@@ -1,0 +1,44 @@
+Case 1
+
+   x       y
+ 1.0  29.750
+ 1.5  19.125
+ 2.0  14.375
+ 3.0   9.500
+ 4.0   7.125
+ 5.0   5.625
+ 6.0   4.875
+ 7.0   4.250
+ 8.0   3.750
+ 9.0   3.375
+10.0   3.000
+12.0   2.625
+14.0   2.250
+16.0   2.000
+18.0   1.875
+20.0   1.750
+24.0   1.500
+28.0   1.375
+32.0   1.250
+
+Source: William Francis Magie, {\em A Source Book in Physics}, Harvard
+University Press, 1965, p. 87.
+
+Description: Pressure of a quantity of enclosed air vs. volume of the
+air, as published by Boyle in 1662 in partial support of his law
+$PV=k$.
+
+Reference Relation: $y=k/x$
+
+Comments: The reference relation leaves clearly patterned residuals.
+It is possible to get a better fit of the form
+$y=k_{1}/x^{2}+k_{2}/x+k_{3}$ or one the form
+$y+k_{1}=k_{2}/(x+k_{3})$.  The former is closer to what scientists
+now use (see Case 45); the latter is a simple inverse relationship,
+assuming that Boyle had the origin of his measurement scales slightly
+off.  Note that Boyle's original article (as reproduced by Magie)
+includes two data sets, of which this is the second.  The first fits
+the reference relation very nicely.
+
+              ---------------------------------------------
+

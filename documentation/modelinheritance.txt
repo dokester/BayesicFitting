@@ -1,0 +1,54 @@
+BaseModel
+    result( xdata, param )
+	calls baseResult( xdata, param )
+
+    partial( xdata, param, parlist=None )
+	calls basePartial( xdata, param, parlist=parlist )
+
+
+FixedModel( BaseModel )
+    parlist : list of not-fixed parameters
+
+    result( xdata, param )
+	calls super().result( xdata, expparam )
+
+    partial( xdata, param )
+	calls super().partial( xdata, expparam, parlist=parlist )
+
+    numPartial( xdata, param, parlist=None )
+	for all par in parlist
+	calls FixedModel.result( xdata, par )
+
+
+Model( FixedModel )
+    result( xdata, param )
+	recursively calls super.result( xdata, param )
+
+    partial( xdata, param, useNum=False )
+	recursively calls super.partial( xdata, param )
+	or                super.numPartial( xdata, param )
+
+    numPartial( xdata, param )
+	calls partial( xdata, params, useNum=True )
+
+
+LinearModel( Model )
+    baseResult( xdata, param ) :
+	calls basePartial( xdata, param )
+
+NonLinearModel( Model )
+    basePartial( xdata, param, parlist=None )
+	calls numPartial( xdata, param, parlist=parlist )
+
+FunctionalModel( LinearModel )
+    basePartial( xdata, param, parlist=None )
+	calculates partial of function for (selected) paramters
+	
+FunctionalModel( NonLinearModel )
+    baseResult( xdata, param )
+	calculates function result.
+
+    optional:
+    basePartial( xdata, param, parlist=None )
+	calculates partial of function for (selected) paramters
+
