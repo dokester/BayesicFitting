@@ -14,24 +14,25 @@ the second goal the evidence is calculated, either as a Gaussian
 approximation, or in case of NestedSampler by integrating over the 
 posterior.
 
-#### [Description](#descript)
-##### [Models](#models)
-##### [Fitters](#fitters)
-##### [NestedSampler](#ns)
-#### [Usage](#usage)  
-##### [Usage Fitter](#usage-fitter)  
-##### [Usage NestedSampler](#usage-ns)  
-##### [Usage Model](#usage-model)  
-#### [Synopsis](#synopsis)  
-##### [Models](#synops-model)  
-##### [Fitters](#synops-fitter)  
-##### [NestedSampler](#synops-ns)  
-##### [Kernels](#synops-kernel)  
-##### [Miscellaneous](#synops-miscel)  
-#### [References](#refs)  
+## Contents
+1. [Description](#descript)
+    + [Models](#models)
+    + [Fitters](#fitters)
+    + [NestedSampler](#ns)
+2. [Usage](#usage)  
+    + [Usage Fitter](#usage-fitter)  
+    + [Usage NestedSampler](#usage-ns)  
+    + [Usage Model](#usage-model)  
+3. [Synopsis](#synopsis)  
+    + [Models](#synops-model)  
+    + [Fitters](#synops-fitter)  
+    + [NestedSampler](#synops-ns)  
+    + [Kernels](#synops-kernel)  
+    + [Miscellaneous](#synops-miscel)  
+4. [References](#refs)  
 
 <a name="descript"></a>  
-## Description 
+## 1. Description
 
 The toolbox contains over 100 classes. Each class forms an object that
 encapsulates several methods. The name of the class is a good
@@ -93,7 +94,7 @@ likelihood to the top.
 Nested sampling is an idea of David McKay and John Skilling.
 
 <a name="usage"></a>
-## Usage
+## 2. Usage
 
 We first explain how to use a fitter with a simple model, then the same
 with **NestedSampler** also using a simple model. Finally we show how to
@@ -121,14 +122,14 @@ deviations, the evidence, or any other interesting property of the fit.
 It would be better to write, in stead of the last line:
 
     model = PolynomialModel( 1 )	# make a first order polynomial
-    fitter = Fitter( x, model )		# construct a fitter with this model
+    fitter = Fitter( x, model )	# construct a fitter with this model
     pars = fitter.fit( y )		# fit the data y to the model
 
 This yields the same set of parameters, but now we can also ask:
 
     yfit = model( x )		# the model values at x
-    stdev = fitter.stdevs	# standard deviations of the parameters
-    scale = fitter.scale	# stdev of remaining noise (= y - yfit) 
+    stdev = fitter.stdevs		# standard deviations of the parameters
+    scale = fitter.scale		# stdev of remaining noise (= y - yfit) 
     covar = fitter.covariance	# covariance between the parameters
 
 To calculate the evidence (or better the logEvidence) we need a prior
@@ -164,7 +165,7 @@ Set up the model with limits on the uniform priors of the parameters.
     model = GaussModel()
     lolim = [-10.0, 0.0, 0.0]		# low limits on the params
     hilim = [+10.0, 5.0, 5.0]		# high limits
-    model.setLimits( lolim, hilim )	# use UniformPrior with limits
+    model.setLimits( lolim, hilim )		# use UniformPrior with limits
 
 The likelihood is calculated from the **GaussianErrorDistribution**. By
 default it has a fixed scale. However in most real cases it is better
@@ -257,7 +258,7 @@ provided. A compound model can only have constituent models of the same
 dimensionality.   
 
 <a name="synopsis"></a>
-## Synopsis
+## 3. Synopsis
 
 All classes are listed with a one-line purpose. They are organized by
 their functionality into 5 sections, models, fitters, nested sampling,
@@ -488,37 +489,37 @@ A kernel is bound when it is zero outside (-1,+1)
 They can be encapsulated in a **KernelModel** or in a 2dim
 **Kernel2dModel**. They also find use in the **RobustFitter**.
 
-<!--
-+ **Biweight**<br>
-   <td width=400>$( 1-x^2 )^2$</td><td> bound </td>
-+ **CosSquare**<br>
-   <td width=400>$\cos^2( 0.5*PI*x )$ </td><td> bound </td>
--->
 
 + **Biweight**<br>
-   ( 1-x^2 )^2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __( 1-x<sup>2</sup> )<sup>2</sup>__		bound
 + **CosSquare**<br>
-   cos^2( 0.5*PI*x ) &nbsp;&nbsp; bound
+   __cos<sup>2</sup>( 0.5*&pi;*x )__		bound
+
+
++ **Biweight**<br>
+   __( 1-x<sup>2</sup> )<sup>2</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
++ **CosSquare**<br>
+   __cos<sup>2</sup>( 0.5*&pi;*x )__ &nbsp;&nbsp; bound
 + **Cosine**<br>
-   cos( 0.5*PI*x ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __cos( 0.5*&pi;*x )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **Gauss**<br>
-   exp( -0.5*x*x ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
+   __exp( -0.5*x*x )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
 + **Huber**<br>
-   min( 1, 1/|x| ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound and improper because infinite integral
+   __min( 1, 1/|x| )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound and improper because infinite integral
 + **Lorentz**<br>
-   1 / ( 1 * x*x ) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
+   __1 / ( 1 * x*x )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
 + **Parabola**<br>
-   1 - x*x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __1 - x*x__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **Sinc**<br>
-   sin(x) / x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
+   __sin(x) / x__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
 + **Triangle**<br>
-   1 - |x| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __1 - |x|__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **Tricube**<br>
-   ( 1 - |x|^3 )^3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __( 1 - |x|<sup>3</sup> )<sup>3</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **Triweight**<br>
-   ( 1 - x^2 )^3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __( 1 - x<sup>2,/sup> )<sup>3</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **Uniform**<br>
-   1.0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+   __1.0__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 
 <a name="synops-miscel"></a>
 ### Miscellaneous
@@ -533,14 +534,14 @@ They can be encapsulated in a **KernelModel** or in a 2dim
     Various tools.
 
 <a name="refs"></a>  
-## Referenes
+## 4. Referenes
 
-[1]: D.S. Sivia. **Data Analysis, A Bayesian Tutorial.** 
-Oxford University Press. 2006 "Sivia"<br>
+[1]: D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
+Oxford University Press. 2006.<br>
 [2]: C.M. Bishop. **Pattern Recognition and Machine Learning.**
-Springer Science. 2006. "Bishop"<br>
+Springer Science. 2006.<br>
 [3]: W. von der Linden, V. Dose, U. Toussaint. **Bayesian Probabilty Theory.** 
-Cambridge University Press. 2014. "von der Linden"<br>
+Cambridge University Press. 2014.<br>
 [4]: E.T. Jaynes. **Probability Theory.**
-Cambridge University Press. 2003. "Jaynes"<br>
+Cambridge University Press. 2003.<br>
 

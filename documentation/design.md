@@ -42,6 +42,7 @@ relationships can be  found in figure 1.
 <!-- --------------------------------------------------------------- -->
 
 <a name="basemodel">
+
 ### BaseModel.
 
 **BaseModel** defines a simple or basic model and all its methods. 
@@ -76,6 +77,7 @@ partial etc.
 
 
 <a name="fixedmodel">
+
 ### FixedModel.
 
 In each **BaseModel** one or more parameters can be replaced either by a
@@ -99,6 +101,7 @@ functionality can be constructed this way.
 
 
 <a name="model">
+
 ### Model.
 
 In the center of the tree sits **Model**, the last common anchestor
@@ -179,6 +182,7 @@ See Example (TBD)
 
 
 <a name="linearmodel">
+
 ### LinearModels
 
 **LinearModel**s are linear in its parameters, meaning that the result
@@ -207,6 +211,7 @@ TBD: **FreeShapeModel**
 
 
 <a name="nonlinearmodel">
+
 ### NonLinearModels
 
 All **Model**s that are not linear are **NonLinearModels**. They at
@@ -224,6 +229,7 @@ complicated, slower and not guaranteed to find the best solution,
 
 
 <a name="kernelmodel">
+
 ### KernelModels
 
 A special case of **NonLinearModel**s are the **KernelModel**s and their
@@ -285,6 +291,7 @@ coding from scratch.
 <!-- --------------------------------------------------------------- -->
 
 <a name="fitterclasses"></a>
+
 ## The Fitter Classes
 
 ### BaseFitter
@@ -310,6 +317,7 @@ The Fitter inheritance tree is displayed in figure 5.
 ![Fitters](Fitter.png "Figure 5")
 
 <a name="linearfitter"></a>
+
 ### Linear Fitters
 
 The package contains 2 linear fitter classes: **Fitter** and
@@ -329,6 +337,7 @@ sense.
 The SVPFitter is TBW.
 
 <a name="nonlinearfitter"></a>
+
 ### NonLinear Fitters
 
 The other descendants of the **BaseFitter** are all iterative fitters to
@@ -364,13 +373,14 @@ Up to now all fitters try to find the minimum in the __&chi;<sup>2</sup>__-lands
 They are strictly "least squares". **MaxLikelihoodFitter**s can also
 maximize the log likelihood of a selected [**ErrorDistribution**](#errdis). 
 
-## AmoebaFitter
+### AmoebaFitter
 
 The **AmoebaFitter** performs the simplex method described in
 [AnnealingAmoeba](#amoeba) to find the minimum in __&chi;<sup>2</sup>__ or the
 maximum in the likelihood.
 
 <a name="amoeba"></a>
+
 ### AnnealingAmoeba
 
 **AnnealingAmoeba** implements the simplex method designed by Nelder and
@@ -391,6 +401,7 @@ No guarantee however. In doubt start it at different initial values etc.
 Nelder-Mead algorithm in [Press][5] par 10.4 and 10.9. 
 
 <a name="scipy"></a>
+
 ###  ScipyFitter
 
 The method `scipy.optimize.minimize` implements about 10 minimization
@@ -418,6 +429,7 @@ For details on the individual **ScipyFitter**s see
 [minimize](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
 
 <a name="robust"></a>
+
 #### RobustShell
 
 In real life data often outliers are present, little understood large
@@ -433,6 +445,7 @@ carefully check the results.
  
 <!-- --------------------------------------------------------------- -->
 <a name="nested"></a>
+
 ### NestedSampler
 
 Nested Sampling is an algorithm invented by David MacKay and John
@@ -470,6 +483,7 @@ optional `weights`, the likelihood can be calculated by the
 likelihood via various **Engine**s.  
 
 <a name="prior"></a>
+
 ### Priors
 
 The **Prior**s contain information about the parameters which is known
@@ -486,6 +500,7 @@ distribution, and its inverse `domain2unit`.
 
 
 <a name="errdis"></a>
+
 ### ErrorDistribution
 
 The main task of the **ErrorDistribution** is to calculate the
@@ -502,6 +517,7 @@ Some **ErrorDistribution**s have parameters of themselves, so called
 **HyperParameter**s. One special case is the **NoiseScale**.
 
 <a name="noisescale"></a>
+
 ### NoiseScale
 
 The **NoiseScale** contains information about the amount of noise in
@@ -514,6 +530,7 @@ means that its integral is unbound. Low and high limits (both > 0) need
 to be provided when calculating the evidence.
 
 <a name="engine"></a>
+
 ### Engine
 
 The way the walkers are moved around in the available parameter space is
@@ -529,20 +546,21 @@ engine.
 <!-- --------------------------------------------------------------- -->
 
 <a name="reference"></a>
+
 ## References.
 
 [1]: D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
-2nd Edition. Oxford University Press. 2006 "Sivia"<br>
+2nd Edition. Oxford University Press. 2006.<br>
 [2]: C.M. Bishop. **Pattern Recognition and Machine Learning.**
-Springer Science. 2006. "Bishop"<br>
+Springer Science. 2006.<br>
 [3]: W. von der Linden, V. Dose, U. Toussaint. **Bayesian Probabilty
 Theory.** 
-Cambridge University Press. 2014. "von der Linden"<br>
+Cambridge University Press. 2014.<br>
 [4]: E.T. Jaynes. **Probability Theory.**
-Cambridge University Press. 2003. "Jaynes"<br>
+Cambridge University Press. 2003.<br>
 [5]: W.H.Press, S.A.Teukolsky, W.T.Vetterling and B.P.Flannery 
 **Numerical Recipes**, 
-Cambridge University Press. 1988-2007, "Press" <br>
+Cambridge University Press. 1988-2007. <br>
 
 
 <!--

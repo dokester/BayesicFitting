@@ -40,7 +40,7 @@ structure, scipy (>=1.0) for linear algebra and other stuff and astropy
 (>=2.0) for units. Matplotlib (>=2.0) is used for plotting and bspline
 (>=0.1.1 at github by Foster and Jeronen) is used in the BSplinesModel.
 
-Download the necessary dependencies. Then download the package and put is
+Download the necessary dependencies. Then download the package and put it
 in a directory BayesicFitting. Adapt the environment variable PYTHONPATH
 to include 
 
@@ -52,7 +52,7 @@ and if you want to run the test harnasses, put
 
 BayesicFitting/test/
 
-also in yout PYTHONPATH
+also in your PYTHONPATH
 
 <a name="structure"> </a>
 ## Structure 
@@ -74,7 +74,7 @@ BayesicFitting/test. They can be execised as:
 
     python -m unittest <file>
 
-where python refers to python3 and <file> refers to one of the files in
+where python refers to python3 and file refers to one of the files in
 BayesicFitting/test.
 
 As most functionality is tested in a test harnass, examples on how to
