@@ -498,19 +498,69 @@ They can be encapsulated in a **KernelModel** or in a 2dim
   <th>comment</th>
 </tr>
 <tr>
-  <td>**Biweight**</td>
-  <td>__( 1-x<sup>2</sup> )<sup>2</sup>__</td> 
+  <td><b>Biweight</b></td>
+  <td>( 1-x<sup>2</sup> )<sup>2</sup></td> 
   <td>true</td>
 </tr>
 <tr>
-  <td>**CosSquare**</td>
-  <td>__cos<sup>2</sup>( 0.5*&pi;*x )__</td>
+  <td><b>CosSquare</b></td>
+  <td>cos<sup>2</sup>( 0.5*&pi;*x )</td>
+  <td>true</td>
+</tr>
+<tr>
+  <td><b>Cosine</b></td>
+  <td>cos( 0.5 &pi; x )</td> 
+  <td>true</td>
+</tr>
+<tr>
+  <td><b>Gauss</b></td>
+  <td>exp( -0.5 x<sup>2</sup> )</td> 
   <td>false</td>
-  <td>kemmentaar</td>
+</tr>
+<tr>
+  <td><b>Huber</b></td>
+  <td>min( 1, 1/|x| )</td> 
+  <td>false</td>
+  <td>improper because infinite integral</td>
+</tr>
+<tr>
+  <td><b>Lorentz</b></td>
+  <td>1 / ( 1 + x<sup>2</sup> )</td> 
+  <td>false</td>
+</tr>
+<tr>
+  <td><b>Parabola</b></td>
+  <td>1 - x<sup>2</sup></td> 
+  <td>true</td>
+</tr>
+<tr>
+  <td><b>Sinc</b></td>
+  <td>sin(x) / x</td> 
+  <td>true</td>
+</tr>
+<tr>
+  <td><b>Triangle</b></td>
+  <td>1 - |x|</td> 
+  <td>true</td>
+</tr>
+<tr>
+  <td><b>Tricube</b></td>
+  <td>( 1 - |x|<sup>3</sup> )<sup>3</sup></td> 
+  <td>true</td>
+</tr>
+<tr>
+  <td><b>Triweight</b></td>
+  <td>( 1 - x<sup>2</sup> )<sup>3</sup></td>  
+ <td>true</td>
+</tr>
+<tr>
+  <td><b>Uniform</b></td>
+  <td>1.0</td> 
+  <td>true</td>
 </tr>
 </table>
 
-
+<!--
 + **Biweight**<br>
    __( 1-x<sup>2</sup> )<sup>2</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **CosSquare**<br>
@@ -535,6 +585,7 @@ They can be encapsulated in a **KernelModel** or in a 2dim
    __( 1 - x<sup>2</sup> )<sup>3</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
 + **Uniform**<br>
    __1.0__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
+-->
 
 <a name="synops-miscel"></a>
 ### Miscellaneous
