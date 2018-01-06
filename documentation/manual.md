@@ -560,40 +560,13 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 </tr>
 </table>
 
-<!--
-+ **Biweight**<br>
-   __( 1-x<sup>2</sup> )<sup>2</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
-+ **CosSquare**<br>
-   __cos<sup>2</sup>( 0.5 &pi; x )__ &nbsp;&nbsp; bound
-+ **Cosine**<br>
-   __cos( 0.5 &pi; x )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
-+ **Gauss**<br>
-   __exp( -0.5 x<sup>2</sup> )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
-+ **Huber**<br>
-   __min( 1, 1/|x| )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound and improper because infinite integral
-+ **Lorentz**<br>
-   __1 / ( 1 + x<sup>2</sup> )__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
-+ **Parabola**<br>
-   __1 - x<sup>2</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
-+ **Sinc**<br>
-   __sin(x) / x__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unbound
-+ **Triangle**<br>
-   __1 - |x|__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
-+ **Tricube**<br>
-   __( 1 - |x|<sup>3</sup> )<sup>3</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
-+ **Triweight**<br>
-   __( 1 - x<sup>2</sup> )<sup>3</sup>__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
-+ **Uniform**<br>
-   __1.0__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bound
--->
-
 <a name="synops-miscel"></a>
 ### Miscellaneous
 
 + **LogFactorial**<br>
     Natural logarithm of n!
 + **Formatter**<br>
-    Format a number or array in a nicely into a string.
+    Format a number or array, nicely into a string.
 + **Plotter**<br>
     Plot a model fitted to data.
 + **Tools**<br>

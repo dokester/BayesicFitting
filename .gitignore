@@ -5,6 +5,7 @@ __pycache__
 documentation/*.dia~
 documentation/*.html
 examples/.ipynb_checkpoints
+examples/Untitled.ipynb
 source/EtalonDrift2Model.py
 source/EtalonDrift3Model.py
 source/EtalonDrift4Model.py

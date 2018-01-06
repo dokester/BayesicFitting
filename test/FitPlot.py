@@ -51,7 +51,7 @@ def plotFit( x, data=None, model=None, ftr=None, truth=None, show=True,
         plt.setp( xticklabels, visible=False )
 
     if truth is not None :
-        ax0.plot( x, truth, 'bs' )
+        ax0.plot( x, truth, 'b+' )
     if data is not None :
         ax0.plot( x, data, 'k.' )
 
