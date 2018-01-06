@@ -490,10 +490,25 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 **Kernel2dModel**. They also find use in the **RobustFitter**.
 
 
-+ **Biweight**<br>
-   <textarea cols=25>__( 1-x<sup>2</sup> )<sup>2</sup>__</textarea> bound
-+ **CosSquare**<br>
-   <textarea cols=25>__cos<sup>2</sup>( 0.5*&pi;*x )__</textarea>bound
+<table>
+<tr>
+  <th>name</th>
+  <th>function</th>
+  <th>bound</th>
+  <th>comment</th>
+</tr>
+<tr>
+  <td>**Biweight**</td>
+  <td>__( 1-x<sup>2</sup> )<sup>2</sup>__</td> 
+  <td>true</td>
+</tr>
+<tr>
+  <td>**CosSquare**</td>
+  <td>__cos<sup>2</sup>( 0.5*&pi;*x )__</td>
+  <td>false</td>
+  <td>kemmentaar</td>
+</tr>
+</table>
 
 
 + **Biweight**<br>
