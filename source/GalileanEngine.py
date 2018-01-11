@@ -78,7 +78,8 @@ class GalileanEngine( Engine ):
         seed : int
             for random number generator
         """
-        super( GalileanEngine, self ).__init__( walkers, errdis, copy=copy, seed=seed  )
+        super( GalileanEngine, self ).__init__( walkers, errdis, copy=copy,
+                        seed=seed  )
         self.nstep = 3
         self.size = 0.5
 

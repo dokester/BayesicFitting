@@ -2,13 +2,15 @@
 
 A package for model fitting and evidence calculation.
 
-#### [History](#history)
-#### [Setup](#setup)
-#### [Structure](#structure)
-#### [Status](#status)
+## Content
+
+1. [History](#history)
+2. [Setup](#setup)
+3. [Structure](#structure)
+4. [Status](#status)
 
 <a name="history"></a>
-## History 
+## 1. History 
 
 The BayesicFitting package is a python version of the the fitter classes
 in Herschel Common Science System (HCSS). The HCSS version was written
@@ -32,7 +34,7 @@ the inheritance, methods and dependencies are largely the same as in the
 original HCSS.
 
 <a name="setup"> </a>
-## Setup 
+## 2. Setup 
 
 The package is written in python3 although I am not aware of using any
 specific python3 features. It uses numpy (>= 1.9) for its array
@@ -55,7 +57,7 @@ BayesicFitting/test/
 also in your PYTHONPATH
 
 <a name="structure"> </a>
-## Structure 
+## 3. Structure 
 
 ### source
 
@@ -97,8 +99,25 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
+In the documenation directory a number of documents can be found. 
+
+
++ [Manual](./documentation/manual.md)<br>
+A first draft of a manula. It obviously needs more work.
+
++ [FAQ](./documentation/troubles.md)<br>
+A list of troublesome situations and what to do about it.
+
++ [Glossary](./documentation/glossary.md)
+A list of the terms used throughout this package, with explanations.
+
++ [Design](./documentation/design.md)
+An architectural design document, displaying the relationships between 
+the classes. 
+
+<!--
 A first draft of a manual can be found in 
-BayesicFitting/documentation/manual.md. It obviously needs more work.
+./documentation/manual.md. It obviously needs more work.
 
 Another hopefully usefull document is troubles.md in the same directory. 
 It lists a number of cases where the fitting went haywire and how it
@@ -108,11 +127,11 @@ Also in BayesicFitting/documentation are a number of structure diagrams
 (dia-files and png-files). They show the relationships between the 
 classes in the package. A first version of the Design Document has 
 been written. 
-
+-->
 
 
 <a name="status"> </a> 
-## Status 
+## 4. Status 
 
 A package like this is never finished. Always more classes and/or
 functionalities can be added. I present it now as it is in the hope it

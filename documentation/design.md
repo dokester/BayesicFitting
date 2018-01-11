@@ -2,16 +2,16 @@
 # BayesicFitting Design Documentation
 
 
+## Contents.
 
-
-#### [Introduction](#intro)
-#### [Model Classes](#modelclasses)
-#### [Fitter Classes](#fitterclasses)
-#### [Nested Sampling](#nested)
-
+1. [Introduction](#intro)
+2. [Model Classes](#modelclasses)
+3. [Fitter Classes](#fitterclasses)
+4. [Nested Sampling](#nested)
+5. [References](#reference)
 
 <a name="intro"></a>
-## Introduction
+## 1. Introduction
 
 The BayesicFitting package offers a general way to fit
 models to data in a Bayesian way.
@@ -24,7 +24,7 @@ the [Sivia][1], [Bishop][2], [von der Linden][3] and [Jaynes][4]
 and for some fitter algorithms [Press][5]. 
 
 <a name="modelclasses"></a>
-## Model Classes.
+## 2. Model Classes.
 
 The Model classes define the model functions which are to be fitted. A
 model class has methods to return its function value and partial
@@ -292,7 +292,7 @@ coding from scratch.
 
 <a name="fitterclasses"></a>
 
-## The Fitter Classes
+## 3. The Fitter Classes
 
 ### BaseFitter
 
@@ -446,7 +446,7 @@ carefully check the results.
 <!-- --------------------------------------------------------------- -->
 <a name="nested"></a>
 
-### NestedSampler
+## 4. NestedSampler
 
 Nested Sampling is an algorithm invented by David MacKay and John
 Skilling, to sample and to integrate the posterior to obtain the
@@ -547,7 +547,7 @@ engine.
 
 <a name="reference"></a>
 
-## References.
+## 5. References.
 
 [1]: D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
 2nd Edition. Oxford University Press. 2006.<br>
