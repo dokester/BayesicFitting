@@ -7,7 +7,10 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import math
 import Tools
+from Formatter import formatter as fmt
+
 from GaussModel import GaussModel
+from PolynomialModel import PolynomialModel
 from GaussErrorDistribution import GaussErrorDistribution
 from NoiseScale import NoiseScale
 from Sample import Sample
@@ -52,7 +55,7 @@ class TestSampleList( unittest.TestCase ):
     noise = numpy.asarray( [ -0.000996, -0.046035,  0.013656,  0.418449,  0.0295155,  0.273705,
     -0.204794,  0.275843, -0.415945, -0.373516, -0.158084], dtype=float )
     wgt = numpy.asarray( [1,2,3,4,5,6,7,4,3,2,1], dtype=float )                 #  total 38
-    par = numpy.asarray( [3,2,1], dtype=float )
+    par = numpy.asarray( [3,2,1,0.3], dtype=float )
     len = 11
 
 
@@ -60,6 +63,7 @@ class TestSampleList( unittest.TestCase ):
     def testSampleList( self ):
         print( "=========  SampleListTest  =======================" )
         gm = GaussModel( )
+        gm += PolynomialModel( 0 )
 
         errdis = GaussErrorDistribution( self.x, self.noise )
 
@@ -76,8 +80,10 @@ class TestSampleList( unittest.TestCase ):
             self.assertTrue( s.parameters[1] == 0 )
             self.assertTrue( s.parameters[2] == 1 )
             self.assertTrue( s.hypars[0] == 1 )
+            self.assertTrue( len( s.fitIndex ) == 4 )
             k += 1
 
+        errdis = GaussErrorDistribution( self.x, self.noise, limits=[0.1,10] )
         sl = SampleList( gm, self.len, errdis )
         k = 0
         for s in sl:
@@ -90,8 +96,9 @@ class TestSampleList( unittest.TestCase ):
             s.logL = -1213.0 + self.x[k]
             s.logW = math.log( self.wgt[k] / 38.0 ) + lnZ
             print( s )
-            print( "    parlist ", s.parlist )
-            print( "    par sup ", s.parameters, s.hypars )
+            print( "    parlist ", fmt( s.parlist ) )
+            print( "    par sup ", fmt( s.parameters ), fmt( s.hypars ) )
+            print( "    fitindx ", fmt( s.fitIndex ) )
             k += 1
         sl.logZ = lnZ
         sl.info = 30
@@ -165,7 +172,7 @@ class TestSampleList( unittest.TestCase ):
 
         print( sl.medianIndex, sl.modusIndex, sl.maxLikelihoodIndex )
 
-        sss = numpy.zeros( 3, dtype=float ) + 0.003
+        sss = numpy.zeros( gm.npchain, dtype=float ) + 0.003
 
         assertAAE( sl.parameters, self.par, 2 )
         assertAAE( sl.standardDeviations, sss, 1 )
@@ -184,10 +191,11 @@ class TestSampleList( unittest.TestCase ):
         param = sl.getParameterEvolution( )
         print( param.shape )
         self.assertTrue( param.shape[0] == 11 )
-        self.assertTrue( param.shape[1] == 3 )
+        self.assertTrue( param.shape[1] == 4 )
         par0 = sl.getParameterEvolution( 0 )
         par1 = sl.getParameterEvolution( 1 )
         par2 = sl.getParameterEvolution( 2 )
+        par3 = sl.getParameterEvolution( 3 )
         nrp = sl.getNumberOfParametersEvolution( )
 
         for i in range( self.len ):
@@ -195,7 +203,8 @@ class TestSampleList( unittest.TestCase ):
             assertAAE( param[i, 0], par0[i] )
             assertAAE( param[i, 1], par1[i] )
             assertAAE( param[i, 2], par2[i] )
-            self.assertTrue( nrp[i] == 3 )
+            assertAAE( param[i, 3], par3[i] )
+            self.assertTrue( nrp[i] == 4 )
 
         xx = numpy.arange( 10, dtype=float ) * 0.2
         yf1 = sl.average( xx )

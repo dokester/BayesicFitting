@@ -96,8 +96,8 @@ class Sample( object ):
             if fitIndex is not None :
                 self.fitIndex = fitIndex                # no copy.
             else :
-                self.fitIndex = numpy.arange( model.npbase )
-                indx = model.npbase
+                self.fitIndex = numpy.arange( model.npchain )
+                indx = model.npchain
                 for s in errdis.hyperpar :
                     if not s.isFixed :
                         self.fitIndex = numpy.append( self.fitIndex, [indx] )

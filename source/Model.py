@@ -9,6 +9,7 @@ from FixedModel import FixedModel
 from Prior import Prior
 from UniformPrior import UniformPrior
 from NoiseScale import NoiseScale
+#from Dynamic import Dynamic
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -28,10 +29,9 @@ from NoiseScale import NoiseScale
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2018 Do Kester
 
 
-#class Model( BaseModel ):
 class Model( FixedModel ):
     """
     Model implements the common parts of (compound) models.
@@ -395,14 +395,6 @@ class Model( FixedModel ):
 
         return
 
-    def _optAppendI( self, x, y, model ) :
-        if x is not None or y is not None :
-            np1 = self.getNumberOfParameters()
-            np2 = model.getNumberOfParameters()
-            return numpy.append( x if x is not None else numpy.arange( np1 ),
-                                 y if y is not None else numpy.arange( np2 ) + np1 )
-        else : return x
-
     def _optAppend( self, x, y ) :
         if y is not None :
             if x is None : return y
@@ -628,7 +620,7 @@ class Model( FixedModel ):
         return self._toString( "" )
 
     def _toString( self, indent, npars=0 ) :
-        opname = [" null\n", " +\n", " -\n", " *\n", " /\n" ]
+        opname = [" null\n", " +\n", " -\n", " *\n", " /\n", " |\n" ]
         np = self.npbase
         if self._next is None :
             return super( Model, self )._toString( npars=npars )
@@ -641,7 +633,7 @@ class Model( FixedModel ):
         """
         Return a short version the string representation: upto first non-letter.
         """
-        opname = [" null\n", " + ", " - ", " * ", " / " ]
+        opname = [" null\n", " + ", " - ", " * ", " / ", " | " ]
         if self._next is None :
             return super( Model, self ).shortName()
 
@@ -1206,6 +1198,7 @@ class Model( FixedModel ):
         Return whether the model can change the number of parameters dynamically.
         """
         return False
+#        return isinstance( self, Dynamic )
 
 ##### End Model #########################################################
 

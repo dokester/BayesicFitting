@@ -72,7 +72,7 @@ class SineAmpModel( LinearModel ):
 
         """
         names = ["cosamp", "sinamp"]
-        super( SineAmpModel, self ).__init__( 2, copy=copy, names=names, **kwargs )
+        super( ).__init__( 2, copy=copy, names=names, **kwargs )
 
         if copy is None :
             self.frequency = frequency
@@ -86,7 +86,7 @@ class SineAmpModel( LinearModel ):
     def __setattr__( self, name, value ) :
         dind = {"frequency": float}
         if not Tools.setSingleAttributes( self, name, value, dind ) :
-            super( SineAmpModel, self ).__setattr__( name, value )
+            super( ).__setattr__( name, value )
 
     def basePartial( self, xdata, params, parlist=None ):
         """
