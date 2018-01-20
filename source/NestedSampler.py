@@ -379,7 +379,7 @@ class NestedSampler( object ):
 
             if self.verbose >= 3 or ( self.verbose >= 2 and self.iteration % 100 == 0 ):
                 kw = worst[0]
-                pl = self.walkers[kw].parlist[self.walkers[kw].fitIndex]
+                pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ, self.info,
                         self.lowLhood, np ), fmt( pl ) )

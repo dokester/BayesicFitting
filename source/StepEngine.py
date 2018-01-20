@@ -98,7 +98,7 @@ class StepEngine( Engine ):
         dur = urange / nm
         urange += 2 * dur
 
-        param = walker.parlist
+        param = walker.allpars
         usav = self.domain2Unit( model, param, kpar=fitIndex )
 
         sz = 1.0

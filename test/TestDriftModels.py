@@ -9,9 +9,6 @@ import Tools
 
 from PolySineAmpModel import PolySineAmpModel
 from EtalonDriftModel import EtalonDriftModel
-from EtalonDrift2Model import EtalonDrift2Model
-from EtalonDrift3Model import EtalonDrift3Model
-from EtalonDrift4Model import EtalonDrift4Model
 from GaussModel import GaussModel
 from SineModel import SineModel
 from PolynomialModel import PolynomialModel
@@ -74,6 +71,8 @@ class TestDriftModels( unittest.TestCase ):
         p = [-1.1, 0.5, 0.04, 1.2, -0.5]
         self.stdModeltest( m, p, plot=plot )
 
+        """
+
     def testEtalonDrift2Model( self, plot=False ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
@@ -128,6 +127,7 @@ class TestDriftModels( unittest.TestCase ):
         p = [-1.1, 0.04, 1.2, -0.5, 1.0, 0.5, 2, 0.1, 0.0]
         self.stdModeltest( m, p, plot=plot )
 
+        """
 
 
     def stdModeltest( self, model, par, xdata=None, plot=None, warn=[] ):

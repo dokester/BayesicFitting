@@ -106,7 +106,7 @@ class FrogEngine( Engine ):
             fitIndex = sample.fitIndex
 
         model = sample.model                    ### TBC need a copy here ????
-        param = sample.parlist[:]
+        param = sample.allpars[:]
 
         np = len( param )
         nm = len( self.walkers )

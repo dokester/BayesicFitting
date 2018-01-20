@@ -106,9 +106,9 @@ class Engine( object ):
 
 
     #  *********SET & GET***************************************************
-    def setSample( self, walker, model, parlist, logL, logW=None ):
+    def setSample( self, walker, model, allpars, logL, logW=None ):
         """
-        Update the sample with model, parlist, LogL and logW.
+        Update the sample with model, allpars, LogL and logW.
 
         Parameters
         ----------
@@ -116,7 +116,7 @@ class Engine( object ):
             sample to be updated
         model : Model
             the model in the sample
-        parlist : array_like
+        allpars : array_like
             list of all parameters
         logL : float
             log Likelihood
@@ -124,7 +124,7 @@ class Engine( object ):
             log of the weight of the likelihood
         """
         walker.logL = logL
-        walker.parlist = parlist
+        walker.allpars = allpars
         walker.model = model
         if logW is not None :
             walker.logW = logW
@@ -221,17 +221,17 @@ class Engine( object ):
         kmx = 0
         for walker in self.walkers :
             if walker.model.npchain == npmax :
-                minv = walker.parlist.copy()
+                minv = walker.allpars.copy()
                 maxv = minv.copy()
                 break
             kmx += 1
 
-        nval = numpy.zeros_like( self.walkers[kmx].parlist, dtype=float )
+        nval = numpy.zeros_like( self.walkers[kmx].allpars, dtype=float )
 
         for walker in self.walkers :
-            np = walker.parlist.size
-            minv[:np] = numpy.fmin( minv[:np], walker.parlist )
-            maxv[:np] = numpy.fmax( maxv[:np], walker.parlist )
+            np = walker.allpars.size
+            minv[:np] = numpy.fmin( minv[:np], walker.allpars )
+            maxv[:np] = numpy.fmax( maxv[:np], walker.allpars )
             nval[:np] += 1
 
         model = self.walkers[kmx].model

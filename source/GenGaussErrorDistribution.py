@@ -141,7 +141,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         return hypar[0] * math.sqrt( special.gamma( 3.0 / p ) / special.gamma( 1.0 / p ) )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, parlist ) :
+    def logLikelihood( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -149,16 +149,16 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             model to calculate mock data
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
 
         """
         self.ncalls += 1
         np = model.npchain
-        scale = parlist[np]
-        power = parlist[np+1]
+        scale = allpars[np]
+        power = allpars[np+1]
 
-        res = self.getResiduals( model, parlist[:np] )
+        res = self.getResiduals( model, allpars[:np] )
         chisq = self.getChisq( res, scale, power )
         norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
 #        print( "GG  ", chisq, norm, self.sumweight )
@@ -198,7 +198,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         return math.pow( chi / self.sumweight, 1.0 / power )
 
 
-    def partialLogL( self, model, parlist, fitIndex ) :
+    def partialLogL( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -206,7 +206,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             model to calculate mock data
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of the parameters to be fitted
@@ -214,9 +214,9 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
         np = model.npchain
-        scale = parlist[np]
-        power = parlist[np+1]
-        res = self.getResiduals( model, parlist[:np] )
+        scale = allpars[np]
+        power = allpars[np+1]
+        res = self.getResiduals( model, allpars[:np] )
 
         ars = numpy.abs( res / scale )
         rsp = numpy.power( ars, power )
@@ -224,7 +224,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
             rsp = rsp * self.weights
 
         dLdm = power * rsp / res
-        dM = model.partial( self.xdata, parlist[:np] )
+        dM = model.partial( self.xdata, allpars[:np] )
 
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0

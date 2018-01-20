@@ -93,7 +93,7 @@ class CrossEngine( Engine ):
         nf = len( fitIndex )
 
         model = walker.model
-        param = walker.parlist[:]
+        param = walker.allpars[:]
 
         nm = len( self.walkers )
         np = len( param )
@@ -109,7 +109,7 @@ class CrossEngine( Engine ):
                 if not ( (m == walker.id or m == walker.parent) ):
                     break
 
-            crospar = self.walkers[m].parlist
+            crospar = self.walkers[m].allpars
             mp = len( crospar )
             if mp == 0:
                 continue
@@ -132,7 +132,7 @@ class CrossEngine( Engine ):
                 self.setSample( walker, model, param, Ltry )
                 return nf
             elif kk <= self.maxtrials :
-                param = walker.parlist[:]
+                param = walker.allpars[:]
                 self.reportReject( )
             else :
                 self.reportFailed()

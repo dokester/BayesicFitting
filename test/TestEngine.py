@@ -109,7 +109,7 @@ class TestEngine( unittest.TestCase ):
         self.assertTrue( isinstance( engine.rng, numpy.random.RandomState ) )
 
         print( engine.walkers[0] )
-        print( engine.walkers[0].parlist )
+        print( engine.walkers[0].allpars )
 
         ur = engine.calculateUnitRange()
 

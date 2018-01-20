@@ -99,7 +99,7 @@ class OrderEngine( Engine ):
 
 
         for c in perm :
-            param = walker.parlist.copy( )
+            param = walker.allpars.copy( )
             save = param[c]
             usav = self.domain2Unit( model, save, kpar=c )
             while True :

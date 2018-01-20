@@ -103,7 +103,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, parlist ) :
+    def logLikelihood( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -111,13 +111,13 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             to be fitted
-        parlist : array_like
+        allpars : array_like
             list of all parameters in the problem
 
         """
         np = model.npchain
-        scale = parlist[np]
-        res = self.getResiduals( model, parlist[:np] )
+        scale = allpars[np]
+        res = self.getResiduals( model, allpars[:np] )
         chisq = self.getChisq( res, scale )
         self.ncalls += 1
         return ( - self.sumweight * ( 0.5 * self.LOG2PI + math.log( scale ) ) -
@@ -157,7 +157,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             res2 = res2 * self.weights
         return numpy.sum( res2  ) / ( scale * scale )
 
-    def partialLogL( self, model, parlist, fitIndex ) :
+    def partialLogL( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
@@ -165,7 +165,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             to be fitted
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
@@ -174,8 +174,8 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         self.nparts += 1                    ## counts calls to partialLogL
 
         np = model.npchain
-        param = parlist[:np]
-        scale = parlist[np]
+        param = allpars[:np]
+        scale = allpars[np]
         s2 = scale * scale
         res = self.getResiduals( model, param )
         if self.weights is not None :
@@ -194,7 +194,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             i += 1
         return dL
 
-    def hessianLogL( self, model, parlist, fitIndex ) :
+    def hessianLogL( self, model, allpars, fitIndex ) :
         """
         Return the hessian of log( likelihood ) to the parameters in fitIndex.
 
@@ -205,7 +205,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             to be fitted
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
@@ -215,8 +215,8 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         nh = len( fitIndex )
         np = model.npchain
-        param = parlist[:np]
-        scale = parlist[np]
+        param = allpars[:np]
+        scale = allpars[np]
         s2 = scale * scale
 
         fi = fitIndex if fitIndex[-1] != np else fitIndex[-1:]

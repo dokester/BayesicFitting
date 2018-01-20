@@ -83,7 +83,7 @@ class StartEngine( Engine ):
             fitIndex = walker.fitIndex
 
         model = walker.model
-        par = walker.parlist
+        par = walker.allpars
         uval = self.rng.rand( len( fitIndex ) )
         par[fitIndex] = self.unit2Domain( model, uval, kpar=fitIndex )
 

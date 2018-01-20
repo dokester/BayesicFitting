@@ -285,7 +285,7 @@ class ErrorDistribution( object ):
 
     #  *********LIKELIHOODS***************************************************
 
-    def logLikelihood( self, model, parlist ):
+    def logLikelihood( self, model, allpars ):
         """
         Return the log( likelihood ).
 
@@ -293,12 +293,12 @@ class ErrorDistribution( object ):
         ----------
         model : Model
             to be fitted
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         """
         pass
 
-    def partialLogL( self, model, parlist, fitIndex ) :
+    def partialLogL( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -306,15 +306,15 @@ class ErrorDistribution( object ):
         ----------
         model : Model
             to be fitted
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
 
         """
-        return self.numPartialLogL( model, parlist, fitIndex )
+        return self.numPartialLogL( model, allpars, fitIndex )
 
-    def numPartialLogL( self, model, parlist, fitIndex ) :
+    def numPartialLogL( self, model, allpars, fitIndex ) :
         """
         Return d log( likelihood ) / dp, numerically calculated.
 
@@ -322,27 +322,27 @@ class ErrorDistribution( object ):
         ----------
         model : Model
             to be fitted
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
 
         """
         dL = numpy.zeros( len( fitIndex ), dtype=float )
-        p = parlist.copy( )
+        p = allpars.copy( )
         i = 0
         for k in fitIndex :
-            p[k] = parlist[k] - self.deltaP
+            p[k] = allpars[k] - self.deltaP
             lm = self.logLikelihood( model, p )
-            p[k] = parlist[k] + self.deltaP
+            p[k] = allpars[k] + self.deltaP
             lp = self.logLikelihood( model, p )
             dL[i] = 0.5 * ( lp - lm ) / self.deltaP
             i += 1
-            p[k]= parlist[k]
+            p[k]= allpars[k]
         return dL
 
 
-    def updateLogL( self, model, parlist, parval=None ):
+    def updateLogL( self, model, allpars, parval=None ):
         """"
         Return a update of the log( likelihood ) given a change in a few parameter.
 
@@ -360,7 +360,7 @@ class ErrorDistribution( object ):
             int index of a parameter
             float (old) value of the parameter
         """
-        return self.logLikelihood( model, parlist )
+        return self.logLikelihood( model, allpars )
 
     def setResult( self ):
         pass

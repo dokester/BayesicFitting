@@ -103,7 +103,7 @@ class RandomEngine( Engine ):
 
         t = 0
         for c in perm :
-            param = walker.parlist.copy( )
+            param = walker.allpars.copy( )
             save = param[c]
             kk = 0
             while True :

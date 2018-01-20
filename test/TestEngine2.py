@@ -154,16 +154,16 @@ class TestEngine2( unittest.TestCase ):
         engine = myengine( sl, errdis )
         for k in range( iter ) :
             lowL, klo = sl.getLowLogL()
-            p0 = sl[klo].parlist[:2]
+            p0 = sl[klo].allpars[:2]
             engine.calculateUnitRange()
             while True :
                 kok = engine.rng.randint( 0, nsamp )
 #                print( klo, kok )
                 if kok != klo :
-                    sl[klo].parlist = sl[kok].parlist.copy()
+                    sl[klo].allpars = sl[kok].allpars.copy()
                     break
             engine.execute( sl[klo], lowL )
-            p1 = sl[klo].parlist[:2]
+            p1 = sl[klo].allpars[:2]
             if k % 50 == 0 :
                 print( k, klo, p1, sl[klo].logL )
 

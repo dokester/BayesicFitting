@@ -130,7 +130,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
                 self.sumweight * ( 2 * math.log( scale ) + math.sqrt( 2.0 ) ) )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, parlist ):
+    def logLikelihood( self, model, allpars ):
         """
         Return the log( likelihood ) for a Cauchy distribution.
         Cauchy distr : f( x ) = s / ( pi * ( s^2 + x^2 ) )
@@ -141,18 +141,18 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             model to calculate mock data
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
 
         """
         self.ncalls += 1
         np = model.npchain
-        scale = parlist[np]
-        res2 = numpy.square( self.getResiduals( model, parlist[:np] ) )
+        scale = allpars[np]
+        res2 = numpy.square( self.getResiduals( model, allpars[:np] ) )
         return ( self.ndata * ( math.log( scale ) - self.LOGPI ) -
                  numpy.sum( numpy.log( res2 + scale * scale ) ) )
 
-    def partialLogL( self, model, parlist, fitIndex ) :
+    def partialLogL( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters
         in fitIndex.
@@ -161,7 +161,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             model to calculate mock data
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
@@ -169,10 +169,10 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         self.nparts += 1
         np = model.npchain
-        scale = parlist[np]
-        res = self.getResiduals( model, parlist[:np] )
+        scale = allpars[np]
+        res = self.getResiduals( model, allpars[:np] )
         r2s = res * res + scale * scale
-        dM = model.partial( self.xdata, parlist[:np] )
+        dM = model.partial( self.xdata, allpars[:np] )
 
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0

@@ -52,7 +52,7 @@ class Sample( object ):
         log Weights of the likelihood.
             SUM( log( W * L ) = logZ (TBC)
             log( SUM( W * L ) = logZ (evidence)
-    parlist : array_like
+    allpars : array_like
         list of parameters and hyperparameters
     fitIndex : array_like or None
         list of (super)parameters to be fitted.
@@ -83,7 +83,7 @@ class Sample( object ):
         errdis : ErrorDistribution
             to get info about super parameters
         fitIndex : array_like
-            list of indices in parlist that need fitting
+            list of indices in allpars that need fitting
         copy : Sample
             the sample to be copied
 
@@ -92,7 +92,7 @@ class Sample( object ):
         self.parent = parent
         self.model = model
         if copy is None :
-            self.parlist = numpy.append( model.parameters, errdis.hypar )
+            self.allpars = numpy.append( model.parameters, errdis.hypar )
             if fitIndex is not None :
                 self.fitIndex = fitIndex                # no copy.
             else :
@@ -105,7 +105,7 @@ class Sample( object ):
             self.logL = 0.0
             self.logW = 0.0
         else :
-            self.parlist = copy.parlist.copy()
+            self.allpars = copy.allpars.copy()
             self.fitIndex = copy.fitIndex             # no copy; read only
             self.logL = copy.logL
             self.logW = copy.logW
@@ -126,10 +126,10 @@ class Sample( object ):
         if name == "weight" :
             return math.exp( self.logW )
         elif name == "parameters" :
-            return self.parlist[:self.model.npchain]
+            return self.allpars[:self.model.npchain]
         elif name == "hypars" :
-            if len( self.parlist ) > self.model.npchain :
-                return self.parlist[self.model.npchain:]
+            if len( self.allpars ) > self.model.npchain :
+                return self.allpars[self.model.npchain:]
             else :
                 return None
         else :
@@ -143,7 +143,7 @@ class Sample( object ):
         """
 
         key1 = {"id" : int, "parent" : int, "model": Model, "logL" : float, "logW" : float }
-        key2 = {"parlist" : float, "fitIndex" : int }
+        key2 = {"allpars" : float, "fitIndex" : int }
         if ( Tools.setSingleAttributes( self, name, value, key1 ) or
              Tools.setListOfAttributes( self, name, value, key2 ) ) :
             pass

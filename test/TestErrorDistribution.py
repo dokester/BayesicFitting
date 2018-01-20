@@ -91,9 +91,9 @@ class TestErrorDistribution( unittest.TestCase ):
             errdis.data = y
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
             nf *= 10
-        parlist = [0.0, 1.0]
+        allpars = [0.0, 1.0]
         if plot:
-            self.ploterrdis( noise, errdis, model, parlist )
+            self.ploterrdis( noise, errdis, model, allpars )
 
         nf = 0.01
         errdis = LaplaceErrorDistribution ( x, ym )
@@ -148,18 +148,18 @@ class TestErrorDistribution( unittest.TestCase ):
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
             nf *= 10
 
-        parlist = [0.0, 1.0, power]
+        allpars = [0.0, 1.0, power]
         if plot :
-            self.ploterrdis( noise, errdis, model, parlist )
+            self.ploterrdis( noise, errdis, model, allpars )
 
-    def ploterrdis( self, noise, errdis, model, parlist ) :
+    def ploterrdis( self, noise, errdis, model, allpars ) :
         num_bins = 20
         plt.hist( noise, num_bins, normed=1, facecolor='g', alpha=0.5 )
         xx = numpy.linspace( -0.3, 0.3, 601, dtype=float )
         lik = numpy.zeros_like( xx )
         for k,p in enumerate( xx ) :
-            parlist[0] = p
-            lik[k] = errdis.logLikelihood( model, parlist )
+            allpars[0] = p
+            lik[k] = errdis.logLikelihood( model, allpars )
         maxlik = numpy.max( lik )
         plt.plot( xx, numpy.exp( lik - maxlik ), 'r-' )
         plt.show()

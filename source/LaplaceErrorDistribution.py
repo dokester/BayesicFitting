@@ -117,7 +117,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         return scale * math.sqrt( 2.0 )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, parlist ) :
+    def logLikelihood( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -125,14 +125,14 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             model to calculate mock data
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
 
         """
         self.ncalls += 1
         np = model.npchain
-        scale = parlist[np]
-        res = self.getResiduals( model, parlist[:np] )
+        scale = allpars[np]
+        res = self.getResiduals( model, allpars[:np] )
         sumres = self.getSumRes( res, scale )
         return - self.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
 
@@ -168,7 +168,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
             residual = residual * self.weights
         return numpy.sum( numpy.abs( residual ) ) / scale
 
-    def partialLogL( self, model, parlist, fitIndex ) :
+    def partialLogL( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -176,7 +176,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         ----------
         model : Model
             model to calculate mock data
-        parlist : array_like
+        allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
@@ -184,11 +184,11 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         self.nparts += 1
         np = model.npchain
-        scale = parlist[np]
+        scale = allpars[np]
 
-        dM = model.partial( self.xdata, parlist[:np] )
+        dM = model.partial( self.xdata, allpars[:np] )
         dL = numpy.zeros( len( fitIndex ), dtype=float )
-        res = self.getResiduals( model, parlist[:np] )
+        res = self.getResiduals( model, allpars[:np] )
         wgt = numpy.ones_like( res, dtype=float ) if self.weights is None else self.weights
         wgt = numpy.copysign( wgt, res )
 

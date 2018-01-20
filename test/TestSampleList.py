@@ -92,11 +92,11 @@ class TestSampleList( unittest.TestCase ):
             sup = 0.3 + 0.01 * self.noise[k]
             pars = self.par + 0.01 * self.noise[k]
             pars = numpy.append( pars, Tools.toArray( sup ) )
-            s.parlist = pars
+            s.allpars = pars
             s.logL = -1213.0 + self.x[k]
             s.logW = math.log( self.wgt[k] / 38.0 ) + lnZ
             print( s )
-            print( "    parlist ", fmt( s.parlist ) )
+            print( "    allpars ", fmt( s.allpars ) )
             print( "    par sup ", fmt( s.parameters ), fmt( s.hypars ) )
             print( "    fitindx ", fmt( s.fitIndex ) )
             k += 1

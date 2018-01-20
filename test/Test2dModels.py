@@ -10,9 +10,6 @@ import Tools
 from PolySineAmpModel import PolySineAmpModel
 from PolySurfaceModel import PolySurfaceModel
 from EtalonDriftModel import EtalonDriftModel
-from EtalonDrift2Model import EtalonDrift2Model
-from EtalonDrift3Model import EtalonDrift3Model
-from EtalonDrift4Model import EtalonDrift4Model
 from SurfaceSplinesModel import SurfaceSplinesModel
 from GaussModel import GaussModel
 from SineModel import SineModel
