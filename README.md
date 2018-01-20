@@ -103,32 +103,17 @@ In the documenation directory a number of documents can be found.
 
 
 + [Manual](./documentation/manual.md)<br>
-A first draft of a manula. It obviously needs more work.
+A first draft of a manual. It obviously needs more work.
 
 + [FAQ](./documentation/troubles.md)<br>
 A list of troublesome situations and what to do about it.
 
-+ [Glossary](./documentation/glossary.md)
++ [Glossary](./documentation/glossary.md)<br>
 A list of the terms used throughout this package, with explanations.
 
-+ [Design](./documentation/design.md)
++ [Design](./documentation/design.md)<br>
 An architectural design document, displaying the relationships between 
 the classes. 
-
-<!--
-A first draft of a manual can be found in 
-./documentation/manual.md. It obviously needs more work.
-
-Another hopefully usefull document is troubles.md in the same directory. 
-It lists a number of cases where the fitting went haywire and how it
-might be solved.  
-
-Also in BayesicFitting/documentation are a number of structure diagrams 
-(dia-files and png-files). They show the relationships between the 
-classes in the package. A first version of the Design Document has 
-been written. 
--->
-
 
 <a name="status"> </a> 
 ## 4. Status 

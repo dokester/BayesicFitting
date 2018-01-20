@@ -268,9 +268,9 @@ kernels and miscellaneous.
 ### Models
 
 + **BaseModel**<br>
-    BaseModel implements the common parts of simple Models.
+    BaseModel implements the common parts of simple models.
 + **FixedModel**<br>
-    FixedModel implements the 'fixing' of parameters for simple Models.
+    FixedModel implements the 'fixing' of parameters for simple models.
 + **Model**<br>
     Model implements the common parts of (compound) models.
 + **LinearModel**<br>
@@ -279,7 +279,7 @@ kernels and miscellaneous.
     Anchestor of all non-linear models.
 
 + **BracketModel**<br>
-    BracketModel provides brackets to a chain of `Model`s.
+    BracketModel provides brackets to a chain of models.
 + **CombiModel**<br>
     CombiModel combines a number of copies of the same model.
 
@@ -294,7 +294,7 @@ kernels and miscellaneous.
 + **ConstantModel**<br>
     ConstantModel is a Model which does not have any parameters.
 + **EtalonModel**<br>
-    Sinusoidal Model with drifting frequency.
+    Fabry-Perot Etalon Model.
 + **ExpModel**<br>
     Exponential Model.
 + **FreeShapeModel**<br>

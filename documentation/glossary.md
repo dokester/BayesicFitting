@@ -1,6 +1,9 @@
 
 ## Glossary <a name="glossary"> </a>
 
+A list of terms used in this package, with a short explanation. 
+The sizes listed at various terms are explained at the end.
+
 + **Independent Variable**<br>
 The vector(s) of coordinates (locations, times, frequencies or
 whatever), at which  the measurements were made. These vector(s) are
@@ -99,13 +102,14 @@ instrument; fluxes should be above the noise level and below the
 saturation etc. My personal rule of thumb is, whenever you start to
 frown on the outcome of a parameter it is out of your prior range.
 
-+ **Posterior** or *Posterior probability**<br>
++ **Posterior** or **Posterior probability**<br>
 The posterior is the probability of the parameters (in our case) after 
 considering the data.<br>
 According to Bayes Rule, the joint probability of data and parameters,
 given the model:<br>
-joint    = posterior * evidence = likelihood * prior<br>
-P(p,D|M) = P(p|D,M)  * P(D|M)   = P(D|p,M)   * P(p|M)<br>
+  joint    = posterior * evidence = likelihood * prior<br>
+  P(p,D|M) = P(p|D,M)  * P(D|M)   = P(D|p,M)   * P(p|M)<br>
+Where P is probability, p is parameters, D is Data and M is Model.<br>
 As the integral of the posterior over the parameter space must be 1.0,
 to be a proper probability, the evidence acts as a normalizing constant
 of the prior * likelihood.
