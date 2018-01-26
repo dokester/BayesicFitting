@@ -1,4 +1,5 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+
 
 __version__ = '0.9'
 
@@ -19,11 +20,14 @@ setup(
     description='A Python Toolbox for Bayes-enhanched fitting.',
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
                 'optimization','nested sampling'],
-    packages=['BayesicFitting'],
+    packages=['source', 'source/kernels', 'test', 'examples'],
+#    packages = find_packages( exclude=('test',) ),
     classifiers = [
         "Programming Language :: Python",
         "Operating System :: OS Independent",
         "Intended Audience :: Science/Research/DataAnalysis",
-        "License :: GPL3"
-    ]
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+        "Topic :: Scientific/Engineering"
+    ],
+    include_package_data=True
 )

@@ -1,0 +1,6 @@
+include examples/*.ipynb
+include examples/data/*.csv
+include documentation/*.dia
+include documentation/*.png
+include documentation/*.md
+

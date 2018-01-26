@@ -2,6 +2,9 @@
 
 A package for model fitting and evidence calculation.
 
+in case you are wondering what this is about take a 
+quick look at [this example.](./examples/sealevel.ipynb)
+
 ## Content
 
 1. [History](#history)

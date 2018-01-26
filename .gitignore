@@ -2,6 +2,9 @@
 **old
 README.html
 __pycache__
+dist/
+*egg/
+*egg-info/
 documentation/*.dia~
 documentation/*.html
 examples/.ipynb_checkpoints

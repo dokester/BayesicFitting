@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # PYTHON.test -> test area for basic fitter package
 
+"""
 from Test2dFixedModels import Test2dFixedModels
 from Test2dModels import Test2dModels
 # from TestAll import TestAll
@@ -43,4 +44,4 @@ from TestTools import TestTools
 from TestWeights import TestWeights
 
 print( "__init__  done" )
-
+"""
