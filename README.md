@@ -1,9 +1,9 @@
 # BayesicFitting
 
-A package for model fitting and evidence calculation.
+A package for Bayesian model fitting and evidence calculation.
 
-in case you are wondering what this is about take a 
-quick look at [this example.](./examples/sealevel.ipynb)
+(In case you are wondering what that is about take a 
+quick look at [this example.](./examples/sealevel.ipynb))
 
 ## Content
 
@@ -17,12 +17,12 @@ quick look at [this example.](./examples/sealevel.ipynb)
 
 The BayesicFitting package is a python version of the the fitter classes
 in Herschel Common Science System (HCSS). The HCSS version was written
-in JAVA also mostly by me. I encoded features and classes that were
-requested by my Herschel colleagues or I remembered having used myself
-while doing data analysis for earlier satellites as IRAS, ISO and AKARI.
-So most of the stuff in here was needed and used at a certain moment in
-time. Even now the package is developing in directions that are needed by
-my work for JWST. 
+in JAVA mostly by me. I encoded features and classes that were requested
+by my Herschel colleagues or that I remembered having used myself during
+my lifelong career as data analysis for earlier satellites as IRAS, ISO
+and AKARI. So most of the stuff in here was needed and used at a certain
+moment in time. Even now the package is developing in directions that
+are needed by my work for JWST. 
 
 The HCSS system is in the public domain under GPL3. It was used by the 3
 instrument groups of the Herschel satellite to write calibration and
@@ -72,27 +72,18 @@ classes are in a directory BayesicFitting/source. A special type of
 functions are found in BayesicFitting/source/kernels. They can be used
 e.g. to combine into a model.
 
-### test
-
-Almost all classes have a test harnass. These are located in
-BayesicFitting/test. They can be execised as:
-
-    python -m unittest <file>
-
-where python refers to python3 and file refers to one of the files in
-BayesicFitting/test.
-
-As most functionality is tested in a test harnass, examples on how to
-use the classes can be found there too.
-
 ### examples
 
-In BayesicFitting/examples a number of scripts can be found the exercise
-the classes. They are in the form of jupyter notebooks. Some are using
-real data; others have synthetic data specially constructed to make some
-point.
+In [BayesicFitting/examples](./examples) a number of scripts can be
+found the exercise the classes. They are in the form of jupyter
+notebooks. Some are using real data; others have synthetic data
+specially constructed to make some point. 
 
-Run a jupyter notebook in the examples directory.
+All examples can be inspected by clicking on them. They will fold out in
+the browser.
+
+To actually exercise the examples and maybe adapt then, start a jupyter
+notebook in the examples directory.
 
     jupyter notebook
 
@@ -102,7 +93,8 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
-In the documenation directory a number of documents can be found. 
+In the [documenation](./documentation) directory a number of documents
+can be found. 
 
 
 + [Manual](./documentation/manual.md)<br>
@@ -117,6 +109,19 @@ A list of the terms used throughout this package, with explanations.
 + [Design](./documentation/design.md)<br>
 An architectural design document, displaying the relationships between 
 the classes. 
+
+### test
+
+Almost all classes have a test harnass. These are located in
+BayesicFitting/test. They can be execised as:
+
+    python -m unittest <file>
+
+where python refers to python3 and file refers to one of the files in
+BayesicFitting/test.
+
+As most functionality is tested in a test harnass, examples on how to
+use the classes can be found there too.
 
 <a name="status"> </a> 
 ## 4. Status 
@@ -133,5 +138,5 @@ More work needs to be done in:
   * Dynamic models for NestedSampler
 
 
-4 Jan 2018 Do Kester.
- 
+ 4 Jan 2018 Do Kester.
+26 Jan 2018 
