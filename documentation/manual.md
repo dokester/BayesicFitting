@@ -51,17 +51,43 @@ and classes pertaining to the **NestedSampler**.
 
 A model is a function of variables and parameters, which together with
 its derivatives, parameter values, and other possibly usefull
-information are packed into a class. **Model**s can be combined by various
-operations (+-*/) into a new compound model. The functional results,
-derivatives etc. of the compound model are calculated according to the
-operations at hand. This way quite complicated models can be formed
-without worrying about internal consistency.
+information are packed into a class. 
+**Model**s come into 2 varieties: those that are linear in its
+parameters and those that are not. The former have great advantages as
+they can be fitted directly to the data; the latter always need an
+iterative fitting approach. 
 
-**Model**s come into 2 varieties: those that are linear in its parameters
-and those that are not. The former have great advantages as they can be
-fitted directly to the data; the latter always need an iterative fitting
-approach. Compound models are non-linear unless all its constituents are
-linear and its operations are additive.
+#### Dimensionality.
+
+Most **Model**s are 1-dimensional i.e. they require a 1-dimensional
+input vector. Two- or more-dimensional models need 2 or more numbers for
+each result it produces. One could think of fitting  maps or cubes. The
+results of any model is always a 1-dimensional vector.
+
+Models of different dimensionality cannot be combined in any way.
+
+#### Compound Models.
+
+**Model**s can be combined by various operations (+-*/) into a new
+(compound) model. The functional results, derivatives etc. of the
+compound model are calculated according to the operations at hand.
+Compound models are **Model**s and can be combined with other (compound)
+models into a new model. This way quite complicated models can be formed
+without worrying about internal consistency. 
+See the [Gaussfit example](../examples/gaussfit.ipynb).
+
+#### Fixed Models.
+
+Upon construction the value(s) of one or more parameters can be fixed. 
+Either with a constant value, turning the model into one with less
+parameters, or with another **Model**. Now the parameter is changing as
+the **Model**. Results and derivatives are constructed from the
+interacting models. Again such a fixed model is a **Model** and can be
+part of a compound model. 
+See the [mrs-fringes example](../examples/mrs-fringes.ipynb).
+
+Compound and fixed models are non-linear
+unless all its constituents are linear and its operations are additive.
 
 There are several dozens of simple Models inside this toolbox.
 
@@ -74,6 +100,78 @@ parameters. The values for the parameters where the minimum cq. maximum
 in the landscape is found are the least-squares solution resp. the
 maximum-likelihood solution. If the likelihood is Gaussian the two are
 the same. 
+
+#### Weights.
+
+Up on fitting weights can be provided as a vector of the same length as
+the data vector. 
+The behaviour of the fitter is such
+that when a point has a weight of n, this is equivalent to a case where that
+particular point is present in the dataset n times. This concept is
+extended to non-integral values of the weights.<br>
+Weights could be derived from the standard deviations in a previous
+calculation. In that case the weights should be set to the inverse
+squares of the stdevs. However weights do not need to be inverse
+variances; they could be derived in any other way. One specially usefull
+feature of the use of weights, is that some might be set to zero,
+causing those points not to contribute at all to the fit.<br>
+
+#### Linear Fitters.
+
+As with **Model**s there are two kinds of **Fitter**s, linear or
+non-linear ones for linear and non-linear **Model**s resp. 
+
+The landscape for linear models is monomodal; it has
+on (global) minimum. The linear fitter has generally no problem finding
+this minimum in one direct matrix conversion. It is fast and efficient.
+This package has 2 linear fitters: **Fitter** and **QRFitter**.
+
+#### Non-linear Fitters.
+
+For non-linear models the landscape can be multimodal, especially for
+periodic models.  It can have many minima of which only one is the
+deepest. That is the one the fitter should find. Non linear fitters
+search for a gradient in the landscape to descend into the valley.
+Wherever a minimum is found, most fitters get stuck. There are several
+strategies to search the landscape but all of them are iterative. There
+is no single best strategy. It depends on the problem and on knowledge
+of the starting values for the parameters. This package has a dozen non
+linear fitters.
+
+#### Evidence.
+
+When an optimal solution for the parameters has been found, a number of
+methods, all inherited from **BaseFitter**, are available to calculate
+[standard deviations](./glossary/#stdev), 
+[noise scale](./glossary/#noise), 
+[&chi;<sup>2</sup>](./glossary/#chisq), 
+[confidence regions](./glossary/#confidence)
+and the [evidence](./glossary/#evidence). 
+Mostly they are derived from the covariance matrix at
+the optimal parameter location. The evidence (or more precisely the log
+evidence) is calculated as a Gaussian approximation of the posterior,
+also called Laplace's method. 
+See [example](../examples/harmonicfit.ipynb). 
+
+#### Keep fixed.
+
+The **Fitter**s have the option to keep one or more parameters fixed
+during the fitting proces. Contrary to **FixedModel**s the paramaters
+are not fixed permanently. In a next run of the fitter they can be taken
+along in the fit.
+
+#### Set limits.
+
+TBC. TBD. TBW. It is one of the areas that need more work.
+
+#### Robust fitting.
+
+A special fitter is **RobustShell**. It is a shell around any other
+fitter that iteratively de-weights outlying points. It makes the fit
+more robust in the presence of a minority of outliers i.e. points that
+should not partake in the fit. The de-weighting process is governed by
+one of the [kernels](../source/kernels).
+
 
 <a name="ns"></a>
 ### NestedSampler 
@@ -134,8 +232,8 @@ This yields the same set of parameters, but now we can also ask:
 
 To calculate the evidence (or better the logEvidence) we need a prior
 probability on the parameters and on the noise scale. In the context of
-the Fitters, the prior on the parameters is the UniformPrior, and
-on the noise scale it is the **JeffreysPrior**. Both these Priors are
+the Fitters, the prior on the parameters is the **UniformPrior**, and
+on the noise scale it is the **JeffreysPrior**. Both these **Prior**s are
 improper, i.e. the integral from -inf to +inf is infinite. So we need
 limits, on the parameters prior and on the noise scale prior. 
 
@@ -144,7 +242,7 @@ limits, on the parameters prior and on the noise scale prior.
 The `logE` is calculated using a Gaussian approximation for the
 posterior, also known as Laplace's rule.
 
-See [below](#list-fitters) for a list of available fitters with its
+See [below](#ref-fitter) for a list of available fitters with its
 purpose line.
 
 <a name="usage-ns"></a>
@@ -180,7 +278,7 @@ We execute the program as
     yfit = ns.sample()
 
 where `yfit` contains the optimal model fit. We can now ask optimal
-parameters, standard deviations, scale and most impotantly the evidence.
+parameters, standard deviations, scale and most importantly the evidence.
 
     param = ns.parameters
     stdev = ns.standardDeviations
@@ -267,6 +365,8 @@ kernels and miscellaneous.
 <a name="synops-model"></a>  
 ### Models
 
+#### Base models.
+
 + **BaseModel**<br>
     BaseModel implements the common parts of simple models.
 + **FixedModel**<br>
@@ -278,12 +378,14 @@ kernels and miscellaneous.
 + **NonLinearModel**<br>
     Anchestor of all non-linear models.
 
+#### Compound models.
+
 + **BracketModel**<br>
     BracketModel provides brackets to a chain of models.
 + **CombiModel**<br>
     CombiModel combines a number of copies of the same model.
 
-#### 1 dimensional simple models
+#### 1-dimensional simple models
 
 + **ArctanModel**<br>
     Arctangus Model.
@@ -298,7 +400,7 @@ kernels and miscellaneous.
 + **ExpModel**<br>
     Exponential Model.
 + **FreeShapeModel**<br>
-    Pixelated Model.
+    Pixelated Model. (TBD)
 + **GaussModel**<br>
     Gaussian Model.
 + **HarmonicModel**<br>
@@ -328,12 +430,12 @@ kernels and miscellaneous.
 + **VoigtModel**<br>
     Voigt's Gauss Lorentz convoluted model for line profiles.
 
-#### 2 dimensional simple models
+#### 2-dimensional simple models
 
 + **EtalonDriftModel**<br>
     Sinusoidal Model with drifting frequency.
 + **FreeShape2dModel**<br>
-    Pixelated 2-dim Model.
+    Pixelated 2-dim Model. (TBD)
 + **Kernel2dModel**<br>
     Two dimensional **Kernel** Model.
 + **PolySurfaceModel**<br>
@@ -346,31 +448,38 @@ kernels and miscellaneous.
 <a name="ref-fitter"></a>  
 ### Fitters
 
+#### Base fitters.
+
 + **BaseFitter**<br>
     Base class for all Fitters.
 + **IterativeFitter**<br>
     Base class with methods common to all iterative fitters.
 + **MaxLikelihoodFitter**<br>
     Base class with methods common to fitters handling ErrorDistributions.
+
+#### Helpers.
+
 + **RobustShell**<br>
     For fitting in the presence of outliers.
-
 + **ImageAssistant**<br>
     Helper class in case the data are in the form of an image.
++ **AnnealingAmoeba**<br>
+    Minimizer using an annealing Nelder-Mead simplex.
 + **MonteCarlo**<br>
     Helper class to calculate the confidence region of a fitted model.
-
 + **ConvergenceError**<br>
     Thrown when an iterative fitter stops while the minimum has not been found.
 
 
 #### Linear fitters
+
 + **Fitter**<br>
     Fitter for linear models.
 + **QRFitter**<br>
     Fitter for linear models, using QR decomposition.
 
 #### Nonlinear fitters
+
 + **AmoebaFitter**<br>
     Fitter using the simulated annealing simplex minimum finding algorithm,
 + **CurveFitter**<br>
@@ -470,7 +579,7 @@ kernels and miscellaneous.
 + **CrossEngine**<br>
     Cross over between 2 walkers.
 + **FrogEngine**<br>
-    The FrogEngine jumps a parameter set towards/over a bunch of others.
+    The FrogEngine jumps a parameter set towards/over a bunch of others.(TBD)
 + **GalileanEngine**<br>
     Move all parameters in forward steps, with mirroring on the edge.
 + **GibbsEngine**<br>
@@ -487,7 +596,7 @@ Kernels are even functions that are integrable over (-inf,+inf).
 A kernel is bound when it is zero outside (-1,+1)
 
 They can be encapsulated in a **KernelModel** or in a 2dim
-**Kernel2dModel**. They also find use in the **RobustFitter**.
+**Kernel2dModel**. They also find use in the **RobustShell**.
 
 
 <table>
@@ -536,7 +645,8 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 <tr>
   <td><b>Sinc</b></td>
   <td>sin(x) / x</td> 
-  <td>true</td>
+  <td>false</td>
+  <td>do not use in **RobustShell**</td>
 </tr>
 <tr>
   <td><b>Triangle</b></td>
