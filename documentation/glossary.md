@@ -27,7 +27,7 @@ Size = N.
 A vector of the same shape as the dependent variable representing the weights
 of the individual datapoints. Weights by nature are non-negative. <br>
 Weights are defined such that a point with weight W is equivalent to having 
-W times that same point.
+W times that same point.<br>
 Size = N.
 
 <a name="model"></a>

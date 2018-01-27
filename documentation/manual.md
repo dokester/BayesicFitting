@@ -74,7 +74,7 @@ compound model are calculated according to the operations at hand.
 Compound models are **Model**s and can be combined with other (compound)
 models into a new model. This way quite complicated models can be formed
 without worrying about internal consistency. 
-See the [Gaussfit example](../examples/gaussfit.ipynb).
+See the [gaussfit example](../examples/gaussfit.ipynb).
 
 #### Fixed Models.
 
@@ -142,11 +142,11 @@ linear fitters.
 
 When an optimal solution for the parameters has been found, a number of
 methods, all inherited from **BaseFitter**, are available to calculate
-[standard deviations](./glossary/#stdev), 
-[noise scale](./glossary/#noise), 
-[&chi;<sup>2</sup>](./glossary/#chisq), 
-[confidence regions](./glossary/#confidence)
-and the [evidence](./glossary/#evidence). 
+[standard deviations](./glossary.md/#stdev), 
+[noise scale](./glossary.md/#noise), 
+[&chi;<sup>2</sup>](./glossary.md/#chisq), 
+[confidence regions](./glossary.md/#confidence)
+and the [evidence](./glossary.md/#evidence). 
 Mostly they are derived from the covariance matrix at
 the optimal parameter location. The evidence (or more precisely the log
 evidence) is calculated as a Gaussian approximation of the posterior,
