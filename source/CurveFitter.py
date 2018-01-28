@@ -116,7 +116,7 @@ class CurveFitter( IterativeFitter ):
         ------
             ValueError when ydata or weights contain a NaN
         """
-        fitIndex = self.fitprolog( ydata, weights=weights )
+        fitIndex = self.fitprolog( ydata, weights=weights, keep=keep )
 
         abssigma = ( self.fixedScale is not None )
         if weights is None :

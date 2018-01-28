@@ -159,6 +159,7 @@ The **Fitter**s have the option to keep one or more parameters fixed
 during the fitting proces. Contrary to **FixedModel**s the paramaters
 are not fixed permanently. In a next run of the fitter they can be taken
 along in the fit.
+See [example](../examples/fix-parameters.ipynb). 
 
 #### Set limits.
 

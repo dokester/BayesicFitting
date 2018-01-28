@@ -196,7 +196,7 @@ class IterativeFitter( BaseFitter ):
         ConvergenceError if it stops when the tolerance has not yet been reached.
 
         """
-        self.fitprolog( ydata, weights=weights )
+        self.fitprolog( ydata, weights=weights, keep=keep )
 
         try:
             params = self.nonlinfit( ydata, weights=weights )
