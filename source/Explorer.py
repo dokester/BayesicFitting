@@ -1,6 +1,8 @@
 import numpy as numpy
 from threading import Thread
 
+## from OrderProblem import OrderProblem
+
 __author__ = "Do Kester"
 __year__ = 2017
 __license__ = "GPL3"
@@ -74,6 +76,7 @@ class Explorer( object ):
         self.rate = ns.rate
         self.maxtrials = ns.maxtrials
         self.verbose = ns.verbose
+##        if not isinstance( self.walkers[0].model, OrderProblem ) :
         self.engines[0].calculateUnitRange( )
 
     def explore( self, worst, lowLhood, fitindex ):
@@ -107,6 +110,7 @@ class Explorer( object ):
                 e.report[3] += nc
 
         # recalculate  TBC
+##        if not isinstance( self.walkers[0].model, OrderProblem ) :
         self.engines[0].calculateUnitRange( )
 
 class ExplorerThread( Thread ):
@@ -158,8 +162,9 @@ class ExplorerThread( Thread ):
                 moves += engine.execute( walker, lowLhood, fitindex )
 
                 if self.verbose >= 4:
-                    print( "%4d -%12.12s %4d %8.1f %8.1f ==> %3d  %8.1f"%
-                            ( i, engine, walkerId, lowLhood, oldlogL, moves, walker.logL ) )
+                    print( "%4d %-15.15s %4d %8.1f %8.1f ==> %3d  %8.1f"%
+                            ( i, engine, walkerId, lowLhood, oldlogL, moves,
+                                walker.logL ) )
                     i += 1
                     oldlogL = walker.logL
 
@@ -171,7 +176,7 @@ class ExplorerThread( Thread ):
         return
 
     def logLcheck( self, walker ) :
-        wlogL = self.errdis.logLikelihood( walker.model, walker.parlist )
+        wlogL = self.errdis.logLikelihood( walker.model, walker.allpars )
         if wlogL != walker.logL :
             raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
                                 ( walker.logL, wlogL ) )

@@ -9,12 +9,12 @@ setup(
     author='Do Kester',
     author_email='dokester@home.nl',
     install_requires=[
-        'python>=3.5',
-        'numpy>=1.9',
-        'matplotlib>=2.0.2',
-        'scipy>=1.0.0',
-        'astropy>=2.0.2',
-        'bspline>=0.1.1'         # from John Foster and Juha Jeronen at github
+#        'python >= 3.5',
+        'numpy >= 1.9',
+        'matplotlib >= 2.0',
+        'scipy >= 1.0',
+        'astropy >= 2.0'
+#        'bspline>=0.1.1'         # from John Foster and Juha Jeronen at github
     ],
     license='LICENSE.txt',
     description='A Python Toolbox for Bayes-enhanched fitting.',
@@ -23,7 +23,7 @@ setup(
     packages=['source', 'source/kernels', 'test', 'examples'],
 #    packages = find_packages( exclude=('test',) ),
     classifiers = [
-        "Programming Language :: Python",
+        "Programming Language :: Python :: 3.5",
         "Operating System :: OS Independent",
         "Intended Audience :: Science/Research/DataAnalysis",
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",

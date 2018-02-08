@@ -75,7 +75,7 @@ e.g. to combine into a model.
 ### examples
 
 In [BayesicFitting/examples](./examples) a number of scripts can be
-found the exercise the classes. They are in the form of jupyter
+found to exercise the classes. They are in the form of jupyter
 notebooks. Some are using real data; others have synthetic data
 specially constructed to make some point. 
 
@@ -138,5 +138,5 @@ More work needs to be done in:
   * Dynamic models for NestedSampler
 
 
- 4 Jan 2018 Do Kester.
-26 Jan 2018 
+ 4 Jan 2018 Do Kester.<br>
+26 Jan 2018 <br>
