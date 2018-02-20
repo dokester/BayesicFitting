@@ -13,7 +13,8 @@ setup(
         'numpy >= 1.9',
         'matplotlib >= 2.0',
         'scipy >= 1.0',
-        'astropy >= 2.0'
+        'astropy >= 2.0',
+        'future'
 #        'bspline>=0.1.1'         # from John Foster and Juha Jeronen at github
     ],
     license='LICENSE.txt',
