@@ -1,5 +1,7 @@
 ## run as : python3 -m unittest TestErrorDistribution
 
+from __future__ import print_function
+
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
