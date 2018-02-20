@@ -220,7 +220,7 @@ class FixedModel( BaseModel ):
 
         """
         expparam = self.expand( xdata, param )
-        return super().result( xdata, expparam )
+        return super(FixedModel, self).result( xdata, expparam )
 
     def expand( self, xdata, param ) :
         """
@@ -269,7 +269,7 @@ class FixedModel( BaseModel ):
         expparam = self.expand( xdata, param )
         self.checkParameter( expparam )
         if len( self.mlist ) == 0 :
-            return super().partial( xdata, expparam, parlist=self.parlist )
+            return super(FixedModel, self).partial( xdata, expparam, parlist=self.parlist )
 
         np = len( param )
         ns = len( expparam )

@@ -423,7 +423,7 @@ class Model( FixedModel ):
     def _recursiveCorrect( self, params, newpar ) :
 
         np = self.npbase
-        newpar = numpy.append( newpar,  super().checkParameter( params[:np] ) )
+        newpar = numpy.append( newpar,  super(Model,self).checkParameter( params[:np] ) )
         model = self._next
         if model is None :
             return newpar
@@ -454,7 +454,7 @@ class Model( FixedModel ):
     def _recursiveResult( self, xdata, param, res ) :
 
         np = self.npbase
-        res = self.operate( res, super().result( xdata, param[:np] ) )
+        res = self.operate( res, super(Model,self).result( xdata, param[:np] ) )
         model = self._next
         if model is None :
             return res
@@ -514,9 +514,9 @@ class Model( FixedModel ):
         nextres = None
         if np > 0:                      #  the base model has no parameters: skip
             if useNum:
-                nextdf = super().numDerivative( xdata, par )
+                nextdf = super(Model,self).numDerivative( xdata, par )
             else:
-                nextdf = super().derivative( xdata, par )
+                nextdf = super(Model,self).derivative( xdata, par )
 
         else :
             nextdf = numpy.zeros_like( xdata, dtype=float )
@@ -528,11 +528,11 @@ class Model( FixedModel ):
             df -= nextdf
 
         elif self._operation == self.MUL :
-            nextres = super().result( xdata, par )
+            nextres = super(Model,self).result( xdata, par )
             df = df * nextres + nextdf * result
 
         elif self._operation == self.DIV :
-            nextres = super().result( xdata, par )
+            nextres = super(Model,self).result( xdata, par )
             df = ( df * nextres - nextdf * result ) / ( nextres * nextres )
 
 
@@ -540,7 +540,7 @@ class Model( FixedModel ):
         if model is None:
             return df
         if nextres is None:
-            nextres = super().result( xdata, par )
+            nextres = super(Model,self).result( xdata, par )
         result = self.operate( result, nextres )
         #  append the dfs of the _next model
 
@@ -580,9 +580,9 @@ class Model( FixedModel ):
         nextres = None
         if np > 0:                #  the base model has no parameters: skip
             if useNum:
-                nextpartial = super().numPartial( xdata, par )
+                nextpartial = super(Model,self).numPartial( xdata, par )
             else:
-                nextpartial = super().partial( xdata, par )
+                nextpartial = super(Model,self).partial( xdata, par )
 
         else :
             inlen = Tools.length( xdata )
@@ -592,12 +592,12 @@ class Model( FixedModel ):
             nextpartial = numpy.negative( nextpartial )
 
         elif self._operation == self.MUL :
-            nextres = super().result( xdata, par )
+            nextres = super(Model,self).result( xdata, par )
             partial = numpy.multiply( partial.transpose(), nextres ).transpose()
             nextpartial = numpy.multiply( nextpartial.transpose(), result ).transpose()
 
         elif self._operation == self.DIV :
-            nextres = super().result( xdata, par )
+            nextres = super(Model,self).result( xdata, par )
             partial = numpy.divide( partial.transpose(), nextres ).transpose()
             invres = - result / ( nextres * nextres )
             nextpartial = numpy.multiply( nextpartial.transpose(), invres ).transpose()
@@ -609,7 +609,7 @@ class Model( FixedModel ):
         if model is None:
             return partial
         if nextres is None:
-            nextres = super().result( xdata, par )
+            nextres = super(Model,self).result( xdata, par )
         result = self.operate( result, nextres )
         #  append the partials of the _next model
         return model._recursivePartial( xdata, param[np:], result, partial,

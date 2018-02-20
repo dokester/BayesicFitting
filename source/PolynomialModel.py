@@ -64,7 +64,7 @@ class PolynomialModel( LinearModel ):
         """
         names = ["polycoeff_%d"%k for k in range( degree+1 )]
 
-        super( ).__init__( degree + 1, copy=copy,
+        super(PolynomialModel,self ).__init__( degree + 1, copy=copy,
                         names=names, **kwargs )
 
         object.__setattr__( self, "degree", degree )
