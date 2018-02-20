@@ -3,7 +3,7 @@ from astropy import units
 import math
 import Tools
 from NonLinearModel import NonLinearModel
-from Kernel import Kernel
+from kernels.Kernel import Kernel
 from Gauss import Gauss
 
 __author__ = "Do Kester"

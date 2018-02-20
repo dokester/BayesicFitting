@@ -20,7 +20,7 @@ Provides fitter functions.
 from .AmoebaFitter import AmoebaFitter
 from .AnnealingAmoeba import AnnealingAmoeba
 from .ArctanModel import ArctanModel
-from .BSplinesModel import BSplinesModel
+#from .BSplinesModel import BSplinesModel
 from .BaseFitter import BaseFitter
 from .BaseModel import BaseModel
 from .BracketModel import BracketModel
@@ -112,6 +112,6 @@ from .UniformPrior import UniformPrior
 from .VoigtModel import VoigtModel
 
 from .Formatter import formatter as fmt
-import Tools
+from . import Tools
 
 #__all__ = ['Model', 'GaussModel', 'Prior']
