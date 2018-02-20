@@ -23,7 +23,7 @@ TBC: How much time does this take. Everything is translated ??
 
 """
 
-from BayesicFitting.source.AmoebaFitter import AmoebaFitter
+from .source.AmoebaFitter import AmoebaFitter
 from BayesicFitting.source.AnnealingAmoeba import AnnealingAmoeba
 from BayesicFitting.source.ArctanModel import ArctanModel
 #from BayesicFitting.source.BSplinesModel import BSplinesModel
