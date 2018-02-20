@@ -22,7 +22,7 @@ setup(
                 'optimization','nested sampling'],
 #    packages=['bayesicFitting/source', 'bayesicFitting/source/kernels', 'bayesicFitting/test', 'bayesicFitting/examples'],
 #    packages = find_packages( exclude=('test',) ),
-    packages=['bayesicFitting', 'bayesicFitting/source', 'bayesicFitting/source/kernels', 'bayesicFitting/test', 'bayesicFitting/examples'],
+    packages=['bayesicFitting', 'bayesicFitting/source', 'bayesicFitting/test', 'bayesicFitting/examples'],
     classifiers = [
         "Programming Language :: Python :: 3.5",
         "Operating System :: OS Independent",

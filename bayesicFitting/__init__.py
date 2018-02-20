@@ -68,7 +68,7 @@ from .source.LaplaceErrorDistribution import LaplaceErrorDistribution
 from .source.LaplacePrior import LaplacePrior
 from .source.LevenbergMarquardtFitter import LevenbergMarquardtFitter
 #from .source.LinearModel import LinearModel
-from .source.LogFactorial import LogFactorial
+from .source.LogFactorial import logFactorial
 from .source.LorentzModel import LorentzModel
 #from .source.MaxLikelihoodFitter import MaxLikelihoodFitter
 #from .source.Model import Model
@@ -78,7 +78,7 @@ from .source.NoiseScale import NoiseScale
 #from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
 from .source.PadeModel import PadeModel
-from .source.Plotter import Plotter
+from .source.Plotter import plotFit
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel
 from .source.PolySurfaceModel import PolySurfaceModel
@@ -109,8 +109,8 @@ from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
 
-from .source.Formatter import Formatter
-from .source.Tools import Tools
+from .source.Formatter import formatter
+from .source import Tools
 
 
 
