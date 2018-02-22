@@ -1,5 +1,5 @@
-from KernelModel import KernelModel
-from Sinc import Sinc
+from .KernelModel import KernelModel
+from .Sinc import Sinc
 
 __author__ = "Do Kester"
 __year__ = 2017

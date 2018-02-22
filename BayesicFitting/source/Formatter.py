@@ -3,7 +3,7 @@ from numpy import ndarray
 from numpy import float64
 from numpy import int64
 import math
-import Tools
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017

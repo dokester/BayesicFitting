@@ -1,5 +1,5 @@
 import numpy as numpy
-import Tools
+from . import Tools
 import math
 # import bspline from Juha Jeronen
 import bspline
@@ -9,7 +9,7 @@ import splinelab
 #from splinelab import augknt
 
 
-from LinearModel import LinearModel
+from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
 __year__ = 2017

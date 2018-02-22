@@ -1,7 +1,7 @@
 import numpy as numpy
 import math
 
-from ScaledErrorDistribution import ScaledErrorDistribution
+from .ScaledErrorDistribution import ScaledErrorDistribution
 
 __author__ = "Do Kester"
 __year__ = 2017

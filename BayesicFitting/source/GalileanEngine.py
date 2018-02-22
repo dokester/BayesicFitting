@@ -1,11 +1,11 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from Formatter import formatter as fmt
+from . import Tools
+from .Formatter import formatter as fmt
 
-from Engine import Engine
-from Engine import DummyPlotter
+from .Engine import Engine
+from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
 __year__ = 2017

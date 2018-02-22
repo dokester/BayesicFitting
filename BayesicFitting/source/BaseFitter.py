@@ -3,12 +3,12 @@ import math
 import warnings
 import matplotlib.pyplot as plt
 
-from ImageAssistant import ImageAssistant
-from MonteCarlo import MonteCarlo
-from ConvergenceError import ConvergenceError
-import Tools
-import Plotter
-from Formatter import formatter as fmt
+from .ImageAssistant import ImageAssistant
+from .MonteCarlo import MonteCarlo
+from .ConvergenceError import ConvergenceError
+from . import Tools
+from . import Plotter
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017

@@ -2,13 +2,13 @@ import numpy as numpy
 from astropy import units
 from scipy.optimize import curve_fit
 import math
-import Tools
-from Formatter import formatter as fmt
+from . import Tools
+from .Formatter import formatter as fmt
 
-from ConvergenceError import ConvergenceError
-from BaseFitter import BaseFitter
-from IterativeFitter import IterativeFitter
-from IterationPlotter import IterationPlotter
+from .ConvergenceError import ConvergenceError
+from .BaseFitter import BaseFitter
+from .IterativeFitter import IterativeFitter
+from .IterationPlotter import IterationPlotter
 
 __author__ = "Do Kester"
 __year__ = 2017

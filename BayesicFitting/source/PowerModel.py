@@ -1,6 +1,6 @@
 import numpy as numpy
-from LinearModel import LinearModel
-import Tools
+from .LinearModel import LinearModel
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017

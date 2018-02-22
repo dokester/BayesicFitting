@@ -1,9 +1,9 @@
 import numpy as numpy
-import Tools
+from . import Tools
 
-from Model import Model
-from PolynomialModel import PolynomialModel
-from PolySurfaceModel import PolySurfaceModel
+from .Model import Model
+from .PolynomialModel import PolynomialModel
+from .PolySurfaceModel import PolySurfaceModel
 
 __author__ = "Do Kester"
 __year__ = 2017

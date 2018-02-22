@@ -2,9 +2,9 @@ import numpy as numpy
 from astropy import units
 import re
 import warnings
-import Tools
+from . import Tools
 
-from BaseModel import BaseModel
+from .BaseModel import BaseModel
 
 #  * This file is part of the BayesicFitting package.
 #  *

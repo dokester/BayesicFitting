@@ -1,14 +1,14 @@
 import numpy as numpy
 
-from ConvergenceError import ConvergenceError
-from BaseFitter import BaseFitter
-from IterativeFitter import IterativeFitter
-from IterationPlotter import IterationPlotter
-from GaussErrorDistribution import GaussErrorDistribution
-from LaplaceErrorDistribution import LaplaceErrorDistribution
-from CauchyErrorDistribution import CauchyErrorDistribution
-from PoissonErrorDistribution import PoissonErrorDistribution
-from GenGaussErrorDistribution import GenGaussErrorDistribution
+from .ConvergenceError import ConvergenceError
+from .BaseFitter import BaseFitter
+from .IterativeFitter import IterativeFitter
+from .IterationPlotter import IterationPlotter
+from .GaussErrorDistribution import GaussErrorDistribution
+from .LaplaceErrorDistribution import LaplaceErrorDistribution
+from .CauchyErrorDistribution import CauchyErrorDistribution
+from .PoissonErrorDistribution import PoissonErrorDistribution
+from .GenGaussErrorDistribution import GenGaussErrorDistribution
 
 
 __author__ = "Do Kester"

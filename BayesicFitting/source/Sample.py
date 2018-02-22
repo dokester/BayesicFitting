@@ -1,7 +1,7 @@
 import numpy as numpy
 import math
-import Tools
-from Model import Model
+from . import Tools
+from .Model import Model
 
 __author__ = "Do Kester"
 __year__ = 2017

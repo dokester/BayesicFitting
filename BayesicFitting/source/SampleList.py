@@ -1,8 +1,8 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from Sample import Sample
+from . import Tools
+from .Sample import Sample
 
 __author__ = "Do Kester"
 __year__ = 2017

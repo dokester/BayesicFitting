@@ -2,7 +2,7 @@ import time
 import numpy as numpy
 from astropy import units
 import math
-import Tools
+from . import Tools
 import matplotlib.pyplot as pyplot
 
 __author__ = "Do Kester"

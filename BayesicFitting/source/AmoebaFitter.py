@@ -1,9 +1,9 @@
 import numpy as numpy
 import math
-import Tools
+from . import Tools
 
-from MaxLikelihoodFitter import MaxLikelihoodFitter
-from AnnealingAmoeba import AnnealingAmoeba
+from .MaxLikelihoodFitter import MaxLikelihoodFitter
+from .AnnealingAmoeba import AnnealingAmoeba
 
 __author__ = "Do Kester"
 __year__ = 2017

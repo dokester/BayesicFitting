@@ -1,9 +1,9 @@
 import numpy as numpy
 import math
-import Tools
-from NonLinearModel import NonLinearModel
-from PolynomialModel import PolynomialModel
-from SplinesModel import SplinesModel
+from . import Tools
+from .NonLinearModel import NonLinearModel
+from .PolynomialModel import PolynomialModel
+from .SplinesModel import SplinesModel
 
 __author__ = "Do Kester"
 __year__ = 2017

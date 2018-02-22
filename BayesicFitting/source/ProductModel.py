@@ -1,7 +1,7 @@
 import numpy as numpy
-import Tools
-from Model import Model
-from NonLinearModel import NonLinearModel
+from . import Tools
+from .Model import Model
+from .NonLinearModel import NonLinearModel
 from astropy import units
 
 __author__ = "Do Kester"

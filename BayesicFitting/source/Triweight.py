@@ -1,8 +1,8 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from Kernel import Kernel
+from . import Tools
+from .Kernel import Kernel
 
 __author__ = "Do Kester"
 __year__ = 2017

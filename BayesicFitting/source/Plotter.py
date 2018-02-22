@@ -5,8 +5,8 @@ import math as math
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from numpy.testing import assert_array_almost_equal as assertAAE
-import Tools
-from Formatter import formatter as fmt
+from . import Tools
+from .Formatter import formatter as fmt
 
 # This file is part of the BayesicFitting package.
 #

@@ -1,8 +1,8 @@
 import numpy as numpy
 import math
-import Tools
-from LinearModel import LinearModel
-from PolynomialModel import PolynomialModel
+from . import Tools
+from .LinearModel import LinearModel
+from .PolynomialModel import PolynomialModel
 
 __author__ = "Do Kester"
 __year__ = 2017

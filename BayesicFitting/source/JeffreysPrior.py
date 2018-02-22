@@ -1,6 +1,6 @@
 import math as math
 
-from Prior import Prior
+from .Prior import Prior
 
 __author__ = "Do Kester"
 __year__ = 2017

@@ -1,8 +1,8 @@
 import numpy as numpy
-import Tools
-from Formatter import formatter as fmt
+from . import Tools
+from .Formatter import formatter as fmt
 
-from Engine import Engine
+from .Engine import Engine
 
 __author__ = "Do Kester"
 __year__ = 2017

@@ -1,7 +1,7 @@
 import numpy as numpy
 import math
 
-from BaseFitter import BaseFitter
+from .BaseFitter import BaseFitter
 
 __author__ = "Do Kester"
 __year__ = 2017

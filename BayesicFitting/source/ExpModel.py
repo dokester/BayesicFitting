@@ -1,6 +1,6 @@
 import numpy as numpy
-import Tools
-from NonLinearModel import NonLinearModel
+from . import Tools
+from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
 __year__ = 2017

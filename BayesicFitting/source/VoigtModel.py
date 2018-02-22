@@ -1,7 +1,7 @@
 import numpy as numpy
 import math
-from NonLinearModel import NonLinearModel
-from LorentzModel import LorentzModel
+from .NonLinearModel import NonLinearModel
+from .LorentzModel import LorentzModel
 
 __author__ = "Do Kester"
 __year__ = 2017
