@@ -92,7 +92,7 @@ class Engine( object ):
             self.rng = copy.rng
 
     def copy( self ):
-        """ Return a copy of ths engine.  """
+        """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
 
     def __getattr__( self, name ) :
@@ -106,7 +106,8 @@ class Engine( object ):
 
 
     #  *********SET & GET***************************************************
-    def setSample( self, walker, model, allpars, logL, logW=None ):
+    def setSample( self, walker, model, allpars, logL, logW=None,
+                   fitindex=None ):
         """
         Update the sample with model, allpars, LogL and logW.
 
@@ -122,12 +123,16 @@ class Engine( object ):
             log Likelihood
         logW : float
             log of the weight of the likelihood
+        fitindex : array_like
+            list of parameter indices to be diffuse
         """
         walker.logL = logL
         walker.allpars = allpars
         walker.model = model
         if logW is not None :
             walker.logW = logW
+        if fitindex is not None :
+            walker.fitIndex = fitindex
         self.walkers[walker.id] = walker
 
 ###### TBD:
@@ -149,17 +154,25 @@ class Engine( object ):
         """
         np = model.npchain
         if kpar is None :
-            kpar = range( len( dval ) )
+            kpar = self.makeIndex( np, dval )
+
         elif Tools.isInstance( kpar, int ) :
-            return ( model.domain2Unit( dval, kpar ) if kpar < np else
-                     self.errdis.domain2Unit( dval, kpar - np ) )
+            return ( model.domain2Unit( dval, kpar ) if kpar >= 0 else
+                     self.errdis.domain2Unit( dval, kpar ) )
+#           return ( model.domain2Unit( dval, kpar ) if kpar < np else
+#                     self.errdis.domain2Unit( dval, kpar - np ) )
 
         uval = numpy.ndarray( len( kpar ), dtype=float )
+
+
+#        print( "Eng d2u  ", dval, kpar, uval )
         for i,kp in enumerate( kpar ) :
-            if kp < np :
+#            if kp < np :
+            if kp >= 0 :
                 uval[i] = model.domain2Unit( dval[kp], kp )
             else :
-                uval[i] = self.errdis.domain2Unit( dval[kp], kp - np )
+#                uval[i] = self.errdis.domain2Unit( dval[kp], kp - np )
+                uval[i] = self.errdis.domain2Unit( dval[kp], kp )
         return uval
 
     def unit2Domain( self, model, uval, kpar=None ) :
@@ -177,19 +190,30 @@ class Engine( object ):
             None means all.
         """
         np = model.npchain
+
         if kpar is None :
-            kpar = range( len( uval ) )
+            kpar = self.makeIndex( np, uval )
         elif Tools.isInstance( kpar, int ) :
-            return ( model.unit2Domain( uval, kpar ) if kpar < np else
-                     self.errdis.unit2Domain( uval, kpar - np ) )
+            return ( model.unit2Domain( uval, kpar ) if kpar >= 0 else
+                     self.errdis.unit2Domain( uval, kpar ) )
+#            return ( model.unit2Domain( uval, kpar ) if kpar < np else
+#                     self.errdis.unit2Domain( uval, kpar - np ) )
 
         dval = numpy.ndarray( len( kpar ), dtype=float )
         for i,kp in enumerate( kpar ) :
-            if kp < np :
+#            if kp < np :
+            if kp >= 0 :
                 dval[i] = model.unit2Domain( uval[kp], kp )
             else :
-                dval[i] = self.errdis.unit2Domain( uval[kp], kp - np )
+#                dval[i] = self.errdis.unit2Domain( uval[kp], kp - np )
+                dval[i] = self.errdis.unit2Domain( uval[kp], kp )
         return dval
+
+    def makeIndex( self, np, val ) :
+        kpar = [k for k in range( np )]
+        nh = len( val ) - np
+        kpar += [-k for k in range( nh, 0, -1 )]
+        return kpar
 
     def reportCall( self ):
         """ Store a call to engine  """
@@ -216,30 +240,38 @@ class Engine( object ):
         it is 1.0 for other parameters.
 
         """
-        npmax = self.walkers.getMaximumNumberOfParameters( )
-
         kmx = 0
-        for walker in self.walkers :
-            if walker.model.npchain == npmax :
-                minv = walker.allpars.copy()
-                maxv = minv.copy()
-                break
-            kmx += 1
+        if not self.walkers[0].model.isDynamic() :
+#            npmax = len( self.walkers[0].allpars )
+            npmax = len( self.walkers[0].fitIndex )
+        else :
+            npmax = 0
+            for k, walker in enumerate( self.walkers ) :
+                if len( walker.allpars ) > npmax :
+#                    npmax = len( walker.allpars )
+                    npmax = len( walker.fitIndex )
+                    kmx = k
+#        minv = self.walkers[kmx].allpars.copy()
+        minv = numpy.ones( npmax, dtype=float )
+        maxv = numpy.zeros( npmax, dtype=float )
+        nval = numpy.zeros( npmax, dtype=int )
 
-        nval = numpy.zeros_like( self.walkers[kmx].allpars, dtype=float )
+#        print( "npmax  ", npmax, nval )
 
         for walker in self.walkers :
-            np = walker.allpars.size
-            minv[:np] = numpy.fmin( minv[:np], walker.allpars )
-            maxv[:np] = numpy.fmax( maxv[:np], walker.allpars )
-            nval[:np] += 1
+#            print( "ENG   ", walker.id, walker.fitIndex, walker.allpars )
+            fi = walker.fitIndex
+            minv[fi] = numpy.fmin( minv[fi], walker.allpars[fi] )
+            maxv[fi] = numpy.fmax( maxv[fi], walker.allpars[fi] )
+            nval[fi] += 1
 
         model = self.walkers[kmx].model
 
-        maxv = self.domain2Unit( model, maxv )
-        minv = self.domain2Unit( model, minv )
+        maxv = self.domain2Unit( model, maxv, kpar=self.walkers[kmx].fitIndex )
+        minv = self.domain2Unit( model, minv, kpar=self.walkers[kmx].fitIndex )
 
-        q = numpy.where( numpy.logical_or( maxv == minv, nval < len( self.walkers ) ) )
+#        print( maxv <= minv, nval < len( self.walkers ) )
+        q = numpy.where( numpy.logical_or( maxv <= minv, nval < len( self.walkers ) ) )
         maxv[q] = 1.0
         minv[q] = 0.0
 

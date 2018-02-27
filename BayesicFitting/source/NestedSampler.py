@@ -1,11 +1,12 @@
-from __future__ import print_function
 import numpy as numpy
 from astropy import units
 import math
 import Tools
 from Formatter import formatter as fmt
+import Plotter
 import sys
 import warnings
+import matplotlib.pyplot as plt
 
 from Model import Model
 from Sample import Sample
@@ -23,10 +24,21 @@ from StartEngine import StartEngine
 from GibbsEngine import GibbsEngine
 from GalileanEngine import GalileanEngine
 from StepEngine import StepEngine
-#from FrogEngine import FrogEngine
-#from BirthEngine import BirthEngine
-#from DeathEngine import DeathEngine
 
+
+## for Dynamic Models import the classes
+from BirthEngine import BirthEngine
+from DeathEngine import DeathEngine
+
+#######  For later #################
+## for Order Problems import the classes
+#from OrderProblem import OrderProblem
+#from DistanceCostFunction import DistanceCostFunction
+#from StartOrderEngine import StartOrderEngine
+#from OrderEngine import OrderEngine
+#from ReverseEngine import ReverseEngine
+#from ShuffleEngine import ShuffleEngine
+#from SwitchEngine import SwitchEngine
 
 
 __author__ = "Do Kester"
@@ -168,6 +180,9 @@ class NestedSampler( object ):
 
 
     """
+    TWOP32 = 2 ** 32
+
+
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata, model, ydata, weights=None, distribution=None,
                 keep=None, ensemble=100, discard=1, seed=80409, rate=1.0,
@@ -200,6 +215,8 @@ class NestedSampler( object ):
             "poisson"  : `PoissonErrorDistribution`  no hyperpar
             "cauchy"   : `CauchyErrorDstribution`    with 1 hyperpar scale
             "gengauss" : `GenGaussErrorDistribution` with 2 hyperpar (scale, power)
+            Only for OrderProblems: (for later)
+            "distance" : `DistanceCostFunction`      no hyperpar
 
             Error distribution class which implements logLikelihood
 
@@ -218,6 +235,10 @@ class NestedSampler( object ):
             "galilean"  : GalileanEngine
             "gibbs" 	: GibbsEngine 	move one parameter at a time
             "step"  	: StepEngine    move all parameters in arbitrary direction
+
+            For OrderProblems (for later)
+            "order"   : insert a snippet of parameters at another location
+            "reverse" : reverse the order of a snippet of parameters
 
             For Dynamic models only
             "birth" : BirthEngine   increase the parameter list of a walker by one
@@ -254,24 +275,22 @@ class NestedSampler( object ):
         self.rate = rate
         self.restart = None                     ## TBD
 
-        self.minimumIterations = 1000
+        self.minimumIterations = 100
         self.end = 2.0
         self.maxtrials = 5
 
         self.iteration = 0
 
-        if distribution is None :
-            self.setErrorDistribution( "gauss", scale=1.0 )
-        else :
+        if distribution is not None :
             self.setErrorDistribution( distribution )
+#        elif isinstance( model, OrderProblem ) :
+#            self.setErrorDistribution( "distance" )
+        else :
+            self.setErrorDistribution( "gauss", scale=1.0 )
 
 #        print( distribution.hyperpar[0].getLimits() )
 #        print( self.distribution.hyperpar[0].getLimits() )
 
-        if engines is None :
-            engines = ["galilean"]
-            if self.model.isDynamic() :
-                engines += ["birth", "death"]
         self.setEngines( engines )
 
         ## Initialize the sample list
@@ -287,12 +306,13 @@ class NestedSampler( object ):
             dictionary of indices that need to be kept at the float value.
         """
 
-        fitlist = [k for k in range( self.model.npchain )]
-        k = self.model.npchain
+        np = len( self.model.parameters )
+        fitlist = [k for k in range( np )]
+        nh = -1
         for sp in self.distribution.hyperpar :
             if not sp.isFixed and sp.isBound() :
-                fitlist += [k]
-            k += 1
+                fitlist += [nh]
+            nh -= 1
 
         if keep is not None :
             fitlist = numpy.setxor1d( fitlist, list( keep.keys() ) )
@@ -302,7 +322,7 @@ class NestedSampler( object ):
 
 
     #  *******SAMPLE************************************************************
-    def sample( self, keep=None ):
+    def sample( self, keep=None, plot=False ):
         """
         Sample the posterior and return the weighted average result of the
         Model.
@@ -317,6 +337,8 @@ class NestedSampler( object ):
             Hyperparameters follow model parameters
             The values will override those at initialization.
             They are only used in this call of fit.
+        plot : bool
+            Show a plot of the results
 
         """
         if keep is None :
@@ -324,6 +346,7 @@ class NestedSampler( object ):
         fitlist = self.makeFitlist( keep=keep )
 
         self.initWalkers( fitlist=fitlist )
+
         for eng in self.engines :
             eng.walkers = self.walkers
 
@@ -334,19 +357,21 @@ class NestedSampler( object ):
         if self.verbose >= 1 :
             print( "Fit", ( "all" if keep is None else fitlist ), "parameters of" )
             print( " ", self.model._toString( "  " ) )
-            print( "Using a", self.distribution, "with" )
-            np = self.model.npchain
+            print( "Using a", self.distribution, "with", end="" )
+            np = -1
+            cstr = " with "
             for name,hyp in zip( self.distribution.PARNAMES, self.distribution.hyperpar ) :
-                print( "  %-7.7s   " % name, end="" )
+                print( cstr, end="" )
                 if np in fitlist :
-                    print( "unknown" )
+                    print( "unknown %s" % name, end="" )
                 else :
-                    print( "  (fixed)  ", hyp.hypar )
-#                    print( "%7.2f  (fixed)" % hyp.hypar )
-                np += 1
-            print( "Moving the walkers with" )
+                    print( "%s = %7.2f " % (name, hyp.hypar), end="" )
+                np -= 1
+                cstr = " and "
+            print( "\nMoving the walkers with ", end="" )
             for eng in self.engines :
-                print( " ", eng )
+                print( " ", eng, end="" )
+            print( "" )
 
 
         if self.verbose >= 2:
@@ -358,6 +383,9 @@ class NestedSampler( object ):
         self.info = 0
 
         logWidth = math.log( 1.0 - math.exp( (-1.0 * self.discard ) / self.ensemble) )
+
+#        for w in self.walkers :
+#            print( w.id, w.allpars, w.logL )
 
         if self.optionalRestart() :
             logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
@@ -392,6 +420,7 @@ class NestedSampler( object ):
             self.copyWalker( worst )
 
             # Explore the copied walker(s)
+#            print( "NS     ", self.walkers[worst[0]].allpars, fitlist )
             explorer.explore( worst, self.lowLhood, fitlist )
 
             # Shrink the interval
@@ -410,13 +439,24 @@ class NestedSampler( object ):
         self.samples.normalize( )
 
         # put the info into the model
-        self.model.parameters = self.samples.parameters
-        self.model.stdevs = self.samples.stdevs
+        if not self.model.isDynamic() :
+            self.model.parameters = self.samples.parameters
+            self.model.stdevs = self.samples.stdevs
 
         if self.verbose >= 1 :
             self.report()
 
-        return self.samples.average( self.xdata )
+#        for eng in self.engines :
+#            print( eng )
+#            print( " s  ", eng.succ )
+#            print( " f  ", eng.fail )
+
+        yfit = self.samples.average( self.xdata )
+        if plot :
+            Plotter.plotFit( self.xdata, self.ydata, yfit=yfit,
+                             residuals=True )
+
+        return yfit
 
     def getMaxIter( self ) :
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.discard )
@@ -588,9 +628,11 @@ class NestedSampler( object ):
         elif name == "gengauss" :
             self.distribution = GenGaussErrorDistribution( self.xdata, self.ydata,
                     weights=self.weights, scale=scale, power=power )
+        elif name == "distance" :
+            self.distribution = DistanceCostFunction( self.xdata, self.ydata,
+                    weights=self.weights )
         else :
             raise ValueError( "Unknown error distribution %s" % name )
-        print( "NS   ", self.distribution )
 
     def setEngines( self, engines ) :
         """
@@ -601,6 +643,17 @@ class NestedSampler( object ):
         engines : list of string
             list of engine names
         """
+        if engines is not None :
+            pass
+#        elif isinstance( self.model, OrderProblem ) :
+#            engines = ["order", "reverse", "shuffle", "switch"]
+        else :
+            engines = ["galilean"]
+
+        if self.model.isDynamic() :
+            engines += ["birth", "death"]
+
+
         self.engines = []
         if isinstance( engines, str ) :
             engines = [engines]
@@ -615,20 +668,40 @@ class NestedSampler( object ):
             if not isinstance( name, str ) :
                 raise ValueError( "Cannot interpret ", name, " as string or as Engine" )
 
+
             if name == "galilean" :
-                engine = GalileanEngine( self.walkers, self.distribution, seed=self.seed )
+                seed = self.rng.randint( self.TWOP32 )
+#                print( "Galil    ", seed )
+                engine = GalileanEngine( self.walkers, self.distribution, seed=seed )
             elif name == "gibbs" :
-                engine = GibbsEngine( self.walkers, self.distribution, seed=self.seed )
+                seed = self.rng.randint( self.TWOP32 )
+                engine = GibbsEngine( self.walkers, self.distribution, seed=seed )
             elif name == "step" :
-                engine = StepEngine( self.walkers, self.distribution, seed=self.seed )
-#            elif name == "cross" :
-#                engine = CrossEngine( self.walkers, self.distribution, seed=self.seed )
-#            elif name == "frog" :
-#                engine = FrogEngine( self.walkers, self.distribution, seed=self.seed )
-#            elif name == "birth" :
-#                engine = BirthEngine( self.walkers, self.distribution, seed=self.seed )
-#            elif name == "death" :
-#                engine = DeathEngine( self.walkers, self.distribution, seed=self.seed )
+                seed = self.rng.randint( self.TWOP32 )
+                engine = StepEngine( self.walkers, self.distribution, seed=seed )
+####        Order Problems (for later)
+#            elif name == "order" :
+#                seed = self.rng.randint( self.TWOP32 )
+#                engine = OrderEngine( self.walkers, self.distribution, seed=seed )
+#            elif name == "reverse" :
+#                seed = self.rng.randint( self.TWOP32 )
+#                engine = ReverseEngine( self.walkers, self.distribution, seed=seed )
+#            elif name == "shuffle" :
+#                seed = self.rng.randint( self.TWOP32 )
+#                engine = ShuffleEngine( self.walkers, self.distribution, seed=seed )
+#            elif name == "switch" :
+#                seed = self.rng.randint( self.TWOP32 )
+#                engine = SwitchEngine( self.walkers, self.distribution, seed=seed )
+
+####        For Dynamic Models
+            elif name == "birth" :
+                seed = self.rng.randint( self.TWOP32 )
+#                print( "Birth    ", seed )
+                engine = BirthEngine( self.walkers, self.distribution, seed=seed )
+            elif name == "death" :
+                seed = self.rng.randint( self.TWOP32 )
+#                print( "Death    ", seed )
+                engine = DeathEngine( self.walkers, self.distribution, seed=seed )
             else :
                 raise ValueError( "Unknown Engine name : %10s" % name )
 
@@ -643,16 +716,23 @@ class NestedSampler( object ):
         self.walkers = SampleList( self.model, self.ensemble, self.distribution,
                 fitindex=fitlist )
 
-        if self.initialEngine is None:
-            self.initialEngine = StartEngine( self.walkers, self.distribution,
-                        seed=self.seed )
-        else :
+        if self.initialEngine is not None:
             # decorate with proper information
             self.initialEngine.members = self.walkers
             self.initialEngine.errdis = self.distribution
+#        elif isinstance( self.model, OrderProblem ) :
+#            seed = self.rng.randint( self.TWOP32 )
+#            self.initialEngine = StartOrderEngine( self.walkers, self.distribution,
+#                        seed=seed )
+        else :
+            seed = self.rng.randint( self.TWOP32 )
+#            print( "Start    ", seed )
+            self.initialEngine = StartEngine( self.walkers, self.distribution,
+                        seed=seed )
 
         for walker in self.walkers :
             self.initialEngine.execute( walker, 0, fitIndex=fitlist )
+
 
     def plotData( self ):
         if self.plotter is None:
@@ -685,7 +765,6 @@ class NestedSampler( object ):
 
         print( "Samples  %10d" % len( self.samples ) )
         print( "Evidence    %10.3f +- %10.3f" % (self.evidence, self.precision ) )
-
 
 
 

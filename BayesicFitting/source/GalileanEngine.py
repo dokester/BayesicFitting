@@ -127,6 +127,7 @@ class GalileanEngine( Engine ):
         Ltry = 0
 
         self.plotter.start( )
+#        print( "GE  UM  ", walker.id, allpars, fitIndex )
         um = UnitMovements( model, allpars, fitIndex, self )
 
         ptry = allpars.copy()
@@ -160,11 +161,12 @@ class GalileanEngine( Engine ):
             else:                                       # mirroring failed; do reverse
                 um.reverseVelocity( 1.0 )
                 ptry[fitIndex] = um.stepPars( 1.0 )
+                self.size *= 0.7
 
                 self.plotter.move( allpars, ptry, 3 )
 
-#            print( ptry )
             Ltry = self.errdis.logLikelihood( model, ptry )
+
             if Ltry >= lowLhood:
                 allpars = ptry.copy( )
                 Lhood = Ltry
@@ -178,13 +180,18 @@ class GalileanEngine( Engine ):
                     self.reportReject( )
                 else:
                     self.reportFailed( )
+
+#            print( "GEng  ", model.npchain, fitIndex, fmt(ptry), fmt(Ltry),
+#                inside, step, fmt( self.size ) )
+
             if not ( step < nstep and trial < maxtrial ):
                 break
 
         self.setSample( walker, model, allpars, Lhood )
 
         if trial >= maxtrial:
-            self.size = self.size * 0.9 + 0.00001
+#            self.size = self.size * 0.9 + 0.00001
+            pass
 
         self.plotter.stop()
         return npout
@@ -197,11 +204,15 @@ class UnitMovements( object ):
         self.model = model
         self.np = len( fitIndex )
         self.fitIndex = fitIndex
-#        self.upar = engine.domain2Unit( model, allpars, kpar=fitIndex )
         self.engine = engine
         self.setParameters( model, allpars )
+
+#        if fitIndex[-1] >= len( self.engine.unitRange ) :
+#            print( "GAL  ", self.engine.unitRange, fitIndex, end="" )
+#            self.engine.unitRange = numpy.append( self.engine.unitRange, [1.0] )
+#            print( self.engine.unitRange )
+
         self.upran = self.engine.unitRange[fitIndex]
-#        print( "Range  ", fmt( self.upran ) )
         self.setVelocity( self.engine.size )
 
     def setParameters( self, model, allpars ):
@@ -225,11 +236,9 @@ class UnitMovements( object ):
     def setVelocityStatic( self, size ):
         # find two randomly chosen walkers
         nm = len( self.engine.walkers )
-        k0 = self.engine.rng.randint( nm )
-        while True:
+        k1 = k0 = self.engine.rng.randint( nm )
+        while k1 == k0:
             k1 = self.engine.rng.randint( nm )
-            if k0 != k1 :
-                break
 
         # subtract the parameter postions to get a velocity
         self.uvel = ( self.allpars2unit( k0 ) - self.allpars2unit( k1 ) ) * size
@@ -242,16 +251,18 @@ class UnitMovements( object ):
         return self.engine.rng.rand( self.np ) - 0.5
 
     def setVelocityDynamic( self, size ):
-        self.uvel = self.uniform() * size * self.uran
+#        print( "SVD   ", self.np, size, len( self.engine.walkers[0].allpars), self.engine.unitRange )
+        self.uvel = self.uniform() * size * self.engine.unitRange[self.fitIndex]
 
     def reverseVelocity( self, size ):
-        upv = self.uvel
-        self.setVelocity( 0.9 * size )
-        self.uvel -= upv
+        upv = self.uvel                 # keep original velocity
+        self.setVelocity( 0.5 * size )  # get a new one
+        self.uvel -= ( 0.5 * upv )      # subtract original
 
     def stepPars( self, f ):
         uv = self.uvel
         pv = self.upar + uv * f
+        # check if outside [0,1]
         pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
         self.upar, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
         return self.engine.unit2Domain( self.model, self.upar, kpar=self.fitIndex )

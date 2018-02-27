@@ -1,7 +1,10 @@
 import numpy as numpy
 import math
 import Tools
+from Formatter import formatter as fmt
+
 from Model import Model
+#from Problem import Problem
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -90,23 +93,30 @@ class Sample( object ):
         """
         self.id = id
         self.parent = parent
-        self.model = model
+
         if copy is None :
-            self.allpars = numpy.append( model.parameters, errdis.hypar )
+            self.model = model
+            allpars = model.parameters
+            npars = len( model.parameters )
+            if errdis.nphypar > 0 :
+                allpars = numpy.append( allpars, errdis.hypar )
+            self.allpars = allpars
+
             if fitIndex is not None :
                 self.fitIndex = fitIndex                # no copy.
             else :
-                self.fitIndex = numpy.arange( model.npchain )
-                indx = model.npchain
+                self.fitIndex = numpy.arange( npars )
+                nh = -1
                 for s in errdis.hyperpar :
-                    if not s.isFixed :
-                        self.fitIndex = numpy.append( self.fitIndex, [indx] )
-                    indx += 1
+                    if not s.isFixed and s.isBound() :
+                        self.fitIndex = numpy.append( self.fitIndex, [nh] )
+                    nh -= 1
             self.logL = 0.0
             self.logW = 0.0
         else :
+            self.model = copy.model.copy()
             self.allpars = copy.allpars.copy()
-            self.fitIndex = copy.fitIndex             # no copy; read only
+            self.fitIndex = copy.fitIndex.copy()
             self.logL = copy.logL
             self.logW = copy.logW
 
@@ -141,9 +151,14 @@ class Sample( object ):
         """
         Set attributes.
         """
+        if name == "allpars" :
+            object.__setattr__( self, name, value )
+            return
 
-        key1 = {"id" : int, "parent" : int, "model": Model, "logL" : float, "logW" : float }
-        key2 = {"allpars" : float, "fitIndex" : int }
+#        key1 = {"id" : int, "parent" : int, "model": (Model,Problem),
+        key1 = {"id" : int, "parent" : int, "model": Model,
+                "logL" : float, "logW" : float }
+        key2 = {"fitIndex" : int }
         if ( Tools.setSingleAttributes( self, name, value, key1 ) or
              Tools.setListOfAttributes( self, name, value, key2 ) ) :
             pass
@@ -156,3 +171,9 @@ class Sample( object ):
                     ( self.id, self.parent, self.model.shortName(), self.logL, self.logW ) )
 
 
+    def check( self, nhyp=0 ) :
+#        print( len( self.allpars ), self.model.npchain, nhyp )
+        assert( len( self.allpars ) == self.model.npchain + nhyp,
+                fmt( self.allpars ) + fmt( self.model.npchain ) + fmt( nhyp ) )
+        if nhyp > 0 :
+            assert( self.allpars[-nhyp] > 0 )

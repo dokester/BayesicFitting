@@ -879,8 +879,10 @@ class BaseFitter( object ):
             the model the ydata are fitted to at xdata.
         residuals : bool
             plot the residuals in a separate panel.
+        confidence : bool
+            plot confidence region
         show : bool
-            displyy the plot.
+            display the plot.
         """
         if xdata is None :
             xdata = self.xdata

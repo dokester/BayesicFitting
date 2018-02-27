@@ -308,7 +308,12 @@ class AnnealingAmoeba( object ):
         """
         for i in range( self.simplex.shape[0] ):
             corner = self.simplex[i,:]
-            self.values[i] = self.func( corner )
+            cost = self.func( corner )
+            if not numpy.isfinite( cost ) :
+                corner += 0.01 * numpy.sum( self.simplex, 0 )
+                cost = self.func( corner )
+
+            self.values[i] = cost
             if i == 0 or self.values[i] < self.fopt:
                 self.fopt = self.values[i]
                 self.xopt = corner.copy()
@@ -336,6 +341,7 @@ class AnnealingAmoeba( object ):
 
         maxiter = self.maxiter * ( 1 if self.temp == 0 else self.steps )
         while self.iter < maxiter :
+#            print( self.iter, maxiter )
             trans = self.temperatureStep( )
             self.ncalls += trans
 
@@ -396,7 +402,7 @@ class AnnealingAmoeba( object ):
 #                print( self.simplex[i,:], self.values[i] )
 #            print( ilo, ihi, ylo, ynhi, yhi )
 
-            rtol = abs( yhi - ylo ) / ( abs( yhi ) + abs( ylo ) + 1e-20 )
+            rtol = abs( yhi - ylo ) / max( abs( yhi ) + abs( ylo ), 1e-20 )
             stops = ( ( self.abstol is None or abs( yhi - ylo ) < self.abstol ) and
                       ( self.reltol is None or rtol < self.reltol ) )
 
@@ -463,7 +469,7 @@ class AnnealingAmoeba( object ):
                         factor = self.randomRange( beta )
                         if not math.isnan( ytry ) : break
                     trans += nfit
-                    move = "shrink"				# shrink simplex on best point
+                    move = "shrink" 			# shrink simplex on best point
             else:
                 trans -= 1
 

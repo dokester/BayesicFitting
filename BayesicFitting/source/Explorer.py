@@ -1,7 +1,7 @@
 import numpy as numpy
-from threading import Thread
+from threading import Thread, current_thread
 
-## from OrderProblem import OrderProblem
+#from OrderProblem import OrderProblem
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -30,6 +30,9 @@ __status__ = "Development"
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
 #  *    2017        Do Kester
+
+
+threadErrors = []
 
 class Explorer( object ):
     """
@@ -60,6 +63,7 @@ class Explorer( object ):
     Author       Do Kester.
 
     """
+    TWOP32 = 2 ** 32
 
     def __init__( self, ns ):
         """
@@ -72,11 +76,12 @@ class Explorer( object ):
         """
         self.walkers = ns.walkers
         self.engines = ns.engines
-        self.rng = self.engines[0].rng
+        self.rng = ns.rng
         self.rate = ns.rate
         self.maxtrials = ns.maxtrials
         self.verbose = ns.verbose
-##        if not isinstance( self.walkers[0].model, OrderProblem ) :
+#        if isinstance( self.walkers[0].model, OrderProblem ) :
+#           return
         self.engines[0].calculateUnitRange( )
 
     def explore( self, worst, lowLhood, fitindex ):
@@ -96,12 +101,15 @@ class Explorer( object ):
         self.lowLhood = lowLhood
         explorerThreads = []
         for kw in worst :
-            exThread = ExplorerThread( "explorer_%d"%kw, kw, self, fitindex )
+            seed = self.rng.randint( self.TWOP32 )
+#            print( "Thr  %d  "%kw, seed )
+            exThread = ExplorerThread( "explorer_%d"%kw, kw, self, seed, fitindex )
             exThread.start( )
             explorerThreads += [exThread]
 
         for thread in explorerThreads :
             thread.join( )
+
             for k,e in enumerate( self.engines ) :
                 nc = 0
                 for i in range( 3 ) :
@@ -109,8 +117,15 @@ class Explorer( object ):
                     e.report[i] += thread.engines[k].report[i]
                 e.report[3] += nc
 
+        if len( threadErrors ) > 0: #check if there are any errors
+            for e in threadErrors:
+                print( e )
+            raise Exception( "Thread Error" )
+
         # recalculate  TBC
-##        if not isinstance( self.walkers[0].model, OrderProblem ) :
+#        if isinstance( self.walkers[0].model, OrderProblem ) :
+#            return
+
         self.engines[0].calculateUnitRange( )
 
 class ExplorerThread( Thread ):
@@ -131,19 +146,25 @@ class ExplorerThread( Thread ):
         to be used (=self.engines[0].errdis)
     """
 
-    def __init__( self, name, id, explorer, fitindex ):
+    global threadErrors
+
+    def __init__( self, name, id, explorer, seed, fitindex ):
         super( ExplorerThread, self ).__init__( name=name )
         self.id = id
         self.explorer = explorer
         self.fitindex = fitindex
         self.engines = [eng.copy() for eng in explorer.engines]
-        seed = explorer.rng.randint( 100000 )
         self.rng = numpy.random.RandomState( seed )
         self.errdis = self.engines[0].errdis
         self.verbose = explorer.verbose
 
     def run( self ):
-        self.explore( self.id, self.fitindex )
+        try :
+            self.explore( self.id, self.fitindex )
+        except Exception as e :
+            threadErrors.append( [repr(e) + " occurred in thread %d"%self.id] )
+            raise
+
 
     def explore( self, walkerId, fitindex ):
         walker = self.explorer.walkers[walkerId]
@@ -158,7 +179,7 @@ class ExplorerThread( Thread ):
         while moves < maxmoves and trials < maxtrials :
             i = 0
             for engine in self.rng.permutation( self.engines ) :
-
+#                print( "Exp   ", engine, walker.id, fitindex, walker.allpars, walker.fitIndex )
                 moves += engine.execute( walker, lowLhood, fitindex )
 
                 if self.verbose >= 4:

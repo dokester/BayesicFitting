@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import numpy as numpy
 from numpy import ndarray
 from numpy import float64

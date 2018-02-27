@@ -1,4 +1,5 @@
 from __future__ import print_function
+
 import numpy as numpy
 import random
 from astropy import units
@@ -156,6 +157,10 @@ class Model( FixedModel ):
         self.xUnit = copy.xUnit
         self.yUnit = copy.yUnit
 
+    def copy( self ):
+        """ Return a copy.  """
+        return Model( copy=self )
+
     def __setattr__( self, name, value ):
         """
         Set attributes.
@@ -205,10 +210,6 @@ class Model( FixedModel ):
             raise AttributeError( "Unknown attribute " + name )
 
         return None
-
-    def copy( self ):
-        """ Return a copy.  """
-        return Model( copy=self )
 
     def chainLength( self ):
         """ Return length of the chain.  """
@@ -360,7 +361,8 @@ class Model( FixedModel ):
         ------
         ValueError when a model of a different dimensionality is offered.
         """
-
+        if self.isDynamic() :
+            raise ValueError( "Only one Dynamic model which should be the last" )
         if self.ndim != model.ndim:
             raise ValueError( "Trying to add incompatible models, with dimensions: %d and %d"%
                                 (self.ndim, model.ndim) )
@@ -402,8 +404,6 @@ class Model( FixedModel ):
             else : return numpy.append( x, y )
         else : return x
 
-
-
     #  *****CHECK**************************************************************
     def correctParameters( self, params ):
         """
@@ -423,7 +423,7 @@ class Model( FixedModel ):
     def _recursiveCorrect( self, params, newpar ) :
 
         np = self.npbase
-        newpar = numpy.append( newpar,  super(Model,self).checkParameter( params[:np] ) )
+        newpar = numpy.append( newpar,  super( Model, self ).checkParameter( params[:np] ) )
         model = self._next
         if model is None :
             return newpar
@@ -454,7 +454,7 @@ class Model( FixedModel ):
     def _recursiveResult( self, xdata, param, res ) :
 
         np = self.npbase
-        res = self.operate( res, super(Model,self).result( xdata, param[:np] ) )
+        res = self.operate( res, super( Model, self ).result( xdata, param[:np] ) )
         model = self._next
         if model is None :
             return res
@@ -514,9 +514,9 @@ class Model( FixedModel ):
         nextres = None
         if np > 0:                      #  the base model has no parameters: skip
             if useNum:
-                nextdf = super(Model,self).numDerivative( xdata, par )
+                nextdf = super( Model, self ).numDerivative( xdata, par )
             else:
-                nextdf = super(Model,self).derivative( xdata, par )
+                nextdf = super( Model, self ).derivative( xdata, par )
 
         else :
             nextdf = numpy.zeros_like( xdata, dtype=float )
@@ -528,11 +528,11 @@ class Model( FixedModel ):
             df -= nextdf
 
         elif self._operation == self.MUL :
-            nextres = super(Model,self).result( xdata, par )
+            nextres = super( Model, self ).result( xdata, par )
             df = df * nextres + nextdf * result
 
         elif self._operation == self.DIV :
-            nextres = super(Model,self).result( xdata, par )
+            nextres = super( Model, self ).result( xdata, par )
             df = ( df * nextres - nextdf * result ) / ( nextres * nextres )
 
 
@@ -540,7 +540,7 @@ class Model( FixedModel ):
         if model is None:
             return df
         if nextres is None:
-            nextres = super(Model,self).result( xdata, par )
+            nextres = super( Model, self ).result( xdata, par )
         result = self.operate( result, nextres )
         #  append the dfs of the _next model
 
@@ -580,9 +580,9 @@ class Model( FixedModel ):
         nextres = None
         if np > 0:                #  the base model has no parameters: skip
             if useNum:
-                nextpartial = super(Model,self).numPartial( xdata, par )
+                nextpartial = super( Model, self ).numPartial( xdata, par )
             else:
-                nextpartial = super(Model,self).partial( xdata, par )
+                nextpartial = super( Model, self ).partial( xdata, par )
 
         else :
             inlen = Tools.length( xdata )
@@ -592,12 +592,12 @@ class Model( FixedModel ):
             nextpartial = numpy.negative( nextpartial )
 
         elif self._operation == self.MUL :
-            nextres = super(Model,self).result( xdata, par )
+            nextres = super( Model, self ).result( xdata, par )
             partial = numpy.multiply( partial.transpose(), nextres ).transpose()
             nextpartial = numpy.multiply( nextpartial.transpose(), result ).transpose()
 
         elif self._operation == self.DIV :
-            nextres = super(Model,self).result( xdata, par )
+            nextres = super( Model, self ).result( xdata, par )
             partial = numpy.divide( partial.transpose(), nextres ).transpose()
             invres = - result / ( nextres * nextres )
             nextpartial = numpy.multiply( nextpartial.transpose(), invres ).transpose()
@@ -609,7 +609,7 @@ class Model( FixedModel ):
         if model is None:
             return partial
         if nextres is None:
-            nextres = super(Model,self).result( xdata, par )
+            nextres = super( Model, self ).result( xdata, par )
         result = self.operate( result, nextres )
         #  append the partials of the _next model
         return model._recursivePartial( xdata, param[np:], result, partial,
@@ -678,7 +678,68 @@ class Model( FixedModel ):
         """
         return self.partial( xdata, param, useNum=True )
 
+    def isDynamic( self ) :
+        """
+        Return whether the model can change the number of parameters dynamically.
+        """
+        if super( Model, self ).isDynamic() :
+            return True
+        elif self._next is not None :
+            return self._next.isDynamic()
+
+        return False
+
     #  *****PRIOR***************************************************************
+    def setPriorTBD( self, k, prior=None, limits=None ):
+        """
+        Set the prior and/or limits for the indicated parameter.
+
+        Parameters
+        ----------
+        k : int
+            parameter number.
+        prior : Prior
+            prior for the parameter
+        limits : [float,float]
+            [low,high] limits on the prior.
+
+        Raises
+        ------
+        IndexError when k is larger than the number of parameters.
+
+        """
+        np = self.npbase
+        if k < np:
+            super( Model, self  ).setPrior( k, prior=prior, limits=limits )
+        elif self._next != None:
+            self._next.setPrior( k - np, prior=prior, limits=limits )
+        else:
+            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
+                              " parameters." )
+
+    def getPriorTBD( self, k ):
+        """
+        Return the prior of the indicated parameter.
+
+        Parameters
+        ----------
+        k : int
+            parameter number.
+
+        Raises
+        ------
+        IndexError when k is larger than the number of parameters.
+
+        """
+        np = self.npbase
+        if k < np:
+            return super( Model, self  ).getPrior( k )
+        elif self._next != None:
+            return self._next.getPrior( k - np )
+        else:
+            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
+                              " parameters." )
+
     def getPrior( self, k ):
         """
         Return the prior of the indicated parameter.
@@ -801,11 +862,11 @@ class Model( FixedModel ):
             npr = len( self.priors )
             self.priors = self.priors + [last] * ( ml - npr )
 
-        k = 0
-        for pr in self.priors :
+
+        for k,pr in enumerate( self.priors ) :
             if k < nl : pr.lowLimit  = lowLimits[k]
             if k < nh : pr.highLimit = highLimits[k]
-            k += 1
+
             if pr.lowLimit > pr.highLimit :
                 pr.lowLimit  = pr._lowDomain
                 pr.highLimit = pr._highDomain
@@ -1193,13 +1254,6 @@ class Model( FixedModel ):
                             (i, params[i], partial[k,i], numeric[k,i]) )
 
         return kerr
-
-    def isDynamic( self ) :
-        """
-        Return whether the model can change the number of parameters dynamically.
-        """
-        return False
-#        return isinstance( self, Dynamic )
 
 ##### End Model #########################################################
 

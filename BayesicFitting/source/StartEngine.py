@@ -2,7 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 import Tools
-
+from Formatter import formatter as fmt
 from Engine import Engine
 
 __author__ = "Do Kester"
@@ -83,11 +83,11 @@ class StartEngine( Engine ):
             fitIndex = walker.fitIndex
 
         model = walker.model
-        par = walker.allpars
+        par = walker.allpars.copy()
         uval = self.rng.rand( len( fitIndex ) )
         par[fitIndex] = self.unit2Domain( model, uval, kpar=fitIndex )
-
         logL = self.errdis.logLikelihood( model, par )
+#        print( "Start  ", walker.id, fmt(uval), fmt(par), fmt(logL) )
         self.setSample( walker, model, par, logL, logW=-math.inf )
 
         return len( fitIndex )

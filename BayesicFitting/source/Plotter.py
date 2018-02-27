@@ -24,7 +24,7 @@ from Formatter import formatter as fmt
 #
 # 2017 Do Kester
 
-def plotFit( x, data=None, model=None, fitter=None, show=True,
+def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
              residuals=False ) :
     """
     Plot the data of a fit.
@@ -35,6 +35,8 @@ def plotFit( x, data=None, model=None, fitter=None, show=True,
         xdata of the problem
     data : array_like
         ydata of the problem
+    yfit : array_like
+        fit of the data to the model
     model : Model
         the model the data are fitted to at x
     fitter : BaseFitter
@@ -52,13 +54,15 @@ def plotFit( x, data=None, model=None, fitter=None, show=True,
     plt.figure( "Fitter Results" )
     ax0 = plt
 
+    if yfit is None and model is not None :
+        yfit = model( x )
+
     if residuals :
         plt.subplots_adjust( hspace=0.001 )
         np = 2
         gs = gridspec.GridSpec( 2, 1, height_ratios=[4, 1])
 
         ax1 = plt.subplot( gs[1] )
-        yfit = model( x )
         res = data - yfit
         ax1.plot( x, res, 'k-' )
         ax1.margins( 0.05, 0.05 )
@@ -67,7 +71,7 @@ def plotFit( x, data=None, model=None, fitter=None, show=True,
 
         plt.yticks( [-xtk, 0.0, xtk] )
         plt.ylabel( "residual" )
-        plt.xlabel( "x" )
+        plt.xlabel( "xdata" )
 
         ax0 = plt.subplot( gs[0] )
         xticklabels = ax0.get_xticklabels()
@@ -86,6 +90,8 @@ def plotFit( x, data=None, model=None, fitter=None, show=True,
             ax0.plot( xx, yy - err, 'g-' )
             ax0.plot( xx, yy + err, 'g-' )
         ax0.plot( xx, yy, 'r-' )
+    elif yfit is not None :
+        ax0.plot( x, yfit, 'r-' )
 
     ax0.margins( 0.05, 0.05 )
     plt.ylabel( "ydata" )

@@ -162,7 +162,8 @@ class AmoebaFitter( MaxLikelihoodFitter ):
 
         func = self.makeFuncs( data, weights=weights, index=fitIndex, ret=1 )
 
-        if par0 is None : par0 = self.model.parameters
+        if par0 is None :
+            par0 = self.model.parameters
         if fitIndex is not None and len( fitIndex ) < len( par0 ) :
             par0 = par0[fitIndex]
 

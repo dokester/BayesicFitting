@@ -4,6 +4,8 @@ import re
 import warnings
 import Tools
 
+from Dynamic import Dynamic
+
 #  * This file is part of the BayesicFitting package.
 #  *
 #  * BayesicFitting is free software: you can redistribute it and/or modify
@@ -209,6 +211,12 @@ class BaseModel( object ):
                 warnings.warn( msg )
                 param[k] = self.tiny
 
+    def isDynamic( self ) :
+        """
+        Whether the model implements Dynamic
+        """
+        return isinstance( self, Dynamic )
+
     #  *****TOSTRING***********************************************************
     def __str__( self ):
         """ Returns a string representation of the model.  """
@@ -238,6 +246,66 @@ class BaseModel( object ):
 
         """
         return self.baseDerivative( xdata, params )
+
+    def setPrior( self, k, prior=None, limits=None ) :
+        """
+        set the prior and/or limits for the indicated parameter.
+
+        Parameters
+        ---------
+        k : int
+            parameter number.
+        prior : Prior
+            prior for the parameter
+        limits : [float,float]
+            [low,high] limits on the prior.
+
+        """
+        np = len( self.priors )
+        if prior is None :
+            if np == 0 :
+                self.priors = [UniformPrior( limits=limits )]
+                return
+            else :
+                prior = self.basePrior( k )
+
+        prior.setLimits( limits )
+
+        if k == np :
+            self.priors += [prior]
+        elif k > np :
+            k = -1
+        self.priors[k] = prior
+        return
+
+
+    def getPrior( self, k ) :
+        """
+        Return the prior of the indicated parameter.
+
+        Parameters
+        ---------
+        k : int
+            parameter number.
+        """
+        return self.basePrior( k )
+
+    def basePrior( self, k ) :
+        """
+        Return the prior of the indicated parameter.
+
+        Parameters
+        ---------
+        k : int
+            parameter number.
+        """
+        np = len( self.priors )
+        if np == 0 :
+            raise IndexError( "The model does not have priors." )
+        if k < np:
+            return self.priors[k]
+        else :
+            return self.priors[-1]
 
     def getParameterName( self, k ) :
         """

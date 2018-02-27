@@ -128,6 +128,10 @@ class SampleList( list ):
 
     def addSamples( self, model, nSamples, errdis, fitindex=None ):
         for i in range( nSamples ) :
+            if model.isDynamic() :
+                model = model.copy()
+                if fitindex is not None :
+                    fitindex = fitindex.copy()
             sample = Sample( self._count, -1, model, errdis, fitIndex=fitindex )
             self.append( sample )
             self._count += 1
@@ -342,10 +346,10 @@ class SampleList( list ):
      # ===== EVOLUTIONS ========================================================
     def getMaximumNumberOfParameters( self ):
         """
-        TBD when Dynamic models are defin
+        TBD when Dynamic models are defined
         """
-#        if self[0].model.isDynamic( ) :
-#            return numpy.max( self.getNumberOfParametersEvolution() )
+        if self[0].model.isDynamic( ) :
+            return numpy.max( self.getNumberOfParametersEvolution() )
 
         return self[0].model.npchain
 
