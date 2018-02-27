@@ -1,7 +1,3 @@
-import numpy as numpy
-from astropy import units
-import math
-import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017

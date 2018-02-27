@@ -1,7 +1,5 @@
 import numpy as numpy
-from astropy import units
-import math
-import Tools
+
 from .Kernel import Kernel
 
 __author__ = "Do Kester"
@@ -26,8 +24,8 @@ __status__ = "Development"
 #  *
 #  *    The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
+#  *    A JAVA version of this code was part of the Herschel Common
+#  *    Science System (HCSS), also under GPL3.
 #  *
 #  *    2013 - 2014 Do Kester, SRON (Java code)
 #  *    2016 - 2017 Do Kester
