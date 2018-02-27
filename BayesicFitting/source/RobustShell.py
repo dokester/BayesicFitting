@@ -2,8 +2,8 @@ import numpy as numpy
 import inspect
 
 from .IterativeFitter import IterativeFitter
-from Kernel import Kernel
-from Biweight import Biweight
+from .kernels.Kernel import Kernel
+from .kernels.Biweight import Biweight
 
 __author__ = "Do Kester"
 __year__ = 2017

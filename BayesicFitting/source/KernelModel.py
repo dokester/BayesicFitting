@@ -3,8 +3,8 @@ from astropy import units
 import math
 from . import Tools
 from .NonLinearModel import NonLinearModel
-from Kernel import Kernel
-from Biweight import Biweight
+from .kernels.Kernel import Kernel
+from .kernels.Biweight import Biweight
 
 __author__ = "Do Kester"
 __year__ = 2017
