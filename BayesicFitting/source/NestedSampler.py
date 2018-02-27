@@ -1,34 +1,36 @@
+from __future__ import print_function
+
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from Formatter import formatter as fmt
-import Plotter
+from . import Tools
+from .Formatter import formatter as fmt
+from . import Plotter
 import sys
 import warnings
 import matplotlib.pyplot as plt
 
-from Model import Model
-from Sample import Sample
-from SampleList import SampleList
-from ErrorDistribution import ErrorDistribution
-from ScaledErrorDistribution import ScaledErrorDistribution
-from GaussErrorDistribution import GaussErrorDistribution
-from LaplaceErrorDistribution import LaplaceErrorDistribution
-from PoissonErrorDistribution import PoissonErrorDistribution
-from CauchyErrorDistribution import CauchyErrorDistribution
-from GenGaussErrorDistribution import GenGaussErrorDistribution
-from Explorer import Explorer
-from Engine import Engine
-from StartEngine import StartEngine
-from GibbsEngine import GibbsEngine
-from GalileanEngine import GalileanEngine
-from StepEngine import StepEngine
+from .Model import Model
+from .Sample import Sample
+from .SampleList import SampleList
+from .ErrorDistribution import ErrorDistribution
+from .ScaledErrorDistribution import ScaledErrorDistribution
+from .GaussErrorDistribution import GaussErrorDistribution
+from .LaplaceErrorDistribution import LaplaceErrorDistribution
+from .PoissonErrorDistribution import PoissonErrorDistribution
+from .CauchyErrorDistribution import CauchyErrorDistribution
+from .GenGaussErrorDistribution import GenGaussErrorDistribution
+from .Explorer import Explorer
+from .Engine import Engine
+from .StartEngine import StartEngine
+from .GibbsEngine import GibbsEngine
+from .GalileanEngine import GalileanEngine
+from .StepEngine import StepEngine
 
 
 ## for Dynamic Models import the classes
-from BirthEngine import BirthEngine
-from DeathEngine import DeathEngine
+from .BirthEngine import BirthEngine
+from .DeathEngine import DeathEngine
 
 #######  For later #################
 ## for Order Problems import the classes
