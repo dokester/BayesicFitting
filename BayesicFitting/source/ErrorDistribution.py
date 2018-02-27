@@ -1,9 +1,9 @@
 import numpy as numpy
-from HyperParameter import HyperParameter
-from Model import Model
+from .HyperParameter import HyperParameter
+from .Model import Model
 
 
-import Tools
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017

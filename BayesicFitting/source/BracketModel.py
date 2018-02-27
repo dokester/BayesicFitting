@@ -1,7 +1,7 @@
 import numpy
-from Model import Model
-from Model import Brackets
-import Tools
+from .Model import Model
+from .Model import Brackets
+from . import Tools
 
 _author__ = "Do Kester"
 __year__ = 2017

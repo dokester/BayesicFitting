@@ -1,5 +1,5 @@
-from Model import Model
-import Tools
+from .Model import Model
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017

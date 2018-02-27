@@ -1,7 +1,7 @@
 import numpy as numpy
-import Tools
+from . import Tools
 from astropy import units
-from LinearModel import LinearModel
+from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
 __year__ = 2017

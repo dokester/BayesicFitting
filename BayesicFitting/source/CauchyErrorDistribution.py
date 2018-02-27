@@ -2,8 +2,8 @@ import numpy as numpy
 import scipy
 import math
 
-from ScaledErrorDistribution import ScaledErrorDistribution
-from NoiseScale import NoiseScale
+from .ScaledErrorDistribution import ScaledErrorDistribution
+from .NoiseScale import NoiseScale
 
 
 __author__ = "Do Kester"

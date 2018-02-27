@@ -3,14 +3,14 @@ from __future__ import print_function
 import numpy as numpy
 import random
 from astropy import units
-import Tools
+from . import Tools
 import warnings
 
-from BaseModel import BaseModel
-from FixedModel import FixedModel
-from Prior import Prior
-from UniformPrior import UniformPrior
-from NoiseScale import NoiseScale
+from .BaseModel import BaseModel
+from .FixedModel import FixedModel
+from .Prior import Prior
+from .UniformPrior import UniformPrior
+from .NoiseScale import NoiseScale
 #from Dynamic import Dynamic
 
 #  * This file is part of the BayesicFitting package.

@@ -1,13 +1,13 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
+from . import Tools
 
-from PolynomialModel import PolynomialModel
-from Dynamic import Dynamic
-from Prior import Prior
-from ExponentialPrior import ExponentialPrior
-from UniformPrior import UniformPrior
+from .PolynomialModel import PolynomialModel
+from .Dynamic import Dynamic
+from .Prior import Prior
+from .ExponentialPrior import ExponentialPrior
+from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
 __year__ = 2018

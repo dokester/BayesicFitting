@@ -1,8 +1,8 @@
 import numpy as numpy
-import Tools
-from Model import Model
-from LinearModel import LinearModel
-from SplinesModel import SplinesModel
+from . import Tools
+from .Model import Model
+from .LinearModel import LinearModel
+from .SplinesModel import SplinesModel
 
 __author__ = "Do Kester"
 __year__ = 2017

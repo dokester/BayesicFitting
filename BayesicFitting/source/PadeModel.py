@@ -1,10 +1,10 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
+from . import Tools
 
-from NonLinearModel import NonLinearModel
-from Formatter import formatter as fmt
+from .NonLinearModel import NonLinearModel
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017

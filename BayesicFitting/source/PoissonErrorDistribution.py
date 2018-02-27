@@ -1,8 +1,8 @@
 import numpy as numpy
 import math
 
-from ErrorDistribution import ErrorDistribution
-from LogFactorial import logFactorial
+from .ErrorDistribution import ErrorDistribution
+from .LogFactorial import logFactorial
 
 __author__ = "Do Kester"
 __year__ = 2017

@@ -1,7 +1,7 @@
 import numpy as numpy
 import inspect
 
-from IterativeFitter import IterativeFitter
+from .IterativeFitter import IterativeFitter
 from Kernel import Kernel
 from Biweight import Biweight
 

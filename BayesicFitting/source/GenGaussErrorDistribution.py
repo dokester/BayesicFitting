@@ -2,9 +2,9 @@ import numpy as numpy
 from scipy import special
 import math
 
-from ScaledErrorDistribution import ScaledErrorDistribution
-from HyperParameter import HyperParameter
-from NoiseScale import NoiseScale
+from .ScaledErrorDistribution import ScaledErrorDistribution
+from .HyperParameter import HyperParameter
+from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
 __year__ = 2017

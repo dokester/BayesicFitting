@@ -1,9 +1,9 @@
 import numpy as numpy
 import math
-import Tools
+from . import Tools
 
-from Formatter import formatter as fmt
-from ConvergenceError import ConvergenceError
+from .Formatter import formatter as fmt
+from .ConvergenceError import ConvergenceError
 
 __author__ = "Do Kester"
 __year__ = 2017

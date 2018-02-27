@@ -1,11 +1,11 @@
 import numpy as numpy
 import random
 from astropy import units
-import Tools
+from . import Tools
 import warnings
-from Formatter import formatter as fmt
+from .Formatter import formatter as fmt
 
-from Prior import Prior
+from .Prior import Prior
 
 #  * This file is part of the BayesicFitting package.
 #  *

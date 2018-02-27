@@ -2,8 +2,8 @@ import numpy as numpy
 from astropy import units
 import math
 import Tools
-from Kernel import Kernel
-from Cosine import Cosine
+from .Kernel import Kernel
+from .Cosine import Cosine
 
 __author__ = "Do Kester"
 __year__ = 2017

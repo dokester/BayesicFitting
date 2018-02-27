@@ -1,7 +1,7 @@
 import numpy as numpy
 import math
 
-from Kernel import Kernel
+from .Kernel import Kernel
 
 __author__ = "Do Kester"
 __year__ = 2017

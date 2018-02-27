@@ -1,13 +1,13 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from Formatter import formatter as fmt
+from . import Tools
+from .Formatter import formatter as fmt
 
-from Dynamic import Dynamic
-from Engine import Engine
-from GibbsEngine import GibbsEngine
-from ExponentialPrior import ExponentialPrior
+from .Dynamic import Dynamic
+from .Engine import Engine
+from .GibbsEngine import GibbsEngine
+from .ExponentialPrior import ExponentialPrior
 
 __author__ = "Do Kester"
 __year__ = 2018

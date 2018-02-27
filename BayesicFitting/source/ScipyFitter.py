@@ -4,7 +4,7 @@ import warnings
 # unconstrained minimization
 from scipy.optimize import minimize
 
-from MaxLikelihoodFitter import MaxLikelihoodFitter
+from .MaxLikelihoodFitter import MaxLikelihoodFitter
 #from ConvergenceError import ConvergenceError
 
 __author__ = "Do Kester"

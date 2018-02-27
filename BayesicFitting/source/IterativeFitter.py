@@ -1,15 +1,15 @@
 import numpy as numpy
 import math
 
-from ConvergenceError import ConvergenceError
-from BaseFitter import BaseFitter
-from IterationPlotter import IterationPlotter
-from GaussErrorDistribution import GaussErrorDistribution
-from LaplaceErrorDistribution import LaplaceErrorDistribution
-from CauchyErrorDistribution import CauchyErrorDistribution
-from PoissonErrorDistribution import PoissonErrorDistribution
-from GenGaussErrorDistribution import GenGaussErrorDistribution
-from Formatter import formatter as fmt
+from .ConvergenceError import ConvergenceError
+from .BaseFitter import BaseFitter
+from .IterationPlotter import IterationPlotter
+from .GaussErrorDistribution import GaussErrorDistribution
+from .LaplaceErrorDistribution import LaplaceErrorDistribution
+from .CauchyErrorDistribution import CauchyErrorDistribution
+from .PoissonErrorDistribution import PoissonErrorDistribution
+from .GenGaussErrorDistribution import GenGaussErrorDistribution
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017

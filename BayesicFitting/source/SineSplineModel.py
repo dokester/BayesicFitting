@@ -1,9 +1,9 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from LinearModel import LinearModel
-from SplinesModel import SplinesModel
+from . import Tools
+from .LinearModel import LinearModel
+from .SplinesModel import SplinesModel
 
 __author__ = "Do Kester"
 __year__ = 2017

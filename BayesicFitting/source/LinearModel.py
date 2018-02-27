@@ -1,5 +1,5 @@
 import numpy as numpy
-from Model import Model
+from .Model import Model
 
 __author__ = "Do Kester"
 __year__ = 2017

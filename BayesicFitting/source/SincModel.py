@@ -1,4 +1,4 @@
-from KernelModel import KernelModel
+from .KernelModel import KernelModel
 from Sinc import Sinc
 
 __author__ = "Do Kester"

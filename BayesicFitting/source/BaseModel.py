@@ -2,9 +2,9 @@ import numpy as numpy
 from astropy import units
 import re
 import warnings
-import Tools
+from . import Tools
 
-from Dynamic import Dynamic
+from .Dynamic import Dynamic
 
 #  * This file is part of the BayesicFitting package.
 #  *

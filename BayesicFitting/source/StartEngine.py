@@ -1,9 +1,9 @@
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-from Formatter import formatter as fmt
-from Engine import Engine
+from . import Tools
+from .Formatter import formatter as fmt
+from .Engine import Engine
 
 __author__ = "Do Kester"
 __year__ = 2017

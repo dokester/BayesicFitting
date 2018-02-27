@@ -1,10 +1,10 @@
 import numpy as numpy
 import math
 
-from ErrorDistribution import ErrorDistribution
-from NoiseScale import NoiseScale
-from JeffreysPrior import JeffreysPrior
-import Tools
+from .ErrorDistribution import ErrorDistribution
+from .NoiseScale import NoiseScale
+from .JeffreysPrior import JeffreysPrior
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017
