@@ -13,8 +13,8 @@ setup(
         'matplotlib >= 2.0',
         'scipy >= 1.0',
         'astropy >= 2.0',
+        'bspline>=0.1.1',         # from John Foster and Juha Jeronen at github
         'future'
-#        'bspline>=0.1.1'         # from John Foster and Juha Jeronen at github
     ],
     license='LICENSE.txt',
     description='A Python Toolbox for Bayes-enhanched fitting.',
@@ -23,7 +23,9 @@ setup(
     packages=['BayesicFitting', 'BayesicFitting/source', 'BayesicFitting/source/kernels',
               'BayesicFitting/test', 'BayesicFitting/examples'],
     classifiers = [
+        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
         "Operating System :: OS Independent",
         "Intended Audience :: Science/Research/DataAnalysis",
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",

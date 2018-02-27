@@ -109,7 +109,9 @@ from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
 
-from .source.Formatter import formatter
+from .source.kernels import kernels
+
+from .source import Formatter
 from .source import Tools
 
 
