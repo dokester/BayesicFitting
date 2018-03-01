@@ -173,7 +173,8 @@ class Sample( object ):
 
     def check( self, nhyp=0 ) :
 #        print( len( self.allpars ), self.model.npchain, nhyp )
-        assert( len( self.allpars ) == self.model.npchain + nhyp,
-                fmt( self.allpars ) + fmt( self.model.npchain ) + fmt( nhyp ) )
-        if nhyp > 0 :
-            assert( self.allpars[-nhyp] > 0 )
+        if not len( self.allpars ) == ( self.model.npchain + nhyp ) :
+            raise ValueError( "Sample inconsistent parameter length : %d is not ( %d + %d )" %
+                ( len( self.allpars ), self.model.npchain, nhyp ) )
+        if nhyp > 0 and self.allpars[-nhyp] <= 0 :
+            raise ValueError( "Sample has non-positive hyperparameter: %f" % self.allpars[-nhyp] )

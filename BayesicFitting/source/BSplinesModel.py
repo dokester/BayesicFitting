@@ -1,13 +1,9 @@
 import numpy as numpy
 from . import Tools
 import math
-# import bspline from Juha Jeronen
-import bspline
-import splinelab
-
-#from bspline import Bspline
-#from splinelab import augknt
-
+# import (modified) bspline from Juha Jeronen
+from . import bspline
+from . import splinelab
 
 from .LinearModel import LinearModel
 

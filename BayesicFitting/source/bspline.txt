@@ -1,0 +1,16 @@
+The python modules bspline.py and splinelab.py are enhanced copies of
+the bspline package of John Foster and Juha Jeronen, at
+http://github.com/johnfoster/bspline.
+
+Bsplines have a set of knots, ordered over the domain of interest for
+the inputs, x.
+The original bspline package was defined strictly on the domain 
+	knots[0] <= x < knots[-1]
+
+So when some x value was exactly equal to the value of the last knot, it
+gave an error message.
+
+This version is enhanced in the sense that the bsplines are defined for
+	knots[0] <= x <= knots[-1]
+including the last knot.
+
