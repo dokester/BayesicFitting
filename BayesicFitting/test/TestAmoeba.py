@@ -4,12 +4,10 @@ import numpy as numpy
 import unittest
 from astropy import units
 import math
-import Tools
 import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE
 
-from AnnealingAmoeba import AnnealingAmoeba
-from ConvergenceError import ConvergenceError
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017

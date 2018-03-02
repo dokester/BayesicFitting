@@ -6,12 +6,8 @@ import numpy as np
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 import matplotlib.pyplot as plt
-from BaseFitter import BaseFitter
-from Fitter import Fitter
-from PolynomialModel import PolynomialModel
-from GaussModel import GaussModel
-from NoiseScale import NoiseScale
-from ConvergenceError import ConvergenceError
+
+from BayesicFitting import *
 
 class TestBaseFitter( unittest.TestCase  ) :
 

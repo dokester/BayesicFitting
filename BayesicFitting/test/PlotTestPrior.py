@@ -4,15 +4,15 @@ import numpy as np
 import math
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
-from ExponentialPrior import ExponentialPrior
-from LaplacePrior import LaplacePrior
-from JeffreysPrior import JeffreysPrior
-from UniformPrior import UniformPrior
-from GaussPrior import GaussPrior
-#from GaussLutPrior import GaussLutPrior
-from CauchyPrior import CauchyPrior
+from BayesicFitting import ExponentialPrior
+from BayesicFitting import LaplacePrior
+from BayesicFitting import JeffreysPrior
+from BayesicFitting import UniformPrior
+from BayesicFitting import GaussPrior
+from BayesicFitting import CauchyPrior
 
-from Prior import Prior
+from BayesicFitting import Prior
+from BayesicFitting import Formatter
 from Formatter import formatter as fmt
 
 class PlotTestPrior( unittest.TestCase  ) :

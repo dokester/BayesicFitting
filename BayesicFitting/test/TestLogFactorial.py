@@ -8,7 +8,7 @@ from astropy import units
 import matplotlib.pyplot as plt
 import warnings
 
-from LogFactorial import logFactorial
+from BayesicFitting import logFactorial
 
 __author__ = "Do Kester"
 __year__ = 2017

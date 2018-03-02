@@ -5,18 +5,8 @@ import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
 import warnings
-import Tools
 
-from PolySineAmpModel import PolySineAmpModel
-from PolySurfaceModel import PolySurfaceModel
-from EtalonDriftModel import EtalonDriftModel
-from SurfaceSplinesModel import SurfaceSplinesModel
-from GaussModel import GaussModel
-from SineModel import SineModel
-from PolynomialModel import PolynomialModel
-from HarmonicModel import HarmonicModel
-from ProductModel import ProductModel
-from Kernel2dModel import Kernel2dModel
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017

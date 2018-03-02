@@ -4,22 +4,11 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
-import matplotlib.pyplot as plt
-from Formatter import formatter as fmt
 
-from PolynomialModel import PolynomialModel
-from Engine import Engine
-from StartEngine import StartEngine
-from RandomEngine import RandomEngine
-from GibbsEngine import GibbsEngine
-from StepEngine import StepEngine
-from CrossEngine import CrossEngine
-from GalileanEngine import GalileanEngine
-from GaussErrorDistribution import GaussErrorDistribution
-from SampleList import SampleList
-from UniformPrior import UniformPrior
-from ExponentialPrior import ExponentialPrior
+import matplotlib.pyplot as plt
+
+from BayesicFitting import *
+from Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -57,37 +46,55 @@ class TestEngine3( unittest.TestCase ):
 
 
     def plotRandomEngine( self ):
+        self.testRandomEngine(plot=True )
+
+    def testRandomEngine( self, plot=False ):
         print( "\n   Random Engine Test\n" )
-        self.stdenginetest( RandomEngine, nsamp=10, plot=True )
+        self.stdenginetest( RandomEngine, nsamp=10, plot=plot )
 
     def plotGibbsEngine( self ):
+        self.testGibbsEngine( plot=True )
+
+    def testGibbsEngine( self, plot=False ):
         print( "\n   Gibbs Engine Test\n" )
-        self.stdenginetest( GibbsEngine, nsamp=10, plot=True )
+        self.stdenginetest( GibbsEngine, nsamp=10, plot=plot )
 
     def plotGibbsEngine2( self ):
+        self.testGibbsEngine2( plot=True )
+
+    def testGibbsEngine2( self, plot=False ):
         print( "\n   Gibbs Engine Test 2\n" )
-        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-200, plot=True )
-        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-170, plot=True )
-        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-165, plot=True )
-        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-163, plot=True )
+        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-200, plot=plot )
+        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-170, plot=plot )
+        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-165, plot=plot )
+        self.stdenginetest2( GibbsEngine, nsamp=10, lowL=-163, plot=plot )
 
     def plotStepEngine( self ):
+        self.testStepEngine( plot=True )
+
+    def testStepEngine( self, plot=False ):
         print( "\n   Step Engine Test 2\n" )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-200, plot=True )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-170, plot=True )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-165, plot=True )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-163, plot=True )
+        self.stdenginetest2( StepEngine, nsamp=10, lowL=-200, plot=plot )
+        self.stdenginetest2( StepEngine, nsamp=10, lowL=-170, plot=plot )
+        self.stdenginetest2( StepEngine, nsamp=10, lowL=-165, plot=plot )
+        self.stdenginetest2( StepEngine, nsamp=10, lowL=-163, plot=plot )
 
     def plotGalileanEngine( self ):
+        self.testGalileanEngine( plot=True )
+
+    def testGalileanEngine( self, plot=False ):
         print( "\n   Galilean Engine Test\n" )
-        self.stdenginetest( GalileanEngine, nsamp=10, plot=True )
+        self.stdenginetest( GalileanEngine, nsamp=10, plot=plot )
 
     def plotGalileanEngine2( self ):
+        self.testGalileanEngine2( plot=True )
+
+    def testGalileanEngine2( self, plot=False ):
         print( "\n   Galilean Engine Test 2\n" )
-        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-200, plot=True )
-        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-170, plot=True )
-        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-165, plot=True )
-        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-163, plot=True )
+        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-200, plot=plot )
+        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-170, plot=plot )
+        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-165, plot=plot )
+        self.stdenginetest2( GalileanEngine, nsamp=10, lowL=-163, plot=plot )
 
     def initEngine( self, order=1, np=101 ):
         m = PolynomialModel( order )
@@ -108,7 +115,7 @@ class TestEngine3( unittest.TestCase ):
         m, xdata, data = self.initEngine()
         sigma = 2.0
         errdis = GaussErrorDistribution( xdata, data )
-        errdis.keepFixed( 0, sigma )
+        errdis.keepFixed( {0: sigma} )
         sl = SampleList( m, nsamp, errdis )
         map = numpy.ndarray( (21,21), dtype=float )
         mmx = -math.inf
@@ -148,12 +155,12 @@ class TestEngine3( unittest.TestCase ):
 
             klo = engine.rng.randint( 0, nsamp )
 
-            p0 = sl[klo].parlist[:2]
+            p0 = sl[klo].allpars[:2]
             plt.plot( p0[0], p0[1], 'k.' )
             engine.calculateUnitRange()
 
             engine.execute( sl[klo], lowL )
-            p1 = sl[klo].parlist[:2]
+            p1 = sl[klo].allpars[:2]
 
             print( klo, p1, sl[klo].logL )
             plt.show()
@@ -163,7 +170,7 @@ class TestEngine3( unittest.TestCase ):
         m, xdata, data = self.initEngine()
         sigma = 2.0
         errdis = GaussErrorDistribution( xdata, data )
-        errdis.keepFixed( 0, sigma )
+        errdis.keepFixed( {0: sigma} )
         sl = SampleList( m, nsamp, errdis )
 
         engine = StartEngine( sl, errdis )
@@ -216,13 +223,13 @@ class TestEngine3( unittest.TestCase ):
         engine = myengine( sl, errdis )
         klo = engine.rng.randint( 0, nsamp )
 
-        p0 = sl[klo].parlist[:2]
+        p0 = sl[klo].allpars[:2]
         engine.calculateUnitRange()
 
         for k in range( 100 ) :
-            sl[klo].parlist[:2] = p0
+            sl[klo].allpars[:2] = p0
             engine.execute( sl[klo], lowL )
-            p1 = sl[klo].parlist[:2]
+            p1 = sl[klo].allpars[:2]
             plt.plot( p1[0], p1[1], 'r.' )
 
         plt.plot( p0[0], p0[1], 'k*' )

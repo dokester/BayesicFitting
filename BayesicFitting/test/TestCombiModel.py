@@ -6,12 +6,8 @@ from numpy.testing import assert_array_equal as assertAE
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import math
-import Tools
 
-from BracketModel import BracketModel
-from CombiModel import CombiModel
-from GaussModel import GaussModel
-from EtalonModel import EtalonModel
+from BayesicFitting import *
 from StdTests import stdModeltest
 
 __author__ = "Do Kester"

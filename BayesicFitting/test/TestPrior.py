@@ -4,15 +4,9 @@
 import unittest
 import numpy as numpy
 import math
-import Tools
 
-from Prior import Prior
-from UniformPrior import UniformPrior
-from JeffreysPrior import JeffreysPrior
-from ExponentialPrior import ExponentialPrior
-from LaplacePrior import LaplacePrior
-from CauchyPrior import CauchyPrior
-from GaussPrior import GaussPrior
+from BayesicFitting import Prior, UniformPrior, JeffreysPrior, ExponentialPrior
+from BayesicFitting import LaplacePrior, CauchyPrior, GaussPrior
 
 __author__ = "Do Kester"
 __year__ = 2017

@@ -5,14 +5,9 @@ import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
 import warnings
-import Tools
 
-from PolySineAmpModel import PolySineAmpModel
-from EtalonDriftModel import EtalonDriftModel
-from GaussModel import GaussModel
-from SineModel import SineModel
-from PolynomialModel import PolynomialModel
-from HarmonicModel import HarmonicModel
+from BayesicFitting import *
+
 
 __author__ = "Do Kester"
 __year__ = 2017

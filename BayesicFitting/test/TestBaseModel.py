@@ -2,7 +2,7 @@
 
 import unittest
 import numpy as numpy
-from BaseModel import BaseModel
+from BayesicFitting import BaseModel
 
 __author__ = "Do Kester"
 __year__ = 2017

@@ -5,15 +5,12 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
 from numpy.testing import assert_array_almost_equal as assertAAE
 from FitPlot import plotFit
+
+from BayesicFitting import *
 from Formatter import formatter as fmt
 
-from NestedSampler import NestedSampler
-from GaussModel import GaussModel
-from PolynomialModel import PolynomialModel
-from SineModel import SineModel
 
 __author__ = "Do Kester"
 __year__ = 2017

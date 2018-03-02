@@ -6,14 +6,11 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 
 from astropy import units
 import math
-import Tools
 import matplotlib.pyplot as pyplot
-from Formatter import formatter as fmt
 
-from PolynomialModel import PolynomialModel
-from GaussModel import GaussModel
-from MonteCarlo import MonteCarlo
-from Fitter import Fitter
+
+from BayesicFitting import *
+from Formatter import formatter as fmt
 
 
 __author__ = "Do Kester"

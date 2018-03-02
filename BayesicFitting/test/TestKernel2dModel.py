@@ -4,12 +4,9 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
 from numpy.testing import assert_array_almost_equal as assertAAE
 
-from Kernel2dModel import Kernel2dModel
-from Gauss import Gauss
-from Cosine import Cosine
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017

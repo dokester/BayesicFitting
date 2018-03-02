@@ -9,16 +9,9 @@ from numpy.testing import assert_array_equal as assertAE
 
 import matplotlib.pyplot as plt
 import warnings
-import Tools
+
+from BayesicFitting import *
 from Formatter import formatter as fmt
-
-from Fitter import Fitter
-from SincModel import SincModel
-from SineModel import SineModel
-from GaussModel import GaussModel
-from SplinesModel import SplinesModel
-from BSplinesModel import BSplinesModel
-
 
 __author__ = "Do Kester"
 __year__ = 2017

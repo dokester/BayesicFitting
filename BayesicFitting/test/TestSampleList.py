@@ -6,15 +6,9 @@ import sys
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import math
-import Tools
-from Formatter import formatter as fmt
 
-from GaussModel import GaussModel
-from PolynomialModel import PolynomialModel
-from GaussErrorDistribution import GaussErrorDistribution
-from NoiseScale import NoiseScale
-from Sample import Sample
-from SampleList import SampleList
+from BayesicFitting import *
+from Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017

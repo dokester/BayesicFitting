@@ -3,8 +3,9 @@
 import unittest
 import numpy as numpy
 import math
-import Tools
 from datetime import date
+
+from BayesicFitting import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017

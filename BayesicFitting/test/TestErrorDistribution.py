@@ -7,22 +7,11 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
 from astropy import units
 import math
-import Tools
+import matplotlib.pyplot as plt
 
-from PolynomialModel import PolynomialModel
-from GaussModel import GaussModel
-from NoiseScale import NoiseScale
-from ErrorDistribution import ErrorDistribution
-from GaussErrorDistribution import GaussErrorDistribution
-from GenGaussErrorDistribution import GenGaussErrorDistribution
-from CauchyErrorDistribution import CauchyErrorDistribution
-from PoissonErrorDistribution import PoissonErrorDistribution
-from LaplaceErrorDistribution import LaplaceErrorDistribution
-from LogFactorial import logFactorial
-from CauchyPrior import CauchyPrior
+from BayesicFitting import *
 from Formatter import formatter as fmt
 
-import matplotlib.pyplot as plt
 
 __author__ = "Do Kester"
 __year__ = 2017

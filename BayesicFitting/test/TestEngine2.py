@@ -4,21 +4,9 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
 import matplotlib.pyplot as plt
 
-from PolynomialModel import PolynomialModel
-from Engine import Engine
-from StartEngine import StartEngine
-from RandomEngine import RandomEngine
-from GibbsEngine import GibbsEngine
-from StepEngine import StepEngine
-#from CrossEngine import CrossEngine
-from GalileanEngine import GalileanEngine
-from GaussErrorDistribution import GaussErrorDistribution
-from SampleList import SampleList
-from UniformPrior import UniformPrior
-from ExponentialPrior import ExponentialPrior
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -90,14 +78,14 @@ class TestEngine2( unittest.TestCase ):
 
     def testGibbsEngine( self, plot=False ):
         print( "\n   Gibbs Engine Test\n" )
-        self.stdenginetest( GibbsEngine, iter=200, nsamp=10, plot=plot )
+        self.stdenginetest( GibbsEngine, iter=101, nsamp=10, plot=plot )
 
     def plotStepEngine( self ):
         self.testStepEngine( plot=True )
 
     def testStepEngine( self, plot=False ):
         print( "\n   Step Engine Test\n" )
-        self.stdenginetest( StepEngine, iter=200, nsamp=10, plot=plot )
+        self.stdenginetest( StepEngine, iter=1001, nsamp=10, plot=plot )
 
 #    def plotCrossEngine( self ):
 #        self.testCrossEngine( plot=True )
@@ -111,7 +99,7 @@ class TestEngine2( unittest.TestCase ):
 
     def testGalileanEngine( self, plot=False ):
         print( "\n   Galilean Engine Test\n" )
-        self.stdenginetest( GalileanEngine, iter=400, nsamp=10, plot=plot )
+        self.stdenginetest( GalileanEngine, iter=101, nsamp=10, plot=plot )
 
     def stdenginetest( self, myengine, nsamp=4, iter=100, plot=False ) :
         m, xdata, data = self.initEngine()

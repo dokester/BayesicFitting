@@ -5,17 +5,8 @@ import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
 import warnings
-import Tools
 
-from PolySineAmpModel import PolySineAmpModel
-from PolySurfaceModel import PolySurfaceModel
-from EtalonDriftModel import EtalonDriftModel
-from SurfaceSplinesModel import SurfaceSplinesModel
-from GaussModel import GaussModel
-from PolynomialModel import PolynomialModel
-from ProductModel import ProductModel
-from Kernel2dModel import Kernel2dModel
-from FreeShape2dModel import FreeShape2dModel
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -137,6 +128,7 @@ class Test2dFixedModels( unittest.TestCase ):
         yk = numpy.arange( 3, dtype=float )
         self.assertRaises( AttributeError, SurfaceSplinesModel, [xk,yk], fixed={3:1.1} )
 
+    """
     def testFreeShape2dModel( self, plot=False ):
         rng = numpy.random
         x = rng.rand( 100, 2 )
@@ -149,7 +141,7 @@ class Test2dFixedModels( unittest.TestCase ):
         xk = numpy.arange( 4, dtype=float )
         yk = numpy.arange( 3, dtype=float )
         self.assertRaises( AttributeError, FreeShape2dModel, (12,13), fixed={3:1.1} )
-
+    """
 
 
     def stdModeltest( self, model, par, xdata=None, plot=None, warn=[] ):

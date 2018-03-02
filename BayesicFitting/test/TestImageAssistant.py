@@ -7,8 +7,8 @@ from astropy import units
 import matplotlib.pyplot as plt
 import warnings
 
-from PolySurfaceModel import PolySurfaceModel
-from ImageAssistant import ImageAssistant
+from BayesicFitting import PolySurfaceModel
+from BayesicFitting import ImageAssistant
 
 __author__ = "Do Kester"
 __year__ = 2017

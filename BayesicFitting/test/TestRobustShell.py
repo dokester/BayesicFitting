@@ -4,20 +4,10 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
 import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE
 
-from RobustShell import RobustShell
-from Biweight import Biweight
-from Cosine import Cosine
-from Huber import Huber
-from Uniform import Uniform
-from PolynomialModel import PolynomialModel
-from GaussModel import GaussModel
-from Fitter import Fitter
-from LevenbergMarquardtFitter import LevenbergMarquardtFitter
-from CurveFitter import CurveFitter
+from BayesicFitting import *
 from Formatter import formatter as fmt
 
 __author__ = "Do Kester"

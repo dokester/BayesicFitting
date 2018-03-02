@@ -6,10 +6,7 @@ from astropy import units
 import unittest
 import FitPlot
 
-from PolynomialModel import PolynomialModel
-from PowerModel import PowerModel
-from Fitter import Fitter
-from QRFitter import QRFitter
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017

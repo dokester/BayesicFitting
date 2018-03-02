@@ -4,16 +4,10 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
 import matplotlib.pyplot as plt
 
-from GaussModel import GaussModel
-from Engine import Engine
-from StartEngine import StartEngine
-from GaussErrorDistribution import GaussErrorDistribution
-from SampleList import SampleList
-from UniformPrior import UniformPrior
-from ExponentialPrior import ExponentialPrior
+from BayesicFitting import *
+
 
 __author__ = "Do Kester"
 __year__ = 2017

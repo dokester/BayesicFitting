@@ -4,12 +4,8 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
-import Tools
 
-from Model import Model
-from PolynomialModel import PolynomialModel
-from GaussModel import GaussModel
-from VoigtModel import VoigtModel
+from BayesicFitting import *
 
 
 __author__ = "Do Kester"

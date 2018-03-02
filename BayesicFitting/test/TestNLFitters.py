@@ -5,22 +5,11 @@ import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import math
-import Tools
 
 import matplotlib.pyplot as plt
-from AmoebaFitter import AmoebaFitter
-from ScipyFitter import NelderMeadFitter
-from ScipyFitter import PowellFitter
-from ScipyFitter import ConjugateGradientFitter
-from ScipyFitter import BfgsFitter
-from ScipyFitter import NewtonCgFitter
-from ScipyFitter import LbfgsbFitter
-from ScipyFitter import TncFitter
-from ScipyFitter import CobylaFitter
-from ScipyFitter import SlsqpFitter
-from ScipyFitter import DoglegFitter
-from ScipyFitter import TrustNcgFitter
-from ConvergenceError import ConvergenceError
+
+from BayesicFitting import *
+
 from StdTests import stdFittertest
 
 __author__ = "Do Kester"

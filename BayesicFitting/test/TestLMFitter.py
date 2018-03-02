@@ -5,19 +5,12 @@ import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import math
-import Tools
 
 import matplotlib.pyplot as plt
-from LevenbergMarquardtFitter import LevenbergMarquardtFitter as LMFitter
-from Fitter import Fitter
-from QRFitter import QRFitter
-from AmoebaFitter import AmoebaFitter
-from CurveFitter import CurveFitter
-from ScipyFitter import PowellFitter
-from PolynomialModel import PolynomialModel
-from GaussModel import GaussModel
-from NoiseScale import NoiseScale
-from ConvergenceError import ConvergenceError
+
+from BayesicFitting import *
+from BayesicFitting import LevenbergMarquardtFitter as LMFitter
+
 from Formatter import formatter as fmt
 
 __author__ = "Do Kester"

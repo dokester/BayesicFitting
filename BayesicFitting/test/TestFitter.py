@@ -6,11 +6,7 @@ from astropy import units
 import unittest
 import FitPlot
 
-from PolynomialModel import PolynomialModel
-from PowerModel import PowerModel
-from SineAmpModel import SineAmpModel
-from Fitter import Fitter
-from CurveFitter import CurveFitter
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017

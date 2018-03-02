@@ -8,28 +8,8 @@ import warnings
 
 from StdTests import stdModeltest
 
-from ArctanModel import ArctanModel
-from EtalonModel import EtalonModel
-from ExpModel import ExpModel
-from PolynomialModel import PolynomialModel
-from ChebyshevPolynomialModel import ChebyshevPolynomialModel
-from ConstantModel import ConstantModel
-from FreeShapeModel import FreeShapeModel
-from PadeModel import PadeModel
-from PowerModel import PowerModel
-from PowerLawModel import PowerLawModel
-from GaussModel import GaussModel
-from LorentzModel import LorentzModel
-from VoigtModel import VoigtModel
-from BSplinesModel import BSplinesModel
-from SplinesModel import SplinesModel
-from HarmonicModel import HarmonicModel
-from SincModel import SincModel
-from SineModel import SineModel
-from SineAmpModel import SineAmpModel
-from SineSplineModel import SineSplineModel
-from SineSplineDriftModel import SineSplineDriftModel
-from SineDriftModel import SineDriftModel
+from BayesicFitting import *
+
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -103,7 +83,7 @@ class TestModels( unittest.TestCase ):
         self.testLorentzModel( plot=True )
 
     def plotFreeShapeModel( self ) :
-        self.testFreeShapeModel( plot=True )
+        self.XtestFreeShapeModel( plot=True )
 
     def plotGaussModel( self ) :
         self.testGaussModel( plot=True )
@@ -222,7 +202,7 @@ class TestModels( unittest.TestCase ):
         print( p )
         stdModeltest( m, p, plot=plot, warn=["nopart"] )
 
-    def testFreeShapeModel( self, plot=False ):
+    def XtestFreeShapeModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******FREESHAPE********************" )
         m = FreeShapeModel( 5, pixperbin=1, xlo=-1, xhi=1.1 )

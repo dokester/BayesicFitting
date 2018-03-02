@@ -6,17 +6,10 @@ from numpy.testing import assert_array_equal as assertAE
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import math
+
+from BayesicFitting import *
 from Tools import ndprint
 from Tools import printclass
-
-from BracketModel import BracketModel
-from ConstantModel import ConstantModel
-from GaussModel import GaussModel
-from LorentzModel import LorentzModel
-from PolynomialModel import PolynomialModel
-from ExpModel import ExpModel
-from SineModel import SineModel
-from UniformPrior import UniformPrior
 from StdTests import stdModeltest
 
 __author__ = "Do Kester"

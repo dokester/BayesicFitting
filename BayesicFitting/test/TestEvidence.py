@@ -6,17 +6,8 @@ import math
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 import matplotlib.pyplot as plt
-from BaseFitter import BaseFitter
-from Fitter import Fitter
-from AmoebaFitter import AmoebaFitter
-from ScipyFitter import PowellFitter
-from ScipyFitter import ConjugateGradientFitter
-from PolynomialModel import PolynomialModel
-from FreeShapeModel import FreeShapeModel
-from GaussModel import GaussModel
-from NoiseScale import NoiseScale
-from GaussErrorDistribution import GaussErrorDistribution
-from LaplaceErrorDistribution import LaplaceErrorDistribution
+from BayesicFitting import *
+
 
 class TestEvidence( unittest.TestCase  ) :
 
