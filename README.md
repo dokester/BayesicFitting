@@ -42,22 +42,15 @@ original HCSS.
 The package is written in python3 although I am not aware of using any
 specific python3 features. It uses numpy (>= 1.9) for its array
 structure, scipy (>=1.0) for linear algebra and other stuff and astropy
-(>=2.0) for units. Matplotlib (>=2.0) is used for plotting and bspline
-(>=0.1.1 at github by Foster and Jeronen) is used in the BSplinesModel.
+(>=2.0) for units. Matplotlib (>=2.0) is used for plotting.
 
-Download the necessary dependencies. Then download the package and put it
-in a directory BayesicFitting. Adapt the environment variable PYTHONPATH
-to include 
+Download and unpack the BayesicFitting zip file from github. Move into 
+the BayesicFitting-master directory and run:
 
-BayesicFitting/source/<br>
-BayesicFitting/source/kernels/<br>
-BayesicFitting/examples/<br>
+> python setup.py install
 
-and if you want to run the test harnasses, put
+where python is python3.
 
-BayesicFitting/test/
-
-also in your PYTHONPATH
 
 <a name="structure"> </a>
 ## 3. Structure 

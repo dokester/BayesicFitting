@@ -1,7 +1,7 @@
 
 ## Restrictions and Trouble Shooting.
 
-**All maths is OK, computation is the nightmare.**
+**All the math is OK, computation is the nightmare.**
 
 
 Although the theory of model fitting is quite straightforward, the
@@ -75,6 +75,13 @@ If you can in some other way localise the area where your parameters
 should be found, feed them to the system as initial parameters.
 Otherwise you have to use the AmoebaFitter in the annealing mode or even
 do exhaustive search. Both strategies take a lot more time.
+
++ **Nonlinear fitters produce warnings.**<br>
+Sometimes a nonlinear fitter produces a division-by-zero warning. When 
+the fitter just continues and produces sensible results, the warnings
+can be ignored. They are caused by a noise scale equal to 0, when 
+calculating the loglikelihood. As +inf is larger than any other number 
+the fitter cannot have a minimum there. 
 
 + **Matrix is degenerate**<br>
 The model is (almost) degenerate under the data it is presented to. In

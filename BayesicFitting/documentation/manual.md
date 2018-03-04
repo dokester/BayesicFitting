@@ -206,8 +206,8 @@ Assume `x` and `y` are some measurement that might be modelled by a
 linear relation. Then the simplest way to get the parameters of the
 model is:
 
-    from PolynomialModel import PolynomialModel
-    from Fitter import Fitter
+    from BayesicFitting import PolynomialModel
+    from BayesicFitting import Fitter
 
     x = [1.0, 2.0, 3.0, 4.0, 5.0]
     y = [1.2, 1.3, 1.5, 1.4, 1.4]
@@ -253,8 +253,8 @@ purpose line.
 its parameters and it needs a likelihood function. We start off defining
 some data.
 
-    from GaussModel import GaussModel
-    from NestedSampler import NestedSampler
+    from BayesicFitting import GaussModel
+    from BayesicFitting import NestedSampler
 
     x = [1.0, 2.0, 3.0, 4.0, 5.0]
     y = [0.2, 1.3, 4.5, 1.4, 0.1]

@@ -13,7 +13,8 @@ setup(
         'matplotlib >= 2.0',
         'scipy >= 1.0',
         'astropy >= 2.0',
-        'bspline>=0.1.1',         # from John Foster and Juha Jeronen at github
+# A modified version of bspline is added to BayesicFitting
+#        'bspline>=0.1.1',         # from John Foster and Juha Jeronen at github
         'future'
     ],
     license='LICENSE.txt',
