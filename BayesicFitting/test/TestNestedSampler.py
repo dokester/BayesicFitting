@@ -9,7 +9,7 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 from FitPlot import plotFit
 
 from BayesicFitting import *
-from Formatter import formatter as fmt
+from BayesicFitting import formatter as fmt
 
 
 __author__ = "Do Kester"

@@ -4,9 +4,8 @@ import unittest
 import numpy as numpy
 import math
 
-from BayesicFitting import Formatter
-from Formatter import formatter as fmt
-from Formatter import init as fmtinit
+from BayesicFitting import formatter as fmt
+from BayesicFitting import formatter_init as fmtinit
 
 __author__ = "Do Kester"
 __year__ = 2017

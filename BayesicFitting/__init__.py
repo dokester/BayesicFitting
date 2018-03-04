@@ -77,7 +77,6 @@ from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
 from .source.PadeModel import PadeModel
-from .source.Plotter import plotFit
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel
 from .source.PolySurfaceModel import PolySurfaceModel
@@ -108,10 +107,13 @@ from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
 
-from .source import Formatter
+from .source.Formatter import formatter
+from .source.Formatter import formatter_init
+from .source.Plotter import plotFit
+from .source.Tools import printclass
 from .source import Tools
-from .source import bspline
-from .source import splinelab
+#from .source import bspline
+#from .source import splinelab
 
 #from .source.bsplines.bspline import bspline
 #from .source.bsplines.splinelab import splinelab

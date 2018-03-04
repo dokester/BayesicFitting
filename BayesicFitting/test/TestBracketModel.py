@@ -8,8 +8,7 @@ from astropy import units
 import math
 
 from BayesicFitting import *
-from Tools import ndprint
-from Tools import printclass
+from BayesicFitting import formatter as fmt
 from StdTests import stdModeltest
 
 __author__ = "Do Kester"
@@ -145,17 +144,17 @@ class TestBracketModel( unittest.TestCase ):
         p = [1.0, 0.0, -1.0]
         mm.parameters = p
         print( mm )
-        ndprint( mm.parameters )
+        print( fmt( mm.parameters, max=None ) )
         lm = LorentzModel()
         lm.tiny = 0.001
         mm.addModel( lm )
         p = [1.0, 0.0, -1.0, 1.0, 1.0, 0.0]
         mm.parameters = p
         print( mm )
-        ndprint( mm.parameters )
+        print( fmt( mm.parameters, max=None ) )
         mm += PolynomialModel(1)
         print( mm )
-        ndprint( mm.parameters )
+        print( fmt( mm.parameters, max=None ) )
         self.assertTrue( mm.priors is None )
 
         m = BracketModel( mm )

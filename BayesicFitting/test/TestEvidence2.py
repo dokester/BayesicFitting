@@ -6,10 +6,9 @@ import math
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 import matplotlib.pyplot as plt
-import Tools
 
 from BayesicFitting import *
-from Formatter import formatter as fmt
+from BayesicFitting import formatter as fmt
 
 from FitPlot import plotFit
 from FitPlot import plotErrdis

@@ -10,7 +10,7 @@ import math
 import matplotlib.pyplot as plt
 
 from BayesicFitting import *
-from Formatter import formatter as fmt
+from BayesicFitting import formatter as fmt
 
 
 __author__ = "Do Kester"

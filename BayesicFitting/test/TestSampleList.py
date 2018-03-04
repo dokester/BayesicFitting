@@ -8,7 +8,7 @@ from astropy import units
 import math
 
 from BayesicFitting import *
-from Formatter import formatter as fmt
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017

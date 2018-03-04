@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from numpy.testing import assert_array_almost_equal as assertAAE
 
-from Formatter import formatter as fmt
-
 # This file is part of the BayesicFitting package.
 #
 # BayesicFitting is free software: you can redistribute it and/or modify

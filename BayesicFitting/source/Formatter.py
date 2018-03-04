@@ -36,7 +36,7 @@ gmax = 5
 fmt = { "float64" : " %8.3f", "int64" : " %8d" }
 
 
-def init( format={}, indent=None, linelength=None, max=-1 ):
+def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
     """
     Initialize the formatter with new default values.
 

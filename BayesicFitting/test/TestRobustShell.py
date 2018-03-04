@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 from BayesicFitting import *
-from Formatter import formatter as fmt
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
