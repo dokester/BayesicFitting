@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-__version__ = '0.9'
+__version__ = '1.0.1'
 
 setup(
     name='BayesicFitting',
@@ -25,6 +25,7 @@ setup(
               'BayesicFitting/test', 'BayesicFitting/examples'],
     classifiers = [
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Operating System :: OS Independent",
