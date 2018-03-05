@@ -29,7 +29,7 @@ setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Operating System :: OS Independent",
-        "Intended Audience :: Science/Research/DataAnalysis",
+        "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Topic :: Scientific/Engineering"
     ],
