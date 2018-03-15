@@ -6,6 +6,13 @@ from . import Tools
 
 from .Dynamic import Dynamic
 
+__author__ = "Do Kester"
+__year__ = 2018
+__license__ = "GPL3"
+__version__ = "0.9"
+__maintainer__ = "Do"
+__status__ = "Development"
+
 #  * This file is part of the BayesicFitting package.
 #  *
 #  * BayesicFitting is free software: you can redistribute it and/or modify

@@ -7,6 +7,13 @@ from .Formatter import formatter as fmt
 
 from .Prior import Prior
 
+__author__ = "Do Kester"
+__year__ = 2018
+__license__ = "GPL3"
+__version__ = "0.9"
+__maintainer__ = "Do"
+__status__ = "Development"
+
 #  * This file is part of the BayesicFitting package.
 #  *
 #  * BayesicFitting is free software: you can redistribute it and/or modify
@@ -33,18 +40,54 @@ class Dynamic( object ):
     def getNumberOfComponents( self ):
         return self.npbase / self.deltaNpar
 
-    def __setattr__( self, name, value ) :
-        dind = {"growPrior" : Prior}
-        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass
-        else :
-            super( ).__setattr__( name, value )
 
+    def grow( self, pat=0 ):
+        """
+        Increase the degree by one upto maxDegree ( if present ).
 
+        Parameters
+        ----------
+        pat : int
+            location where the new params should be inserted
 
+        Return
+        ------
+        bool :  succes
 
+        """
+        ncomp = self.getNumberOfComponents()
+        if self.maxComp is not None and ncomp >= self.maxComp:
+            return False
 
+        self.alterParameterSize( self.deltaNpar, pat )
+
+        self.changeNComp( 1 )
+
+        return True
+
+    def shrink( self, pat=0 ):
+        """
+        Decrease the degree by one downto minDegree ( default 1 ).
+
+        Parameters
+        ----------
+        pat : int
+            location where the new params should be inserted
+
+        Return
+        ------
+        bool : succes
+
+        """
+        ncomp = self.getNumberOfComponents()
+        if ncomp <= self.minComp :
+            return False
+
+        self.alterParameterSize( -self.deltaNpar, pat )
+
+        self.changeNComp( -1 )
+
+        return True
 
     def alterParameterSize( self, dnp, pat ) :
         """
@@ -57,14 +100,10 @@ class Dynamic( object ):
         pat : int
             starting index of the DynamicModel
         """
-        npnew = self.npbase + dnp
-#        print( "Dyn  ", pat, self.npbase, dnp )
-
         if dnp == 0 :
             return
 
         mdlpar = self._head.parameters
-#        print( "mdlpar  ", mdlpar )
         mdlpar = self.alterParameters( mdlpar, self.npbase, dnp, pat )
 
         self.npmax += dnp
@@ -79,7 +118,6 @@ class Dynamic( object ):
         kh = pat + npbase + dnp
         kb = pat + npbase
 
-#        print( param.shape, npbase, pat, dnp, kh, kb )
         if dnp < 0 :
             newpar[:kh] = param[:kh]
             newpar[kh:] = param[kb:]
@@ -87,7 +125,6 @@ class Dynamic( object ):
             newpar[:kb] = param[:kb]
             newpar[kh:] = param[kb:]
 
-#        print( "nwpar  ", fmt( newpar, max=None ) )
         return newpar
 
     def alterFitindex( self, findex, npbase, dnp, pat ) :
@@ -96,7 +133,6 @@ class Dynamic( object ):
         kh = pat + npbase + dnp
         kb = pat + npbase
 
-#        print( param.shape, npbase, pat, dnp, kh, kb )
         if dnp < 0 :
             newfi[:kh] = findex[:kh]
             newfi[kh:] = findex[kb:]
@@ -105,7 +141,6 @@ class Dynamic( object ):
             newfi[kb:kh] = numpy.arange( dnp ) + findex[kb-1] + 1
             newfi[kh:] = findex[kb:]
 
-#        print( "newfi  ", fmt( newfi, max=None ) )
         return newfi
 
 

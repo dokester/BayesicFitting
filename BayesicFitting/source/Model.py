@@ -3,15 +3,20 @@ from __future__ import print_function
 import numpy as numpy
 import random
 from astropy import units
-from . import Tools
 import warnings
 
-from .BaseModel import BaseModel
 from .FixedModel import FixedModel
 from .Prior import Prior
 from .UniformPrior import UniformPrior
-from .NoiseScale import NoiseScale
-#from Dynamic import Dynamic
+from . import Tools
+from .Formatter import formatter as fmt
+
+__author__ = "Do Kester"
+__year__ = 2018
+__license__ = "GPL3"
+__version__ = "0.9"
+__maintainer__ = "Do"
+__status__ = "Development"
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -39,17 +44,19 @@ class Model( FixedModel ):
     Model implements the common parts of (compound) models.
     It is the last common anchestor of all Models.
 
-    Models can be handled by the `BaseFitter` class and its descendants.
+    Models can be handled by the **Fitter** classes.
 
     A model consists of one or more instantiations of (base) models which
     are concatenated in a chain of models using various operations
-    ( +=, -=, *= or /= ).
+    ( +-*/ ). A special operation is the pipe (|). It works like a unix pipe,
+    i.e. the output of the left-hand process in used as input of the
+    right-hand process.
 
     Methods defined in `BaseModel` as eg. `baseResult()` are recursively called
     here as result(). They are the ones used in the fitters.
 
     The Model is the place where model-related items are kept, like parameters,
-    stdevs, `Prior`s, `NoiseScale` and unit information.
+    stdevs, `Prior`s and unit information.
 
     Model also implements a numerical derivation of partial to be
     used when partial is not given in the model definition itself. This same
@@ -185,8 +192,8 @@ class Model( FixedModel ):
                 warnings.warn( "%s: Nr of parameters does not comply. expect %d; got %d" %
                                 ( self.shortName(), self.npchain, Tools.length( value ) ) )
         ### TBC Why are these lines here ??
-        if name == 'stdevs' and value is not None :
-            stdv = numpy.zeros_like( self.parameters, dtype=float )
+        # if name == 'stdevs' and value is not None :
+        #     stdv = numpy.zeros_like( self.parameters, dtype=float )
 
         if ( Tools.setNoneAttributes( self, name, value, lnon ) or
              Tools.setListOfAttributes( self, name, value, dlst ) or
@@ -346,6 +353,18 @@ class Model( FixedModel ):
         """
         self.appendModel( model, self.DIV )
 
+    def pipeModel( self, model ):
+        """
+        Make a compound model by piping the result into the next.
+
+        Parameters
+        ----------
+        model : Model
+            model to pipe into
+
+        """
+        self.appendModel( model, self.PIP )
+
     def appendModel( self, model, operation ):
         """
         Append a model to the present chain using a operation.
@@ -454,7 +473,11 @@ class Model( FixedModel ):
     def _recursiveResult( self, xdata, param, res ) :
 
         np = self.npbase
-        res = self.operate( res, super( Model, self ).result( xdata, param[:np] ) )
+        if not self._operation == self.PIP :
+            nextres = super( Model, self ).result( xdata, param[:np] )
+        else :
+            nextres = None
+        res = self.operate( res, param[:np], nextres )
         model = self._next
         if model is None :
             return res
@@ -462,24 +485,21 @@ class Model( FixedModel ):
         res = model._recursiveResult( xdata, param[np:], res )
         return res
 
-    def operate( self, result, next ):
-        if result is None or self._operation == self.NOP: # first one
-            result = next
+    def operate( self, res, pars, next ):
+        if res is None or self._operation == self.NOP: # first one
+            res = next
         elif self._operation == self.ADD:                 # NOP & ADD
-            result = numpy.add( result, next )
+            res = numpy.add( res, next )
         elif self._operation == self.SUB:
-            result = numpy.subtract( result, next )
+            res = numpy.subtract( res, next )
         elif self._operation == self.MUL:
-            result = numpy.multiply( result, next )
+            res = numpy.multiply( res, next )
         elif self._operation == self.DIV:
-            result = numpy.divide( result, next )
-        #       case FUN:
-        #           result = super.result( new ModelInput( result ), par );
-        #           break;
-        #      * P
-        #         default:
-        #             break;
-        return result
+            res = numpy.divide( res, next )
+        elif self._operation == self.PIP:
+            res = super( Model, self ).result( res, pars )
+
+        return res
 
     #  *****DERIVATIVE*********************************************************
     def derivative( self, xdata, param, useNum=False ):
@@ -499,7 +519,8 @@ class Model( FixedModel ):
         result = None
         df = numpy.zeros_like( xdata )
         xdata = Tools.toArray( xdata )
-        df = self._recursiveDerivative( xdata, param, result, df, useNum=useNum )
+        df = self._recursiveDerivative( xdata, param, result, df,
+                    useNum=useNum )
         return df
 
     def _recursiveDerivative( self, xdata, param, result, df, useNum=False ):
@@ -512,11 +533,15 @@ class Model( FixedModel ):
         np = self.npbase
         par = param[:np]
         nextres = None
+
+#        print( self.shortName(), self._operation )
+
         if np > 0:                      #  the base model has no parameters: skip
+            xd = xdata if self._operation is not self.PIP else result
             if useNum:
-                nextdf = super( Model, self ).numDerivative( xdata, par )
+                nextdf = super( Model, self ).numDerivative( xd, par )
             else:
-                nextdf = super( Model, self ).derivative( xdata, par )
+                nextdf = super( Model, self ).derivative( xd, par )
 
         else :
             nextdf = numpy.zeros_like( xdata, dtype=float )
@@ -535,17 +560,22 @@ class Model( FixedModel ):
             nextres = super( Model, self ).result( xdata, par )
             df = ( df * nextres - nextdf * result ) / ( nextres * nextres )
 
+        elif self._operation == self.PIP :
+            nextres = 'dummy'           ## not needed, but needs something
+            df *= nextdf
+        else :
+            raise ValueError( "Unknown operation: %d" & self.PIP )
 
-        model = self._next
-        if model is None:
+        if self._next is None :
             return df
         if nextres is None:
             nextres = super( Model, self ).result( xdata, par )
-        result = self.operate( result, nextres )
+        result = self.operate( result, par, nextres )
         #  append the dfs of the _next model
 
+        model = self._next
         return model._recursiveDerivative( xdata, param[np:], result, df,
-                    useNum )
+                    useNum=useNum )
 
     #  *****PARTIAL*************************************************************
     def partial( self, xdata, param, useNum=False ):
@@ -565,10 +595,11 @@ class Model( FixedModel ):
         result = None
         partial = None
         xdata = Tools.toArray( xdata )
-        partial = self._recursivePartial( xdata, param, result, partial, useNum=useNum )
+        partial = self._recursivePartial( xdata, param, 0, result,
+                            partial, useNum=useNum )
         return partial
 
-    def _recursivePartial( self, xdata, param, result, partial, useNum=False ):
+    def _recursivePartial( self, xdata, param, at, result, partial, useNum=False ):
         """
         Workhorse for partial.
 
@@ -576,13 +607,15 @@ class Model( FixedModel ):
 
         """
         np = self.npbase
-        par = param[:np]
+        par = param[at:at+np]
         nextres = None
-        if np > 0:                #  the base model has no parameters: skip
+
+        if np > 0 :
+            xd = xdata if self._operation is not self.PIP else result
             if useNum:
-                nextpartial = super( Model, self ).numPartial( xdata, par )
+                nextpartial = super( Model, self ).numPartial( xd, par )
             else:
-                nextpartial = super( Model, self ).partial( xdata, par )
+                nextpartial = super( Model, self ).partial( xd, par )
 
         else :
             inlen = Tools.length( xdata )
@@ -602,6 +635,15 @@ class Model( FixedModel ):
             invres = - result / ( nextres * nextres )
             nextpartial = numpy.multiply( nextpartial.transpose(), invres ).transpose()
 
+        elif self._operation == self.PIP :
+            nextres = 'dummy'       ## not needed, but needs something
+
+            if useNum :
+                dfdx = super( Model, self ).numDerivative( result, par )
+            else :
+                dfdx = super( Model, self ).derivative( result, par )
+            partial = numpy.multiply( partial.transpose(), dfdx ).transpose()
+
         partial = ( nextpartial if partial is None
                     else numpy.append( partial, nextpartial, axis=1 ) )
 
@@ -610,10 +652,12 @@ class Model( FixedModel ):
             return partial
         if nextres is None:
             nextres = super( Model, self ).result( xdata, par )
-        result = self.operate( result, nextres )
+
+        result = self.operate( result, param[at:], nextres )
         #  append the partials of the _next model
-        return model._recursivePartial( xdata, param[np:], result, partial,
-                    useNum )
+        at += np
+        return model._recursivePartial( xdata, param, at, result, partial,
+                    useNum=useNum )
 
     #  *****TOSTRING***********************************************************
     def __str__( self ):
@@ -1066,7 +1110,7 @@ class Model( FixedModel ):
         """ Return null.  """
         return None
 
-    #  *****JYTHON**************************************************************
+    #  ***** PYTHON INTERFACES ****************************************************
     def __getitem__( self, i ):
         """
         Return the i-th parameter.
@@ -1191,6 +1235,31 @@ class Model( FixedModel ):
         """
         return self.copy().divideModel( model )
 
+    def __ior__( self, model ):
+        """
+        Method for making compound models using |= operator.
+
+        Parameters
+        ----------
+        model : Model
+            a model to pipe the previous results through
+
+        """
+        self.pipeModel( model )
+        return self
+
+    def __or__( self, model ):
+        """
+        Method for making compound models using | (pipe) operator.
+
+        Parameters
+        ----------
+        model : Model
+            a model to pipe the previous results through
+
+        """
+        return self.copy().pipeModel( model )
+
     #  *************************************************************************
     def testPartial( self, xdata, params ):
         """
@@ -1224,7 +1293,6 @@ class Model( FixedModel ):
             hasderiv = False
 
         partial = self.partial( xdata, params )
-
         numeric = self.numPartial( xdata, params )
 
         kerr = 0
@@ -1239,21 +1307,59 @@ class Model( FixedModel ):
                 for i in range( sz[1] ) :
                     print( " %8.3f"%(xdata[k,i]), end='' )
             if hasderiv :
-                print( "     result %10.5f  df %10.5f %10.5f"%(res[k], df[k], numdf[k]) )
-                if abs( df[k] - numdf[k] ) > 0.001 :
+                snum = self.strictNumeric( xdata[k], params )
+                print( "     result %10.5f  df %10.5f %10.5f %10.5f" %
+                        ( res[k], df[k], numdf[k], snum ) )
+                if ( abs( df[k] - snum ) > 0.001 or
+                     abs( numdf[k] - snum ) > 0.001 ) :
                     kerr += 1
             else :
                 print( "     result %10.5f"%(res[k]) )
 
+            print( "     par     value      partial   numpartial      numeric" )
             for i in range( self.npchain ) :
-                err = 1 if abs( partial[k,i] - numeric[k,i] ) > 0.001 else 0
+                snum = self.strictNumeric( xdata[k], params, kpar=i )
+                if ( abs( partial[k,i] - snum ) > 0.001 or
+                     abs( numeric[k,i] - snum ) > 0.001 ) :
+                    err = 1
+                else :
+                    err = 0
                 kerr += err
 
                 if err == 1 or random.random() < 5.0 / self.npchain :
-                    print( "    parameter %4d  %8.3f partial = %10.5f  numeric = %10.5f"%
-                            (i, params[i], partial[k,i], numeric[k,i]) )
+                    print( "    %4d  %8.3f   %10.5f   %10.5f   %10.5f"%
+                            (i, params[i], partial[k,i], numeric[k,i], snum) )
 
         return kerr
+
+    def strictNumeric( self, x, param, kpar=None ) :
+        """
+        Strictly numeric calculation of derivative.
+
+        For compound models it is different from numPartial and numDerivative.
+
+        Parameters
+        ----------
+        x : float or array-like
+            xdata
+        param : array-like
+            parameters
+        kpar : None or int
+            None : return derivative to x
+            int  : return derivative to parameter kpar.
+        """
+        dx = self.deltaP[0]
+        if kpar is None :
+            r1 = self.result( x+dx, param )
+            r2 = self.result( x-dx, param )
+            return ( r1 - r2 ) / ( 2 * dx )
+
+        pp = param.copy()
+        pp[kpar] += dx
+        r1 = self.result( x, pp )
+        pp[kpar] -= 2 * dx
+        r2 = self.result( x, pp )
+        return ( r1 - r2 ) / ( 2 * dx )
 
 ##### End Model #########################################################
 

@@ -29,6 +29,7 @@ from .source.ArctanModel import ArctanModel
 from .source.BSplinesModel import BSplinesModel
 from .source.BaseFitter import BaseFitter
 from .source.BaseModel import BaseModel
+from .source.BirthEngine import BirthEngine
 from .source.BracketModel import BracketModel
 from .source.CauchyErrorDistribution import CauchyErrorDistribution
 from .source.CauchyPrior import CauchyPrior
@@ -38,6 +39,8 @@ from .source.ConstantModel import ConstantModel
 from .source.ConvergenceError import ConvergenceError
 from .source.CrossEngine import CrossEngine
 from .source.CurveFitter import CurveFitter
+from .source.DeathEngine import DeathEngine
+from .source.Dynamic import Dynamic
 from .source.Engine import Engine
 from .source.ErrorDistribution import ErrorDistribution
 from .source.EtalonDriftModel import EtalonDriftModel
@@ -56,6 +59,7 @@ from .source.GaussPrior import GaussPrior
 from .source.GenGaussErrorDistribution import GenGaussErrorDistribution
 from .source.GibbsEngine import GibbsEngine
 from .source.HarmonicModel import HarmonicModel
+from .source.HarmonicDynamicModel import HarmonicDynamicModel
 from .source.HyperParameter import HyperParameter
 from .source.ImageAssistant import ImageAssistant
 from .source.IterationPlotter import IterationPlotter
@@ -88,6 +92,7 @@ from .source.Prior import Prior
 from .source.ProductModel import ProductModel
 from .source.QRFitter import QRFitter
 from .source.RandomEngine import RandomEngine
+from .source.RepeatingModel import RepeatingModel
 from .source.RobustShell import RobustShell
 from .source.Sample import Sample
 from .source.SampleList import SampleList

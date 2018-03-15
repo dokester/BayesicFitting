@@ -26,11 +26,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
-#  *
-#  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class ProductModel( NonLinearModel ):
     """
@@ -48,9 +44,11 @@ class ProductModel( NonLinearModel ):
     >>> nyk = 11
     >>> xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160
     >>> yknots = numpy.arange(  nyk , dtype=float ) * 10      # make knots from 0 to 100
-    >>> csm = ProductModel( xknots, yknots, 2 )
+    >>> smx = SplinesModel( xknots )
+    >>> smy = SplinesModel( yknots )
+    >>> csm = ProductModel( [smx,smy] )
     >>> print csm.getNumberOfParameters( )      # ( nxk + order - 1 ) + ( nyk + order - 1 )
-    30
+    32
     # ... fitter etc. see Fitter
 
     Category     mathematics/Fitting

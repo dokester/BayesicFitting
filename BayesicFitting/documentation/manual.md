@@ -69,7 +69,10 @@ Models of different dimensionality cannot be combined in any way.
 #### Compound Models.
 
 **Model**s can be combined by various operations (+-*/) into a new
-(compound) model. The functional results, derivatives etc. of the
+(compound) model. A special operation that can be applied to two models 
+is the pipe, indicated by |. It acts just like the (unix) pipe: the
+result of the left-hand model is used as input of the right-hand model.
+The functional results, derivatives etc. of the
 compound model are calculated according to the operations at hand.
 Compound models are **Model**s and can be combined with other (compound)
 models into a new model. This way quite complicated models can be formed
@@ -78,18 +81,35 @@ See the [gaussfit example](../examples/gaussfit.ipynb).
 
 #### Fixed Models.
 
-Upon construction the value(s) of one or more parameters can be fixed. 
-Either with a constant value, turning the model into one with less
-parameters, or with another **Model**. Now the parameter is changing as
-the **Model**. Results and derivatives are constructed from the
-interacting models. Again such a fixed model is a **Model** and can be
-part of a compound model. 
+Upon construction  of a model the value(s) of one or more parameters can
+be fixed.  Either with a constant value, turning the model into one with
+less parameters, or with another **Model**. In the latter case the
+parameter is changing as the **Model**. Results and derivatives are
+constructed from the interacting models. Again such a fixed model is a
+**Model** and can be part of a compound model.  
 See the [mrs-fringes example](../examples/mrs-fringes.ipynb).
 
 Compound and fixed models are non-linear
 unless all its constituents are linear and its operations are additive.
 
 There are several dozens of simple Models inside this toolbox.
+
+#### Brackets
+
+The models in a chain are process, strictly from left to right. There is
+no adherence to operation preferences. However, when a compound model is
+appended to a chain, the appended model is considered as a single unit.
+It get a set of brackets around it. If m1, m2 and m3 are all models,
+then 
+    m = m1 * m2
+    m += m3
+is different from
+    m = m1
+    m *= m2 + m3
+The first is processed as ( m1 * m2 ) + m3 while the second is processed
+as m1 * ( m2 + m3 ). The brackets are introduced implicitly. Explicit
+placement of brackets can be done with **BracketModel**.
+
 
 <a name="fitters"></a>
 ### Fitters 
@@ -100,6 +120,13 @@ parameters. The values for the parameters where the minimum cq. maximum
 in the landscape is found are the least-squares solution resp. the
 maximum-likelihood solution. If the likelihood is Gaussian the two are
 the same. 
+
+#### data.
+
+Data is a one dimensional vector (array) of measured points that are to
+be compared with the model. The misfit is minimized when using
+&chi;<sup>2</sup>, or the likelihood of the model parameters, given the
+data is maximized.
 
 #### Weights.
 
@@ -113,8 +140,8 @@ Weights could be derived from the standard deviations in a previous
 calculation. In that case the weights should be set to the inverse
 squares of the stdevs. However weights do not need to be inverse
 variances; they could be derived in any other way. One specially usefull
-feature of the use of weights, is that some might be set to zero,
-causing those points not to contribute at all to the fit.<br>
+feature of the use of weights, is that some weights might be set to zero,
+causing those points not to contribute at all to the fit.
 
 #### Linear Fitters.
 
@@ -122,7 +149,7 @@ As with **Model**s there are two kinds of **Fitter**s, linear or
 non-linear ones for linear and non-linear **Model**s resp. 
 
 The landscape for linear models is monomodal; it has
-on (global) minimum. The linear fitter has generally no problem finding
+one (global) minimum. The linear fitter has generally no problem finding
 this minimum in one direct matrix conversion. It is fast and efficient.
 This package has 2 linear fitters: **Fitter** and **QRFitter**.
 
@@ -135,8 +162,8 @@ search for a gradient in the landscape to descend into the valley.
 Wherever a minimum is found, most fitters get stuck. There are several
 strategies to search the landscape but all of them are iterative. There
 is no single best strategy. It depends on the problem and on knowledge
-of the starting values for the parameters. This package has a dozen non
-linear fitters.
+of the starting values for the parameters. This package has a dozen 
+non-linear fitters.
 
 #### Evidence.
 
@@ -168,16 +195,17 @@ TBC. TBD. TBW. It is one of the areas that need more work.
 #### Robust fitting.
 
 A special fitter is **RobustShell**. It is a shell around any other
-fitter that iteratively de-weights outlying points. It makes the fit
-more robust in the presence of a minority of outliers i.e. points that
-should not partake in the fit. The de-weighting process is governed by
-one of the [kernels](../source/kernels).
+fitter. **RobustShell** iteratively de-weights outlying points. It makes
+the fit more robust in the presence of a minority of outliers i.e.
+points that should not partake in the fit. The de-weighting process is
+governed by one of the [kernels](../source/kernels).
 
 
 <a name="ns"></a>
 ### NestedSampler 
 
-**NestedSampler** samples the Posterior while integrating it to calculate
+**NestedSampler** is a novel technique to do Bayesian calculations. 
+It samples the Posterior while integrating it to calculate
 the evidence. From the samples, the optimal values for the model
 parameters, its standard deviations etc can be calculated.
 
@@ -213,7 +241,7 @@ model is:
     y = [1.2, 1.3, 1.5, 1.4, 1.4]
     pars = Fitter( x, PolynomialModel( 1 ) ).fit( y )
 
-`pars` are the parameters of the model. However this is all we can
+The `pars` are the parameters of the model. However this is all we can
 get from this little script. As we dont have a handle on the fitter, nor
 on the model, we cannot request anything else e.g. the standard
 deviations, the evidence, or any other interesting property of the fit.
@@ -241,7 +269,7 @@ limits, on the parameters prior and on the noise scale prior.
     logE = fitter.getEvidence( limits=[-10,10], noiseLimits=[0.01,1.0] )
 
 The `logE` is calculated using a Gaussian approximation for the
-posterior, also known as Laplace's rule.
+posterior, also known as Laplace's method.
 
 See [below](#ref-fitter) for a list of available fitters with its
 purpose line.
@@ -249,7 +277,7 @@ purpose line.
 <a name="usage-ns"></a>
 ### Usage of NestedSampler
 
-**NestedSampler** needs more information to run. It needs priors for all 
+needs more information to run. It needs priors for all 
 its parameters and it needs a likelihood function. We start off defining
 some data.
 
@@ -276,21 +304,21 @@ to treat the scale as a hyperparameter, which needs a prior,
 
 We execute the program as
 
-    yfit = ns.sample()
+    logE = ns.sample()
 
-where `yfit` contains the optimal model fit. We can now ask optimal
-parameters, standard deviations, scale and most importantly the evidence.
+where `logE` is the 10log of the evidence. We can now ask optimal
+parameters, standard deviations, scale and the optimal fit of the model. 
 
     param = ns.parameters
     stdev = ns.standardDeviations
     scale = ns.scale
-    evidence = ns.evidence.
+    yfit  = ns.modelfit
 
 The **Sample**s generated are collected in a **SampleList**, from which
 numerous items can be extracted.
 
     slist = ns.samples
-    param = slist.parameters
+    param = slist.parameters		## same as params above
     mlpar = slist.maxLikelihoodParameters
 
 See below for lists of available [**Prior**s](#list-priors),
@@ -307,7 +335,7 @@ All simple models have a method `model.result( x, p )`, which calculated
 the model function at points `x`, using parameters `p`. They also have
 partial derivatives to p (df/dp) called `model.partial( x, p )` and
 derivatives to x (df/dx), called `model.derivative( x, p )`. The model
-itself  has a name, as do all parameters. One or more of its parameters
+itself has a name, as do all parameters. One or more of its parameters
 can be permanently (ie. for the lifetime of the object) fixed at a
 chosen value or replaced by another model. The latter option can produce 
 quite sophisticated simple models.
@@ -336,7 +364,9 @@ be done at the simple model level).
 The model `gm` is a compound model for a (gaussian) spectral line on a
 constant background. The results of the **PolynomialModel** and the
 **GaussModel** are added together. Other options are subtraction,
-multiplication and division (`-*/`).
+multiplication, division and pipe (`-*/|`). In a pipe the result of the
+left-hand model is used as input for the right-hand model.
+
 A compound model can be fitted to data just like before. Or
 another model can be added to the chain.
 
@@ -378,6 +408,8 @@ kernels and miscellaneous.
     Anchestor of all linear models.
 + **NonLinearModel**<br>
     Anchestor of all non-linear models.
++ **Dynamic**<br>
+    Contains a number of methods common to Dynamic models.
 
 #### Compound models.
 
@@ -416,6 +448,8 @@ kernels and miscellaneous.
     Sine of fixed frequency with polynomials as amplitudes.
 + **PolynomialModel**<br>
     General polynomial model of arbitrary degree.
++ **PolynomialDynamicModel**<br>
+    General polynomial model of variable degree.
 + **PowerLawModel**<br>
     General powerlaw model of arbitrary degree.
 + **PowerModel**<br>

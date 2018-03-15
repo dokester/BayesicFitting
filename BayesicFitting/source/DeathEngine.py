@@ -94,7 +94,6 @@ class DeathEngine( Engine ):
         int : the number of successfull moves
 
         """
-#        print( "Deng  : ", end="" )
         waltry = walker.copy()
         model = waltry.model
         ptry = waltry.allpars
@@ -104,12 +103,12 @@ class DeathEngine( Engine ):
             pat += model.npbase
             model = model._next
 
+        nc = model.getNumberOfComponents()
         np = model.npbase
 
-        if not ( np > model.growPrior.unit2Domain( self.rng.rand() ) and
+        if not ( nc > model.growPrior.unit2Domain( self.rng.rand() ) and
                 model.shrink( pat ) ) :
             self.reportFailed()
-#            print( "DE  failed" )
             return 0
 
         dnp = model.deltaNpar        # parameter decrease
@@ -128,6 +127,7 @@ class DeathEngine( Engine ):
 
         self.reportReject( )
         walker.check( nhyp=self.errdis.nphypar )
+
         return 0
 
 

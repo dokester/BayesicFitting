@@ -1,9 +1,9 @@
 import numpy as numpy
 from astropy import units
 import math
-from . import Tools
+from .import Tools
 
-from .PolynomialModel import PolynomialModel
+from .HarmonicModel import HarmonicModel
 from .Dynamic import Dynamic
 from .Prior import Prior
 from .ExponentialPrior import ExponentialPrior
@@ -37,82 +37,77 @@ __status__ = "Development"
 #  *    2003 - 2014 Do Kester, SRON (Java code)
 #  *    2018        Do Kester
 
-class PolynomialDynamicModel( PolynomialModel, Dynamic ):
+
+class HarmonicDynamicModel( HarmonicModel, Dynamic ):
     """
-    General polynomial model of an adaptable degree.
+    Harmonic oscillator Model of adaptable order.
 
-    f( x:p ) = &sum; p_k * x^k
+    f( x:p ) = &sum;_j ( p_k cos( 2 &pi; j x ) + p_k+1 sin( 2 &pi; j x ) )
 
-    where the sum is over k running from 0 to degree ( inclusive ).
+    j = 1, N; k = 0, 2N, 2
 
-    It is a linear model.
+    The parameters are initialized at 1.0. It is a linear model.
 
     Author       Do Kester
 
     Examples
     --------
-    >>> poly = PolynomialDynamicModel( )         # polynomial with unknown degree
-    >>> ran = MoreRandom( )
-    >>> poly.grow( )                         # starts at degree = 0, npar = 1
-    >>> poly.grow( )                         # each grow( ) adds 1
-    >>> poly.grow( )
-    >>> poly.grow( )
-    >>> print poly.npchain
-    5
-    >>> poly.shrink( )                        # shrink( ) deletes 1 degree
-    >>> print poly.npbase
-    4
+    >>> harm = HarmonicDynamicModel( 3 )     # period = 1
+    >>> print harm.getNumberOfParameters( )        # 6
+    >>> harm = HarmonicModel( 4, 2.7 )        # period = 2.7
 
     Category     mathematics/Fitting
 
     """
+    deltaNpar = 2
 
-    deltaNpar = 1
-
-    def __init__( self, degree, minDegree=0, maxDegree=None, fixed=None,
+    def __init__( self, order, minOrder=1, maxOrder=None, period=1.0, fixed=None,
                   growPrior=None, copy=None, **kwargs ):
         """
-        Polynomial of a adaptable degree.
+        Harmonic of a adaptable order.
 
-        The model starts as a PolynomialModel of degree = 0.
-        Growth of the model is governed by a exponential prior ( scale=1 ).
+        The model starts as a HarmonicModel of order = 1
+        Growth of the model is governed by a exponential prior ( scale=1 )
 
         Parameters
         ----------
-        degree : int
-            degree to start with; it should be minDegree <= degree <= maxDegree
-        minDegree : int
-            minimum degree of polynomial (def=0)
-        maxDegree : None or int
+        order : int
+            order to start with. It should be minOrder <= order <= maxOrder
+        minOrder : int
+            minimum degree of polynomial (def=1)
+        maxOrder : None or int
             maximum degree of polynomial (def=None)
+        period : float
+            period of the oscilation
         growPrior : None or Prior
             governing the birth and death.
-            ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior
-        copy : PolynomialDynamicModel
+            ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+        copy : HarmonicDynamicModel
             model to copy
 
         Raises
         ------
         AttributeError when fixed parameters are requested
-        ValueError when degree is outside [min..max] range
+        ValueError when order is outside [min..max] range
+
         """
         if fixed is not None :
             raise AttributeError( "DynamicModel cannot have fixed parameters" )
-        if degree < minDegree or ( maxDegree is not None and degree > maxDegree ):
-            raise ValueError( "degree outside range of [min..max] range" )
+        if order < minOrder or ( maxOrder is not None and order > maxOrder ) :
+            raise ValueError( "order outside range of [min..max] range" )
 
-
-        super( PolynomialDynamicModel, self ).__init__( degree, copy=copy, **kwargs )
+        super( HarmonicDynamicModel, self ).__init__( order, period=period,
+            copy=copy, **kwargs )
 
         if copy is None :
-            self.minComp = minDegree + 1
-            self.maxComp = maxDegree if maxDegree is None else maxDegree + 1
+            self.minComp = minOrder
+            self.maxComp = maxOrder
             if growPrior is None :
-                if maxDegree is None :
+                if maxOrder is None :
                     self.growPrior = ExponentialPrior( scale=2 )
                 else :
-                    lim = [minDegree+1, maxDegree+2]    # limits on components
-                    self.growPrior =  UniformPrior( limits=lim )
+                    lim = [minOrder, maxOrder+1]        # limits on components
+                    self.growPrior = UniformPrior( limits=lim )
             else :
                 self.growPrior = growPrior
         else :
@@ -122,24 +117,23 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
 
     def copy( self ):
         """ Copy method.  """
-        return PolynomialDynamicModel( self.degree, copy=self )
+        return HarmonicDynamicModel( self.order, period=self.period, copy=self )
 
     def changeNComp( self, dn ) :
-        self.degree += dn
+        self.order += dn
 
     def __setattr__( self, name, value ) :
+        dind = {"minComp": int, "maxComp": int, "growPrior": Prior}
         lnon = {"maxComp": int}
-        dind = {"degree": int, "minComp": int, "maxComp": int,
-                "growPrior": Prior}
         if ( Tools.setNoneAttributes( self, name, value, lnon ) or
              Tools.setSingleAttributes( self, name, value, dind ) ) :
             pass
         else :
-            super( ).__setattr__( name, value )
+            super( HarmonicDynamicModel, self ).__setattr__( name, value )
 
 
     def baseName( self ):
         """ Return a string representation of the model.  """
-        return "Dynamic" + super( PolynomialDynamicModel, self ).baseName( )
+        return "Dynamic" + super( HarmonicDynamicModel, self ).baseName( )
 
 

@@ -198,7 +198,7 @@ class TestNestedSampler( unittest.TestCase ):
 
 
     def dofit( self, ns, pp ) :
-        yfit = ns.sample( )
+        logE = ns.sample( )
 
         par = ns.parameters
         std = ns.standardDeviations

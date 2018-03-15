@@ -4,9 +4,14 @@ import unittest
 import numpy as numpy
 from astropy import units
 import math
+import matplotlib.pyplot as plt
+
+#from BayesicFitting import PolynomialModel, SineModel
+#from Model import Model
+
+from StdTests import stdModeltest
 
 from BayesicFitting import *
-
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -140,6 +145,38 @@ class TestCompoundModel( unittest.TestCase ):
         self.assertTrue( m.npbase == 3 )
         self.assertTrue( p.npbase == 2 )
         self.assertTrue( s.npbase == 4 )
+
+
+    def plotPipe1( self ) :
+        self.testPipe1( plot=True )
+
+    def testPipe1( self, plot=False ) :
+        model = PolynomialModel( 2 )
+        model |= SineModel()
+        print( model )
+        p = numpy.asarray( [0.0, 0.4, 0.2, 1.0, 0.0, 1.0] )
+        x = numpy.linspace( 0, 10, 101, dtype=float )
+
+        y = model.result( x, p )
+
+        stdModeltest( model, p, x=x, plot=plot )
+
+
+    def plotPipe2( self ) :
+        self.testPipe2( plot=True )
+
+    def testPipe2( self, plot=False ) :
+        model = PolynomialModel( 2 )
+        model |= SineModel()
+        model *= ExpModel()
+        print( model )
+        p = numpy.asarray( [0.0, 0.4, 0.2, 1.0, 0.0, 1.0, 1.3, -0.2] )
+        x = numpy.linspace( 0, 10, 101, dtype=float )
+
+        y = model.result( x, p )
+
+        stdModeltest( model, p, x=x, plot=plot )
+
 
     def testThreeModelLimits( self ):
         print( "  Test three models: limits and domain <> unit" )

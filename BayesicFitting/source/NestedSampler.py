@@ -44,7 +44,7 @@ from .DeathEngine import DeathEngine
 
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -69,7 +69,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class NestedSampler( object ):
     """
@@ -448,17 +448,11 @@ class NestedSampler( object ):
         if self.verbose >= 1 :
             self.report()
 
-#        for eng in self.engines :
-#            print( eng )
-#            print( " s  ", eng.succ )
-#            print( " f  ", eng.fail )
-
-        yfit = self.samples.average( self.xdata )
         if plot :
-            Plotter.plotFit( self.xdata, self.ydata, yfit=yfit,
+            Plotter.plotFit( self.xdata, self.ydata, yfit=self.yfit,
                              residuals=True )
 
-        return yfit
+        return self.evidence
 
     def getMaxIter( self ) :
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.discard )
@@ -587,6 +581,8 @@ class NestedSampler( object ):
             return self.samples.hypars[0]
         elif name == "stdevScale" :
             return self.samples.stdevHypars[0]
+        elif name == "modelfit" or name == "yfit" :
+            return self.samples.average( self.xdata )
 
     #  *********DISTRIBUTIONS***************************************************
     def setErrorDistribution( self, name, scale=1.0, power=2.0 ):

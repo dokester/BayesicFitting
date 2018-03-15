@@ -6,8 +6,6 @@ from .Formatter import formatter as fmt
 
 from .Dynamic import Dynamic
 from .Engine import Engine
-from .GibbsEngine import GibbsEngine
-from .ExponentialPrior import ExponentialPrior
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -49,7 +47,6 @@ class BirthEngine( Engine ):
     Author       Do Kester.
 
     """
-#    _birthrate = 0.1
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, walkers, errdis, copy=None, seed=23455 ) :
@@ -70,7 +67,6 @@ class BirthEngine( Engine ):
         """
         super( BirthEngine, self ).__init__( walkers, errdis, copy=copy,
                     seed=seed )
-#        self.gibbs = GibbsEngine( walkers, errdis, seed=seed )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -98,30 +94,24 @@ class BirthEngine( Engine ):
         int : the number of successfull moves
 
         """
-#        print( "Beng  : ", end="" )
         waltry = walker.copy()
-#        print( "allpars ", fmt( waltry.allpars, max=None ) )
-#        Tools.printclass( waltry.model._next )
 
         model = waltry.model
         ptry = waltry.allpars
-#        np = model.npchain
+
         pat = 0
         while model is not None and not isinstance( model, Dynamic ) :
             pat += model.npbase
             model = model._next
 
+        nc = model.getNumberOfComponents()
         np = model.npbase
-#        print( "BE  ", pat, model.shortName(), model.growPrior )
-#        print( "BE  ", np, model.growPrior.unit2Domain( self.rng.rand() ) )
 
-        if not ( np < model.growPrior.unit2Domain( self.rng.rand() ) and
+        if not ( nc < model.growPrior.unit2Domain( self.rng.rand() ) and
                  model.grow( pat ) ):
             self.reportFailed()
-#            print( "BE  failed" )
             walker.check( nhyp=self.errdis.nphypar )
             return 0
-
 
         dnp = model.deltaNpar        # parameter increase
         ptry = model.alterParameters( ptry, np, dnp, pat )
@@ -137,7 +127,6 @@ class BirthEngine( Engine ):
             if Ltry >= lowLhood:
                 self.reportSuccess()
                 self.setSample( walker, model, ptry, Ltry, fitindex=find )
-#                print( "BE    ", walker.allpars, walker.fitIndex )
                 walker.check( nhyp=self.errdis.nphypar )
                 return dnp
             else :
@@ -146,6 +135,7 @@ class BirthEngine( Engine ):
 
         self.reportReject( )
         walker.check( nhyp=self.errdis.nphypar )
+
         return 0
 
 

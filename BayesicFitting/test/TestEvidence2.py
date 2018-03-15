@@ -69,7 +69,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
         stdv = ns.stdevs
@@ -134,7 +134,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
         logz2 = ns.logZ
@@ -191,7 +191,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
         logz2 = ns.logZ
@@ -255,7 +255,7 @@ class TestEvidence2( unittest.TestCase  ) :
         dis = GaussErrorDistribution( x, y, scale=0.5 )
         ns = NestedSampler( x, model, y, distribution=dis, verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
         par2 = ns.parameters
         logz2 = ns.logZ
         dlz2 = ns.logZprecision
@@ -277,6 +277,7 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.plot( parevo[:,0], parevo[:,1], 'k,' )
 
             plt.figure( "model" )			# grab again
+            yfit = ns.modelfit
             err = samples.monteCarloError( x )
             plt.plot( x, yfit + err, 'b-' )
             plt.plot( x, yfit - err, 'b-' )
@@ -328,7 +329,7 @@ class TestEvidence2( unittest.TestCase  ) :
         dis.setLimits( nslim )
         ns = NestedSampler( x, model, y, distribution=dis, verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
         par2 = ns.parameters
         scl2 = ns.scale
         logz2 = ns.logZ
@@ -351,6 +352,7 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.plot( parevo[:,0], scevo, 'k,' )
 
             plt.figure( "model" )			# grab again
+            yfit = ns.yfit
             err = samples.monteCarloError( x )
             plt.plot( x, yfit + err, 'b-' )
             plt.plot( x, yfit - err, 'b-' )
@@ -380,7 +382,7 @@ class TestEvidence2( unittest.TestCase  ) :
             dis = GaussErrorDistribution( x, y, scale=0.5 )
             ns = NestedSampler( x, model, y, distribution=dis, verbose=0, seed=k )
 
-            yfit = ns.sample()
+            logE = ns.sample()
             par2 = ns.parameters
             logz2 = ns.logZ
             dlz2 = ns.logZprecision
@@ -434,11 +436,12 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, distribution='laplace', verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
-        logz2 = ns.logZ
+        logE = ns.logZ
         dlz2 = ns.logZprecision
+        logz2 = ns.logZ
         print( "pars  ", fmt( par2 ) )
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
@@ -500,12 +503,13 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, distribution='laplace', verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
         stdv = ns.stdevs
-        logz2 = ns.logZ
+        logE = ns.logZ
         dlz2 = ns.logZprecision
+        logz2 = ns.logZ
         print( "pars  ", fmt( par2 ) )
         print( "stdv  ", fmt( stdv ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
@@ -573,11 +577,12 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, distribution='laplace', verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
-        logz2 = ns.logZ
+        logE = ns.logZ
         dlz2 = ns.logZprecision
+        logz2 = ns.logZ
         print( "pars  ", fmt( par2 ) )
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
@@ -635,11 +640,12 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
         ns = NestedSampler( x, model, y, distribution='poisson', verbose=0 )
 
-        yfit = ns.sample()
+        logE = ns.sample()
 
         par2 = ns.parameters
-        logz2 = ns.logZ
+        logE = ns.logZ
         dlz2 = ns.logZprecision
+        logz2 = ns.logZ
         samples = ns.samples
 
         print( "pars  ", fmt( par2 ), fmt( samples.maxLikelihoodParameters ) )

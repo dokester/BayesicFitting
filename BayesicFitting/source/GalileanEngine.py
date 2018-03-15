@@ -149,8 +149,10 @@ class GalileanEngine( Engine ):
                 self.plotter.move( allpars, ptry, 0 )
             elif inside == 1 :                          # first time outside -> mirror
                 f = ( Lhood - lowLhood ) / ( Lhood - Ltry )     # lin interpolation to edge
+#                print( "GE1  ", f, Lhood, lowLhood, Ltry )
                 pedge = ptry.copy()
                 pedge[fitIndex] = um.stepPars( f )                # ptry on edge
+#                print( "GE2  ", pedge, fitIndex )
                 dLdp = self.errdis.partialLogL( model, pedge, fitIndex )
                 self.plotter.move( allpars, pedge, 1 )
 
@@ -207,9 +209,9 @@ class UnitMovements( object ):
         self.engine = engine
         self.setParameters( model, allpars )
 
-#        if fitIndex[-1] >= len( self.engine.unitRange ) :
+        if len( fitIndex ) > len( self.engine.unitRange ) :
 #            print( "GAL  ", self.engine.unitRange, fitIndex, end="" )
-#            self.engine.unitRange = numpy.append( self.engine.unitRange, [1.0] )
+            self.engine.unitRange = numpy.append( self.engine.unitRange, [1.0]*model.deltaNpar )
 #            print( self.engine.unitRange )
 
         self.upran = self.engine.unitRange[fitIndex]
@@ -221,6 +223,7 @@ class UnitMovements( object ):
     def mirrorOnLowL( self, dLdp ):
         inprod = numpy.inner( dLdp, self.uvel )
         sumsq  = numpy.inner( dLdp, dLdp )
+#        print( "MOL  ", dLdp, self.uvel, sumsq )
         self.uvel -= 2 * dLdp * inprod / sumsq
 
     def setVelocity( self, size ):

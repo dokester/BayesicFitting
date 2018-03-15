@@ -73,7 +73,7 @@ class HarmonicModel( LinearModel ):
 
         Parameters
         ----------
-        order : int
+        order : int (>0)
             the number of overtones
         period : float
             length of the period of the fundamental. default 1.0

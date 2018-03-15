@@ -73,7 +73,7 @@ def stdModeltest( model, par, x=None, plot=None, warn=[] ):
             print( model.shortName() + ": Further no-partial warnings ignored." )
             warnings.simplefilter( "ignore" )
 
-        numpy.set_printoptions( precision=3, suppress=True )
+#        numpy.set_printoptions( precision=3, suppress=True )
         print( "result:\n", model.result( x, par ) )
 
         print( "partial:\n", model.partial( x, par ) )
@@ -190,31 +190,38 @@ def std2dModeltest( model, par, x=None, plot=None, warn=[] ):
             plotModel( model, par, xx=x )
 
 def plotModel( model, par, xx=None ) :
-        print( xx )
+#        print( xx )
+        nx = 11
         if xx is None :
             xx = numpy.linspace( -1, +1, 1001 )
-            x2 = numpy.linspace( -1, +1, 11 )
-            nx = 11
+            x2 = numpy.linspace( -1, +1, nx )
             ff = 1
         else :
-            x2 = xx
-            nx = xx.size
             mnx = numpy.min( xx )
             mxx = numpy.max( xx )
             ff = 0.5 * ( mxx - mnx )
-            xx = numpy.linspace( mnx, mxx, 100 * nx, dtype=float )
-        print( xx )
-        plt.plot( xx, model.result( xx, par ), '-', linewidth=2 )
+            x2 = numpy.linspace( mnx, mxx, nx, dtype=float )
+            if len( xx ) < 1001 :
+                xx= numpy.linspace( mnx, mxx, 1001, dtype=float ) 
+
+        yy = model.result( xx, par )
+        plt.plot( xx, yy, '-', linewidth=2 )
         try :
             dy = model.derivative( x2, par )
-            yy = model.result( x2, par )
+            ny = model.numDerivative( x2, par )
+            kk = numpy.asarray( [range( 50, 1000, 100 )] )
+
+            y2 = model.result( x2, par )
+            plt.plot( x2, y2, 'g+' )
             for k in range( nx ) :
+		
                 x3 = numpy.asarray( [-0.05, +0.05] ) * ff
-                y3 = x3 * dy[k] + yy[k]
+                y3 = x3 * dy[k] + y2[k]
                 plt.plot( x2[k] + x3, y3, 'r-' )
+
         except :
             print( "No derivative" )
-            pass
+            raise
         plt.show()
 
 def stdFittertest( myfitter, npt, xmin=-10.0, xmax=10.0, noise=0.1, plot=False,

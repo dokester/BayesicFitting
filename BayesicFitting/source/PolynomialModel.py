@@ -62,10 +62,8 @@ class PolynomialModel( LinearModel ):
             model to copy
 
         """
-        names = ["polycoeff_%d"%k for k in range( degree+1 )]
-
         super(PolynomialModel,self ).__init__( degree + 1, copy=copy,
-                        names=names, **kwargs )
+                        **kwargs )
 
         object.__setattr__( self, "degree", degree )
 
@@ -136,6 +134,16 @@ class PolynomialModel( LinearModel ):
             bn += " + p_%d * x^%d"%(k,k)
         return bn
 
+    def baseParameterName( self, k ):
+        """
+        Return the name of the indicated parameter.
+        Parameters
+        ----------
+        k : int
+            parameter number.
+
+        """
+        return "polycoeff_%d" % k
 
     def baseParameterUnit( self, k ):
         """

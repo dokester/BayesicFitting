@@ -5,7 +5,12 @@ import math as math
 import sys
 import trace
 
-#from Model import Model
+__author__ = "Do Kester"
+__year__ = 2018
+__license__ = "GPL3"
+__version__ = "0.9"
+__maintainer__ = "Do"
+__status__ = "Development"
 
 #  * This file is part of the BayesicFitting package.
 #  *

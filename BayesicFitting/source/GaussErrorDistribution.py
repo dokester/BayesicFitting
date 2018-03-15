@@ -187,7 +187,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for  k in fitIndex:
-            if k < np :
+            if k >= 0 :
                 dL[i] = numpy.sum( resw * dM[:,k] ) / s2
             else :
                 dL[i] = ( numpy.sum( res * resw ) / s2 - self.sumweight ) / scale
