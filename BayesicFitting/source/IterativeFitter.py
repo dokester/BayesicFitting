@@ -196,41 +196,6 @@ class IterativeFitter( BaseFitter ):
         ConvergenceError if it stops when the tolerance has not yet been reached.
 
         """
-        self.fitprolog( ydata, weights=weights, keep=keep )
-
-        try:
-            params = self.nonlinfit( ydata, weights=weights )
-            self.model.parameters = params
-        except ConvergenceError :
-            raise                   # reraise the ConvergenceError
-
-        if len( params ) < self.tooLarge :
-            try:
-                self.getHessian( weights )
-            except MemoryError:
-                self.large = len( params )
-                print( "Out of Memory when making Hessian. Skipped." )
-
-        return params
-
-    def nonlinfit( self, ydata, weights=None, keep=None ):
-        """
-        Return      parameters for the model fitted to the data array.
-
-        Parameters
-        ----------
-        ydata : array_like
-            the data vector to be fitted
-        weights : array_like
-            weights pertaining to the data
-        keep : dict of {int:float}
-            dictionary of indices (int) to be kept at a fixed value (float)
-
-        Raises
-        ------
-            ConvergenceError if it stops when the tolerance has not yet been reached.
-
-        """
         raise ConvergenceError( "IterativeFitter is a base class, not suitable itself to perform fits." )
 
     def report( self, verbose, param, chi, more=None, force=False ) :

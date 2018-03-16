@@ -130,7 +130,7 @@ data is maximized.
 
 #### Weights.
 
-Up on fitting weights can be provided as a vector of the same length as
+Up on fitting, weights can be provided as a vector of the same length as
 the data vector. 
 The behaviour of the fitter is such
 that when a point has a weight of n, this is equivalent to a case where that
@@ -148,7 +148,7 @@ causing those points not to contribute at all to the fit.
 As with **Model**s there are two kinds of **Fitter**s, linear or
 non-linear ones for linear and non-linear **Model**s resp. 
 
-The landscape for linear models is monomodal; it has
+The landscape for linear models is monomodal; it has only
 one (global) minimum. The linear fitter has generally no problem finding
 this minimum in one direct matrix conversion. It is fast and efficient.
 This package has 2 linear fitters: **Fitter** and **QRFitter**.
@@ -183,7 +183,7 @@ See [example](../examples/harmonicfit.ipynb).
 #### Keep fixed.
 
 The **Fitter**s have the option to keep one or more parameters fixed
-during the fitting proces. Contrary to **FixedModel**s the paramaters
+during the fitting proces. Contrary to **FixedModel**s the parameters
 are not fixed permanently. In a next run of the fitter they can be taken
 along in the fit.
 See [example](../examples/fix-parameters.ipynb). 
@@ -252,7 +252,8 @@ It would be better to write, in stead of the last line:
     fitter = Fitter( x, model )	# construct a fitter with this model
     pars = fitter.fit( y )		# fit the data y to the model
 
-This yields the same set of parameters, but now we can also ask:
+This yields the same set of parameters; these parameters are inserted 
+into the model. Now we can also ask:
 
     yfit = model( x )		# the model values at x
     stdev = fitter.stdevs		# standard deviations of the parameters
@@ -438,6 +439,8 @@ kernels and miscellaneous.
     Gaussian Model.
 + **HarmonicModel**<br>
     Harmonic oscillator Model.
++ **HarmonicDynamicModel**<br>
+    Harmonic oscillator Model of varaible order.
 + **KernelModel**<br>
     Kernel Model, a Model build around an **Kernel**.
 + **LorentzModel**<br>
@@ -454,6 +457,8 @@ kernels and miscellaneous.
     General powerlaw model of arbitrary degree.
 + **PowerModel**<br>
     General power model of arbitrary degree.
++ **RepeatingModel**<br>
+    Variable repetition the same Model
 + **SincModel**<br>
     Sinc Model.
 + **SineAmpModel**<br>

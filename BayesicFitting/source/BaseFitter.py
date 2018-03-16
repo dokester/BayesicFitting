@@ -99,6 +99,9 @@ class BaseFitter( object ):
 
     Attributes (available after a call to fit())
     ----------
+    yfit : array_like
+        The model result at the optimal value for the parameters.
+        If map is true, a map is returned.
     chisq : float (read only)
         chisquared of the fit
     parameters : ndarray
@@ -230,15 +233,20 @@ class BaseFitter( object ):
         """
         self.checkNan( ydata, weights=weights )
 
+        if self.map :
+            ydata = self.imageAssistant.getydata( ydata )
+            if weights is not None :
+                weights = self.imageAssistant.getydata( weights )
+
         if keep is not None :
-            return self.keepFixed( keep )
+            return ( self.keepFixed( keep ), ydata, weights )
 
         if self.fitIndex is None :
             self.npfit = self.model.npchain
-            return numpy.arange( self.model.npchain, dtype=int )
+            return ( numpy.arange( self.model.npchain, dtype=int ), ydata, weights )
 
         self.npfit = len( self.fitIndex )
-        return self.fitIndex
+        return ( self.fitIndex, ydata, weights )
 
     def fitpostscript( self, ydata, plot=False ) :
         """
@@ -313,7 +321,7 @@ class BaseFitter( object ):
         ----------
         ydata : array_like
             the data vector to be fitted.
-        weights : array_like
+        weights : None or array_like
             weights to be used
         keep : dict of {int:float}
             dictionary of indices (int) to be kept at a fixed value (float)
@@ -322,9 +330,8 @@ class BaseFitter( object ):
 
         """
         self.model.parameters = self.fit( ydata, weights=weights, keep=keep )
+        return self.yfit
 
-        yfit = self.model.result( self.xdata )
-        return yfit if self.imageAssistant is None else self.imageAssistant.resizeData( yfit )
 
     def limitsFit( self, fitmethod, ydata, weights=None, keep=None ) :
         """
@@ -435,6 +442,9 @@ class BaseFitter( object ):
             raise AttributeError( str( self ) + ": " + name + " is not yet available." )
         elif name == 'parameters' :
             return self.model.parameters
+        elif name == 'yfit' :
+            yfit = self.model.result( self.xdata )
+            return yfit if self.imageAssistant is None else self.imageAssistant.resizeData( yfit )
         elif name == 'design' :
             return self.getDesign()
         elif name == 'hessian' :

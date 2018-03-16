@@ -228,6 +228,22 @@ complicated, slower and not guaranteed to find the best solution,
 **NonLinearModel**s are harder to handle.
 
 
+<a name="dynamic">
+
+### DynamicModels
+
+**Dynamic** models are specialisations of **Model**s that have a fixed
+number of something. E.g **PolynomialModel** with fixed degree or
+**HarmonicModel** with fixed order. **Dynamic** implements methods to
+let the model grow or shrink. These models can not be used with ordinary
+**Fitter**s. Using **NestedSampler** they automatically converge on the
+model with the optimal number of components. 
+
+All pre-defined **Dynamic** models are displayed in figure 4
+
+![Dynamic](Dynamic.png "Figure 4")
+
+
 <a name="kernelmodel">
 
 ### KernelModels
@@ -237,9 +253,9 @@ more-dimensional variants, **Kernel2dModel**.
 A **KernelModel** encapsulates a **Kernel** function, which is defined
 as an even function with a definite integral over (-inf,+inf). 
 
-All pre-defined kernels are displayed in figure 4
+All pre-defined kernels are displayed in figure 5
 
-![Kernels](Kernel.png "Figure 4")
+![Kernels](Kernel.png "Figure 5")
 
 Of the more-dimensional variants, only the 2-dim is defined, where the
 2d kernel is either round or elliptic along the axes, or rotated
@@ -312,9 +328,9 @@ in model comparison when some reasonable provisions are taken into
 account, like comparing not too different models, feeding the same data
 (and weights) to all models etc.
 
-The Fitter inheritance tree is displayed in figure 5.
+The Fitter inheritance tree is displayed in figure 6.
 
-![Fitters](Fitter.png "Figure 5")
+![Fitters](Fitter.png "Figure 6")
 
 <a name="linearfitter"></a>
 
@@ -467,9 +483,9 @@ maximum value of the likelihood. The stored **Sample**s provide enough
 pointers into the Likelihood function to make a good estimate of the
 integral (evidence).
 
-The classes associated with NestedSampler are displayed in figure 6.
+The classes associated with NestedSampler are displayed in figure 7.
 
-![NestedSampler](NestedSampler.png "Figure 6")
+![NestedSampler](NestedSampler.png "Figure 7")
 
 **NestedSampler** contains 2 **SampleList**s, one internally to store
 the walkers and one to store the weighted samples of the posterior. Both
@@ -490,9 +506,9 @@ The **Prior**s contain information about the parameters which is known
 before the data is taken into account. It is the range that the
 parameters can move, without being frowned up on. 
 
-The predefined **Prior**s are displayed in figure 7.
+The predefined **Prior**s are displayed in figure 8.
 
-![Priors](Prior.png "Figure 7")
+![Priors](Prior.png "Figure 8")
 
 All **Prior**s define two methods `unit2domain` which transforms
 (random) value in [0,1] into a (random) value from the prior
@@ -509,9 +525,9 @@ logLikelihood wrt the parameters is also defined. It is used in the
 **Engine** of choice for parameter with continuous values:
 **GalileanEngine**. 
 
-The predefined **ErrorDistribution**s are displayed in figure 8.
+The predefined **ErrorDistribution**s are displayed in figure 9.
 
-![ErrorDistributions](ErrorDistribution.png "Figure 8")
+![ErrorDistributions](ErrorDistribution.png "Figure 9")
 
 Some **ErrorDistribution**s have parameters of themselves, so called
 **HyperParameter**s. One special case is the **NoiseScale**.

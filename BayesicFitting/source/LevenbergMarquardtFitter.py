@@ -175,7 +175,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
         if tolerance is None : tolerance = self.tolerance
         if verbose is None : verbose = self.verbose
 
-        fitIndex = self.fitprolog( data, weights=weights, keep=keep )
+        fitIndex, data, weights = self.fitprolog( data, weights=weights, keep=keep )
 
 
         trypar = self.model.parameters if par0 is None else par0

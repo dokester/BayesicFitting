@@ -125,7 +125,7 @@ class Fitter( BaseFitter ):
             ValueError when ydata or weights contain a NaN
 
         """
-        fitIndex = self.fitprolog( ydata, weights=weights, keep=keep )
+        fitIndex, ydata, weights = self.fitprolog( ydata, weights=weights, keep=keep )
 
         if self.model.isNullModel() :
             self.chiSquared( ydata, weights )

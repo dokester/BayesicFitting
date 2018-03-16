@@ -222,7 +222,7 @@ class ScipyFitter( MaxLikelihoodFitter ):
             ConvergenceError if it stops when the tolerance has not yet been reached.
 
         """
-        fitIndex = self.fitprolog( data, weights=weights, keep=keep )
+        fitIndex, data, weights = self.fitprolog( data, weights=weights, keep=keep )
 
         inipar = self.model.parameters[fitIndex]
 

@@ -134,15 +134,11 @@ class QRFitter( BaseFitter ):
             ValueError when ydata or weights contain a NaN
 
         """
-        self.checkNan( ydata, weights )
+        fi, ydata, weights = self.fitprolog( ydata, weights=weights, keep=keep )
+
         if self.model.isNullModel() :
             self.chiSquared( ydata, weights )
             return numpy.asarray( 0 )
-
-        if keep is not None :
-            fi = self.keepFixed( keep )
-        else :
-            fi = self.fitIndex
 
         ydatacopy = ydata.copy( )
         # subtract influence of fixed parameters on the data

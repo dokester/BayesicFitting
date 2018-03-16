@@ -158,7 +158,7 @@ class AmoebaFitter( MaxLikelihoodFitter ):
             where `val` is the minimizable array
 
         """
-        fitIndex = self.fitprolog( data, weights=weights, keep=keep )
+        fitIndex, data, weights = self.fitprolog( data, weights=weights, keep=keep )
 
         func = self.makeFuncs( data, weights=weights, index=fitIndex, ret=1 )
 
