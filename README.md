@@ -131,11 +131,15 @@ More work needs to be done in:
 
 
  +  4 Jan 2018 version 0.9.0 Do Kester.<br>
-Initial upload to github.
+   * Initial upload to github.
  + 26 Jan 2018 version <br>
  +  5 Mar 2018 version 1.0.1 <br>
-Package on pypi.com. Restructured all import statement to comply with PYPI package.
- + 14 Mar 2018 version 1.1.0 <br>
+   * Package on pypi.com. 
+   * Restructured all import statement to comply with PYPI package.
+ + 14 Mar 2018 version 1.0.2 <br>
    * Added Dynamic Models 
    * Added piping of models
-
+ * 23 Mar 2018 version 1.0.3 <br>
+   * Some issues with ErrorDistributions and map fitting
+   * 2-d fitting examples added
+   * All examples revisited
