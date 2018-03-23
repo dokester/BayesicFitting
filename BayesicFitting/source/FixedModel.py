@@ -227,7 +227,7 @@ class FixedModel( BaseModel ):
 
         """
         expparam = self.expand( xdata, param )
-        return super(FixedModel, self).result( xdata, expparam )
+        return super( FixedModel, self ).result( xdata, expparam )
 
     def expand( self, xdata, param ) :
         """

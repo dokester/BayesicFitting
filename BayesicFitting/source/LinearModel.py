@@ -79,21 +79,9 @@ class LinearModel( Model ):
         parlist = numpy.arange( self.npmax )
         part = self.basePartial( xdata, params, parlist=parlist  )
 
-#        print( "LM  ", params )
-#        print( "LM  ", part )
-#        print( "LM  ", parlist )
-#        try :
-#            return numpy.inner( params, part )
-#        except ValueError :
-#            print( "LinearModel: ValueError" )
-#            pass
-
         res = numpy.zeros( part.shape[0], dtype=float )
         for k in parlist :
             res += params[k] * part[:,k]
 
-
-#        for k,p in enumerate( params ) :
-#            res += p * part[:,k]
         return res
 

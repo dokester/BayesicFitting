@@ -322,8 +322,14 @@ class TestFixedModels( unittest.TestCase ):
     def testSplinesModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SPLINES*************************" )
-        knots = numpy.arange( 11, dtype=float )
-        self.assertRaises( AttributeError, SplinesModel, knots, fixed={3:1.1} )
+        knots = numpy.arange( 3, dtype=float ) - 1.0
+        m = SplinesModel( knots=knots, fixed={0:0.0} )
+        self.assertTrue( m.npmax == 5 )
+        self.assertTrue( m.npchain == 4 )
+        self.assertTrue( m.npbase == 4 )
+        p = [1.1, 0.5, 0.8, 0.4 ]
+        stdModeltest( m, p, plot=plot )
+
 
     def testSineSplineModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )

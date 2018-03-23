@@ -116,7 +116,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         """
         np = model.npchain
-        scale = allpars[np]
+        scale = allpars[-1]
         res = self.getResiduals( model, allpars[:np] )
         chisq = self.getChisq( res, scale )
         self.ncalls += 1
@@ -175,7 +175,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         np = model.npchain
         param = allpars[:np]
-        scale = allpars[np]
+        scale = allpars[-1]
         s2 = scale * scale
         res = self.getResiduals( model, param )
         if self.weights is not None :

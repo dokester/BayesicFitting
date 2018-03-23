@@ -310,11 +310,11 @@ class NestedSampler( object ):
 
         np = len( self.model.parameters )
         fitlist = [k for k in range( np )]
-        nh = -1
+        nh = - self.distribution.nphypar
         for sp in self.distribution.hyperpar :
             if not sp.isFixed and sp.isBound() :
                 fitlist += [nh]
-            nh -= 1
+            nh += 1
 
         if keep is not None :
             fitlist = numpy.setxor1d( fitlist, list( keep.keys() ) )
@@ -626,9 +626,9 @@ class NestedSampler( object ):
         elif name == "gengauss" :
             self.distribution = GenGaussErrorDistribution( self.xdata, self.ydata,
                     weights=self.weights, scale=scale, power=power )
-        elif name == "distance" :
-            self.distribution = DistanceCostFunction( self.xdata, self.ydata,
-                    weights=self.weights )
+#        elif name == "distance" :
+#            self.distribution = DistanceCostFunction( self.xdata, self.ydata,
+#                    weights=self.weights )
         else :
             raise ValueError( "Unknown error distribution %s" % name )
 

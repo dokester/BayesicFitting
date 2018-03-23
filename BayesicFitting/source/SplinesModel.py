@@ -79,7 +79,8 @@ class SplinesModel( LinearModel ):
 
     """
     def __init__( self, knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
-                        copy=None, fixed=None, **kwargs ):
+                        copy=None, **kwargs ):
+#                        copy=None, fixed=None, **kwargs ):
         """
         Splines on a given set of knots and a given order.
 
@@ -116,8 +117,8 @@ class SplinesModel( LinearModel ):
         minmax of knots. It deteriorates fastly going outside the domain.
 
         """
-        if fixed is not None :
-            raise AttributeError( "SplinesModel cannot have fixed parameters" )
+#        if fixed is not None :
+#            raise AttributeError( "SplinesModel cannot have fixed parameters" )
 
         if copy is not None :
             knots = copy.knots
@@ -167,12 +168,12 @@ class SplinesModel( LinearModel ):
             list of indices active parameters (or None for all)
 
         """
-        np = self.npbase
+        np = self.npmax
         ni = Tools.length( xdata )
-        result = numpy.zeros( ( ni, np), dtype=float )
+        partial = numpy.zeros( ( ni, np), dtype=float )
         x = numpy.ones( ni )
         for i in range( self.order ):
-            result[:,i] = x
+            partial[:,i] = x
             x *= xdata
 
         i = self.order
@@ -180,7 +181,7 @@ class SplinesModel( LinearModel ):
 
         ki = numpy.arange( ni )
         while i < np - 1 :
-            result[ki,i] = x[ki]
+            partial[ki,i] = x[ki]
 
             ki = numpy.where( xdata >= self.knots[i - ko] )[0]
             if ki.size == 0 : break
@@ -189,12 +190,17 @@ class SplinesModel( LinearModel ):
             t = numpy.ones( len( d ) )
             for k in range( self.order ):
                 t *= d
-            result[ki,i] -= t
+            partial[ki,i] -= t
 
             x[ki] = t
             i += 1
-        result[ki,i] = x[ki]
-        return result
+        partial[ki,i] = x[ki]
+
+        if parlist is None or len( parlist ) == np :
+            return partial
+
+        return partial[:,parlist]
+
 
     def baseDerivative( self, xdata, params ) :
         """

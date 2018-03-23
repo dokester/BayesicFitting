@@ -76,10 +76,9 @@ class Kernel2dModel( NonLinearModel ):
 
     Example
     -------
-    >>> model = Kernel2dModel( )
-    >>> model.setKernel( kernel=Lorentz )                        # circular Lorentz model.
-    >>> model = Kernel2dModel( shape=Kernel2dModel.ROTATED )
-    >>> model.setKernel( Gauss )                                 # equivalent to Gauss2DRotModel.
+    >>> model = Kernel2dModel( )                                 # default: circular Gauss
+    >>> model.setKernelShape( Lorentz(), 'Elliptic'  )             # elliptic Lorentz model.
+    >>> model = Kernel2dModel( shape=3 )                         # rotated Gauss
 
     Category:    mathematics/Fitting
 
@@ -100,9 +99,11 @@ class Kernel2dModel( NonLinearModel ):
         Parameters
         ----------
         kernel : Kernel
-            the kernel to be usel
-        shape : 1 | 2 | 3
-            shapes, resp.: circular elliptic, rotated
+            the kernel to be used
+        shape : 1 | 2 | 3 | 'circular' | 'elliptic' | 'rotated'
+            int : resp.: circular elliptic, rotated
+            str : case insensitive; only the first letter matters.
+            shape defaults to 'circular' when misunderstood
         copy : Kernel2dModel
             to be copied
         fixed : dictionary of {int:float}
@@ -111,6 +112,9 @@ class Kernel2dModel( NonLinearModel ):
             Attribute fixed can only be set in the constructor.
 
         """
+
+        shape = self.parseShape( shape )
+
         super( Kernel2dModel, self ).__init__( self.NPAR[shape], ndim=2, copy=copy, **kwargs )
 
         if copy is not None :
@@ -134,7 +138,16 @@ class Kernel2dModel( NonLinearModel ):
         else :
             super( Kernel2dModel, self ).__setattr__( name, value )
 
+    def parseShape( self, shape ) :
+        if isinstance( shape, str ) :
+            shape = str.find( 'xxcCeErR', shape[0] ) // 2
+        if not 1 <= shape <= 3 :
+            shape = 1
+        return shape
+
+
     def setKernelShape( self, kernel, shape ) :
+        shape = self.parseShape( shape )
         self.kernel = kernel
         amp = 2.0 / ( self.kernel.integral * math.pi )
 
@@ -168,7 +181,7 @@ class Kernel2dModel( NonLinearModel ):
 
     def baseName( self ):
         """ Returns a string representation of the model.  """
-        return "2-dim " + self.SHAPENAMES[self.shape] + "-" + self.kernel.name( )
+        return "2-d-" + self.SHAPENAMES[self.shape] + "-" + self.kernel.name( )
 
     def baseResult( self, xdata, params ):
         """
@@ -268,12 +281,17 @@ class Circle( BaseShape2d ):
         v = ( xdata[:,1] - params[2] ) / params[3]
         r2 = u * u + v * v
         r = numpy.sqrt( r2 )
-        p0dkdr = params[0] * self.kernel.partial( r )
+        p0dkdr = -params[0] * self.kernel.partial( r )
+        try :
+            drdu = numpy.where( r == 0, 1.0, u / r )
+            drdv = numpy.where( r == 0, 1.0, v / r )
+        except Warning :
+            pass
 
         parts = { 0 : ( lambda: self.kernel.resultsq( r2 ) ),
-                  1 : ( lambda: -p0dkdr * u / ( r * params[3] ) ),
-                  2 : ( lambda: -p0dkdr * v / ( r * params[3] ) ),
-                  3 : ( lambda: -p0dkdr * r / params[3] ) }
+                  1 : ( lambda: p0dkdr * drdu / params[3] ),
+                  2 : ( lambda: p0dkdr * drdv / params[3] ),
+                  3 : ( lambda: p0dkdr * r / params[3] ) }
 
         if parlist is None :
             parlist = range( np )
@@ -300,13 +318,18 @@ class Ellipse( BaseShape2d ):
         v = ( xdata[:,1] - params[2] ) / params[4]
         r2 = u * u + v * v
         r = numpy.sqrt( r2 )
-        p0dkdr = params[0] * self.kernel.partial( r )
+        p0dkdr = -params[0] * self.kernel.partial( r )
+        try :
+            drdu = numpy.where( r == 0, 1.0, u / r )
+            drdv = numpy.where( r == 0, 1.0, v / r )
+        except RuntimeWarning :
+            pass
 
         parts = { 0 : ( lambda: self.kernel.resultsq( r2 ) ),
-                  1 : ( lambda: -p0dkdr * u / ( r * params[3] ) ),
-                  2 : ( lambda: -p0dkdr * v / ( r * params[4] ) ),
-                  3 : ( lambda: -p0dkdr * u * u / ( r * params[3] ) ),
-                  4 : ( lambda: -p0dkdr * v * v / ( r * params[4] ) ) }
+                  1 : ( lambda: p0dkdr * drdu / params[3] ),
+                  2 : ( lambda: p0dkdr * drdv / params[4] ),
+                  3 : ( lambda: p0dkdr * u * drdu / params[3] ),
+                  4 : ( lambda: p0dkdr * v * drdv / params[4] ) }
 
 
         if parlist is None :
@@ -355,9 +378,12 @@ class Rotated( BaseShape2d ):
         v = ( x * s + y * c ) / params[4]
         r2 = u * u + v * v
         r = numpy.sqrt( r2 )
-        p0dkdr = params[0] * self.kernel.partial( r )
-        drdu = -u / r
-        drdv = -v / r
+        p0dkdr = - params[0] * self.kernel.partial( r )
+        try :
+            drdu = numpy.where( r == 0, 1.0, u / r )
+            drdv = numpy.where( r == 0, 1.0, v / r )
+        except RuntimeWarning :
+            pass
 
         parts = { 0 : ( lambda: self.kernel.resultsq( r2 ) ),
                     #  dfdp1 = p0 * dkdr * ( drdu * dudx + drdv * dvdx ) * dxdp1

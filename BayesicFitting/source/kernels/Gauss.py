@@ -59,6 +59,6 @@ class Gauss( Kernel ):
         return False
 
     def name( self ):
-        return str( "Gauss: exp( -0.5 * x * x )" )
+        return str( "Gauss: exp( -0.5 * x^2 )" )
 
 

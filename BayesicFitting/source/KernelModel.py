@@ -49,7 +49,7 @@ class KernelModel( NonLinearModel ):
     The parameters are initialized at {amp,0,1}. the amplitude is such that the
     function integrates to 1.0. They are listed in the table.
 
-    Several kernel functions predefined. See {@link Kernel}.
+    Several kernel functions predefined.
 
     Beware: The "bound" models are unaware of anything outside their range.
 
@@ -61,7 +61,7 @@ class KernelModel( NonLinearModel ):
     model.kernel = Biweight
 
     """
-    def __init__( self, copy=None, kernel=Biweight, **kwargs ):
+    def __init__( self, copy=None, kernel=Biweight(), **kwargs ):
         """
         Kernel Model.
 

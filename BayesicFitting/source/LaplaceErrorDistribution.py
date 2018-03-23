@@ -131,7 +131,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
         np = model.npchain
-        scale = allpars[np]
+        scale = allpars[-1]
         res = self.getResiduals( model, allpars[:np] )
         sumres = self.getSumRes( res, scale )
         return - self.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
@@ -184,7 +184,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         self.nparts += 1
         np = model.npchain
-        scale = allpars[np]
+        scale = allpars[-1]
 
         dM = model.partial( self.xdata, allpars[:np] )
         dL = numpy.zeros( len( fitIndex ), dtype=float )
@@ -194,7 +194,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
 
         i = 0
         for k in fitIndex :
-            if k < np :
+            if k >= 0 :
                 dL[i] = numpy.sum( wgt * dM[:,k] )
             else :
                 dL[i] = self.getSumRes( res, scale ) - self.sumweight

@@ -87,8 +87,10 @@ class TestDynamicModel( unittest.TestCase ):
         print( "  Test two models" )
         print( "========================" )
 
+        self.assertRaises( ValueError, PolynomialDynamicModel, 0, minDegree=2, maxDegree=4 )
+
         m = GaussModel( )
-        p = PolynomialDynamicModel( 0, minDegree=2, maxDegree=4 )
+        p = PolynomialDynamicModel( 2, minDegree=2, maxDegree=4 )
         print( p.growPrior )
         m += p
 
@@ -188,7 +190,7 @@ class TestDynamicModel( unittest.TestCase ):
 #        ns.distribution.scale = 0.02
 
         logE = ns.sample( plot=plot )
-        print( "scale  ", ns.scale() )
+        print( "scale  ", ns.scale )
 
     def plotNestedSampler3( self ) :
         self.testNestedSampler3( plot=True )

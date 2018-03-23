@@ -186,7 +186,7 @@ class BaseFitter( object ):
 
         ninp = Tools.length( xdata )
         self.nxdata = ninp
-        self.ndim = 1 if xdata.ndim <= 1 else xdata.shape[1]
+        self.ndim = 1 if self.xdata.ndim <= 1 else self.xdata.shape[1]
         self.model = model
         self.keep = keep
         self.fitIndex = self.keepFixed( keep )
@@ -233,7 +233,7 @@ class BaseFitter( object ):
         """
         self.checkNan( ydata, weights=weights )
 
-        if self.map :
+        if self.imageAssistant is not None :
             ydata = self.imageAssistant.getydata( ydata )
             if weights is not None :
                 weights = self.imageAssistant.getydata( weights )

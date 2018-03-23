@@ -245,7 +245,7 @@ class ErrorDistribution( object ):
             high : float or array_like
                 high limits
         """
-        if len( self.hyperpar ) == 1 :
+        if self.nphypar == 1 :
             self.hyperpar[0].setLimits( limits )
             return
         low = limits[0]

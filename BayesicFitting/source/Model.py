@@ -536,7 +536,7 @@ class Model( FixedModel ):
 
 #        print( self.shortName(), self._operation )
 
-        if np > 0:                      #  the base model has no parameters: skip
+        if self.npmax > 0:            #  the base model has no parameters at all: skip
             xd = xdata if self._operation is not self.PIP else result
             if useNum:
                 nextdf = super( Model, self ).numDerivative( xd, par )
@@ -1348,6 +1348,8 @@ class Model( FixedModel ):
             None : return derivative to x
             int  : return derivative to parameter kpar.
         """
+        x = Tools.toArray( x, ndim=self.ndim )
+
         dx = self.deltaP[0]
         if kpar is None :
             r1 = self.result( x+dx, param )

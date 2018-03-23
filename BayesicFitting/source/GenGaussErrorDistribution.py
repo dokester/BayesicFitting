@@ -155,8 +155,8 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
         np = model.npchain
-        scale = allpars[np]
-        power = allpars[np+1]
+        scale = allpars[-2]
+        power = allpars[-1]
 
         res = self.getResiduals( model, allpars[:np] )
         chisq = self.getChisq( res, scale, power )
@@ -214,8 +214,8 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
         np = model.npchain
-        scale = allpars[np]
-        power = allpars[np+1]
+        scale = allpars[-2]
+        power = allpars[-1]
         res = self.getResiduals( model, allpars[:np] )
 
         ars = numpy.abs( res / scale )
@@ -229,9 +229,9 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for  k in fitIndex :
-            if k < np :
+            if k >= 0 :
                 dL[i] = numpy.sum( dLdm * dM[:,k] )
-            elif k == np :
+            elif k == -2 :
                 dL[i] = - self.sumweight / scale + power * numpy.sum( rsp ) / scale
             else :
                 # special.psi( x ) is the same as special.polygamma( 1, x )

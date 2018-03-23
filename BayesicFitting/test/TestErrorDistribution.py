@@ -186,7 +186,8 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 1.0
         param[2] = scale
-        fitIndex = numpy.arange( 3 )
+#        fitIndex = numpy.arange( 3 )
+        fitIndex = numpy.asarray( [0,1,-1] )
         dL = ged.partialLogL( poly, param, fitIndex )
         nL = ged.numPartialLogL( poly, param, fitIndex )
         print( "partial = ", dL )
@@ -241,7 +242,7 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 1.0
         param[np] = scale
-        fitIndex = numpy.arange( np+1 )
+        fitIndex = numpy.append( numpy.arange( np ), [-1] )
         dL = ged.partialLogL( gm, param, fitIndex )
         nL = ged.numPartialLogL( gm, param, fitIndex )
         print( "partial = ", dL )
@@ -257,7 +258,7 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 0.5
         param[np] = scale
-        fitIndex = numpy.asarray( [0,1,2,3,4,5] )
+        fitIndex = numpy.asarray( [0,1,2,3,4,-1] )
         ged.weights = self.wgt
         dL = ged.partialLogL( gm, param, fitIndex )
         nL = ged.numPartialLogL( gm,  param, fitIndex )
@@ -267,7 +268,7 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 0.5
         param[np] = scale
-        fitIndex = numpy.asarray( [0,1,2,4,5] )
+        fitIndex = numpy.asarray( [0,1,2,4,-1] )
         ged.weights = self.wgt
         ged.hyperpar[0] = NoiseScale()
         Tools.printclass( ged )
@@ -311,8 +312,10 @@ class TestErrorDistribution( unittest.TestCase ):
         chisq = ged.getSumRes( res, lpscl )
         chipp = ggd.getChisq( res, ggscl, power )
         print( "chipp = %8.3f   chisq = %8.3f"%( chipp, chisq ) )
-        ggfi = numpy.arange( 4 )
-        lpfi = numpy.arange( 3 )
+#        ggfi = numpy.arange( 4 )
+#        lpfi = numpy.arange( 3 )
+        ggfi = numpy.asarray( [0,1,-2,-1] )
+        lpfi = numpy.asarray( [0,1,-1] )
         logL = ged.logLikelihood( poly, lppar )
         lggL = ggd.logLikelihood( poly, ggpar )
 
@@ -401,20 +404,26 @@ class TestErrorDistribution( unittest.TestCase ):
         logL = ged.logLikelihood( poly, gapar )
         lggL = ggd.logLikelihood( poly, ggpar )
 
+        print( 'gapar  ', gapar )
+        print( 'ggpar  ', ggpar )
+
         print( "lggL  = %8.3f   logL  = %8.3f" % ( lggL, logL ) )
         assertAAE( logL, lggL )
 
-        ggfi = numpy.arange( 4 )
-        lpfi = numpy.arange( 3 )
+        ggfi = numpy.array( [0,1,-2,-1] )
+        lpfi = numpy.array( [0,1,-1] )
+
         dL = ged.partialLogL( poly, gapar, lpfi )
         nL = ged.numPartialLogL( poly, gapar, lpfi )
         dG = ggd.partialLogL( poly, ggpar, ggfi)
         nG = ggd.numPartialLogL( poly, ggpar, ggfi )
 
         print( "partial = ", dL )
-        print( "partial = ", dG )
         print( "numpart = ", nL )
+        print( "partial = ", dG )
         print( "numpart = ", nG )
+        print( nG[-2] * ff )
+
         assertAAE( dG[:2], dL[:2], 5 )
         assertAAE( dG[2]*ff, dL[2], 5 )
         assertAAE( dG, nG, 5 )
@@ -551,7 +560,7 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 1.0
         param[2] = scale
-        fi = [0,1,2]
+        fi = [0,1,-1]
         dL = ced.partialLogL( poly, param, fi )
         nL = ced.numPartialLogL( poly, param, fi )
         print( "params  = ", param, scale )
@@ -600,7 +609,7 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 1.0
         param[2] = scale
-        fi = [0,1,2]
+        fi = [0,1,-1]
         dL = ced.partialLogL( poly, param, fi )
         nL = ced.numPartialLogL( poly, param, fi )
         print( "params  = ", param, scale )

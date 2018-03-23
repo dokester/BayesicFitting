@@ -6,6 +6,7 @@ from astropy import units
 import math
 from numpy.testing import assert_array_almost_equal as assertAAE
 
+from BayesicFitting import formatter as fmt
 from BayesicFitting import *
 
 __author__ = "Do Kester"
@@ -68,7 +69,7 @@ class TestKernel2dModel( unittest.TestCase ):
 
         x = x1.copy()
         x = numpy.append( x, x1 + 0.01, 0 ).reshape( 101, 2 )
-        print( x )
+        print( fmt( x ) )
 
         p = m.parameters
         print( m )

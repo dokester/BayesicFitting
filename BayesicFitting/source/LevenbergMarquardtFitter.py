@@ -263,7 +263,8 @@ class LevenbergMarquardtFitter( IterativeFitter ):
             self.iter += 1
 
 #            print( "trialfit", self.chi, trychi, math.log10( self.lamda ) )
-            self.report( verbose, trypar, trychi, more=math.log10( self.lamda ), force=(verbose >= 3) )
+            self.report( verbose, trypar, trychi, more=math.log10( self.lamda ),
+                         force=(verbose >= 3) )
 
             if trychi <= self.chi:
 
@@ -301,15 +302,16 @@ class LevenbergMarquardtFitter( IterativeFitter ):
 
         """
         onedge = False
-        if self.model.priors is not None and self.model.priors.hasLimits( fitindex ):
+#        if self.model.priors is not None and self.model.priors.hasLimits( ):
+        if self.model.priors is not None :
             fitin = []
             for i,k in enumerate( fitindex ) :
                 pr = self.model.getPrior( k )
-                if pr.hasLowLimit( ) and fitpar[i] < pr.getLowLimit( ):
-                    fitpar[i] = pr.getLowLimit( )
+                if pr.hasLowLimit( ) and fitpar[i] < pr.lowLimit :
+                    fitpar[i] = pr.lowLimit
                     onedge = True
-                elif pr.hasHighLimit( ) and fitpar[i] > pr.getHighLimit( ):
-                    fitpar[i] = pr.getHighLimit( )
+                elif pr.hasHighLimit( ) and fitpar[i] > pr.highLimit :
+                    fitpar[i] = pr.highLimit
                     onedge = True
                 else:
                     fitin += [k]

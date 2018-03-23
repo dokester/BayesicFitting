@@ -147,7 +147,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
         np = model.npchain
-        scale = allpars[np]
+        scale = allpars[-1]
         res2 = numpy.square( self.getResiduals( model, allpars[:np] ) )
         return ( self.ndata * ( math.log( scale ) - self.LOGPI ) -
                  numpy.sum( numpy.log( res2 + scale * scale ) ) )
@@ -169,7 +169,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         self.nparts += 1
         np = model.npchain
-        scale = allpars[np]
+        scale = allpars[-1]
         res = self.getResiduals( model, allpars[:np] )
         r2s = res * res + scale * scale
         dM = model.partial( self.xdata, allpars[:np] )
@@ -177,7 +177,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for k in fitIndex :
-            if k < np :
+            if k >= 0 :
                 dL[i] = 2 * numpy.sum( res * dM[:,k] / r2s )
             else :
                 dL[i] = self.ndata / scale - numpy.sum( 2 * scale / r2s )
