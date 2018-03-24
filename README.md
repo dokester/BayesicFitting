@@ -3,7 +3,7 @@
 A package for Bayesian model fitting and evidence calculation.
 
 (In case you are wondering what that is about take a 
-quick look at [this example.](./examples/sealevel.ipynb))
+quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
 ## Content
 
@@ -67,7 +67,7 @@ e.g. to combine into a model.
 
 ### examples
 
-In [BayesicFitting/examples](./examples) a number of scripts can be
+In [BayesicFitting/examples](./BayesicFitting/examples) a number of scripts can be
 found to exercise the classes. They are in the form of jupyter
 notebooks. Some are using real data; others have synthetic data
 specially constructed to make some point. 
@@ -86,20 +86,20 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
-In the [documenation](./documentation) directory a number of documents
+In the [documenation](./BayesicFitting/documentation) directory a number of documents
 can be found. 
 
 
-+ [Manual](./documentation/manual.md)<br>
++ [Manual](./BayesicFitting/documentation/manual.md)<br>
 A first draft of a manual. It obviously needs more work.
 
-+ [FAQ](./documentation/troubles.md)<br>
++ [FAQ](./BayesicFitting/documentation/troubles.md)<br>
 A list of troublesome situations and what to do about it.
 
-+ [Glossary](./documentation/glossary.md)<br>
++ [Glossary](./BayesicFitting/documentation/glossary.md)<br>
 A list of the terms used throughout this package, with explanations.
 
-+ [Design](./documentation/design.md)<br>
++ [Design](./BayesicFitting/documentation/design.md)<br>
 An architectural design document, displaying the relationships between 
 the classes. 
 
@@ -143,3 +143,4 @@ More work needs to be done in:
    * Some issues with ErrorDistributions and map fitting
    * 2-d fitting examples added
    * All examples revisited
+   * Links in README.md updated
