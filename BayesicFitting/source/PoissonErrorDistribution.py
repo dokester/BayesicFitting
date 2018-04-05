@@ -91,12 +91,29 @@ class PoissonErrorDistribution( ErrorDistribution ):
         """
         return False
 
+    def getChisq( self, residuals, scale ) :
+        """
+        Return chisq as Gaussian approximation
+        .. math::
+            \chi^2 = \sum( residuals^2 / data )
+
+        Parameters
+        ----------
+        residuals : array-like
+            difference between data and model
+        scale : float
+            scale factor. Not used.
+        """
+        return numpy.sum( numpy.square( residuals ) / self.data )
+
     def getScale( self, model ) :
         """
-        Return the sqrt( sum( data ) / N )
+        Return the sqrt( chisq / npt )
+        Gaussian approximation.
 
         """
-        return math.sqrt( sum( self.data ) / self.sumweight )
+        chi = self.getChisq( self.getResiduals( model ), 0.0 )
+        return math.sqrt( chi / self.sumweight )
 
 
     #  *********LIKELIHOODS***************************************************
