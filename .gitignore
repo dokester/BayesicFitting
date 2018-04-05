@@ -3,6 +3,7 @@
 README.html
 __pycache__
 dist/
+build/
 *egg/
 *egg-info/
 BayesicFitting/documentation/*.dia~
