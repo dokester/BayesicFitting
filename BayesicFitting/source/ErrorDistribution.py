@@ -365,6 +365,21 @@ class ErrorDistribution( object ):
     def setResult( self ):
         pass
 
+    def getResiduals( self, model, param=None ):
+        """
+        Return the residuals. (data - model)
+        For those distributions that need them.
+
+        Parameters
+        ----------
+        model : Model
+            model to be fitted
+        param : array_like
+            parameters of the model
+
+        """
+        return self.data - model.result( self.xdata, param )
+
     def __str__( self ) :
         return "Error distribution"
 

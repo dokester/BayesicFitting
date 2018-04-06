@@ -133,18 +133,4 @@ class ScaledErrorDistribution( ErrorDistribution ):
         else :
             return super( ScaledErrorDistribution, self ).__getattr__( name )
 
-    def getResiduals( self, model, param=None ):
-        """
-        Return the residuals.
-        For those distributions r=that need them.
-
-        Parameters
-        ----------
-        model : Model
-            model to be fitted
-        param : array_like
-            parameters of the model
-
-        """
-        return self.data - model.result( self.xdata, param )
 
