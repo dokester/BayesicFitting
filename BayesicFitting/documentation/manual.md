@@ -457,6 +457,8 @@ kernels and miscellaneous.
     General powerlaw model of arbitrary degree.
 + **PowerModel**<br>
     General power model of arbitrary degree.
++ **PseudoVoigtModel**<br>
+    Weighted sum of Gauss and Lorentz models; approximation of **VoigtModel**
 + **RepeatingModel**<br>
     Variable repetition the same Model
 + **SincModel**<br>
@@ -583,6 +585,8 @@ kernels and miscellaneous.
     Laplace prior distribution.
 + **UniformPrior**<br>
     Uniform prior distribution, for location parameters.
++ **CircularUniformPrior**<br>
+    Uniform prior distribution wrapped at the endpoints, for phase-like parameters.
 
 <a name="list-errdis"></a>
 #### Error distributions.
