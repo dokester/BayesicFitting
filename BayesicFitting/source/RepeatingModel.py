@@ -67,7 +67,7 @@ class RepeatingModel( Model, Dynamic ):
         growPrior : None or Prior
             governing the birth and death.
             ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
-        copy : HarmonicDynamicModel
+        copy : RepeatingModel
             model to copy
 
         Raises
@@ -126,7 +126,7 @@ class RepeatingModel( Model, Dynamic ):
             super( RepeatingModel, self ).__setattr__( name, value )
 
     #  *************************************************************************
-    def result( self, xdata, params ):
+    def baseResult( self, xdata, params ):
         """
         Returns the result of the model function.
 
@@ -148,7 +148,7 @@ class RepeatingModel( Model, Dynamic ):
 
         return result
 
-    def partial( self, xdata, params ):
+    def basePartial( self, xdata, params, parlist=None ):
         """
         Returns the partials at the input value.
 
@@ -157,8 +157,9 @@ class RepeatingModel( Model, Dynamic ):
         xdata : array_like
             value at which to calculate the result
         params : array_like
-             values for the parameters
-
+            values for the parameters
+        parlist : array_like
+            list of indices of active parameter
 
         """
         nxdata = Tools.length( xdata )
@@ -169,9 +170,13 @@ class RepeatingModel( Model, Dynamic ):
             ke = ks + self.deltaNpar
             partial[:,ks:ke] = self.model.partial( xdata, params[ks:ke] )
             ks = ke
-        return partial
 
-    def derivative( self, xdata, params ):
+        if parlist is None :
+            return partial
+
+        return partial[:,parlist]
+
+    def baseDerivative( self, xdata, params ):
         """
         Returns the derivative df/dx at the input value.
 
@@ -206,7 +211,7 @@ class RepeatingModel( Model, Dynamic ):
         return ( "Repeat %d times:\n  " % self.ncomp +
                   self.model.baseName( ) )
 
-    def getParName( self, k ):
+    def baseParameterName( self, k ):
         """
         Return the name of the indicated parameter.
 
@@ -219,7 +224,7 @@ class RepeatingModel( Model, Dynamic ):
         return ( self._model.getParameterName( k % self.deltaNpar ) + "_" +
                 ( k / self.deltaNpar ) )
 
-    def getParUnit( self, k ):
+    def baseParameterUnit( self, k ):
         """
         Return the unit of the indicated parameter.
 
