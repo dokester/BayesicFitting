@@ -33,6 +33,7 @@ from .source.BirthEngine import BirthEngine
 from .source.BracketModel import BracketModel
 from .source.CauchyErrorDistribution import CauchyErrorDistribution
 from .source.CauchyPrior import CauchyPrior
+from .source.CircularUniformPrior import CircularUniformPrior
 from .source.ChebyshevPolynomialModel import ChebyshevPolynomialModel
 from .source.CombiModel import CombiModel
 from .source.ConstantModel import ConstantModel
@@ -90,6 +91,7 @@ from .source.PowerLawModel import PowerLawModel
 from .source.PowerModel import PowerModel
 from .source.Prior import Prior
 from .source.ProductModel import ProductModel
+from .source.PseudoVoigtModel import PseudoVoigtModel
 from .source.QRFitter import QRFitter
 from .source.RandomEngine import RandomEngine
 from .source.RepeatingModel import RepeatingModel
