@@ -7,6 +7,8 @@ import math
 
 from BayesicFitting import Prior, UniformPrior, JeffreysPrior, ExponentialPrior
 from BayesicFitting import LaplacePrior, CauchyPrior, GaussPrior
+from BayesicFitting import CircularUniformPrior
+
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -83,6 +85,48 @@ class TestPrior( unittest.TestCase ) :
         self.assertTrue( prior.partialDomain2Unit( 48.1 ) == 0.0 )
         self.assertAlmostEqual( prior.partialDomain2Unit(0.9 ), prior.numPartialDomain2Unit( 0.9 ) )
 
+    def testCircularUniformPrior( self ):
+
+        print( "===== CircularUniform Prior Tests ==========================\n" )
+        prior = CircularUniformPrior( )
+        print( prior )
+        self.assertTrue( prior._lowDomain == -math.inf )
+        self.assertTrue( prior._highDomain == +math.inf )
+        self.assertFalse( prior.isBound() )
+        self.assertRaises( AttributeError, prior.unit2Domain, 0.0 )
+        self.assertRaises( AttributeError, prior.domain2Unit, 0.0 )
+        self.assertRaises( AttributeError, prior.result, 1.0 )
+
+        prior.setLimits( [0,5] )
+        print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._range ) )
+        print( prior )
+
+        values = {0.0:0.0, 0.5:2.5, 1.0:0.0 }
+        self.stdTestPrior( prior, values=values, utest=False )
+
+        cp = prior.copy( )
+        print( cp )
+        self.stdTestPrior( cp, values=values, utest=False )
+
+        prior = UniformPrior( numpy.asarray( [6.,48.] ) )
+        print( prior )
+        values = {0.0:6, 0.5:27, 1.0:48 }
+        self.stdTestPrior( prior, values=values, utest=False )
+
+        print( prior.domain2Unit( prior.unit2Domain(0.1) ) )
+        print( prior.domain2Unit( prior.unit2Domain(0.3) ) )
+        print( prior.domain2Unit( prior.unit2Domain(0.8) ) )
+        self.assertAlmostEqual( prior.domain2Unit( prior.unit2Domain( 0.1 ) ), 0.1 )
+        self.assertAlmostEqual( prior.domain2Unit( prior.unit2Domain( 0.3 ) ), 0.3 )
+        self.assertAlmostEqual( prior.domain2Unit( prior.unit2Domain( 0.8 ) ), 0.8 )
+        print( prior.partialDomain2Unit( 5.9 ) )
+        print( prior.partialDomain2Unit( 10.3 ) )
+        print( prior.partialDomain2Unit( 48.8 ) )
+        self.assertTrue( prior.partialDomain2Unit( 5.9 ) == 0.0 )
+        self.assertTrue( prior.partialDomain2Unit( 10.3 ) == 1.0 / ( 48 - 6) )
+        self.assertTrue( prior.partialDomain2Unit( 48.1 ) == 0.0 )
+        self.assertAlmostEqual( prior.partialDomain2Unit(0.9 ), prior.numPartialDomain2Unit( 0.9 ) )
+
     def testJeffreysPrior( self ):
         print( "===== Jeffreys Prior Tests ===========================\n" )
         prior = JeffreysPrior( )
@@ -130,16 +174,17 @@ class TestPrior( unittest.TestCase ) :
         self.stdTestPrior( prior, values=values )
 
 
-    def stdTestPrior( self, prior, notest=False, values={} ) :
+    def stdTestPrior( self, prior, utest=True, values={} ) :
         for ku in range( 11 ) :
             u = 0.1 * ku
             d = prior.unit2Domain( u )
             v = prior.domain2Unit( d )
             f = prior.unit2Domain( v )
             print( "Unit %10.7f %10.7f  Domain %10.7f %10.7f"%( u, v, d, f ) )
-            if notest :
+            self.assertAlmostEqual( d, f )
+            if utest :
                 self.assertAlmostEqual( v, u )
-                self.assertAlmostEqual( d, f )
+
         # define a number of x values
         xx = [-10,-5, -1, 0, 1, 3, 6, 6.1, 48, math.inf]
         for x in xx :
@@ -152,11 +197,12 @@ class TestPrior( unittest.TestCase ) :
                 self.assertAlmostEqual( pl, nl, 4 )
             self.assertTrue( prior.result( x ) == prior.partialDomain2Unit( x ) )
 
-        for v in values :
+        for v in values.keys() :
             print( "Unit %10.7f %10.7f  Domain %10.7f %10.7f"%
                 ( v, prior.domain2Unit( values[v] ), values[v], prior.unit2Domain( v ) ) )
             self.assertAlmostEqual( prior.unit2Domain( v ), values[v] )
-            self.assertAlmostEqual( prior.domain2Unit( values[v] ), v )
+            if utest :
+                self.assertAlmostEqual( prior.domain2Unit( values[v] ), v )
 
     def domainTest( self, prior ) :
         print( prior.unit2Domain( 1.0 ) )
@@ -232,7 +278,7 @@ class TestPrior( unittest.TestCase ) :
         self.assertTrue( prior._uval == 0.0 )
         self.assertTrue( prior._shift == 0.5 )
 
-        self.stdTestPrior( prior )
+        self.stdTestPrior( prior, utest=False )
 
         self.assertAlmostEqual( prior.unit2Domain( 1 - 1.0 / 2048 ), 69.3147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 6.93147180559945 )
@@ -282,7 +328,7 @@ class TestPrior( unittest.TestCase ) :
         self.assertTrue( prior._uval == 0.0 )
         self.assertTrue( prior._shift == 0.7 )
 
-        self.stdTestPrior( prior )
+        self.stdTestPrior( prior, utest=False )
         print( prior._uval )
         print( prior.domain2Unit( 0 ) )
         print( prior._uval )

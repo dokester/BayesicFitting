@@ -68,15 +68,33 @@ class TestModels( unittest.TestCase ):
         self.testVoigtModel( )
         xx = numpy.linspace( -1, +1, 1001 )
         par = numpy.asarray( [1.2,-0.2,0.3,0.3], dtype=float )
-        plt.plot( xx, VoigtModel().result( xx, par ), '-', linewidth=2 )
-        plt.plot( xx, GaussModel().result( xx, par[[0,1,2]] ), 'r-' )
+        plt.plot( xx, VoigtModel().result( xx, par ), 'r-', linewidth=2 )
+        plt.plot( xx, GaussModel().result( xx, par[[0,1,2]] ), 'b-' )
         pg = par.copy()
         pg[3] = 0
-        plt.plot( xx, VoigtModel().result( xx, pg ), 'r--' )
         plt.plot( xx, LorentzModel().result( xx, par[[0,1,3]] ), 'g-' )
+        plt.plot( xx, VoigtModel().result( xx, pg ), 'r--' )
         pg = par.copy()
         pg[2] = 0
-        plt.plot( xx, VoigtModel().result( xx, pg ), 'g--' )
+        plt.plot( xx, VoigtModel().result( xx, pg ), 'r.' )
+        plt.show()
+
+    def plotPseudoVoigtModel( self ) :
+        self.testPseudoVoigtModel( )
+        xx = numpy.linspace( -1, +1, 1001 )
+        pvm = PseudoVoigtModel()
+        gm = GaussModel()
+        lm = LorentzModel()
+        par = numpy.asarray( [1.2,-0.2,0.3,0.3], dtype=float )
+        plt.plot( xx, pvm.result( xx, par ), 'r-', linewidth=2 )
+        plt.plot( xx, gm.result( xx, par[[0,1,2]] ), 'b-' )
+        pg = par.copy()
+        pg[3] = 0
+        plt.plot( xx, lm.result( xx, par[[0,1,3]] ), 'g-' )
+        plt.plot( xx, pvm.result( xx, pg ), 'c--' )
+        pg = par.copy()
+        pg[3] = 1.0
+        plt.plot( xx, pvm.result( xx, pg ), 'm--' )
         plt.show()
 
     def plotLorentzModel( self ) :
@@ -201,6 +219,14 @@ class TestModels( unittest.TestCase ):
         p = numpy.asarray( [1.2,0.2,0.3,0.4], dtype=float )
         print( p )
         stdModeltest( m, p, plot=plot, warn=["nopart"] )
+
+    def testPseudoVoigtModel( self, plot=False ):
+        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
+        print( "******PSEUDOVOIGT***********************" )
+        m = PseudoVoigtModel( )
+        p = numpy.asarray( [1.2,0.2,0.3,0.4], dtype=float )
+        print( p )
+        stdModeltest( m, p, plot=plot )
 
     def XtestFreeShapeModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
