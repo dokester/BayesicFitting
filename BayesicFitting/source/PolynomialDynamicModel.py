@@ -135,8 +135,7 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
              Tools.setSingleAttributes( self, name, value, dind ) ) :
             pass
         else :
-            super( ).__setattr__( name, value )
-
+            super( PolynomialDynamicModel, self ).__setattr__( name, value )
 
     def baseName( self ):
         """ Return a string representation of the model.  """
