@@ -44,6 +44,12 @@ class Engine( object ):
         walkers to be diffused
     errdis : ErrorDistribution
         error distribution to be used
+    constrain : None or callable (TBD -- future extension)
+        Impose constraints on the parameters.
+        None : no constraints
+        callable : a method as
+            parameters = constrain( model, parameters, xdata )
+        It is the callers responsibility to return valid values for the parameters.
     maxtrials : int
         maximum number of trials for various operations
     rng : numpy.random.RandomState
@@ -67,6 +73,7 @@ class Engine( object ):
 
     #  *********CONSTRUCTORS***************************************************
 
+#    def __init__( self, walkers, errdis, copy=None, seed=4213, constrain=None ):
     def __init__( self, walkers, errdis, copy=None, seed=4213 ):
         """
         Copy Constructor.
@@ -76,6 +83,13 @@ class Engine( object ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        seed : int
+            for random number generator
+        constrain : None or callable (TBD)
+            Impose constraints on the parameters
+            None : no constraints
+            callable : a method as
+                parameters = constrain( model, parameters, xdata )
         copy : Engine
             engine to be copied
 
@@ -87,9 +101,14 @@ class Engine( object ):
         if copy is None :
             self.maxtrials = 5
             self.rng = numpy.random.RandomState( seed )
+#            if constrain is None or callable( constrain ) :
+#                self.constrain = constrain
+#            else :
+#                raise ValueError( "Constrain does not seem callable" )
         else :
             self.maxtrials = copy.maxtrials
             self.rng = copy.rng
+#            self.constrain = copy.constrain
 
     def copy( self ):
         """ Return a copy of this engine.  """

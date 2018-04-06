@@ -120,21 +120,14 @@ class GalileanEngine( Engine ):
         allpars = walker.allpars
         fitIndex = walker.fitIndex
 
-#        reportCall( )
-
         npout = 0
         inside = 0
         Ltry = 0
 
         self.plotter.start( )
-#        print( "GE  UM  ", walker.id, allpars, fitIndex )
         um = UnitMovements( model, allpars, fitIndex, self )
 
         ptry = allpars.copy()
-#        print( ptry )
-#        print( um.upar )
-#        print( self.unit2Domain( model, um.upar ) )
-
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
         maxtrial = self.maxtrials * nstep
         step = 0
@@ -166,6 +159,11 @@ class GalileanEngine( Engine ):
                 self.size *= 0.7
 
                 self.plotter.move( allpars, ptry, 3 )
+
+#            ## future extension
+#            if self.constrain :
+#                xdata = self.errdis.xdata
+#                ptry = self.constrain( model, ptry, xdata )
 
             Ltry = self.errdis.logLikelihood( model, ptry )
 
@@ -209,10 +207,8 @@ class UnitMovements( object ):
         self.engine = engine
         self.setParameters( model, allpars )
 
-        if len( fitIndex ) > len( self.engine.unitRange ) :
-#            print( "GAL  ", self.engine.unitRange, fitIndex, end="" )
-            self.engine.unitRange = numpy.append( self.engine.unitRange, [1.0]*model.deltaNpar )
-#            print( self.engine.unitRange )
+        if self.np > len( self.engine.unitRange ) :
+            self.engine.unitRange = numpy.ones( self.np, dtype=float )
 
         self.upran = self.engine.unitRange[fitIndex]
         self.setVelocity( self.engine.size )
@@ -223,7 +219,6 @@ class UnitMovements( object ):
     def mirrorOnLowL( self, dLdp ):
         inprod = numpy.inner( dLdp, self.uvel )
         sumsq  = numpy.inner( dLdp, dLdp )
-#        print( "MOL  ", dLdp, self.uvel, sumsq )
         self.uvel -= 2 * dLdp * inprod / sumsq
 
     def setVelocity( self, size ):
