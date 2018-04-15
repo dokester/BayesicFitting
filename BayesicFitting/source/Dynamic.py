@@ -1,11 +1,6 @@
 import numpy as numpy
-import random
-from astropy import units
 from . import Tools
-import warnings
 from .Formatter import formatter as fmt
-
-from .Prior import Prior
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -120,10 +115,10 @@ class Dynamic( object ):
 
         if dnp < 0 :
             newpar[:kh] = param[:kh]
-            newpar[kh:] = param[kb:]
         else :
             newpar[:kb] = param[:kb]
-            newpar[kh:] = param[kb:]
+
+        newpar[kh:] = param[kb:]
 
         return newpar
 
@@ -135,11 +130,12 @@ class Dynamic( object ):
 
         if dnp < 0 :
             newfi[:kh] = findex[:kh]
-            newfi[kh:] = findex[kb:]
         else :
             newfi[:kb] = findex[:kb]
             newfi[kb:kh] = numpy.arange( dnp ) + findex[kb-1] + 1
-            newfi[kh:] = findex[kb:]
+
+        # the last part needs a shift of dnp, except when < 0
+        newfi[kh:] = [fi if fi < 0 else fi + dnp for fi in findex[kb:]]
 
         return newfi
 

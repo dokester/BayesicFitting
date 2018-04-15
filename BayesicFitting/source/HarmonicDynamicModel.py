@@ -131,6 +131,17 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
         else :
             super( HarmonicDynamicModel, self ).__setattr__( name, value )
 
+    def getPrior( self, k ):
+        """
+        Return the prior for parameter k.
+
+        Parameters
+        ----------
+        k : int
+            the parameter to be selected.
+        """
+        return super( HarmonicDynamicModel, self ).getPrior( k % self.deltaNpar )
+
 
     def baseName( self ):
         """ Return a string representation of the model.  """

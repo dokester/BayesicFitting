@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 from StdTests import stdModeltest
 
+from BayesicFitting import formatter as fmt
 from BayesicFitting import *
 
 __author__ = "Do Kester"
@@ -195,10 +196,13 @@ class TestCompoundModel( unittest.TestCase ):
 
         par = numpy.arange( 9, dtype=float )
         unp = m.domain2Unit( par )
-        print( par )
-        print( unp )
-        print( m.unit2Domain( unp ) )
-        print( m.partialDomain2Unit( par ) )
+        print( fmt( par, max=None ) )
+        print( fmt( lo, max=None ) )
+        print( fmt( hi, max=None ) )
+        print( fmt( unp, max=None ) )
+        print( fmt( par / hi, max=None ) )
+        print( fmt( m.unit2Domain( unp ), max=None ) )
+        print( fmt( m.partialDomain2Unit( par ), max=None ) )
 
         numpy.testing.assert_array_almost_equal( m.unit2Domain( unp ), par, 8 )
         self.assertTrue( m.domain2Unit( par[2], 2 ) == unp[2] )

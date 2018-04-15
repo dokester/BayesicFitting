@@ -86,8 +86,14 @@ class StartEngine( Engine ):
         par = walker.allpars.copy()
         uval = self.rng.rand( len( fitIndex ) )
         par[fitIndex] = self.unit2Domain( model, uval, kpar=fitIndex )
+
+#        ## fiture extension
+#        if self.constrain :
+#            xdata = self.errdis.xdata
+#            par = self.constrain( model, par, xdata )
+
         logL = self.errdis.logLikelihood( model, par )
-#        print( "Start  ", walker.id, fmt(uval), fmt(par), fmt(logL) )
+
         self.setSample( walker, model, par, logL, logW=-math.inf )
 
         return len( fitIndex )

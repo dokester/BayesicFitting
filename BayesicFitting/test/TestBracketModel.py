@@ -164,14 +164,19 @@ class TestBracketModel( unittest.TestCase ):
         m.setLimits( lo, hi )
         print( m )
         print( m.parameters )
-        print( "pl    ", len( m.priors ), m.npchain )
+        self.assertTrue( m.priors is None )
+
+
+        print( "pl    ", len( m.model.priors ), len( m.model._next.priors ),
+                         len( m.model._next._next.priors ), m.npchain )
         (lolim,hilim) = m.getLimits()
         print( "Lolim ", lolim )
         print( "Hilim ", hilim )
         self.assertTrue( lolim[7] == -8 )
         self.assertTrue( hilim[7] == 8 )
 
-        self.assertTrue( len( m.priors ) == m.getNumberOfParameters( ) )
+        self.assertTrue( len( lolim ) == m.npchain )
+        self.assertTrue( len( hilim ) == m.npchain )
 
         errors = m.testPartial( x[3], p )
         self.assertTrue( errors == 0 )

@@ -154,8 +154,10 @@ def makeNext( x, k ) :
 
 def length( x ) :
     """
-    Return the length of any item. Singletons too.
+    Return the length of any item. Singletons have length 1; None has length 0..
     """
+    if x is None :
+        return 0
     try :
         return len( x )
     except :

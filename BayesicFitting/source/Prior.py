@@ -2,7 +2,7 @@ import numpy as numpy
 import math as math
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -73,17 +73,19 @@ class Prior( object ):
         super( object, self ).__init__()
 
         self.deltaP = 0.0001
+        # private properties of the Prior
         self._lowDomain = -math.inf
         self._highDomain = math.inf
 
-        object.__setattr__( self, "deltaP", 0.001 )             # for numerical partials
+
+#        object.__setattr__( self, "deltaP", 0.001 )             # for numerical partials
         object.__setattr__( self, "lowLimit", -math.inf )       # Lower limit.
         object.__setattr__( self, "highLimit", math.inf )       # Upper limit.
-#       private properties of the Prior
-        object.__setattr__( self, "_lowDomain", -math.inf )     # Lower limit of the Priors possible domain.
-        object.__setattr__( self, "_highDomain", math.inf )     # Upper limit of the Priors possible domain
+#        object.__setattr__( self, "_lowDomain", -math.inf )     # Lower limit of the Priors possible domain.
+#        object.__setattr__( self, "_highDomain", math.inf )     # Upper limit of the Priors possible domain
 
         self.setLimits( limits )
+
         if prior is not None :
             self.deltaP = prior.deltaP
 
@@ -91,32 +93,35 @@ class Prior( object ):
         """ Return a copy """
         return Prior( prior=self, limits=self.limits )
 
-    def setLimits( self, limits ):
+    def setLimits( self, limits=None ):
         """
         Set limits.
-        It is asserted that limits[0] is smaller than limits[1].
+        It is asserted that lowLimit is smaller than hoghLimit.
 
         Parameters
         ----------
-        limits : None or list of 2 float
-            None : limits are set to [-inf,+inf]
-            the [low,high] limits.
+        limits : None or list of any combination of [None, float]
+            None : no limit (for both or one)
+            float : [low,high] limit
+
         Raises
         ------
-        ValueError when low limit is larger than high limit
+        ValueError when low limit is larger than high limit or out of Domain
 
         """
-        if limits is None :
-            limits = [-math.inf,+math.inf]
+        lowLimit  = None if limits is None else limits[0]
+        highLimit = None if limits is None else limits[1]
 
-        if limits[0] > limits[1] :
-            raise ValueError( "The lowlimit %f must be smaller than the high limit %f"%
-                                ( limits[0], limits[1] ) )
-        if not ( self._lowDomain <= limits[0] < limits[1] <= self._highDomain ) :
+        if lowLimit is None :
+            lowLimit = self._lowDomain
+        if highLimit is None :
+            highLimit = self._highDomain
+
+        if not ( self._lowDomain <= lowLimit < highLimit <= self._highDomain ) :
             raise ValueError( "Limits out of order or out of domain" )
 
-        self.lowLimit = limits[0]
-        self.highLimit = limits[1]
+        self.lowLimit  = lowLimit
+        self.highLimit = highLimit
 
     def __setattr__( self, name, value ) :
         """
@@ -138,6 +143,21 @@ class Prior( object ):
         """ Remove all limits.  """
         self.lowLimit = self._lowDomain
         self.highLimit = self._highDomain
+
+    def setAttributes( self, limits=None, scale=None ) :
+        """
+        Set possible attributes for a Prior.
+
+        Parameters
+        ----------
+        limits : float or None
+            [low,high] limit
+        scale : float or None
+            scale factor
+        """
+        self.setLimits( limits=limits )
+        if scale is not None :
+            self.scale = scale
 
     def isOutOfLimits( self, par ):
         """

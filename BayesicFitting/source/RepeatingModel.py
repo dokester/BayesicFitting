@@ -4,6 +4,7 @@ import math
 from . import Tools
 
 from .Model import Model
+from .BracketModel import BracketModel
 from .Dynamic import Dynamic
 from .ExponentialPrior import ExponentialPrior
 from .UniformPrior import UniformPrior
@@ -37,7 +38,7 @@ __status__ = "Development"
 #  *    2003 - 2014 Do Kester, SRON (Java code)
 #  *    2018        Do Kester
 
-class RepeatingModel( Model, Dynamic ):
+class RepeatingModel( BracketModel, Dynamic ):
     """
     RepeatingModel implements the the Dynamic interface for a Model.
 
@@ -90,6 +91,7 @@ class RepeatingModel( Model, Dynamic ):
         if copy is None :
             self.minComp = minComp
             self.maxComp = maxComp
+            self.priors = model.priors          ## point to the same
             if growPrior is None :
                 if maxComp is None :
                     self.growPrior = ExponentialPrior( scale=2 )
@@ -204,6 +206,14 @@ class RepeatingModel( Model, Dynamic ):
 
 
     def getPrior( self, k ):
+        """
+        Return the prior for parameter k.
+
+        Parameters
+        ----------
+        k : int
+            the parameter to be selected.
+        """
         return super( RepeatingModel, self ).getPrior( k % self.deltaNpar )
 
     def baseName( self ):

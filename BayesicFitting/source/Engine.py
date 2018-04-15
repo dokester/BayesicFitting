@@ -183,7 +183,6 @@ class Engine( object ):
 
         uval = numpy.ndarray( len( kpar ), dtype=float )
 
-
 #        print( "Eng d2u  ", dval, kpar, uval )
         for i,kp in enumerate( kpar ) :
 #            if kp < np :
@@ -261,24 +260,19 @@ class Engine( object ):
         """
         kmx = 0
         if not self.walkers[0].model.isDynamic() :
-#            npmax = len( self.walkers[0].allpars )
             npmax = len( self.walkers[0].fitIndex )
         else :
             npmax = 0
             for k, walker in enumerate( self.walkers ) :
                 if len( walker.allpars ) > npmax :
-#                    npmax = len( walker.allpars )
                     npmax = len( walker.fitIndex )
                     kmx = k
-#        minv = self.walkers[kmx].allpars.copy()
+
         minv = numpy.ones( npmax, dtype=float )
         maxv = numpy.zeros( npmax, dtype=float )
         nval = numpy.zeros( npmax, dtype=int )
 
-#        print( "npmax  ", npmax, nval )
-
         for walker in self.walkers :
-#            print( "ENG   ", walker.id, walker.fitIndex, walker.allpars )
             fi = walker.fitIndex
             minv[fi] = numpy.fmin( minv[fi], walker.allpars[fi] )
             maxv[fi] = numpy.fmax( maxv[fi], walker.allpars[fi] )
@@ -289,7 +283,6 @@ class Engine( object ):
         maxv = self.domain2Unit( model, maxv, kpar=self.walkers[kmx].fitIndex )
         minv = self.domain2Unit( model, minv, kpar=self.walkers[kmx].fitIndex )
 
-#        print( maxv <= minv, nval < len( self.walkers ) )
         q = numpy.where( numpy.logical_or( maxv <= minv, nval < len( self.walkers ) ) )
         maxv[q] = 1.0
         minv[q] = 0.0

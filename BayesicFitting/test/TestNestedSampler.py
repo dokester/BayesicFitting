@@ -57,7 +57,6 @@ class TestNestedSampler( unittest.TestCase ):
         cc = 0.2
         r0 = 0.1
 
-
         x = numpy.arange( N, dtype=float ) / 25 - 2
         w = numpy.full( N, 2.0, dtype=float )
 

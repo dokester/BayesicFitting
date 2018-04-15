@@ -5,6 +5,8 @@ import warnings
 from . import Tools
 
 from .Dynamic import Dynamic
+from .Prior import Prior
+from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -109,6 +111,7 @@ class BaseModel( object ):
         if copy is None :
             self.npbase    = nparams
             self.ndim      = ndim
+            self.priors    = None
             self.posIndex  = posIndex
             self.nonZero   = nonZero
             self.deltaP    = [0.00001]
@@ -120,6 +123,7 @@ class BaseModel( object ):
         else :
             self.npbase   = copy.npbase
             self.ndim     = copy.ndim
+            self.priors   = None if copy.priors is None else copy.priors.copy()
             self.posIndex = copy.posIndex.copy()
             self.nonZero  = copy.nonZero.copy()
             self.deltaP   = copy.deltaP.copy()
@@ -131,9 +135,11 @@ class BaseModel( object ):
         Set attributes.
 
         """
-        keys = {"posIndex":int, "nonZero":int, "deltaP":float, "parNames":str}
+        lnon = {"priors"}
+        keys = {"posIndex":int, "priors":Prior, "nonZero":int, "deltaP":float, "parNames":str}
         key1 = {"npbase":int, "ndim":int, "tiny":float }
-        if ( Tools.setListOfAttributes( self, name, value, keys ) or
+        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
+             Tools.setListOfAttributes( self, name, value, keys ) or
              Tools.setSingleAttributes( self, name, value, key1 ) ) :
             pass
         else :
@@ -252,9 +258,9 @@ class BaseModel( object ):
             values for the parameters. (default: self.parameters)
 
         """
-        return self.baseDerivative( xdata, params )
+        return self.baseDerivative( xdata, param )
 
-    def setPrior( self, k, prior=None, limits=None ) :
+    def setPrior( self, k, prior=None, **kwargs ) :
         """
         set the prior and/or limits for the indicated parameter.
 
@@ -264,27 +270,23 @@ class BaseModel( object ):
             parameter number.
         prior : Prior
             prior for the parameter
-        limits : [float,float]
-            [low,high] limits on the prior.
+        kwargs : dict
+            attributes to be passed to the prior
 
         """
-        np = len( self.priors )
+        np = Tools.length( self.priors )
         if prior is None :
-            if np == 0 :
-                self.priors = [UniformPrior( limits=limits )]
-                return
-            else :
-                prior = self.basePrior( k )
+            prior = UniformPrior( ) if np == 0 else self.basePrior( k )
 
-        prior.setLimits( limits )
+        prior.setAttributes( **kwargs )
 
         if k == np :
-            self.priors += [prior]
-        elif k > np :
+            self.priors = [prior] if self.priors is None else self.priors + [prior]
+            return
+        if k > np :
             k = -1
         self.priors[k] = prior
         return
-
 
     def getPrior( self, k ) :
         """
@@ -302,13 +304,14 @@ class BaseModel( object ):
         Return the prior of the indicated parameter.
 
         Parameters
-        ---------
+        ----------
         k : int
             parameter number.
         """
-        np = len( self.priors )
+        np = Tools.length( self.priors )
         if np == 0 :
             raise IndexError( "The model does not have priors." )
+
         if k < np:
             return self.priors[k]
         else :
@@ -358,4 +361,23 @@ class BaseModel( object ):
             parameter number.
         """
         return units.Unit( 1.0 )
+
+    def hasLimits( self, fitindex=None ) :
+        """
+        Return True if the model has limits set.
+        """
+        if self.npbase == 0 :
+            return True
+        if self.priors is None :
+            return False
+        if fitindex is None :
+            return all( p.hasLimits() for p in self.priors )
+        else :
+            haslim = True
+            npr = len( self.priors )
+            for k in fitindex :
+                if k >= npr :
+                    return haslim
+                haslim = haslim and self.priors[k].hasLimits()
+            return haslim
 

@@ -142,7 +142,7 @@ class Model( FixedModel ):
         nparams = self.npbase                       # accounting len( fixed )
         self._npchain = nparams
         self.stdevs = None
-        self.priors = None
+#        self.priors = None
         # xUnit is by default a (list[ndim] of) scalars, unitless
         self.xUnit = units.Unit( 1.0 ) if ndim == 1 else [units.Unit( 1.0 )]*ndim
         self.yUnit = units.Unit( 1.0 )                  # scalar
@@ -159,7 +159,7 @@ class Model( FixedModel ):
         self._npchain = copy._npchain
         if copy.parameters is not None : self.parameters = copy.parameters.copy()
         if copy.stdevs is not None     : self.stdevs = copy.stdevs.copy()
-        if copy.priors is not None     : self.priors = copy.priors.copy()
+#        if copy.priors is not None     : self.priors = copy.priors.copy()
 
         self.xUnit = copy.xUnit
         self.yUnit = copy.yUnit
@@ -180,8 +180,8 @@ class Model( FixedModel ):
             value of the attribute
 
         """
-        lnon = ['parameters', 'stdevs', 'priors', '_next']
-        dlst = {'parameters':float, 'stdevs':float, 'priors':Prior }
+        lnon = ['parameters', 'stdevs', '_next']
+        dlst = {'parameters':float, 'stdevs':float }
         dind = {'_npchain':int, '_operation':int,
                 '_head':Model, '_next':Model, 'yUnit': units.core.UnitBase }
         if self.ndim == 1 : dind.update( {'xUnit':units.core.UnitBase} )
@@ -247,7 +247,7 @@ class Model( FixedModel ):
     def isolateModel( self, k ):
         """
         Return a ( isolated ) copy of the k-th model in the chain.
-        Fixed parameters, noise scale and priors which might be present in the compound model
+        Fixed parameters and priors which might be present in the compound model
         will be lost in the isolated model.
 
         Parameters
@@ -380,8 +380,8 @@ class Model( FixedModel ):
         ------
         ValueError when a model of a different dimensionality is offered.
         """
-        if self.isDynamic() :
-            raise ValueError( "Only one Dynamic model which should be the last" )
+        if self.isDynamic() and model.isDynamic():
+            raise ValueError( "Only one Dynamic model in a chain" )
         if self.ndim != model.ndim:
             raise ValueError( "Trying to add incompatible models, with dimensions: %d and %d"%
                                 (self.ndim, model.ndim) )
@@ -398,22 +398,21 @@ class Model( FixedModel ):
             last = last._next
             last._head = self._head
 
-        npars = self.getNumberOfParameters()
         self._npchain   = len( self.parameters ) + len( model.parameters )
 
         self.parameters = self._optAppend( self.parameters, model.parameters )
 
-        if model.priors is not None :
-            if self.priors is None :
-                self.priors = [UniformPrior()] * npars
-            elif len( self.priors ) < npars :
-                need = npars - len( self.priors )
-                self.priors = numpy.append( self.priors, [self.priors[-1]] * need )
-            self.priors = numpy.append( self.priors, model.priors )
+#        if model.priors is not None :
+#            if self.priors is None :
+#                self.priors = [UniformPrior()] * npars
+#            elif len( self.priors ) < npars :
+#                need = npars - len( self.priors )
+#                self.priors = numpy.append( self.priors, [self.priors[-1]] * need )
+#            self.priors = numpy.append( self.priors, model.priors )
 
         # Erase the model's attributes; not needed anymore
         model.parameters = None
-        model.priors = None
+#        model.priors = None
 
         return
 
@@ -734,34 +733,7 @@ class Model( FixedModel ):
         return False
 
     #  *****PRIOR***************************************************************
-    def setPriorTBD( self, k, prior=None, limits=None ):
-        """
-        Set the prior and/or limits for the indicated parameter.
-
-        Parameters
-        ----------
-        k : int
-            parameter number.
-        prior : Prior
-            prior for the parameter
-        limits : [float,float]
-            [low,high] limits on the prior.
-
-        Raises
-        ------
-        IndexError when k is larger than the number of parameters.
-
-        """
-        np = self.npbase
-        if k < np:
-            super( Model, self  ).setPrior( k, prior=prior, limits=limits )
-        elif self._next != None:
-            self._next.setPrior( k - np, prior=prior, limits=limits )
-        else:
-            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
-                              " parameters." )
-
-    def getPriorTBD( self, k ):
+    def getPrior( self, k ):
         """
         Return the prior of the indicated parameter.
 
@@ -781,31 +753,33 @@ class Model( FixedModel ):
         elif self._next != None:
             return self._next.getPrior( k - np )
         else:
-            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
-                              " parameters." )
+            raise IndexError( "The (compound) model does not have %d parameters"%( k + 1 ) )
 
-    def getPrior( self, k ):
+    def setPrior( self, k, prior=None, **kwargs ):
         """
-        Return the prior of the indicated parameter.
+        Set the prior for the indicated parameter.
 
         Parameters
         ----------
         k : int
             parameter number.
+        prior : Prior
+            prior for parameter k
+        kwargs : keyword arguments
+            attributes to be passed to the prior
 
         Raises
         ------
         IndexError when k is larger than the number of parameters.
 
         """
-        np = len( self.priors )
+        np = self.npbase
         if k < np:
-            return self.priors[k]
-        elif np < self.getNumberOfParameters() :
-            return self.priors[-1]
+            super( Model, self  ).setPrior( k, prior=prior, **kwargs )
+        elif self._next != None:
+            self._next.setPrior( k - np, prior=prior, **kwargs )
         else:
-            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
-                              " parameters." )
+            raise IndexError( "The (compound) model does not have %d parameters"%( k + 1 ) )
 
     #  ***PARAMETER NAME *******************************************************
     def getParameterName( self, k ):
@@ -869,17 +843,15 @@ class Model( FixedModel ):
         """
         Sets the limits for the parameters of the compound model.
         <br>
-        1. It is valid to insert for either parameter a ( numpy.ndarray )null value
+        1. It is valid to insert for either parameter a None value
         indicating no lower/upper limits.<br>
         2. When a lowerlimit >= upperlimit no limits are enforced.<br>
-        It only works in *Fitter classes which can support it. Eg. Fitter
-        itself cannot handle limits as it would turn the problem into
-        a <b>non</b>-linear one.
+        It only works in *Fitter classes which support it.
 
         Parameters
         ----------
         lowLimits : array_like
-            lower limits on the paameters
+            lower limits on the parameters
         highLimits : array_like
             upper limits on the parameters
 
@@ -894,26 +866,15 @@ class Model( FixedModel ):
             nh = len( highLimits )
             ml = max( ml, nh )
         if ml == 0 : return
-        if ml > self.getNumberOfParameters() :
-            warnings.warn( "More limits given than parameters present: " + str(ml) +
-                          " > " + str( self.getNumberOfParameters() ) )
+        if ml > self.npchain :
+            warnings.warn( "More limits given than parameters present: %d < %d" %
+                            ( ml, self.npchain ) )
 
-        # make enough priors to store
-        if self.priors is None :
-            self.priors = list( UniformPrior() for k in range( ml ) )
-        elif len( self.priors ) < ml :
-            last = self.priors[-1]
-            npr = len( self.priors )
-            self.priors = self.priors + [last] * ( ml - npr )
-
-
-        for k,pr in enumerate( self.priors ) :
-            if k < nl : pr.lowLimit  = lowLimits[k]
-            if k < nh : pr.highLimit = highLimits[k]
-
-            if pr.lowLimit > pr.highLimit :
-                pr.lowLimit  = pr._lowDomain
-                pr.highLimit = pr._highDomain
+        for k in range( ml ) :
+#            pr = self.getPrior( k )
+            lo = None if k >= nl else lowLimits[k]
+            hi = None if k >= nh else highLimits[k]
+            self.setPrior( k, limits=[lo,hi] )
 
     def getLimits( self ) :
         """
@@ -925,33 +886,39 @@ class Model( FixedModel ):
             (lowlimits, highlimits)
 
         """
-        if self.priors is None :
-            return (None,None)
-        lo = [p.lowLimit for p in self.priors]
-        hi = [p.highLimit for p in self.priors]
-        return (lo, hi)
+        lolim = []
+        hilim = []
+        mdl = self
+        while mdl is not None :
+            if not super( Model, mdl ).hasLimits( ) :
+                return [None,None]
+            lolim += [p.lowLimit for p in mdl.priors]
+            hilim += [p.highLimit for p in mdl.priors]
+
+            mdl = mdl._next
+        return (lolim, hilim)
 
     #  *************************************************************************
-    def unsetLimits( self ):
+#    def unsetLimits( self ):
         """ Unset the limits for the parameters.  """
-        for pr in self.priors :
-            pr.unsetLimits()
+#        for pr in self.priors :
+#            pr.unsetLimits()
 
 
     #  FIXME is this needed
-    def hasLowLimit( self ):
+#    def hasLowLimit( self ):
         """
         Return true if a lower limits is present for the parameters.
 
         """
-        return self.priors is not None and all( p.hasLowLimit() for p in self.priors )
+#        return self.priors is not None and all( p.hasLowLimit() for p in self.priors )
 
-    def hasHighLimit( self ):
+#    def hasHighLimit( self ):
         """
         Return true if a upper limit is present for the parameter.
 
         """
-        return self.priors is not None and all( p.hasHighLimit() for p in self.priors )
+#        return self.priors is not None and all( p.hasHighLimit() for p in self.priors )
 
     #  *************************************************************************
     def hasLimits( self, fitindex=None ):
@@ -963,12 +930,17 @@ class Model( FixedModel ):
         fitindex    list of indices to be fitted.
 
         """
-        if self.isNullModel() :
-            return True
-        if fitindex is None :
-            return self.priors is not None and all( p.hasLimits() for p in self.priors )
-        else :
-            return self.priors is not None and all( self.prior( k ).hasLimits() for k in fitindex )
+        haslim = True
+        mdl = self
+        while mdl is not None :
+            haslim = haslim and super( Model, mdl ).hasLimits( fitindex=fitindex )
+            if not haslim :
+                return haslim
+            if fitindex is not None :
+                q = numpy.where( fitindex >= mdl.npbase )
+                fitindex = fitindex[q] - mdl.npbase
+            mdl = mdl._next
+        return haslim
 
     def stayInLimits( self, oldpar, trypar, parlist ):
         """
@@ -1024,6 +996,7 @@ class Model( FixedModel ):
             self.getPrior( k ).checkLimit( param[i] )
             i += 1
 
+    """
     def isOutOfLimits( self, param, index=None ) :
         if self.priors is None:
             return False
@@ -1034,7 +1007,7 @@ class Model( FixedModel ):
             if self.getPrior( k ).isOutOfLimits( param[k] ) :
                 return True
         return False
-
+    """
     #  ****** UNIT <--> DOMAIN ********************************************
     def unit2Domain( self, uvalue, kpar=None ):
         """
@@ -1051,14 +1024,16 @@ class Model( FixedModel ):
         if kpar is not None :
             return self.getPrior( kpar ).unit2Domain( uvalue )
 
-        pgen = Tools.makeNext( self.priors, 0 )
-        dv = numpy.fromiter( ( next( pgen ).unit2Domain( uv ) for uv in uvalue ), float )
+#        return [self.unit2Domain( u, kpar=k ) for k,u in enumerate( uval )]
+
+        pgen = self.nextPrior(  )
+        dval = numpy.fromiter( ( next( pgen ).unit2Domain( uv ) for uv in uvalue ), float )
         try :
             pgen.close()
         except :
             pass
+        return dval
 
-        return dv
 
     def domain2Unit( self, dvalue, kpar=None ):
         """
@@ -1075,13 +1050,15 @@ class Model( FixedModel ):
         if kpar is not None :
             return self.getPrior( kpar ).domain2Unit( dvalue )
 
-        pgen = Tools.makeNext( self.priors, 0 )
-        uv = numpy.fromiter( ( next( pgen ).domain2Unit( dv ) for dv in dvalue ), float )
+#        return [self.getPrior( k ).domain2Unit( d ) for k,d in enumerate( dval )]
+
+        pgen = self.nextPrior()
+        uval = numpy.fromiter( ( next( pgen ).domain2Unit( dv ) for dv in dvalue ), float )
         try :
             pgen.close()
         except :
             pass
-        return uv
+        return uval
 
     def partialDomain2Unit( self, dvalue ):
         """
@@ -1093,13 +1070,33 @@ class Model( FixedModel ):
            parameter array
 
         """
-        pgen = Tools.makeNext( self.priors, 0 )
+#        return [self.getPrior( k ).partialDomain2Unit( d ) for k,d in enumerate( dvalue )]
+
+        pgen = self.nextPrior(  )
         part = numpy.fromiter( ( next( pgen ).partialDomain2Unit( dv ) for dv in dvalue ), float )
         try :
             pgen.close()
         except :
             pass
         return part
+
+    def nextPrior( self ) :
+        mdl = self
+        k = 0
+        while True :
+            try :
+                yield mdl.priors[k]
+            except :
+                yield mdl.priors[-1]
+            k += 1
+            if k >= mdl.npbase :
+                mdl = mdl._next
+                k = 0
+
+
+
+
+
 
     #  *****SOME DUMMY METHODS TO ALLOW LINEAR MODELS IN NONLIN FITTERS********
     def isMixed( self ):
@@ -1459,11 +1456,32 @@ class Brackets( Model ):
         """
         return self.model.derivative( xdata, param )
 
+
+    def setLimits( self, lowLimits=None, highLimits=None ) :
+        self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
+
+    def getLimits( self ) :
+        return self.model.getLimits()
+
+    def nextPrior( self ) :
+        yield self.model.nextPrior()
+
     #  *************************************************************************
     def baseName( self ):
         """ Returns a string representation of the model.  """
         indent = "  "
         return "{ " + self.model._toString( indent * self._deep ) + " }"
+
+    def basePrior( self, k ) :
+        """
+        Return the prior of the indicated parameter.
+
+        Parameters
+        ----------
+        k : int
+            parameter number.
+        """
+        return self.model.getPrior( k )
 
     def baseParameterName( self, k ):
         """
