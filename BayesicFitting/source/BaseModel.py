@@ -276,7 +276,7 @@ class BaseModel( object ):
         """
         np = Tools.length( self.priors )
         if prior is None :
-            prior = UniformPrior( ) if np == 0 else self.basePrior( k )
+            prior = UniformPrior( ) if np == 0 else self.basePrior( k ).copy()
 
         prior.setAttributes( **kwargs )
 
@@ -287,6 +287,18 @@ class BaseModel( object ):
             k = -1
         self.priors[k] = prior
         return
+
+    def hasPriors( self, isBound=True ) :
+        """
+        Return True when the model has priors for all its parameters.
+
+        Parameters
+        ----------
+        isBound : bool
+            Also check if the prior is bound.
+        """
+        return ( self.priors is not None and ( ( not isBound ) or
+                 all( [p.isBound() for p in self.priors] ) ) )
 
     def getPrior( self, k ) :
         """

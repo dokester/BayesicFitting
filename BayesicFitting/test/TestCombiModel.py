@@ -135,7 +135,7 @@ class TestCombiModel( unittest.TestCase ):
         cm.xUnit = units.m
         cm.yUnit = units.kg
 
-        p = numpy.asarray( [1.0,0.5, 10.0, 0.0, 1.0, 0.4, 0.0] )
+        p = numpy.asarray( [1.0, 0.5, 10.0, 0.0, 1.0, 0.0] )
 
         stdModeltest( cm, p, plot=plot )
 

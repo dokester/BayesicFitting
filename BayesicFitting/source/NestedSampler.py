@@ -262,8 +262,9 @@ class NestedSampler( object ):
         """
         self.xdata = xdata
         self.model = model
-        if not ( ( self.model.priors is not None ) and
-                 all( [p.isBound() for p in self.model.priors] ) ) :
+#        if not ( ( self.model.priors is not None ) and
+#                 all( [p.isBound() for p in self.model.priors] ) ) :
+        if not self.model.hasPriors() :
             warnings.warn( "Model needs priors and/or limits" )
         self.ydata = ydata
         self.weights = weights
@@ -413,7 +414,7 @@ class NestedSampler( object ):
                 kw = worst[0]
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
-#               scale = self.walker[kw].model
+#               scale = self.getScale( self.walker[kw] )
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ, self.info,
                         self.lowLhood, np ), fmt( pl ) )
 
@@ -459,6 +460,9 @@ class NestedSampler( object ):
     def getMaxIter( self ) :
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.discard )
 
+#   det getScale( self, walker ) :
+#       np = walker.model.npchain
+#       return self.distribution.getScale( walker.model, params=walker.allpars[:np] )
 
 #  ===================================================================================
     def optionalRestart( self ):

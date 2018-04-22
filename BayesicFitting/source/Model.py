@@ -191,6 +191,8 @@ class Model( FixedModel ):
             if Tools.length( value ) != self.npchain :
                 warnings.warn( "%s: Nr of parameters does not comply. expect %d; got %d" %
                                 ( self.shortName(), self.npchain, Tools.length( value ) ) )
+                raise ValueError( "%s: Nr of parameters does not comply. expect %d; got %d" %
+                                ( self.shortName(), self.npchain, Tools.length( value ) ) )
         ### TBC Why are these lines here ??
         # if name == 'stdevs' and value is not None :
         #     stdv = numpy.zeros_like( self.parameters, dtype=float )
@@ -733,6 +735,22 @@ class Model( FixedModel ):
         return False
 
     #  *****PRIOR***************************************************************
+    def hasPriors( self, isBound=True ) :
+        """
+        Return True when the model has priors for all its parameters.
+
+        Parameters
+        ----------
+        isBound : bool
+            Also check if the prior is bound.
+        """
+        hasp = True
+        mdl = self
+        while mdl is not None and hasp :
+            hasp = hasp and super( Model, self ).hasPriors( isBound=isBound )
+            mdl = mdl._next
+        return hasp
+
     def getPrior( self, k ):
         """
         Return the prior of the indicated parameter.
@@ -1092,10 +1110,6 @@ class Model( FixedModel ):
             if k >= mdl.npbase :
                 mdl = mdl._next
                 k = 0
-
-
-
-
 
 
     #  *****SOME DUMMY METHODS TO ALLOW LINEAR MODELS IN NONLIN FITTERS********
@@ -1482,6 +1496,17 @@ class Brackets( Model ):
             parameter number.
         """
         return self.model.getPrior( k )
+
+    def hasPriors( self, isBound=True ) :
+        """
+        Return True when the model has priors for all its parameters.
+
+        Parameters
+        ----------
+        isBound : bool
+            Also check if the prior is bound.
+        """
+        return self.model.hasPriors( isBound=isBound )
 
     def baseParameterName( self, k ):
         """

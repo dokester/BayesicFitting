@@ -132,10 +132,19 @@ class Dynamic( object ):
             newfi[:kh] = findex[:kh]
         else :
             newfi[:kb] = findex[:kb]
-            newfi[kb:kh] = numpy.arange( dnp ) + findex[kb-1] + 1
+            fill = numpy.arange( dnp )
+            if kb > 0 :
+                fill += findex[kb-1] + 1
+            newfi[kb:kh] = fill
 
         # the last part needs a shift of dnp, except when < 0
         newfi[kh:] = [fi if fi < 0 else fi + dnp for fi in findex[kb:]]
+
+        if newfi[0] > 0 :
+            print( npbase, dnp, pat )
+            print( findex )
+            print( newfi )
+            raise AssertionError()
 
         return newfi
 

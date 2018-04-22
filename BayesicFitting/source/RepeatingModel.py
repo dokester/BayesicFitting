@@ -38,7 +38,7 @@ __status__ = "Development"
 #  *    2003 - 2014 Do Kester, SRON (Java code)
 #  *    2018        Do Kester
 
-class RepeatingModel( BracketModel, Dynamic ):
+class RepeatingModel( Model, Dynamic ):
     """
     RepeatingModel implements the the Dynamic interface for a Model.
 
@@ -51,7 +51,7 @@ class RepeatingModel( BracketModel, Dynamic ):
     """
     #  *****CONSTRUCTOR*********************************************************
     def __init__( self, ncomp, model, minComp=0, maxComp=None, fixed=None,
-                  growPrior=None, copy=None, **kwargs ):
+                  growPrior=None, isDynamic=True, copy=None, **kwargs ):
         """
         Repeating the same model several times.
 
@@ -68,6 +68,8 @@ class RepeatingModel( BracketModel, Dynamic ):
         growPrior : None or Prior
             governing the birth and death.
             ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+        isDynamic : bool (True)
+            Whether this is a Dynamic Model.
         copy : RepeatingModel
             model to copy
 
@@ -83,6 +85,7 @@ class RepeatingModel( BracketModel, Dynamic ):
             raise ValueError( "ncomp outside range of [min..max] range" )
 
         np = ncomp * model.npchain
+
         super( RepeatingModel, self ).__init__( np, copy=copy, **kwargs )
 
         self.ncomp = ncomp
@@ -91,6 +94,7 @@ class RepeatingModel( BracketModel, Dynamic ):
         if copy is None :
             self.minComp = minComp
             self.maxComp = maxComp
+            self.isDyna = isDynamic or minComp == maxComp
             self.priors = model.priors          ## point to the same
             if growPrior is None :
                 if maxComp is None :
@@ -103,7 +107,9 @@ class RepeatingModel( BracketModel, Dynamic ):
         else :
             self.minComp = copy.minComp
             self.maxComp = copy.maxComp
-            self.growPrior = copy.growPrior.copy()
+            self.growPrior = None if copy.growPrior is None else copy.growPrior.copy()
+            self.isDyna = copy.isDyna
+
 
     def copy( self ):
         """ Copy method.  """
@@ -114,7 +120,7 @@ class RepeatingModel( BracketModel, Dynamic ):
 
     #  *************************************************************************
     def __setattr__( self, name, value ) :
-        dind = {"minComp": int, "maxComp": int, "growPrior": Prior,
+        dind = {"minComp": int, "maxComp": int, "growPrior": Prior, "isDyna": bool,
                 "model": Model, "ncomp" : int, "deltaNpar" : int}
         lnon = {"maxComp": int}
 
@@ -126,6 +132,9 @@ class RepeatingModel( BracketModel, Dynamic ):
             pass
         else :
             super( RepeatingModel, self ).__setattr__( name, value )
+
+    def isDynamic( self ) :
+        return self.isDyna
 
     #  *************************************************************************
     def baseResult( self, xdata, params ):
@@ -218,8 +227,8 @@ class RepeatingModel( BracketModel, Dynamic ):
 
     def baseName( self ):
         """ Return a string representation of the model.  """
-        return ( "Repeat %d times:\n  " % self.ncomp +
-                  self.model.baseName( ) )
+        return ( "Repeat  Model" )
+#        return ( "Repeat %d times:\n  " % self.ncomp + self.model.baseName( ) )
 
     def baseParameterName( self, k ):
         """

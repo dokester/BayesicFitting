@@ -53,8 +53,9 @@ class TestDynamicModel( unittest.TestCase ):
         print( "  Test RepeatingModel" )
         m = GaussModel()
         r = RepeatingModel( 1, m  )
-        self.growshrink( r, dnp=3 )
+        rc = r.copy()
 
+        self.growshrink( rc, dnp=3 )
 
     def growshrink( self, m, dnp=1 ) :
         self.assertTrue( m.npchain == dnp )

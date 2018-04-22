@@ -316,7 +316,7 @@ class TestFixedModels( unittest.TestCase ):
         self.assertTrue( m.npmax == 4 )
         self.assertTrue( m.npchain == 3 )
         self.assertTrue( m.npbase == 3 )
-        p = [1.1, 0.5, 0.8, 0.4 ]
+        p = [1.1, 0.5, 0.4 ]
         stdModeltest( m, p, plot=plot )
 
     def testSplinesModel( self, plot=False ):
