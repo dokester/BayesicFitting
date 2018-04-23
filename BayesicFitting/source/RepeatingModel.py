@@ -122,7 +122,7 @@ class RepeatingModel( Model, Dynamic ):
     def __setattr__( self, name, value ) :
         dind = {"minComp": int, "maxComp": int, "growPrior": Prior, "isDyna": bool,
                 "model": Model, "ncomp" : int, "deltaNpar" : int}
-        lnon = {"maxComp": int}
+        lnon = {"maxComp"}
 
         if name == "model" :
             self.deltaNpar = value.npchain
