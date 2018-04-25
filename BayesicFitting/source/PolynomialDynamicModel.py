@@ -128,7 +128,7 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
         self.degree += dn
 
     def __setattr__( self, name, value ) :
-        lnon = {"maxComp": int}
+        lnon = ["maxComp"]
         dind = {"degree": int, "minComp": int, "maxComp": int,
                 "growPrior": Prior}
         if ( Tools.setNoneAttributes( self, name, value, lnon ) or

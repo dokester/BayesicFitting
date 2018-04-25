@@ -111,9 +111,13 @@ class DeathEngine( Engine ):
             self.reportFailed()
             return 0
 
-        dnp = model.deltaNpar        # parameter decrease
-        ptry = model.alterParameters( ptry, np, -dnp, pat )
-        find = model.alterFitindex( walker.fitIndex, np, -dnp, pat )
+#        dnp = model.deltaNpar        # parameter decrease
+#        ptry = model.alterParameters( ptry, np, -dnp, pat )
+#        find = model.alterFitindex( walker.fitIndex, np, -dnp, pat )
+
+        dnp = model.npbase - np         # parameter decrease
+        ptry = model.alterParameters( ptry, np, dnp, pat )
+        find = model.alterFitindex( walker.fitIndex, np, dnp, pat )
 
         model = waltry.model
 
@@ -123,7 +127,7 @@ class DeathEngine( Engine ):
             self.reportSuccess()
             self.setSample( walker, model, ptry, Ltry, fitindex=find )
             walker.check( nhyp=self.errdis.nphypar )
-            return dnp
+            return abs( dnp )
 
         self.reportReject( )
         walker.check( nhyp=self.errdis.nphypar )

@@ -124,7 +124,7 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
 
     def __setattr__( self, name, value ) :
         dind = {"minComp": int, "maxComp": int, "growPrior": Prior}
-        lnon = {"maxComp": int}
+        lnon = ["maxComp"]
         if ( Tools.setNoneAttributes( self, name, value, lnon ) or
              Tools.setSingleAttributes( self, name, value, dind ) ) :
             pass

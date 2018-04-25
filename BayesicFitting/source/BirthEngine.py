@@ -113,7 +113,8 @@ class BirthEngine( Engine ):
             walker.check( nhyp=self.errdis.nphypar )
             return 0
 
-        dnp = model.deltaNpar        # parameter increase
+#        dnp = model.deltaNpar        # parameter increase
+        dnp = model.npbase - np         # parameter change
         ptry = model.alterParameters( ptry, np, dnp, pat )
         find = model.alterFitindex( walker.fitIndex, np, dnp, pat )
 

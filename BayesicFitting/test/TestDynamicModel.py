@@ -5,6 +5,8 @@ import numpy as numpy
 from astropy import units
 import math
 
+from StdTests import stdModeltest
+
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 
@@ -50,12 +52,88 @@ class TestDynamicModel( unittest.TestCase ):
         self.growshrink( m, dnp=2 )
 
     def test1Model3( self ):
-        print( "  Test RepeatingModel" )
+        print( "  Test RepeatingModel 3" )
         m = GaussModel()
         r = RepeatingModel( 1, m  )
         rc = r.copy()
 
         self.growshrink( rc, dnp=3 )
+
+    def test1Model4( self ):
+        print( "  Test RepeatingModel 4" )
+        m = GaussModel()
+        r = RepeatingModel( 1, m, same=[2]  )
+        self.assertTrue( isinstance( r.growPrior, ExponentialPrior ) )
+
+        rc = r.copy()
+        self.assertTrue( isinstance( rc.growPrior, ExponentialPrior ) )
+
+        self.assertTrue( rc.same[0] == 2 )
+        self.assertTrue( len( rc.same ) == 1 )
+
+        self.assertTrue( rc.index[0] == 0 )
+        self.assertTrue( rc.index[1] == 1 )
+        self.assertTrue( len( rc.index ) == 2 )
+
+        Tools.printclass( r )
+
+        self.assertTrue( r.grow() )
+        self.assertTrue( r.npbase == 5 )
+        self.assertTrue( r.shrink() )
+        self.assertTrue( r.npbase == 3 )
+        r.shrink()
+        self.assertTrue( r.npbase == 0 )
+        r.grow()
+        self.assertTrue( r.npbase == 3 )
+
+
+        rc.grow()
+        rc.grow()
+        self.assertTrue( rc.npbase == 7 )
+        self.assertTrue( rc.ncomp == 3 )
+
+    def test1Model5( self ):
+        print( "  Test RepeatingModel 6" )
+        m = GaussModel()
+        r = RepeatingModel( 1, m, same=[2], minComp=1, maxComp=3  )
+
+        self.assertTrue( isinstance( r.growPrior, UniformPrior ) )
+        self.assertTrue( r.grow() )
+        self.assertTrue( r.npbase == 5 )
+        self.assertTrue( r.grow() )
+        self.assertTrue( r.npchain == 7 )
+        self.assertFalse( r.grow() )
+        self.assertTrue( r.npbase == 7 )
+
+        pars = numpy.asarray( [1.0, -0.4, 0.1, 0.5, 0.0, 0.3, 0.4] )
+        stdModeltest( r, pars )
+
+        self.assertTrue( r.shrink() )
+        self.assertTrue( r.npbase == 5 )
+        self.assertTrue( r.shrink() )
+        self.assertTrue( r.npbase == 3 )
+        self.assertFalse( r.shrink() )
+        self.assertTrue( r.npbase == 3 )
+
+    def test1Model6( self ):
+        print( "  Test RepeatingModel 6" )
+        m = GaussModel()
+        r = RepeatingModel( 1, m, same=[2], minComp=1, maxComp=1  )
+        self.assertFalse( r.isDynamic() )
+        self.assertFalse( r.grow() )
+        self.assertTrue( r.npbase == 3 )
+        self.assertFalse( r.shrink() )
+        self.assertTrue( r.npbase == 3 )
+
+        p = RepeatingModel( 1, m, same=[2], isDynamic=False  )
+        self.assertFalse( p.isDynamic() )
+        self.assertFalse( p.grow() )
+        self.assertTrue( p.npbase == 3 )
+        self.assertFalse( p.shrink() )
+        self.assertTrue( p.npbase == 3 )
+
+
+
 
     def growshrink( self, m, dnp=1 ) :
         self.assertTrue( m.npchain == dnp )

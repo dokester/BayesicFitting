@@ -135,7 +135,7 @@ class BaseModel( object ):
         Set attributes.
 
         """
-        lnon = {"priors"}
+        lnon = ["priors"]
         keys = {"posIndex":int, "priors":Prior, "nonZero":int, "deltaP":float, "parNames":str}
         key1 = {"npbase":int, "ndim":int, "tiny":float }
         if ( Tools.setNoneAttributes( self, name, value, lnon ) or
