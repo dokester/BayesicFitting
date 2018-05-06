@@ -106,14 +106,13 @@ class DeathEngine( Engine ):
         nc = model.getNumberOfComponents()
         np = model.npbase
 
+        # shuffle the parameters (if needed) before throwing the last one out.
+        ptry = model.shuffle( ptry, pat, np, self.rng )
+
         if not ( nc > model.growPrior.unit2Domain( self.rng.rand() ) and
                 model.shrink( pat ) ) :
             self.reportFailed()
             return 0
-
-#        dnp = model.deltaNpar        # parameter decrease
-#        ptry = model.alterParameters( ptry, np, -dnp, pat )
-#        find = model.alterFitindex( walker.fitIndex, np, -dnp, pat )
 
         dnp = model.npbase - np         # parameter decrease
         ptry = model.alterParameters( ptry, np, dnp, pat )

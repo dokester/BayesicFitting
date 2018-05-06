@@ -88,6 +88,7 @@ class RepeatingModel( Model, Dynamic ):
             raise ValueError( "ncomp outside range of [min..max] range" )
 
         np = ncomp * model.npchain
+        self.isDyna = isDynamic and ( maxComp is None or minComp < maxComp )
 
         super( RepeatingModel, self ).__init__( np, copy=copy, **kwargs )
 
@@ -97,13 +98,11 @@ class RepeatingModel( Model, Dynamic ):
         if copy is None :
             self.minComp = minComp
             self.maxComp = maxComp
-            self.isDyna = isDynamic and ( maxComp is None or minComp < maxComp )
             self.priors = model.priors          ## point to the same
         else :
             self.minComp = copy.minComp
             self.maxComp = copy.maxComp
             growPrior = copy.growPrior.copy()
-            self.isDyna = copy.isDyna
             same = copy.same
 
         self.setSame( same )
@@ -121,7 +120,7 @@ class RepeatingModel( Model, Dynamic ):
 
     def copy( self ):
         """ Copy method.  """
-        return RepeatingModel( self.ncomp, self.model, copy=self )
+        return RepeatingModel( self.ncomp, self.model, isDynamic=self.isDyna, copy=self )
 
     def changeNComp( self, dn ) :
         self.ncomp += dn
@@ -140,7 +139,7 @@ class RepeatingModel( Model, Dynamic ):
 
     def grow( self, pat=0 ):
         """
-        Increase the degree by one upto maxDegree ( if present ).
+        Increase the the number of components by 1 (if allowed by maxComp)
 
         Parameters
         ----------
@@ -167,7 +166,8 @@ class RepeatingModel( Model, Dynamic ):
 
     def shrink( self, pat=0 ):
         """
-        Decrease the degree by one downto minDegree ( default 1 ).
+        Decrease the the number of componenets by 1 (if allowed by minComp)
+        Remove an arbitrary item.
 
         Parameters
         ----------
@@ -182,12 +182,65 @@ class RepeatingModel( Model, Dynamic ):
         if ( not self.isDynamic() ) or self.ncomp <= self.minComp :
             return False
 
+#        pars = self._head.parameters[pat:pat+self.npbase]
+#        pars = self.rotate( pars )
+#        self._head.parameters[pat:pat+self.npbase] = pars
+
         dnp = self.deltaNpar if self.ncomp > 1 else self.model.npbase
         self.alterParameterSize( -dnp, pat )
 
         self.ncomp -= 1
 
         return True
+
+    def shuffle( self, param, pat, np, rng ) :
+        """
+        Shuffle the parameters of the components (if they are equivalent)
+
+        Parameters
+        ----------
+        param : array-like
+            list of all parameters
+        pat : int
+            index where the dynamic model starts
+        np : int
+            length of the parameters of the dynamic model
+        rng : RNG
+            random number generator
+        """
+        if self.ncomp <= 1 :
+            return param
+
+        off = self.model.npbase + pat
+        src = numpy.arange( self.ncomp ) * self.deltaNpar + off
+        per = rng.permutation( self.ncomp )
+        for i in self.index :
+            src[-1] = pat + i             # replace last src by index
+            param[src[per]] = param[src]
+            src += 1
+
+        return param
+
+    """
+    def rotate( self, pars ) :
+        if self.ncomp <= 1 :
+            return pars
+
+        np = self.model.npchain
+        dp = self.deltaNpar
+        rot = numpy.array( [np + j * dp for j in range( self.ncomp )] )
+#        print( "RM   ", self.model.npchain, rot )
+        for i in self.index :
+            rot[-1] = i
+            des = numpy.append( rot[1:], [rot[0]] )
+#            print( "RM   ", i, rot )
+#            print( "RM   ", i, des )
+
+            pars[des] = pars[rot]
+            rot += 1
+#        print( pars )
+        return pars
+    """
 
 
     #  *************************************************************************
@@ -324,12 +377,12 @@ class RepeatingModel( Model, Dynamic ):
         k : int
             the parameter to be selected.
         """
-        return super( RepeatingModel, self ).getPrior( k % self.deltaNpar )
+        i,k = self.par2model( k )
+        return super( RepeatingModel, self ).getPrior( i )
 
     def baseName( self ):
         """ Return a string representation of the model.  """
-        return ( "Repeat  Model" )
-#        return ( "Repeat %d times:\n  " % self.ncomp + self.model.baseName( ) )
+        return ( "Repeat %d times:\n  " % self.ncomp + self.model.baseName( ) )
 
     def baseParameterName( self, k ):
         """
@@ -341,13 +394,9 @@ class RepeatingModel( Model, Dynamic ):
             parameter number.
 
         """
-        if k < self.model.npchain :
-            return self.model.getParameterName( k ) + "_0"
+        i,k = self.par2model( k )
+        return self.model.getParameterName( i ) + "_%d" % k
 
-        k -= self.model.npchain
-        i = self.index[ k % self.deltaNpar ]
-        return ( self.model.getParameterName( i ) + "_%d" %
-                ( 1 + k / self.deltaNpar ) )
 
     def baseParameterUnit( self, k ):
         """
@@ -362,8 +411,18 @@ class RepeatingModel( Model, Dynamic ):
         self.model.xUnit = self.xUnit
         self.model.yUnit = self.yUnit
 
+        i,k = self.par2model( k )
+        return self.model.getParameterUnit( i )
+
+    def par2model( self, k ) :
+        """
+        Return index in model and repetition nr for param k
+        """
         if k >= self.model.npchain :
             k -= self.model.npchain
-            k = self.index[ k % self.deltaNpar ]
-
-        return self.model.getParameterUnit( k )
+            i = self.index[ k % self.deltaNpar ]
+            k = 1 + k / self.deltaNpar
+        else :
+            i = k
+            k = 0
+        return i, k

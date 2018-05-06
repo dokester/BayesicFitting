@@ -107,6 +107,26 @@ class Dynamic( object ):
 
         self._head.parameters = mdlpar
 
+    def shuffle( self, param, pat, np, rng ) :
+        """
+        Shuffle the parameters of the components (if they are equivalent)
+        Default implementation: does nothing.
+
+        Parameters
+        ----------
+        param : array-like
+            list of all parameters
+        pat : int
+            index where the dynamic model starts
+        np : int
+            length of the parameters of the dynamic model
+        rng : RNG
+            random number generator
+        """
+        return param
+
+
+
     def alterParameters( self, param, npbase, dnp, pat ) :
 
         newpar = numpy.zeros( len( param ) + dnp, dtype=float )
