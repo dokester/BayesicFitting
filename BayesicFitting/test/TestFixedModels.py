@@ -180,7 +180,7 @@ class TestFixedModels( unittest.TestCase ):
         print( m.parameters )
         print( m.expand( x, m.parameters ) )
 
-        stdModeltest( m, p, plot=plot, warn=["nopart"] )
+        stdModeltest( m, p, plot=plot )
 
     def XtestFreeShapeModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )

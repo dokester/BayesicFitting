@@ -264,7 +264,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
 #        print( logz0 - logz1, logz0 - logz2 )
-        self.assertTrue( abs( logz2 - logz0 ) < dlz2 )
+        self.assertTrue( abs( logz2 - logz0 ) < 2 * dlz2 )
 
         samples = ns.samples
         parevo =samples.getParameterEvolution()
@@ -434,7 +434,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-        ns = NestedSampler( x, model, y, distribution='laplace', verbose=0 )
+        ns = NestedSampler( x, model, y, distribution='laplace', verbose=0, rate=0.5 )
 
         logE = ns.sample()
 
@@ -446,7 +446,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
-        self.assertTrue( abs( logz2 - logz1 ) < 2 * dlz2 )
+        self.assertTrue( abs( logz2 - logz0 ) < 3 * dlz2 )
 #        print( logz0 - logz1, logz0 - logz2 )
 
         samples = ns.samples

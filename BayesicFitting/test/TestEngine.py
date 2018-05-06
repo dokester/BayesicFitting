@@ -105,11 +105,11 @@ class TestEngine( unittest.TestCase ):
         print( engine.walkers[0] )
         print( engine.walkers[0].allpars )
 
-        ur = engine.calculateUnitRange()
+        engine.calculateUnitRange()
 
-        print( "UnitR ", ur )
+        print( "UnitR ", engine.unitRange )
 
-        print( "DomR  ", engine.unit2Domain( m, ur ) )
+        print( "DomR  ", engine.unit2Domain( m, engine.unitRange ) )
         engine.printReport()
 
 

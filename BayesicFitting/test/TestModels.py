@@ -218,7 +218,7 @@ class TestModels( unittest.TestCase ):
         m = VoigtModel( )
         p = numpy.asarray( [1.2,0.2,0.3,0.4], dtype=float )
         print( p )
-        stdModeltest( m, p, plot=plot, warn=["nopart"] )
+        stdModeltest( m, p, plot=plot ) #, warn=["nopart"] )
 
     def testPseudoVoigtModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )

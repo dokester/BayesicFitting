@@ -108,12 +108,20 @@ class TestDynamicModel( unittest.TestCase ):
         pars = numpy.asarray( [1.0, -0.4, 0.1, 0.5, 0.0, 0.3, 0.4] )
         stdModeltest( r, pars )
 
+
+        r.parameters = pars
+        print( r.parameters )
         self.assertTrue( r.shrink() )
         self.assertTrue( r.npbase == 5 )
+        print( r.parameters )
+
         self.assertTrue( r.shrink() )
         self.assertTrue( r.npbase == 3 )
+        print( r.parameters )
+
         self.assertFalse( r.shrink() )
         self.assertTrue( r.npbase == 3 )
+        print( r.parameters )
 
     def test1Model6( self ):
         print( "  Test RepeatingModel 6" )
@@ -132,8 +140,73 @@ class TestDynamicModel( unittest.TestCase ):
         self.assertFalse( p.shrink() )
         self.assertTrue( p.npbase == 3 )
 
+    def test1Model7( self ):
+        print( "  Test RepeatingModel 7" )
+        m = GaussModel()
+        r = RepeatingModel( 1, m, minComp=1, maxComp=3  )
+
+        self.assertTrue( isinstance( r.growPrior, UniformPrior ) )
+        self.assertTrue( r.grow() )
+        self.assertTrue( r.npbase == 6 )
+        self.assertTrue( r.grow() )
+        self.assertTrue( r.npchain == 9 )
+
+        pars = numpy.asarray( [1.0, 0.1, 0.01, 2.0, 0.2, 0.02, 3.0, 0.3, 0.03] )
+
+        r.parameters = pars
+        print( r.parameters )
+        self.assertTrue( r.shrink() )
+        self.assertTrue( r.npbase == 6 )
+        print( r.parameters )
+        self.assertTrue( r.shrink() )
+        self.assertTrue( r.npbase == 3 )
+        print( r.parameters )
 
 
+    def test1Model8( self ):
+        print( "  Test RepeatingModel 8" )
+        m = GaussModel()
+        r = RepeatingModel( 3, m )
+
+        pars = numpy.arange( 9, dtype=float )
+        rng = numpy.random.RandomState( 12345 )
+        pars = r.shuffle( pars, 0, 9, numpy.random )
+        print( pars )
+        p0 = pars[0]
+        for k,p in enumerate( pars[1:] ) :
+            self.assertTrue( p == p0+1 or k%3 == 2 )
+            p0 = p
+
+        pars = numpy.arange( 12, dtype=float )
+        rng = numpy.random.RandomState( 12345 )
+        pars = r.shuffle( pars, 2, 9, numpy.random )
+        print( pars )
+        self.assertTrue( pars[0]==0 and pars[1]==1 and pars[-1]==11 )
+
+    def test1Model9( self ):
+        print( "  Test RepeatingModel 9" )
+        m = GaussModel()
+        r = RepeatingModel( 3, m, same=[1] )
+
+        pars = numpy.array( [0,1,2,3,5,6,8], dtype=float )
+        rng = numpy.random.RandomState( 12345 )
+        pars = r.shuffle( pars, 0, 7, numpy.random )
+        print( pars )
+        self.assertTrue( pars[1] == 1 )
+        self.assertTrue( pars[2] == pars[0]+2 )
+        self.assertTrue( pars[4] == pars[3]+2 )
+        self.assertTrue( pars[6] == pars[5]+2 )
+
+
+        pars = numpy.array( [0,1,2,3,4,5,7,8,10,11], dtype=float )
+        rng = numpy.random.RandomState( 12345 )
+        pars = r.shuffle( pars, 2, 7, numpy.random )
+        print( pars )
+        self.assertTrue( pars[0]==0 and pars[1]==1 and pars[-1]==11 )
+        self.assertTrue( pars[3] == 3 )
+        self.assertTrue( pars[4] == pars[2]+2 )
+        self.assertTrue( pars[6] == pars[5]+2 )
+        self.assertTrue( pars[8] == pars[7]+2 )
 
     def growshrink( self, m, dnp=1 ) :
         self.assertTrue( m.npchain == dnp )
@@ -282,7 +355,7 @@ class TestDynamicModel( unittest.TestCase ):
         numpy.random.seed( 1315 )
         N = 200
         x = numpy.arange( N, dtype=float ) / 40
-        y = 0.3 * numpy.random.randn( N )
+        y = 0.1 * numpy.random.randn( N )
         gm = GaussModel()
         for k in range( 1, 6 ) :
             par = [5.0/k, k-0.5, 0.1]

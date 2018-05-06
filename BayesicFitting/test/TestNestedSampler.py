@@ -10,6 +10,7 @@ from FitPlot import plotFit
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
+from BayesicFitting import fma
 
 
 __author__ = "Do Kester"
@@ -111,13 +112,11 @@ class TestNestedSampler( unittest.TestCase ):
 
         gm.setLimits( lolim, hilim )
 
-        ns = NestedSampler( x, gm, y, w )
+        ns = NestedSampler( x, gm, y, w, threads=True, engines=["galilean", "gibbs"] )
         ns.verbose = 2
 
-        self.dofit( ns, pp )
+        self.dofit( ns, pp, plot=plot )
 
-        if plot :
-            plotFit( x, y, gm, ftr=ns.samples )
 
     def test2( self, plot=False ):
         print( "=========== Nested Sampler test 2 ======================" )
@@ -135,14 +134,12 @@ class TestNestedSampler( unittest.TestCase ):
 
         gm.setLimits( lolim, hilim )
 
-        ns = NestedSampler( x, gm, y )
+        ns = NestedSampler( x, gm, y, threads=True )
         ns.verbose = 2
 
         print( "truth  ", pp )
-        self.dofit( ns, pp )
+        self.dofit( ns, pp, plot=plot )
 
-        if plot :
-            plotFit( x, y, gm, ftr=ns.samples )
 
     def test3( self, plot=False ):
         print( "=========== Nested Sampler test 3 ======================" )
@@ -158,8 +155,8 @@ class TestNestedSampler( unittest.TestCase ):
         print( gm._next._next.shortName( ) )
         print( gm._next._next._next )
 
-        lolim = numpy.asarray( [-10,-10,  0,-10,-10, 0,-10,-10], dtype=float )
-        hilim = numpy.asarray( [ 10, 10, 10, 10, 10, 2, 10, 10], dtype=float )
+        lolim = numpy.asarray( [-10,-10,  0,-10,-10, 0.5,-10,-10], dtype=float )
+        hilim = numpy.asarray( [ 10, 10, 10, 10, 10, 2.5, 10, 10], dtype=float )
 
         gm.setLimits( lolim, hilim )
 
@@ -170,44 +167,21 @@ class TestNestedSampler( unittest.TestCase ):
         Tools.printclass( ns )
 
         print( "truth  ", pp )
-        self.dofit( ns, pp )
-
-        if plot :
-            plotFit( x, y, gm, ftr=ns.samples )
-
-    def nytest( self ) :
-        print( "=========== Nested Sampler test 2 ======================" )
-
-        nslim = numpy.asarray( [ 0.01, 100], dtype=float )
-        gm.getNoiseScale( ).setLimits(nslim )
-        ns = NestedSampler( x, gm, y, w )
-        ns.setRate( 0.99 )
-        ns.setTrials( 10 )
-        ns.setInitialisationEngine( RandomEngine() )
-        ns.setEngine( CrossEngine() )
-        ns.addEngine( FrogEngine() )
-        ns.addEngine( ScaleEngine() )
-        ns.addEngine( StepEngine() )
-        ns.setVerbose( True )
-        np = gm.getNumberOfParameters( )
-        ns.setMaxSamples( 1000 )
-
-        print( "truth  ", pp )
-        self.dofit( ns, pp )
+        self.dofit( ns, pp, plot=plot )
 
 
-    def dofit( self, ns, pp ) :
-        logE = ns.sample( )
+    def dofit( self, ns, pp, plot=False ) :
+        logE = ns.sample( plot=plot )
 
         par = ns.parameters
         std = ns.standardDeviations
         mlp = ns.samples.maxLikelihoodParameters
         scale = ns.scale
         scdev = ns.stdevScale
-        print( "truth  ", fmt( pp ) )
-        print( "par    ", fmt( par ) )
-        print( "st dev ", fmt( std ) )
-        print( "ML par ", fmt( mlp ) )
+        print( "truth  ", fma( pp ) )
+        print( "par    ", fma( par ) )
+        print( "st dev ", fma( std ) )
+        print( "ML par ", fma( mlp ) )
         print( "scale  ", fmt( scale ), " +- ", fmt( scdev ) )
 #        ns.report( )
 
