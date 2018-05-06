@@ -3,6 +3,7 @@ from astropy import units
 import math
 from . import Tools
 from .Formatter import formatter as fmt
+from .Formatter import fma
 
 from .Engine import Engine
 from .Engine import DummyPlotter
@@ -80,8 +81,8 @@ class GalileanEngine( Engine ):
         """
         super( GalileanEngine, self ).__init__( walkers, errdis, copy=copy,
                         seed=seed  )
-        self.nstep = 3
-        self.size = 0.5
+        self.nstep = 4
+#        self.size = 0.5
 
         self.plotter = DummyPlotter( )
 
@@ -89,7 +90,7 @@ class GalileanEngine( Engine ):
         """ Return copy of this.  """
         engine = GalileanEngine( self.walkers, self.errdis, copy=self )
         engine.nstep = self.nstep
-        engine.size = self.size
+#        engine.size = self.size
         return engine
 
     def __str__( self ):
@@ -123,9 +124,10 @@ class GalileanEngine( Engine ):
         npout = 0
         inside = 0
         Ltry = 0
+        size = 0.5
 
         self.plotter.start( )
-        um = UnitMovements( model, allpars, fitIndex, self )
+        um = UnitMovements( model, allpars, fitIndex, self, size )
 
         ptry = allpars.copy()
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
@@ -154,9 +156,10 @@ class GalileanEngine( Engine ):
 
                 self.plotter.move( pedge, ptry, 2 )
             else:                                       # mirroring failed; do reverse
-                um.reverseVelocity( 1.0 )
+                size *= 0.7
+                um.reverseVelocity( size )
                 ptry[fitIndex] = um.stepPars( 1.0 )
-                self.size *= 0.7
+#                self.size *= 0.7
 
                 self.plotter.move( allpars, ptry, 3 )
 
@@ -181,17 +184,13 @@ class GalileanEngine( Engine ):
                 else:
                     self.reportFailed( )
 
-#            print( "GEng  ", model.npchain, fitIndex, fmt(ptry), fmt(Ltry),
-#                inside, step, fmt( self.size ) )
+#            print( "GEng  ", fma(ptry), fmt(Ltry) )
+#            print( "      ", fma( self.unitRange ), inside, step, fmt( size ) )
 
             if not ( step < nstep and trial < maxtrial ):
                 break
 
         self.setSample( walker, model, allpars, Lhood )
-
-        if trial >= maxtrial:
-#            self.size = self.size * 0.9 + 0.00001
-            pass
 
         self.plotter.stop()
         return npout
@@ -200,7 +199,7 @@ import matplotlib.pyplot as plt
 
 class UnitMovements( object ):
 
-    def __init__( self, model, allpars, fitIndex, engine ):
+    def __init__( self, model, allpars, fitIndex, engine, size ):
         self.model = model
         self.np = len( fitIndex )
         self.fitIndex = fitIndex
@@ -211,7 +210,7 @@ class UnitMovements( object ):
             self.engine.unitRange = numpy.ones( self.np, dtype=float )
 
         self.upran = self.engine.unitRange[fitIndex]
-        self.setVelocity( self.engine.size )
+        self.setVelocity( size )
 
     def setParameters( self, model, allpars ):
         self.upar = self.engine.domain2Unit( model, allpars, kpar=self.fitIndex )
@@ -232,6 +231,9 @@ class UnitMovements( object ):
         return self.engine.domain2Unit( self.model, allpars, kpar=self.fitIndex )
 
     def setVelocityStatic( self, size ):
+        self.uvel  = self.uniform() * self.upran * size
+
+        """
         # find two randomly chosen walkers
         nm = len( self.engine.walkers )
         k1 = k0 = self.engine.rng.randint( nm )
@@ -244,6 +246,7 @@ class UnitMovements( object ):
         # add a random contibution
         rv = self.uniform() * self.upran * size
         self.uvel = ( nm * self.uvel + self.np * rv ) / ( nm + self.np )
+        """
 
     def uniform( self ) :
         return self.engine.rng.rand( self.np ) - 0.5
@@ -254,8 +257,10 @@ class UnitMovements( object ):
 
     def reverseVelocity( self, size ):
         upv = self.uvel                 # keep original velocity
-        self.setVelocity( 0.5 * size )  # get a new one
-        self.uvel -= ( 0.5 * upv )      # subtract original
+        self.setVelocity( size )        # get a new one to perturb
+        nm = len( self.engine.walkers )
+        self.uvel = size * ( self.np * self.uvel - nm * upv ) / ( nm + self.np )
+#        self.uvel -= ( 0.5 * upv )      # subtract original
 
     def stepPars( self, f ):
         uv = self.uvel

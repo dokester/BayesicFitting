@@ -188,7 +188,7 @@ class NestedSampler( object ):
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata, model, ydata, weights=None, distribution=None,
                 keep=None, ensemble=100, discard=1, seed=80409, rate=1.0,
-                limits=None, engines=None, maxsize=None, verbose=1 ) :
+                limits=None, engines=None, maxsize=None, threads=False, verbose=1 ) :
         """
         Create a new class, providing inputs and model.
 
@@ -253,6 +253,8 @@ class NestedSampler( object ):
                       execute( walker, lowLhood, fitIndex )
         maxsize : None or int
             maximum size of the resulting sample list (None : no limit)
+        threads : bool (False)
+            Use Threads to distribute the diffusion of discarded samples over the available cores.
         vebose : int
             0 : silent
             1 : basic information
@@ -262,8 +264,7 @@ class NestedSampler( object ):
         """
         self.xdata = xdata
         self.model = model
-#        if not ( ( self.model.priors is not None ) and
-#                 all( [p.isBound() for p in self.model.priors] ) ) :
+
         if not self.model.hasPriors() :
             warnings.warn( "Model needs priors and/or limits" )
         self.ydata = ydata
@@ -282,6 +283,7 @@ class NestedSampler( object ):
         self.minimumIterations = 100
         self.end = 2.0
         self.maxtrials = 5
+        self.threads = threads
 
         self.iteration = 0
 
@@ -356,7 +358,7 @@ class NestedSampler( object ):
 
         self.distribution.ncalls = 0                      #  reset number of calls
 
-        self.plotData( )
+        self.plotData( plot=plot )
 
         if self.verbose >= 1 :
             print( "Fit", ( "all" if keep is None else fitlist ), "parameters of" )
@@ -381,7 +383,8 @@ class NestedSampler( object ):
         if self.verbose >= 2:
             print( "Iteration   logZ        H     LowL     npar    parameters" )
 
-        explorer = Explorer( self )
+
+        explorer = Explorer( self, threads=self.threads )
 
         self.logZ = -sys.float_info.max
         self.info = 0
@@ -393,6 +396,13 @@ class NestedSampler( object ):
 
         if self.optionalRestart() :
             logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
+
+        self.engines[0].calculateUnitRange()
+        oldinfo = 0
+        for eng in self.engines :
+            eng.unitRange = self.engines[0].unitRange
+            eng.unitMin   = self.engines[0].unitMin
+#            print( eng, "  ",  eng.unitRange )
 
         while self.iteration < self.getMaxIter( ):
 
@@ -418,7 +428,7 @@ class NestedSampler( object ):
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ, self.info,
                         self.lowLhood, np ), fmt( pl ) )
 
-                self.plotResult( worst[0], self.iteration )
+                self.plotResult( self.walkers[worst[0]], self.iteration, plot=plot )
 
             self.samples.weed( self.maxsize )                # remove overflow in samplelist
 
@@ -433,6 +443,14 @@ class NestedSampler( object ):
             self.iteration += 1
 
             self.optionalSave( )
+
+            if self.info > oldinfo + 1 :
+                self.engines[0].calculateUnitRange()
+                for eng in self.engines :
+                    eng.unitRange = self.engines[0].unitRange
+                    eng.unitMin   = self.engines[0].unitMin
+#                    print( eng, "  ",  eng.unitRange )
+                oldinfo = self.info
 
 
         # End of Sampling
@@ -737,20 +755,36 @@ class NestedSampler( object ):
             self.initialEngine.execute( walker, 0, fitIndex=fitlist )
 
 
-    def plotData( self ):
-        if self.plotter is None:
+    def plotData( self, plot=False ):
+        if not plot :
             return
-        inp = self.xdata.getNumericData( )
-        self.plotter.plotData( inp, self.data, "Iteration plot" )
+        plt.figure( 'iterplot' )
+        plt.plot( self.xdata, self.ydata, 'k.' )
+        plt.show( block=False )
 
-    def plotResult( self, walkerId, iter ):
-        if self.plotter is None:
+    def plotResult( self, walker, iter, plot=False ):
+        if not plot :
             return
-        inp = self.xdata.getNumericData( )
-        param = self.walkers.getParameters( walkerId )
-        model = self.walkers.getModel( walkerId )
+
+        plt.figure( 'iterplot' )
+        if self.line is not None :
+            ax = plt.gca()
+            plt.pause( 0.02 )
+            ax.lines.remove( self.line )
+            self.text.set_text( "Iteration %d" % iter )
+        else :
+            self.text = plt.title( "Iteration %d" % iter )
+            self.ymin, self.ymax = plt.ylim()
+
+        param = walker.allpars
+        model = walker.model
         mock = model.result( self.xdata, param )
-        self.plotter.plotResult( inp, mock, iter )
+        self.line, = plt.plot( self.xdata, mock, 'r-' )
+        dmin = min( self.ymin, numpy.min( mock ) )
+        dmax = max( self.ymax, numpy.max( mock ) )
+        plt.ylim( dmin, dmax )
+        plt.show( block=False )
+
 
     def report( self ):
 

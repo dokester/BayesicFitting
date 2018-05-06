@@ -1,5 +1,5 @@
 import numpy as numpy
-from threading import Thread, current_thread
+from threading import Thread
 
 #from OrderProblem import OrderProblem
 
@@ -65,7 +65,7 @@ class Explorer( object ):
     """
     TWOP32 = 2 ** 32
 
-    def __init__( self, ns ):
+    def __init__( self, ns, threads=False ):
         """
         Construct Explorer from a NestedSampler object.
         Parameters
@@ -82,7 +82,9 @@ class Explorer( object ):
         self.verbose = ns.verbose
 #        if isinstance( self.walkers[0].model, OrderProblem ) :
 #           return
-        self.engines[0].calculateUnitRange( )
+#        self.engines[0].calculateUnitRange( )
+        self.threads = threads
+
 
     def explore( self, worst, lowLhood, fitindex ):
         """
@@ -98,24 +100,33 @@ class Explorer( object ):
             list of parameter indices to fit
 
         """
-        self.lowLhood = lowLhood
+        if not self.threads :
+            for kw in worst :
+                walker = self.walkers[kw]
+                self.exploreWalker( walker, lowLhood, fitindex, self.engines, self.rng )
+#            self.engines[0].calculateUnitRange( )
+            return
+
+        ## We have Threads
         explorerThreads = []
+        self.lowLhood = lowLhood
         for kw in worst :
             seed = self.rng.randint( self.TWOP32 )
+            walker = self.walkers[kw]
 #            print( "Thr  %d  "%kw, seed )
-            exThread = ExplorerThread( "explorer_%d"%kw, kw, self, seed, fitindex )
+            exThread = ExplorerThread( "explorer_%d"%kw, walker, self, seed, fitindex )
             exThread.start( )
             explorerThreads += [exThread]
 
         for thread in explorerThreads :
             thread.join( )
 
-            for k,e in enumerate( self.engines ) :
+            for k,engine in enumerate( self.engines ) :
                 nc = 0
                 for i in range( 3 ) :
                     nc += thread.engines[k].report[i]
-                    e.report[i] += thread.engines[k].report[i]
-                e.report[3] += nc
+                    engine.report[i] += thread.engines[k].report[i]
+                engine.report[3] += nc
 
         if len( threadErrors ) > 0: #check if there are any errors
             for e in threadErrors:
@@ -126,7 +137,44 @@ class Explorer( object ):
 #        if isinstance( self.walkers[0].model, OrderProblem ) :
 #            return
 
-        self.engines[0].calculateUnitRange( )
+#        self.engines[0].calculateUnitRange( )
+
+    def exploreWalker( self, walker, lowLhood, fitindex, engines, rng ):
+        oldlogL = walker.logL
+
+        maxmoves = len( fitindex ) / self.rate
+        maxtrials = self.maxtrials / self.rate
+
+        moves = 0
+        trials = 0
+        while moves < maxmoves and trials < maxtrials :
+            i = 0
+            for engine in rng.permutation( engines ) :
+#                print( "Exp   ", engine, walker.id, fitindex, walker.allpars, walker.fitIndex )
+                moves += engine.execute( walker, lowLhood, fitindex )
+
+                if self.verbose >= 4:
+                    print( "%4d %-15.15s %4d %8.1f %8.1f ==> %3d  %8.1f"%
+                            ( i, engine, walker.id, lowLhood, oldlogL, moves,
+                                walker.logL ) )
+                    i += 1
+                    oldlogL = walker.logL
+
+            trials += 1
+
+        if moves == 0 :
+            self.logLcheck( walker )
+
+
+#        print( moves, maxmoves, trials, maxtrials )
+        return
+
+    def logLcheck( self, walker ) :
+        wlogL = self.errdis.logLikelihood( walker.model, walker.allpars )
+        if wlogL != walker.logL :
+            raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
+                                ( walker.logL, wlogL ) )
+
 
 class ExplorerThread( Thread ):
     """
@@ -148,57 +196,22 @@ class ExplorerThread( Thread ):
 
     global threadErrors
 
-    def __init__( self, name, id, explorer, seed, fitindex ):
+    def __init__( self, name, walker, explorer, seed, fitindex ):
         super( ExplorerThread, self ).__init__( name=name )
-        self.id = id
+        self.walker = walker
         self.explorer = explorer
         self.fitindex = fitindex
         self.engines = [eng.copy() for eng in explorer.engines]
         self.rng = numpy.random.RandomState( seed )
-        self.errdis = self.engines[0].errdis
-        self.verbose = explorer.verbose
+
 
     def run( self ):
         try :
-            self.explore( self.id, self.fitindex )
+            self.explorer.exploreWalker( self.walker, self.explorer.lowLhood,
+                                         self.fitindex, self.engines, self.rng )
         except Exception as e :
-            threadErrors.append( [repr(e) + " occurred in thread %d"%self.id] )
+            threadErrors.append( [repr(e) + " occurred in walker %d" % self.walker.id] )
             raise
 
 
-    def explore( self, walkerId, fitindex ):
-        walker = self.explorer.walkers[walkerId]
-        oldlogL = walker.logL
-
-        maxmoves = len( fitindex ) / self.explorer.rate
-        maxtrials = self.explorer.maxtrials / self.explorer.rate
-
-        lowLhood = self.explorer.lowLhood
-        moves = 0
-        trials = 0
-        while moves < maxmoves and trials < maxtrials :
-            i = 0
-            for engine in self.rng.permutation( self.engines ) :
-#                print( "Exp   ", engine, walker.id, fitindex, walker.allpars, walker.fitIndex )
-                moves += engine.execute( walker, lowLhood, fitindex )
-
-                if self.verbose >= 4:
-                    print( "%4d %-15.15s %4d %8.1f %8.1f ==> %3d  %8.1f"%
-                            ( i, engine, walkerId, lowLhood, oldlogL, moves,
-                                walker.logL ) )
-                    i += 1
-                    oldlogL = walker.logL
-
-            trials += 1
-
-        if moves == 0 :
-            self.logLcheck( walker )
-
-        return
-
-    def logLcheck( self, walker ) :
-        wlogL = self.errdis.logLikelihood( walker.model, walker.allpars )
-        if wlogL != walker.logL :
-            raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
-                                ( walker.logL, wlogL ) )
 

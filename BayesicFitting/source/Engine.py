@@ -70,7 +70,6 @@ class Engine( object ):
     FAILED = 2              #  failed to move
     NCALLS = 3              #  number of calls
 
-
     #  *********CONSTRUCTORS***************************************************
 
 #    def __init__( self, walkers, errdis, copy=None, seed=4213, constrain=None ):
@@ -101,6 +100,10 @@ class Engine( object ):
         if copy is None :
             self.maxtrials = 5
             self.rng = numpy.random.RandomState( seed )
+            self.unitRange = None
+            self.unitMin = None
+
+
 #            if constrain is None or callable( constrain ) :
 #                self.constrain = constrain
 #            else :
@@ -109,11 +112,14 @@ class Engine( object ):
             self.maxtrials = copy.maxtrials
             self.rng = copy.rng
 #            self.constrain = copy.constrain
+            self.unitRange = copy.unitRange
+            self.unitMin   = copy.unitMin
 
     def copy( self ):
         """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
 
+    """
     def __getattr__( self, name ) :
         if name == "unitRange" :
             return self.calculateUnitRange()
@@ -122,7 +128,7 @@ class Engine( object ):
             return self.unitMin
         else :
              raise AttributeError( str( self ) + ": Unknown attribute " + name )
-
+    """
 
     #  *********SET & GET***************************************************
     def setSample( self, walker, model, allpars, logL, logW=None,
@@ -290,7 +296,10 @@ class Engine( object ):
         self.unitRange = numpy.abs( maxv - minv )
         self.unitMin = numpy.fmin( minv, maxv )
 
-        return self.unitRange
+#        self.unitRange = numpy.ones( npmax, dtype=float )
+#        self.unitMin   = numpy.zeros( npmax, dtype=float )
+
+        return  # self.unitRange
 
     def __str__( self ) :
         return str( "Engine" )
