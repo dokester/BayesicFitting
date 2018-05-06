@@ -30,7 +30,7 @@ __status__ = "Development"
 #  *    2017        Do Kester
 
 
-gllen = 80
+gllen = 120
 gindent = 0
 gmax = 5
 fmt = { "float64" : " %8.3f", "int64" : " %8d" }
@@ -70,6 +70,8 @@ def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
         gmax = max
 #    print( "init  ", gindent, gllen, gmax, fmt )
 
+def fma( array, **kwargs ) :
+    return formatter( array, max=None, **kwargs )
 
 def formatter( array, format=None, indent=None, linelength=None, max=-1 ) :
     """

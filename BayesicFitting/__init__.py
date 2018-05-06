@@ -111,10 +111,12 @@ from .source.SplinesModel import SplinesModel
 from .source.StartEngine import StartEngine
 from .source.StepEngine import StepEngine
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
+#from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
 
 from .source.Formatter import formatter
+from .source.Formatter import fma
 from .source.Formatter import formatter_init
 from .source.Plotter import plotFit
 from .source.Tools import printclass
