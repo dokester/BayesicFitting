@@ -67,6 +67,9 @@ class BaseModel( object ):
         number of params in the base model
     ndim : int
         number of dimensions of input. (default : 1)
+    priors : list of Prior
+        pertaining to each of the parameters of the model.
+        If the list is shorter than the number of parameters, the last one is repeated.
     posIndex : list of int
         list of indices indication positive-definite parameters.
         (default : none)

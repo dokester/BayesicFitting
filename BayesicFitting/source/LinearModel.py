@@ -43,6 +43,26 @@ class LinearModel( Model ):
     The ``baseResult`` follows from that one.
     It is implemented here.
 
+    Attributes
+    ----------
+    None of its own
+
+    Attributes from Model
+    ---------------------
+        parameters, stdevs, npchain
+        _next, _head, _operation
+        xUnit, yUnit (relegated to model)
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Author       Do Kester
+
 
     """
     def __init__( self, nparams, ndim=1, copy=None, **kwargs ):

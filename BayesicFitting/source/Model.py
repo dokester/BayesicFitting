@@ -48,7 +48,7 @@ class Model( FixedModel ):
 
     A model consists of one or more instantiations of (base) models which
     are concatenated in a chain of models using various operations
-    ( +-*/ ). A special operation is the pipe (|). It works like a unix pipe,
+    (+-*/). A special operation is the pipe (|). It works like a unix pipe,
     i.e. the output of the left-hand process in used as input of the
     right-hand process.
 
@@ -56,7 +56,7 @@ class Model( FixedModel ):
     here as result(). They are the ones used in the fitters.
 
     The Model is the place where model-related items are kept, like parameters,
-    stdevs, `Prior`s and unit information.
+    stdevs.
 
     Model also implements a numerical derivation of partial to be
     used when partial is not given in the model definition itself. This same
@@ -70,19 +70,39 @@ class Model( FixedModel ):
     >>> poly.parameters = [3,2,1]               # set the parameters for the model
     >>> y = poly( x )                           # evaluate the model at x
     >>> p0 = poly[0]                            # 3: the first parameter
-
-    To make a compound model consisting of a gaussian and a constant background
-
+    >>>
+    >>> # To make a compound model consisting of a gaussian and a constant background
+    >>>
     >>> gauss = GaussModel( )                   # gaussian model
     >>> gauss += PolynomialModel( 0 )           # gaussian on a constant background
     >>> print( gauss.getNumberOfParameters( ) )
-    4
-
-    Set limits to this model
-
+    >>> 4
+    >>>
+    >>> # Set limits to this model
+    >>>
     >>> lolim = [0,-10,0,-5]                    # lower limits for the parameters
     >>> hilim = [10,10,2, 5]                    # high limits for parameters
     >>> gauss.setLimits( lolim, hilim )         # set limits. Does not work with all Fitters
+    >>>
+    >>> # Pipe a model; The order of operation matters.
+    >>> # m5 = ( m1 | m2 ) + m3
+    >>>
+    >>> m1 = PolynomialModel( 1 )               # m1( x, p )
+    >>> m2 = SineModel()                        # m2( x, q )
+    >>> m3 = PolynomialModel( 0 )               # m4( x, r )
+    >>> m4 = m1 | m2                            # m2( m1( x, p ), q )
+    >>> m5 = m4 + m3                            # m2( m1( x, p ), q ) + m4( x, r )
+    >>> print( m5.parameters )                  # [p, q, r]
+    >>>
+    >>> # Implicit brackets
+    >>> # m5 = m1 | ( m2 + m3 )
+    >>>
+    >>> m1 = PolynomialModel( 1 )               # m1( x, p )
+    >>> m2 = SineModel()                        # m2( x, q )
+    >>> m3 = PolynomialModel( 0 )               # m3( x, r )
+    >>> m4 = m2 + m3                            # m2( x, q ) + m3( x, r )
+    >>> m5 = m1 | m4                            # m2( m1( x, p ), q ) + m4( m1( x, p ), r )
+    >>> print( m5.parameters )                  # [p, q, r]
 
     Attributes
     ----------
@@ -98,6 +118,16 @@ class Model( FixedModel ):
         unit of the y-values
     npchain : int (read only)
         number of parameters needed in the total chain of models
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Author       Do Kester
 
     """
 
@@ -1166,10 +1196,10 @@ class Model( FixedModel ):
         Parameters
         ----------
         model : Model
-            a model to add to self (the existing chain)
+            a copy of model to add to a copy of self (the existing chain)
 
         """
-        return self.copy().addModel( model )
+        return self.copy().__iadd__( model.copy() )
 
     def __isub__( self, model ):
         """
@@ -1191,10 +1221,10 @@ class Model( FixedModel ):
         Parameters
         ----------
         model : Model
-            a model to subtract from self (the existing chain)
+            a copy of model to subtract from a copy of self (the existing chain)
 
         """
-        return self.copy().subtractModel( model )
+        return self.copy().__isub__( model.copy() )
 
     def __imul__( self, model ):
         """
@@ -1216,12 +1246,12 @@ class Model( FixedModel ):
         Parameters
         ----------
         model : Model
-            a model to multiply with self (the existing chain)
+            a copy of model to multiply with a copy of self (the existing chain)
 
         """
-        return self.copy().multiplyModel( model )
+        return self.copy().__imul__( model.copy() )
 
-    def __idiv__( self, model ):
+    def __itruediv__( self, model ):
         """
         Method for making compound models using /= operator.
 
@@ -1234,17 +1264,17 @@ class Model( FixedModel ):
         self.divideModel( model )
         return self
 
-    def __div__( self, model ):
+    def __truediv__( self, model ):
         """
         Method for making compound models using / operator.
 
         Parameters
         ----------
         model : Model
-            a model to divide self with (the existing chain)
+            a copy of model to divide a copy of self with (the existing chain)
 
         """
-        return self.copy().divideModel( model )
+        return self.copy().__itruediv__( model.copy() )
 
     def __ior__( self, model ):
         """
@@ -1266,10 +1296,10 @@ class Model( FixedModel ):
         Parameters
         ----------
         model : Model
-            a model to pipe the previous results through
+            a copy of model to pipe the results of a copy of self (the existing chain)
 
         """
-        return self.copy().pipeModel( model )
+        return self.copy().__ior__( model.copy() )
 
     #  *************************************************************************
     def testPartial( self, xdata, params ):

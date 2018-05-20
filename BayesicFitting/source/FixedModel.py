@@ -65,7 +65,12 @@ class FixedModel( BaseModel ):
         Attribute fixed can only be set in the constructor.
     parlist : array_like or None
         list of active (not-fixed) indices. None is all.
+    mlist : list of Model
+        list of parameter indices which are replaced by a Model in fixed.
 
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     Author :         Do Kester
 
