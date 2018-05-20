@@ -41,7 +41,7 @@ class Gauss( Kernel ):
     def __init__( self ) :
         integral = numpy.sqrt( 2 * math.pi )
         fwhm = 2 * math.sqrt( 2 * math.log( 2 ) )
-        super( Gauss, self ).__init__( integral=integral, fwhm=fwhm )
+        super( Gauss, self ).__init__( integral=integral, fwhm=fwhm, range=math.inf )
 
     def integral( self ):
         return

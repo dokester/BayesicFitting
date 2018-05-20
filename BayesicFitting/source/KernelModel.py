@@ -81,7 +81,7 @@ class KernelModel( NonLinearModel ):
         param = [amp, 0.0, 1.0]
         names = ["amplitude", "center", "width"]
 
-        super( KernelModel, self ).__init__( kernel.numpar, copy=copy, params=param,
+        super( KernelModel, self ).__init__( 3, copy=copy, params=param,
                     names=names, **kwargs )
 
         self.kernel = kernel

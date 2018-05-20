@@ -38,7 +38,7 @@ class Lorentz( Kernel ):
 
     """
     def __init__( self ) :
-        super( Lorentz, self ).__init__( integral=math.pi, fwhm=2.0 )
+        super( Lorentz, self ).__init__( integral=math.pi, fwhm=2.0, range=math.inf )
 
     def integral( self ):
         return math.pi

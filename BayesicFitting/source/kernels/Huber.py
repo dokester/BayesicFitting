@@ -38,7 +38,7 @@ class Huber( Kernel ):
 
     """
     def __init__( self ) :
-        super( Huber, self ).__init__( integral=math.inf, fwhm=4.0 )
+        super( Huber, self ).__init__( integral=math.inf, fwhm=4.0, range=math.inf )
 
     def result( self, x ):
         ax = numpy.abs( x )

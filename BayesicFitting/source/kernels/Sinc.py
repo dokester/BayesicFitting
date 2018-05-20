@@ -42,7 +42,8 @@ class Sinc( Kernel ):
 
     """
     def __init__( self ) :
-        super( Sinc, self ).__init__( integral=1.0, fwhm=2 * 1.8954942670 / math.pi )
+        super( Sinc, self ).__init__( integral=1.0, fwhm=2 * 1.8954942670 / math.pi,
+                                      range=math.inf )
 
     def result( self, x ):
         xp = numpy.where( x == 0, 1.0, x * math.pi )
