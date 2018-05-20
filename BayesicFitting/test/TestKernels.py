@@ -61,6 +61,48 @@ class TestKernels( unittest.TestCase ):
             self.stdKerneltest( kernel, plot=plot )
             self.assertTrue( kernel.isBound() or ( kernl in kernels[:3] ) )
 
+    def plotTHC( self ) :
+        self.testTHC( plot=True )
+
+
+    def testTHC( self, plot=False ) :
+        x = numpy.linspace( -5, 5, 1001 )
+        for kc in range( 7 ) :
+
+            kernel = Tophat( nconv=kc )
+            print( "****"  , kernel, "  *************************" )
+
+            y = kernel.result( x )
+            top = y[500]
+
+            kernin = numpy.sum( y ) / 100
+            self.assertAlmostEqual( kernin, kernel.integral )
+
+            print( kc, top, numpy.sum( y )/100 )
+            if plot :
+                plt.plot( x, kernel.result( x ) )
+                plt.plot( x, kernel.partial( x ) )
+
+            self.stdKerneltest( kernel )
+
+        if plot :
+            plt.show()
+
+    def testonex( self ) :
+        sc = Sinc()
+        ysc = sc.result( 0.0 )
+        print( "sinc  ", ysc, ysc.__class__ )
+
+        un = Uniform()
+        yun = un.result( 0.0 )
+        print( "unif  ", yun, yun.__class__ )
+
+        for n in range( 7 ) :
+            thc = Tophat( nconv=n )
+            ytc = thc.result( 0.0 )
+            print( "thc%d  " % n, ytc, ytc.__class__ )
+
+
 
     def stdKerneltest( self, kernel, plot=None ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
@@ -92,10 +134,12 @@ class TestKernels( unittest.TestCase ):
         self.assertAlmostEqual( ss, 1.0 / model.parameters[0], 4 )
 
         xhm = kernel.fwhm / 2
-        print( xhm, kernel.result( xhm ), kernel.result( -xhm ) )
+        yhm = model.result( xhm )[0]
+        self.assertAlmostEqual( yhm, model.result( -xhm ) )
+        y0 = model.result( 0.0 )[0]
+        print( xhm, yhm, y0, yhm / y0, yhm.__class__ )
 
-        self.assertAlmostEqual( kernel.result( xhm ), 0.5 )
-        self.assertAlmostEqual( kernel.result( -xhm ), 0.5 )
+        self.assertAlmostEqual( (yhm / y0), 0.5 )
 
         part = model.partial( x, par )
         nump = model.numPartial( x, par )

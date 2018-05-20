@@ -44,6 +44,132 @@ class TestCompoundModel( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def testOperations( self ) :
+        print( "  Test Operations  " )
+        m = GaussModel()
+        p = PolynomialModel( 2 )
+        m1 = m + p
+        self.assertTrue( isinstance( m1, Model ) )
+        self.assertTrue( m1.npchain == 6 )
+
+        m = GaussModel()
+        p = PolynomialModel( 2 )
+        m1 = m - p
+        self.assertTrue( isinstance( m1, Model ) )
+        self.assertTrue( m1.npchain == 6 )
+
+        m = GaussModel()
+        p = PolynomialModel( 2 )
+        m1 = m * p
+        self.assertTrue( isinstance( m1, Model ) )
+        self.assertTrue( m1.npchain == 6 )
+
+        m = GaussModel()
+        p = PolynomialModel( 2 )
+        m1 = m / p
+        self.assertTrue( isinstance( m1, Model ) )
+        self.assertTrue( m1.npchain == 6 )
+
+        m = GaussModel()
+        p = PolynomialModel( 2 )
+        m1 = m | p
+        self.assertTrue( isinstance( m1, Model ) )
+        self.assertTrue( m1.npchain == 6 )
+
+
+    def testLimits( self ) :
+        m = GaussModel()
+        m.setLimits( lowLimits=[-10, 5, 0], highLimits=[10, 9, 6] )
+        p = PolynomialModel( 3 )
+        p.setLimits( lowLimits=[-100], highLimits=[100] )
+        m1 = m | p
+        print( m1.npchain, m.npchain, p.npchain )
+        Tools.printclass( m )
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
+        m1 = p + m
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
+        r = RepeatingModel( 3, m )
+        print( r.npchain, m.npchain, m.npbase )
+        self.assertTrue( r.npchain == 9 )
+        self.assertTrue( r.npbase == 9 )
+        self.assertTrue( r.npmax == 9 )
+        self.assertTrue( r.ncomp == 3 )
+        self.assertTrue( r.deltaNpar == 3 )
+
+        Tools.printclass( r )
+        for k in range( r.npchain ) :
+            print( k, r.par2model( k ) )
+        lo = [r.getPrior(k).lowLimit for k in range( r.npchain )]
+        print( lo )
+        m1 = p + r
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
+        r = RepeatingModel( 3, m, same=2 )
+        print( r.npchain, m.npchain, m.npbase )
+        self.assertTrue( r.npchain == 7 )
+        self.assertTrue( r.npbase == 7 )
+        self.assertTrue( r.npmax == 7 )
+        self.assertTrue( r.ncomp == 3 )
+        self.assertTrue( r.deltaNpar == 2 )
+        Tools.printclass( r )
+        for k in range( r.npchain ) :
+            print( k, r.par2model( k ) )
+        lo = [r.getPrior(k).lowLimit for k in range( r.npchain )]
+        print( lo )
+        m1 = p + r
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
+        m = GaussModel()
+        r = RepeatingModel( 3, m, same=2 )
+        r.setLimits( lowLimits=[-10, 5, 0], highLimits=[10, 9, 6] )
+
+        print( r.npchain, m.npchain, m.npbase )
+        self.assertTrue( r.npchain == 7 )
+        self.assertTrue( r.npbase == 7 )
+        self.assertTrue( r.npmax == 7 )
+        self.assertTrue( r.ncomp == 3 )
+        self.assertTrue( r.deltaNpar == 2 )
+        Tools.printclass( r )
+        for k in range( r.npchain ) :
+            print( k, r.par2model( k ) )
+        lo = [r.getPrior(k).lowLimit for k in range( r.npchain )]
+        print( lo )
+        m1 = p + r
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
+        h = HarmonicModel( 3 )
+        h.setLimits( lowLimits=[-110,-111], highLimits=[110,111] )
+        m1 = p + h
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
+        h = HarmonicDynamicModel( 3 )
+        h.setLimits( lowLimits=[-110,-111], highLimits=[110,111] )
+        m1 = p + h
+        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
+        print( lo )
+        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
+        print( hi )
+
 
     def testOneModel( self ):
         print( "  Test one model" )

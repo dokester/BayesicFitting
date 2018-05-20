@@ -7,6 +7,7 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
 from astropy import units
 import math
+import sys
 import matplotlib.pyplot as plt
 
 from BayesicFitting import *
@@ -91,6 +92,16 @@ class TestErrorDistribution( unittest.TestCase ):
         print( errdis )
         for k in range( 5 ) :
             noise = numpy.random.laplace( size=nn )
+            y = ym + nf * noise
+            errdis.data = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            nf *= 10
+
+        nf = 0.01
+        errdis = UniformErrorDistribution ( x, ym )
+        print( errdis )
+        for k in range( 5 ) :
+            noise = 0.5 - numpy.random.rand( nn )
             y = ym + nf * noise
             errdis.data = y
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
@@ -643,6 +654,66 @@ class TestErrorDistribution( unittest.TestCase ):
             print( param, ":  ", end="" )
             for k in range( 9 ):
                 print( " %8.3f" % ced.logLikelihood( poly, param ), end="" )
+                param[1] += 1
+            print( "" )
+
+    def testUniformErrorDistribution( self ):
+        print( "\n   Test Uniform Error Distribution\n" )
+        poly = PolynomialModel( 1 )
+        ced = UniformErrorDistribution( self.x, self.data )
+        print( "x   ", self.x )
+        print( "y   ", self.data )
+        self.assertTrue( ced.acceptWeight() )
+
+        param = numpy.asarray( [0.3,11,4], dtype=float )
+        print( "m   ", poly.result( self.x, param ) )
+        logL = ced.logLikelihood( poly, param )
+        print( "logL  =  %8.3f" % ( logL ), -11 * math.log( 2 * param[2] ) )
+        self.assertTrue( logL == -11 * math.log( 2 * param[2] ) )
+
+        scale = 1.0
+        param[2] = scale
+        logL = ced.logLikelihood( poly, param )
+
+        print( "logL  =  %12.3g" % (logL) )
+        self.assertTrue( logL == -sys.float_info.max )
+
+        scale = 4.0
+        param[2] = scale
+        fi = [0,1,-1]
+        dL = ced.partialLogL( poly, param, fi )
+        nL = ced.numPartialLogL( poly, param, fi )
+        print( "params  = ", param, scale )
+        print( "partial = ", dL )
+        print( "numpart = ", nL )
+        assertAAE( dL, nL, 2 )
+
+        scale = 5
+        param[2] = scale
+        ced.weights = self.wgt
+        dL = ced.partialLogL( poly, param, fi )
+        nL = ced.numPartialLogL( poly, param, fi )
+        print( "params  = ", param, scale )
+        print( "partial = ", dL )
+        print( "numpart = ", nL )
+        assertAAE( dL, nL, 2 )
+
+        logL = ced.logLikelihood( poly, param )
+        cced = ced.copy()
+        logLc = cced.logLikelihood( poly, param )
+        print( cced )
+        print( "logL  =  %8.3f  copy %8.3f" % (logL, logLc ) )
+        dLc = cced.partialLogL( poly, param, fi )
+        print( "params  = ", param, scale )
+        print( "partial = ", dL )
+        assertAAE( logL, logLc, 6 )
+        assertAAE( dL, dLc, 6 )
+
+        for i in range( 11 ):
+            param = numpy.asarray( [i-5,5,10], dtype=float )
+            print( param, ":  ", end="" )
+            for k in range( 9 ):
+                print( " %10.3g" % ced.logLikelihood( poly, param ), end="" )
                 param[1] += 1
             print( "" )
 

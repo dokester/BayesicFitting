@@ -35,6 +35,9 @@ class TestEvidence2( unittest.TestCase  ) :
     def plot7( self ) :
         self.test7( plot=True )
 
+    def plot8( self ) :
+        self.test8( plot=True )
+
     def test1( self, plot=False ) :
         print( "====test1============================" )
         nn = 100
@@ -664,6 +667,38 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.plot( parevo[:,0], parevo[:,1], 'k,' )
             plt.show()
 
+
+    def test8( self, plot=False ) :
+        print( "====test8  Uniform ================" )
+
+        nn = 200
+        x = numpy.linspace( 0, 2, nn, dtype=float )
+        ym = 0.3 + 5.4 * x
+
+        y = numpy.round( ym )
+
+        limits = [-1,2]
+
+        model = PolynomialModel( 1 )
+        model.setLimits( lowLimits=[0,0], highLimits=[10,10] )
+
+        ns = NestedSampler( x, model, y, distribution='uniform', verbose=2, rate=0.5 )
+        ns.distribution.setLimits( [0.1, 1000] )
+        ns.minimumIterations = 501
+
+        logE = ns.sample( plot=plot )
+
+        par2 = ns.parameters
+        logE = ns.logZ
+        dlz2 = ns.logZprecision
+        logz2 = ns.logZ
+        print( "pars  ", fmt( par2 ) )
+        print( "stdv  ", fmt( ns.stdevs ) )
+        print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
+
+        if plot :
+
+            plt.show()
 
 if __name__ == '__main__':
     unittest.main( )
