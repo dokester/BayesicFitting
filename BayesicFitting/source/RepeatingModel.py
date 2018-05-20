@@ -39,11 +39,72 @@ __status__ = "Development"
 
 class RepeatingModel( Model, Dynamic ):
     """
-    RepeatingModel implements the the Dynamic interface for a Model.
+    RepeatingModel is a dynamic model, that calls the same model zero or more times,
+    each time with the next set of parameters.
 
-    It repeatedly calls a  Model, called the basic model,
-    zero ( or more ) times, each time with the next set of parameters.
+    RepeatingModel is a Dynamic model that grows and shrinks according to a growPrior.
+    The growPrior defaults to ExponentialPrior, unless a maxComp (max nr of components)
+    then it defaults to a UniformPrior with limits minComp .. maxComp.
 
+    When isDynamic is set to False or minComp == maxComp, the RepeatingModel is a normal
+    model with a static number of parameters/components.
+
+    Priors and/or limits for the RepeatingModel are stored in the (encapsulated) model.
+
+    It can be arranged that all similar parameters are the same, represented by the
+    same parameters. Use keywords same=.
+
+    Attributes
+    ----------
+    ncomp : int
+        number of repetitions
+    model : Model
+        (encapsulated) model to be repeated
+    minComp : int
+        minimum number of repetitions
+    maxComp : None or int
+        maximum number of repetitions
+    same : None or int or list of int
+        indices of parameters of model that get identical values
+    index : list of int
+        list of parameter indices not in same.
+    growPrior : None or Prior
+        governing the birth and death.
+        ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+    isDyna : bool
+        Whether this is a Dynamic Model.
+
+    Attributes from Model
+    ---------------------
+        parameters, stdevs, npchain
+        _next, _head, _operation
+        xUnit, yUnit (relegated to model)
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Example
+    -------
+    >>> # Define a model containing between 1 and 6 VoigtModels, starting with 3
+    >>> # and all with the same widths (for Gauss and Cauchy)
+    >>> vgt = VoigtModel()
+    >>> mdl = RepeatingModel( 3, vgt, minComp=1. maxComp=6, same=[2,3] )
+    >>> print( mdl.npbase )             # 4 + 2 + 2
+    >>> 8
+    >>> # Define a static RepeatingModel of 5 GaussModels
+    >>> gm = GaussModel()
+    >>> mdl = RepeatingModel( 5, gm, isDynamic=False )
+    >>> print( mdl.npbase )             # 5 * 3
+    >>> 15
+    >>> # Define a RepeatingModel with and exponential grow prior with scale 10
+    >>> mdl = RepeatingModel( 1, gm, growPrior=ExponentialPrior( scale=10 ) )
+    >>> print( mdl.npbase )             # 3
+    >>> 3
 
     Author       Do Kester
 
@@ -87,7 +148,7 @@ class RepeatingModel( Model, Dynamic ):
         if ncomp < minComp or ( maxComp is not None and ncomp > maxComp ) :
             raise ValueError( "ncomp outside range of [min..max] range" )
 
-        np = ncomp * model.npchain
+        np = ncomp * model.npchain - ( ncomp - 1 ) * Tools.length( same )
         self.isDyna = isDynamic and ( maxComp is None or minComp < maxComp )
 
         super( RepeatingModel, self ).__init__( np, copy=copy, **kwargs )
@@ -133,7 +194,7 @@ class RepeatingModel( Model, Dynamic ):
 
         index = []
         for k in range( self.model.npbase ) :
-            if not k in same :
+            if not k in self.same :
                 index += [k]
         self.index = numpy.array( index, dtype=int )
 
@@ -220,27 +281,6 @@ class RepeatingModel( Model, Dynamic ):
             src += 1
 
         return param
-
-    """
-    def rotate( self, pars ) :
-        if self.ncomp <= 1 :
-            return pars
-
-        np = self.model.npchain
-        dp = self.deltaNpar
-        rot = numpy.array( [np + j * dp for j in range( self.ncomp )] )
-#        print( "RM   ", self.model.npchain, rot )
-        for i in self.index :
-            rot[-1] = i
-            des = numpy.append( rot[1:], [rot[0]] )
-#            print( "RM   ", i, rot )
-#            print( "RM   ", i, des )
-
-            pars[des] = pars[rot]
-            rot += 1
-#        print( pars )
-        return pars
-    """
 
 
     #  *************************************************************************
@@ -367,8 +407,12 @@ class RepeatingModel( Model, Dynamic ):
         """ Return the number of basic models inside this compound model.  """
         return self.ncomp
 
+    def setLimits( self, lowLimits=None, highLimits=None ) :
+        self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
 
-    def getPrior( self, k ):
+
+
+    def basePrior( self, k ):
         """
         Return the prior for parameter k.
 
@@ -378,7 +422,7 @@ class RepeatingModel( Model, Dynamic ):
             the parameter to be selected.
         """
         i,k = self.par2model( k )
-        return super( RepeatingModel, self ).getPrior( i )
+        return self.model.getPrior( i )
 
     def baseName( self ):
         """ Return a string representation of the model.  """
@@ -396,7 +440,6 @@ class RepeatingModel( Model, Dynamic ):
         """
         i,k = self.par2model( k )
         return self.model.getParameterName( i ) + "_%d" % k
-
 
     def baseParameterUnit( self, k ):
         """
@@ -421,7 +464,7 @@ class RepeatingModel( Model, Dynamic ):
         if k >= self.model.npchain :
             k -= self.model.npchain
             i = self.index[ k % self.deltaNpar ]
-            k = 1 + k / self.deltaNpar
+            k = 1 + k // self.deltaNpar
         else :
             i = k
             k = 0
