@@ -19,6 +19,7 @@ from .GaussErrorDistribution import GaussErrorDistribution
 from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
+from .UniformErrorDistribution import UniformErrorDistribution
 from .GenGaussErrorDistribution import GenGaussErrorDistribution
 from .Explorer import Explorer
 from .Engine import Engine
@@ -216,6 +217,7 @@ class NestedSampler( object ):
             "laplace"  : `LaplaceErrorDistribution`  with 1 hyperpar scale
             "poisson"  : `PoissonErrorDistribution`  no hyperpar
             "cauchy"   : `CauchyErrorDstribution`    with 1 hyperpar scale
+            "uniform"  : `UniformErrorDistribution`  with 1 hyperpar scale
             "gengauss" : `GenGaussErrorDistribution` with 2 hyperpar (scale, power)
             Only for OrderProblems: (for later)
             "distance" : `DistanceCostFunction`      no hyperpar
@@ -343,13 +345,23 @@ class NestedSampler( object ):
             Hyperparameters follow model parameters
             The values will override those at initialization.
             They are only used in this call of fit.
-        plot : bool
-            Show a plot of the results
+        plot : bool or str
+            bool : Show a plot of the final results
+            str  : 'iter' show iterations
+                   'all'  show iterations and final result
+                   'last' show final result
 
         """
         if keep is None :
             keep = self.keep
         fitlist = self.makeFitlist( keep=keep )
+
+        if isinstance( plot, str ) :
+            iterplot = plot == 'iter' or plot == 'all'
+            lastplot = plot == 'last' or plot == 'all'
+        else :
+            iterplot = False
+            lastplot = plot
 
         self.initWalkers( fitlist=fitlist )
 
@@ -358,7 +370,7 @@ class NestedSampler( object ):
 
         self.distribution.ncalls = 0                      #  reset number of calls
 
-        self.plotData( plot=plot )
+        self.plotData( plot=iterplot )
 
         if self.verbose >= 1 :
             print( "Fit", ( "all" if keep is None else fitlist ), "parameters of" )
@@ -418,6 +430,8 @@ class NestedSampler( object ):
 
             self.info = ( math.exp( worstLogW - logZnew ) * self.lowLhood +
                     math.exp( self.logZ - logZnew ) * ( self.info + self.logZ ) - logZnew )
+            if math.isnan( self.info ) :
+                self.info = 0.0
             self.logZ = logZnew
 
             if self.verbose >= 3 or ( self.verbose >= 2 and self.iteration % 100 == 0 ):
@@ -428,7 +442,7 @@ class NestedSampler( object ):
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ, self.info,
                         self.lowLhood, np ), fmt( pl ) )
 
-                self.plotResult( self.walkers[worst[0]], self.iteration, plot=plot )
+                self.plotResult( self.walkers[worst[0]], self.iteration, plot=iterplot )
 
             self.samples.weed( self.maxsize )                # remove overflow in samplelist
 
@@ -469,9 +483,8 @@ class NestedSampler( object ):
         if self.verbose >= 1 :
             self.report()
 
-        if plot :
-            Plotter.plotFit( self.xdata, self.ydata, yfit=self.yfit,
-                             residuals=True )
+        if lastplot :
+            Plotter.plotFit( self.xdata, self.ydata, yfit=self.yfit, residuals=True )
 
         return self.evidence
 
@@ -616,7 +629,7 @@ class NestedSampler( object ):
         Parameters
         ----------
         name : string
-            name of distribution: "gauss", "laplace", "poisson", "cauchy", "gengauss"
+            name of distribution: "gauss", "laplace", "poisson", "cauchy", "uniform", "gengauss"
         scale : float
             fixed scale of distribution
         power : float
@@ -646,6 +659,9 @@ class NestedSampler( object ):
                     weights=self.weights )
         elif name == "cauchy" :
             self.distribution = CauchyErrorDistribution( self.xdata, self.ydata,
+                    weights=self.weights, scale=scale )
+        elif name == "uniform" :
+            self.distribution = UniformErrorDistribution( self.xdata, self.ydata,
                     weights=self.weights, scale=scale )
         elif name == "gengauss" :
             self.distribution = GenGaussErrorDistribution( self.xdata, self.ydata,
