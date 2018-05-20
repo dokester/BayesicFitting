@@ -1,7 +1,10 @@
 from setuptools import setup, find_packages
 
+__version__ = '1.0.4'
 
-__version__ = '1.0.3'
+def readme():
+    with open( 'README.md' ) as f:
+        return f.read()
 
 setup(
     name='BayesicFitting',
@@ -19,6 +22,8 @@ setup(
     ],
     license='LICENSE.txt',
     description='A Python Toolbox for Bayes-enhanched fitting.',
+    long_description=readme(),
+    long_description_content_type='text/markdown',
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
                 'optimization','nested sampling', 'fitting'],
     packages=['BayesicFitting', 'BayesicFitting/source', 'BayesicFitting/source/kernels',

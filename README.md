@@ -51,6 +51,9 @@ the BayesicFitting-master directory and run:
 
 where python is python3.
 
+Or install it as :
+
+> pip install BayesicFitting
 
 <a name="structure"> </a>
 ## 3. Structure 
@@ -105,7 +108,7 @@ the classes.
 
 ### test
 
-Almost all classes have a test harnass. These are located in
+Almost all classes have a test harness. These are located in
 BayesicFitting/test. They can be execised as:
 
     python -m unittest <file>
@@ -113,7 +116,7 @@ BayesicFitting/test. They can be execised as:
 where python refers to python3 and file refers to one of the files in
 BayesicFitting/test.
 
-As most functionality is tested in a test harnass, examples on how to
+As most functionality is tested in a test harness, examples on how to
 use the classes can be found there too.
 
 <a name="status"> </a> 

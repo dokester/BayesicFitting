@@ -10,11 +10,6 @@ BayesicFitting/documentation/*.dia~
 BayesicFitting/documentation/*.html
 BayesicFitting/examples/.ipynb_checkpoints
 BayesicFitting/examples/Untitled.ipynb
-BayesicFitting/source/EtalonDrift2Model.py
-BayesicFitting/source/EtalonDrift3Model.py
-BayesicFitting/source/EtalonDrift4Model.py
-BayesicFitting/source/EtalonDrift5Model.py
-BayesicFitting/source/FreeShape*Model.py
 BayesicFitting/source/__pycache__
 BayesicFitting/source/kernels/__pycache__
 BayesicFitting/test/__pycache__
