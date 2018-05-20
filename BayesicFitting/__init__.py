@@ -52,7 +52,7 @@ from .source.ExponentialPrior import ExponentialPrior
 from .source.Fitter import Fitter
 from .source.FixedModel import FixedModel
 #from .source.FreeShape2dModel import FreeShape2dModel
-#from .source.FreeShapeModel import FreeShapeModel
+from .source.FreeShapeModel import FreeShapeModel
 from .source.GalileanEngine import GalileanEngine
 from .source.GaussErrorDistribution import GaussErrorDistribution
 from .source.GaussModel import GaussModel
@@ -111,7 +111,7 @@ from .source.SplinesModel import SplinesModel
 from .source.StartEngine import StartEngine
 from .source.StepEngine import StepEngine
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
-#from .source.UniformErrorDistribution import UniformErrorDistribution
+from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
 
@@ -137,6 +137,7 @@ from .source.kernels.Lorentz import Lorentz
 from .source.kernels.Parabola import Parabola
 from .source.kernels.Sinc import Sinc
 from .source.kernels.Triangle import Triangle
+from .source.kernels.Tophat import Tophat
 from .source.kernels.Tricube import Tricube
 from .source.kernels.Triweight import Triweight
 from .source.kernels.Uniform import Uniform
