@@ -142,8 +142,16 @@ More work needs to be done in:
  + 14 Mar 2018 version 1.0.2 <br>
    * Added Dynamic Models 
    * Added piping of models
- * 23 Mar 2018 version 1.0.3 <br>
+ + 23 Mar 2018 version 1.0.3 <br>
    * Some issues with ErrorDistributions and map fitting
    * 2-d fitting examples added
    * All examples revisited
    * Links in README.md updated
+ + 28 May 2018 version 1.0.4 <br>
+   * New classes: CircularUniformPrior, PseudoVoigtModel
+   * VoigtModel uses scipy.special.wozf() and has partials now,
+   * Refactoring Priors to the BaseModel
+   * Restructuring Dynamic
+   * Threading optional in NestedSampler.
+   * New classes: UniformErrorDistribution, FreeShapeModel and kernels/Tophat
+   * added to testharnesses and examples
