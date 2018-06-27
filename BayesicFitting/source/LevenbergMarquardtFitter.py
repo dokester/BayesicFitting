@@ -271,7 +271,8 @@ class LevenbergMarquardtFitter( IterativeFitter ):
                 if onEdge :                        # further convergence on the edge plane(s)
                     self.chi = trychi
                     self.model.parameters = trypar
-                    trypar, trychi = self.trialfit( trypar, edgeInd, data, weights, verbose )
+                    trypar, trychi = self.trialfit( trypar, edgeInd, data, weights,
+                            verbose, maxiter )
 
 
                 return ( trypar, trychi )          #  succesfull step
