@@ -155,3 +155,8 @@ More work needs to be done in:
    * Threading optional in NestedSampler.
    * New classes: UniformErrorDistribution, FreeShapeModel and kernels/Tophat
    * added to testharnesses and examples
+ + 27 June 2018 version 1.0.5<br>
+   * New classes: RadialVelocityModel and MixedErrorDistribution
+   * testharnesses and examples
+   * ducumentation updates
+
