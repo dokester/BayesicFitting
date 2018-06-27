@@ -1,9 +1,7 @@
 import numpy as numpy
 import math
-import sys
 
 from .ScaledErrorDistribution import ScaledErrorDistribution
-from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -40,7 +38,7 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
 
     For one residual, x, it holds
     .. math::
-        f( x ) = 1 / s if abs( x ) < 2*s else 0
+        f( x ) = 1 / (2*s) if abs( x ) < s else 0
 
     where s is the scale.
     s is a hyperparameter, which might be estimated from the data.
@@ -51,13 +49,12 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
     The function is mostly used to calculate the likelihood L, or easier
     to use log likelihood, logL.
     .. math::
-        logL = -log( s ) if abs( x ) < 2 * s else -inf
+        logL = -log( 2*s ) if abs( x ) < s else -inf
 
     Using weights this becomes:
     .. math::
-        logL = log( \sum( w ) / ( 2 s ) ) - \sum( w |x| / s  )
+        logL = -w * log( 2*s ) )
 
-    Using this error distribution results in median-like solutions.
 
     Author       Do Kester.
 
@@ -118,7 +115,7 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         return scale * 2 / math.sqrt( 12 )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, allpars ) :
+    def logLikelihoodXXX( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -141,7 +138,31 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         if all( ares < scale ) :
             return - math.log( 2 * scale ) * self.sumweight
 
-        return -sys.float_info.max
+        return -math.inf
+
+    def logLdata( self, model, allpars ) :
+        """
+        Return the log( likelihood ) for each residual
+
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            list of all parameters in the problem
+
+        """
+        np = model.npchain
+        scale = allpars[-1]
+        ares = numpy.abs( self.getResiduals( model, allpars[:np] ) )
+
+        lld = numpy.where( ares < scale, -math.log( 2 * scale ), -math.inf )
+        if self.weights is not None :
+            lld *= self.weights
+        return lld
+
 
     def getScale( self, model ) :
         """
@@ -154,7 +175,7 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         """
         return numpy.max( numpy.abs( self.getResiduals( model ) ) )
 
-    def partialLogL( self, model, allpars, fitIndex ) :
+    def partialLogLXXX( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -172,6 +193,35 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         if fitIndex[-1] == -1 :
             dL[-1] = -self.sumweight / allpars[-1]
         return dL
+
+    def nextPartialData( self, model, allpars, fitIndex ) :
+        """
+        Return the partial derivative of elements of the log( likelihood )
+        to the parameters.
+
+        Parameters
+        ----------
+        model : Model
+            model to calculate mock data
+        allpars : array_like
+            parameters of the problem
+        fitIndex : array_like
+            indices of parameters to be fitted
+
+        """
+        pll = numpy.zeros_like( self.data )
+        if self.weights is not None :
+            wgt = self.weights
+        else :
+            wgt = numpy.ones_like( self.data )
+
+        for k in fitIndex :
+            if k >= 0 :
+                yield pll
+            else :
+                yield ( - wgt / allpars[-1] )
+
+        return
 
     def __str__( self ) :
         return "Uniform error distribution"

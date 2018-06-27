@@ -1,8 +1,8 @@
 import numpy as numpy
 import math
 
+from .Formatter import formatter as fmt
 from .ScaledErrorDistribution import ScaledErrorDistribution
-from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -117,7 +117,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         return scale * math.sqrt( 2.0 )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, allpars ) :
+    def logLikelihoodXXX( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -135,6 +135,28 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         res = self.getResiduals( model, allpars[:np] )
         sumres = self.getSumRes( res, scale )
         return - self.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
+
+    def logLdata( self, model, allpars ) :
+        """
+        Return the log( likelihood ) for each residual
+
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            list of all parameters in the problem
+
+        """
+        np = model.npchain
+        scale = allpars[-1]
+        res = self.getResiduals( model, allpars[:np] )
+        res = - numpy.abs( res ) / scale - ( self.LOG2 + math.log( scale ) )
+        if self.weights is not None :
+            res = res * self.weights
+        return res
 
     def getScale( self, model ) :
         """
@@ -168,7 +190,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
             residual = residual * self.weights
         return numpy.sum( numpy.abs( residual ) ) / scale
 
-    def partialLogL( self, model, allpars, fitIndex ) :
+    def partialLogLXXX( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -200,6 +222,40 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
                 dL[i] = self.getSumRes( res, scale ) - self.sumweight
             i += 1
         return dL / scale
+
+    def nextPartialData( self, model, allpars, fitIndex ) :
+        """
+        Return the partial derivative of elements of the log( likelihood )
+        to the parameters.
+
+        Parameters
+        ----------
+        model : Model
+            model to calculate mock data
+        allpars : array_like
+            parameters of the problem
+        fitIndex : array_like
+            indices of parameters to be fitted
+
+        """
+        self.nparts += 1
+        np = model.npchain
+        scale = allpars[-1]
+
+        dM = model.partial( self.xdata, allpars[:np] )
+        res = self.getResiduals( model, allpars[:np] )
+
+        wgt = numpy.ones_like( res, dtype=float ) if self.weights is None else self.weights
+        swgt = numpy.copysign( wgt, res )
+
+        res *= swgt / scale             ## make all residuals >= 0
+
+        for k in fitIndex :
+            if k >= 0 :
+                yield ( swgt * dM[:,k] ) / scale
+            else :
+                yield ( res - wgt ) / scale
+        return
 
     def __str__( self ) :
         return "Laplace error distribution"

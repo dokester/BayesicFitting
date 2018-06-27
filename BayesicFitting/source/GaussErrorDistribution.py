@@ -2,9 +2,10 @@ import numpy as numpy
 import math
 
 from .ScaledErrorDistribution import ScaledErrorDistribution
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -29,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 class GaussErrorDistribution( ScaledErrorDistribution ):
@@ -103,7 +104,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, allpars ) :
+    def logLikelihoodXXX( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -115,13 +116,40 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             list of all parameters in the problem
 
         """
+        self.ncalls += 1
+
         np = model.npchain
         scale = allpars[-1]
         res = self.getResiduals( model, allpars[:np] )
         chisq = self.getChisq( res, scale )
-        self.ncalls += 1
         return ( - self.sumweight * ( 0.5 * self.LOG2PI + math.log( scale ) ) -
                        0.5 * chisq )
+
+    def logLdata( self, model, allpars ) :
+        """
+        Return the log( likelihood ) for each residual
+
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            list of all parameters in the problem
+
+        """
+        np = model.npchain
+        scale = allpars[-1]
+#        print( "GED1 ", fmt( allpars, max=None ), fmt( 1.0 / scale ) )
+
+        res = self.getResiduals( model, allpars[:np] )
+        res2 = - 0.5 * numpy.square( res / scale )
+        res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) )
+        if self.weights is not None :
+            res2 = res2 * self.weights
+        return res2
+
 
     def getScale( self, model ) :
         """
@@ -157,7 +185,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             res2 = res2 * self.weights
         return numpy.sum( res2  ) / ( scale * scale )
 
-    def partialLogL( self, model, allpars, fitIndex ) :
+    def partialLogLXXX( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
@@ -193,6 +221,45 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
                 dL[i] = ( numpy.sum( res * resw ) / s2 - self.sumweight ) / scale
             i += 1
         return dL
+
+    def nextPartialData( self, model, allpars, fitIndex ) :
+        """
+        Return the partial derivative all elements of the log( likelihood )
+        to the parameters in fitIndex.
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            parameters of the problem
+        fitIndex : array_like
+            indices of parameters to be fitted
+
+        """
+        self.nparts += 1                    ## counts calls to partialLogL
+
+        np = model.npchain
+        param = allpars[:np]
+        scale = allpars[-1]
+        s2 = scale * scale
+        res = self.getResiduals( model, param )
+        if self.weights is not None :
+            resw = res * self.weights
+            wgt = self.weights
+        else :
+            resw = res
+            wgt = 1.0
+        dM = model.partial( self.xdata, param )
+
+        i = 0
+        for  k in fitIndex:
+            if k >= 0 :
+                yield ( resw * dM[:,k] ) / s2
+            else :
+                yield ( res * resw / s2 - wgt ) / scale
+            i += 1
+        return
 
     def hessianLogL( self, model, allpars, fitIndex ) :
         """

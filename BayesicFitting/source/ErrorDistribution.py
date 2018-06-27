@@ -1,12 +1,10 @@
 import numpy as numpy
 from .HyperParameter import HyperParameter
-from .Model import Model
-
 
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -31,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -296,9 +294,44 @@ class ErrorDistribution( object ):
         allpars : array_like
             parameters of the problem
         """
-        pass
+        self.ncalls += 1
+        return numpy.sum( self.logLdata( model, allpars ) )
+
 
     def partialLogL( self, model, allpars, fitIndex ) :
+        """
+        Return the partial derivative of log( likelihood ) to the parameters.
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            parameters of the problem
+        fitIndex : array_like
+            indices of parameters to be fitted
+
+        """
+        self.nparts += 1                ## counts calls tp partialLogL
+        try :
+            pg = self.nextPartialData( model, allpars, fitIndex )
+            np = len( fitIndex )
+            dL = numpy.zeros( np, dtype=float )
+            for k in range( np ) :
+                dL[k] = numpy.sum( next( pg ) )
+#                print( "ED   ", k, dL[k] )
+
+            try :
+                pg.close()
+            except :
+                pass
+            return dL
+        except :
+            print( "Using numeric partialLogL." )
+            return self.numPartialLogL( model, allpars, fitIndex )
+
+
+    def partialLogLXXX( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 

@@ -141,7 +141,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         return hypar[0] * math.sqrt( special.gamma( 3.0 / p ) / special.gamma( 1.0 / p ) )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, allpars ) :
+    def logLikelihoodXXX( self, model, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -163,6 +163,33 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
 #        print( "GG  ", chisq, norm, self.sumweight )
         return self.sumweight * norm - chisq
+
+    def logLdata( self, model, allpars ) :
+        """
+        Return the log( likelihood ) for each residual
+
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            list of all parameters in the problem
+
+        """
+        np = model.npchain
+        scale = allpars[-2]
+        power = allpars[-1]
+
+        res = self.getResiduals( model, allpars[:np] )
+        lld = - numpy.power( numpy.abs( res / scale ), power )
+        norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
+        lld += norm
+        if self.weights is not None :
+            lld *= self.weights
+        return lld
+
 
     def getChisq( self, residual, scale, power ):
         """
@@ -198,7 +225,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         return math.pow( chi / self.sumweight, 1.0 / power )
 
 
-    def partialLogL( self, model, allpars, fitIndex ) :
+    def partialLogLXXX( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -241,6 +268,51 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
             i += 1
 
         return dL
+
+    def nextPartialData( self, model, allpars, fitIndex ) :
+        """
+        Return the partial derivative of all elements of the log( likelihood )
+        to the parameters.
+
+        Parameters
+        ----------
+        model : Model
+            model to calculate mock data
+        allpars : array_like
+            parameters of the problem
+        fitIndex : array_like
+            indices of the parameters to be fitted
+
+        """
+        self.ncalls += 1
+        np = model.npchain
+        scale = allpars[-2]
+        power = allpars[-1]
+        res = self.getResiduals( model, allpars[:np] )
+
+        ars = numpy.abs( res / scale )
+        rsp = numpy.power( ars, power )
+        if self.weights is not None :
+            rsp = rsp * self.weights
+            wgt = self.weights
+        else :
+            wgt = 1.0
+
+        dLdm = power * rsp / res
+        dM = model.partial( self.xdata, allpars[:np] )
+
+        # special.psi( x ) is the same as special.polygamma( 1, x )
+        dlp = wgt * ( power + special.psi( 1.0 / power ) ) / ( power * power )
+
+        for  k in fitIndex :
+            if k >= 0 :
+                yield ( dLdm * dM[:,k] )
+            elif k == -2 :
+                yield ( power * rsp - wgt ) / scale
+            else :
+                yield dlp - rsp * numpy.log( ars )
+
+        return
 
     def __str__( self ) :
         return "Generalized Gauss error distribution"

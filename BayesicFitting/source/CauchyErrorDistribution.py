@@ -130,7 +130,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
                 self.sumweight * ( 2 * math.log( scale ) + math.sqrt( 2.0 ) ) )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, allpars ):
+    def logLikelihoodXXX( self, model, allpars ):
         """
         Return the log( likelihood ) for a Cauchy distribution.
         Cauchy distr : f( x ) = s / ( pi * ( s^2 + x^2 ) )
@@ -152,7 +152,27 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         return ( self.ndata * ( math.log( scale ) - self.LOGPI ) -
                  numpy.sum( numpy.log( res2 + scale * scale ) ) )
 
-    def partialLogL( self, model, allpars, fitIndex ) :
+    def logLdata( self, model, allpars ) :
+        """
+        Return the log( likelihood ) for each residual
+
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        allpars : array_like
+            list of all parameters in the problem
+
+        """
+        np = model.npchain
+        scale = allpars[-1]
+        s2 = scale * scale
+        res2 = numpy.square( self.getResiduals( model, allpars[:np] ) )
+        return math.log( scale ) - self.LOGPI - numpy.log( res2 + s2 )
+
+    def partialLogLXXX( self, model, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters
         in fitIndex.
@@ -183,6 +203,36 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
                 dL[i] = self.ndata / scale - numpy.sum( 2 * scale / r2s )
             i += 1
         return dL
+
+    def nextPartialData( self, model, allpars, fitIndex ) :
+        """
+        Return the partial derivative of log( likelihood ) to the parameters
+        in fitIndex.
+
+        Parameters
+        ----------
+        model : Model
+            model to calculate mock data
+        allpars : array_like
+            parameters of the problem
+        fitIndex : array_like
+            indices of parameters to be fitted
+
+        """
+        self.nparts += 1
+        np = model.npchain
+        scale = allpars[-1]
+        res = self.getResiduals( model, allpars[:np] )
+        r2s = res * res + scale * scale
+        dM = model.partial( self.xdata, allpars[:np] )
+
+        for k in fitIndex :
+            if k >= 0 :
+                yield 2 * res * dM[:,k] / r2s
+            else :
+                yield 1.0 / scale - 2 * scale / r2s
+
+        return
 
     def __str__( self ) :
         return "Cauchy error distribution"

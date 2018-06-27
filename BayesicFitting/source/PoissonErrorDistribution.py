@@ -117,7 +117,7 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, model, param ):
+    def logLikelihoodXXX( self, model, param ):
         """
         Return the log( likelihood ) for a Poisson distribution.
 
@@ -143,7 +143,29 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
         return logl
 
-    def partialLogL( self, model, param, fitIndex ):
+    def logLdata( self, model, param ) :
+        """
+        Return the log( likelihood ) for each residual
+
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        model : Model
+            to be fitted
+        param : array_like
+            list of all parameters in the problem
+
+        """
+        mock = model.result( self.xdata, param )
+        lfdata = logFactorial( self.data )
+
+        lld = self.data * numpy.log( mock ) - mock - lfdata
+        lld = numpy.where( numpy.isfinite( lld ), lld, -math.inf )
+
+        return lld
+
+    def partialLogLXXX( self, model, param, fitIndex ):
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -165,6 +187,28 @@ class PoissonErrorDistribution( ErrorDistribution ):
         for k in fitIndex :
             dL[i] = numpy.sum( ( self.data / mock - 1 ) * dM[:,k] )
             i += 1
+
+        return dL
+
+    def nextPartialData( self, model, param, fitIndex ):
+        """
+        Return the partial derivative of log( likelihood ) to the parameters.
+
+        Parameters
+        ----------
+        model : Model
+            model to calculate mock data
+        param : array_like
+            parameters of the model
+        fitIndex : array_like
+            indices of the params to be fitted
+        """
+        self.nparts += 1
+        mock = model.result( self.xdata, param )
+        dM = model.partial( self.xdata, param )
+
+        for k in fitIndex :
+            yield ( self.data / mock - 1 ) * dM[:,k]
 
         return dL
 
