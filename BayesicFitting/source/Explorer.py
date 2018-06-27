@@ -47,6 +47,8 @@ class Explorer( object ):
         samples to be explored
     engines : [engine]
         list of engines to be used
+    errdis : ErrorDistribution
+        to be used
     rng : numpy.random.RandomState
         random number generator
     rate : float (1.0)
@@ -76,6 +78,7 @@ class Explorer( object ):
         """
         self.walkers = ns.walkers
         self.engines = ns.engines
+        self.errdis = ns.distribution
         self.rng = ns.rng
         self.rate = ns.rate
         self.maxtrials = ns.maxtrials
@@ -190,8 +193,6 @@ class ExplorerThread( Thread ):
         random number generator
     engines : [Engine]
         copy of the list of Engines of Explorer
-    errdis : ErrorDistribution
-        to be used (=self.engines[0].errdis)
     """
 
     global threadErrors

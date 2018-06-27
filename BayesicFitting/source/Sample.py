@@ -61,7 +61,7 @@ class Sample( object ):
         list of (super)parameters to be fitted.
     parameters : array_like (read only)
         parameters (of the model)
-    hyperpars : array_like (read only)
+    hypars : array_like (read only)
         list of hyper parameters (of the error distribution)
 
 

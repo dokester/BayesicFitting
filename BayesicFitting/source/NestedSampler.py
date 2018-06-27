@@ -332,8 +332,7 @@ class NestedSampler( object ):
     #  *******SAMPLE************************************************************
     def sample( self, keep=None, plot=False ):
         """
-        Sample the posterior and return the weighted average result of the
-        Model.
+        Sample the posterior and return the 10log( evidence )
 
         The more sensible result of this method is a SampleList which contains
         samples taken from the posterior distribution.

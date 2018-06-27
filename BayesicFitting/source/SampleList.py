@@ -317,16 +317,17 @@ class SampleList( list ):
         """
         Return the super parameters
         """
-        hypar = 0.0
-        hydev = 0.0
+        nhp = len( self[0].allpars ) - self[0].model.npchain
+        hypar = numpy.zeros( nhp, dtype=float )
+        hydev = numpy.zeros( nhp, dtype=float )
         sw = 0.0
         for sample in self :
             wt = math.exp( sample.logW )
             sw += wt
             ws = wt * sample.hypars
-            hypar += ws
-            hydev += ws * sample.hypars
-        self.stdevHypars = numpy.sqrt( ( hydev - hypar * hypar ) / self.ndata )
+            hypar = hypar + ws
+            hydev = hydev + ws * sample.hypars
+        self.stdevHypars = numpy.sqrt( hydev - hypar * hypar )
         self.hypars = hypar
         return self.hypars
 
