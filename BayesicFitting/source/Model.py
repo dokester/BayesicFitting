@@ -1072,8 +1072,6 @@ class Model( FixedModel ):
         if kpar is not None :
             return self.getPrior( kpar ).unit2Domain( uvalue )
 
-#        return [self.unit2Domain( u, kpar=k ) for k,u in enumerate( uval )]
-
         pgen = self.nextPrior(  )
         dval = numpy.fromiter( ( next( pgen ).unit2Domain( uv ) for uv in uvalue ), float )
         try :
@@ -1098,8 +1096,6 @@ class Model( FixedModel ):
         if kpar is not None :
             return self.getPrior( kpar ).domain2Unit( dvalue )
 
-#        return [self.getPrior( k ).domain2Unit( d ) for k,d in enumerate( dval )]
-
         pgen = self.nextPrior()
         uval = numpy.fromiter( ( next( pgen ).domain2Unit( dv ) for dv in dvalue ), float )
         try :
@@ -1118,8 +1114,6 @@ class Model( FixedModel ):
            parameter array
 
         """
-#        return [self.getPrior( k ).partialDomain2Unit( d ) for k,d in enumerate( dvalue )]
-
         pgen = self.nextPrior(  )
         part = numpy.fromiter( ( next( pgen ).partialDomain2Unit( dv ) for dv in dvalue ), float )
         try :

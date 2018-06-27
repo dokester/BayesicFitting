@@ -90,7 +90,7 @@ class BaseModel( object ):
     """
 
     #  *************************************************************************
-    def __init__( self, nparams=0, ndim=1, copy=None, fixed=None, names=None,
+    def __init__( self, nparams=0, ndim=1, copy=None, names=None,
                         posIndex=[], nonZero=[] ):
         """
         BaseModel Constructor.
@@ -105,6 +105,11 @@ class BaseModel( object ):
             to be copied
         names : list of string
             names for the parameters
+        posIndex : list of int
+            indices of parameters that need to be > 0
+        nonZero : list of int
+            indices of parameters that cannot be zero.
+            they are replaced by self.tiny
 
         """
         super( BaseModel, self ).__init__( )
@@ -148,6 +153,21 @@ class BaseModel( object ):
         else :
             raise AttributeError(
                 "Model has no attribute " + name + " of type " + str( value.__class__ ) )
+
+    def __getattr__( self, name ) :
+        """
+        Return value belonging to attribute with name.
+
+        Parameters
+        ----------
+        name : string
+            name of the attribute
+        """
+        for k,pn in enumerate( self.parNames ) :
+            if name == pn :
+                return self.parameters[k]
+
+
 
     #  *****RESULT**************************************************************
     def result( self, xdata, param ):

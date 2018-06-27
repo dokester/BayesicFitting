@@ -79,7 +79,7 @@ class TestRobustShell( unittest.TestCase ):
         assertAAE( par, numpy.asarray( [aa, bb] ), 2 )
 
         if plot :
-            plt.plot( x, y, 'k.' )
+            plt.plot( x, y, 'k*' )
             plt.plot( x, model( x ), 'k-' )
 
         # make some outliers
@@ -97,6 +97,7 @@ class TestRobustShell( unittest.TestCase ):
         print( "chisq   " + fmt( altch ) )
 
         if plot :
+            plt.plot( x, y, 'b.' )
             plt.plot( x, romod( x ), 'b-' )
 
         rf = RobustShell( altfit )

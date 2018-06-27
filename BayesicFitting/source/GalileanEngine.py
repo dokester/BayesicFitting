@@ -130,6 +130,8 @@ class GalileanEngine( Engine ):
         um = UnitMovements( model, allpars, fitIndex, self, size )
 
         ptry = allpars.copy()
+#        print( "GE0  ", fma( ptry ) )
+
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
         maxtrial = self.maxtrials * nstep
         step = 0
@@ -144,15 +146,17 @@ class GalileanEngine( Engine ):
                 self.plotter.move( allpars, ptry, 0 )
             elif inside == 1 :                          # first time outside -> mirror
                 f = ( Lhood - lowLhood ) / ( Lhood - Ltry )     # lin interpolation to edge
-#                print( "GE1  ", f, Lhood, lowLhood, Ltry )
+#                print( "GE1  ", fmt(f), fmt(Lhood), fmt(lowLhood), fmt(Ltry) )
                 pedge = ptry.copy()
                 pedge[fitIndex] = um.stepPars( f )                # ptry on edge
-#                print( "GE2  ", pedge, fitIndex )
+#                print( "GE2  ", fma(pedge), fitIndex )
                 dLdp = self.errdis.partialLogL( model, pedge, fitIndex )
                 self.plotter.move( allpars, pedge, 1 )
+#                print( "GE3  ", fma( dLdp ) )
 
                 um.mirrorOnLowL( dLdp )
                 ptry[fitIndex] = um.stepPars( 1 - f )
+#                print( "GE4  ", fma( ptry ) )
 
                 self.plotter.move( pedge, ptry, 2 )
             else:                                       # mirroring failed; do reverse
@@ -168,7 +172,11 @@ class GalileanEngine( Engine ):
 #                xdata = self.errdis.xdata
 #                ptry = self.constrain( model, ptry, xdata )
 
+#            print( "GEng  ", fma(ptry), inside )
+
             Ltry = self.errdis.logLikelihood( model, ptry )
+
+#            print( "GEng  ", fmt(Ltry) )
 
             if Ltry >= lowLhood:
                 allpars = ptry.copy( )
@@ -216,9 +224,16 @@ class UnitMovements( object ):
         self.upar = self.engine.domain2Unit( model, allpars, kpar=self.fitIndex )
 
     def mirrorOnLowL( self, dLdp ):
+#        print( "dLdp  ", fmt( dLdp ) )
+#        print( "uvel  ", fmt( self.uvel ) )
         inprod = numpy.inner( dLdp, self.uvel )
+#        print( "inpr  ", fmt( inprod ) )
         sumsq  = numpy.inner( dLdp, dLdp )
+#        print( "sumq  ", fmt( sumsq ) )
         self.uvel -= 2 * dLdp * inprod / sumsq
+#        print( "uvel  ", fmt( self.uvel ) )
+
+
 
     def setVelocity( self, size ):
         if self.model.isDynamic():

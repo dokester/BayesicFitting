@@ -69,7 +69,9 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
 
         ax1 = plt.subplot( gs[1] )
         res = data - yfit
-        ax1.plot( x, res, 'k-' )
+        nd = int( math.log10( len( data ) ) )
+        mrksz = ( 5 - nd ) if nd < 4 else 1
+        ax1.plot( x, res, 'k.', markersize=mrksz )
         ax1.margins( 0.05, 0.05 )
         xt = plt.ylim()
         xtk = Tools.nicenumber( ( xt[1] - xt[0] ) / 4 )

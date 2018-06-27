@@ -127,6 +127,9 @@ class TestModels( unittest.TestCase ):
     def plotPowerModel( self ) :
         self.testPowerModel( plot=True )
 
+    def plotRadialVelocityModel( self ) :
+        self.testRadialVelocityModel( plot=True )
+
     def plotSincModel( self ) :
         self.testSincModel( plot=True )
 
@@ -328,6 +331,23 @@ class TestModels( unittest.TestCase ):
         self.assertTrue( m.getNumberOfParameters( ) == 1 )
         self.assertTrue( m.npbase == 1 )
         p = [2.3]
+        stdModeltest( m, p, plot=plot )
+
+    def testRadialVelocityModel( self, plot=False ):
+        x  = numpy.linspace( 0, 1400, 1401, dtype=float )
+        print( "******RADIALVELOCITY***************" )
+        m = RadialVelocityModel( )
+        self.assertTrue( m.getNumberOfParameters( ) == 5 )
+        self.assertTrue( m.npbase == 5 )
+        p = [130, 1200.0, 0.67, 4.0, 3.0]
+        if plot :
+            for p3 in range( 7 ) :
+                p[4] = 2.7 + 0.1 * p3
+                y = m.result( x, p )
+                plt.plot( x, y + 100 * p3 )
+
+            plt.show()
+
         stdModeltest( m, p, plot=plot )
 
     def testSincModel( self, plot=False ):

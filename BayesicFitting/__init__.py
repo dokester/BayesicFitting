@@ -75,6 +75,7 @@ from .source.LinearModel import LinearModel
 from .source.LogFactorial import logFactorial
 from .source.LorentzModel import LorentzModel
 from .source.MaxLikelihoodFitter import MaxLikelihoodFitter
+from .source.MixedErrorDistribution import MixedErrorDistribution
 from .source.Model import Model
 from .source.MonteCarlo import MonteCarlo
 from .source.NestedSampler import NestedSampler
@@ -93,6 +94,7 @@ from .source.Prior import Prior
 from .source.ProductModel import ProductModel
 from .source.PseudoVoigtModel import PseudoVoigtModel
 from .source.QRFitter import QRFitter
+from .source.RadialVelocityModel import RadialVelocityModel
 from .source.RandomEngine import RandomEngine
 from .source.RepeatingModel import RepeatingModel
 from .source.RobustShell import RobustShell

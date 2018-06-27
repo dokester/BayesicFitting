@@ -459,6 +459,8 @@ kernels and miscellaneous.
     General power model of arbitrary degree.
 + **PseudoVoigtModel**<br>
     Weighted sum of Gauss and Lorentz models; approximation of **VoigtModel**
++ **RadialVelocityModel**<br>
+    radial velocity variations of a star, caused by an orbiting planet.
 + **RepeatingModel**<br>
     Variable repetition the same Model
 + **SincModel**<br>
@@ -595,6 +597,8 @@ kernels and miscellaneous.
     Base class that defines general methods for a error distribution.
 + **ScaledErrorDistribution**<br>
     Base class that defines methods common to error distributions with a scale.
++ **MixedErrorDistribution**<br>
+    A mixture of 2 errordistributions
 
 + **CauchyErrorDistribution**<br>
     To calculate a Cauchy or Lorentz likelihood.
@@ -606,6 +610,8 @@ kernels and miscellaneous.
     To calculate a Laplace likelihood.
 + **PoissonErrorDistribution**<br>
     To calculate a Poisson likelihood.
++ **UniformErrorDistribution**<br>
+    To calculate a Uniform likelihood.
 
 #### Hyper parameters.
 
@@ -690,7 +696,13 @@ They can be encapsulated in a **KernelModel** or in a 2dim
   <td><b>Sinc</b></td>
   <td>sin(x) / x</td> 
   <td>false</td>
-  <td>do not use in **RobustShell**</td>
+  <td>do not use in <b>RobustShell</b></td>
+</tr>
+<tr>
+  <td><b>Tophat</b></td>
+  <td>convolution</td> 
+  <td>true</td>
+  <td>0 to 6 convolutions of Uniform
 </tr>
 <tr>
   <td><b>Triangle</b></td>

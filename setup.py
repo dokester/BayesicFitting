@@ -23,7 +23,7 @@ setup(
     license='LICENSE.txt',
     description='A Python Toolbox for Bayes-enhanched fitting.',
     long_description=readme(),
-    long_description_content_type='text/markdown',
+#    long_description_content_type='reStructuredText',
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
                 'optimization','nested sampling', 'fitting'],
     packages=['BayesicFitting', 'BayesicFitting/source', 'BayesicFitting/source/kernels',

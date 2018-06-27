@@ -84,15 +84,24 @@ class StartEngine( Engine ):
 
         model = walker.model
         par = walker.allpars.copy()
-        uval = self.rng.rand( len( fitIndex ) )
-        par[fitIndex] = self.unit2Domain( model, uval, kpar=fitIndex )
 
-#        ## fiture extension
-#        if self.constrain :
-#            xdata = self.errdis.xdata
-#            par = self.constrain( model, par, xdata )
+        ktry = 0
+        while True :
+            uval = self.rng.rand( len( fitIndex ) )
+            par[fitIndex] = self.unit2Domain( model, uval, kpar=fitIndex )
 
-        logL = self.errdis.logLikelihood( model, par )
+#           ## fiture extension
+#           if self.constrain :
+#               xdata = self.errdis.xdata
+#               par = self.constrain( model, par, xdata )
+
+            logL = self.errdis.logLikelihood( model, par )
+            if numpy.isfinite( logL ) :
+                break
+            elif ktry > ( self.maxtrials + walker.id ) :
+                raise RuntimeError( "Cannot find valid starting solutions" )
+            else :
+                ktry += 1
 
         self.setSample( walker, model, par, logL, logW=-math.inf )
 
