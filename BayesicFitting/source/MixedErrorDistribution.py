@@ -120,7 +120,7 @@ class MixedErrorDistribution( ErrorDistribution ):
 
 
     #  *********LIKELIHOODS***************************************************
-    def logLdata( self, model, allpars ) :
+    def logLdata( self, model, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for a Mixedian distribution.
 
@@ -130,8 +130,13 @@ class MixedErrorDistribution( ErrorDistribution ):
             to be fitted
         allpars : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:model.npchain] )
+
         f = allpars[-1]
         n1 = self.errdis1.nphypar
         n2 = self.errdis2.nphypar
@@ -140,15 +145,15 @@ class MixedErrorDistribution( ErrorDistribution ):
         p2[-n2:] = allpars[-n2-1:-1]
 
         if f <= 0 :
-            return self.errdis2.logLdata( model, p2 )
+            return self.errdis2.logLdata( model, p2, mockdata=mockdata )
         if f >= 1 :
-            return self.errdis1.logLdata( model, p1 )
+            return self.errdis1.logLdata( model, p1, mockdata=mockdata )
 
         return numpy.logaddexp(
-                self.errdis1.logLdata( model, p1 ) + math.log( f ),
-                self.errdis2.logLdata( model, p2 ) + math.log( 1 - f ) )
+                self.errdis1.logLdata( model, p1, mockdata=mockdata ) + math.log( f ),
+                self.errdis2.logLdata( model, p2, mockdata=mockdata ) + math.log( 1 - f ) )
 
-    def nextPartialData( self, model, allpars, fitIndex ) :
+    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
@@ -160,8 +165,13 @@ class MixedErrorDistribution( ErrorDistribution ):
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
+        mockdata : array_like
+            as calculated by the model
 
         """
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:model.npchain] )
+
         # make allpars lists (p1,p2)for errdis1&2; shift hyperpars in p2
         f = allpars[-1]
         emf = 1 - f
@@ -183,10 +193,10 @@ class MixedErrorDistribution( ErrorDistribution ):
             f2 = numpy.append( f2, [-1] )
 
         # make fitindices (f1,f2) for errdis1&2
-        lhd1 = numpy.exp( self.errdis1.logLdata( model, p1 ) )
-        lhd2 = numpy.exp( self.errdis2.logLdata( model, p2 ) )
-        pg1 = self.errdis1.nextPartialData( model, p1, f1 )
-        pg2 = self.errdis2.nextPartialData( model, p2, f2 )
+        lhd1 = numpy.exp( self.errdis1.logLdata( model, p1, mockdata=mockdata ) )
+        lhd2 = numpy.exp( self.errdis2.logLdata( model, p2, mockdata=mockdata ) )
+        pg1 = self.errdis1.nextPartialData( model, p1, f1, mockdata=mockdata )
+        pg2 = self.errdis2.nextPartialData( model, p2, f2, mockdata=mockdata )
 
 #        q1 = numpy.where( numpy.logical_not( numpy.isfinite( lhd1 ) ) )[0]
 #        q2 = numpy.where( numpy.logical_not( numpy.isfinite( lhd2 ) ) )[0]
@@ -197,6 +207,10 @@ class MixedErrorDistribution( ErrorDistribution ):
 #        print( lhd2[q2] )
 
         ff1 = f * lhd1 + emf * lhd2
+        # Where the mixed likelihood (=ff1) is indistinguishable from 0,
+        # its partials also must be zero. In those locations we can replace
+        # the inverse of ff1, needed in calculating the partials, by 0.
+
         fff = numpy.where( ff1 < sys.float_info.min, 0.0, 1.0 / ff1 )
 
 
@@ -204,12 +218,7 @@ class MixedErrorDistribution( ErrorDistribution ):
 #        print( "fff  ", q1, len( q1 ) )
 #        print( fff[q1] )
 #        print( ff1[q1] )
-
-
-
 #        print( "MED1  ", f, emf, numpy.all( numpy.isfinite( fff ) ) )
-
-
 
         for fi in fitIndex :
 #            print( "MED2  ", fi )

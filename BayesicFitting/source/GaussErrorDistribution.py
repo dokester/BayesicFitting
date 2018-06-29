@@ -125,7 +125,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         return ( - self.sumweight * ( 0.5 * self.LOG2PI + math.log( scale ) ) -
                        0.5 * chisq )
 
-    def logLdata( self, model, allpars ) :
+    def logLdata( self, model, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -137,13 +137,17 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             to be fitted
         allpars : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
         np = model.npchain
         scale = allpars[-1]
 #        print( "GED1 ", fmt( allpars, max=None ), fmt( 1.0 / scale ) )
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:np] )
 
-        res = self.getResiduals( model, allpars[:np] )
+        res = self.data - mockdata
         res2 = - 0.5 * numpy.square( res / scale )
         res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) )
         if self.weights is not None :
@@ -222,7 +226,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             i += 1
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex ) :
+    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative all elements of the log( likelihood )
         to the parameters in fitIndex.
@@ -235,22 +239,27 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
-
+        mockdata : array_like
+            as calculated by the model
         """
-        self.nparts += 1                    ## counts calls to partialLogL
-
         np = model.npchain
         param = allpars[:np]
+        if mockdata is None :
+            mockdata = model.result( self.xdata, param )
         scale = allpars[-1]
         s2 = scale * scale
-        res = self.getResiduals( model, param )
+        res = self.data - mockdata
         if self.weights is not None :
             resw = res * self.weights
             wgt = self.weights
         else :
             resw = res
             wgt = 1.0
+
+
         dM = model.partial( self.xdata, param )
+##      TBD import mockdata into partial
+#        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
         i = 0
         for  k in fitIndex:

@@ -295,7 +295,9 @@ class ErrorDistribution( object ):
             parameters of the problem
         """
         self.ncalls += 1
-        return numpy.sum( self.logLdata( model, allpars ) )
+        mock = model.result( self.xdata, allpars[:model.npchain] )
+
+        return numpy.sum( self.logLdata( model, allpars, mockdata=mock ) )
 
 
     def partialLogL( self, model, allpars, fitIndex ) :
@@ -313,8 +315,10 @@ class ErrorDistribution( object ):
 
         """
         self.nparts += 1                ## counts calls tp partialLogL
+        mock = model.result( self.xdata, allpars[:model.npchain] )
+
         try :
-            pg = self.nextPartialData( model, allpars, fitIndex )
+            pg = self.nextPartialData( model, allpars, fitIndex, mockdata=mock )
             np = len( fitIndex )
             dL = numpy.zeros( np, dtype=float )
             for k in range( np ) :

@@ -164,7 +164,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
 #        print( "GG  ", chisq, norm, self.sumweight )
         return self.sumweight * norm - chisq
 
-    def logLdata( self, model, allpars ) :
+    def logLdata( self, model, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -176,13 +176,17 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
             to be fitted
         allpars : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
         np = model.npchain
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:np] )
         scale = allpars[-2]
         power = allpars[-1]
+        res = self.data - mockdata
 
-        res = self.getResiduals( model, allpars[:np] )
         lld = - numpy.power( numpy.abs( res / scale ), power )
         norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
         lld += norm
@@ -269,7 +273,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
 
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex ) :
+    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of all elements of the log( likelihood )
         to the parameters.
@@ -282,13 +286,17 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
             parameters of the problem
         fitIndex : array_like
             indices of the parameters to be fitted
+        mockdata : array_like
+            as calculated by the model
 
         """
-        self.ncalls += 1
         np = model.npchain
+        param = allpars[:np]
+        if mockdata is None :
+            mockdata = model.result( self.xdata, param )
         scale = allpars[-2]
         power = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
+        res = self.data - mockdata
 
         ars = numpy.abs( res / scale )
         rsp = numpy.power( ars, power )
@@ -299,7 +307,9 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
             wgt = 1.0
 
         dLdm = power * rsp / res
-        dM = model.partial( self.xdata, allpars[:np] )
+        dM = model.partial( self.xdata, param )
+##      TBD import mockdata into partial
+#        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
         # special.psi( x ) is the same as special.polygamma( 1, x )
         dlp = wgt * ( power + special.psi( 1.0 / power ) ) / ( power * power )

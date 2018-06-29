@@ -143,7 +143,7 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
         return logl
 
-    def logLdata( self, model, param ) :
+    def logLdata( self, model, param, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -155,12 +155,15 @@ class PoissonErrorDistribution( ErrorDistribution ):
             to be fitted
         param : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
-        mock = model.result( self.xdata, param )
+        if mockdata is None :
+            mockdata = model.result( self.xdata, param )
         lfdata = logFactorial( self.data )
 
-        lld = self.data * numpy.log( mock ) - mock - lfdata
+        lld = self.data * numpy.log( mockdata ) - mockdata - lfdata
         lld = numpy.where( numpy.isfinite( lld ), lld, -math.inf )
 
         return lld
@@ -190,7 +193,7 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
         return dL
 
-    def nextPartialData( self, model, param, fitIndex ):
+    def nextPartialData( self, model, param, fitIndex, mockdata=None ):
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
@@ -202,15 +205,19 @@ class PoissonErrorDistribution( ErrorDistribution ):
             parameters of the model
         fitIndex : array_like
             indices of the params to be fitted
+        mockdata : array_like
+            as calculated by the model
         """
-        self.nparts += 1
-        mock = model.result( self.xdata, param )
+        if mockdata is None :
+            mockdata = model.result( self.xdata, param )
         dM = model.partial( self.xdata, param )
+##      TBD import mockdata into partial
+#        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
         for k in fitIndex :
-            yield ( self.data / mock - 1 ) * dM[:,k]
+            yield ( self.data / mockdata - 1 ) * dM[:,k]
 
-        return dL
+        return
 
     def __str__( self ) :
         return "Poisson error distribution"

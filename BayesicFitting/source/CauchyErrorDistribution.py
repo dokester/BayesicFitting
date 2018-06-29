@@ -152,7 +152,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         return ( self.ndata * ( math.log( scale ) - self.LOGPI ) -
                  numpy.sum( numpy.log( res2 + scale * scale ) ) )
 
-    def logLdata( self, model, allpars ) :
+    def logLdata( self, model, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -164,12 +164,16 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             to be fitted
         allpars : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
         np = model.npchain
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:np] )
         scale = allpars[-1]
         s2 = scale * scale
-        res2 = numpy.square( self.getResiduals( model, allpars[:np] ) )
+        res2 = numpy.square( self.data - mockdata )
         return math.log( scale ) - self.LOGPI - numpy.log( res2 + s2 )
 
     def partialLogLXXX( self, model, allpars, fitIndex ) :
@@ -204,7 +208,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             i += 1
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex ) :
+    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters
         in fitIndex.
@@ -217,14 +221,21 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
+        mockdata : array_like
+            as calculated by the model
 
         """
         self.nparts += 1
         np = model.npchain
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:np] )
         scale = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
+        res = self.data - mockdata
         r2s = res * res + scale * scale
+
         dM = model.partial( self.xdata, allpars[:np] )
+##      TBD import mockdata into partial
+#        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
         for k in fitIndex :
             if k >= 0 :

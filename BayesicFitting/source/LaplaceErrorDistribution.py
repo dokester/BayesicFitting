@@ -136,7 +136,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         sumres = self.getSumRes( res, scale )
         return - self.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
 
-    def logLdata( self, model, allpars ) :
+    def logLdata( self, model, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -148,11 +148,15 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
             to be fitted
         allpars : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
         np = model.npchain
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:np] )
         scale = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
+        res = self.data - mockdata
         res = - numpy.abs( res ) / scale - ( self.LOG2 + math.log( scale ) )
         if self.weights is not None :
             res = res * self.weights
@@ -223,7 +227,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
             i += 1
         return dL / scale
 
-    def nextPartialData( self, model, allpars, fitIndex ) :
+    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of elements of the log( likelihood )
         to the parameters.
@@ -236,14 +240,20 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
+        mockdata : array_like
+            as calculated by the model
 
         """
-        self.nparts += 1
         np = model.npchain
+        param = allpars[:np]
         scale = allpars[-1]
+        if mockdata is None :
+            mockdata = model.result( self.xdata, param )
+        res = self.data - mockdata
 
-        dM = model.partial( self.xdata, allpars[:np] )
-        res = self.getResiduals( model, allpars[:np] )
+        dM = model.partial( self.xdata, param )
+##      TBD import mockdata into partial
+#        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
         wgt = numpy.ones_like( res, dtype=float ) if self.weights is None else self.weights
         swgt = numpy.copysign( wgt, res )

@@ -140,7 +140,7 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
 
         return -math.inf
 
-    def logLdata( self, model, allpars ) :
+    def logLdata( self, model, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -152,11 +152,15 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
             to be fitted
         allpars : array_like
             list of all parameters in the problem
+        mockdata : array_like
+            as calculated by the model
 
         """
         np = model.npchain
+        if mockdata is None :
+            mockdata = model.result( self.xdata, allpars[:np] )
         scale = allpars[-1]
-        ares = numpy.abs( self.getResiduals( model, allpars[:np] ) )
+        ares = numpy.abs( self.data - mockdata )
 
         lld = numpy.where( ares < scale, -math.log( 2 * scale ), -math.inf )
         if self.weights is not None :
@@ -194,7 +198,7 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
             dL[-1] = -self.sumweight / allpars[-1]
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex ) :
+    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of elements of the log( likelihood )
         to the parameters.
@@ -207,8 +211,11 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
+        mockdata : array_like
+            as calculated by the model
 
         """
+        scale = allpars[-1]
         pll = numpy.zeros_like( self.data )
         if self.weights is not None :
             wgt = self.weights
@@ -219,7 +226,7 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
             if k >= 0 :
                 yield pll
             else :
-                yield ( - wgt / allpars[-1] )
+                yield ( - wgt / scale )
 
         return
 
