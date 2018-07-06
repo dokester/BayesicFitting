@@ -36,7 +36,7 @@ class EtalonDriftModel( NonLinearModel ):
     """
     Sinusoidal Model with drifting frequency.
     .. math::
-        f( x,y:p ) = p_0 / ( 1.0 + p_1 * sin^2( \pi p_2 x + p_3 + p_4 y ) )
+        f( x,y:p ) = p_0 / ( 1.0 + p_1^2 * sin^2( \pi ( p_2 x + p_3 + p_4 y ) ) )
 
     where :math:`p_0` = amplitude, :math:`p_1` = finesse,
     :math:`p_2` = periods per wavenumber, :math:`p_3` = phase,
