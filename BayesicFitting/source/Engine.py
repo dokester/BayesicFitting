@@ -68,7 +68,8 @@ class Engine( object ):
     SUCCESS = 0             #  succesfull move
     REJECT = 1              #  rejected move
     FAILED = 2              #  failed to move
-    NCALLS = 3              #  number of calls
+    BEST   = 3              #  better than all
+    NCALLS = 4              #  number of calls
 
     #  *********CONSTRUCTORS***************************************************
 
@@ -95,7 +96,7 @@ class Engine( object ):
         """
         self.walkers = walkers
         self.errdis = errdis
-        self.report = [0]*4
+        self.report = [0]*5
 
         if copy is None :
             self.maxtrials = 5
@@ -252,9 +253,12 @@ class Engine( object ):
     def reportFailed( self ):
         self.report[self.FAILED] += 1
 
+    def reportBest( self ):
+        self.report[self.BEST] += 1
+
     def printReport( self ) :
-        print( " %10d %10d %10d %10d" % (self.report[0], self.report[1],
-                                         self.report[2], self.report[3] ) )
+        print( " %10d %10d %10d %10d %10d" % (self.report[0], self.report[1],
+                              self.report[2], self.report[3], self.report[4] ) )
 
     def calculateUnitRange( self ):
         """

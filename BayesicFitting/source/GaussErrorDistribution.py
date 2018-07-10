@@ -152,6 +152,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) )
         if self.weights is not None :
             res2 = res2 * self.weights
+#        [ print( "LLD   ", r, math.frexp( r ) ) for r in res2 ]
         return res2
 
 

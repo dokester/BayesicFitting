@@ -388,7 +388,7 @@ class NestedSampler( object ):
             print( "\nMoving the walkers with ", end="" )
             for eng in self.engines :
                 print( " ", eng, end="" )
-            print( "" )
+            print( "\nUsing %s" %( "threads." if self.threads else "no threads." ) )
 
 
         if self.verbose >= 2:
@@ -438,8 +438,10 @@ class NestedSampler( object ):
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
 #               scale = self.getScale( self.walker[kw] )
+#                sumlh = numpy.sum( self.walkers.getLogLikelihoodEvolution() )
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ, self.info,
                         self.lowLhood, np ), fmt( pl ) )
+#                        sumlh, np ), fmt( pl ) )
 
                 self.plotResult( self.walkers[worst[0]], self.iteration, plot=iterplot )
 
@@ -543,7 +545,7 @@ class NestedSampler( object ):
         sworst = sorted( worst )
 #        print( worst, sworst )
         for k in range( self.discard ):
-            kcp = self.rng.randint( 0, self.ensemble - self.discard )
+            kcp = self.rng.randint( 0, self.ensemble + 1 - self.discard )
             for kk in range( self.discard ):
                 if kcp >= sworst[kk] :
                     kcp += 1
@@ -708,7 +710,6 @@ class NestedSampler( object ):
 
             if name == "galilean" :
                 seed = self.rng.randint( self.TWOP32 )
-#                print( "Galil    ", seed )
                 engine = GalileanEngine( self.walkers, self.distribution, seed=seed )
             elif name == "gibbs" :
                 seed = self.rng.randint( self.TWOP32 )
@@ -750,7 +751,9 @@ class NestedSampler( object ):
         """
         Initialize the walkers at random values of parameters and scale
         """
-        self.walkers = SampleList( self.model, self.ensemble, self.distribution,
+
+        # Make the walkers list one larger to store the all time best.
+        self.walkers = SampleList( self.model, self.ensemble + 1, self.distribution,
                 fitindex=fitlist )
 
         if self.initialEngine is not None:
@@ -766,9 +769,18 @@ class NestedSampler( object ):
             self.initialEngine = StartEngine( self.walkers, self.distribution,
                         seed=seed )
 
+        # Calculate logL for all walkers.
         for walker in self.walkers :
             self.initialEngine.execute( walker, 0, fitIndex=fitlist )
 
+        # Find best in ensemble and copy it into the last, extra position.
+        lbest = self.walkers[0].logL
+        kbest = 0
+        for k,walker in enumerate( self.walkers[:-1] ) :
+            if walker.logL > lbest :
+                kbest = k
+                lbest = walker.logL
+        self.walkers.copy( kbest, -1 )
 
     def plotData( self, plot=False ):
         if not plot :
@@ -804,7 +816,7 @@ class NestedSampler( object ):
     def report( self ):
 
 #        print( "Rate        %f" % self.rate )
-        print( "Engines              success     reject     failed      calls" )
+        print( "Engines              success     reject     failed       best        calls" )
 
         for engine in self.engines :
             print( "%-16.16s " % engine, end="" )

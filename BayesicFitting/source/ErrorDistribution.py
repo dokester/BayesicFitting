@@ -1,6 +1,5 @@
 import numpy as numpy
 from .HyperParameter import HyperParameter
-
 from . import Tools
 
 __author__ = "Do Kester"
