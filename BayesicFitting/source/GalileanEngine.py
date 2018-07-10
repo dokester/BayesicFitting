@@ -134,6 +134,7 @@ class GalileanEngine( Engine ):
 
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
         maxtrial = self.maxtrials * nstep
+        Lbest = self.walkers[-1].logL
         step = 0
         trial = 0
 
@@ -149,21 +150,24 @@ class GalileanEngine( Engine ):
 #                print( "GE1  ", fmt(f), fmt(Lhood), fmt(lowLhood), fmt(Ltry) )
                 pedge = ptry.copy()
                 pedge[fitIndex] = um.stepPars( f )                # ptry on edge
-#                print( "GE2  ", fma(pedge), fitIndex )
+#                print( "GE2  ", fma(pedge) )
+#                [print( "edge  ", pt, math.frexp( pt ) ) for pt in pedge ]
+#                print( "GE2  ", fma(pedge) )
                 dLdp = self.errdis.partialLogL( model, pedge, fitIndex )
+#                [print( "llde  ", pt, math.frexp( pt ) ) for pt in dLdp ]
                 self.plotter.move( allpars, pedge, 1 )
 #                print( "GE3  ", fma( dLdp ) )
 
                 um.mirrorOnLowL( dLdp )
                 ptry[fitIndex] = um.stepPars( 1 - f )
-#                print( "GE4  ", fma( ptry ) )
+#                print( "GE4  ", ( ptry ) )
 
                 self.plotter.move( pedge, ptry, 2 )
             else:                                       # mirroring failed; do reverse
                 size *= 0.7
                 um.reverseVelocity( size )
                 ptry[fitIndex] = um.stepPars( 1.0 )
-#                self.size *= 0.7
+#                print( "GE5  ", ( ptry ) )
 
                 self.plotter.move( allpars, ptry, 3 )
 
@@ -172,11 +176,13 @@ class GalileanEngine( Engine ):
 #                xdata = self.errdis.xdata
 #                ptry = self.constrain( model, ptry, xdata )
 
-#            print( "GEng  ", fma(ptry), inside )
+
+#            print( "GEng  ", (ptry) )
+#            [print( "ptry  ", pt, math.frexp( pt ) ) for pt in ptry ]
 
             Ltry = self.errdis.logLikelihood( model, ptry )
 
-#            print( "GEng  ", fmt(Ltry) )
+#            print( "Geng  ", self.rng.rand(), Ltry, math.frexp(Ltry), inside, (Ltry >= lowLhood) )
 
             if Ltry >= lowLhood:
                 allpars = ptry.copy( )
@@ -185,6 +191,11 @@ class GalileanEngine( Engine ):
                 npout = len( allpars )
                 inside = 0
                 step += 1
+                if Ltry > Lbest :
+                    Lbest = Ltry
+                    self.setSample( self.walkers[-1], model, ptry.copy(), Lbest )
+                    self.reportBest()
+
             else:
                 inside += 1
                 if inside == 1:
@@ -226,9 +237,11 @@ class UnitMovements( object ):
     def mirrorOnLowL( self, dLdp ):
 #        print( "dLdp  ", fmt( dLdp ) )
 #        print( "uvel  ", fmt( self.uvel ) )
-        inprod = numpy.inner( dLdp, self.uvel )
+#        inprod = numpy.inner( dLdp, self.uvel )
+        inprod = numpy.sum( dLdp * self.uvel )
 #        print( "inpr  ", fmt( inprod ) )
-        sumsq  = numpy.inner( dLdp, dLdp )
+#        sumsq  = numpy.inner( dLdp, dLdp )
+        sumsq  = numpy.sum( dLdp * dLdp )
 #        print( "sumq  ", fmt( sumsq ) )
         self.uvel -= 2 * dLdp * inprod / sumsq
 #        print( "uvel  ", fmt( self.uvel ) )
