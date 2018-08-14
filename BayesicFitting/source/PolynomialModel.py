@@ -1,6 +1,7 @@
 import numpy as numpy
 from .LinearModel import LinearModel
 from . import Tools
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -27,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA Code)
-#  *    2016      Do Kester
+#  *    2016 - 2018 Do Kester
 
 
 class PolynomialModel( LinearModel ):
@@ -47,6 +48,24 @@ class PolynomialModel( LinearModel ):
 
     Author : Do Kester
 
+    Attributes
+    ----------
+    degree : int
+        degree of the polynomial
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
     """
     def __init__( self, degree, copy=None, **kwargs ):
         """
@@ -65,11 +84,20 @@ class PolynomialModel( LinearModel ):
         super(PolynomialModel,self ).__init__( degree + 1, copy=copy,
                         **kwargs )
 
-        object.__setattr__( self, "degree", degree )
+        self.degree = degree
 
     def copy( self ):
         """ Copy method.  """
         return PolynomialModel( self.degree, copy=self )
+
+    def __setattr__( self, name, value ):
+        """
+        Set attributes: degree
+        """
+        if name == 'degree' :
+            setatt( self, name, value, type=int )
+        else :
+            super( PolynomialModel, self ).__setattr__( name, value )
 
     def basePartial( self, xdata, params, parlist=None ):
         """

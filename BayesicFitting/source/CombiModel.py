@@ -3,6 +3,7 @@ from astropy import units
 import math
 import re
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .BracketModel import BracketModel
 from .Formatter import formatter as fmt
@@ -48,6 +49,9 @@ class CombiModel( BracketModel ):
 
     where `g( x:p )` is a model ( e.g. GaussModel )
 
+    For consistency reasons it is not possible to change the attributes of a
+    CombiModel. It is better to make a new one with the required settings.
+
     Attributes
     ----------
     nrepeat : int
@@ -70,6 +74,23 @@ class CombiModel( BracketModel ):
         list of values to be multiplied to the parameters in mulindex
     select : array of int
         indices of expandpar to get parameters
+
+    Attributes from BracketModel
+    --------------------------
+        model, deep
+
+    Attributes from Model
+    --------------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
 
     Examples
     --------
@@ -144,24 +165,24 @@ class CombiModel( BracketModel ):
 
         super( CombiModel, self ).__init__( mdl, **kwargs )
 
-        self.nmp = model.npchain
-        self.nrepeat = nrepeat
-        self.npcmax = model.npchain * nrepeat
+        setatt( self, "nmp", model.npchain )
+        setatt( self, "nrepeat", nrepeat )
+        setatt( self, "npcmax", model.npchain * nrepeat )
 
         self.combine( addCombi=addCombi, mulCombi=mulCombi )
 
         if copy is not None :
-            self.addindex = copy.addindex.copy()
-            self.addvalue = copy.addvalue.copy()
-            self.mulindex = copy.mulindex.copy()
-            self.mulvalue = copy.mulvalue.copy()
-            self.select = copy.select.copy()
-            self.expandindex = copy.expandindex.copy()
+            setatt( self, "addindex", copy.addindex.copy() )
+            setatt( self, "addvalue", copy.addvalue.copy() )
+            setatt( self, "mulindex", copy.mulindex.copy() )
+            setatt( self, "mulvalue", copy.mulvalue.copy() )
+            setatt( self, "select", copy.select.copy() )
+            setatt( self, "expandindex", copy.expandindex.copy() )
 
-        self._npchain = len( self.select )
-        self.npbase  = self._npchain
-        self.npmax = self.npbase
-        self.parameters = self.parameters[self.select]
+        setatt( self, "_npchain", len( self.select ) )
+        setatt( self, "npbase", self._npchain )
+        setatt( self, "npmax", self.npbase )
+        setatt( self, "parameters", self.parameters[self.select] )
 
     def copy( self ):
         """ Copy method.  """
@@ -172,47 +193,34 @@ class CombiModel( BracketModel ):
         return CombiModel( self.model.isolateModel( 0 ), nrepeat=self.nrepeat,
                     oper=oper, copy=self )
 
-    def __setattr__( self, name, value ):
-        """
-        Set attributes.
-
-        Parameters
-        ----------
-        name :  string
-            name of the attribute
-        value :
-            value of the attribute
-
-        """
-        dlst = {'addindex':int, 'mulindex':int, 'addvalue':float, 'mulvalue':float,
-                'expandindex':int, 'select': int }
-        dind = {'nmp':int, 'nrepeat':int, "npcmax":int }
-
-        if ( Tools.setListOfAttributes( self, name, value, dlst ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass                                            # success
-        else :
-            super( CombiModel, self ).__setattr__( name, value )
-
-
     def combine( self, addCombi=None, mulCombi=None ) :
+        """
+        (re)sets the value of attributes "addindex", "addvalue", "mulindex", "mulvalue",
+        "select" and "expandindex".
+
+        """
 #        print( addCombi, mulCombi )
 
-        self.addindex, self.addvalue = self.setCombi( addCombi )
-        self.mulindex, self.mulvalue = self.setCombi( mulCombi )
+        addindex, addvalue = self.setCombi( addCombi )
+        setatt( self, "addindex", addindex )
+        setatt( self, "addvalue", addvalue )
+        mulindex, mulvalue = self.setCombi( mulCombi )
+        setatt( self, "mulindex", mulindex )
+        setatt( self, "mulvalue", mulvalue )
 
         expandindex = numpy.arange( self.npcmax, dtype=int )
         expandindex = self.makeExpandIndex( expandindex, self.addindex )
         expandindex = self.makeExpandIndex( expandindex, self.mulindex )
 
-        self.select = numpy.asarray( list( sorted( set( expandindex ) ) ) )
+        setatt( self, "select", numpy.asarray( list( sorted( set( expandindex ) ) ) ) )
+
         i = 0
         for k in range( self.npcmax ) :
             if expandindex[k] >= i :
                 expandindex[k] = i
                 i += 1
 
-        self.expandindex = expandindex
+        setatt( self, "expandindex", expandindex )
 
 
     def makeExpandIndex( self, expandindex, amindex ) :

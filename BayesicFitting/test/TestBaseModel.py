@@ -2,7 +2,7 @@
 
 import unittest
 import numpy as numpy
-from BayesicFitting import BaseModel
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -26,9 +26,6 @@ class TestBaseModel( unittest.TestCase ) :
 
         self.assertEqual( bm.nonZero.shape, (0,) )
         self.assertTrue( isinstance( bm.nonZero, numpy.ndarray ) )
-
-        for k in range( bm.npbase ) :
-            self.assertEqual( bm.parNames[k], "parameter_%d"%k )
 
         bm.posIndex = [2,4]
         bm.nonZero = 3
@@ -56,12 +53,22 @@ class TestBaseModel( unittest.TestCase ) :
         self.assertTrue( isinstance( cm.nonZero, numpy.ndarray ) )
         self.assertEqual( cm.nonZero[0], 3 )
 
-    def test_setattr( self ) :
-        bm = BaseModel( 2 )
+    def test_parnames( self ) :
+        bm = GaussModel( )
+#        pm = PolynomialModel( 1 )
 
-        self.assertRaises( AttributeError, bm.__setattr__, 'posIndex', 1.2 )
-        self.assertRaises( AttributeError, bm.__setattr__, 'PosIndex', 1 )
-        self.assertRaises( AttributeError, bm.__setattr__, '_zeroFound', 1.2 )
+        Tools.printclass( bm )
+#        Tools.printclass( pm )
+
+#        bm += pm
+
+        self.assertTrue( bm.amplitude == bm.parameters[0] )
+        self.assertTrue( bm.center == bm.parameters[1] )
+        self.assertTrue( bm.width == bm.parameters[2] )
+
+#        self.assertTrue( bm.parameter_0 == bm.parameters[3] )
+#        self.assertTrue( bm.parameter_1 == bm.parameters[4] )
+
 
 
 

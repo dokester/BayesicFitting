@@ -1,5 +1,6 @@
 import numpy as numpy
 from . import Tools
+from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
@@ -27,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2018 Do Kester
 
 class SplinesModel( LinearModel ):
     """
@@ -72,10 +73,29 @@ class SplinesModel( LinearModel ):
     >>> print csm.getNumberOfParameters( )
     18
 
+    Attributes
+    ----------
+    knots : array_like
+        positions of the spline knots
+    order : int
+        order of the spline. default: 3
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
 
     Limitations
     -----------
-    Dont put the knots too closely so that there are no datapoints in between.
+    Dont constract the knots so closely spaced, that there are no datapoints in between.
 
     """
     def __init__( self, knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
@@ -107,9 +127,8 @@ class SplinesModel( LinearModel ):
 
         Raises
         ------
-        ValueError : At least either (`knots`) or (`nrnkots`, `min`, `max`) or
+        ValueError : At least either (`knots`) or (`nrknots`, `min`, `max`) or
                 (`nrknots`, `xrange`) must be provided to define a valid model.
-        AttributeErrr : When fixed is not None
 
         Notes
         -----
@@ -117,8 +136,6 @@ class SplinesModel( LinearModel ):
         minmax of knots. It deteriorates fastly going outside the domain.
 
         """
-#        if fixed is not None :
-#            raise AttributeError( "SplinesModel cannot have fixed parameters" )
 
         if copy is not None :
             knots = copy.knots
@@ -144,11 +161,10 @@ class SplinesModel( LinearModel ):
         Set attributes: knots, order
 
         """
-        dlst = {'knots': float }
-        dind = {'order': int }
-        if ( Tools.setListOfAttributes( self, name, value, dlst ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ):
-            pass
+        if name == "knots" :
+            setatt( self, name, value, type=float, islist=True )
+        elif name == "order" :
+            setatt( self, name, value, type=int )
         else :
             super( SplinesModel, self ).__setattr__( name, value )
 

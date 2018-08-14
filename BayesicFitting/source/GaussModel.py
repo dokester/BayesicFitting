@@ -2,6 +2,8 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
+
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
@@ -56,6 +58,22 @@ class GaussModel( NonLinearModel ):
        6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
        1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Alternate
+    ---------
+    `GaussModel()` is equivalent to `KernelModel( kernel=Gauss() )`.
+
 
     """
 
@@ -80,8 +98,8 @@ class GaussModel( NonLinearModel ):
         super( GaussModel, self ).__init__( 3, copy=copy, params=param,
                     names=names, **kwargs )
         if copy is None :
-            self.posIndex = [2]
-            self.nonZero = [2]
+            setatt( self, "posIndex", [2] )
+            setatt( self, "nonZero", [2] )
 
     def copy( self ):
         """ Copy method.  """

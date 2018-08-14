@@ -36,7 +36,7 @@ class RadialVelocityModel( NonLinearModel ):
         f( x:p ) = p_1 * \cos( 2 * \pi * p_0 * x ) + p_2 * \sin( 2 * \pi * p_0 * x )
 
     amplitude   : of the velocity variation (>0)
-    eriod       : of the velocity variation (>0)
+    period      : of the velocity variation (>0)
     eccentricity: of the elliptic orbit (0<e<1; 0 = circular orbit)
     phase       : time shift since periastron (0<p<2pi)
     periastron  : longitude of periastron (0<p<2pi)
@@ -65,7 +65,7 @@ class RadialVelocityModel( NonLinearModel ):
 
         Parameters
         ----------
-        copy : SineModel
+        copy : RadialVelocityModel
             model to copy
         fixed : dictionary of {int:float}
             int     list if parameters to fix permanently. Default None.
@@ -111,8 +111,6 @@ class RadialVelocityModel( NonLinearModel ):
         return ( 4.91e-3 * math.pow( stellarmass, 2.0 / 3.0 ) * p[0] *
                  math.pow( p[1], 1.0 / 3.0 ) * math.sqrt( 1 - p[2] * p[2] ) )
 
-
-
     def baseResult( self, xdata, params ):
         """
         Returns the result of the model function.
@@ -145,7 +143,6 @@ class RadialVelocityModel( NonLinearModel ):
         eccen = params[2]
         phase = params[3] / self.TWOPI
 
-#        otime = ( ( xdata + phase ) % period ) / period
         otime = ( ( xdata / period ) + phase ) % 1.0
 
         npt = 361
@@ -154,9 +151,7 @@ class RadialVelocityModel( NonLinearModel ):
 
         sectors = 0.5 * r[1:] * r[:-1] * math.sin( self.TWOPI * phi[1] )
         anom = numpy.cumsum( sectors )
-#        print( anom )
         anom /= anom[-1]
-#        anom *= ( period / anom[-1] )
 
         k = 0
         res = numpy.zeros_like( xdata )
@@ -187,22 +182,6 @@ class RadialVelocityModel( NonLinearModel ):
         np = self.npbase if parlist is None else len( parlist )
         partial = numpy.ndarray( ( Tools.length( xdata ), np ) )
 
-        #  disregard count
-        x = self.TWOPI * xdata
-        xf = x * params[0]
-        cxf = numpy.cos( xf )
-        sxf = numpy.sin( xf )
-
-        parts = { 0 : ( lambda: x * params[2] * cxf - x * params[1] * sxf ),
-                  1 : ( lambda: cxf ),
-                  2 : ( lambda: sxf ) }
-
-        if parlist is None :
-            parlist = range( self.npmax )
-
-        for k,kp in enumerate( parlist ) :
-            partial[:,k] = parts[kp]()
-
         return partial
 
     def TBWbaseDerivative( self, xdata, params ):
@@ -217,9 +196,7 @@ class RadialVelocityModel( NonLinearModel ):
             values for the parameters.
 
         """
-        x = self.TWOPI * xdata * params[0]
-        df = self.TWOPI * params[0] * ( params[2] * numpy.cos( x ) - params[1] * numpy.sin( x ) )
-        return df
+        return 0
 
     def baseName( self ):
         """

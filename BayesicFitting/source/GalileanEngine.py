@@ -193,7 +193,8 @@ class GalileanEngine( Engine ):
                 step += 1
                 if Ltry > Lbest :
                     Lbest = Ltry
-                    self.setSample( self.walkers[-1], model, ptry.copy(), Lbest )
+                    self.setSample( self.walkers[-1], model, ptry.copy(), Lbest,
+                                    fitindex=fitIndex )
                     self.reportBest()
 
             else:
@@ -209,7 +210,7 @@ class GalileanEngine( Engine ):
             if not ( step < nstep and trial < maxtrial ):
                 break
 
-        self.setSample( walker, model, allpars, Lhood )
+        self.setSample( walker, model, allpars, Lhood, fitindex=fitIndex )
 
         self.plotter.stop()
         return npout

@@ -1,5 +1,7 @@
 import numpy as numpy
 from . import Tools
+from .Tools import setAttribute as setatt
+
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
@@ -54,6 +56,18 @@ class PolySurfaceModel( LinearModel ):
     degree : int
         degree of the polynomial
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
 
     """
     def __init__( self, degree, copy=None, **kwargs ):
@@ -87,10 +101,8 @@ class PolySurfaceModel( LinearModel ):
         """
         Set attributes: degree
         """
-        dind = {"degree": int}
-
-        if Tools.setSingleAttributes( self, name, value, dind ) :
-            pass                                            # success
+        if name == 'degree' :
+            setatt( self, name, value, type=int )
         else :
             super( PolySurfaceModel, self ).__setattr__( name, value )
 

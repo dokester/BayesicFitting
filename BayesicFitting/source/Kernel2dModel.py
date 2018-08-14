@@ -2,6 +2,8 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
+
 from .NonLinearModel import NonLinearModel
 from .kernels.Kernel import Kernel
 from .kernels.Gauss import Gauss
@@ -129,12 +131,14 @@ class Kernel2dModel( NonLinearModel ):
         return Kernel2dModel( copy=self, shape=self.shape )
 
     def __setattr__( self, name, value ) :
-        if name == "kernel" and isinstance( value, Kernel ) :
-            object.__setattr__( self, name, value )
-        elif name == "shape2d" and isinstance( value, BaseShape2d ) :
-            object.__setattr__( self, name, value )
+        if name == "kernel" :
+            setatt( self, name, value, type=Kernel )
+        elif name == "shape2d" :
+            setatt( self, name, value, type=BaseShape2d )
         elif name == "shape" :
-            object.__setattr__( self, name, value )
+            setatt( self, name, value )
+        elif name == "npbase" :
+            setatt( self, name, value )
         else :
             super( Kernel2dModel, self ).__setattr__( name, value )
 

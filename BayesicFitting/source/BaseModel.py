@@ -3,6 +3,7 @@ from astropy import units
 import re
 import warnings
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .Dynamic import Dynamic
 from .Prior import Prior
@@ -90,8 +91,7 @@ class BaseModel( object ):
     """
 
     #  *************************************************************************
-    def __init__( self, nparams=0, ndim=1, copy=None, names=None,
-                        posIndex=[], nonZero=[] ):
+    def __init__( self, nparams=0, ndim=1, copy=None, posIndex=[], nonZero=[] ):
         """
         BaseModel Constructor.
         <br>
@@ -103,8 +103,6 @@ class BaseModel( object ):
             Number of dimensions of the input (default: 1)
         copy : BaseModel
             to be copied
-        names : list of string
-            names for the parameters
         posIndex : list of int
             indices of parameters that need to be > 0
         nonZero : list of int
@@ -113,46 +111,50 @@ class BaseModel( object ):
 
         """
         super( BaseModel, self ).__init__( )
-        object.__setattr__( self, "npbase", 0 )
-        object.__setattr__( self, "ndim", 1 )
 
         if copy is None :
-            self.npbase    = nparams
-            self.ndim      = ndim
-            self.priors    = None
-            self.posIndex  = posIndex
-            self.nonZero   = nonZero
-            self.deltaP    = [0.00001]
-            self.tiny      = 1e-20
-            if names is None :
-                self.parNames = ["parameter_%d"%k for k in range( self.npbase )]
-            else :
-                self.parNames = self.selectNames( names )
+            setatt( self, "npbase", nparams )
+            setatt( self, "ndim", ndim )
+            setatt( self, "priors", None )
+            setatt( self, "posIndex", numpy.asarray( posIndex, dtype=int ) )
+            setatt( self, "nonZero", numpy.asarray( nonZero, dtype=int ) )
+            setatt( self, "deltaP", numpy.asarray( [0.00001] ) )
+            setatt( self, "tiny", 1e-20 )
+            parNames = ["parameter_%d"%k for k in range( self.npbase )]
+            setatt( self, "parNames", parNames )
         else :
-            self.npbase   = copy.npbase
-            self.ndim     = copy.ndim
-            self.priors   = None if copy.priors is None else copy.priors.copy()
-            self.posIndex = copy.posIndex.copy()
-            self.nonZero  = copy.nonZero.copy()
-            self.deltaP   = copy.deltaP.copy()
-            self.tiny     = copy.tiny
-            self.parNames = copy.parNames[:]
+            setatt( self, "npbase", copy.npbase )
+            setatt( self, "ndim", copy.ndim )
+            setatt( self, "priors", None if copy.priors is None else copy.priors.copy() )
+            setatt( self, "posIndex", copy.posIndex )
+            setatt( self, "nonZero", copy.nonZero )
+            setatt( self, "deltaP", copy.deltaP )
+            setatt( self, "tiny", copy.tiny )
+            setatt( self, "parNames", copy.parNames )
 
     def __setattr__( self, name, value ):
         """
         Set attributes.
 
         """
-        lnon = ["priors"]
-        keys = {"posIndex":int, "priors":Prior, "nonZero":int, "deltaP":float, "parNames":str}
-        key1 = {"npbase":int, "ndim":int, "tiny":float }
-        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
-             Tools.setListOfAttributes( self, name, value, keys ) or
-             Tools.setSingleAttributes( self, name, value, key1 ) ) :
-            pass
-        else :
-            raise AttributeError(
-                "Model has no attribute " + name + " of type " + str( value.__class__ ) )
+        if name == "priors" :
+            setatt( self, name, value, type=Prior, isnone=True, islist=True )
+            return
+        if name == "parNames" :
+            setatt( self, name, value, type=str, islist=True )
+            return
+        if name == "deltaP" :
+            setatt( self, name, value, type=float, islist=True )
+            return
+        if name == "tiny" :
+            setatt( self, name, value, type=float )
+            return
+        if name in ["posIndex", "nonZero"] :
+            setatt( self, name, value, type=int, islist=True )
+            return
+
+        raise AttributeError(
+            "Model has no attribute " + name + " of type " + str( value.__class__ ) )
 
     def __getattr__( self, name ) :
         """
@@ -163,6 +165,9 @@ class BaseModel( object ):
         name : string
             name of the attribute
         """
+        if name == "parNames" :
+            raise AttributeError( "Model has no defined parameter names." )
+
         for k,pn in enumerate( self.parNames ) :
             if name == pn :
                 return self.parameters[k]

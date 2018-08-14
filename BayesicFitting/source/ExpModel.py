@@ -44,6 +44,17 @@ class ExpModel( NonLinearModel ):
     Beware of a positive 2nd parameter; when positive the model is going off
     to Infinity quite quickly.
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     Examples
     --------

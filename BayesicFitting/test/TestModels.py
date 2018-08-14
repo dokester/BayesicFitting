@@ -52,6 +52,33 @@ class TestModels( unittest.TestCase ):
         model += PolynomialModel( 1 )
         print( model )
 
+    def plotall( self ) :
+        self.plotArctanModel( )
+        self.plotConstantModel( )
+        self.plotEtalonModel( )
+        self.plotExpModel( )
+        self.plotVoigtModel( )
+        self.plotPseudoVoigtModel( )
+        self.plotLorentzModel( )
+        self.plotFreeShapeModel( )
+        self.plotGaussModel( )
+        self.plotGaussPlusBackgroundModel( )
+        self.plotHarmonicModel( )
+        self.plotPolynomialModel( )
+        self.plotChebyshevPolynomialModel( )
+        self.plotPadeModel( )
+        self.plotPowerLawModel( )
+        self.plotPowerModel( )
+        self.plotRadialVelocityModel( )
+        self.plotSincModel( )
+        self.plotSineModel( )
+        self.plotSineAmpModel( )
+        self.plotSineSplineModel( )
+        self.plotSineSplineDriftModel( )
+        self.plotSineDriftModel( )
+        self.plotBSplinesModel( )
+        self.plotSplinesModel( )
+
     def plotArctanModel( self ) :
         self.testArctanModel( plot=True )
 
@@ -65,7 +92,7 @@ class TestModels( unittest.TestCase ):
         self.testExpModel( plot=True )
 
     def plotVoigtModel( self ) :
-        self.testVoigtModel( )
+        self.testVoigtModel( plot=True )
         xx = numpy.linspace( -1, +1, 1001 )
         par = numpy.asarray( [1.2,-0.2,0.3,0.3], dtype=float )
         plt.plot( xx, VoigtModel().result( xx, par ), 'r-', linewidth=2 )
@@ -75,7 +102,7 @@ class TestModels( unittest.TestCase ):
         plt.plot( xx, LorentzModel().result( xx, par[[0,1,3]] ), 'g-' )
         plt.plot( xx, VoigtModel().result( xx, pg ), 'r--' )
         pg = par.copy()
-        pg[2] = 0
+        pg[2] = 1e-10                           ## avoid division by 0
         plt.plot( xx, VoigtModel().result( xx, pg ), 'r.' )
         plt.show()
 
@@ -101,7 +128,7 @@ class TestModels( unittest.TestCase ):
         self.testLorentzModel( plot=True )
 
     def plotFreeShapeModel( self ) :
-        self.XtestFreeShapeModel( plot=True )
+        self.testFreeShapeModel( plot=True )
 
     def plotGaussModel( self ) :
         self.testGaussModel( plot=True )
@@ -135,6 +162,9 @@ class TestModels( unittest.TestCase ):
 
     def plotSineModel( self ) :
         self.testSineModel( plot=True )
+
+    def plotPhaseSineModel( self ) :
+        self.testPhaseSineModel( plot=True )
 
     def plotSineAmpModel( self ) :
         self.testSineAmpModel( plot=True )
@@ -231,10 +261,10 @@ class TestModels( unittest.TestCase ):
         print( p )
         stdModeltest( m, p, plot=plot )
 
-    def XtestFreeShapeModel( self, plot=False ):
+    def testFreeShapeModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******FREESHAPE********************" )
-        m = FreeShapeModel( 5, pixperbin=1, xlo=-1, xhi=1.1 )
+        m = FreeShapeModel( 5, pixperbin=1, xlo=-1, xhi=1.1, nconvolve=2 )
         self.assertTrue( m.npbase == 5 )
         p = numpy.asarray( [1.2,0.2,1.0,0.5,0.3], dtype=float )
 
@@ -363,6 +393,15 @@ class TestModels( unittest.TestCase ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINE***********************" )
         m = SineModel( )
+        self.assertTrue( m.npchain == 3 )
+        self.assertTrue( m.npbase == 3 )
+        p = [1.3, -1.1, 0.5]
+        stdModeltest( m, p, plot=plot )
+
+    def testPhaseSineModel( self, plot=False ):
+        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
+        print( "******SINE***********************" )
+        m = SineModel( phase=True )
         self.assertTrue( m.npchain == 3 )
         self.assertTrue( m.npbase == 3 )
         p = [1.3, -1.1, 0.5]

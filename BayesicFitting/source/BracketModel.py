@@ -2,6 +2,7 @@ import numpy
 from .Model import Model
 from .Model import Brackets
 from . import Tools
+from .Tools import setAttribute as setatt
 
 _author__ = "Do Kester"
 __year__ = 2017
@@ -43,8 +44,28 @@ class BracketModel( Brackets ):
     other than addition ( there is also subtract, multiply and divide ) brackets
     are needed to distinguish `m1 * ( m2 + m3 )` from `m1 * m2 + m3`.
 
-    BracketModel is autoatically invoked when the Model appended to another model,
+    BracketModel is automatically invoked when the Model appended to another model,
     is actually a chain of models.
+
+    Attributes
+    ----------
+    model : Model
+        to be put inside of brackets
+    deep : int
+        container depth (only for nice printing).
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
 
     Examples
     --------
@@ -75,16 +96,6 @@ class BracketModel( Brackets ):
     2. If you change a BracketModel which is part of a model chain, unexpected result
        might happen.
 
-
-    Attributes
-    ----------
-    model : Model
-        to be put inside of brackets
-
-    Hidden Attributes
-    -----------------
-    _deep : int
-        container depth (only for nice printing).
 
     """
     #  *************************************************************************

@@ -6,10 +6,11 @@ from astropy import units
 import warnings
 
 from .FixedModel import FixedModel
-from .Prior import Prior
-from .UniformPrior import UniformPrior
+#from .Prior import Prior
+#from .UniformPrior import UniformPrior
 from . import Tools
 from .Formatter import formatter as fmt
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -110,8 +111,6 @@ class Model( FixedModel ):
         parameters of the model
     stdevs : None or array_like
         standard deviations after a fit to the data
-    priors : list of Prior
-        list of prior distributions. They contain the limits on the parameters
     xUnit : astropy.units or list of
         unit of the x-values (list of in case of more dimensions)
     yUnit : astropy.units
@@ -159,24 +158,24 @@ class Model( FixedModel ):
         super( Model, self ).__init__( nparams=nparams, ndim=ndim, copy=copy,
                             **kwargs )
 
-#        print( nparams, self.npbase, self.npmax )
+        setatt( self, "_next", None )
+        setatt( self, "_head", self )
 
-        self._next = None
-        self._head = self
         if params is None :
             params = numpy.zeros( nparams, dtype=float )
         else :
             params = Tools.toArray( params, dtype=float )
-        object.__setattr__( self, "parameters", self.select( params ) )
+        setatt( self, "parameters", self.select( params ), type=float, islist=True )
 
         nparams = self.npbase                       # accounting len( fixed )
-        self._npchain = nparams
-        self.stdevs = None
-#        self.priors = None
+        setatt( self, "_npchain", nparams )
+        setatt( self, "stdevs", None )
+
         # xUnit is by default a (list[ndim] of) scalars, unitless
-        self.xUnit = units.Unit( 1.0 ) if ndim == 1 else [units.Unit( 1.0 )]*ndim
-        self.yUnit = units.Unit( 1.0 )                  # scalar
-        self._operation = self.NOP
+        xUnit = units.Unit( 1.0 ) if ndim == 1 else [units.Unit( 1.0 )]*ndim
+        setatt( self, "xUnit", xUnit )
+        setatt( self, "yUnit", units.Unit( 1.0 ) )                  # scalar
+        setatt( self, "_operation", self.NOP )
 
         if copy is None : return
 
@@ -186,13 +185,14 @@ class Model( FixedModel ):
             self.appendModel( last.isolateModel( 0 ), last._operation )
             last = last._next
 
-        self._npchain = copy._npchain
-        if copy.parameters is not None : self.parameters = copy.parameters.copy()
-        if copy.stdevs is not None     : self.stdevs = copy.stdevs.copy()
-#        if copy.priors is not None     : self.priors = copy.priors.copy()
+        setatt( self, "_npchain", copy._npchain )
+        if copy.parameters is not None :
+            setatt( self, "parameters", copy.parameters.copy() )
+        if copy.stdevs is not None :
+            setatt( self, "stdevs", copy.stdevs.copy() )
 
-        self.xUnit = copy.xUnit
-        self.yUnit = copy.yUnit
+        setatt( self, "xUnit", copy.xUnit )
+        setatt( self, "yUnit", copy.yUnit )
 
     def copy( self ):
         """ Return a copy.  """
@@ -210,27 +210,17 @@ class Model( FixedModel ):
             value of the attribute
 
         """
-        lnon = ['parameters', 'stdevs', '_next']
-        dlst = {'parameters':float, 'stdevs':float }
-        dind = {'_npchain':int, '_operation':int,
-                '_head':Model, '_next':Model, 'yUnit': units.core.UnitBase }
-        if self.ndim == 1 : dind.update( {'xUnit':units.core.UnitBase} )
-        else : dlst.update( {'xUnit':units.core.UnitBase} )
 
-        if name == 'parameters' and value is not None :
-            if Tools.length( value ) != self.npchain :
-                warnings.warn( "%s: Nr of parameters does not comply. expect %d; got %d" %
-                                ( self.shortName(), self.npchain, Tools.length( value ) ) )
-                raise ValueError( "%s: Nr of parameters does not comply. expect %d; got %d" %
-                                ( self.shortName(), self.npchain, Tools.length( value ) ) )
-        ### TBC Why are these lines here ??
-        # if name == 'stdevs' and value is not None :
-        #     stdv = numpy.zeros_like( self.parameters, dtype=float )
+        if name in ['parameters', 'stdevs'] :
+            if value is not None and Tools.length( value ) != self.npchain :
+                raise ValueError( "%s: Nr of %s does not comply. expect %d; got %d" %
+                                ( self.shortName(), name, self.npchain, Tools.length( value ) ) )
+            setatt( self, name, value, type=float, islist=True, isnone=True )
 
-        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
-             Tools.setListOfAttributes( self, name, value, dlst ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass                                            # success
+        elif name in ['xUnit', 'yUnit'] :
+            isl = ( name == 'xUnit' and self.ndim == 2 )
+            setatt( self, name, value, type=units.core.UnitBase, islist=isl, isnone=True )
+
         else :
             super( Model, self ).__setattr__( name, value )
 
@@ -245,10 +235,9 @@ class Model( FixedModel ):
         """
         if name == 'npchain' :
             return self._head._npchain
-        else :
-            raise AttributeError( "Unknown attribute " + name )
 
-        return None
+        return super( Model, self ).__getattr__( name )
+
 
     def chainLength( self ):
         """ Return length of the chain.  """
@@ -298,24 +287,26 @@ class Model( FixedModel ):
         while last is not None:
             if i == k :
                 next = last._next               #  save
-                last._next = None               #  isolate
+
+                setatt( last, "_next", None )   #  isolate
                 head = last._head               #  save
-                last._head = last               #  isolate
+                setatt( last, "_head", last )   #  isolate
                 mdl = last.copy()               #  copy
-                last._next = next               #  restore
-                last._head = head
-                mdl._operation = self.NOP
+                setatt( last, "_next", next )   #  restore
+                setatt( last, "_head", head )
+                setatt( mdl, "_operation", self.NOP )
 
                 n2 = np + last.npbase
                 # hard overwrite of the base parameters (over the chain parameters)
-                object.__setattr__( mdl, "parameters", self._head.parameters[np:n2] )
+                setatt( mdl, "parameters", self._head.parameters[np:n2] )
 
                 if self.stdevs is not None :
-                    object.__setattr__( mdl, "stdevs", self._head.stdevs[np:n2] )
+                    setatt( mdl, "stdevs", self._head.stdevs[np:n2] )
                 else :
-                    mdl.stdevs = None
-                mdl._npchain = mdl.npbase       # only extract one model
+                    setatt( mdl, "stdevs", None )
+                setatt( mdl, "_npchain", mdl.npbase )      # only extract one model
                 return mdl
+
             np += last.npbase
             last = last._next
             i += 1
@@ -424,27 +415,18 @@ class Model( FixedModel ):
         last = self
         while last._next != None:
             last = last._next
-        last._next = model
-        model._operation = operation
+        setatt( last, "_next",  model )
+        setatt( model, "_operation", operation )
         while last._next != None:
             last = last._next
-            last._head = self._head
+            setatt( last, "_head", self._head )
 
-        self._npchain   = len( self.parameters ) + len( model.parameters )
+        setatt( self, "_npchain", len( self.parameters ) + len( model.parameters ) )
 
-        self.parameters = self._optAppend( self.parameters, model.parameters )
-
-#        if model.priors is not None :
-#            if self.priors is None :
-#                self.priors = [UniformPrior()] * npars
-#            elif len( self.priors ) < npars :
-#                need = npars - len( self.priors )
-#                self.priors = numpy.append( self.priors, [self.priors[-1]] * need )
-#            self.priors = numpy.append( self.priors, model.priors )
+        setatt( self, "parameters", self._optAppend( self.parameters, model.parameters ) )
 
         # Erase the model's attributes; not needed anymore
-        model.parameters = None
-#        model.priors = None
+        setatt( model, "parameters", None )
 
         return
 
@@ -947,28 +929,6 @@ class Model( FixedModel ):
         return (lolim, hilim)
 
     #  *************************************************************************
-#    def unsetLimits( self ):
-        """ Unset the limits for the parameters.  """
-#        for pr in self.priors :
-#            pr.unsetLimits()
-
-
-    #  FIXME is this needed
-#    def hasLowLimit( self ):
-        """
-        Return true if a lower limits is present for the parameters.
-
-        """
-#        return self.priors is not None and all( p.hasLowLimit() for p in self.priors )
-
-#    def hasHighLimit( self ):
-        """
-        Return true if a upper limit is present for the parameter.
-
-        """
-#        return self.priors is not None and all( p.hasHighLimit() for p in self.priors )
-
-    #  *************************************************************************
     def hasLimits( self, fitindex=None ):
         """
         Return true if limits has been set for this model.
@@ -1044,18 +1004,6 @@ class Model( FixedModel ):
             self.getPrior( k ).checkLimit( param[i] )
             i += 1
 
-    """
-    def isOutOfLimits( self, param, index=None ) :
-        if self.priors is None:
-            return False
-
-        if index is None :
-            index = range( len( param ) )
-        for k in index :
-            if self.getPrior( k ).isOutOfLimits( param[k] ) :
-                return True
-        return False
-    """
     #  ****** UNIT <--> DOMAIN ********************************************
     def unit2Domain( self, uvalue, kpar=None ):
         """
@@ -1335,23 +1283,24 @@ class Model( FixedModel ):
         if sz[0] > 10 :
             lrang = random.sample( lrang, 10 )
         for k in lrang :
-            print( "xdata  %2d" % k )
+            print( "xdata[%2d]" % k, end='' )
             if self.ndim == 1 :
                 print( " %8.3f"%(xdata[k]), end='' )
             else :
                 for i in range( sz[1] ) :
                     print( " %8.3f"%(xdata[k,i]), end='' )
+            print( "      result    %10.5f" % (res[k]) )
+
+            print( "     par     value      partial   numpartial      numeric" )
+
             if hasderiv :
                 snum = self.strictNumeric( xdata[k], params )
-                print( "     result %10.5f  df %10.5f %10.5f %10.5f" %
-                        ( res[k], df[k], numdf[k], snum ) )
+                print( "      df             %10.5f   %10.5f   %10.5f" %
+                        ( df[k], numdf[k], snum ) )
                 if ( abs( df[k] - snum ) > 0.001 or
                      abs( numdf[k] - snum ) > 0.001 ) :
                     kerr += 1
-            else :
-                print( "     result %10.5f"%(res[k]) )
 
-            print( "     par     value      partial   numpartial      numeric" )
             for i in range( self.npchain ) :
                 snum = self.strictNumeric( xdata[k], params, kpar=i )
                 if ( abs( partial[k,i] - snum ) > 0.001 or
@@ -1404,47 +1353,29 @@ class Model( FixedModel ):
 class Brackets( Model ):
     """
     Brackets is only for use in Model. Use BracketModel for independent uses.
+
     """
-    _indent = ""
 
     #  *************************************************************************
     def __init__( self, model, copy=None, **kwargs ):
 
         super( Brackets, self ).__init__( model.npchain, ndim=model.ndim,
                                 copy=copy, **kwargs )
-        self.model = model
-        self.parameters = model.parameters
+        setatt( self, "model", model, type=Model )
+        setatt( self, "parameters", model.parameters )
 
-        self._deep = 1
         next = model
+        deep = 1
         while next is not None :
             if isinstance( next, Brackets ) :
-                next._deep += 1
+                deep += 1
             next = next._next
-        self.parNames = []
+        setatt( self, "deep", deep )
+        setatt( self, "parNames", [] )
 
     def copy( self ):
 
         return Brackets( self.model.copy(), copy=self )
-
-    def __setattr__( self, name, value ):
-        """
-        Set attributes.
-
-        Parameters
-        ----------
-        name :  string
-            name of the attribute
-        value :
-            value of the attribute
-
-        """
-        dind = {'model':Model, '_deep':int}
-
-        if ( Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass                                            # success
-        else :
-            super( Brackets, self ).__setattr__( name, value )
 
 
     #  *****RESULT**************************************************************
@@ -1508,7 +1439,7 @@ class Brackets( Model ):
     def baseName( self ):
         """ Returns a string representation of the model.  """
         indent = "  "
-        return "{ " + self.model._toString( indent * self._deep ) + " }"
+        return "{ " + self.model._toString( indent * self.deep ) + " }"
 
     def basePrior( self, k ) :
         """

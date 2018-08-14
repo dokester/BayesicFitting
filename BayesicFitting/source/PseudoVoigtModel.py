@@ -1,6 +1,7 @@
 import numpy as numpy
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 from .LorentzModel import LorentzModel
 from .GaussModel import GaussModel
@@ -50,6 +51,27 @@ class PseudoVoigtModel( NonLinearModel ):
     >>> voigt.setParameters( [5, 4, 1, 0.7] )
     >>> print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
+    Attributes
+    ----------
+    gauss : GaussModel
+        to construct the gauss parts
+    lorentz : LorentzModel
+        to construct the lorentz parts
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
+
     """
 
     def __init__( self, copy=None, **kwargs ):
@@ -70,13 +92,10 @@ class PseudoVoigtModel( NonLinearModel ):
         super( PseudoVoigtModel, self ).__init__( 4, copy=copy, params=param,
                         names=names, **kwargs )
 
+        setatt( self, "gauss", GaussModel() )
+        setatt( self, "lorentz", LorentzModel() )
         if copy is None :
             self.posIndex = [2]
-            self.gauss = GaussModel()
-            self.lorentz = LorentzModel()
-        else :
-            self.gauss = copy.gauss
-            self.lorentz = copy.lorentz
 
     def copy( self ):
         """ Copy method.  """
@@ -94,9 +113,10 @@ class PseudoVoigtModel( NonLinearModel ):
             value of the attribute
 
         """
-        dind = {'gauss':GaussModel, 'lorentz':LorentzModel}
-        if ( Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass                                            # success
+        if name == "gauss" :
+            setatt( self, name, value, type=GaussModel )
+        elif name == "lorentz" :
+            setatt( self, name, value, type=LorentzModel )
         else :
             super( PseudoVoigtModel, self ).__setattr__( name, value )
 

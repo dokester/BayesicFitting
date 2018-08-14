@@ -5,7 +5,7 @@ import numpy as numpy
 import math
 from datetime import date
 
-from BayesicFitting import Tools
+from BayesicFitting import *
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -33,6 +33,26 @@ __status__ = "Development"
 #  *
 #  *  2006-2015 Do Kester (JAVA CODE)
 
+class ATestClass( object ) :
+    def __init__( self, copy=None ) :
+        super( ATestClass, self ).__init__( )
+        self.setatt( "n1", 4 )
+        self.setatt( "n2", 4, type=int )
+        self.setatt( "p1", 4.0, type=float, isnone=True )
+        self.setatt( "p2", None, type=float, isnone=True )
+        self.setatt( "ln", 4, type=int, islist=True )
+        self.setatt( "lp", 4, type=float, islist=True )
+
+        try :
+            self.setatt( "ep", 4.78, type=int, islist=True )
+            assert( False )
+        except TypeError :
+            assert( True )
+
+    def setatt( self, name, value, type=None, islist=None, isnone=False ) :
+        Tools.setAttribute( self, name, value, type=type, islist=islist, isnone=isnone )
+
+
 class TestTools( unittest.TestCase ) :
     """
     Test harness for Fitter class.
@@ -40,6 +60,39 @@ class TestTools( unittest.TestCase ) :
     @author Do Kester
 
     """
+    def testATestClass( self ) :
+        atc = ATestClass()
+
+        Tools.printclass( atc )
+
+
+    def testBaseModel( self ) :
+        atc = BaseModel( 4 )
+        atc.posIndex = [1,2]
+        print( atc.posIndex )
+
+#        atc.posIndex = 1.2
+
+        try :
+            atc.posIndex = 1.2
+            print( atc.posIndex )
+            self.assertTrue( False )
+        except TypeError :
+            self.assertTrue( True )
+
+        try :
+            atc.PosIndex = 1
+            self.assertTrue( False )
+        except AttributeError :
+            self.assertTrue( True )
+
+        try :
+            atc.posIndex = None
+            self.assertTrue( False )
+        except TypeError :
+            self.assertTrue( True )
+
+
     def testtoday( self ):
         print( date.today() )
 

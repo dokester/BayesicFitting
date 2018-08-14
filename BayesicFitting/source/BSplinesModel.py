@@ -1,5 +1,6 @@
 import numpy as numpy
 from . import Tools
+from .Tools import setAttribute as setatt
 import math
 # import (modified) bspline from Juha Jeronen
 from . import bspline
@@ -81,6 +82,29 @@ class BSplinesModel( LinearModel ):
     >>> print csm.getNumberOfParameters( )
     18
 
+    Attributes
+    ----------
+    knots : array_like
+        a array of arbitrarily positioned knots
+    order : int
+        order of the spline. Default 3 (cubic splines)
+    eps : float
+        small number to enable inclusion of endpoints. Default 0.0.
+
+
+    Attributes from Model
+    --------------------------
+        parameters, stdevs, xUnit, yUnit, npchain
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
 
     Limitations
     -----------
@@ -136,18 +160,17 @@ class BSplinesModel( LinearModel ):
             raise ValueError( "Need either knots or (nrknots,min,max) or (nrknots,xrange)" )
 
         super( BSplinesModel, self ).__init__( order + nrknots - 1, copy=copy, **kwargs )
-        self.order = order
+        setatt( self, "order", order )
         if knots is None :
             if xrange is not None :
                 min = numpy.min( xrange )
                 max = numpy.max( xrange )
             knots = numpy.linspace( min, max, nrknots, dtype=float )
-        self.knots = knots
+        setatt( self, "knots", knots )
 
-        self.augknots = splinelab.augknt( knots, order )
-        self.Bspline = bspline.Bspline( self.augknots, self.order, last=True )
-        self.eps = 0
-#        self.eps = 1e-16
+        augknots = splinelab.augknt( knots, order )
+        setatt( self, "_bspline", bspline.Bspline( augknots, self.order, last=True ) )
+        setatt( self, "eps", 0 )
 
     def copy( self ):
         return BSplinesModel( copy=self )
@@ -157,13 +180,22 @@ class BSplinesModel( LinearModel ):
         Set attributes: knots, order
 
         """
-        dlst = {'knots': float, 'augknots': float }
-        dind = {'order': int, 'Bspline': bspline.Bspline, 'eps': float }
-        if ( Tools.setListOfAttributes( self, name, value, dlst ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ):
-            pass
+        rerun = False
+        if name == "knots" :
+            setatt( self, name, value, type=float, islist=True )
+            rerun = True
+        elif name == "order" :
+            setatt( self, name, value, type=int )
+            rerun = True
+        elif name == "eps" :
+            setatt( self, name, value, type=float )
+
         else :
             super( BSplinesModel, self ).__setattr__( name, value )
+
+        if rerun :
+            augknots = splinelab.augknt( self.knots, self.order )
+            setatt( self, "_bspline", bspline.Bspline( augknots, self.order, last=True ) )
 
 
     def basePartial( self, xdata, params, parlist=None ):
@@ -191,7 +223,7 @@ class BSplinesModel( LinearModel ):
                    "  knots : ", self.knots[0], self.knots[-1] )
             raise ValueError( "Input data need to fall strictly in the domain spanned by knots" )
 
-        partial = Tools.toArray( self.Bspline.collmat( xdata ), ndim=2 )
+        partial = Tools.toArray( self._bspline.collmat( xdata ), ndim=2 )
 
         return partial
 
@@ -210,7 +242,7 @@ class BSplinesModel( LinearModel ):
         """
         xd = numpy.where( xdata == self.knots[-1], ( 1.0 - self.eps ) * self.knots[-1], xdata )
 
-        partial = Tools.toArray( self.Bspline.collmat( xd, deriv_order=1 ), ndim=2 )
+        partial = Tools.toArray( self._bspline.collmat( xd, deriv_order=1 ), ndim=2 )
 
         return numpy.inner( params, partial )
 

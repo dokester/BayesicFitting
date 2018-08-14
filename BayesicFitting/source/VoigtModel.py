@@ -51,6 +51,24 @@ class VoigtModel( NonLinearModel ):
     >>> voigt.setParameters( [5, 4, 1, 2] )
     >>> print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
+
+    Attributes
+    ----------
+        none of its own
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
     """
 
     def __init__( self, copy=None, **kwargs ):

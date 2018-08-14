@@ -56,6 +56,23 @@ class SineDriftModel( NonLinearModel ):
     >>> sine.parameters = pars
     >>> print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, drifting
 
+
+    Attributes
+    ----------
+        No attributes of its own.
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
     """
 
     def __init__( self, copy=None, **kwargs ):

@@ -55,6 +55,23 @@ class PowerLawModel( NonLinearModel ):
     >>> print( pl.npchain )
     4
 
+    Attributes
+    ----------
+        no attributes of its own.
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
     """
     def __init__( self, copy=None, **kwargs ):
         """

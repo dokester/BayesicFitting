@@ -29,6 +29,41 @@ __status__ = "Development"
 #  *    2016 - 2017 Do Kester
 
 
+def setAttribute( obj, name, value, type=None, islist=False, isnone=False ) :
+
+    if type is None :                       ## no check on type
+        object.__setattr__( obj, name, value )
+        return True
+
+    if isnone and value is None :           ## could be None
+        object.__setattr__( obj, name, value )
+        return True
+
+    if islist :                             ## should be list of type
+        isl = isList( value, type )
+#        print( "TS  ", name, value, type, isl )
+        if ( isl[0] ) :
+            if type is not int and type is not float :
+                array = value if isl[1] else [value]
+            elif ( isl[1] ) : array = numpy.asarray( value, dtype=type )
+            else : array = numpy.asarray( [value], dtype=type )
+            object.__setattr__( obj, name, array )
+            return True
+        else :
+            raise TypeError( name + ' has not the proper type: (list of) ' + str( type ) )
+            return False
+
+    if isInstance( value, type ) :          ## should be singular type
+        object.__setattr__( obj, name, value )
+        return True
+    else :
+        raise TypeError( name + ' has not the proper type: ' + str( type ) )
+    return False
+
+
+
+
+
 def setNoneAttributes( obj, name, value, listNone ) :
     """
     Set attribute contained in dictionary dictList into the attr-list.
@@ -98,7 +133,7 @@ def setListOfAttributes( obj, name, value, dictList ) :
             object.__setattr__( obj, name, _array )
             return True
         else :
-            TypeError( name + ' has not the proper type: (list of) ' + str( dictList[name] ) )
+            raise TypeError( name + ' has not the proper type: (list of) ' + str( dictList[name] ) )
     return False
 
 
@@ -131,7 +166,7 @@ def setSingleAttributes( obj, name, value, dictSingle ) :
             object.__setattr__( obj, name, value )
             return True
         else :
-            TypeError( name + ' has not the proper type: ' + str( dictSingle[name] ) )
+            raise TypeError( name + ' has not the proper type: ' + str( dictSingle[name] ) )
     return False
 
 def makeNext( x, k ) :

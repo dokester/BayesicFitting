@@ -1,5 +1,6 @@
 import numpy as numpy
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .Model import Model
 from .PolynomialModel import PolynomialModel
@@ -54,6 +55,26 @@ class ConstantModel( Model ):
 
     It can also be used when some constant is needed in a compound model.
 
+    Attributes
+    ----------
+    fixedModel : Model
+        a model which is calculated. (default: 0, everywhere)
+    table : array_like
+        array of tabulated results
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
     Examples
     --------
     To make a model that decays to 1.0
@@ -64,13 +85,6 @@ class ConstantModel( Model ):
     To make a model that returns a fixed cosine of frequency 5
 
     >>> model = ConstantModel( fixedModel=SineModel(), values=[1.0,0.0,5.0] )
-
-    Attributes
-    ----------
-    fixedModel : Model
-        a model which is calculated. (default: 0, everywhere)
-    table : array_like
-        array of tabulated results
 
     """
     def __init__( self, ndim=1, copy=None, fixedModel=None, values=None,
@@ -95,20 +109,21 @@ class ConstantModel( Model ):
 
         """
         super( ConstantModel, self ).__init__( 0, ndim=ndim, copy=copy, **kwargs )
+
         if copy is not None :                  # copy from model
-            self.fixedModel = copy.fixedModel
-            self.table = copy.table
+            setatt( self, "fixedModel", copy.fixedModel )
+            setatt( self, "table", copy.table )
         elif table is not None :                # store tabular results
-            self.table = table
-            self.fixedModel = None
+            setatt( self, "table", table, islist=True, type=float )
+            setatt( self, "fixedModel", None )
         else :                                  # make a fixedModel
-            self.table = None
+            setatt( self, "table", None )
             if fixedModel is not None :
-                self.fixedModel = fixedModel
+                setatt( self, "fixedModel", fixedModel, type=Model )
             else :
-                self.fixedModel = PolynomialModel( 0 ) if ndim == 1 else PolySurfaceModel( 0 )
+                setatt( self, "fixedModel", PolynomialModel( 0 ) if ndim == 1 else PolySurfaceModel( 0 ) )
             if values is not None :
-                self.fixedModel.parameters = values
+                setatt( self.fixedModel, "parameters", values, type=float, islist=True )
 
     def copy( self ):
         """ Copy method.  """
@@ -116,18 +131,20 @@ class ConstantModel( Model ):
 
     def __setattr__( self, name, value ):
         """
-        Set attributes: fixedModel
+        Set attributes: fixedModel, table, values
         """
-        lnon = ["fixedModel", "table"]
-        dlst = {"table": float}
-        dind = {"fixedModel":Model}
+        if name == "fixedModel" :
+            setatt( self, name, value, type=Model, isnone=True )
+            return
+        if name == "table" :
+            setatt( self, name, value, type=float, islist=True, isnone=True )
+            setatt( self, "fixedModel", None )
+            return
+        if name == "values" :
+            setatt( self.fixedModel, "parameters", value, type=float, islist=True )
+            return
 
-        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
-             Tools.setListOfAttributes( self, name, value, dlst ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass                                            # success
-        else :
-            super( ConstantModel, self ).__setattr__( name, value )
+        super( ConstantModel, self ).__setattr__( name, value )
 
     def baseResult( self, xdata, params ):
         """

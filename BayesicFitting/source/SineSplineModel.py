@@ -1,7 +1,7 @@
 import numpy as numpy
-from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 from .SplinesModel import SplinesModel
 
@@ -26,7 +26,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017        Do Kester
+#  *    2017 - 2018        Do Kester
 
 class SineSplineModel( LinearModel ):
     """
@@ -44,6 +44,47 @@ class SineSplineModel( LinearModel ):
     >>> sine = SineSplineModel( 150, knots )        # fixed frequency of 150 Hz
     >>> print( sine.npbase )                        # number of parameters
     26
+
+    Attributes
+    ----------
+    frequency : float
+        (fixed) frequency of the sine
+    knots : array_like
+        positions of the spline knots
+    order : int
+        order of the spline. default: 3
+    cm : SplinesModel
+        amplitude of the cosine
+    sm : SplinesModel
+        amplitude of the sine
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
+    Alternate
+    ---------
+    The model
+
+    >>> model = SineSplineModel( frequency, knots )
+
+    is equivalent to :
+
+    >>> cm = SplinesModel( knots )
+    >>> sm = SplinesModel( knots )
+    >>> fxd = {0:cm, 1:sm}
+    >>> model = SineAmpModel( frequency, fixed=fxd )
+
+
     """
 
     def __init__( self, frequency, knots, order=3, copy=None, fixed=None, **kwargs ):
@@ -77,21 +118,26 @@ class SineSplineModel( LinearModel ):
         self.knots = knots
         self.order = order
         if copy is not None :
-            self.cm = copy.cm.copy()
-            self.sm = copy.sm.copy()
+            setatt( self, "cm", copy.cm.copy() )
+            setatt( self, "sm", copy.sm.copy() )
         else :
-            self.cm = SplinesModel( knots, order=order )
-            self.sm = SplinesModel( knots, order=order )
+            setatt( self, "cm", SplinesModel( knots, order=order ) )
+            setatt( self, "sm", SplinesModel( knots, order=order ) )
 
     def copy( self ):
         """ Copy method.  """
         return SineSplineModel( self.frequency, self.knots, order=self.order, copy=self )
 
     def __setattr__( self, name, value ) :
-        dind = {"frequency": float, "order": float, "cm": SplinesModel, "sm": SplinesModel}
-        dlst = {"knots": float}
-        if not ( Tools.setListOfAttributes( self, name, value, dlst ) or
-                 Tools.setSingleAttributes( self, name, value, dind ) ) :
+        if name == "frequency" :
+            setatt( self, name, value, type=float )
+        elif name == "knots" :
+            setatt( self, name, value, type=float, islist=True )
+        elif name == "order" :
+            setatt( self, name, value, type=int )
+        elif name == "cm" or name == "sm" :
+            raise AttributeError( "Attributes cm or sm can not be set" )
+        else :
             super( SineSplineModel, self ).__setattr__( name, value )
 
     def basePartial( self, xdata, params, parlist=None ):

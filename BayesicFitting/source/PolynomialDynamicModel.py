@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .PolynomialModel import PolynomialModel
 from .Dynamic import Dynamic
@@ -52,7 +53,6 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
     Examples
     --------
     >>> poly = PolynomialDynamicModel( )         # polynomial with unknown degree
-    >>> ran = MoreRandom( )
     >>> poly.grow( )                         # starts at degree = 0, npar = 1
     >>> poly.grow( )                         # each grow( ) adds 1
     >>> poly.grow( )
@@ -62,6 +62,34 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
     >>> poly.shrink( )                        # shrink( ) deletes 1 degree
     >>> print poly.npbase
     4
+
+    Attributes
+    ----------
+    minDegree : int
+        minimum degree of the polynomial
+    maxDegree : int or None
+        maximum degree of the polynomial
+
+    Attributes from Dynamic
+    -----------------------
+        ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior
+
+    Attributes from PolynomialModel
+    -------------------------------
+        degree
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
 
     Category     mathematics/Fitting
 
@@ -104,38 +132,55 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
 
         super( PolynomialDynamicModel, self ).__init__( degree, copy=copy, **kwargs )
 
+        self.deltaNpar = 1
+
         if copy is None :
-            self.minComp = minDegree + 1
-            self.maxComp = maxDegree if maxDegree is None else maxDegree + 1
+            setatt( self, "minDegree", minDegree, type=int )
+            setatt( self, "maxDegree", maxDegree, type=int, isnone=True )
             if growPrior is None :
                 if maxDegree is None :
                     self.growPrior = ExponentialPrior( scale=2 )
                 else :
-                    lim = [minDegree+1, maxDegree+2]    # limits on components
+                    lim = [self.minComp, self.maxComp+1]    # limits on components
                     self.growPrior =  UniformPrior( limits=lim )
             else :
                 self.growPrior = growPrior
         else :
-            self.minComp = copy.minComp
-            self.maxComp = copy.maxComp
-            self.growPrior = copy.growPrior.copy()
+            setatt( self, "minDegree", copy.minDegree )
+            setatt( self, "maxDegree", copy.maxDegree )
+            setatt( self, "growPrior", copy.growPrior.copy() )
 
     def copy( self ):
         """ Copy method.  """
         return PolynomialDynamicModel( self.degree, copy=self )
 
     def changeNComp( self, dn ) :
-        self.degree += dn
+        setatt( self, "degree", self.degree + dn )
 
     def __setattr__( self, name, value ) :
-        lnon = ["maxComp"]
-        dind = {"degree": int, "minComp": int, "maxComp": int,
-                "growPrior": Prior}
-        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
-             Tools.setSingleAttributes( self, name, value, dind ) ) :
-            pass
+        if self.setDynamicAttribute( name, value ) :
+            return
         else :
             super( PolynomialDynamicModel, self ).__setattr__( name, value )
+
+    def __getattr__( self, name ) :
+        """
+        Return value belonging to attribute with name.
+
+        Parameters
+        ----------
+        name : string
+            name of the attribute
+        """
+        if name == 'ncomp' :
+            return self.degree + 1
+        if name == 'minComp' :
+            return self.minDegree + 1
+        if name == 'maxComp' :
+            return self.maxDegree if self.maxDegree is None else ( self.maxDegree + 1 )
+
+        return super( PolynomialDynamicModel, self ).__getattr__( name )
+
 
     def baseName( self ):
         """ Return a string representation of the model.  """

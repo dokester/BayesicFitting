@@ -103,7 +103,7 @@ class DeathEngine( Engine ):
             pat += model.npbase
             model = model._next
 
-        nc = model.getNumberOfComponents()
+        nc = model.ncomp
         np = model.npbase
 
         # shuffle the parameters (if needed) before throwing the last one out.

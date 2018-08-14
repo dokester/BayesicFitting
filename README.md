@@ -158,5 +158,11 @@ More work needs to be done in:
  + 27 June 2018 version 1.0.5<br>
    * New classes: RadialVelocityModel and MixedErrorDistribution
    * testharnesses and examples
-   * ducumentation updates
+   * documentation updates
+ + 28 June 2018 version 1.0.6
+   * longdescription set to markdown (Still not OK on pypi.com)
+ + 28 July 2018 version 1.0.7
+   * small compilation error in 1.0.6
+ + 14 Augustus 2018 version 1.0.8
+   * refactoring the setting of attributes in Models
 

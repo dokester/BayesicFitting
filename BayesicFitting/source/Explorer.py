@@ -2,6 +2,7 @@ import numpy as numpy
 from threading import Thread
 
 #from OrderProblem import OrderProblem
+from .Engine import Engine
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -113,6 +114,8 @@ class Explorer( object ):
         ## We have Threads
         explorerThreads = []
         self.lowLhood = lowLhood
+
+        nrep = Engine.NCALLS
         for kw in worst :
             seed = self.rng.randint( self.TWOP32 )
             walker = self.walkers[kw]
@@ -126,10 +129,10 @@ class Explorer( object ):
 
             for k,engine in enumerate( self.engines ) :
                 nc = 0
-                for i in range( 3 ) :
+                for i in range( nrep ) :
                     nc += thread.engines[k].report[i]
                     engine.report[i] += thread.engines[k].report[i]
-                engine.report[3] += nc
+                engine.report[nrep] += nc
 
         if len( threadErrors ) > 0: #check if there are any errors
             for e in threadErrors:

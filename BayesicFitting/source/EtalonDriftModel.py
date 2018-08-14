@@ -45,11 +45,14 @@ class EtalonDriftModel( NonLinearModel ):
 
     The parameters are initialized at {1.0, 1.0, 1.0, 0.0, 0.0}. It is a non-linear model.
 
-    Examples TBC
+    This model is specificly made for the MIRI instrumnet aboard JWST.
+    Its usefullness elsewhere is doubtfull.
+
+    Examples
     --------
-    >>> fpm = EtalonModel( )
+    >>> fpm = EtalonDriftModel( )
     >>> print( fpm.npchain )
-    4
+    5
     >>> pars = [1.0, 30.0, 1.0, 0.0, 0.0]
     >>> fpm.parameters = pars
     >>> print( fpm( numpy.arange( 101, dtype=float ) ) )     # etalon with 10 periods

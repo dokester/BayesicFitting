@@ -4,6 +4,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 from . import Plotter
 import sys
@@ -550,6 +551,7 @@ class NestedSampler( object ):
                 if kcp >= sworst[kk] :
                     kcp += 1
             self.walkers.copy( kcp, worst[k] )
+            setatt( self.walkers[worst[k]], "parent", kcp )
 
     def addEnsembleToSamples( self, logWidth ):
         """

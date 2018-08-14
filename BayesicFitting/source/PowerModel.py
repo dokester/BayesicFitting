@@ -1,6 +1,6 @@
 import numpy as numpy
 from .LinearModel import LinearModel
-from . import Tools
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -28,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2004 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2018 Do Kester
 
 class PowerModel( LinearModel ):
     """
@@ -48,6 +48,24 @@ class PowerModel( LinearModel ):
     >>> pwr = PowerModel( -1 )
     >>> print pwr.getNumberOfParameters( )       # 1
     1
+
+    Attributes
+    ----------
+    exponent : float
+        exponent (a) of the power function.
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
 
     """
     def __init__( self, exponent=0, copy=None, **kwargs ):
@@ -77,8 +95,9 @@ class PowerModel( LinearModel ):
         return PowerModel( copy=self )
 
     def __setattr__( self, name, value ) :
-        dind = {"exponent": float}
-        if not Tools.setSingleAttributes( self, name, value, dind ) :
+        if name == "exponent" :
+            setatt( self, name, value, type=float )
+        else :
             super( PowerModel, self ).__setattr__( name, value )
 
 

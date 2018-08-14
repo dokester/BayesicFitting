@@ -1,6 +1,7 @@
 import numpy as numpy
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 from .PolynomialModel import PolynomialModel
 from .SplinesModel import SplinesModel
@@ -26,7 +27,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017        Do Kester
+#  *    2017 - 2018        Do Kester
 
 class SineSplineDriftModel( NonLinearModel ):
     """
@@ -49,19 +50,64 @@ class SineSplineDriftModel( NonLinearModel ):
     >>> sine = SineSplineDriftModel( 150, knots )        # fixed frequency of 150 Hz
     >>> print( sine.npbase )                        # number of parameters
     26
+
+    Attributes
+    ----------
+    degree : int
+        degree of the polynomial governing the frequency of the sine
+    knots : array_like
+        positions of the spline knots
+    order : int
+        order of the spline. default: 3
+    cm : SplinesModel
+        amplitude of the cosine
+    sm : SplinesModel
+        amplitude of the sine
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Alternate
+    ---------
+    The model
+
+    >>> model = SineSplineModel( knots, degree=1 )
+
+    is equivalent to :
+
+    >>> cm = SplinesModel( knots )
+    >>> sm = SplinesModel( knots )
+    >>> pm = PolynomialModel( 1 )
+    >>> fxd = {0:pm, 1:cm, 2:sm}
+    >>> model = SineModel( fixed=fxd )
+
+
     """
 
     def __init__( self, knots, order=3, degree=1, copy=None, fixed=None, **kwargs ):
         """
-        Sine model of a fixed frequency with a splineslike changing
-        amplitude/phase and polynomially changing frequency.
+        Sine model of a polynomially drifting frequency with a splineslike changing
+        amplitude/phase
 
         Number of parameters is 2 * ( len(knots) + order - 1 ) + degree + 1.
 
         Parameters
         ----------
-        frequency : float
-            the frequency
+        knots : array of float
+            the knot positions of the amplitude splines
+        order : int
+            order of the splines
+        degree : int
+            degree of the drifting polynomial
         copy : SineSplineDriftModel
             model to be copied
         fixed : dict
@@ -73,7 +119,7 @@ class SineSplineDriftModel( NonLinearModel ):
 
         """
         if fixed is not None :
-            raise AttributeError( "FreeShapeModel cannot have fixed parameters" )
+            raise AttributeError( "SineSplineDriftModel cannot have fixed parameters" )
 
         np = 2 * ( len( knots ) + order - 1 ) + degree + 1
         super( SineSplineDriftModel, self ).__init__( np, copy=copy, **kwargs )
@@ -82,13 +128,13 @@ class SineSplineDriftModel( NonLinearModel ):
         self.order = order
         self.degree = degree
         if copy is not None :
-            self.pm = copy.pm.copy()
-            self.cm = copy.cm.copy()
-            self.sm = copy.sm.copy()
+            setatt( self, "pm", copy.pm.copy() )
+            setatt( self, "cm", copy.cm.copy() )
+            setatt( self, "sm", copy.sm.copy() )
         else :
-            self.pm = PolynomialModel( self.degree )
-            self.cm = SplinesModel( knots, order=order )
-            self.sm = SplinesModel( knots, order=order )
+            setatt( self, "pm", PolynomialModel( self.degree ) )
+            setatt( self, "cm", SplinesModel( knots, order=order ) )
+            setatt( self, "sm", SplinesModel( knots, order=order ) )
 
     def copy( self ):
         """ Copy method.  """
@@ -96,11 +142,15 @@ class SineSplineDriftModel( NonLinearModel ):
                                      degree=self.degree, copy=self )
 
     def __setattr__( self, name, value ) :
-        dind = {"degree": int, "order": float, "pm" : PolynomialModel,
-                "cm": SplinesModel, "sm": SplinesModel}
-        dlst = {"knots": float}
-        if not ( Tools.setListOfAttributes( self, name, value, dlst ) or
-                 Tools.setSingleAttributes( self, name, value, dind ) ) :
+        if name == "degree" :
+            setatt( self, name, value, type=int )
+        elif name == "knots" :
+            setatt( self, name, value, type=float, islist=True )
+        elif name == "order" :
+            setatt( self, name, value, type=int )
+        elif name == "cm" or name == "sm" or name == "pm":
+            raise AttributeError( "Attributes cm or sm or pm can not be set" )
+        else :
             super( SineSplineDriftModel, self ).__setattr__( name, value )
 
     def baseResult( self, xdata, params ):

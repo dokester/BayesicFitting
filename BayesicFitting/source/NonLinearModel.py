@@ -1,5 +1,6 @@
 from .Model import Model
 from . import Tools
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -73,17 +74,10 @@ class NonLinearModel( Model ):
 
         """
         super( NonLinearModel, self ).__init__( nparams, ndim=ndim, copy=copy, **kwargs )
-        if copy is None : self._linear = set()
-        else : self._linear = copy._linear.copy()
-
-    def __setattr__( self, name, value ) :
-        """
-        Set attributes: _linear
-
-        """
-        dic = {'_linear':set}
-        if not Tools.setSingleAttributes( self, name, value, dic ) :
-            super( NonLinearModel, self ).__setattr__( name, value )
+        if copy is None :
+            setatt( self, "_linear", set() )
+        else :
+            setatt( self, "_linear", copy._linear.copy() )
 
     def setMixedModel( self, lindex ):
         """
@@ -99,9 +93,9 @@ class NonLinearModel( Model ):
 
         """
         if lindex is None:
-            self._linear = set()
+            setatt( self, "_linear", set() )
         else:
-            self._linear = set( lindex )
+            setatt( self, "_linear", set( lindex ) )
 
     def isMixed( self ):
         """ Returns true when linear indices have been set  """

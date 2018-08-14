@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
@@ -52,7 +53,19 @@ class EtalonModel( NonLinearModel ):
 
     A finesse below -1 causes infinities.
 
-    Examples TBC
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Examples
     --------
     >>> fpm = EtalonModel( )
     >>> print( fpm.npchain )

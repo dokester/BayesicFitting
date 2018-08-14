@@ -2,6 +2,8 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
+
 from .NonLinearModel import NonLinearModel
 from .kernels.Kernel import Kernel
 from .kernels.Biweight import Biweight
@@ -57,8 +59,28 @@ class KernelModel( NonLinearModel ):
 
     Examples
     --------
-    model = KernelModel( )
-    model.kernel = Biweight
+    >>> model = KernelModel( )
+    >>> model.kernel = Triweight()
+
+    Attributes
+    ----------
+    kernel : Kernel
+        the kernel of this model
+        Default : Biweight
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
 
     """
     def __init__( self, copy=None, kernel=Biweight(), **kwargs ):
@@ -95,7 +117,7 @@ class KernelModel( NonLinearModel ):
 
     def __setattr__( self, name, value ) :
         if name == "kernel" and isinstance( value, Kernel ) :
-            object.__setattr__( self, name, value )
+            setatt( self, name, value )
         else :
             super( KernelModel, self ).__setattr__( name, value )
 

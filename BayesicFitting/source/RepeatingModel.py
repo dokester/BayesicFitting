@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .Model import Model
 from .Dynamic import Dynamic
@@ -60,19 +61,16 @@ class RepeatingModel( Model, Dynamic ):
         number of repetitions
     model : Model
         (encapsulated) model to be repeated
-    minComp : int
-        minimum number of repetitions
-    maxComp : None or int
-        maximum number of repetitions
     same : None or int or list of int
         indices of parameters of model that get identical values
     index : list of int
         list of parameter indices not in same.
-    growPrior : None or Prior
-        governing the birth and death.
-        ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
     isDyna : bool
         Whether this is a Dynamic Model.
+
+    Attributes from Dynamic
+    -----------------------
+        ncomp, deltaNpar, minComp, maxComp, growPrior
 
     Attributes from Model
     ---------------------
@@ -184,7 +182,7 @@ class RepeatingModel( Model, Dynamic ):
         return RepeatingModel( self.ncomp, self.model, isDynamic=self.isDyna, copy=self )
 
     def changeNComp( self, dn ) :
-        self.ncomp += dn
+        setatt( self, "ncomp", self.ncomp + dn )
 
     def setSame( self, same ) :
         self.same = same
@@ -285,18 +283,18 @@ class RepeatingModel( Model, Dynamic ):
 
     #  *************************************************************************
     def __setattr__( self, name, value ) :
-        dind = {"minComp": int, "maxComp": int, "growPrior": Prior, "isDyna": bool,
-                "model": Model, "ncomp" : int, "deltaNpar" : int}
-        lnon = ["maxComp", "same"]
-        llst = {"same": int, "index": int}
 
-        if name == "model" :
-            self.deltaNpar = value.npchain
+        if self.setDynamicAttribute( name, value ) :
+            return
 
-        if ( Tools.setNoneAttributes( self, name, value, lnon ) or
-             Tools.setSingleAttributes( self, name, value, dind ) or
-             Tools.setListOfAttributes( self, name, value, llst ) ) :
-            pass
+        if name == "isDyna" :
+            setatt( self, name, value, type=bool )
+        elif name == "model" :
+            setatt( self, name, value, type=Model )
+        elif name == "same" :
+            setatt( self, name, value, type=int, islist=True, isnone=True )
+        elif name == "index" :
+            setatt( self, name, value, type=int, islist=True, isnone=True )
         else :
             super( RepeatingModel, self ).__setattr__( name, value )
 
@@ -403,13 +401,8 @@ class RepeatingModel( Model, Dynamic ):
 
         return dfdx
 
-    def getNumberOfComponents( self ):
-        """ Return the number of basic models inside this compound model.  """
-        return self.ncomp
-
     def setLimits( self, lowLimits=None, highLimits=None ) :
         self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
-
 
 
     def basePrior( self, k ):

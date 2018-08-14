@@ -67,7 +67,9 @@ class TestCombiModel( unittest.TestCase ):
 
         cm = CombiModel( gm, 3 )
 
-        self.assertTrue( cm._deep == 1 )
+        Tools.printclass( cm )
+
+        self.assertTrue( cm.deep == 1 )
         print( str( cm._head ) )
         self.assertTrue( str( cm._head ) == "Combi of 3 times Gauss" )
         self.assertTrue( cm._next is None )

@@ -85,21 +85,19 @@ def stdModeltest( model, par, x=None, plot=None, warn=[] ):
         model.xUnit = units.m
         model.yUnit = units.kg
         print( model.parlist )
-        for k in range( model.getNumberOfParameters() ):
+        for k in range( model.npchain ):
             print( "%d  %-12s  %-12s"%(k, model.getParameterName( k ),
                     model.getParameterUnit( k ) ) )
 
+
         print( "Integral   ", model.getIntegralUnit( ) )
-        tc.assertTrue( model.testPartial( x, par ) == 0 )
-        """
-        part = model.partial( x, par )
-        nump = model.numPartial( x, par )
-        k = 0
-        for (pp,nn) in zip( part.flatten(), nump.flatten() ) :
-            print( k, pp, nn )
-            tc.assertAlmostEqual( pp, nn, 3 )
-            k += 1
-        """
+#        plt.plot( x, model.result( x, par ), 'k.' )
+#        plt.show( )
+        nerr = model.testPartial( x, par )
+#        print( nerr )
+
+        tc.assertTrue( nerr == 0 )
+
         mc = model.copy( )
 #        Tools.printclass( model )
 #        Tools.printclass( mc )
@@ -202,7 +200,7 @@ def plotModel( model, par, xx=None ) :
             ff = 0.5 * ( mxx - mnx )
             x2 = numpy.linspace( mnx, mxx, nx, dtype=float )
             if len( xx ) < 1001 :
-                xx= numpy.linspace( mnx, mxx, 1001, dtype=float ) 
+                xx= numpy.linspace( mnx, mxx, 1001, dtype=float )
 
         yy = model.result( xx, par )
         plt.plot( xx, yy, '-', linewidth=2 )
@@ -214,14 +212,15 @@ def plotModel( model, par, xx=None ) :
             y2 = model.result( x2, par )
             plt.plot( x2, y2, 'g+' )
             for k in range( nx ) :
-		
+
                 x3 = numpy.asarray( [-0.05, +0.05] ) * ff
                 y3 = x3 * dy[k] + y2[k]
                 plt.plot( x2[k] + x3, y3, 'r-' )
 
         except :
-            print( "No derivative" )
-            raise
+            print( "No derivative; ignored" )
+#            raise
+        plt.title( model.__str__() )
         plt.show()
 
 def stdFittertest( myfitter, npt, xmin=-10.0, xmax=10.0, noise=0.1, plot=False,

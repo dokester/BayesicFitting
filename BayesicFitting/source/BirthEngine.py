@@ -99,16 +99,22 @@ class BirthEngine( Engine ):
         model = waltry.model
         ptry = waltry.allpars
 
+#        print( "BEN0  ", walker.id, walker.parent, len( ptry ), len( fitIndex ) )
+
+
         pat = 0
         while model is not None and not isinstance( model, Dynamic ) :
             pat += model.npbase
             model = model._next
 
-        nc = model.getNumberOfComponents()
+        nc = model.ncomp
         np = model.npbase
+
+#        print( "BEN1  ", nc, np, len( ptry ), len( fitIndex ) )
 
         if not ( nc < model.growPrior.unit2Domain( self.rng.rand() ) and
                  model.grow( pat ) ):
+#            print( "BEN2  ", "failed" )
             self.reportFailed()
             walker.check( nhyp=self.errdis.nphypar )
             return 0

@@ -1,5 +1,7 @@
 import numpy as numpy
 from . import Tools
+from .Tools import setAttribute as setatt
+
 from astropy import units
 from .LinearModel import LinearModel
 
@@ -51,6 +53,23 @@ class ChebyshevPolynomialModel( LinearModel ):
 
     It is a linear model.
 
+    Attributes
+    ----------
+    degree : int
+        degree of the polynomial
+
+    Attributes from Model
+    --------------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
     Examples
     --------
     >>> poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
@@ -64,17 +83,30 @@ class ChebyshevPolynomialModel( LinearModel ):
         <br>
         The number of parameters is ( degree + 1 )
 
-        Parameters:  degree the degree of the polynomial.
+        Parameters
+        ----------
+        degree : int
+            the degree of the polynomial.
 
         """
         names = ["coeff_%d"%k for k in range( degree + 1 )]
         super( ChebyshevPolynomialModel, self ).__init__( degree + 1, copy=copy,
                     names=names, **kwargs )
-        object.__setattr__( self, "degree", degree )
+
+        self.degree = degree
 
     def copy( self ):
         """ Copy method.  """
         return ChebyshevPolynomialModel( self.degree, copy=self )
+
+    def __setattr__( self, name, value ):
+        """
+        Set attributes: degree
+        """
+        if name == 'degree' :
+            setatt( self, name, value, type=int )
+        else :
+            super( ChebyshevPolynomialModel, self ).__setattr__( name, value )
 
     def basePartial( self, xdata, params, parlist=None ):
         """

@@ -55,6 +55,20 @@ class ProductModel( NonLinearModel ):
 
     Attributes
     ----------
+    models : list of Model
+        models to be multiplied, one for each dimension.
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     """
 
@@ -214,9 +228,16 @@ class ProductModel( NonLinearModel ):
         """
         u = units.Unit( 1.0 )
         n = 0
+        print( self.attsingle )
+        print( self.models[0].attsingle )
+        print( self.models[1].attsingle )
+        print( self.models[0].xUnit, self.models[1].xUnit )
         for mdl in self.models :
+            mdl.xUnit = self.xUnit[n]
+            print( mdl.ndim, mdl.xUnit, self.xUnit[n] )
             nx = mdl.npbase
             if k < nx :
+                print( k, nx, mdl.getParameterUnit( k ), u )
                 return mdl.getParameterUnit( k ) / u
             n += 1
             k -= nx

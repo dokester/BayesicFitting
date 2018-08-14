@@ -1,5 +1,6 @@
 import numpy as numpy
 from . import Tools
+from .Tools import setAttribute as setatt
 from .Model import Model
 from .LinearModel import LinearModel
 from .SplinesModel import SplinesModel
@@ -61,6 +62,24 @@ class SurfaceSplinesModel( LinearModel ):
 
     Attributes
     ----------
+    knots : list of array_like
+        positions of the knots in all dimensions
+    order : list of ints
+        order of the splines in all dimensions
+    models : list of Model
+        SplinesModels in all dimensions
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     """
 
@@ -83,7 +102,7 @@ class SurfaceSplinesModel( LinearModel ):
 
         Raises
         ------
-        AttributeErrr : When fixed is not None
+        AttributeError : When fixed is not None
 
         """
         if fixed is not None :
@@ -119,11 +138,12 @@ class SurfaceSplinesModel( LinearModel ):
         Set attributes: knots, order, models
 
         """
-        dlst = {'order': int, 'models': Model }
-        done = {'knots': list }
-        if ( Tools.setListOfAttributes( self, name, value, dlst ) or
-             Tools.setSingleAttributes( self, name, value, done ) ) :
-            pass
+        if name == 'knots' :
+            setatt( self, name, value, type=list )
+        elif name == 'order' :
+            setatt( self, name, value, type=int, islist=True )
+        elif name == 'models' :
+            setatt( self, name, value, type=Model, islist=True )
         else :
             super( SurfaceSplinesModel, self ).__setattr__( name, value )
 

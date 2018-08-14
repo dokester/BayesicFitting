@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .NonLinearModel import NonLinearModel
 from .Formatter import formatter as fmt
@@ -69,7 +70,26 @@ class PadeModel( NonLinearModel ):
     den : int
         order of the polynomial in the denominator
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
+    Alternate
+    ---------
+    `PadeModel( 2, 3 )` is equivalent to
+    `PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0:1.0} )`
+
     """
+
     PARNAMES = ["numer_", "denom_"]
 
     def __init__( self, num, den, copy=None, fixed=None, **kwargs ):
@@ -116,8 +136,9 @@ class PadeModel( NonLinearModel ):
         Set attributes: num, den
 
         """
-        dind = {'num': int, 'den': int }
-        if not Tools.setSingleAttributes( self, name, value, dind ):
+        if name in ['den', 'num'] :
+            setatt( self, name, value, type=int )
+        else :
             super( PadeModel, self ).__setattr__( name, value )
 
     def baseResult( self, xdata, params ):

@@ -331,6 +331,7 @@ class TestDynamicModel( unittest.TestCase ):
 
         pm = HarmonicDynamicModel( 1, period=2.0 )
         pm.growPrior.scale = 6
+
         lolim = [-10]
         hilim = [+10]
         pm.setLimits( lowLimits=lolim, highLimits=hilim )

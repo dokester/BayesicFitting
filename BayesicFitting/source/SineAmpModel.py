@@ -2,6 +2,8 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
+
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
@@ -48,6 +50,23 @@ class SineAmpModel( LinearModel ):
     --------
     >>> sine = SineAmpModel( 150 )        # fixed frequency of 150 Hz
 
+    Attributes
+    ----------
+    frequency : float
+        the (fixed) frequency of the sinusoidal.
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
     Notes
     -----
     This model is equivalent to SineModel( fixed={0:frequency} )
@@ -72,7 +91,7 @@ class SineAmpModel( LinearModel ):
 
         """
         names = ["cosamp", "sinamp"]
-        super( ).__init__( 2, copy=copy, names=names, **kwargs )
+        super( SineAmpModel, self ).__init__( 2, copy=copy, names=names, **kwargs )
 
         if copy is None :
             self.frequency = frequency
@@ -84,9 +103,10 @@ class SineAmpModel( LinearModel ):
         return SineAmpModel( self.frequency, copy=self )
 
     def __setattr__( self, name, value ) :
-        dind = {"frequency": float}
-        if not Tools.setSingleAttributes( self, name, value, dind ) :
-            super( ).__setattr__( name, value )
+        if name == 'frequency' :
+            setatt( self, name, value, type=float )
+        else :
+            super( SineAmpModel, self ).__setattr__( name, value )
 
     def basePartial( self, xdata, params, parlist=None ):
         """

@@ -5,6 +5,7 @@ import warnings
 from . import Tools
 
 from .BaseModel import BaseModel
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -113,22 +114,22 @@ class FixedModel( BaseModel ):
 
 
         if copy is None :
-            self.npmax = nparams
+            setatt( self, "npmax", nparams )
             if fixed is not None :
-                self.npbase -= len( fixed )
-                self._npb = npar
-            self.mlist = mlist
+                setatt( self, "npbase", self.npbase - len( fixed ) )
+                setatt( self, "_npb", npar )
+            setatt( self, "mlist", mlist )
             self._setFixed( fixed )
             if names is None :
-                self.parNames = ["parameter_%d"%k for k in range( self.npbase )]
+                parNames = ["parameter_%d"%k for k in range( self.npbase )]
             else :
-                self.parNames = self.selectNames( names )
+                parNames = self.selectNames( names )
         else :
-            self.npmax = copy.npmax
-            self.mlist  = copy.mlist
+            setatt( self, "npmax", copy.npmax )
+            setatt( self, "mlist", copy.mlist )
             if copy.fixed is not None :
                 fixed = {}
-                self._npb = copy._npb
+                setatt( self, "_npb", copy._npb )
                 for k in copy.fixed.keys() :
                     if k in self.mlist :
                         fixed[k] = copy.fixed[k].copy()
@@ -136,8 +137,9 @@ class FixedModel( BaseModel ):
                         fixed[k] = copy.fixed[k]
             else :
                 fixed = None
-            self._setFixed( fixed )
-            self.parNames = copy.parNames[:]
+            parNames = copy.parNames[:]
+        self._setFixed( fixed )
+        setatt( self, "parNames", parNames )
 
     def copy( self ) :
         """ Return a copy. """
@@ -148,20 +150,15 @@ class FixedModel( BaseModel ):
         Set attributes.
 
         """
-        key1 = {"npmax":int, "_npb":int, "fixed":dict }
-        keys = {"mlist":int}
-        if ( Tools.setListOfAttributes( self, name, value, keys ) or
-             Tools.setSingleAttributes( self, name, value, key1 ) ) :
-            pass
-        elif name == "fixed" :
+        if name == "fixed" :
             raise AttributeError( "Attribute fixed can only be set in the constructor" )
         else :
             super( FixedModel, self ).__setattr__( name, value )
 
     def _setFixed( self, fixed ) :
-        object.__setattr__( self, "fixed", fixed )
+        setatt( self, "fixed", fixed )
         if fixed is None :
-            object.__setattr__( self, "parlist", None )
+            setatt( self, "parlist", None )
             return
 
         if not isinstance( fixed, dict ) :
@@ -169,7 +166,7 @@ class FixedModel( BaseModel ):
 
         parlist = numpy.arange( self._npb )
         parlist = numpy.setxor1d( parlist, list( fixed.keys() ) )
-        object.__setattr__( self, "parlist", parlist )
+        setatt( self, "parlist", parlist )
 
     def select( self, params ) :
         """

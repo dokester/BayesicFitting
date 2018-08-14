@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .LinearModel import LinearModel
 
@@ -62,6 +63,18 @@ class HarmonicModel( LinearModel ):
     period : float
         the length of the period of the fundamental
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
     """
     PARNAMES = ["cosamp_", "sinamp_"]
 
@@ -99,9 +112,10 @@ class HarmonicModel( LinearModel ):
         Set attributes: order, period
 
         """
-        dind = {'order': int, 'period': float }
-        if Tools.setSingleAttributes( self, name, value, dind ):
-            pass
+        if name == 'order' :
+            setatt( self, name, value, type=int )
+        elif name == 'period' :
+            setatt( self, name, value, type=float )
         else :
             super( HarmonicModel, self ).__setattr__( name, value )
 

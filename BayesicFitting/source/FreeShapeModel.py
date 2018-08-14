@@ -4,6 +4,7 @@ from astropy import units
 import math
 
 from . import Tools
+from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 from .LinearModel import LinearModel
 from .kernels.Kernel import Kernel
@@ -58,16 +59,6 @@ class FreeShapeModel( LinearModel ):
     Using {@link NestedSampler} its exponential prior will ensure that all
     parameters are kept positive.
 
-    Author       Do Kester
-
-    Examples
-    --------
-    >>> nn = 100
-    >>> fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
-    >>> print( fsm.shape )
-
-    Category     mathematics/Fitting
-
     Attributes
     ----------
     npix : int
@@ -77,12 +68,31 @@ class FreeShapeModel( LinearModel ):
     xhi : float ( default npix )
         Highest value in xdata
         xlo and xhi define the valid domain of the model.
-        All input data must be: xlo < xdata < xhi
+        All input data must be: xlo <= xdata <= xhi
     shape : Kernel
         shape of convolving function
     center : float (between 0..1)
         position of the center of shape with respect to the pixels
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+    Examples
+    --------
+    >>> nn = 100
+    >>> fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
+    >>> print( fsm.shape )
+
+    Author       Do Kester
 
     """
     def __init__( self, npix, copy=None, shape=None, nconvolve=0,
@@ -116,26 +126,38 @@ class FreeShapeModel( LinearModel ):
 
         if copy is None :
             if shape is None :
-                self.shape = Tophat( nconv=nconvolve )
+                setatt( self, "shape", Tophat( nconv=nconvolve ) )
             else :
                 self.shape = shape
             self.xlo = xlo
-            self.xhi = npix if xhi is None else xhi
+            self.xhi = xhi
             self.center = center
+
         else :
-            self.xlo = copy.xlo
-            self.xhi = copy.xhi
-            self.shape = copy.shape
-            self.center = copy.center
+            setatt( self, "xlo", copy.xlo )
+            setatt( self, "xhi", copy.xhi )
+            setatt( self, "shape", copy.shape )
+            setatt( self, "center", copy.center )
 
     def copy( self ):
         """ Copy method.  """
         return FreeShapeModel( self.npbase,  copy=self )
 
     def __setattr__( self, name, value ) :
-        dind = { "shape": Kernel, "xlo": float, "xhi": float, "center": float}
-        if not ( Tools.setSingleAttributes( self, name, value, dind ) ) :
-            super( FreeShapeModel, self ).__setattr__( name, value )
+        if name == "shape" :
+            setatt( self, name, value, type=Kernel )
+            return
+        if name == "xlo" :
+            setatt( self, name, value, type=float )
+            return
+        if name == "xhi" :
+            setatt( self, name, self.npbase if value is None else value, type=float )
+            return
+        if name == "center" and ( 0 <= value <= 1 ) :
+            setatt( self, name, value, type=float )
+            return
+
+        super( FreeShapeModel, self ).__setattr__( name, value )
 
 
     def checkDomain( self, xdata ) :
@@ -204,10 +226,10 @@ class FreeShapeModel( LinearModel ):
             p0 = p
             partial[:,k] = self.shape.result( xpix )
 
-        print( fmt( partial ) )
+#        print( fmt( partial ) )
         return partial
 
-    def baseDerivative( self, xdata, params ):
+    def TBCbaseDerivative( self, xdata, params ):
         """
         Returns the derivative of the model function df/dx.
 

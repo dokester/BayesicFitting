@@ -1,6 +1,7 @@
 import numpy as numpy
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 from .PolynomialModel import PolynomialModel
 
@@ -50,17 +51,28 @@ class PolySineAmpModel( LinearModel ):
 
     Attributes
     ----------
-    order : int
-        order of the polynomials
+    degree : int
+        degree of the polynomials
     frequency : float
         frequency of the sine.
-    Hidden Attributes
-    -----------------
-    _pm : PolynomialModel
+    pm : PolynomialModel
         polynomial to be multiplied with the (co)sine
 
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
     """
-    def __init__( self, order, frequency, copy=None, fixed=None, **kwargs ):
+    def __init__( self, degree, frequency, copy=None, fixed=None, **kwargs ):
         """
         Sine model of a fixed frequency and polynomials as coefficients.
 
@@ -68,8 +80,8 @@ class PolySineAmpModel( LinearModel ):
 
         Parameters
         ----------
-        order : int
-            order of the polynomials
+        degree : int
+            degree of the polynomials
         frequency : float
             the frequency
         copy : PolySineAmpModel
@@ -85,27 +97,30 @@ class PolySineAmpModel( LinearModel ):
         if fixed is not None :
             raise AttributeError( "PolySineAmpModel cannot have fixed parameters" )
 
-        super( PolySineAmpModel, self ).__init__( 2*order+2, ndim=2, copy=copy, **kwargs )
+        super( PolySineAmpModel, self ).__init__( 2*degree+2, ndim=2, copy=copy, **kwargs )
 
         if copy is None :
             self.frequency = frequency
-            self.order = order
+            self.degree = degree
         else :
             self.frequency = copy.frequency
-            self.order = copy.order
+            self.degree = copy.degree
 
-        self.frequency = frequency
-        self.order = order
-        self._pm = PolynomialModel( order )
+        setatt( self, "pm", PolynomialModel( degree ) )
 
 
     def copy( self ):
         """ Copy method.  """
-        return PolySineAmpModel( self.order, self.frequency, copy=self )
+        return PolySineAmpModel( self.degree, self.frequency, copy=self )
 
     def __setattr__( self, name, value ) :
-        dind = {"frequency": float, "order": int, "_pm": PolynomialModel}
-        if not Tools.setSingleAttributes( self, name, value, dind ) :
+        if name == "frequency" :
+            setatt( self, name, value, type=float )
+        elif name == "degree" :
+            setatt( self, name, value, type=int )
+        elif name == "pm" :
+            raise AttributeError( "Attribute pm can not be set" )
+        else :
             super( PolySineAmpModel, self ).__setattr__( name, value )
 
     def basePartial( self, xdata, params, parlist=None ):
@@ -128,7 +143,7 @@ class PolySineAmpModel( LinearModel ):
         y = xdata[:,1]
         cx = numpy.cos( 2 * math.pi * self.frequency * x )
         sx = numpy.sin( 2 * math.pi * self.frequency * x )
-        np = self.order + 1
+        np = self.degree + 1
         for k in range( np ) :
             part[:,k] = cx
             n = k + np
@@ -153,14 +168,14 @@ class PolySineAmpModel( LinearModel ):
         dfdx = numpy.zeros( ( nxdata, 2 ), dtype=float )
         x = xdata[:,0]
         y = xdata[:,1]
-        np = self.order + 1
+        np = self.degree + 1
         tpf = 2 * math.pi * self.frequency
         cx = numpy.cos( tpf * x )
         sx = numpy.sin( tpf * x )
-        dfdx[:,0] = tpf * ( self._pm.result( y, params[np:] ) * cx -
-                            self._pm.result( y, params[:np] ) * sx )
-        dfdx[:,1] = ( self._pm.derivative( y, params[:np] ) * cx +
-                      self._pm.derivative( y, params[np:] ) * sx )
+        dfdx[:,0] = tpf * ( self.pm.result( y, params[np:] ) * cx -
+                            self.pm.result( y, params[:np] ) * sx )
+        dfdx[:,1] = ( self.pm.derivative( y, params[:np] ) * cx +
+                      self.pm.derivative( y, params[np:] ) * sx )
         return dfdx
 
     def baseName( self ):

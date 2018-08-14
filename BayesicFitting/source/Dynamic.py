@@ -1,6 +1,9 @@
 import numpy as numpy
 from . import Tools
 from .Formatter import formatter as fmt
+from .Tools import setAttribute as setatt
+
+from .Prior import Prior
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -30,15 +33,66 @@ class Dynamic( object ):
     """
     Class adjoint to Model which implements some dynamic behaviour.
 
+
+    Attributes
+    ----------
+    ncomp : int
+        the number of components in the dynamic model
+    deltaNpar : int
+        the number of parameters in each component
+    minComp : int
+        minimum number of repetitions
+    maxComp : None or int
+        maximum number of repetitions
+    growPrior : None or Prior
+        governing the birth and death.
+        ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+
+
     """
 
-    def getNumberOfComponents( self ):
-        return self.npbase / self.deltaNpar
+    def setDynamicAttribute( self, name, value ) :
+        """
+        Set attribute, if it belongs to a Dynamic Models.
+
+        Parameters
+        ----------
+        name : str
+            name of the attribute
+        value : anything
+            value of the attribute
+
+        Return
+        ------
+        bool : True if name was a Dynamic name
+               False if not
+
+        """
+        if name == "ncomp" :
+            setatt( self, name, value, type=int )
+            return True
+        if name == "deltaNpar" :
+            setatt( self, name, value, type=int )
+            return True
+        if name == "maxComp" :
+            setatt( self, name, value, type=int, isnone=True )
+            return True
+        if name == "minComp" :
+            setatt( self, name, value, type=int )
+            return True
+        if name == "growPrior" :
+            setatt( self, name, value, type=Prior )
+            return True
+
+        return False
+
+#    def getNumberOfComponents( self ):
+#        return self.npbase // self.deltaNpar
 
 
     def grow( self, pat=0 ):
         """
-        Increase the degree by one upto maxDegree ( if present ).
+        Increase the degree by one upto maxComp ( if present ).
 
         Parameters
         ----------
@@ -50,8 +104,8 @@ class Dynamic( object ):
         bool :  succes
 
         """
-        ncomp = self.getNumberOfComponents()
-        if self.maxComp is not None and ncomp >= self.maxComp:
+#        ncomp = self.getNumberOfComponents()
+        if self.maxComp is not None and self.ncomp >= self.maxComp:
             return False
 
         self.alterParameterSize( self.deltaNpar, pat )
@@ -62,7 +116,7 @@ class Dynamic( object ):
 
     def shrink( self, pat=0 ):
         """
-        Decrease the degree by one downto minDegree ( default 1 ).
+        Decrease the degree by one downto minComp ( default 1 ).
 
         Parameters
         ----------
@@ -74,8 +128,8 @@ class Dynamic( object ):
         bool : succes
 
         """
-        ncomp = self.getNumberOfComponents()
-        if ncomp <= self.minComp :
+#        ncomp = self.getNumberOfComponents()
+        if self.ncomp <= self.minComp :
             return False
 
         self.alterParameterSize( -self.deltaNpar, pat )
@@ -99,13 +153,20 @@ class Dynamic( object ):
             return
 
         mdlpar = self._head.parameters
+
+#        print( "DYN1  ", dnp, pat, self.npmax, self.npbase, self.npchain,
+#            mdlpar )
+
         mdlpar = self.alterParameters( mdlpar, self.npbase, dnp, pat )
 
-        self.npmax += dnp
-        self.npbase += dnp
-        self._head._npchain += dnp
+        setatt( self, "npmax", self.npmax + dnp )
+        setatt( self, "npbase", self.npbase + dnp )
+        setatt( self._head, "_npchain", self._head._npchain + dnp )
 
-        self._head.parameters = mdlpar
+#        print( "DYN2  ", dnp, pat, self.npmax, self.npbase, self.npchain,
+#            mdlpar )
+
+        setatt( self._head, "parameters", mdlpar )
 
     def shuffle( self, param, pat, np, rng ) :
         """
@@ -125,13 +186,14 @@ class Dynamic( object ):
         """
         return param
 
-
-
     def alterParameters( self, param, npbase, dnp, pat ) :
 
         newpar = numpy.zeros( len( param ) + dnp, dtype=float )
         kh = pat + npbase + dnp
         kb = pat + npbase
+
+#        print( "DPA1  ", npbase, dnp, pat, kh, kb )
+#        print( "DPA2  ", param )
 
         if dnp < 0 :
             newpar[:kh] = param[:kh]
@@ -140,6 +202,8 @@ class Dynamic( object ):
 
         newpar[kh:] = param[kb:]
 
+#        print( "DPA3  ", newpar )
+
         return newpar
 
     def alterFitindex( self, findex, npbase, dnp, pat ) :
@@ -147,6 +211,10 @@ class Dynamic( object ):
         newfi = numpy.zeros( len( findex ) + dnp, dtype=int )
         kh = pat + npbase + dnp
         kb = pat + npbase
+
+#        print( "DFI1  ", npbase, dnp, pat, kh, kb )
+#        print( "DFI2  ", findex )
+
 
         if dnp < 0 :
             newfi[:kh] = findex[:kh]
@@ -166,6 +234,7 @@ class Dynamic( object ):
             print( newfi )
             raise AssertionError()
 
+#        print( "DFI3  ", newfi )
         return newfi
 
 

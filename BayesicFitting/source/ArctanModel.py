@@ -41,13 +41,26 @@ class ArctanModel( NonLinearModel ):
 
     The parameters are initialized at {2/pi, 0.0, 1.0}. It is a non-linear model.
 
-    Author:      Do Kester
+    Attributes from Model
+    --------------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     Example
     -------
     >>> arct = ArctanModel( )
     >>> print( arct.getNumberOfParameters( ) )
     3
+
+
+    Author:      Do Kester
 
     """
 

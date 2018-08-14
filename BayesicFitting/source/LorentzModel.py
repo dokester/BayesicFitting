@@ -70,6 +70,28 @@ class LorentzModel( NonLinearModel ):
     >>> lorentz.setParameters( [5, 4, 1] )
     >>> print( lorentz( numpy.arange(  41 , dtype=float ) / 5 ) )
 
+    Attributes
+    ----------
+        none in this model
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+
+    Alternate
+    ---------
+    `LorentzModel()` is equivalent to `KernelModel( kernel=Lorentz() )`.
+
+
     """
     def __init__( self, copy=None, **kwargs ):
         """

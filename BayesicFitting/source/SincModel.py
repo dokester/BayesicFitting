@@ -53,6 +53,23 @@ class SincModel( KernelModel ):
     >>> print( sinc( numpy.arange( 15, dtype=float )-7 ) )        # sinc function between [-7,+7]
     [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
 
+
+    Attributes
+    ----------
+    none of its own
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
     """
     def __init__( self, copy=None, **kwargs ):
         """
