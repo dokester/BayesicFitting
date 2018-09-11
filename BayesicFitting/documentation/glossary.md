@@ -26,16 +26,17 @@ Size = N.
 + **Weight**<br>
 A vector of the same shape as the dependent variable representing the weights
 of the individual datapoints. Weights by nature are non-negative. <br>
-Weights are defined such that a point with weight W is equivalent to having 
-W times that same point.<br>
+Weights are defined such that a point with weight, w, is equivalent to having 
+that same point w times .<br>
 Size = N.
 
 <a name="model"></a>
 + **Model**<br>
 The mathematical relationship which is supposed to be present between the 
-independent and the dependent variables. The fitting process is a search 
-for those model parameters that 
-differences between the modelled data and the measured data are minimized.
+independent and the dependent variables. 
+The relationship mostly contains one or more unknown values, called parameters.
+The fitting process is a search for those model parameters that minimize the
+differences between the modelled data and the measured data.
 
 <a name="param"></a>
 + **Parameter**<br>
@@ -56,8 +57,8 @@ In practice the log of the likelihood is used as it is a more manageable,
 nicer number.<br>
 MaxLikelihood fitters search for a (global) maximum in the likelihood 
 landscape. At that position, the maximum likelihood solution for the
-parameters is found. In case of a Gaussian likelihood, this de ML
-solution which is the same as the least squares. 
+parameters is found. In case of a Gaussian likelihood, this ML
+solution is the same as the least squares solution. 
 
 <a name="stdev"></a>
 + **Standard Deviation**<br>
@@ -75,7 +76,7 @@ increase.
 
 <a name="confidence"></a>
 + **Confidence Region**<br>
-The confidence region is the wiggle room of the optiaml solution. 
+The confidence region is the wiggle room of the optimal solution. 
 It is derived via a montecarlo method from the covariance matrix. 
 
 <a name="design"></a>
@@ -87,7 +88,8 @@ Size = N * K.
 
 <a name="hessian"></a>
 + **Hessian Matrix**<br>
-The inner product of the transpose of the design matrix by itself. <br>
+The inner product of the design matrix with its transpose. In the 
+presence of weights these are also folded in.<br>
 Size = K * K.
 
 <a name="covar"></a>

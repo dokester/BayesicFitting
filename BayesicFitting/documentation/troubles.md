@@ -1,24 +1,27 @@
 
 ## Restrictions and Trouble Shooting.
 
-**All the math is OK, computation is the nightmare.**
+**All the math is OK, the computation is the nightmare.**
 
 
 Although the theory of model fitting is quite straightforward, the
 implementation can be cumbersome. This is mostly due to the fact that we
 have limited precision computers and limited amounts of time. Even
 though all the computation is done in 8-byte floats, limited resources
-and sometimes the obnoxious shape of the &chi;<sup>2</sup>-landscape can
-make life for the fitter difficult. Another common bear on the road is
-the (near-)degeneracy in the model with respect to the data.
-It sometimes looks more like an art than a craft. 
+and sometimes the obnoxious shape of the likelihood landscape (or
+&chi;<sup>2</sup>-landscape) can make life for the fitter difficult.
+Another common bear on the road is the (near-)degeneracy in the model
+with respect to the data. It sometimes looks more like an art than a
+craft. 
 
 For diagnostic (and debugging) purposes in the iterative fitters there
 is the `verbose` option, which prints increasingly more information for
 higher values.
 
 It is also a good idea to visually inspect the results of the fit. All
-fitters have a method `fitter.plotResult( xdata, ydata, model )`.
+fitters have a method `fitter.plotResult( xdata, ydata, model )`. 
+It is more easily called by turning on the plot option in the fit method:
+`fitter.fit( ydata, plot=True )`.
 
 Here are some guidelines that might help to get usefull results.
 
@@ -49,7 +52,7 @@ Check whether &chi;<sup>2</sup> is of the order of the
 number of datapoints. 
 
 + **Model Degeneracy**<br>
-Sometimes the model is degenerated, meaning that 2 (or more) of its 
+Sometimes the model is degenerate, meaning that 2 (or more) of its 
 parameters are essentially measuring the same thing. 
 Trying to fit data using Fitter to such a model results in a singular matrix.
 The SingularValueDecompositionFitter has less problems as it evenly 

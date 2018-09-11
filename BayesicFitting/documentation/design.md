@@ -36,7 +36,15 @@ domain too. Just like fixed parameters.
 A partial and schematic view on the model classes and their
 relationships can be  found in figure 1. 
 
-![Models](Model.png "Figure 1")
+For all images it holds that the boxes are classes. In the upper
+panel the name, in the mid panel some of the attributes of the class and
+in the lower panel some methods. Not all attributes and methods are
+displayed. An open arrow indicates inheritance: Model inherits from
+FixedModel which inherits from BaseModel. A black arrow indicates a
+relationship between the classes, which is written next to it.
+
+
+![Models](images/Model.png "Figure 1")
 
 
 <!-- --------------------------------------------------------------- -->
@@ -63,9 +71,10 @@ __&part;f(x:p)&thinsp;/&thinsp;&part;p__ and derivatives of __f__ to __x__. The 
 resp. (N,K) and N or (N,D).
 When no (partial) derivatives can be calculated, this class automatically
 provides numerical (partial) derivatives.
-Up to now the derivative, __&part;f&thinsp;/&thinsp;&part;x__, has little use in
-this package. It is there for future expansions. However, the partials, 
-__&part;f&thinsp;/&thinsp;&part;p__, are intensively used in the fitters to feel
+The derivative, __&part;f&thinsp;/&thinsp;&part;x__, is only used when
+models are connected via a pipe operation. See [**Model**](#model).
+However, the partials, 
+__&part;f&thinsp;/&thinsp;&part;p__, are intensively used by the fitters to feel
 its ways towards the minimum.
 
 Each **BaseModel** provides its own name and names for its parameters.
@@ -89,7 +98,7 @@ same order as they are provided.
 
 **FixedModel**s stay fixed for as long as the object exists.
 Consequently they can only be constructed when the **BaseModel** itself
-is constructed.
+is constructed. **Model**s can only be fixed up on construction.
 
 Results and partial derivatives for **FixedModel**s are calculated from
 the constituent **Model**s. The derivative to the independent
@@ -120,7 +129,9 @@ Two or more models can be concatinated to form a new compound model with
 `model1 + model2`. The result equals the sum 
 of the individual results. The parameters are listed with the ones from
 model1 first, followed by those of model2, etc. Other arithmetic
-operators (-*/) can be used too, with obvious results.
+operators (-*/|) can be used too, with obvious results.
+
+
 The methods of a compound model are called recursively over the chain.
 
 For every (simple) model in a chain. relevant information is kept
@@ -143,8 +154,9 @@ models. These models will be introduced in the sample subpackage too.
 
 -->
 
-After the **Model** things starts to diversify into two base
-classes, **LinearModel** and **NonLinearModel**, the **BracketModel**
+After the **Model** things starts to diversify into different
+directions, 
+**LinearModel** and **NonLinearModel**, the **BracketModel**
 and the **ConstantModel**.
 
 
@@ -193,7 +205,7 @@ partials as `basePartial`.
 
 All pre-defined linear models are displayed in figure 2
 
-![LinearModels](LinearModel.png "Figure 2")
+![LinearModels](images/LinearModel.png "Figure 2")
 
 **LinearModel**s have quite some benefits. Using a Gaussian error
 distribution (aka least squares) the optimal parameters can be found
@@ -207,8 +219,6 @@ can be easily integrated to obtain the evidence.
 It is not wrong to use a non-linear fitter on a linear model. Sometimes
 it can even be necessary e.g. when the number of parameters gets large. 
 
-TBD: **FreeShapeModel**
-
 
 <a name="nonlinearmodel">
 
@@ -220,7 +230,7 @@ least need to define the result as `baseResult`. When `basePartial` or
 
 All pre-defined non-linear models are displayed in figure 3
 
-![NonLinearModels](NonLinearModel.png "Figure 3")
+![NonLinearModels](images/NonLinearModel.png "Figure 3")
 
 **NonLinearModel**s need [non-linear (NL) fitters](#nonlinearfitter) to
 optimize their parameters. As NL fitters are iterative, more
@@ -233,15 +243,15 @@ complicated, slower and not guaranteed to find the best solution,
 ### DynamicModels
 
 **Dynamic** models are specialisations of **Model**s that have a fixed
-number of something. E.g **PolynomialModel** with fixed degree or
+attribute. E.g **PolynomialModel** with fixed degree or
 **HarmonicModel** with fixed order. **Dynamic** implements methods to
 let the model grow or shrink. These models can not be used with ordinary
 **Fitter**s. Using **NestedSampler** they automatically converge on the
 model with the optimal number of components. 
 
-All pre-defined **Dynamic** models are displayed in figure 4
+All pre-defined **Dynamic** models are displayed in figure 4.
 
-![Dynamic](Dynamic.png "Figure 4")
+![Dynamic](images/Dynamic.png "Figure 4")
 
 
 <a name="kernelmodel">
@@ -253,9 +263,9 @@ more-dimensional variants, **Kernel2dModel**.
 A **KernelModel** encapsulates a **Kernel** function, which is defined
 as an even function with a definite integral over (-inf,+inf). 
 
-All pre-defined kernels are displayed in figure 5
+All pre-defined kernels are displayed in figure 5.
 
-![Kernels](Kernel.png "Figure 5")
+![Kernels](images/Kernel.png "Figure 5")
 
 Of the more-dimensional variants, only the 2-dim is defined, where the
 2d kernel is either round or elliptic along the axes, or rotated
@@ -288,20 +298,20 @@ one.
 
 ### Construction of new Models
 
-TBW.
-<!--
-Apart from coding new models from scratch (either in Java or in Jython), 
-there is the option to
-construct new models out of existing ones via the method
-<code>addModel</code>, <code>multiplyModel</code>, 
-<code>subtractModel</code> and <code>divideModel</code>. 
-The results of the models are added, resp. multiplied, subtracted or divided,
-together and the partials are made for a parameter vector where the 
-parameters of model2 are appended to those of model1. It is the
-users responsibility to assert that no parameters are degenerate, i.e. 
-measuring essentially the same thing. But this is no different than when
-coding from scratch. 
--->
+If the needed model can not be constructed via the  [fixing of
+parameters](#fixedmodel) or by [concatenating models](#model), it is
+advised to take a similar (linear or non-linear) model as an example and
+change the revelant methods. As a bare minimum the method `baseResult`
+need to be filled. The method `basePartial` either needs to be filled or
+the method should be removed. In the latter case numeric derivatives are
+used.
+
+The method `testPartial` in **Model** van be used to check the
+consistency between the methods `baseResult` and `basePartial`.
+
+When a new model is constructed either from existing ones or new, it is
+the users responsibility to make sure the the parameters are not
+degenerate, i.e. measuring essentially the same thing.
 
 
 <!-- --------------------------------------------------------------- -->
@@ -322,15 +332,16 @@ prior a **UniformPrior** is asumed, for which limits are necessary to
 make it a proper probability. The limits need to be provided by the user. 
 
 In case of parameter estimation of a **LinearModel** Laplace's method is
-exact. In all other cases it is an approximation, better or worse
-depending on the problem at hand. Nontheless it can be used succesfully
-in model comparison when some reasonable provisions are taken into
-account, like comparing not too different models, feeding the same data
-(and weights) to all models etc.
+exact, provided that the limits on the parameters are wide enough. In
+all other cases it is an approximation, better or worse depending on the
+problem at hand. Nontheless it can be used succesfully in model
+comparison when some reasonable provisions are taken into account, like
+comparing not too different models, feeding the same data (and weights)
+to all models etc.
 
 The Fitter inheritance tree is displayed in figure 6.
 
-![Fitters](Fitter.png "Figure 6")
+![Fitters](images/Fitter.png "Figure 6")
 
 <a name="linearfitter"></a>
 
@@ -343,14 +354,14 @@ QR-decomposition of the Hessian. When the same problem needs to be
 solved for several different datasets QR-decomposition is more
 efficient. 
 
-A third method, Singular Value Decomposition (SVP), is somewhat more
-robust when the Hessian is nearly singular. SVP decomposes the design
+A third method, Singular Value Decomposition (SVD), is somewhat more
+robust when the Hessian is nearly singular. SVD decomposes the design
 matrix into a singular value decomposition.  Those singular values which
 do not exceed a threshold are set to zero. As a consequence the
 degenerate parameters get values which are  minimalised in a absolute
 sense. 
 
-The SVPFitter is TBW.
+The SVD-Fitter is TBW.
 
 <a name="nonlinearfitter"></a>
 
@@ -485,7 +496,7 @@ integral (evidence).
 
 The classes associated with NestedSampler are displayed in figure 7.
 
-![NestedSampler](NestedSampler.png "Figure 7")
+![NestedSampler](images/NestedSampler.png "Figure 7")
 
 **NestedSampler** contains 2 **SampleList**s, one internally to store
 the walkers and one to store the weighted samples of the posterior. Both
@@ -495,8 +506,7 @@ of which has a **Prior**. Together with the `xdata`, the `ydata` and the
 optional `weights`, the likelihood can be calculated by the
 **ErrorDistribution**. The **ErrorDistribution** itself might have
 **HyperParameter**s, that have to be estimated too. Finally there is the
-**Explorer** which in a threads distributed calculation explores the
-likelihood via various **Engine**s.  
+**Explorer** which explores the likelihood via various **Engine**s.  
 
 <a name="prior"></a>
 
@@ -508,7 +518,7 @@ parameters can move, without being frowned up on.
 
 The predefined **Prior**s are displayed in figure 8.
 
-![Priors](Prior.png "Figure 8")
+![Priors](images/Prior.png "Figure 8")
 
 All **Prior**s define two methods `unit2domain` which transforms
 (random) value in [0,1] into a (random) value from the prior
@@ -527,7 +537,7 @@ logLikelihood wrt the parameters is also defined. It is used in the
 
 The predefined **ErrorDistribution**s are displayed in figure 9.
 
-![ErrorDistributions](ErrorDistribution.png "Figure 9")
+![ErrorDistributions](images/ErrorDistribution.png "Figure 9")
 
 Some **ErrorDistribution**s have parameters of themselves, so called
 **HyperParameter**s. One special case is the **NoiseScale**.
@@ -551,7 +561,9 @@ to be provided when calculating the evidence.
 
 The way the walkers are moved around in the available parameter space is
 determined by the **Engine**s. Several **Engine**s are availble:
-**GibbsEngine**, **CrossEngine**, **FrogEngine** and **StepEngine**.
+**GibbsEngine**, **CrossEngine** and **StepEngine**. For
+**Dynamic**Models **BirthEngine** and **DeathEngine** are needed too.
+
 Two need special mentioning. The **StartEngine** generates the initial
 random ensemble. The **GalileanEngine** moves the point in a random
 direction for several steps. When the walker is moving outside the area
