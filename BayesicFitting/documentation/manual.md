@@ -1,12 +1,12 @@
 
 
 
-<center>
+
 BayesicFitting
 ==============
 Bayesian model fitting and evidence calculation.
 ------------------------------------------------
-</center>
+
 
 <!--
 Fitting is about finding a model, a mathematical relation, that best
