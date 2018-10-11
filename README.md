@@ -1,6 +1,6 @@
 # BayesicFitting
 
-A package for Bayesian model fitting and evidence calculation.
+A package for model fitting and bayesian evidence calculation.
 
 (In case you are wondering what that is about take a 
 quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
@@ -11,6 +11,7 @@ quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 2. [Setup](#setup)
 3. [Structure](#structure)
 4. [Status](#status)
+5. [Versions](#versions)
 
 <a name="history"></a>
 ## 1. History 
@@ -19,7 +20,7 @@ The BayesicFitting package is a python version of the the fitter classes
 in Herschel Common Science System (HCSS). The HCSS version was written
 in JAVA mostly by me. I encoded features and classes that were requested
 by my Herschel colleagues or that I remembered having used myself during
-my lifelong career as data analysis for earlier satellites as IRAS, ISO
+my lifelong career as data analyst for earlier satellites as IRAS, ISO
 and AKARI. So most of the stuff in here was needed and used at a certain
 moment in time. Even now the package is developing in directions that
 are needed by my work for JWST. 
@@ -31,10 +32,12 @@ maintained
 
 I used a customized version of java2python (j2py on github) to translate
 the JAVA classes to python. However, the actual code needed serious
-pythonization. Every line has been inspected. The documentation got most
-profit from the automated conversion. Also the structure into classes,
-the inheritance, methods and dependencies are largely the same as in the
-original HCSS.
+pythonization. Every line has been inspected. Every construct has been 
+revised.
+
+The documentation got most profit from the automated conversion. Also
+the structure into classes, the inheritance, methods and dependencies
+are largely the same as in the original HCSS.
 
 <a name="setup"> </a>
 ## 2. Setup 
@@ -47,13 +50,11 @@ structure, scipy (>=1.0) for linear algebra and other stuff and astropy
 Download and unpack the BayesicFitting zip file from github. Move into 
 the BayesicFitting-master directory and run:
 
-> python setup.py install
+    python setup.py install
 
-where python is python3.
+where python is python3. Or install it as :
 
-Or install it as :
-
-> pip install BayesicFitting
+    pip install BayesicFitting
 
 <a name="structure"> </a>
 ## 3. Structure 
@@ -66,7 +67,7 @@ models, fitters and nested sampling. About 50 models, 10 fitters and the
 remainder is needed to run the nested sampling algorithm. All these
 classes are in a directory BayesicFitting/source. A special type of
 functions are found in BayesicFitting/source/kernels. They can be used
-e.g. to combine into a model.
+to construct a model.
 
 ### examples
 
@@ -79,7 +80,7 @@ All examples can be inspected by clicking on them. They will fold out in
 the browser.
 
 To actually exercise the examples and maybe adapt then, start a jupyter
-notebook in the examples directory.
+notebook in your examples directory.
 
     jupyter notebook
 
@@ -96,7 +97,7 @@ can be found.
 + [Manual](./BayesicFitting/documentation/manual.md)<br>
 A first draft of a manual. It obviously needs more work.
 
-+ [FAQ](./BayesicFitting/documentation/troubles.md)<br>
++ [Troubles](./BayesicFitting/documentation/troubles.md)<br>
 A list of troublesome situations and what to do about it.
 
 + [Glossary](./BayesicFitting/documentation/glossary.md)<br>
@@ -132,6 +133,9 @@ More work needs to be done in:
   * Examples, more of them and covering more classes.
   * FreeShapeModel needs rethinking.
 
+<a name="versions"></a>
+## 5. Versions
+
 
  +  4 Jan 2018 version 0.9.0 Do Kester.<br>
    * Initial upload to github.
@@ -163,6 +167,6 @@ More work needs to be done in:
    * longdescription set to markdown (Still not OK on pypi.com)
  + 28 July 2018 version 1.0.7
    * small compilation error in 1.0.6
- + 14 Augustus 2018 version 1.0.8
+ + 11 October 2018 version 1.0.8
    * refactoring the setting of attributes in Models
-
+   * documentation (manual, design, etc.) updated.
