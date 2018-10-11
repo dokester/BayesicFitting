@@ -120,8 +120,9 @@ class PadeModel( NonLinearModel ):
             fixed = { num + 1: 1.0 }
         np = num + den + 2
         params = numpy.zeros( np, dtype=float )
-        for key in fixed :
-            params[key] = fixed[key]
+        params[num+1] = 1.0                     # to prevent 0/0
+#        for key in fixed :
+#            params[key] = fixed[key]
 
         super( PadeModel, self ).__init__( np, params=params, copy=copy,
                         names=names, fixed=fixed, **kwargs )
