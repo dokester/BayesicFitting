@@ -115,8 +115,11 @@ class Model( FixedModel ):
         unit of the x-values (list of in case of more dimensions)
     yUnit : astropy.units
         unit of the y-values
+    nrpars : int (read only)
+        number of parameters in this model
     npchain : int (read only)
         number of parameters needed in the total chain of models
+        identical to nrpars
 
     Attributes from FixedModel
     --------------------------
@@ -233,7 +236,7 @@ class Model( FixedModel ):
         name : string
             name of the attribute
         """
-        if name == 'npchain' :
+        if name == 'nrpars' or name == 'npchain' :
             return self._head._npchain
 
         return super( Model, self ).__getattr__( name )
