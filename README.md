@@ -164,7 +164,7 @@ More work needs to be done in:
    * testharnesses and examples
    * documentation updates
  + 28 June 2018 version 1.0.6
-   * longdescription set to markdown (Still not OK on pypi.com)
+   * longdescription set to markdown (Still not OK on pypi.org)
  + 28 July 2018 version 1.0.7
    * small compilation error in 1.0.6
  + 11 October 2018 version 1.0.8
