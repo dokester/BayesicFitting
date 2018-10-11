@@ -66,8 +66,8 @@ class ImageAssistant( object ):
     >>> input = aass.getIndices( y )
     >>> fitter = Fitter( input, some2dModel )
     >>> pars = fitter.fit( aass.resizeData( y ) )
-    >>> yfit = some2dModel.result( input )        # Double1d
-    >>> yfit2d = aass.resizeData( yfit, y )        # Double2d
+    >>> yfit = some2dModel.result( input )                  # Double1d
+    >>> yfit2d = aass.resizeData( yfit, shape=y.shape )     # Double2d
 
 
     Author       Do Kester

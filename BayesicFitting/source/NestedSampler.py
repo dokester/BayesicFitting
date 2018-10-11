@@ -258,7 +258,7 @@ class NestedSampler( object ):
             maximum size of the resulting sample list (None : no limit)
         threads : bool (False)
             Use Threads to distribute the diffusion of discarded samples over the available cores.
-        vebose : int
+        verbose : int (1)
             0 : silent
             1 : basic information
             2 : more about every 100th iteration

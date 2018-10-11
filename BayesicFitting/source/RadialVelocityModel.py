@@ -33,13 +33,14 @@ class RadialVelocityModel( NonLinearModel ):
     Model for the radial velocity variations of a star caused by a orbiting planet.
 .
     .. math::
-        f( x:p ) = p_1 * \cos( 2 * \pi * p_0 * x ) + p_2 * \sin( 2 * \pi * p_0 * x )
+        result = p_0 * ( \cos( \theta ) + p_2 * \cos( p_4 ) )
+        \theta = 2 * \pi * anomaly( x, p ) + p_4
 
-    amplitude   : of the velocity variation (>0)
-    period      : of the velocity variation (>0)
-    eccentricity: of the elliptic orbit (0<e<1; 0 = circular orbit)
-    phase       : time shift since periastron (0<p<2pi)
-    periastron  : longitude of periastron (0<p<2pi)
+    p_0 : amplitude    of the velocity variation (>0)
+    p_1 : period       of the velocity variation (>0)
+    p_2 : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
+    p_3 : phase        time shift since periastron (0<p<2pi)
+    p_4 : periastron   longitude of periastron (0<p<2pi)
 
     Note:
     The velocity of the star system is not included in this model. See example.
@@ -50,8 +51,8 @@ class RadialVelocityModel( NonLinearModel ):
     Examples
     --------
     >>> rv = RadialVelocityModel( )
-    >>> print( rv.npchain )
-    3
+    >>> print( rv.npars )
+    5
     >>> rv += PolynomialModel( 0 )          # add a constant system velocity
 
     """
@@ -143,8 +144,10 @@ class RadialVelocityModel( NonLinearModel ):
         eccen = params[2]
         phase = params[3] / self.TWOPI
 
+        # orbit time as fraction of the period, between 0 and 1.
         otime = ( ( xdata / period ) + phase ) % 1.0
 
+        # make lookup table equidistant in 1 degree, summing to 1.0
         npt = 361
         phi = numpy.linspace( 0.0, 1.0, npt, dtype=float )
         r = ( 1 - eccen * eccen ) / ( 1 - eccen * numpy.cos( self.TWOPI * phi ) )
@@ -153,6 +156,7 @@ class RadialVelocityModel( NonLinearModel ):
         anom = numpy.cumsum( sectors )
         anom /= anom[-1]
 
+        # use table to find phases.
         k = 0
         res = numpy.zeros_like( xdata )
         for i,t in enumerate( otime ) :

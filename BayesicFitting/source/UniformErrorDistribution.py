@@ -25,11 +25,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
-#  *
-#  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2018        Do Kester
 
 
 class UniformErrorDistribution( ScaledErrorDistribution ):

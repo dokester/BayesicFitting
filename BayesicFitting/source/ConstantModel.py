@@ -140,7 +140,7 @@ class ConstantModel( Model ):
             setatt( self, name, value, type=float, islist=True, isnone=True )
             setatt( self, "fixedModel", None )
             return
-        if name == "values" :
+        if name == "values" or name == "value":
             setatt( self.fixedModel, "parameters", value, type=float, islist=True )
             return
 

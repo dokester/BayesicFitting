@@ -26,6 +26,12 @@ and for some fitter algorithms [Press][5].
 <a name="modelclasses"></a>
 ## 2. Model Classes.
 
+![Models](images/Model.png "Figure 1")
+
+<a name="basemodel"></a>
+
+### BaseModel.
+
 The Model classes define the model functions which are to be fitted. A
 model class has methods to return its function value and partial
 derivates given one input value and a set of parameters. It is  also the
@@ -43,14 +49,6 @@ displayed. An open arrow indicates inheritance: Model inherits from
 FixedModel which inherits from BaseModel. A black arrow indicates a
 relationship between the classes, which is written next to it.
 
-
-![Models](images/Model.png "Figure 1")
-
-
-
-<a name="basemodel"></a>
-
-### BaseModel.
 
 **BaseModel** defines a simple or basic model and all its methods. 
 A basic model has methods to return the functional result,  
@@ -184,6 +182,12 @@ See Example (TBD)
 constant form, no matter what the input. The constant form could be 0
 everywhere, but also another **Model** with known parameters, or even a
 table.
+
+The **ConstantModel** has no parameters and strictly speaken, it can not
+be fitted. It states that the the data, except for the constant form, is
+mere noise.  It might seem a useless class, but it can be interesting in
+model comparison. E.g. to decide whether some feature is present or not.
+See Example (TBD)
 
 
 <a name="linearmodel"></a>
@@ -459,7 +463,7 @@ functions can be used as de-weighting schemes.
 
 Robust fitting is even more error prone than normal fitting. Always
 carefully check the results.
- 
+
 
 <a name="nested"></a>
 

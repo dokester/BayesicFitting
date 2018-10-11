@@ -1,7 +1,7 @@
 
 ## Restrictions and Trouble Shooting.
 
-**All the math is OK, the computation is the nightmare.**
+**The math is all OK, the computation is the nightmare.**
 
 
 Although the theory of model fitting is quite straightforward, the
@@ -41,12 +41,15 @@ with usable data.
 + **Constraints on the dependent variable**<br>
 The dependent variable (y) has less constraints. Still there is a silent
 assumption in the algorithms that the amount of noise in the data is of
-the order 1. This is only of importance in the stopping criterion of
-iterative fitters. There is no way to do it right in all imaginable
-cases. <br>
+the order 1. This is only of importance for the stopping of
+iterative fitters. An iterative fitter stops when the change in the cost
+function from one iteration to the next is less than the tolerance. When
+the cost function is small to begin with, due to small y values, the
+fitter might stop too early. Or too late when y values are large.
+There is no way to do it right in all imaginable cases. <br>
 To redress this condition you can either use weights 
-or use the setTolerance() method to adapt the stopping 
-criterion to your problem or scale the dependent variable such that 
+or set the tolerance attribute to adapt the stopping 
+criterion to your problem, or scale the dependent variable such that 
 the noise level attains a more usefull value. <br>
 Check whether &chi;<sup>2</sup> is of the order of the
 number of datapoints. 
@@ -55,9 +58,11 @@ number of datapoints.
 Sometimes the model is degenerate, meaning that 2 (or more) of its 
 parameters are essentially measuring the same thing. 
 Trying to fit data using Fitter to such a model results in a singular matrix.
+<!-- SVDFitter has not yet been implemented.
 The SingularValueDecompositionFitter has less problems as it evenly 
 distributes the value over the degenerated parameters. 
 Try hasDegeneracy() to check for this condition.<br>
+-->
 In general it is better to use models which are not degenerated.   
 
 + **(Nonlinear)Fitter does not find the minimum.**<br>
@@ -95,9 +100,9 @@ hand. Use a simpler model.
 The size of the Simplex in the AmoebaFitter is by default 1.  When your
 x-data is  very much larger (or smaller) than 1 and you set your
 startValues accordingly,  you might want to adapt the size of the
-Simplex too.  In extreme cases the 1 vanishes in the precision of the
+simplex too.  In extreme cases the 1 vanishes in the precision of the
 startValues and the  simplex is frozen in some dimension(s). Use
-setSimplex( startValues, sizeSimplex ).
+AmoebaFitter.fit( data, size=simplexsize ).
 
 + **&chi;<sup>2</sup> is zero.**<br>
 This can only happen when the data fit the

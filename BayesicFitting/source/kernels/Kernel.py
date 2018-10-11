@@ -30,7 +30,7 @@ __status__ = "Development"
 
 class Kernel( object ):
     """
-    A kernel is a non-negative real-valued integrable function.
+    A kernel is an even real-valued integrable function.
 
     It is satisfying the following two requirements:
 

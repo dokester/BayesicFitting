@@ -24,10 +24,21 @@ Size = N.
 
 <a name="weight"></a>
 + **Weight**<br>
-A vector of the same shape as the dependent variable representing the weights
-of the individual datapoints. Weights by nature are non-negative. <br>
-Weights are defined such that a point with weight, w, is equivalent to having 
-that same point w times .<br>
+
+A vector of the same shape as the dependent variable representing the
+weights of the individual datapoints. Weights by nature are
+non-negative. <br> 
+Weights are defined such that a point with weight, w,
+is equivalent to having  that same point w times .
+This concept is extended to non-integral values of the weights.<br>
+Weights can sometimes be derived from the standard deviations in a previous
+calculation. In that case the weights should be set to the inverse
+squares of the stdevs. However weights do not need to be inverse
+variances; they can also be derived in other ways. One specially usefull
+feature of the use of weights, is that some weights might be set to zero,
+causing those points not to contribute at all to the fit.<br>
+As weights are obviously more flexible that standard deviations, weights 
+are preferred in BayesicFitting, throughout. 
 Size = N.
 
 <a name="model"></a>
