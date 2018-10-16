@@ -170,7 +170,7 @@ class TestDynamicModel( unittest.TestCase ):
 
         pars = numpy.arange( 9, dtype=float )
         rng = numpy.random.RandomState( 12345 )
-        pars = r.shuffle( pars, 0, 9, numpy.random )
+        pars = r.shuffle( pars, 0, 9, rng )
         print( pars )
         p0 = pars[0]
         for k,p in enumerate( pars[1:] ) :
@@ -179,7 +179,7 @@ class TestDynamicModel( unittest.TestCase ):
 
         pars = numpy.arange( 12, dtype=float )
         rng = numpy.random.RandomState( 12345 )
-        pars = r.shuffle( pars, 2, 9, numpy.random )
+        pars = r.shuffle( pars, 2, 9, rng )
         print( pars )
         self.assertTrue( pars[0]==0 and pars[1]==1 and pars[-1]==11 )
 
@@ -190,7 +190,7 @@ class TestDynamicModel( unittest.TestCase ):
 
         pars = numpy.array( [0,1,2,3,5,6,8], dtype=float )
         rng = numpy.random.RandomState( 12345 )
-        pars = r.shuffle( pars, 0, 7, numpy.random )
+        pars = r.shuffle( pars, 0, 7, rng )
         print( pars )
         self.assertTrue( pars[1] == 1 )
         self.assertTrue( pars[2] == pars[0]+2 )
@@ -200,7 +200,7 @@ class TestDynamicModel( unittest.TestCase ):
 
         pars = numpy.array( [0,1,2,3,4,5,7,8,10,11], dtype=float )
         rng = numpy.random.RandomState( 12345 )
-        pars = r.shuffle( pars, 2, 7, numpy.random )
+        pars = r.shuffle( pars, 2, 7, rng )
         print( pars )
         self.assertTrue( pars[0]==0 and pars[1]==1 and pars[-1]==11 )
         self.assertTrue( pars[3] == 3 )
@@ -262,12 +262,12 @@ class TestDynamicModel( unittest.TestCase ):
 
         errdis = GaussErrorDistribution( x, y )
         sl = SampleList( m, 10, errdis )
-        print( m. npchain, m.npbase, m._next.npbase, hex(id(m)) )
+        print( m. npchain, m.npbase, m._next.npbase )
         print( "====================" )
 
         seng = StartEngine( sl, errdis )
         for s in sl :
-            print( s.model.npchain, s.model.npbase, s.model._next.npbase, hex(id(s.model)) )
+            print( s.model.npchain, s.model.npbase, s.model._next.npbase )
             seng.execute( s, 0.0 )
 
         logl = sl.getLogLikelihoodEvolution()

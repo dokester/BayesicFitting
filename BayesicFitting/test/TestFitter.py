@@ -140,6 +140,7 @@ class TestFitter( unittest.TestCase ):
 
         sm = PowerModel( 1.0 )
 
+        numpy.random.seed( 2345 )
         x = numpy.linspace( 0.0, 10.0, 101 )
         y = 1.0 + 0.5 * x - 0.2 * x * x +  numpy.random.randn( 101 ) * 0.1
 

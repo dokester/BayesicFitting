@@ -79,7 +79,7 @@ class Test2dModels( unittest.TestCase ):
         self.stdModeltest( m, p, plot=plot )
 
     def testProductModel( self, plot=False ):
-        rng = numpy.random
+        rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
         x[:,1] *= 2
@@ -90,7 +90,7 @@ class Test2dModels( unittest.TestCase ):
         gm = GaussModel()
         pm = PolynomialModel( 2 )
         m = ProductModel( [gm,pm] )
-        print( m.models )
+        # print( m.models )
         print( m )
         print( m.npchain )
 
@@ -100,7 +100,7 @@ class Test2dModels( unittest.TestCase ):
         self.stdModeltest( m, p, xdata=x, plot=plot )
 
     def testSurfaceSplinesModel( self, plot=False ):
-        rng = numpy.random
+        rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
         x[:,1] *= 2
@@ -123,7 +123,7 @@ class Test2dModels( unittest.TestCase ):
         self.stdModeltest( m, p, xdata=x, plot=plot )
 
     def testSurfaceSplinesModel2( self, plot=False ):
-        rng = numpy.random
+        rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
         x[:,1] *= 2

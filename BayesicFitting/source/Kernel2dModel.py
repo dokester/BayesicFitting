@@ -305,6 +305,9 @@ class Circle( BaseShape2d ):
 
         return partial
 
+    def __str__( self ) :
+        return "Circle"
+
 class Ellipse( BaseShape2d ):
     def __init__( self, npbase, kernel ) :
         super( Ellipse, self ).__init__( npbase, kernel )
@@ -343,6 +346,9 @@ class Ellipse( BaseShape2d ):
             partial[:,k] = parts[kp]()
 
         return partial
+
+    def __str__( self ) :
+        return "Ellipse"
 
 class Rotated( BaseShape2d ):
     def __init__( self, npbase, kernel ) :
@@ -412,5 +418,8 @@ class Rotated( BaseShape2d ):
             partial[:,k] = parts[kp]()
 
         return partial
+
+    def __str__( self ) :
+        return "Rotated"
 
 

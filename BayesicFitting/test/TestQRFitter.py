@@ -105,6 +105,7 @@ class TestQRFitter( unittest.TestCase ):
 
         print( "   par  ", par, " stdv  ", std, chisq )
 
+        numpy.random.seed( 9876 )
         for k in range( 5 ) :
             y1 = yy + 0.3 * numpy.random.randn( 11 )
             par1 = fitter.fit( y1 )

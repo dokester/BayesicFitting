@@ -102,7 +102,7 @@ class Test2dFixedModels( unittest.TestCase ):
         self.stdModeltest( m, p, plot=plot )
 
     def testProductModel( self, plot=False ):
-        rng = numpy.random
+        rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
         x[:,1] *= 2
@@ -116,7 +116,7 @@ class Test2dFixedModels( unittest.TestCase ):
 
 
     def testSurfaceSplinesModel( self, plot=False ):
-        rng = numpy.random
+        rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
         x[:,1] *= 2
@@ -130,7 +130,7 @@ class Test2dFixedModels( unittest.TestCase ):
 
     """
     def testFreeShape2dModel( self, plot=False ):
-        rng = numpy.random
+        rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
         x[:,1] *= 2

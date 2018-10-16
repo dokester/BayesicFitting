@@ -107,6 +107,8 @@ class ExponentialPrior( Prior ):
                 raise ValueError( "Fraction of zeroes must be between [0,1]" )
             object.__setattr__( self, name, float( value ) )
             object.__setattr__( self, "_shift", 1.0 - value )
+            random.seed( 34567 )
+            object.__setattr__( self, "_rng", random )
         elif name == "_uval" :
             object.__setattr__( self, name, float( value ) )
         else :
@@ -126,7 +128,7 @@ class ExponentialPrior( Prior ):
         uv = 1 - uval
         if uv == 0 : return math.inf
         if ( uv > self._shift ) :
-            self._uval = random.random() * self.zeroFraction     # arbitrary
+            self._uval = self._rng.random() * self.zeroFraction     # arbitrary
             return 0
         else :
             return -math.log( uv / self._shift ) * self.scale

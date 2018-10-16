@@ -21,6 +21,7 @@ class TestEvidence( unittest.TestCase  ) :
         x = np.arange( nn, dtype=float ) / (nn/2) - 1
         ym = 1.2 + 0.5 * x
         nf = 0.1
+        np.random.seed( 2345 )
         noise = np.random.randn( nn )
 
         y = ym + nf * noise
@@ -251,6 +252,8 @@ class TestEvidence( unittest.TestCase  ) :
         x = np.arange( nn, dtype=int ) // 20
         ym = np.linspace( 1.0, 2.0, nn )
         nf = 0.1
+
+        np.random.seed( 2345 )
         noise = np.random.normal( 0.0, 1.0, nn )
 
         y = ym + nf * noise
@@ -298,6 +301,7 @@ class TestEvidence( unittest.TestCase  ) :
         x = np.arange( nn, dtype=float ) / (nn/2) - 1
         ym = 1.3
         nf = 0.1
+        np.random.seed( 2345 )
         noise = np.random.laplace( 0.0, 1.0, nn )
 
         y = ym + nf * noise

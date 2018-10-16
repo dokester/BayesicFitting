@@ -56,6 +56,7 @@ class TestBaseFitter( unittest.TestCase  ) :
 
     def testVector( self ) :
         print( "====testVector======================" )
+        np.random.seed( 12345 )
         x = np.arange( 10, dtype=float )
         y = np.random.rand( 10 )
         w = np.ones( 10, dtype=float )
