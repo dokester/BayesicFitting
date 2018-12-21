@@ -1,0 +1,259 @@
+import numpy as numpy
+import re
+
+from .Tools import setAttribute as setatt
+
+#  * This file is part of the BayesicFitting package.
+#  *
+#  * BayesicFitting is free software: you can redistribute it and/or modify
+#  * it under the terms of the GNU Lesser General Public License as
+#  * published by the Free Software Foundation, either version 3 of
+#  * the License, or ( at your option ) any later version.
+#  *
+#  * BayesicFitting is distributed in the hope that it will be useful,
+#  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  * GNU Lesser General Public License for more details.
+#  *
+#  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
+#  *
+#  *    2018        Do Kester
+
+class Problem( object ):
+    """
+    Problem implements the common parts of specialized Problems.
+
+    A Problem is an optimization of parameters which does not involve
+    the fitting of data to a Model.
+
+    Problems can be solved by NestedSampler, with appropriate Engines and
+    ErrorDistributions (==CostFunctions)
+
+    The result of the function for certain x and p is given by
+    `problem.result( x, p )`
+    The parameters, p, are to be optimized while the x provide additional
+    information.
+
+    This class is a base class. Further specializations will define the
+    result method.
+
+    Attributes
+    ----------
+    model : Model
+        to be optimized
+    xdata : array_like
+        independent variable (static)
+    ydata : array_like
+        dependent variable (static)
+    weights : array_like
+        weights associated with ydata
+    npars : int
+        number of parameters in the problem (might include nuisance parameters)
+    partype : float | int
+        type of the parameters
+
+
+    Author :         Do Kester
+
+    """
+
+    #  *************************************************************************
+    def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
+        """
+        Problem Constructor.
+        <br>
+        Parameters
+        ----------
+        model : Model
+            the model to be solved
+        xdata : array_like or None
+            independent variable
+        ydata : array_like or None
+            dependent variable
+        weights : array_like or None
+            weights associated with ydata
+        copy : Problem
+            to be copied
+
+        """
+        super( ).__init__( )
+
+        if copy is None :
+            self.xdata = xdata
+            self.ydata = ydata
+            self.model = model
+            self.weights = weights
+            self.partype = float
+        else :
+            self.xdata = copy.xdata
+            self.ydata = copy.ydata
+            self.weights = copy.weights
+            if copy.model.isDynamic() :
+                self.model = copy.model.copy()
+            else :
+                self.model = copy.model
+            self.partype = copy.partype
+
+        self.npars = self.model.npars
+
+    def copy( self ):
+        """
+        Copy.
+
+        """
+        return Problem( copy=self )
+
+
+    def __getattr__( self, name ) :
+        """
+        Return value belonging to attribute with name.
+
+        Parameters
+        ----------
+        name : string
+            name of the attribute
+        """
+        if name == 'sumweight' :            # Return the sum over weight vector.
+            if self.hasWeights() :
+                self.sumweight = numpy.sum( self.weights )
+                return self.sumweight
+            else :
+                return self.ndata
+        elif name == 'ndata' :
+            self.ndata = len( self.ydata )        # number of data points/tuples
+            return self.ndata
+        else :
+            raise AttributeError( "Unknown attribute " + name )
+
+        return None
+
+    def hasWeights( self ):
+        """ Return whether it has weights.  """
+        return self.weights is not None
+
+
+    #  *****RESULT**************************************************************
+    def result( self, param ):
+        """
+        Returns the result using the parameters.
+
+        In this (base)class it is a placeholder.
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters.
+
+        """
+        pass
+
+
+    def residuals( self, param, mockdata=None ) :
+        """
+        Returns the (weighted) residuals, calculated at the xdata.
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters.
+        mockdata : array_like
+            model fit at xdata
+
+        """
+        return self.ydata - ( self.result( param ) if mockdata is None else mockdata )
+
+    def weightedResiduals( self, param, mockdata=None, extra=False ) :
+        """
+        Returns the (weighted) residuals, calculated at the xdata.
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters.
+        mockdata : array_like
+            model fit at xdata
+        extra : bool (False)
+            true  : return ( wgt * res, wgt * sign( res ) )
+            false : return wgt * res
+        """
+        res = self.residuals( param, mockdata=mockdata )
+
+        if extra :
+            if self.weights is None :
+                wgt = numpy.ones_like( self.ydata )
+                return ( res, numpy.copysign( wgt, res ) )
+            else :
+                return ( res * self.weights, numpy.copysign( self.weights, res ) )
+        else :
+            return res if self.weights is None else res * self.weights
+
+
+    def weightedResSq( self, param, mockdata=None, extra=False ) :
+        """
+        Returns the (weighted) squared residuals, calculated at the xdata.
+
+        Optionally (extra=True) the weighted residuals themselves are returned too.
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters.
+        mockdata : array_like
+            model fit at xdata
+        extra : bool (False)
+            true  : return ( wgt * res^2, wgt * res )
+            false : return wgt * res^2
+        """
+        res = self.residuals( param, mockdata=mockdata )
+
+        resw = res if self.weights is None else res * self.weights
+        return ( resw * res, resw ) if extra else resw * res
+
+
+    def domain2Unit( self, dval, kpar ) :
+        """
+        Return value in [0,1] for the selected parameter.
+
+        Parameters
+        ----------
+        dval : float
+            domain value for the selected parameter
+        kpar : array_like
+            selected parameter index, where kp is index in [parameters, hyperparams]
+        """
+        return self.model.domain2Unit( dval, kpar )
+
+
+    def unit2Domain( self, uval, kpar ) :
+        """
+        Return domain value for the selected parameter.
+
+        Parameters
+        ----------
+        uval : array_like
+            unit value for the selected parameter
+        kpar : array_like
+            selected parameter indices, where kp is index in [parameters, hyperparams]
+        """
+        return self.model.unit2Domain( uval, kpar )
+
+
+    #  *****TOSTRING***********************************************************
+    def __str__( self ):
+        """ Returns a string representation of the model.  """
+        return self.baseName( )
+
+    def _toString( self, spaces ) :
+        return self.baseName()
+
+
+    def shortName( self ):
+        """
+        Return a short version the string representation: upto first non-letter.
+
+        """
+        m = re.match( "^[a-zA-Z_]*", self.baseName() )
+        return m.group(0)
+
+    def baseName( self ) :
+        return "Problem of %s" % self.model.shortName()

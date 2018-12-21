@@ -16,7 +16,7 @@
 """
 Provides fitter functions.
 
-Import into BayesicFitting itself all classe that are directly usable.
+Import into BayesicFitting itself all classes that are directly usable.
 I.e. leave out the base classes and helper classes.
 
 TBC: How much time does this take. Everything is translated ??
@@ -35,6 +35,7 @@ from .source.CauchyErrorDistribution import CauchyErrorDistribution
 from .source.CauchyPrior import CauchyPrior
 from .source.CircularUniformPrior import CircularUniformPrior
 from .source.ChebyshevPolynomialModel import ChebyshevPolynomialModel
+from .source.ClassicProblem import ClassicProblem
 from .source.CombiModel import CombiModel
 from .source.ConstantModel import ConstantModel
 from .source.ConvergenceError import ConvergenceError
@@ -44,10 +45,12 @@ from .source.DeathEngine import DeathEngine
 from .source.Dynamic import Dynamic
 from .source.Engine import Engine
 from .source.ErrorDistribution import ErrorDistribution
+from .source.ErrorsInXandYProblem import ErrorsInXandYProblem
 from .source.EtalonDriftModel import EtalonDriftModel
 from .source.EtalonModel import EtalonModel
 from .source.ExpModel import ExpModel
 from .source.Explorer import Explorer
+from .source.ExponentialErrorDistribution import ExponentialErrorDistribution
 from .source.ExponentialPrior import ExponentialPrior
 from .source.Fitter import Fitter
 from .source.FixedModel import FixedModel
@@ -57,7 +60,7 @@ from .source.GalileanEngine import GalileanEngine
 from .source.GaussErrorDistribution import GaussErrorDistribution
 from .source.GaussModel import GaussModel
 from .source.GaussPrior import GaussPrior
-from .source.GenGaussErrorDistribution import GenGaussErrorDistribution
+#from .source.GenGaussErrorDistribution import GenGaussErrorDistribution
 from .source.GibbsEngine import GibbsEngine
 from .source.HarmonicModel import HarmonicModel
 from .source.HarmonicDynamicModel import HarmonicDynamicModel
@@ -91,6 +94,7 @@ from .source.PolynomialModel import PolynomialModel
 from .source.PowerLawModel import PowerLawModel
 from .source.PowerModel import PowerModel
 from .source.Prior import Prior
+from .source.Problem import Problem
 from .source.ProductModel import ProductModel
 from .source.PseudoVoigtModel import PseudoVoigtModel
 from .source.QRFitter import QRFitter
@@ -112,10 +116,13 @@ from .source.SineSplineModel import SineSplineModel
 from .source.SplinesModel import SplinesModel
 from .source.StartEngine import StartEngine
 from .source.StepEngine import StepEngine
+#from .source.StellarOrbitModel import StellarOrbitModel
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
+from .source.Walker import Walker
+from .source.WalkerList import WalkerList
 
 from .source.Formatter import formatter
 from .source.Formatter import fma
