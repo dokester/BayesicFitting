@@ -7,7 +7,7 @@ from .HyperParameter import HyperParameter
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -28,12 +28,12 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
-class GenGaussErrorDistribution( ScaledErrorDistribution ):
+class ExponentialErrorDistribution( ScaledErrorDistribution ):
     """
-    To calculate a generalized Gaussian likelihood.
+    To calculate a generalized Exponential likelihood.
 
     For one residual, x, it holds
     .. math::
@@ -56,7 +56,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
     .. math::
         logL = log( \sum( w ) p / ( 2 s \Gamma( 1 / p ) ) ) - \sum( w ( |x| / s ) ^ p )
 
-    Note: the scale s in Generalized Gaussian is NOT the same as the scale in Gaussian or
+    Note: the scale s in Generalized Exponential is NOT the same as the scale in Gaussian or
         in Laplace.
 
     Author       Do Kester.
@@ -66,19 +66,12 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
     PARNAMES = ["scale", "power"]
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, scale=1.0, power=2.0,
-                  limits=None, copy=None ):
+    def __init__( self, scale=1.0, power=2.0, limits=None, copy=None ):
         """
         Default Constructor.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model
-        data : array_like
-            data to be fitted
-        weights : array_like
-            weights to be used
         scale : float
             noise scale
         power : float
@@ -90,11 +83,10 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
             [low]   low limit on [scale,power] (need to be >0)
             [high]  high limit on [scale,power]
             when limits are set, the scale cq. power are *not* fixed.
-        copy : GenGaussErrorDistribution
+        copy : ExponentialErrorDistribution
             distribution to be copied.
         """
-        super( GenGaussErrorDistribution, self ).__init__( xdata, data,
-                       weights=weights, limits=None, copy=copy )
+        super( ExponentialErrorDistribution, self ).__init__( limits=None, copy=copy )
 
         plim = None
         if limits is None :
@@ -119,8 +111,7 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
 
     def copy( self ):
         """ Return copy of this.  """
-        return GenGaussErrorDistribution( self.xdata, self.data,
-                copy=self )
+        return ExponentialErrorDistribution( copy=self )
 
     def acceptWeight( self ):
         """
@@ -135,36 +126,35 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         Parameter
         --------
         hypar : array_like (2 floats)
-            the [scale,power] of this GenGauss distribution.
+            the [scale,power] of this Exponential distribution.
         """
         p = hypar[1]
         return hypar[0] * math.sqrt( special.gamma( 3.0 / p ) / special.gamma( 1.0 / p ) )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihoodXXX( self, model, allpars ) :
+    def logLikelihood_alt( self, problem, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
 
         """
         self.ncalls += 1
-        np = model.npchain
+
         scale = allpars[-2]
         power = allpars[-1]
 
-        res = self.getResiduals( model, allpars[:np] )
-        chisq = self.getChisq( res, scale, power )
-        norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
-#        print( "GG  ", chisq, norm, self.sumweight )
-        return self.sumweight * norm - chisq
+        chipow = self.getChipow( problem, allpars ) / math.pow( scale, power )
+        norm = math.log( 0.5 * power / scale ) - special.gammaln( 1.0 / power )
 
-    def logLdata( self, model, allpars, mockdata=None ) :
+        return self.sumweight * norm - chipow
+
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -172,144 +162,145 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
-        if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:np] )
         scale = allpars[-2]
         power = allpars[-1]
-        res = self.data - mockdata
+
+        res = problem.residuals( allpars[:-2], mockdata=mockdata )
 
         lld = - numpy.power( numpy.abs( res / scale ), power )
         norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
         lld += norm
-        if self.weights is not None :
-            lld *= self.weights
+        if problem.weights is not None :
+            lld *= problem.weights
         return lld
 
-
-    def getChisq( self, residual, scale, power ):
+    def getChipow( self, problem, allpars=None ) :
         """
         Return chisq.
 
-        Sum over the (weighted) squared residuals
+        return Sum over the (weighted) powered residuals
 
         Parameters
         ----------
-        residual : array_like
-            the residuals
-        scale : float
-            noise scale
-        power : float
-            power of distribution
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+
         """
-        ares = numpy.power( numpy.abs( residual / scale ), power )
-        if self.weights is not None :
-            ares = ares * self.weights
+        res = problem.residuals( allpars[:-2] )
+        power = allpars[-1]
+
+        ares = numpy.power( numpy.abs( res ), power )
+        if problem.weights is not None :
+            ares = ares * problem.weights
         return numpy.sum( ares )
 
-    def getScale( self, model ) :
+    def getScale( self, problem, allpars=None ) :
         """
         Return the noise scale calculated from the residuals.
 
         Parameters
         ----------
-        model : Model
-            the model involved.
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
         """
-        power = self.hyperpar[1].hypar
-        chi = self.getChisq( self.getResiduals( model ), 1.0, power )
-        return math.pow( chi / self.sumweight, 1.0 / power )
+        power = allpars[-1]
+        chi = self.getChipow( problem, allpars=allpars )
+        return math.pow( chi / problem.sumweight, 1.0 / power )
 
 
-    def partialLogLXXX( self, model, allpars, fitIndex ) :
+    def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
-            indices of the parameters to be fitted
+            indices of parameters to be fitted
 
         """
         self.ncalls += 1
-        np = model.npchain
+
         scale = allpars[-2]
         power = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
+        res = problem.residuals( allpars[:-2] )
 
         ars = numpy.abs( res / scale )
         rsp = numpy.power( ars, power )
-        if self.weights is not None :
-            rsp = rsp * self.weights
+        if problem.weights is not None :
+            rsp = rsp * problem.weights
 
         dLdm = power * rsp / res
-        dM = model.partial( self.xdata, allpars[:np] )
+        dM = problem.partial( allpars[:-2] )
 
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for  k in fitIndex :
             if k >= 0 :
                 dL[i] = numpy.sum( dLdm * dM[:,k] )
+                i += 1
             elif k == -2 :
-                dL[i] = - self.sumweight / scale + power * numpy.sum( rsp ) / scale
+                dL[-2] = - problem.sumweight / scale + power * numpy.sum( rsp ) / scale
             else :
                 # special.psi( x ) is the same as special.polygamma( 1, x )
-                dL[i] = self.sumweight * ( power + special.psi( 1.0 / power ) )
-                dL[i] /= ( power * power )
-                dL[i] -= ( numpy.sum( rsp * numpy.log( ars ) ) )
-            i += 1
+                dldp = problem.sumweight * ( power + special.psi( 1.0 / power ) )
+                dldp /= ( power * power )
+                dldp -= ( numpy.sum( rsp * numpy.log( ars ) ) )
+                dL[-1] = dldp
 
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of all elements of the log( likelihood )
         to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
-            indices of the parameters to be fitted
+            indices of parameters to be fitted
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
-        param = allpars[:np]
-        if mockdata is None :
-            mockdata = model.result( self.xdata, param )
+        param = allpars[:-2]
+        res = problem.residuals( param, mockdata=mockdata )
         scale = allpars[-2]
         power = allpars[-1]
-        res = self.data - mockdata
 
         ars = numpy.abs( res / scale )
         rsp = numpy.power( ars, power )
-        if self.weights is not None :
-            rsp = rsp * self.weights
-            wgt = self.weights
+        if problem.weights is not None :
+            rsp = rsp * problem.weights
+            wgt = problem.weights
         else :
             wgt = 1.0
 
         dLdm = power * rsp / res
-        dM = model.partial( self.xdata, param )
+        dM = problem.partial( param )
 ##      TBD import mockdata into partial
-#        dM = model.partial( self.xdata, param, mockdata=mockdata )
+#        dM = problem.partial( param, mockdata=mockdata )
 
         # special.psi( x ) is the same as special.polygamma( 1, x )
         dlp = wgt * ( power + special.psi( 1.0 / power ) ) / ( power * power )
@@ -325,5 +316,5 @@ class GenGaussErrorDistribution( ScaledErrorDistribution ):
         return
 
     def __str__( self ) :
-        return "Generalized Gauss error distribution"
+        return "Exponential error distribution"
 
