@@ -4,7 +4,6 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 from .Model import Model
-#from Problem import Problem
 
 __author__ = "Do Kester"
 __year__ = 2018

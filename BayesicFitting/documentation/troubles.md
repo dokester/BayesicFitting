@@ -65,6 +65,13 @@ Try hasDegeneracy() to check for this condition.<br>
 -->
 In general it is better to use models which are not degenerated.   
 
++ **Runtime Warning.**<br>
+It can happen that a runtime warning is thrown during the run of a 
+fitter (or of NestedSampler). In most cases the results are still OK.
+The program sailed undamaged pass the obstacle. Although some extra 
+precautions should be taken with the results, the warnings can almost
+always be ignored.
+
 + **(Nonlinear)Fitter does not find the minimum.**<br>
 When a non-linear fitter searches for a minimum, it migh happen that for
 almost all values of the parameters &chi;<sup>2</sup> does not have a

@@ -24,7 +24,6 @@ Size = N.
 
 <a name="weight"></a>
 + **Weight**<br>
-
 A vector of the same shape as the dependent variable representing the
 weights of the individual datapoints. Weights by nature are
 non-negative. <br> 
@@ -38,7 +37,7 @@ variances; they can also be derived in other ways. One specially usefull
 feature of the use of weights, is that some weights might be set to zero,
 causing those points not to contribute at all to the fit.<br>
 As weights are obviously more flexible that standard deviations, weights 
-are preferred in BayesicFitting, throughout. 
+are preferred in BayesicFitting, throughout.<br>
 Size = N.
 
 <a name="model"></a>
@@ -54,10 +53,17 @@ differences between the modelled data and the measured data.
 The parameters of the model. After fitting they are at the optimal values.<br>
 Size = K.
 
+<a name="problem"<>/a>
++ **Problem**<br>
+A container object that collects all elements of a problem e.g. the Model, the 
+independent and dependent varaiables and if present, the weights. **Problem**s
+are only relevant in the context of NestedSampler.
+
 <a name="chisq"></a>
 + **Chisq**<br>
-Chisq is the global misfit of the data (D) wrt the model (M): <br>
-&chi;<sup>2</sup> = &Sigma; ( D - M )<sup>2</sup> <br>
+Chisq is the global misfit of the data (D) wrt the model (M), multiplied with 
+the weights, if applicable : <br>
+&chi;<sup>2</sup> = &Sigma; w * ( D - M )<sup>2</sup> <br>
 In least-squares setting, the fitters minimize Chisq to find the optimal 
 parameters. 
 
