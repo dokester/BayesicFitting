@@ -43,7 +43,7 @@ class StartEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
         Parameters
@@ -52,7 +52,7 @@ class StartEngine( Engine ):
             engine to be copied
 
         """
-        super( StartEngine, self ).__init__( walkers, errdis, copy=copy, seed=seed )
+        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -62,7 +62,7 @@ class StartEngine( Engine ):
         return str( "StartEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by a random selection of the parameters.
 
@@ -72,30 +72,30 @@ class StartEngine( Engine ):
             sample to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of parameter indices
+
         Returns
         -------
         int : the number of successfull moves
 
         """
-        if fitIndex is None :
-            fitIndex = walker.fitIndex
-
-        model = walker.model
+        problem = walker.problem
+        fitIndex = walker.fitIndex
         par = walker.allpars.copy()
+
+#        print( "FI   ", fitIndex )
 
         ktry = 0
         while True :
             uval = self.rng.rand( len( fitIndex ) )
-            par[fitIndex] = self.unit2Domain( model, uval, kpar=fitIndex )
+            par[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
 
 #           ## fiture extension
 #           if self.constrain :
 #               xdata = self.errdis.xdata
 #               par = self.constrain( model, par, xdata )
 
-            logL = self.errdis.logLikelihood( model, par )
+            logL = self.errdis.logLikelihood( problem, par )
+
             if numpy.isfinite( logL ) :
                 break
             elif ktry > ( self.maxtrials + walker.id ) :
@@ -103,7 +103,7 @@ class StartEngine( Engine ):
             else :
                 ktry += 1
 
-        self.setSample( walker, model, par, logL, logW=-math.inf )
+        self.setWalker( walker, problem, par, logL, fitIndex=fitIndex )
 
         return len( fitIndex )
 

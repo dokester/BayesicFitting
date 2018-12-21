@@ -7,7 +7,7 @@ from .JeffreysPrior import JeffreysPrior
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -32,7 +32,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 class ScaledErrorDistribution( ErrorDistribution ):
@@ -50,33 +50,28 @@ class ScaledErrorDistribution( ErrorDistribution ):
     PARNAMES = ["scale"]
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, scale=1.0, limits=None,
-                  copy=None ):
+    def __init__( self, scale=1.0, limits=None, fixed=None, copy=None ):
         """
         Default Constructor.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model
-        data : array_like
-            data to be fitted
-        weights : array_like
-            weights to be used
         scale : float
             noise scale
         limits : None or list of 2 floats [low,high]
             None : no limits implying fixed scale
             low     low limit on scale (needs to be >0)
             high    high limit on scale
-            when limits are set, the scale is *not* fixed.
+            when limits are set, the scale is to be fitted
+        fixed : dictionary of {int:float}
+            int     list if parameters to fix permanently. Default None.
+            float   list of values for the fixed parameters.
 
         copy : ScaledErrorDistribution
             distribution to be copied.
 
         """
-        super( ScaledErrorDistribution, self ).__init__( xdata, data,
-                weights=weights, copy=copy )
+        super( ScaledErrorDistribution, self ).__init__( fixed=fixed, copy=copy )
 
         if copy is None :
             self.hyperpar = NoiseScale( scale=scale, limits=limits )
@@ -88,7 +83,7 @@ class ScaledErrorDistribution( ErrorDistribution ):
 
     def copy( self ):
         """ Return copy of this.  """
-        return ScaledErrorDistribution( self.xdata, self.data, copy=self )
+        return ScaledErrorDistribution( copy=self )
 
     def setLimits( self, limits ) :
         """
@@ -106,7 +101,6 @@ class ScaledErrorDistribution( ErrorDistribution ):
             self.hyperpar[0].prior = JeffreysPrior()
 
         super( ScaledErrorDistribution, self ).setLimits( limits )
-
 
 
     def __setattr__( self, name, value ):

@@ -7,7 +7,7 @@ from .Model import Model
 #from Problem import Problem
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -32,7 +32,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class Sample( object ):
     """
@@ -55,25 +55,25 @@ class Sample( object ):
         log Weights of the likelihood.
             SUM( log( W * L ) = logZ (TBC)
             log( SUM( W * L ) = logZ (evidence)
-    allpars : array_like
-        list of parameters and hyperparameters
-    fitIndex : array_like or None
-        list of (super)parameters to be fitted.
-    parameters : array_like (read only)
+    parameters : array_like
         parameters (of the model)
-    hypars : array_like (read only)
+    nuisance : array_like (optional)
+        nuisance parameters (of the problem)
+    hyper : array_like (optional)
         list of hyper parameters (of the error distribution)
+    fitIndex : array_like or None
+        list of allpars to be fitted.
 
+    allpars : array_like (read only)
+        list of parameters, nuisance parameters and hyperparameters
 
     Author       Do Kester
 
     """
 
-    def __init__( self, id, parent, model, errdis=None, fitIndex=None, copy=None ):
+    def __init__( self, id, parent, model, parameters=None, fitIndex=None, copy=None ):
         """
         Constructor.
-
-        Either errdis or copy is obligatory.
 
         Parameters
         ----------
@@ -83,8 +83,8 @@ class Sample( object ):
             id of the parent (-1 for Adam/Eve)
         model : Model
             the model being used. Parameters are copied from this model.
-        errdis : ErrorDistribution
-            to get info about super parameters
+        parameters : array_like
+            list of model parameters
         fitIndex : array_like
             list of indices in allpars that need fitting
         copy : Sample
@@ -96,26 +96,16 @@ class Sample( object ):
 
         if copy is None :
             self.model = model
-            allpars = model.parameters
-            npars = len( model.parameters )
-            if errdis.nphypar > 0 :
-                allpars = numpy.append( allpars, errdis.hypar )
-            self.allpars = allpars
+            self.parameters = parameters if parameters is not None else model.parameters
+            self.fitIndex = fitIndex if fitIndex is not None else numpy.arange( model.npars )
 
-            if fitIndex is not None :
-                self.fitIndex = fitIndex                # no copy.
-            else :
-                self.fitIndex = numpy.arange( npars )
-                nh = -1
-                for s in errdis.hyperpar :
-                    if not s.isFixed and s.isBound() :
-                        self.fitIndex = numpy.append( self.fitIndex, [nh] )
-                    nh -= 1
             self.logL = 0.0
             self.logW = 0.0
         else :
             self.model = copy.model.copy()
-            self.allpars = copy.allpars.copy()
+            self.parameters = copy.parameters.copy()
+            if hasattr( copy, "nuisance" ) : self.nuisance = copy.nuisance.copy()
+            if hasattr( copy, "hyper" ) : self.hyper = copy.hyper.copy()
             self.fitIndex = copy.fitIndex.copy()
             self.logL = copy.logL
             self.logW = copy.logW
@@ -135,13 +125,15 @@ class Sample( object ):
         """
         if name == "weight" :
             return math.exp( self.logW )
-        elif name == "parameters" :
-            return self.allpars[:self.model.npchain]
+        elif name == "allpars" :
+            allpars = self.parameters.copy()
+            if hasattr( self, "nuisance" ) :
+                allpars = numpy.append( allpars, self.nuisance )
+            if hasattr( self, "hyper" ) :
+                allpars = numpy.append( allpars, self.hyper )
+            return allpars
         elif name == "hypars" :
-            if len( self.allpars ) > self.model.npchain :
-                return self.allpars[self.model.npchain:]
-            else :
-                return None
+            return self.hyper
         else :
             raise AttributeError( "Unknown attribute " + name )
 
@@ -151,14 +143,13 @@ class Sample( object ):
         """
         Set attributes.
         """
-        if name == "allpars" :
+        if name == "parameters" :
             object.__setattr__( self, name, value )
             return
 
-#        key1 = {"id" : int, "parent" : int, "model": (Model,Problem),
         key1 = {"id" : int, "parent" : int, "model": Model,
                 "logL" : float, "logW" : float }
-        key2 = {"fitIndex" : int }
+        key2 = {"fitIndex" : int, "nuisance" : float, "hyper" : float }
         if ( Tools.setSingleAttributes( self, name, value, key1 ) or
              Tools.setListOfAttributes( self, name, value, key2 ) ) :
             pass
@@ -170,7 +161,7 @@ class Sample( object ):
         return str( "Sample: %3d parent: %3d model: %s logL: %10.2f logW: %10.2f"%
                     ( self.id, self.parent, self.model.shortName(), self.logL, self.logW ) )
 
-
+    """
     def check( self, nhyp=0 ) :
 #        print( len( self.allpars ), self.model.npchain, nhyp )
         if not len( self.allpars ) == ( self.model.npchain + nhyp ) :
@@ -178,3 +169,4 @@ class Sample( object ):
                 ( len( self.allpars ), self.model.npchain, nhyp ) )
         if nhyp > 0 and self.allpars[-nhyp] <= 0 :
             raise ValueError( "Sample has non-positive hyperparameter: %f" % self.allpars[-nhyp] )
+    """

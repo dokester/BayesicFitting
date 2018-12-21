@@ -1,7 +1,4 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
 
 from .Dynamic import Dynamic
 from .Engine import Engine
@@ -50,13 +47,13 @@ class DeathEngine( Engine ):
 #    _deathrate = 1.0
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=23455 ):
+    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ):
         """
         Constructor.
 
         Parameters
         ----------
-        walkers : SampleList
+        walkers : WalkerList
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
@@ -66,7 +63,7 @@ class DeathEngine( Engine ):
             for random number generator
         """
         super( DeathEngine, self ).__init__( walkers, errdis, copy=copy,
-                    seed=seed )
+                    seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -76,27 +73,28 @@ class DeathEngine( Engine ):
         return str( "DeathEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by removins a component.
 
         Parameters
         ----------
-        walker : Sample
+        walker : Walker
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of the/some parameters indices to be diffused
 
         Returns
         -------
         int : the number of successfull moves
 
         """
-        waltry = walker.copy()
-        model = waltry.model
-        ptry = waltry.allpars
+        cwalker = walker.copy()          ## work on local copy
+
+        problem = cwalker.problem
+        model = problem.model
+        ptry = cwalker.allpars
+        ftry = cwalker.fitIndex
 
         pat = 0
         while model is not None and not isinstance( model, Dynamic ) :
@@ -106,30 +104,33 @@ class DeathEngine( Engine ):
         nc = model.ncomp
         np = model.npbase
 
+        if self.verbose > 4 :
+            print( "DEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
+
         # shuffle the parameters (if needed) before throwing the last one out.
         ptry = model.shuffle( ptry, pat, np, self.rng )
 
         if not ( nc > model.growPrior.unit2Domain( self.rng.rand() ) and
                 model.shrink( pat ) ) :
+#            print( "DEN2  ", "failed" )
             self.reportFailed()
             return 0
 
         dnp = model.npbase - np         # parameter decrease
         ptry = model.alterParameters( ptry, np, dnp, pat )
-        find = model.alterFitindex( walker.fitIndex, np, dnp, pat )
+        ftry = model.alterFitindex( ftry, np, dnp, pat )
+        problem.npars += dnp
 
-        model = waltry.model
-
-        Ltry = self.errdis.logLikelihood( model, ptry )
+        Ltry = self.errdis.logLikelihood( problem, ptry )
 
         if Ltry >= lowLhood:
             self.reportSuccess()
-            self.setSample( walker, model, ptry, Ltry, fitindex=find )
-            walker.check( nhyp=self.errdis.nphypar )
+            self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
+            wlkr = self.walkers[walker.id]
+            wlkr.check( nhyp=self.errdis.nphypar )
             return abs( dnp )
 
         self.reportReject( )
-        walker.check( nhyp=self.errdis.nphypar )
 
         return 0
 

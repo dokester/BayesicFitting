@@ -1,8 +1,4 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
-from .Formatter import formatter as fmt
 
 from .Dynamic import Dynamic
 from .Engine import Engine
@@ -33,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class BirthEngine( Engine ):
     """
@@ -49,24 +45,24 @@ class BirthEngine( Engine ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=23455 ) :
+    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ) :
         """
         Constructor.
 
         Parameters
         ----------
-        walkers : SampleList
+        walkers : list of Walker
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        copy : GalileanEngine
+        copy : BirthEngine
             to be copied
         seed : int
             for random number generator
 
         """
         super( BirthEngine, self ).__init__( walkers, errdis, copy=copy,
-                    seed=seed )
+                    seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -76,7 +72,7 @@ class BirthEngine( Engine ):
         return str( "BirthEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by adding a component and diffusing the parameters.
 
@@ -86,23 +82,23 @@ class BirthEngine( Engine ):
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of the/some parameters indices to be diffused
 
         Returns
         -------
         int : the number of successfull moves
 
         """
-        waltry = walker.copy()
+        cwalker = walker.copy()                  ## work on local copy.
 
-        model = waltry.model
-        ptry = waltry.allpars
+        problem = cwalker.problem
+        ptry = cwalker.allpars
+        ftry = cwalker.fitIndex
 
-#        print( "BEN0  ", walker.id, walker.parent, len( ptry ), len( fitIndex ) )
-
+        if self.verbose > 4 :
+            print( "BEN0  ", walker.id, walker.parent, len( ptry ), len( fitIndex ) )
 
         pat = 0
+        model = problem.model
         while model is not None and not isinstance( model, Dynamic ) :
             pat += model.npbase
             model = model._next
@@ -110,38 +106,37 @@ class BirthEngine( Engine ):
         nc = model.ncomp
         np = model.npbase
 
-#        print( "BEN1  ", nc, np, len( ptry ), len( fitIndex ) )
+        if self.verbose > 4 :
+            print( "BEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
 
         if not ( nc < model.growPrior.unit2Domain( self.rng.rand() ) and
                  model.grow( pat ) ):
 #            print( "BEN2  ", "failed" )
             self.reportFailed()
-            walker.check( nhyp=self.errdis.nphypar )
             return 0
 
-#        dnp = model.deltaNpar        # parameter increase
         dnp = model.npbase - np         # parameter change
         ptry = model.alterParameters( ptry, np, dnp, pat )
-        find = model.alterFitindex( walker.fitIndex, np, dnp, pat )
+        ftry = model.alterFitindex( ftry, np, dnp, pat )
+        problem.npars += dnp
 
-        model = waltry.model
         t = 0
         while t < self.maxtrials :
             for kp in range( pat+np, pat+np+dnp ) :
-                ptry[kp] = model.unit2Domain( self.rng.rand(), kpar=kp )
-            Ltry = self.errdis.logLikelihood( model, ptry )
+                ptry[kp] = problem.unit2Domain( self.rng.rand(), kpar=kp )
+            Ltry = self.errdis.logLikelihood( problem, ptry )
 
             if Ltry >= lowLhood:
                 self.reportSuccess()
-                self.setSample( walker, model, ptry, Ltry, fitindex=find )
-                walker.check( nhyp=self.errdis.nphypar )
+                self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
+                wlkr = self.walkers[walker.id]
+                wlkr.check( nhyp=self.errdis.nphypar )
                 return dnp
             else :
                 self.reportFailed()
                 t += 1
 
         self.reportReject( )
-        walker.check( nhyp=self.errdis.nphypar )
 
         return 0
 

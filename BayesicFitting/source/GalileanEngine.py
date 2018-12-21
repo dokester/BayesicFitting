@@ -9,7 +9,7 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -34,7 +34,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class GalileanEngine( Engine ):
     """
@@ -45,7 +45,7 @@ class GalileanEngine( Engine ):
 
     Attributes
     ----------
-    walkers : SampleList
+    walkers : WalkerList
         walkers to be diffused
     errdis : ErrorDistribution
         error distribution to be used
@@ -64,13 +64,13 @@ class GalileanEngine( Engine ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Default Constructor.
 
         Parameters
         ----------
-        walkers : SampleList
+        walkers : WalkerList
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
@@ -80,7 +80,7 @@ class GalileanEngine( Engine ):
             for random number generator
         """
         super( GalileanEngine, self ).__init__( walkers, errdis, copy=copy,
-                        seed=seed  )
+                        seed=seed, verbose=verbose  )
         self.nstep = 4
 #        self.size = 0.5
 
@@ -98,7 +98,7 @@ class GalileanEngine( Engine ):
         return str( "GalileanEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -108,17 +108,17 @@ class GalileanEngine( Engine ):
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of the/some parameters indices to be diffused
 
         Returns
         -------
         int : the number of successfull moves
 
         """
-        model = walker.model
+        walker = walker.copy()
+        problem = walker.problem
         Lhood = walker.logL
         allpars = walker.allpars
+#        print( "GE  ", fma( allpars ), fmt( Lhood ), fmt( lowLhood ) )
         fitIndex = walker.fitIndex
 
         npout = 0
@@ -127,62 +127,54 @@ class GalileanEngine( Engine ):
         size = 0.5
 
         self.plotter.start( )
-        um = UnitMovements( model, allpars, fitIndex, self, size )
-
-        ptry = allpars.copy()
-#        print( "GE0  ", fma( ptry ) )
+        um = UnitMovements( walker, self, size )
 
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
         maxtrial = self.maxtrials * nstep
+        ptry = allpars.copy()
+        if self.verbose > 4 :
+            print( "alpar ", fma( ptry ), fmt( Lhood ), fmt( lowLhood) )
+            print( "fitin ", fma( fitIndex ), nstep, maxtrial )
+            print( "unitr ", fma( self.unitRange ), size )
+
         Lbest = self.walkers[-1].logL
         step = 0
         trial = 0
 
         while True:
             trial += 1
-            um.setParameters( model, allpars )
+            um.setParameters( problem, allpars )
             if inside == 0 :                            # safely inside lowLhood area
                 ptry[fitIndex] = um.stepPars( 1.0 )
 
                 self.plotter.move( allpars, ptry, 0 )
             elif inside == 1 :                          # first time outside -> mirror
                 f = ( Lhood - lowLhood ) / ( Lhood - Ltry )     # lin interpolation to edge
-#                print( "GE1  ", fmt(f), fmt(Lhood), fmt(lowLhood), fmt(Ltry) )
+
                 pedge = ptry.copy()
                 pedge[fitIndex] = um.stepPars( f )                # ptry on edge
-#                print( "GE2  ", fma(pedge) )
-#                [print( "edge  ", pt, math.frexp( pt ) ) for pt in pedge ]
-#                print( "GE2  ", fma(pedge) )
-                dLdp = self.errdis.partialLogL( model, pedge, fitIndex )
-#                [print( "llde  ", pt, math.frexp( pt ) ) for pt in dLdp ]
+
+                dLdp = self.errdis.partialLogL( problem, pedge, fitIndex )
                 self.plotter.move( allpars, pedge, 1 )
-#                print( "GE3  ", fma( dLdp ) )
 
                 um.mirrorOnLowL( dLdp )
                 ptry[fitIndex] = um.stepPars( 1 - f )
-#                print( "GE4  ", ( ptry ) )
 
                 self.plotter.move( pedge, ptry, 2 )
             else:                                       # mirroring failed; do reverse
                 size *= 0.7
                 um.reverseVelocity( size )
                 ptry[fitIndex] = um.stepPars( 1.0 )
-#                print( "GE5  ", ( ptry ) )
 
                 self.plotter.move( allpars, ptry, 3 )
 
-#            ## future extension
-#            if self.constrain :
-#                xdata = self.errdis.xdata
-#                ptry = self.constrain( model, ptry, xdata )
+            ## future extension #########################
+            # if self.constrain :
+            #     xdata = self.errdis.xdata
+            #     ptry = self.constrain( model, ptry, xdata )
+            #############################################
 
-
-#            print( "GEng  ", (ptry) )
-#            [print( "ptry  ", pt, math.frexp( pt ) ) for pt in ptry ]
-
-            Ltry = self.errdis.logLikelihood( model, ptry )
-
-#            print( "Geng  ", self.rng.rand(), Ltry, math.frexp(Ltry), inside, (Ltry >= lowLhood) )
+            Ltry = self.errdis.logLikelihood( problem, ptry )
 
             if Ltry >= lowLhood:
                 allpars = ptry.copy( )
@@ -193,8 +185,7 @@ class GalileanEngine( Engine ):
                 step += 1
                 if Ltry > Lbest :
                     Lbest = Ltry
-                    self.setSample( self.walkers[-1], model, ptry.copy(), Lbest,
-                                    fitindex=fitIndex )
+                    self.setWalker( self.walkers[-1], problem, ptry.copy(), Lbest, fitIndex=fitIndex )
                     self.reportBest()
 
             else:
@@ -204,65 +195,105 @@ class GalileanEngine( Engine ):
                 else:
                     self.reportFailed( )
 
-#            print( "GEng  ", fma(ptry), fmt(Ltry) )
-#            print( "      ", fma( self.unitRange ), inside, step, fmt( size ) )
+            if self.verbose > 4 :
+                print( "GEng  ", fma(ptry), fmt(Ltry), inside, step, trial, fmt( size ) )
 
             if not ( step < nstep and trial < maxtrial ):
                 break
 
-        self.setSample( walker, model, allpars, Lhood, fitindex=fitIndex )
+        self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
+
+#        print( "GE  ", fma( allpars ), fmt( Lhood ) )
 
         self.plotter.stop()
         return npout
 
-import matplotlib.pyplot as plt
-
 class UnitMovements( object ):
+    """
+    Define all parameter movements in unitspace.
 
-    def __init__( self, model, allpars, fitIndex, engine, size ):
-        self.model = model
-        self.np = len( fitIndex )
-        self.fitIndex = fitIndex
+
+
+    """
+    def __init__( self, walker, engine, size ):
+        self.problem = walker.problem
+        self.fitIndex = walker.fitIndex
+
+        self.np = len( self.fitIndex )
         self.engine = engine
-        self.setParameters( model, allpars )
+        self.setParameters( self.problem, walker.allpars )
 
         if self.np > len( self.engine.unitRange ) :
             self.engine.unitRange = numpy.ones( self.np, dtype=float )
 
-        self.upran = self.engine.unitRange[fitIndex]
+        self.upran = self.engine.unitRange[self.fitIndex]
         self.setVelocity( size )
 
-    def setParameters( self, model, allpars ):
-        self.upar = self.engine.domain2Unit( model, allpars, kpar=self.fitIndex )
+    def uniform( self ) :
+        """
+        Return random step between [0.5,0.5]
+        """
+        return self.engine.rng.rand( self.np ) - 0.5
+
+    def setParameters( self, problem, allpars ):
+        """
+        Set unit values for the applicable parameters
+        """
+        self.upar = self.engine.domain2Unit( problem, allpars, kpar=self.fitIndex )
 
     def mirrorOnLowL( self, dLdp ):
-#        print( "dLdp  ", fmt( dLdp ) )
-#        print( "uvel  ", fmt( self.uvel ) )
-#        inprod = numpy.inner( dLdp, self.uvel )
+        """
+        Mirror the velocity on the low likelihood border.
+        """
         inprod = numpy.sum( dLdp * self.uvel )
-#        print( "inpr  ", fmt( inprod ) )
-#        sumsq  = numpy.inner( dLdp, dLdp )
         sumsq  = numpy.sum( dLdp * dLdp )
-#        print( "sumq  ", fmt( sumsq ) )
         self.uvel -= 2 * dLdp * inprod / sumsq
-#        print( "uvel  ", fmt( self.uvel ) )
-
-
 
     def setVelocity( self, size ):
-        if self.model.isDynamic():
+        """
+        Set a (random) unit velocity.
+        """
+        self.uvel = self.uniform() * self.upran * size
+
+    def reverseVelocity( self, size ):
+        """
+        Reverse the unit velocity when mirroring fails.
+        Add small perturbation.
+        """
+        upv = self.uvel                 # keep original velocity
+        self.setVelocity( size )        # get a new one to perturb
+        nm = len( self.engine.walkers )
+        self.uvel = size * ( self.np * self.uvel - nm * upv ) / ( nm + self.np )
+
+    def stepPars( self, f ):
+        """
+        Return a new stepped parameter set.
+        """
+        uv = self.uvel
+        pv = self.upar + uv * f
+
+        # check if outside [0,1]
+        pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
+        self.upar, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
+
+        return self.engine.unit2Domain( self.problem, self.upar, kpar=self.fitIndex )
+
+
+    """
+    ###########  Some olf code; Keep for a while ########################
+
+    def setVelocity( self, size ):
+        if self.problem.model.isDynamic():
             self.setVelocityDynamic( size )
         else:
             self.setVelocityStatic( size )
 
-    def allpars2unit( self, kw ) :
-        allpars = self.engine.walkers[kw].allpars
-        return self.engine.domain2Unit( self.model, allpars, kpar=self.fitIndex )
+    def setVelocityDynamic( self, size ):
+        self.uvel = self.uniform() * size * self.engine.unitRange[self.fitIndex]
 
     def setVelocityStatic( self, size ):
-        self.uvel  = self.uniform() * self.upran * size
+        self.uvel = self.uniform() * self.upran * size
 
-        """
         # find two randomly chosen walkers
         nm = len( self.engine.walkers )
         k1 = k0 = self.engine.rng.randint( nm )
@@ -275,27 +306,10 @@ class UnitMovements( object ):
         # add a random contibution
         rv = self.uniform() * self.upran * size
         self.uvel = ( nm * self.uvel + self.np * rv ) / ( nm + self.np )
-        """
 
-    def uniform( self ) :
-        return self.engine.rng.rand( self.np ) - 0.5
+    def allpars2unit( self, kw ) :
+        allpars = self.engine.walkers[kw].allpars
+        return self.engine.domain2Unit( self.problem, allpars, kpar=self.fitIndex )
 
-    def setVelocityDynamic( self, size ):
-#        print( "SVD   ", self.np, size, len( self.engine.walkers[0].allpars), self.engine.unitRange )
-        self.uvel = self.uniform() * size * self.engine.unitRange[self.fitIndex]
-
-    def reverseVelocity( self, size ):
-        upv = self.uvel                 # keep original velocity
-        self.setVelocity( size )        # get a new one to perturb
-        nm = len( self.engine.walkers )
-        self.uvel = size * ( self.np * self.uvel - nm * upv ) / ( nm + self.np )
-#        self.uvel -= ( 0.5 * upv )      # subtract original
-
-    def stepPars( self, f ):
-        uv = self.uvel
-        pv = self.upar + uv * f
-        # check if outside [0,1]
-        pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
-        self.upar, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
-        return self.engine.unit2Domain( self.model, self.upar, kpar=self.fitIndex )
+    """
 

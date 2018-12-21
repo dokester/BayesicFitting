@@ -5,7 +5,7 @@ from .ErrorDistribution import ErrorDistribution
 from .LogFactorial import logFactorial
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 class PoissonErrorDistribution( ErrorDistribution ):
@@ -48,6 +48,9 @@ class PoissonErrorDistribution( ErrorDistribution ):
     .. math::
         logL = \sum( n * \log( x ) - x - \log( n! ) )
 
+    Weights are not accepted in this ErrorDistribution; they are silently ignored.
+
+
     Author       Do Kester.
 
     """
@@ -55,34 +58,21 @@ class PoissonErrorDistribution( ErrorDistribution ):
     PARNAMES = []
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, copy=None ):
+    def __init__( self, copy=None ):
         """
         Constructor.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model
-        data : array_like
-            data to be fitted
-        weights : array_like
-            weights to be used (no weights are possible in Poisson)
         copy : PoissonErrorDistribution
             distribution to be copied.
 
-        Raises
-        ------
-        ValueError when weights is not None
-
         """
-        if weights is not None:
-            raise ValueError( "Weights are not possible in Poisson distributions" )
-
-        super( PoissonErrorDistribution, self ).__init__( xdata, data, copy=copy )
+        super( PoissonErrorDistribution, self ).__init__( copy=copy )
 
     def copy( self ):
         """ Return copy of this.  """
-        return PoissonErrorDistribution( self.xdata, self.data, copy=self )
+        return PoissonErrorDistribution( copy=self )
 
     def acceptWeight( self ):
         """
@@ -91,59 +81,52 @@ class PoissonErrorDistribution( ErrorDistribution ):
         """
         return False
 
-    def getChisq( self, residuals, scale ) :
+
+    def getScale( self, problem, allpars=None ) :
         """
-        Return chisq as Gaussian approximation
-        .. math::
-            \chi^2 = \sum( residuals^2 / data )
+        Return the noise scale.
+
+        *** Gaussian approximation ***
 
         Parameters
         ----------
-        residuals : array-like
-            difference between data and model
-        scale : float
-            scale factor. Not used.
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
         """
-        return numpy.sum( numpy.square( residuals ) / self.data )
-
-    def getScale( self, model ) :
-        """
-        Return the sqrt( chisq / npt )
-        Gaussian approximation.
-
-        """
-        chi = self.getChisq( self.getResiduals( model ), 0.0 )
-        return math.sqrt( chi / self.sumweight )
-
+        return self.getGaussianScale( problem, allpars=allpars )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihoodXXX( self, model, param ):
+    def logLikelihood_alt( self, problem, allpars ):
         """
         Return the log( likelihood ) for a Poisson distribution.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
-        param : array_like
-            parameters of the model
+        problem : Problem
+            to be solved
+        allpars : array_like
+            list of all parameters in the problem
 
         """
         self.ncalls += 1
-        mock = model.result( self.xdata, param )
-        if numpy.any( numpy.less_equal( mock, 0 ) ) :
+
+        mock = problem.result( allpars )
+        if numpy.any(  mock <= 0.0 ) :
             return -math.inf
 
-        lfdata = logFactorial( self.data )
+        lfdata = logFactorial( problem.ydata )
 
-        logl = numpy.sum( self.data * numpy.log( mock ) - mock - lfdata )
+        logl = numpy.sum( problem.ydata * numpy.log( mock ) - mock - lfdata )
 
         if math.isnan( logl ) :
             return -math.inf
 
         return logl
 
-    def logLdata( self, model, param, mockdata=None ) :
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -151,71 +134,71 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
-        param : array_like
+        problem : Problem
+            to be solved
+        allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
             as calculated by the model
 
         """
         if mockdata is None :
-            mockdata = model.result( self.xdata, param )
-        lfdata = logFactorial( self.data )
+            mockdata = problem.result( allpars )
+        lfdata = logFactorial( problem.ydata )
 
-        lld = self.data * numpy.log( mockdata ) - mockdata - lfdata
+        lld = problem.ydata * numpy.log( mockdata ) - mockdata - lfdata
         lld = numpy.where( numpy.isfinite( lld ), lld, -math.inf )
 
         return lld
 
-    def partialLogLXXX( self, model, param, fitIndex ):
+    def partialLogL_alt( self, problem, allpars, fitIndex ):
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
-        param : array_like
-            parameters of the model
+        problem : Problem
+            to be solved
+        allpars : array_like
+            list of all parameters in the problem
         fitIndex : array_like
-            indices of the params to be fitted
+            indices of parameters to be fitted
         """
         self.nparts += 1
-        mock = model.result( self.xdata, param )
-        dM = model.partial( self.xdata, param )
+        mock = problem.result( allpars )
+        dM = problem.partial( allpars )
         dL = numpy.zeros( len( fitIndex ), dtype=float )
 
         i = 0
         for k in fitIndex :
-            dL[i] = numpy.sum( ( self.data / mock - 1 ) * dM[:,k] )
+            dL[i] = numpy.sum( ( problem.ydata / mock - 1 ) * dM[:,k] )
             i += 1
 
         return dL
 
-    def nextPartialData( self, model, param, fitIndex, mockdata=None ):
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ):
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
-        param : array_like
-            parameters of the model
+        problem : Problem
+            to be solved
+        allpars : array_like
+            list of all parameters in the problem
         fitIndex : array_like
-            indices of the params to be fitted
+            indices of parameters to be fitted
         mockdata : array_like
             as calculated by the model
         """
         if mockdata is None :
-            mockdata = model.result( self.xdata, param )
-        dM = model.partial( self.xdata, param )
+            mockdata = problem.result( allpars )
+        dM = problem.partial( allpars )
 ##      TBD import mockdata into partial
-#        dM = model.partial( self.xdata, param, mockdata=mockdata )
+#        dM = problem.partial( allpars, mockdata=mockdata )
 
         for k in fitIndex :
-            yield ( self.data / mockdata - 1 ) * dM[:,k]
+            yield ( problem.ydata / mockdata - 1 ) * dM[:,k]
 
         return
 

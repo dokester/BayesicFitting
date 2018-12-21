@@ -5,7 +5,7 @@ from .Formatter import formatter as fmt
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class GibbsEngine( Engine ):
     """
@@ -42,13 +42,13 @@ class GibbsEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
 
         Parameters
         ----------
-        walkers : SampleList
+        walkers : WalkerList
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
@@ -58,7 +58,7 @@ class GibbsEngine( Engine ):
             for random number generator
 
         """
-        super( GibbsEngine, self ).__init__( walkers, errdis, copy=copy, seed=seed )
+        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -68,7 +68,7 @@ class GibbsEngine( Engine ):
         return str( "GibbsEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -78,26 +78,26 @@ class GibbsEngine( Engine ):
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of the/some parameters indices to be diffused
 
         Returns
         -------
         int : the number of successfull moves
 
         """
-        if fitIndex is None :
-            fitIndex = walker.fitIndex
+        walker = walker.copy()              ## work on local copy
+
+        problem = walker.problem
+        fitIndex = walker.fitIndex
 
         perm = self.rng.permutation( fitIndex )
-        model = walker.model
         ur = self.unitRange * ( 1 + 2.0 / len( self.walkers ) )
 
+        Lbest = self.walkers[-1].logL
         t = 0
         for c in perm :
-            param = walker.allpars.copy( )
+            param = walker.allpars.copy()
             save = param[c]
-            usav = self.domain2Unit( model, save, kpar=c )
+            usav = self.domain2Unit( problem, save, kpar=c )
             while True :
                 step = 2 * self.rng.rand() - 1.0
                 if c < len( ur ) :
@@ -108,13 +108,13 @@ class GibbsEngine( Engine ):
             kk = 0
             while True :
                 kk += 1
-                param[c] = self.unit2Domain( model, ptry, kpar=c )
+                param[c] = self.unit2Domain( problem, ptry, kpar=c )
 
-                Ltry = self.errdis.updateLogL( model, param, parval={c : save} )
+                Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
 
                 if Ltry >= lowLhood:
                     self.reportSuccess( )
-                    self.setSample( walker, model, param, Ltry )
+                    self.setWalker( walker, problem, param, Ltry, fitIndex=fitIndex )
                     t += 1
                     break
                 elif kk < self.maxtrials :
@@ -126,6 +126,11 @@ class GibbsEngine( Engine ):
                     self.reportFailed()
                     param[c] = save
                     break
+
+            if Ltry > Lbest :
+                Lbest = Ltry
+                self.setWalker( self.walkers[-1], problem, param.copy(), Lbest, fitIndex=fitIndex )
+                self.reportBest()
 
         return t                        # nr of succesfull steps
 

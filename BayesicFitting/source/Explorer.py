@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 threadErrors = []
@@ -44,8 +44,8 @@ class Explorer( object ):
 
     Attributes
     ----------
-    walkers : SampleList
-        samples to be explored
+    walkers : WalkerList
+        walkers to be explored
     engines : [engine]
         list of engines to be used
     errdis : ErrorDistribution
@@ -90,24 +90,22 @@ class Explorer( object ):
         self.threads = threads
 
 
-    def explore( self, worst, lowLhood, fitindex ):
+    def explore( self, worst, lowLhood ):
         """
         Explore the likelihood function, using threads.
 
         Parameters
         ----------
         worst : [int]
-            list of samples to be explored/updated
+            list of walkers to be explored/updated
         lowLhood : float
             level of the low likelihood
-        fitindex : list of int
-            list of parameter indices to fit
 
         """
         if not self.threads :
             for kw in worst :
                 walker = self.walkers[kw]
-                self.exploreWalker( walker, lowLhood, fitindex, self.engines, self.rng )
+                self.exploreWalker( walker, lowLhood, self.engines, self.rng )
 #            self.engines[0].calculateUnitRange( )
             return
 
@@ -120,7 +118,7 @@ class Explorer( object ):
             seed = self.rng.randint( self.TWOP32 )
             walker = self.walkers[kw]
 #            print( "Thr  %d  "%kw, seed )
-            exThread = ExplorerThread( "explorer_%d"%kw, walker, self, seed, fitindex )
+            exThread = ExplorerThread( "explorer_%d"%kw, walker, self, seed )
             exThread.start( )
             explorerThreads += [exThread]
 
@@ -145,24 +143,29 @@ class Explorer( object ):
 
 #        self.engines[0].calculateUnitRange( )
 
-    def exploreWalker( self, walker, lowLhood, fitindex, engines, rng ):
+    def exploreWalker( self, walker, lowLhood, engines, rng ):
         oldlogL = walker.logL
 
-        maxmoves = len( fitindex ) / self.rate
+        maxmoves = len( walker.fitIndex ) / self.rate
         maxtrials = self.maxtrials / self.rate
 
         moves = 0
         trials = 0
+
         while moves < maxmoves and trials < maxtrials :
             i = 0
             for engine in rng.permutation( engines ) :
-#                print( "Exp   ", engine, walker.id, fitindex, walker.allpars, walker.fitIndex )
-                moves += engine.execute( walker, lowLhood, fitindex )
+#                print( "Exp   ", engine, walker.id, walker.allpars, walker.fitIndex )
+
+                moves += engine.execute( walker, lowLhood )
 
                 if self.verbose >= 4:
                     print( "%4d %-15.15s %4d %8.1f %8.1f ==> %3d  %8.1f"%
                             ( i, engine, walker.id, lowLhood, oldlogL, moves,
                                 walker.logL ) )
+                    if len( walker.allpars ) < len( walker.fitIndex ) :
+                        raise ValueError( "Walker parameter %d fitIndex %d" %
+                            ( len( walker.allpars ), len( walker.fitIndex ) ) )
                     i += 1
                     oldlogL = walker.logL
 
@@ -176,7 +179,7 @@ class Explorer( object ):
         return
 
     def logLcheck( self, walker ) :
-        wlogL = self.errdis.logLikelihood( walker.model, walker.allpars )
+        wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if wlogL != walker.logL :
             raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
                                 ( walker.logL, wlogL ) )
@@ -190,7 +193,7 @@ class ExplorerThread( Thread ):
     ----------
     id : int
         identity for thread
-    walkers : SampleList
+    walkers : WalkerList
         list of walkers
     rng : numpy.random.RandomState
         random number generator
@@ -200,11 +203,10 @@ class ExplorerThread( Thread ):
 
     global threadErrors
 
-    def __init__( self, name, walker, explorer, seed, fitindex ):
+    def __init__( self, name, walker, explorer, seed ):
         super( ExplorerThread, self ).__init__( name=name )
         self.walker = walker
         self.explorer = explorer
-        self.fitindex = fitindex
         self.engines = [eng.copy() for eng in explorer.engines]
         self.rng = numpy.random.RandomState( seed )
 
@@ -212,7 +214,7 @@ class ExplorerThread( Thread ):
     def run( self ):
         try :
             self.explorer.exploreWalker( self.walker, self.explorer.lowLhood,
-                                         self.fitindex, self.engines, self.rng )
+                                         self.engines, self.rng )
         except Exception as e :
             threadErrors.append( [repr(e) + " occurred in walker %d" % self.walker.id] )
             raise

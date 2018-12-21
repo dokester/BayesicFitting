@@ -1,4 +1,3 @@
-import math
 
 from .UniformPrior import UniformPrior
 

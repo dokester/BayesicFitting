@@ -3,7 +3,7 @@ import math
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -27,30 +27,34 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2018 Do Kester
 
 
 class LaplacePrior( Prior ):
     """
     Laplace prior distribution.
     .. math::
-        Pr( x ) = exp( - |x| / scale )
+        Pr( x ) = exp( - |x - center| / scale )
 
-    By default: scale = 1.
-    It can also have a limited domain. By default the domain is [-Inf,+Inf].
+    By default: center = 0.0 and scale = 1.
+
+    It can also have a limited domain. (To be done)
+    By default the domain is [-Inf,+Inf].
     In computational practice the domain is limited to about [-36,36] scale units
 
     Equivalent to a double-sided exponential prior
 
-    domain2unit: u = 0.5 * exp( d / scale )             if d < 0
-                     1.0 - 0.5 * exp( -d / scale )      otherwise
-    unit2domain: d = log( 2 * u ) * scale               if u < 0.5
-                    -log( 2 * ( 1 - u ) ) * scale       otherwise
+    domain2unit: u = 0.5 * exp( ( d - c ) / scale )             if d < c
+                     1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise
+    unit2domain: d = c + log( 2 * u ) * scale                   if u < 0.5
+                     c - log( 2 * ( 1 - u ) ) * scale           otherwise
 
     Attributes
     ----------
+    center : float
+        center of the Laplace prior
     scale : float
-        scale of the exponential
+        scale of the Laplace prior
     lowLimit : float
         low limit (inactive for now)
     highLimit : float
@@ -59,31 +63,34 @@ class LaplacePrior( Prior ):
     """
 
     #  *********CONSTRUCTOR***************************************************
-    def __init__( self, scale=1.0, prior=None ):
+    def __init__( self, center=0.0, scale=1.0, prior=None ):
         """
         Constructor.
 
         Parameters
         ----------
+        center : float
+            of the prior
         scale : float
-            of the exponential
+            of the prior
         prior : LaplacePrior
             prior to copy (with new scale if applicable)
 
         """
         super( LaplacePrior, self ).__init__( prior=prior )
+        self.center = center
         self.scale = scale
 
     def copy( self ):
-        return LaplacePrior( prior=self, scale=self.scale )
+        return LaplacePrior( prior=self, center=self.center, scale=self.scale )
 
     def domain2Unit( self, dval ):
         """
         Return a value in [0,1] given a value within the valid domain of
         a parameter for a Laplace distribution.
 
-        domain2unit: u = 0.5 * exp( d / scale ) if d < 0 else
-                         1.0 - 0.5 * exp( -d / scale )
+        domain2unit: u = 0.5 * exp( ( d - c ) / s ) if d < c else
+                         1.0 - 0.5 * exp( ( c - d ) / s )
 
         Parameters
         ----------
@@ -91,16 +98,17 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        return ( 0.5 * math.exp(  dval / self.scale ) if ( dval < 0 ) else
-           1.0 - 0.5 * math.exp( -dval / self.scale ) )
+        d = dval - self.center
+        return ( 0.5 * math.exp(  d / self.scale ) if ( d < 0 ) else
+           1.0 - 0.5 * math.exp( -d / self.scale ) )
 
     def unit2Domain( self, uval ):
         """
         Return a value within the valid domain of the parameter given a value
         between [0,1] for a Laplace distribution.
 
-        unit2domain: d = log( 2 * u ) * scale if u < 0.5 else
-                        -log( 2 * ( 1 - u ) ) * scale;
+        unit2domain: d = c + log( 2 * u ) * scale if u < 0.5 else
+                         c - log( 2 * ( 1 - u ) ) * scale;
 
         Parameters
         ----------
@@ -114,7 +122,7 @@ class LaplacePrior( Prior ):
         if uval > 0.5:
             uval = 1 - uval
             scl *= -1
-        return math.log( 2 * uval ) * scl
+        return self.center + math.log( 2 * uval ) * scl
 
     def result( self, x ):
         """
@@ -126,7 +134,7 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        return 0.5 * math.exp( -abs( x ) / self.scale ) / self.scale
+        return 0.5 * math.exp( -abs( x - self.center ) / self.scale ) / self.scale
 
     def logResult( self, x ):
         """
@@ -138,22 +146,23 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        if self.isOutOfLimits( x ) : return -math.inf
+        xc = x - self.center
+        if self.isOutOfLimits( xc ) : return -math.inf
 
-        return math.log( 0.5 / self.scale ) - abs( x ) / self.scale
+        return math.log( 0.5 / self.scale ) - abs( xc ) / self.scale
 
-    def partialLog( self, p ):
+    def partialLog( self, x ):
         """
         Return partial derivative of log( Prior ) wrt parameter.
 
         Parameters
         ----------
-        p : float
+        x : float
             the value
 
         """
-        if p == 0 : return 0
-        return -1 / self.scale if p > 0 else 1 / self.scale
+        if x == self.center : return 0
+        return -1 / self.scale if x > self.center else 1 / self.scale
 
     def isBound( self ):
         """ Return true if the integral over the prior is bound.  """

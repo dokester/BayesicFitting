@@ -98,7 +98,7 @@ class SampleList( list ):
     Author       Do Kester
 
     """
-    def __init__( self, model, nsamples, errdis, fitindex=None, ndata=1 ):
+    def __init__( self, model, nsamples, parameters=None, fitIndex=None, ndata=1 ):
         """
         Default Constructor.
 
@@ -108,9 +108,9 @@ class SampleList( list ):
             number of samples created.
         model : Model
             to be used in the samples
-        errdis : ErrorDistribution
-            to get info about hyperparameters
-        fitindex : array of int
+        parameters : array_like
+            list of model parameters
+        fitIndex : array of int
             indicating which parameters need fitting
         ndata : int
             length of the data vector; to be used in stdev calculations
@@ -121,18 +121,18 @@ class SampleList( list ):
         self.iteration = 0
         self.logZ = 0.0
         self.info = 0.0
-        self.addSamples( model, nsamples, errdis, fitindex=fitindex )
+        self.addSamples( model, nsamples, parameters, fitIndex=fitIndex )
         self.maxLikelihoodIndex = -1            # always the last one
         self.normalized = False
         self.ndata = ndata
 
-    def addSamples( self, model, nSamples, errdis, fitindex=None ):
+    def addSamples( self, model, nSamples, parameters, fitIndex=None ):
         for i in range( nSamples ) :
             if model.isDynamic() :
                 model = model.copy()
-                if fitindex is not None :
-                    fitindex = fitindex.copy()
-            sample = Sample( self._count, -1, model, errdis, fitIndex=fitindex )
+                if fitIndex is not None :
+                    fitIndex = fitIndex.copy()
+            sample = Sample( self._count, -1, model, parameters=parameters, fitIndex=fitIndex )
             self.append( sample )
             self._count += 1
 
@@ -144,9 +144,14 @@ class SampleList( list ):
             return self.stdevs
         elif name == "hypars" :
             return self.getHypars()
-        elif name == "stdev" :
+        elif name == "stdevHypar" :
             self.getHypars()
-            return self.stdev
+            return self.stdevHypar
+        elif name == "nuisance" :
+            return self.getNuisance()
+        elif name == "stdevNuis" :
+            self.getNuisance()
+            return self.stdevNuis
         elif name == "scale" :
             return self.hypars[0]
         elif name == "stdevScale" :
@@ -219,19 +224,17 @@ class SampleList( list ):
 #            sample.logW += self.logZ - lswt
 
 
-    def add( self, samplelist, index ):
+    def add( self, sample ):
         """
-        Add a ( copy if a ) Sample from an ( other ) list to this one.
+        Add a Sample to the list
 
         Parameters
         ----------
-        samplelist : SampleList
-            the list to take to copy from
-        index : int
-            the item from the list
+        sample : Sample
+            the sample to be added
 
         """
-        sample = samplelist[index].copy()
+        sample.parent = sample.id       ## where it is from
         sample.id = self._count
         self._count += 1
         self.append( sample )
@@ -249,10 +252,10 @@ class SampleList( list ):
             the destination item
 
         """
-
         id = self[des].id
         self[des] = self[src].copy()
         self[des].id = id
+
 
     def weed( self, maxsize=None ):
         """
@@ -297,39 +300,80 @@ class SampleList( list ):
             ValueError when using Dynamic Models
 
         """
+        ( a, s ) = self.averstd( "parameters" )
+        self.stdevs = s
+        return a
+
+
+        """
         np = self[0].model.npchain
         param = numpy.zeros( np, dtype=float )
         stdev = numpy.zeros( np, dtype=float )
+        sumwt = 0.0
         for sample in self :
             if sample.model.npchain != np :
                 raise ValueError( "Models with different " + "numbers of parameters: Cannot average" )
             wt = math.exp( sample.logW )
+            sumwt += wt
             wp = wt * sample.parameters
             param = param + wp
             stdev = stdev + wp * sample.parameters
+
         stdev = numpy.sqrt( stdev - param * param )
         self.parameters = param
         self.stdevs = stdev
 
         return self.parameters
+        """
 
     def getHypars( self ) :
         """
         Return the super parameters
         """
-        nhp = len( self[0].allpars ) - self[0].model.npchain
+        nhp = len( self[0].hyper )
+
         hypar = numpy.zeros( nhp, dtype=float )
         hydev = numpy.zeros( nhp, dtype=float )
         sw = 0.0
         for sample in self :
             wt = math.exp( sample.logW )
             sw += wt
-            ws = wt * sample.hypars
+            ws = wt * sample.hyper
             hypar = hypar + ws
-            hydev = hydev + ws * sample.hypars
+            hydev = hydev + ws * sample.hyper
         self.stdevHypars = numpy.sqrt( hydev - hypar * hypar )
         self.hypars = hypar
         return self.hypars
+
+    def getNuisance( self ) :
+        ( a, s ) = self.averstd( "nuisance" )
+        self.stdevNuis = s
+        return a
+
+    def averstd( self, name ) :
+        """
+        Return the average and the stddevs of the named attribute from Sample
+
+        Parameters
+        ----------
+        name : str
+            name of an attribute from Sample
+        """
+        np = len( getattr( self[0], name ) )
+
+        aver = numpy.zeros( np, dtype=float )
+        stdv = numpy.zeros( np, dtype=float )
+        sw = 0.0
+        for sample in self :
+            wt = math.exp( sample.logW )
+            sw += wt
+            ss = getattr( sample, name )
+            ws = wt * ss
+            aver = aver + ws
+            stdv = stdv + ws * ss
+        stdv = numpy.sqrt( stdv - aver * aver )
+
+        return ( aver, stdv )
 
     # ===== MEDIAN ===========================================================
     def getMedianIndex( self ) :

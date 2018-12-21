@@ -30,21 +30,23 @@ class GaussPrior( Prior ):
     """
     Gauss prior distribution.
     .. math::
-        Pr( x ) = exp( - ( x / scale )^2 )
+        Pr( x ) = exp( - ( ( x - c ) / scale )^2 )
 
-    By default: scale = 1.
-    It can also have a limited domain. By default the domain is [-Inf,+Inf].
+    By default: center = 0 and scale = 1.
+
+    It can also have a limited domain. (To be done)
+    By default the domain is [-Inf,+Inf].
     In computational practice the domain is limited to about [-6, 6] scale units.
 
-    Equivalent to a double-sided exponential prior
-
-    domain2unit: u = 0.5 * ( erf( d / scale ) + 1 )
-    unit2domain: d = erfinv( 2 * u - 1 ) * scale
+    domain2unit: u = 0.5 * ( erf( ( d - center ) / scale ) + 1 )
+    unit2domain: d = erfinv( 2 * u - 1 ) * scale + center
 
     Attributes
     ----------
+    center : float
+        center of the Gaussian prior
     scale : float
-        scale of the Gaussian distribution
+        scale of the Gaussian prior
     lowLimit : float
         low limit (inactive for now)
     highLimit : float
@@ -56,12 +58,14 @@ class GaussPrior( Prior ):
     LSPI = math.log( SPI )
 
     #  *********CONSTRUCTOR***************************************************
-    def __init__( self, scale=1.0, prior=None ):
+    def __init__( self, center=0.0, scale=1.0, prior=None ):
         """
         Constructor.
 
         Parameters
         ----------
+        center : float
+            of the location of the prior
         scale : float
             of the exponential
         prior : GaussPrior
@@ -69,17 +73,18 @@ class GaussPrior( Prior ):
 
         """
         super( GaussPrior, self ).__init__( prior=prior )
+        self.center = center
         self.scale = scale
 
     def copy( self ):
-        return GaussPrior( prior=self, scale=self.scale )
+        return GaussPrior( prior=self, center=self.center, scale=self.scale )
 
     def domain2Unit( self, dval ):
         """
         Return a value in [0,1] given a value within the valid domain of
         a parameter for a Gauss distribution.
 
-        domain2unit: u = 0.5 * ( erf( d / scale ) + 1 )
+        domain2unit: u = 0.5 * ( erf( ( d - center ) / scale ) + 1 )
 
         Parameters
         ----------
@@ -87,14 +92,14 @@ class GaussPrior( Prior ):
             value within the domain of a parameter
 
         """
-        return 0.5 * ( special.erf(  dval / self.scale ) + 1 )
+        return 0.5 * ( special.erf( ( dval - self.center ) / self.scale ) + 1 )
 
     def unit2Domain( self, uval ):
         """
         Return a value within the valid domain of the parameter given a value
         between [0,1] for a Gauss distribution.
 
-        unit2domain: d = erfinv( 2 * u - 1 ) * scale
+        unit2domain: d = erfinv( 2 * u - 1 ) * scale + center
 
         Parameters
         ----------
@@ -102,7 +107,7 @@ class GaussPrior( Prior ):
             value within [0,1]
 
         """
-        return special.erfinv( 2 * uval - 1 ) * self.scale
+        return special.erfinv( 2 * uval - 1 ) * self.scale + self.center
 
 #    def partialDomain2Unit( self, dval ):
     def result( self, x ):
@@ -115,12 +120,12 @@ class GaussPrior( Prior ):
             value within the domain of a parameter
 
         """
-        xs = x / self.scale
+        xs = ( x - self.center ) / self.scale
         return self.SPI * math.exp( - xs * xs )
 
     def logResult( self, x ):
         """
-        Return a the log of the result of the distribution function to p.
+        Return a the log of the result of the prior.
 
         Parameters
         ----------
@@ -128,7 +133,7 @@ class GaussPrior( Prior ):
             value within the domain of a parameter
 
         """
-        xs = x / self.scale
+        xs = ( x - self.center ) / self.scale
         return self.LSPI - ( xs * xs )
 
     def partialLog( self, x ):
@@ -141,7 +146,7 @@ class GaussPrior( Prior ):
             the value
 
         """
-        return -2 * x / ( self.scale * self.scale )
+        return -2 * ( x - self.center ) / ( self.scale * self.scale )
 
     def isBound( self ):
         """ Return true if the integral over the prior is bound.  """

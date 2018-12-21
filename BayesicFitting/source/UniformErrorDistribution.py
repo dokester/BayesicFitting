@@ -61,19 +61,12 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
 
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, scale=1.0, limits=None,
-                  copy=None ) :
+    def __init__( self, scale=1.0, limits=None, copy=None ) :
         """
         Constructor of Uniform Distribution.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model
-        data : array_like
-            data to be fitted
-        weights : array_like
-            weights to be used
         scale : float
             noise scale
         limits : None or list of 2 floats [low,high]
@@ -85,12 +78,12 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         copy : UniformErrorDistribution
             distribution to be copied.
         """
-        super( UniformErrorDistribution, self ).__init__( xdata, data,
-               weights=weights, scale=scale, limits=limits, copy=copy )
+        super( UniformErrorDistribution, self ).__init__( scale=scale,
+                limits=limits, copy=copy )
 
     def copy( self ):
         """ Return copy of this.  """
-        return UniformErrorDistribution( self.xdata, self.data, copy=self )
+        return UniformErrorDistribution( copy=self )
 
     #  *********DATA & WEIGHT***************************************************
     def acceptWeight( self ):
@@ -99,6 +92,21 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         Always true for this distribution.
         """
         return True
+
+    def getScale( self, problem, allpars=None ) :
+        """
+        Return the noise scale
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+        """
+        res = self.getResiduals( problem, allpars=allpars )
+        return numpy.max( numpy.abs( res ) )
 
     def toSigma( self, scale ) :
         """
@@ -111,32 +119,35 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         return scale * 2 / math.sqrt( 12 )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihoodXXX( self, model, allpars ) :
+    def logLikelihood_alt( self, problem, allpars ) :
         """
-        Return the log( likelihood ) for a Gaussian distribution.
+        Return the log( likelihood ) for a Uniform distribution.
+
+        Alternate calculation.
 
         Outside the range the likelihood is zero, so the logL should be -inf.
         However for computational reasons the maximum negative value is returned.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
 
         """
         self.ncalls += 1
-        np = model.npchain
+
         scale = allpars[-1]
-        ares = numpy.abs( self.getResiduals( model, allpars[:np] ) )
+
+        ares = numpy.abs( problem.residuals( allpars[:-1] ) )
 
         if all( ares < scale ) :
-            return - math.log( 2 * scale ) * self.sumweight
+            return - math.log( 2 * scale ) * problem.sumweight
 
         return -math.inf
 
-    def logLdata( self, model, allpars, mockdata=None ) :
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -144,45 +155,33 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
         if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:np] )
+            mockdata = problem.result( allpars[:-1] )
         scale = allpars[-1]
-        ares = numpy.abs( self.data - mockdata )
+        ares = numpy.abs( problem.ydata - mockdata )
 
         lld = numpy.where( ares < scale, -math.log( 2 * scale ), -math.inf )
-        if self.weights is not None :
-            lld *= self.weights
+        if problem.weights is not None :
+            lld *= problem.weights
         return lld
 
 
-    def getScale( self, model ) :
-        """
-        Return the noise scale
-
-        Parameters
-        ----------
-        model : Model
-            the model involved
-        """
-        return numpy.max( numpy.abs( self.getResiduals( model ) ) )
-
-    def partialLogLXXX( self, model, allpars, fitIndex ) :
+    def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
@@ -191,18 +190,18 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         """
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         if fitIndex[-1] == -1 :
-            dL[-1] = -self.sumweight / allpars[-1]
+            dL[-1] = -problem.sumweight / allpars[-1]
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of elements of the log( likelihood )
         to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
@@ -212,11 +211,11 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
 
         """
         scale = allpars[-1]
-        pll = numpy.zeros_like( self.data )
-        if self.weights is not None :
-            wgt = self.weights
+        pll = numpy.zeros_like( problem.ydata )
+        if problem.weights is not None :
+            wgt = problem.weights
         else :
-            wgt = numpy.ones_like( self.data )
+            wgt = numpy.ones_like( problem.ydata )
 
         for k in fitIndex :
             if k >= 0 :

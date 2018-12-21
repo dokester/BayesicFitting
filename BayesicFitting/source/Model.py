@@ -115,11 +115,11 @@ class Model( FixedModel ):
         unit of the x-values (list of in case of more dimensions)
     yUnit : astropy.units
         unit of the y-values
-    nrpars : int (read only)
+    npars : int (read only)
         number of parameters in this model
     npchain : int (read only)
         number of parameters needed in the total chain of models
-        identical to nrpars
+        identical to npars
 
     Attributes from FixedModel
     --------------------------
@@ -236,7 +236,7 @@ class Model( FixedModel ):
         name : string
             name of the attribute
         """
-        if name == 'nrpars' or name == 'npchain' :
+        if name == 'npars' or name == 'npchain' :
             return self._head._npchain
 
         return super( Model, self ).__getattr__( name )
@@ -814,6 +814,7 @@ class Model( FixedModel ):
         else:
             raise IndexError( "The (compound) model does not have %d parameters"%( k + 1 ) )
 
+
     #  ***PARAMETER NAME *******************************************************
     def getParameterName( self, k ):
         """
@@ -904,7 +905,6 @@ class Model( FixedModel ):
                             ( ml, self.npchain ) )
 
         for k in range( ml ) :
-#            pr = self.getPrior( k )
             lo = None if k >= nl else lowLimits[k]
             hi = None if k >= nh else highLimits[k]
             self.setPrior( k, limits=[lo,hi] )
@@ -1000,7 +1000,7 @@ class Model( FixedModel ):
         ValueError when out of limits.
 
         """
-        if self.getPriors is None : return
+        if self.priors is None : return
 
         i = 0
         for k in parlist :

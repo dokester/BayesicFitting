@@ -4,7 +4,7 @@ from . import Tools
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -29,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class StepEngine( Engine ):
     """
@@ -42,13 +42,13 @@ class StepEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
 
         Parameters
         ----------
-        walkers : SampleList
+        walkers : WalkerList
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
@@ -58,7 +58,7 @@ class StepEngine( Engine ):
             for rng
 
         """
-        super( StepEngine, self ).__init__( walkers, errdis, copy=copy, seed=seed )
+        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -69,37 +69,33 @@ class StepEngine( Engine ):
 
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by diffusing the parameters.
 
         Parameters
         ----------
-        walker : Sample
+        walker : Walker
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of the/some parameters indices to be diffused
 
         Returns
         -------
         int : the number of successfull moves
 
         """
-        if fitIndex is None :
-            fitIndex = walker.fitIndex
+        walker = walker.copy()
+        problem = walker.problem
+        fitIndex = walker.fitIndex
         np = len( fitIndex )
 
-        model = walker.model
-        nm = len( self.walkers )
-
         urange = self.unitRange[fitIndex]
-        dur = urange / nm
+        dur = urange / len( self.walkers )      ## why this ???
         urange += 2 * dur
 
         param = walker.allpars
-        usav = self.domain2Unit( model, param, kpar=fitIndex )
+        usav = self.domain2Unit( problem, param, kpar=fitIndex )
 
         sz = 1.0
         ptry = param.copy()
@@ -122,12 +118,12 @@ class StepEngine( Engine ):
                 else :
                     break
 
-            ptry[fitIndex] = self.unit2Domain( model, utry,  )
+            ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
 
-            Ltry = self.errdis.logLikelihood( model, ptry )
+            Ltry = self.errdis.logLikelihood( problem, ptry )
             if Ltry >= lowLhood:
                 self.reportSuccess( )
-                self.setSample( walker, model, ptry, Ltry )
+                self.setWalker( walker, problem, ptry, Ltry, fitIndex=fitIndex )
                 break
             elif kk < self.maxtrials :
                 sz *= 0.5

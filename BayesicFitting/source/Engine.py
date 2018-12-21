@@ -1,10 +1,8 @@
 import numpy as numpy
-from astropy import units
-import math
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -29,7 +27,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class Engine( object ):
     """
@@ -40,7 +38,7 @@ class Engine( object ):
 
     Attributes
     ----------
-    walkers : SampleList
+    walkers : WalkerList
         walkers to be diffused
     errdis : ErrorDistribution
         error distribution to be used
@@ -74,17 +72,19 @@ class Engine( object ):
     #  *********CONSTRUCTORS***************************************************
 
 #    def __init__( self, walkers, errdis, copy=None, seed=4213, constrain=None ):
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Copy Constructor.
         Parameters
         ----------
-        walkers : SampleList
+        walkers : list of Walker
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
         seed : int
             for random number generator
+        verbose : int
+            report about the engines when verbose > 4
         constrain : None or callable (TBD)
             Impose constraints on the parameters
             None : no constraints
@@ -103,6 +103,7 @@ class Engine( object ):
             self.rng = numpy.random.RandomState( seed )
             self.unitRange = None
             self.unitMin = None
+            self.verbose = verbose
 
 
 #            if constrain is None or callable( constrain ) :
@@ -115,6 +116,7 @@ class Engine( object ):
 #            self.constrain = copy.constrain
             self.unitRange = copy.unitRange
             self.unitMin   = copy.unitMin
+            self.verbose   = copy.verbose
 
     def copy( self ):
         """ Return a copy of this engine.  """
@@ -132,106 +134,93 @@ class Engine( object ):
     """
 
     #  *********SET & GET***************************************************
-    def setSample( self, walker, model, allpars, logL, logW=None,
-                   fitindex=None ):
+    def setWalker( self, walker, problem, allpars, logL, fitIndex=None ) :
         """
-        Update the sample with model, allpars, LogL and logW.
+        Update the walker with problem, allpars, LogL and logW.
 
         Parameters
         ----------
         walker : Sample
             sample to be updated
-        model : Model
-            the model in the sample
+        problem : Problem
+            the problem in the walker
         allpars : array_like
             list of all parameters
         logL : float
             log Likelihood
-        logW : float
-            log of the weight of the likelihood
-        fitindex : array_like
-            list of parameter indices to be diffuse
+        fitIndex : array_like
+            (new) fitIndex
+
         """
         walker.logL = logL
         walker.allpars = allpars
-        walker.model = model
-        if logW is not None :
-            walker.logW = logW
-        if fitindex is not None :
-            walker.fitIndex = fitindex
+        walker.problem = problem
+        if fitIndex is not None :
+            walker.fitIndex = fitIndex
         self.walkers[walker.id] = walker
 
 ###### TBD:
 ##  Has dval the length kpar ???
 
-    def domain2Unit( self, model, dval, kpar=None ) :
+    def domain2Unit( self, problem, dval, kpar=None ) :
         """
         Return value in [0,1] for the selected parameter.
 
         Parameters
         ----------
-        model : Model
-            the model involved
+        problem : Problem
+            the problem involved
         dval : float
             domain value for the selected parameter
         kpar : None or array_like
             selected parameter index, where kp is index in [parameters, hyperparams]
             None means all
         """
-        np = model.npchain
+        np = problem.npars
         if kpar is None :
             kpar = self.makeIndex( np, dval )
 
         elif Tools.isInstance( kpar, int ) :
-            return ( model.domain2Unit( dval, kpar ) if kpar >= 0 else
+            return ( problem.domain2Unit( dval, kpar ) if kpar >= 0 else
                      self.errdis.domain2Unit( dval, kpar ) )
-#           return ( model.domain2Unit( dval, kpar ) if kpar < np else
-#                     self.errdis.domain2Unit( dval, kpar - np ) )
 
         uval = numpy.ndarray( len( kpar ), dtype=float )
 
-#        print( "Eng d2u  ", dval, kpar, uval )
         for i,kp in enumerate( kpar ) :
-#            if kp < np :
             if kp >= 0 :
-                uval[i] = model.domain2Unit( dval[kp], kp )
+                uval[i] = problem.domain2Unit( dval[i], kp )
             else :
-#                uval[i] = self.errdis.domain2Unit( dval[kp], kp - np )
-                uval[i] = self.errdis.domain2Unit( dval[kp], kp )
+                uval[i] = self.errdis.domain2Unit( dval[i], kp )
         return uval
 
-    def unit2Domain( self, model, uval, kpar=None ) :
+    def unit2Domain( self, problem, uval, kpar=None ) :
         """
         Return domain value for the selected parameter.
 
         Parameters
         ----------
-        model : Model
-            the model involved
+        problem : Problem
+            the problem involved
         uval : array_like
             unit value for the selected parameter
         kpar : None or array_like
             selected parameter indices, where kp is index in [parameters, hyperparams]
             None means all.
         """
-        np = model.npchain
+        np = problem.npars
 
         if kpar is None :
             kpar = self.makeIndex( np, uval )
         elif Tools.isInstance( kpar, int ) :
-            return ( model.unit2Domain( uval, kpar ) if kpar >= 0 else
+            return ( problem.unit2Domain( uval, kpar ) if kpar >= 0 else
                      self.errdis.unit2Domain( uval, kpar ) )
-#            return ( model.unit2Domain( uval, kpar ) if kpar < np else
-#                     self.errdis.unit2Domain( uval, kpar - np ) )
 
         dval = numpy.ndarray( len( kpar ), dtype=float )
         for i,kp in enumerate( kpar ) :
-#            if kp < np :
             if kp >= 0 :
-                dval[i] = model.unit2Domain( uval[kp], kp )
+                dval[i] = problem.unit2Domain( uval[i], kp )
             else :
-#                dval[i] = self.errdis.unit2Domain( uval[kp], kp - np )
-                dval[i] = self.errdis.unit2Domain( uval[kp], kp )
+                dval[i] = self.errdis.unit2Domain( uval[i], kp )
         return dval
 
     def makeIndex( self, np, val ) :
@@ -269,29 +258,30 @@ class Engine( object ):
 
         """
         kmx = 0
-        if not self.walkers[0].model.isDynamic() :
-            npmax = len( self.walkers[0].fitIndex )
+        if not self.walkers[0].problem.model.isDynamic() :
+            npmax = len( self.walkers[0].allpars )
         else :
             npmax = 0
             for k, walker in enumerate( self.walkers ) :
                 if len( walker.allpars ) > npmax :
-                    npmax = len( walker.fitIndex )
+                    npmax = len( walker.allpars )
                     kmx = k
 
-        minv = numpy.ones( npmax, dtype=float )
-        maxv = numpy.zeros( npmax, dtype=float )
+        minv = self.walkers[kmx].allpars.copy()
+        maxv = self.walkers[kmx].allpars.copy()
         nval = numpy.zeros( npmax, dtype=int )
 
         for walker in self.walkers :
             fi = walker.fitIndex
+#            print( "Eng   ", fi, minv, walker.allpars )
             minv[fi] = numpy.fmin( minv[fi], walker.allpars[fi] )
             maxv[fi] = numpy.fmax( maxv[fi], walker.allpars[fi] )
             nval[fi] += 1
 
-        model = self.walkers[kmx].model
-
-        maxv = self.domain2Unit( model, maxv, kpar=self.walkers[kmx].fitIndex )
-        minv = self.domain2Unit( model, minv, kpar=self.walkers[kmx].fitIndex )
+        problem = self.walkers[kmx].problem
+        fi = self.walkers[kmx].fitIndex
+        maxv[fi] = self.domain2Unit( problem, maxv[fi], kpar=fi )
+        minv[fi] = self.domain2Unit( problem, minv[fi], kpar=fi )
 
         q = numpy.where( numpy.logical_or( maxv <= minv, nval < len( self.walkers ) ) )
         maxv[q] = 1.0
@@ -300,15 +290,13 @@ class Engine( object ):
         self.unitRange = numpy.abs( maxv - minv )
         self.unitMin = numpy.fmin( minv, maxv )
 
-#        self.unitRange = numpy.ones( npmax, dtype=float )
-#        self.unitMin   = numpy.zeros( npmax, dtype=float )
-
-        return  # self.unitRange
+#        print( "Eng1  ", self.unitRange )
+        return
 
     def __str__( self ) :
         return str( "Engine" )
 
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine for diffusing the parameters
 
@@ -318,8 +306,6 @@ class Engine( object ):
             walker to diffuse
         lowLhood : float
             low limit on the loglikelihood
-        fitIndex : array_like
-            list of parameter indices to diffuse
 
         Returns
         -------

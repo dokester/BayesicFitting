@@ -63,19 +63,12 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, scale=1.0, limits=None,
-                  copy=None ):
+    def __init__( self, scale=1.0, limits=None, copy=None ):
         """
         Default Constructor.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model (independent data)
-        data : array_like
-            data to be fitted (dependent data)
-        weights : array_like
-            weights to be used
         scale : float
             noise scale
         limits : None or list of 2 floats [low,high]
@@ -88,12 +81,11 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             distribution to be copied.
 
         """
-        super( GaussErrorDistribution, self ).__init__( xdata, data, weights=weights,
-                    scale=scale, limits=limits, copy=copy )
+        super( GaussErrorDistribution, self ).__init__(  scale=scale, limits=limits, copy=copy )
 
     def copy( self ):
         """ Return copy of this.  """
-        return GaussErrorDistribution( self.xdata, self.data, copy=self )
+        return GaussErrorDistribution( copy=self )
 
     def acceptWeight( self ):
         """
@@ -102,30 +94,43 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         """
         return True
 
-
-    #  *********LIKELIHOODS***************************************************
-    def logLikelihoodXXX( self, model, allpars ) :
+    def getScale( self, problem, allpars=None ) :
         """
-        Return the log( likelihood ) for a Gaussian distribution.
+        Return the noise scale.
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+        """
+        return self.getGaussianScale( problem, allpars=allpars )
+
+    #  *********LIKELIHOODS***************************************************
+    def logLikelihood_alt( self, problem, allpars ) :
+        """
+        Return the log( likelihood ) for a Gaussian distribution.
+
+        Alternate calculation
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
 
         """
         self.ncalls += 1
 
-        np = model.npchain
         scale = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
-        chisq = self.getChisq( res, scale )
-        return ( - self.sumweight * ( 0.5 * self.LOG2PI + math.log( scale ) ) -
+        chisq = self.getChisq( problem, allpars ) / ( scale * scale )
+        return ( - problem.sumweight * ( 0.5 * self.LOG2PI + math.log( scale ) ) -
                        0.5 * chisq )
 
-    def logLdata( self, model, allpars, mockdata=None ) :
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -133,145 +138,103 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
-        scale = allpars[-1]
-#        print( "GED1 ", fmt( allpars, max=None ), fmt( 1.0 / scale ) )
-        if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:np] )
 
-        res = self.data - mockdata
-        res2 = - 0.5 * numpy.square( res / scale )
-        res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) )
-        if self.weights is not None :
-            res2 = res2 * self.weights
-#        [ print( "LLD   ", r, math.frexp( r ) ) for r in res2 ]
+        scale = allpars[-1]
+
+        res2 = -0.5 * problem.weightedResSq( allpars[:-1], mockdata=mockdata )
+
+        res2 /= ( scale * scale )
+        if problem.weights is None :
+            res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) )
+        else :
+            res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) ) * problem.weights
         return res2
 
 
-    def getScale( self, model ) :
-        """
-        Return the noise scale.
-
-        Parameters
-        ----------
-        mode : Model
-            the model involved
-        """
-        chi = self.getChisq( self.getResiduals( model ), 1.0 )
-        return math.sqrt( chi / self.sumweight )
-
-    def getSumRes( self, residual, scale ):
-        return self.getChiSq( residual, scale )
-
-    def getChisq( self, residual, scale ):
-        """
-        Return chisq.
-
-        Sum over the (weighted) squared normalozed residuals
-
-        Parameters
-        ----------
-        residual : array_like
-            the residuals
-        scale : float
-            hyperparameter of the problem; here it is the noise scale
-
-        """
-        res2 = numpy.square( residual )
-        if self.weights is not None :
-            res2 = res2 * self.weights
-        return numpy.sum( res2  ) / ( scale * scale )
-
-    def partialLogLXXX( self, model, allpars, fitIndex ) :
+    def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
+        Alternate calculation
+
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved.
         allpars : array_like
-            parameters of the problem
+            (hyper)parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
 
         """
+
         self.nparts += 1                    ## counts calls to partialLogL
 
-        np = model.npchain
-        param = allpars[:np]
         scale = allpars[-1]
         s2 = scale * scale
-        res = self.getResiduals( model, param )
-        if self.weights is not None :
-            resw = res * self.weights
-        else :
-            resw = res
-        dM = model.partial( self.xdata, param )
+        ( res2, res ) = problem.weightedResSq( allpars[:-1], extra=True )
+
+        dM = problem.partial( allpars[:-1] )
 
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
-        for  k in fitIndex:
+        for  k in fitIndex :
             if k >= 0 :
-                dL[i] = numpy.sum( resw * dM[:,k] ) / s2
+                dL[i] = numpy.sum( res * dM[:,k] ) / s2
+                i += 1
             else :
-                dL[i] = ( numpy.sum( res * resw ) / s2 - self.sumweight ) / scale
-            i += 1
+                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) / scale
+
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
+
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative all elements of the log( likelihood )
         to the parameters in fitIndex.
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
-            parameters of the problem
-        fitIndex : array_like
-            indices of parameters to be fitted
+            (hyper)parameters of the problem
+        fitIndex : array_like of int
+            indices of allpars to fit
         mockdata : array_like
-            as calculated by the model
+            as calculated for the problem
         """
-        np = model.npchain
+
+        np = problem.npars
         param = allpars[:np]
-        if mockdata is None :
-            mockdata = model.result( self.xdata, param )
+
+        ( res2, res ) = problem.weightedResSq( allpars[:-1], mockdata=mockdata, extra=True )
+
+        dM = problem.partial( param )
+
+##      TBD import mockdata into partial
+#        dM = problem.partial( param, mockdata=mockdata )
+
         scale = allpars[-1]
         s2 = scale * scale
-        res = self.data - mockdata
-        if self.weights is not None :
-            resw = res * self.weights
-            wgt = self.weights
-        else :
-            resw = res
-            wgt = 1.0
-
-
-        dM = model.partial( self.xdata, param )
-##      TBD import mockdata into partial
-#        dM = model.partial( self.xdata, param, mockdata=mockdata )
-
-        i = 0
         for  k in fitIndex:
             if k >= 0 :
-                yield ( resw * dM[:,k] ) / s2
+                yield ( res * dM[:,k] ) / s2
             else :
-                yield ( res * resw / s2 - wgt ) / scale
-            i += 1
+                wgt = 1.0 if problem.weights is None else problem.weights
+                yield ( res2 / s2 - wgt ) / scale
+
         return
 
-    def hessianLogL( self, model, allpars, fitIndex ) :
+    def hessianLogL( self, problem, allpars, fitIndex ) :
         """
         Return the hessian of log( likelihood ) to the parameters in fitIndex.
 
@@ -280,18 +243,17 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
-            parameters of the problem
-        fitIndex : array_like
-            indices of parameters to be fitted
-
+            (hyper)parameters of the problem
+        fitIndex : array_like of int
+            indices of allpars to fit
         """
         self.nparts += 1                    ## counts calls to partialLogL
 
         nh = len( fitIndex )
-        np = model.npchain
+        np = problem.npars
         param = allpars[:np]
         scale = allpars[np]
         s2 = scale * scale
@@ -299,11 +261,11 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         fi = fitIndex if fitIndex[-1] != np else fitIndex[-1:]
 
         nf = len( fi )
-        design = model.partial( self.xdata, param )[:,fi]
+        design = problem.partial( param )[:,fi]
         design = design.transpose()
         deswgt = design
-        if self.weights is None :
-            deswgt *= self.weights
+        if problem.hasWeights() :
+            deswgt *= problem.weights
 
         hessian = numpy.zeros( ( nh, nh ), dtype=float )
         hessian[:nf,:nf] = numpy.inner( design, deswgt ) / s2

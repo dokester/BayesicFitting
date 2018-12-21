@@ -5,7 +5,7 @@ from .Formatter import formatter as fmt
 from .ScaledErrorDistribution import ScaledErrorDistribution
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 class LaplaceErrorDistribution( ScaledErrorDistribution ):
@@ -67,19 +67,12 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
 
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, scale=1.0, limits=None,
-                  copy=None ) :
+    def __init__( self, scale=1.0, limits=None, copy=None ) :
         """
         Constructor of Laplace Distribution.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model
-        data : array_like
-            data to be fitted
-        weights : array_like
-            weights to be used
         scale : float
             noise scale
         limits : None or list of 2 floats [low,high]
@@ -91,12 +84,12 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         copy : LaplaceErrorDistribution
             distribution to be copied.
         """
-        super( LaplaceErrorDistribution, self ).__init__( xdata, data,
-               weights=weights, scale=scale, limits=limits, copy=copy )
+        super( LaplaceErrorDistribution, self ).__init__( scale=scale,
+                limits=limits, copy=copy )
 
     def copy( self ):
         """ Return copy of this.  """
-        return LaplaceErrorDistribution( self.xdata, self.data, copy=self )
+        return LaplaceErrorDistribution( copy=self )
 
     #  *********DATA & WEIGHT***************************************************
     def acceptWeight( self ):
@@ -116,27 +109,64 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         return scale * math.sqrt( 2.0 )
 
+    def getScale( self, problem, allpars=None ) :
+        """
+        Return the noise scale
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+        """
+        sumres = self.getSumRes( problem, allpars=allpars )
+        return sumres / problem.sumweight
+
+
+    def getSumRes( self, problem, allpars=None ):
+        """
+        Return the sum of the absolute values of the residuals.
+
+        ..math ::
+            \sum ( | res | )
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+        """
+        res = self.getResiduals( problem, allpars=allpars )
+
+        if problem.weights is not None :
+            res *= problem.weights
+        return numpy.sum( numpy.abs( res ) )
+
+
     #  *********LIKELIHOODS***************************************************
-    def logLikelihoodXXX( self, model, allpars ) :
+    def logLikelihood_alt( self, problem, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
 
         """
         self.ncalls += 1
-        np = model.npchain
-        scale = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
-        sumres = self.getSumRes( res, scale )
-        return - self.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
 
-    def logLdata( self, model, allpars, mockdata=None ) :
+        scale = allpars[-1]
+        sumres = self.getSumRes( problem, allpars ) / scale
+        return - problem.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
+
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -144,118 +174,81 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
-        if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:np] )
+        np = problem.npars
+        res = problem.residuals( allpars[:np], mockdata=mockdata )
+
         scale = allpars[-1]
-        res = self.data - mockdata
         res = - numpy.abs( res ) / scale - ( self.LOG2 + math.log( scale ) )
-        if self.weights is not None :
-            res = res * self.weights
+        if problem.weights is not None :
+            res = res * problem.weights
         return res
 
-    def getScale( self, model ) :
-        """
-        Return the noise scale
-
-        Parameters
-        ----------
-        model : Model
-            the model involved
-        """
-        sumres = self.getSumRes( self.getResiduals( model ), 1.0 )
-        return sumres / self.sumweight
-
-
-    def getSumRes( self, residual, scale ):
-        """
-        Return the sum of the absolute values of the normalized residuals.
-
-        ..math ::
-            \sum ( | res | / scale )
-
-        Parameters
-        ----------
-        residual : array_like
-            the residuals
-        scale : float
-            the noise scale
-
-        """
-        if self.weights is not None :
-            residual = residual * self.weights
-        return numpy.sum( numpy.abs( residual ) ) / scale
-
-    def partialLogLXXX( self, model, allpars, fitIndex ) :
+    def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
-            parameters of the problem
+            list of all parameters in the problem
         fitIndex : array_like
             indices of parameters to be fitted
 
         """
         self.nparts += 1
-        np = model.npchain
         scale = allpars[-1]
 
-        dM = model.partial( self.xdata, allpars[:np] )
-        dL = numpy.zeros( len( fitIndex ), dtype=float )
-        res = self.getResiduals( model, allpars[:np] )
-        wgt = numpy.ones_like( res, dtype=float ) if self.weights is None else self.weights
+        dM = problem.partial( allpars[:-1] )
+        res = problem.residuals( allpars[:-1] )
+        wgt = numpy.ones_like( res, dtype=float ) if problem.weights is None else problem.weights
         wgt = numpy.copysign( wgt, res )
 
+        dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for k in fitIndex :
             if k >= 0 :
                 dL[i] = numpy.sum( wgt * dM[:,k] )
+                i += 1
             else :
-                dL[i] = self.getSumRes( res, scale ) - self.sumweight
-            i += 1
+                dL[-1] = self.getSumRes( problem, allpars ) / scale - problem.sumweight
         return dL / scale
 
-    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of elements of the log( likelihood )
         to the parameters.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
-            parameters of the problem
+            list of all parameters in the problem
         fitIndex : array_like
             indices of parameters to be fitted
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
-        param = allpars[:np]
+        param = allpars[:-1]
         scale = allpars[-1]
-        if mockdata is None :
-            mockdata = model.result( self.xdata, param )
-        res = self.data - mockdata
+        res = problem.residuals( param, mockdata=mockdata )
 
-        dM = model.partial( self.xdata, param )
+        dM = problem.partial( param )
 ##      TBD import mockdata into partial
 #        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
-        wgt = numpy.ones_like( res, dtype=float ) if self.weights is None else self.weights
+        wgt = numpy.ones_like( res, dtype=float ) if problem.weights is None else problem.weights
         swgt = numpy.copysign( wgt, res )
 
         res *= swgt / scale             ## make all residuals >= 0

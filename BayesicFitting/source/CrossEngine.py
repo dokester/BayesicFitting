@@ -4,7 +4,7 @@ from . import Tools
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -29,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class CrossEngine( Engine ):
     """
@@ -44,13 +44,13 @@ class CrossEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
 
         Parameters
         ----------
-        walkers : SampleList
+        walkers : WalkerList
             walkers to be diffused
         errdis : ErrorDistribution
             error dstribution to be used
@@ -60,7 +60,7 @@ class CrossEngine( Engine ):
             for rng
 
         """
-        super( CrossEngine, self ).__init__( walkers, errdis, copy=copy, seed=seed )
+        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -70,7 +70,7 @@ class CrossEngine( Engine ):
         return str( "CrossEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ) :
         """
         Execute the engine by diffusing the parameters.
 
@@ -80,19 +80,17 @@ class CrossEngine( Engine ):
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list if the parameters to be diffused
 
         Returns
         -------
         int : the number of successfull moves
 
         """
-        if fitIndex is None :
-            fitIndex = walker.fitIndex
+        problem = walker.problem
+        fitIndex = walker.fitIndex
+
         nf = len( fitIndex )
 
-        model = walker.model
         param = walker.allpars[:]
 
         nm = len( self.walkers )
@@ -126,10 +124,10 @@ class CrossEngine( Engine ):
             f = self.rng.rand( nf )
             param[fitIndex] = f * param[fitIndex] + ( 1 - f ) * crospar[fitIndex]
 
-            Ltry = self.errdis.logLikelihood( model, param )
+            Ltry = self.errdis.logLikelihood( problem, param )
             if Ltry >= lowLhood:
                 self.reportSuccess( )
-                self.setSample( walker, model, param, Ltry )
+                self.setSample( walker, problem, param, Ltry )
                 return nf
             elif kk <= self.maxtrials :
                 param = walker.allpars[:]

@@ -83,8 +83,7 @@ class MixedErrorDistribution( ErrorDistribution ):
             distribution to be copied.
 
         """
-        super( MixedErrorDistribution, self ).__init__( errdis1.xdata, errdis1.data,
-                    weights=errdis1.weights, copy=copy )
+        super( MixedErrorDistribution, self ).__init__( copy=copy )
 
         self.errdis1 = errdis1
         self.errdis2 = errdis2
@@ -120,22 +119,22 @@ class MixedErrorDistribution( ErrorDistribution ):
 
 
     #  *********LIKELIHOODS***************************************************
-    def logLdata( self, model, allpars, mockdata=None ) :
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for a Mixedian distribution.
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
-            as calculated by the model
+            as calculated for the problem
 
         """
         if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:model.npchain] )
+            mockdata = problem.result( allpars[:problem.npars] )
 
         f = allpars[-1]
         n1 = self.errdis1.nphypar
@@ -145,32 +144,32 @@ class MixedErrorDistribution( ErrorDistribution ):
         p2[-n2:] = allpars[-n2-1:-1]
 
         if f <= 0 :
-            return self.errdis2.logLdata( model, p2, mockdata=mockdata )
+            return self.errdis2.logLdata( problem, p2, mockdata=mockdata )
         if f >= 1 :
-            return self.errdis1.logLdata( model, p1, mockdata=mockdata )
+            return self.errdis1.logLdata( problem, p1, mockdata=mockdata )
 
         return numpy.logaddexp(
-                self.errdis1.logLdata( model, p1, mockdata=mockdata ) + math.log( f ),
-                self.errdis2.logLdata( model, p2, mockdata=mockdata ) + math.log( 1 - f ) )
+                self.errdis1.logLdata( problem, p1, mockdata=mockdata ) + math.log( f ),
+                self.errdis2.logLdata( problem, p2, mockdata=mockdata ) + math.log( 1 - f ) )
 
-    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
         mockdata : array_like
-            as calculated by the model
+            as calculated for the problem
 
         """
         if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:model.npchain] )
+            mockdata = problem.result( allpars[:problem.npars] )
 
         # make allpars lists (p1,p2)for errdis1&2; shift hyperpars in p2
         f = allpars[-1]
@@ -193,72 +192,42 @@ class MixedErrorDistribution( ErrorDistribution ):
             f2 = numpy.append( f2, [-1] )
 
         # make fitindices (f1,f2) for errdis1&2
-        lhd1 = numpy.exp( self.errdis1.logLdata( model, p1, mockdata=mockdata ) )
-        lhd2 = numpy.exp( self.errdis2.logLdata( model, p2, mockdata=mockdata ) )
-        pg1 = self.errdis1.nextPartialData( model, p1, f1, mockdata=mockdata )
-        pg2 = self.errdis2.nextPartialData( model, p2, f2, mockdata=mockdata )
-
-#        q1 = numpy.where( numpy.logical_not( numpy.isfinite( lhd1 ) ) )[0]
-#        q2 = numpy.where( numpy.logical_not( numpy.isfinite( lhd2 ) ) )[0]
-
-#        print( q1, len( q1 ) )
-#        print( lhd1[q1] )
-#        print( q2, len( q2 ) )
-#        print( lhd2[q2] )
+        lhd1 = numpy.exp( self.errdis1.logLdata( problem, p1, mockdata=mockdata ) )
+        lhd2 = numpy.exp( self.errdis2.logLdata( problem, p2, mockdata=mockdata ) )
+        pg1 = self.errdis1.nextPartialData( problem, p1, f1, mockdata=mockdata )
+        pg2 = self.errdis2.nextPartialData( problem, p2, f2, mockdata=mockdata )
 
         ff1 = f * lhd1 + emf * lhd2
+
         # Where the mixed likelihood (=ff1) is indistinguishable from 0,
         # its partials also must be zero. In those locations we can replace
         # the inverse of ff1, needed in calculating the partials, by 0.
+        fff = numpy.zeros_like( ff1 )
+        q = numpy.where( ff1 > sys.float_info.min )
+        fff[q] = 1.0 / ff1[q]
 
-        fff = numpy.where( ff1 < sys.float_info.min, 0.0, 1.0 / ff1 )
-
-
-#        q1 = numpy.where( numpy.logical_not( numpy.isfinite( fff ) ) )[0]
-#        print( "fff  ", q1, len( q1 ) )
-#        print( fff[q1] )
-#        print( ff1[q1] )
-#        print( "MED1  ", f, emf, numpy.all( numpy.isfinite( fff ) ) )
+#        fff = numpy.where( ff1 < sys.float_info.min, 0.0, 1.0 / ff1 )
 
         for fi in fitIndex :
-#            print( "MED2  ", fi )
             if fi >= 0 :            ## partialLogL for model parameters
                 npg1 = next( pg1 )
                 npg2 = next( pg2 )
 
-#                q1 = numpy.where( numpy.logical_not( numpy.isfinite( npg1 ) ) )[0]
-#                print( "NPG1  ", fi, q1, len( q1 ) )
-#                print( npg1[q1] )
-
-#                q2 = numpy.where( numpy.logical_not( numpy.isfinite( npg2 ) ) )[0]
-#                print( "NPG2  ", fi, q2, len( q2 ) )
-#                print( npg2[q2] )
-
                 yield ( fff * ( f * lhd1 * npg1 +
                               emf * lhd2 * npg2 ) )
-#                yield ( fff * ( f * lhd1 * next( pg1 ) +
-#                              emf * lhd2 * next( pg2 ) ) )
 
             if fi == -1 :           ## partialLogL for fraction f
                 yield ( ( lhd1 - lhd2 ) * fff )
 
             elif fi == -2 :         ## partialLogL for sigma of errdis2
                 npg2 = next( pg2 )
-#                q2 = numpy.where( numpy.logical_not( numpy.isfinite( npg2 ) ) )[0]
-#                print( "NPG2  ", fi, q2, len( q2 ) )
-#                print( npg2[q2] )
 
                 yield ( emf * lhd2 * fff * npg2 )
-#                yield ( emf * lhd2 * fff * next( pg2 ) )
 
             elif fi == -3 :         ## partialLogL for sigma of errdis1
                 npg1 = next( pg1 )
-#                q1 = numpy.where( numpy.logical_not( numpy.isfinite( npg1 ) ) )[0]
-#                print( "NPG1  ", fi, q1, len( q1 ) )
-#                print( npg1[q1] )
 
                 yield ( f * lhd1 * fff * npg1 )
-#                yield ( f * lhd1 * fff * next( pg1 ) )
 
         try :
             pg1.close()

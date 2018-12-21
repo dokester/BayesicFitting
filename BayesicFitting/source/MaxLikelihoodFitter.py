@@ -1,18 +1,15 @@
 import numpy as numpy
 
-from .ConvergenceError import ConvergenceError
-from .BaseFitter import BaseFitter
 from .IterativeFitter import IterativeFitter
-from .IterationPlotter import IterationPlotter
 from .GaussErrorDistribution import GaussErrorDistribution
 from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
-from .GenGaussErrorDistribution import GenGaussErrorDistribution
-
+from .ExponentialErrorDistribution import ExponentialErrorDistribution
+from .ClassicProblem import ClassicProblem
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -37,7 +34,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON ( Java code )
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2018 Do Kester
 
 class MaxLikelihoodFitter( IterativeFitter ):
     """
@@ -47,7 +44,7 @@ class MaxLikelihoodFitter( IterativeFitter ):
 
     Attributes
     ----------
-    errdis : None | "gauss" | "laplace" | "cauchy" | "poisson" | "gengauss"
+    errdis : None | "gauss" | "laplace" | "cauchy" | "poisson" | "exponential"
         None : Use _ChiSq as function to be minimized
         name : use -logLikelihood as function to be minimized from the named
                 errordistribution.
@@ -122,9 +119,6 @@ class MaxLikelihoodFitter( IterativeFitter ):
                     errdis=self.errdis, scale=scale, power=self.power )
             self.isChisq = False
 
-#        self.func = landscape.func
-#        self.dfunc = landscape.dfunc
-#        self.hfunc = landscape.hessian
         self.landscape = landscape
 
         if ret == 1 :
@@ -149,8 +143,7 @@ class MaxLikelihoodFitter( IterativeFitter ):
         Return the stdev of the noise.
         """
         if isinstance( self.landscape, _LogL ) :
-            errdis = self.landscape.errdis
-            return errdis.toSigma( errdis.getScale( self.model ) )
+            return self.landscape.getScale()
 
         return super( MaxLikelihoodFitter, self ).getScale()
 
@@ -302,45 +295,50 @@ class _LogL( _Chisq ) :
             power if applicable in errdis
         """
 
-        super( _LogL, self ).__init__( outer, data, weights, index=None )
+        super( _LogL, self ).__init__( outer, data, weights, index=index )
+
+        self.problem = ClassicProblem( outer.model, xdata=outer.xdata, ydata=data,
+            weights=weights )
 
         if errdis == 'gauss' :
-            self.errdis = GaussErrorDistribution( outer.xdata, data,
-                    weights=weights, scale=scale )
+            self.errdis = GaussErrorDistribution( scale=scale )
             self.hypar = [scale]
         elif errdis == 'laplace' :
-            self.errdis = LaplaceErrorDistribution( outer.xdata, data,
-                    weights=weights, scale=scale )
+            self.errdis = LaplaceErrorDistribution( scale=scale )
             self.hypar = [scale]
         elif errdis == 'cauchy' :
-            self.errdis = CauchyErrorDistribution( outer.xdata, data, scale=scale )
+            self.errdis = CauchyErrorDistribution( scale=scale )
             self.hypar = [scale]
         elif errdis == 'poisson' :
-            self.errdis = PoissonErrorDistribution( outer.xdata, data )
+            self.errdis = PoissonErrorDistribution( )
             self.hypar = []
-        elif errdis == 'gengauss' :
-            self.errdis = GenGaussErrorDistribution( outer.xdata, data,
-                    weights=weights, scale=scale, power=power )
+        elif errdis == 'exponential' :
+            self.errdis = ExponentialErrorDistribution( scale=scale, power=power )
             self.hypar = [scale, power]
         else :
             raise ValueError( "Unknown errordistribution %s."%errdis )
 
+    def getScale( self ) :
+        errdis = self.errdis
+        return errdis.toSigma( errdis.getScale( self.problem ) )
+
+
     def func( self, par ) :
         param = self._outer.insertParameters( par, index=self._index )
         param = numpy.append( param, self.hypar )
-        return - self.errdis.logLikelihood( self._outer.model, param )
+        return - self.errdis.logLikelihood( self.problem, param )
 
 
     def dfunc( self, par ) :
         param = self._outer.insertParameters( par, index=self._index )
         param = numpy.append( param, self.hypar )
 
-        return - self.errdis.partialLogL( self._outer.model, param, self._index )
+        return - self.errdis.partialLogL( self.problem, param, self._index )
 
     def hessian( self, par ) :
         param = self._outer.insertParameters( par, index=self._index )
         param = numpy.append( param, self.hypar )
 
-        return - self.errdis.hessianLogL( self._outer.model, param, self._index )
+        return - self.errdis.hessianLogL( self.problem, param, self._index )
 
 

@@ -11,9 +11,17 @@ import sys
 import warnings
 import matplotlib.pyplot as plt
 
+from .Explorer import Explorer
 from .Model import Model
+from .Walker import Walker
+from .WalkerList import WalkerList
 from .Sample import Sample
 from .SampleList import SampleList
+
+from .Problem import Problem
+from .ClassicProblem import ClassicProblem
+from .ErrorsInXandYProblem import ErrorsInXandYProblem
+
 from .ErrorDistribution import ErrorDistribution
 from .ScaledErrorDistribution import ScaledErrorDistribution
 from .GaussErrorDistribution import GaussErrorDistribution
@@ -21,15 +29,13 @@ from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .UniformErrorDistribution import UniformErrorDistribution
-from .GenGaussErrorDistribution import GenGaussErrorDistribution
-from .Explorer import Explorer
+from .ExponentialErrorDistribution import ExponentialErrorDistribution
+
 from .Engine import Engine
 from .StartEngine import StartEngine
 from .GibbsEngine import GibbsEngine
 from .GalileanEngine import GalileanEngine
 from .StepEngine import StepEngine
-
-
 ## for Dynamic Models import the classes
 from .BirthEngine import BirthEngine
 from .DeathEngine import DeathEngine
@@ -168,8 +174,8 @@ class NestedSampler( object ):
     verbose : int
         level of blabbering
 
-    walkers : SampleList
-        ensemble of Samples that explore the likelihood space
+    walkers : WalkerList
+        ensemble of walkers that explore the likelihood space
     samples : SampleList
         Samples resulting from the exploration
     engines : list of Engine
@@ -188,11 +194,15 @@ class NestedSampler( object ):
 
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, model, ydata, weights=None, distribution=None,
-                keep=None, ensemble=100, discard=1, seed=80409, rate=1.0,
-                limits=None, engines=None, maxsize=None, threads=False, verbose=1 ) :
+    def __init__( self, xdata=None, model=None, ydata=None, weights=None,
+                problem=None, distribution=None, limits=None, keep=None, ensemble=100,
+                discard=1, seed=80409, rate=1.0, engines=None, maxsize=None,
+                threads=False, verbose=1 ) :
         """
         Create a new class, providing inputs and model.
+
+        Either (model,xdata,ydata) needs to be provided or a completely filled
+        problem.
 
         Parameters
         ----------
@@ -205,6 +215,15 @@ class NestedSampler( object ):
             array of dependent (to be fitted) data
         weights : array_like (None)
             weights pertaining to ydata
+        problem : None or string or Problem
+            None : ClassicProblem is chosen
+
+            "classic"	: `ClassicProblem`
+            "errors"	: `ErrorsInXandYProblem`
+            "multiple"	: `MultipleOutputProblem`		## TBD
+            "order"		: `OrderProblem`				## TBD
+            "salesman"  : `SalesmanProblem`				## TBD
+
         keep : None or dict of {int:float}
             None : none of the model parameters are kept fixed.
             Dictionary of indices (int) to be kept at a fixed value (float).
@@ -226,6 +245,11 @@ class NestedSampler( object ):
             Error distribution class which implements logLikelihood
 
             When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.
+        limits : None or [low,high] or [[low],[high]]
+            None : no limits implying fixed hyperparameters of the distribution
+            low     low limit on hyperpars
+            high    high limit on hyperpars
+            when limits are set, the hyperpars are *not* fixed.
         ensemble : int (100)
             number of walkers
         discard : int (1)
@@ -265,13 +289,15 @@ class NestedSampler( object ):
             3 : more about every iteration
 
         """
-        self.xdata = xdata
-        self.model = model
-
-        if not self.model.hasPriors() :
+        if not model.hasPriors() and model.npars > 0:
+            Tools.printclass( model )
             warnings.warn( "Model needs priors and/or limits" )
-        self.ydata = ydata
-        self.weights = weights
+
+        if problem is None :
+            problem = "classic"
+
+        self.setProblem( problem, model=model, xdata=xdata, ydata=ydata, weights=weights )
+
         self.keep = keep
 
         self.ensemble = ensemble
@@ -279,7 +305,8 @@ class NestedSampler( object ):
         self.rng = numpy.random.RandomState( seed )
         self.seed = seed
         self.maxsize = maxsize
-        self.verbose = verbose
+        object.__setattr__( self, "verbose", verbose )
+#        self.verbose = verbose
         self.rate = rate
         self.restart = None                     ## TBD
 
@@ -291,9 +318,9 @@ class NestedSampler( object ):
         self.iteration = 0
 
         if distribution is not None :
-            self.setErrorDistribution( distribution )
-#        elif isinstance( model, OrderProblem ) :
-#            self.setErrorDistribution( "distance" )
+            self.setErrorDistribution( distribution, limits=limits )
+        elif limits is not None :
+            self.setErrorDistribution( "gauss", limits=limits )
         else :
             self.setErrorDistribution( "gauss", scale=1.0 )
 
@@ -303,7 +330,7 @@ class NestedSampler( object ):
         self.setEngines( engines )
 
         ## Initialize the sample list
-        self.samples = SampleList( model, 0, self.distribution, ndata=len( ydata ) )
+        self.samples = SampleList( model, 0, ndata=len( ydata ) )
 
     def makeFitlist( self, keep=None ) :
         """
@@ -314,20 +341,37 @@ class NestedSampler( object ):
         keep : None or dict of {int : float}
             dictionary of indices that need to be kept at the float value.
         """
+#        allpars = self.problem.model.parameters.copy()
+#        if self.distribution.nphypar > 0 :
+#            allpars = numpy.append( allpars, self.distribution.hypar )
 
-        np = len( self.model.parameters )
+        allpars = numpy.zeros( self.problem.npars + self.distribution.nphypar )
+
+        np = self.problem.npars
         fitlist = [k for k in range( np )]
-        nh = - self.distribution.nphypar
+        nh = -self.distribution.nphypar
         for sp in self.distribution.hyperpar :
             if not sp.isFixed and sp.isBound() :
-                fitlist += [nh]
+                fitlist += [nh]                             # it is to be optimised
+            else :
+                allpars[nh] = self.distribution.hypar[nh]   # fill in the fixed value
+
             nh += 1
 
+        nh = self.distribution.nphypar
         if keep is not None :
-            fitlist = numpy.setxor1d( fitlist, list( keep.keys() ) )
-            self.model.parameters[list(keep.keys())] = list( keep.values() )
+            fitl = []
+            kkeys = list( keep.keys() )
+            for k in range( np + nh ) :
+                if k in kkeys :
+                    allpars[k] = keep[k]                    # save keep.value in allpars
+                elif fitlist[k] in kkeys :
+                    allpars[k] = keep[fitlist[k]]           # save keep.value in allpars
+                else :
+                    fitl += [fitlist[k]]                    # list of pars to be fitted
+            fitlist = fitl
 
-        return fitlist
+        return ( fitlist, allpars )
 
 
     #  *******SAMPLE************************************************************
@@ -335,7 +379,7 @@ class NestedSampler( object ):
         """
         Sample the posterior and return the 10log( evidence )
 
-        The more sensible result of this method is a SampleList which contains
+        A additional result of this method is a SampleList which contains
         samples taken from the posterior distribution.
 
         Parameters
@@ -354,7 +398,14 @@ class NestedSampler( object ):
         """
         if keep is None :
             keep = self.keep
-        fitlist = self.makeFitlist( keep=keep )
+        fitIndex, allpars = self.makeFitlist( keep=keep )
+
+        self.initWalkers( allpars, fitIndex )
+
+        for eng in self.engines :
+            eng.walkers = self.walkers
+
+        self.distribution.ncalls = 0                      #  reset number of calls
 
         if isinstance( plot, str ) :
             iterplot = plot == 'iter' or plot == 'all'
@@ -363,24 +414,17 @@ class NestedSampler( object ):
             iterplot = False
             lastplot = plot
 
-        self.initWalkers( fitlist=fitlist )
-
-        for eng in self.engines :
-            eng.walkers = self.walkers
-
-        self.distribution.ncalls = 0                      #  reset number of calls
-
         self.plotData( plot=iterplot )
 
         if self.verbose >= 1 :
-            print( "Fit", ( "all" if keep is None else fitlist ), "parameters of" )
-            print( " ", self.model._toString( "  " ) )
+            print( "Fit", ( "all" if keep is None else fitIndex ), "parameters of" )
+            print( " ", self.problem.model._toString( "  " ) )
             print( "Using a", self.distribution, "with", end="" )
             np = -1
             cstr = " with "
             for name,hyp in zip( self.distribution.PARNAMES, self.distribution.hyperpar ) :
                 print( cstr, end="" )
-                if np in fitlist :
+                if np in fitIndex :
                     print( "unknown %s" % name, end="" )
                 else :
                     print( "%s = %7.2f " % (name, hyp.hypar), end="" )
@@ -451,8 +495,8 @@ class NestedSampler( object ):
             self.copyWalker( worst )
 
             # Explore the copied walker(s)
-#            print( "NS     ", self.walkers[worst[0]].allpars, fitlist )
-            explorer.explore( worst, self.lowLhood, fitlist )
+#            print( "NS     ", self.walkers[worst[0]].allpars, fitIndex )
+            explorer.explore( worst, self.lowLhood )
 
             # Shrink the interval
             logWidth -= ( 1.0 * self.discard ) / self.ensemble
@@ -460,7 +504,7 @@ class NestedSampler( object ):
 
             self.optionalSave( )
 
-            if self.info > oldinfo + 1 :
+            if self.info > oldinfo + 1000 :
                 self.engines[0].calculateUnitRange()
                 for eng in self.engines :
                     eng.unitRange = self.engines[0].unitRange
@@ -478,15 +522,15 @@ class NestedSampler( object ):
         self.samples.normalize( )
 
         # put the info into the model
-        if not self.model.isDynamic() :
-            self.model.parameters = self.samples.parameters
-            self.model.stdevs = self.samples.stdevs
+        if not self.problem.model.isDynamic() :
+            self.problem.model.parameters = self.samples.parameters
+            self.problem.model.stdevs = self.samples.stdevs
 
         if self.verbose >= 1 :
             self.report()
 
         if lastplot :
-            Plotter.plotFit( self.xdata, self.ydata, yfit=self.yfit, residuals=True )
+            Plotter.plotFit( self.problem.xdata, self.problem.ydata, yfit=self.yfit, residuals=True )
 
         return self.evidence
 
@@ -517,8 +561,8 @@ class NestedSampler( object ):
 
     def storeSamples( self, worst, worstLogW ):
         for kw in worst :
-            self.walkers[kw].logW = worstLogW
-            self.samples.add( self.walkers, kw )
+            smpl = self.walkers[kw].toSample( worstLogW )
+            self.samples.add( smpl )
 
     def findWorst( self ):
         """
@@ -573,7 +617,7 @@ class NestedSampler( object ):
                     self.lowLhood = logl
 
             worstLogW = logWidth + self.lowLhood
-            self.walkers[worst].logW = worstLogW
+#            self.walkers[worst].logW = worstLogW
 
             # Update Evidence Z and Information H
             logZnew = numpy.logaddexp( self.logZ, worstLogW )
@@ -582,7 +626,9 @@ class NestedSampler( object ):
             self.logZ = logZnew
 
             # Keep posterior sample
-            self.samples.add( self.walkers, worst )
+            smpl = self.walkers[worst].toSample( worstLogW )
+            self.samples.add( smpl )
+#            self.samples.add( self.walkers, worst )
 
             done[worst] = True
 
@@ -593,10 +639,13 @@ class NestedSampler( object ):
         ### TBD hypar fitting
         if name == "scale" and isinstance( self.distribution, ScaledErrorDistribution ) :
             self.distribution.scale = value
-        elif name == "power" and isinstance( self.distribution, GenGaussErrorDistribution ) :
+        elif name == "power" and isinstance( self.distribution, ExponentialErrorDistribution ) :
             self.distribution.power = value
         else :
             object.__setattr__( self, name, value )
+            if name == "verbose" :
+                for eng in self.engines :
+                    eng.verbose = value
 
     def __getattr__( self, name ) :
         if name == "evidence" :
@@ -622,28 +671,88 @@ class NestedSampler( object ):
         elif name == "stdevScale" :
             return self.samples.stdevHypars[0]
         elif name == "modelfit" or name == "yfit" :
-            return self.samples.average( self.xdata )
+            return self.samples.average( self.problem.xdata )
 
     #  *********DISTRIBUTIONS***************************************************
-    def setErrorDistribution( self, name, scale=1.0, power=2.0 ):
+
+    def setProblem( self, name, model=None, xdata=None, ydata=None, weights=None ) :
+        """
+        Set the problem for this run.
+
+        If name is a Problem, then the keyword arguments (xdata,model,ydata,weights)
+        are overwritten provided they are not None
+
+        Parameters
+        ----------
+        name : string or Problem
+            name of problem: "classic"
+            Problem Use this one
+        model : Model
+            the model to be solved
+        xdata : array_like or None
+            independent variable
+        ydata : array_like or None
+            dependent variable
+        weights : array_like or None
+            weights associated with ydata
+
+        """
+        problemdict = {
+            "classic" : ClassicProblem,
+            "errors"  : ErrorsInXandYProblem
+        }
+#           "multiple" : MultipleOutputProblem
+#           "salesman" : SalesmanProblem
+#           "order" : OrderProblem
+
+        if isinstance( name, Problem ) :
+            self.problem = name
+            if model is not None : self.problem.model = model
+            if xdata is not None : self.problem.xdata = xdata
+            if ydata is not None : self.problem.ydata = ydata
+            if weights is not None : self.problem.weights = weights
+            return
+
+        if not isinstance( name, str ) :
+            raise ValueError( "Cannot interpret ", name, " as string or Problem" )
+
+        name = str.lower( name )
+        try :
+            myProblem = problemdict[name]
+            self.problem = myProblem( model, xdata=xdata, ydata=ydata, weights=weights )
+        except :
+            raise ValueError( "Unknown problem name %s" % name )
+
+
+
+    #  *********DISTRIBUTIONS***************************************************
+    def setErrorDistribution( self, name=None, limits=None, scale=1.0, power=2.0 ):
         """
         Set the error distribution for calculating the likelihood.
 
         Parameters
         ----------
-        name : string
-            name of distribution: "gauss", "laplace", "poisson", "cauchy", "uniform", "gengauss"
+        name : None or ErrorDistribution or string
+            None    distribution is Problem dependent.
+            ErrorDistribution: use this one
+            string  name of distribution:
+                    "gauss", "laplace", "poisson", "cauchy", "uniform", "exonential"
+        limits : None or [low,high] or [[low],[high]]
+            None : no limits implying fixed hyperparameters (scale,power,etc)
+            low     low limit on hyperpars (needs to be >0)
+            high    high limit on hyperpars
+            when limits are set, the hyperpars are *not* fixed.
         scale : float
             fixed scale of distribution
         power : float
             fixed power of distribution
 
         """
-        if isinstance( name, ErrorDistribution ) :
+        if name is None :
+            name = self.problem.myDistribution()
+        elif isinstance( name, ErrorDistribution ) :
             self.distribution = name
-            self.distribution.xdata = self.xdata
-            self.distribution.data  = self.ydata
-            self.distribution.weights = self.weights
+
             return
 
         if not isinstance( name, str ) :
@@ -652,48 +761,48 @@ class NestedSampler( object ):
         name = str.lower( name )
 #        print( name )
         if name == "gauss" :
-            self.distribution = GaussErrorDistribution( self.xdata, self.ydata,
-                    weights=self.weights, scale=scale )
+            self.distribution = GaussErrorDistribution( scale=scale, limits=limits )
         elif name == "laplace" :
-            self.distribution = LaplaceErrorDistribution( self.xdata, self.ydata,
-                    weights=self.weights, scale=scale )
+            self.distribution = LaplaceErrorDistribution( scale=scale, limits=limits )
         elif name == "poisson" :
-            self.distribution = PoissonErrorDistribution( self.xdata, self.ydata,
-                    weights=self.weights )
+            self.distribution = PoissonErrorDistribution()
         elif name == "cauchy" :
-            self.distribution = CauchyErrorDistribution( self.xdata, self.ydata,
-                    weights=self.weights, scale=scale )
+            self.distribution = CauchyErrorDistribution( scale=scale, limits=limits )
         elif name == "uniform" :
-            self.distribution = UniformErrorDistribution( self.xdata, self.ydata,
-                    weights=self.weights, scale=scale )
-        elif name == "gengauss" :
-            self.distribution = GenGaussErrorDistribution( self.xdata, self.ydata,
-                    weights=self.weights, scale=scale, power=power )
+            self.distribution = UniformErrorDistribution( scale=scale, limits=limits )
+        elif name == "exponential" :
+            self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )
 #        elif name == "distance" :
-#            self.distribution = DistanceCostFunction( self.xdata, self.ydata,
-#                    weights=self.weights )
+#            self.distribution = DistanceCostFunction( )
         else :
             raise ValueError( "Unknown error distribution %s" % name )
 
-    def setEngines( self, engines ) :
+    def setEngines( self, engines=None ) :
         """
         initialize the engines.
 
         Parameters
         ----------
-        engines : list of string
+        engines : None or list of [Engine or string]
+            None : engines is Problem dependent
+            list of Engines : use these
             list of engine names
         """
-        if engines is not None :
-            pass
-#        elif isinstance( self.model, OrderProblem ) :
-#            engines = ["order", "reverse", "shuffle", "switch"]
-        else :
-            engines = ["galilean"]
+        enginedict = {
+            "galilean" : GalileanEngine,
+            "birth" : 	 BirthEngine,
+            "death" : 	 DeathEngine,
+            "gibbs" : 	 GibbsEngine,
+            "step" : 	 StepEngine }
 
-        if self.model.isDynamic() :
-            engines += ["birth", "death"]
+#           "order" :    OrderEngine,
+#           "reverse" :  ReverseEngine,
+#           "shuffle" :  ShuffleEngine,
+#           "switch" :   switchEngine,
 
+
+        if engines is None :
+            engines = self.problem.myEngines()
 
         self.engines = []
         if isinstance( engines, str ) :
@@ -703,77 +812,64 @@ class NestedSampler( object ):
                 engine = name
                 engine.members = self.walkers
                 engine.errdis = self.distribution
+                engine.verbose = self.verbose
                 self.engines += [engine]
                 continue
 
             if not isinstance( name, str ) :
                 raise ValueError( "Cannot interpret ", name, " as string or as Engine" )
 
-
-            if name == "galilean" :
+            try :
+                Eng = enginedict[name]
                 seed = self.rng.randint( self.TWOP32 )
-                engine = GalileanEngine( self.walkers, self.distribution, seed=seed )
-            elif name == "gibbs" :
-                seed = self.rng.randint( self.TWOP32 )
-                engine = GibbsEngine( self.walkers, self.distribution, seed=seed )
-            elif name == "step" :
-                seed = self.rng.randint( self.TWOP32 )
-                engine = StepEngine( self.walkers, self.distribution, seed=seed )
-####        Order Problems (for later)
-#            elif name == "order" :
-#                seed = self.rng.randint( self.TWOP32 )
-#                engine = OrderEngine( self.walkers, self.distribution, seed=seed )
-#            elif name == "reverse" :
-#                seed = self.rng.randint( self.TWOP32 )
-#                engine = ReverseEngine( self.walkers, self.distribution, seed=seed )
-#            elif name == "shuffle" :
-#                seed = self.rng.randint( self.TWOP32 )
-#                engine = ShuffleEngine( self.walkers, self.distribution, seed=seed )
-#            elif name == "switch" :
-#                seed = self.rng.randint( self.TWOP32 )
-#                engine = SwitchEngine( self.walkers, self.distribution, seed=seed )
-
-####        For Dynamic Models
-            elif name == "birth" :
-                seed = self.rng.randint( self.TWOP32 )
-#                print( "Birth    ", seed )
-                engine = BirthEngine( self.walkers, self.distribution, seed=seed )
-            elif name == "death" :
-                seed = self.rng.randint( self.TWOP32 )
-#                print( "Death    ", seed )
-                engine = DeathEngine( self.walkers, self.distribution, seed=seed )
-            else :
+                engine = Eng( self.walkers, self.distribution, seed=seed, verbose=self.verbose )
+            except :
                 raise ValueError( "Unknown Engine name : %10s" % name )
 
             self.engines += [engine]
 
 
     #  *********INITIALIZATION***************************************************
-    def initWalkers( self, fitlist=None ):
+    def initWalkers( self, allpars, fitIndex ):
         """
         Initialize the walkers at random values of parameters and scale
+
+        Parameters
+        ----------
+        allpars : array_like
+            array of (hyper)parameters
+        fitIndex : array_like
+            indices of allpars to be fitted
+
         """
+        stengdict = {
+            "start" : StartEngine
+        }
+#           "order" : StartOrderEngine
+
 
         # Make the walkers list one larger to store the all time best.
-        self.walkers = SampleList( self.model, self.ensemble + 1, self.distribution,
-                fitindex=fitlist )
+        self.walkers = WalkerList( self.problem, self.ensemble+1, allpars, fitIndex )
 
         if self.initialEngine is not None:
             # decorate with proper information
             self.initialEngine.members = self.walkers
             self.initialEngine.errdis = self.distribution
-#        elif isinstance( self.model, OrderProblem ) :
-#            seed = self.rng.randint( self.TWOP32 )
-#            self.initialEngine = StartOrderEngine( self.walkers, self.distribution,
-#                        seed=seed )
+
         else :
-            seed = self.rng.randint( self.TWOP32 )
-            self.initialEngine = StartEngine( self.walkers, self.distribution,
+            try :
+                name = self.problem.myStartEngine()
+                StartEng = stengdict[name]
+                seed = self.rng.randint( self.TWOP32 )
+                self.initialEngine = StartEng( self.walkers, self.distribution,
                         seed=seed )
+            except :
+                raise ValueError( "Unknown StartEngine name : %10s" % name )
+
 
         # Calculate logL for all walkers.
         for walker in self.walkers :
-            self.initialEngine.execute( walker, 0, fitIndex=fitlist )
+            self.initialEngine.execute( walker, -math.inf )
 
         # Find best in ensemble and copy it into the last, extra position.
         lbest = self.walkers[0].logL
@@ -788,7 +884,7 @@ class NestedSampler( object ):
         if not plot :
             return
         plt.figure( 'iterplot' )
-        plt.plot( self.xdata, self.ydata, 'k.' )
+        plt.plot( self.problem.xdata, self.problem.ydata, 'k.' )
         plt.show( block=False )
 
     def plotResult( self, walker, iter, plot=False ):
@@ -806,9 +902,9 @@ class NestedSampler( object ):
             self.ymin, self.ymax = plt.ylim()
 
         param = walker.allpars
-        model = walker.model
-        mock = model.result( self.xdata, param )
-        self.line, = plt.plot( self.xdata, mock, 'r-' )
+        model = walker.problem.model
+        mock = model.result( self.problem.xdata, param )
+        self.line, = plt.plot( self.problem.xdata, mock, 'r-' )
         dmin = min( self.ymin, numpy.min( mock ) )
         dmax = max( self.ymax, numpy.max( mock ) )
         plt.ylim( dmin, dmax )

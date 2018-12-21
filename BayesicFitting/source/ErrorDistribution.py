@@ -1,4 +1,6 @@
 import numpy as numpy
+import math
+
 from .HyperParameter import HyperParameter
 from . import Tools
 
@@ -41,12 +43,6 @@ class ErrorDistribution( object ):
 
     Attributes
     ----------
-    xdata : array_like
-        input data for the model
-    data : array_like
-        data to be fitted
-    weights : array_like
-        weights to be used
     hyperpar : HyperParameter
         hyperparameter for the error distribution
     deltaP : float
@@ -63,23 +59,18 @@ class ErrorDistribution( object ):
         list of values for the hyperparameters
     nphypar : int
         number of hyper parameters in this error distribution
+
     """
 
     PARNAMES = ["hypar"]
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, fixed=None, copy=None ):
+    def __init__( self, fixed=None, copy=None ):
         """
         Constructor.
 
         Parameters
         ----------
-        xdata : array_like
-            input data for the model
-        data : array_like
-            data to be fitted
-        weights : array_like
-            weights to be used
         fixed : dictionary of {int:float}
             int     list if parameters to fix permanently. Default None.
             float   list of values for the fixed parameters.
@@ -91,16 +82,10 @@ class ErrorDistribution( object ):
         self.ncalls = 0
         self.nparts = 0
         if copy is None :
-            self.xdata = xdata
-            self.data = data
-            self.weights = weights
             self.hyperpar = []
             self.deltaP = 0.000001
             self.fixed = self.keepFixed( fixed )
         else :                          ### TBC do we need copies here ????
-            self.xdata = copy.xdata
-            self.data = copy.data
-            self.weights = copy.weights
             self.hyperpar = copy.hyperpar
             self.deltaP = copy.deltaP
             self.fixed = self.keepFixed( copy.fixed )
@@ -114,11 +99,9 @@ class ErrorDistribution( object ):
         Set attributes.
 
         """
-        key0 = ["weights", "hyperpar", "fixed"]
-        keys = {"xdata": float, "data": float, "weights": float,
-                "hyperpar": HyperParameter}
-        key1 = {"deltaP": float, "sumweight" : float, "ncalls": int, "nparts": int,
-                "fixed": dict }
+        key0 = ["hyperpar", "fixed"]
+        keys = {"hyperpar": HyperParameter}
+        key1 = {"deltaP": float, "ncalls": int, "nparts": int, "fixed": dict }
         if ( Tools.setNoneAttributes( self, name, value, key0 ) or
              Tools.setListOfAttributes( self, name, value, keys ) or
              Tools.setSingleAttributes( self, name, value, key1 ) ) :
@@ -136,15 +119,7 @@ class ErrorDistribution( object ):
         name : string
             name of the attribute
         """
-        if name == 'sumweight' :            # Return the sum over weight vector.
-            if self.hasWeight() :
-                self.sumweight = numpy.sum( self.weights )
-                return self.sumweight
-            else :
-                return len( self.data )
-        elif name == 'ndata' :
-            return len( self.data )         # number of data points/tuples
-        elif name == 'nphypar' :
+        if name == 'nphypar' :
             return len( self.hyperpar )
         elif name == "hypar" :
             return numpy.asarray( [s.hypar for s in self.hyperpar], dtype=float )
@@ -153,14 +128,80 @@ class ErrorDistribution( object ):
 
         return None
 
-    def getScale( self, model ) :
+    def getGaussianScale( self, problem, allpars=None ) :
         """
-        return default value: 1.0
+        Return the noise scale.
+
+        *** Gaussian approximation ***
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
         """
-        return 1.0
+        chi = self.getChisq( problem, allpars=allpars )
+        return math.sqrt( chi / problem.sumweight )
+
+
+    def getResiduals( self, problem, allpars=None ):
+        """
+        Return residuals: ydata - model.result
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+        """
+        if allpars is None :
+            param = problem.model.parameters
+        else :
+            nh = self.nphypar
+            param = allpars[:-nh]
+
+        return problem.residuals( param )
+
+
+    def getChisq( self, problem, allpars=None ):
+        """
+        Return chisq
+
+        *** Gaussian approximation ***
+
+        Sum over the (weighted) squared residuals
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
+        """
+        if allpars is None :
+            param = problem.model.parameters
+        else :
+            nh = self.nphypar
+            param = allpars[:-nh]
+
+        res2 = problem.weightedResSq( param )
+
+        return numpy.sum( res2 )
 
     def toSigma( self, scale ) :
         """
+        Return sigma, the squareroot of the variance.
+
+        Parameter
+        --------
+        scale : float
+            the scale of this distribution.
+
         Return default value : scale
         """
         return scale
@@ -181,13 +222,6 @@ class ErrorDistribution( object ):
     def acceptWeight( self ):
         """ True if the distribution accepts weights.  """
         return False
-
-    def hasWeight( self ):
-        """ Return whether it has weights.  """
-        return self.weights is not None
-
-
-    ### TBD : turn fixed into dictionary ###########################
 
     def keepFixed( self, fixed=None ) :
         """
@@ -217,6 +251,7 @@ class ErrorDistribution( object ):
             self.hyperpar[f].hypar = fixed[f]
 
         return fixed
+
 
     def setPriors( self, priors ) :
         """
@@ -282,31 +317,30 @@ class ErrorDistribution( object ):
 
     #  *********LIKELIHOODS***************************************************
 
-    def logLikelihood( self, model, allpars ):
+    def logLikelihood( self, problem, allpars ):
         """
         Return the log( likelihood ).
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         """
         self.ncalls += 1
-        mock = model.result( self.xdata, allpars[:model.npchain] )
 
-        return numpy.sum( self.logLdata( model, allpars, mockdata=mock ) )
+        return numpy.sum( self.logLdata( problem, allpars ) )
 
 
-    def partialLogL( self, model, allpars, fitIndex ) :
+    def partialLogL( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
@@ -314,10 +348,12 @@ class ErrorDistribution( object ):
 
         """
         self.nparts += 1                ## counts calls tp partialLogL
-        mock = model.result( self.xdata, allpars[:model.npchain] )
+        mock = problem.result( allpars[:problem.model.npars] )
 
-        try :
-            pg = self.nextPartialData( model, allpars, fitIndex, mockdata=mock )
+        if True :
+
+#        try :
+            pg = self.nextPartialData( problem, allpars, fitIndex, mockdata=mock )
             np = len( fitIndex )
             dL = numpy.zeros( np, dtype=float )
             for k in range( np ) :
@@ -329,35 +365,38 @@ class ErrorDistribution( object ):
             except :
                 pass
             return dL
-        except :
+        else :
+#        except :
             print( "Using numeric partialLogL." )
-            return self.numPartialLogL( model, allpars, fitIndex )
+            return self.numPartialLogL( problem, allpars, fitIndex )
 
 
-    def partialLogLXXX( self, model, allpars, fitIndex ) :
+    def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
+        Alternative calculation.
+
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
             indices of parameters to be fitted
 
         """
-        return self.numPartialLogL( model, allpars, fitIndex )
+        return self.numPartialLogL( problem, allpars, fitIndex )
 
-    def numPartialLogL( self, model, allpars, fitIndex ) :
+    def numPartialLogL( self, problem, allpars, fitIndex ) :
         """
         Return d log( likelihood ) / dp, numerically calculated.
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
@@ -369,16 +408,16 @@ class ErrorDistribution( object ):
         i = 0
         for k in fitIndex :
             p[k] = allpars[k] - self.deltaP
-            lm = self.logLikelihood( model, p )
+            lm = self.logLikelihood( problem, p )
             p[k] = allpars[k] + self.deltaP
-            lp = self.logLikelihood( model, p )
+            lp = self.logLikelihood( problem, p )
             dL[i] = 0.5 * ( lp - lm ) / self.deltaP
             i += 1
             p[k]= allpars[k]
         return dL
 
 
-    def updateLogL( self, model, allpars, parval=None ):
+    def updateLogL( self, problem, allpars, parval=None ):
         """"
         Return a update of the log( likelihood ) given a change in a few parameter.
 
@@ -388,33 +427,18 @@ class ErrorDistribution( object ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         param : array_like
             parameters of the model
         parval : dict of {int : float}
             int index of a parameter
             float (old) value of the parameter
         """
-        return self.logLikelihood( model, allpars )
+        return self.logLikelihood( problem, allpars )
 
     def setResult( self ):
         pass
-
-    def getResiduals( self, model, param=None ):
-        """
-        Return the residuals. (data - model)
-        For those distributions that need them.
-
-        Parameters
-        ----------
-        model : Model
-            model to be fitted
-        param : array_like
-            parameters of the model
-
-        """
-        return self.data - model.result( self.xdata, param )
 
     def __str__( self ) :
         return "Error distribution"
@@ -429,3 +453,23 @@ class ErrorDistribution( object ):
             index of the hyperparameter
         """
         return self.PARNAMES[k]
+
+
+
+    ######## Deprecated ################################
+    #def getResiduals( self, problem, param=None ):
+        """
+        Return the residuals. (data - model)
+        For those distributions that need them.
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        param : array_like
+            parameters of the model
+
+        """
+        #return problem.residuals( param )
+
+

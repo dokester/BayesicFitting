@@ -1,12 +1,9 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
 
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -31,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 class RandomEngine( Engine ):
     """
@@ -43,12 +40,12 @@ class RandomEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213 ):
+    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
         Parameters
         ----------
-        walkers : SampleList
+        walkers : WalkerList
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
@@ -57,7 +54,7 @@ class RandomEngine( Engine ):
         seed : int
             for random number generator
         """
-        super( RandomEngine, self ).__init__( walkers, errdis, copy=copy, seed=seed )
+        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -67,7 +64,7 @@ class RandomEngine( Engine ):
         return str( "RandomEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood, fitIndex=None ):
+    def execute( self, walker, lowLhood ):
         """
         Execute the engine by a random selection of the parameters.
 
@@ -77,21 +74,18 @@ class RandomEngine( Engine ):
             sample to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        fitIndex : array_like
-            list of parameter indices
+
         Returns
         -------
         int : the number of successfull moves
 
         """
-
-        if fitIndex is None :
-            fitIndex = walker.fitIndex
+        problem = walker.problem
+        fitIndex = walker.fitIndex
 
         perm = self.rng.permutation( fitIndex )
 
-        model = walker.model
-
+        ### Needs more study to make the engine effective.
         mlen = len( self.walkers )
         ur = self.unitRange * mlen / ( mlen - 1 )
         um = self.unitMin - ur / mlen
@@ -109,12 +103,12 @@ class RandomEngine( Engine ):
             while True :
                 kk += 1
                 uval = self.rng.uniform( um[c], ux[c], 1 )
-                param[c] = self.unit2Domain( model, uval, c )
+                param[c] = self.unit2Domain( problem, uval, c )
 
-                Ltry = self.errdis.updateLogL( model, param, parval={c : save} )
+                Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
                 if Ltry >= lowLhood:
                     self.reportSuccess( )
-                    self.setSample( walker, model, param, Ltry )
+                    self.setWalker( walker, problem, param, Ltry, fitIndex=fitIndex )
                     t += 1
                     break
                 elif kk < self.maxtrials :

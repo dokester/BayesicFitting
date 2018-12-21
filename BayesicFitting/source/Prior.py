@@ -130,7 +130,8 @@ class Prior( object ):
         Also set scale for Priors that need a scale.
 
         """
-        keys = ["lowLimit", "highLimit", "deltaP", "scale", "_lowDomain", "_highDomain"]
+        keys = ["lowLimit", "highLimit", "deltaP", "center", "scale",
+                "_lowDomain", "_highDomain"]
         if name == "scale" and value <= 0 :
             raise ValueError( "Scale must be positive" )
 

@@ -5,9 +5,8 @@ import math
 from .ScaledErrorDistribution import ScaledErrorDistribution
 from .NoiseScale import NoiseScale
 
-
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2018
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -32,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2018 Do Kester
 
 
 class CauchyErrorDistribution( ScaledErrorDistribution ):
@@ -48,7 +47,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
     .. math::
         logL = N ( \log( s ) - \log( \pi ) ) - \sum( \log( x^2 + s^2 ) )
 
-    The use of weights is not possible in this error distribution.
+    Weights are not possible in this error distribution. They are silently ignored.
 
     s is a hyperparameter, which might be estimated from the data.
 
@@ -59,19 +58,12 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
     LOGPI = math.log( math.pi )
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, xdata, data, weights=None, scale=1.0, limits=None,
-                  copy=None ):
+    def __init__( self, scale=1.0, limits=None, copy=None ):
         """
         Default Constructor.
 
         Parameters
         ----------
-        xdata : array_like
-            input data fro the model (independent data)
-        data : array_like
-            data to be fitted (dependent data)
-        weights : array_like
-            weights to be used (no weights are possible in Cauchy)
         scale : float
             noise scale
         limits : None or list of 2 floats [low,high]
@@ -83,22 +75,20 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             distribution to be copied.
 
         """
-        if weights is not None:
-            raise ValueError( "Weights are not possible in Cauchy distributions" )
 
-        super( CauchyErrorDistribution, self ).__init__( xdata, data,
-                scale=scale, limits=limits, copy=copy )
+        super( CauchyErrorDistribution, self ).__init__( scale=scale, limits=limits,
+            copy=copy )
 
     def copy( self ):
         """ Return copy of this.  """
-        return CauchyErrorDistribution( self.xdata, self.data, copy=self )
+        return CauchyErrorDistribution( copy=self )
 
     def __setattr__( self, name, value ):
         """
-        Set attributes.
+        Set attributes. Needed for getScale()
 
         """
-        if name == "res2" :
+        if name == "res2" or name == "sumweight":
             object.__setattr__( self, name, value )
         else :
             super( CauchyErrorDistribution, self ).__setattr__( name, value )
@@ -110,17 +100,21 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         return False
 
-    def getScale( self, model ) :
+    def getScale( self, problem, allpars=None ) :
         """
         Return the noise scale as calculated from the residuals.
 
         Parameters
         ----------
-        model : Model
-            the model involved
+        problem : Problem
+            to be solved
+        allpars : array_like
+            None take parameters from problem.model
+            list of all parameters in the problem
         """
-        res = self.getResiduals( model )
+        res = self.getResiduals( problem, allpars=allpars )
         self.res2 = res * res
+        self.sumweight = problem.sumweight
 
         scale = scipy.optimize.bisect( self.funct, 0.001, 100.0 )
         return scale
@@ -130,29 +124,32 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
                 self.sumweight * ( 2 * math.log( scale ) + math.sqrt( 2.0 ) ) )
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihoodXXX( self, model, allpars ):
+    def logLikelihood_alt( self, problem, allpars ):
         """
         Return the log( likelihood ) for a Cauchy distribution.
         Cauchy distr : f( x ) = s / ( pi * ( s^2 + x^2 ) )
 
         where x = residual and s = scale
 
+        Alternate calculation
+
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
-            parameters of the problem
+            list of all parameters in the problem
 
         """
         self.ncalls += 1
-        np = model.npchain
+
         scale = allpars[-1]
-        res2 = numpy.square( self.getResiduals( model, allpars[:np] ) )
-        return ( self.ndata * ( math.log( scale ) - self.LOGPI ) -
+        res = problem.residuals( allpars[:-1] )
+        res2 = numpy.square( res )
+        return ( problem.ndata * ( math.log( scale ) - self.LOGPI ) -
                  numpy.sum( numpy.log( res2 + scale * scale ) ) )
 
-    def logLdata( self, model, allpars, mockdata=None ) :
+    def logLdata( self, problem, allpars, mockdata=None ) :
         """
         Return the log( likelihood ) for each residual
 
@@ -160,31 +157,32 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
 
         Parameters
         ----------
-        model : Model
-            to be fitted
+        problem : Problem
+            to be solved
         allpars : array_like
             list of all parameters in the problem
         mockdata : array_like
             as calculated by the model
 
         """
-        np = model.npchain
-        if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:np] )
+        res = problem.residuals( allpars[:-1], mockdata=mockdata )
+
         scale = allpars[-1]
         s2 = scale * scale
-        res2 = numpy.square( self.data - mockdata )
+        res2 = res * res
         return math.log( scale ) - self.LOGPI - numpy.log( res2 + s2 )
 
-    def partialLogLXXX( self, model, allpars, fitIndex ) :
+    def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters
         in fitIndex.
 
+        Alternate calculation
+
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
@@ -192,31 +190,32 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
 
         """
         self.nparts += 1
-        np = model.npchain
+
         scale = allpars[-1]
-        res = self.getResiduals( model, allpars[:np] )
+        res = problem.residuals( allpars[:-1] )
         r2s = res * res + scale * scale
-        dM = model.partial( self.xdata, allpars[:np] )
+        dM = problem.partial( allpars[:-1] )
 
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for k in fitIndex :
             if k >= 0 :
                 dL[i] = 2 * numpy.sum( res * dM[:,k] / r2s )
+                i += 1
             else :
-                dL[i] = self.ndata / scale - numpy.sum( 2 * scale / r2s )
-            i += 1
+                dL[-1] = self.ndata / scale - numpy.sum( 2 * scale / r2s )
+
         return dL
 
-    def nextPartialData( self, model, allpars, fitIndex, mockdata=None ) :
+    def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters
         in fitIndex.
 
         Parameters
         ----------
-        model : Model
-            model to calculate mock data
+        problem : Problem
+            to be solved
         allpars : array_like
             parameters of the problem
         fitIndex : array_like
@@ -225,15 +224,11 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             as calculated by the model
 
         """
-        self.nparts += 1
-        np = model.npchain
-        if mockdata is None :
-            mockdata = model.result( self.xdata, allpars[:np] )
+        res = problem.residuals( allpars[:-1], mockdata=mockdata )
         scale = allpars[-1]
-        res = self.data - mockdata
         r2s = res * res + scale * scale
 
-        dM = model.partial( self.xdata, allpars[:np] )
+        dM = problem.partial( allpars[:-1] )
 ##      TBD import mockdata into partial
 #        dM = model.partial( self.xdata, param, mockdata=mockdata )
 
