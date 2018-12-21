@@ -86,17 +86,17 @@ def plotModel( model, par ) :
 
 
 
-def plotErrdis( errdis, model, limits=[-10,10], max=None, plot=None ) :
+def plotErrdis( errdis, problem, limits=[-10,10], max=None, plot=None ) :
     np = 2001
     map = numpy.ndarray( np, dtype=float )
 
-    par = model.parameters
+    par = problem.model.parameters
     pars = numpy.append( par, errdis.hypar )
     r0 = numpy.linspace( limits[0], limits[1], np, dtype=float )
 
     for k, p in enumerate( r0 ) :
         pars[0] = p
-        map[k] = errdis.logLikelihood( model, pars )
+        map[k] = errdis.logLikelihood( problem, pars )
 
     if max is None :
         max = numpy.max( map )
@@ -109,13 +109,13 @@ def plotErrdis( errdis, model, limits=[-10,10], max=None, plot=None ) :
     return ( math.log( numpy.sum( map ) / np ) + max, max )
 
 
-def plotErrdis2d( errdis, model, limits=[-10,10], nslim=None, max=None,
+def plotErrdis2d( errdis, problem, limits=[-10,10], nslim=None, max=None,
                 plot=None ) :
 
     np = 201
     map = numpy.ndarray( (np,np), dtype=float )
 
-    par = model.parameters
+    par = problem.model.parameters
     pars = numpy.append( par, errdis.hypar )
     r0lo = limits[0]
     r0hi = limits[1]
@@ -144,7 +144,7 @@ def plotErrdis2d( errdis, model, limits=[-10,10], nslim=None, max=None,
         pars[1] = p1
         for k0,p0 in enumerate( r0 ) :
             pars[0] = p0
-            map[k1,k0] = errdis.logLikelihood( model, pars )
+            map[k1,k0] = errdis.logLikelihood( problem, pars )
 
     logl = numpy.max( map )
 #    print( prior.shape, prior[0,0], 2*math.log( 1.0/ ( r0hi - r0lo ) ) )

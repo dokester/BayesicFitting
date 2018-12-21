@@ -61,9 +61,9 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "stdv  ", fmt( bf.stdevs ) )
         print( "logZ  ", fmt( logz0 ), "   logl  ", fmt( logl0 ) )
 
-        errdis = GaussErrorDistribution ( x, y )
-
-        logz1, maxll = plotErrdis( errdis, pm, limits=limits,
+        errdis = GaussErrorDistribution( )
+        problem = ClassicProblem( pm, xdata=x, ydata=y )
+        logz1, maxll = plotErrdis( errdis, problem, limits=limits,
                                     max=0, plot=plot )
 
         print( "logZ  ", fmt( logz1 ) )
@@ -123,9 +123,10 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "pars  ", fmt( pars ) )
         print( "logZ  ", fmt( logz0 ), "   logl  ", fmt( logl0 ) )
 
-        errdis = GaussErrorDistribution ( x, y )
+        errdis = GaussErrorDistribution( )
+        problem = ClassicProblem( pm, xdata=x, ydata=y )
 
-        logz1, logl1 = plotErrdis2d( errdis, pm, limits=limits, max=0,
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
                     plot=plot )
 
         if plot :
@@ -181,9 +182,10 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "stdv  ", fmt( bf.stdevs ) )
         print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
 
-        errdis = GaussErrorDistribution ( x, y )
+        errdis = GaussErrorDistribution( )
+        problem = ClassicProblem( pm, xdata=x, ydata=y )
 
-        logz1, logl1 = plotErrdis2d( errdis, pm, limits=limits, max=0,
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
                     plot=plot )
         if plot :
             plt.plot( pars[0], pars[1], 'k.' )
@@ -242,9 +244,10 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.figure( "model" )
             plotFit( x, data=y, model=pm, ftr=bf, truth=ym, show=False )
 
-        errdis = GaussErrorDistribution ( x, y, scale=0.5 )
+        errdis = GaussErrorDistribution( scale=0.5 )
+        problem = ClassicProblem( pm, xdata=x, ydata=y )
 
-        logz1, logl1 = plotErrdis2d( errdis, pm, limits=limits, max=0,
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
                         plot=plot )
 
         if plot :
@@ -255,7 +258,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
 
-        dis = GaussErrorDistribution( x, y, scale=0.5 )
+        dis = GaussErrorDistribution( scale=0.5 )
         ns = NestedSampler( x, model, y, distribution=dis, verbose=0 )
 
         logE = ns.sample()
@@ -316,9 +319,10 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.figure( "model" )
             plotFit( x, data=y, model=pm, ftr=bf, truth=ym, show=False )
 
-        errdis = GaussErrorDistribution ( x, y )
+        errdis = GaussErrorDistribution( )
+        problem = ClassicProblem( pm, xdata=x, ydata=y )
 
-        logz1, logl1 = plotErrdis2d( errdis, pm, limits=limits, nslim=nslim,
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, nslim=nslim,
                         plot=plot )
         if plot :
             plt.plot( pars[0], scale, 'k.' )
@@ -328,7 +332,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model = PolynomialModel( 0 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
 
-        dis = GaussErrorDistribution( x, y )
+        dis = GaussErrorDistribution( )
         dis.setLimits( nslim )
         ns = NestedSampler( x, model, y, distribution=dis, verbose=0 )
 
@@ -382,7 +386,7 @@ class TestEvidence2( unittest.TestCase  ) :
         s2 = 0.0
         mr = 10
         for k in range( mr ) :
-            dis = GaussErrorDistribution( x, y, scale=0.5 )
+            dis = GaussErrorDistribution( scale=0.5 )
             ns = NestedSampler( x, model, y, distribution=dis, verbose=0, seed=k )
 
             logE = ns.sample()
@@ -427,8 +431,9 @@ class TestEvidence2( unittest.TestCase  ) :
         logl0 = bf.logLikelihood
         print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
 
-        errdis = LaplaceErrorDistribution( x, y, scale=nf )
-        logz1, logl1 = plotErrdis2d( errdis, model, limits=limits, max=0,
+        errdis = LaplaceErrorDistribution( scale=nf )
+        problem = ClassicProblem( model, xdata=x, ydata=y )
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
                 plot=plot )
         if plot :
             plt.plot( pars[0], pars[1], 'k.' )
@@ -493,8 +498,9 @@ class TestEvidence2( unittest.TestCase  ) :
         logl0 = bf.logLikelihood
         print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
 
-        errdis = LaplaceErrorDistribution( x, y, scale=nf )
-        logz1, logl1 = plotErrdis( errdis, model, limits=limits, max=0,
+        errdis = LaplaceErrorDistribution( scale=nf )
+        problem = ClassicProblem( model, xdata=x, ydata=y )
+        logz1, logl1 = plotErrdis( errdis, problem, limits=limits, max=0,
                 plot=plot )
         if plot :
             plt.plot( pars[0], logl1, 'k.' )
@@ -567,8 +573,9 @@ class TestEvidence2( unittest.TestCase  ) :
         logl0 = bf.logLikelihood
         print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
 
-        errdis = LaplaceErrorDistribution( x, y, scale=nf )
-        logz1, logl1 = plotErrdis2d( errdis, model, limits=limits, max=0,
+        errdis = LaplaceErrorDistribution( scale=nf )
+        problem = ClassicProblem( model, xdata=x, ydata=y )
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
                         plot=plot )
         if plot :
             plt.plot( pars[0], pars[1], 'k.' )
@@ -631,8 +638,9 @@ class TestEvidence2( unittest.TestCase  ) :
         logl0 = bf.logLikelihood
         print( "logZ  ", fmt( logz0 ), "   logl  ", fmt( logl0 ) )
 
-        errdis = PoissonErrorDistribution( x, y )
-        logz1, logl1 = plotErrdis2d( errdis, model, limits=limits, max=0,
+        errdis = PoissonErrorDistribution( )
+        problem = ClassicProblem( model, xdata=x, ydata=y )
+        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
                     plot=plot )
         if plot :
             plt.plot( pars[0], pars[1], 'k.' )
@@ -641,7 +649,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-        ns = NestedSampler( x, model, y, distribution='poisson', verbose=0 )
+        ns = NestedSampler( x, model, y, distribution='poisson', verbose=0, seed=23456 )
 
         logE = ns.sample()
 

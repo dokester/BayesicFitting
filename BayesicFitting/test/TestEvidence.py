@@ -144,7 +144,8 @@ class TestEvidence( unittest.TestCase  ) :
         maxloglik = bf.logLikelihood
         lintpr = math.log( hi - lo )
 
-        errdis = GaussErrorDistribution( x, y, scale=nf )
+        errdis = GaussErrorDistribution( scale=nf )
+        problem = ClassicProblem( model=pm, xdata=x, ydata=y )
 
         npt = 401
         p0 = np.linspace( lo, hi, npt )
@@ -154,7 +155,7 @@ class TestEvidence( unittest.TestCase  ) :
             pp = np.append( pars, [nf] )
             for k,p in enumerate( p0 ) :
                 pp[i] = p
-                L0[k] = errdis.logLikelihood( pm, pp )
+                L0[k] = errdis.logLikelihood( problem, pp )
             lz = np.log( np.sum( np.exp( L0 ) ) * (hi - lo) / npt )
             maxl = np.max( L0 )
             L0 -= maxloglik
@@ -166,7 +167,7 @@ class TestEvidence( unittest.TestCase  ) :
                 plt.plot( p0, np.exp( L0 ), 'k-' )
 
         print( "BF logL  ", maxloglik, bf.logOccam, maxl, np.exp( maxl ), lintpr )
-        print( "ED logL  ", errdis.logLikelihood( pm, np.append( pars, [nf] ) ) )
+        print( "ED logL  ", errdis.logLikelihood( problem, np.append( pars, [nf] ) ) )
         print( "evid      %f  %f  %f"%( logz, lz - lintpr,
                 maxloglik + math.log( 0.01 * math.pi ) - lintpr  ) )
 #        print( "evid      %f  %f  %f"%( logz, lz, maxloglik + math.log( 0.01 * math.pi )  ) )
@@ -211,7 +212,8 @@ class TestEvidence( unittest.TestCase  ) :
         maxloglik = bf.logLikelihood
         lintpr = math.log( hi - lo )
 
-        errdis = LaplaceErrorDistribution( x, y, scale=nf )
+        errdis = LaplaceErrorDistribution( scale=nf )
+        problem = ClassicProblem( model=pm, xdata=x, ydata=y )
 
         npt = 101
         p0 = np.linspace( lo, hi, npt )
@@ -221,7 +223,7 @@ class TestEvidence( unittest.TestCase  ) :
             pp = np.append( pars, [nf] )
             for k,p in enumerate( p0 ) :
                 pp[i] = p
-                L0[k] = errdis.logLikelihood( pm, pp )
+                L0[k] = errdis.logLikelihood( problem, pp )
             lz = np.log( np.sum( np.exp( L0 ) ) * (hi - lo) / npt )
             maxl = np.max( L0 )
             L0 -= maxl
@@ -234,7 +236,7 @@ class TestEvidence( unittest.TestCase  ) :
                 plt.plot( p0, np.exp( L0 ), 'k-' )
 
         print( "BF logL  ", maxloglik, bf.logOccam, maxl, np.exp( maxl ), lintpr )
-        print( "ED logL  ", errdis.logLikelihood( pm, np.append( pars, [nf] ) ) )
+        print( "ED logL  ", errdis.logLikelihood( problem, np.append( pars, [nf] ) ) )
         print( "evid      %f  %f  %f"%( logz, lz - lintpr,
                 maxloglik + math.log( 0.01 * math.pi ) - lintpr  ) )
 #        print( "evid      %f  %f  %f"%( logz, lz, maxloglik + math.log( 0.01 * math.pi )  ) )
@@ -269,8 +271,8 @@ class TestEvidence( unittest.TestCase  ) :
         print( "stdv  ", std )
         print( "scale %f  sumwgt %f" % ( bf.scale, bf.sumwgt ) )
 
-        errdis = GaussErrorDistribution( x, y, scale=nf )
-
+        errdis = GaussErrorDistribution( scale=nf )
+        problem = ClassicProblem( model=pm, xdata=x, ydata=y )
 
         p0 = np.linspace( 0.0, 3.0, 301 )
         for i in range( pm.npchain ) :
@@ -278,7 +280,7 @@ class TestEvidence( unittest.TestCase  ) :
             pp = np.append( pars, [0.1] )
             for k,p in enumerate( p0 ) :
                 pp[i] = p
-                L0[k] = errdis.logLikelihood( pm, pp )
+                L0[k] = errdis.logLikelihood( problem, pp )
             L0 -= np.max( L0 )
 
             if plot :
@@ -316,12 +318,14 @@ class TestEvidence( unittest.TestCase  ) :
         print( "stdv  ", std )
         print( "scale %f  sumwgt %f" % ( bf.scale, bf.sumwgt ) )
 
-        errdis = LaplaceErrorDistribution( x, y, scale=nf )
+        errdis = LaplaceErrorDistribution( scale=nf )
+        problem = ClassicProblem( model=pm, xdata=x, ydata=y )
+
         p0 = np.linspace( 1.2, 1.5, 201 )
         L0 = np.ndarray( 201, dtype=float )
         for k,p in enumerate( p0 ) :
             pp = [p, 0.1]
-            L0[k] = errdis.logLikelihood( pm, pp )
+            L0[k] = errdis.logLikelihood( problem, pp )
         L0 -= np.max( L0 )
 
         if plot :

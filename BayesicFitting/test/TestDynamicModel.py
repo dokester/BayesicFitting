@@ -260,14 +260,28 @@ class TestDynamicModel( unittest.TestCase ):
         x = numpy.linspace( -1.0, 1.0, 11 )
         y = numpy.linspace( 0.0, 2.3, 11 )
 
-        errdis = GaussErrorDistribution( x, y )
-        sl = SampleList( m, 10, errdis )
-        print( m. npchain, m.npbase, m._next.npbase )
+        problem = ClassicProblem( model=m, xdata=x, ydata=y )
+
+        print( problem.myEngines() )
+        print( problem.myStartEngine() )
+        print( problem.myDistribution() )
+
+        self.assertTrue( "galilean" in problem.myEngines() )
+        self.assertTrue( "birth" in problem.myEngines() )
+        self.assertTrue( "death" in problem.myEngines() )
+
+        errdis = GaussErrorDistribution( )
+
+        allpars = numpy.append( par, [1.0] )
+        fitIndex = [0,1,2,3,4,5]
+        sl = WalkerList( problem, 10, allpars, fitIndex )
+
+        print( m.npchain, m.npbase, m._next.npbase )
         print( "====================" )
 
         seng = StartEngine( sl, errdis )
         for s in sl :
-            print( s.model.npchain, s.model.npbase, s.model._next.npbase )
+            print( s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
             seng.execute( s, 0.0 )
 
         logl = sl.getLogLikelihoodEvolution()
@@ -281,9 +295,10 @@ class TestDynamicModel( unittest.TestCase ):
         for s in sl :
             Tools.printclass( s )
             suc = beng.execute( s, lowl )
-            print( "Birth  :", suc, s.model.npchain, s.model.getLimits() )
+            print( "Birth  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
+            Tools.printclass( s )
             suc = deng.execute( s, lowl )
-            print( "Death  :", suc, s.model.npchain, s.model.getLimits() )
+            print( "Death  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
 
 
     def testNestedSampler( self, plot=False ) :

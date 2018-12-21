@@ -67,10 +67,8 @@ class TestEngine( unittest.TestCase ):
         print( "\n   Engine Test 1\n" )
         m, xdata, data = self.initEngine()
 
-        errdis = GaussErrorDistribution( xdata, data )
+        errdis = GaussErrorDistribution( )
         errdis.setLimits( [0.1, 10.0] )
-
-        sl = SampleList( m, 100, errdis )
 
         print( errdis.hyperpar[0].prior )
         print( errdis.hyperpar[0].prior.lowLimit )
@@ -78,7 +76,15 @@ class TestEngine( unittest.TestCase ):
         print( errdis.hyperpar[0].prior._logLo )
         print( errdis.hyperpar[0].prior._norm )
 
-        engine = Engine( sl, errdis )
+        fi = [0,1,2,-1]
+        problem = ClassicProblem( m, xdata, data )
+
+        Tools.printclass( problem )
+
+        allpars = numpy.append( m.parameters, 1.0 )
+        wl = WalkerList( problem, 100, allpars, fi )
+
+        engine = Engine( wl, errdis )
         self.enginetest( engine )
 
         print( "    make copy of engine" )
@@ -86,13 +92,12 @@ class TestEngine( unittest.TestCase ):
         self.enginetest( copeng )
 
     def enginetest( self, engine ) :
-        sl = engine.walkers
-        for samp in sl :
-            m = samp.model
-            p = engine.unit2Domain( m, engine.rng.rand( 4 ) )
-            logL = engine.errdis.logLikelihood( m, p )
-            logW = 0.01
-            engine.setSample( samp, m, p, logL, logW )
+        walkers = engine.walkers
+        for w in walkers :
+            problem = w.problem
+            p = engine.unit2Domain( problem, engine.rng.rand( 4 ) )
+            logL = engine.errdis.logLikelihood( problem, p )
+            engine.setWalker( w, problem, p, logL )
             engine.reportSuccess()
             engine.reportCall()
 
@@ -109,7 +114,7 @@ class TestEngine( unittest.TestCase ):
 
         print( "UnitR ", engine.unitRange )
 
-        print( "DomR  ", engine.unit2Domain( m, engine.unitRange ) )
+        print( "DomR  ", engine.unit2Domain( problem, engine.unitRange ) )
         engine.printReport()
 
 

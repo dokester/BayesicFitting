@@ -53,12 +53,18 @@ class TestStartEngine( TestEngine ):
         print( "\n   Start Engine Test 1\n" )
         m, xdata, data = self.initEngine()
 
-        errdis = GaussErrorDistribution( xdata, data )
+        print( m )
+
+        problem = ClassicProblem( m, xdata=xdata, ydata=data )
+
+        errdis = GaussErrorDistribution( )
         errdis.setLimits( [0.1, 10.0] )
+        ap = [1.0, 0.0, 0.3, 0.2]
+        fi = [0,1,2,-1]
 
-        sl = SampleList( m, 100, errdis )
+        wl = WalkerList( problem, 100, ap, fi )
 
-        engine = StartEngine( sl, errdis )
+        engine = StartEngine( wl, errdis )
         self.startenginetest( engine )
 
         print( "    make copy of engine" )

@@ -110,38 +110,6 @@ class TestWeights( unittest.TestCase  ) :
         print( "chisq %f  scale %f %f  sumwgt %f" % ( bf.chisq, bf.scale, bf.makeVariance(), bf.sumwgt ) )
         print( "noise ", bf.scale, " +- ", bf.stdevScale, "  keep ", bf.keep )
 
-        """
-        print( "evid %f  occam %f  lhood %f" %
-            ( bf.getLogZ(), bf.getLogOccam(), bf.getLogLikelihood() ) )
-
-        ns = NoiseScale()
-        ns.setLimits( [0.01, 10] )
-        pm.noiseScale = ns
-        print( "======= Parameters and scale" )
-        print( "evid %f  occam %f  lhood %f" %
-            ( bf.getLogZ(), bf.getLogOccam(), bf.getLogLikelihood() ) )
-
-        print( "======= Parameters and fixed scale = 0.01" )
-        pm.noiseScale.keepFixed( scale = 0.01 )
-        print( "evid %f  occam %f  lhood %f" %
-            ( bf.getLogZ(), bf.getLogOccam(), bf.getLogLikelihood() ) )
-
-        print( "======= Parameters and fixed scale = 0.1" )
-        pm.noiseScale.keepFixed( scale = 0.1 )
-        print( "evid %f  occam %f  lhood %f" %
-            ( bf.getLogZ(), bf.getLogOccam(), bf.getLogLikelihood() ) )
-
-        print( "======= Parameters and fixed scale = 1.0" )
-        pm.noiseScale.keepFixed( scale = 1.0 )
-        print( "evid %f  occam %f  lhood %f" %
-            ( bf.getLogZ(), bf.getLogOccam(), bf.getLogLikelihood() ) )
-
-
-        print( "======= Parameters and fixed scale = 10.0" )
-        pm.noiseScale.keepFixed( scale = 10.0 )
-        print( "evid %f  occam %f  lhood %f" %
-            ( bf.getLogZ(), bf.getLogOccam(), bf.getLogLikelihood() ) )
-        """
 
 if __name__ == '__main__':
     unittest.main( )

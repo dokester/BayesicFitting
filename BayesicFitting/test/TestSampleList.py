@@ -59,10 +59,11 @@ class TestSampleList( unittest.TestCase ):
         gm = GaussModel( )
         gm += PolynomialModel( 0 )
 
-        errdis = GaussErrorDistribution( self.x, self.noise )
+        problem = ClassicProblem( gm, xdata=self.x, ydata=self.noise )
+#        errdis = GaussErrorDistribution( )
 
         lnZ = 1.234
-        sl0 = SampleList( gm, self.len, errdis )
+        sl0 = SampleList( gm, self.len )
         k = 0
         for s in sl0 :
             self.assertTrue( s.id == k )
@@ -73,20 +74,23 @@ class TestSampleList( unittest.TestCase ):
             self.assertTrue( s.parameters[0] == 1 )
             self.assertTrue( s.parameters[1] == 0 )
             self.assertTrue( s.parameters[2] == 1 )
-            self.assertTrue( s.hypars[0] == 1 )
+            self.assertTrue( s.parameters[3] == 0 )
+
             self.assertTrue( len( s.fitIndex ) == 4 )
             k += 1
 
-        errdis = GaussErrorDistribution( self.x, self.noise, limits=[0.1,10] )
-        sl = SampleList( gm, self.len, errdis )
+        ap = numpy.append( gm.parameters, [0.5] )
+        fi = numpy.asarray( [0,1,2,3,-1] )
+
+        sl = SampleList( gm, self.len, parameters=ap, fitIndex=fi )
         k = 0
         for s in sl:
             s.id = k + 1
             s.parent = ( k + 2 ) % self.len + 1
             sup = 0.3 + 0.01 * self.noise[k]
+            s.hyper = sup
             pars = self.par + 0.01 * self.noise[k]
-            pars = numpy.append( pars, Tools.toArray( sup ) )
-            s.allpars = pars
+            s.parameters = pars
             s.logL = -1213.0 + self.x[k]
             s.logW = math.log( self.wgt[k] / 38.0 ) + lnZ
             print( s )
@@ -144,9 +148,11 @@ class TestSampleList( unittest.TestCase ):
         print( "sl  Id   ", sl.getGeneration( ) )
         print( "sl  par  ", sl.getParentEvolution( ) )
 
-        sl0.add( sl, 1 )
+        sl0.add( sl[10] )
+#        print( "sl0 Id   ", sl0.getGeneration( ) )
         self.assertTrue( len( sl0 ) == 12 )
         sl0.copy( 11, 0 )
+#        print( "sl0 Id   ", sl0.getGeneration( ) )
         self.assertTrue( sl0[0].id == 0 )
         self.assertTrue( sl0[11].id == 11 )
         self.assertTrue( sl0[0].logW == sl0[11].logW )

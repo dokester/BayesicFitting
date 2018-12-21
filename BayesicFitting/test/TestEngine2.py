@@ -103,16 +103,22 @@ class TestEngine2( unittest.TestCase ):
 
     def stdenginetest( self, myengine, nsamp=4, iter=100, plot=False ) :
         m, xdata, data = self.initEngine()
-        errdis = GaussErrorDistribution( xdata, data, scale=0.5 )
+        problem = ClassicProblem( m, xdata=xdata, ydata=data )
+
+        Tools.printclass( problem )
+        errdis = GaussErrorDistribution( scale=0.5 )
         Tools.printclass( errdis )
 
-        sl = SampleList( m, nsamp, errdis )
+        allpars = numpy.append( m.parameters, [0.5] )
+        fitIndex = [0,1]
+        wl = WalkerList( problem, nsamp, allpars, fitIndex )
+
         map = numpy.ndarray( (41,21), dtype=float )
         mmx = -math.inf
         for k0 in range( 21 ) :
             for k1 in range( 41 ) :
                 pl = [k0-10, 0.25*k1, 0.5]
-                map[k1,k0] = errdis.logLikelihood( m, pl )
+                map[k1,k0] = errdis.logLikelihood( problem, pl )
                 if map[k1,k0] > mmx :
                     mmx = map[k1,k0]
                     mk1 = k1 / 4
@@ -125,13 +131,12 @@ class TestEngine2( unittest.TestCase ):
         ay = numpy.linspace(   0, 10, 41 )
         v = [-500000,-100000,-50000,-10000,-5000, -3000, -1000, -500, -300, -200]
 
-        engine = StartEngine( sl, errdis )
+        engine = StartEngine( wl, errdis )
         Tools.printclass( engine.walkers[0] )
-        for samp in engine.walkers :
-            engine.execute( samp, -math.inf )
+        for walker in engine.walkers :
+            engine.execute( walker, -math.inf )
 
-        pevo = sl.getParameterEvolution()
-
+        pevo = wl.getParameterEvolution()
         if plot :
             plt.figure( str( myengine ) )
             plt.contour( ax, ay, map, v )
@@ -139,21 +144,21 @@ class TestEngine2( unittest.TestCase ):
             plt.plot( pevo[:,0], pevo[:,1], 'k.' )
 
         col = ['k-', 'r-', 'g-', 'b-']
-        engine = myengine( sl, errdis )
+        engine = myengine( wl, errdis )
         for k in range( iter ) :
-            lowL, klo = sl.getLowLogL()
-            p0 = sl[klo].allpars[:2]
+            lowL, klo = wl.getLowLogL()
+            p0 = wl[klo].allpars[:2]
             engine.calculateUnitRange()
             while True :
                 kok = engine.rng.randint( 0, nsamp )
-#                print( klo, kok )
                 if kok != klo :
-                    sl[klo].allpars = sl[kok].allpars.copy()
+                    wl[klo].allpars = wl[kok].allpars.copy()
                     break
-            engine.execute( sl[klo], lowL )
-            p1 = sl[klo].allpars[:2]
+
+            engine.execute( wl[klo], lowL )
+            p1 = wl[klo].allpars[:2]
             if k % 50 == 0 :
-                print( k, klo, p1, sl[klo].logL )
+                print( k, klo, p1, wl[klo].logL )
 
             if plot :
                 plt.plot( [p0[0],p1[0]], [p0[1],p1[1]], col[klo%4] )
@@ -163,7 +168,7 @@ class TestEngine2( unittest.TestCase ):
 
 #        engine.printReport()
         if plot :
-            pevo = sl.getParameterEvolution()
+            pevo = wl.getParameterEvolution()
             plt.plot( pevo[:,0], pevo[:,1], 'r.' )
             plt.show()
 

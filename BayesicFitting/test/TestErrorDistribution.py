@@ -72,96 +72,102 @@ class TestErrorDistribution( unittest.TestCase ):
 
         model = PolynomialModel( 0 )
         model.parameters = 0.0
+        problem = ClassicProblem( model=model, xdata=x, ydata=ym )
+        fitIndex=[0]
+
         numpy.random.seed( 2345 )
         noise = numpy.random.randn( nn )
 
-        errdis = GaussErrorDistribution ( x, ym )
+        errdis = GaussErrorDistribution( )
+        allpars = [0.0, 1.0]
         print( errdis )
         for k in range( 5 ) :
             noise = numpy.random.randn( nn )
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
-        allpars = [0.0, 1.0]
         if plot:
             self.ploterrdis( noise, errdis, model, allpars )
 
         nf = 0.01
-        errdis = LaplaceErrorDistribution ( x, ym )
+        errdis = LaplaceErrorDistribution( )
         print( errdis )
         for k in range( 5 ) :
             noise = numpy.random.laplace( size=nn )
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
 
         nf = 0.01
-        errdis = UniformErrorDistribution ( x, ym )
+        errdis = UniformErrorDistribution( )
         print( errdis )
         for k in range( 5 ) :
             noise = 0.5 - numpy.random.rand( nn )
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
 
         nf = 0.01
-        errdis = CauchyErrorDistribution ( x, ym )
+        errdis = CauchyErrorDistribution ( )
         cp = CauchyPrior()
         print( errdis )
         for k in range( 5 ) :
             noise = numpy.random.rand( nn )
             noise = cp.unit2Domain( noise )
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
 
         nf = 0.01
-        errdis = GenGaussErrorDistribution ( x, ym, power=1 )
+        errdis = ExponentialErrorDistribution( )
+        allpars = [0.0, 1.0, 1.0]
         print( errdis, "  power=1" )
         for k in range( 5 ) :
             noise = numpy.random.laplace( size=nn )
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
 
         nf = 0.01
-        errdis = GenGaussErrorDistribution ( x, ym, power=2 )
+        errdis = ExponentialErrorDistribution( )
+        allpars = [0.0, 1.0, 2.0]
         print( errdis, "  power=2"  )
         for k in range( 5 ) :
             noise = numpy.random.randn( nn )
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
 
         nf = 0.01
         power = 10
-        errdis = GenGaussErrorDistribution ( x, ym, power=power )
+        errdis = ExponentialErrorDistribution ( )
+        allpars = [0.0, 1.0, 10.0]
         print( errdis, "  power=%d" % power  )
         for k in range( 5 ) :
             noise = 2 * numpy.random.rand( nn ) - 1.0
             y = ym + nf * noise
-            errdis.data = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( model ) ) )
+            problem.ydata = y
+            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
 
         allpars = [0.0, 1.0, power]
         if plot :
             self.ploterrdis( noise, errdis, model, allpars )
 
-    def ploterrdis( self, noise, errdis, model, allpars ) :
+    def ploterrdis( self, noise, errdis, problem, allpars ) :
         num_bins = 20
         plt.hist( noise, num_bins, normed=1, facecolor='g', alpha=0.5 )
         xx = numpy.linspace( -0.3, 0.3, 601, dtype=float )
         lik = numpy.zeros_like( xx )
         for k,p in enumerate( xx ) :
             allpars[0] = p
-            lik[k] = errdis.logLikelihood( model, allpars )
+            lik[k] = errdis.logLikelihood( problem, allpars )
         maxlik = numpy.max( lik )
         plt.plot( xx, numpy.exp( lik - maxlik ), 'r-' )
         plt.show()
@@ -173,29 +179,33 @@ class TestErrorDistribution( unittest.TestCase ):
 
         poly = PolynomialModel( 1 )
         param = numpy.asarray( [1,10,1], dtype=float )
-        ged = GaussErrorDistribution( self.x, self.data )
+        ged = GaussErrorDistribution( )
         self.assertTrue( ged.acceptWeight() )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data,
+                weights=self.wgt )
+
+        fitIndex = [0,1,-1]
 
         #   data = { -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 }
         #   f( x ) = { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 }
         #   f - d=     1   1  -1   1  -1 -1  1 -1  1  0  -1
 
-        chisq = ged.getChisq( ged.getResiduals( poly, param[:2] ), param[2] )
+        chisq = ged.getChisq( problem, param )
         print( "chisq = %8.3f"%( chisq ) )
-        lLdata = ged.logLdata( poly, param )
+        lLdata = ged.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
 
-        logL = ged.logLikelihood( poly, param )
-        altL = -0.5 * ( 11 * math.log( 2 * math.pi ) + chisq )
+        logL = ged.logLikelihood( problem, param )
+        altL = ged.logLikelihood_alt( problem, param )
         print( "logL  = %8.3f  %8.3f  %8.3f" % ( logL, logL0, altL ) )
         assertAAE( logL, altL )
         assertAAE( logL, logL0 )
 
         scale = 0.1
         param[2] = scale
-        logL = ged.logLikelihood( poly, param )
-        altL = -11 * ( 0.5 * math.log( 2 * math.pi ) +
-                    math.log( scale ) ) - 0.5 * chisq / ( scale * scale )
+        logL = ged.logLikelihood( problem, param )
+        altL = ged.logLikelihood_alt( problem, param )
         print( "logL  = %8.3f  %8.3f" % ( logL, altL ) )
         assertAAE( logL, altL )
 
@@ -203,28 +213,28 @@ class TestErrorDistribution( unittest.TestCase ):
         param[2] = scale
 #        fitIndex = numpy.arange( 3 )
         fitIndex = numpy.asarray( [0,1,-1] )
-        dL = ged.partialLogL( poly, param, fitIndex )
-        nL = ged.numPartialLogL( poly, param, fitIndex )
+        dL = ged.partialLogL( problem, param, fitIndex )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
-        print( "partXXX = ", ged.partialLogLXXX( poly, param, fitIndex ) )
+        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
         print( "Using scale = 0.5 and weights." )
         scale = 0.5
         param[2] = scale
-        ged.weights = self.wgt
+        problem.weights = self.wgt
 
-        logL = ged.logLikelihood( poly, param )
+        logL = ged.logLikelihood( problem, param )
         print( "logL = %8.3f  %8.3f" % ( logL, logL0 ) )
 
-        lLdata = ged.logLdata( poly, param )
+        lLdata = ged.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
         assertAAE( logL, logL0 )
 
-        dL = ged.partialLogL( poly, param, fitIndex )
-        print( "partXXX = ", ged.partialLogLXXX( poly, param, fitIndex ) )
-        nL = ged.numPartialLogL( poly, param, fitIndex )
+        dL = ged.partialLogL( problem, param, fitIndex )
+        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
@@ -234,7 +244,7 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5,5,1], dtype=float )
             print( param, "  :  ", end="" )
             for k in range( 9 ):
-                print( " %8.3f" % ged.logLikelihood( poly, param ), end="" )
+                print( " %8.3f" % ged.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
@@ -245,22 +255,25 @@ class TestErrorDistribution( unittest.TestCase ):
         param = numpy.asarray( [5, 1, -0.3, 1, 1, 1], dtype=float )
         data2 = self.data.copy( ) * 0.1
         data2[1:5] = [2.3, 5.4, 4.5, 2.0]
-
         print( data2 )
 
-        ged = GaussErrorDistribution( self.x, data2 )
+        problem = ClassicProblem( model=gm, xdata=self.x, ydata=self.data )
+        fitIndex = [0,1,2,3,4,-1]
+
+        ged = GaussErrorDistribution( )
         Tools.printclass( ged )
         np = gm.npchain
-        chisq = ged.getChisq( ged.getResiduals( gm, param[:np] ), param[np] )
+        chisq = ged.getChisq( problem, param )
         print( "chisq = %8.3f"%( chisq ) )
-        logL = ged.logLikelihood( gm, param )
+        logL = ged.logLikelihood( problem, param )
+        altL = ged.logLikelihood_alt( problem, param )
 
-        print( "logL  = %8.3f  %8.3f" % ( logL, -0.5 * ( 11 * math.log( 2 * math.pi ) + chisq) ) )
-        assertAAE( logL, -0.5 * ( 11 * math.log( 2 * math.pi ) + chisq) )
+        print( "logL  = %8.3f  %8.3f" % ( logL, altL ) )
+        assertAAE( logL, altL )
 
         scale = 0.1
         param[np] = scale
-        logL = ged.logLikelihood( gm, param )
+        logL = ged.logLikelihood( problem, param )
         altL = ( -11 * ( 0.5 * math.log( 2 * math.pi ) +
                     math.log( scale ) ) - 0.5 * chisq / ( scale * scale ) )
         print( "logL  = %8.3f  %8.3f" % ( logL, altL ) )
@@ -268,63 +281,66 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 1.0
         param[np] = scale
-        fitIndex = numpy.append( numpy.arange( np ), [-1] )
-        dL = ged.partialLogL( gm, param, fitIndex )
-        nL = ged.numPartialLogL( gm, param, fitIndex )
+        dL = ged.partialLogL( problem, param, fitIndex )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
-        print( "partXXX = ", ged.partialLogLXXX( gm, param, fitIndex ) )
+        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
         fitIndex = numpy.asarray( [0,2,3,4] )
-        dL = ged.partialLogL( gm, param, fitIndex )
-        nL = ged.numPartialLogL( gm, param, fitIndex )
+        dL = ged.partialLogL( problem, param, fitIndex )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
-        print( "partXXX = ", ged.partialLogLXXX( gm, param, fitIndex ) )
+        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
         scale = 0.5
         param[np] = scale
         fitIndex = numpy.asarray( [0,1,2,3,4,-1] )
-        ged.weights = self.wgt
-        dL = ged.partialLogL( gm, param, fitIndex )
-        nL = ged.numPartialLogL( gm,  param, fitIndex )
+        problem.weights = self.wgt
+        dL = ged.partialLogL( problem, param, fitIndex )
+        nL = ged.numPartialLogL( problem,  param, fitIndex )
         print( "partial = ", dL )
-        print( "partXXX = ", ged.partialLogLXXX( gm, param, fitIndex ) )
+        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
         scale = 0.5
         param[np] = scale
         fitIndex = numpy.asarray( [0,1,2,4,-1] )
-        ged.weights = self.wgt
+
         ged.hyperpar[0] = NoiseScale()
         Tools.printclass( ged )
         ged.keepFixed( fixed={0:2.5} )
         Tools.printclass( ged )
         Tools.printclass( ged.hyperpar[0] )
 
-        dL = ged.partialLogL( gm, param, fitIndex )
-        print( "partXXX = ", ged.partialLogLXXX( gm, param, fitIndex ) )
-        nL = ged.numPartialLogL( gm, param, fitIndex )
+        dL = ged.partialLogL( problem, param, fitIndex )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
+        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
-    def testGenGaussErrorDistribution1( self ):
+    def testExponentialErrorDistribution1( self ):
 
-        print( "=======   Test Gen Gauss Error Distribution 1 ==================" )
+        print( "=======   Test Exponential Error Distribution 1 ==================" )
 
         poly = PolynomialModel( 1 )
         param = numpy.asarray( [1,10], dtype=float )
-        ged = LaplaceErrorDistribution( self.x, self.data )
-        ggd = GenGaussErrorDistribution( self.x, self.data )
+        ged = LaplaceErrorDistribution( )
+        ggd = ExponentialErrorDistribution( )
         self.assertTrue( ggd.acceptWeight() )
 
         #   data = { -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 }
         #   f( x ) = { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 }
         #   f - d=     1   1  -1   1  -1 -1  1 -1  1  0  -1
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
+        fitIndex = [0,1,2,3,4,-1]
+
 
         power = 1.0
         ggscl = 1.0
@@ -338,37 +354,37 @@ class TestErrorDistribution( unittest.TestCase ):
         ff = 1.0 / sigma
         ggpar = numpy.append( param, hypar )
         lppar = numpy.append( param, [lpscl] )
-        res = ggd.getResiduals( poly, param )
-        chisq = ged.getSumRes( res, lpscl )
-        chipp = ggd.getChisq( res, ggscl, power )
+        res = problem.residuals( param )
+        chisq = ged.getSumRes( problem, lppar )
+        chipp = ggd.getChipow( problem, ggpar )
         print( "chipp = %8.3f   chisq = %8.3f"%( chipp, chisq ) )
-#        ggfi = numpy.arange( 4 )
-#        lpfi = numpy.arange( 3 )
+        assertAAE( chisq, chipp )
+
         ggfi = numpy.asarray( [0,1,-2,-1] )
         lpfi = numpy.asarray( [0,1,-1] )
-        logL = ged.logLikelihood( poly, lppar )
-        lggL = ggd.logLikelihood( poly, ggpar )
+        logL = ged.logLikelihood( problem, lppar )
+        lggL = ggd.logLikelihood( problem, ggpar )
 
         print( "lggL  = %8.3f   logL  = %8.3f" % ( lggL, logL ) )
         assertAAE( logL, lggL )
 
-        lLdata = ggd.logLdata( poly, ggpar )
+        lLdata = ggd.logLdata( problem, ggpar )
         logL0 = numpy.sum( lLdata )
         print( "logL  = %8.3f   ldata = %8.3f" % (logL, logL0 ) )
         assertAAE( logL, logL0 )
 
 
-        dL = ged.partialLogL( poly, lppar, lpfi )
-        nL = ged.numPartialLogL( poly, lppar, lpfi )
-        dG = ggd.partialLogL( poly, ggpar, ggfi)
-        nG = ggd.numPartialLogL( poly, ggpar, ggfi )
+        dL = ged.partialLogL( problem, lppar, lpfi )
+        nL = ged.numPartialLogL( problem, lppar, lpfi )
+        dG = ggd.partialLogL( problem, ggpar, ggfi)
+        nG = ggd.numPartialLogL( problem, ggpar, ggfi )
 
         print( "partial = ", dL )
         print( "partial = ", dG )
         print( "numpart = ", nL )
-#        print( "partXXX = ", ged.partialLogLXXX( poly, lppar, lpfi ) )
+#        print( "partalt = ", ged.partialLogL_alt( problem, lppar, lpfi ) )
         print( "numpart = ", nG )
-        print( "partXXX = ", ggd.partialLogLXXX( poly, ggpar, ggfi ) )
+        print( "partalt = ", ggd.partialLogL_alt( problem, ggpar, ggfi ) )
 
         assertAAE( dG[:3], dL, 5 )
         assertAAE( dG, nG, 5 )
@@ -379,8 +395,8 @@ class TestErrorDistribution( unittest.TestCase ):
         sigma = ggscl / ff
         ggpar = numpy.append( param, hypar )
         lppar = numpy.append( param, [sigma] )
-        logL = ged.logLikelihood( poly, lppar )
-        lggL = ggd.logLikelihood( poly, ggpar )
+        logL = ged.logLikelihood( problem, lppar )
+        lggL = ggd.logLikelihood( problem, ggpar )
         print( "lggL  = %8.3f   logL  = %8.3f" % ( lggL, logL ) )
         assertAAE( logL, lggL )
 
@@ -391,19 +407,18 @@ class TestErrorDistribution( unittest.TestCase ):
         ggpar = numpy.append( param, hypar )
         lppar = numpy.append( param, [sigma] )
 
-        ged.weights = self.wgt
-        ggd.weights = self.wgt
-        dL = ged.partialLogL( poly, lppar, lpfi )
-        nL = ged.numPartialLogL( poly, lppar, lpfi )
-        dG = ggd.partialLogL( poly, ggpar, ggfi)
-        nG = ggd.numPartialLogL( poly, ggpar, ggfi )
+        problem.weights = self.wgt
+        dL = ged.partialLogL( problem, lppar, lpfi )
+        nL = ged.numPartialLogL( problem, lppar, lpfi )
+        dG = ggd.partialLogL( problem, ggpar, ggfi)
+        nG = ggd.numPartialLogL( problem, ggpar, ggfi )
 
         print( "partial = ", dL )
         print( "partial = ", dG )
         print( "numpart = ", nL )
-#        print( "partXXX = ", ged.partialLogLXXX( poly, lppar, lpfi ) )
+#        print( "partalt = ", ged.partialLogL_alt( problem, lppar, lpfi ) )
         print( "numpart = ", nG )
-        print( "partXXX = ", ggd.partialLogLXXX( poly, ggpar, ggfi ) )
+        print( "partalt = ", ggd.partialLogL_alt( problem, ggpar, ggfi ) )
         assertAAE( dG[:3], dL, 5 )
         assertAAE( dG, nG, 5 )
         assertAAE( dL, nL, 5 )
@@ -412,23 +427,26 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5, 5, ggscl, power], dtype=float )
             print( param, "  :  ", end="" )
             for k in range( 9 ):
-                print( " %8.3f" % ggd.logLikelihood( poly, param ), end="" )
+                print( " %8.3f" % ggd.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
-    def testGenGaussErrorDistribution2( self ):
+    def testExponentialErrorDistribution2( self ):
 
-        print( "=======   Test Gen Gauss Error Distribution 2  ==================" )
+        print( "=======   Test Exponential Error Distribution 2  ==================" )
 
         poly = PolynomialModel( 1 )
-        param = numpy.asarray( [1,10], dtype=float )
-        ged = GaussErrorDistribution( self.x, self.data )
-        ggd = GenGaussErrorDistribution( self.x, self.data )
+        param = numpy.asarray( [0.9,10], dtype=float )
+        ged = GaussErrorDistribution( )
+        ggd = ExponentialErrorDistribution( )
         self.assertTrue( ggd.acceptWeight() )
 
         #   data = { -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 }
         #   f( x ) = { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 }
         #   f - d=     1   1  -1   1  -1 -1  1 -1  1  0  -1
+
+        data = [ -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 ]
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
 
         power = 2.0
         scale = 1.0
@@ -438,12 +456,16 @@ class TestErrorDistribution( unittest.TestCase ):
         ff = 1 / sigma
         ggpar = numpy.append( param, hypar )
         gapar = numpy.append( param, [sigma] )
-        res = ggd.getResiduals( poly, param )
-        chisq = ged.getChisq( res, scale )
-        chipp = ggd.getChisq( res, scale, power )
+#        gapar = numpy.append( param, [1.0] )
+
+        chisq = ged.getChisq( problem, gapar )
+        chipp = ggd.getChipow( problem, ggpar )
         print( "chipp = %8.3f   chisq = %8.3f"%( chipp, chisq ) )
-        logL = ged.logLikelihood( poly, gapar )
-        lggL = ggd.logLikelihood( poly, ggpar )
+#        assertAAE( chipp, chisq )
+
+
+        logL = ged.logLikelihood( problem, gapar )
+        lggL = ggd.logLikelihood( problem, ggpar )
 
         print( 'gapar  ', gapar )
         print( 'ggpar  ', ggpar )
@@ -454,15 +476,18 @@ class TestErrorDistribution( unittest.TestCase ):
         ggfi = numpy.array( [0,1,-2,-1] )
         lpfi = numpy.array( [0,1,-1] )
 
-        dL = ged.partialLogL( poly, gapar, lpfi )
-        nL = ged.numPartialLogL( poly, gapar, lpfi )
-        dG = ggd.partialLogL( poly, ggpar, ggfi)
-        nG = ggd.numPartialLogL( poly, ggpar, ggfi )
+        dL = ged.partialLogL( problem, gapar, lpfi )
+        nL = ged.numPartialLogL( problem, gapar, lpfi )
+        dG = ggd.partialLogL( problem, ggpar, ggfi)
+        nG = ggd.numPartialLogL( problem, ggpar, ggfi )
 
         print( "partial = ", dL )
         print( "numpart = ", nL )
+        print( "partalt = ", ged.partialLogL_alt( problem, gapar, lpfi ) )
         print( "partial = ", dG )
         print( "numpart = ", nG )
+        print( "partalt = ", ggd.partialLogL_alt( problem, ggpar, ggfi ) )
+
         print( nG[-2] * ff )
 
         assertAAE( dG[:2], dL[:2], 5 )
@@ -475,16 +500,16 @@ class TestErrorDistribution( unittest.TestCase ):
         sigma = ggd.toSigma( hypar )
         ggpar = numpy.append( param, hypar )
         gapar = numpy.append( param, [sigma] )
-        logL = ged.logLikelihood( poly, gapar )
-        lggL = ggd.logLikelihood( poly, ggpar )
+        logL = ged.logLikelihood( problem, gapar )
+        lggL = ggd.logLikelihood( problem, ggpar )
 
         print( "lggL  = %8.3f   logL  = %8.3f" % ( lggL, logL ) )
         assertAAE( logL, lggL )
 
-        dL = ged.partialLogL( poly, gapar, lpfi )
-        nL = ged.numPartialLogL( poly, gapar, lpfi )
-        dG = ggd.partialLogL( poly, ggpar, ggfi)
-        nG = ggd.numPartialLogL( poly, ggpar, ggfi )
+        dL = ged.partialLogL( problem, gapar, lpfi )
+        nL = ged.numPartialLogL( problem, gapar, lpfi )
+        dG = ggd.partialLogL( problem, ggpar, ggfi)
+        nG = ggd.numPartialLogL( problem, ggpar, ggfi )
 
         print( "partial = ", dL )
         print( "numpart = ", nL )
@@ -501,19 +526,18 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "Super : ", hypar, "  sigma : ", sigma )
         ggpar = numpy.append( param, hypar )
         gapar = numpy.append( param, [sigma] )
-        ged.weights = self.wgt
-        ggd.weights = self.wgt
+        problem.weights = self.wgt
 
-        logL = ged.logLikelihood( poly, gapar )
-        lggL = ggd.logLikelihood( poly, ggpar )
+        logL = ged.logLikelihood( problem, gapar )
+        lggL = ggd.logLikelihood( problem, ggpar )
 
         print( "lggL  = %8.3f   logL  = %8.3f" % ( lggL, logL ) )
         assertAAE( logL, lggL )
 
-        dL = ged.partialLogL( poly, gapar, lpfi )
-        nL = ged.numPartialLogL( poly, gapar, lpfi )
-        dG = ggd.partialLogL( poly, ggpar, ggfi)
-        nG = ggd.numPartialLogL( poly, ggpar, ggfi )
+        dL = ged.partialLogL( problem, gapar, lpfi )
+        nL = ged.numPartialLogL( problem, gapar, lpfi )
+        dG = ggd.partialLogL( problem, ggpar, ggfi)
+        nG = ggd.numPartialLogL( problem, ggpar, ggfi )
 
         print( "partial = ", dL )
         print( "numpart = ", nL )
@@ -528,7 +552,7 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5,5,scale,power], dtype=float )
             print( param, "  :  ", end="" )
             for k in range( 9 ):
-                print( " %8.3f" % ggd.logLikelihood( poly, param ), end="" )
+                print( " %8.3f" % ggd.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
@@ -536,19 +560,22 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "====== Test Poisson Error Distribution ======================" )
         poly = PolynomialModel( 1 )
         param = numpy.asarray( [12, 10], dtype=float )
-        data = numpy.asarray( self.data + 12, dtype=int )
+        data = numpy.asarray( self.data + 13, dtype=int )
         print( "Data : ", data )
-        ped = PoissonErrorDistribution( self.x, data )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
+
+        ped = PoissonErrorDistribution( )
         self.assertFalse( ped.acceptWeight() )
 
-        logL = ped.logLikelihood( poly, param )
+        logL = ped.logLikelihood( problem, param )
         print( "logL  = %8.3f"%( logL ) )
         scale = 0.1
-        logL = ped.logLikelihood( poly, param )
-        mok = poly.result( self.x, param )
-        altL = numpy.sum( data * numpy.log( mok ) - mok - logFactorial( data ) )
+        logL = ped.logLikelihood( problem, param )
+        mok = problem.result( param )
+        altL = ped.logLikelihood_alt( problem, param )
 
-        lLdata = ped.logLdata( poly, param )
+        lLdata = ped.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
         print( "logL  =  %8.3f  ldata %8.3f  alt %8.3f" % (logL, logL0, altL ) )
         assertAAE( logL, altL )
@@ -557,21 +584,21 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "logL  = %8.3f  %8.3f" % ( logL, altL ) )
         assertAAE( logL, altL )
 
-        logL = ped.logLikelihood( poly, [-5, 0] )
+        logL = ped.logLikelihood( problem, [-5, 0] )
         print( "logL  = %8.3f"%( logL ) )
         self.assertTrue( math.isinf( logL ) )
 
         scale = 1.0
         fitIndex = [0,1]
-        dL = ped.partialLogL( poly, param, fitIndex )
-        nL = ped.numPartialLogL( poly, param, fitIndex )
+        dL = ped.partialLogL( problem, param, fitIndex )
+        nL = ped.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
         scale = 0.5
-        dL = ped.partialLogL( poly, param, fitIndex )
-        nL = ped.numPartialLogL( poly, param, fitIndex )
+        dL = ped.partialLogL( problem, param, fitIndex )
+        nL = ped.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
@@ -581,7 +608,7 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [8+i,4], dtype=float )
             print( param, "  :  ", end="" )
             for k in range( 9 ):
-                print( " %8.3f" % ped.logLikelihood( poly, param ), end="" )
+                print( " %8.3f" % ped.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
@@ -589,21 +616,22 @@ class TestErrorDistribution( unittest.TestCase ):
     def testCauchyErrorDistribution( self ):
         print( "\n   Test Cauchy Error Distribution\n" )
         poly = PolynomialModel( 1 )
-        ced = CauchyErrorDistribution( self.x, self.data )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
+
+        ced = CauchyErrorDistribution( )
         self.assertFalse( ced.acceptWeight() )
 
         param = numpy.asarray( [1,10,1], dtype=float )
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
         print( "logL  =  %8.3f" % ( logL ) )
         scale = 0.1
         s2 = scale * scale
         param[2] = scale
-        logL = ced.logLikelihood( poly, param )
-        altL = math.log( scale / math.pi ) * len( self.data )
-        res = ced.getResiduals( poly, param[:2] )
-        altL -= numpy.sum( numpy.log( s2 + res * res ) )
+        logL = ced.logLikelihood( problem, param )
+        altL = ced.logLikelihood_alt( problem, param )
 
-        lLdata = ced.logLdata( poly, param )
+        lLdata = ced.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
         print( "logL  =  %8.3f  ldata %8.3f  alt %8.3f" % (logL, logL0, altL ) )
         assertAAE( logL, altL )
@@ -615,8 +643,8 @@ class TestErrorDistribution( unittest.TestCase ):
         scale = 1.0
         param[2] = scale
         fi = [0,1,-1]
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         print( "numpart = ", nL )
@@ -624,8 +652,8 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 0.5
         param[2] = scale
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         print( "numpart = ", nL )
@@ -636,7 +664,7 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5,5,1], dtype=float )
             print( param, ":  ", end="" )
             for k in range( 9 ):
-                print( " %8.3f" % ced.logLikelihood( poly, param ), end="" )
+                print( " %8.3f" % ced.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
@@ -644,22 +672,23 @@ class TestErrorDistribution( unittest.TestCase ):
     def testLaplaceErrorDistribution( self ):
         print( "\n   Test Laplace Error Distribution\n" )
         poly = PolynomialModel( 1 )
-        ced = LaplaceErrorDistribution( self.x, self.data )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
+
+        ced = LaplaceErrorDistribution( )
         self.assertTrue( ced.acceptWeight() )
 
         param = numpy.asarray( [1,10,1], dtype=float )
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
         print( "logL  =  %8.3f" % ( logL ) )
         scale = 0.1
         param[2] = scale
         s2 = scale * scale
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
 
-        altL = - len( self.data ) * math.log( 2.0 * scale )
-        res = ced.getResiduals( poly, param[:2] )
-        altL -= numpy.sum( numpy.abs( res ) ) / scale
+        altL = ced.logLikelihood_alt( problem, param )
 
-        lLdata = ced.logLdata( poly, param )
+        lLdata = ced.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
         print( "logL  =  %8.3f  ldata %8.3f  alt %8.3f" % (logL, logL0, altL ) )
         assertAAE( logL, altL )
@@ -669,31 +698,31 @@ class TestErrorDistribution( unittest.TestCase ):
         scale = 1.0
         param[2] = scale
         fi = [0,1,-1]
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
-        print( "partXXX = ", ced.partialLogLXXX( poly, param, fi ) )
+        print( "partalt = ", ced.partialLogL_alt( problem, param, fi ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
 
         scale = 0.5
         param[2] = scale
-        ced.weights = self.wgt
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        problem.weights = self.wgt
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
-        print( "partXXX = ", ced.partialLogLXXX( poly, param, fi ) )
+        print( "partalt = ", ced.partialLogL_alt( problem, param, fi ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
 
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
         cced = ced.copy()
-        logLc = cced.logLikelihood( poly, param )
+        logLc = cced.logLikelihood( problem, param )
         print( cced )
         print( "logL  =  %8.3f  copy %8.3f" % (logL, logLc ) )
-        dLc = cced.partialLogL( poly, param, fi )
+        dLc = cced.partialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         assertAAE( logL, logLc, 6 )
@@ -703,30 +732,33 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5,5,1], dtype=float )
             print( param, ":  ", end="" )
             for k in range( 9 ):
-                print( " %8.3f" % ced.logLikelihood( poly, param ), end="" )
+                print( " %8.3f" % ced.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
     def testUniformErrorDistribution( self ):
         print( "\n   Test Uniform Error Distribution\n" )
         poly = PolynomialModel( 1 )
-        ced = UniformErrorDistribution( self.x, self.data )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
+
+        ced = UniformErrorDistribution( )
         print( "x   ", self.x )
         print( "y   ", self.data )
         self.assertTrue( ced.acceptWeight() )
 
         param = numpy.asarray( [0.3,11,4], dtype=float )
-        print( "m   ", poly.result( self.x, param ) )
-        logL = ced.logLikelihood( poly, param )
-        altL = -11 * math.log( 2 * param[2] )
+        print( "m   ", problem.result( param ) )
+        logL = ced.logLikelihood( problem, param )
+        altL = ced.logLikelihood_alt( problem, param )
         print( "logL  =  %8.3f  altL  %8.3f" % ( logL, altL ) )
         assertAAE( logL, altL )
 
         scale = 1.0
         param[2] = scale
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
 
-        lLdata = ced.logLdata( poly, param )
+        lLdata = ced.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
         print( "logL  =  %8.3f  ldata %8.3f" % (logL, logL0 ) )
         assertAAE( logL, logL0 )
@@ -737,30 +769,30 @@ class TestErrorDistribution( unittest.TestCase ):
         scale = 4.0
         param[2] = scale
         fi = [0,1,-1]
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
-        print( "partXXX = ", ced.partialLogLXXX( poly, param, fi ) )
+        print( "partalt = ", ced.partialLogL_alt( problem, param, fi ) )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
 
         scale = 5
         param[2] = scale
-        ced.weights = self.wgt
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        problem.weights = self.wgt
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
 
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
         cced = ced.copy()
-        logLc = cced.logLikelihood( poly, param )
+        logLc = cced.logLikelihood( problem, param )
         print( cced )
         print( "logL  =  %8.3f  copy %8.3f" % (logL, logLc ) )
-        dLc = cced.partialLogL( poly, param, fi )
+        dLc = cced.partialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         assertAAE( logL, logLc, 6 )
@@ -770,23 +802,24 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5,5,10], dtype=float )
             print( param, ":  ", end="" )
             for k in range( 9 ):
-                print( " %6.2f" % ced.logLikelihood( poly, param ), end="" )
+                print( " %6.2f" % ced.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
     def plotMixedErrorDistribution( self ):
         print( "\n   Test Mixed Error Distribution 0\n" )
-        poly = PolynomialModel( 0 )
+        m = PolynomialModel( 0 )
         x = numpy.linspace( -10, 10, 201 )
-        ed1 = GaussErrorDistribution( x, x )
-        ed2 = GaussErrorDistribution( x, x )
-#        ed2 = UniformErrorDistribution( x, x )
+        problem = ClassicProblem( m, x, x )
+        ed1 = GaussErrorDistribution( )
+#        ed2 = GaussErrorDistribution( )
+        ed2 = UniformErrorDistribution( )
 
         ced = MixedErrorDistribution( ed1, ed2  )
         param = numpy.asarray( [0.0, 0.3, 5, 0.7 ], dtype=float )
         for k in range( 5 ) :
             param[3] = 0.25 * k
-            lld = ced.logLdata( poly, param )
+            lld = ced.logLdata( problem, param )
             plt.plot( x, numpy.exp( lld ) )
         plt.show()
 
@@ -795,44 +828,41 @@ class TestErrorDistribution( unittest.TestCase ):
     def testMixedErrorDistribution( self ):
         print( "\n   Test Mixed Error Distribution\n" )
         poly = PolynomialModel( 1 )
-        ed1 = GaussErrorDistribution( self.x, self.data )
-        ed2 = UniformErrorDistribution( self.x, self.data )
 
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
+
+        ed1 = GaussErrorDistribution( )
+        ed2 = UniformErrorDistribution( )
         ced = MixedErrorDistribution( ed1, ed2  )
-        print( "x   ", self.x )
-        print( "y   ", self.data )
+
         self.assertTrue( ced.acceptWeight() )
 
         param = numpy.asarray( [0.3, 11, 1, 4, 0.7 ], dtype=float )
-        print( "m   ", poly.result( self.x, param ) )
-        logL = ced.logLikelihood( poly, param )
+
+        logL = ced.logLikelihood( problem, param )
         print( "logL  =  %8.3f" % ( logL ) )
 #        self.assertTrue( logL == -11 * math.log( 2 * param[2] ) )
 
         param[2:4] *= 0.097
 #        param[4] = 0.7
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
 
 
         print( "logL  =  %8.3f" % (logL) )
-        print( "lld  ", ced.logLdata( poly, param ) )
-        print( "ll1  ", ced.errdis1.logLdata( poly, param ) )
-        print( "ll2  ", ced.errdis2.logLdata( poly, param ) )
-
-
-
+        print( "lld  ", ced.logLdata( problem, param ) )
+        pars = param[:3]
+        print( "ll1  ", ced.errdis1.logLdata( problem, pars ) )
+        pars[2] = param[3]
+        print( "ll2  ", ced.errdis2.logLdata( problem, param ) )
 
 
         fi = [0,1,-3,-2,-1]
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param )
         print( "partial = ", dL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
-
-
-
 
 #        self.assertTrue( logL == -math.inf )
 
@@ -840,8 +870,8 @@ class TestErrorDistribution( unittest.TestCase ):
         param[2] = 0.1 * scale      ## gauss
         param[3] = scale            ## uniform
         fi = [0,1,-3,-2,-1]
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param )
         print( "partial = ", dL )
         print( "numpart = ", nL )
@@ -849,21 +879,21 @@ class TestErrorDistribution( unittest.TestCase ):
 
         scale = 5
         param[2] = scale
-        ced.weights = self.wgt
-        dL = ced.partialLogL( poly, param, fi )
-        nL = ced.numPartialLogL( poly, param, fi )
+        problem.weights = self.wgt
+        dL = ced.partialLogL( problem, param, fi )
+        nL = ced.numPartialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
 
         print( "make a copy" )
-        logL = ced.logLikelihood( poly, param )
+        logL = ced.logLikelihood( problem, param )
         cced = ced.copy()
-        logLc = cced.logLikelihood( poly, param )
+        logLc = cced.logLikelihood( problem, param )
         print( cced )
         print( "logL  =  %8.3f  copy %8.3f" % (logL, logLc ) )
-        dLc = cced.partialLogL( poly, param, fi )
+        dLc = cced.partialLogL( problem, param, fi )
         print( "params  = ", param, scale )
         print( "partial = ", dL )
         assertAAE( logL, logLc, 6 )
@@ -873,7 +903,7 @@ class TestErrorDistribution( unittest.TestCase ):
             param = numpy.asarray( [i-5,5,0.2,1.0,0.7], dtype=float )
             print( param )
             for k in range( 9 ):
-                print( " %10.3g" % ced.logLikelihood( poly, param ), end="" )
+                print( " %10.3g" % ced.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
 
