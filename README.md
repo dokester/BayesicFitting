@@ -5,6 +5,30 @@ A package for model fitting and bayesian evidence calculation.
 (In case you are wondering what that is about take a 
 quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
+## What's new in version 2.0.
+ + Introduction of Problem Classes: 
+   * Problem. <br>
+Base class for problems to be handled by NestedSampler.
+   * ClassicProblem. <br>
+Common class for everything that was possible in version 1.
+ClassicProblem is transparant as all interfaces to NestedSampler have remained 
+the same as they were in version 1.0, even though behind the scenes a 
+ClassicProblem has been invoked.
+   * ErrorsInXandYProblem. <br>
+Problem that have errors in the xdata  and in the ydata.
+   * ... more to come.
+ + Introduction of Walker and WalkerList to represent the internal ensemble
+in NestedSampler. 
+ + Adaptations in NestedSampler, ErrorDistributions, Engines, Sample, SampleList.
+ + Better separation of responsibilities of ErrorDistribution and Problem. <br>
+Consequently ErrorDistribution has a new initialisation, which is incompatible 
+with previous versions. In most cases this has no effect on the calling 
+sequences of NestedSampler.
+ + Rename GenGaussErrorDistribution into ExponentialErrorDistribution.
+ + New testharnesses and examples.
+ + Adaptations of documentation: manual and design.
+
+
 ## Content
 
 1. [History](#history)
@@ -131,13 +155,12 @@ More work needs to be done in:
 
   * Documentation, especially the manual.
   * Examples, more of them and covering more classes.
-  * FreeShapeModel needs rethinking.
+  * Introduction of more Problems: MultiOutputProblem, OrderProblem, ...
 
 <a name="versions"></a>
 ## 5. Versions
 
-
- +  4 Jan 2018 version 0.9.0 Do Kester.<br>
+ +  4 Jan 2018 version 0.9.0.<br>
    * Initial upload to github.
  + 26 Jan 2018 version <br>
  +  5 Mar 2018 version 1.0.1 <br>
@@ -170,3 +193,5 @@ More work needs to be done in:
  + 11 October 2018 version 1.0.8
    * refactoring the setting of attributes in Models
    * documentation (manual, design, etc.) updated.
+ + 28 December 2018 version 2.0.0
+   * see above in Whats new.
