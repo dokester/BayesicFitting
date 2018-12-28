@@ -80,6 +80,8 @@ class RandomEngine( Engine ):
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
         problem = walker.problem
         fitIndex = walker.fitIndex
 

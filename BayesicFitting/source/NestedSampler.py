@@ -289,14 +289,17 @@ class NestedSampler( object ):
             3 : more about every iteration
 
         """
-        if not model.hasPriors() and model.npars > 0:
-            Tools.printclass( model )
-            warnings.warn( "Model needs priors and/or limits" )
-
         if problem is None :
             problem = "classic"
 
         self.setProblem( problem, model=model, xdata=xdata, ydata=ydata, weights=weights )
+
+        if model is None :
+            model = self.problem.model
+
+        if not model.hasPriors() and model.npars > 0:
+            Tools.printclass( model )
+            warnings.warn( "Model needs priors and/or limits" )
 
         self.keep = keep
 
@@ -330,7 +333,7 @@ class NestedSampler( object ):
         self.setEngines( engines )
 
         ## Initialize the sample list
-        self.samples = SampleList( model, 0, ndata=len( ydata ) )
+        self.samples = SampleList( model, 0, ndata=self.problem.ndata )
 
     def makeFitlist( self, keep=None ) :
         """
@@ -914,7 +917,7 @@ class NestedSampler( object ):
     def report( self ):
 
 #        print( "Rate        %f" % self.rate )
-        print( "Engines              success     reject     failed       best        calls" )
+        print( "Engines              success     reject     failed       best      calls" )
 
         for engine in self.engines :
             print( "%-16.16s " % engine, end="" )

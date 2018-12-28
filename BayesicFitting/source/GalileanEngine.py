@@ -114,6 +114,8 @@ class GalileanEngine( Engine ):
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
         walker = walker.copy()
         problem = walker.problem
         Lhood = walker.logL

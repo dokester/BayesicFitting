@@ -89,6 +89,8 @@ class DeathEngine( Engine ):
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
         cwalker = walker.copy()          ## work on local copy
 
         problem = cwalker.problem

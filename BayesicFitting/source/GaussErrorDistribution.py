@@ -271,7 +271,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         hessian[:nf,:nf] = numpy.inner( design, deswgt ) / s2
 
         if fitIndex[-1] == np :
-            hessian[nf,nf] = 2 * ( self.ndata - nf ) / s2
+            hessian[nf,nf] = 2 * ( problem.ndata - nf ) / s2
 
         return hessian
 

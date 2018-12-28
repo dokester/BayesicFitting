@@ -84,6 +84,8 @@ class GibbsEngine( Engine ):
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
         walker = walker.copy()              ## work on local copy
 
         problem = walker.problem
