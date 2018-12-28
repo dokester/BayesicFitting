@@ -193,8 +193,9 @@ class TestProblem( unittest.TestCase ):
         self.assertTrue( numpy.sum( s ) == 0 )
 
         engs = problem.myEngines()
-        self.assertTrue( len( engs ) == 1 )
+        self.assertTrue( len( engs ) == 2 )
         self.assertTrue( engs[0] == "galilean" )
+        self.assertTrue( engs[1] == "gibbs" )
 
         self.assertTrue( problem.myStartEngine() == "start" )
         self.assertTrue( problem.myDistribution() == "gauss" )
