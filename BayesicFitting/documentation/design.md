@@ -466,32 +466,53 @@ carefully check the results.
 ## 4. NestedSampler
 
 Nested Sampling is an algorithm invented by David MacKay and John
-Skilling, to sample and to integrate the posterior to obtain the
-evidence. **NestedSampler** follows the core algorithm as presented in
-[Sivia][1] closely, but is expanded with pluggable **Model**s,
+Skilling, to integrate the posterior to obtain the evidence.
+At the same time samples from the posterior are collected into a 
+**SampleList**. 
+**NestedSampler** follows the core algorithm as presented in
+[Sivia][1] closely, but is expanded with pluggable **Problem**s, **Model**s,
 **Prior**s, **ErrorDistribution**s and **Engine**s. It offers solutions
 to a wide variety of inverse problems.
 
-Initially an ensemble of **Sample**s in the space spanned by the
-(hyper)parameters is randomly distributed over the **Prior**s of the
-parameters. These points are called walkers and typically there are 100
-of them. In an iterative loop, the walker with the lowest likelihood is
-removed from the ensemble of walkers. It is weighted and stored in a
-**SamleList**. One of the remaining walkers is copied and randomly moved
-around by **Engine**s, provided that its likelihood stays higher than
-that of the stored **Sample**. This way the walkers slowly climb to the
-maximum value of the likelihood. The stored **Sample**s provide enough
-pointers into the Likelihood function to make a good estimate of the
-integral (evidence).
+Initially an ensemble of trial points, a **WalkerList**, in the space 
+spanned by the (hyper)parameters is randomly distributed over the
+**Prior**s of the parameters. These points are **Walkers** and
+typically there are 100 of them. In an iterative loop, the walker with
+the lowest likelihood is removed from the ensemble of walkers. It is
+weighted and stored as a **Sample** in a **SamleList**. 
+One of the remaining walkers is
+copied and randomly moved around by **Engine**s, provided that its
+likelihood stays higher than that of the stored **Sample**. This way the
+walkers slowly climb to the maximum value of the likelihood. The stored
+**Sample**s provide enough pointers into the Likelihood function to make
+a good estimate of the integral (evidence).
 
 The classes associated with NestedSampler are displayed in figure 7.
 
 ![NestedSampler](images/NestedSampler.png "Figure 7")
 
-**NestedSampler** contains 2 **SampleList**s, one internally to store
-the walkers and one to store the weighted samples of the posterior. Both
-**SampleList**s are lists of **Sample**s.
-**NestedSampler** has a **Model**, containing a list of parameters, each
+**NestedSampler** acts upon a **Problem**. A **Problem** is a object
+that encodes a solvable problem. This is meant in a very broad sense.
+The solution of the problem is contained in the parameters. Together
+with (special) ErrorDistribution, Engines and Priors, NestedSampler 
+can optimize the parameters. What the Problem, parameters, etc. exactly 
+are, is completely dependent on the problem to be solved. 
+
+In versions 1.0 of this package and below, only problems with parameterized
+models, one or more dimensional input and one-dimensional outputs were 
+handled. For these kind of problems ClassicProblem is introduced. Mostly 
+it stays behind the scenes and is invisible for the users.
+
+More **Problem**s can be found in figure 8.
+
+![Problems](images/Problem.png "Figure 8")
+
+A **Problem** knows how to calculate its result, partial and derivative
+given the parameters. It also knows which **Engine**s and which 
+**ErrorDistribution** is the best choice.
+
+
+The **ClassicProblem** has a **Model**, containing a list of parameters, each
 of which has a **Prior**. Together with the `xdata`, the `ydata` and the
 optional `weights`, the likelihood can be calculated by the
 **ErrorDistribution**. The **ErrorDistribution** itself might have
@@ -506,9 +527,9 @@ The **Prior**s contain information about the parameters which is known
 before the data is taken into account. It is the range that the
 parameters can move, without being frowned up on. 
 
-The predefined **Prior**s are displayed in figure 8.
+The predefined **Prior**s are displayed in figure 9.
 
-![Priors](images/Prior.png "Figure 8")
+![Priors](images/Prior.png "Figure 9")
 
 All **Prior**s define two methods `unit2domain` which transforms
 (random) value in [0,1] into a (random) value from the prior
@@ -525,9 +546,9 @@ logLikelihood wrt the parameters is also defined. It is used in the
 **Engine** of choice for parameter with continuous values:
 **GalileanEngine**. 
 
-The predefined **ErrorDistribution**s are displayed in figure 9.
+The predefined **ErrorDistribution**s are displayed in figure 10.
 
-![ErrorDistributions](images/ErrorDistribution.png "Figure 9")
+![ErrorDistributions](images/ErrorDistribution.png "Figure 10")
 
 Some **ErrorDistribution**s have parameters of themselves, so called
 **HyperParameter**s. One special case is the **NoiseScale**.
@@ -553,6 +574,10 @@ The way the walkers are moved around in the available parameter space is
 determined by the **Engine**s. Several **Engine**s are availble:
 **GibbsEngine**, **CrossEngine** and **StepEngine**. For
 **Dynamic**Models **BirthEngine** and **DeathEngine** are needed too.
+
+The available **Engine**s are displayed in figure 11.
+
+![Enginess](images/Engine.png "Figure 11")
 
 Two need special mentioning. The **StartEngine** generates the initial
 random ensemble. The **GalileanEngine** moves the point in a random

@@ -757,9 +757,9 @@ discarded and replaced by a copy of one of the remaining walkers. The
 copied walker is wandered around randomly by one or more **Engine**s, 
 provided it keeps a higher likelihood than the value of the discarded
 walker. This way the ensemble of walkers stays randomly distributed over
-the prior while it slowly ascends the  likelihood to the top. The
-discarded walker is kept as a sample of the posterior, appropriately
-weighted.
+the prior while the ensemble as a whole slowly ascends the likelihood
+to the top. The discarded walker is kept as a sample of the posterior,
+appropriately weighted.
 
 **NestedSampler** uses a **Prior** for the initial distribution and an
 **ErrorDistribution** to calculate the likelihoods.
@@ -767,12 +767,12 @@ weighted.
 Nested sampling is an idea of David McKay and John Skilling.
 
 
-**NestedSampler** needs more information to run. It needs priors for all 
-its parameters and it needs a likelihood function. We start off defining
-some data. 
+**NestedSampler** needs more information to run tahn ordinary
+**Fitter**s. It needs priors for all  its parameters and it needs a
+likelihood function. We start off defining some data. 
 
-    x = [1.0, 2.0, 3.0, 4.0, 5.0]
-    y = [0.2, 1.3, 4.5, 1.4, 0.1]
+    xdata = [1.0, 2.0, 3.0, 4.0, 5.0]
+    ydata = [0.2, 1.3, 4.5, 1.4, 0.1]
 
 Set up the model with limits on the uniform priors of the parameters.
 
@@ -781,14 +781,14 @@ Set up the model with limits on the uniform priors of the parameters.
     hilim = [+10.0, 5.0, 5.0]		    # high limits
     model.setLimits( lolim, hilim )	    # use UniformPrior with limits
 
-The likelihood is calculated from the **GaussianErrorDistribution**. By
+The likelihood is calculated by the **GaussErrorDistribution**. By
 default it has a fixed scale. However in most real cases ( see [noise2
 example](#../examples/noise2.ipynb) )  it is better to treat the scale
 as a hyperparameter, which needs a prior, by default a
 **JeffreysPrior**, and limits.
 
     limits = [0.01, 10]
-    ns = NestedSampler( x, model, y, limits=limits )	
+    ns = NestedSampler( xdata, model, ydata, limits=limits )	
 
 We execute the program as
 
@@ -827,18 +827,21 @@ A **Sample** is a collection of items.
     id of the parent of this sample.
 + model : Model<br>
     the model being used.
-+ allpars : array_like<br>
-    list of model parameters and hyperparameters.
++ parameters : array_like<br>
+    list of model parameters.
++ hyper : array_like (optional)<br>
+    list of hyper parameters from the **ErrorDistribution**.
++ nuisance : array_like (optional)<br>
+    list of nuisance parameters from **ErrorsInXandYProblem**.
 + logL : float<br>
     log Likelihood = log Prob( data | params )
 + logW : float<br>
     log weight. Relative weight of this sample.
 + fitIndex : None or array_like<br>
-    list of (hyper)parameters to be fitted; None is all.
+    list of all parameters to be fitted; None is all.
 
-**Sample**s can be collected in a **SampleList**. Both the `walkers`
-inside the **NestedSamler** and the resulting samples from the posterior
-are **SampleList**s.
+**Sample**s can be collected in a **SampleList**.
+The resulting samples from the posterior are collected in a **SampleList**.
 
 When using the samples of the posterior for other purposes than are
 provided in **SampleList**, all items derived from individual
@@ -848,6 +851,12 @@ provided in **SampleList**, all items derived from individual
 
 before averaging them.
     
+### Walkers and WalkerList.
+
+The internal ensemble of trial points is designed as a **WalkerList**, 
+or a list of **Walker**s. **Walker**s are similar to **Sample**s, except 
+that they have a **Problem** in stead of a **Model**.
+
 The number of walkers can be set with the `ensemble` keyword. By default
 `ensemble=100`. The number of walkers that are discarded in every
 iteration can be set with `discard`. By default `discard=1`. When
@@ -858,8 +867,8 @@ resulting samples. When the size of the sample list is larger than
 maxsize, the samples with the smallest weights are thrown out. By
 default `maxsize=None`.
 
-    ns = NestedSampler( x, model, y, ensemble=200, discard=5,
-                        threads=True, maxsize=500 ) 
+    ns = NestedSampler( xdata, model, ydata, ensemble=200, discard=5,
+                        threads=True, maxsize=5000 ) 
 
 
 ### Prior
@@ -902,14 +911,40 @@ Except the **PoissonErrorDistribution** all others have one or more
 **HyperParameter**s which are governed by a **Prior**, unless they
 are known in advance.
 
-    dis = GaussErrorDistribution( x, y )
+    dis = GaussErrorDistribution( )
     dis.setLimits( [0.1, 1.0] )
-    ns = NestedSampler( x, model, y, distribution=dis )
+    ns = NestedSampler( xdata, model, ydata, distribution=dis )
+
+Since version 2.0 the **ErrorDistribution**s has changed its interface.
+Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
+Now the resposiblities of ErrorDistribution and Problem are better separated. 
 
 The use of e mixture of 2 error distributions is shown in
 [outliers2](#../examples/outliers-2.ipynb).
 
 See below for lists of available [**ErrorDistribution**s](#list-errdis).
+
+### Problem
+
+The **Problem** classes have been introduced in version 2.0. They are
+meant to broaden the applicability of NestedSampler beyond the classic
+problems that we addressed before. A **Problem** collects all items that 
+are needed to solve the problem, where the parameters constitute the
+solution. 
+
+A **ClassicProblem** consists of a parameterized model with a list of
+measured data at the locations of the indepemdent variables. Optionally
+there are weights. The **ClassicProblem** is invoked by default.
+
+Other **Problem**s need to be separately invoked.
+
+    problem = ErrorsInXandYProblem( model, xdata, ydata )
+    ns = NestedSampler( problem=problem )
+    evidence = ns.sample()
+
+See below for lists of available [**Problem**s](#list-problems). 
+More **Problem**s can be expected in later versions.
+ 
 
 ### Engine
 
@@ -935,7 +970,7 @@ number of parameters.
 The keyword `rate` governs the speed of the engines. High rate equals
 high speed equals low accuracy.  
 
-    ns = NestedSampler( x, model, y, speed=0.5,
+    ns = NestedSampler( xdata, model, ydata, speed=0.5,
                         engines=["galilean", "gibbs", "step"] )
 
 
@@ -959,8 +994,7 @@ The keyword `verbose` determines how much output the program generates.
 The keyword `seed` seeds the random number generator, to ensure the same
 random sequence each run.
 
-
-    ns = NestedSampler( x, model, y, weights=wgts, keep={0:1.0},
+    ns = NestedSampler( xdata, model, ydata, weights=wgts, keep={0:1.0},
                         seed=123456, verbose=2 ) 
     logE = ns.sample( keep={2:3.14}, plot=True )
 
@@ -1157,10 +1191,28 @@ BaseFitters contain common methods for fitters that inherit from them.
     A novel technique to do Bayesian calculation.
 + **Explorer**<br>
     Helper class of NestedSampler to run the **Engine**s.
++ **Walker**<br>
+    Trial point in parameter space.
++ **WalkerList**<br>
+    Ensemble of **Walker**s.
 + **Sample**<br>
     Weighted random draw from a Posterior distribution from **NestedSampler**.
 + **SampleList**<br>
     List of **Sample**s with interpretational methods.
+
+<a name="list-problems"></a>
+#### Problems
+
++ **ClassicProblem**<br>
+    Default problem
++ **ErrorsInXandYProblem**<br>
+    Classic problem with errors in both xdata and ydata.
+
+<!-- dont remove -->
+
++ **Problem**<br>
+    Base class defining problems.
+
 
 <a name="list-priors"></a>
 #### Prior distributions
@@ -1225,16 +1277,14 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **CrossEngine**<br>
     Cross over between 2 walkers.
-+ **FrogEngine**<br>
-    The FrogEngine jumps a parameter set towards/over a bunch of others.(TBD)
 + **GalileanEngine**<br>
     Move all parameters in forward steps, with mirroring on the edge.
 + **GibbsEngine**<br>
     Move a one parameter at a time by a random amount.
 + **StartEngine**<br>
-    Generates an initial random sample.
+    Generates an initial random walker.
 + **StepEngine**<br>
-    Move a a walker in a random direction.
+    Move a walker in a random direction.
 
 <!-- dont remove -->
 
