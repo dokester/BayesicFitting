@@ -10,7 +10,7 @@ quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 Problems with more dimensional outputs 
    * StellarOrbitModel. 
 A 2 dim output model to calculate the orbit of a double star
-   *+ Keppler2ndLaw.
+   * Keppler2ndLaw.
 To calculate the radius and true anomaly according to Kepplers 2nd law. 
 (and derivatives)
    * RadialVelocityModel: adapted to Kepplers2ndLaw. A slight change in the 
@@ -207,5 +207,5 @@ sequences of NestedSampler.
    * New testharnesses and examples.
    * Adaptations of documentation: manual and design.
 
- + 28 December 2018 version 2.1.0
+ + 16 Jan 2019 version 2.1.0
    * see above in Whats new.
