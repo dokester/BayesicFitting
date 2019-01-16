@@ -5,28 +5,19 @@ A package for model fitting and bayesian evidence calculation.
 (In case you are wondering what that is about take a 
 quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
-## What's new in version 2.0.
- + Introduction of Problem Classes: 
-   * Problem. <br>
-Base class for problems to be handled by NestedSampler.
-   * ClassicProblem. <br>
-Common class for everything that was possible in version 1.
-ClassicProblem is transparant as all interfaces to NestedSampler have remained 
-the same as they were in version 1.0, even though behind the scenes a 
-ClassicProblem has been invoked.
-   * ErrorsInXandYProblem. <br>
-Problem that have errors in the xdata  and in the ydata.
-   * ... more to come.
- + Introduction of Walker and WalkerList to represent the internal ensemble
-in NestedSampler. 
- + Adaptations in NestedSampler, ErrorDistributions, Engines, Sample, SampleList.
- + Better separation of responsibilities of ErrorDistribution and Problem. <br>
-Consequently ErrorDistribution has a new initialisation, which is incompatible 
-with previous versions. In most cases this has no effect on the calling 
-sequences of NestedSampler.
- + Rename GenGaussErrorDistribution into ExponentialErrorDistribution.
- + New testharnesses and examples.
- + Adaptations of documentation: manual and design.
+## What's new in version 2.1.
+   * MultipleOutputProblem.
+Problems with more dimensional outputs 
+   * StellarOrbitModel. 
+A 2 dim output model to calculate the orbit of a double star
+   *+ Keppler2ndLaw.
+To calculate the radius and true anomaly according to Kepplers 2nd law. 
+(and derivatives)
+   * RadialVelocityModel: adapted to Kepplers2ndLaw. A slight change in the 
+order of the parameters.
+   * NestedSampler: some improvements in output layout.
+   * New tests, examples and updates for documentation.
+
 
 
 ## Content
@@ -194,4 +185,27 @@ More work needs to be done in:
    * refactoring the setting of attributes in Models
    * documentation (manual, design, etc.) updated.
  + 28 December 2018 version 2.0.0
+   * Introduction of Problem Classes: 
+     - Problem. <br>
+Base class for problems to be handled by NestedSampler.
+     - ClassicProblem. <br>
+Common class for everything that was possible in version 1.
+ClassicProblem is transparant as all interfaces to NestedSampler have remained 
+the same as they were in version 1.0, even though behind the scenes a 
+ClassicProblem has been invoked.
+     - ErrorsInXandYProblem. <br>
+Problem that have errors in the xdata  and in the ydata.
+     - ... more to come.
+   * Introduction of Walker and WalkerList to represent the internal ensemble
+in NestedSampler. 
+   * Adaptations in NestedSampler, ErrorDistributions, Engines, Sample, SampleList.
+   * Better separation of responsibilities of ErrorDistribution and Problem. <br>
+Consequently ErrorDistribution has a new initialisation, which is incompatible 
+with previous versions. In most cases this has no effect on the calling 
+sequences of NestedSampler.
+   * Rename GenGaussErrorDistribution into ExponentialErrorDistribution.
+   * New testharnesses and examples.
+   * Adaptations of documentation: manual and design.
+
+ + 28 December 2018 version 2.1.0
    * see above in Whats new.

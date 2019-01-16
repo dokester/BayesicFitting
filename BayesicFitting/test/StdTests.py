@@ -219,7 +219,7 @@ def plotModel( model, par, xx=None ) :
 
         except :
             print( "No derivative; ignored" )
-#            raise
+            raise
         plt.title( model.__str__() )
         plt.show()
 

@@ -378,6 +378,55 @@ class TestProblem( unittest.TestCase ):
             plt.plot( [x[k],xopt[k]], [y[k],yopt[k]], 'g-')
         plt.show()
 
+    def test5( self, plot=False ) :
+        print( "====test4 ErrorsInXandYProblem============================" )
+        x = numpy.array( [0,1,2,3], dtype=float )
+        y = numpy.array( [[1,0],[0,1],[-1,0],[0,-1]], dtype=float )
+        w = numpy.array( [0.9,1.0,1.1,1.2], dtype=float )
+
+        mdl = StellarOrbitModel( )
+        p = [ 0.0, 1.1, 4.0, 0.01, 0.0, 0.0, 0.0]
+
+        problem = MultipleOutputProblem( model=mdl, xdata=x, ydata=y, weights=w )
+
+        print( problem.weights )
+
+        ym = problem.result( p )
+
+        print( y.flatten() )
+        print( ym.flatten() )
+
+        res = problem.residuals( p )
+
+        print( res.flatten() )
+
+        dmdx = problem.derivative( p )
+        print( dmdx )
+        sh = dmdx.shape
+        self.assertTrue( sh[0] == 4 and sh[1] == 2 )
+
+        parts = mdl.partial( x, p )
+        print( parts[0] )
+        sh = parts[1].shape
+        self.assertTrue( sh[0] == 4 and sh[1] == 7 )
+
+        partial = problem.partial( p )
+        print( partial )
+        sh = partial.shape
+        self.assertTrue( sh[0] == 8 and sh[1] == 7 )
+
+        a0 = numpy.arange( 6 ).reshape( 3, 2 )
+        a1 = numpy.arange( 6 ).reshape( 3, 2 ) + 10
+        a2 = numpy.arange( 6 ).reshape( 3, 2 ) + 20
+
+        aa = numpy.append( a0, a1, 1 )
+        aa = numpy.append( aa, a2, 1 )
+
+        print( a0 )
+        print( aa )
+        print( aa.reshape( -1, 2 ) )
+
+
     @classmethod
     def suite( cls ):
         return unittest.TestCase.suite( ErrorDistributionTest.__class__ )

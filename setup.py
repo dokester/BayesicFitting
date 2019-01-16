@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'
 
 def readme():
     with open( 'README.md' ) as f:
@@ -23,7 +23,7 @@ setup(
     license='LICENSE.txt',
     description='A Python Toolbox for Bayesian fitting.',
     long_description=readme(),
-    long_description_content_type='text/markdown',
+    long_description_content_type='markdown',
     url="https://github.com/dokester/BayesicFitting",
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
                 'optimization','nested sampling', 'fitting'],

@@ -367,14 +367,16 @@ class TestModels( unittest.TestCase ):
         x  = numpy.linspace( 0, 1400, 1401, dtype=float )
         print( "******RADIALVELOCITY***************" )
         m = RadialVelocityModel( )
-        self.assertTrue( m.getNumberOfParameters( ) == 5 )
+        self.assertTrue( m.npars == 5 )
         self.assertTrue( m.npbase == 5 )
-        p = [130, 1200.0, 0.67, 4.0, 3.0]
+        p = [0.67, 130, 1200.0, 4.0, 3.0]
         if plot :
             for p3 in range( 7 ) :
-                p[4] = 2.7 + 0.1 * p3
+                p[4] = 0.7 + 0.5 * p3
                 y = m.result( x, p )
-                plt.plot( x, y + 100 * p3 )
+                plt.plot( x, y + 100 * p3, '-' )
+#                yo = m.baseResultXXX( x, p )
+#                plt.plot( x, yo + 100 * p3, '.' )
 
             plt.show()
 

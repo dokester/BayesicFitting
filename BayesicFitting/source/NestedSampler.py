@@ -436,8 +436,8 @@ class NestedSampler( object ):
             print( "\nMoving the walkers with ", end="" )
             for eng in self.engines :
                 print( " ", eng, end="" )
-            print( "\nUsing %s" %( "threads." if self.threads else "no threads." ) )
-
+            if self.threads :
+                print( "\nUsing threads." )
 
         if self.verbose >= 2:
             print( "Iteration   logZ        H     LowL     npar    parameters" )
@@ -463,6 +463,8 @@ class NestedSampler( object ):
             eng.unitMin   = self.engines[0].unitMin
 #            print( eng, "  ",  eng.unitRange )
 
+        nwln = "\r" if self.verbose == 1 else "\n"
+
         while self.iteration < self.getMaxIter( ):
 
             #  find worst walker(s) in ensemble
@@ -481,15 +483,14 @@ class NestedSampler( object ):
                 self.info = 0.0
             self.logZ = logZnew
 
-            if self.verbose >= 3 or ( self.verbose >= 2 and self.iteration % 100 == 0 ):
+            if self.verbose >= 3 or ( self.verbose >= 1 and
+                        self.iteration > 100 and self.iteration % 100 == 0 ):
                 kw = worst[0]
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
 #               scale = self.getScale( self.walker[kw] )
-#                sumlh = numpy.sum( self.walkers.getLogLikelihoodEvolution() )
-                print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ, self.info,
-                        self.lowLhood, np ), fmt( pl ) )
-#                        sumlh, np ), fmt( pl ) )
+                print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
+                        self.info, self.lowLhood, np ), fmt( pl ), end=nwln )
 
                 self.plotResult( self.walkers[worst[0]], self.iteration, plot=iterplot )
 
@@ -498,7 +499,6 @@ class NestedSampler( object ):
             self.copyWalker( worst )
 
             # Explore the copied walker(s)
-#            print( "NS     ", self.walkers[worst[0]].allpars, fitIndex )
             explorer.explore( worst, self.lowLhood )
 
             # Shrink the interval
@@ -514,6 +514,13 @@ class NestedSampler( object ):
                     eng.unitMin   = self.engines[0].unitMin
 #                    print( eng, "  ",  eng.unitRange )
                 oldinfo = self.info
+        else :
+            if self.verbose > 0 :
+                kw = worst[0]
+                pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
+                np = len( pl )
+                print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
+                        self.info, self.lowLhood, np ), fmt( pl ), "         " )
 
 
         # End of Sampling

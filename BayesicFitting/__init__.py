@@ -69,6 +69,7 @@ from .source.ImageAssistant import ImageAssistant
 from .source.IterationPlotter import IterationPlotter
 from .source.IterativeFitter import IterativeFitter
 from .source.JeffreysPrior import JeffreysPrior
+from .source.Kepplers2ndLaw import Kepplers2ndLaw
 from .source.Kernel2dModel import Kernel2dModel
 from .source.KernelModel import KernelModel
 from .source.LaplaceErrorDistribution import LaplaceErrorDistribution
@@ -81,6 +82,7 @@ from .source.MaxLikelihoodFitter import MaxLikelihoodFitter
 from .source.MixedErrorDistribution import MixedErrorDistribution
 from .source.Model import Model
 from .source.MonteCarlo import MonteCarlo
+from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
@@ -116,7 +118,7 @@ from .source.SineSplineModel import SineSplineModel
 from .source.SplinesModel import SplinesModel
 from .source.StartEngine import StartEngine
 from .source.StepEngine import StepEngine
-#from .source.StellarOrbitModel import StellarOrbitModel
+from .source.StellarOrbitModel import StellarOrbitModel
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior

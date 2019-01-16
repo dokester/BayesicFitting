@@ -1012,7 +1012,7 @@ kernels and miscellaneous.
 #### simple models 1-dimensional
 
 + **ArctanModel**<br>
-    Arctangus Model.
+    Arctangus Model. [example](../examples/arctanfit.ipynb)
 + **BSplinesModel**<br>
     General b-splines model of arbitrary order and with arbitrary knot settings.
 + **ChebyshevPolynomialModel**<br>
@@ -1020,58 +1020,70 @@ kernels and miscellaneous.
 + **ConstantModel**<br>
     ConstantModel is a Model which does not have any parameters.
 + **EtalonModel**<br>
-    Fabry-Perot Etalon Model.
+    Fabry-Perot Etalon Model. [example](../examples/mrs-fringes.ipynb)
 + **ExpModel**<br>
-    Exponential Model.
+    Exponential Model. [example](../examples/expfit.ipynb)
 + **FreeShapeModel**<br>
     Pixelated Model.
 + **GaussModel**<br>
-    Gaussian Model.
+    Gaussian Model. [example](../examples/gaussfit.ipynb)
 + **HarmonicModel**<br>
-    Harmonic oscillator Model.
+    Harmonic oscillator Model. [example](../examples/harmonicfit.ipynb)
 + **KernelModel**<br>
     Kernel Model, a Model build around a [**Kernel**](#synops-kernel).
 + **LorentzModel**<br>
     Lorentzian Model.
 + **PadeModel**<br>
     General Pade model of arbitrary degrees in numerator and denominator.
+    [example](../examples/boyles-law.ipynb) 
 + **PolySineAmpModel**<br>
     Sine of fixed frequency with polynomials as amplitudes.
 + **PolynomialModel**<br>
-    General polynomial model of arbitrary degree.
+    General polynomial model of arbitrary degree. 
+    [example](../examples/sealevel.ipynb)
 + **PowerLawModel**<br>
     General powerlaw model of arbitrary degree.
 + **PowerModel**<br>
-    General power model of arbitrary degree.
+    General power model of arbitrary degree.  
+    [example](../examples/boyles-law.ipynb)
 + **PseudoVoigtModel**<br>
     Weighted sum of Gauss and Lorentz models; approximation of **VoigtModel**
 + **RadialVelocityModel**<br>
-    radial velocity variations of a star, caused by an orbiting planet.
+    radial velocity variations of a star, caused by an orbiting planet. 
+    [Gregory][4].  [example](../examples/HD2039.ipynb)
 + **SincModel**<br>
     Sinc Model.
 + **SineAmpModel**<br>
     Sine with fixed frequency.
 + **SineModel**<br>
-    Sinusoidal Model.
+    Sinusoidal Model. [example](../examples/outliers.ipynb)
 + **SplinesModel**<br>
     General splines model of arbitrary order and with arbitrary knot settings.
+    [example](../examples/mrs-fringes.ipynb)
 + **VoigtModel**<br>
     Voigt's Gauss Lorentz convoluted model for spectral line profiles.
 
-#### Simple models 2-dimensional
+#### Simple models 2-dimensional inputs
 
 + **EtalonDriftModel**<br>
     Sinusoidal Model with drifting frequency.
 + **FreeShape2dModel**<br>
     Pixelated 2-dim Model. (TBD)
 + **Kernel2dModel**<br>
-    Two dimensional **Kernel** Model.
+    Two dimensional **Kernel** Model. [example](../examples/randommap.ipynb)
 + **PolySurfaceModel**<br>
     General polynomial surface model of arbitrary degree.
+    [example](../examples/simplemapfit.ipynb)
 + **ProductModel**<br>
     Direct product of 2 (or more) models. Two (or more) dimensional.
 + **SurfaceSplinesModel**<br>
     Surface splines model of arbitrary order and knot settings.
+
+#### Simple models 2-dimensional outputs
+
++ **StellarOrbitModel**<br>
+    Orbit of a double star as function of time, resulting in 2d sky position.
+    [Boule][6]. [example](../examples/alphaComae.ipynb)
 
 #### Simple dynamic models.
 
@@ -1091,6 +1103,7 @@ They can only be used with **NestedSampler**.
     BracketModel provides brackets to a chain of models.
 + **CombiModel**<br>
     CombiModel combines a number of copies of the same model.
+    [example](../examples/combifit.ipynb)
 
 #### Base models.
 
@@ -1117,7 +1130,7 @@ common to all classes that inherit from them.
 #### Linear fitters
 
 + **Fitter**<br>
-    Fitter for linear models.
+    Fitter for linear models. [example](../examples/temperature.ipynb)
 + **QRFitter**<br>
     Fitter for linear models, using QR decomposition.
 
@@ -1127,11 +1140,13 @@ common to all classes that inherit from them.
     CurveFitter implements scipy.optimize.curve_fit.
 + **LevenbergMarquardtFitter**<br>
     Non-linear fitter using the Levenberg-Marquardt method.
+    [example](../examples/outliers.ipynb)
 
 #### Nonlinear fitters (least-squares and maximum likelihood)
 
 + **AmoebaFitter**<br>
     Fitter using the simulated annealing simplex minimum finding algorithm,
+    [example](../examples/combifit.ipynb)
 + **ScipyFitter**<br>
     Unified interface to the Scipy minimization module `minimize`, to fit 
     data to a model.
@@ -1139,7 +1154,7 @@ common to all classes that inherit from them.
     - **NelderMeadFitter**<br>
         Nelder Mead downhill simplex.
     - **PowellFitter**<br>
-        Powell's conjugate direction method.
+        Powell's conjugate direction method. [example](../examples/summerdays.ipynb)
     - **ConjugateGradientFitter**<br>
         Conjugate Gradient Method of Polak and Ribiere.
     - **BfgsFitter**<br>
@@ -1173,9 +1188,11 @@ BaseFitters contain common methods for fitters that inherit from them.
 #### Helpers.
 
 + **RobustShell**<br>
-    For fitting in the presence of outliers.
+    For fitting in the presence of outliers. 
+    [example](../examples/outliers.ipynb)
 + **ImageAssistant**<br>
     Helper class in case the data are in the form of an image.
+    [example](../examples/randommap.ipynb)
 + **AnnealingAmoeba**<br>
     Minimizer using an annealing Nelder-Mead simplex.
 + **MonteCarlo**<br>
@@ -1189,6 +1206,9 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **NestedSampler**<br>
     A novel technique to do Bayesian calculation.
+    [example1](../examples/HD2039.ipynb)
+    [example2](../examples/alphaComae.ipynb)
+    [example3](../examples/outliers-2.ipynb)
 + **Explorer**<br>
     Helper class of NestedSampler to run the **Engine**s.
 + **Walker**<br>
@@ -1207,6 +1227,10 @@ BaseFitters contain common methods for fitters that inherit from them.
     Default problem
 + **ErrorsInXandYProblem**<br>
     Classic problem with errors in both xdata and ydata.
+    [example](../examples/XandYErrors.ipynb)
++ **MultipleOutputProblem**<br>
+    Problems with more dimensional output values
+    [example](../examples/alphaComae.ipynb)
 
 <!-- dont remove -->
 
@@ -1229,8 +1253,10 @@ BaseFitters contain common methods for fitters that inherit from them.
     Laplace prior distribution.
 + **UniformPrior**<br>
     Uniform prior distribution, for location parameters.
+    [example](../examples/XandYErrors.ipynb)
 + **CircularUniformPrior**<br>
     Uniform prior distribution wrapped at the endpoints, for phase-like parameters.
+    [example](../examples/alphaComae.ipynb)
 
 <!-- dont remove -->
 
@@ -1244,14 +1270,20 @@ BaseFitters contain common methods for fitters that inherit from them.
     To calculate a Cauchy or Lorentz likelihood.
 + **GaussErrorDistribution**<br>
     To calculate a Gauss likelihood.
-+ **GenGaussErrorDistribution**<br>
+    [example](../examples/outliers-2.ipynb)
++ **ExponentialErrorDistribution**<br>
     To calculate a generalized Gaussian likelihood.
 + **LaplaceErrorDistribution**<br>
     To calculate a Laplace likelihood.
++ **MixedErrorDistribution**<br>
+    A mixture of 2 errordistributions
+    [example](../examples/outliers-2.ipynb)
 + **PoissonErrorDistribution**<br>
     To calculate a Poisson likelihood.
+    [example](../examples/summerdays.ipynb)
 + **UniformErrorDistribution**<br>
     To calculate a Uniform likelihood.
+    [example](../examples/outliers-2.ipynb)
 
 <!-- dont remove -->
     
@@ -1259,8 +1291,6 @@ BaseFitters contain common methods for fitters that inherit from them.
     Base class that defines general methods for a error distribution.
 + **ScaledErrorDistribution**<br>
     Base class that defines methods common to error distributions with a scale.
-+ **MixedErrorDistribution**<br>
-    A mixture of 2 errordistributions
 
 #### Hyper parameters.
 
@@ -1285,6 +1315,13 @@ BaseFitters contain common methods for fitters that inherit from them.
     Generates an initial random walker.
 + **StepEngine**<br>
     Move a walker in a random direction.
+
+<!-- dont remove -->
+
++ **BirthEngine**<br>
+    Increase the number of parameters of a walker
++ **DeathEngine**<br>
+    Decrease the number of parameters of a walker
 
 <!-- dont remove -->
 
@@ -1381,10 +1418,12 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 <a name="synops-miscel"></a>
 ### Miscellaneous
 
-+ **LogFactorial**<br>
-    Natural logarithm of n!
 + **Formatter**<br>
     Format a number or array, nicely into a string.
++ **Kepplers2ndLaw**<br>
+    calculates radius and true anomaly (and derivatives) for Kepplers 2nd law.
++ **LogFactorial**<br>
+    Natural logarithm of n!
 + **Plotter**<br>
     Plot a model fitted to data.
 + **Tools**<br>
@@ -1401,6 +1440,10 @@ Springer Science. 2006.<br>
 Cambridge University Press. 2014.<br>
 [4]: E.T. Jaynes. **Probability Theory.**
 Cambridge University Press. 2003.<br>
-
+[5]: P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
+Cambridge University Press. 2005.<br>
+[6]: C. Boule, ́K. Andrews, A. Penfield, I. Puckette, K. A. Goodale and 
+S. A. Harfenist. **Determining Binary Star Orbits Using Kepler’s Equati**
+Journal of Double Star Observations, Vol 13, p 189. 2017.
 
 
