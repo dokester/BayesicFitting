@@ -128,8 +128,9 @@ class TestProblem( unittest.TestCase ):
         self.assertTrue( s[6] + s[10] == 1.2 )
 
         engs = problem.myEngines()
-        self.assertTrue( len( engs ) == 1 )
+        self.assertTrue( len( engs ) == 2 )
         self.assertTrue( engs[0] == "galilean" )
+        self.assertTrue( engs[1] == "chord" )
 
         self.assertTrue( problem.myStartEngine() == "start" )
         self.assertTrue( problem.myDistribution() == "gauss" )
@@ -193,9 +194,10 @@ class TestProblem( unittest.TestCase ):
         self.assertTrue( numpy.sum( s ) == 0 )
 
         engs = problem.myEngines()
-        self.assertTrue( len( engs ) == 2 )
+        self.assertTrue( len( engs ) == 3 )
         self.assertTrue( engs[0] == "galilean" )
         self.assertTrue( engs[1] == "gibbs" )
+        self.assertTrue( engs[2] == "chord" )
 
         self.assertTrue( problem.myStartEngine() == "start" )
         self.assertTrue( problem.myDistribution() == "gauss" )
@@ -289,14 +291,13 @@ class TestProblem( unittest.TestCase ):
         mdl = PolynomialModel( 1 )
         mdl.setLimits( -10, 10 )
 
-        ns = NestedSampler( x, mdl, y, problem="errors", verbose=2, limits=[0.1,1] )
+        ns = NestedSampler( x, mdl, y, problem="errors", limits=[0.1,1] )
         ns.setEngines( ["galilean", "gibbs"] )
         ns.problem.prior = UniformPrior( limits=[-2.0,2.0] )
         #ns.minimumIterations = 1000
 
         Tools.printclass( ns.problem )
         Tools.printclass( ns.distribution )
-        ns.verbose = 2
         ns.end = 4.0
 
         # find the parameters
@@ -318,10 +319,8 @@ class TestProblem( unittest.TestCase ):
         print( "ML Nuis    :", fmt( mlap[2:-1], max=10 ) )
         print( "ML scale   :", fmt( mlap[-1], max=10 ) )
 
-        assertAAE( mlap[:2], [0,1], 2 )
+        assertAAE( mlap[:2], [0,1], 1 )
         assertAAE( mlap[2:-1], ( x + y ) / 2, 1 )
-
-
 
         print( "ML logL    :", fmt( ns.samples[-1].logL ) )
 
@@ -346,6 +345,9 @@ class TestProblem( unittest.TestCase ):
 
         plt.show()
 
+    def plot4( self ) :
+        self.test4( plot=True )
+
 
     def test4( self, plot=False ) :
         print( "====test4 ErrorsInXandYProblem============================" )
@@ -355,17 +357,18 @@ class TestProblem( unittest.TestCase ):
         mdl = PolynomialModel( 1 )
         mdl.setLimits( -10, 10 )
 
-        ns = NestedSampler( x, mdl, y, problem="errors", verbose=2, limits=[0.1,1] )
-        ns.setEngines( ["galilean", "gibbs"] )
+        ns = NestedSampler( x, mdl, y, problem="errors", limits=[0.1,1] )
+#        ns.setEngines( ["galilean", "gibbs"] )
+#        ns.setEngines( ["galilean"] )
         ns.problem.prior = UniformPrior( limits=[-2.0,2.0] )
+#        ns.verbose=5
 
         Tools.printclass( ns.problem )
         Tools.printclass( ns.distribution )
-        ns.verbose = 2
-        #ns.end = 4.0
 
         # find the parameters
         keep = {0:0, 1:1, 3:0.5, 4:9.5, 5:9.5}
+        keep = {0:0.5, 1:0.9}
         evid = ns.sample( keep=keep )
 
         if not plot :
@@ -379,7 +382,7 @@ class TestProblem( unittest.TestCase ):
         plt.show()
 
     def test5( self, plot=False ) :
-        print( "====test4 ErrorsInXandYProblem============================" )
+        print( "====test5 MultipleOutputProblem============================" )
         x = numpy.array( [0,1,2,3], dtype=float )
         y = numpy.array( [[1,0],[0,1],[-1,0],[0,-1]], dtype=float )
         w = numpy.array( [0.9,1.0,1.1,1.2], dtype=float )

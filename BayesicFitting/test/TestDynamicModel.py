@@ -321,7 +321,6 @@ class TestDynamicModel( unittest.TestCase ):
 
         engines = None
         ns = NestedSampler( x, pm, y, seed=2031967, engines=engines )
-        ns.verbose = 2
 
         ns.distribution.setLimits( [0.01, 100] )
 
@@ -353,7 +352,7 @@ class TestDynamicModel( unittest.TestCase ):
         Tools.printclass( pm )
 
         ns = NestedSampler( x, pm, y, seed=2031967 )
-        ns.verbose = 2
+
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
 
@@ -385,7 +384,6 @@ class TestDynamicModel( unittest.TestCase ):
         Tools.printclass( pm )
 
         ns = NestedSampler( x, pm, y, seed=2031967 )
-        ns.verbose = 2
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
 

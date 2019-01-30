@@ -58,7 +58,7 @@ class TestNLFitters( unittest.TestCase ):
         stdFittertest( AmoebaFitter, 201, plot=plot, options=options )
 
     def testAmoebaFitter2( self, plot=False ):
-        options = {"temp": 10.0, "maxiter": 10000, "verbose": 2 }
+        options = {"temp": 10.0, "maxiter": 10000, "verbose": 1 }
         stdFittertest( AmoebaFitter, 201, errdis='gauss', plot=plot, options=options )
         plt.show()
 

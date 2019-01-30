@@ -35,6 +35,7 @@ from .source.CauchyErrorDistribution import CauchyErrorDistribution
 from .source.CauchyPrior import CauchyPrior
 from .source.CircularUniformPrior import CircularUniformPrior
 from .source.ChebyshevPolynomialModel import ChebyshevPolynomialModel
+from .source.ChordEngine import ChordEngine
 from .source.ClassicProblem import ClassicProblem
 from .source.CombiModel import CombiModel
 from .source.ConstantModel import ConstantModel
@@ -87,6 +88,7 @@ from .source.NestedSampler import NestedSampler
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
+from .source.OrthonormalBasis import OrthonormalBasis
 from .source.PadeModel import PadeModel
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel

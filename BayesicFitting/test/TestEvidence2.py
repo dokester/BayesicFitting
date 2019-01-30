@@ -454,7 +454,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
-        self.assertTrue( abs( logz2 - logz0 ) < 3 * dlz2 )
+        self.assertTrue( abs( logz2 - logz1 ) < 3 * dlz2 )
 #        print( logz0 - logz1, logz0 - logz2 )
 
         samples = ns.samples
@@ -663,7 +663,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
-        self.assertTrue( abs( logz2 - logz1 ) < dlz2 )
+        self.assertTrue( abs( logz2 - logz1 ) < 3 * dlz2 )
 
         parevo =samples.getParameterEvolution()
         llevo = samples.getLogLikelihoodEvolution()
@@ -690,11 +690,16 @@ class TestEvidence2( unittest.TestCase  ) :
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=[0,0], highLimits=[10,10] )
 
-        ns = NestedSampler( x, model, y, distribution='uniform', verbose=2, rate=0.5 )
+        ns = NestedSampler( x, model, y, distribution='uniform', verbose=1,
+            engines=["chord"] )
+#            engines=["galilean"] )
+
+#        ns.engines[0].debug = True
         ns.distribution.setLimits( [0.1, 1000] )
         ns.minimumIterations = 501
 
         logE = ns.sample( plot=plot )
+        plt.show()
 
         par2 = ns.parameters
         logE = ns.logZ
@@ -703,6 +708,25 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "pars  ", fmt( par2 ) )
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
+
+        eng = ns.engines[0]
+        eng.calculateUnitRange()
+        print( eng.unitRange )
+        print( eng.unitMin )
+
+        for w in ns.walkers :
+            pars = w.allpars
+            up = eng.domain2Unit( ns.problem, pars )
+#            print( pars, up )
+#            plt.plot( [up[0]], [up[1]], 'k.' )
+#            plt.plot( [up[2]], [up[0]], 'r.' )
+#            plt.plot( [up[1]], [up[2]], 'g.' )
+
+
+#        plt.show()
+
+
+
 
         if plot :
 

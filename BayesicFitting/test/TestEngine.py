@@ -5,9 +5,9 @@ import numpy as numpy
 from astropy import units
 import math
 import matplotlib.pyplot as plt
+from numpy.testing import assert_array_almost_equal as assertAAE
 
 from BayesicFitting import *
-
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -85,11 +85,13 @@ class TestEngine( unittest.TestCase ):
         wl = WalkerList( problem, 100, allpars, fi )
 
         engine = Engine( wl, errdis )
+
         self.enginetest( engine )
 
         print( "    make copy of engine" )
         copeng = engine.copy()
         self.enginetest( copeng )
+
 
     def enginetest( self, engine ) :
         walkers = engine.walkers

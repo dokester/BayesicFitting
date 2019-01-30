@@ -7,6 +7,7 @@ import math
 import matplotlib.pyplot as plt
 
 from BayesicFitting import *
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -101,6 +102,13 @@ class TestEngine2( unittest.TestCase ):
         print( "\n   Galilean Engine Test\n" )
         self.stdenginetest( GalileanEngine, iter=101, nsamp=10, plot=plot )
 
+    def plotChordEngine( self ):
+        self.testChordEngine( plot=True )
+
+    def testChordEngine( self, plot=False ):
+        print( "\n   Chord Engine Test\n" )
+        self.stdenginetest( ChordEngine, iter=100, nsamp=10, plot=plot )
+
     def stdenginetest( self, myengine, nsamp=4, iter=100, plot=False ) :
         m, xdata, data = self.initEngine()
         problem = ClassicProblem( m, xdata=xdata, ydata=data )
@@ -157,14 +165,16 @@ class TestEngine2( unittest.TestCase ):
 
             engine.execute( wl[klo], lowL )
             p1 = wl[klo].allpars[:2]
-            if k % 50 == 0 :
-                print( k, klo, p1, wl[klo].logL )
+            if k % 100 == 0 :
+                print( k, klo, fmt(p1), fmt(wl[klo].logL) )
 
             if plot :
                 plt.plot( [p0[0],p1[0]], [p0[1],p1[1]], col[klo%4] )
 
         print( lowL, p1 )
         print( mmx, mk0, mk1 )
+        engine.printReport()
+
 
 #        engine.printReport()
         if plot :

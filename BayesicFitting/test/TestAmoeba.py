@@ -69,7 +69,7 @@ class TestAmoeba( unittest.TestCase ):
         print( "Testing AnnealingAmoeba" )
 
         xx = numpy.asarray( [3, -2], dtype=float )
-        amb = AnnealingAmoeba( self.func1, xx, verbose=5 )
+        amb = AnnealingAmoeba( self.func1, xx, verbose=1 )
 
         Tools.printclass( amb )
         amb.minimize()
@@ -84,7 +84,7 @@ class TestAmoeba( unittest.TestCase ):
 
         xx = numpy.asarray( [3, -2], dtype=float )
         amb = AnnealingAmoeba( self.func1, xx, limits=[[-1,0],[3,3]], reltol=1e-10,
-            maxiter=100, verbose=5 )
+            maxiter=100, verbose=1 )
         Tools.printclass( amb )
         self.assertRaises( ConvergenceError, amb.minimize )
 
@@ -100,7 +100,7 @@ class TestAmoeba( unittest.TestCase ):
     def plot3( self ) :
         self.test3( plot=True )
 
-    def xxxtest3( self, plot=False ):
+    def test3( self, plot=False ):
         """     # 	test iterative slope fit  """
         print( "Testing AnnealingAmoeba with limits" )
 
@@ -110,7 +110,7 @@ class TestAmoeba( unittest.TestCase ):
             self.plot( self.func2, x=x, y=y, contour=[5,10,15,20,30,40,60,80,100, 200] )
 
         xx = numpy.asarray( [3, -2], dtype=float )
-        amb = AnnealingAmoeba( self.func2, xx, reltol=1e-10, verbose=5 )
+        amb = AnnealingAmoeba( self.func2, xx, reltol=1e-10, verbose=1 )
         xopt = amb.minimize()
 
         print( amb.fopt, xopt )
@@ -118,7 +118,7 @@ class TestAmoeba( unittest.TestCase ):
             plt.plot( [xopt[1]], [xopt[0]], 'r+' )
 
 
-        amb = AnnealingAmoeba( self.func2, xx, temp=10, seed=123456, verbose=100 )
+        amb = AnnealingAmoeba( self.func2, xx, temp=10, seed=123456, verbose=1 )
         amb.minimize()
 
         xopt = amb.xopt
@@ -153,12 +153,6 @@ class TestAmoeba( unittest.TestCase ):
         if contour is None :
             contour = 10
         plt.contour( x, y, map, contour )
-
-
-
-
-
-
 
 
     @classmethod

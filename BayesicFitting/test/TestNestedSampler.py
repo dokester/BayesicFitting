@@ -113,7 +113,6 @@ class TestNestedSampler( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
 
         ns = NestedSampler( x, gm, y, w, threads=True, engines=["galilean", "gibbs"] )
-        ns.verbose = 2
 
         self.dofit( ns, pp, plot=plot )
 
@@ -135,7 +134,6 @@ class TestNestedSampler( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
 
         ns = NestedSampler( x, gm, y, threads=True )
-        ns.verbose = 2
 
         print( "truth  ", pp )
         self.dofit( ns, pp, plot=plot )
@@ -161,7 +159,6 @@ class TestNestedSampler( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
 
         ns = NestedSampler( x, gm, y, w )
-        ns.verbose = 2
         ns.distribution.setLimits( [0.01, 100] )
 
         Tools.printclass( ns )
@@ -182,11 +179,12 @@ class TestNestedSampler( unittest.TestCase ):
         print( "par    ", fma( par ) )
         print( "st dev ", fma( std ) )
         print( "ML par ", fma( mlp ) )
-        print( "scale  ", fmt( scale ), " +- ", fmt( scdev ) )
+        print( "scale  ", fmt( scale ) )
 #        ns.report( )
 
 
-#        assertAAE( par, mlp, 2 )
+        self.assertTrue( all( numpy.abs( par - mlp ) < 2 * std ) )
+        self.assertTrue( all( numpy.abs( par - pp ) < 2 * std ) )
 #        assertAAE( par, pp, 2 )
 
     @classmethod
