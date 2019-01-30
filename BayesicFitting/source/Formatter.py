@@ -111,7 +111,6 @@ def formatter( array, format=None, indent=None, linelength=None, max=-1 ) :
     if max is not None and max <= 0 :
         max = gmax
     count = indent
-    dent = indent
     llen = linelength
     mx = max
     nwl = False

@@ -489,6 +489,7 @@ class Model( FixedModel ):
     def _recursiveResult( self, xdata, param, res ) :
 
         np = self.npbase
+
         if not self._operation == self.PIP :
             nextres = super( Model, self ).result( xdata, param[:np] )
         else :

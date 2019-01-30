@@ -100,6 +100,8 @@ class LinearModel( Model ):
         part = self.basePartial( xdata, params, parlist=parlist  )
 
         res = numpy.zeros( part.shape[0], dtype=float )
+#        print( res.shape, params, part.shape )
+
         for k in parlist :
             res += params[k] * part[:,k]
 

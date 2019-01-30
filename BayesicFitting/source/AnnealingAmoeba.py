@@ -335,7 +335,7 @@ class AnnealingAmoeba( object ):
         """
 
         if self.verbose > 0 :
-            print( "Iteration   step   ", ( "temp" if ( self.temp > 0 ) else "" ),
+            print( "Iteration   step     ", ( "temp" if ( self.temp > 0 ) else "" ),
                    "  minimum    values" )
             numpy.set_printoptions( precision=3, suppress=True )
 
@@ -483,11 +483,13 @@ class AnnealingAmoeba( object ):
         return trans
 
     def doVerbose( self, name, chisq, par, force=False ):
-        if self.verbose > 1 and ( self.iter % 100 == 0 or force ):
+        nwln = "\r" if self.verbose == 1 else "\n"
+        if self.verbose >= 3 or ( self.verbose >= 1 and
+                    self.iter > 100 and self.iter % 100 == 0 ):
             mx = 5 if self.verbose < 4 else None if self.verbose == 4 else self.verbose
             print( "%6d    %-8.8s "%(self.iter,name),
                     ( "%6.1f"%(self.temp ) if ( self.temp > 0 ) else "" ),
-                    " %8.1f  "%chisq, fmt( par, max=mx ) )
+                    " %8.1f  "%chisq, fmt( par, max=mx ), end=nwln )
 
     def randomRange( self, factor ):
         return factor * ( 0.9 + 0.2 * self.rng.rand( ) )

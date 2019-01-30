@@ -163,7 +163,6 @@ class StellarOrbitModel( NonLinearModel ):
 
         dfdx = numpy.zeros( ( len( xdata ), 2 ), dtype=float )
 
-        KL = Kepplers2ndLaw()
         p = params[:4]
         r, v = self.keppler.radiusAndTrueAnomaly( xdata, p )
 

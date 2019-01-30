@@ -97,7 +97,7 @@ class StepEngine( Engine ):
         urange += 2 * dur
 
         param = walker.allpars
-        usav = self.domain2Unit( problem, param, kpar=fitIndex )
+        usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
 
         sz = 1.0
         ptry = param.copy()

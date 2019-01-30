@@ -31,7 +31,7 @@ __status__ = "Development"
 
 class Engine( object ):
     """
-    Engine defines general properties of a Engine.
+    Engine defines common properties of all Engines.
 
     An Engine moves around a sample in a random way such that its likelood
     remain above the low-likelihood-limit.
@@ -52,13 +52,15 @@ class Engine( object ):
         maximum number of trials for various operations
     rng : numpy.random.RandomState
         random number generator
+    verbose : int
+        if verbose > 4 report about the engines. (mostly for debugging)
 
     report : list of int (read only)
         reports number of succes, accepted, rejected, failed calls. Plus the total.
     unitRange : array_like (read only)
-        present max size of the parameter cloud (in [0,1])
+        present max size of the parameter cloud (in unitspace: [0,1])
     unitMin : array_like (read only)
-        present minimum values of the parameter cloud (in [0,1])
+        present minimum values of the parameter cloud (in unitspace: [0,1])
 
     Author       Do Kester.
 
@@ -74,7 +76,8 @@ class Engine( object ):
 #    def __init__( self, walkers, errdis, copy=None, seed=4213, constrain=None ):
     def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
-        Copy Constructor.
+        Constructor.
+
         Parameters
         ----------
         walkers : list of Walker
@@ -122,17 +125,6 @@ class Engine( object ):
         """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
 
-    """
-    def __getattr__( self, name ) :
-        if name == "unitRange" :
-            return self.calculateUnitRange()
-        elif name == "unitMin" :
-            self.calculateUnitRange()
-            return self.unitMin
-        else :
-             raise AttributeError( str( self ) + ": Unknown attribute " + name )
-    """
-
     #  *********SET & GET***************************************************
     def setWalker( self, walker, problem, allpars, logL, fitIndex=None ) :
         """
@@ -159,8 +151,28 @@ class Engine( object ):
             walker.fitIndex = fitIndex
         self.walkers[walker.id] = walker
 
-###### TBD:
-##  Has dval the length kpar ???
+
+    def checkBest( self, problem, allpars, logL, fitIndex ) :
+        """
+        Check if Ltry better than the best at self.walkers[-1].
+        If so replace.
+
+        Parameters
+        ----------
+        problem : Problem
+            the problem in the walker
+        logL : float
+            likelihood
+        allpars : array_like
+            parameters of problem
+        fitIndex : array_like
+            (new) fitIndex
+        """
+        if logL > self.walkers[-1].logL :
+            self.setWalker( self.walkers[-1], problem, allpars.copy(), logL, fitIndex )
+            self.reportBest()
+
+######## domain <> unit ###########################################
 
     def domain2Unit( self, problem, dval, kpar=None ) :
         """
@@ -249,6 +261,7 @@ class Engine( object ):
         print( " %10d %10d %10d %10d %10d" % (self.report[0], self.report[1],
                               self.report[2], self.report[3], self.report[4] ) )
 
+
     def calculateUnitRange( self ):
         """
         Calculate the range of the present parameter values in unit values.
@@ -269,6 +282,7 @@ class Engine( object ):
 
         minv = self.walkers[kmx].allpars.copy()
         maxv = self.walkers[kmx].allpars.copy()
+#        mean = numpy.zeros( npmax, dtype=float )
         nval = numpy.zeros( npmax, dtype=int )
 
         for walker in self.walkers :
@@ -276,6 +290,7 @@ class Engine( object ):
 #            print( "Eng   ", fi, minv, walker.allpars )
             minv[fi] = numpy.fmin( minv[fi], walker.allpars[fi] )
             maxv[fi] = numpy.fmax( maxv[fi], walker.allpars[fi] )
+#            mean[fi] += walker.allpars[fi]
             nval[fi] += 1
 
         problem = self.walkers[kmx].problem
@@ -289,6 +304,7 @@ class Engine( object ):
 
         self.unitRange = numpy.abs( maxv - minv )
         self.unitMin = numpy.fmin( minv, maxv )
+#        self.unitMean = self.domain2Unit( problem, mean / nval, kpar=fi )
 
 #        print( "Eng1  ", self.unitRange )
         return

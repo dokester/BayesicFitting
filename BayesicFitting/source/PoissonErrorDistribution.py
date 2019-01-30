@@ -1,5 +1,6 @@
 import numpy as numpy
 import math
+import warnings
 
 from .ErrorDistribution import ErrorDistribution
 from .LogFactorial import logFactorial
@@ -146,8 +147,15 @@ class PoissonErrorDistribution( ErrorDistribution ):
             mockdata = problem.result( allpars )
         lfdata = logFactorial( problem.ydata )
 
-        lld = problem.ydata * numpy.log( mockdata ) - mockdata - lfdata
+        with warnings.catch_warnings():
+            warnings.simplefilter( "ignore", category=RuntimeWarning )
+            lld = problem.ydata * numpy.log( mockdata ) - mockdata - lfdata
+
         lld = numpy.where( numpy.isfinite( lld ), lld, -math.inf )
+
+#        lld = numpy.where( mockdata <= 0, -math.inf,
+#                problem.ydata * numpy.log( mockdata ) - mockdata - lfdata )
+
 
         return lld
 

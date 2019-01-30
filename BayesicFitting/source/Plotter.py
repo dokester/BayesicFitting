@@ -55,7 +55,6 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
 
     minx = numpy.min( x )
     maxx = numpy.max( x )
-    np = 1
     plt.figure( "Fitter Results" )
     ax0 = plt
 
@@ -64,7 +63,6 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
 
     if residuals :
         plt.subplots_adjust( hspace=0.001 )
-        np = 2
         gs = gridspec.GridSpec( 2, 1, height_ratios=[4, 1])
 
         ax1 = plt.subplot( gs[1] )

@@ -1,6 +1,7 @@
 import numpy as numpy
 from astropy import units
 import math
+import warnings
 from . import Tools
 from .Formatter import formatter as fmt
 from .Formatter import fma
@@ -45,19 +46,12 @@ class GalileanEngine( Engine ):
 
     Attributes
     ----------
-    walkers : WalkerList
-        walkers to be diffused
-    errdis : ErrorDistribution
-        error distribution to be used
-    nstep : int (10)
+    nstep : int (5)
         average number of steps to be taken
-    size : float (0.5)
-        average normalized stepsize
-    maxtrials : int
-        maximum number of trials for various operations
-    rng : numpy.random.RandomState
-        random number generator
 
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, rng, report, unitRange, unitMin, verbose
 
     Author       Do Kester.
 
@@ -81,8 +75,7 @@ class GalileanEngine( Engine ):
         """
         super( GalileanEngine, self ).__init__( walkers, errdis, copy=copy,
                         seed=seed, verbose=verbose  )
-        self.nstep = 4
-#        self.size = 0.5
+        self.nstep = 5
 
         self.plotter = DummyPlotter( )
 
@@ -90,7 +83,7 @@ class GalileanEngine( Engine ):
         """ Return copy of this.  """
         engine = GalileanEngine( self.walkers, self.errdis, copy=self )
         engine.nstep = self.nstep
-#        engine.size = self.size
+
         return engine
 
     def __str__( self ):
@@ -132,19 +125,23 @@ class GalileanEngine( Engine ):
         um = UnitMovements( walker, self, size )
 
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
-        maxtrial = self.maxtrials * nstep
+#        maxtrial = self.maxtrials * nstep
+        maxtrial = self.maxtrials
+
         ptry = allpars.copy()
         if self.verbose > 4 :
             print( "alpar ", fma( ptry ), fmt( Lhood ), fmt( lowLhood) )
+            fip = allpars[fitIndex]
+            print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
             print( "fitin ", fma( fitIndex ), nstep, maxtrial )
             print( "unitr ", fma( self.unitRange ), size )
 
-        Lbest = self.walkers[-1].logL
         step = 0
         trial = 0
 
         while True:
             trial += 1
+
             um.setParameters( problem, allpars )
             if inside == 0 :                            # safely inside lowLhood area
                 ptry[fitIndex] = um.stepPars( 1.0 )
@@ -185,10 +182,9 @@ class GalileanEngine( Engine ):
                 npout = len( allpars )
                 inside = 0
                 step += 1
-                if Ltry > Lbest :
-                    Lbest = Ltry
-                    self.setWalker( self.walkers[-1], problem, ptry.copy(), Lbest, fitIndex=fitIndex )
-                    self.reportBest()
+
+                ## check if better than Lbest in walkers[-1]
+                self.checkBest( problem, ptry, Ltry, fitIndex )
 
             else:
                 inside += 1
@@ -203,7 +199,11 @@ class GalileanEngine( Engine ):
             if not ( step < nstep and trial < maxtrial ):
                 break
 
-        self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
+        if npout > 0 :
+            self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
+        elif self.verbose > 4 :
+            warnings.warn( "GalileanEngine: no steps found" )
+
 
 #        print( "GE  ", fma( allpars ), fmt( Lhood ) )
 
@@ -241,7 +241,26 @@ class UnitMovements( object ):
         """
         Set unit values for the applicable parameters
         """
-        self.upar = self.engine.domain2Unit( problem, allpars, kpar=self.fitIndex )
+#        print( "fiti  ", fma( self.fitIndex ) )
+        fip = allpars[self.fitIndex]
+        self.upar = self.engine.domain2Unit( problem, fip, kpar=self.fitIndex )
+#        print( "upar  ", fma(self.upar) )
+
+    def stepPars( self, f ):
+        """
+        Return a new stepped parameter set.
+        """
+        uv = self.uvel
+        pv = self.upar + uv * f
+
+#        print( "pv    ", fma(pv), fma(uv), fmt(f) )
+
+        # check if outside [0,1]
+        pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
+        self.upar, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
+#        pv, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
+
+        return self.engine.unit2Domain( self.problem, self.upar, kpar=self.fitIndex )
 
     def mirrorOnLowL( self, dLdp ):
         """
@@ -267,51 +286,5 @@ class UnitMovements( object ):
         nm = len( self.engine.walkers )
         self.uvel = size * ( self.np * self.uvel - nm * upv ) / ( nm + self.np )
 
-    def stepPars( self, f ):
-        """
-        Return a new stepped parameter set.
-        """
-        uv = self.uvel
-        pv = self.upar + uv * f
 
-        # check if outside [0,1]
-        pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
-        self.upar, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
-
-        return self.engine.unit2Domain( self.problem, self.upar, kpar=self.fitIndex )
-
-
-    """
-    ###########  Some olf code; Keep for a while ########################
-
-    def setVelocity( self, size ):
-        if self.problem.model.isDynamic():
-            self.setVelocityDynamic( size )
-        else:
-            self.setVelocityStatic( size )
-
-    def setVelocityDynamic( self, size ):
-        self.uvel = self.uniform() * size * self.engine.unitRange[self.fitIndex]
-
-    def setVelocityStatic( self, size ):
-        self.uvel = self.uniform() * self.upran * size
-
-        # find two randomly chosen walkers
-        nm = len( self.engine.walkers )
-        k1 = k0 = self.engine.rng.randint( nm )
-        while k1 == k0:
-            k1 = self.engine.rng.randint( nm )
-
-        # subtract the parameter postions to get a velocity
-        self.uvel = ( self.allpars2unit( k0 ) - self.allpars2unit( k1 ) ) * size
-
-        # add a random contibution
-        rv = self.uniform() * self.upran * size
-        self.uvel = ( nm * self.uvel + self.np * rv ) / ( nm + self.np )
-
-    def allpars2unit( self, kw ) :
-        allpars = self.engine.walkers[kw].allpars
-        return self.engine.domain2Unit( self.problem, allpars, kpar=self.fitIndex )
-
-    """
 

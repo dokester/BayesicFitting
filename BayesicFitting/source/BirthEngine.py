@@ -97,7 +97,7 @@ class BirthEngine( Engine ):
         ftry = cwalker.fitIndex
 
         if self.verbose > 4 :
-            print( "BEN0  ", walker.id, walker.parent, len( ptry ), len( fitIndex ) )
+            print( "BEN0  ", walker.id, walker.parent, len( ptry ), len( ftry ) )
 
         pat = 0
         model = problem.model
