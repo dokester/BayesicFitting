@@ -5,6 +5,7 @@ import warnings
 from . import Tools
 
 from .Problem import Problem
+from .Formatter import formatter as fmt
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -150,8 +151,10 @@ class ErrorsInXandYProblem( Problem ):
         if kpar < self.model.npars :
             return self.model.domain2Unit( dval, kpar )
 
-        dval -= self.xdata[kpar-self.model.npars]
-        return self.prior.domain2Unit( dval )
+        kp = kpar - self.model.npars
+        dv = dval - self.xdata[kp]
+
+        return self.prior.domain2Unit( dv )
 
     def unit2Domain( self, uval, kpar ) :
         """
@@ -249,7 +252,7 @@ class ErrorsInXandYProblem( Problem ):
         return res2 if self.weights is None else res2 * self.weights
 
     def myEngines( self ) :
-        return ["galilean", "gibbs"]
+        return ["galilean", "gibbs", "chord"]
 
     def myStartEngine( self ) :
         return "start"

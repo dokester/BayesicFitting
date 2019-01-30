@@ -122,7 +122,7 @@ class MultipleOutputProblem( Problem ):
         return res.flatten()
 
     def myEngines( self ) :
-        return ["galilean"]
+        return ["galilean", "chord"]
 
     def myStartEngine( self ) :
         return "start"

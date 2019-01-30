@@ -97,9 +97,9 @@ class ClassicProblem( Problem ):
 
     def myEngines( self ) :
         if self.model.isDynamic() :
-            return ["galilean", "birth", "death"]
+            return ["galilean", "chord", "birth", "death"]
         else :
-            return ["galilean"]
+            return ["galilean", "chord"]
 
     def myStartEngine( self ) :
         return "start"

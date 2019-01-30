@@ -33,6 +33,7 @@ from .ExponentialErrorDistribution import ExponentialErrorDistribution
 
 from .Engine import Engine
 from .StartEngine import StartEngine
+from .ChordEngine import ChordEngine
 from .GibbsEngine import GibbsEngine
 from .GalileanEngine import GalileanEngine
 from .StepEngine import StepEngine
@@ -262,6 +263,7 @@ class NestedSampler( object ):
             to randomly move the walkers around, within the likelihood bound.
 
             "galilean"  : GalileanEngine
+            "chord"     : ChordEngine   select random point on random line
             "gibbs" 	: GibbsEngine 	move one parameter at a time
             "step"  	: StepEngine    move all parameters in arbitrary direction
 
@@ -273,7 +275,7 @@ class NestedSampler( object ):
             "birth" : BirthEngine   increase the parameter list of a walker by one
             "death" : DeathEngine   decrease the parameter list of a walker by one
 
-            None    : take default ["galilean"]. When the model is Dynamic
+            None    : take default ["galilean", "chord"]. When the model is Dynamic
                       the list is supplemented with ["birth", "death"]
 
             engine  : a class inheriting from Engine. At least implementing
@@ -436,10 +438,11 @@ class NestedSampler( object ):
             print( "\nMoving the walkers with ", end="" )
             for eng in self.engines :
                 print( " ", eng, end="" )
+            print( "" )
             if self.threads :
-                print( "\nUsing threads." )
+                print( "Using threads." )
 
-        if self.verbose >= 2:
+        if self.verbose >= 1 :
             print( "Iteration   logZ        H     LowL     npar    parameters" )
 
 
@@ -457,7 +460,7 @@ class NestedSampler( object ):
             logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
 
         self.engines[0].calculateUnitRange()
-        oldinfo = 0
+
         for eng in self.engines :
             eng.unitRange = self.engines[0].unitRange
             eng.unitMin   = self.engines[0].unitMin
@@ -507,13 +510,12 @@ class NestedSampler( object ):
 
             self.optionalSave( )
 
-            if self.info > oldinfo + 1000 :
-                self.engines[0].calculateUnitRange()
-                for eng in self.engines :
-                    eng.unitRange = self.engines[0].unitRange
-                    eng.unitMin   = self.engines[0].unitMin
+            self.engines[0].calculateUnitRange()
+            for eng in self.engines :
+                eng.unitRange = self.engines[0].unitRange
+                eng.unitMin   = self.engines[0].unitMin
 #                    print( eng, "  ",  eng.unitRange )
-                oldinfo = self.info
+
         else :
             if self.verbose > 0 :
                 kw = worst[0]
@@ -800,6 +802,7 @@ class NestedSampler( object ):
         """
         enginedict = {
             "galilean" : GalileanEngine,
+            "chord" :    ChordEngine,
             "birth" : 	 BirthEngine,
             "death" : 	 DeathEngine,
             "gibbs" : 	 GibbsEngine,
