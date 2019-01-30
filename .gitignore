@@ -8,6 +8,7 @@ build/
 *egg-info/
 BayesicFitting/documentation/*.dia~
 BayesicFitting/documentation/*.html
+BayesicFitting/documentation/images/.ipynb_checkpoints
 BayesicFitting/examples/.ipynb_checkpoints
 BayesicFitting/examples/Untitled.ipynb
 BayesicFitting/source/__pycache__
