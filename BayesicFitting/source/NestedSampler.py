@@ -442,7 +442,7 @@ class NestedSampler( object ):
             if self.threads :
                 print( "Using threads." )
 
-        if self.verbose >= 1 :
+        if self.verbose > 1 :
             print( "Iteration   logZ        H     LowL     npar    parameters" )
 
 
@@ -466,8 +466,6 @@ class NestedSampler( object ):
             eng.unitMin   = self.engines[0].unitMin
 #            print( eng, "  ",  eng.unitRange )
 
-        nwln = "\r" if self.verbose == 1 else "\n"
-
         while self.iteration < self.getMaxIter( ):
 
             #  find worst walker(s) in ensemble
@@ -487,13 +485,21 @@ class NestedSampler( object ):
             self.logZ = logZnew
 
             if self.verbose >= 3 or ( self.verbose >= 1 and
-                        self.iteration > 100 and self.iteration % 100 == 0 ):
-                kw = worst[0]
-                pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
-                np = len( pl )
-#               scale = self.getScale( self.walker[kw] )
-                print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
-                        self.info, self.lowLhood, np ), fmt( pl ), end=nwln )
+                                      self.iteration % 100 == 0 ):
+                if self.verbose == 1 :
+#                    if self.iteration == 0 or ( self.iteration % 5000 ) > 0 :
+                    if ( self.iteration / 100 ) % 50 == 49 :
+                        nwln = "\n"
+                    else :
+                        nwln = ""
+                    print( ">", end=nwln, flush=True )
+                else :
+                    kw = worst[0]
+                    pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
+                    np = len( pl )
+#                   scale = self.getScale( self.walker[kw] )
+                    print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
+                        self.info, self.lowLhood, np ), fmt( pl ) )
 
                 self.plotResult( self.walkers[worst[0]], self.iteration, plot=iterplot )
 
@@ -518,11 +524,13 @@ class NestedSampler( object ):
 
         else :
             if self.verbose > 0 :
+                if self.verbose == 1 :
+                    print( "\nIteration   logZ        H     LowL     npar    parameters" )
                 kw = worst[0]
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
-                        self.info, self.lowLhood, np ), fmt( pl ), "         " )
+                        self.info, self.lowLhood, np ), fmt( pl ) )
 
 
         # End of Sampling
