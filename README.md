@@ -5,19 +5,11 @@ A package for model fitting and bayesian evidence calculation.
 (In case you are wondering what that is about take a 
 quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
-## What's new in version 2.1.
-   * MultipleOutputProblem.
-Problems with more dimensional outputs 
-   * StellarOrbitModel. 
-A 2 dim output model to calculate the orbit of a double star
-   * Keppler2ndLaw.
-To calculate the radius and true anomaly according to Kepplers 2nd law. 
-(and derivatives)
-   * RadialVelocityModel: adapted to Kepplers2ndLaw. A slight change in the 
-order of the parameters.
-   * NestedSampler: some improvements in output layout.
-   * New tests, examples and updates for documentation.
-
+## What's new in version 2.2.
+   * ChordEngine. Implementation of the POLYCHORD engine, developed 
+by Handley etal. (2015) MNRAS 
+   * OrthogonalBasis. Helper class fot ChordEngine.
+   * Tests and examples
 
 
 ## Content
@@ -208,4 +200,17 @@ sequences of NestedSampler.
    * Adaptations of documentation: manual and design.
 
  + 16 Jan 2019 version 2.1.0
+   * MultipleOutputProblem.
+Problems with more dimensional outputs 
+   * StellarOrbitModel. 
+A 2 dim output model to calculate the orbit of a double star
+   * Keppler2ndLaw.
+To calculate the radius and true anomaly according to Kepplers 2nd law. 
+(and derivatives)
+   * RadialVelocityModel: adapted to Kepplers2ndLaw. A slight change in the 
+order of the parameters.
+   * NestedSampler: some improvements in output layout.
+   * New tests, examples and updates for documentation.
+
+ + 7 Feb 2019 version 2.2.0
    * see above in Whats new.
