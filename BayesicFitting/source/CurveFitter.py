@@ -149,7 +149,10 @@ class CurveFitter( IterativeFitter ):
             ydat = numpy.append( ydata, self.normdata )
             if sigma is None :
                 sigma = numpy.ones_like( ydata, dtype=float )
-            sigma = numpy.append( sigma, 1.0 / numpy.sqrt( self.normweight ) )
+            ms = numpy.min( sigma )
+            ## avoid zero weights : make then much smaller than the minimum
+            nw = numpy.where( self.normweight == 0, ms / 1e10, self.normweight )
+            sigma = numpy.append( sigma, 1.0 / numpy.sqrt( nw ) )
 
         # Call scipy.curve_fit
         out = curve_fit( self.result, self.xdata, ydat, p0=p0,

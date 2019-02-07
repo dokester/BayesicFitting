@@ -1,5 +1,7 @@
 import numpy as numpy
 import math
+import warnings
+
 from . import Tools
 from .Tools import setAttribute as setatt
 
@@ -324,8 +326,13 @@ class Kepplers2ndLaw( object ):
         ## v = true anomaly
         ef = math.sqrt( ( 1 + eccen ) / ( 1 - eccen ) )
 
-        tanE = self.sinE / ( 1 + cosE )          ## for tan( E/2 )
-        v = 2 * numpy.arctan( ef * tanE )
+        with warnings.catch_warnings() :
+            warnings.simplefilter( "ignore", category=RuntimeWarning )
+            tanE = self.sinE / ( 1 + cosE )          ## for tan( E/2 )
+            v = 2 * numpy.arctan( ef * tanE )
+
+
+#        v = 2 * numpy.arctan2( ef * self.sinE, 1 + cosE )
 
         setatt( self, "eccAnomaly", E )
         ## return radius and true anomaly
