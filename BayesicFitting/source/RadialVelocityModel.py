@@ -34,20 +34,16 @@ class RadialVelocityModel( NonLinearModel ) :
     """
     Model for the radial velocity variations of a star caused by a orbiting planet.
 
-    .. math::
-        result = p_0 * ( \cos( \theta ) + p_2 * \cos( p_4 ) )
-        \theta = 2 * \pi * anomaly( x, p ) + p_4
-
-    p_0 : amplitude    of the velocity variation (>0)
-    p_1 : period       of the velocity variation (>0)
-    p_2 : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
+    p_0 : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
+    p_1 : amplitude    of the velocity variation (>0)
+    p_2 : period       of the velocity variation (>0)
     p_3 : phase        time shift since periastron (0<p<2pi)
     p_4 : periastron   longitude of periastron (0<p<2pi)
 
     Note:
     The velocity of the star system is not included in this model. See example.
 
-    The parameters are initialized at {1.0, 1.0, 0.0, 0.0, 0.0}.
+    The parameters are initialized at {0.0, 1.0, 1.0, 0.0, 0.0}.
     It is a non-linear model.
 
     Attributes
