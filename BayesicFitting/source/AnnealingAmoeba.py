@@ -348,6 +348,11 @@ class AnnealingAmoeba( object ):
             if self.temp > 0 :
                 self.temp *= self.cooling
             if trans == 0:
+                if self.verbose == 1 and self.iter > 100 :
+                    print( "" )
+                vrbs = 0 if self.verbose == 0 else 3
+                self.doVerbose( "  last", self.values[0], self.simplex[0,:], verbose=vrbs )
+
                 return self.xopt
 
         raise ConvergenceError( "AnnealingAmoeba: Too many iterations: %d"%self.iter )
@@ -477,19 +482,21 @@ class AnnealingAmoeba( object ):
                 self.simplex[ihi,:] = self.callback( self.simplex[ihi,:] )
 
             self.iter += 1
-            self.doVerbose( move, ytry, self.simplex[ihi,:], force=(self.verbose>=3) )
+            self.doVerbose( move, ytry, self.simplex[ihi,:], verbose=self.verbose )
 
-        self.doVerbose( move, self.values[0], self.simplex[0,:], force=True )
         return trans
 
-    def doVerbose( self, name, chisq, par, force=False ):
-        nwln = "\r" if self.verbose == 1 else "\n"
-        if self.verbose >= 3 or ( self.verbose >= 1 and
-                    self.iter > 100 and self.iter % 100 == 0 ):
-            mx = 5 if self.verbose < 4 else None if self.verbose == 4 else self.verbose
-            print( "%6d    %-8.8s "%(self.iter,name),
+    def doVerbose( self, name, chisq, par, verbose=0 ) :
+        if verbose >= 3 or ( verbose >= 1 and
+                                  self.iter % 100 == 0 ):
+            if verbose == 1 :
+                nwln = "" if ( self.iter % 5000 ) > 0 else "\n"
+                print( ">", end=nwln, flush=True )
+            else :
+                mx = 5 if verbose < 4 else None if verbose == 4 else verbose
+                print( "%6d    %-8.8s "%(self.iter,name),
                     ( "%6.1f"%(self.temp ) if ( self.temp > 0 ) else "" ),
-                    " %8.1f  "%chisq, fmt( par, max=mx ), end=nwln )
+                    " %8.1f  "%chisq, fmt( par, max=mx ) )
 
     def randomRange( self, factor ):
         return factor * ( 0.9 + 0.2 * self.rng.rand( ) )
