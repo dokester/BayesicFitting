@@ -146,7 +146,6 @@ class GalileanEngine( Engine ):
             if inside == 0 :                            # safely inside lowLhood area
                 ptry[fitIndex] = um.stepPars( 1.0 )
 
-                self.plotter.move( allpars, ptry, 0 )
             elif inside == 1 :                          # first time outside -> mirror
                 f = ( Lhood - lowLhood ) / ( Lhood - Ltry )     # lin interpolation to edge
 
@@ -154,18 +153,18 @@ class GalileanEngine( Engine ):
                 pedge[fitIndex] = um.stepPars( f )                # ptry on edge
 
                 dLdp = self.errdis.partialLogL( problem, pedge, fitIndex )
-                self.plotter.move( allpars, pedge, 1 )
+                self.plotter.move( allpars, pedge, col=1, sym=4 )
 
                 um.mirrorOnLowL( dLdp )
                 ptry[fitIndex] = um.stepPars( 1 - f )
 
-                self.plotter.move( pedge, ptry, 2 )
+                self.plotter.move( pedge, ptry, col=2, sym=0 )
             else:                                       # mirroring failed; do reverse
                 size *= 0.7
                 um.reverseVelocity( size )
                 ptry[fitIndex] = um.stepPars( 1.0 )
 
-                self.plotter.move( allpars, ptry, 3 )
+                self.plotter.move( allpars, ptry, col=3, sym=0 )
 
             ## future extension #########################
             # if self.constrain :
@@ -176,12 +175,15 @@ class GalileanEngine( Engine ):
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
             if Ltry >= lowLhood:
+                self.plotter.move( allpars, ptry, col=0, sym=0 )
+
                 allpars = ptry.copy( )
                 Lhood = Ltry
                 self.reportSuccess( )
                 npout = len( allpars )
                 inside = 0
                 step += 1
+                trial = 0
 
                 ## check if better than Lbest in walkers[-1]
                 self.checkBest( problem, ptry, Ltry, fitIndex )
@@ -189,8 +191,10 @@ class GalileanEngine( Engine ):
             else:
                 inside += 1
                 if inside == 1:
+                    self.plotter.move( allpars, ptry, col=5, sym=4 )
                     self.reportReject( )
                 else:
+                    self.plotter.move( allpars, ptry, col=4, sym=4 )
                     self.reportFailed( )
 
             if self.verbose > 4 :
@@ -241,10 +245,8 @@ class UnitMovements( object ):
         """
         Set unit values for the applicable parameters
         """
-#        print( "fiti  ", fma( self.fitIndex ) )
         fip = allpars[self.fitIndex]
         self.upar = self.engine.domain2Unit( problem, fip, kpar=self.fitIndex )
-#        print( "upar  ", fma(self.upar) )
 
     def stepPars( self, f ):
         """
@@ -253,12 +255,9 @@ class UnitMovements( object ):
         uv = self.uvel
         pv = self.upar + uv * f
 
-#        print( "pv    ", fma(pv), fma(uv), fmt(f) )
-
         # check if outside [0,1]
         pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
         self.upar, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
-#        pv, self.uvel = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
 
         return self.engine.unit2Domain( self.problem, self.upar, kpar=self.fitIndex )
 
@@ -268,6 +267,8 @@ class UnitMovements( object ):
         """
         inprod = numpy.sum( dLdp * self.uvel )
         sumsq  = numpy.sum( dLdp * dLdp )
+        if sumsq == 0 : return
+
         self.uvel -= 2 * dLdp * inprod / sumsq
 
     def setVelocity( self, size ):

@@ -340,7 +340,13 @@ class DummyPlotter( object ) :
         """ start the plot. """
         pass
 
-    def move( self, param, ptry, col=None ):
+    def point( self, param, col=None, sym=0 ):
+        """
+        Place a point at position param using color col and symbol sym.
+        """
+        pass
+
+    def move( self, param, ptry, col=None, sym=None ):
         """
         Move parameters at position param to ptry using color col.
         """

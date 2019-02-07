@@ -160,6 +160,9 @@ class ChordEngine( Engine ):
 #            print( "umean ", fmt( umn ) )
             print( "usav  ", fmt( usav ) )
 
+        self.plotter.point( param, col=0, sym=2 )
+
+
         reset = True
         ptry = param.copy()
         step = 0
@@ -210,7 +213,7 @@ class ChordEngine( Engine ):
                     self.reportSuccess( )
                     step += 1
 
-                    self.plotter.move( param, ptry, 0 )
+                    self.plotter.move( param, ptry, col=0, sym=0 )
 
                     ## check if better than Lbest in walkers[-1]
                     self.checkBest( problem, ptry, Ltry, fitIndex )
@@ -234,7 +237,7 @@ class ChordEngine( Engine ):
 
                     break
 
-                self.plotter.move( param, ptry, 5 )
+                self.plotter.move( param, ptry, col=5, sym=4 )
                 self.reportReject( )
 
                 if dt < 0 :
