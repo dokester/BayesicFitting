@@ -154,7 +154,6 @@ class TestEngine3( unittest.TestCase ):
         self.stdenginetest3( ChordEngine, nsamp=100, order=100, plot=1 )
 
 
-
     def stdenginetest3( self, myengine, nsamp=100, order=1, plot=0 ) :
         m = Sphere( order )
         m.priors = [ UniformPrior( limits=[-1.0,1.0] ) ]
@@ -184,7 +183,7 @@ class TestEngine3( unittest.TestCase ):
             plt.figure( order, figsize=[6,6] )
 
         engine = myengine( wl, errdis )
-        engine.nstep = 5
+        engine.nstep = 15
         engine.size = 1.0
         if plot == 2 :
             engine.plotter = Plotter()
@@ -276,7 +275,7 @@ class TestEngine3( unittest.TestCase ):
 
         engine = myengine( wl, errdis, seed=seed )
         engine.plotter = Plotter()
-        engine.nstep = 10
+        engine.nstep = 20
 #        engine.verbose = 5
 
         pevo = wl.getParameterEvolution()
@@ -383,22 +382,36 @@ class Plotter( object ) :
         self.figsize = figsize
         self.k0 = kp[0]
         self.k1 = kp[1]
-        self.col = ['k-', 'r-', 'g-', 'b-', 'm-', 'y->']
+        self.col = ['k', 'r', 'g', 'b', 'm', 'y']
+        self.sym = ['.', ',', 'o', '+', 's', '*']
 
     def start( self ):
         """ start the plot. """
         plt.figure( 1, figsize=self.figsize )
 
 
-    def move( self, param, ptry, col=None ):
+    def point( self, param, col=0, sym=0 ) :
+        """
+        put a point at position param using color col.
+        """
+        k0 = self.k0
+        k1 = self.k1
+        cl = self.col[col] + self.sym[sym]
+        plt.plot( [param[k0]], [param[k1]], cl )
+
+
+    def move( self, param, ptry, col=0, sym=None ):
         """
         Move parameters at position param to ptry using color col.
         """
         k0 = self.k0
         k1 = self.k1
-        plt.plot( [param[k0], ptry[k0]], [param[k1], ptry[k1]], self.col[col] )
-        if self.iter % 5 == 0 :
+        cl = self.col[col] + '-'
+        plt.plot( [param[k0], ptry[k0]], [param[k1], ptry[k1]], cl )
+        if self.iter % 2 == 0 :
             plt.text( ptry[k0], ptry[k1], "%d" % self.iter )
+        if sym is not None :
+            self.point( ptry, col=col, sym=sym )
         self.iter += 1
 
     def stop( self ):

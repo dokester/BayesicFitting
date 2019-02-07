@@ -66,33 +66,36 @@ class TestAmoeba( unittest.TestCase ):
     #  **************************************************************
     def test1( self ):
         """     # 	test iterative slope fit  """
-        print( "Testing AnnealingAmoeba" )
+        print( "Testing AnnealingAmoeba; test 1" )
 
         xx = numpy.asarray( [3, -2], dtype=float )
         amb = AnnealingAmoeba( self.func1, xx, verbose=1 )
 
         Tools.printclass( amb )
         amb.minimize()
-        Tools.printclass( amb )
+
         assertAAE( amb.xopt, [-1.2,-1.44], 2 )
         assertAAE( amb.fopt, self.func1( [-1.2,-1.44] ), 3 )
 
     #  **************************************************************
     def test2( self ):
         """     # 	test iterative slope fit  """
-        print( "Testing AnnealingAmoeba with limits" )
+        print( "Testing AnnealingAmoeba with limits; test2" )
 
         xx = numpy.asarray( [3, -2], dtype=float )
         amb = AnnealingAmoeba( self.func1, xx, limits=[[-1,0],[3,3]], reltol=1e-10,
             maxiter=100, verbose=1 )
         Tools.printclass( amb )
+        print( "Catch runtime error" )
         self.assertRaises( ConvergenceError, amb.minimize )
 
+        print( "Testing AnnealingAmoeba with limits; test2" )
         xx = numpy.asarray( [3, -2], dtype=float )
-        amb = AnnealingAmoeba( self.func1, xx, limits=[[-1,0],[3,3]], reltol=1e-10, verbose=5 )
+        amb = AnnealingAmoeba( self.func1, xx, limits=[[-1,0],[3,3]], reltol=1e-10,
+                verbose=5 )
 
         amb.minimize()
-        Tools.printclass( amb )
+
         assertAAE( amb.xopt, [-1.0,0.0] )
         assertAAE( amb.fopt, self.func1( [-1.0,0.0] ) )
 
@@ -102,7 +105,7 @@ class TestAmoeba( unittest.TestCase ):
 
     def test3( self, plot=False ):
         """     # 	test iterative slope fit  """
-        print( "Testing AnnealingAmoeba with limits" )
+        print( "Testing AnnealingAmoeba with limits; test 3" )
 
         if plot :
             x = numpy.linspace( -10, 10, 201, dtype=float )
