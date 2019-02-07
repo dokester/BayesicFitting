@@ -30,7 +30,7 @@ class ErrorsInXandYProblem( Problem ):
     contain errors.
 
     It entails that the xdata are not at the exact locations. They need to
-    be optimized too. Consquently the parameters of the model are appended
+    be optimized too. Consequently the parameters of the model are appended
     with a set of parameters, the length of xdata. These extra parameters
     will contain the target localions of the xdata. The 2-dimensional distance
     between data (xdata,ydata) and (target, model(target)) is minimised.
@@ -40,6 +40,13 @@ class ErrorsInXandYProblem( Problem ):
     As the targets need to be optimised they need a Prior. In the present
     implementation there is the same Prior for all targets, which the centered on
     each of the xdata values.
+    S.Gull (1989) argues to use a GaussPrior with a scale similar to the errors
+    in both X and Y.
+
+    Attributes
+    ----------
+    prior : Prior
+        Priors for the x-axis nuisance parameters.
 
 
     Attributes from Problem
