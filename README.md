@@ -5,11 +5,11 @@ A package for model fitting and bayesian evidence calculation.
 (In case you are wondering what that is about take a 
 quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
-## What's new in version 2.2.
-   * ChordEngine. Implementation of the POLYCHORD engine, developed 
-by Handley etal. (2015) MNRAS 
-   * OrthogonalBasis. Helper class fot ChordEngine.
-   * Tests and examples
+## What's new in version 2.2.1
+   * AmoebaFitter still mentioned GenGaussErrorDistribution; replaced 
+by ExponentialErrorDistribution
+   * Some documentation issues repaired.
+
 
 
 ## Content
@@ -213,4 +213,10 @@ order of the parameters.
    * New tests, examples and updates for documentation.
 
  + 7 Feb 2019 version 2.2.0
+   * ChordEngine. Implementation of the POLYCHORD engine, developed 
+by Handley etal. (2015) MNRAS 
+   * OrthogonalBasis. Helper class fot ChordEngine.
+   * Tests and examples
+
+ + 19 Feb 2019 version 2.2.1 
    * see above in Whats new.
