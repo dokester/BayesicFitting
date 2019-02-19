@@ -42,7 +42,8 @@ class ScaledErrorDistribution( ErrorDistribution ):
     GaussErrorDistribution
     LaplaceErrorDistribution
     CauchyErrorDistribution
-    GenGaussErrorDistribution
+    ExponentialErrorDistribution
+    UniformErrorDistribution
 
     Author       Do Kester.
 

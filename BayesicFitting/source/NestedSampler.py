@@ -234,14 +234,14 @@ class NestedSampler( object ):
         distribution : None or String or ErrorDistribution
             None   : GaussErrorDistribution is chosen with (fixed) scale equal to 1.0
 
-            "gauss"    : `GaussErrorDistribution`    with 1 hyperpar scale
-            "laplace"  : `LaplaceErrorDistribution`  with 1 hyperpar scale
-            "poisson"  : `PoissonErrorDistribution`  no hyperpar
-            "cauchy"   : `CauchyErrorDstribution`    with 1 hyperpar scale
-            "uniform"  : `UniformErrorDistribution`  with 1 hyperpar scale
-            "gengauss" : `GenGaussErrorDistribution` with 2 hyperpar (scale, power)
+            "gauss"       : `GaussErrorDistribution`    with 1 hyperpar scale
+            "laplace"     : `LaplaceErrorDistribution`  with 1 hyperpar scale
+            "poisson"     : `PoissonErrorDistribution`  no hyperpar
+            "cauchy"      : `CauchyErrorDstribution`    with 1 hyperpar scale
+            "uniform"  	  : `UniformErrorDistribution`  with 1 hyperpar scale
+            "exponential" : `ExponentialErrorDistribution` with 2 hyperpar (scale, power)
             Only for OrderProblems: (for later)
-            "distance" : `DistanceCostFunction`      no hyperpar
+            "distance"    : `DistanceCostFunction`      no hyperpar
 
             Error distribution class which implements logLikelihood
 

@@ -8,7 +8,7 @@ from .GaussErrorDistribution import GaussErrorDistribution
 from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
-from .GenGaussErrorDistribution import GenGaussErrorDistribution
+from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
