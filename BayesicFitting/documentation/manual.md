@@ -955,12 +955,19 @@ parameter space such that the resulting walker is distributed randomly
 over the priors within the constraint that the likelihood associated
 with the walker remains higher than a preselected level.
 
-The engine of choice for continuous parameter estimation is the
-**GalileanEngine**. Starting at the copied walker it selects a random
+The engines of choice for continuous parameter estimation are the
+**GalileanEngine** and the **ChordEngine**. 
+
+The **GalileanEngine** starts at the copied walker. It selects a random
 step in parameter space and moves forward half a dozen times. When a
 step trespasses the likelihood boundary it mirrors on the boundary to
 get back into allowed space. If that is also unsuccesfull in reverses
 its steps.
+
+The **ChordEngine** selects a random direction, though its starting point.
+It extends that direction until is is outside the the selected level. 
+It selects a random point on the line. If it is inside the level, it is 
+the new point. Otherwise replace one of the endpoints and select again.
 
 The initial distribution of the walkers is made by **StartEngine**.
 
@@ -973,7 +980,7 @@ The keyword `rate` governs the speed of the engines. High rate equals
 high speed equals low accuracy.  
 
     ns = NestedSampler( xdata, model, ydata, speed=0.5,
-                        engines=["galilean", "gibbs", "step"] )
+                        engines=["galilean", "gibbs", "chord", "step"] )
 
 
 See below for lists of available [**Engine**s](#list-engines).
@@ -1307,6 +1314,8 @@ BaseFitters contain common methods for fitters that inherit from them.
 <a name="list-engines"></a>
 #### Engines.
 
++ **ChordEngine**<br>
+    Select a random point on a chord sliced though the likelihood.
 + **CrossEngine**<br>
     Cross over between 2 walkers.
 + **GalileanEngine**<br>
@@ -1426,6 +1435,8 @@ They can be encapsulated in a **KernelModel** or in a 2dim
     calculates radius and true anomaly (and derivatives) for Kepplers 2nd law.
 + **LogFactorial**<br>
     Natural logarithm of n!
++ **OrthonormalBasis**<br>
+    Construct a orthonormal basis from (random) vectors.
 + **Plotter**<br>
     Plot a model fitted to data.
 + **Tools**<br>

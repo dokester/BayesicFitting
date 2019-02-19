@@ -573,6 +573,7 @@ to be provided when calculating the evidence.
 
 The way the walkers are moved around in the available parameter space is
 determined by the **Engine**s. Several **Engine**s are availble:
+""ChordEngine**, **GalileanEngine**, 
 **GibbsEngine**, **CrossEngine** and **StepEngine**. For
 **Dynamic**Models **BirthEngine** and **DeathEngine** are needed too.
 
