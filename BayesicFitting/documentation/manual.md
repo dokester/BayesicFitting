@@ -312,6 +312,13 @@ A special operation that can be applied to two models
 is the pipe, indicated by |. It acts like the (unix) pipe: the
 result of the left-hand model is used as input of the right-hand model.
 
+When m1, m2 and m3 are models, implementing f1( x:p ), f2( x:q ) and f3( x,r ), 
+resp., then m4 = m1 | m2 implements f4( x:p,q ) = f2( f1(x:p), q ).
+m5 = m1 | m2 + m3 implements f5( x:p,q,r ) = f2( f1(x:p):q ) + f3(x:r);
+i.e. the m1 only influences m2, not m3.
+To influence both m2 and m3, write m6 = m2 + m3 and m7 = m1 | m6 
+It implements f5( x:p,q,r ) = f2( f1(x:p):q ) + f3( f1(x:p):r ) 
+
 This is the only place where a 2-d model can be combined with a 1-d
 model as the output of a 2-d model is 1 dimensional.
 
@@ -542,7 +549,7 @@ confidence region.
 
 ### Non-linear Fitters.
 
-For non-linear models the &chi;<sup2</sup>-landscape can be complicated.
+For non-linear models the &chi;<sup>2</sup>-landscape can be complicated.
 It can have many minima of which only one is the deepest. That is the
 one the fitter should find. Non linear fitters search for a gradient in
 the landscape to descend into the valley. Wherever a minimum is found,

@@ -1,7 +1,7 @@
 
 ## Restrictions and Trouble Shooting.
 
-**The math is all OK, the computation is the nightmare.**
+**The math is all OK; computation is the nightmare.**
 
 
 Although the theory of model fitting is quite straightforward, the
@@ -132,6 +132,13 @@ covariance between the parameters, the standard deviations can be large
 while the confidence region is still acceptable. <br>
 The confidence region is actually is better indicator for how well the model
 performs than the standard deviations on the parameters.  
+
++ **NestedSampler and standard deviations.**<br>
+Standard deviations are proportional to the noise scale divided by the 
+square root of the number of points. Nestedsampler is doing that too. 
+However, if the noise scale is fixed during the run of NestedSampler, 
+the standard deviations on the parameters is as much off as the true noise 
+scale differs from the provided noise scale.
 
 + **Parameters at the edge**<br>
 The standard deviations of the parameters are calculated as the
