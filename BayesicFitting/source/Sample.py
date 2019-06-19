@@ -70,7 +70,7 @@ class Sample( object ):
 
     """
 
-    def __init__( self, id, parent, model, parameters=None, fitIndex=None, copy=None ):
+    def __init__( self, id, parent, start, model, parameters=None, fitIndex=None, copy=None ):
         """
         Constructor.
 
@@ -80,6 +80,8 @@ class Sample( object ):
             id of the sample
         parent : int
             id of the parent (-1 for Adam/Eve)
+        start : int
+            iteration in which the walker was constructed
         model : Model
             the model being used. Parameters are copied from this model.
         parameters : array_like
@@ -92,6 +94,7 @@ class Sample( object ):
         """
         self.id = id
         self.parent = parent
+        self.start = start
 
         if copy is None :
             self.model = model
@@ -115,7 +118,7 @@ class Sample( object ):
 
         The copy points to the same instance of model.
         """
-        return Sample( self.id, self.parent, self.model, copy=self )
+        return Sample( self.id, self.parent, self.start, self.model, copy=self )
 
     def __getattr__( self, name ) :
         """
@@ -146,7 +149,7 @@ class Sample( object ):
             object.__setattr__( self, name, value )
             return
 
-        key1 = {"id" : int, "parent" : int, "model": Model,
+        key1 = {"id" : int, "parent" : int, "start" : int, "model": Model,
                 "logL" : float, "logW" : float }
         key2 = {"fitIndex" : int, "nuisance" : float, "hyper" : float }
         if ( Tools.setSingleAttributes( self, name, value, key1 ) or
