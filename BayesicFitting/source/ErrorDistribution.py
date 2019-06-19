@@ -350,23 +350,20 @@ class ErrorDistribution( object ):
         self.nparts += 1                ## counts calls tp partialLogL
         mock = problem.result( allpars[:problem.model.npars] )
 
-        if True :
-
-#        try :
+        try :
             pg = self.nextPartialData( problem, allpars, fitIndex, mockdata=mock )
             np = len( fitIndex )
             dL = numpy.zeros( np, dtype=float )
             for k in range( np ) :
                 dL[k] = numpy.sum( next( pg ) )
-#                print( "ED   ", k, dL[k] )
 
             try :
                 pg.close()
             except :
                 pass
+
             return dL
-        else :
-#        except :
+        except :
             print( "Using numeric partialLogL." )
             return self.numPartialLogL( problem, allpars, fitIndex )
 
