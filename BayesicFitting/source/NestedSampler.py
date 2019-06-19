@@ -505,6 +505,7 @@ class NestedSampler( object ):
 
             self.samples.weed( self.maxsize )                # remove overflow in samplelist
 
+            self.iteration += 1
             self.copyWalker( worst )
 
             # Explore the copied walker(s)
@@ -512,7 +513,6 @@ class NestedSampler( object ):
 
             # Shrink the interval
             logWidth -= ( 1.0 * self.discard ) / self.ensemble
-            self.iteration += 1
 
             self.optionalSave( )
 
@@ -583,6 +583,8 @@ class NestedSampler( object ):
         for kw in worst :
             smpl = self.walkers[kw].toSample( worstLogW )
             self.samples.add( smpl )
+#            wlkr = self.walkers[kw]
+#            print( self.iteration, kw, wlkr.id, wlkr.parent, wlkr.start, smpl.id, smpl.start )
 
     def findWorst( self ):
         """
@@ -616,6 +618,10 @@ class NestedSampler( object ):
                     kcp += 1
             self.walkers.copy( kcp, worst[k] )
             setatt( self.walkers[worst[k]], "parent", kcp )
+            setatt( self.walkers[worst[k]], "start", self.iteration )
+#            wlkr = self.walkers[worst[k]]
+#            print( k, worst[k], wlkr.id, wlkr.parent, wlkr.start, self.iteration )
+
 
     def addEnsembleToSamples( self, logWidth ):
         """
