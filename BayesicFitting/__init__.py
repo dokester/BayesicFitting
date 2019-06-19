@@ -42,6 +42,7 @@ from .source.ConstantModel import ConstantModel
 from .source.ConvergenceError import ConvergenceError
 from .source.CrossEngine import CrossEngine
 from .source.CurveFitter import CurveFitter
+#from .source.CyclicResults import CyclicResults
 from .source.DeathEngine import DeathEngine
 from .source.Dynamic import Dynamic
 from .source.Engine import Engine
@@ -61,7 +62,6 @@ from .source.GalileanEngine import GalileanEngine
 from .source.GaussErrorDistribution import GaussErrorDistribution
 from .source.GaussModel import GaussModel
 from .source.GaussPrior import GaussPrior
-#from .source.GenGaussErrorDistribution import GenGaussErrorDistribution
 from .source.GibbsEngine import GibbsEngine
 from .source.HarmonicModel import HarmonicModel
 from .source.HarmonicDynamicModel import HarmonicDynamicModel
@@ -78,6 +78,7 @@ from .source.LaplacePrior import LaplacePrior
 from .source.LevenbergMarquardtFitter import LevenbergMarquardtFitter
 from .source.LinearModel import LinearModel
 from .source.LogFactorial import logFactorial
+from .source.LogisticModel import LogisticModel
 from .source.LorentzModel import LorentzModel
 from .source.MaxLikelihoodFitter import MaxLikelihoodFitter
 from .source.MixedErrorDistribution import MixedErrorDistribution
@@ -85,6 +86,7 @@ from .source.Model import Model
 from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
+#from .source.NeuralNetModel import NeuralNetModel
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
@@ -108,6 +110,7 @@ from .source.RepeatingModel import RepeatingModel
 from .source.RobustShell import RobustShell
 from .source.Sample import Sample
 from .source.SampleList import SampleList
+from .source.SampleMovie import SampleMovie
 from .source.ScaledErrorDistribution import ScaledErrorDistribution
 ## import all fitters inside ScipyFitter
 from .source.ScipyFitter import *

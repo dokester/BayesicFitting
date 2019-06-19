@@ -10,12 +10,14 @@ BayesicFitting/documentation/*.dia~
 BayesicFitting/documentation/*.html
 BayesicFitting/documentation/images/.ipynb_checkpoints
 BayesicFitting/examples/.ipynb_checkpoints
-BayesicFitting/examples/Untitled.ipynb
+BayesicFitting/examples/Untitled*.ipynb
 BayesicFitting/source/__pycache__
 BayesicFitting/source/kernels/__pycache__
 BayesicFitting/test/__pycache__
-BayesicFitting/test/TESTAll.py
-BayesicFitting/test/TESTFreeShape*
+BayesicFitting/test/*mp4
 BayesicFitting/test/testresults*
+BayesicFitting/TBD-examples/
+BayesicFitting/TBD-test/
+BayesicFitting/examples/test/
 *~
 *.pyc

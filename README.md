@@ -5,11 +5,18 @@ A package for model fitting and bayesian evidence calculation.
 (In case you are wondering what that is about take a 
 quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
-## What's new in version 2.2.1
-   * AmoebaFitter still mentioned GenGaussErrorDistribution; replaced 
-by ExponentialErrorDistribution
-   * Some documentation issues repaired.
 
+Citation index:
+10.5281/zenodo.2597201
+
+
+## What's new in version 2.3.0
+   * Add LogisticModel and SampleMovie
+   * Periodic residuals in Problem
+   * Small issues repaired
+   * Rerun all examples
+   * Pictures moved to documentation/images
+   * Some documentation issues repaired.
 
 
 ## Content
@@ -219,4 +226,9 @@ by Handley etal. (2015) MNRAS
    * Tests and examples
 
  + 19 Feb 2019 version 2.2.1 
+   * AmoebaFitter still mentioned GenGaussErrorDistribution; replaced 
+by ExponentialErrorDistribution
+   * Some documentation issues repaired.
+
+ + 19 Jan 2019 version 2.3.0 
    * see above in Whats new.
