@@ -3,7 +3,6 @@ import math
 from . import Tools
 from .Formatter import formatter as fmt
 
-from .Model import Model
 from .Problem import Problem
 from .Sample import Sample
 
@@ -47,6 +46,8 @@ class Walker( object ):
         identification number
     parent : int
         id of the parent (-1 for Adam/Eve)
+    start : int
+        iteration in which the walker is constructed
     problem : Problem
         the problem being addressed
     logL : float
@@ -66,7 +67,7 @@ class Walker( object ):
 
     """
 
-    def __init__( self, id, problem, allpars, fitIndex, parent=-1, copy=None ):
+    def __init__( self, id, problem, allpars, fitIndex, parent=-1, start=0, copy=None ):
         """
         Constructor.
 
@@ -85,6 +86,8 @@ class Walker( object ):
             None is all
         parent : int
             id of the parent (-1 for Adam/Eve)
+        start : int
+            iteration in which the walker is constructed
         copy : Walker
             the walker to be copied
 
@@ -94,10 +97,12 @@ class Walker( object ):
         self.fitIndex = fitIndex
 
         if copy is None :
+            self.start = start
             self.parent = parent
             self.problem = problem
             self.logL = 0.0
         else :
+            self.start = copy.start
             self.parent = copy.parent
             self.problem = problem.copy()
             self.logL = copy.logL
@@ -122,16 +127,13 @@ class Walker( object ):
         nm = self.problem.model.npars
 
         param = self.allpars[:nm]
-        sample = Sample( self.id, self.parent, self.problem.model, parameters=param,
-                         fitIndex=self.fitIndex )
+        sample = Sample( self.id, self.parent, self.start, self.problem.model,
+                         parameters=param, fitIndex=self.fitIndex )
 
         if len( self.allpars ) > np :
             sample.hyper = self.allpars[np:]
         if np > nm :
             sample.nuisance = self.allpars[nm:np]
-
-#        sample = Sample( self.id, self.parent, self.problem.model, allpars=self.allpars,
-#                         fitIndex=self.fitIndex )
 
         sample.logL = self.logL
         sample.logW = logW
@@ -164,7 +166,7 @@ class Walker( object ):
             object.__setattr__( self, name, value )
             return
 
-        key1 = {"id" : int, "parent" : int, "problem": Problem,
+        key1 = {"id" : int, "parent" : int, "start" : int, "problem": Problem,
                 "logL" : float }
         if Tools.setSingleAttributes( self, name, value, key1 ) :
             pass
