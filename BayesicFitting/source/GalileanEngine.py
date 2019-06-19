@@ -113,7 +113,6 @@ class GalileanEngine( Engine ):
         problem = walker.problem
         Lhood = walker.logL
         allpars = walker.allpars
-#        print( "GE  ", fma( allpars ), fmt( Lhood ), fmt( lowLhood ) )
         fitIndex = walker.fitIndex
 
         npout = 0
@@ -141,13 +140,15 @@ class GalileanEngine( Engine ):
 
         while True:
             trial += 1
+            f = -1
 
             um.setParameters( problem, allpars )
             if inside == 0 :                            # safely inside lowLhood area
                 ptry[fitIndex] = um.stepPars( 1.0 )
 
             elif inside == 1 :                          # first time outside -> mirror
-                f = ( Lhood - lowLhood ) / ( Lhood - Ltry )     # lin interpolation to edge
+                f = ( 1.0 if Lhood == Ltry else
+                      ( Lhood - lowLhood ) / ( Lhood - Ltry ) )     # lin interpolation to edge
 
                 pedge = ptry.copy()
                 pedge[fitIndex] = um.stepPars( f )                # ptry on edge
@@ -209,8 +210,6 @@ class GalileanEngine( Engine ):
             warnings.warn( "GalileanEngine: no steps found" )
 
 
-#        print( "GE  ", fma( allpars ), fmt( Lhood ) )
-
         self.plotter.stop()
         return npout
 
@@ -267,6 +266,7 @@ class UnitMovements( object ):
         """
         inprod = numpy.sum( dLdp * self.uvel )
         sumsq  = numpy.sum( dLdp * dLdp )
+
         if sumsq == 0 : return
 
         self.uvel -= 2 * dLdp * inprod / sumsq
