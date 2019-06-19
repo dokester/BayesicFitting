@@ -132,7 +132,8 @@ class SampleList( list ):
                 model = model.copy()
                 if fitIndex is not None :
                     fitIndex = fitIndex.copy()
-            sample = Sample( self._count, -1, model, parameters=parameters, fitIndex=fitIndex )
+            sample = Sample( self._count, -1, self.iteration, model,
+                             parameters=parameters, fitIndex=fitIndex )
             self.append( sample )
             self._count += 1
 
@@ -460,6 +461,13 @@ class SampleList( list ):
         pe = []
         for sample in self :
             pe += [sample.parent]
+        return numpy.asarray( pe )
+
+    def getStartEvolution( self ):
+        """ Return the evolution of the start generation.  """
+        pe = []
+        for sample in self :
+            pe += [sample.start]
         return numpy.asarray( pe )
 
     def getGeneration( self ):
