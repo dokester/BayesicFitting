@@ -50,7 +50,7 @@ class TestKepplers2ndLaw( unittest.TestCase ):
         self.test1( plot=True )
 
     def test1( self, plot=False ):
-        x  = numpy.linspace( 0, 10, 1001, dtype=float )
+        x  = numpy.linspace( 0.0, 10, 101, dtype=float )
         print( "******KEPPLERS LAW***************" )
         KL = Kepplers2ndLaw( )
 
@@ -64,6 +64,13 @@ class TestKepplers2ndLaw( unittest.TestCase ):
         print( "Ecce ", fmt( e ) )
         print( "True ", fmt( v ) )
         print( "Rad  ", fmt( r ) )
+
+        se = KL.sinE
+        ce = KL.cosE
+
+        for k in range( 101 ) :
+            print( fmt(k), fmt(m[k]), fmt(e[k]), fmt(v[k]), fmt(se[k]), fmt(ce[k]) )
+
         assertAAE( m, e )
         assertAAE( e, v )
         x0 = r * numpy.cos( v )

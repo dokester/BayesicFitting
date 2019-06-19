@@ -60,6 +60,7 @@ class TestModels( unittest.TestCase ):
         self.plotVoigtModel( )
         self.plotPseudoVoigtModel( )
         self.plotLorentzModel( )
+        self.plotLogisticModel( )
         self.plotFreeShapeModel( )
         self.plotGaussModel( )
         self.plotGaussPlusBackgroundModel( )
@@ -123,6 +124,9 @@ class TestModels( unittest.TestCase ):
         pg[3] = 1.0
         plt.plot( xx, pvm.result( xx, pg ), 'm--' )
         plt.show()
+
+    def plotLogisticModel( self ) :
+        self.testLogisticModel( plot=True )
 
     def plotLorentzModel( self ) :
         self.testLorentzModel( plot=True )
@@ -234,6 +238,14 @@ class TestModels( unittest.TestCase ):
         print( "******EXP**************************" )
         m = ExpModel( )
         p = numpy.asarray( [1.2,-0.1], dtype=float )
+
+        stdModeltest( m, p, plot=plot )
+
+    def testLogisticModel( self, plot=False ):
+        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
+        print( "******LOGISTIC***********************" )
+        m = LogisticModel( )
+        p = numpy.asarray( [1.2,-0.2,0.3], dtype=float )
 
         stdModeltest( m, p, plot=plot )
 

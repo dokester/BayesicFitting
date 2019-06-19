@@ -5,11 +5,12 @@ import numpy as numpy
 from astropy import units
 import math
 
-import matplotlib.pyplot as plt
-
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 from Sphere import Sphere
+
+import matplotlib.pyplot as plt
+
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -275,7 +276,7 @@ class TestEngine3( unittest.TestCase ):
 
         engine = myengine( wl, errdis, seed=seed )
         engine.plotter = Plotter()
-        engine.nstep = 20
+        engine.nstep = 10
 #        engine.verbose = 5
 
         pevo = wl.getParameterEvolution()

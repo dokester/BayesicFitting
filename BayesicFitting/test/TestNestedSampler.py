@@ -1,7 +1,8 @@
 # run with : python3 -m unittest TestNestedSampler
-# or :       python3 -m unittest TestNestedSampler.Test.test1
+# or :       python3 -m unittest TestNestedSampler.TestNestedSampler.test1
 
 import unittest
+import time
 import numpy as numpy
 from astropy import units
 import math
@@ -116,11 +117,23 @@ class TestNestedSampler( unittest.TestCase ):
 
         self.dofit( ns, pp, plot=plot )
 
+        sl = ns.samples
+
+        printclass( sl[0] )
+
+#        start = time.time()
+#        SampleMovie( sl, problem=ns.problem, kpar=[1,0] )
+#        endt = time.time()
+
+#        print( "Elapsed ", endt - start )
 
     def test2( self, plot=False ):
         print( "=========== Nested Sampler test 2 ======================" )
 
         pp, y0, x, y, w = self.makeData( 2 )
+
+        x = numpy.append( x, x )
+        y = numpy.append( y, y )
 
         gm = GaussModel( )
         gm.addModel( PolynomialModel(1) )
@@ -133,10 +146,60 @@ class TestNestedSampler( unittest.TestCase ):
 
         gm.setLimits( lolim, hilim )
 
-        ns = NestedSampler( x, gm, y, threads=True )
+        lmf = LevenbergMarquardtFitter( x, gm )
+        pars = lmf.fit( y )
+        print( "LMFpars ", fmt( pars, max=None ) )
+        print( "LMFstdv ", fmt( lmf.stdevs, max=None ) )
 
-        print( "truth  ", pp )
-        self.dofit( ns, pp, plot=plot )
+        ns = NestedSampler( x, gm, y )
+
+        evi = ns.sample()
+        print( "NS pars ", fmt( ns.parameters ) )
+        print( "NS stdv ", fmt( ns.stdevs ) )
+        print( "NS scal ", fmt( ns.scale ) )
+
+        ns = NestedSampler( x, gm, y, verbose=0 )
+        ns.distribution.setLimits( [0.01, 100] )
+
+        evi = ns.sample()
+        print( "NS pars ", fmt( ns.parameters ) )
+        print( "NS stdv ", fmt( ns.stdevs ) )
+        print( "NS scal ", fmt( ns.scale ) )
+
+#        print( "truth  ", pp )
+#        self.dofit( ns, pp, plot=plot )
+
+    def test2a( self, plot=False ):
+        print( "=========== Nested Sampler test 2a ======================" )
+
+        pp = 0.0
+
+        for N in [10, 40, 160] :
+            print( "======= ", N, " points ======" )
+            x = numpy.linspace( -1.0, 1.0, N, dtype=float )
+            y = numpy.random.randn( N )
+
+            pm = PolynomialModel( 1 )
+
+            lolim = numpy.asarray( [-10], dtype=float )
+            hilim = numpy.asarray( [ 10], dtype=float )
+
+            pm.setLimits( lolim, hilim )
+
+            lmf = LevenbergMarquardtFitter( x, pm )
+            pars = lmf.fit( y )
+            print( "LMFpars ", fmt( pars, max=None ) )
+            print( "LMFstdv ", fmt( lmf.stdevs, max=None ) )
+            print( "LMFscal ", fmt( lmf.scale ) )
+
+            ns = NestedSampler( x, pm, y, verbose=0 )
+            ns.distribution.setLimits( [0.01, 100] )
+
+            evi = ns.sample()
+            print( "NS pars ", fmt( ns.parameters ) )
+            print( "NS stdv ", fmt( ns.stdevs ) )
+            print( "NS scal ", fmt( ns.scale ) )
+
 
 
     def test3( self, plot=False ):

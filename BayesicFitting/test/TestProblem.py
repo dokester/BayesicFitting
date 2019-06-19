@@ -14,7 +14,6 @@ from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 from BayesicFitting import fma
 
-
 __author__ = "Do Kester"
 __year__ = 2017
 __license__ = "GPL3"
@@ -387,7 +386,7 @@ class TestProblem( unittest.TestCase ):
         y = numpy.array( [[1,0],[0,1],[-1,0],[0,-1]], dtype=float )
         w = numpy.array( [0.9,1.0,1.1,1.2], dtype=float )
 
-        mdl = StellarOrbitModel( )
+        mdl = StellarOrbitModel( spherical=False )
         p = [ 0.0, 1.1, 4.0, 0.01, 0.0, 0.0, 0.0]
 
         problem = MultipleOutputProblem( model=mdl, xdata=x, ydata=y, weights=w )
@@ -429,9 +428,111 @@ class TestProblem( unittest.TestCase ):
         print( aa )
         print( aa.reshape( -1, 2 ) )
 
+    def testcr1( self ) :
+
+        print( "===== cyclic results 1 ================" )
+
+        mdl = PolynomialModel( 1 )
+        x = numpy.array( [0,1,9,10], dtype=float )
+        y = numpy.array( [1,0,10,9], dtype=float )
+        problem = Problem( model=mdl, xdata=x, ydata=y )
+
+        Tools.printclass( mdl )
+
+        r0 = numpy.linspace( -0.7, 1.5, 12 )
+
+        r1 = problem.cyclicCorrection( r0 )
+
+        assertAAE( r0, r1 )
+
+    def testcr2( self ) :
+
+        print( "===== cyclic results 2 ================" )
+
+        mdl = PhaseModel( cyclic=1.0 )
+
+        x = numpy.array( [0,1,9,10], dtype=float )
+        y = numpy.array( [1,0,10,9], dtype=float )
+        problem = Problem( model=mdl, xdata=x, ydata=y )
+
+        Tools.printclass( problem )
+
+        r0 = numpy.linspace( -0.7, 1.5, 12 )
+        print( fmt( r0, max=None ) )
+        r1 = problem.cyclicCorrection( r0 )
+        print( fmt( r1, max=None ) )
+
+        self.assertTrue( all( numpy.abs( r1 ) <= 0.5 ) )
+
+    def testcr3( self ) :
+
+        print( "===== cyclic results 3 ================" )
+
+        mdl = PhaseModel( cyclic=3.0 )
+
+        x = numpy.array( [0,1,9,10], dtype=float )
+        y = numpy.array( [1,0,10,9], dtype=float )
+        problem = Problem( model=mdl, xdata=x, ydata=y )
+
+        Tools.printclass( problem )
+
+        r0 = numpy.linspace( -4.2, 4.5, 12 ).reshape(3,4).transpose()
+        print( fmt( r0, max=None ) )
+        r1 = problem.cyclicCorrection( r0 )
+        print( fmt( r1, max=None ) )
+
+        self.assertTrue( all( numpy.abs( r1.flatten() ) <= 1.5 ) )
+
+    def testcr4( self ) :
+
+        print( "===== cyclic results 4 ================" )
+
+        mdl = PhaseModel( cyclic={0:1.0} )
+
+        x = numpy.array( [0,1,9,10], dtype=float )
+        y = numpy.array( [1,0,10,9], dtype=float )
+        problem = Problem( model=mdl, xdata=x, ydata=y )
+
+        Tools.printclass( problem )
+
+        r0 = numpy.linspace( -0.8, 1.5, 12 ).reshape(2,6).transpose()
+        print( fmt( r0, max=None ) )
+        r1 = problem.cyclicCorrection( r0 )
+        print( fmt( r1, max=None ) )
+
+        assertAAE( r0[:,1], r1[:,1] )
+        self.assertTrue( all( numpy.abs( r1[:,0] ) < 0.5 ) )
+
+    def testcr5( self ) :
+
+        print( "===== cyclic results 5 ================" )
+
+        mdl = PhaseModel( cyclic={0: 1.0, 2:1.2} )
+        x = numpy.array( [0,1,9,10], dtype=float )
+        y = numpy.array( [1,0,10,9], dtype=float )
+        problem = Problem( model=mdl, xdata=x, ydata=y )
+
+        r0 = numpy.linspace( -0.8, 1.5, 12 ).reshape(3,4).transpose()
+        print( fmt( r0, max=None ) )
+        r1 = problem.cyclicCorrection( r0 )
+        print( fmt( r1, max=None ) )
+
+        assertAAE( r0[:,1], r1[:,1] )
+        self.assertTrue( all( numpy.abs( r1[:,0] ) < 0.5 ) )
+        self.assertTrue( all( numpy.abs( r1[:,2] ) < 0.6 ) )
+
+
+
 
     @classmethod
     def suite( cls ):
-        return unittest.TestCase.suite( ErrorDistributionTest.__class__ )
+        return unittest.TestCase.suite( ProblemTest.__class__ )
 
 
+class PhaseModel( PolynomialModel ) :
+
+    def __init__( self, ndim=1, cyclic=1.0, **kwargs ) :
+
+        super().__init__( degree=0, ndim=ndim, **kwargs )
+
+        Tools.setAttribute( self, "cyclic", cyclic )

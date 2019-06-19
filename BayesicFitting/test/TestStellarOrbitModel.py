@@ -3,6 +3,7 @@
 import unittest
 import numpy as numpy
 from astropy import units
+import math
 import matplotlib.pyplot as plt
 import warnings
 
@@ -49,7 +50,7 @@ class TestStellarOrbitModel( unittest.TestCase ):
     def test1( self, plot=False ):
         x  = numpy.linspace( 0, 1400, 1401, dtype=float )
         print( "****** STELLAR ORBIT test 1 ***************" )
-        m = StellarOrbitModel( )
+        m = StellarOrbitModel( spherical=False )
         self.assertTrue( m.getNumberOfParameters( ) == 7 )
         self.assertTrue( m.npbase == 7 )
 
@@ -95,7 +96,7 @@ class TestStellarOrbitModel( unittest.TestCase ):
 
     def test2( self ) :
         x  = numpy.linspace( 0, 1400, 7, dtype=float )
-        print( "****** STELLAR ORBIT test 1 ***************" )
+        print( "****** STELLAR ORBIT test 2 ***************" )
         m = StellarOrbitModel( )
 
         # eccen, semimajor, period, periastron, inclin, ascnodepos, ascnodelong
@@ -108,6 +109,66 @@ class TestStellarOrbitModel( unittest.TestCase ):
 
         self.dtest( x, mc, p )
 
+    def test3( self ) :
+        x  = numpy.linspace( 0, 1400, 7, dtype=float )
+        print( "****** STELLAR ORBIT test 3 ***************" )
+        m = StellarOrbitModel( spherical=False )
+
+        # eccen, semimajor, period, periastron, inclin, ascnodepos, ascnodelong
+        p = [0.67, 13, 1200.0, 0.1, 0.2, 0.3, 0.4]
+
+        self.dtest( x, m, p )
+
+        print( "Make copy of model: ", m )
+        mc = m.copy()
+
+        self.dtest( x, mc, p )
+
+    def test4( self ) :
+
+        print( "****** STELLAR ORBIT test 4 ***************" )
+        m = StellarOrbitModel( spherical=False )
+
+        p = math.pi
+        rho = numpy.array( [0, 1, 1, 1, 1, 3, 2.4] )
+        phi = numpy.array( [0, 0, p, p/2, p/4, p/6, 4.3] )
+        rp0 = numpy.append( rho, phi ).reshape(2,-1).transpose()
+
+        xy0 = m.toRect( rp0 )
+
+        print( "x0   ", fma( xy0[:,0] ) )
+        print( "y0   ", fma( xy0[:,1] ) )
+
+        rp1 = m.toSpher( xy0 )
+
+        print( "r1   ", fma( rp1[:,0] ) )
+        print( "t1   ", fma( rp1[:,1] ) )
+
+        xy1 = m.toRect( rp1 )
+
+        print( "x1   ", fma( xy1[:,0] ) )
+        print( "y1   ", fma( xy1[:,1] ) )
+
+        rp2 = m.toSpher( xy1 )
+
+        print( "r2   ", fma( rp2[:,0] ) )
+        print( "t2   ", fma( rp2[:,1] ) )
+
+        xy2 = m.toRect( rp2 )
+
+        print( "x2   ", fma( xy2[:,0] ) )
+        print( "y2   ", fma( xy2[:,1] ) )
+
+        rp3 = m.toSpher( xy2 )
+
+        print( "r3   ", fma( rp3[:,0] ) )
+        print( "t3   ", fma( rp3[:,1] ) )
+
+
+#        assertAAE( xy0, xy1 )
+        assertAAE( xy1, xy2 )
+        assertAAE( rp1, rp2 )
+        assertAAE( rp2, rp3 )
 
 
     def dtest( self, x, m, p ) :
