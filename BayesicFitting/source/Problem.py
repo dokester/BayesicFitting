@@ -96,6 +96,17 @@ class Problem( object ):
 
         self.npars = self.model.npars
 
+
+        if self.model.cyclic is None :
+#            print( "Use cycor0" )
+            self.cyclicCorrection = self.cycor0
+        elif isinstance( self.model.cyclic, dict ) :
+#            print( "Use cycor2" )
+            self.cyclicCorrection = self.cycor2
+        else :
+#            print( "Use cycor1" )
+            self.cyclicCorrection = self.cycor1
+
     def copy( self ):
         """
         Copy.
@@ -150,7 +161,7 @@ class Problem( object ):
 
     def residuals( self, param, mockdata=None ) :
         """
-        Returns the (weighted) residuals, calculated at the xdata.
+        Returns the residuals, calculated at the xdata.
 
         Parameters
         ----------
@@ -160,11 +171,60 @@ class Problem( object ):
             model fit at xdata
 
         """
-        return self.ydata - ( self.result( param ) if mockdata is None else mockdata )
+        res = self.ydata - ( self.result( param ) if mockdata is None else mockdata )
+        return self.cyclicCorrection( res )
+
+    def cycor0( self, res ):
+        """
+        Returns the residuals, unadultered
+
+        Parameters
+        ----------
+        res : array_like
+            residuals
+
+        """
+        return res
+
+    def cycor1( self, res ):
+        """
+        Returns the residuals corrected for periodicity in residuals
+
+        Parameters
+        ----------
+        res : array_like
+            residuals
+
+        """
+        return self.cyclize( res, self.model.cyclic )
+
+    def cycor2( self, res ):
+        """
+        Returns the residuals corrected for periodicity in residuals
+
+        Parameters
+        ----------
+        res : array_like
+            residuals
+
+        """
+        cyclic = self.model.cyclic
+        for key in cyclic.keys() :
+            res[:,key] = self.cyclize( res[:,key], cyclic[key] )
+        return res
+
+    def cyclize( self, res, period ) :
+        hp = period / 2
+        return numpy.where( res < -hp, res + period,
+               numpy.where( res >  hp, res - period, res ) )
+
+
 
     def weightedResiduals( self, param, mockdata=None, extra=False ) :
         """
         Returns the (weighted) residuals, calculated at the xdata.
+
+        Optionally (extra=True) the weighted signs of the residuals are returned too.
 
         Parameters
         ----------
