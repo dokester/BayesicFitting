@@ -95,7 +95,7 @@ class SplinesModel( LinearModel ):
 
     Limitations
     -----------
-    Dont constract the knots so closely spaced, that there are no datapoints in between.
+    Dont construct the knots so closely spaced, that there are no datapoints in between.
 
     """
     def __init__( self, knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,

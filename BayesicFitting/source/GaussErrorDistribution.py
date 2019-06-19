@@ -146,7 +146,6 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
             as calculated by the model
 
         """
-
         scale = allpars[-1]
 
         res2 = -0.5 * problem.weightedResSq( allpars[:-1], mockdata=mockdata )
@@ -226,9 +225,9 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         scale = allpars[-1]
         s2 = scale * scale
         for  k in fitIndex:
-            if k >= 0 :
+            if k >= 0 :                         ## the parameters
                 yield ( res * dM[:,k] ) / s2
-            else :
+            else :                              ## the scale
                 wgt = 1.0 if problem.weights is None else problem.weights
                 yield ( res2 / s2 - wgt ) / scale
 

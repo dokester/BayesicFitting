@@ -60,8 +60,8 @@ class Explorer( object ):
         level of blabbering
     lowLhood : float
         present low likelihood level
-    generation : int
-        counting explorer calls
+#    generation : int
+#        counting explorer calls
 
     Author       Do Kester.
 

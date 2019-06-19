@@ -90,9 +90,9 @@ class Model( FixedModel ):
     >>>
     >>> m1 = PolynomialModel( 1 )               # m1( x, p )
     >>> m2 = SineModel()                        # m2( x, q )
-    >>> m3 = PolynomialModel( 0 )               # m4( x, r )
+    >>> m3 = PolynomialModel( 0 )               # m3( x, r )
     >>> m4 = m1 | m2                            # m2( m1( x, p ), q )
-    >>> m5 = m4 + m3                            # m2( m1( x, p ), q ) + m4( x, r )
+    >>> m5 = m4 + m3                            # m2( m1( x, p ), q ) + m3( x, r )
     >>> print( m5.parameters )                  # [p, q, r]
     >>>
     >>> # Implicit brackets
@@ -102,7 +102,7 @@ class Model( FixedModel ):
     >>> m2 = SineModel()                        # m2( x, q )
     >>> m3 = PolynomialModel( 0 )               # m3( x, r )
     >>> m4 = m2 + m3                            # m2( x, q ) + m3( x, r )
-    >>> m5 = m1 | m4                            # m2( m1( x, p ), q ) + m4( m1( x, p ), r )
+    >>> m5 = m1 | m4                            # m2( m1( x, p ), q ) + m3( m1( x, p ), r )
     >>> print( m5.parameters )                  # [p, q, r]
 
     Attributes
@@ -118,7 +118,6 @@ class Model( FixedModel ):
     npars : int (read only)
         number of parameters in this model
     npchain : int (read only)
-        number of parameters needed in the total chain of models
         identical to npars
 
     Attributes from FixedModel
