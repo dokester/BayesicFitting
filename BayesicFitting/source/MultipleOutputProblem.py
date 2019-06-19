@@ -1,6 +1,7 @@
 import numpy as numpy
 
 from .Problem import Problem
+from .Formatter import formatter as fmt
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -60,7 +61,7 @@ class MultipleOutputProblem( Problem ):
 
         """
         if weights is not None :
-            if len( weights ) == len( xdata ) :
+            if len( weights.shape ) == 1 :
                 wgts = numpy.zeros( ( len( weights ), model.noutput ), dtype=float )
                 for k in range( model.noutput ) :
                     wgts[:,k] = weights
@@ -69,6 +70,7 @@ class MultipleOutputProblem( Problem ):
 
         super( ).__init__( model=model, xdata=xdata, ydata=ydata, weights=weights,
                            copy=copy )
+
 
     def copy( self ):
         """
@@ -81,7 +83,7 @@ class MultipleOutputProblem( Problem ):
     #  *****RESULT**************************************************************
     def result( self, param ):
         """
-        Returns the result calculated at the xdatas.
+        Returns the result calculated at the xdata.
 
         Parameters
         ----------
@@ -91,8 +93,16 @@ class MultipleOutputProblem( Problem ):
         """
         return self.model.result( self.xdata, param )
 
-### TBC TBC TBC ###########################
     def partial( self, param ) :
+        """
+        Returns the partials (df/dp) calculated at the xdata.
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters + nuisance params.
+
+        """
 
         parts = self.model.partial( self.xdata, param )
 
@@ -100,16 +110,8 @@ class MultipleOutputProblem( Problem ):
         for k in range( 1, self.model.noutput ) :
             partial = numpy.append( partial, parts[k], 1 )
 
-        """
-        s = parts[0].shape
-        partial = numpy.zeros( ( s[0] * self.model.noutput, s[1] ), dtype=float )
-        k = 0
-        for i in range( s[1] ) :
-            for part in parts :
-                partial[:,k] = part[:,i]
-                k += 1
-        """
         return partial.reshape( -1, self.npars )
+
 
     def derivative( self, param ) :
         return self.model.derivative( self.xdata, param )
