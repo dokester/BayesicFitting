@@ -67,7 +67,7 @@ class BaseModel( object ):
     npbase : int
         number of params in the base model
     ndim : int
-        number of dimensions of input. (default : 1)
+        number of dimensions (parallel streams) of input. (default : 1)
     priors : list of Prior
         pertaining to each of the parameters of the model.
         If the list is shorter than the number of parameters, the last one is repeated.
@@ -292,6 +292,10 @@ class BaseModel( object ):
         """
         set the prior and/or limits for the indicated parameter.
 
+        The prior (by default UniformPrior) is appended when k is equal to np, the
+        length of the existing list of priors. It replaces the prior when k < np
+        and it generates an error when k > np
+
         Parameters
         ---------
         k : int
@@ -303,6 +307,9 @@ class BaseModel( object ):
 
         """
         np = Tools.length( self.priors )
+        assert k <= np, "The par number %d is larger than the length of the priors %d"%(k,np)
+
+
         if prior is None :
             prior = UniformPrior( ) if np == 0 else self.basePrior( k ).copy()
 
@@ -311,8 +318,7 @@ class BaseModel( object ):
         if k == np :
             self.priors = [prior] if self.priors is None else self.priors + [prior]
             return
-        if k > np :
-            k = -1
+
         self.priors[k] = prior
         return
 
