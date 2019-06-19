@@ -4,6 +4,7 @@ import warnings
 
 from . import Tools
 from .Tools import setAttribute as setatt
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2019
@@ -38,6 +39,7 @@ class Kepplers2ndLaw( object ):
     The algorithm was taken from
         Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
 
+        http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
 
     p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
     p_1 : a     semi major axis (>0)
@@ -145,7 +147,7 @@ class Kepplers2ndLaw( object ):
             if all( numpy.abs( E - Ep ) < 1e-8 ) : break
             Ep = E
         else :
-            print( "No convergence at iter %d" % iter )
+            print( "EA0: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
 
         setatt( self, "iter", iter )
         return E
@@ -182,10 +184,9 @@ class Kepplers2ndLaw( object ):
             if all( numpy.abs( E - Ep ) < 1e-8 ) : break
             Ep = E
         else :
-            print( "No convergence at iter %d" % iter )
+            print( "EA1: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
 
         setatt( self, "iter", iter )
-#        self.iter = iter
         return E
 
     def eccentricAnomaly2( self, xdata, params, Estart=None ) :
@@ -212,11 +213,12 @@ class Kepplers2ndLaw( object ):
         eccen = params[0]
 
 
-        Ep = M[:] if Estart is None else Estart
+        E = M[:] if Estart is None else Estart
 
         iter = 0
         ## calculate the eccentric anomaly E
         while iter < self.MAXITER :
+            Ep = E
             sinE = numpy.sin( Ep )
             cosE = numpy.cos( Ep )
             es = eccen * sinE
@@ -226,16 +228,21 @@ class Kepplers2ndLaw( object ):
             E = Ep - 2 * fx * fp / ( 2 * fp * fp + fx * es )
             iter += 1
             if all( numpy.abs( E - Ep ) < 1e-8 ) : break
-            Ep = E
         else :
-            print( "No convergence at iter %d" % iter )
+#            # uncomment for more diagnostics
+#            q = numpy.where( numpy.abs( E - Ep ) > 1e-8 )
+#            print( "\n" )
+#            print( "params  ", fmt( params, max=None ) )
+#            print( "Ep      ", fmt( Ep[q] ) )
+#            print( "E       ", fmt( E[q] ) )
+#            print( "sinE    ", fmt( sinE[q] ) )
+#            print( "cosE    ", fmt( cosE[q] ) )
+
+            print( "EA2: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
 
         setatt( self, "iter", iter )
         setatt( self, "sinE", sinE )
         setatt( self, "cosE", cosE )
-#        self.iter = iter
-#        self.sinE = sinE
-#        self.cosE = cosE
 
         return E
 
@@ -298,6 +305,11 @@ class Kepplers2ndLaw( object ):
 
         from Wikepedia => Trigoniometic Identities :
         tan( E / 2 ) = sqrt( ( 1 - cos( E ) ) / ( 1 + cos( E ) ) )
+                     = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )^2 )
+                     = sqrt( s^2 / ( 1 + c )^2 )
+                     = s / ( 1 + c )
+                     = sin( E ) / ( 1 + cos( E ) )
+        Avoid cases where cos( E ) is too close to -1
 
         Parameters
         ----------
@@ -326,13 +338,7 @@ class Kepplers2ndLaw( object ):
         ## v = true anomaly
         ef = math.sqrt( ( 1 + eccen ) / ( 1 - eccen ) )
 
-        with warnings.catch_warnings() :
-            warnings.simplefilter( "ignore", category=RuntimeWarning )
-            tanE = self.sinE / ( 1 + cosE )          ## for tan( E/2 )
-            v = 2 * numpy.arctan( ef * tanE )
-
-
-#        v = 2 * numpy.arctan2( ef * self.sinE, 1 + cosE )
+        v = 2 * numpy.arctan2( ef * self.sinE, 1 + cosE )
 
         setatt( self, "eccAnomaly", E )
         ## return radius and true anomaly
@@ -367,11 +373,12 @@ class Kepplers2ndLaw( object ):
         dr = semimaj * eccen * sinE
 
         ef = ( 1 + eccen ) / ( 1 - eccen )
-        c2 = 1 / ( 1 + cosE )
+        c2 = numpy.where( cosE <= -0.9999999999, 1e10, 1 / ( 1 + cosE ) )
         t2 = ( 1 - cosE ) * c2          ## = tan^2( E/2 )       from Wiki:
         c2 *= 2                         ## = 1 / cos^2( E/2 )   trig identities
         dv = math.sqrt ( ef ) * c2
         dv /= ( ef * t2 + 1 )
+
         return ( dr, dv )
 
     def drvdx( self, xdata, params, cosE, sinE ) :
@@ -431,11 +438,15 @@ class Kepplers2ndLaw( object ):
         sef = math.sqrt( ef )
         e2 = ( 1 - eccen ) * ( 1 - eccen )
 
-        tanE = sinE / ( 1 + cosE )          ## for tan( E/2 )
+        c2 = numpy.where( cosE <= -0.9999999999, 1e10, 1 / ( 1 + cosE ) )
 
-        dvde = 2 * tanE / ( sef * e2 )
-        dvde += 2 * sef * dEde / ( 1 + cosE )
-        dvde /= ( 1 + ef * tanE * tanE )
+        tanE = sinE * c2                ## for tan( E/2 )
+
+        dd1 = 2 * tanE / ( sef * e2 )
+        dd2 = dd1 + 2 * sef * dEde * c2
+        dvde = dd2 / ( 1 + ef * tanE * tanE )
+        dvde = numpy.where( numpy.isnan( dvde ), 0.0, dvde )
+
         return ( drde, drda, drdP, drdp, dvde, dvdP, dvdp )
 
 
