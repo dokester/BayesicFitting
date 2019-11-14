@@ -7,17 +7,22 @@ quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
 
 
 Citation index:
-10.5281/zenodo.2597201
+DOI: 10.5281/zenodo.2597200
 
 
-## What's new in version 2.3.0
-   * Add LogisticModel and SampleMovie
-   * Periodic residuals in Problem
-   * Small issues repaired
-   * Rerun all examples
-   * Pictures moved to documentation/images
-   * Some documentation issues repaired.
-
+## What's new in version 2.4.0
+   * New Classes:
+      - DecisionTreeModel
+	A DecisionTree Model (DTM) is mostly defined on multiple input dimensions (axes).
+    	It splits the data in 2 parts, according low and high values on a certain input axis.
+    	The splitting can continue along other axes.
+      - Modifiable
+	Interface to define modifiable behaviour of some Models.
+      - StructureEngine
+	Engine to modify Models that implement Modifiable
+   * Introduce Table from astrolib as (multidimensional) xdata
+   * Some restructering necessitated by the classes above.
+   * Testcases and examples for the classes above
 
 ## Content
 
@@ -82,6 +87,7 @@ remainder is needed to run the nested sampling algorithm. All these
 classes are in a directory BayesicFitting/source. A special type of
 functions are found in BayesicFitting/source/kernels. They can be used
 to construct a model.
+
 
 ### examples
 
@@ -230,5 +236,14 @@ by Handley etal. (2015) MNRAS
 by ExponentialErrorDistribution
    * Some documentation issues repaired.
 
- + 19 Jan 2019 version 2.3.0 
+ + 20 Jun 2019 version 2.3.0 
+   * Add LogisticModel and SampleMovie
+   * Periodic residuals in Problem
+   * Small issues repaired
+   * Rerun all examples
+   * Pictures moved to documentation/images
+   * Some documentation issues repaired.
+
+ + 30 Oct 2019 version 2.3.1
    * see above in Whats new.
+

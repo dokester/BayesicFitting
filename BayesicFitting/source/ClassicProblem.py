@@ -6,6 +6,7 @@ from . import Tools
 
 from .Problem import Problem
 from .Dynamic import Dynamic
+from .Modifiable import Modifiable
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -96,10 +97,15 @@ class ClassicProblem( Problem ):
         return self.model.derivative( self.xdata, param )
 
     def myEngines( self ) :
+        engs = ["galilean", "chord"]
+
         if self.model.isDynamic() :
-            return ["galilean", "chord", "birth", "death"]
-        else :
-            return ["galilean", "chord"]
+            engs += ["birth", "death"]
+
+        if self.model.isModifiable() :
+            engs += ["struct"]
+
+        return engs
 
     def myStartEngine( self ) :
         return "start"

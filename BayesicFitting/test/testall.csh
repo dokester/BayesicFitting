@@ -12,7 +12,7 @@ foreach f (Test*.py)
   echo "######## $f ##########################" >> $fn
   echo "###################################################" >> $fn
   echo "" >> $fn
-  python -m unittest $f:s/.py// >>& $fn
+  time python -m unittest $f:s/.py// >>& $fn
 end
 
 

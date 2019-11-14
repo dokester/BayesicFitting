@@ -5,7 +5,6 @@ import warnings
 from . import Tools
 from .Tools import setAttribute as setatt
 
-from .Dynamic import Dynamic
 from .Prior import Prior
 from .UniformPrior import UniformPrior
 
@@ -91,7 +90,7 @@ class BaseModel( object ):
     """
 
     #  *************************************************************************
-    def __init__( self, nparams=0, ndim=1, copy=None, posIndex=[], nonZero=[] ):
+    def __init__( self, nparams=0, ndim=1, copy=None, posIndex=[], nonZero=[], **kwargs ):
         """
         BaseModel Constructor.
         <br>
@@ -256,7 +255,13 @@ class BaseModel( object ):
         """
         Whether the model implements Dynamic
         """
-        return isinstance( self, Dynamic )
+        return False
+
+    def isModifiable( self ) :
+        """
+        Whether the model implements Modifiable
+        """
+        return False
 
     #  *****TOSTRING***********************************************************
     def __str__( self ):

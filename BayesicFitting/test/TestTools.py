@@ -65,6 +65,22 @@ class TestTools( unittest.TestCase ) :
 
         Tools.printclass( atc )
 
+    def testIsBetween( self ) :
+        self.assertTrue( Tools.isBetween( 1, 2, 3 ) )
+        self.assertTrue( Tools.isBetween( 3, 2, 1 ) )
+
+        self.assertFalse( Tools.isBetween( 2, 1, 3 ) )
+        self.assertFalse( Tools.isBetween( 2, 3, 1 ) )
+
+
+        self.assertTrue( Tools.isBetween( 2, 2, 3 ) )
+        self.assertTrue( Tools.isBetween( 1, 2, 2 ) )
+        self.assertTrue( Tools.isBetween( 2, 2, 1 ) )
+        self.assertTrue( Tools.isBetween( 3, 2, 2 ) )
+        self.assertTrue( Tools.isBetween( 2, 2, 2 ) )
+
+
+
 
     def testBaseModel( self ) :
         atc = BaseModel( 4 )

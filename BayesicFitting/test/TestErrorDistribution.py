@@ -613,6 +613,55 @@ class TestErrorDistribution( unittest.TestCase ):
             print( "" )
 
 
+    def XXXtestBernouilliErrorDistribution( self ):
+        print( "====== Test Bernouilli Error Distribution ======================" )
+        poly = LogisticModel( fixed={0:1} )
+        param = numpy.asarray( [0, 1], dtype=float )
+        data = numpy.asarray( [0,0,0,0,0,1,1,1,1,1,1], dtype=int )
+        print( "Data : ", fmt( data, max=None ) )
+        print( "yfit : ", fmt( poly.result( self.x, param ), max=None ) )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
+
+        ped = BernouilliErrorDistribution( )
+        self.assertFalse( ped.acceptWeight() )
+
+        logL = ped.logLikelihood( problem, param )
+        print( "logL  = %8.3f"%( logL ) )
+
+        logL = ped.logLikelihood( problem, param )
+        mok = problem.result( param )
+        altL = ped.logLikelihood_alt( problem, param )
+
+        lLdata = ped.logLdata( problem, param )
+        print( "Ldata: ", fmt( lLdata, max=None ) )
+        logL0 = numpy.sum( lLdata )
+        print( "logL  =  %8.3f  ldata %8.3f  alt %8.3f" % (logL, logL0, altL ) )
+        assertAAE( logL, altL )
+        assertAAE( logL, logL0 )
+
+        print( "logL  = %8.3f  %8.3f" % ( logL, altL ) )
+        assertAAE( logL, altL )
+
+        fitIndex = [0,1]
+        dL = ped.partialLogL( problem, param, fitIndex )
+        aL = ped.partialLogL_alt( problem, param, fitIndex )
+        nL = ped.numPartialLogL( problem, param, fitIndex )
+        print( "partial = ", dL )
+        print( "altpart = ", aL )
+        print( "numpart = ", nL )
+        assertAAE( dL, nL, 5 )
+
+
+        for i in range( 10 ) :
+            param = numpy.asarray( [8+i,4], dtype=float )
+            print( param, "  :  ", end="" )
+            for k in range( 9 ):
+                print( " %8.3f" % ped.logLikelihood( problem, param ), end="" )
+                param[1] += 1
+            print( "" )
+
+
     def testCauchyErrorDistribution( self ):
         print( "\n   Test Cauchy Error Distribution\n" )
         poly = PolynomialModel( 1 )

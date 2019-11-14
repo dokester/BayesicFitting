@@ -72,7 +72,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
     # for diagnostics ( or just for fun )
     >>> lmfit = LevenbergMarquardtFitter( x, gauss )
     >>> lmfit.setVerbose( 2 )                             # report every 100th iteration
-    >>> plotter = IterationPlotter( )                     # from herschel.ia.toolbox.fit
+    >>> plotter = IterationPlotter( )                     # from BayesicFitting
     >>> lmfit.setPlotter( plotter, 20 )                   # make a plot every 20th iteration
     >>> param = lmfit.fit( y )
 

@@ -3,6 +3,7 @@ from astropy import units
 import math
 from . import Tools
 from .Formatter import formatter as fmt
+from .Dynamic import Dynamic
 from .Engine import Engine
 
 __author__ = "Do Kester"
@@ -79,31 +80,58 @@ class StartEngine( Engine ):
 
         """
         problem = walker.problem
+        model = problem.model
         fitIndex = walker.fitIndex
-        par = walker.allpars.copy()
+        allp = walker.allpars.copy()
 
-#        print( "FI   ", fitIndex )
+        npar = len( allp )
+        onp = problem.npars
 
         ktry = 0
         while True :
+
+            if model.isDynamic() :
+                np0 = model.npars
+                off = 0
+                ## find the model in the chain that is actually dynamic
+                while model is not None and not isinstance( model, Dynamic ) :
+                    off += model.npbase
+                    model = model._next
+
+                npbase = model.npbase
+                ## Grow the dynamic model a number of times according to growPrior
+                while ( model.ncomp < model.growPrior.unit2Domain( self.rng.rand() ) and
+                        model.grow( offset=off, rng=self.rng ) ) :
+                    np1 = model.npars
+                    dnp = np1 - np0
+                    fitIndex = model.alterFitindex( fitIndex, npbase, dnp, off )
+                    npbase = model.npbase
+                    np0 = np1
+
+                allp = numpy.zeros( npar + np0 - onp, dtype=float )
+
             uval = self.rng.rand( len( fitIndex ) )
-            par[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
+            allp[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
 
 #           ## fiture extension
+#           model = problem.model
 #           if self.constrain :
 #               xdata = self.errdis.xdata
-#               par = self.constrain( model, par, xdata )
+#               allp = self.constrain( model, allp, xdata )
 
-            logL = self.errdis.logLikelihood( problem, par )
+            logL = self.errdis.logLikelihood( problem, allp )
 
             if numpy.isfinite( logL ) :
                 break
             elif ktry > ( self.maxtrials + walker.id ) :
-                raise RuntimeError( "Cannot find valid starting solutions" )
+                raise RuntimeError( "Cannot find valid starting solutions at walker %d" % walker.id )
             else :
                 ktry += 1
 
-        self.setWalker( walker, problem, par, logL, fitIndex=fitIndex )
+        self.setWalker( walker, problem, allp, logL, fitIndex=fitIndex )
+
+        wlkr = self.walkers[walker.id]
+        wlkr.check( nhyp=self.errdis.nphypar )
 
         return len( fitIndex )
 

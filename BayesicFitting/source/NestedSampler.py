@@ -30,6 +30,7 @@ from .PoissonErrorDistribution import PoissonErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .UniformErrorDistribution import UniformErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
+#from .BernouilliErrorDistribution import BernouilliErrorDistribution
 
 from .Engine import Engine
 from .StartEngine import StartEngine
@@ -40,20 +41,11 @@ from .StepEngine import StepEngine
 ## for Dynamic Models import the classes
 from .BirthEngine import BirthEngine
 from .DeathEngine import DeathEngine
-
-#######  For later #################
-## for Order Problems import the classes
-#from OrderProblem import OrderProblem
-#from DistanceCostFunction import DistanceCostFunction
-#from StartOrderEngine import StartOrderEngine
-#from OrderEngine import OrderEngine
-#from ReverseEngine import ReverseEngine
-#from ShuffleEngine import ShuffleEngine
-#from SwitchEngine import SwitchEngine
-
+## for Modifiable Models:
+from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2018
+__year__ = 2019
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -78,7 +70,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2019 Do Kester
 
 class NestedSampler( object ):
     """
@@ -112,8 +104,8 @@ class NestedSampler( object ):
     given the dataset.
 
     There are 5 different likelihood functions available: Gaussian (Normal),
-    Laplace (Exponential), Poisson (for counting processes),
-    Cauchy (aka Lorentz) and a generalized Gaussian.
+    Laplace (Norm-1), Poisson (for counting processes),
+    Cauchy (aka Lorentz) and Exponential (generalized Gaussian).
     By default the Gaussian distribution is used.
 
     Except for Poisson, all others are `ScaledErrorDistribution`s. The scale is
@@ -122,16 +114,23 @@ class NestedSampler( object ):
     By default it is optimized for Gaussian and Laplace distributions.
     The prior for the noise scale is a Jeffreys distribution.
 
-    The generalized Gaussian also has a power. It is also a `HyperParameter`
-    which can be fixed or optimized. Its default is 2 (==Gaussian).
+    The Exponential also has a power as `HyperParameter` which can be fixed
+    or optimized. Its default is 2 (==Gaussian).
 
-    For the random walk of the parameters 4 so-called engines are written.
-    By default only he first is switched on.
+    For the randomization of the parameters within the likelihood constraint
+    5 so-called engines are written.
+    By default only engines 1 and 2 is switched on.
 
     GalileanEngine. It walks all (super)parameters in a fixed direction
         for about 5 steps. When a step ends outside the high likelihood
         region the direction is mirrored on the lowLikelihood edge and
         continued.
+
+    ChordEngine. It draws a randomly oriented line through a point inside
+        the region, until it reaches outside the restricted likelihood region
+        on both sides. A random point is selected on the line until it is
+        inside the likelihood region.
+        This process runs several times
 
     GibbsEngine. It moves each of the parameters by a random step.
         It is a randomwalk.
@@ -156,6 +155,8 @@ class NestedSampler( object ):
         array of dependent (to be fitted) data
     weights : array_like (None)
         weights pertaining to ydata
+    problem : Problem (ClassicProblem)
+        to be solved (container of model, xdata, ydata and weights)
     distribution : ErrorDistribution
         to calculate the loglikelihood
     ensemble : int (100)
@@ -221,9 +222,7 @@ class NestedSampler( object ):
 
             "classic"	: `ClassicProblem`
             "errors"	: `ErrorsInXandYProblem`
-            "multiple"	: `MultipleOutputProblem`		## TBD
-            "order"		: `OrderProblem`				## TBD
-            "salesman"  : `SalesmanProblem`				## TBD
+            "multiple"	: `MultipleOutputProblem`
 
         keep : None or dict of {int:float}
             None : none of the model parameters are kept fixed.
@@ -239,9 +238,8 @@ class NestedSampler( object ):
             "poisson"     : `PoissonErrorDistribution`  no hyperpar
             "cauchy"      : `CauchyErrorDstribution`    with 1 hyperpar scale
             "uniform"  	  : `UniformErrorDistribution`  with 1 hyperpar scale
+            "bernouilli"  : `BernouilliErrorDistribution`  no hyperpar
             "exponential" : `ExponentialErrorDistribution` with 2 hyperpar (scale, power)
-            Only for OrderProblems: (for later)
-            "distance"    : `DistanceCostFunction`      no hyperpar
 
             Error distribution class which implements logLikelihood
 
@@ -299,8 +297,8 @@ class NestedSampler( object ):
         if model is None :
             model = self.problem.model
 
-        if not model.hasPriors() and model.npars > 0:
-            Tools.printclass( model )
+        if model and not model.hasPriors() and model.npars > 0:
+#            Tools.printclass( model )
             warnings.warn( "Model needs priors and/or limits" )
 
         self.keep = keep
@@ -325,9 +323,9 @@ class NestedSampler( object ):
         if distribution is not None :
             self.setErrorDistribution( distribution, limits=limits )
         elif limits is not None :
-            self.setErrorDistribution( "gauss", limits=limits )
+            self.setErrorDistribution( self.problem.myDistribution(), limits=limits )
         else :
-            self.setErrorDistribution( "gauss", scale=1.0 )
+            self.setErrorDistribution( self.problem.myDistribution(), scale=1.0 )
 
 #        print( distribution.hyperpar[0].getLimits() )
 #        print( self.distribution.hyperpar[0].getLimits() )
@@ -350,8 +348,11 @@ class NestedSampler( object ):
 #        if self.distribution.nphypar > 0 :
 #            allpars = numpy.append( allpars, self.distribution.hypar )
 
-        allpars = numpy.zeros( self.problem.npars + self.distribution.nphypar )
 
+        allpars = numpy.zeros( self.problem.npars + self.distribution.nphypar,
+                               dtype=self.problem.partype )
+
+#        np = self.problem.model.npars
         np = self.problem.npars
         fitlist = [k for k in range( np )]
         nh = -self.distribution.nphypar
@@ -375,6 +376,9 @@ class NestedSampler( object ):
                 else :
                     fitl += [fitlist[k]]                    # list of pars to be fitted
             fitlist = fitl
+
+#        print( "NS MFL  ", fitlist )
+#        print( "NS MFL  ", allpars )
 
         return ( fitlist, allpars )
 
@@ -408,6 +412,7 @@ class NestedSampler( object ):
         self.initWalkers( allpars, fitIndex )
 
         for eng in self.engines :
+#            print( "Engine  ", eng )
             eng.walkers = self.walkers
 
         self.distribution.ncalls = 0                      #  reset number of calls
@@ -423,7 +428,10 @@ class NestedSampler( object ):
 
         if self.verbose >= 1 :
             print( "Fit", ( "all" if keep is None else fitIndex ), "parameters of" )
-            print( " ", self.problem.model._toString( "  " ) )
+            if self.problem.model :
+                print( " ", self.problem.model._toString( "  " ) )
+            else :
+                print( " ", self.problem )
             print( "Using a", self.distribution, "with", end="" )
             np = -1
             cstr = " with "
@@ -503,7 +511,7 @@ class NestedSampler( object ):
 
                 self.plotResult( self.walkers[worst[0]], self.iteration, plot=iterplot )
 
-            self.samples.weed( self.maxsize )                # remove overflow in samplelist
+            self.samples.weed( self.maxsize )        # remove overflow in samplelist
 
             self.iteration += 1
             self.copyWalker( worst )
@@ -530,7 +538,7 @@ class NestedSampler( object ):
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
                 print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
-                        self.info, self.lowLhood, np ), fmt( pl ) )
+                        self.info, self.lowLhood, np ), fmt( pl, max=None ) )
 
 
         # End of Sampling
@@ -542,7 +550,7 @@ class NestedSampler( object ):
         self.samples.normalize( )
 
         # put the info into the model
-        if not self.problem.model.isDynamic() :
+        if self.problem.model and not self.problem.model.isDynamic() :
             self.problem.model.parameters = self.samples.parameters
             self.problem.model.stdevs = self.samples.stdevs
 
@@ -762,7 +770,7 @@ class NestedSampler( object ):
             None    distribution is Problem dependent.
             ErrorDistribution: use this one
             string  name of distribution:
-                    "gauss", "laplace", "poisson", "cauchy", "uniform", "exonential"
+                    "gauss", "laplace", "poisson", "cauchy", "uniform", "exponential"
         limits : None or [low,high] or [[low],[high]]
             None : no limits implying fixed hyperparameters (scale,power,etc)
             low     low limit on hyperpars (needs to be >0)
@@ -778,7 +786,6 @@ class NestedSampler( object ):
             name = self.problem.myDistribution()
         elif isinstance( name, ErrorDistribution ) :
             self.distribution = name
-
             return
 
         if not isinstance( name, str ) :
@@ -798,12 +805,12 @@ class NestedSampler( object ):
             self.distribution = UniformErrorDistribution( scale=scale, limits=limits )
         elif name == "exponential" :
             self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )
-#        elif name == "distance" :
-#            self.distribution = DistanceCostFunction( )
+#        elif name == "bernouilli" :
+#            self.distribution = BernouilliErrorDistribution()
         else :
             raise ValueError( "Unknown error distribution %s" % name )
 
-    def setEngines( self, engines=None ) :
+    def setEngines( self, engines=None, enginedict=None ) :
         """
         initialize the engines.
 
@@ -813,20 +820,19 @@ class NestedSampler( object ):
             None : engines is Problem dependent
             list of Engines : use these
             list of engine names
+        enginedict " dictionary of { str : Engine }
+            connecting names to the Engines
         """
-        enginedict = {
-            "galilean" : GalileanEngine,
-            "chord" :    ChordEngine,
-            "birth" : 	 BirthEngine,
-            "death" : 	 DeathEngine,
-            "gibbs" : 	 GibbsEngine,
-            "step" : 	 StepEngine }
 
-#           "order" :    OrderEngine,
-#           "reverse" :  ReverseEngine,
-#           "shuffle" :  ShuffleEngine,
-#           "switch" :   switchEngine,
-
+        if enginedict is None :
+            enginedict = {
+                "galilean" : GalileanEngine,
+                "chord" :    ChordEngine,
+                "birth" : 	 BirthEngine,
+                "death" : 	 DeathEngine,
+                "struct": 	 StructureEngine,
+                "gibbs" : 	 GibbsEngine,
+                "step"  : 	 StepEngine }
 
         if engines is None :
             engines = self.problem.myEngines()
@@ -857,7 +863,7 @@ class NestedSampler( object ):
 
 
     #  *********INITIALIZATION***************************************************
-    def initWalkers( self, allpars, fitIndex ):
+    def initWalkers( self, allpars, fitIndex, startdict=None ):
         """
         Initialize the walkers at random values of parameters and scale
 
@@ -867,13 +873,11 @@ class NestedSampler( object ):
             array of (hyper)parameters
         fitIndex : array_like
             indices of allpars to be fitted
-
+        startdict : dictionary of { str : Engine }
+            connecting a name to a StartEngine
         """
-        stengdict = {
-            "start" : StartEngine
-        }
-#           "order" : StartOrderEngine
-
+        if startdict is None :
+            startdict = { "start" : StartEngine }
 
         # Make the walkers list one larger to store the all time best.
         self.walkers = WalkerList( self.problem, self.ensemble+1, allpars, fitIndex )
@@ -886,13 +890,12 @@ class NestedSampler( object ):
         else :
             try :
                 name = self.problem.myStartEngine()
-                StartEng = stengdict[name]
+                StartEng = startdict[name]
                 seed = self.rng.randint( self.TWOP32 )
                 self.initialEngine = StartEng( self.walkers, self.distribution,
                         seed=seed )
             except :
                 raise ValueError( "Unknown StartEngine name : %10s" % name )
-
 
         # Calculate logL for all walkers.
         for walker in self.walkers :

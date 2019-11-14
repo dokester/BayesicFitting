@@ -2,6 +2,7 @@ import numpy as numpy
 import math
 import warnings
 import matplotlib.pyplot as plt
+from astropy.table import Table
 
 from .ImageAssistant import ImageAssistant
 from .MonteCarlo import MonteCarlo
@@ -172,28 +173,33 @@ class BaseFitter( object ):
         """
         if model != model._head:
             raise ValueError( "Model is not the head of a compound model chain" )
-        if  numpy.any( numpy.isnan( xdata ) ) :
-            raise ValueError( "NaNs in xdata array" )
-
-        xdata = numpy.array( xdata )
 
         if map :
             self.imageAssistant = ImageAssistant()
             self.xdata = self.imageAssistant.getIndices( xdata )
         else :
             self.imageAssistant = None
-            self.xdata = xdata
+            self.xdata = numpy.array( xdata )
+
+        if isinstance( xdata, Table ) :
+            ndim = len( xdata.columns )
+        else :
+            if numpy.any( numpy.isnan( xdata ) ) :
+                raise ValueError( "NaNs in xdata array" )
+
+            ndim = 1 if self.xdata.ndim <= 1 else self.xdata.shape[1]
 
         ninp = Tools.length( xdata )
         self.nxdata = ninp
-        self.ndim = 1 if self.xdata.ndim <= 1 else self.xdata.shape[1]
+        self.ndim = ndim
         self.model = model
         self.keep = keep
         self.fitIndex = self.keepFixed( keep )
         self.fixedScale = fixedScale
 
         if self.ndim != model.ndim:
-            raise ValueError( "Model and xdata must be of the same dimensionality." )
+            raise ValueError( "Model (%d) and xdata (%d) must be of the same dimensionality."
+                                % (model.ndim, self.ndim) )
 
     def setMinimumScale( self, scale=0 ) :
         """

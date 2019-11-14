@@ -125,7 +125,7 @@ class WalkerList( list ):
 
     def addWalkers( self, problem, nWalkers, allpars, fitIndex ):
         for i in range( nWalkers ) :
-            if problem.model.isDynamic() :
+            if problem.model and problem.model.isDynamic() :
                 problem = problem.copy()
                 fitIndex = fitIndex.copy()
             walker = Walker( self._count, problem, allpars, fitIndex )

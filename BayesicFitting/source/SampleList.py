@@ -268,19 +268,16 @@ class SampleList( list ):
         weed( ) is called recursively until the size has the required length.
 
         """
-        if maxsize is None or len( self ) <= maxsize :
+        if maxsize is None :
             return
 
-        minw = self[0].logW
-        mink = 0
-        for k in range( len( self ) ) :
-            if self[k].logW < minw :
-                mink = k
-                minw = self[k].logW
-        self.remove( self[mink] )
+        while len( self ) > maxsize :
+            if self[0].logW < self[-1].logW :
+                self.remove( self[0] )
+            else :
+                self.remove( self[-1] )
+        return
 
-        #  continue until size <= max
-        self.weed( maxsize )
 
     def logPlus( self, x, y ):
         return numpy.logaddexp( x, y )
@@ -503,8 +500,9 @@ class SampleList( list ):
             the input
 
         """
-        result = numpy.zeros_like( xdata, dtype=float )
-        error = numpy.zeros_like( xdata, dtype=float )
+        ndata = Tools.length( xdata )
+        result = numpy.zeros( ndata, dtype=float )
+        error = numpy.zeros( ndata, dtype=float )
         sumwgt = 0
         for sample in self :
             yfit = sample.model.result( xdata, sample.parameters )

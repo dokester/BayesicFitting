@@ -41,6 +41,50 @@ class TestDynamicModel( unittest.TestCase ):
 
     """
 
+    def testDynamic( self ) :
+        print( "  Test Dynamic" )
+        dyn = Dynamic( dynamic=False )
+        self.assertFalse( dyn.isDynamic() )
+
+        dyn = Dynamic(  )
+        self.assertTrue( dyn.isDynamic() )
+
+        par = numpy.arange( 8, dtype=float ) * 0.1
+        print( "par      ", fmt( par, max=None ) )
+        par = dyn.alterParameters( par, 3, 1, 2, value=1.0 )
+        print( "par      ", fmt( par, max=None ) )
+        par = dyn.alterParameters( par, 4, -1, 2 )
+        print( "par      ", fmt( par, max=None ) )
+        par = dyn.alterParameters( par, 6, 2, 2, value=[1.0,2.0] )
+        print( "par      ", fmt( par, max=None ) )
+        par = dyn.alterParameters( par, 8, -1, 2 )
+        print( "par      ", fmt( par, max=None ) )
+        par = dyn.alterParameters( par, 6, -1, 2 )
+        print( "par      ", fmt( par, max=None ) )
+
+        fin = [0,1,2,3,4,5,-2,-1]
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 3, 1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 3, -1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 4, 1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 5, -1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+
+        fin = [0,2,3,4,5,-2,-1]
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 2, 1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 2, -1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 3, 1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+        fin = dyn.alterFitindex( fin, 4, -1, 2 )
+        print( "fin      ", fmt( fin, max=None ) )
+
+
     def test1Model1( self ):
         print( "  Test PolynomialDynamicModel" )
         m = PolynomialDynamicModel( 0 )
@@ -97,15 +141,23 @@ class TestDynamicModel( unittest.TestCase ):
         m = GaussModel()
         r = RepeatingModel( 1, m, same=[2], minComp=1, maxComp=3  )
 
+        pars = numpy.asarray( [1.0, -0.4, 0.1] )
         self.assertTrue( isinstance( r.growPrior, UniformPrior ) )
         self.assertTrue( r.grow() )
         self.assertTrue( r.npbase == 5 )
+
+        pars = numpy.asarray( [1.0, -0.4, 0.1, 0.5, 0.0] )
         self.assertTrue( r.grow() )
         self.assertTrue( r.npchain == 7 )
+
+        pars = numpy.asarray( [1.0, -0.4, 0.1, 0.5, 0.0, 0.3, 0.4] )
         self.assertFalse( r.grow() )
         self.assertTrue( r.npbase == 7 )
 
         pars = numpy.asarray( [1.0, -0.4, 0.1, 0.5, 0.0, 0.3, 0.4] )
+
+        ## location is removed in BirthEngine, normally
+        del( r.location )
         stdModeltest( r, pars )
 
 
@@ -133,7 +185,7 @@ class TestDynamicModel( unittest.TestCase ):
         self.assertFalse( r.shrink() )
         self.assertTrue( r.npbase == 3 )
 
-        p = RepeatingModel( 1, m, same=[2], isDynamic=False  )
+        p = RepeatingModel( 1, m, same=[2], dynamic=False  )
         self.assertFalse( p.isDynamic() )
         self.assertFalse( p.grow() )
         self.assertTrue( p.npbase == 3 )
@@ -242,7 +294,10 @@ class TestDynamicModel( unittest.TestCase ):
         self.assertRaises( ValueError, PolynomialDynamicModel, 0, minDegree=2, maxDegree=4 )
 
         m = GaussModel( )
-        p = PolynomialDynamicModel( 2, minDegree=2, maxDegree=4 )
+        p = PolynomialDynamicModel( 1, minDegree=1, maxDegree=4 )
+
+        print( m.isDynamic(), p.isDynamic() )
+
         print( p.growPrior )
         m += p
 
@@ -256,7 +311,7 @@ class TestDynamicModel( unittest.TestCase ):
         Tools.printclass( m )
         Tools.printclass( p )
 
-        par = numpy.asarray( [1,-0.2,0.3,-1.2,0.2,0.1] )
+        par = numpy.asarray( [1,-0.2,0.3,-1.2,0.2] )
         x = numpy.linspace( -1.0, 1.0, 11 )
         y = numpy.linspace( 0.0, 2.3, 11 )
 
@@ -270,18 +325,18 @@ class TestDynamicModel( unittest.TestCase ):
         self.assertTrue( "birth" in problem.myEngines() )
         self.assertTrue( "death" in problem.myEngines() )
 
-        errdis = GaussErrorDistribution( )
+        errdis = GaussErrorDistribution( limits=[0.01,100] )
 
         allpars = numpy.append( par, [1.0] )
-        fitIndex = [0,1,2,3,4,5]
+        fitIndex = [0,1,2,3,4,-1]
         sl = WalkerList( problem, 10, allpars, fitIndex )
 
-        print( m.npchain, m.npbase, m._next.npbase )
+        print( m.npchain, m.npbase, m._next.npbase, len( allpars ) )
         print( "====================" )
 
         seng = StartEngine( sl, errdis )
         for s in sl :
-            print( s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
+            print( "Walker  ", s.id, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
             seng.execute( s, 0.0 )
 
         logl = sl.getLogLikelihoodEvolution()

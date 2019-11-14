@@ -124,7 +124,7 @@ class Walker( object ):
         """
 
         np = self.problem.npars
-        nm = self.problem.model.npars
+        nm = self.problem.model.npars if self.problem.model else np
 
         param = self.allpars[:nm]
         sample = Sample( self.id, self.parent, self.start, self.problem.model,
@@ -179,11 +179,13 @@ class Walker( object ):
 
 
     def check( self, nhyp=0 ) :
-        np = self.problem.model.npars
-#        print( len( self.allpars ), np, nhyp )
+        np = self.problem.npars
+
         if not len( self.allpars ) == ( np + nhyp ) :
-            raise ValueError( "Walker inconsistent parameter length : %d is not ( %d + %d )" %
-                ( len( self.allpars ), np, nhyp ) )
+            Tools.printclass( self )
+            Tools.printclass( self.problem )
+            raise ValueError( "Walker %d inconsistent parameter length : %d is not ( %d + %d )" %
+                ( self.id, len( self.allpars ), np, nhyp ) )
 
 #        if not len( self.allpars ) == len( self.fitIndex ) :
 #            raise ValueError( "Walker parameter length = %d fitIndex ( %d )" %

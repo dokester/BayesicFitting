@@ -1,8 +1,8 @@
 import numpy as numpy
 from threading import Thread
 
-#from OrderProblem import OrderProblem
 from .Engine import Engine
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -84,11 +84,8 @@ class Explorer( object ):
         self.rate = ns.rate
         self.maxtrials = ns.maxtrials
         self.verbose = ns.verbose
-#        if isinstance( self.walkers[0].model, OrderProblem ) :
-#           return
-#        self.engines[0].calculateUnitRange( )
         self.threads = threads
-
+        self.iteration = ns.iteration
 
     def explore( self, worst, lowLhood ):
         """
@@ -106,7 +103,6 @@ class Explorer( object ):
             for kw in worst :
                 walker = self.walkers[kw]
                 self.exploreWalker( walker, lowLhood, self.engines, self.rng )
-#            self.engines[0].calculateUnitRange( )
             return
 
         ## We have Threads
@@ -137,12 +133,6 @@ class Explorer( object ):
                 print( e )
             raise Exception( "Thread Error" )
 
-        # recalculate  TBC
-#        if isinstance( self.walkers[0].model, OrderProblem ) :
-#            return
-
-#        self.engines[0].calculateUnitRange( )
-
     def exploreWalker( self, walker, lowLhood, engines, rng ):
         oldlogL = walker.logL
 
@@ -152,16 +142,16 @@ class Explorer( object ):
         moves = 0
         trials = 0
 
+
         while moves < maxmoves and trials < maxtrials :
             i = 0
             for engine in rng.permutation( engines ) :
-#                print( "Exp   ", engine, walker.id, walker.allpars, walker.fitIndex )
 
                 moves += engine.execute( walker, lowLhood )
 
                 if self.verbose >= 4:
-                    print( "%4d %-15.15s %4d %8.1f %8.1f ==> %3d  %8.1f"%
-                            ( i, engine, walker.id, lowLhood, oldlogL, moves,
+                    print( "%4d %-15.15s %4d %10.3f %10.3f ==> %3d  %10.3f"%
+                            ( trials, engine, walker.id, lowLhood, oldlogL, moves,
                                 walker.logL ) )
                     if len( walker.allpars ) < len( walker.fitIndex ) :
                         raise ValueError( "Walker parameter %d fitIndex %d" %
@@ -174,13 +164,13 @@ class Explorer( object ):
         if moves == 0 :
             self.logLcheck( walker )
 
-
-#        print( moves, maxmoves, trials, maxtrials )
         return
 
     def logLcheck( self, walker ) :
         wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if wlogL != walker.logL :
+            print( "Iteration %4d %4d %10.3f  %10.3f" % (self.iteration, walker.id, walker.logL, wlogL ) )
+            print( fmt( walker.allpars, max=None, format="%3d" ) )
             raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
                                 ( walker.logL, wlogL ) )
 

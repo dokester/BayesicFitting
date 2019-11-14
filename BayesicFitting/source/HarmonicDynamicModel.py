@@ -152,6 +152,9 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
         """ Copy method.  """
         return HarmonicDynamicModel( self.order, period=self.period, copy=self )
 
+    def isDynamic( self ) :
+        return True
+
     def changeNComp( self, dn ) :
         setatt( self, "order", self.order + dn )
 

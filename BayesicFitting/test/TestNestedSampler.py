@@ -114,6 +114,7 @@ class TestNestedSampler( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
 
         ns = NestedSampler( x, gm, y, w, threads=True, engines=["galilean", "gibbs"] )
+#        ns.verbose = 2
 
         self.dofit( ns, pp, plot=plot )
 

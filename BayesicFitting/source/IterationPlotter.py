@@ -44,15 +44,14 @@ class IterationPlotter( object ):
         """
         Plot the data.
 
-        Parameters :
-            x       x-axis values of the data
-            y       y-axis values of the data
-            title   the title of the plot
-
-        pyplot.figure( 1 )
-        pyplot.plot( x, y, 'k.' )
-        pyplot.title( title )
-        pyplot.show( block=False )
+        Parameters
+        ----------
+        x : array_like
+            x-axis values of the data
+        y : array_like
+            y-axis values of the data
+        title : string
+            the title of the plot
         """
 
         self.p = pyplot.gca()
@@ -64,14 +63,14 @@ class IterationPlotter( object ):
         """
         Plot the ( intermediate ) result.
 
-        Parameters :
-            x       x-axis values of the data
-            r       model result
-            iter    iteration number
-
-        pyplot.figure( 1 )
-        pyplot.plot( x, r, 'r-' )
-        pyplot.show( block=False )
+        Parameters
+        ----------
+        x : array_like
+            x-axis values of the data
+        r : array_like
+            model result
+        iter : int
+            iteration number
         """
         self.p.plot( x, r, 'r-' )
         pyplot.show( block=False )
@@ -79,7 +78,7 @@ class IterationPlotter( object ):
 
     def plotProgress( self, percent ):
         """
-        Plot ( estimated ) progress upto now.
+        Plot (estimated) progress upto now.
 
         """
         pass

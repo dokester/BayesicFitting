@@ -4,9 +4,12 @@ import numpy as numpy
 import math as math
 import sys
 import trace
+import re
+
+from astropy.table import Table
 
 __author__ = "Do Kester"
-__year__ = 2018
+__year__ = 2019
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -26,7 +29,51 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2019 Do Kester
+
+
+def getItem( ilist, k ) :
+    """
+    Return the k-th item of the ilist
+        or the last when not enough
+        or the ilist itself when it is not a list
+
+    Parameters
+    ----------
+    ilist : an item or a list of items
+        List to obtain an item from
+    k : int
+        item to be returned
+
+    """
+    return ( ilist if not isinstance( ilist, list ) else
+             ilist[-1] if k >= len( ilist ) else ilist[k] )
+
+
+def getColumnData( xdata, kcol ) :
+    """
+    Return the kcol-th column from xdata
+
+    Parameters
+    ----------
+    xdata   2D array_like or Table
+        the data array
+    kcol    int
+        column index
+    """
+    if isinstance( xdata, Table ) :
+        return xdata.columns[kcol].data
+    elif xdata.ndim == 2 :
+        return xdata[:,kcol]
+    else :
+        return xdata
+
+def isBetween( xs, x, xe ) :
+    """
+    Return True when x falls between xs and xe or on xs or xe.
+        where the order of xs, xe is unknown.
+    """
+    return ( xs <= x <= xe ) or ( xe <= x <= xs )
 
 
 def setAttribute( obj, name, value, type=None, islist=False, isnone=False ) :
@@ -212,6 +259,8 @@ def toArray( x, ndim=1, dtype=None ) :
         conversion to type (None : as is)
 
     """
+    if isinstance( x, Table ) :
+        return x
     return numpy.array( x, dtype=dtype, copy=False, ndmin=ndim )
 
 def isList( item, cls ) :
@@ -278,6 +327,8 @@ def printclass( cls, nitems=8 ) :
     """
     Print the attributes of a class.
     """
+    numpy.set_printoptions( precision=3, threshold=10, edgeitems=4 )
+
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
     print( cls )
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
@@ -289,15 +340,21 @@ def printclass( cls, nitems=8 ) :
         val = atr[key]
         nv = length( val )
         if isinstance( val, (list,numpy.ndarray) ) :
-            print( "[", end="" )
-            for k in range( min( nitems, nv ) ) :
-                print( val[k], " ", end="" )
-            if nv > nitems : print( "... ", end="" )
-            print( "]" )
+            print( val, nv )
+        elif isinstance( val, str ) :
+            print( shortName( val ) )
         elif key == "model" :
             print( val.shortName( ) )
         else :
             print( val )
+
+def shortName( val ):
+    """
+    Return a short version the string representation: upto first non-letter.
+    """
+    m = re.match( "^[0-9a-zA-Z_]*", val )
+    return m.group(0)
+
 
 def nicenumber( x ) :
     """

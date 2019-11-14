@@ -4,7 +4,9 @@ from .IterativeFitter import IterativeFitter
 from .GaussErrorDistribution import GaussErrorDistribution
 from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
+from .UniformErrorDistribution import UniformErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
+#from .BernouilliErrorDistribution import BernouilliErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .ClassicProblem import ClassicProblem
 
@@ -44,7 +46,8 @@ class MaxLikelihoodFitter( IterativeFitter ):
 
     Attributes
     ----------
-    errdis : None | "gauss" | "laplace" | "cauchy" | "poisson" | "exponential"
+    errdis : None | "gauss" | "laplace" | "cauchy" | "poisson" |
+                    "uniform" | "exponential"
         None : Use _ChiSq as function to be minimized
         name : use -logLikelihood as function to be minimized from the named
                 errordistribution.
@@ -73,7 +76,8 @@ class MaxLikelihoodFitter( IterativeFitter ):
         model : Model
             the model function to be fitted
 
-        errdis : None | "gauss" | "laplace" | "cauchy" | "poisson" | "gengauss"
+        errdis : None | "gauss" | "laplace" | "cauchy" | "poisson" |
+                        "uniform" | "exponential"
             None : Use _ChiSq as function to be minimized
             name : use -logLikelihood as function to be minimized from the named
                     errordistribution.
@@ -309,9 +313,15 @@ class _LogL( _Chisq ) :
         elif errdis == 'cauchy' :
             self.errdis = CauchyErrorDistribution( scale=scale )
             self.hypar = [scale]
+        elif errdis == 'uniform' :
+            self.errdis = UniformErrorDistribution( scale=scale )
+            self.hypar = [scale]
         elif errdis == 'poisson' :
             self.errdis = PoissonErrorDistribution( )
             self.hypar = []
+#        elif errdis == 'bernouilli' :
+#            self.errdis = BernouilliErrorDistribution( )
+#            self.hypar = []
         elif errdis == 'exponential' :
             self.errdis = ExponentialErrorDistribution( scale=scale, power=power )
             self.hypar = [scale, power]

@@ -63,7 +63,7 @@ class AmoebaFitter( MaxLikelihoodFitter ):
     >>> amfit = AmoebaFitter( x, sine )
     >>> amfit.setTemperature( 10 )                # set a temperature to escape local minima
     >>> amfit.setVerbose( 10 )                    # report every 10th iteration
-    >>> plotter = IterationPlotter( )             # from herschel.ia.toolbox.fit
+    >>> plotter = IterationPlotter( )             # from BayesicFitting
     >>> amfit.setPlotter( plotter, 20 )            # make a plot every 20th iteration
     >>> param = amfit.fit( y )
 

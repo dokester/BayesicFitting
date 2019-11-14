@@ -3,6 +3,7 @@ from astropy import units
 import math
 from . import Tools
 from .Tools import setAttribute as setatt
+from .Formatter import formatter as fmt
 
 from .Model import Model
 from .Dynamic import Dynamic
@@ -109,7 +110,7 @@ class RepeatingModel( Model, Dynamic ):
     """
     #  *****CONSTRUCTOR*********************************************************
     def __init__( self, ncomp, model, minComp=0, maxComp=None, fixed=None,
-                  same=None, growPrior=None, isDynamic=True, copy=None, **kwargs ):
+                  same=None, growPrior=None, dynamic=True, copy=None, **kwargs ):
         """
         Repeating the same model several times.
 
@@ -129,7 +130,7 @@ class RepeatingModel( Model, Dynamic ):
         growPrior : None or Prior
             governing the birth and death.
             ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
-        isDynamic : bool (True)
+        dynamic : bool (True)
             Whether this is a Dynamic Model.
         copy : RepeatingModel
             model to copy
@@ -140,6 +141,8 @@ class RepeatingModel( Model, Dynamic ):
         ValueError when order is outside [min..max] range
 
         """
+
+
         if fixed is not None :
             raise AttributeError( "DynamicModel cannot have fixed parameters; " +
                                   " put fixed parameter(s0 in model." )
@@ -147,7 +150,7 @@ class RepeatingModel( Model, Dynamic ):
             raise ValueError( "ncomp outside range of [min..max] range" )
 
         np = ncomp * model.npchain - ( ncomp - 1 ) * Tools.length( same )
-        self.isDyna = isDynamic and ( maxComp is None or minComp < maxComp )
+        self.isDyna = dynamic and ( maxComp is None or minComp < maxComp )
 
         super( RepeatingModel, self ).__init__( np, copy=copy, **kwargs )
 
@@ -196,14 +199,16 @@ class RepeatingModel( Model, Dynamic ):
                 index += [k]
         self.index = numpy.array( index, dtype=int )
 
-    def grow( self, pat=0 ):
+    def grow( self, offset=0, rng=None, **kwargs ):
         """
         Increase the the number of components by 1 (if allowed by maxComp)
 
         Parameters
         ----------
-        pat : int
-            location where the new params should be inserted
+        offset : int
+            index where the dynamic model starts
+        rng : RandomState
+            random numbr generator
 
         Return
         ------
@@ -216,22 +221,38 @@ class RepeatingModel( Model, Dynamic ):
         if self.maxComp is not None and self.ncomp >= self.maxComp:
             return False
 
+        location = self.npbase
+
         dnp = self.deltaNpar if self.ncomp > 0 else self.model.npbase
-        self.alterParameterSize( dnp, pat )
+        self.alterParameterSize( dnp, offset, location=location )
+
+        head = self._head
+        mdlpar = head.parameters
+        k1 = location + offset
+        value = numpy.zeros( dnp, dtype=float )
+        if rng is not None :
+            for k in range( dnp ) :
+                value[k] = head.unit2Domain( rng.rand(), k + k1 )
+
+        mdlpar = self.alterParameters( mdlpar, location, dnp, offset, value=value )
+
+        setatt( self._head, "parameters", mdlpar )
+
+        self.alterParameterNames( dnp )
 
         self.ncomp += 1
 
         return True
 
-    def shrink( self, pat=0 ):
+    def shrink( self, offset=0, **kwargs ):
         """
         Decrease the the number of componenets by 1 (if allowed by minComp)
         Remove an arbitrary item.
 
         Parameters
         ----------
-        pat : int
-            location where the new params should be inserted
+        offset : int
+            index where the dynamic model starts
 
         Return
         ------
@@ -241,18 +262,22 @@ class RepeatingModel( Model, Dynamic ):
         if ( not self.isDynamic() ) or self.ncomp <= self.minComp :
             return False
 
-#        pars = self._head.parameters[pat:pat+self.npbase]
-#        pars = self.rotate( pars )
-#        self._head.parameters[pat:pat+self.npbase] = pars
+        location = self.npbase
+        dnp = -( self.deltaNpar if self.ncomp > 1 else self.model.npbase )
+        self.alterParameterSize( dnp, offset, location=location )
 
-        dnp = self.deltaNpar if self.ncomp > 1 else self.model.npbase
-        self.alterParameterSize( -dnp, pat )
+        head = self._head
+        mdlpar = head.parameters
+        mdlpar = self.alterParameters( mdlpar, location, dnp, offset )
+        setatt( self._head, "parameters", mdlpar )
+
+        self.alterParameterNames( dnp )
 
         self.ncomp -= 1
 
         return True
 
-    def shuffle( self, param, pat, np, rng ) :
+    def shuffle( self, param, offset, np, rng ) :
         """
         Shuffle the parameters of the components (if they are equivalent)
 
@@ -260,7 +285,7 @@ class RepeatingModel( Model, Dynamic ):
         ----------
         param : array-like
             list of all parameters
-        pat : int
+        offset : int
             index where the dynamic model starts
         np : int
             length of the parameters of the dynamic model
@@ -270,11 +295,11 @@ class RepeatingModel( Model, Dynamic ):
         if self.ncomp <= 1 :
             return param
 
-        off = self.model.npbase + pat
+        off = self.model.npbase + offset
         src = numpy.arange( self.ncomp ) * self.deltaNpar + off
         per = rng.permutation( self.ncomp )
         for i in self.index :
-            src[-1] = pat + i             # replace last src by index
+            src[-1] = offset + i             # replace last src by index
             param[src[per]] = param[src]
             src += 1
 
@@ -321,6 +346,8 @@ class RepeatingModel( Model, Dynamic ):
         ke = self.model.npbase
         pars = params[:ke].copy()
         k = 1
+
+#        print( "RM   ", self.ncomp, fmt( params, max=None ) )
         while True :
             result += self.model.result( xdata, pars )
             if k == self.ncomp :
@@ -328,6 +355,7 @@ class RepeatingModel( Model, Dynamic ):
             k += 1
             ks = ke
             ke += self.deltaNpar
+#            print( "RM1  ", k, ks, ke, self.index )
             pars[self.index] = params[ks:ke]
 
         return result
@@ -404,6 +432,8 @@ class RepeatingModel( Model, Dynamic ):
     def setLimits( self, lowLimits=None, highLimits=None ) :
         self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
 
+    def hasPriors( self ) :
+        return self.model.hasPriors()
 
     def basePrior( self, k ):
         """

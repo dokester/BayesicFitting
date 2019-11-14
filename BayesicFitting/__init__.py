@@ -13,6 +13,7 @@
 #
 #  The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #
+
 """
 Provides fitter functions.
 
@@ -29,8 +30,12 @@ from .source.ArctanModel import ArctanModel
 from .source.BSplinesModel import BSplinesModel
 from .source.BaseFitter import BaseFitter
 from .source.BaseModel import BaseModel
+#from .source.BernouilliErrorDistribution import BernouilliErrorDistribution 
 from .source.BirthEngine import BirthEngine
 from .source.BracketModel import BracketModel
+#from .source.CategoricalFitter import CategoricalFitter
+#from .source.CategoricalLikelihood import CategoricalLikelihood
+#from .source.CategoricalProblem import CategoricalProblem
 from .source.CauchyErrorDistribution import CauchyErrorDistribution
 from .source.CauchyPrior import CauchyPrior
 from .source.CircularUniformPrior import CircularUniformPrior
@@ -44,6 +49,7 @@ from .source.CrossEngine import CrossEngine
 from .source.CurveFitter import CurveFitter
 #from .source.CyclicResults import CyclicResults
 from .source.DeathEngine import DeathEngine
+from .source.DecisionTreeModel import DecisionTreeModel
 from .source.Dynamic import Dynamic
 from .source.Engine import Engine
 from .source.ErrorDistribution import ErrorDistribution
@@ -83,6 +89,8 @@ from .source.LorentzModel import LorentzModel
 from .source.MaxLikelihoodFitter import MaxLikelihoodFitter
 from .source.MixedErrorDistribution import MixedErrorDistribution
 from .source.Model import Model
+#from .source.ModelLikelihood import ModelLikelihood
+from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
@@ -124,12 +132,27 @@ from .source.SplinesModel import SplinesModel
 from .source.StartEngine import StartEngine
 from .source.StepEngine import StepEngine
 from .source.StellarOrbitModel import StellarOrbitModel
+from .source.StructureEngine import StructureEngine
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior
 from .source.VoigtModel import VoigtModel
 from .source.Walker import Walker
 from .source.WalkerList import WalkerList
+
+## OrderProblems
+#from .source.DistanceCostFunction import DistanceCostFunction
+#from .source.NestedSolver import NestedSolver
+#from .source.LoopEngine import LoopEngine
+#from .source.MoveEngine import MoveEngine
+#from .source.OrderEngine import OrderEngine
+#from .source.OrderProblem import OrderProblem
+#from .source.ReverseEngine import ReverseEngine
+#from .source.SalesmanProblem import SalesmanProblem
+#from .source.ShuffleEngine import ShuffleEngine
+#from .source.StartNearEngine import StartNearEngine
+#from .source.StartOrderEngine import StartOrderEngine
+#from .source.SwitchEngine import SwitchEngine
 
 from .source.Formatter import formatter
 from .source.Formatter import fma

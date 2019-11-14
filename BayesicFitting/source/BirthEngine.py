@@ -93,39 +93,47 @@ class BirthEngine( Engine ):
         cwalker = walker.copy()                  ## work on local copy.
 
         problem = cwalker.problem
-        ptry = cwalker.allpars
+        allp = cwalker.allpars
         ftry = cwalker.fitIndex
 
         if self.verbose > 4 :
-            print( "BEN0  ", walker.id, walker.parent, len( ptry ), len( ftry ) )
+            print( "BEN0  ", walker.id, walker.parent, len( allp ), len( ftry ) )
 
-        pat = 0
+        off = 0
         model = problem.model
+        model.parameters = allp[:model.npars]
+
         while model is not None and not isinstance( model, Dynamic ) :
-            pat += model.npbase
+            off += model.npbase
             model = model._next
 
         nc = model.ncomp
         np = model.npbase
 
         if self.verbose > 4 :
-            print( "BEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
+            print( "BEN1  ", cwalker.id, nc, np, len( allp ), len( ftry ) )
 
         if not ( nc < model.growPrior.unit2Domain( self.rng.rand() ) and
-                 model.grow( pat ) ):
-#            print( "BEN2  ", "failed" )
-            self.reportFailed()
+                 model.grow( offset=off, rng=self.rng ) ):
+            self.reportReject()
             return 0
 
         dnp = model.npbase - np         # parameter change
-        ptry = model.alterParameters( ptry, np, dnp, pat )
-        ftry = model.alterFitindex( ftry, np, dnp, pat )
-        problem.npars += dnp
+        ftry = model.alterFitindex( ftry, np, dnp, off )
+        ptry = problem.model.parameters          ## list of grown parameters
+        if self.errdis.nphypar > 0 :
+            ptry = numpy.append( ptry, allp[-self.errdis.nphypar:] )
+
+        loc = model.location            # where the extra parameters are inserted
+        del( model.location )           # not needed anymore
 
         t = 0
+        k0 = off + loc
+        k1 = k0 + dnp
+        klst = [k for k in range( k0, k1 )]
+
         while t < self.maxtrials :
-            for kp in range( pat+np, pat+np+dnp ) :
-                ptry[kp] = problem.unit2Domain( self.rng.rand(), kpar=kp )
+
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
             if Ltry >= lowLhood:
@@ -135,10 +143,13 @@ class BirthEngine( Engine ):
                 wlkr.check( nhyp=self.errdis.nphypar )
                 return dnp
             else :
-                self.reportFailed()
+                uval = self.rng.rand( dnp )
+                ptry[klst] = self.unit2Domain( problem, uval, kpar=klst )
+
+                self.reportReject()
                 t += 1
 
-        self.reportReject( )
+        self.reportFailed()
 
         return 0
 

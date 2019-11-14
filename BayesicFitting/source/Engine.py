@@ -152,7 +152,7 @@ class Engine( object ):
         self.walkers[walker.id] = walker
 
 
-    def checkBest( self, problem, allpars, logL, fitIndex ) :
+    def checkBest( self, problem, allpars, logL, fitIndex=None ) :
         """
         Check if Ltry better than the best at self.walkers[-1].
         If so replace.
@@ -246,15 +246,27 @@ class Engine( object ):
         self.report[self.NCALLS] += 1
 
     def reportSuccess( self ):
+        """
+        Add 1 to the number of succesfull steps: logL < lowLhood.
+        """
         self.report[self.SUCCESS] += 1
 
     def reportReject( self ):
+        """
+        Add 1 to the number of rejected steps: logL > lowLhood.
+        """
         self.report[self.REJECT] += 1
 
     def reportFailed( self ):
+        """
+        Add 1 to the number of failed steps: could not construct a step.
+        """
         self.report[self.FAILED] += 1
 
     def reportBest( self ):
+        """
+        Add 1 to the number of best likelihoods found upto now.
+        """
         self.report[self.BEST] += 1
 
     def printReport( self ) :

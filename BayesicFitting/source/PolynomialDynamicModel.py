@@ -154,6 +154,9 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
         """ Copy method.  """
         return PolynomialDynamicModel( self.degree, copy=self )
 
+    def isDynamic( self ) :
+        return True
+
     def changeNComp( self, dn ) :
         setatt( self, "degree", self.degree + dn )
 

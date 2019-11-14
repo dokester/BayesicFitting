@@ -149,10 +149,12 @@ class Sample( object ):
             object.__setattr__( self, name, value )
             return
 
+        key0 = [ "model" ]
         key1 = {"id" : int, "parent" : int, "start" : int, "model": Model,
                 "logL" : float, "logW" : float }
         key2 = {"fitIndex" : int, "nuisance" : float, "hyper" : float }
-        if ( Tools.setSingleAttributes( self, name, value, key1 ) or
+        if ( Tools.setNoneAttributes( self, name, value, key0 ) or
+             Tools.setSingleAttributes( self, name, value, key1 ) or
              Tools.setListOfAttributes( self, name, value, key2 ) ) :
             pass
         else :

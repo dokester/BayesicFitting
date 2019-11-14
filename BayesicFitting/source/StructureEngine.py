@@ -1,9 +1,8 @@
 import numpy as numpy
 
-from . import Tools
-from .Formatter import formatter as fmt
-from .Dynamic import Dynamic
+from .Modifiable import Modifiable
 from .Engine import Engine
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -27,61 +26,56 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
-#  *
-#  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018        Do Kester
+#  *    2019        Do Kester
 
-
-class DeathEngine( Engine ):
+class StructureEngine( Engine ):
     """
-    The DeathEngine deletes a component from the model.
+    The StructureEngine varies the structure of the model.
 
-    Only for Models that are Dynamic.
-    The death rate is governed by the growth-prior in the dynamic model.
+    Only for Models that are Modifiable.
+    The birth rate is governed by the growth-prior in the dynamic model.
 
     The member is kept when the logLikelihood > lowLhood.
 
     Author       Do Kester.
 
     """
-#    _deathrate = 1.0
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ) :
         """
         Constructor.
 
         Parameters
         ----------
-        walkers : WalkerList
+        walkers : list of Walker
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        copy : GalileanEngine
+        copy : StructureEngine
             to be copied
         seed : int
             for random number generator
+
         """
-        super( DeathEngine, self ).__init__( walkers, errdis, copy=copy,
+        super( StructureEngine, self ).__init__( walkers, errdis, copy=copy,
                     seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """
-        return DeathEngine( self.walkers, self.errdis, copy=self )
+        return StructureEngine( self.walkers, self.errdis, copy=self )
 
     def __str__( self ):
-        return str( "DeathEngine" )
+        return str( "StructureEngine" )
 
     #  *********EXECUTE***************************************************
     def execute( self, walker, lowLhood ):
         """
-        Execute the engine by removins a component.
+        Execute the engine by changing a component.
 
         Parameters
         ----------
-        walker : Walker
+        walker : Sample
             walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
@@ -91,42 +85,47 @@ class DeathEngine( Engine ):
         int : the number of successfull moves
 
         """
+        t = 0
+        k = 0
+        while t <= walker.problem.model.ncomp and k < self.maxtrials :
+            dt = self.executeOnce( walker, lowLhood )
+            if dt > 0 :
+                t += dt
+                k = 0
+            else :
+                k += 1
+
+        return t
+
+    def executeOnce( self, walker, lowLhood ) :
+        """
+        One execution call.
+        """
         self.reportCall()
 
-        cwalker = walker.copy()          ## work on local copy
+        cwalker = walker.copy()                  ## work on local copy.
         problem = cwalker.problem
-        model = problem.model
-        allp = cwalker.allpars
-        ptry = allp
+        ptry = cwalker.allpars
         ftry = cwalker.fitIndex
 
-#        print( "DEAT0  ", fmt( ptry ), fmt( walker.problem.model.parameters ), fmt( ftry ) )
+        if self.verbose > 4 :
+            print( "SEN0  ", walker.id, walker.parent, len( ptry ), len( ftry ) )
 
         off = 0
-        while model is not None and not isinstance( model, Dynamic ) :
+        model = problem.model
+        while model is not None and not isinstance( model, Modifiable ) :
             off += model.npbase
             model = model._next
 
-        nc = model.ncomp
-        np = model.npbase
-
         if self.verbose > 4 :
-            print( "DEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
+            nc = model.ncomp
+            np = model.npbase
+            print( "SEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
 
-        # shuffle the parameters (if needed) before throwing the last one out.
-        ptry = model.shuffle( ptry, off, np, self.rng )
-
-        if not ( nc > model.growPrior.unit2Domain( self.rng.rand() ) and
-                model.shrink( offset=off, rng=self.rng ) ) :
-            self.reportFailed()
+        if not model.vary( rng=self.rng ):
+#            print( "SEN2  ", "failed" )
+            self.reportReject()
             return 0
-
-        dnp = model.npbase - np         # parameter decrease
-
-        ftry = model.alterFitindex( ftry, np, dnp, off )
-        ptry = problem.model.parameters
-        if self.errdis.nphypar > 0 :
-            ptry = numpy.append( ptry, allp[-self.errdis.nphypar:] )
 
         Ltry = self.errdis.logLikelihood( problem, ptry )
 
@@ -134,11 +133,17 @@ class DeathEngine( Engine ):
             self.reportSuccess()
             self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
             wlkr = self.walkers[walker.id]
+
+#            Tools.printclass( walker )
             wlkr.check( nhyp=self.errdis.nphypar )
-            return abs( dnp )
 
-        self.reportReject( )
+            ## check if better than Lbest in walkers[-1]
+            self.checkBest( problem, ptry, Ltry, ftry )
 
+#            return model.npbase
+            return 1
+
+        self.reportFailed()
         return 0
 
 

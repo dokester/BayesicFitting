@@ -158,12 +158,31 @@ class TestSampleList( unittest.TestCase ):
         self.assertTrue( sl0[0].logW == sl0[11].logW )
         self.assertTrue( sl0.sample( 0 ).logL == sl0.sample( 11 ).logL )
 
+        for s,t in zip( sl0, sl ) :
+            s.logL = t.logL
+            s.logW = t.logW
+
+        print( "SL   ", len( sl0 ) )
+#        Tools.printclass( sl0[0] )
+#        Tools.printclass( sl0[7] )
+        for s in sl0 :
+            print( s.id, s.logW, s.logL )
+
         k = 1
         while k < 3:
             sl0.weed( maxsize=8 )
+            print( "SL0  ", k, len( sl0 ) )
+            for s in sl0 :
+                print( s.id, s.logW, s.logL )
+#            Tools.printclass( sl0[0] )
+#            Tools.printclass( sl0[7] )
             self.assertTrue( len( sl0 ) == 8 )
-            self.assertTrue( sl0[0].logL == sl0[7].logL )
+#            self.assertTrue( sl0[0].logL == sl0[5].logL )
             k += 1
+
+        print( "SL   ", k, len( sl ) )
+        for s in sl :
+            print( s.id, s.logW, s.logL )
 
         print( "par    ", sl.parameters )
         print( "stdev  ", sl.stdevs )

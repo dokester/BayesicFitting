@@ -6,7 +6,7 @@ from .Tools import setAttribute as setatt
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2018
+__year__ = 2019
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -50,6 +50,21 @@ class Dynamic( object ):
 
 
     """
+    def __init__( self, dynamic=True ) :
+        """
+        Constructor for Dynamic
+
+        Parameters
+        ----------
+        dynamic: bool
+            True if the Model is to be considered dynamic.
+        """
+
+        setatt( self, "dynamic", dynamic )
+
+
+    def isDynamic( self ) :
+        return self.dynamic
 
     def setDynamicAttribute( self, name, value ) :
         """
@@ -86,89 +101,216 @@ class Dynamic( object ):
 
         return False
 
-#    def getNumberOfComponents( self ):
-#        return self.npbase // self.deltaNpar
 
-
-    def grow( self, pat=0 ):
+    def grow( self, offset=0, rng=None, **kwargs ):
         """
         Increase the degree by one upto maxComp ( if present ).
 
         Parameters
         ----------
-        pat : int
-            location where the new params should be inserted
+        offset : int
+            index where the params of the Dynamic model start
 
         Return
         ------
         bool :  succes
 
         """
-#        ncomp = self.getNumberOfComponents()
         if self.maxComp is not None and self.ncomp >= self.maxComp:
             return False
 
-        self.alterParameterSize( self.deltaNpar, pat )
+        location = self.npbase
+
+        dnp = self.deltaNpar
+        self.alterParameterSize( dnp, offset, location=location )
+
+        head = self._head
+        mdlpar = head.parameters
+        k1 = location + offset
+        value = numpy.zeros( dnp, dtype=float )
+        if rng is not None :
+            for k in range( dnp ) :
+                value[k] = head.unit2Domain( rng.rand(), k + k1 )
+
+        mdlpar = self.alterParameters( mdlpar, location, dnp, offset, value=value )
+
+        setatt( self._head, "parameters", mdlpar )
+
+        self.alterParameterNames( dnp )
 
         self.changeNComp( 1 )
 
         return True
 
-    def shrink( self, pat=0 ):
+    def shrink( self, offset=0, **kwargs ):
         """
         Decrease the degree by one downto minComp ( default 1 ).
 
         Parameters
         ----------
-        pat : int
-            location where the new params should be inserted
+        offset : int
+            index where the params of the Dynamic model start
 
         Return
         ------
         bool : succes
 
         """
-#        ncomp = self.getNumberOfComponents()
         if self.ncomp <= self.minComp :
             return False
 
-        self.alterParameterSize( -self.deltaNpar, pat )
+        location = self.npbase
+        dnp = - self.deltaNpar
+        self.alterParameterSize( dnp, offset, location=location )
+
+        head = self._head
+        mdlpar = head.parameters
+        mdlpar = self.alterParameters( mdlpar, location, dnp, offset )
+        setatt( self._head, "parameters", mdlpar )
+
+        self.alterParameterNames( dnp )
 
         self.changeNComp( -1 )
 
         return True
 
-    def alterParameterSize( self, dnp, pat ) :
+    def alterParameterNames( self, dnp ) :
+        if dnp > 0 :
+            parNames = ["parameter_%d"%k for k in range( self.npbase )]
+        else :
+            parNames = self.parNames[:self.npbase]
+
+        setatt( self, "parNames", parNames )
+
+
+    def alterParameterSize( self, dnp, offset, location=None, value=0 ) :
         """
         Change the number of parameters and self.parameters.
 
         Parameters
         ----------
-        npnew : int
+        dnp : int
             number of parameters in the DynamicModel
-        pat : int
+        offset : int
             starting index of the DynamicModel
+        location : int
+            index in param[offset:] at which to insert/delete the new parameters
         """
         if dnp == 0 :
             return
 
+        if location is None :
+            location = self.npbase
+
         mdlpar = self._head.parameters
 
-#        print( "DYN1  ", dnp, pat, self.npmax, self.npbase, self.npchain,
-#            mdlpar )
+#        print( "DYN1  ", dnp, offset, self.npmax, self.npbase, self.npchain, mdlpar )
 
-        mdlpar = self.alterParameters( mdlpar, self.npbase, dnp, pat )
-
+        setatt( self, "location", location )
         setatt( self, "npmax", self.npmax + dnp )
         setatt( self, "npbase", self.npbase + dnp )
         setatt( self._head, "_npchain", self._head._npchain + dnp )
 
-#        print( "DYN2  ", dnp, pat, self.npmax, self.npbase, self.npchain,
-#            mdlpar )
+#        print( "DYN2  ", dnp, offset, self.npmax, self.npbase, self.npchain, mdlpar )
 
-        setatt( self._head, "parameters", mdlpar )
 
-    def shuffle( self, param, pat, np, rng ) :
+    def alterParameters( self, param, location, dnp, offset, value=None ) :
+        """
+        change the parameters to comply with the changed model.
+
+        param:      [p0 p1 p2 p3 p4 p5 p6 p7 p8 p9]   # previous set
+        offset:     2           # parameters of models in preceeding chain
+        location:   1           # location where to add/delete parameter
+        value:      [v0 ...]    # values to be given to added parameters
+
+        dnp:        +1
+        ==> newpar: [p0 p1 p2 v0 p3 p4 p5 p6 p7 p8 p9]
+
+        dnp:        +2
+        ==> newpar: [p0 p1 p2 v0 v1 p3 p4 p5 p6 p7 p8 p9]
+
+        dnp:        -1
+        ==> newpar: [p0 p1 p3 p4 p5 p6 p7 p8 p9]
+
+        dnp:        -2
+        ==> ERROR: not enough space in param before location
+
+        Parameters
+        ----------
+        param : array_like
+            parameters of the parent model (chain)
+        location : int
+            index in param[offset:] at which to insert/delete the new parameters
+        dnp : int
+            number of parameters to insert (dnp>0) or delete (dnp<0)
+        offset : int
+            start index of the parameters of the dynamic model in param
+        value : float or array_like
+            to be given to the inserted parameters (only when dnp>0)
+
+        """
+        np = len( param )
+        newpar = numpy.zeros( np + dnp, dtype=float )
+
+        if dnp > 0 :
+            k1 = offset + location
+            k2 = k1 + dnp
+            newpar[:k1] = param[:k1]
+            newpar[k1:k2] = value
+            newpar[k2:] = param[k1:]
+        else :
+            if location + dnp < 0 :
+                raise IndexError( "Cannot delete %d from parameters at %d"%(-dnp,location) )
+            k2 = offset + location
+            k1 = k2 + dnp
+            newpar[:k1] = param[:k1]
+            newpar[k1:] = param[k2:]
+
+        return newpar
+
+
+    def alterFitindex( self, findex, location, dnp, offset ) :
+        """
+        change the fit index to comply with the changed model.
+
+        Parameters
+        ----------
+        findex : array_like
+            fit index of the parent model (chain)
+        location : int
+            index in param[offset:] at which to insert/delete the new parameters
+        dnp : int
+            number of parameters to insert (dnp>0) or delete (dnp<0)
+        offset : int
+            start index of the parameters of the dynamic model in param
+        """
+        lfin = len( findex )
+        newfi = numpy.zeros( lfin + dnp, dtype=int )
+
+        k = 0
+        kol = offset + location
+
+        kh = kol if dnp > 0 else kol + dnp
+        while findex[k] >=0 and findex[k] < kh :    ## copy first parts
+            newfi[k] = findex[k]
+            k += 1
+        kl = k if dnp > 0 else k - dnp              ## where we are if findex
+
+        for i in range( dnp ) :                     ## insert extra indices if dnp>0
+            newfi[k] = kol + i
+            k += 1
+
+        for j in range( kl, lfin ) :                 ## copy the tail
+            if findex[j] >= 0 :
+                newfi[k] = findex[j] + dnp           ## in/de-crease indices
+            else :
+                newfi[k] = findex[j]                 ## negitive indices for hyperpars
+            k += 1
+
+        return newfi
+
+
+    def shuffle( self, param, offset, np, rng ) :
         """
         Shuffle the parameters of the components (if they are equivalent)
         Default implementation: does nothing.
@@ -177,7 +319,7 @@ class Dynamic( object ):
         ----------
         param : array-like
             list of all parameters
-        pat : int
+        offset : int
             index where the dynamic model starts
         np : int
             length of the parameters of the dynamic model
@@ -185,57 +327,6 @@ class Dynamic( object ):
             random number generator
         """
         return param
-
-    def alterParameters( self, param, npbase, dnp, pat ) :
-
-        newpar = numpy.zeros( len( param ) + dnp, dtype=float )
-        kh = pat + npbase + dnp
-        kb = pat + npbase
-
-#        print( "DPA1  ", npbase, dnp, pat, kh, kb )
-#        print( "DPA2  ", param )
-
-        if dnp < 0 :
-            newpar[:kh] = param[:kh]
-        else :
-            newpar[:kb] = param[:kb]
-
-        newpar[kh:] = param[kb:]
-
-#        print( "DPA3  ", newpar )
-
-        return newpar
-
-    def alterFitindex( self, findex, npbase, dnp, pat ) :
-
-        newfi = numpy.zeros( len( findex ) + dnp, dtype=int )
-        kh = pat + npbase + dnp
-        kb = pat + npbase
-
-#        print( "DFI1  ", npbase, dnp, pat, kh, kb )
-#        print( "DFI2  ", findex )
-
-
-        if dnp < 0 :
-            newfi[:kh] = findex[:kh]
-        else :
-            newfi[:kb] = findex[:kb]
-            fill = numpy.arange( dnp )
-            if kb > 0 :
-                fill += findex[kb-1] + 1
-            newfi[kb:kh] = fill
-
-        # the last part needs a shift of dnp, except when < 0
-        newfi[kh:] = [fi if fi < 0 else fi + dnp for fi in findex[kb:]]
-
-        if newfi[0] > 0 :
-            print( npbase, dnp, pat )
-            print( findex )
-            print( newfi )
-            raise AssertionError()
-
-#        print( "DFI3  ", newfi )
-        return newfi
 
 
 

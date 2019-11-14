@@ -2,6 +2,7 @@ import numpy as numpy
 import re
 
 from .Tools import setAttribute as setatt
+from .Dynamic import Dynamic
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -88,16 +89,13 @@ class Problem( object ):
             self.xdata = copy.xdata
             self.ydata = copy.ydata
             self.weights = copy.weights
-            if copy.model.isDynamic() :
+            if copy.model and copy.model.isDynamic() :
                 self.model = copy.model.copy()
             else :
                 self.model = copy.model
             self.partype = copy.partype
 
-        self.npars = self.model.npars
-
-
-        if self.model.cyclic is None :
+        if self.model is None or self.model.cyclic is None :
 #            print( "Use cycor0" )
             self.cyclicCorrection = self.cycor0
         elif isinstance( self.model.cyclic, dict ) :
@@ -124,7 +122,10 @@ class Problem( object ):
         name : string
             name of the attribute
         """
-        if name == 'sumweight' :            # Return the sum over weight vector.
+        if name == 'npars' :
+            return self.model.npars
+
+        elif name == 'sumweight' :            # Return the sum over weight vector.
             if self.hasWeights() :
                 self.sumweight = numpy.sum( self.weights )
                 return self.sumweight
@@ -269,6 +270,9 @@ class Problem( object ):
         resw = res if self.weights is None else res * self.weights
         return ( resw * res, resw ) if extra else resw * res
 
+    def isDynamic( self ) :
+        return self.model.isDynamic()
+
 
     def domain2Unit( self, dval, kpar ) :
         """
@@ -297,7 +301,6 @@ class Problem( object ):
         """
         return self.model.unit2Domain( uval, kpar )
 
-
     #  *****TOSTRING***********************************************************
     def __str__( self ):
         """ Returns a string representation of the model.  """
@@ -317,3 +320,4 @@ class Problem( object ):
 
     def baseName( self ) :
         return "Problem of %s" % self.model.shortName()
+

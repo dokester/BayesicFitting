@@ -725,12 +725,119 @@ class TestEvidence2( unittest.TestCase  ) :
 
 #        plt.show()
 
-
-
-
         if plot :
-
             plt.show()
+
+    def XXXtest9( self, plot=False ) :
+        print( "====test9  Bernouilli ================" )
+
+        nn = 61
+        x = numpy.linspace( -3, 3, nn, dtype=float )
+        numpy.random.seed( 124 )
+        xp = x + numpy.random.randn( nn )
+        y = numpy.where( xp > 0, 1, 0 )
+        print( fmt( x, max=None ) )
+        print( fmt( xp, max=None ) )
+        print( fmt( y, max=None ) )
+
+
+        model = LogisticModel( fixed={0:1} )
+
+        model.setLimits( lowLimits=[-3,-2], highLimits=[3,2] )
+
+        ns = NestedSampler( x, model, y, distribution='bernouilli', verbose=2 )
+#            engines=["chord"] )
+#            engines=["galilean"] )
+
+#        ns.engines[0].debug = True
+        ns.minimumIterations = 501
+
+        logE = ns.sample( )
+
+        yfit1 = model( x )
+        par2 = ns.parameters
+        logz = ns.logZ
+        dlz  = ns.logZprecision
+        print( "pars  ", fmt( par2 ) )
+        print( "stdv  ", fmt( ns.stdevs ) )
+        print( "logZ  ", fmt( logz ), " +- ", fmt( dlz ) )
+        print( "logL  ", fmt( ns.distribution.logLikelihood( ns.problem, par2 ) ) )
+
+        bf = AmoebaFitter( x, model, errdis="bernouilli" )
+
+        pars = bf.fit( y, tolerance=1e-20 )
+        print( "pars  ", fmt( pars ) )
+        print( "stdv  ", fmt( bf.stdevs ) )
+
+#        limits = [6,4]
+        logz0 = bf.getLogZ()        # limits=limits )
+        logl0 = bf.logLikelihood
+        print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
+
+        yfit2 = model( x )
+
+        plt.plot( x, y, 'k.' )
+        plt.plot( x, yfit1, 'r-' )
+        plt.plot( x, yfit2, 'g-' )
+        plt.show()
+
+    def XXXtest10( self, plot=False ) :
+        print( "====test10  Bernouilli ================" )
+
+        nn = 1000
+        x = numpy.linspace( 0, 10, nn )
+        y = numpy.zeros( nn )
+        y[:300] = 1
+        y[900:] = 1
+        y[400:600] = 2
+
+#        Tools.printclass( UniformPrior( limits=[0,1] ) )
+
+        dtm = DecisionTreeModel( ndim=1, kdim=[0], depth=1, dynamic=False )
+#        print( dtm.result( x, [0,1] ) )
+
+#        Tools.printclass( dtm )
+
+        problem = CategoricalProblem( model=dtm, xdata=x, ydata=y )
+        print( problem.npars, problem.ncateg )
+        print( problem.ydata.shape )
+
+        ns = NestedSampler( problem=problem, distribution='bernouilli' )
+        ns.verbose = 2
+
+#        Tools.printclass( ns )
+
+        logE = ns.sample( )
+
+#        yfit1 = model( x )
+        par2 = ns.parameters
+        logz = ns.logZ
+        dlz  = ns.logZprecision
+        print( "pars  ", fmt( par2 ) )
+        print( "stdv  ", fmt( ns.stdevs ) )
+        print( "logZ  ", fmt( logz ), " +- ", fmt( dlz ) )
+        print( "logE  ", fmt( logE ) )
+        print( "logL  ", fmt( ns.distribution.logLikelihood( ns.problem, par2 ) ) )
+
+        bf = CategoricalFitter( problem )
+
+        pars = bf.fit( )
+        print( "pars  ", fmt( pars ) )
+        print( "stdv  ", fmt( bf.stdevs ) )
+
+#        limits = [6,4]
+        logz0 = bf.getLogZ( pars )
+        logl0 = bf.logLikelihood
+        print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
+
+#        yfit2 = model( x )
+
+#        plt.plot( x, y, 'k.' )
+#        plt.plot( x, yfit1, 'r-' )
+#        plt.plot( x, yfit2, 'g-' )
+#        plt.show()
+
+
 
 if __name__ == '__main__':
     unittest.main( )
