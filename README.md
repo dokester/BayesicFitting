@@ -244,6 +244,6 @@ by ExponentialErrorDistribution
    * Pictures moved to documentation/images
    * Some documentation issues repaired.
 
- + 30 Oct 2019 version 2.3.1
+ + 14 Nov 2019 version 2.4.0
    * see above in Whats new.
 
