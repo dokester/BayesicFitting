@@ -10,7 +10,7 @@ Citation index:
 DOI: 10.5281/zenodo.2597200
 
 
-## What's new in version 2.4.0
+## What's new in versions 2.4.0 to 2.4.2
    * New Classes:
       - DecisionTreeModel
 	A DecisionTree Model (DTM) is mostly defined on multiple input dimensions (axes).
@@ -244,6 +244,6 @@ by ExponentialErrorDistribution
    * Pictures moved to documentation/images
    * Some documentation issues repaired.
 
- + 14 Nov 2019 version 2.4.0
+ + 14 Nov 2019 version 2.4.0 to 2.4.2
    * see above in Whats new.
 
