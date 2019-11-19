@@ -3,4 +3,4 @@ include BayesicFitting/examples/data/*.csv
 include BayesicFitting/documentation/images/*.dia
 include BayesicFitting/documentation/images/*.png
 include BayesicFitting/documentation/*.md
-
+include LICENSE
