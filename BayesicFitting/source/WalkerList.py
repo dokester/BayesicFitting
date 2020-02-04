@@ -30,77 +30,32 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class WalkerList( list ):
     """
-    WalkerList is a list of `Walker`s
+    WalkerList is a list of Walker.
 
-    WalkerList is the main result of the NestedSampler. It contains all
-    information to calculate averages, medians, modi or maximum likihood solutions
-    of the parameters, or of any function of the parameters; in particular of the
-    Model.
-    To make averages one has to take into account the weights. Each Walker has a weight
-    and all weights sum to 1.0. So the average of any function f of the parameters p is
-
-    E( f(p) ) = &sum; w_k f( p_k )
-    where the sum is over all samples k.
-
-    A large set of utility functions is provided to extract the information from the
-    WalkerList.
+    It is the working ensemble of NestedSampler.
 
 
     Attributes
     ----------
-    parameters : numpy.array (read-only)
-        The average over the parameters. Not for dynamic models.
-    stdevs, standardDeviations : numpy.array (read-only)
-        The standard deviations for the parameters. Not for dynamic models
-    scale : float
-        The average of the noise scale
-    stdevScale : float
-        the standard deviation of the scale.
-
     logZ : float (read-only)
         Natural log of evidence
-    evidence : float (read-only)
-        log10( Z ). Evidence * 10 is interpretable as dB.
     info : float (read-only)
         The information H. The compression factor ( the ratio of the prior space
         available to the model parameters over the posterior space ) is equal to the exp( H ).
-
-    maxLikelihoodIndex : int (read-only)
-        The index at which the max likelihood can be found: always the last in the list
-    maxLikelihoodParameters : numpy.array (read-only)
-        The maximum likelihood parameters at the maxLikelihoodIndex.
-    maxLikelihoodScale : float (read-only)
-        The maximum likelihood noise scale at the maxLikelihoodIndex.
-    medianIndex : int (read-only)
-        The index at which the median can be found: the middle of the cumulative weights.
-        It is calculated once and then kept.
-    medianParameters : numpy.array (read-only)
-        The median of the parameters at the medianIndex
-    medianScale : float (read-only)
-        The median of the noise scale at the medianIndex
-    modusIndex : int (read-only)
-        The index at which the modus can be found: the largest weight
-        It is calculated once and then kept.
-    modusParameters : numpy.array (read-only)
-        The modus of the parameters at the modusIndex
-    modusScale : float (read-only)
-        The modus of the noise scale at the modusIndex.
-
-    normalized : bool
-        True when the weights are normalized to SUM( weights ) = 1
-
+    iteration : int
+        Present iteration number.
 
     Author       Do Kester
 
     """
     def __init__( self, problem, nsamples, allpars, fitIndex ):
         """
-        Default Constructor.
+        Constructor.
 
         Parameters
         ----------
@@ -170,6 +125,9 @@ class WalkerList( list ):
 
 
     def logPlus( self, x, y ):
+        """
+        Return the log of sum.
+        """
         return numpy.logaddexp( x, y )
 
 
@@ -207,7 +165,7 @@ class WalkerList( list ):
 
     def getLowLogL( self ):
         """
-        Return the lowest value of logL in the samplelist, plus its index.
+        Return the lowest value of logL in the walkerlist, plus its index.
         """
         low = self[0].logL
         klo = 0

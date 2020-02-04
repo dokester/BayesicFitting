@@ -37,7 +37,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 
 class Model( FixedModel ):
@@ -45,7 +45,7 @@ class Model( FixedModel ):
     Model implements the common parts of (compound) models.
     It is the last common anchestor of all Models.
 
-    Models can be handled by the **Fitter** classes.
+    Models can be handled by the Fitter classes.
 
     A model consists of one or more instantiations of (base) models which
     are concatenated in a chain of models using various operations
@@ -53,7 +53,7 @@ class Model( FixedModel ):
     i.e. the output of the left-hand process in used as input of the
     right-hand process.
 
-    Methods defined in `BaseModel` as eg. `baseResult()` are recursively called
+    Methods defined in BaseModel as eg. baseResult() are recursively called
     here as result(). They are the ones used in the fitters.
 
     The Model is the place where model-related items are kept, like parameters,
@@ -155,6 +155,11 @@ class Model( FixedModel ):
             model to be copied (default: None)
         params : array_like
             initial parameters of the model
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         super( Model, self ).__init__( nparams=nparams, ndim=ndim, copy=copy,
@@ -250,17 +255,6 @@ class Model( FixedModel ):
             i += 1
         return i
 
-#   TBC if needed
-    def hasNoNullModel( self, model ):
-        """
-        Return True if the (compound) model contains a NullModel.
-        """
-        while model is not None :
-            if model.isNullModel() :
-                return False
-            model = model._next
-        return True
-
     def isNullModel( self ) :
         """
         Return True if the model has no parameters (a NullModel).
@@ -326,7 +320,7 @@ class Model( FixedModel ):
         and when needed these attributes are taken from there, or stored there.
 
         The operation (addition in this case) is always with the total result of the
-        existing chain. For the use of "brackets" in a chain use ContainerModel.
+        existing chain. For the use of "brackets" in a chain use BracketModel.
 
         Parameters
         ----------
@@ -1101,6 +1095,8 @@ class Model( FixedModel ):
         """
         Return the i-th parameter.
 
+        >>> p_i = model[i]
+
         Parameters
         ----------
         i : int
@@ -1113,6 +1109,10 @@ class Model( FixedModel ):
         """
         Return the result of the model.
 
+        >>> y = model( x )
+        is equivalent to
+        >>> y = model.result( x, model.parameters )
+
         Parameters
         ----------
         x : (list of) float
@@ -1124,6 +1124,8 @@ class Model( FixedModel ):
     def __iadd__( self, model ):
         """
         Method for making compound models using += operator.
+
+        >>> model1 += model2
 
         Parameters
         ----------
@@ -1138,6 +1140,8 @@ class Model( FixedModel ):
         """
         Method for making compound models using + operator.
 
+        >>> model1 = model2 + model3
+
         Parameters
         ----------
         model : Model
@@ -1149,6 +1153,8 @@ class Model( FixedModel ):
     def __isub__( self, model ):
         """
         Method for making compound models using -= operator.
+
+        >>> model1 -= model2
 
         Parameters
         ----------
@@ -1163,6 +1169,8 @@ class Model( FixedModel ):
         """
         Method for making compound models using - operator.
 
+        >>> model1 = model2 - model3
+
         Parameters
         ----------
         model : Model
@@ -1174,6 +1182,8 @@ class Model( FixedModel ):
     def __imul__( self, model ):
         """
         Method for making compound models using *= operator.
+
+        >>> model1 *= model2
 
         Parameters
         ----------
@@ -1188,6 +1198,8 @@ class Model( FixedModel ):
         """
         Method for making compound models using * operator.
 
+        >>> model1 = model2 * model3
+
         Parameters
         ----------
         model : Model
@@ -1199,6 +1211,8 @@ class Model( FixedModel ):
     def __itruediv__( self, model ):
         """
         Method for making compound models using /= operator.
+
+        >>> model1 /= model2
 
         Parameters
         ----------
@@ -1213,6 +1227,8 @@ class Model( FixedModel ):
         """
         Method for making compound models using / operator.
 
+        >>> model1 = model2 / model3
+
         Parameters
         ----------
         model : Model
@@ -1224,6 +1240,10 @@ class Model( FixedModel ):
     def __ior__( self, model ):
         """
         Method for making compound models using |= operator.
+
+        >>> model1 |= model2
+
+        Use the results of model1 as input for model2.
 
         Parameters
         ----------
@@ -1237,6 +1257,8 @@ class Model( FixedModel ):
     def __or__( self, model ):
         """
         Method for making compound models using | (pipe) operator.
+
+        >>> model1 = model2 | model3
 
         Parameters
         ----------

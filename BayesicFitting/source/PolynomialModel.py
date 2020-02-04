@@ -28,14 +28,14 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA Code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 
 class PolynomialModel( LinearModel ):
     """
     General polynomial model of arbitrary degree.
-    .. math::
-        f( x:p ) = \sum p_k * x^k
+
+        f( x:p ) = &sum; p_k * x^k
 
     where the sum is over k running from 0 to degree ( inclusive ).
 
@@ -79,6 +79,11 @@ class PolynomialModel( LinearModel ):
             the degree of the polynomial.
         copy : PolynomialModel
             model to copy
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         super(PolynomialModel,self ).__init__( degree + 1, copy=copy,

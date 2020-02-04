@@ -23,13 +23,13 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017        Do Kester
+#  *    2017 - 2020  Do Kester
 
 
 class GaussPrior( Prior ):
     """
     Gauss prior distribution.
-    .. math::
+
         Pr( x ) = exp( - ( ( x - c ) / scale )^2 )
 
     By default: center = 0 and scale = 1.
@@ -47,10 +47,12 @@ class GaussPrior( Prior ):
         center of the Gaussian prior
     scale : float
         scale of the Gaussian prior
-    lowLimit : float
-        low limit (inactive for now)
-    highLimit : float
-        high limit ( inactive for now)
+
+    Attributes from Prior
+    --------------------=
+    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
+
+    lowLimit and highLimit cannot be used in this implementation.
 
     """
 
@@ -77,6 +79,7 @@ class GaussPrior( Prior ):
         self.scale = scale
 
     def copy( self ):
+        """ Copy the prior """
         return GaussPrior( prior=self, center=self.center, scale=self.scale )
 
     def domain2Unit( self, dval ):

@@ -36,7 +36,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class BaseFitter( object ):
     """
@@ -64,7 +64,7 @@ class BaseFitter( object ):
        only exact for linear models with a fixed scale.
     2. Attributes labelled as read only should not be set by a user.
 
-    Category:    Mathematics/Fitting
+    Author: Do Kester
 
     Attributes
     ----------
@@ -157,7 +157,7 @@ class BaseFitter( object ):
         keep : dict of {int:float}
             dictionary of indices (int) to be kept at a fixed value (float)
             The values of keep will be used by the Fitter as long as the Fitter exists.
-            See also `fit( ..., keep=dict )`
+            See also fit( ..., keep=dict )
         fixedScale : None or float
             None : the noise scale is not fixed
             float: value of the fixed noise scale
@@ -168,7 +168,7 @@ class BaseFitter( object ):
         ValueError when one of the following is true
             1. Dimensionality of model and input does not match.
             2. Nans in input stream.
-            3. Model is not the head if the compound model chain.
+            3. Model is not the head of a compound model chain.
 
         """
         if model != model._head:
@@ -204,8 +204,7 @@ class BaseFitter( object ):
     def setMinimumScale( self, scale=0 ) :
         """
         Introduce a minimum in scale calculation and consequently in chisq.
-        .. math::
-            \chi^2 >= sumwgt * scale^2
+            chi^2 >= sumwgt * scale^2
 
         Parameters
         ----------
@@ -430,6 +429,20 @@ class BaseFitter( object ):
         raise NotImplementedError( "BaseFitter is a base class, not suitable itself to perform fits." )
 
     def checkNan( self, ydata, weights=None ):
+        """
+        Check there are no Nans or Infs in ydata or weights.
+
+        Parameters
+        ----------
+        ydata : array_like
+            data to be fitted.
+        weights : array_like
+            weights pertaining to ydata
+
+        Raises
+        ------
+        ValueError.
+        """
         if not numpy.all( numpy.isfinite( ydata ) ) :
             raise ValueError( "Fitter: NaNs or Infs in ydata" )
         if  weights is not None and not numpy.all( numpy.isfinite( weights ) ) :
@@ -478,7 +491,7 @@ class BaseFitter( object ):
         """
         Return the &beta;-vector.
 
-        It includes `normalized` data if present. See `normalize()`.
+        It includes "normalized" data if present. See normalize().
 
         Parameters
         ----------
@@ -500,7 +513,7 @@ class BaseFitter( object ):
         """
         Calculates the hessian matrix for a given set of model parameters.
 
-        It includes `normalized` data if present. See `normalize()`
+        It includes "normalized" data if present. See normalize()
 
         Parameters
         ----------
@@ -570,9 +583,9 @@ class BaseFitter( object ):
     def makeVariance( self, scale=None ):
         """
         Return the (calculated) variance of the remaining noise. I.e.
-            :math:`var = chisq / dof`
+            var = chisq / dof
         when automatic noise scaling is requested or
-            :math:`var = scale^2`
+            var = scale^2
         when we have a fixed scale.
 
         Parameters
@@ -687,8 +700,7 @@ class BaseFitter( object ):
         """
         Calculates of standard deviations pertaining to the parameters.
 
-        .. math::
-            \sigma_i = s * \sqrt( C_{i,i} )
+            &sigma;_i = s * sqrt( C[i,i] )
 
         where C is the Covariance matrix, the inverse of the Hessian Matrix and
         s is the noiseScale.
@@ -713,7 +725,7 @@ class BaseFitter( object ):
     #  *****MONTE CARLO ERROR***************************************************
     def monteCarloError( self, xdata=None, monteCarlo=None):
         """
-        Calculates :math:\sigma:math:-confidence regions on the model given some inputs.
+        Calculates &sigma;-confidence regions on the model given some inputs.
 
         From the full covariance matrix (inverse of the Hessian) random
         samples are drawn, which are added to the parameters. With this new
@@ -756,8 +768,7 @@ class BaseFitter( object ):
         """
         Calculation of the evidence, log10( Z ), for the model given the data.
 
-        ../math::
-            E = \log10( P( Model | data ) )
+            E = log10( P( Model | data ) )
 
         The calculation of the evidence uses a Gaussion approximation of the Posterior
         probability.
@@ -799,8 +810,7 @@ class BaseFitter( object ):
         """
         Calculation of the evidence, log( Z ), for the model given the data.
 
-        .. math::
-            logZ = \log( P( Model | data ) )
+            logZ = log( P( Model | data ) )
 
         The calculation of the evidence uses a Gaussion approximation of the Posterior
         probability.
@@ -910,19 +920,3 @@ class BaseFitter( object ):
                 fitter=fitter, residuals=residuals )
 
 
-    def plotResultXXX( self, xdata, ydata, model ) :
-
-        plt.figure( "Fitter Result" )
-        plt.plot( xdata, ydata, 'k,' )
-
-        xx = numpy.linspace( numpy.min( xdata ), numpy.max( xdata ), 1001 )
-
-        yy = model.result( xx )
-        err = self.monteCarloError( xx )
-
-        plt.plot( xx, yy + err, 'r--' )
-        plt.plot( xx, yy - err, 'r--' )
-
-        plt.plot( xx, yy, 'r-' )
-
-        plt.show( )

@@ -31,22 +31,21 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class ChebyshevPolynomialModel( LinearModel ):
     """
     Chebyshev polynomial model of arbitrary degree.
 
-    .. math::
-        f( x:p ) = \sum; p_k * T_k( x )
+        f( x:p ) = &sum; p_k * T_k( x )
 
     where the sum is over k running from 0 to degree ( inclusive ).
 
     The T( x ) are Chebyshev polynomials of the first kind which are defined
     recursively as:
-    .. math::
-        T_0( x ) = 1\\
-        T_1( x ) = x\\
+
+        T_0( x ) = 1
+        T_1( x ) = x
         T_n( x ) = 2 x T_{n-1}( x ) - T_{n-2}( x ) for n >= 2
 
     These polynomials are orthogonal, only when x is in [-1,+1].
@@ -80,13 +79,20 @@ class ChebyshevPolynomialModel( LinearModel ):
     def __init__( self, degree, copy=None, **kwargs ):
         """
         Chebyshev Polynomial of a certain degree.
-        <br>
+
         The number of parameters is ( degree + 1 )
 
         Parameters
         ----------
         degree : int
             the degree of the polynomial.
+        copy : ChebyshevPolynomialModel
+            to be copied
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         names = ["coeff_%d"%k for k in range( degree + 1 )]
@@ -113,7 +119,7 @@ class ChebyshevPolynomialModel( LinearModel ):
         Returns the partials at the xdata value.
 
         The partials are calculated using the recurrence formula
-        .. math::
+
             f_n( x ) = 2 * x * f_{n-1}( x ) - f_{n-2}( x )
 
         Parameters
@@ -144,13 +150,12 @@ class ChebyshevPolynomialModel( LinearModel ):
     def baseDerivative( self, xdata, params ):
         """
         Returns the derivative df/dx at the xdata value.
-        .. math::
+
             df_n = n * U_{n-1}
 
         where
-        .. math::
-            U_0 = 1\\
-            U_1 = 2x\\
+            U_0 = 1
+            U_1 = 2x
             U_{n+1} = 2 * x * U_n - U_{n-1}
 
         Parameters

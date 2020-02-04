@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class RobustShell( IterativeFitter ):
@@ -79,22 +79,22 @@ class RobustShell( IterativeFitter ):
     A number of weighting schemes are provided.
 
     With bound support and smooth edges:
-    .. Kernel       Name        domain      comment
-    .. Biweight     Tukey         5.54      Default kernel
-    .. CosSquare                  6.00
-    .. Tricube                    5.08
-    .. Triweight                  6.60
+       Kernel       Name        domain      comment
+       Biweight     Tukey         5.54      Default kernel
+       CosSquare                  6.00
+       Tricube                    5.08
+       Triweight                  6.60
 
     With bound support and hard edges:
-    .. Uniform      Clip          3.00      Ignore all outside 3 sigma
-    .. Cosine                     4.50
-    .. Triangle                   6.00
-    .. Parabola                   4.50
+       Uniform      Clip          3.00      Ignore all outside 3 sigma
+       Cosine                     4.50
+       Triangle                   6.00
+       Parabola                   4.50
 
     with unbound support:
-    .. Huber        Median        1.50      Inside domain mean; outside domain median
-    .. Gauss                      2.12
-    .. Lorentz                    3.00
+       Huber        Median        1.50      Inside domain mean; outside domain median
+       Gauss                      2.12
+       Lorentz                    3.00
 
     Other schemes can be written by making another Kernel or writing a function
         wgts = func( d )
@@ -120,7 +120,6 @@ class RobustShell( IterativeFitter ):
     >>> print( ftr.chisq )                          # get from someFtr
 
     Author       Do Kester.
-    =============================================================================
 
     """
     def __init__( self, fitter, kernel=Biweight, domain=None, onesided=None, **kwargs ):

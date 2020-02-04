@@ -31,15 +31,15 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class PolySineAmpModel( LinearModel ):
     """
     Sine of fixed frequency with polynomials as amplitudes.
 
     Find amplitudes/phases for sinusoidal of a given frequency.
-    .. math::
-        f( x, y:p ) = P(y) \cos( 2 \pi \omega x ) + Q(y) \sin( 2 \pi \omega x )
+
+        f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )
 
     P(y), Q(y) are Polynomials of a certain order, n.
 
@@ -83,7 +83,7 @@ class PolySineAmpModel( LinearModel ):
         degree : int
             degree of the polynomials
         frequency : float
-            the frequency
+            the frequency, &omega;
         copy : PolySineAmpModel
             model to be copied
         fixed : dict

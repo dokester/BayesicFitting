@@ -18,7 +18,7 @@ from .Dynamic import Dynamic
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 class Problem( object ):
     """
@@ -28,10 +28,10 @@ class Problem( object ):
     the fitting of data to a Model.
 
     Problems can be solved by NestedSampler, with appropriate Engines and
-    ErrorDistributions (==CostFunctions)
+    ErrorDistributions.
 
     The result of the function for certain x and p is given by
-    `problem.result( x, p )`
+    problem.result( x, p )
     The parameters, p, are to be optimized while the x provide additional
     information.
 
@@ -62,7 +62,7 @@ class Problem( object ):
     def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
         """
         Problem Constructor.
-        <br>
+
         Parameters
         ----------
         model : Model
@@ -96,13 +96,10 @@ class Problem( object ):
             self.partype = copy.partype
 
         if self.model is None or self.model.cyclic is None :
-#            print( "Use cycor0" )
             self.cyclicCorrection = self.cycor0
         elif isinstance( self.model.cyclic, dict ) :
-#            print( "Use cycor2" )
             self.cyclicCorrection = self.cycor2
         else :
-#            print( "Use cycor1" )
             self.cyclicCorrection = self.cycor1
 
     def copy( self ):
@@ -189,7 +186,7 @@ class Problem( object ):
 
     def cycor1( self, res ):
         """
-        Returns the residuals corrected for periodicity in residuals
+        Returns the residuals, all corrected for periodicity in residuals
 
         Parameters
         ----------
@@ -201,7 +198,8 @@ class Problem( object ):
 
     def cycor2( self, res ):
         """
-        Returns the residuals corrected for periodicity in residuals
+        Returns the residuals corrected for periodicity in residuals, only
+        the result dimensions listed in the model.cyclic dictionary.
 
         Parameters
         ----------
@@ -215,6 +213,29 @@ class Problem( object ):
         return res
 
     def cyclize( self, res, period ) :
+        """
+        Apply correction on residuals which are cyclic in some
+        phase space.
+
+        If the model results in a phase value of +&epsilon;
+        while the data give that phase value as (p - &epsilon;)
+        to keep all data in the range [0,p], the naive residual
+        would be (p - 2 &epsilon;) while the actual distance should
+        be measured the other way around as (2 &epsilon;).
+        Here p = period and &epsilon; = small deviation.
+
+        Parameters
+        ----------
+        res : array_like
+            original residuals
+        period : float
+            of the phase space
+
+        Returns
+        -------
+        corrected residuals.
+        """
+
         hp = period / 2
         return numpy.where( res < -hp, res + period,
                numpy.where( res >  hp, res - period, res ) )

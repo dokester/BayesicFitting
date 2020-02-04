@@ -26,7 +26,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 
 class Dynamic( object ):
@@ -47,7 +47,6 @@ class Dynamic( object ):
     growPrior : None or Prior
         governing the birth and death.
         ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
-
 
     """
     def __init__( self, dynamic=True ) :
@@ -175,6 +174,14 @@ class Dynamic( object ):
         return True
 
     def alterParameterNames( self, dnp ) :
+        """
+        Renumber the parameter names.
+
+        Parameters
+        ----------
+        dnp : int
+            change in the number of parameters
+        """
         if dnp > 0 :
             parNames = ["parameter_%d"%k for k in range( self.npbase )]
         else :
@@ -190,7 +197,7 @@ class Dynamic( object ):
         Parameters
         ----------
         dnp : int
-            number of parameters in the DynamicModel
+            change in the number of parameters in the DynamicModel
         offset : int
             starting index of the DynamicModel
         location : int

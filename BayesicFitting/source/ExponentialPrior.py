@@ -28,15 +28,16 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class ExponentialPrior( Prior ):
     """
     Exponential prior distribution.
-    .. math::
+
         Pr( x ) = exp( -x / scale )
 
     By default scale = 1.
+
     The domain is [0,+Inf].
     In computational practice the domain is limited to about [0,36] scale units
 
@@ -52,10 +53,6 @@ class ExponentialPrior( Prior ):
         scale of the exponential
     zeroFraction : float
         fraction of unit that map to zero in domain and vice versa.
-    lowLimit : float
-        low limit is inactive
-    highLimit : float
-        high limit is inactive
 
     Hidden Attributes
     -----------------
@@ -63,6 +60,12 @@ class ExponentialPrior( Prior ):
         shift of the exponential part to make room for zeros.
     _uval : float
         random number within [0,zeroFraction].
+
+    Attributes from Prior
+    --------------------=
+    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
+
+    lowLimit and highLimit cannot be used in this implementation.
 
     Author: Do Kester.
     """
@@ -91,6 +94,7 @@ class ExponentialPrior( Prior ):
             self._uval = prior._uval
 
     def copy( self ):
+        """ Copy the prior """
         return ExponentialPrior( scale=self.scale, prior=self )
 
     def __setattr__( self, name, value ):

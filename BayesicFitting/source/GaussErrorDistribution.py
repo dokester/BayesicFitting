@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class GaussErrorDistribution( ScaledErrorDistribution ):
@@ -38,22 +38,22 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
     To calculate a Gauss likelihood.
 
     For one residual, x, it holds
-    .. math::
-        f( x ) = 1 / \sqrt( 2 \pi s^2 ) exp( - 0.5 ( x / s )^2 )
+
+        L( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 ( x / s )^2 )
 
     where s is the scale.
     s is a hyperparameter, which might be estimated from the data.
 
-    The scale s is also the sqrt of the variance of this error distribution.
+    The scale s is also the square root of the variance of this error distribution.
 
-    The function is mostly used to calculate the likelihood L, or easier
-    to use log likelihood, logL.
-    .. math::
-        logL = \log( N / ( \sqrt( 2 \pi ) s )  ) - 0.5 \sum( ( x / s ) ^ 2 )
+    The function is mostly used to calculate the likelihood L over N residuals,
+    or easier to use log likelihood, logL.
+
+        logL = log( N / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( x / s ) ^ 2
 
     Using weights this becomes:
-    .. math::
-        logL = \log( \sum( w ) / ( \sqrt( 2 \pi ) s )  ) - 0.5 \sum( w ( x / s ) ^ 2 )
+
+        logL = log( &sum;( w ) / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s ) ^ 2 )
 
 
     Author       Do Kester.
@@ -237,8 +237,10 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         """
         Return the hessian of log( likelihood ) to the parameters in fitIndex.
 
-        ..math::
-             hessian = d^2 logL/ dp_i dp_k
+        The hessian is a matrix containing the second derivatives to each
+        of the parameters.
+
+             hessian = d^2 logL / dp_i dp_k
 
         Parameters
         ----------

@@ -28,7 +28,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *           2017 Do Kester
+#  *   2017 - 2020  Do Kester
 
 class FixedModel( BaseModel ):
     """
@@ -38,10 +38,10 @@ class FixedModel( BaseModel ):
     dynamically, with another Model. The parameters of this latter model
     also appear as parameters of the FixedModel.
 
-    The methods `result` (f(x:p)) and `partial` (df/dp) are calculated
+    The methods result (f(x:p)) and partial (df/dp) are calculated
     in here.
-    Unfortunately the methods `derivative` (df/dx) is model dependent.
-    It is reset to `numDerivative`.
+    Unfortunately the methods derivative (df/dx) is model dependent.
+    It is reset to numDerivative.
 
     Examples
     --------
@@ -73,7 +73,7 @@ class FixedModel( BaseModel ):
     --------------------------
         npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-    Author :         Do Kester
+    Author       Do Kester
 
     """
 
@@ -98,6 +98,8 @@ class FixedModel( BaseModel ):
             Attribute fixed can only be set in the constructor.
         names : list of string
             names for the parameters
+        kwargs for @BaseModel :
+            posIndex, nonZero
 
         """
 

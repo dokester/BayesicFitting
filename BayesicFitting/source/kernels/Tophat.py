@@ -41,11 +41,23 @@ class Tophat( Kernel ):
     FWHM = [0.5, 0.5, 0.6339745962155612, 0.7223517244643762, 0.7971951696335494,
             0.8660920722545018, 0.9301994777857857]
     RANGE = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
-#    INTEGRAL = [1.0, 1.0, 3/4, 2/3, 115/192, 11/20, 5887/11520]
     INTEGRAL = [1.0, 1.0, 4/3, 3/2, 192/115, 20/11, 11520/5887]
 
 
     def __init__( self, nconv=0 ) :
+        """
+        Constructor.
+
+        Integral, fwhm and range are dependent on the number of convolutions.
+
+        Parameters
+        ----------
+        nconv : int
+            number of auto-convolutions
+
+        """
+
+
         super( Tophat, self ).__init__( integral=self.INTEGRAL[nconv],
                         fwhm=2*self.FWHM[nconv], range=self.RANGE[nconv] )
         self.nconv = nconv

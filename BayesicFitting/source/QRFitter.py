@@ -28,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class QRFitter( BaseFitter ):
     """
@@ -37,18 +37,18 @@ class QRFitter( BaseFitter ):
     in its parameters.
 
     For Linear models the matrix equation
-    .. math::
-    H * p = \beta
 
-    is solved for p. H is the Hessian matrix ( :math:`D * w * D^T` )
-    and :math:`\beta` is the inproduct of the data with the D, design matrix.
-    .. math::
-    \beta = y * w * D^T
+        H * p = &beta;
+
+    is solved for p. H is the Hessian matrix ( D * w * D^T )
+    and &beta; is the inproduct of the data with the D, design matrix.
+
+        &beta; = y * w * D^T
 
     The QRFitter class use QR decomposition which effectively is an inversion
     of the hessian matrix such that
-    .. math::
-    p = \beta * H^{-1}
+
+        p = &beta; * inverse( H )
 
     It can be more efficient if
     similar ydata needs to be fitter to the same model and xdata.
@@ -76,12 +76,12 @@ class QRFitter( BaseFitter ):
             i.e. the previous QR-decomposition is used, unless weights are used.
             Only for linear fitters, setting it to false might improve efficiency.
             It only works properly when the model, the x-data etc are exactly the
-            same in the previous run.<br>
+            same in the previous run.
             Whenever weights are used, it always needs a new decomposition.
 
     qrmat : matrix
-        matrix formed by :math:`q * r^{-1}`, where q,r is the QR decomposition
-        of the deging matrix.
+        matrix formed by q * inverse( r ), where q,r is the QR decomposition
+        of the design matrix.
         qrmat is to be multiplied with the data vector to get the solution.
 
     """
@@ -131,7 +131,7 @@ class QRFitter( BaseFitter ):
             They are only used in this call of fit.
         Raises
         ------
-            ValueError when ydata or weights contain a NaN
+        ValueError when ydata or weights contain a NaN
 
         """
         fi, ydata, weights = self.fitprolog( ydata, weights=weights, keep=keep )

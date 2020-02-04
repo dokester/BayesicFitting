@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class NoiseScale( HyperParameter ):
     """
@@ -41,12 +41,11 @@ class NoiseScale( HyperParameter ):
 
     Information about the scale of the noise is stored in his class.
     It is either in the form of a fixed number, when the noise scale
-    is known or in the form of a `Prior`
-    with limits. By default this prior is a `JeffreysPrior`.
+    is known or in the form of a Prior with limits.
+    By default this prior is a JeffreysPrior..
 
     The full use of priors is reserved for Bayesian calculations as
     in NestedSampler
-
 
     Attributes
     ----------

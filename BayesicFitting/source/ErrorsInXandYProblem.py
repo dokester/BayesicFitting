@@ -32,7 +32,7 @@ class ErrorsInXandYProblem( Problem ):
     It entails that the xdata are not at the exact locations. They need to
     be optimized too. Consequently the parameters of the model are appended
     with a set of parameters, the length of xdata. These extra parameters
-    will contain the target localions of the xdata. The 2-dimensional distance
+    will contain the target locations of the xdata. The 2-dimensional distance
     between data (xdata,ydata) and (target, model(target)) is minimised.
     The target are nuisance parameters which are not part of the modeling
     solution.
@@ -63,7 +63,7 @@ class ErrorsInXandYProblem( Problem ):
                     prior=None, copy=None ):
         """
         Problem Constructor.
-        <br>
+
         Parameters
         ----------
         model : Model
@@ -141,6 +141,15 @@ class ErrorsInXandYProblem( Problem ):
         return part
 
     def derivative( self, param ) :
+        """
+        Return the derivative to the Model.
+
+        Parameters
+        ----------
+        params : array_like
+            list of problem parameters
+        """
+
         ( xd, pars ) = self.splitParam( param )
         return self.model.derivative( xd, pars )
 
@@ -259,12 +268,21 @@ class ErrorsInXandYProblem( Problem ):
         return res2 if self.weights is None else res2 * self.weights
 
     def myEngines( self ) :
+        """
+        Return a default list of preferred engines
+        """
         return ["galilean", "gibbs", "chord"]
 
     def myStartEngine( self ) :
+        """
+        Return a default preferred start engines: "start"
+        """
         return "start"
 
     def myDistribution( self ) :
+        """
+        Return a default preferred ErrorDistribution: "gauss"
+        """
         return "gauss"
 
     #  *****TOSTRING***********************************************************

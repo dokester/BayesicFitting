@@ -33,13 +33,13 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class PadeModel( NonLinearModel ):
     """
     General Pade model of arbitrary degrees in numerator and denominator.
-    .. math::
-        f( x:p ) = \sum p_n * x^n / ( \sum p_{num+1+k} * x^k )
+
+        f( x:p ) = &sum; p_n * x^n / ( &sum; p_{num+1+k} * x^k )
 
     where the sum in the numerator is over n running from 0 to num ( inclusive )
     and the sum in the denominator is over k running from 0 to den ( inclusive )
@@ -57,11 +57,9 @@ class PadeModel( NonLinearModel ):
 
     Examples
     --------
-    >>> pade = PadeModel( 3, 1 )            # 3rd degree polynomial
-    >>> print pade.getNumberOfParameters( )        # 5
+    >>> pade = PadeModel( 3, 1 )                # 3rd degree polynomial
+    >>> print pade.getNumberOfParameters( )     # 5
     5
-
-    Category:    mathematics/Fitting
 
     Attributes
     ----------
@@ -85,8 +83,8 @@ class PadeModel( NonLinearModel ):
 
     Alternate
     ---------
-    `PadeModel( 2, 3 )` is equivalent to
-    `PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0:1.0} )`
+    PadeModel( 2, 3 ) is equivalent to
+    PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0:1.0} )
 
     """
 
@@ -106,11 +104,13 @@ class PadeModel( NonLinearModel ):
             the degree of the polynomial in the denominator.
         copy : PadeModel
             model to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently.
-                    Default {num+1 : 1.0}
-            float   list of values for the fixed parameters.
+        fixed : dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+                        Default {num+1 : 1.0}
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
+
 
         """
         names  = ["%s%d" % (self.PARNAMES[0], k) for k in range( num + 1 )]

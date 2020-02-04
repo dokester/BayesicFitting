@@ -37,7 +37,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class IterativeFitter( BaseFitter ):
     """
@@ -104,9 +104,8 @@ class IterativeFitter( BaseFitter ):
             1 : report result
             2 : report every 100th iteration
             3 : report every iteration
-        kwargs : dict
-            Possibly includes keywords from
-                BaseFitter :           map, keep, fixedScale
+        kwargs for @BaseFitter
+            map, keep, fixedScale
 
         """
         super( IterativeFitter, self ).__init__( xdata, model, **kwargs )
@@ -136,7 +135,17 @@ class IterativeFitter( BaseFitter ):
         self.model.parameters = params
 
     def doPlot( self, param, force=False ):
-        """ TBC """
+        """
+        Plot intermediate result.
+
+        Parameters
+        ----------
+        param : array_like
+            of the model
+        force : bool
+            do the plot
+
+        """
         if ( self.plotfreq > 0 and self.iter % self.plotfreq == 0 ) or force :
             y = self.model.result( self.xdata, param )
             self.plotter.plotResult( self.xdata, y, self._iter )
@@ -199,6 +208,10 @@ class IterativeFitter( BaseFitter ):
         raise ConvergenceError( "IterativeFitter is a base class, not suitable itself to perform fits." )
 
     def report( self, verbose, param, chi, more=None, force=False ) :
+        """
+        Report on intermediate results.
+        """
+
         if verbose > 1 and ( self.iter % 100 == 0 or force ) :
             mr = "" if more is None else fmt( more, format='   %6.1f ' )
             mx = 5 if verbose < 4 else None if verbose == 4 else verbose

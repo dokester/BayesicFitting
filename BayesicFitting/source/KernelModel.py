@@ -34,19 +34,22 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class KernelModel( NonLinearModel ):
     """
-    Kernel Model, a Model build around an Kernel.
+    Kernel Model, a Model build around an @Kernel.
 
     The KernelModel is defined as
-    .. math::
+
         f( x:p ) = p_0 * K( ( x - p_1 ) / p_2 )
 
     where K( u ) is a selectable kernel function on the rescaled input u
-    :math: u = ( x - p_1 ) / p_2.
-    p_0 is the amplitude, p_1 is the center and p_2 is the range.
+        u = ( x - p_1 ) / p_2.
+
+        p_0 is the amplitude
+        p_1 is the center
+        p_2 is the range.
 
     The parameters are initialized at {amp,0,1}. the amplitude is such that the
     function integrates to 1.0. They are listed in the table.
@@ -66,7 +69,6 @@ class KernelModel( NonLinearModel ):
     ----------
     kernel : Kernel
         the kernel of this model
-        Default : Biweight
 
     Attributes from Model
     ---------------------
@@ -93,10 +95,11 @@ class KernelModel( NonLinearModel ):
             model to be copied
         kernel : Kernel
             kernel class (default = Biweight)
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         amp = 1.0 / kernel.integral
@@ -112,7 +115,9 @@ class KernelModel( NonLinearModel ):
             self.nonZero = [2]
 
     def copy( self ):
-        """ Copy method.  """
+        """
+        Copy method.
+        """
         return KernelModel( copy=self, kernel=self.kernel )
 
     def __setattr__( self, name, value ) :

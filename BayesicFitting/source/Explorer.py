@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 threadErrors = []
@@ -60,8 +60,8 @@ class Explorer( object ):
         level of blabbering
     lowLhood : float
         present low likelihood level
-#    generation : int
-#        counting explorer calls
+    iteration : int
+        counting explorer calls
 
     Author       Do Kester.
 
@@ -71,10 +71,11 @@ class Explorer( object ):
     def __init__( self, ns, threads=False ):
         """
         Construct Explorer from a NestedSampler object.
+
         Parameters
         ----------
         ns : NestedSampler
-            the calling NestedSampler
+            the calling NestedSampler. It provides the attributes.
 
         """
         self.walkers = ns.walkers
@@ -134,6 +135,8 @@ class Explorer( object ):
             raise Exception( "Thread Error" )
 
     def exploreWalker( self, walker, lowLhood, engines, rng ):
+        """ For internal use only """
+
         oldlogL = walker.logL
 
         maxmoves = len( walker.fitIndex ) / self.rate
@@ -167,6 +170,19 @@ class Explorer( object ):
         return
 
     def logLcheck( self, walker ) :
+        """
+        Sanity check when no moves are found, if the LogL is still the same as the stored logL.
+
+        Parameters
+        ----------
+        walker : Walker
+            the one with the stored logL
+
+        Raises
+        ------
+        ValueError at inconsistency.
+
+        """
         wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if wlogL != walker.logL :
             print( "Iteration %4d %4d %10.3f  %10.3f" % (self.iteration, walker.id, walker.logL, wlogL ) )

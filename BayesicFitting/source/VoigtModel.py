@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class VoigtModel( NonLinearModel ):
     """
@@ -44,6 +44,8 @@ class VoigtModel( NonLinearModel ):
     the Gaussian, and half-width of the Lorentzian.
     These are initialised to [1, 0, 1, 1].
     Parameters 2 & 3 ( widths ) is always kept positive ( >=0 ).
+
+    The implementation uses the Faddeeva function from scipy.special.wofz.
 
     Examples
     --------
@@ -74,7 +76,7 @@ class VoigtModel( NonLinearModel ):
     def __init__( self, copy=None, **kwargs ):
         """
         Voigt model.
-        <br>
+
         Number of parameters is 4.
 
         Parameters
@@ -122,7 +124,7 @@ class VoigtModel( NonLinearModel ):
     def basePartial( self, xdata, params, parlist=None ):
         """
         Returns the partials at the input value.
-        ..math::
+
             z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
             z0 = 1j * p3 / ( p2 * sqrt2 )
 
@@ -136,7 +138,6 @@ class VoigtModel( NonLinearModel ):
             dwdz = 2j / sqrt(pi) - 2 * z  * wofzz
             dwd0 = 2j / sqrt(pi) - 2 * z0 * wofz0
 
-
             ## p0 and p1 have no influence in wofz0
             dzdp0 = 0
             dzdp1 = -1 / ( p2 * sqrt2 )
@@ -144,10 +145,8 @@ class VoigtModel( NonLinearModel ):
             dzdp2 = - ( ( x - p1 + 1j * p3 ) / ( p2^2 * sqrt2 ) = -z  / p2
             dzdp3 = d0dp3 = 1j / ( p2 * sqrt2 )
 
-
             dvdp0 = R(wofzz) / R(wofz0)
             ## The other partial follow from calculating dvdp for the parameters 1..3
-
 
         Parameters
         ----------
@@ -200,7 +199,7 @@ class VoigtModel( NonLinearModel ):
         """
         Return the derivative df/dx at each xdata (=x).
 
-        ..math::
+        <code>
             z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
             z0 = 1j * p3 / ( p2 * sqrt2 )
 
@@ -211,7 +210,7 @@ class VoigtModel( NonLinearModel ):
             dwdz = 2j / sqrt(pi) - 2 * z * wofzz
 
             dzdx = 1 / ( p2 * sqrt2 )
-
+        </code>
 
         Parameters
         ----------

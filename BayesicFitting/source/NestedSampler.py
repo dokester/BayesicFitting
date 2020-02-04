@@ -76,10 +76,10 @@ class NestedSampler( object ):
     """
     A novel technique to do Bayesian calculation.
 
-    NestedSampler produces `Sample`s from the posterior probability
-    distribution of the parameters, given a `Model` and a
+    NestedSampler produces samples from the posterior probability
+    distribution of the parameters, given a Model and a
     dataset ( x-values, y-values and optionally weights ).
-    The Samples are collected in a `SampleList`.
+    The samples are collected in a SampleList.
 
     NestedSampler is constructed according to the ideas of John Skilling
     and David MacKay ( ref TBD ).
@@ -103,47 +103,62 @@ class NestedSampler( object ):
     calculated, which is equal to the evidence for the resulting parameters,
     given the dataset.
 
-    There are 5 different likelihood functions available: Gaussian (Normal),
-    Laplace (Norm-1), Poisson (for counting processes),
-    Cauchy (aka Lorentz) and Exponential (generalized Gaussian).
+    There are different likelihood functions available: Gaussian (Normal),
+    Laplace (Norm-1), Uniform (Norm-Inf), Poisson (for counting processes),
+    Bernouilli (for categories), Cauchy (aka Lorentz) and
+    Exponential (generalized Gaussian).
+    A mixture of ErrorDistributions can also be defined.
     By default the Gaussian distribution is used.
 
-    Except for Poisson, all others are `ScaledErrorDistribution`s. The scale is
-    a `HyperParameter` which can either be fixed, by setting the attribute
-    errdis.scale or optimized, given the model parameters and the data.
+    Except for Poisson and Bernouilli , all others are ScaledErrorDistributions.
+    The scale is a HyperParameter which can either be fixed, by setting the
+    attribute errdis.scale or optimized, given the model parameters and the data.
     By default it is optimized for Gaussian and Laplace distributions.
-    The prior for the noise scale is a Jeffreys distribution.
+    The prior for the noise scale is a JeffreysPrior.
 
-    The Exponential also has a power as `HyperParameter` which can be fixed
+    The Exponential also has a power as HyperParameter which can be fixed
     or optimized. Its default is 2 (==Gaussian).
 
     For the randomization of the parameters within the likelihood constraint
-    5 so-called engines are written.
+    so-called engines are written.
     By default only engines 1 and 2 is switched on.
 
-    GalileanEngine. It walks all (super)parameters in a fixed direction
-        for about 5 steps. When a step ends outside the high likelihood
-        region the direction is mirrored on the lowLikelihood edge and
-        continued.
+    1. GalileanEngine.
+        It walks all (super)parameters in a fixed direction for about 5 steps.
+        When a step ends outside the high likelihood region the direction is
+        mirrored on the lowLikelihood edge and continued.
 
-    ChordEngine. It draws a randomly oriented line through a point inside
-        the region, until it reaches outside the restricted likelihood region
-        on both sides. A random point is selected on the line until it is
-        inside the likelihood region.
+    2. ChordEngine.
+        It draws a randomly oriented line through a point inside the region,
+        until it reaches outside the restricted likelihood region on both sides.
+        A random point is selected on the line until it is inside the likelihood region.
         This process runs several times
 
-    GibbsEngine. It moves each of the parameters by a random step.
+    3. GibbsEngine.
+        It moves each of the parameters by a random step, one at a time.
         It is a randomwalk.
 
-    StepEngine. It moves all parameters in a random direction.
-        It is a randomwalk.
+    4. StepEngine.
+        It moves all parameters in a random direction. It is a randomwalk.
 
-    CrossEngine. The parameters of 2 walkers are mixed in a random way.
+    5. CrossEngine.
+        The parameters of 2 walkers are mixed in a random way.
 
     For dynamic models 2 extra engines are defined:
 
-    BirthEngine. It tries to increase the number of parameters.
-    DeathEngine. It tries to decrease the number of parameters.
+    6. BirthEngine.
+        It tries to increase the number of parameters.
+        It can only be switched on for Dynamic Models.
+
+    7. DeathEngine.
+        It tries to decrease the number of parameters.
+        It can only be switched on for Dynamic Models.
+
+    For modifiable models 1 engine is defined.
+
+    8. StructureEngine.
+        It alters the internal structure of the model.
+        It can only be switched on for Modifiable Models.
 
     Attributes
     ----------
@@ -175,7 +190,6 @@ class NestedSampler( object ):
         stopping criterion
     verbose : int
         level of blabbering
-
     walkers : WalkerList
         ensemble of walkers that explore the likelihood space
     samples : SampleList
@@ -187,13 +201,10 @@ class NestedSampler( object ):
     restart : StopStart (TBW)
         write intermediate results to (optionally) start from.
 
-
     Author       Do Kester.
-
 
     """
     TWOP32 = 2 ** 32
-
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata=None, model=None, ydata=None, weights=None,
@@ -218,75 +229,75 @@ class NestedSampler( object ):
         weights : array_like (None)
             weights pertaining to ydata
         problem : None or string or Problem
-            None : ClassicProblem is chosen
+            Defines the kind of problem to be solved.
 
-            "classic"	: `ClassicProblem`
-            "errors"	: `ErrorsInXandYProblem`
-            "multiple"	: `MultipleOutputProblem`
+            None        same as "classic"
+            "classic" 	ClassicProblem
+            "errors"	ErrorsInXandYProblem
+            "multiple"	MultipleOutputProblem
 
+            Problem     Externally defined Problem. When Problem has been provided,
+                        xdata, model, weights and ydata are not used.
         keep : None or dict of {int:float}
-            None : none of the model parameters are kept fixed.
+            None of the model parameters are kept fixed.
             Dictionary of indices (int) to be kept at a fixed value (float).
             Hyperparameters follow model parameters.
             The values will override those at initialization.
             They are used in this instantiation, unless overwritten at the call to sample()
         distribution : None or String or ErrorDistribution
-            None   : GaussErrorDistribution is chosen with (fixed) scale equal to 1.0
-
-            "gauss"       : `GaussErrorDistribution`    with 1 hyperpar scale
-            "laplace"     : `LaplaceErrorDistribution`  with 1 hyperpar scale
-            "poisson"     : `PoissonErrorDistribution`  no hyperpar
-            "cauchy"      : `CauchyErrorDstribution`    with 1 hyperpar scale
-            "uniform"  	  : `UniformErrorDistribution`  with 1 hyperpar scale
-            "bernouilli"  : `BernouilliErrorDistribution`  no hyperpar
-            "exponential" : `ExponentialErrorDistribution` with 2 hyperpar (scale, power)
-
-            Error distribution class which implements logLikelihood
-
+            Defines the ErrorDistribution to be used
             When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.
+
+            None            same as "gauss"
+            "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0
+            "laplace"       LaplaceErrorDistribution with 1 hyperpar scale
+            "poisson"       PoissonErrorDistribution no hyperpar
+            "cauchy"        CauchyErrorDstribution with 1 hyperpar scale
+            "uniform"       UniformErrorDistribution with 1 hyperpar scale
+            "bernouilli"    BernouilliErrorDistribution no hyperpar
+            "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
+
+            ErrorDistribution Externally defined ErrorDistribution
         limits : None or [low,high] or [[low],[high]]
-            None : no limits implying fixed hyperparameters of the distribution
+            None    no limits implying fixed hyperparameters of the distribution
             low     low limit on hyperpars
             high    high limit on hyperpars
-            when limits are set, the hyperpars are *not* fixed.
-        ensemble : int (100)
+            When limits are set the hyperpars are not fixed.
+        ensemble : int
             number of walkers
-        discard : int (1)
+        discard : int
             number of walkers to be replaced each generation
-        seed : int (80409)
-            seed of rng
-        rate : float (1.0)
+        seed : int
+            seed of random number generator
+        rate : float
             speed of exploration
         engines : None or (list of) string or (list of) Engine
             to randomly move the walkers around, within the likelihood bound.
 
-            "galilean"  : GalileanEngine
-            "chord"     : ChordEngine   select random point on random line
-            "gibbs" 	: GibbsEngine 	move one parameter at a time
-            "step"  	: StepEngine    move all parameters in arbitrary direction
+            None        use a Problem defined selection of engines
+            "galilean"  GalileanEngine	move forward and mirror on edges
+            "chord"     ChordEngine   	select random point on random line
+            "gibbs" 	GibbsEngine 	move one parameter at a time
+            "step"  	StepEngine    	move all parameters in arbitrary direction
 
-            For OrderProblems (for later)
-            "order"   : insert a snippet of parameters at another location
-            "reverse" : reverse the order of a snippet of parameters
+            For Dynamic models only:
+            "birth" 	BirthEngine     increase the parameter list of a walker by one
+            "death" 	DeathEngine     decrease the parameter list of a walker by one
 
-            For Dynamic models only
-            "birth" : BirthEngine   increase the parameter list of a walker by one
-            "death" : DeathEngine   decrease the parameter list of a walker by one
+            For Modifiable models only:
+            "struct"    StructureEngine change the (internal) structure.
 
-            None    : take default ["galilean", "chord"]. When the model is Dynamic
-                      the list is supplemented with ["birth", "death"]
-
-            engine  : a class inheriting from Engine. At least implementing
-                      execute( walker, lowLhood, fitIndex )
+            Engine      an externally defined (list of) Engine
         maxsize : None or int
             maximum size of the resulting sample list (None : no limit)
         threads : bool (False)
             Use Threads to distribute the diffusion of discarded samples over the available cores.
         verbose : int (1)
-            0 : silent
-            1 : basic information
-            2 : more about every 100th iteration
-            3 : more about every iteration
+            0   silent
+            1   basic information
+            2   more about every 100th iteration
+            3   more about every iteration
+            >4  for debugging
 
         """
         if problem is None :
@@ -298,7 +309,6 @@ class NestedSampler( object ):
             model = self.problem.model
 
         if model and not model.hasPriors() and model.npars > 0:
-#            Tools.printclass( model )
             warnings.warn( "Model needs priors and/or limits" )
 
         self.keep = keep
@@ -309,7 +319,6 @@ class NestedSampler( object ):
         self.seed = seed
         self.maxsize = maxsize
         object.__setattr__( self, "verbose", verbose )
-#        self.verbose = verbose
         self.rate = rate
         self.restart = None                     ## TBD
 
@@ -326,9 +335,6 @@ class NestedSampler( object ):
             self.setErrorDistribution( self.problem.myDistribution(), limits=limits )
         else :
             self.setErrorDistribution( self.problem.myDistribution(), scale=1.0 )
-
-#        print( distribution.hyperpar[0].getLimits() )
-#        print( self.distribution.hyperpar[0].getLimits() )
 
         self.setEngines( engines )
 
@@ -377,9 +383,6 @@ class NestedSampler( object ):
                     fitl += [fitlist[k]]                    # list of pars to be fitted
             fitlist = fitl
 
-#        print( "NS MFL  ", fitlist )
-#        print( "NS MFL  ", allpars )
-
         return ( fitlist, allpars )
 
 
@@ -399,10 +402,10 @@ class NestedSampler( object ):
             The values will override those at initialization.
             They are only used in this call of fit.
         plot : bool or str
-            bool : Show a plot of the final results
-            str  : 'iter' show iterations
-                   'all'  show iterations and final result
-                   'last' show final result
+            bool    show a plot of the final results
+            "iter" 	show iterations
+            "all"  	show iterations and final result
+            "last" 	show final result
 
         """
         if keep is None :
@@ -412,7 +415,6 @@ class NestedSampler( object ):
         self.initWalkers( allpars, fitIndex )
 
         for eng in self.engines :
-#            print( "Engine  ", eng )
             eng.walkers = self.walkers
 
         self.distribution.ncalls = 0                      #  reset number of calls
@@ -461,9 +463,6 @@ class NestedSampler( object ):
 
         logWidth = math.log( 1.0 - math.exp( (-1.0 * self.discard ) / self.ensemble) )
 
-#        for w in self.walkers :
-#            print( w.id, w.allpars, w.logL )
-
         if self.optionalRestart() :
             logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
 
@@ -472,7 +471,6 @@ class NestedSampler( object ):
         for eng in self.engines :
             eng.unitRange = self.engines[0].unitRange
             eng.unitMin   = self.engines[0].unitMin
-#            print( eng, "  ",  eng.unitRange )
 
         while self.iteration < self.getMaxIter( ):
 
@@ -495,7 +493,6 @@ class NestedSampler( object ):
             if self.verbose >= 3 or ( self.verbose >= 1 and
                                       self.iteration % 100 == 0 ):
                 if self.verbose == 1 :
-#                    if self.iteration == 0 or ( self.iteration % 5000 ) > 0 :
                     if ( self.iteration / 100 ) % 50 == 49 :
                         nwln = "\n"
                     else :
@@ -528,7 +525,6 @@ class NestedSampler( object ):
             for eng in self.engines :
                 eng.unitRange = self.engines[0].unitRange
                 eng.unitMin   = self.engines[0].unitMin
-#                    print( eng, "  ",  eng.unitRange )
 
         else :
             if self.verbose > 0 :
@@ -563,6 +559,9 @@ class NestedSampler( object ):
         return self.evidence
 
     def getMaxIter( self ) :
+        """
+        Retrun the maximum number of iteration.
+        """
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.discard )
 
 #   det getScale( self, walker ) :
@@ -571,7 +570,9 @@ class NestedSampler( object ):
 
 #  ===================================================================================
     def optionalRestart( self ):
-
+        """
+        Restart the session from a file. (not yet operational)
+        """
         if self.restart is not None and self.restart.wantRestore( ):
             self.walkers, self.samples = self.restart.restore( self.walkers, self.samples )
             self.logZ = self.walkers.logZ
@@ -581,6 +582,9 @@ class NestedSampler( object ):
         return False
 
     def optionalSave( self ):
+        """
+        Save the session to a file. (not yet operational)
+        """
         if self.restart is not None and self.restart.wantSave( ) and self.iteration % 100 == 0:
             self.walkers.logZ = self.logZ
             self.walkers.info = self.info
@@ -588,6 +592,16 @@ class NestedSampler( object ):
             self.restart.save( self.walkers, self.samples )
 
     def storeSamples( self, worst, worstLogW ):
+        """
+        Store worst walkers into samplelist
+
+        Parameters
+        ----------
+        worst : [int]
+            list of worst Walkers
+        worstLogW : float
+            pertaining logWidth
+        """
         for kw in worst :
             smpl = self.walkers[kw].toSample( worstLogW )
             self.samples.add( smpl )
@@ -616,6 +630,10 @@ class NestedSampler( object ):
         """
         Kill worst walker( s ) in favour of one of the others
 
+        Parameters
+        ----------
+        worst : [int]
+            list of Walkers to copy
         """
         sworst = sorted( worst )
 #        print( worst, sworst )
@@ -634,6 +652,12 @@ class NestedSampler( object ):
     def addEnsembleToSamples( self, logWidth ):
         """
         Add the ensemble walkers to the samples
+
+        Parameters
+        ----------
+        logWidth : float
+            present shrinkage factor of the available space
+
         """
         done = [False] * self.ensemble
 
@@ -719,7 +743,7 @@ class NestedSampler( object ):
         Parameters
         ----------
         name : string or Problem
-            name of problem: "classic"
+            name of problem
             Problem Use this one
         model : Model
             the model to be solved
@@ -766,13 +790,14 @@ class NestedSampler( object ):
 
         Parameters
         ----------
-        name : None or ErrorDistribution or string
+        name : None or string or ErrorDistribution
             None    distribution is Problem dependent.
-            ErrorDistribution: use this one
-            string  name of distribution:
-                    "gauss", "laplace", "poisson", "cauchy", "uniform", "exponential"
+            string  name of distribution; one of
+                    "gauss", "laplace", "poisson", "cauchy", "uniform",
+                    "bernouilli", "exponential",
+            ErrorDistribution use this one
         limits : None or [low,high] or [[low],[high]]
-            None : no limits implying fixed hyperparameters (scale,power,etc)
+            None    no limits implying fixed hyperparameters (scale,power,etc)
             low     low limit on hyperpars (needs to be >0)
             high    high limit on hyperpars
             when limits are set, the hyperpars are *not* fixed.
@@ -816,11 +841,11 @@ class NestedSampler( object ):
 
         Parameters
         ----------
-        engines : None or list of [Engine or string]
-            None : engines is Problem dependent
-            list of Engines : use these
-            list of engine names
-        enginedict " dictionary of { str : Engine }
+        engines : None or [Engine] or [string]
+            None       engines is Problem dependent
+            [Engines]  list of Engines to use
+            [string]   list engine names
+        enginedict : dictionary of { str : Engine }
             connecting names to the Engines
         """
 
@@ -911,6 +936,14 @@ class NestedSampler( object ):
         self.walkers.copy( kbest, -1 )
 
     def plotData( self, plot=False ):
+        """
+        Initialize the plot with data.
+
+        Parameters
+        ----------
+        plot : bool
+            whether to plot.
+        """
         if not plot :
             return
         plt.figure( 'iterplot' )
@@ -918,6 +951,18 @@ class NestedSampler( object ):
         plt.show( block=False )
 
     def plotResult( self, walker, iter, plot=False ):
+        """
+        Plot the results for a walker.
+
+        Parameters
+        ----------
+        walker : Walker
+            the walker to plot
+        iter : int
+            iteration number
+        plot : bool
+            whether to plot.
+        """
         if not plot :
             return
 
@@ -942,7 +987,9 @@ class NestedSampler( object ):
 
 
     def report( self ):
-
+        """
+        Final report on the run.
+        """
 #        print( "Rate        %f" % self.rate )
         print( "Engines              success     reject     failed       best      calls" )
 

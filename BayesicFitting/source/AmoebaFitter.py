@@ -31,12 +31,13 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class AmoebaFitter( MaxLikelihoodFitter ):
     """
     Fitter using the simulated annealing simplex minimum finding algorithm,
-    :ref:`AnnealingAmoeba<bayesfit.AnnealingAmoeba>`.
+
+    See also: @AnnealingAmoeba
 
     Author       Do Kester
 
@@ -70,11 +71,11 @@ class AmoebaFitter( MaxLikelihoodFitter ):
 
     Notes
     -----
-    1. AmoebaFitter is <b>not</b> guaranteed to find the global minimum.
+    1. AmoebaFitter is not guaranteed to find the global minimum.
     2. The calculation of the evidence is an Gaussian approximation which is
     only exact for linear models with a fixed scale.
 
-    Category     mathematics/Fitting
+    Author : Do Kester.
 
     """
     #  *************************************************************************

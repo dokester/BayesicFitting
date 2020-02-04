@@ -28,16 +28,24 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2013 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class Triweight( Kernel ):
     """
     Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
-    .. math::
-        K( x ) = ( 1 - x^2 )^3 if |x| < 1 else 0
+
+        K( x ) = ( 1 - x^2 )^3      if |x| < 1
+                 0                  elsewhere
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 32.0/35.0
+            fwhm = 0.908404
+        """
         super( Triweight, self ).__init__( integral=32.0/35.0, fwhm=2 * 0.454202 )
 
     def result( self, x ):

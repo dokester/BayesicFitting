@@ -32,13 +32,11 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 class Walker( object ):
     """
     Walker is member of the cloud of points used in NestedSampler.
-
-    Each Walker maintains 5 attributes
 
     Attributes
     ----------
@@ -56,12 +54,10 @@ class Walker( object ):
         list of parameters and hyperparameters
     fitIndex : array_like
         list of (super)parameters to be fitted.
-
     parameters : array_like (read only)
         parameters (of the model)
     hypars : array_like (read only)
         list of hyper parameters (of the error distribution)
-
 
     Author       Do Kester
 
@@ -114,7 +110,6 @@ class Walker( object ):
         """
         Copy.
 
-        The copy points to the same instance of model.
         """
         return Walker( self.id, self.problem, self.allpars, self.fitIndex, copy=self )
 
@@ -179,6 +174,9 @@ class Walker( object ):
 
 
     def check( self, nhyp=0 ) :
+        """
+        Perform some sanity checks.
+        """
         np = self.problem.npars
 
         if not len( self.allpars ) == ( np + nhyp ) :

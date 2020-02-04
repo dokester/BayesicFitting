@@ -33,7 +33,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class LevenbergMarquardtFitter( IterativeFitter ):
@@ -44,6 +44,9 @@ class LevenbergMarquardtFitter( IterativeFitter ):
     of a non-linear model. It is a gradient fitter which uses partial
     derivatives to find the downhill gradient. Consequently it ends in the
     first minimum it finds.
+
+    The original C-version stems from Numerical Recipes with some additions of my own.
+    This might be the third or fourth transcription of it.
 
     Author       Do Kester.
 
@@ -78,9 +81,8 @@ class LevenbergMarquardtFitter( IterativeFitter ):
 
     Notes
     -----
-    In case of problems look at the
-    <a href="../../hcss_drm/ia/numeric/toolbox/fit/doc/reference.html#trouble">
-    trouble shooting</a> section.
+    In case of problems look at the "Troubles" page in the documentation area.
+
 
     Limitations
     -----------
@@ -96,8 +98,6 @@ class LevenbergMarquardtFitter( IterativeFitter ):
         the model to be fitted
     lamda : float
         to balance the curvature matrix (see Numerical Recipes)
-
-
 
     """
     #  *************************************************************************

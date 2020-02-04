@@ -23,7 +23,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019        Do Kester
+#  *    2019 - 2020 Do Kester
 
 class OrthonormalBasis( object ):
     """
@@ -40,11 +40,14 @@ class OrthonormalBasis( object ):
     #  *********CONSTRUCTORS***************************************************
 
     def __init__( self ):
+        """
+        Constructor.
+        """
         pass
 
     def normalise( self, vec, reset=False ) :
         """
-        Construct from vec a unit vector orthogonal to self.basis.
+        Construct from vec a unit vector orthogonal to self.basis
 
         from http://www.ecs.umass.edu/ece/ece313/Online_help/gram.pdf
 

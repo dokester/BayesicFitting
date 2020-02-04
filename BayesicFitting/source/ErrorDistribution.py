@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -415,7 +415,7 @@ class ErrorDistribution( object ):
 
 
     def updateLogL( self, problem, allpars, parval=None ):
-        """"
+        """
         Return a update of the log( likelihood ) given a change in a few parameter.
 
         This method provides the opportunity to optimize the logL calculation.
@@ -438,6 +438,9 @@ class ErrorDistribution( object ):
         pass
 
     def __str__( self ) :
+        """
+        Return a string representation of this class.
+        """
         return "Error distribution"
 
     def hyparname( self, k ) :
@@ -451,22 +454,5 @@ class ErrorDistribution( object ):
         """
         return self.PARNAMES[k]
 
-
-
-    ######## Deprecated ################################
-    #def getResiduals( self, problem, param=None ):
-        """
-        Return the residuals. (data - model)
-        For those distributions that need them.
-
-        Parameters
-        ----------
-        problem : Problem
-            to be solved
-        param : array_like
-            parameters of the model
-
-        """
-        #return problem.residuals( param )
 
 

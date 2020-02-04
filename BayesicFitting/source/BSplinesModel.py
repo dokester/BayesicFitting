@@ -29,7 +29,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class BSplinesModel( LinearModel ):
     """
@@ -39,8 +39,10 @@ class BSplinesModel( LinearModel ):
     at http://github.com/johnfoster/bspline.
 
     B-splines have some advantages over natural splines as implemented in
-    :ref:`SplinesModel.py`. Specificly the parameters are much more easily
-    interpreted as the amplitudes of spline-like blobs.
+    SplinesModel. Specificly the parameters are much more easily
+    interpreted as the amplitudes of spline-like blobs. The disadvantage of
+    BSplinesModel is that the x-values need to fall strictly within the range
+    spanned by the knots.
 
     It is a linear model.
 
@@ -60,7 +62,7 @@ class BSplinesModel( LinearModel ):
     fits the datapoints. One needs at least 2 knots, one smaller and one
     larger than the x-values in the dataset.
 
-    Contrary to the :ref:`SplinesModel` here the xdata need to be strictly inside the range
+    Contrary to the SplinesModel here the xdata need to be strictly inside the range
     spanned by the knots: knots[0] <= xdata < knots[-1]
 
     This model is NOT for (cubic) spline interpolation.
@@ -135,18 +137,19 @@ class BSplinesModel( LinearModel ):
         copy : BSplinesModel
             model to be copied.
         fixed : dict
-            If not None raise AttributeError.
+            If not None, raise AttributeError.
+
 
         Raises
         ------
-        ValueError : At least either (`knots`) or (`nrnkots`, `min`, `max`) or
-                (`nrknots`, `xrange`) must be provided to define a valid model.
+        ValueError : At least either ('knots') or ('nrnkots', 'min', 'max') or
+                ('nrknots', 'xrange') must be provided to define a valid model.
         AttributeErrr : When fixed is not None
 
         Notes
         -----
         The BSplinesModel is only strictly valid inside the domain defined by the
-        minmax of knots. It deteriorates fastly going outside the domain.
+        minmax of knots. It does not exist outside that domain.
 
         """
         if fixed is not None :

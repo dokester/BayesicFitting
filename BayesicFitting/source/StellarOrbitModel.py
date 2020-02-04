@@ -29,7 +29,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 class StellarOrbitModel( NonLinearModel ):
     """
@@ -50,12 +50,18 @@ class StellarOrbitModel( NonLinearModel ):
     The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0].
     It is a non-linear model.
 
+    This class uses @Kepplers2ndLaw to find the radius and anomaly.
+
     Attributes
     ----------
+    keppler : Kepplers2ndLaw()
+        to calculate the radius and true anomaly
+    noutput : int
+        The number of outputs is 2. Use @MultipleOutputProblem.
     spherical : bool
         if True return the results in spherical coordinates.
     cyclic : { 1 : 2*pi }
-        Only is spherical, indicating that result[:,1] is cyclic.
+        Only if spherical, indicating that result[:,1] is cyclic.
 
     Attributes from Model
     ---------------------

@@ -27,19 +27,19 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 class Engine( object ):
     """
     Engine defines common properties of all Engines.
 
-    An Engine moves around a sample in a random way such that its likelood
+    An Engine moves around a walker in a random way such that its likelood
     remain above the low-likelihood-limit.
 
     Attributes
     ----------
     walkers : WalkerList
-        walkers to be diffused
+        list of walkers to be diffused
     errdis : ErrorDistribution
         error distribution to be used
     constrain : None or callable (TBD -- future extension)
@@ -74,6 +74,14 @@ class Engine( object ):
     #  *********CONSTRUCTORS***************************************************
 
 #    def __init__( self, walkers, errdis, copy=None, seed=4213, constrain=None ):
+#        constrain : None or callable (TBD)
+#            Impose constraints on the parameters
+#            None : no constraints
+#            callable : a method as
+#                parameters = constrain( model, parameters, xdata )
+
+
+
     def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
@@ -88,11 +96,6 @@ class Engine( object ):
             for random number generator
         verbose : int
             report about the engines when verbose > 4
-        constrain : None or callable (TBD)
-            Impose constraints on the parameters
-            None : no constraints
-            callable : a method as
-                parameters = constrain( model, parameters, xdata )
         copy : Engine
             engine to be copied
 

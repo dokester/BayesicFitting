@@ -27,7 +27,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class NonLinearModel( Model ):
     """
@@ -71,6 +71,10 @@ class NonLinearModel( Model ):
             dimensionality of the input. Default 1
         copy : NonLinearModel
             model to be copied.
+        kwargs : dict
+            Possibly includes keywords from
+                @FixedModel :   fixed, names
+                @BaseModel :    posIndex, nonZero
 
         """
         super( NonLinearModel, self ).__init__( nparams, ndim=ndim, copy=copy, **kwargs )

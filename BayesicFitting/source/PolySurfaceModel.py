@@ -30,13 +30,13 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class PolySurfaceModel( LinearModel ):
     """
     General polynomial surface model of arbitrary degree.
-    .. math::
-        f( x,y:p ) = \sum_d \sum_k p_n * x^{d-k} * y^k )
+
+        f( x,y:p ) = &sum;_d &sum;_k p_n * x^{d-k} * y^k )
 
     where the first sum is over d running from 0 to degree ( inclusive )
     and the second sum is over k running from 0 to d ( inclusive ).
@@ -49,7 +49,7 @@ class PolySurfaceModel( LinearModel ):
     poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )        # 10
 
-    Category     mathematics/Fitting
+    Author      Do Kester
 
     Attributes
     ----------
@@ -82,10 +82,11 @@ class PolySurfaceModel( LinearModel ):
             the degree of the polynomial.
         copy : PolySurfaceModel
             model to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : dictionary of {int:float|Model}
+            int             list if parameters to fix permanently. Default None.
+            float|Model     list of values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See @FixedModel
 
         """
         super( PolySurfaceModel, self ).__init__( (degree+2)*(degree+1)//2, ndim=2,

@@ -31,7 +31,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018        Do Kester
+#  *    2018 - 2020  Do Kester
 
 
 class MixedErrorDistribution( ErrorDistribution ):
@@ -39,19 +39,25 @@ class MixedErrorDistribution( ErrorDistribution ):
     To calculate a mixture of two likelihoods.
 
     For one residual, x, it holds
-    .. math::
+
         L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )
 
     where f is the contributing fraction while L, L1 and L2 are likelihoods
     f is a hyperparameter between [0..1]
 
     The likelihood over N datapoints is
-    .. math::
-        L = \Pi{ L( x ) } = \Pi{ f * L1( x ) + ( 1 - f ) * L2( x ) }
+
+        L = &Pi;{ L( x ) } = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )
 
     And the log of L is
-    .. math::
-        logL = \Sum{ logL( x ) } = \Sum{ log( f * L1(x) + ( 1 - f ) * L2(x) ) }
+
+        logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )
+
+    Note
+    ----
+    The mixture, i.e. the weighted sum of 2 distributions for each residual, is
+    the raison-d'etre for the methods logLdata and nextPartialData, so individual
+    contributions can be weighted, added, log-ged and summed.
 
     Author       Do Kester.
 

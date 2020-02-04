@@ -30,12 +30,12 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2004 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class PowerLawModel( NonLinearModel ):
     """
     General powerlaw model of arbitrary degree.
-    .. math::
+
         f( x:p ) = p_0 * ( x - p_1 )^p_2
 
     with
@@ -83,6 +83,11 @@ class PowerLawModel( NonLinearModel ):
         ----------
         copy : PowerLawModel
             to be copied
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
         """
         param = [1.0, 0.0, 1.0]
         names = ["amplitude", "x-shift", "power"]

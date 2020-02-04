@@ -29,14 +29,14 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 class BirthEngine( Engine ):
     """
     The BirthEngine adds a new component to the model.
 
     Only for Models that are Dynamic.
-    The birth rate is governed by the growth-prior in the dynamic model.
+    The birth rate is governed by the growth-prior in the Dynamic.
 
     The member is kept when the logLikelihood > lowLhood.
 

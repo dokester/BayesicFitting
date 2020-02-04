@@ -27,23 +27,27 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class SincModel( KernelModel ):
     """
     Sinc Model.
     Also known as Cardinal Sine.
-    .. math::
+
         f( x:p ) = p_0 * sin( ( x - p_1 ) / p_2 ) / ( ( x - p_1 ) / p_2 )
 
-    where :math:`p_0` = amplitude, :math:`p_1` = offset and
-    :math:`p_2` = width ( =Distance between first zero-crossings divided by 2 Pi. )
+    where
+        p_0 = amplitude
+        p_1 = offset
+        p_2 = width ( =Distance between first zero-crossings divided by 2 Pi. )
     As always x = input.
 
     The parameters are initialized at {1.0, 0.0, 1.0}.
     Parameter 2 ( width ) is always kept positive ( >=0 ).
 
-    SincModel() is syntactic sugar for KernelModel( kernel=Sinc() )
+    SincModel() is syntactic sugar for
+        KernelModel( kernel=Sinc() )
+    See @KernelModel
 
     Examples
     --------

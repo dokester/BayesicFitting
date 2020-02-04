@@ -29,7 +29,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2019 Do Kester
+#  *    2016 - 2020 Do Kester
 
 
 def getItem( ilist, k ) :
@@ -106,9 +106,6 @@ def setAttribute( obj, name, value, type=None, islist=False, isnone=False ) :
     else :
         raise TypeError( name + ' has not the proper type: ' + str( type ) )
     return False
-
-
-
 
 
 def setNoneAttributes( obj, name, value, listNone ) :
@@ -400,3 +397,5 @@ def track( statement ) :
     # make a report, placing output in the current directory
     r = tracer.results()
     r.write_results(show_missing=True, coverdir=".")
+
+

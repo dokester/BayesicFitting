@@ -22,18 +22,18 @@ from .Modifiable import Modifiable
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 class ClassicProblem( Problem ):
     """
     A ClassicProblem is an optimization of parameters which involves
-    the fitting of data to a Model.
+    the fitting of data to a Model at a fixed set of x values..
 
     Problems can be solved by NestedSampler, with appropriate Engines and
-    ErrorDistributions (==CostFunctions)
+    ErrorDistributions.
 
     The result of the function for certain x and p is given by
-    `problem.result( x, p )`
+    problem.result( x, p )
     The parameters, p, are to be optimized while the x provide additional
     information.
 
@@ -91,12 +91,31 @@ class ClassicProblem( Problem ):
 
 
     def partial( self, param ) :
+        """
+        Return the partials of the internal model.
+
+        Parameters
+        ----------
+        param : array_like
+            list of model parameters
+        """
         return self.model.partial( self.xdata, param )
 
     def derivative( self, param ) :
+        """
+        Return the derivative of the internal model.
+
+        Parameters
+        ----------
+        param : array_like
+            list of model parameters
+        """
         return self.model.derivative( self.xdata, param )
 
     def myEngines( self ) :
+        """
+        Return a default list of preferred engines
+        """
         engs = ["galilean", "chord"]
 
         if self.model.isDynamic() :
@@ -108,9 +127,15 @@ class ClassicProblem( Problem ):
         return engs
 
     def myStartEngine( self ) :
+        """
+        Return a default preferred start engines: "start"
+        """
         return "start"
 
     def myDistribution( self ) :
+        """
+        Return a default preferred ErrorDistribution: "gauss"
+        """
         return "gauss"
 
     #  *****TOSTRING***********************************************************

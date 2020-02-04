@@ -27,7 +27,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester.
+#  *    2016 - 2020 Do Kester.
 
 class JeffreysPrior( Prior ):
     """
@@ -35,8 +35,9 @@ class JeffreysPrior( Prior ):
     Jeffreys prior is a improper prior ( i.e. its integral is unbound ).
     Because of that it always needs limits, low and high, such that
     0 < low < high < +Inf.
-    .. math::
-        Pr( x ) = 1.0 / ( x * norm )   if low < x < high else 0
+
+        Pr( x ) = 1.0 / ( x * norm )    if low < x < high
+                  0.0                   otherwise
 
     where norm = log( high ) - log( low )
 
@@ -48,9 +49,13 @@ class JeffreysPrior( Prior ):
     Hidden Attributes
     -----------------
     _logLo : float
-        log of lowLimit
+        log( lowLimit )
     _norm : float
-        log of highLimit / lowLimit
+        log( highLimit / lowLimit )
+
+    Attributes from Prior
+    --------------------=
+    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
     The default of lowLimit and _lowDomain is zero.
 

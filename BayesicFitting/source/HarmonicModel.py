@@ -32,20 +32,17 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class HarmonicModel( LinearModel ):
     """
     Harmonic oscillator Model.
 
     f( x:p ) = SUM_j ( p_k * cos( 2*pi*j*x ) + p_k+1 * sin( 2*pi*j*x ) )
-    j = 1, N; k = 0, 2N-2, 2
+    j = 1, N; k = 0, 2N-2.
 
     The number of parameters is 2 * order.
     The parameters are initialized at 1.0. It is a linear model.
-
-    See
-    <a href="../../../../../../ia/numeric/toolbox/fit/demo/harmonicfit.py">example</a>
 
     Author:      Do Kester
 
@@ -92,10 +89,11 @@ class HarmonicModel( LinearModel ):
             length of the period of the fundamental. default 1.0
         copy : HarmonicModel
             model to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         super( HarmonicModel, self ).__init__( 2 * order, copy=copy, **kwargs )

@@ -31,16 +31,19 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2015 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class EtalonModel( NonLinearModel ):
     """
     Sinusoidal Model with drifting frequency.
-    .. math::
+
         f( x:p ) = p_0 / ( 1.0 + p_1 * sin^2( \pi p_2 x + p_3 ) )
 
-    where :math:`p_0` = amplitude, :math:`p_1` = finesse,
-    :math:`p_2` = periods per wavenumber and :math:`p_3` = phase,
+    where
+        p_0 = amplitude
+        p_1 = finesse,
+        p_2 = periods per wavenumber
+        p_3 = phase,
     As always x = input; it is in wavenumbers
 
     The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model.
@@ -86,10 +89,11 @@ class EtalonModel( NonLinearModel ):
         ----------
         copy : EtalonModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         param = [1.0, 1.0, 1.0, 0.0]

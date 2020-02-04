@@ -27,16 +27,15 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class PseudoVoigtModel( NonLinearModel ):
     """
     Approximation of VoigtModel as the sum of a GaussModel and a LorentzModel
 
-    ::math ..
         F(x:p) = p_3 * L(x:p) + ( 1 - p_3 ) * G(x:p)
 
-    where L() and G() are the LorentzModel and the GaussModel, resp. ang p_3
+    where L() and G() are the LorentzModel and the GaussModel, resp. and p_3
     is the fractional contribution of them. 0 < p_3 < 1.
 
     The models takes 4 parameters: amplitude, center frequency, half-width and
@@ -70,8 +69,6 @@ class PseudoVoigtModel( NonLinearModel ):
     --------------------------
         npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-
-
     """
 
     def __init__( self, copy=None, **kwargs ):
@@ -84,6 +81,11 @@ class PseudoVoigtModel( NonLinearModel ):
         ----------
         copy : PseudoVoigtModel
             to be copied
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         param = [1.0, 0.0, 1.0, 0.5]

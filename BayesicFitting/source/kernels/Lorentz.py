@@ -33,11 +33,19 @@ __status__ = "Development"
 class Lorentz( Kernel ):
     """
     Lorentz is an unbound Kernel function.
-    .. math::
+
         f( x ) = 1 / ( 1 + x * x ).
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = &pi;
+            fwhm = 2.0
+            range = inf
+        """
         super( Lorentz, self ).__init__( integral=math.pi, fwhm=2.0, range=math.inf )
 
     def integral( self ):

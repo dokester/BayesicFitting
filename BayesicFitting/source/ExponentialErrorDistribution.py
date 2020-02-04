@@ -28,36 +28,45 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class ExponentialErrorDistribution( ScaledErrorDistribution ):
     """
-    To calculate a generalized Exponential likelihood.
+    Also known as generalized gaussian errordistribution.
+
+    To calculate an Exponential likelihood.
 
     For one residual, x, it holds
-    .. math::
-        f( x ) = p / ( 2 s \Gamma( 1 / p ) ) exp( - ( |x| / s ) ^ p )
+
+        f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s ) ^ p )
 
     where s is the scale and p is the power.
     s and p are hyperparameters, which might be estimated from the data.
 
     The variance of this function is
-    .. math::
-        \sigma ^ 2 = s ^ 2 \Gamma( 3 / p ) / \Gamma( 1 / p )
+
+        &sigma; ^ 2 = s ^ 2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )
+
     See toSigma()
 
-    The function is mostly used to calculate the likelihood L, or easier
-    to use log( L )
-    .. math::
-        logL = log( N p / ( 2 s \Gamma( 1 / p ) ) ) - \sum( ( |x| / s ) ^ p )
+    The function is mostly used to calculate the likelihood L over N residuals,
+    or easier to use log( L )
+
+        logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s ) ^ p )
 
     Using weights this becomes:
-    .. math::
-        logL = log( \sum( w ) p / ( 2 s \Gamma( 1 / p ) ) ) - \sum( w ( |x| / s ) ^ p )
 
-    Note: the scale s in Generalized Exponential is NOT the same as the scale in Gaussian or
-        in Laplace.
+        logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s ) ^ p )
+
+    Note
+    ----
+    The scale s in Exponential is NOT the same as the scale in Gaussian or in Laplace.
+
+    Attributes from ErrorDistibution
+    --------------------------------
+    hyperpar, deltaP, ncalls, nparts, sumweight, ndata, hypar, nphypar
+
 
     Author       Do Kester.
 

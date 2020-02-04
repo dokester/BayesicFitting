@@ -28,21 +28,22 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class ExpModel( NonLinearModel ):
     """
     Exponential Model.
-    .. math::
+
         f( x:p ) = p_0 * exp( p_1 * x )
 
-    where p_0 = amplitude, p_1 = slope and
+    where p_0 = amplitude
+          p_1 = slope
     As always x = input.
 
     The parameters are initialized at {1.0, -1.0}. It is a non-linear model.
 
     Beware of a positive 2nd parameter; when positive the model is going off
-    to Infinity quite quickly.
+    to Infinity very quickly.
 
     Attributes from Model
     ---------------------
@@ -62,7 +63,7 @@ class ExpModel( NonLinearModel ):
     >>> print( em.getNumberOfParameters( ) )
     2
 
-    Category:    mathematics/Fitting
+    Author  Do Kester
 
     """
     def __init__( self, copy=None, **kwargs ):
@@ -75,6 +76,11 @@ class ExpModel( NonLinearModel ):
         ----------
         copy : ExpModel
             to be copied
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         param = [1.0,-1.0]

@@ -27,7 +27,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class UniformPrior( Prior ):
     """
@@ -36,22 +36,38 @@ class UniformPrior( Prior ):
     A uniform prior is a improper prior ( i.e. its integral is unbound ).
     Because of that it always needs limits, low and high, such that
     -Inf < low < high < +Inf.
-    .. math::
-        Pr( x ) = 1 / ( high - low )   if low < x < high else 0
+
+        Pr( x ) = 1 / ( high - low )    if low < x < high
+                  0                     elsewhere
 
     domain2Unit: u = ( d - lo ) / range
     unit2Domain: d = u * range + lo
 
-    Hidden Attributes
-    -----------------
+    Attributes
+    ----------
     _range : float
-        valid range ( highLimit - lowLimit )
+        highlimit - lowlimit
+
+    Attributes from Prior
+    --------------------=
+    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
+
 
     """
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, limits=None, prior=None ):
-        """ Constructor.  """
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        limits : None or [float,float]
+            None    no limits are set
+            2 floats    lowlimit and highlimit
+        prior : UniformPrior
+            to be copied
+        """
         super( UniformPrior, self ).__init__( limits=limits, prior=prior )
 
     def copy( self ):

@@ -31,13 +31,12 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
-#  *
+#  *    2016 - 2020 Do Kester
+
 
 class ScipyFitter( MaxLikelihoodFitter ):
     """
-    Unified interface to the Scipy minimization module `minimize`, to fit data to a model.
-
+    Unified interface to the Scipy minimization module minimize, to fit data to a model.
 
     For documentation see scipy.org->Docs->Reference Guide->optimization and root finding.
     scipy.optimize.minimize
@@ -106,9 +105,8 @@ class ScipyFitter( MaxLikelihoodFitter ):
 
     """
 ## ******************************************************************************
-    def __init__( self, xdata, model, method='cg', gradient=True, hessp=None,
+    def __init__( self, xdata, model, method=None, gradient=True, hessp=None,
                     **kwargs ) :
-#                    map=False, keep=None, errdis=None, scale=None, power=2 ) :
         """
         Constructor.
         Create a class, providing inputs and model.
@@ -123,7 +121,7 @@ class ScipyFitter( MaxLikelihoodFitter ):
                   'TNC' | 'COBYLA' | 'SLSQP' | 'DOGLEG' | 'TRUST-NCG'
             the method name is case invariant.
             None            Automatic selection of the method.
-                            'SLSQP' when the problem has constarints
+                            'SLSQP' when the problem has constraints
                             'L-BFGS-B' when the problem has limits
                             'BFGS' otherwise
             'CG'            Conjugate Gradient Method of Polak and Ribiere
@@ -390,7 +388,10 @@ class NelderMeadFitter( ScipyFitter ) :
     """
     Nelder Mead downhill simplex.
 
-    Syntactic sugar for `ScipyFitter( ..., method='nelder-mead', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='NELDER-MEAD', ... )
+
+    See @ScipyFitter
 
     """
 
@@ -420,7 +421,11 @@ class PowellFitter( ScipyFitter ) :
     """
     Powell's conjugate direction method.
 
-    Syntactic sugar for `ScipyFitter( ..., method='powell', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='POWELL', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, **kwargs ) :
         """
@@ -447,7 +452,11 @@ class ConjugateGradientFitter( ScipyFitter ) :
     """
     Conjugate Gradient Method of Polak and Ribiere.
 
-    Syntactic sugar for `ScipyFitter( ..., method='CG', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='CG', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -479,7 +488,11 @@ class BfgsFitter( ScipyFitter ) :
     """
     Quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shannon.
 
-    Syntactic sugar for `ScipyFitter( ..., method='BFGS', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='BFGS', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -512,7 +525,11 @@ class NewtonCgFitter( ScipyFitter ) :
     """
     Truncated Newton method
 
-    Syntactic sugar for `ScipyFitter( ..., method='NEWTON-CG', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='NEWTON-CG', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -545,7 +562,11 @@ class LbfgsbFitter( ScipyFitter ) :
     """
     Limited Memory Algorithm for Bound Constrained Optimization
 
-    Syntactic sugar for `ScipyFitter( ..., method='L-BFGS-B', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='L-BFGS-B', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -578,7 +599,11 @@ class TncFitter( ScipyFitter ) :
     """
     Truncated Newton method with limits.
 
-    Syntactic sugar for `ScipyFitter( ..., method='TNC', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='TNC', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -611,7 +636,11 @@ class CobylaFitter( ScipyFitter ) :
     """
     Constrained Optimization BY Linear Approximation.
 
-    Syntactic sugar for `ScipyFitter( ..., method='COBYLA', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='COBYLA', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, **kwargs ) :
         """
@@ -640,7 +669,11 @@ class SlsqpFitter( ScipyFitter ) :
     """
     Sequential Least Squares
 
-    Syntactic sugar for `ScipyFitter( ..., method='SLSQP', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='SLSQP', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -673,7 +706,11 @@ class DoglegFitter( ScipyFitter ) :
     """
     Dog-leg trust-region algorithm.
 
-    Syntactic sugar for `ScipyFitter( ..., method='DOGLEG', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='DOGLEG', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """
@@ -705,7 +742,11 @@ class TrustNcgFitter( ScipyFitter ) :
     """
     Newton conjugate gradient trust-region algorithm.
 
-    Syntactic sugar for `ScipyFitter( ..., method='TRUST-NCG', ... )`
+    Syntactic sugar for
+        ScipyFitter( ..., method='TRUST-NCG', ... )
+
+    See @ScipyFitter
+
     """
     def __init__( self, xdata, model, gradient=True, **kwargs ) :
         """

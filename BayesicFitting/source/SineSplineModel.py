@@ -26,16 +26,16 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2018        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class SineSplineModel( LinearModel ):
     """
     Sine of fixed frequency with splineslike amplitudes/phases.
 
-    .. math::
-        f( x:p ) = s_0 \cos( 2 \pi \omega x ) + s_1 \sin( 2 \pi \omega x )
+        f( x:p ) = SM0 \cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )
 
-    Where :math:`s_0` and :math:`s_1` are splines with defined knots and order.
+    Where SM0 and SM1 are splines models with defined knots and order.
+
     It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
     Examples

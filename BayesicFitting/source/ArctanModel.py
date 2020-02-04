@@ -28,13 +28,13 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class ArctanModel( NonLinearModel ):
     """
     Arctangus Model.
-    .. math::
-        f( x:p ) = p_0 * \arctan( p_2 * ( x - p_1 ) )
+
+        f( x:p ) = p_0 * arctan( p_2 * ( x - p_1 ) )
         p_0 = amplitude;  p_1 = center; p_2 = slope.
 
     As always x = input.
@@ -67,17 +67,18 @@ class ArctanModel( NonLinearModel ):
     def __init__( self, copy=None, **kwargs ):
         """
         Arc-tangus model.
-        <br>
+
         Number of parameters is 3.
 
         Parameters
         ----------
         copy : ArctanModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         params = [2/math.pi, 0.0, 1.0]

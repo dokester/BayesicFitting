@@ -32,7 +32,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class SineModel( NonLinearModel ):
     """
@@ -41,19 +41,25 @@ class SineModel( NonLinearModel ):
     Two variants are implemented.
 
     1. By default it is the weighted sum of sine and cosine of the same frequency:
-    .. math::
-        f( x:p ) = p_1 * \cos( 2 * \pi * p_0 * x ) + p_2 * \sin( 2 * \pi * p_0 * x )
 
-    where :math:`p_0` = frequency, :math:`p_1` = amplitude cosine and
-    :math:`p_2` = amplitude sine. As always x = input.
+        f( x:p ) = p_1 * cos( 2 * &pi; * p_0 * x ) + p_2 * sin( 2 * &pi; * p_0 * x )
+
+    where
+        p_0 = frequency
+        p_1 = amplitude cosine and
+        p_2 = amplitude sine.
+    As always x = input.
 
     The parameters are initialized at [1.0, 1.0, 1.0]. It is a non-linear model.
 
     2. If phase == True, the sinusoidal model has an explicit phase:
-    ..math::
-        f( x:p ) = p_0 * \sin( 2 * \pi * p_1 * x + p_2 )
 
-    where `p_0` = amplitude, `p_1` = frequency and `p_2` = phase.
+        f( x:p ) = p_0 * sin( 2 * &pi; * p_1 * x + p_2 )
+
+    where
+        p_0 = amplitude
+        p_1 = frequency
+        p_2 = phase.
 
     The parameters are initialized as [1.0, 1.0, 0.0].
 
@@ -100,6 +106,8 @@ class SineModel( NonLinearModel ):
 
         Parameters
         ----------
+        phase : bool
+            if True, construct phase variant.
         copy : SineModel
             model to copy
         fixed : dictionary of {int:float}

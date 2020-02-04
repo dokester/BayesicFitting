@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 class Sample( object ):
     """
@@ -51,9 +51,11 @@ class Sample( object ):
     logL : float
         log Likelihood = log Prob( data | params )
     logW : float
-        log Weights of the likelihood.
-            SUM( log( W * L ) = logZ (TBC)
-            log( SUM( W * L ) = logZ (evidence)
+        log Weights of the log of the weight of the sample.
+        The weight is the relative contribution to the evidence integral.
+        logW = logL + log( width )
+        The logZ, the evidence, equals the log of the sum of the contributions.
+        logZ = log( sum( exp( logW ) ) )
     parameters : array_like
         parameters (of the model)
     nuisance : array_like (optional)
@@ -62,7 +64,6 @@ class Sample( object ):
         list of hyper parameters (of the error distribution)
     fitIndex : array_like or None
         list of allpars to be fitted.
-
     allpars : array_like (read only)
         list of parameters, nuisance parameters and hyperparameters
 
@@ -116,7 +117,6 @@ class Sample( object ):
         """
         Copy.
 
-        The copy points to the same instance of model.
         """
         return Sample( self.id, self.parent, self.start, self.model, copy=self )
 

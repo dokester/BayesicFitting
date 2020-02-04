@@ -30,22 +30,24 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class BracketModel( Brackets ):
     """
-    BracketModel provides brackets to a chain of `Model`s.
+    BracketModel provides brackets to a chain of Models.
 
     Its results are exactly the same as the results of the contained model.
 
     When the contained model is a compound model (a chain of models), the
-    Brackets make a single unit out of it. It acts as a pair of brackets
+    BracketModel make a single unit out of it. It acts as a pair of brackets
     in another chain of models. Since compound models can be joined by operations
     other than addition ( there is also subtract, multiply and divide ) brackets
-    are needed to distinguish `m1 * ( m2 + m3 )` from `m1 * m2 + m3`.
+    are needed to distinguish m1 * ( m2 + m3 ) from m1 * m2 + m3.
 
     BracketModel is automatically invoked when the Model appended to another model,
     is actually a chain of models.
+
+    Model.Brackets is an internal class inside Model.
 
     Attributes
     ----------
@@ -87,7 +89,9 @@ class BracketModel( Brackets ):
     >>> print( m3 )                             # exactly the same
 
 
-    **Warning: BracketModel is about rather advanced model building.**
+    Warning
+    -------
+    BracketModel is about rather advanced model building.
 
     Notes
     -----

@@ -28,14 +28,16 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2019 Do Kester
+#  *    2018 - 2020 Do Kester
 
 
 class LogisticModel( NonLinearModel ):
     """
     Logistic Model.
-    ..math::
+
         f( x:p ) = p_0 / ( 1 + exp( ( x - p_1 ) / p_2 ) )
+
+    where
 
         p_0 : amplitude
         p_1 : center
@@ -79,10 +81,11 @@ class LogisticModel( NonLinearModel ):
         ----------
         copy : LogisticModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         names = ["amplitude", "center", "slope"]

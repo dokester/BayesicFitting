@@ -28,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class Fitter( BaseFitter ):
     """
@@ -61,8 +61,7 @@ class Fitter( BaseFitter ):
     2. The calculation of the evidence is an Gaussian approximation which is
        only exact for linear models with a fixed scale.
 
-    Category:    Mathematics/Fitting
-
+    Author  Do Kester
 
     """
 
@@ -99,13 +98,13 @@ class Fitter( BaseFitter ):
         Return model parameters fitted to the data, including weights.
 
         For Linear models the matrix equation
-        .. math::
-            H * p = \beta
 
-        is solved for p. H is the Hessian matrix ( :math:`D * w * D^T` )
-        and :math:`\beta` is the inproduct of the data with the D, design matrix.
-        .. math::
-            \beta = y * w * D^T
+            H * p = &beta;
+
+        is solved for p. H is the Hessian matrix ( D * w * D^T )
+        and &beta; is the inproduct of the data with the D, design matrix.
+
+            &beta; = y * w * D^T
 
         Parameters
         ----------

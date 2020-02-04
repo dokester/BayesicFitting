@@ -34,12 +34,19 @@ __status__ = "Development"
 class Parabola( Kernel ):
     """
     Parabola is a Kernel function between [-1,1]; it is 0 elsewhere.
-    .. math::
-        K( x ) = ( 1-x^2 ) if |x| < 1 else 0
 
+        K( x ) = ( 1-x^2 )      if |x| < 1
+                 0              elsewhere
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 4.0/3.0
+            fwhm = 2 sqrt( 0.5 )
+        """
         super( Parabola, self ).__init__( integral=4.0/3.0, fwhm=2 * math.sqrt(0.5) )
 
     def result( self, x ):

@@ -34,7 +34,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -258,6 +258,10 @@ class ChordEngine( Engine ):
 
 
     def stepOut( self, problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) :
+        """
+        Check if endpoints are indeed outside the lowLhood domain.
+        """
+
         ## Step out
         if t == 0 :
             t = 0.01 * tmax

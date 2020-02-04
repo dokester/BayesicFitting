@@ -34,34 +34,34 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class Kernel2dModel( NonLinearModel ):
     """
     Two dimensional Kernel Model.
 
     The Kernel2dModel is defined as
-    .. math::
+
         f( x:p ) = p_0 * K( r )
 
     where K( r ) is a selectable kernel function and r is the distance to the center.
-    .. math::
+
         r = sqrt( u^2 + v^2 ).
 
     There are 3 options for u and v
 
     1. CIRCULAR has 4 parameters
         Circular shape with only one width.
-        :math: u = ( x - p_1 ) / p_3
-        :math: v = ( x - p_2 ) / p_3
+        u = ( x - p_1 ) / p_3
+        v = ( x - p_2 ) / p_3
     2. ELLIPTIC has 5 parameters
         Elliptic shape aligned along the axes; 2 widths.
-        :math: u = ( x - p_1 ) / p_3
-        :math: u = ( x - p_2 ) / p_4
+        u = ( x - p_1 ) / p_3
+        v = ( x - p_2 ) / p_4
     3. ROTATED has 6 parameters
         Rotated elliptical shape with 2 width and a rotational angle.
-        :math: u = ( ( x - p_1 )*cos( p_5 ) - ( y - p_2 )*sin( p_5) ) / p_3
-        :math: v = ( ( x - p_1 )*sin( p_5 ) + ( y - p_2 )*cos( p_5) ) / p_4
+        u = ( ( x - p_1 )*cos( p_5 ) - ( y - p_2 )*sin( p_5) ) / p_3
+        v = ( ( x - p_1 )*sin( p_5 ) + ( y - p_2 )*cos( p_5) ) / p_4
 
     The "center" parameters ( 1&2 ) and the "angle" parameter ( 5 ) are initilized as 0.
     The rotational angle is measured counterclockwise from the x-axis.
@@ -108,10 +108,11 @@ class Kernel2dModel( NonLinearModel ):
             shape defaults to 'circular' when misunderstood
         copy : Kernel2dModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
 

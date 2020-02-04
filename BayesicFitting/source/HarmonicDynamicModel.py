@@ -36,7 +36,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 
 class HarmonicDynamicModel( HarmonicModel, Dynamic ):
@@ -45,7 +45,7 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
 
     f( x:p ) = &sum;_j ( p_k cos( 2 &pi; j x ) + p_k+1 sin( 2 &pi; j x ) )
 
-    j = 1, N; k = 0, 2N, 2
+    j = 1, N; k = 0, 2N
 
     The parameters are initialized at 1.0. It is a linear model.
 
@@ -110,6 +110,8 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
             maximum degree of polynomial (def=None)
         period : float
             period of the oscilation
+        fixed : None
+            If fixed is not None an AttributeError is raised
         growPrior : None or Prior
             governing the birth and death.
             ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior

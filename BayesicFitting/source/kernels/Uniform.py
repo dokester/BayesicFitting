@@ -32,10 +32,20 @@ __status__ = "Development"
 
 class Uniform( Kernel ):
     """
-    Uniform is a Kernel function which is constant between [-1,1]; it is 0 elsewhere.
+    Uniform is a Kernel function which is constant between [-1,1].
+
+        K( x ) = 1.0        if |x| < 1
+                 0.0        elsewhere
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 2.0
+            fwhm = 2.0
+        """
         super( Uniform, self ).__init__( integral=2.0, fwhm=2.0 )
 
     def result( self, x ):

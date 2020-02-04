@@ -23,7 +23,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019        Do Kester
+#  *    2019 - 2020 Do Kester
 
 
 class Modifiable( object ):

@@ -31,12 +31,12 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class IterationPlotter( object ):
     """
     The IterationPlotter plots intermediate results from a iterative fitter.
-    <p>
+
     Author:      Do Kester
 
     """

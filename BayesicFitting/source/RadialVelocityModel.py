@@ -28,7 +28,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 class RadialVelocityModel( NonLinearModel ) :
     """
@@ -39,6 +39,8 @@ class RadialVelocityModel( NonLinearModel ) :
     p_2 : period       of the velocity variation (>0)
     p_3 : phase        time shift since periastron (0<p<2pi)
     p_4 : periastron   longitude of periastron (0<p<2pi)
+
+    This class uses @Kepplers2ndLaw to find radius and true anomaly.
 
     Note:
     The velocity of the star system is not included in this model. See example.
@@ -244,63 +246,4 @@ class RadialVelocityModel( NonLinearModel ) :
         if k == 0:
             return units.Unit( units.si.rad ) / self.xUnit
         return self.yUnit
-
-######## old stuff #####################################
-
-    def baseResultXXX( self, xdata, params ):
-        """
-        Returns the result of the model function.
-
-        Parameters
-        ----------
-        xdata : array_like
-            values at which to calculate the result
-        params : array_like
-            values for the parameters.
-
-        """
-        x = self.TWOPI * self.anomaly( xdata, params ) + params[4]
-        result = params[0] * ( numpy.cos( x ) + params[2] * math.cos( params[4] ) )
-        return result
-
-    def anomaly( self, xdata, params ) :
-        """
-        Returns the true anomaly at times xdata
-
-        Parameters
-        ----------
-        xdata : array_like
-            values at which to calculate the result
-        params : array_like
-            values for the parameters.
-
-        """
-        period = params[1]
-        eccen = params[2]
-        phase = params[3] / self.TWOPI
-
-        # orbit time as fraction of the period, between 0 and 1.
-        otime = ( ( xdata / period ) + phase ) % 1.0
-
-        # make lookup table equidistant in 1 degree, summing to 1.0
-        npt = 361
-        phi = numpy.linspace( 0.0, 1.0, npt, dtype=float )
-        r = ( 1 - eccen * eccen ) / ( 1 - eccen * numpy.cos( self.TWOPI * phi ) )
-
-        sectors = 0.5 * r[1:] * r[:-1] * math.sin( self.TWOPI * phi[1] )
-        anom = numpy.cumsum( sectors )
-        anom /= anom[-1]
-
-        # use table to find phases.
-        k = 0
-        res = numpy.zeros_like( xdata )
-        for i,t in enumerate( otime ) :
-            while k < npt and anom[k] < t :
-                k += 1
-            while k > 0 and anom[k] > t :
-                k -= 1
-            res[i] = phi[k] + phi[1] * ( t - anom[k] ) / ( anom[k+1] - anom[k] )
-
-        return res
-
 

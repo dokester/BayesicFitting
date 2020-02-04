@@ -32,13 +32,12 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class ConstantModel( Model ):
     """
     ConstantModel is a Model which does not have any parameters.
 
-    .. math::
         f( x:p ) = f( x )
 
     As such it is irrelevant whether it is linear or not.
@@ -53,7 +52,8 @@ class ConstantModel( Model ):
     with more complicated models to decide whether there is any evidence for
     some structure at all.
 
-    It can also be used when some constant is needed in a compound model.
+    It can also be used when some constant is needed in a compound model,
+    or a family of similar shapes.
 
     Attributes
     ----------
@@ -88,10 +88,10 @@ class ConstantModel( Model ):
 
     """
     def __init__( self, ndim=1, copy=None, fixedModel=None, values=None,
-                    table=None, **kwargs ):
+                    table=None ):
         """
         The ConstantModel implementation.
-        <br>
+
         Number of parameters = 0.
 
         Parameters
@@ -107,8 +107,13 @@ class ConstantModel( Model ):
         table : array_like
             array of tabulated results
 
+        Notes
+        -----
+        A table provided to the constructor has only values at the xdata.
+        At other vales than xdata, the model does not work.
+
         """
-        super( ConstantModel, self ).__init__( 0, ndim=ndim, copy=copy, **kwargs )
+        super( ConstantModel, self ).__init__( 0, ndim=ndim, copy=copy )
 
         if copy is not None :                  # copy from model
             setatt( self, "fixedModel", copy.fixedModel )

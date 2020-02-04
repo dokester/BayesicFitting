@@ -36,13 +36,13 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class FreeShapeModel( LinearModel ):
     """
     Pixelated Model.
 
-    f( x:p ) = p ( expanded )
+    f( x:p ) = p( expanded )
 
     where p is a array of amplitudes of the same size as the input x divided by
     the number of pixels per bin ( ppb ). When ppb > 1, each p has a shape which
@@ -56,7 +56,7 @@ class FreeShapeModel( LinearModel ):
     Although this is a LinearModel it will not work very well with the ( linear )
     Fitter. It will be a very ill-posed problem.
 
-    Using {@link NestedSampler} its exponential prior will ensure that all
+    Using NestedSampler its exponential prior will ensure that all
     parameters are kept positive.
 
     Attributes

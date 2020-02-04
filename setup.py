@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = '2.4.2'
+__version__ = '2.4.3'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -28,6 +28,7 @@ setup(
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
                 'optimization','nested sampling', 'fitting'],
     packages=['BayesicFitting', 'BayesicFitting/source', 'BayesicFitting/source/kernels',
+#              'BayesicFitting/alpha',
               'BayesicFitting/test', 'BayesicFitting/examples'],
     classifiers = [
         "Programming Language :: Python :: 3",

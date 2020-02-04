@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class AnnealingAmoeba( object ):
     """
@@ -65,9 +65,9 @@ class AnnealingAmoeba( object ):
 
     Iteration continues until the relative difference between the low and high
     points within the simplex is less than reltol
-    ``|yhi - ylo| / ( |yhi| + |ylo| ) < reltol``
+        |yhi - ylo| / ( |yhi| + |ylo| ) < reltol
     and/or the absolute difference is less than abstol
-    ``|yhi - ylo| < abstol``.
+        |yhi - ylo| < abstol.
 
     AnnealingAmoeba can be used with limits set to one or more of the input values.
 
@@ -78,11 +78,11 @@ class AnnealingAmoeba( object ):
     Attributes
     ----------
     func : callable
-        function to be minimized of form : `y = func( x )`
+        function to be minimized of form : y = func( x )
     lolimits : array_like
-        lower limits on `x`. -inf is allowed to indicate no lower limit
+        lower limits on x. -inf is allowed to indicate no lower limit
     hilimits : array_like
-        upper limits on `x`. +inf is allowed to indicate no upper limit
+        upper limits on x. +inf is allowed to indicate no upper limit
     fopt : float
         the best of the above values
     xopt : ndarray
@@ -226,7 +226,12 @@ class AnnealingAmoeba( object ):
         """
         Make a simplex for the given set of parameters.
 
-        Parameters  fitindex    list of parameters to fit
+        Parameters
+        ----------
+        xini : array_like
+            initial (parameter) array
+        step : float
+            size of the simplex
 
         """
         nfit = len( xini )
@@ -270,12 +275,33 @@ class AnnealingAmoeba( object ):
         self.setValues()
 
     def hasLowLimits( self, k ) :
+        """
+        Return True if it has low limits > -inf.
+        """
         return self.lolimits is not None and self.hilimits[k] > -math.inf
 
     def hasHighLimits( self, k ) :
+        """
+        Return True if it has high limits < inf.
+        """
         return self.hilimits is not None and self.hilimits[k] < math.inf
 
     def stayInLimits( self, oldpar, trypar ) :
+        """
+        Keep the parameters within the limits.
+
+        Parameters
+        ----------
+        oldpar : array_like
+            previous set of parameters (assumed to be within limits)
+        trypar : array_like
+            new parameters, possibly out of limits
+
+        Returns
+        -------
+        newpar : array_like
+            new parameters, within limits
+        """
         if self.lolimits is None and self.hilimits is None :
             return trypar
 
@@ -290,6 +316,11 @@ class AnnealingAmoeba( object ):
     def checkSimplex( self, simplex ):
         """
         Check for degeneracy: all points on same location.
+
+        Parameters
+        ----------
+        simplex : matrix
+            the simplex of amoeba
         """
         dim = simplex.shape
         for i in range( dim[1] ) :

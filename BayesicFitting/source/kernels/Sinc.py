@@ -37,11 +37,20 @@ class Sinc( Kernel ):
     """
     Sinc is an unbound Kernel function.
 
-    .. math::
         f( x ) = sin( x ) / x.
+
+    Sinc is not strictly positive.
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 1.0
+            fwhm = 2 * 1.8954942670 / &pi;
+            range = inf
+        """
         super( Sinc, self ).__init__( integral=1.0, fwhm=2 * 1.8954942670 / math.pi,
                                       range=math.inf )
 

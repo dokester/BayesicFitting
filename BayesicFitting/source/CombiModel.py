@@ -34,7 +34,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class CombiModel( BracketModel ):
     """
@@ -44,10 +44,9 @@ class CombiModel( BracketModel ):
     The relations can be either multiplicative or additive.
     When these relations are set, they must be set for all models.
 
-    ..math::
-        f( x:p ) = \sum g( x:p )
+        f( x:p ) = &sum; g( x:p )
 
-    where `g( x:p )` is a model ( e.g. GaussModel )
+    where g( x:p ) is a model ( e.g. GaussModel )
 
     For consistency reasons it is not possible to change the attributes of a
     CombiModel. It is better to make a new one with the required settings.
@@ -126,7 +125,7 @@ class CombiModel( BracketModel ):
     def __init__( self, model, nrepeat=1, copy=None, oper='add',
                   addCombi=None, mulCombi=None, **kwargs ):
         """
-        CombiModel combines sveral copies of the same model int one.
+        CombiModel combines several copies of the same model int one.
 
         Parameters
         ----------
@@ -198,6 +197,25 @@ class CombiModel( BracketModel ):
         (re)sets the value of attributes "addindex", "addvalue", "mulindex", "mulvalue",
         "select" and "expandindex".
 
+        Parameters
+        ----------
+        addCombi : None or dict
+            make additive connections between parameters
+            None : no additive connection
+            dict : { int : array }
+                key : int
+                    index pointing to the key-th parameter in the model
+                value : array of nrepeat floats
+                    values added to each of the key-th parameters
+        mulCombi : None or dict
+            make multiplicative connections between parameters
+            None : no multiplicative connection
+            dict : { int : array }
+                key : int
+                    index pointing to the key-th parameter in the model
+                value : array of nrepeat floats
+                    values  multiplied to each of the key-th parameters
+
         """
 #        print( addCombi, mulCombi )
 
@@ -224,6 +242,10 @@ class CombiModel( BracketModel ):
 
 
     def makeExpandIndex( self, expandindex, amindex ) :
+        """
+        Make an expanded index enumerating the parameters for the full model
+        """
+
         for i,k in enumerate( amindex ) :
             if i % self.nrepeat == 0 :
                 kk = amindex[i]

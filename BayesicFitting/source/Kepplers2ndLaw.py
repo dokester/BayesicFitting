@@ -28,7 +28,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2019 Do Kester
+#  *    2018 - 2020 Do Kester
 
 class Kepplers2ndLaw( object ):
     """

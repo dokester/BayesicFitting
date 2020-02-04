@@ -35,16 +35,18 @@ __status__ = "Development"
 
 class SampleList( list ):
     """
-    SampleList is a list of `Sample`s
+    SampleList is a list of Samples, see @Sample
 
     SampleList is the main result of the NestedSampler. It contains all
     information to calculate averages, medians, modi or maximum likihood solutions
     of the parameters, or of any function of the parameters; in particular of the
     Model.
-    To make averages one has to take into account the weights. Each Sample has a weight
-    and all weights sum to 1.0. So the average of any function f of the parameters p is
 
-    E( f(p) ) = &sum; w_k f( p_k )
+    To make averages one has to take into account the weights. Each Sample has a weight
+    and all weights sum to 1.0. So the average of any function, f, of the parameters p is
+
+        E( f(p) ) = &sum; w_k f( p_k )
+
     where the sum is over all samples k.
 
     A large set of utility functions is provided to extract the information from the
@@ -100,7 +102,7 @@ class SampleList( list ):
     """
     def __init__( self, model, nsamples, parameters=None, fitIndex=None, ndata=1 ):
         """
-        Default Constructor.
+        Constructor.
 
         Parameters
         ----------
@@ -221,10 +223,6 @@ class SampleList( list ):
             sample.logW -= ( lmax + lswt )
 
 
-# TBC why is the logZ in this ???
-#            sample.logW += self.logZ - lswt
-
-
     def add( self, sample ):
         """
         Add a Sample to the list
@@ -280,10 +278,10 @@ class SampleList( list ):
 
 
     def logPlus( self, x, y ):
+        """
+        Return  log( exp(x) + exp(y) )
+        """
         return numpy.logaddexp( x, y )
-
-#        return ( x + math.log( 1 + math.exp( y - x) ) if ( x > y )
-#                else y + math.log( 1 + math.exp( x - y ) ) )
 
     # ===== AVERAGES and STDEVS ===================================================
     def getParameters( self ):
@@ -326,7 +324,7 @@ class SampleList( list ):
 
     def getHypars( self ) :
         """
-        Return the super parameters
+        Return the hyper parameters
         """
         nhp = len( self[0].hyper )
 
@@ -344,6 +342,9 @@ class SampleList( list ):
         return self.hypars
 
     def getNuisance( self ) :
+        """
+        Return the average of the nuisance parameters (if present)
+        """
         ( a, s ) = self.averstd( "nuisance" )
         self.stdevNuis = s
         return a
@@ -375,6 +376,9 @@ class SampleList( list ):
 
     # ===== MEDIAN ===========================================================
     def getMedianIndex( self ) :
+        """
+        Return the index at which the median can be found.
+        """
         sum = 0.0
         k = 0
         for sample in self :
@@ -389,7 +393,7 @@ class SampleList( list ):
      # ===== EVOLUTIONS ========================================================
     def getMaximumNumberOfParameters( self ):
         """
-        TBD when Dynamic models are defined
+        Return the maximum number of parameters (for Dynamic Models)
         """
         if self[0].model.isDynamic( ) :
             return numpy.max( self.getNumberOfParametersEvolution() )
@@ -438,7 +442,7 @@ class SampleList( list ):
         Return the evolution of the log( weight ).
 
         The weights itself sum up to 1.
-        @see #getWeightEvolution( ).
+        See #getWeightEvolution( ).
 
         """
         pe = [sample.logW for sample in self]

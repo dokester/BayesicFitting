@@ -22,17 +22,17 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class CircularUniformPrior( UniformPrior ):
     """
     Cricular Uniform prior distribution, for location parameters.
     The lowLimit is wrapped onto the highLimit.
 
-    A circular uniform prior is a improper prior ( i.e. its integral is unbound ).
-    Because of that it always needs limits, low and high, such that
+    A circular uniform prior is a proper prior ( i.e. its integral is unbound ).
+    Because of its wrapping around needs limits, low and high, such that
     -Inf < low < high < +Inf.
-    .. math::
+
         Pr( x ) = 1 / ( high - low )   if low < x < high else 0
 
     For computational purposes the unit range is from [1/3..2/3]; the u value
@@ -46,16 +46,30 @@ class CircularUniformPrior( UniformPrior ):
     unit2Domain: u = ( 3 * u ) % 1.0            ## wrap around
                  d = u  * range + lo
 
-    Hidden Attributes
-    -----------------
+    Attributes from UniformPrior
+    ----------------------------
     _range : float
         valid range ( highLimit - lowLimit )
+
+    Attributes from Prior
+    --------------------=
+    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
     """
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, limits=None, prior=None ):
-        """ Constructor.  """
+        """
+        Constructor.
+
+        Parameters
+        ----------
+        limits : array of 2 floats
+            [low,high]  range of the prior. Low is wrapped onto high.
+        prior : CircularUniformPrior
+            to be copied.
+
+        """
         super( CircularUniformPrior, self ).__init__( limits=limits, prior=prior )
 
     def copy( self ):

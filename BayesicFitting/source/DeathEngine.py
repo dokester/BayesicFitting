@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 
 class DeathEngine( Engine ):

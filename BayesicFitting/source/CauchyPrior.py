@@ -28,14 +28,14 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 
 class CauchyPrior( Prior ):
     """
     Cauchy prior distribution.
-    .. math::
-        Pr( x ) =  scale / ( \pi * ( scale^2 + ( x - center )^2 )
+
+        Pr( x ) =  scale / ( &pi; * ( scale^2 + ( x - center )^2 )
 
     By default: center = 0 and scale = 1.
 
@@ -52,10 +52,12 @@ class CauchyPrior( Prior ):
         center of the Cauchy prior
     scale : float
         scale of the Cauchy prior
-    lowLimit : float
-        low limit (inactive for now)
-    highLimit : float
-        high limit ( inactive for now)
+
+    Attributes from Prior
+    --------------------=
+    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
+
+    lowLimit and highLimit cannot be used in this implementation.
 
     """
 

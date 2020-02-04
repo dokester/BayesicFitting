@@ -31,11 +31,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
-#  *
-#  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class CurveFitter( IterativeFitter ):
     """

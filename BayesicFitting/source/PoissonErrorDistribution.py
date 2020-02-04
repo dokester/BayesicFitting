@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class PoissonErrorDistribution( ErrorDistribution ):
@@ -39,15 +39,15 @@ class PoissonErrorDistribution( ErrorDistribution ):
     To calculate a Poisson likelihood.
 
     For one observation with n counts it holds
-    ..math ::
+
         f( n,x ) = x^n / ( e^x * n! )
 
     where x is the expected counts
 
     The function is mostly used to calculate the likelihood L, or easier
     to use log likelihood, logL.
-    .. math::
-        logL = \sum( n * \log( x ) - x - \log( n! ) )
+
+        logL = &sum;( n * log( x ) - x - log( n! ) )
 
     Weights are not accepted in this ErrorDistribution; they are silently ignored.
 

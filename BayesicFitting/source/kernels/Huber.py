@@ -29,8 +29,9 @@ __status__ = "Development"
 
 class Huber( Kernel ):
     """
-    Huber is an improper Kernel function which is constant between [-1,1]
-    and 1 / |x| elsewhere.
+    Huber is an improper Kernel function
+        K( x ) = 1.0            if |x| < 1
+                 1.0 / |x|      elsewhere
 
     It is improper because the integral equals +inf.
 
@@ -38,6 +39,16 @@ class Huber( Kernel ):
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Improper Kernel.
+
+        Using
+            integral = inf
+            fwhm = 4
+            range = inf
+        """
         super( Huber, self ).__init__( integral=math.inf, fwhm=4.0, range=math.inf )
 
     def result( self, x ):

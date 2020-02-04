@@ -33,23 +33,27 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
     To calculate a Uniform likelihood, eg. for digitization noise.
 
     For one residual, x, it holds
-    .. math::
-        f( x ) = 1 / (2*s) if abs( x ) < s else 0
+
+        L( x ) = 1 / ( 2 * s )    if |x| < s
+                 0                otherwise
 
     where s is the scale.
     s is a hyperparameter, which might be estimated from the data.
 
-    The variance of this function is :math:`\sigma^2 = s / 6`.
+    The variance of this function is &sigma;^2 = s / 6.
     See: toSigma()
 
-    The function is mostly used to calculate the likelihood L, or easier
-    to use log likelihood, logL.
-    .. math::
-        logL = -log( 2*s ) if abs( x ) < s else -inf
+    The function is mostly used to calculate the likelihood L over N residuals,
+    or easier using log likelihood, logL.
+
+        logL = -log( 2 * s ) * N
+
+    Note that it is required that <b>all</b> residuals are smaller than s,
+    otherwise the logL becomes -inf.
 
     Using weights this becomes:
-    .. math::
-        logL = -w * log( 2*s ) )
+
+        logL = -log( 2 * s ) * &sum; w
 
 
     Author       Do Kester.
@@ -70,13 +74,13 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         scale : float
             noise scale
         limits : None or list of 2 floats [low,high]
-            None : no limits implying fixed scale
+            None    no limits implying fixed scale
             low     low limit on scale (needs to be >0)
             high    high limit on scale
             when limits are set, the scale is *not* fixed.
-
         copy : UniformErrorDistribution
             distribution to be copied.
+
         """
         super( UniformErrorDistribution, self ).__init__( scale=scale,
                 limits=limits, copy=copy )
@@ -226,5 +230,8 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         return
 
     def __str__( self ) :
+        """
+        Return a string representation of this class.
+        """
         return "Uniform error distribution"
 

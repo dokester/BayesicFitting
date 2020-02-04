@@ -28,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class Prior( object ):
     """
@@ -72,17 +72,13 @@ class Prior( object ):
         """
         super( object, self ).__init__()
 
-        self.deltaP = 0.0001
+        self.deltaP = 0.0001                # for numerical partials
         # private properties of the Prior
-        self._lowDomain = -math.inf
-        self._highDomain = math.inf
+        self._lowDomain = -math.inf         # Lower limit of the Priors possible domain.
+        self._highDomain = math.inf         # Upper limit of the Priors possible domain
 
-
-#        object.__setattr__( self, "deltaP", 0.001 )             # for numerical partials
         object.__setattr__( self, "lowLimit", -math.inf )       # Lower limit.
         object.__setattr__( self, "highLimit", math.inf )       # Upper limit.
-#        object.__setattr__( self, "_lowDomain", -math.inf )     # Lower limit of the Priors possible domain.
-#        object.__setattr__( self, "_highDomain", math.inf )     # Upper limit of the Priors possible domain
 
         self.setLimits( limits )
 

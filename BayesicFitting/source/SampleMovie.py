@@ -31,7 +31,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019        Do Kester
+#  *    2019 - 2020 Do Kester
 
 
 class SampleMovie( object ):
@@ -52,7 +52,22 @@ class SampleMovie( object ):
     """
 
     def __init__( self, samplelist, filename="samplemovie.mp4", problem=None, kpar=[0,1] ) :
+        """
+        Constructor.
 
+        The constructor produces the movie.
+
+        Parameters
+        ----------
+        samplelist : SampleList
+            to make the movie from
+        filename : str
+            name of the mp4 movie
+        problem : Problem
+            the problem that produced the samplelist
+        kpar : list of 2 ints
+            indices of the parameters to plot
+        """
 
         bakend = matplotlib.get_backend()       ## save present backend to restore
 

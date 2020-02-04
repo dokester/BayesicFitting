@@ -33,7 +33,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class BaseModel( object ):
     """
@@ -41,18 +41,18 @@ class BaseModel( object ):
 
     A simple model is a function in x with parameters p : f(x:p).
     The variable x is an array of points in a space of one or more
-    dimensions; p can have any dimension, including 0 i.e. the model
+    dimensions; p can have any length, including 0 i.e. the model
     has no parameters.
 
     The result of the function for certain x and p is given by
-    `model.result( x, p )`
+    model.result( x, p )
 
     The partial derivatives of f to p (df/dp) is given by
-    `model.partial( x, p )`
+    model.partial( x, p )
     Some fitters make use of the partials
 
     The derivative of f to x (df/dx) is given by
-    `model.derivative( x, p )`
+    model.derivative( x, p )
 
     BaseModel checks parameters for positivity and nonzero-ness, if such
     is indicated in the model itself.
@@ -72,10 +72,8 @@ class BaseModel( object ):
         If the list is shorter than the number of parameters, the last one is repeated.
     posIndex : list of int
         list of indices indication positive-definite parameters.
-        (default : none)
     nonZero : list of int
         list of parameters that need a warning when they are equal to zero.
-        (default : none)
         Warnings will only be issued once. Values are replaced by self.tiny
     tiny : float
         very small value, replacing zero valued when found on NonZero.
@@ -83,7 +81,7 @@ class BaseModel( object ):
     deltaP : array_like
         (list of) width(s) for numerical partial calculation. (default : 0.00001)
     parNames : list of str
-        list of parameter names. (default : ``parameter_k``)
+        list of parameter names. (default : "parameter_k")
 
     Author :         Do Kester
 
@@ -107,7 +105,8 @@ class BaseModel( object ):
         nonZero : list of int
             indices of parameters that cannot be zero.
             they are replaced by self.tiny
-
+        kwargs
+            for internal use.
         """
         super( BaseModel, self ).__init__( )
 
@@ -288,7 +287,7 @@ class BaseModel( object ):
         xdata : array_like
             values at which to calculate the derivative
         param : array_like
-            values for the parameters. (default: self.parameters)
+            values for the parameters. (default: model.parameters)
 
         """
         return self.baseDerivative( xdata, param )

@@ -34,14 +34,22 @@ __status__ = "Development"
 class Cosine( Kernel ):
     """
     Cosine is a Kernel function between [-1,1]; it is 0 elsewhere.
-    .. math::
-        K( x ) = cos( 0.5*PI*x ) if |x| < 1 else  0
+
+        K( x ) = cos( 0.5 &pi; x )      if |x| < 1
+                 0                      elsewhere
 
 
     """
     HALFPI = 0.5 * math.pi
 
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 4 / &pi;
+            fwhm = 4.0 / 3.0
+        """
         super( Cosine, self ).__init__( integral=4/math.pi, fwhm=4.0/3.0 )
 
     def result( self, x ):

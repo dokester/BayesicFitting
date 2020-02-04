@@ -34,11 +34,19 @@ __status__ = "Development"
 class Gauss( Kernel ):
     """
     Gauss is an unbound Kernel function:
-    .. math::
+
         f( x ) = exp( -0.5 * x * x ).
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = sqrt( 2 &pi; )
+            fwhm = sqrt( 2 log( 2 ) )
+            range = inf
+        """
         integral = numpy.sqrt( 2 * math.pi )
         fwhm = 2 * math.sqrt( 2 * math.log( 2 ) )
         super( Gauss, self ).__init__( integral=integral, fwhm=fwhm, range=math.inf )

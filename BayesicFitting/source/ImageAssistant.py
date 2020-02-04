@@ -29,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2006 - 2014 Do Kester, SRON (Java code)
-#  *    2017        Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class ImageAssistant( object ):
@@ -77,7 +77,8 @@ class ImageAssistant( object ):
 
     def __init__( self, order='C' ):
         """
-        Helper class to construct the input arrays needed for the Fitters.
+        Helper class to construct from an image, the input arrays
+        needed for the Fitters.
 
         Parameters
         ----------

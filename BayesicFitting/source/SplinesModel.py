@@ -28,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class SplinesModel( LinearModel ):
     """
@@ -37,7 +37,7 @@ class SplinesModel( LinearModel ):
 
     order   behaviour between knots     continuity at knots
       0     piecewise constant          not continuous at all
-      1     piecewise linear            lines are continuous
+      1     piecewise linear            lines are continuous (connected)
       2     parabolic pieces            1st derivatives are also continuous
       3     cubic pieces                2nd derivatives are also continuous
      n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
@@ -100,7 +100,6 @@ class SplinesModel( LinearModel ):
     """
     def __init__( self, knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
                         copy=None, **kwargs ):
-#                        copy=None, fixed=None, **kwargs ):
         """
         Splines on a given set of knots and a given order.
 
@@ -122,8 +121,11 @@ class SplinesModel( LinearModel ):
             range of the xdata
         copy : SplinesModel
             model to be copied.
-        fixed : dict
-            If not None raise AttributeError.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         Raises
         ------

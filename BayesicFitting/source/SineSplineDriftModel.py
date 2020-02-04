@@ -27,21 +27,21 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2018        Do Kester
+#  *    2017 - 2020 Do Kester
 
 class SineSplineDriftModel( NonLinearModel ):
     """
     Sine with drifting frequency and splineslike amplitudes/phases.
 
-    .. math::
         nd = degree + 1
         nh = len( knots ) + order - 1
-        xx = 2 \pi x PM( x:p[:nd] )
+        xx = 2 &pi; x PM( x:p[:nd] )
         A  = SM( x:p[nd:nd+nh] )
         B  = SM( x:p[nd+nh:] )
-        f( x:p ) = A \cos( xx ) + B \sin( xx )
+        f( x:p ) = A cos( xx ) + B sin( xx )
 
-    Where :math:`s_0` and :math:`s_1` are splines with defined knots and order.
+    Where PM is a PolynomialModel and SM a SplinesModel
+
     It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
     Examples
@@ -75,21 +75,6 @@ class SineSplineDriftModel( NonLinearModel ):
     Attributes from BaseModel
     --------------------------
         npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
-
-    Alternate
-    ---------
-    The model
-
-    >>> model = SineSplineModel( knots, degree=1 )
-
-    is equivalent to :
-
-    >>> cm = SplinesModel( knots )
-    >>> sm = SplinesModel( knots )
-    >>> pm = PolynomialModel( 1 )
-    >>> fxd = {0:pm, 1:cm, 2:sm}
-    >>> model = SineModel( fixed=fxd )
-
 
     """
 

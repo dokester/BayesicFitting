@@ -26,27 +26,37 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
-#  *
-#  *    2015 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class EtalonDriftModel( NonLinearModel ):
     """
     Sinusoidal Model with drifting frequency.
-    .. math::
-        f( x,y:p ) = p_0 / ( 1.0 + p_1^2 * sin^2( \pi ( p_2 x + p_3 + p_4 y ) ) )
 
-    where :math:`p_0` = amplitude, :math:`p_1` = finesse,
-    :math:`p_2` = periods per wavenumber, :math:`p_3` = phase,
-    and :math:`p_4` = phase drift
+        f( x,y:p ) = p_0 / ( 1.0 + p_1^2 * sin^2( &pi; ( p_2 x + p_3 + p_4 y ) ) )
+
+    where p_0 = amplitude
+          p_1 = finesse
+          p_2 = periods per wavenumber
+          p_3 = phase
+          p_4 = phase drift
     As always (x,y) = input; it is in (wavenumbers,alpha)
 
     The parameters are initialized at {1.0, 1.0, 1.0, 0.0, 0.0}. It is a non-linear model.
 
     This model is specificly made for the MIRI instrumnet aboard JWST.
     Its usefullness elsewhere is doubtfull.
+
+    Attributes from Model
+    ---------------------
+        npchain, parameters, stdevs, xUnit, yUnit
+
+    Attributes from FixedModel
+    --------------------------
+        npmax, fixed, parlist, mlist
+
+    Attributes from BaseModel
+    --------------------------
+        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     Examples
     --------
@@ -55,7 +65,6 @@ class EtalonDriftModel( NonLinearModel ):
     5
     >>> pars = [1.0, 30.0, 1.0, 0.0, 0.0]
     >>> fpm.parameters = pars
-    >>> print( fpm( numpy.arange( 101, dtype=float ) ) )     # etalon with 10 periods
 
     """
 
@@ -69,10 +78,11 @@ class EtalonDriftModel( NonLinearModel ):
         ----------
         copy : EtalonModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         param = [1.0, 1.0, 1.0, 0.0, 0.0]

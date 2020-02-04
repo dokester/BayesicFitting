@@ -32,17 +32,20 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class SineAmpModel( LinearModel ):
     """
     Sine with fixed frequency.
 
     Find amplitudes/phases for sinusoidal of a given frequency.
-    .. math::
-        f( x:p ) = p_0 \cos( 2 \pi \omega x ) + p_1 \sin( 2 \pi \omega x )
 
-    `\omega` is the frequency of the model.
+        f( x:p ) = p_0 cos( 2 &pi; &omega; x ) + p_1 sin( 2 &pi; &omega; x )
+
+    where
+        p_0 = amplitude of cosine
+        p_1 = amplitude of sine
+        &omega; is the fixed frequency of the model.
 
     It is a linear model with 2 parameters.
 
@@ -67,9 +70,10 @@ class SineAmpModel( LinearModel ):
     --------------------------
         npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-    Notes
-    -----
-    This model is equivalent to SineModel( fixed={0:frequency} )
+    Alternate
+    ---------
+    This model is equivalent to
+        SineModel( fixed={0:frequency} )
 
     """
     def __init__( self, frequency, copy=None, **kwargs ):
@@ -84,10 +88,11 @@ class SineAmpModel( LinearModel ):
             the frequency
         copy : SineAmpModel
             model to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         names = ["cosamp", "sinamp"]

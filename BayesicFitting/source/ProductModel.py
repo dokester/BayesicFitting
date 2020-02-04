@@ -26,17 +26,15 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 class ProductModel( NonLinearModel ):
     """
     Direct product of 2 (or more) models.
+
     The dimensionality of this model is equal to the number of constituent models.
 
-
-
     The number of parameters is the sum of the parameters of the models.
-
 
     Examples
     --------
@@ -77,7 +75,7 @@ class ProductModel( NonLinearModel ):
         Direct product of 2 (or more) models. It has dimensionality equal to
         the number of constituent models.
 
-        The models are given as input the consecutive colums in xdata.
+        The models are given as input, the consecutive colums in xdata.
 
         The number of parameters is the sum of the parameters of the
         constituent models

@@ -32,16 +32,18 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 
 class GaussModel( NonLinearModel ):
     """
     Gaussian Model.
-    ..math::
-        f( x:p ) = p_0 * \exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
 
-        p_0 = amplitude; p_1 = center;  p_2 = width
+        f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
+
+        p_0 = amplitude
+        p_1 = center
+        p_2 = width
 
     The parameters are initialized at {1.0, 0.0, 1.0}.
     Parameter 2 (width) is always kept stricktly positive ( >0 ).
@@ -87,14 +89,16 @@ class GaussModel( NonLinearModel ):
         ----------
         copy : GaussModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         names = ["amplitude", "center", "width"]
         param = [1.0,0.0,1.0]
+
         super( GaussModel, self ).__init__( 3, copy=copy, params=param,
                     names=names, **kwargs )
         if copy is None :

@@ -26,7 +26,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class LinearModel( Model ):
     """
@@ -35,12 +35,11 @@ class LinearModel( Model ):
     LinearModel implements the baseResult method needed in all linear models.
 
     For Linear models it holds that
-    .. math::
-        f( x:p ) = \sum( p_i * f^\prime( x ) )
 
-    which means that only the partial derivatives to :math:`p_i`,
-    the :math:`f^\prime( x )`, need to be given as ``basePartial``.
-    The ``baseResult`` follows from that one.
+        f( x:p ) = &sum;( p_i * df( x )/dp_i )
+
+    which means that only the partial derivatives to p_i need to be given
+    as basePartial. The baseResult follows directly from that one.
     It is implemented here.
 
     Attributes
@@ -77,6 +76,11 @@ class LinearModel( Model ):
             the dimensionality of the inputs (default: 1)
         copy : LinearModel
             model to be copied (default: None)
+        kwargs : dict
+            Possibly includes keywords from
+                @Model :        params
+                @FixedModel :   fixed, names
+                @BaseModel :    posIndex, nonZero
 
         """
         super( LinearModel, self ).__init__( nparams, ndim=ndim, copy=copy, **kwargs )
@@ -100,7 +104,6 @@ class LinearModel( Model ):
         part = self.basePartial( xdata, params, parlist=parlist  )
 
         res = numpy.zeros( part.shape[0], dtype=float )
-#        print( res.shape, params, part.shape )
 
         for k in parlist :
             res += params[k] * part[:,k]

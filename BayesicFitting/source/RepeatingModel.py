@@ -37,7 +37,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 class RepeatingModel( Model, Dynamic ):
     """
@@ -141,8 +141,6 @@ class RepeatingModel( Model, Dynamic ):
         ValueError when order is outside [min..max] range
 
         """
-
-
         if fixed is not None :
             raise AttributeError( "DynamicModel cannot have fixed parameters; " +
                                   " put fixed parameter(s0 in model." )
@@ -188,6 +186,14 @@ class RepeatingModel( Model, Dynamic ):
         setatt( self, "ncomp", self.ncomp + dn )
 
     def setSame( self, same ) :
+        """
+        Assign similar parameters the same value.
+
+        Parameters
+        ----------
+        same : None or int or [int]
+            similar parameters indicated as an index in encapsulated model.
+        """
         self.same = same
         if same is None :
             self.index = numpy.arange( self.model.npbase, dtype=int )

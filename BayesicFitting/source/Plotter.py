@@ -27,7 +27,7 @@ __status__ = "Development"
 #
 # The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #
-# 2017 Do Kester
+#   2017 - 2020 Do Kester
 
 def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
              residuals=False ) :

@@ -30,7 +30,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class LaplaceErrorDistribution( ScaledErrorDistribution ):
@@ -38,23 +38,23 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
     To calculate a Laplace likelihood.
 
     For one residual, x, it holds
-    .. math::
+
         f( x ) = 1 / ( 2 s ) exp( - |x| / s )
 
     where s is the scale.
     s is a hyperparameter, which might be estimated from the data.
 
-    The variance of this function is :math:`\sigma^2 = 2 s ^ 2`.
+    The variance of this function is &sigma;^2 = 2 s ^ 2.
     See: toSigma()
 
-    The function is mostly used to calculate the likelihood L, or easier
-    to use log likelihood, logL.
-    .. math::
-        logL = log( N / ( 2 s ) ) - \sum( |x| / s  )
+    The function is mostly used to calculate the likelihood L over N
+    residuals, or easier using log likelihood, logL.
+
+        logL = log( N / ( 2 s ) ) - &sum;( |x| / s  )
 
     Using weights this becomes:
-    .. math::
-        logL = log( \sum( w ) / ( 2 s ) ) - \sum( w |x| / s  )
+
+        logL = log( &sum;( w ) / ( 2 s ) ) - &sum;( w |x| / s  )
 
     Using this error distribution results in median-like solutions.
 

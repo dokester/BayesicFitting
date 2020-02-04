@@ -33,12 +33,13 @@ __status__ = "Development"
 class LorentzModel( NonLinearModel ):
     """
     Lorentzian Model.
-    .. math::
+
         f( x:p ) = p_0 * ( p_2^2 / ( ( x - p_1 )^2 + p_2^2 )
 
-    :math:`p_0` = amplitude
-    :math:`p_1` = x-shift
-    :math:`p_2` = gamma ( width )
+    where
+        p_0 = amplitude
+        p_1 = x-shift
+        p_2 = gamma ( width )
 
     The parameters are initialized at [1/PI, 0.0, 1.0] where the integral
     over the function equals 1.
@@ -48,20 +49,19 @@ class LorentzModel( NonLinearModel ):
 
     Notes
     -----
-    There are other possible
-    <a href="http://en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function">
-    definitions of this model</a>, where the integral equals 1.0.
+    There are other possible definitions of this model, where the integral equals 1.0.
+    http://en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function
+
     Definitions that integrate to 1.0 are more fit as a distribution function.
     See sample/CauchyErrorDistribution.
 
     We choose our definition for 2 reasons.
     1. to be in line with the definitions of the GaussModel, SincModel,
         VoigtModel, all KernelModels etc. In all of them the amplitude parameter,
-        :math:`p_0`, equals the maximum of the function.
-        I.e. :math:`p_0` is indeed the amplitude.
+        p_0, equals the maximum of the function. I.e. p_0 is indeed the amplitude.
     2. to have maximally independent parameters, meaning that if you change one
         parameter, only that aspect changes. In the present definition this is the case.
-        In the alternative definition if you change :math:`p_2`, not only the width
+        In the alternative definition if you change p_2, not only the width
         of the function changes, but also the amplitude.
 
     Examples
@@ -89,7 +89,7 @@ class LorentzModel( NonLinearModel ):
 
     Alternate
     ---------
-    `LorentzModel()` is equivalent to `KernelModel( kernel=Lorentz() )`.
+    LorentzModel() is equivalent to KernelModel( kernel=Lorentz() ).
 
 
     """
@@ -103,10 +103,11 @@ class LorentzModel( NonLinearModel ):
         ----------
         copy : LorentzModel
             to be copied
-        fixed : dictionary of {int:float}
-            int     list if parameters to fix permanently. Default None.
-            float   list of values for the fixed parameters.
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
             Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         param = [1/math.pi, 0.0, 1.0]

@@ -29,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class MonteCarlo( object ):
     """
@@ -37,11 +37,9 @@ class MonteCarlo( object ):
 
     MonteCarlo for models.
 
-    The MonteCarlo class is to be used in conjunction with *Model classes.
+    The MonteCarlo class is to be used in conjunction with Model classes.
 
     Author:      Do Kester
-
-    Category:    Mathematics/Fitting
 
     Attributes
     ----------
@@ -69,8 +67,8 @@ class MonteCarlo( object ):
         """
         Create a new MonteCarlo, providing inputs and model.
 
-        A Error class is defined by its model and the input vector ( the
-        independent variable ). When a fit to another model and/or another
+        A MonteCarlo object is defined by its model and the input vector (the
+        independent variable). When a fit to another model and/or another
         input vector is needed a new object should be created.
 
         Parameters
@@ -86,7 +84,9 @@ class MonteCarlo( object ):
         seed : int
             seed for random number generator
 
-        Raises:  ValueError when model and input have different dimensions
+        Raises
+        ------
+        ValueError when model and input have different dimensions
 
         """
 

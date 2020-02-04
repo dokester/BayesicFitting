@@ -31,21 +31,21 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2018 Do Kester
+#  *    2017 - 2020 Do Kester
 
 
 class CauchyErrorDistribution( ScaledErrorDistribution ):
     """
     To calculate a Cauchy or Lorentz likelihood.
-    ..math ::
-        f( x ) = s / ( \pi * ( s^2 + x^2 ) )
+
+        f( x ) = s / ( &pi; * ( s^2 + x^2 ) )
 
     where x = residual and s = scale
 
     The function is mostly used to calculate the likelihood L, or easier
     to use log likelihood, logL.
-    .. math::
-        logL = N ( \log( s ) - \log( \pi ) ) - \sum( \log( x^2 + s^2 ) )
+
+        logL = N ( log( s ) - log( &pi; ) ) - sum( log( x^2 + s^2 ) )
 
     Weights are not possible in this error distribution. They are silently ignored.
 
@@ -60,7 +60,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, scale=1.0, limits=None, copy=None ):
         """
-        Default Constructor.
+        Constructor.
 
         Parameters
         ----------
@@ -70,7 +70,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             None : no limits implying fixed scale
             low     low limit on scale (needs to be >0)
             high    high limit on scale
-            when limits are set, the scale is *not* fixed.
+            when limits are set, the scale is not fixed.
          copy : CauchyErrorDistribution
             distribution to be copied.
 

@@ -33,12 +33,19 @@ __status__ = "Development"
 class Tricube( Kernel ):
     """
     Tricube is a Kernel function between [-1,1]; it is 0 elsewhere.
-    .. math::
-        K( x ) = ( 1 - |x|^3 )^3 for |x| < 1 else 0
 
+        K( x ) = ( 1 - |x|^3 )^3        if |x| < 1
+                 0                      elsewhere
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 81.0/70.0
+            fwhm = 1.18176021
+        """
         super( Tricube, self ).__init__( integral=81.0/70.0, fwhm=1.18176021 )
 
     def result( self, x ):

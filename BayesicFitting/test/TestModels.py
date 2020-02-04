@@ -394,6 +394,25 @@ class TestModels( unittest.TestCase ):
 
         stdModeltest( m, p, plot=plot )
 
+    def testRadialVelocityModel_2( self, plot=False ):
+        x  = numpy.linspace( 0, 1400, 1401, dtype=float )
+        print( "******RADIALVELOCITY***************" )
+        m = RadialVelocityModel( spherical=False )
+        self.assertTrue( m.npars == 5 )
+        self.assertTrue( m.npbase == 5 )
+        p = [0.67, 130, 1200.0, 4.0, 3.0]
+        if plot :
+            for p3 in range( 7 ) :
+                p[4] = 0.7 + 0.5 * p3
+                y = m.result( x, p )
+                plt.plot( x, y + 100 * p3, '-' )
+#                yo = m.baseResultXXX( x, p )
+#                plt.plot( x, yo + 100 * p3, '.' )
+
+            plt.show()
+
+        stdModeltest( m, p, plot=plot )
+
     def testSincModel( self, plot=False ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINC***********************" )

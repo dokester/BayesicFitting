@@ -25,7 +25,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class HyperParameter( object ):
     """
@@ -98,6 +98,11 @@ class HyperParameter( object ):
         return HyperParameter( copy=self )
 
     def checkPrior( self ) :
+        """
+        Raises
+        ------
+        ValueError when no prior has been set.
+        """
         if self.prior is None :
             raise ValueError( "Need a prior set to %s" % self.__str__() )
 

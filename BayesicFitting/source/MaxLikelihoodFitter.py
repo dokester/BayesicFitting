@@ -36,7 +36,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON ( Java code )
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class MaxLikelihoodFitter( IterativeFitter ):
     """
@@ -53,7 +53,7 @@ class MaxLikelihoodFitter( IterativeFitter ):
                 errordistribution.
     scale : float
         the (fixed) noise scale
-    power : float (2)
+    power : float
         power of errdis (if applicable)
 
     Raises

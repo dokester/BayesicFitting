@@ -33,12 +33,19 @@ __status__ = "Development"
 class Triangle( Kernel ):
     """
     Triangle is a Kernel function between [-1,1]; it is 0 elsewhere.
-    .. math::
-        K( x ) =  ( 1 - |x| ) if |x| < 1 else 0
 
+        K( x ) = ( 1 - |x| )        if |x| < 1
+                 0                  elsewhere
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 1.0K6.0/15.0
+            fwhm = 1.0
+        """
         super( Triangle, self ).__init__( integral=1.0, fwhm=1.0 )
 
     def result( self, x ):

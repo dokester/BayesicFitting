@@ -33,14 +33,22 @@ __status__ = "Development"
 class Biweight( Kernel ):
     """
     Biweight is a Kernel function between [-1,1]; it is 0 elsewhere.
-    .. math::
-        K( x ) = ( 1-x^2 )^2 for |x| < 1 else 0
+
+        K( x ) = ( 1-x^2 )^2    if |x| < 1
+                 0              elsewhere
 
     Author:      Do Kester
 
 
     """
     def __init__( self ) :
+        """
+        Constructor.
+
+        Using
+            integral = 16.0/15.0
+            fwhm = 1.0823922
+        """
         super( Biweight, self ).__init__( integral=16.0/15.0, fwhm=1.0823922 )
 
     def result( self, x ):

@@ -28,12 +28,12 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2004 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2018 Do Kester
+#  *    2016 - 2020 Do Kester
 
 class PowerModel( LinearModel ):
     """
     General power model of arbitrary degree.
-    .. math::
+
         f( x:p ) = p * x^a
 
     a is an float ( positive or negative ).
@@ -71,13 +71,20 @@ class PowerModel( LinearModel ):
     def __init__( self, exponent=0, copy=None, **kwargs ):
         """
         Power of a certain degree.
-        <br>
+
         The number of parameters is 1
 
         Parameters
         ----------
         exponent : int
             power to which the xdata is to be raised.
+        copy : PowerModel
+            to be copied
+        fixed : None or dictionary of {int:float|Model}
+            int         index of parameter to fix permanently.
+            float|Model values for the fixed parameters.
+            Attribute fixed can only be set in the constructor.
+            See: @FixedModel
 
         """
         param = [1.0]

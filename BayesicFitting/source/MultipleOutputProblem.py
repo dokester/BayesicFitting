@@ -17,7 +17,7 @@ from .Formatter import formatter as fmt
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018        Do Kester
+#  *    2018 - 2020 Do Kester
 
 class MultipleOutputProblem( Problem ):
     """
@@ -26,10 +26,10 @@ class MultipleOutputProblem( Problem ):
     a game.
 
     Problems can be solved by NestedSampler, with appropriate Engines and
-    ErrorDistributions (==CostFunctions)
+    ErrorDistributions.
 
     The result of the function for certain x and p is given by
-    `problem.result( p )`
+    problem.result( p )
     The parameters, p, are to be optimized while the x provide additional
     information.
 
@@ -45,7 +45,7 @@ class MultipleOutputProblem( Problem ):
     def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
         """
         Problem Constructor.
-        <br>
+
         Parameters
         ----------
         model : Model
@@ -114,6 +114,14 @@ class MultipleOutputProblem( Problem ):
 
 
     def derivative( self, param ) :
+        """
+        Return the derivative of the internal model.
+
+        Parameters
+        ----------
+        param : array_like
+            list of model parameters
+        """
         return self.model.derivative( self.xdata, param )
 
     def residuals( self, param, mockdata=None ) :
@@ -124,12 +132,21 @@ class MultipleOutputProblem( Problem ):
         return res.flatten()
 
     def myEngines( self ) :
+        """
+        Return a default list of preferred engines
+        """
         return ["galilean", "chord"]
 
     def myStartEngine( self ) :
+        """
+        Return the default preferred startengines
+        """
         return "start"
 
     def myDistribution( self ) :
+        """
+        Return the name of the preferred error distribution
+        """
         return "gauss"
 
     #  *****TOSTRING***********************************************************

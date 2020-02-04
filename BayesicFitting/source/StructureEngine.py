@@ -26,16 +26,23 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019        Do Kester
+#  *    2019 - 2020 Do Kester
 
 class StructureEngine( Engine ):
     """
-    The StructureEngine varies the structure of the model.
+    The StructureEngine varies the internal structure of the model.
 
     Only for Models that are Modifiable.
-    The birth rate is governed by the growth-prior in the dynamic model.
 
     The member is kept when the logLikelihood > lowLhood.
+
+    Attributes
+    ----------
+    None of its own
+
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, rng, report, unitRange, unitMin, verbose
 
     Author       Do Kester.
 

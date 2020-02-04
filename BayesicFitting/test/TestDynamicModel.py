@@ -139,7 +139,7 @@ class TestDynamicModel( unittest.TestCase ):
     def test1Model5( self ):
         print( "  Test RepeatingModel 6" )
         m = GaussModel()
-        r = RepeatingModel( 1, m, same=[2], minComp=1, maxComp=3  )
+        r = RepeatingModel( 1, m, same=2, minComp=1, maxComp=3  )
 
         pars = numpy.asarray( [1.0, -0.4, 0.1] )
         self.assertTrue( isinstance( r.growPrior, UniformPrior ) )
@@ -238,7 +238,7 @@ class TestDynamicModel( unittest.TestCase ):
     def test1Model9( self ):
         print( "  Test RepeatingModel 9" )
         m = GaussModel()
-        r = RepeatingModel( 3, m, same=[1] )
+        r = RepeatingModel( 3, m, same=1 )
 
         pars = numpy.array( [0,1,2,3,5,6,8], dtype=float )
         rng = numpy.random.RandomState( 12345 )
