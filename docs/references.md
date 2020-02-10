@@ -30,7 +30,7 @@ Eds: R. Fischer et al.
 Garching, 2004, AIP Conference Proceedings 735 2004, p. 379.<br>
 
 <a name="kester3"></a>  
-+ D. Kester, D. Beintema and D. Lutz. 
++ Do Kester, Douwe Beintema and Dieter Lutz. 
 **SWS Fringes and Models**
 ESA SP-481, Vilspa, pp. 375-378. 2009.<br>
 
@@ -65,7 +65,7 @@ A &amp; A 599 A115. 2017.<br>
 Cambridge University Press. 2014.<br>
 
 <a name="press"></a>
-+ W.H.bPress, S.A.bTeukolsky, W.T.bVetterling and B.P.bFlannery
++ W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery
 **Numerical Recipes**,
 Cambridge University Press. 1988-2007. <br>
 

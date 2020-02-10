@@ -121,8 +121,8 @@ the classes.
 + [Style](./docs/style.md)<br>
 A few notes on my style of code and documenation.
 
-+ [References](./docs/references.md)
-A list of external references for BayesisFitting.
++ [References](./docs/references.md)<br>
+A list of external references for BayesicFitting.
 
 ### test
 
