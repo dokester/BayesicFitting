@@ -1,4 +1,4 @@
-# BayesicFitting
+# BayesicFitting Readme.
 
 A package for model fitting and bayesian evidence calculation.
 
@@ -10,10 +10,10 @@ Citation index:
 DOI: 10.5281/zenodo.2597200
 
 
-## What's new in versions 2.4.3
-   * Clean up and unification of the python doc strings.
-   * Reran all examples and test harnasses in python 3.7.
-   * Add random seed to several examples to make them more stable.
+## What's new in versions 2.4.4
+   * Moved BayesicFitting/BayesicFitting/documentation tp BayesicFitting/docs
+   * Added a references.md file which collects (external) references.
+   * Updated the docs files.
 
 ## Content
 
@@ -105,18 +105,24 @@ In the [documenation](./BayesicFitting/documentation) directory a number of docu
 can be found. 
 
 
-+ [Manual](./BayesicFitting/documentation/manual.md)<br>
++ [Manual](./docs/manual.md)<br>
 A first draft of a manual. It obviously needs more work.
 
-+ [Troubles](./BayesicFitting/documentation/troubles.md)<br>
++ [Troubles](./docs/troubles.md)<br>
 A list of troublesome situations and what to do about it.
 
-+ [Glossary](./BayesicFitting/documentation/glossary.md)<br>
++ [Glossary](./docs/glossary.md)<br>
 A list of the terms used throughout this package, with explanations.
 
-+ [Design](./BayesicFitting/documentation/design.md)<br>
++ [Design](./docs/design.md)<br>
 An architectural design document, displaying the relationships between 
 the classes. 
+
++ [Style](./docs/style.md)<br>
+A few notes on my style of code and documenation.
+
++ [References](./docs/references.md)
+A list of external references for BayesisFitting.
 
 ### test
 
@@ -142,7 +148,7 @@ More work needs to be done in:
 
   * Documentation, especially the manual.
   * Examples, more of them and covering more classes.
-  * Introduction of more Problems: MultiOutputProblem, OrderProblem, ...
+  * Introduction of more Problems: OrderProblem, ...
 
 <a name="versions"></a>
 ## 5. Versions
@@ -250,6 +256,11 @@ by ExponentialErrorDistribution
    * Testcases and examples for the classes above
 
  +  3 Feb 2020 version 2.4.3
+   * Clean up and unification of the python doc strings.
+   * Reran all examples and test harnasses in python 3.7.
+   * Add random seed to several examples to make them more stable.
+
+ +  10 Feb 2020 version 2.4.4
    * see above in Whats new.
 
 

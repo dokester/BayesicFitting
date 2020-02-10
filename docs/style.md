@@ -37,7 +37,7 @@ unreadable code.
 as "plus", = reads as "is". So operators have spaces on each side. 
 
   + Brackets as ()[]{} have spaces too if they are selfstanding. E.g. in
-grouping things together, in tuples, lists or dictionaries. 
+grouping things together, in equations, tuples, lists or dictionaries. 
 
   + If parentheses, (), are part of a function the opening parenthesis
 clings to the functionname, followed by a space. The closing one is

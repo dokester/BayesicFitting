@@ -8,7 +8,7 @@
 2. [Model Classes](#modelclasses)
 3. [Fitter Classes](#fitterclasses)
 4. [Nested Sampling](#nested)
-5. [References](#reference)
+5. [References](./references.md)
 
 <a name="intro"></a>
 ## 1. Introduction
@@ -19,9 +19,11 @@ It consists of 3 families of classes: the Model classes, the Fitter
 classes and the NestedSampling classes.
 
 This is not the place to explain either the mathematics behind 
-Bayesian modelling of data or the algorithms used. For the mathematics look at
-the [Sivia][1], [Bishop][2], [von der Linden][3] and [Jaynes][4] 
-and for some fitter algorithms [Press][5]. 
+Bayesian modelling of data or the algorithms used. 
+For the mathematics look at the books of [Sivia](./references.md/#sivia), 
+[Bishop](./references.md/#bishop), [von der Linden](./references.md/#linden)
+and [Jaynes](./references.md/#jaynes) 
+and for some fitter algorithms [Press](./references.md/#press). 
 
 
 <a name="modelclasses"></a>
@@ -589,6 +591,7 @@ likelihood boundary. The **GalileanEngine** is the most efficient
 engine.  
 
 
+<!--
 
 <a name="reference"></a>
 
@@ -608,7 +611,6 @@ Cambridge University Press. 2003.<br>
 Cambridge University Press. 1988-2007. <br>
 
 
-<!--
 D.J.M.Kester (2004), "A Software Package for Parameter Estimation and 
 Model Comparison."
 In: Bayesian Inference and Maximum Entropy Methods in Science and Engineering

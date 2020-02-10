@@ -2,10 +2,10 @@
 
 
 
-BayesicFitting
-==============
-Bayesian model fitting and evidence calculation.
-------------------------------------------------
+# BayesicFitting Manual
+
+## Bayesian model fitting and evidence calculation.
+
 
 
 <!--
@@ -17,9 +17,13 @@ It is achieved by minimizing the distance between the model and the data.
 
 
 It is assumed that the reader is familiar with the Bayesian ways to
-perform inference from data. If not, there are enough books on the
-market that explain what it is about. E.g. [[Sivia][1], [Bishop][2],
-[von der Linden][3] and [Jaynes][4]](#refs).
+perform inference from data. If not, see e.g. 
+[Kester 2](./references.md/#kester2).
+And there are enough books on the market that explain what it is about. 
+E.g. [Sivia](./references.md/#sivia), 
+[Bishop](./references.md/#bishop),
+[von der Linden](./references.md/#linden) and 
+[Jaynes](./references/#jaynes).
 
 The BayesicFitting toolbox can be used to fit data to a model *and* to 
 find the model that fits the data best. The first goal is achieved by
@@ -29,8 +33,8 @@ approximation, or in case of NestedSampler by integrating over the
 posterior.
 
 <a name="quickstart"></a>
-Quick Start
------------
+## Quick Start
+
 
 The easiest way to get started with this package is to look into the 
 [examples](../examples) directory and find an example that looks like
@@ -44,8 +48,7 @@ in the examples directory. Select the example in the list that appears in
 the browser. Copy and edit the example until it works on the problem at hand.
 
 
-Contents
---------
+## Contents
 1. [Introduction](#intro)
 2. [Imports](#imports)
 3. [Models](#models)
@@ -57,7 +60,6 @@ Contents
     + [NestedSampler](#synops-ns)  
     + [Kernels](#synops-kernel)  
     + [Miscellaneous](#synops-miscel)  
-7. [References](#refs)  
 
 ## External Documents
 
@@ -73,6 +75,9 @@ the classes.
 
 + [Style](./style.md)<br>
 A document about coding style adhered to by this project.
+
++ [References](./references.md)  
+A list of external references for BayesisFitting.
 
 <a name="intro"></a>  
 ## 1. Introduction
@@ -111,7 +116,8 @@ that all necessary imports have been performed in the code listed.
 A model is a class that encapsulates a relation between independent 
 variable, parameters and a dependent variable. 
 The independent variable is called **x** (or `xdata`); de parameters are 
-indicated as **p** and the dependent variable is called **y** (or `ydata`).
+indicated as **p** (or `pars`, `param` or `params`) and the dependent 
+variable is called **y** (or `ydata`).
 The relation between them is a mathematical function **f**.
 
 > **y = f(x:p)**
@@ -139,7 +145,8 @@ defined.
 Most **Model**s are 1-dimensional i.e. they require a 1-dimensional
 input vector. Two- or more-dimensional models need 2 or more numbers for
 each result it produces. One could think of fitting  maps or cubes. The
-results of any model is always a 1-dimensional vector.
+results of any model is always a 1-dimensional vector, except when 
+[not](#multioutput).
 
 In general, models of different dimensionality cannot be combined.
 
@@ -258,7 +265,7 @@ models and apply the operation.
 For compound models the (partial) derivatives, (parameter) names etc are 
 properly defined.
 
-All operations are also available as assignment operators (+=, -=, *=, /=, |=).
+All operations are also available as assignment operators: += -= *= /= |=
 
 
 #### Addition (+)
@@ -296,6 +303,10 @@ them to 1.0 the model avoids degeneracy.
 To construct the inverse of **(p<sub>0</sub> + p<sub>1</sub> * x<sup>2</sup>)**:
 
     m7 = ConstantModel( values=1 ) / PolynomialModel( 2, fixed={1:0.0} )
+
+The ConstantModel is a model without parameters that returns a constant value, 
+in this case 1.0 for any value of `x`.
+
 
 ![CompoundModels2](images/manual-4.png "Figure 4")
 <table><tr>
@@ -454,12 +465,63 @@ kernel; lower right an elliptic one and in the upper center a rotated one.
 </td></tr>
 </table>
 
-<!--
-**Model**s come into 2 varieties: those that are linear in its
-parameters and those that are not. The former have great advantages as
-they can be fitted directly to the data; the latter always need an
-iterative fitting approach. 
--->
+### Dynamic Models
+
+Dynamic models can alter their behaviour by changing the number of 
+parameters they contain. The purpose is to find the best model both in
+complexity (number of parameters) as in the parameter values itself.
+**Fitter**s cannot do this, however the **NestedSampler** can.
+
+Dynamic models have 2 extra methods `grow()` and `shrink()` that increase
+cq. decrease the number of parameters. The rate of growth is governed by
+a growPrior.
+
+Dynamic models inherit from **Model** and from **Dynamic**.
+
+    mdl1 = PolynomialDynamicModel( 2 )
+    mdl2 = HarmonicDynamicModel( 0, maxOrder=6 )
+    mdl3 = RepeatingModel( 1, GaussModel(), minComp=1, maxComp=7,
+		same=2, growPrior=JeffreysPrior() )
+
+mdl1 starts as a polynomial of degree 2. It has a minimum degree of 0
+and no maximum. The growPrior is an **ExponentialPrior**. 
+
+mdl2 starts as a HarmonicModel of order 0 with a maximum at 6. The
+growPrior is a **UniformPrior**. 
+
+mdl3 consists of at least 1 repetition of a **GaussModel**, up to 6 repetions
+are possible, where all **GaussModel**s have the same value for the 2nd
+parameters (width).
+
+
+### Modifiable Models
+
+Modifiable models can alter the internal structure of the model. E.g.
+the location of the knots in **SplinesNodel**. Again the purpose is to
+find the best internal structure and the best parameters that go with
+it. This can be done with **NestedSampler**
+
+Modifiable models implement an extra method `vary()` that varies the
+structure. 
+
+Most modifiable models are dynamic. They always inherit from
+**Modifiable** too.
+
+It is indeed debatable whether the internal structure is not just
+another set of parameters. We chose this way as changes in the internal
+structure can be much more complicated than a simple change in value. 
+
+### Multiple Output Models
+
+Some models are easier defined when it results in 2 (or more) values per
+observation. Eg. the outcome of football match (3-1), or the position of
+a star in orbit around another (distance and angle). These model have an
+extra attribute `noutput` indicating how many output values per
+observation are present. 
+
+The use of **MultipleOutputProblem** is needed in **NestedSampler** to
+flatten the multiple outputs.
+
 
 <a name="fitters"></a>
 ## 4. Fitters 
@@ -485,22 +547,6 @@ called [**ErrorDistribution**](#list-errdis).
 Using the **GaussErrorDistribution** is equivalent to using the
 least-squares method.
  
-
-<!--
-A fitter tries to find the minimum in the &chi;<sup>2</sup> landscape,
-cq. the maximum in the likelihood landscape, as a function of the model
-parameters. The values for the parameters where the minimum cq. maximum
-in the landscape is found are the least-squares solution resp. the
-maximum-likelihood solution. If the likelihood is Gaussian the two are
-the same. 
-
-#### data.
-
-Data is a one dimensional vector (array) of measured points that are to
-be compared with the model. The misfit is minimized when using
-&chi;<sup>2</sup>, or the likelihood of the model parameters, given the
-data is maximized.
--->
 
 ### Weights.
 
@@ -602,7 +648,7 @@ and the [evidence](./glossary.md/#evidence).
     stdev = ftr.stdevs               # standard deviations on parameters
     covar = ftr.covariance           # covariance matrix
     chisq = ftr.chisq                # chisq at the optimal params
-    scale = ftr.scale                # remaining noise scale
+    scale = ftr.scale                # scale of the remaining noise
     yfit = ftr.getResult()           # fitted model values
     yfit = model( xdata )            # same as previous
     yband = ftr.monteCarloError()    # 1-sigma confidence region
@@ -612,9 +658,25 @@ the optimal parameter location.
 
 ### Evidence.
 
+
+The [evidence](./glossary.md/#evidence) is a number that indicates how
+probable a model is given the data. Evidence is not an absolute number;
+it must always be used to compare one model with other model(s).
+
+For the casual user the evidence is the single item that lifts Bayesian
+fitting way above ordinary fitting. Wonderful things can be done with it
+that are beyond the standard ways. See my papers 
+[Kester 1](./references.md/#kester1), 
+[Kester 3](./references.md/#kester3), 
+[Kester 4](./references.md/#kester4), 
+[Kester 5](./references.md/#kester5), 
+[Kester 6](./references.md/#kester6) and
+[Kester 7](./references.md/#kester7).
+
+ 
 The evidence can only be calculated when the limits on the parameters
-are provided. And when the noise scale is fitted too, also for the
-scale. [Priors](.glossary.md/#prior) for the parameters are assumed to
+are provided. And, when the noise scale is fitted too, also for the
+scale. [Priors](./glossary.md/#prior) for the parameters are assumed to
 be Uniform, for the scale it is JeffreysPrior.
 
 It is up to the user to make sure that the optimal parameters and noise
@@ -644,9 +706,9 @@ See [example on model comparison](../examples/modelcomparison.ipynb) or
 [harmonicfit](../examples/harmonicfit.ipynb) for demonstration of the use of
 evidence to determine the best model.
 For instructions on when to optimize the noise scale too, see
-[noise2 example](#../examples/noise2.ipynb). 
+[noise2 example](../examples/noise2.ipynb). 
 For a demonstration on the influence of noise on model selection see
-[noise1 example](#../examples/noise.ipynb).
+[noise1 example](../examples/noise.ipynb).
 
 ### Keep fixed.
 
@@ -774,11 +836,15 @@ appropriately weighted.
 **ErrorDistribution** to calculate the likelihoods.
 
 Nested sampling is an idea of David McKay and John Skilling.
+Skilling has written a separate chapter in [Sivia's book](#ref1)
+explaining the Nested Sampling idea, including an algorithm in C, which
+served as the basis (via C, and JAVA) for our implementation. 
 
-
-**NestedSampler** needs more information to run tahn ordinary
+**NestedSampler** needs more information to run than ordinary
 **Fitter**s. It needs priors for all  its parameters and it needs a
-likelihood function. We start off defining some data. 
+likelihood function. 
+
+We start off defining some data. 
 
     xdata = [1.0, 2.0, 3.0, 4.0, 5.0]
     ydata = [0.2, 1.3, 4.5, 1.4, 0.1]
@@ -792,7 +858,7 @@ Set up the model with limits on the uniform priors of the parameters.
 
 The likelihood is calculated by the **GaussErrorDistribution**. By
 default it has a fixed scale. However in most real cases ( see [noise2
-example](#../examples/noise2.ipynb) )  it is better to treat the scale
+example](../examples/noise2.ipynb) )  it is better to treat the scale
 as a hyperparameter, which needs a prior, by default a
 **JeffreysPrior**, and limits.
 
@@ -928,7 +994,7 @@ Since version 2.0 the **ErrorDistribution**s has changed its interface.
 Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
 Now the resposiblities of ErrorDistribution and Problem are better separated. 
 
-The use of e mixture of 2 error distributions is shown in
+The use of a mixture of 2 error distributions is shown in
 [outliers2](#../examples/outliers-2.ipynb).
 
 See below for lists of available [**ErrorDistribution**s](#list-errdis).
@@ -982,13 +1048,15 @@ When the model is dynamic, the **BirthEngine** and **DeathEngine** are
 added to the engine list to govern the increase and decrease of the
 number of parameters.
 
+When a model is modifiable, the **StructurEngine** is added to the
+engine list, to randomly change the structure of the model.
+
 **Engine**s are selectable in the construction.
 The keyword `rate` governs the speed of the engines. High rate equals
 high speed equals low accuracy.  
 
-    ns = NestedSampler( xdata, model, ydata, speed=0.5,
+    ns = NestedSampler( xdata, model, ydata, rate=0.5,
                         engines=["galilean", "gibbs", "chord", "step"] )
-
 
 See below for lists of available [**Engine**s](#list-engines).
 
@@ -1066,7 +1134,7 @@ kernels and miscellaneous.
     Weighted sum of Gauss and Lorentz models; approximation of **VoigtModel**
 + **RadialVelocityModel**<br>
     radial velocity variations of a star, caused by an orbiting planet. 
-    [Gregory][4].  See [example](../examples/HD2039.ipynb)
+    [Gregory](#ref4).  See [example](../examples/HD2039.ipynb)
 + **SincModel**<br>
     Sinc Model.
 + **SineAmpModel**<br>
@@ -1099,13 +1167,15 @@ kernels and miscellaneous.
 
 + **StellarOrbitModel**<br>
     Orbit of a double star as function of time, resulting in 2d sky position.
-    [Boule][6]. See [example](../examples/alphaComae.ipynb)
+    [Boule](#ref6). See [example](../examples/alphaComae.ipynb)
 
-#### Simple dynamic models.
+#### Simple dynamic or modifiable models.
 
 Dynamic models have an adaptable number of parameters.
 They can only be used with **NestedSampler**.
 
++ **DecisionTreeModel**<br>
+    Decision Tree, dynamic and modifiable.
 + **HarmonicDynamicModel**<br>
     Harmonic oscillator Model of variable order.
 + **PolynomialDynamicModel**<br>
@@ -1343,6 +1413,11 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 <!-- dont remove -->
 
++ **StructureEngine**<br>
+    Vary the internal structure of a modifiable model randomly.
+
+<!-- dont remove -->
+
 + **Engine**<br>
     Base class that defines general properties of a Engine.
 
@@ -1433,13 +1508,14 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 </tr>
 </table>
 
+
 <a name="synops-miscel"></a>
 ### Miscellaneous
 
 + **Formatter**<br>
     Format a number or array, nicely into a string.
 + **Kepplers2ndLaw**<br>
-    calculates radius and true anomaly (and derivatives) for Kepplers 2nd law.
+    Calculates radius and true anomaly (and derivatives) for Kepplers 2nd law.
 + **LogFactorial**<br>
     Natural logarithm of n!
 + **OrthonormalBasis**<br>
@@ -1452,18 +1528,62 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 <a name="refs"></a>  
 ## 4. References
 
-[1]: D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
+<a name="ref1"></a>  
+1. D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
 Oxford University Press. 2006.<br>
-[2]: C.M. Bishop. **Pattern Recognition and Machine Learning.**
+
+<a name="ref2"></a>  
+2. C.M. Bishop. **Pattern Recognition and Machine Learning.**
 Springer Science. 2006.<br>
-[3]: W. von der Linden, V. Dose, U. Toussaint. **Bayesian Probabilty Theory.** 
+
+<a name="ref3"></a>  
+3. W. von der Linden, V. Dose, U. Toussaint. **Bayesian Probabilty Theory.** 
 Cambridge University Press. 2014.<br>
-[4]: E.T. Jaynes. **Probability Theory.**
+
+<a name="ref4"></a>  
+4. E.T. Jaynes. **Probability Theory.**
 Cambridge University Press. 2003.<br>
-[5]: P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
+
+<a name="ref5"></a>  
+5. P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
 Cambridge University Press. 2005.<br>
-[6]: C. Boule, K. Andrews, A. Penfield, I. Puckette, K. A. Goodale and 
+
+<a name="ref6"></a>  
+6. C. Boule, K. Andrews, A. Penfield, I. Puckette, K. A. Goodale and 
 S. A. Harfenist. **Determining Binary Stellar Orbits Using Kepplers Equation**.
-Journal of Double Star Observations, Vol 13, p 189. 2017.
+Journal of Double Star Observations, Vol 13, p 189. 2017.<br>
 
+<a name="ref7"></a>  
+7. Do Kester. **Straight Lines.**
+Maximum Entropy and Bayesian Methods. Eds: Von der Linden, W., et al.
+Garching, Kluwer Academic Publishers, pp. 179-188, 1999.<br>
 
+<a name="ref8"></a>  
+8. Do Kester and Romke Bontekoe.
+**Darwinian Model Building.**
+Bayesian Inference and Maximum Entropy Methods in Science and Engineering.
+Eds: Ali-Mohammad Djafari et al. Chamonix. 
+AIP Conference Proceedings 1305, p.49. 2010.<br>
+
+<a name="ref9"></a>  
+9. Do Kester.
+**The Ball is Round.**
+Bayesian Inference and Maximum Entropy Methods in Science and Engineering.
+Eds: Ali-Mohammad Djafari et al. Chamonix.
+AIP Conference Proceedings 1305. p.107. 2010.<br>
+
+<a name="ref10"></a>  
+10. D. Kester, D. Beintema and D. Lutz. 
+**SWS Fringes and Models**
+ESA SP-481, Vilspa, pp. 375-378. 2009.<br>
+
+<a name="ref11"></a>  
+11. Do Kester, Ian Avruch and David Teyssier. 
+**Correction of Electric Standing Waves.** 
+in Bayesian Inference and Maximum Entropy Methods in Science and Engineering,
+AIP Conf. Proc., 1636, 62. 2014.<br>
+
+<a name="ref12"></a>  
+12. Do Kester, Ronan Higgins and David Teyssier.
+**Derivation of sideband gain ratio for Herschel/HIFI**
+A &amp; A 599 A115. 2017.<br>
