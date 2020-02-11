@@ -17,13 +17,15 @@ It is achieved by minimizing the distance between the model and the data.
 
 
 It is assumed that the reader is familiar with the Bayesian ways to
-perform inference from data. If not, see e.g. 
-[Kester 2](./references.md/#kester2).
-And there are enough books on the market that explain what it is about. 
+perform inference from data. If not,
+there are enough books on the market that explain what it is about. 
 E.g. [Sivia](./references.md/#sivia), 
 [Bishop](./references.md/#bishop),
 [von der Linden](./references.md/#linden) and 
 [Jaynes](./references/#jaynes).
+The equations implemented in this toolbox can be found in
+[Kester 2](./references.md/#kester2).
+
 
 The BayesicFitting toolbox can be used to fit data to a model *and* to 
 find the model that fits the data best. The first goal is achieved by

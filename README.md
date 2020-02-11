@@ -101,7 +101,7 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
-In the [documenation](./BayesicFitting/documentation) directory a number of documents
+In the [documenation](./docs) directory a number of documents
 can be found. 
 
 
