@@ -26,7 +26,9 @@ class TestBaseFitter( unittest.TestCase  ) :
         y = np.arange( 10, dtype=float )
         self.assertRaises( NotImplementedError, bf.fit, y )
 
-        self.assertRaises( AttributeError, bf.__getattr__, 'sumwgt' )
+        self.assertTrue( bf.sumwgt == bf.nxdata )
+
+#        self.assertRaises( AttributeError, bf.__getattr__, 'sumwgt' )
         self.assertRaises( AttributeError, bf.__getattr__, 'chisq' )
         self.assertRaises( AttributeError, bf.__getattr__, 'logOccam' )
         self.assertRaises( AttributeError, bf.__getattr__, 'logLikelihood' )

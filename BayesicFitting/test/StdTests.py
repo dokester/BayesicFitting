@@ -49,8 +49,6 @@ def classequal( cls1, cls2 ) :
     for key1,key2 in zip( ld1, ld2 ) :
         val1 = atr1[key1]
         val2 = atr2[key2]
-#        print( "Cls1  ", key1, val1 )
-#        print( "Cls2  ", key2, val2 )
         if isinstance( val1, (list, numpy.ndarray) ) :
             assertAE( val1, val2 )
         elif isinstance( val1, ( int, float, str ) ) :
