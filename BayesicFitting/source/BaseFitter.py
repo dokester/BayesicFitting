@@ -76,6 +76,8 @@ class BaseFitter( object ):
         length of the xdata vector(s)
     ndim : int (read only)
         number of xdata vectors
+    weights : array_like
+        the weights on the data from the last fit
     imageAssistant : ImageAssistant
         to convert images to pixels indices, needed for a fit
     keep : dict of {int : float}
@@ -94,9 +96,6 @@ class BaseFitter( object ):
     design : matrix (read only)
         the design matrix (partial of model to parameters)
         returns self.getDesign()
-    hessian : matrix (read only)
-        the hessian matrix
-        returns self.getHessian()
 
     Attributes (available after a call to fit())
     ----------
@@ -111,6 +110,8 @@ class BaseFitter( object ):
     stdevs, standardDeviations : array_like (read only)
         the standard deviations on the parameters
         returns self.getStandardDeviations()
+    hessian : matrix (read only)
+        the hessian matrix
     covariance : matrix (read only)
         the covariance matrix
         returns self.getCovarianceMatrix()
@@ -242,6 +243,8 @@ class BaseFitter( object ):
             ydata = self.imageAssistant.getydata( ydata )
             if weights is not None :
                 weights = self.imageAssistant.getydata( weights )
+
+        self.weights = weights
 
         if keep is not None :
             return ( self.keepFixed( keep ), ydata, weights )
@@ -457,10 +460,14 @@ class BaseFitter( object ):
         name : string
             name of the attribute
         """
-        if name in ['logOccam', 'logLikelihood', 'chisq', 'sumwgt'] :
+        if name in ['logOccam', 'logLikelihood', 'chisq'] :
             raise AttributeError( str( self ) + ": " + name + " is not yet available." )
         elif name == 'parameters' :
             return self.model.parameters
+        elif name == 'weights' :            ## not present return None
+            return None
+        elif name == 'sumwgt' :             ## not present return nxdata
+            return self.nxdata
         elif name == 'yfit' :
             yfit = self.model.result( self.xdata )
             return yfit if self.imageAssistant is None else self.imageAssistant.resizeData( yfit )
@@ -475,7 +482,8 @@ class BaseFitter( object ):
         elif name == 'scale' :
             return self.getScale()
         elif name == "stdevScale" :
-            return self.scale / math.sqrt( 2 * self.nxdata )
+            return self.scale / math.sqrt( 2 * self.sumwgt )
+#            return self.scale / math.sqrt( 2 * self.nxdata )
         elif name == 'evidence' :
             return self.getEvidence()
         elif name == 'logZ' :
@@ -526,6 +534,8 @@ class BaseFitter( object ):
 
         """
         if params is None : params = self.model.parameters
+        if weights is None : weights = self.weights
+
         self.sumwgt = self.nxdata if weights is None else numpy.sum( weights )
 
         if self.model.isNullModel() :
@@ -541,11 +551,11 @@ class BaseFitter( object ):
         design = design.transpose()
 
         if weights is not None :
-            hessian = numpy.inner( design, design * weights )
+            self.hessian = numpy.inner( design, design * weights )
         else :
-            hessian = numpy.inner( design, design )
+            self.hessian = numpy.inner( design, design )
 
-        return hessian
+        return self.hessian
 
 #      * TBD Condition number see Wikipedia: Condition Number and Matrix Norm
 
@@ -759,8 +769,16 @@ class BaseFitter( object ):
         float : the noise scale
             scale = sqrt( chisq / DOF )
 
+        Raise
+        -----
+        RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
+
         """
-        dof = self.nxdata - self.npfit
+#        dof = self.nxdata - self.npfit
+        dof = self.sumwgt - self.npfit
+        if dof <= 0 :
+            raise RuntimeError( "More parameters than (weighted) data points" )
+
         return math.sqrt( self.chisq / dof )
 
     #  *****EVIDENCE************************************************************
@@ -829,8 +847,13 @@ class BaseFitter( object ):
         ------
         ValueError when no Prior is available
 
+        RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
+
         """
-        dof = self.nxdata - self.npfit
+#        dof = self.nxdata - self.npfit
+        dof = self.sumwgt - self.npfit
+        if dof <= 0 :
+            raise RuntimeError( "More parameters than (weighted) data points" )
 
         if noiseLimits is not None :
             scalerange = math.log( noiseLimits[1] ) - math.log( noiseLimits[0] )
