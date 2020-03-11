@@ -50,7 +50,7 @@ def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
         Default is 0
     linelength : None or int
         length of the lines produced
-        Default is 80
+        Default is 120
     max : None or int
         maximum number of items displayed followed by ... if there are more
         None displays all
@@ -73,7 +73,7 @@ def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
 def fma( array, **kwargs ) :
     return formatter( array, max=None, **kwargs )
 
-def formatter( array, format=None, indent=None, linelength=None, max=-1 ) :
+def formatter( array, format=None, indent=None, linelength=None, max=-1, tail=0 ) :
     """
     Format a number or an array nicely into a string
 
@@ -91,11 +91,15 @@ def formatter( array, format=None, indent=None, linelength=None, max=-1 ) :
         Default is 0
     linelength : None or int
         length of the lines produced
-        Default is 80
+        Default is 120
     max : None or int
         maximum number of items displayed followed by ... if there are more
         None displays all
         Default is 5
+    tail : int
+        print the last items in the array, preceeded by ...
+        Only if the number of items is larger than max.
+        Default is 0
 
     Returns
     -------
@@ -126,10 +130,10 @@ def formatter( array, format=None, indent=None, linelength=None, max=-1 ) :
     fmtlen = len( format % 1 )
 
     result = ""
-    result = recursive_format( result, array, format=format, indent=indent )
+    result = recursive_format( result, array, format=format, indent=indent, tail=tail )
     return result
 
-def recursive_format( result, array, format=None, indent=0 ) :
+def recursive_format( result, array, format=None, indent=0, tail=0 ) :
     global count, nwl, sp, llen, fmtlen, mx, fmt
 
     if array.size == 1 :
@@ -150,10 +154,17 @@ def recursive_format( result, array, format=None, indent=0 ) :
     sp += 1
     shp0 = shp[0] if mx is None else min( shp[0], mx )
     for k in range( shp0 ) :
-        result = recursive_format( result, array[k], format=format, indent=indent )
+        result = recursive_format( result, array[k], format=format,
+                                   indent=indent, tail=tail )
         nwl = True
     if mx is not None and shp[0] > mx :
+        if len( shp ) > 1 :
+            result += "\n"
         result += " ..."
+        for k in range( -tail, 0 ) :
+            result = recursive_format( result, array[k], format=format,
+                                       indent=indent, tail=tail )
+
     result += ( "]"  )
     count = 0
     sp -=1

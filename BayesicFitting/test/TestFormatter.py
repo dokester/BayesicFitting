@@ -31,7 +31,7 @@ __status__ = "Development"
 #  * A JAVA version of this code was part of the Herschel Common
 #  * Science System (HCSS), also under GPL3.
 #  *
-#  *  2006-2015 Do Kester (JAVA CODE)
+#  *  2018-2020 Do Kester
 
 class TestFormatter( unittest.TestCase ) :
     """
@@ -73,6 +73,21 @@ class TestFormatter( unittest.TestCase ) :
         print( fmt( alist ) )
         self.assertTrue( isinstance( alist, list ) )
         print( fmt( 3 ), fmt( 3.4 ) )
+
+    def test3( self ) :
+        print( "===== formatter test3 ===========================" )
+
+        arr = numpy.asarray( [k for k in range(120)], dtype=float  )
+        arr = arr.reshape( (10,12) )
+
+        fmtinit( max=4 )
+        print( fmt( arr ) )
+        print( fmt( arr, max=None ) )
+        print( fmt( arr, tail=1 ) )
+        print( fmt( arr, tail=3 ) )
+
+        print( fmt( arr[1,:], tail=1 ) )
+        print( fmt( arr[1,:], tail=3 ) )
 
     def suite( cls ):
         return ConfiguredTestCase.suite( TestFormatter.__class__ )
