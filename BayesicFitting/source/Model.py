@@ -870,10 +870,10 @@ class Model( FixedModel ):
     def setLimits( self, lowLimits=None, highLimits=None ):
         """
         Sets the limits for the parameters of the compound model.
-        <br>
+
         1. It is valid to insert for either parameter a None value
-        indicating no lower/upper limits.<br>
-        2. When a lowerlimit >= upperlimit no limits are enforced.<br>
+        indicating no lower/upper limits.
+        2. When a lowerlimit >= upperlimit no limits are enforced.
         It only works in *Fitter classes which support it.
 
         Parameters
@@ -1272,7 +1272,7 @@ class Model( FixedModel ):
     def testPartial( self, xdata, params ):
         """
         A test routine to check the calculation of the partial derivatives.
-        <br>
+
         It is compared to a numerical calculation.
 
         Parameters
