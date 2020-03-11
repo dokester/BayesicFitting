@@ -1,5 +1,5 @@
 
-# BayesicFitting Design Documentation
+# Architectural Design Document.
 
 
 ## Contents.

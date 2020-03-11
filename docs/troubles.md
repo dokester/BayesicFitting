@@ -1,5 +1,5 @@
 
-## Restrictions and Trouble Shooting.
+# Restrictions and Trouble Shooting.
 
 **The math is all OK; computation is the nightmare.**
 
@@ -19,13 +19,15 @@ is the `verbose` option, which prints increasingly more information for
 higher values.
 
 It is also a good idea to visually inspect the results of the fit. All
-fitters have a method `fitter.plotResult( xdata, ydata, model )`. 
-It is more easily called by turning on the plot option in the fit method:
-`fitter.fit( ydata, plot=True )`.
+fitters have a method<br> 
+`fitter.plotResult( xdata, ydata, model )`<br> 
+It is more easily called by turning on the plot option in the fit method:<br>
+`fitter.fit( ydata, plot=True )`<br>
 
 Here are some guidelines that might help to get usefull results.
 
-+ **Constraints on the independent variable(s)**<br>
+<a name="restriction"></a>
+### **Constraints on the independent variable(s)**<br>
 The independent variable(s) (x) should be nice numbers, ie. roughly of
 order 1. Mostly the fitter obtains solutions by manipulating a matrix
 consisting of a direct product of the partial derivatives of the model
@@ -38,7 +40,7 @@ The Fitter software can not and does not scale its inputs in any way. It
 takes it all at face value. It is upto the user to present the Fitters
 with usable data. 
 
-+ **Constraints on the dependent variable**<br>
+### **Constraints on the dependent variable**<br>
 The dependent variable (y) has less constraints. Still there is a silent
 assumption in the algorithms that the amount of noise in the data is of
 the order 1. This is only of importance for the stopping of
@@ -54,7 +56,7 @@ the noise level attains a more usefull value. <br>
 Check whether &chi;<sup>2</sup> is of the order of the
 number of datapoints. 
 
-+ **Model Degeneracy**<br>
+### **Model Degeneracy**<br>
 Sometimes the model is degenerate, meaning that 2 (or more) of its 
 parameters are essentially measuring the same thing. 
 Trying to fit data using Fitter to such a model results in a singular matrix.
@@ -65,14 +67,16 @@ Try hasDegeneracy() to check for this condition.<br>
 -->
 In general it is better to use models which are not degenerated.   
 
-+ **Runtime Warning.**<br>
+<a name="warning"></a>
+### **Runtime Warning.**<br>
 It can happen that a runtime warning is thrown during the run of a 
 fitter (or of NestedSampler). In most cases the results are still OK.
 The program sailed undamaged pass the obstacle. Although some extra 
 precautions should be taken with the results, the warnings can almost
 always be ignored.
 
-+ **(Nonlinear)Fitter does not find the minimum.**<br>
+<a name="help"></a>
+### **(Nonlinear)Fitter does not find the minimum.**<br>
 When a non-linear fitter searches for a minimum, it migh happen that for
 almost all values of the parameters &chi;<sup>2</sup> does not have a
 gradient. That is when the parameters move away from the sought minimum,
@@ -91,19 +95,19 @@ should be found, feed them to the system as initial parameters.
 Otherwise you have to use the AmoebaFitter in the annealing mode or even
 do exhaustive search. Both strategies take a lot more time.
 
-+ **Nonlinear fitters produce warnings.**<br>
+### **Nonlinear fitters produce warnings.**<br>
 Sometimes a nonlinear fitter produces a division-by-zero warning. When 
 the fitter just continues and produces sensible results, the warnings
 can be ignored. They are caused by a noise scale equal to 0, when 
 calculating the loglikelihood. As +inf is larger than any other number 
 the fitter cannot have a minimum there. 
 
-+ **Matrix is degenerate**<br>
+### **Matrix is degenerate**<br>
 The model is (almost) degenerate under the data it is presented to. In
 general this signals that the model is not the best one for the data at
 hand. Use a simpler model.
 
-+ **AmoebaFitter does not start.**<br>
+### **AmoebaFitter does not start.**<br>
 The size of the Simplex in the AmoebaFitter is by default 1.  When your
 x-data is  very much larger (or smaller) than 1 and you set your
 startValues accordingly,  you might want to adapt the size of the
@@ -111,7 +115,7 @@ simplex too.  In extreme cases the 1 vanishes in the precision of the
 startValues and the  simplex is frozen in some dimension(s). Use
 AmoebaFitter.fit( data, size=simplexsize ).
 
-+ **&chi;<sup>2</sup> is zero.**<br>
+### **&chi;<sup>2</sup> is zero.**<br>
 This can only happen when the data fit the
 model perfectly. And as true perfection is not given to us it often is
 the result of something else e.g. digitization of the data: the data is
@@ -123,7 +127,7 @@ digitization levels (presumably at distance 1).
 This noise can be added to the internal &chi;<sup>2</sup> with 
 setChiSquared( N/12 ).
 
-+ **Standard deviations seem too large.**<br>
+### **Standard deviations seem too large.**<br>
 When you think that the standard deviations on the parameters are 
 ridiculously large, please calculate the confidence region on the model fit 
 (use fitter.monteCarloError()). This 1-&sigma; confidence interval is obtained 
@@ -133,14 +137,14 @@ while the confidence region is still acceptable. <br>
 The confidence region is actually is better indicator for how well the model
 performs than the standard deviations on the parameters.  
 
-+ **NestedSampler and standard deviations.**<br>
+### **NestedSampler and standard deviations.**<br>
 Standard deviations are proportional to the noise scale divided by the 
 square root of the number of points. Nestedsampler is doing that too. 
 However, if the noise scale is fixed during the run of NestedSampler, 
 the standard deviations on the parameters is as much off as the true noise 
 scale differs from the provided noise scale.
 
-+ **Parameters at the edge**<br>
+### **Parameters at the edge**<br>
 The standard deviations of the parameters are calculated as the
 square root of chisq multiplied by the diagonal elements of the inverse
 Hessian matrix at the chisq minimum, divided by the degrees of freedom.

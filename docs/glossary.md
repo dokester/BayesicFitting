@@ -1,11 +1,16 @@
 <a name="glossary"> </a>
-## Glossary 
+# Glossary 
 
 A list of terms used in this package, with a short explanation. 
-The sizes listed at various terms are explained at the end.
+
+The sizes listed at various terms:<br>
+D: dimension of the input variable(s).<br>
+K: number of parameters in the model.<br>
+N: number of data points.<br>
+
 
 <a name="indepvar"></a>
-+ **Independent Variable**<br>
+### **Independent Variable**<br>
 The vector(s) of coordinates (locations, times, frequencies or
 whatever), at which  the measurements were made. These vector(s) are
 known beforehand. Mostly in the ordinary 1 dimensional case this would
@@ -15,7 +20,7 @@ problem.<br>
 Size = N if D == 1 else D * N.
 
 <a name="depvar"></a>
-+ **Dependent Variable**<br>
+### **Dependent Variable**<br>
 The vector of measured datapoints. For the fitterclasses this needs 
 to be a 1-dim vector. For fitting maps, cubes or even higher dimensional 
 datasets automatic conversion is done to get the dependent and
@@ -23,7 +28,7 @@ independent variables in the proper shape.<br>
 Size = N.
 
 <a name="weight"></a>
-+ **Weight**<br>
+### **Weight**<br>
 A vector of the same shape as the dependent variable representing the
 weights of the individual datapoints. Weights by nature are
 non-negative. <br> 
@@ -41,7 +46,7 @@ are preferred in BayesicFitting, throughout.<br>
 Size = N.
 
 <a name="model"></a>
-+ **Model**<br>
+### **Model**<br>
 The mathematical relationship which is supposed to be present between the 
 independent and the dependent variables. 
 The relationship mostly contains one or more unknown values, called parameters.
@@ -49,18 +54,18 @@ The fitting process is a search for those model parameters that minimize the
 differences between the modelled data and the measured data.
 
 <a name="param"></a>
-+ **Parameter**<br>
+### **Parameter**<br>
 The parameters of the model. After fitting they are at the optimal values.<br>
 Size = K.
 
 <a name="problem"></a>
-+ **Problem**<br>
+### **Problem**<br>
 A container object that collects all elements of a problem e.g. the Model, the 
 independent and dependent variables and if present, the weights. **Problem**s
 are only relevant in the context of NestedSampler.
 
 <a name="chisq"></a>
-+ **Chisq**<br>
+### **Chisq**<br>
 Chisq is the global misfit of the data (D) wrt the model (M), multiplied with 
 the weights, if applicable : <br>
 &chi;<sup>2</sup> = &Sigma; w * ( D - M )<sup>2</sup> <br>
@@ -70,7 +75,7 @@ In least-squares setting, the fitters minimize Chisq to find the optimal
 parameters. 
 
 <a name="lhood"></a>
-+ **Likelihood**<br>
+### **Likelihood**<br>
 The cumulative probability of the data, given the parameters and model.
 In practice the log of the likelihood is used as it is a more manageable,
 nicer number.<br>
@@ -80,7 +85,7 @@ parameters is found. In case of a Gaussian likelihood, this ML
 solution is the same as the least squares solution. 
 
 <a name="stdev"></a>
-+ **Standard Deviation**<br>
+### **Standard Deviation**<br>
 The standard deviation of the parameters. It is the squareroot of the
 trace of the [covariance matrix](#covar)<br>
 When the number of data points
@@ -88,7 +93,7 @@ increases the standard deviations decrease roughly with a factor sqrt(N).<br>
 Size = K.
 
 <a name="noise"></a>
-+ **Scale** or **Noise Scale**<br>
+### **Scale** or **Noise Scale**<br>
 The average amount of noise left over when the model with optimized 
 parameters has been subtracted. <br>
 s = sqrt( &chi;<sup>2</sup> / ( N - K ) ) <br>
@@ -96,32 +101,32 @@ Scale will <b>not</b> decrease when the number of datapoints
 increase.
 
 <a name="confidence"></a>
-+ **Confidence Region**<br>
+### **Confidence Region**<br>
 The confidence region is the wiggle room of the optimal solution. 
 It is derived via a montecarlo method from the covariance matrix. 
 
 <a name="design"></a>
-+ **Design Matrix**<br>
+### **Design Matrix**<br>
 The matrix of the partial derivatives of the model function to each of 
 its parameters at every data point. It is also known as the Jacobian 
 (matrix).<br>
 Size = N * K.
 
 <a name="hessian"></a>
-+ **Hessian Matrix**<br>
+### **Hessian Matrix**<br>
 The inner product of the design matrix with its transpose. In the 
 presence of weights these are also folded in.<br>
 Size = K * K.
 
 <a name="covar"></a>
-+ **Covariance Matrix**<br>
+### **Covariance Matrix**<br>
 The covariance matrix is the inverse of the Hessian matrix multiplied by
 the scale squared. The standard deviations are defined as the square
 root of the diagonal elements of this matrix.<br>
 Size = K * K
 
 <a name="prior"></a>
-+ **Prior** or **Prior probability**<br>
+### **Prior** or **Prior probability**<br>
 The prior is the probability of the parameters (in our case) before 
 considering the data.<br>
 There is a lot of mumbo-jumbo about priors. They are said to be
@@ -136,7 +141,7 @@ saturation etc. My personal rule of thumb is, whenever you start to
 frown on the outcome of a parameter it is out of your prior range.
 
 <a name="posterior"></a>
-+ **Posterior** or **Posterior probability**<br>
+### **Posterior** or **Posterior probability**<br>
 The posterior is the probability of the parameters (in our case) after 
 considering the data.<br>
 According to Bayes Rule, the joint probability of data and parameters,
@@ -149,7 +154,7 @@ to be a proper probability, the evidence acts as a normalizing constant
 of the prior * likelihood.
 
 <a name="evidence"></a>
-+ **Evidence**<br>
+### **Evidence**<br>
 The integral of the prior * likelihood over the parameter space. It provides
 the evidence the data carry for the model. I.e. it tells us how probable
 the model is given the data. Technically seen there is another application of
@@ -171,13 +176,9 @@ model B.
   P(A)/P(B) = 10^f.
 
 <a name="information"></a>
-+ **Information**<br>
+### **Information**<br>
 The log of the ratio the space available to the parameters under the prior
 probability to the space under the posterior probability. 
 
-The sizes given above are:<br>
-D: dimension of the input variable(s).<br>
-K: number of parameters in the model.<br>
-N: number of data points.<br>
 
 

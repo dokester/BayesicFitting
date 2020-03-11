@@ -34,7 +34,9 @@ correct. See [Obfuscated C](https://ioccc.org), a competition in writing
 unreadable code.
 
   + Readable sentences have spaces between words. Operators are words: + reads
-as "plus", = reads as "is". So operators have spaces on each side. 
+as "plus", = reads as "is". So operators have spaces on each side. <br>
+Except when the "=" is part of a keyword argument. In that case there are 
+no spaces around it. To visually connect the argument to the keyword.
 
   + Brackets as ()[]{} have spaces too if they are selfstanding. E.g. in
 grouping things together, in equations, tuples, lists or dictionaries. 

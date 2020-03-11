@@ -1212,7 +1212,7 @@ common to all classes that inherit from them.
     Contains a number of methods common to Dynamic models.
 
 
-<a name="ref-fitter"></a>  
+<a name="synops-fitter"></a>  
 ### Fitters
 
 #### Linear fitters
@@ -1289,7 +1289,7 @@ BaseFitters contain common methods for fitters that inherit from them.
     Thrown when an iterative fitter stops while the minimum has not been found.
 
 
-<a name="ref-ns"></a>
+<a name="synops-ns"></a>
 ### NestedSampler
 
 + **NestedSampler**<br>
