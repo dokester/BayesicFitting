@@ -1,6 +1,7 @@
 import numpy as numpy
 from . import Tools
 from .Formatter import formatter as fmt
+from .Formatter import fma
 
 from .Engine import Engine
 
@@ -94,6 +95,14 @@ class GibbsEngine( Engine ):
         perm = self.rng.permutation( fitIndex )
         ur = self.unitRange * ( 1 + 2.0 / len( self.walkers ) )
 
+        param = walker.allpars
+        if self.verbose > 4 :
+            print( "alpar ", fma( param ), fmt( walker.logL ), fmt( lowLhood) )
+            fip = param[fitIndex]
+            print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
+            print( "fitin ", fma( fitIndex ), self.maxtrials )
+            print( "unitr ", fma( self.unitRange ) )
+
         Lbest = self.walkers[-1].logL
         t = 0
         for c in perm :
@@ -113,6 +122,9 @@ class GibbsEngine( Engine ):
                 param[c] = self.unit2Domain( problem, ptry, kpar=c )
 
                 Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
+
+                if self.verbose > 4 :
+                    print( "Gibbs ", fma(param), fmt(Ltry), kk, fmt( step ) )
 
                 if Ltry >= lowLhood:
                     self.reportSuccess( )

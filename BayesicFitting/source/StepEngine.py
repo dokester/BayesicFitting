@@ -1,5 +1,7 @@
 import numpy as numpy
 from . import Tools
+from .Formatter import formatter as fmt
+from .Formatter import fma
 
 from .Engine import Engine
 
@@ -99,13 +101,22 @@ class StepEngine( Engine ):
         param = walker.allpars
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
 
+        if self.verbose > 4 :
+            print( "alpar ", fma( param ), fmt( walker.logL ), fmt( lowLhood) )
+            fip = param[fitIndex]
+            print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
+            print( "fitin ", fma( fitIndex ), self.maxtrials )
+            print( "unitr ", fma( self.unitRange ) )
+
+
+
         sz = 1.0
         ptry = param.copy()
+        step = ( 2 * self.rng.rand( np ) - 1 ) * urange
         kk = 0
         while True :
             kk += 1
 
-            step = ( 2 * self.rng.rand( np ) - 1 ) * urange
             while True :
                 utry = usav + step
                 q0 = numpy.where( utry < 0 )[0]
@@ -123,12 +134,17 @@ class StepEngine( Engine ):
             ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
 
             Ltry = self.errdis.logLikelihood( problem, ptry )
+
+            if self.verbose > 4 :
+                print( "Step  ", fma(ptry), fmt(Ltry), kk, fmt( sz ) )
+
             if Ltry >= lowLhood:
                 self.reportSuccess( )
                 self.setWalker( walker, problem, ptry, Ltry, fitIndex=fitIndex )
                 break
-            elif kk < self.maxtrials :
-                sz *= 0.5
+            elif kk <= self.maxtrials :
+                sz *= 0.7
+                step *= sz
                 self.reportReject( )
             else :
                 self.reportFailed()
