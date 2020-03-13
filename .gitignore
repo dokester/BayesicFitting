@@ -6,8 +6,6 @@ dist/
 build/
 *egg/
 *egg-info/
-docs/*.dia~
-docs/*.html
 docs/images/.ipynb_checkpoints
 BayesicFitting/examples/.ipynb_checkpoints
 BayesicFitting/examples/Untitled*.ipynb

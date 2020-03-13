@@ -1447,7 +1447,7 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 </tr>
 <tr>
   <td><b>CosSquare</b></td>
-  <td>cos<sup>2</sup>( 0.5*&pi;*x )</td>
+  <td>cos<sup>2</sup>( 0.5 &pi; x )</td>
   <td>true</td>
 </tr>
 <tr>
