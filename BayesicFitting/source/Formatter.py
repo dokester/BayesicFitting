@@ -158,10 +158,14 @@ def recursive_format( result, array, format=None, indent=0, tail=0 ) :
                                    indent=indent, tail=tail )
         nwl = True
     if mx is not None and shp[0] > mx :
-        if len( shp ) > 1 :
-            result += "\n"
-        result += " ..."
-        for k in range( -tail, 0 ) :
+        if shp[0] > mx + tail :
+            lens = len( shp )
+            if lens > 1 :
+                result += "\n%s..." % spaces( lens + indent )
+            else :
+                result += " ..."
+        t = min( tail, shp[0] - mx )
+        for k in range( -t, 0 ) :
             result = recursive_format( result, array[k], format=format,
                                        indent=indent, tail=tail )
 

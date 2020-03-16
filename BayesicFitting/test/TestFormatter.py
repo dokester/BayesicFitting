@@ -88,6 +88,31 @@ class TestFormatter( unittest.TestCase ) :
 
         print( fmt( arr[1,:], tail=1 ) )
         print( fmt( arr[1,:], tail=3 ) )
+        print( fmt( arr[1,:], max=8, tail=2, linelength=200 ) )
+        print( fmt( arr[1,:], max=8, tail=3, linelength=200 ) )
+        print( fmt( arr[1,:], max=8, tail=4, linelength=200 ) )
+        print( fmt( arr[1,:], max=8, tail=5, linelength=200 ) )
+
+    def test4( self ) :
+        print( "===== formatter test4 ===========================" )
+
+        arr = numpy.asarray( [k for k in range(60)], dtype=float  )
+        arr = arr.reshape( (3,4,5) )
+
+        fmtinit( max=4 )
+        print( "fmt( arr ) ", fmt( arr, indent=12 ) )
+        print( "max=None   ", fmt( arr, max=None, indent=12 ) )
+        print( "max=1      ", fmt( arr, max=1, indent=12 ) )
+        print( "max=2      ", fmt( arr, max=2, indent=12 ) )
+        print( "max=2,tl=1 ", fmt( arr, max=2, tail=1, indent=12 ) )
+
+        print( "           ", fmt( [[[2.,1.]]] ) )
+
+        print( fmt( arr ) )
+        print( fmt( arr, max=None ) )
+        print( fmt( arr, max=1 ) )
+        print( fmt( arr, max=2 ) )
+        print( fmt( arr, max=2, tail=1 ) )
 
     def suite( cls ):
         return ConfiguredTestCase.suite( TestFormatter.__class__ )
