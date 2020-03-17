@@ -11,9 +11,11 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new in versions 2.4.4
-   * Moved BayesicFitting/BayesicFitting/documentation tp BayesicFitting/docs
+   * Moved BayesicFitting/BayesicFitting/documentation to BayesicFitting/docs
    * Added a references.md file which collects (external) references.
    * Updated the docs files.
+   * Handling of weight in accordance with the definition in the Glossary.
+   * Add keyword tail= to formatter to display last items of an array.
 
 ## Content
 
@@ -255,12 +257,12 @@ by ExponentialErrorDistribution
    * Some restructering necessitated by the classes above.
    * Testcases and examples for the classes above
 
- +  3 Feb 2020 version 2.4.3
+ + 3 Feb 2020 version 2.4.3
    * Clean up and unification of the python doc strings.
    * Reran all examples and test harnasses in python 3.7.
    * Add random seed to several examples to make them more stable.
 
- +  10 Feb 2020 version 2.4.4
-   * see above in Whats new.
+ + 17 Mar 2020 version 2.4.4
+   * See above in Whats new.
 
 
