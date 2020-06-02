@@ -1,14 +1,8 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
 from .Tools import setAttribute as setatt
 
 from .PolynomialModel import PolynomialModel
 from .Dynamic import Dynamic
-from .Prior import Prior
-from .ExponentialPrior import ExponentialPrior
-from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -135,16 +129,8 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
         self.deltaNpar = 1
 
         if copy is None :
-            setatt( self, "minDegree", minDegree, type=int )
-            setatt( self, "maxDegree", maxDegree, type=int, isnone=True )
-            if growPrior is None :
-                if maxDegree is None :
-                    self.growPrior = ExponentialPrior( scale=2 )
-                else :
-                    lim = [self.minComp, self.maxComp+1]    # limits on components
-                    self.growPrior =  UniformPrior( limits=lim )
-            else :
-                self.growPrior = growPrior
+            self.setGrowPrior( growPrior=growPrior, min=minDegree, max=maxDegree,
+                           name="Degree" )
         else :
             setatt( self, "minDegree", copy.minDegree )
             setatt( self, "maxDegree", copy.maxDegree )
@@ -164,7 +150,7 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
         if self.setDynamicAttribute( name, value ) :
             return
         else :
-            super( PolynomialDynamicModel, self ).__setattr__( name, value )
+            super( ).__setattr__( name, value )
 
     def __getattr__( self, name ) :
         """
@@ -182,7 +168,7 @@ class PolynomialDynamicModel( PolynomialModel, Dynamic ):
         if name == 'maxComp' :
             return self.maxDegree if self.maxDegree is None else ( self.maxDegree + 1 )
 
-        return super( PolynomialDynamicModel, self ).__getattr__( name )
+        return super( ).__getattr__( name )
 
 
     def baseName( self ):

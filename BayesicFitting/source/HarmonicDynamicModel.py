@@ -6,9 +6,6 @@ from .Tools import setAttribute as setatt
 
 from .HarmonicModel import HarmonicModel
 from .Dynamic import Dynamic
-from .Prior import Prior
-from .ExponentialPrior import ExponentialPrior
-from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -135,16 +132,8 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
         self.deltaNpar = 2
 
         if copy is None :
-            setatt( self, "minOrder", minOrder, type=int )
-            setatt( self, "maxOrder", maxOrder, type=int, isnone=True )
-            if growPrior is None :
-                if maxOrder is None :
-                    setatt( self, "growPrior", ExponentialPrior( scale=2 ) )
-                else :
-                    lim = [minOrder, maxOrder+1]        # limits on components
-                    setatt( self, "growPrior", UniformPrior( limits=lim ) )
-            else :
-                setatt( self, "growPrior", growPrior, type=Prior )
+            self.setGrowPrior( growPrior=growPrior, min=minOrder, max=maxOrder,
+                           name="Order" )
         else :
             setatt( self, "minOrder", copy.minOrder )
             setatt( self, "maxOrder", copy.maxOrder )
@@ -164,7 +153,7 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
         if self.setDynamicAttribute( name, value ) :
             return
         else :
-            super( HarmonicDynamicModel, self ).__setattr__( name, value )
+            super( ).__setattr__( name, value )
 
     def __getattr__( self, name ) :
         """
@@ -182,7 +171,7 @@ class HarmonicDynamicModel( HarmonicModel, Dynamic ):
         if name == 'maxComp' :
             return self.maxOrder
 
-        return super( HarmonicDynamicModel, self ).__getattr__( name )
+        return super( ).__getattr__( name )
 
     def basePrior( self, k ):
         """

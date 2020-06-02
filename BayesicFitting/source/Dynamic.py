@@ -2,8 +2,9 @@ import numpy as numpy
 from . import Tools
 from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
-
 from .Prior import Prior
+from .ExponentialPrior import ExponentialPrior
+from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
 __year__ = 2019
@@ -65,6 +66,34 @@ class Dynamic( object ):
     def isDynamic( self ) :
         return self.dynamic
 
+    def setGrowPrior( self, growPrior=None, min=1, max=None, name="Comp" ) :
+        """
+        Set the growth prior.
+
+        Parameters
+        ----------
+        growPrior : None or Prior
+            governing the birth and death.
+            ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+        min : int
+            lower limit on growthprior
+        max : None or int
+            upper limit on growthprior
+        name : str
+            name of the component
+        """
+        setatt( self, "min%s"%name, min, type=int )
+        setatt( self, "max%s"%name, max, type=int, isnone=True )
+        if growPrior is None :
+            if max is None :
+                setatt( self, "growPrior", ExponentialPrior( scale=2 ) )
+            else :
+                lim = [min, max+1]              # limits on components
+                setatt( self, "growPrior", UniformPrior( limits=lim ) )
+        else :
+            setatt( self, "growPrior", growPrior, type=Prior )
+
+
     def setDynamicAttribute( self, name, value ) :
         """
         Set attribute, if it belongs to a Dynamic Models.
@@ -109,6 +138,8 @@ class Dynamic( object ):
         ----------
         offset : int
             index where the params of the Dynamic model start
+        rng : random number generator
+            to generate a new parameter.
 
         Return
         ------
@@ -141,7 +172,7 @@ class Dynamic( object ):
 
         return True
 
-    def shrink( self, offset=0, **kwargs ):
+    def shrink( self, offset=0, rng=None, **kwargs ):
         """
         Decrease the degree by one downto minComp ( default 1 ).
 
@@ -149,6 +180,8 @@ class Dynamic( object ):
         ----------
         offset : int
             index where the params of the Dynamic model start
+        rng : random number generator
+            Not used in this implementation
 
         Return
         ------
@@ -209,8 +242,6 @@ class Dynamic( object ):
         if location is None :
             location = self.npbase
 
-        mdlpar = self._head.parameters
-
 #        print( "DYN1  ", dnp, offset, self.npmax, self.npbase, self.npchain, mdlpar )
 
         setatt( self, "location", location )
@@ -256,6 +287,9 @@ class Dynamic( object ):
             to be given to the inserted parameters (only when dnp>0)
 
         """
+
+#        print( "DY IN  ", fmt( param, max=None ), location, dnp, offset )
+
         np = len( param )
         newpar = numpy.zeros( np + dnp, dtype=float )
 
@@ -272,6 +306,8 @@ class Dynamic( object ):
             k1 = k2 + dnp
             newpar[:k1] = param[:k1]
             newpar[k1:] = param[k2:]
+
+#        print( "DY OUT ", fmt( newpar, max=None ), k1, k2 )
 
         return newpar
 
