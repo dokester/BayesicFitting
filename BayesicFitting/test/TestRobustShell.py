@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestRobustShell
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
@@ -32,7 +33,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2004 SRON, Do Kester
+#  *    2004 - 2020 Do Kester
 
 class TestRobustShell( unittest.TestCase ):
     """
@@ -41,19 +42,17 @@ class TestRobustShell( unittest.TestCase ):
     Author       Do Kester
 
     """
-    def plot1( self ) :
-        self.test1( plot=True )
-        plt.show()
-
-    def plot2( self ) :
-        self.test2( plot=True )
-        plt.show()
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
     #  **************************************************************
-    def test1( self, plot=False ):
+    def test1( self ):
         """     #   test slope fit  """
 
         print( "\n   Robust fitter Test 1  \n" )
+
+        plot = self.doplot
 
         ndata = 101
         aa = 5.0            #  average offset
@@ -160,10 +159,12 @@ class TestRobustShell( unittest.TestCase ):
         if plot :
             plt.plot( x, romod( x ), 'm-' )
             plt.plot( x, rf.weights, 'm-' )
+            plt.show()
         assertAAE( par, alt, 1 )
         assertAAE( std, ast, 1 )
 
-    def test2( self, plot=False ):
+    def test2( self ):
+        plot = self.doplot
 
         ndata = 101
         c0 = 3.2
@@ -238,6 +239,7 @@ class TestRobustShell( unittest.TestCase ):
         if plot :
             plt.plot( x, modl2( x ), 'r-' )
             plt.plot( x, rf.weights, 'r-' )
+            plt.show()
         assertAAE( par2, par3, 1 )
         assertAAE( std2, std3, 1 )
 

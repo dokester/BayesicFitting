@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 from BayesicFitting import *
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -57,34 +58,34 @@ class TestOrthonormalBasis( unittest.TestCase ):
 
         a1 = numpy.array( [1,0,2,1], dtype=float )
         u1 = onb.normalise( a1 )
-        print( "vector  ", a1 )
-        print( "ortnor  ", u1 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a1 ) )
+        print( "ortnor  ", fmt( u1 ) )
+        print( "basis  ", fmt( onb.basis, indent=8 ) )
+        print( "" )
         assertAAE( u1, a1 / math.sqrt( 6 ) )
 
         a2 = numpy.array( [2,2,3,1], dtype=float )
         u2 = onb.normalise( a2 )
-        print( "vector  ", a2 )
-        print( "ortnor  ", u2 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a2 ) )
+        print( "ortnor  ", fmt( u2 ) )
+        print( "basis  ", fmt( onb.basis, indent=8 ) )
+        print( "" )
         assertAAE( u2, numpy.array( [1,4,0,-1] ) / ( 3 * math.sqrt( 2 ) ) )
 
         a3 = numpy.array( [1,1,0,1], dtype=float )
         u3 = onb.normalise( a3 )
-        print( "vector  ", a3 )
-        print( "ortnor  ", u3 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a3 ) )
+        print( "ortnor  ", fmt( u3 ) )
+        print( "basis  ", fmt( onb.basis, indent=8 ) )
+        print( "" )
         assertAAE( u3, numpy.array( [4,1,-6,8] )/ math.sqrt( 117 ) )
 
         a4 = numpy.array( [2,1,0,1], dtype=float )
         u4 = onb.normalise( a4 )
-        print( "vector  ", a4 )
-        print( "ortnor  ", u4 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a4 ) )
+        print( "ortnor  ", fmt( u4 ) )
+        print( "basis  ", fmt( onb.basis, indent=8 ) )
+        print( "" )
 #        assertAAE( u4, numpy.array( [4,1,-6,8] )/ math.sqrt( 117 ) )
 
         b = onb.basis
@@ -97,25 +98,26 @@ class TestOrthonormalBasis( unittest.TestCase ):
 
         a5 = numpy.array( [1,1,0,2], dtype=float )
         u5 = onb.normalise( a5 )
-        print( "vector  ", a5 )
-        print( "ortnor  ", u5 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a5 ) )
+        print( "ortnor  ", fmt( u5 ) )
+        print( "basis  ", fmt( onb.basis, indent=8 ) )
+        print( "" )
         assertAAE( u5, numpy.array( [1,1,0,2] )/ math.sqrt( 6 ) )
 
         a6 = numpy.random.rand( 20 ) - 0.5
         u6 = onb.normalise( a6, reset=True )
-        print( "vector  ", a6 )
-        print( "ortnor  ", u6 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a6 ) )
+        print( "ortnor  ", fmt( u6 ) )
+        print( "basis  ", fmt( onb.basis, indent=8, max=None ) )
+        print( "" )
 
         a7 = numpy.random.rand( 20 ) - 0.5
         u7 = onb.normalise( a7, reset=False )
-        print( "vector  ", a7 )
-        print( "ortnor  ", u7 )
-        print( "basis" )
-        print( onb.basis )
+        print( "vector  ", fmt( a7 ) )
+        print( "ortnor  ", fmt( u7 ) )
+        print( "basis  ", fmt( onb.basis, indent=8, max=None ) )
+        print( "" )
+
         b = onb.basis
         assertAAE( numpy.inner( b[0,:], b[1,:] ), 0.0 )
 

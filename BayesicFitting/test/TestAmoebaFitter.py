@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestAmoebaFitter
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
@@ -63,10 +64,11 @@ class TestAmoebaFitter( unittest.TestCase ):
 
 
 ################################################################################
-    def plotAmoebaFitter( self ):
-        self.testAmoebaFitter( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def testAmoebaFitter( self, plot=False ):
+    def testAmoebaFitter( self ):
 
         c0 = 3.2
         c1 = -0.1
@@ -110,7 +112,7 @@ class TestAmoebaFitter( unittest.TestCase ):
         assertAAE( par1, par2[:3], 1 )
         assertAAE( par2, tr, 0 )
 
-        if plot :
+        if self.doplot :
             xx = numpy.linspace( -1, +1, 1001 )
             plt.plot( self.x, y, 'k+' )
             plt.plot( xx, modl1.result( xx ), 'k-' )

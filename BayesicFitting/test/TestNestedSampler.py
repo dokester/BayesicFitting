@@ -2,6 +2,7 @@
 # or :       python3 -m unittest TestNestedSampler.TestNestedSampler.test1
 
 import unittest
+import os
 import time
 import numpy as numpy
 from astropy import units
@@ -46,6 +47,10 @@ class TestNestedSampler( unittest.TestCase ):
 
     """
 
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
     def makeData( self, n=3 ) :
 
         N = 201
@@ -89,18 +94,10 @@ class TestNestedSampler( unittest.TestCase ):
         return pp, y0, x, y, w
 
 
-    def plot1( self ):
-        self.test1( plot=True )
-
-    def plot2( self ):
-        self.test2( plot=True )
-
-    def plot3( self ):
-        self.test3( plot=True )
-
-
-    def test1( self, plot=False ):
+    def test1( self ):
         print( "=========== Nested Sampler test 1 ======================" )
+
+        plot = self.doplot
 
         pp, y0, x, y, w = self.makeData( n=1 )
 
@@ -114,7 +111,7 @@ class TestNestedSampler( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
 
         ns = NestedSampler( x, gm, y, w, threads=True, engines=["galilean", "gibbs"] )
-#        ns.verbose = 2
+#        ns.verbose = 4
 
         self.dofit( ns, pp, plot=plot )
 
@@ -128,8 +125,10 @@ class TestNestedSampler( unittest.TestCase ):
 
 #        print( "Elapsed ", endt - start )
 
-    def test2( self, plot=False ):
+    def test2( self ):
         print( "=========== Nested Sampler test 2 ======================" )
+
+        plot = self.doplot
 
         pp, y0, x, y, w = self.makeData( 2 )
 
@@ -170,7 +169,7 @@ class TestNestedSampler( unittest.TestCase ):
 #        print( "truth  ", pp )
 #        self.dofit( ns, pp, plot=plot )
 
-    def test2a( self, plot=False ):
+    def test2a( self ):
         print( "=========== Nested Sampler test 2a ======================" )
 
         pp = 0.0
@@ -203,8 +202,10 @@ class TestNestedSampler( unittest.TestCase ):
 
 
 
-    def test3( self, plot=False ):
+    def test3( self ):
         print( "=========== Nested Sampler test 3 ======================" )
+
+        plot = self.doplot
 
         pp, y0, x, y, w = self.makeData( 3 )
 

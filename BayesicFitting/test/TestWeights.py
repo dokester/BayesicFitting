@@ -10,11 +10,8 @@ from BayesicFitting import *
 
 class TestWeights( unittest.TestCase  ) :
 
-    def plotEvidence( self ) :
-        self.testEvidence( plot=True )
 
-
-    def testWeights2( self, plot=None ) :
+    def testWeights2( self ) :
         print( "====testWeights 2====================" )
         nn = 5
         x = np.arange( nn, dtype=float )
@@ -68,7 +65,7 @@ class TestWeights( unittest.TestCase  ) :
         print( "noise ", bf.scale, " +- ", bf.stdevScale, "  keep ", bf.keep )
 
 
-    def testWeights1( self, plot=None ) :
+    def testWeights1( self ) :
         print( "====testWeights 1====================" )
         nn = 5
         x = np.arange( nn, dtype=float )

@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import numpy as numpy
+import os
 from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
 from astropy import units
@@ -62,12 +63,9 @@ class TestProblem( unittest.TestCase ):
     def __init__( self, name ):
         super( ).__init__( name )
         numpy.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def plot3( self ) :
-        self.test3( plot=True )
-
-
-    def test1( self, plot=False ) :
+    def test1( self ) :
         print( "====test1 (Classic)Problem============================" )
         nn = 11
         x = numpy.linspace( -1, 1, nn, dtype=float )
@@ -134,7 +132,7 @@ class TestProblem( unittest.TestCase ):
         self.assertTrue( problem.myStartEngine() == "start" )
         self.assertTrue( problem.myDistribution() == "gauss" )
 
-    def test2( self, plot=False ) :
+    def test2( self ) :
         print( "====test2 ErrorsInXandYProblem============================" )
         nn = 4
         x = numpy.asarray( [0,2,8,10],dtype=float )
@@ -267,7 +265,7 @@ class TestProblem( unittest.TestCase ):
                 param[1] += 0.2
             print( "" )
 
-    def test3( self, plot=False ) :
+    def test3( self ) :
         print( "====test3 ErrorsInXandYProblem============================" )
 
         x = numpy.array( [0,1,2,3,4,5,5,6,7,8,9,10], dtype=float )
@@ -283,9 +281,10 @@ class TestProblem( unittest.TestCase ):
         ftr = Fitter( x, pm )
         par = ftr.fit( y )
         yfit = pm( x )
-        plt.figure( "x-opt", figsize=(6,6) )
-        plt.plot( x, y, 'k.' )
-        plt.plot( x, yfit, 'r-' )
+        if self.doplot :
+            plt.figure( "x-opt", figsize=(6,6) )
+            plt.plot( x, y, 'k.' )
+            plt.plot( x, yfit, 'r-' )
 
 
         mdl = PolynomialModel( 1 )
@@ -339,7 +338,7 @@ class TestProblem( unittest.TestCase ):
 
         nd = len( x )
 
-        if not plot :
+        if not self.doplot :
             return
 
         yopt = mdl.result( xopt, ns.parameters )
@@ -349,11 +348,8 @@ class TestProblem( unittest.TestCase ):
 
         plt.show()
 
-    def plot4( self ) :
-        self.test4( plot=True )
 
-
-    def test4( self, plot=False ) :
+    def test4( self ) :
         print( "====test4 ErrorsInXandYProblem============================" )
         x = numpy.array( [0,1,9,10], dtype=float )
         y = numpy.array( [1,0,10,9], dtype=float )
@@ -375,7 +371,7 @@ class TestProblem( unittest.TestCase ):
         keep = {0:0.5, 1:0.9}
         evid = ns.sample( keep=keep )
 
-        if not plot :
+        if not self.doplot :
             return
 
         xopt = ns.samples.nuisance
@@ -385,7 +381,7 @@ class TestProblem( unittest.TestCase ):
             plt.plot( [x[k],xopt[k]], [y[k],yopt[k]], 'g-')
         plt.show()
 
-    def test5( self, plot=False ) :
+    def test5( self ) :
         print( "====test5 MultipleOutputProblem============================" )
         x = numpy.array( [0,1,2,3], dtype=float )
         y = numpy.array( [[1,0],[0,1],[-1,0],[0,-1]], dtype=float )
@@ -433,7 +429,7 @@ class TestProblem( unittest.TestCase ):
         print( aa )
         print( aa.reshape( -1, 2 ) )
 
-    def XXXtest6( self, plot=False ) :
+    def XXXtest6( self ) :
         print( "====test6 CategoricalProblem============================" )
 
         x = numpy.array( [[1,4,2,1,3,2,4,2,3,2,1,2,3]], dtype=float ).transpose()

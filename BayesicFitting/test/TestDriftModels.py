@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestDriftModels
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
@@ -39,11 +40,12 @@ class TestDriftModels( unittest.TestCase ):
     Author:      Do Kester
 
     """
-    def plotPolySineAmpModel( self ) :
-        self.testPolySineAmpModel( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
 
-    def testPolySineAmpModel( self, plot=False ):
+    def testPolySineAmpModel( self ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
         print( "******POLYSINEAMP********************" )
@@ -54,9 +56,10 @@ class TestDriftModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 6 )
         self.assertTrue( m.npbase == 6 )
         p = [-1.1, 0.5, 0.04, 1.2, -0.5, -0.03]
-        self.stdModeltest( m, p, plot=plot )
+        self.stdModeltest( m, p )
+#        self.stdModeltest( m, p, plot=self.doplot )
 
-    def testEtalonDriftModel( self, plot=False ):
+    def testEtalonDriftModel( self ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
         print( "******ETALON DRIFT********************" )
@@ -64,65 +67,9 @@ class TestDriftModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 5 )
         self.assertTrue( m.npbase == 5 )
         p = [-1.1, 0.5, 0.04, 1.2, -0.5]
-        self.stdModeltest( m, p, plot=plot )
+        self.stdModeltest( m, p )
+#        self.stdModeltest( m, p, plot=self.doplot )
 
-        """
-
-    def testEtalonDrift2Model( self, plot=False ):
-        x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
-                [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
-        print( "******ETALON DRIFT 2 ********************" )
-        m = EtalonDrift2Model( )
-        self.assertTrue( m.npchain == 5 )
-        self.assertTrue( m.npbase == 5 )
-        p = [-1.1, 0.5, 0.04, 1.2, -0.5]
-        self.stdModeltest( m, p, plot=plot )
-
-#    def plotEtalonDrift2Model2( self, plot=False ):
-#        self.testEtalonDrift2Model2( plot=True )
-
-    def testEtalonDrift2Model2( self, plot=False ):
-        x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
-                [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
-        print( "******ETALON DRIFT 2.2 ********************" )
-
-        pm = PolynomialModel( 1 )
-        pm.parameters = [1.0,0.5]
-        m = EtalonDrift2Model( model=pm )
-        self.assertTrue( m.npchain == 5 )
-        self.assertTrue( m.npbase == 5 )
-        p = [-1.1, 0.5, 0.04, 1.2, -0.5]
-        self.stdModeltest( m, p, plot=plot )
-
-    def testEtalonDrift3Model( self, plot=False ):
-        x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
-                [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
-        print( "******ETALON DRIFT 4.0 ********************" )
-
-        pm = PolynomialModel( 1 )
-        pm.parameters = [1.0,0.5]
-        m = EtalonDrift3Model( model=pm )
-        self.assertTrue( m.npchain == 8 )
-        self.assertTrue( m.npbase == 8 )
-        p = [-1.1, 0.5, 0.04, 1.2, -0.5, 0.1, 0.1, 0.0]
-        self.stdModeltest( m, p, plot=plot )
-
-    def testEtalonDrift4Model( self, plot=False ):
-        x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
-                [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
-        print( "******ETALON DRIFT 4.0 ********************" )
-
-        pm = PolynomialModel( 1 )
-        pm += SineModel()
-        pm.parameters = [1.0,0.5,2,0.1,0.0]
-
-        m = EtalonDrift4Model( model=pm )
-        self.assertTrue( m.npchain == 9 )
-        self.assertTrue( m.npbase == 9 )
-        p = [-1.1, 0.04, 1.2, -0.5, 1.0, 0.5, 2, 0.1, 0.0]
-        self.stdModeltest( m, p, plot=plot )
-
-        """
 
 
     def stdModeltest( self, model, par, xdata=None, plot=None, warn=[] ):

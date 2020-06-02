@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestFitter
 
 import numpy as numpy
+import os
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import unittest
@@ -54,6 +55,10 @@ class TestQRFitter( unittest.TestCase ):
     noise = numpy.asarray( [-0.000996, -0.046035,  0.013656,  0.418449,  0.0295155,  0.273705,
       -0.204794,  0.275843, -0.415945, -0.373516, -0.158084] )
 
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
     def eq( self, a, b, eps=1e-10 ) :
         if ( a + b ) != 0 :
             return abs( a - b ) / abs( a + b ) < eps
@@ -63,7 +68,7 @@ class TestQRFitter( unittest.TestCase ):
 
 
     #  **************************************************************
-    def testStraightLineParameter( self, plot=False ):
+    def testStraightLineParameter( self ):
         """
         test slope fit
 
@@ -73,6 +78,8 @@ class TestQRFitter( unittest.TestCase ):
 
         """
         print( "\n   Fitter Test 1  \n" )
+        plot = self.doplot
+
         model = PolynomialModel( 1 )
         fitter = Fitter( self.x, model )
         model0 = PowerModel( 0 )

@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestFixedModels.TestFixedModels.testGaussModel
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
@@ -40,111 +41,38 @@ class TestFixedModels( unittest.TestCase ):
     Author:      Do Kester
 
     """
-    def plotArctanModel( self ) :
-        self.testArctanModel( plot=True )
-
-    def plotConstantModel( self ) :
-        self.testConstantModel( plot=True )
-
-    def plotEtalonModel( self ) :
-        self.testEtalonModel( plot=True )
-
-    def plotExpModel( self ) :
-        self.testExpModel( plot=True )
-
-    def plotVoigtModel( self ) :
-        self.testVoigtModel( )
-        xx = numpy.linspace( -1, +1, 1001 )
-        par = numpy.asarray( [1.2,-0.2,0.3,0.3], dtype=float )
-        plt.plot( xx, VoigtModel().result( xx, par ), '-', linewidth=2 )
-        plt.plot( xx, GaussModel().result( xx, par[[0,1,2]] ), 'r-' )
-        pg = par.copy()
-        pg[3] = 0
-        plt.plot( xx, VoigtModel().result( xx, pg ), 'r--' )
-        plt.plot( xx, LorentzModel().result( xx, par[[0,1,3]] ), 'g-' )
-        pg = par.copy()
-        pg[2] = 0
-        plt.plot( xx, VoigtModel().result( xx, pg ), 'g--' )
-        plt.show()
-
-    def plotLorentzModel( self ) :
-        self.testLorentzModel( plot=True )
-
-    def plotFreeShapeModel( self ) :
-        self.XtestFreeShapeModel( plot=True )
-
-    def plotGaussModel( self ) :
-        self.testGaussModel( plot=True )
-
-    def plotGaussPlusBackgroundModel( self ) :
-        self.testGaussPlusBackgroundModel( plot=True )
-
-    def plotHarmonicModel( self ) :
-        self.testHarmonicModel( plot=True )
-
-    def plotPolynomialModel( self ) :
-        self.testPolynomialModel( plot=True )
-
-    def plotChebyshevPolynomialModel( self ) :
-        self.testChebyshevPolynomialModel( plot=True )
-
-    def plotPadeModel( self ) :
-        self.testPadeModel( plot=True )
-
-    def plotPowerLawModel( self ) :
-        self.testPowerLawModel( plot=True )
-
-    def plotPowerModel( self ) :
-        self.testPowerModel( plot=True )
-
-    def plotSincModel( self ) :
-        self.testSincModel( plot=True )
-
-    def plotSineModel( self ) :
-        self.testSineModel( plot=True )
-
-    def plotSineAmpModel( self ) :
-        self.testSineAmpModel( plot=True )
-
-    def plotSineSplineModel( self ) :
-        self.testSineSplineModel( plot=True )
-
-    def plotSineSplineDriftModel( self ) :
-        self.testSineSplineDriftModel( plot=True )
-
-    def plotSineDriftModel( self ) :
-        self.testSineDriftModel( plot=True )
-
-    def plotSplinesModel( self ) :
-        self.testSplinesModel( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
 
-    def testArctanModel( self, plot=False ):
+
+    def testArctanModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******ARCTAN******************" )
         m = ArctanModel( fixed={1:-1.2} )
         p = numpy.asarray( [1.2,30], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testEtalonModel( self, plot=False ):
+    def testEtalonModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******ETALON***********************" )
         m = EtalonModel( fixed={0:1.5})
         p = numpy.asarray( [30.0, 2.0, 0.2], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testEtalonModel2( self, plot=False ):
+    def testEtalonModel2( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******ETALON 2***********************" )
         fm = PolynomialModel( 1 )
         m = EtalonModel( fixed={0:1.5, 1:fm})
         p = numpy.asarray( [2.0, 0.2, 1.0, 0.9], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testEtalonModel3( self, plot=False ):
+    def testEtalonModel3( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******ETALON 2***********************" )
         fm = PolynomialModel( 1 )
@@ -154,25 +82,25 @@ class TestFixedModels( unittest.TestCase ):
         par = [10.0, 0.2, 1.0, 0.1, 0.0, 0.02, 1.0, 0.5, 2.0, 0.1, 0.0]
         p = numpy.asarray( par, dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testExpModel( self, plot=False ):
+    def testExpModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******EXP**************************" )
         m = ExpModel( fixed={1:0.1} )
         p = numpy.asarray( [1.2], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testLorentzModel( self, plot=False ):
+    def testLorentzModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******LORENTZ***********************" )
         m = LorentzModel( fixed={0:4} )
         p = numpy.asarray( [-0.2,0.3], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testVoigtModel( self, plot=False ):
+    def testVoigtModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******VOIGT***********************" )
         m = VoigtModel( fixed={1:0.2,2:0.3} )
@@ -180,24 +108,24 @@ class TestFixedModels( unittest.TestCase ):
         print( m.parameters )
         print( m.expand( x, m.parameters ) )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def XtestFreeShapeModel( self, plot=False ):
+    def XtestFreeShapeModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******FREESHAPE********************" )
 
         self.assertRaises( AttributeError, FreeShapeModel,  5, pixperbin=1, xlo=-1,
                     xhi=1.1, fixed={3:1.1} )
 
-    def testGaussModel( self, plot=False ):
+    def testGaussModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******GAUSS*************************" )
         m = GaussModel( fixed={2:0.3} )
         p = numpy.asarray( [1.2,-0.2], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testGaussPlusBackgroundModel( self, plot=False ):
+    def testGaussPlusBackgroundModel( self ):
         print( "******GAUSS + BG**********************" )
         gm = GaussModel( fixed={1:0.1} )
         print( gm )
@@ -209,9 +137,9 @@ class TestFixedModels( unittest.TestCase ):
         self.assertTrue( gm.npchain == 4 )
         par = numpy.asarray( [3,0.2,0.1,0.1], dtype=float )
 
-        stdModeltest( gm, par, plot=plot )
+        stdModeltest( gm, par, plot=self.doplot )
 
-    def testHarmonicModel( self, plot=False ):
+    def testHarmonicModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******HARMONIC**********************" )
         m = HarmonicModel( order=3, period=0.4, fixed={0:1.0,2:1.0,4:1.0} )
@@ -222,9 +150,9 @@ class TestFixedModels( unittest.TestCase ):
 
         p = numpy.asarray( [1.2,0.3,1.2], dtype=float )
 
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testPolynomialModel( self, plot=False ):
+    def testPolynomialModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******POLYNOMIAL*********************" )
         sm = SineModel()
@@ -242,18 +170,18 @@ class TestFixedModels( unittest.TestCase ):
         print( pm.result( x, p ) )
         print( m )
         print( m.result( x, p ) )
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testChebyshevPolynomialModel( self, plot=False ):
+    def testChebyshevPolynomialModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******CHEBYSHEV POLYNOMIAL*************" )
         m = ChebyshevPolynomialModel( 4, fixed={4:0.1} )
         self.assertTrue( m.getNumberOfParameters( ) == 4 )
         self.assertTrue( m.npbase == 4 )
         p = numpy.asarray( [1,-2,3,-2], dtype=float )
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testPadeModel( self, plot=False ):
+    def testPadeModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******PADE***********************" )
         m = PadeModel( 3, 2, fixed={0:1} )
@@ -261,54 +189,54 @@ class TestFixedModels( unittest.TestCase ):
         self.assertTrue( m.npbase == 6 )
         self.assertTrue( m.npmax == 7 )
         p =  numpy.asarray( [-2, 3, -2, 0.3, 1, 0.2], dtype=float )
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testPowerLawModel( self, plot=False ):
+    def testPowerLawModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******POWERLAW*******************" )
         m = PowerLawModel( fixed={1:-2} )
         self.assertTrue( m.npchain == 2 )
         self.assertTrue( m.npbase == 2 )
         p = [2.3, 0.5]
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testPowerModel( self, plot=False ):
+    def testPowerModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******POWER**********************" )
         m = PowerModel( 3, fixed={0:1.2} )
         self.assertTrue( m.getNumberOfParameters( ) == 0 )
         self.assertTrue( m.npbase == 0 )
         p = []
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testSincModel( self, plot=False ):
+    def testSincModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINC***********************" )
         m = SincModel( fixed={2:0.1,1:2} )
         self.assertTrue( m.npchain == 1 )
         self.assertTrue( m.npbase == 1 )
         p = [2.3]
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testSineModel( self, plot=False ):
+    def testSineModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINE***********************" )
         m = SineModel( fixed={0:1})
         self.assertTrue( m.npchain == 2 )
         self.assertTrue( m.npbase == 2 )
         p = [-1.1, 0.5]
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testSineAmpModel( self, plot=False ):
+    def testSineAmpModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINEAMP********************" )
         m = SineAmpModel( 1.3, fixed={1:1} )
         self.assertTrue( m.npchain == 1 )
         self.assertTrue( m.npbase == 1 )
         p = [-1.1]
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testSineDriftModel( self, plot=False ):
+    def testSineDriftModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINEDRIFT******************" )
 
@@ -317,9 +245,9 @@ class TestFixedModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 3 )
         self.assertTrue( m.npbase == 3 )
         p = [1.1, 0.5, 0.4 ]
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
-    def testSplinesModel( self, plot=False ):
+    def testSplinesModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SPLINES*************************" )
         knots = numpy.arange( 3, dtype=float ) - 1.0
@@ -328,10 +256,10 @@ class TestFixedModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 4 )
         self.assertTrue( m.npbase == 4 )
         p = [1.1, 0.5, 0.8, 0.4 ]
-        stdModeltest( m, p, plot=plot )
+        stdModeltest( m, p, plot=self.doplot )
 
 
-    def testSineSplineModel( self, plot=False ):
+    def testSineSplineModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINESPLINE******************" )
         knots = numpy.arange( 3, dtype=float ) - 1
@@ -339,7 +267,7 @@ class TestFixedModels( unittest.TestCase ):
         self.assertRaises( AttributeError, SineSplineModel, freq, knots, fixed={3:1.1} )
 
 
-    def testSineSplineDriftModel( self, plot=False ):
+    def testSineSplineDriftModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINESPLINEDRIFT*************" )
         knots = numpy.arange( 3, dtype=float ) - 1

@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestLMFitter
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
@@ -48,6 +49,11 @@ class TestLMFitter( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
+
     def makeData( self, bg=False ) :
 
         p = [3.2, -0.1, 0.3, 1.1, 2.1]
@@ -72,10 +78,7 @@ class TestLMFitter( unittest.TestCase ):
 
 
 ################################################################################
-    def plot1( self ):
-        self.test1( plot=True )
-
-    def test1( self, plot=False ):
+    def test1( self ):
 
         x,y,p1 = self.makeData()
 
@@ -108,7 +111,7 @@ class TestLMFitter( unittest.TestCase ):
 
         assertAAE( par2, p2, 1 )
 
-        if plot :
+        if self.doplot :
             xx = numpy.linspace( -1, +1, 1001 )
             plt.plot( x, y, 'k+' )
             plt.plot( xx, modl1.result( xx ), 'k-' )
@@ -150,12 +153,12 @@ class TestLMFitter( unittest.TestCase ):
             self.assertTrue( abs( h1 + f - h3 ) < 1e-8 )
             f = 0.0
 
-        if plot :
+        if self.doplot :
             plt.plot( xx, modl1.result( xx ), 'g-' )
             plt.show()
 
 
-    def test4( self, plot=False ) :
+    def test4( self ) :
 
         self.normalizetest( Fitter )
         self.normalizetest( QRFitter )

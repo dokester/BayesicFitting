@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestImageAssistant
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
@@ -40,7 +41,11 @@ class TestImageAssistant( unittest.TestCase ):
     Author:      Do Kester
 
     """
-    def testImageAssistantC( self, plot=False ):
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
+    def testImageAssistantC( self ):
 
         print( "====ImageAssistant C ===================" )
         ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
@@ -59,7 +64,7 @@ class TestImageAssistant( unittest.TestCase ):
         print( ymap1 )
         assertAAE( ymap1, ymap + 1 )
 
-    def testImageAssistantF( self, plot=False ):
+    def testImageAssistantF( self ):
 
         print( "====ImageAssistant F ===================" )
         ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
@@ -77,7 +82,7 @@ class TestImageAssistant( unittest.TestCase ):
         print( ymap1 )
         assertAAE( ymap1, ymap + 1 )
 
-    def testImageAssistant3dC( self, plot=False ):
+    def testImageAssistant3dC( self ):
 
         print( "====ImageAssistant 3d C ===================" )
         ymap = numpy.arange( 24, dtype=float ).reshape( 2, 3, 4 )
@@ -92,7 +97,7 @@ class TestImageAssistant( unittest.TestCase ):
         print( ymap1 )
         assertAAE( ymap1, ymap + 1 )
 
-    def testImageAssistant3dF( self, plot=False ):
+    def testImageAssistant3dF( self ):
 
         print( "====ImageAssistant 3d F ===================" )
         ymap = numpy.arange( 24, dtype=float ).reshape( 2, 3, 4 )

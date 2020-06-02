@@ -154,6 +154,36 @@ class TestEngine3( unittest.TestCase ):
         self.stdenginetest3( GalileanEngine, nsamp=100, order=100, plot=1 )
         self.stdenginetest3( ChordEngine, nsamp=100, order=100, plot=1 )
 
+    def testEngine( self, myengine, plot=False ) :
+        print( "\n   Uniform Engine Test\n" )
+
+        numpy.random.seed( 123456789 )
+
+        np = 10     ## number of parameters
+        knots = numpy.arange( np+1, dtype=float )
+        mdl = SplinesModel( knots=knots, order=0 )
+        mdl.setLimits( lowLimits=-2, highLimits=2 )
+
+        nd = 10
+        nx = nd * np
+        xdata = ( numpy.arange( nx, dtype=float ) + 0.5 ) / nd
+        yd = numpy.random.rand( nx )
+        yd -= numpy.mean( yd )
+        ydata = numpy.arange( 0, dtype=float )
+        for k in nd :
+            ydata = numpy.append( ydata, yd )
+        problem = ClassicProblem( xdata=xdata, model=mdl, ydata=ydata )
+        errdis = GaussErrorDistribution( scale=1.0 )
+
+        allpars = numpy.ones( np, dtype=float )
+        Llow = errdis.logLikelihood( problem, allpars )
+
+        allpars = numpy.random.rand( np ) * 2 - 1
+        fitIndex = [k for k in range( np )]
+        wl = WalkerList( problem, 2, allpars, fitIndex )
+
+
+
 
     def stdenginetest3( self, myengine, nsamp=100, order=1, plot=0 ) :
         m = Sphere( order )

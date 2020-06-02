@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestEngine2
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
@@ -40,8 +41,9 @@ class TestEngine2( unittest.TestCase ):
     Author       Do Kester
 
     """
-    def __init__( self, name ):
-        super( TestEngine2, self ).__init__( name )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
 
     def initEngine( self, order=1, np=101 ):
@@ -60,54 +62,29 @@ class TestEngine2( unittest.TestCase ):
         numpy.set_printoptions( precision=3, suppress=True )
         return ( m, xdata, data )
 
-    def plotall( self ) :
-        self.testRandomEngine( plot=True )
-        self.testGibbsEngine( plot=True )
-        self.testStepEngine( plot=True )
-        self.testGalileanEngine( plot=True )
-
-
-    def plotRandomEngine( self ):
-        self.testRandomEngine( plot=True )
-
-    def testRandomEngine( self, plot=False ):
+    def testRandomEngine( self ):
         print( "\n   Random Engine Test\n" )
-        self.stdenginetest( RandomEngine, iter=200, nsamp=10, plot=plot )
+        self.stdenginetest( RandomEngine, iter=200, nsamp=10, plot=self.doplot )
 
-    def plotGibbsEngine( self ):
-        self.testGibbsEngine( plot=True )
-
-    def testGibbsEngine( self, plot=False ):
+    def testGibbsEngine( self ):
         print( "\n   Gibbs Engine Test\n" )
-        self.stdenginetest( GibbsEngine, iter=101, nsamp=10, plot=plot )
+        self.stdenginetest( GibbsEngine, iter=101, nsamp=10, plot=self.doplot )
 
-    def plotStepEngine( self ):
-        self.testStepEngine( plot=True )
-
-    def testStepEngine( self, plot=False ):
+    def testStepEngine( self ):
         print( "\n   Step Engine Test\n" )
-        self.stdenginetest( StepEngine, iter=1001, nsamp=10, plot=plot )
+        self.stdenginetest( StepEngine, iter=1001, nsamp=10, plot=self.doplot )
 
-#    def plotCrossEngine( self ):
-#        self.testCrossEngine( plot=True )
-
-#    def testCrossEngine( self, plot=False ):
+#    def testCrossEngine( self ):
 #        print( "\n   Cross Engine Test\n" )
-#        self.stdenginetest( CrossEngine, iter=800, nsamp=100, plot=plot )
+#        self.stdenginetest( CrossEngine, iter=800, nsamp=100, plot=self.doplot )
 
-    def plotGalileanEngine( self ):
-        self.testGalileanEngine( plot=True )
-
-    def testGalileanEngine( self, plot=False ):
+    def testGalileanEngine( self ):
         print( "\n   Galilean Engine Test\n" )
-        self.stdenginetest( GalileanEngine, iter=101, nsamp=10, plot=plot )
+        self.stdenginetest( GalileanEngine, iter=101, nsamp=10, plot=self.doplot )
 
-    def plotChordEngine( self ):
-        self.testChordEngine( plot=True )
-
-    def testChordEngine( self, plot=False ):
+    def testChordEngine( self ):
         print( "\n   Chord Engine Test\n" )
-        self.stdenginetest( ChordEngine, iter=100, nsamp=10, plot=plot )
+        self.stdenginetest( ChordEngine, iter=100, nsamp=10, plot=self.doplot )
 
     def stdenginetest( self, myengine, nsamp=4, iter=100, plot=False ) :
         m, xdata, data = self.initEngine()

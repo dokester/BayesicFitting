@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestScale
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
@@ -46,9 +47,10 @@ class TestWeight2( unittest.TestCase ):
     """
     def __init__( self, name ):
         super( TestWeight2, self ).__init__( name )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
 
-    def test1( self, plot=False ):
+    def test1( self ):
 
         numpy.random.seed( 345347 )
 
@@ -133,17 +135,8 @@ class TestWeight2( unittest.TestCase ):
             self.assertAlmostEqual( l1a, l2a, 0 )
             self.assertAlmostEqual( l1b, l2b, 0 )
 
-            if plot :
-                plt.plot( xx, yy )
-                plt.plot( x, xx[:100], 'k.' )
 
-        if plot : plt.show()
-
-    def plot2( self ) :
-        self.test2( plot=True )
-
-
-    def test2( self, plot=False ) :
+    def test2( self ) :
 
         numpy.random.seed( 345347 )
 
@@ -156,7 +149,7 @@ class TestWeight2( unittest.TestCase ):
         x0 = numpy.linspace( -9.995, 9.995, np )
         y0 = 0.1 * x0 + 0.3 * numpy.random.randn( np )
 
-        if plot : plt.plot( x0, y0, 'k.' )
+        if self.doplot : plt.plot( x0, y0, 'k.' )
 
         x1 = []
         y1 = []
@@ -219,7 +212,7 @@ class TestWeight2( unittest.TestCase ):
         self.assertAlmostEqual( occ2, occ1 )
         self.assertAlmostEqual( lik2, lik1 )
 
-        if plot :
+        if self.doplot :
             plt.plot( x1, y1, 'r*' )
             plt.plot( x2, y2, 'g+' )
             plt.show()

@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestCurveFitter
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
@@ -62,10 +63,11 @@ class TestCurveFitter( unittest.TestCase ):
 
 
 ################################################################################
-    def plot1( self ):
-        self.test1( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def test1( self, plot=False ):
+    def test1( self ):
 
         c0 = 3.2
         c1 = -0.1
@@ -112,7 +114,7 @@ class TestCurveFitter( unittest.TestCase ):
         self.assertTrue( self.eq(abs(par2[2] ), c2, self.ss) )
         self.assertTrue( self.eq(par2[3], c3, self.ss) )
         self.assertTrue( self.eq(par2[4], c4, self.ss) )
-        if plot :
+        if self.doplot :
             xx = numpy.linspace( -1, +1, 1001 )
             plt.plot( self.x, y, 'k+' )
             plt.plot( xx, modl1.result( xx ), 'k-' )
@@ -145,14 +147,7 @@ class TestCurveFitter( unittest.TestCase ):
         print( par1 )
         print( par3 )
 
-
-
-
-
-    def plot2( self ):
-        self.test2( plot=True )
-
-    def test2( self, plot=False ):
+    def test2( self ):
 
         c0 = 3.2
         c1 = -0.1
@@ -187,7 +182,7 @@ class TestCurveFitter( unittest.TestCase ):
         self.assertTrue( self.eq(par2[2], c2, self.ss) )
         self.assertTrue( self.eq(par2[3], c3, self.ss) )
         self.assertTrue( self.eq(par2[4], c4, self.ss) )
-        if plot :
+        if self.doplot :
             xx = numpy.linspace( -1, +1, 1001 )
 #            plt.plot( self.x, y, 'k+' )
 #            plt.plot( xx, modl1.result( xx ), 'k-' )
@@ -195,11 +190,7 @@ class TestCurveFitter( unittest.TestCase ):
             plt.plot( xx, modl2.result( xx ), 'r-' )
             plt.show()
 
-
-    def plot3( self ):
-        self.test3( plot=True )
-
-    def test3( self, plot=False ):
+    def test3( self ):
 
         c0 = 3.2
         c1 = -0.1
@@ -246,7 +237,7 @@ class TestCurveFitter( unittest.TestCase ):
         self.assertTrue( self.eq(abs(par2[2] ), c2, self.ss) )
         self.assertTrue( self.eq(par2[3], c3, self.ss) )
         self.assertTrue( self.eq(par2[4], c4, self.ss) )
-        if plot :
+        if self.doplot :
             xx = numpy.linspace( -1, +1, 1001 )
             plt.plot( self.x, y, 'k+' )
             plt.plot( xx, modl1.result( xx ), 'k-' )

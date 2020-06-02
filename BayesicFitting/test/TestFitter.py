@@ -4,6 +4,7 @@ import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import unittest
+import os
 import FitPlot
 
 from BayesicFitting import *
@@ -58,12 +59,12 @@ class TestFitter( unittest.TestCase ):
         else :
             return abs( a - b ) < eps
 
-    def plotStraightLineParameter( self ):
-        self.testStraightLineParameter( plot=True )
-
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
     #  **************************************************************
-    def testStraightLineParameter( self, plot=False ):
+    def testStraightLineParameter( self ):
         """
         test slope fit
 
@@ -72,6 +73,8 @@ class TestFitter( unittest.TestCase ):
         2. Fix parameters in PolynomialModel
 
         """
+        plot = self.doplot
+
         print( "\n   Fitter Test 1  \n" )
         model = PolynomialModel( 1 )
         fitter = Fitter( self.x, model )
@@ -126,7 +129,7 @@ class TestFitter( unittest.TestCase ):
         print( "error = ", error1 )
 
     #  **************************************************************
-    def testNormalize( self, plot=False ):
+    def testNormalize( self ):
         """
         test normalized parameter, alternative for keepfixed.
 
@@ -135,6 +138,8 @@ class TestFitter( unittest.TestCase ):
         2.
 
         """
+        plot = self.doplot
+
         print( "\n   Fitter Test 2 Normalize  \n" )
         model = PolynomialModel( 2 )
 

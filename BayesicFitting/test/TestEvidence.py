@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestEvidence
 
 import unittest
+import os
 import numpy as np
 import math
 from numpy.testing import assert_array_almost_equal as assertAAE
@@ -11,11 +12,11 @@ from BayesicFitting import *
 
 class TestEvidence( unittest.TestCase  ) :
 
-    def plotEvidence( self ) :
-        self.testEvidence( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-
-    def testEvidence( self, plot=None ) :
+    def testEvidence( self ) :
         print( "====testEvidence======================" )
         nn = 100
         x = np.arange( nn, dtype=float ) / (nn/2) - 1
@@ -47,7 +48,7 @@ class TestEvidence( unittest.TestCase  ) :
             ( bf.getLogZ(  limits=[lolim,hilim] ),
             bf.logOccam, bf.logLikelihood ), bf.fixedScale )
 
-        if plot :
+        if self.doplot :
             plt.plot( x, ym, 'g.' )
             plt.plot( x, y, 'b+' )
             plt.plot( x, yfit, 'r-' )
@@ -108,13 +109,7 @@ class TestEvidence( unittest.TestCase  ) :
             bf.logOccam, bf.logLikelihood, bf.fixedScale ) )
 
 
-
-
-    def plotSimple1( self ) :
-        self.testSimple1( plot=True )
-
-
-    def testSimple1( self, plot=False ) :
+    def testSimple1( self ) :
         print( "====testEvidence for Gauss (Simple) ====" )
         np.random.seed( 2345 )
         nn = 100
@@ -160,7 +155,7 @@ class TestEvidence( unittest.TestCase  ) :
             maxl = np.max( L0 )
             L0 -= maxloglik
 
-            if plot :
+            if self.doplot :
                 gm = GaussModel()
                 gm.parameters = [1.0, pars[i], std[i]]
                 plt.plot( p0, gm( p0 ), 'b-' )
@@ -172,15 +167,11 @@ class TestEvidence( unittest.TestCase  ) :
                 maxloglik + math.log( 0.01 * math.pi ) - lintpr  ) )
 #        print( "evid      %f  %f  %f"%( logz, lz, maxloglik + math.log( 0.01 * math.pi )  ) )
 
-        if plot :
+        if self.doplot :
             plt.show()
 
 
-    def plotSimpleLaplace1( self ) :
-        self.testSimpleLaplace1( plot=True )
-
-
-    def testSimpleLaplace1( self, plot=False ) :
+    def testSimpleLaplace1( self ) :
         print( "====testEvidence for Laplace (Simple 1) ====" )
         np.random.seed( 2345 )
         nn = 1000
@@ -228,7 +219,7 @@ class TestEvidence( unittest.TestCase  ) :
             maxl = np.max( L0 )
             L0 -= maxl
 
-            if plot :
+            if self.doplot :
                 gm = GaussModel()
                 gm.parameters = [1.0, pars[i], std[i]]
 #                gm.parameters = [1.0, pars[i], 2*nf/math.sqrt(nn) ]
@@ -241,14 +232,11 @@ class TestEvidence( unittest.TestCase  ) :
                 maxloglik + math.log( 0.01 * math.pi ) - lintpr  ) )
 #        print( "evid      %f  %f  %f"%( logz, lz, maxloglik + math.log( 0.01 * math.pi )  ) )
 
-        if plot :
+        if self.doplot :
             plt.show()
 
-    def plotGauss( self ) :
-        self.testGauss( plot=True )
 
-
-    def testGauss( self, plot=False ) :
+    def testGauss( self ) :
         print( "====testEvidence for Gauss============" )
         nn = 1000
         x = np.arange( nn, dtype=int ) // 20
@@ -283,21 +271,17 @@ class TestEvidence( unittest.TestCase  ) :
                 L0[k] = errdis.logLikelihood( problem, pp )
             L0 -= np.max( L0 )
 
-            if plot :
+            if self.doplot :
                 gm = GaussModel()
                 gm.parameters = [1.0, pars[i], std[i]]
                 plt.plot( p0, gm( p0 ), 'b-' )
                 plt.plot( p0, np.exp( L0 ), 'k-' )
 
-        if plot :
+        if self.doplot :
             plt.show()
 
 
-    def plotLaplace( self ) :
-        self.testLaplace( plot=True )
-
-
-    def testLaplace( self, plot=None ) :
+    def testLaplace( self ) :
         print( "====testEvidence for Laplace============" )
         nn = 100
         x = np.arange( nn, dtype=float ) / (nn/2) - 1
@@ -328,7 +312,7 @@ class TestEvidence( unittest.TestCase  ) :
             L0[k] = errdis.logLikelihood( problem, pp )
         L0 -= np.max( L0 )
 
-        if plot :
+        if self.doplot :
             gm = GaussModel()
             gm.parameters = [1.0, pars[0], std[0]]
             plt.plot( p0, gm( p0 ), 'b-' )

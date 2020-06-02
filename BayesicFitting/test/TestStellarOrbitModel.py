@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestModels.TestModels.testGaussModel
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
@@ -43,11 +44,12 @@ class TestStellarOrbitModel( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def plot1( self ) :
-        self.test1( plot=True )
 
-    def test1( self, plot=False ):
+    def test1( self ):
         x  = numpy.linspace( 0, 1400, 1401, dtype=float )
         print( "****** STELLAR ORBIT test 1 ***************" )
         m = StellarOrbitModel( spherical=False )
@@ -56,7 +58,7 @@ class TestStellarOrbitModel( unittest.TestCase ):
 
         # eccen, semimajor, inclin, ascnodepos, ascnodelong, period, periastron
         p = [0.67, 13, 1500.0, 0.0, 0.0, 0.0, 0.0]
-        if plot :
+        if self.doplot :
             plt.plot( [0], [0], 'k.' )
 
             hpi = 1.5
@@ -92,7 +94,6 @@ class TestStellarOrbitModel( unittest.TestCase ):
 
             plt.show()
 
-#        stdModeltest( m, p, plot=plot )
 
     def test2( self ) :
         x  = numpy.linspace( 0, 1400, 7, dtype=float )
@@ -207,8 +208,6 @@ class TestStellarOrbitModel( unittest.TestCase ):
             print( "nm1   ", fma( num1 ) )
             assertAAE( part0[:,k], num0 )
             assertAAE( part1[:,k], num1 )
-
-
 
 
     @classmethod

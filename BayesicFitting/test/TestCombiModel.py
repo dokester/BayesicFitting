@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestCombiModel
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_equal as assertAE
 from numpy.testing import assert_array_almost_equal as assertAAE
@@ -41,14 +42,9 @@ class TestCombiModel( unittest.TestCase ):
     Author       Do Kester
 
     """
-
-    def plotall( self ) :
-        self.test1()
-        self.test2( plot=True )
-        self.test3( plot=True )
-        self.test4( plot=True )
-        self.test5( plot=True )
-        self.test6( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
     def test1( self ):
         print( "\n   CombiModel Test 1\n" )
@@ -59,7 +55,7 @@ class TestCombiModel( unittest.TestCase ):
         self.assertRaises( ValueError, cm.setCombi, {3:[1,2,3]} )
         self.assertRaises( ValueError, cm.setCombi, {1:[1,2]} )
 
-    def test2( self, plot=False ):
+    def test2( self ):
         print( "\n   CombiModel Test 2\n" )
         gm = GaussModel( )
         pars = numpy.linspace( 0.0, 1.0, 3, dtype=float )
@@ -84,9 +80,9 @@ class TestCombiModel( unittest.TestCase ):
         p = numpy.ones( 9, dtype=float )
         p[1:9:3] /= 2
         p[2:9:3] /= 10
-        stdModeltest( cm, p, plot=plot )
+        stdModeltest( cm, p, plot=self.doplot )
 
-    def test3( self, plot=False ):
+    def test3( self ):
         print( "\n   CombiModel Test 3\n" )
         gm = GaussModel( )
         pars = numpy.linspace( 0.0, 1.0, 3, dtype=float )
@@ -98,9 +94,9 @@ class TestCombiModel( unittest.TestCase ):
 
         p = numpy.array( [1.0, -0.6, 0.1, 1.0, 1.0, 1.0] )
 
-        stdModeltest( cm, p, plot=plot )
+        stdModeltest( cm, p, plot=self.doplot )
 
-    def test4( self, plot=False ):
+    def test4( self ):
         print( "\n   CombiModel Test 4\n" )
         gm = GaussModel( )
         pars = numpy.linspace( 0.0, 1.0, 3, dtype=float )
@@ -112,9 +108,9 @@ class TestCombiModel( unittest.TestCase ):
 
         p = numpy.array( [1.0, -0.6, 0.1, 1.0, 1.0, 1.0] )
 
-        stdModeltest( cm, p, plot=plot )
+        stdModeltest( cm, p, plot=self.doplot )
 
-    def test5( self, plot=False ):
+    def test5( self ):
         print( "\n   CombiModel Test 5\n" )
         gm = EtalonModel( )
         pars = numpy.asarray( [1.0,0.5, 10.0, 0.0], dtype=float )
@@ -125,9 +121,9 @@ class TestCombiModel( unittest.TestCase ):
         cm.yUnit = units.kg
 
         p = numpy.asarray( [1.0,0.5, 10.0, 0.0, 1.0, 0.4, 0.0] )
-        stdModeltest( cm, p, plot=plot )
+        stdModeltest( cm, p, plot=self.doplot )
 
-    def test6( self, plot=False ):
+    def test6( self ):
         print( "\n   CombiModel Test 6\n" )
         gm = EtalonModel( )
         pars = numpy.asarray( [1.0,0.5, 10.0, 0.0], dtype=float )
@@ -139,7 +135,7 @@ class TestCombiModel( unittest.TestCase ):
 
         p = numpy.asarray( [1.0, 0.5, 10.0, 0.0, 1.0, 0.0] )
 
-        stdModeltest( cm, p, plot=plot )
+        stdModeltest( cm, p, plot=self.doplot )
 
 
 

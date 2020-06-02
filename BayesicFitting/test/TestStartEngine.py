@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestStartEngine
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
@@ -42,14 +43,11 @@ class TestStartEngine( TestEngine ):
     Author       Do Kester
 
     """
-    def __init__( self, name ):
-        super( TestStartEngine, self ).__init__( name )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-
-    def plotStartEngine( self ):
-        self.testStartEngine( plot=True )
-
-    def testStartEngine( self, plot=False ):
+    def testStartEngine( self ):
         print( "\n   Start Engine Test 1\n" )
         m, xdata, data = self.initEngine()
 
@@ -71,9 +69,9 @@ class TestStartEngine( TestEngine ):
         copeng = engine.copy()
         self.startenginetest( copeng )
 
-        if plot :
-            parevo = sl.getParameterEvolution()
-            sclevo = sl.getScaleEvolution()
+        if self.doplot :
+            parevo = wl.getParameterEvolution()
+            sclevo = wl.getScaleEvolution()
             print( parevo.shape, sclevo.shape )
             plt.subplot( 2, 2, 1 )
             plt.plot( parevo[:,0], parevo[:,1], 'k.' )

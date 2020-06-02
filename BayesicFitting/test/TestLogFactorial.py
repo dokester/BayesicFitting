@@ -40,7 +40,7 @@ class TestLogFactorial( unittest.TestCase ):
     Author:      Do Kester
 
     """
-    def testLogFactorial( self, plot=False ):
+    def testLogFactorial( self ):
 
         print( "====LogFactorial ===================" )
         self.assertTrue( logFactorial( 0 ) == 0 )

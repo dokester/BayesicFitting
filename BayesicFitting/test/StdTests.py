@@ -45,7 +45,18 @@ def classequal( cls1, cls2 ) :
     atr2 = vars( cls2 )
     ld2 = list( atr2.keys() )
     ld2.sort()
-    assertAE( ld1, ld2 )
+
+    if len( ld1 ) == len( ld2 ) :
+        assertAE( ld1, ld2 )
+    else :
+        for key in ld1 :
+            print( key, "\t:", atr1[key] )
+        print( )
+        for key in ld2 :
+            print( key, "\t:", atr2[key] )
+        print()
+
+
     for key1,key2 in zip( ld1, ld2 ) :
         val1 = atr1[key1]
         val2 = atr2[key2]
@@ -204,10 +215,8 @@ def plotModel( model, par, xx=None ) :
         plt.plot( xx, yy, '-', linewidth=2 )
         try :
             dy = model.derivative( x2, par )
-            ny = model.numDerivative( x2, par )
-            kk = numpy.asarray( [range( 50, 1000, 100 )] )
-
             y2 = model.result( x2, par )
+
             plt.plot( x2, y2, 'g+' )
             for k in range( nx ) :
 
@@ -217,8 +226,9 @@ def plotModel( model, par, xx=None ) :
 
         except :
             print( "No derivative; ignored" )
-            raise
-        plt.title( model.__str__() )
+#            raise
+#        plt.title( model.__str__() )
+        plt.title( model.shortName() )
         plt.show()
 
 def stdFittertest( myfitter, npt, xmin=-10.0, xmax=10.0, noise=0.1, plot=False,
@@ -274,5 +284,6 @@ def stdFittertest( myfitter, npt, xmin=-10.0, xmax=10.0, noise=0.1, plot=False,
         plt.plot( x, yfit, 'r-' )
         plt.plot( x, yfit - lmce, 'm-' )
         plt.plot( x, yfit + lmce, 'm-' )
-
+        plt.title( ftr.__str__() )
+        plt.show()
 

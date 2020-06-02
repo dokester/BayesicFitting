@@ -1,6 +1,7 @@
 # run with : python3 -m unittest Test2dModels
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
@@ -38,7 +39,12 @@ class Test2dModels( unittest.TestCase ):
     Author:      Do Kester
 
     """
-    def testPolySurfaceModel( self, plot=False ):
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
+
+    def testPolySurfaceModel( self ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
         print( "******POLYSURFACE********************" )
@@ -46,9 +52,9 @@ class Test2dModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 6 )
         self.assertTrue( m.npbase == 6 )
         p = [-1.1, 0.5, 0.04, 1.2, -0.5, -0.03]
-        self.stdModeltest( m, p, plot=plot )
+        self.stdModeltest( m, p, plot=self.doplot )
 
-    def testKernel2dModel1( self, plot=False ):
+    def testKernel2dModel1( self ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
         print( "******KERNEL2D CIRCULAR********************" )
@@ -56,9 +62,9 @@ class Test2dModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 4 )
         self.assertTrue( m.npbase == 4 )
         p = [-1.1, 0.5, 0.04, 1.2]
-        self.stdModeltest( m, p, plot=plot )
+        self.stdModeltest( m, p, plot=self.doplot )
 
-    def testKernel2dModel2( self, plot=False ):
+    def testKernel2dModel2( self ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
         print( "******KERNEL2D ELLIPTIC********************" )
@@ -66,9 +72,9 @@ class Test2dModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 5 )
         self.assertTrue( m.npbase == 5 )
         p = [-1.1, 0.5, 0.04, 1.2, 1.4]
-        self.stdModeltest( m, p, plot=plot )
+        self.stdModeltest( m, p, plot=self.doplot )
 
-    def testKernel2dModel3( self, plot=False ):
+    def testKernel2dModel3( self ):
         x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
                 [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
         print( "******KERNEL2D ROTATED********************" )
@@ -76,9 +82,9 @@ class Test2dModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 6 )
         self.assertTrue( m.npbase == 6 )
         p = [-1.1, 0.5, 0.04, 1.2, 1.3, 1.1]
-        self.stdModeltest( m, p, plot=plot )
+        self.stdModeltest( m, p, plot=self.doplot )
 
-    def testProductModel( self, plot=False ):
+    def testProductModel( self ):
         rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
@@ -97,9 +103,9 @@ class Test2dModels( unittest.TestCase ):
         self.assertTrue( m.npchain == 6 )
         self.assertTrue( m.npbase == 6 )
         p = [1.1, 0.5, 1.4, 1.2, -0.5, -0.03]
-        self.stdModeltest( m, p, xdata=x, plot=plot )
+        self.stdModeltest( m, p, xdata=x, plot=self.doplot )
 
-    def testSurfaceSplinesModel( self, plot=False ):
+    def testSurfaceSplinesModel( self ):
         rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
@@ -120,9 +126,9 @@ class Test2dModels( unittest.TestCase ):
         p = [-1.1, 0.5, 0.04, 1.2, -0.5, -0.03, -1.1, 0.5, 0.04, 1.2, -0.5, -0.03,
              -1.1, 0.5, 0.04, 1.2, -0.5, -0.03, -1.1, 0.5, 0.04, 1.2, -0.5, -0.03,
              -1.1, 0.5, 0.04, 1.2, -0.5, -0.03]
-        self.stdModeltest( m, p, xdata=x, plot=plot )
+        self.stdModeltest( m, p, xdata=x, plot=self.doplot )
 
-    def testSurfaceSplinesModel2( self, plot=False ):
+    def testSurfaceSplinesModel2( self ):
         rng = numpy.random.RandomState( 1234 )
         x = rng.rand( 100, 2 )
         x[:,0] *= 3
@@ -142,7 +148,7 @@ class Test2dModels( unittest.TestCase ):
         self.assertTrue( m.npbase == 12 )
         p = [-1.1, 0.5, 0.04, 1.2, -0.5, -0.03, -1.1, 0.5, 0.04, 1.2, -0.5, -0.03]
 
-        self.stdModeltest( m, p, xdata=x, plot=plot )
+        self.stdModeltest( m, p, xdata=x, plot=self.doplot )
 
 
 
@@ -195,10 +201,10 @@ class Test2dModels( unittest.TestCase ):
             self.assertEqual( r1, r2 )
         self.assertTrue( mc.testPartial( x, par ) == 0 )
 
-        if plot :
-            self.plotModel( model, par )
+#        if plot :
+#            self.plotModel( model, par )
 
-    def plotModel( self, model, par ) :
+    def TBDplotModel( self, model, par ) :
         xx = numpy.linspace( -1, +1, 1001 )
         plt.plot( xx, model.result( xx, par ), '-', linewidth=2 )
         x2 = numpy.linspace( -1, +1, 11 )

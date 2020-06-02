@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestBracketModel
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_equal as assertAE
 from numpy.testing import assert_array_almost_equal as assertAAE
@@ -42,13 +43,13 @@ class TestBracketModel( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def plotImplicit( self ) :
-        self.testImplicit( plot=True )
 
 
-
-    def testImplicit( self, plot=False ) :
+    def testImplicit( self ) :
         print( "====  BracketModel Test =======================" )
         m1 = GaussModel( )
         m1 += PolynomialModel( 0 )              # Gauss on a constant background
@@ -72,8 +73,7 @@ class TestBracketModel( unittest.TestCase ):
         assertAE( g3.partial( x, p ), m3.partial( x, p ) )
         assertAE( g3.derivative( x, p ), m3.derivative( x, p ) )
 
-
-        stdModeltest( g3, p, plot=plot )
+        stdModeltest( g3, p, plot=self.doplot )
 
     def testConstantModel( self ):
         print( "====  BracketModel Test 1 =======================" )
@@ -108,7 +108,7 @@ class TestBracketModel( unittest.TestCase ):
         c = BracketModel( m )
         p = [-1.0,-1.0]
 
-        stdModeltest( c, p, plot=False )
+        stdModeltest( c, p, plot=self.doplot )
 
     def testFixedModel( self ):
         print( "====  BracketModel Test 3 =======================" )
@@ -133,7 +133,7 @@ class TestBracketModel( unittest.TestCase ):
         self.assertTrue( m.model.npbase == 6 )
         p = [1,-2,-0.2,-0.02,0.003,0.001]
 
-        stdModeltest( m, p, plot=False )
+        stdModeltest( m, p, plot=self.doplot )
 
     def testGaussPlusBackgroundModel( self ):
         print( "====  BracketModel Test 4 =======================" )

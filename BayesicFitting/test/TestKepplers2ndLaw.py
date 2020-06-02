@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestKepplers2ndLaw
 
 import unittest
+import os
 import numpy as numpy
 import math
 from astropy import units
@@ -45,11 +46,11 @@ class TestKepplers2ndLaw( unittest.TestCase ):
     """
     TWOPI = 2 * math.pi
 
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def plot1( self ) :
-        self.test1( plot=True )
-
-    def test1( self, plot=False ):
+    def test1( self ):
         x  = numpy.linspace( 0.0, 10, 101, dtype=float )
         print( "******KEPPLERS LAW***************" )
         KL = Kepplers2ndLaw( )
@@ -90,16 +91,14 @@ class TestKepplers2ndLaw( unittest.TestCase ):
         y1 = r * numpy.sin( v )
 
 
-        if plot :
+        if self.doplot :
             plt.figure( 1, figsize=[6,6] )
             plt.plot( x0, y0, 'k-' )
             plt.plot( x1, y1, 'r-' )
 
             plt.show()
 
-#        stdModeltest( m, p, plot=plot )
-
-    def test2( self, plot=False ):
+    def test2( self ):
         x  = numpy.linspace( 0, 10, 1001, dtype=float )
         print( "******KEPPLERS LAW test 2***************" )
         KL = Kepplers2ndLaw( )
@@ -125,7 +124,7 @@ class TestKepplers2ndLaw( unittest.TestCase ):
         e = KL.eccentricAnomaly( x, p, Estart=e2 )
         print( "Eccentricity  ", p[0], "                 ", fmt( KL.iter ) )
 
-    def test3( self, plot=False ):
+    def test3( self ):
         x  = numpy.linspace( 0, 10, 1001, dtype=float )
         print( "******KEPPLERS LAW test 3***************" )
         KL = Kepplers2ndLaw( )
@@ -143,7 +142,7 @@ class TestKepplers2ndLaw( unittest.TestCase ):
             xx = r * numpy.cos( v )
             yy = r * numpy.sin( v )
 
-            if plot :
+            if self.doplot :
                 plt.plot( xx, yy )
 
             print( fmt( p[0] ), fmt( e ), fmt( a ), fmt( b ), fmt( KL.iter ) )
@@ -151,12 +150,12 @@ class TestKepplers2ndLaw( unittest.TestCase ):
 
             p[0] += 0.1
 
-        if plot :
+        if self.doplot :
             plt.plot( [0], [0], 'k.' )
             plt.show()
 
 
-    def test4( self, plot=False ):
+    def test4( self ):
         x  = numpy.linspace( 0, 10, 11, dtype=float )
         xp = x + 0.0001
         xm = x - 0.0001

@@ -1,84 +1,104 @@
 
 import unittest
+import os
 import numpy as np
 import math
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
-from BayesicFitting import ExponentialPrior
-from BayesicFitting import LaplacePrior
-from BayesicFitting import JeffreysPrior
-from BayesicFitting import UniformPrior
-from BayesicFitting import GaussPrior
-from BayesicFitting import CauchyPrior
 
-from BayesicFitting import Prior
-from BayesicFitting import Formatter
-from Formatter import formatter as fmt
+from BayesicFitting import *
 
-class PlotTestPrior( unittest.TestCase  ) :
+from BayesicFitting import formatter as fmt
+
+#  * This file is part of the BayesicFitting package.
+#  *
+#  * BayesicFitting is free software: you can redistribute it and/or modify
+#  * it under the terms of the GNU Lesser General Public License as
+#  * published by the Free Software Foundation, either version 3 of
+#  * the License, or ( at your option ) any later version.
+#  *
+#  * BayesicFitting is distributed in the hope that it will be useful,
+#  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  * GNU Lesser General Public License for more details.
+#  *
+#  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
+#  *
+#  *  2020 Do Kester
+
+
+class TestPrior2( unittest.TestCase  ) :
+
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+        np.random.seed( 123456 )
 
     def testPlotUniform( self ) :
         # example data
-        u = np.random.rand( 10000 )
+        NP = 10000
+        u = np.random.rand( NP )
         pr = UniformPrior( limits=[-10,10] )
         d = [pr.unit2Domain( v ) for v in u]
+
+        fac = NP / 2.5
         x = np.asarray( [-12,-10,-10,10,10,12], dtype=float )
-        a = 1.0 / pr._range
+        a = fac / pr._range
         y = np.asarray( [0,0,a,a,0,0], dtype=float )
         self.histo( d, pr, fun=(x,y) )
 
     def testPlotJeffreys( self ) :
         # example data
-        u = np.random.rand( 10000 )
-        pr = JeffreysPrior( limits=[0.2,9] )
+        NP = 10000
+        u = np.random.rand( NP )
+        pr = JeffreysPrior( limits=[0.1,9] )
         d = [pr.unit2Domain( v ) for v in u]
+
+        fac = NP / 5.5
         x = np.arange( 51 ) / 5
         y = np.zeros( 51, dtype=float )
-        y[1:46] = 1.0 / ( ( math.log( pr.highLimit ) - math.log( pr.lowLimit ) ) * x[1:46] )
+        y[1:46] = fac / ( ( math.log( pr.highLimit ) - math.log( pr.lowLimit ) ) * x[1:46] )
         self.histo( d, pr, fun=(x,y) )
 
     def testPlotExponential( self ) :
         # example data
-        u = np.random.rand( 10000 )
+        NP = 10000
+        u = np.random.rand( NP )
         pr = ExponentialPrior( scale=3 )
         d = [pr.unit2Domain( v ) for v in u]
+
+        fac = 0.5 * NP
         x = np.arange( 51 ) * pr.scale / 5
-        y = np.exp( - x / pr.scale ) / pr.scale
+        y = fac * np.exp( - x / pr.scale ) / pr.scale
         self.histo( d, pr, fun=(x,y) )
 
     def testPlotLaplace( self ) :
         # example data
-        u = np.random.rand( 10000 )
+        NP = 10000
+        u = np.random.rand( NP )
         pr = LaplacePrior( scale=4 )
         d = [pr.unit2Domain( v ) for v in u]
+
+        fac = math.sqrt( 2.0 ) * NP
         x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
-        y = np.exp( - np.abs( x ) / pr.scale ) / ( 2 * pr.scale )
+        y = fac * np.exp( - np.abs( x ) / pr.scale ) / ( 2 * pr.scale )
         self.histo( d, pr, fun=(x,y) )
 
     def testPlotGauss( self ) :
         # example data
-        u = np.random.rand( 10000 )
+        NP = 10000
+        u = np.random.rand( NP )
         pr = GaussPrior( scale=4 )
         d = [pr.unit2Domain( v ) for v in u]
         x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
-        y = [pr.result( v )/4 for v in x]
+        fac = NP / 2.5
+        y = [fac * pr.result( v )/4 for v in x]
         self.histo( d, pr, fun=(x,y) )
 
-    """
-    def testPlotGaussLut( self ) :
-        # example data
-        u = np.random.rand( 10000 )
-        pr = GaussLutPrior( scale=4, nl=128 )
-#        print( fmt( pr.u2d, max=None ) )
-#        print( fmt( pr.d2u, max=None ) )
-        d = [pr.unit2Domain( v ) for v in u]
-        x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
-        y = [pr.result( v )/4 for v in x]
-        self.histo( d, pr, fun=(x,y) )
-    """
     def testPlotCauchy( self ) :
         # example data
-        u = np.random.rand( 10000 )
+        NP = 10000
+        u = np.random.rand( NP )
         pr = CauchyPrior( scale=4 )
         d = np.asarray( [pr.unit2Domain( v ) for v in u] )
         # There are too many far outliers in a Cauchy
@@ -87,7 +107,8 @@ class PlotTestPrior( unittest.TestCase  ) :
         q = np.where( d > 50 )
         d[q] = 50
         x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
-        y = [pr.result( v ) for v in x]
+        fac = 2 * NP
+        y = [fac * pr.result( v ) for v in x]
         self.histo( d, pr, fun=(x,y) )
 
 
@@ -95,21 +116,23 @@ class PlotTestPrior( unittest.TestCase  ) :
         print( pr )
         print( fmt( x ) )
         print( fmt( fun[0] ) )
-        print( fmt( fun[0] ) )
+        print( fmt( fun[1] ) )
 
-        num_bins = 50
-        # the histogram of the data
-        n, bins, patches = plt.hist(x, num_bins, normed=1, facecolor='green', alpha=0.5)
-        # add a 'best fit' line
-        if fun is not None :
-            plt.plot( fun[0], fun[1], 'r--')
-        plt.xlabel('Error')
-        plt.ylabel('Probability')
-        plt.title('Histogram of ' + str( pr ) )
+        if self.doplot :
+            num_bins = 50
+            # the histogram of the data
+            n, bins, patches = plt.hist(x, num_bins, facecolor='green', alpha=0.5)
 
-        # Tweak spacing to prevent clipping of ylabel
-        plt.subplots_adjust(left=0.15)
-        plt.show()
+            # add a 'best fit' line
+            if fun is not None :
+                plt.plot( fun[0], fun[1], 'r--')
+            plt.xlabel('Error')
+            plt.ylabel('Probability')
+            plt.title('Histogram of ' + str( pr ) )
+
+            # Tweak spacing to prevent clipping of ylabel
+            plt.subplots_adjust(left=0.15)
+            plt.show()
 
 if __name__ == '__main__':
     unittest.main( )

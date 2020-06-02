@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestEvidence2
 
 import unittest
+import os
 import numpy
 import math
 from numpy.testing import assert_array_almost_equal as assertAAE
@@ -17,28 +18,12 @@ from FitPlot import plotErrdis2d
 
 class TestEvidence2( unittest.TestCase  ) :
 
-    def plot1( self ) :
-        self.test1( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def plot2( self ) :
-        self.test2( plot=True )
 
-    def plot3( self ) :
-        self.test3( plot=True )
-
-    def plot4( self ) :
-        self.test4( plot=True )
-
-    def plot6( self ) :
-        self.test6( plot=True )
-
-    def plot7( self ) :
-        self.test7( plot=True )
-
-    def plot8( self ) :
-        self.test8( plot=True )
-
-    def test1( self, plot=False ) :
+    def test1( self ) :
         print( "====test1============================" )
         nn = 100
         x = numpy.zeros( nn, dtype=float )
@@ -64,7 +49,7 @@ class TestEvidence2( unittest.TestCase  ) :
         errdis = GaussErrorDistribution( )
         problem = ClassicProblem( pm, xdata=x, ydata=y )
         logz1, maxll = plotErrdis( errdis, problem, limits=limits,
-                                    max=0, plot=plot )
+                                    max=0, plot=self.doplot )
 
         print( "logZ  ", fmt( logz1 ) )
 
@@ -91,7 +76,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
         assertAAE( numpy.sum( numpy.exp( lwevo ) ), 1.0 )
 
-        if plot :
+        if self.doplot :
             plt.plot( parevo, numpy.exp( llevo ), 'r,' )
 
             mxl = numpy.exp( numpy.max( llevo ) ) * 1.2
@@ -102,7 +87,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
-    def test2( self, plot=False ) :
+    def test2( self ) :
         print( "====test2============================" )
         nn = 100
         x = numpy.arange( nn, dtype=float ) / 50
@@ -127,9 +112,9 @@ class TestEvidence2( unittest.TestCase  ) :
         problem = ClassicProblem( pm, xdata=x, ydata=y )
 
         logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
-                    plot=plot )
+                    plot=self.doplot )
 
-        if plot :
+        if self.doplot :
             plt.plot( pars[0], pars[1], 'k.' )
 
         print( "logZ  ", fmt( logz1 ) )
@@ -157,10 +142,10 @@ class TestEvidence2( unittest.TestCase  ) :
 
         assertAAE( numpy.sum( numpy.exp( lwevo ) ), 1.0 )
 
-        if plot :
+        if self.doplot :
             plt.show()
 
-    def test2_1( self, plot=False ) :
+    def test2_1( self ) :
         print( "====test2_1============================" )
         nn = 100
         x = numpy.arange( nn, dtype=float ) / 50
@@ -186,8 +171,8 @@ class TestEvidence2( unittest.TestCase  ) :
         problem = ClassicProblem( pm, xdata=x, ydata=y )
 
         logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
-                    plot=plot )
-        if plot :
+                    plot=self.doplot )
+        if self.doplot :
             plt.plot( pars[0], pars[1], 'k.' )
 
         print( "logZ  ", fmt( logz1 ), "   logL  ", fmt( logl1 ) )
@@ -215,15 +200,17 @@ class TestEvidence2( unittest.TestCase  ) :
 
         assertAAE( numpy.sum( numpy.exp( lwevo ) ), 1.0 )
 
-        if plot :
+        if self.doplot :
             plt.show()
 
-    def test3( self, plot=False ) :
-        print( "====test3============================" )
+    def test3( self ) :
+        print( "====test3======fixed noisescale======================" )
+        plot = self.doplot
+
         nn = 10
         x = numpy.linspace( 0, 2, nn, dtype=float )
         ym = 0.3 + 0.5 * x
-        nf = 0.1
+        nf = 0.2
         numpy.random.seed( 2345 )
         noise = numpy.random.randn( nn )
 
@@ -231,7 +218,7 @@ class TestEvidence2( unittest.TestCase  ) :
         limits = [-1,2]
 
         pm = PolynomialModel( 1 )
-        bf = Fitter( x, pm, fixedScale=0.5 )
+        bf = Fitter( x, pm, fixedScale=nf )
 
         pars = bf.fit( y )
         logz0 = bf.getLogZ( limits=limits )
@@ -244,7 +231,7 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.figure( "model" )
             plotFit( x, data=y, model=pm, ftr=bf, truth=ym, show=False )
 
-        errdis = GaussErrorDistribution( scale=0.5 )
+        errdis = GaussErrorDistribution( scale=nf )
         problem = ClassicProblem( pm, xdata=x, ydata=y )
 
         logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
@@ -258,7 +245,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
 
-        dis = GaussErrorDistribution( scale=0.5 )
+        dis = GaussErrorDistribution( scale=nf )
         ns = NestedSampler( x, model, y, distribution=dis, verbose=0 )
 
         logE = ns.sample()
@@ -290,8 +277,9 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
-    def test4( self, plot=False ) :
-        print( "====test4============================" )
+    def test4( self ) :
+        print( "====test4===unknown noisescale=========================" )
+        plot = self.doplot
 
         nn = 100
         x = numpy.arange( nn, dtype=float ) / 50
@@ -367,8 +355,10 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.show()
 
 
-    def test5( self, plot=None ) :
+    def test5( self ) :
         print( "====test5============================" )
+        plot = self.doplot
+
         nn = 10
         x = numpy.linspace( 0, 2, nn, dtype=float )
         ym = 0.3 + 0.5 * x
@@ -402,8 +392,9 @@ class TestEvidence2( unittest.TestCase  ) :
 
         print( "Average  ", fmt( logz ), " +- ", fmt( dlz ) )
 
-    def test6( self, plot=False ) :
+    def test6( self ) :
         print( "====test6  Laplace ================" )
+        plot = self.doplot
 
         nn = 20
         x = numpy.linspace( 0, 2, nn, dtype=float )
@@ -469,8 +460,9 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
-    def test6_0( self, plot=False ) :
+    def test6_0( self ) :
         print( "====test6_0  Laplace ================" )
+        plot = self.doplot
 
         nn = 20
         x = numpy.linspace( 0, 2, nn, dtype=float )
@@ -544,8 +536,9 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
-    def test6_1( self, plot=False ) :
+    def test6_1( self ) :
         print( "====test6_1  Laplace ================" )
+        plot = self.doplot
 
         nn = 20
         x = numpy.linspace( 0, 2, nn, dtype=float )
@@ -611,8 +604,9 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
-    def test7( self, plot=False ) :
+    def test7( self ) :
         print( "====test7  Poisson ================" )
+        plot = self.doplot
 
         nn = 100
         x = numpy.linspace( 0, 10, nn, dtype=float )
@@ -676,8 +670,9 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.show()
 
 
-    def test8( self, plot=False ) :
+    def test8( self ) :
         print( "====test8  Uniform ================" )
+        plot = self.doplot
 
         nn = 200
         x = numpy.linspace( 0, 2, nn, dtype=float )
@@ -728,8 +723,9 @@ class TestEvidence2( unittest.TestCase  ) :
         if plot :
             plt.show()
 
-    def XXXtest9( self, plot=False ) :
+    def XXXtest9( self ) :
         print( "====test9  Bernouilli ================" )
+        plot = self.doplot
 
         nn = 61
         x = numpy.linspace( -3, 3, nn, dtype=float )
@@ -781,8 +777,9 @@ class TestEvidence2( unittest.TestCase  ) :
         plt.plot( x, yfit2, 'g-' )
         plt.show()
 
-    def XXXtest10( self, plot=False ) :
+    def XXXtest10( self ) :
         print( "====test10  Bernouilli ================" )
+        plot = self.doplot
 
         nn = 1000
         x = numpy.linspace( 0, 10, nn )

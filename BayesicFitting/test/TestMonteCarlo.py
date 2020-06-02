@@ -1,6 +1,7 @@
 #run with: python3 -m unittest TestMonteCarlo
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 
@@ -43,6 +44,10 @@ class TestMonteCarlo( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
     def testMonteCarlo1( self ):
         print( "====== MonteCarlo 1 ===================" )
 
@@ -83,10 +88,7 @@ class TestMonteCarlo( unittest.TestCase ):
 #        self.assertAlmostEqual( par, 0.1 )
 #        self.assertAlmostEqual( chisq, 0.857142857143 )
 
-    def plotMonteCarlo2( self ):
-        self.testMonteCarlo2( doplot=True )
-
-    def testMonteCarlo2( self, doplot=False ):
+    def testMonteCarlo2( self ):
         print( "====== MonteCarlo 2 ===================" )
 
         x = numpy.arange( 7, dtype=float ) - 3
@@ -117,17 +119,15 @@ class TestMonteCarlo( unittest.TestCase ):
 #        numpy.testing.assert_array_almost_equal( std, numpy.asarray([0.1564921592871903,0.07824607964359515]) )
         self.assertAlmostEqual( chisq, 0.857142857143 )
 
-        if doplot :
+        if self.doplot :
             pyplot.plot( x, y, 'k*' )
             pyplot.plot( x, yfit, 'g-' )
             pyplot.plot( x, yfit+lmce, 'r-' )
             pyplot.plot( x, yfit-lmce, 'r-' )
             pyplot.show()
 
-    def plotMonteCarlo3( self ):
-        self.testMonteCarlo3( doplot=True )
 
-    def testMonteCarlo3( self, doplot=False ):
+    def testMonteCarlo3( self ):
         print( "====== MonteCarlo 3 ===================" )
 
         N = 101
@@ -175,7 +175,7 @@ class TestMonteCarlo( unittest.TestCase ):
         print( abs( integral - s1/k ), math.sqrt( s2/( k * 1000 ) ) )
         self.assertTrue( abs( integral - s1/k ) < math.sqrt( s2/( k * 1000 ) ) )
 
-        if doplot :
+        if self.doplot :
             pyplot.plot( x, y1, 'b.' )
 
             pyplot.plot( x, ym, 'k-' )

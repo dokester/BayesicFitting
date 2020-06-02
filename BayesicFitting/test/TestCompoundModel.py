@@ -1,6 +1,7 @@
 #run with: python3 -m unittest TestCompoundModel
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
@@ -44,6 +45,10 @@ class TestCompoundModel( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
     def testOperations( self ) :
         print( "  Test Operations  " )
         m = GaussModel()
@@ -274,10 +279,7 @@ class TestCompoundModel( unittest.TestCase ):
         self.assertTrue( s.npbase == 4 )
 
 
-    def plotPipe1( self ) :
-        self.testPipe1( plot=True )
-
-    def testPipe1( self, plot=False ) :
+    def testPipe1( self ) :
         model = PolynomialModel( 2 )
         model |= SineModel()
         print( model )
@@ -286,13 +288,9 @@ class TestCompoundModel( unittest.TestCase ):
 
         y = model.result( x, p )
 
-        stdModeltest( model, p, x=x, plot=plot )
+        stdModeltest( model, p, x=x, plot=self.doplot )
 
-
-    def plotPipe2( self ) :
-        self.testPipe2( plot=True )
-
-    def testPipe2( self, plot=False ) :
+    def testPipe2( self ) :
         model = PolynomialModel( 2 )
         model |= SineModel()
         model *= ExpModel()
@@ -302,7 +300,7 @@ class TestCompoundModel( unittest.TestCase ):
 
         y = model.result( x, p )
 
-        stdModeltest( model, p, x=x, plot=plot )
+        stdModeltest( model, p, x=x, plot=self.doplot )
 
 
     def testThreeModelLimits( self ):

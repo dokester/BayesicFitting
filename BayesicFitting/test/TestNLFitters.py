@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestNLFitters
 
 import unittest
+import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
@@ -47,113 +48,52 @@ class TestNLFitters( unittest.TestCase ):
     Author:      Do Kester
 
     """
-################################################################################
-    def plotAmoebaFitter( self ):
-        self.testAmoebaFitter( plot=True )
-        plt.show()
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def testAmoebaFitter( self, plot=False ):
+################################################################################
+    def testAmoebaFitter( self ):
         options = {"temp": 10.0, "maxiter": 10000 }
         options = {"maxiter": 10000}
-        stdFittertest( AmoebaFitter, 201, plot=plot, options=options )
+        stdFittertest( AmoebaFitter, 201, plot=self.doplot, options=options )
 
-    def testAmoebaFitter2( self, plot=False ):
+    def testAmoebaFitter2( self ):
         options = {"temp": 10.0, "maxiter": 10000, "verbose": 1 }
-        stdFittertest( AmoebaFitter, 201, errdis='gauss', plot=plot, options=options )
-        plt.show()
+        stdFittertest( AmoebaFitter, 201, errdis='gauss', plot=self.doplot, options=options )
 
-    def plotNelderMeadFitter( self ):
-        self.testNelderMeadFitter( plot=True )
-        plt.show()
+    def testNelderMeadFitter( self ):
+        stdFittertest( NelderMeadFitter, 201, plot=self.doplot, options={"maxiter": 3000} )
 
-    def testNelderMeadFitter( self, plot=False ):
-        stdFittertest( NelderMeadFitter, 201, plot=plot, options={"maxiter": 3000} )
+    def testPowellFitter( self ):
+        stdFittertest( PowellFitter, 201, plot=self.doplot )
 
-    def plotPowellFitter( self ):
-        self.testPowellFitter( plot=True )
-        plt.show()
+    def testConjugateGradientFitter( self ):
+        stdFittertest( ConjugateGradientFitter, 201, plot=self.doplot )
 
-    def testPowellFitter( self, plot=False ):
-        stdFittertest( PowellFitter, 201, plot=plot )
+    def testBfgsFitter( self ):
+        stdFittertest( BfgsFitter, 201, plot=self.doplot )
 
-    def plotConjugateGradientFitter( self ):
-        self.testConjugateGradientFitter( plot=True )
-        plt.show()
+    def testNewtonCgFitter( self ):
+        stdFittertest( NewtonCgFitter, 201, plot=self.doplot )
 
-    def testConjugateGradientFitter( self, plot=False ):
-        stdFittertest( ConjugateGradientFitter, 201, plot=plot )
+    def testLbfgsbFitter( self ):
+        stdFittertest( LbfgsbFitter, 201, plot=self.doplot )
 
-    def plotBfgsFitter( self ):
-        self.testBfgsFitter( plot=True )
-        plt.show()
+    def testTncFitter( self ):
+        stdFittertest( TncFitter, 201, plot=self.doplot )
 
-    def testBfgsFitter( self, plot=False ):
-        stdFittertest( BfgsFitter, 201, plot=plot )
+    def testCobylaFitter( self ):
+        stdFittertest( CobylaFitter, 201, plot=self.doplot )
 
-    def plotNewtonCgFitter( self ):
-        self.testNewtonCgFitter( plot=True )
-        plt.show()
+    def testSlsqpFitter( self ):
+        stdFittertest( SlsqpFitter, 201, plot=self.doplot )
 
-    def testNewtonCgFitter( self, plot=False ):
-        stdFittertest( NewtonCgFitter, 201, plot=plot )
+    def testDoglegFitter( self ):
+        stdFittertest( DoglegFitter, 201, plot=self.doplot )
 
-    def plotLbfgsbFitter( self ):
-        self.testLbfgsbFitter( plot=True )
-        plt.show()
-
-    def testLbfgsbFitter( self, plot=False ):
-        stdFittertest( LbfgsbFitter, 201, plot=plot )
-
-    def plotTncFitter( self ):
-        self.testTncFitter( plot=True )
-        plt.show()
-
-    def testTncFitter( self, plot=False ):
-        stdFittertest( TncFitter, 201, plot=plot )
-
-    def plotCobylaFitter( self ):
-        self.testCobylaFitter( plot=True )
-        plt.show()
-
-    def testCobylaFitter( self, plot=False ):
-        stdFittertest( CobylaFitter, 201, plot=plot )
-
-    def plotSlsqpFitter( self ):
-        self.testSlsqpFitter( plot=True )
-        plt.show()
-
-    def testSlsqpFitter( self, plot=False ):
-        stdFittertest( SlsqpFitter, 201, plot=plot )
-
-    def plotDoglegFitter( self ):
-        self.testDoglegFitter( plot=True )
-        plt.show()
-
-    def testDoglegFitter( self, plot=False ):
-        stdFittertest( DoglegFitter, 201, plot=plot )
-
-    def plotTrustNcgFitter( self ):
-        self.testTrustNcgFitter( plot=True )
-        plt.show()
-
-    def testTrustNcgFitter( self, plot=False ):
-        stdFittertest( TrustNcgFitter, 201, plot=plot )
-
-    def plotall( self ):
-        self.testAmoebaFitter( plot=True )
-        self.testNelderMeadFitter( plot=True )
-        self.testPowellFitter( plot=True )
-        self.testConjugateGradientFitter( plot=True )
-        self.testBfgsFitter( plot=True )
-        self.testNewtonCgFitter( plot=True )
-        self.testLbfgsbFitter( plot=True )
-        self.testTncFitter( plot=True )
-        self.testCobylaFitter( plot=True )
-        self.testSlsqpFitter( plot=True )
-        self.testDoglegFitter( plot=True )
-        self.testTrustNcgFitter( plot=True )
-        plt.show()
-
+    def testTrustNcgFitter( self ):
+        stdFittertest( TrustNcgFitter, 201, plot=self.doplot )
 
     @classmethod
     def suite( cls ):

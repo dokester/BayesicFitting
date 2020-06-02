@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestAmoeba
 
 import numpy as numpy
+import os
 import unittest
 from astropy import units
 import math
@@ -40,9 +41,9 @@ class TestAmoeba( unittest.TestCase ):
     Author       Do Kester
 
     """
-    def __init__( self, name ):
-        """     #  noise Normal distr.  """
-        super( TestAmoeba, self ).__init__( name )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot =  ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
     def func1( self, xx ) :
         yy = 3.14
@@ -100,14 +101,11 @@ class TestAmoeba( unittest.TestCase ):
         assertAAE( amb.fopt, self.func1( [-1.0,0.0] ) )
 
     #  **************************************************************
-    def plot3( self ) :
-        self.test3( plot=True )
-
-    def test3( self, plot=False ):
+    def test3( self ):
         """     # 	test iterative slope fit  """
         print( "Testing AnnealingAmoeba with limits; test 3" )
 
-        if plot :
+        if self.doplot :
             x = numpy.linspace( -10, 10, 201, dtype=float )
             y = numpy.linspace( -10, 10, 201, dtype=float )
             self.plot( self.func2, x=x, y=y, contour=[5,10,15,20,30,40,60,80,100, 200] )
@@ -117,7 +115,7 @@ class TestAmoeba( unittest.TestCase ):
         xopt = amb.minimize()
 
         print( amb.fopt, xopt )
-        if plot :
+        if self.doplot :
             plt.plot( [xopt[1]], [xopt[0]], 'r+' )
 
 
@@ -126,7 +124,7 @@ class TestAmoeba( unittest.TestCase ):
 
         xopt = amb.xopt
         print( amb.fopt, xopt )
-        if plot :
+        if self.doplot :
             plt.plot( [xopt[1]], [xopt[0]], 'g+' )
             plt.show()
 

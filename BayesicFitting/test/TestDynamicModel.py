@@ -1,9 +1,11 @@
 #run with: python3 -m unittest TestCompoundModel
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import math
+import matplotlib.pyplot as plt
 
 from StdTests import stdModeltest
 
@@ -40,6 +42,9 @@ class TestDynamicModel( unittest.TestCase ):
     Author:      Do Kester
 
     """
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
     def testDynamic( self ) :
         print( "  Test Dynamic" )
@@ -260,31 +265,168 @@ class TestDynamicModel( unittest.TestCase ):
         self.assertTrue( pars[6] == pars[5]+2 )
         self.assertTrue( pars[8] == pars[7]+2 )
 
-    def growshrink( self, m, dnp=1 ) :
-        self.assertTrue( m.npchain == dnp )
-        self.assertTrue( m.npbase == dnp )
+    def test1Model10( self ):
+        print( "  Test SplinesDynamicModel" )
+        knots = numpy.linspace( 0, 1, 3 )
+        m = SplinesDynamicModel( knots=knots )
+        m.setLimits( [-10.0], [10.0] )
+        m.parameters = numpy.arange( m.npars, dtype=float )
+        rng  = numpy.random.RandomState( 123456 )
+        m = self.growshrink( m, dnp=1, npf=4, rng=rng, prnt=True )
 
-        Tools.printclass( m )
+        print( "Change Structure" )
+        for k in range( 6 ) :
+            m.vary( rng=rng )
+            self.report( m, prnt=True )
 
-        m.grow()
-        m.grow()
-        m.grow()
+        cm = m.copy()
+        Tools.printclass( cm )
 
-        print( m.npchain, m.npbase, m.npmax )
-        self.assertTrue( m.npchain == 4 * dnp )
-        self.assertTrue( m.npbase == 4 * dnp )
+    def test1Model11( self ):
+        print( "  Test SplinesDynamicModel shrink" )
+        xx = numpy.linspace( 0, 10, 501, dtype=float )
+        kn1 = numpy.linspace( 0, 10, 16, dtype=float )
+        m1 = BasicSplinesModel( knots=kn1 )
+        p1 = numpy.zeros( 18, dtype=float )
+        p1[7:9] = 1.0
 
-        m.grow()
-        m.shrink()
+        kn2 = numpy.append( numpy.append( kn1[:7], [5.0] ), kn1[9:] )
+        m2 = BasicSplinesModel( knots=kn2 )
+        p2 = numpy.zeros( 17, dtype=float )
+        p2[7] = 1.4
+        print( fmt( kn1, max=None ) )
+        print( fmt( kn2, max=None ) )
 
-        Tools.printclass( m )
-        self.assertTrue( m.npchain == 4 * dnp )
-        self.assertTrue( m.npbase == 4 * dnp )
 
-        m.shrink()
-        self.assertTrue( m.npchain == 3 * dnp )
-        self.assertTrue( m.npbase == 3 * dnp )
+        if self.doplot :
+            plt.plot( xx, m1.result( xx, p1 ) )
+            plt.plot( xx, m2.result( xx, p2 ) )
+            plt.show()
 
+
+
+    def constrainPos( self, logL, problem, allpars ):
+        xx = numpy.arange( 101, dtype=float )
+        yy = problem.model.result( xx, allpars )
+        if numpy.any( yy < 0 ):
+            return -1.e20
+        else :
+            return logL
+
+    def TBDtestNS( self ) :
+        print( "  Test SplinesDynamicModel in NestedSampler" )
+        year = numpy.asarray( [5,15,25,35,45,55,65,75,85,95], dtype=float )
+        perc = numpy.asarray( [0,0,0,0.3,0.5,1.1,3.9,13.4,20.6,23.1] )
+        wgt  = numpy.asarray( [4,4,4,4,4,4,4,4,4,4], dtype=float )
+
+        # We need initial knot settings
+        knots =[0, 50, 100]
+
+        mdl = SplinesDynamicModel( knots=knots, maxKnots=5 )
+        mdl.setLimits( lowLimits=[-1.0,-1.0], highLimits=[+1.0,1.0] )
+
+        wg1 = wgt * 2
+        print( wg1 )
+        ns = NestedSampler( year, mdl, perc, weights=wg1, seed=1234 )
+        ns.distribution.setLimits( [0.01,100] )
+        ns.distribution.constrain = self.constrainPos
+        ns.minimumIterations = 1000
+        evid = ns.sample( )
+
+        sl = ns.samples
+        ay = numpy.linspace( 0, 100, 101, dtype=float )
+        res = sl.average( ay )
+        self.assertTrue( all( res >= 0 ) )
+
+
+    def growshrink( self, m0, dnp=1, npf=0, rng=None, prnt=False ) :
+        Tools.printclass( m0 )
+
+        self.assertTrue( m0.npchain == npf + dnp )
+        self.assertTrue( m0.npbase == npf + dnp )
+        self.report( m0, prnt=prnt )
+
+        npf += dnp
+        m = m0.copy()
+        if m.grow( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf += dnp
+        else :
+            print( "grow   failed" )
+
+        m = m0.copy()
+        if m.grow( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf += dnp
+        else :
+            print( "grow   failed" )
+
+        m = m0.copy()
+        if m.grow( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf += dnp
+        else :
+            print( "grow   failed" )
+
+        print( m.npchain, m.npbase, m.npmax, npf )
+        self.assertTrue( m.npchain == npf )
+        self.assertTrue( m.npbase == npf )
+
+        m = m0.copy()
+        if m.grow( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf += dnp
+        else :
+            print( "grow   failed" )
+
+        m = m0.copy()
+        if m.shrink( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf -= dnp
+        else :
+            print( "shrink failed" )
+
+        self.assertTrue( m.npchain == npf )
+        self.assertTrue( m.npbase == npf )
+
+        m = m0.copy()
+        if m.shrink( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf -= dnp
+        else :
+            print( "shrink failed" )
+
+        self.assertTrue( m.npchain == npf )
+        self.assertTrue( m.npbase == npf )
+
+        m = m0.copy()
+        if m.grow( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf += dnp
+        else :
+            print( "grow   failed" )
+
+        m = m0.copy()
+        if m.grow( rng=rng ) :
+            self.report( m, prnt=prnt )
+            m0 = m
+            npf += dnp
+        else :
+            print( "grow   failed" )
+
+        return m
+
+    def report( self, m, prnt=False ) :
+        if prnt :
+            print( "Knots  ", fmt( m.knots, max=None ) )
+            print( "Param  ", fmt( m.parameters, max=None ) )
 
     def test2Model( self ):
         print( "========================" )
@@ -356,7 +498,7 @@ class TestDynamicModel( unittest.TestCase ):
             print( "Death  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
 
 
-    def testNestedSampler( self, plot=False ) :
+    def testNestedSampler( self ) :
         print( "========================" )
         print( "  Test Nested Sampler" )
         print( "========================" )
@@ -379,12 +521,10 @@ class TestDynamicModel( unittest.TestCase ):
 
         ns.distribution.setLimits( [0.01, 100] )
 
-        logE = ns.sample( plot=plot )
+        logE = ns.sample( plot=self.doplot )
 
-    def plotNestedSampler2( self ) :
-        self.testNestedSampler2( plot=True )
 
-    def testNestedSampler2( self, plot=False ) :
+    def testNestedSampler2( self ) :
         print( "========================" )
         print( "  Test Nested Sampler 2" )
         print( "========================" )
@@ -407,17 +547,15 @@ class TestDynamicModel( unittest.TestCase ):
         Tools.printclass( pm )
 
         ns = NestedSampler( x, pm, y, seed=2031967 )
+#        ns.verbose = 4
 
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
 
-        logE = ns.sample( plot=plot )
+        logE = ns.sample( plot=self.doplot )
         print( "scale  ", ns.scale )
 
-    def plotNestedSampler3( self ) :
-        self.testNestedSampler3( plot=True )
-
-    def testNestedSampler3( self, plot=False ) :
+    def testNestedSampler3( self ) :
         print( "========================" )
         print( "  Test Nested Sampler 3" )
         print( "========================" )
@@ -442,7 +580,7 @@ class TestDynamicModel( unittest.TestCase ):
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
 
-        logE = ns.sample( plot=plot )
+        logE = ns.sample( plot=self.doplot )
         sl = ns.samples
         print( "maxlik   ", fmt( sl.maxLikelihoodParameters, max=None ) )
         print( "median   ", fmt( sl.medianParameters, max=None ) )

@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestKernels
 
 import unittest
+import os
 import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
@@ -38,34 +39,34 @@ class TestKernels( unittest.TestCase ):
     Author:      Do Kester
 
     """
-    def plotKernels( self ) :
-        self.testKernels( plot=True )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
-    def plotHuber( self ) :
+
+    def testHuber( self ) :
         kernel = Huber()
         xhm = kernel.fwhm / 2
         self.assertAlmostEqual( kernel.result( xhm ), 0.5 )
         self.assertAlmostEqual( kernel.result( -xhm ), 0.5 )
-        self.plotK( [Huber] )
+        if self.doplot :
+            self.plotK( [Huber] )
 
 
 
-    def testKernels( self, plot=False ):
+    def testKernels( self ):
         kernels = [Gauss, Lorentz, Sinc, Biweight, Cosine, CosSquare, Parabola, Triangle,
                    Tricube, Triweight, Uniform]
-        if plot :
+        if self.doplot :
             self.plotK( kernels )
 
         for kernl in kernels :
             kernel = kernl()
-            self.stdKerneltest( kernel, plot=plot )
+            self.stdKerneltest( kernel, plot=self.doplot )
             self.assertTrue( kernel.isBound() or ( kernl in kernels[:3] ) )
 
-    def plotTHC( self ) :
-        self.testTHC( plot=True )
 
-
-    def testTHC( self, plot=False ) :
+    def testTHC( self ) :
         x = numpy.linspace( -5, 5, 1001 )
         for kc in range( 7 ) :
 
@@ -79,13 +80,13 @@ class TestKernels( unittest.TestCase ):
             self.assertAlmostEqual( kernin, kernel.integral )
 
             print( kc, top, numpy.sum( y )/100 )
-            if plot :
+            if self.doplot :
                 plt.plot( x, kernel.result( x ) )
                 plt.plot( x, kernel.partial( x ) )
 
             self.stdKerneltest( kernel )
 
-        if plot :
+        if self.doplot :
             plt.show()
 
     def testonex( self ) :

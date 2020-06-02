@@ -5,6 +5,7 @@ from __future__ import print_function
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
+import os
 from astropy import units
 import math
 import sys
@@ -59,11 +60,12 @@ class TestErrorDistribution( unittest.TestCase ):
     # Define wgt weigth
     wgt = numpy.asarray( [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1], dtype=float )
 
-    def __init__( self, name ):
-        super( TestErrorDistribution, self ).__init__( name )
+    def __init__( self, testname ):
+        super( ).__init__( testname )
+        self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
         numpy.set_printoptions(formatter={'float': '{: 0.3f}'.format})
 
-    def test1( self, plot=False ) :
+    def test1( self ) :
         print( "====test1============================" )
         nn = 10000
         x = numpy.linspace( 0, 1, nn, dtype=float )
@@ -87,8 +89,8 @@ class TestErrorDistribution( unittest.TestCase ):
             problem.ydata = y
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
-        if plot:
-            self.ploterrdis( noise, errdis, model, allpars )
+        if self.doplot:
+            self.ploterrdis( noise, errdis, problem, allpars )
 
         nf = 0.01
         errdis = LaplaceErrorDistribution( )
@@ -99,6 +101,8 @@ class TestErrorDistribution( unittest.TestCase ):
             problem.ydata = y
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
+        if self.doplot:
+            self.ploterrdis( noise, errdis, problem, allpars )
 
         nf = 0.01
         errdis = UniformErrorDistribution( )
@@ -109,6 +113,8 @@ class TestErrorDistribution( unittest.TestCase ):
             problem.ydata = y
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
+        if self.doplot:
+            self.ploterrdis( noise, errdis, problem, allpars )
 
         nf = 0.01
         errdis = CauchyErrorDistribution ( )
@@ -121,6 +127,9 @@ class TestErrorDistribution( unittest.TestCase ):
             problem.ydata = y
             print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
             nf *= 10
+        if self.doplot :
+            self.ploterrdis( noise, errdis, problem, allpars )
+
 
         nf = 0.01
         errdis = ExponentialErrorDistribution( )
@@ -157,12 +166,13 @@ class TestErrorDistribution( unittest.TestCase ):
             nf *= 10
 
         allpars = [0.0, 1.0, power]
-        if plot :
-            self.ploterrdis( noise, errdis, model, allpars )
+        if self.doplot :
+            self.ploterrdis( noise, errdis, problem, allpars )
 
     def ploterrdis( self, noise, errdis, problem, allpars ) :
         num_bins = 20
-        plt.hist( noise, num_bins, normed=1, facecolor='g', alpha=0.5 )
+#        plt.hist( noise, num_bins, normed=1, facecolor='g', alpha=0.5 )
+        plt.hist( noise, num_bins, facecolor='g', alpha=0.5 )
         xx = numpy.linspace( -0.3, 0.3, 601, dtype=float )
         lik = numpy.zeros_like( xx )
         for k,p in enumerate( xx ) :
@@ -170,6 +180,7 @@ class TestErrorDistribution( unittest.TestCase ):
             lik[k] = errdis.logLikelihood( problem, allpars )
         maxlik = numpy.max( lik )
         plt.plot( xx, numpy.exp( lik - maxlik ), 'r-' )
+        plt.title( errdis.__str__() )
         plt.show()
 
 
@@ -613,7 +624,7 @@ class TestErrorDistribution( unittest.TestCase ):
             print( "" )
 
 
-    def XXXtestBernouilliErrorDistribution( self ):
+    def testBernouilliErrorDistribution( self ):
         print( "====== Test Bernouilli Error Distribution ======================" )
         poly = LogisticModel( fixed={0:1} )
         param = numpy.asarray( [0, 1], dtype=float )
@@ -652,13 +663,14 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
-
+        print( "             ", fmt( [4.0/(k+1) for k in range( 9 )], max=None ) )
         for i in range( 10 ) :
-            param = numpy.asarray( [8+i,4], dtype=float )
-            print( param, "  :  ", end="" )
+            param = numpy.asarray( [i-4,1], dtype=float )
+            print( fmt( param[0] ), "  :  ", end="" )
             for k in range( 9 ):
+                param[1] = 4.0 / ( k + 1 )
                 print( " %8.3f" % ped.logLikelihood( problem, param ), end="" )
-                param[1] += 1
+
             print( "" )
 
 
@@ -855,7 +867,7 @@ class TestErrorDistribution( unittest.TestCase ):
                 param[1] += 1
             print( "" )
 
-    def plotMixedErrorDistribution( self ):
+    def testMixedErrorDistribution0( self ):
         print( "\n   Test Mixed Error Distribution 0\n" )
         m = PolynomialModel( 0 )
         x = numpy.linspace( -10, 10, 201 )
@@ -866,11 +878,13 @@ class TestErrorDistribution( unittest.TestCase ):
 
         ced = MixedErrorDistribution( ed1, ed2  )
         param = numpy.asarray( [0.0, 0.3, 5, 0.7 ], dtype=float )
-        for k in range( 5 ) :
-            param[3] = 0.25 * k
-            lld = ced.logLdata( problem, param )
-            plt.plot( x, numpy.exp( lld ) )
-        plt.show()
+        if self.doplot :
+            for k in range( 5 ) :
+                param[3] = 0.25 * k
+                lld = ced.logLdata( problem, param )
+                plt.plot( x, numpy.exp( lld ) )
+            plt.title( ced.__str__() )
+            plt.show()
 
 
 
