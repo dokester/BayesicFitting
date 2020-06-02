@@ -186,6 +186,8 @@ class NestedSampler( object ):
         speed of exploration
     maxsize : None or int
         maximum size of the resulting sample list (None : no limit)
+    minimumIterations : int (100)
+        minimum number of iterations (adapt when starting problems occur)
     end : float (2.0)
         stopping criterion
     verbose : int
@@ -453,7 +455,7 @@ class NestedSampler( object ):
                 print( "Using threads." )
 
         if self.verbose > 1 :
-            print( "Iteration   logZ        H     LowL     npar    parameters" )
+            print( "Iteration     logZ        H       LowL     npar    parameters" )
 
 
         explorer = Explorer( self, threads=self.threads )
@@ -467,7 +469,6 @@ class NestedSampler( object ):
             logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
 
         self.engines[0].calculateUnitRange()
-
         for eng in self.engines :
             eng.unitRange = self.engines[0].unitRange
             eng.unitMin   = self.engines[0].unitMin
@@ -503,7 +504,7 @@ class NestedSampler( object ):
                     pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                     np = len( pl )
 #                   scale = self.getScale( self.walker[kw] )
-                    print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
+                    print( "%8d %10.3g %8.1f %10.3g %6d "%( self.iteration, self.logZ,
                         self.info, self.lowLhood, np ), fmt( pl ) )
 
                 self.plotResult( self.walkers[worst[0]], self.iteration, plot=iterplot )
@@ -533,7 +534,7 @@ class NestedSampler( object ):
                 kw = worst[0]
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
-                print( "%8d %8.1f %8.1f %8.1f %6d "%( self.iteration, self.logZ,
+                print( "%8d %10.3g %8.1f %10.3g %6d "%( self.iteration, self.logZ,
                         self.info, self.lowLhood, np ), fmt( pl, max=None ) )
 
 
@@ -636,7 +637,6 @@ class NestedSampler( object ):
             list of Walkers to copy
         """
         sworst = sorted( worst )
-#        print( worst, sworst )
         for k in range( self.discard ):
             kcp = self.rng.randint( 0, self.ensemble + 1 - self.discard )
             for kk in range( self.discard ):
@@ -647,7 +647,6 @@ class NestedSampler( object ):
             setatt( self.walkers[worst[k]], "start", self.iteration )
 #            wlkr = self.walkers[worst[k]]
 #            print( k, worst[k], wlkr.id, wlkr.parent, wlkr.start, self.iteration )
-
 
     def addEnsembleToSamples( self, logWidth ):
         """
