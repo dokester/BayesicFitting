@@ -3,6 +3,7 @@ from threading import Thread
 
 from .Engine import Engine
 from .Formatter import formatter as fmt
+from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -88,6 +89,12 @@ class Explorer( object ):
         self.threads = threads
         self.iteration = ns.iteration
 
+        self.selectEngines = self.allEngines    ## default: always use all engines
+        for eng in self.engines :
+            if hasattr( eng, "slow" ) :
+                self.selectEngines = self.selEngines    ## use selection
+                break
+
     def explore( self, worst, lowLhood ):
         """
         Explore the likelihood function, using threads.
@@ -100,10 +107,12 @@ class Explorer( object ):
             level of the low likelihood
 
         """
+        engines = self.selectEngines( self.iteration )
+
         if not self.threads :
             for kw in worst :
-                walker = self.walkers[kw]
-                self.exploreWalker( walker, lowLhood, self.engines, self.rng )
+                self.exploreWalker( kw, lowLhood, self.engines, self.rng )
+
             return
 
         ## We have Threads
@@ -113,9 +122,7 @@ class Explorer( object ):
         nrep = Engine.NCALLS
         for kw in worst :
             seed = self.rng.randint( self.TWOP32 )
-            walker = self.walkers[kw]
-#            print( "Thr  %d  "%kw, seed )
-            exThread = ExplorerThread( "explorer_%d"%kw, walker, self, seed )
+            exThread = ExplorerThread( "explorer_%d"%kw, kw, self, engines, seed )
             exThread.start( )
             explorerThreads += [exThread]
 
@@ -134,9 +141,10 @@ class Explorer( object ):
                 print( e )
             raise Exception( "Thread Error" )
 
-    def exploreWalker( self, walker, lowLhood, engines, rng ):
+    def exploreWalker( self, wlkrid, lowLhood, engines, rng ):
         """ For internal use only """
 
+        walker = self.walkers[wlkrid]
         oldlogL = walker.logL
 
         maxmoves = len( walker.fitIndex ) / self.rate
@@ -145,29 +153,68 @@ class Explorer( object ):
         moves = 0
         trials = 0
 
-
         while moves < maxmoves and trials < maxtrials :
-            i = 0
-            for engine in rng.permutation( engines ) :
 
+            for engine in rng.permutation( engines ) :
+                walker = self.walkers[wlkrid]
                 moves += engine.execute( walker, lowLhood )
 
-                if self.verbose >= 4:
+                if self.verbose >= 4 or self.walkers[wlkrid].logL < lowLhood :
+                    wlkr = self.walkers[wlkrid]
                     print( "%4d %-15.15s %4d %10.3f %10.3f ==> %3d  %10.3f"%
-                            ( trials, engine, walker.id, lowLhood, oldlogL, moves,
-                                walker.logL ) )
-                    if len( walker.allpars ) < len( walker.fitIndex ) :
+                            ( trials, engine, wlkrid, lowLhood, oldlogL, moves,
+                                wlkr.logL ) )
+                    print( "IN       ", fmt( walker.allpars, max=None ), len( walker.allpars ) )
+                    print( "OUT      ", fmt( wlkr.allpars, max=None ), len( wlkr.allpars ) )
+
+                    if len( wlkr.allpars ) < len( wlkr.fitIndex ) :
                         raise ValueError( "Walker parameter %d fitIndex %d" %
-                            ( len( walker.allpars ), len( walker.fitIndex ) ) )
-                    i += 1
-                    oldlogL = walker.logL
+                            ( len( wlkr.allpars ), len( wlkr.fitIndex ) ) )
+                    oldlogL = wlkr.logL
+
+                    ## check all walkers for consistency
+                    self.logLcheck( walker )
 
             trials += 1
 
-        if moves == 0 :
-            self.logLcheck( walker )
+        if moves == 0 or self.verbose >= 4 :
+            self.logLcheck( self.walkers[wlkrid] )
+
+        if self.walkers[wlkrid].logL < lowLhood :
+            raise Exception( "%10.3f < %10.3f" % ( self.walkers[wlkrid].logL, lowLhood )  )
 
         return
+
+    def selEngines( self, iteration ) :
+        """
+        Select engines with slowly changing parameters once per so many iterations.
+
+        Parameter
+        ---------
+        iteration : int
+            iteration number
+        """
+        engines = []
+        for eng in self.engines :
+            if not ( hasattr( eng, "slow" ) and ( iteration % eng.slow ) > 0 )  :
+                engines += [eng]
+        return engines
+
+    def allEngines( self, iteration ) :
+        """
+        Always use all engines.
+
+        Parameters
+        ----------
+        iteration : int
+            iteration number
+        """
+        return self.engines
+
+    def checkWalkers( self ) :
+        for w in self.walkers :
+            self.logLcheck( w )
+
 
     def logLcheck( self, walker ) :
         """
@@ -185,10 +232,18 @@ class Explorer( object ):
         """
         wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if wlogL != walker.logL :
+            Tools.printclass( walker )
             print( "Iteration %4d %4d %10.3f  %10.3f" % (self.iteration, walker.id, walker.logL, wlogL ) )
-            print( fmt( walker.allpars, max=None, format="%3d" ) )
+            print( fmt( walker.allpars, max=None ) )
             raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
                                 ( walker.logL, wlogL ) )
+
+        for ki in walker.fitIndex :
+#            if walker.fitIndex[ki] >= 0 :
+            if ki < 0 :
+                self.errdis.hyperpar[ki].prior.checkLimit( walker.allpars[ki] )
+            elif ki < walker.problem.model.npars :
+                walker.problem.model.getPrior( ki ).checkLimit( walker.allpars[ki] )
 
 
 class ExplorerThread( Thread ):
@@ -209,20 +264,20 @@ class ExplorerThread( Thread ):
 
     global threadErrors
 
-    def __init__( self, name, walker, explorer, seed ):
+    def __init__( self, name, id, explorer, engines, seed ):
         super( ExplorerThread, self ).__init__( name=name )
-        self.walker = walker
+        self.id = id
         self.explorer = explorer
-        self.engines = [eng.copy() for eng in explorer.engines]
+        self.engines = [eng.copy() for eng in engines]
         self.rng = numpy.random.RandomState( seed )
 
 
     def run( self ):
         try :
-            self.explorer.exploreWalker( self.walker, self.explorer.lowLhood,
+            self.explorer.exploreWalker( self.id, self.explorer.lowLhood,
                                          self.engines, self.rng )
         except Exception as e :
-            threadErrors.append( [repr(e) + " occurred in walker %d" % self.walker.id] )
+            threadErrors.append( [repr(e) + " occurred in walker %d" % self.id] )
             raise
 
 

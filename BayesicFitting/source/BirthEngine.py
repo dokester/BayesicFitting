@@ -2,6 +2,7 @@ import numpy as numpy
 
 from .Dynamic import Dynamic
 from .Engine import Engine
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -45,7 +46,7 @@ class BirthEngine( Engine ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ) :
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=23455, verbose=0 ) :
         """
         Constructor.
 
@@ -55,13 +56,15 @@ class BirthEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         copy : BirthEngine
             to be copied
         seed : int
             for random number generator
 
         """
-        super( BirthEngine, self ).__init__( walkers, errdis, copy=copy,
+        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
                     seed=seed, verbose=verbose )
 
     def copy( self ):
@@ -88,6 +91,9 @@ class BirthEngine( Engine ):
         int : the number of successfull moves
 
         """
+        nhyp = self.errdis.nphypar
+        walker.problem.model.parameters = walker.allpars[:-nhyp]
+
         self.reportCall()
 
         cwalker = walker.copy()                  ## work on local copy.
@@ -121,8 +127,8 @@ class BirthEngine( Engine ):
         dnp = model.npbase - np         # parameter change
         ftry = model.alterFitindex( ftry, np, dnp, off )
         ptry = problem.model.parameters          ## list of grown parameters
-        if self.errdis.nphypar > 0 :
-            ptry = numpy.append( ptry, allp[-self.errdis.nphypar:] )
+        if nhyp > 0 :
+            ptry = numpy.append( ptry, allp[-nhyp:] )
 
         loc = model.location            # where the extra parameters are inserted
         del( model.location )           # not needed anymore
@@ -140,7 +146,7 @@ class BirthEngine( Engine ):
                 self.reportSuccess()
                 self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
                 wlkr = self.walkers[walker.id]
-                wlkr.check( nhyp=self.errdis.nphypar )
+                wlkr.check( nhyp=nhyp )
                 return dnp
             else :
                 uval = self.rng.rand( dnp )
@@ -148,6 +154,8 @@ class BirthEngine( Engine ):
 
                 self.reportReject()
                 t += 1
+
+#        print( "Birth   ", walker.id, fmt( ptry, max=None ) )
 
         self.reportFailed()
 

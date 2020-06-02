@@ -43,7 +43,7 @@ class GibbsEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
 
@@ -53,13 +53,15 @@ class GibbsEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         copy : GibbsEngine
             to be copied
         seed : int
             for random number generator
 
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, slow=slow, copy=copy, seed=seed, verbose=verbose )
 
     def copy( self ):
         """ Return copy of this.  """

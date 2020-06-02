@@ -49,7 +49,7 @@ class DeathEngine( Engine ):
 #    _deathrate = 1.0
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ):
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=23455, verbose=0 ):
         """
         Constructor.
 
@@ -59,12 +59,14 @@ class DeathEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         copy : GalileanEngine
             to be copied
         seed : int
             for random number generator
         """
-        super( DeathEngine, self ).__init__( walkers, errdis, copy=copy,
+        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
                     seed=seed, verbose=verbose )
 
     def copy( self ):
@@ -91,6 +93,9 @@ class DeathEngine( Engine ):
         int : the number of successfull moves
 
         """
+        nhyp = self.errdis.nphypar
+        walker.problem.model.parameters = walker.allpars[:-nhyp]
+
         self.reportCall()
 
         cwalker = walker.copy()          ## work on local copy
@@ -99,8 +104,6 @@ class DeathEngine( Engine ):
         allp = cwalker.allpars
         ptry = allp
         ftry = cwalker.fitIndex
-
-#        print( "DEAT0  ", fmt( ptry ), fmt( walker.problem.model.parameters ), fmt( ftry ) )
 
         off = 0
         while model is not None and not isinstance( model, Dynamic ) :
@@ -116,6 +119,7 @@ class DeathEngine( Engine ):
         # shuffle the parameters (if needed) before throwing the last one out.
         ptry = model.shuffle( ptry, off, np, self.rng )
 
+
         if not ( nc > model.growPrior.unit2Domain( self.rng.rand() ) and
                 model.shrink( offset=off, rng=self.rng ) ) :
             self.reportFailed()
@@ -125,8 +129,8 @@ class DeathEngine( Engine ):
 
         ftry = model.alterFitindex( ftry, np, dnp, off )
         ptry = problem.model.parameters
-        if self.errdis.nphypar > 0 :
-            ptry = numpy.append( ptry, allp[-self.errdis.nphypar:] )
+        if nhyp > 0 :
+            ptry = numpy.append( ptry, allp[-nhyp:] )
 
         Ltry = self.errdis.logLikelihood( problem, ptry )
 
@@ -134,7 +138,7 @@ class DeathEngine( Engine ):
             self.reportSuccess()
             self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
             wlkr = self.walkers[walker.id]
-            wlkr.check( nhyp=self.errdis.nphypar )
+            wlkr.check( nhyp=nhyp )
             return abs( dnp )
 
         self.reportReject( )

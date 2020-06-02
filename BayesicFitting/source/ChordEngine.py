@@ -42,13 +42,16 @@ class ChordEngine( Engine ):
 
     The ChordEngine draws a random line through the walker parameters in
     unit space, from unitMin (lowpoint) with lengths unitRange (highpoint).
+
     A random point on the line is selected. If the corresponding parameter
     set has a likelihood < LowLhood, it is accepted. Otherwise either the
     highpoint is reset to the random point (if randompoint > walkerpoint)
-    or the lowpoint is increased to randompoint (if walker < random)
-    then continue.
-    when the point is accepted select another random line orthogonal to
-    the previous ones.
+    or the lowpoint is replaced by the randompoint (if walker < random).
+    Then a new random point on the line is selected, until the point is accepted.
+
+    When the point is accepted, another random line is constructed
+    through the new point and orthogonal to (all) previous ones.
+    (The orthogonality is not implemented now. TBC).
 
     This is an independent implementation inspired by the polychord engine
     described in:
@@ -65,13 +68,13 @@ class ChordEngine( Engine ):
 
     Attributes from Engine
     ----------------------
-    walkers, errdis, maxtrials, rng, verbose, report, unitRange, unitMin
+    walkers, errdis, slow, maxtrials, rng, verbose, report, unitRange, unitMin
 
     Author       Do Kester.
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, debug=False, verbose=0 ):
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, debug=False, verbose=0 ):
         """
         Constructor.
 
@@ -81,6 +84,8 @@ class ChordEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         copy : ChordEngine
             to be copied
         seed : int
@@ -90,7 +95,7 @@ class ChordEngine( Engine ):
             > 4  : info about engine execution
 
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, slow=slow, copy=copy, seed=seed, verbose=verbose )
 
         self.nstep = 5
         self.maxtrials = 25
@@ -123,33 +128,40 @@ class ChordEngine( Engine ):
 
         """
         self.reportCall()
+        self.plotter.start()
 
         walker = walker.copy()
         problem = walker.problem
         fitIndex = walker.fitIndex
         np = len( fitIndex )
 
-        self.plotter.start()
+        param = walker.allpars
+        usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
 
-#        self.calculateUnitRange()
+        # Determine n-dim box boundaries in which the parameters are located
+        if np > len( self.unitRange ) :
+            self.unitRange = numpy.ones( np, dtype=float )
+            self.unitMin = numpy.zeros( np, dtype=float )
 
         uran = self.unitRange[fitIndex]
         umin = self.unitMin[fitIndex]
 
-        dur = 2 * numpy.max( uran ) / len( self.walkers )      # extend range a bit
+        dur = 2 * numpy.max( uran ) / len( self.walkers )       # extend range a bit
         uran += 2 * dur
         umin = self.unitMin[fitIndex] - dur
+        umax = umin + uran
 
+        # make sure that 0 <= umin < usav < umax <= 1
+        umin = numpy.where( usav < umin, 2 * usav - umin, umin )
+        umax = numpy.where( usav > umax, 2 * usav - umax, umax )
         umin = numpy.maximum( umin, 0 )
-        umax = numpy.minimum( umin + uran, 1 )
+        umax = numpy.minimum( umax, 1 )
 
-
-        param = walker.allpars
-        usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
-
+        # number of cycles in ChordEngine
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
 
         onb = OrthonormalBasis( )
+        # random direction in n-dim unit-parameter space
         vel = self.rng.rand( np ) - 0.5
 
         if self.verbose > 4 :
@@ -157,15 +169,14 @@ class ChordEngine( Engine ):
             print( walker.id, nstep, fmt(lowLhood), fmt( param ) )
             print( "umin  ", fmt( umin ) )
             print( "umax  ", fmt( umax ) )
-#            print( "umean ", fmt( umn ) )
             print( "usav  ", fmt( usav ) )
 
         self.plotter.point( param, col=0, sym=2 )
 
-
         reset = True
         ptry = param.copy()
         step = 0
+
         for ks in range( nstep ) :
 
             ## orthonormalise the random vector
@@ -208,9 +219,9 @@ class ChordEngine( Engine ):
                 if self.verbose > 4 :
                     print( kk, fmt(t0), fmt(t1), fmt(dt), fmt(t1-t0), fmt(Ltry) )
 
-
                 if Ltry >= lowLhood:
                     self.reportSuccess( )
+
                     step += 1
 
                     self.plotter.move( param, ptry, col=0, sym=0 )
@@ -222,9 +233,20 @@ class ChordEngine( Engine ):
                     param = ptry.copy()
                     usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
 
+                    # make sure that 0 <= umin < usav < umax <= 1
+                    umin = numpy.where( usav < umin, 2 * usav - umin, umin )
+                    umax = numpy.where( usav > umax, 2 * usav - umax, umax )
+                    umin = numpy.maximum( umin, 0 )
+                    umax = numpy.minimum( umax, 1 )
+
                     ## find a new random direction, orthonormal to the previous ones
                     vel = self.rng.rand( np ) - 0.5
-                    reset = False
+
+                    ## TBC; for now reset always.
+#                    reset = False
+
+                    ## update the walker
+                    self.setWalker( walker, problem, ptry, Ltry, fitIndex=fitIndex )
 
                     break
 
@@ -245,11 +267,7 @@ class ChordEngine( Engine ):
                 else :
                     t1 = dt
 
-        if step > 0 :
-            ## update the walker
-            self.setWalker( walker, problem, ptry, Ltry, fitIndex=fitIndex )
-            step = np
-        elif self.verbose > 4 :
+        if step == 0 and self.verbose > 4 :
             warnings.warn( "ChordEngine: no steps found" )
 
         self.plotter.stop()
@@ -272,7 +290,6 @@ class ChordEngine( Engine ):
 
             utry = usav + vel * t
             ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
-#            print( t, tmax, utry, ptry )
             Ltry = self.errdis.logLikelihood( problem, ptry )
             if Ltry <= lowLhood :
                 return t

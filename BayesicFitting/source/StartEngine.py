@@ -93,6 +93,7 @@ class StartEngine( Engine ):
             if model.isDynamic() :
                 np0 = model.npars
                 off = 0
+
                 ## find the model in the chain that is actually dynamic
                 while model is not None and not isinstance( model, Dynamic ) :
                     off += model.npbase

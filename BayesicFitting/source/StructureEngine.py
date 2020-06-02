@@ -3,6 +3,7 @@ import numpy as numpy
 from .Modifiable import Modifiable
 from .Engine import Engine
 from . import Tools
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -42,14 +43,14 @@ class StructureEngine( Engine ):
 
     Attributes from Engine
     ----------------------
-    walkers, errdis, maxtrials, rng, report, unitRange, unitMin, verbose
+    walkers, errdis, slow, maxtrials, rng, report, unitRange, unitMin, verbose
 
     Author       Do Kester.
 
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=23455, verbose=0 ) :
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=23455, verbose=0 ) :
         """
         Constructor.
 
@@ -59,13 +60,15 @@ class StructureEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         copy : StructureEngine
             to be copied
         seed : int
             for random number generator
 
         """
-        super( StructureEngine, self ).__init__( walkers, errdis, copy=copy,
+        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
                     seed=seed, verbose=verbose )
 
     def copy( self ):
@@ -92,31 +95,32 @@ class StructureEngine( Engine ):
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
         t = 0
         k = 0
-        while t <= walker.problem.model.ncomp and k < self.maxtrials :
-            dt = self.executeOnce( walker, lowLhood )
-            if dt > 0 :
-                t += dt
-                k = 0
-            else :
-                k += 1
+        perm = self.rng.permutation( walker.problem.model.ncomp - 2 )
+        for p in perm :
+            dt = self.executeOnce( walker.id, lowLhood, location=p+1 )
+            k = 0 if dt > 0 else k + 1
+            t += dt
 
         return t
 
-    def executeOnce( self, walker, lowLhood ) :
+    def executeOnce( self, wlkrid, lowLhood, location=None ) :
         """
         One execution call.
         """
-        self.reportCall()
 
+        walker = self.walkers[wlkrid]
         cwalker = walker.copy()                  ## work on local copy.
-        problem = cwalker.problem
-        ptry = cwalker.allpars
-        ftry = cwalker.fitIndex
+        problem = cwalker.problem.copy()
+        ptry = cwalker.allpars.copy()
+        ftry = cwalker.fitIndex.copy()
 
         if self.verbose > 4 :
-            print( "SEN0  ", walker.id, walker.parent, len( ptry ), len( ftry ) )
+            print( "SEN0  ", walker.id, walker.parent, len( ptry ), len( ftry ), walker.logL )
+            print( "      ", fmt( cwalker.problem.model.knots, max=None ) )
 
         off = 0
         model = problem.model
@@ -129,25 +133,27 @@ class StructureEngine( Engine ):
             np = model.npbase
             print( "SEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
 
-        if not model.vary( rng=self.rng ):
-#            print( "SEN2  ", "failed" )
+        if not model.vary( location=location, rng=self.rng ):
             self.reportReject()
             return 0
 
+        problem.model = model._head
         Ltry = self.errdis.logLikelihood( problem, ptry )
+
+        if self.verbose > 4 :
+            print( "SEN3  ", fmt( ptry, max=None ), Ltry, lowLhood )
+            print( "      ", fmt( cwalker.problem.model.knots, max=None ) )
 
         if Ltry >= lowLhood:
             self.reportSuccess()
             self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
             wlkr = self.walkers[walker.id]
 
-#            Tools.printclass( walker )
             wlkr.check( nhyp=self.errdis.nphypar )
 
             ## check if better than Lbest in walkers[-1]
             self.checkBest( problem, ptry, Ltry, ftry )
 
-#            return model.npbase
             return 1
 
         self.reportFailed()

@@ -42,12 +42,8 @@ class Engine( object ):
         list of walkers to be diffused
     errdis : ErrorDistribution
         error distribution to be used
-    constrain : None or callable (TBD -- future extension)
-        Impose constraints on the parameters.
-        None : no constraints
-        callable : a method as
-            parameters = constrain( model, parameters, xdata )
-        It is the callers responsibility to return valid values for the parameters.
+    slow : int
+        If slow > 0, run this engine every slow-th iteration.
     maxtrials : int
         maximum number of trials for various operations
     rng : numpy.random.RandomState
@@ -73,16 +69,7 @@ class Engine( object ):
 
     #  *********CONSTRUCTORS***************************************************
 
-#    def __init__( self, walkers, errdis, copy=None, seed=4213, constrain=None ):
-#        constrain : None or callable (TBD)
-#            Impose constraints on the parameters
-#            None : no constraints
-#            callable : a method as
-#                parameters = constrain( model, parameters, xdata )
-
-
-
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, verbose=0 ):
         """
         Constructor.
 
@@ -92,6 +79,8 @@ class Engine( object ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         seed : int
             for random number generator
         verbose : int
@@ -110,19 +99,14 @@ class Engine( object ):
             self.unitRange = None
             self.unitMin = None
             self.verbose = verbose
-
-
-#            if constrain is None or callable( constrain ) :
-#                self.constrain = constrain
-#            else :
-#                raise ValueError( "Constrain does not seem callable" )
+            if slow is not None : self.slow = slow
         else :
             self.maxtrials = copy.maxtrials
             self.rng = copy.rng
-#            self.constrain = copy.constrain
             self.unitRange = copy.unitRange
             self.unitMin   = copy.unitMin
             self.verbose   = copy.verbose
+            if hasattr( copy, "slow" ) : self.slow = copy.slow
 
     def copy( self ):
         """ Return a copy of this engine.  """

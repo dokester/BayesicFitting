@@ -51,14 +51,14 @@ class GalileanEngine( Engine ):
 
     Attributes from Engine
     ----------------------
-    walkers, errdis, maxtrials, rng, report, unitRange, unitMin, verbose
+    walkers, errdis, maxtrials, slow, rng, report, unitRange, unitMin, verbose
 
     Author       Do Kester.
 
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, verbose=0 ):
         """
         Default Constructor.
 
@@ -68,12 +68,14 @@ class GalileanEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
+        slow : None or int > 0
+            Run this engine every slow-th iteration. None for all.
         copy : GalileanEngine
             to be copied
         seed : int
             for random number generator
         """
-        super( GalileanEngine, self ).__init__( walkers, errdis, copy=copy,
+        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
                         seed=seed, verbose=verbose  )
         self.nstep = 5
 
@@ -189,6 +191,10 @@ class GalileanEngine( Engine ):
                 ## check if better than Lbest in walkers[-1]
                 self.checkBest( problem, ptry, Ltry, fitIndex )
 
+                ## update the walker
+                self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
+
+
             else:
                 inside += 1
                 if inside == 1:
@@ -204,10 +210,16 @@ class GalileanEngine( Engine ):
             if not ( step < nstep and trial < maxtrial ):
                 break
 
-        if npout > 0 :
-            self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
-        elif self.verbose > 4 :
+#        if npout > 0 :
+#            self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
+#        elif self.verbose > 4 :
+
+
+        if npout == 0 and self.verbose > 4 :
             warnings.warn( "GalileanEngine: no steps found" )
+
+#        if npout == 0 :
+#            print( "Galilean ", walker.id, trial, step, npout, fma( ptry ) )
 
 
         self.plotter.stop()
