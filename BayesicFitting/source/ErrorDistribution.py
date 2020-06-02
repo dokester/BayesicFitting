@@ -3,6 +3,7 @@ import math
 
 from .HyperParameter import HyperParameter
 from . import Tools
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2018
@@ -59,13 +60,16 @@ class ErrorDistribution( object ):
         list of values for the hyperparameters
     nphypar : int
         number of hyper parameters in this error distribution
-
+    constrain : None or callable
+        None:     Use logLikelihood as is
+        callable: logL = func( logL, problem, allpars )
+                  returning a (modified) value of the logLikelihood.
     """
 
     PARNAMES = ["hypar"]
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, fixed=None, copy=None ):
+    def __init__( self, fixed=None, constrain=None, copy=None ):
         """
         Constructor.
 
@@ -74,8 +78,15 @@ class ErrorDistribution( object ):
         fixed : dictionary of {int:float}
             int     list if parameters to fix permanently. Default None.
             float   list of values for the fixed parameters.
+        constrain : None or callable
+            function as: func( logL, problem, allpars )
+            returning a (modified) value of the logLikelihood.
         copy : ErrorDistribution
             distribution to be copied.
+
+        Raise
+        -----
+        ValueError when constrain is not a callable method.
 
         """
         super( ErrorDistribution, self ).__init__()
@@ -85,10 +96,12 @@ class ErrorDistribution( object ):
             self.hyperpar = []
             self.deltaP = 0.000001
             self.fixed = self.keepFixed( fixed )
+            self.constrain = constrain
         else :                          ### TBC do we need copies here ????
             self.hyperpar = copy.hyperpar
             self.deltaP = copy.deltaP
             self.fixed = self.keepFixed( copy.fixed )
+            self.constrain = copy.constrain
 
     def copy( self ):
         """ Return copy of this.  """
@@ -99,6 +112,18 @@ class ErrorDistribution( object ):
         Set attributes.
 
         """
+        if name == "constrain" :
+            ## Choose one of 2 likelihood functions in "logLikelihood"
+            if value is None :
+                setatt( self, "logLikelihood", self.logLhood )
+            elif callable( value ) :
+                setatt( self, "logLikelihood", self.logCLhood )
+            else :
+                raise ValueError( "Constrain is not a callable function" )
+
+            setatt( self, "constrain", value )
+            return
+
         key0 = ["hyperpar", "fixed"]
         keys = {"hyperpar": HyperParameter}
         key1 = {"deltaP": float, "ncalls": int, "nparts": int, "fixed": dict }
@@ -317,7 +342,22 @@ class ErrorDistribution( object ):
 
     #  *********LIKELIHOODS***************************************************
 
-    def logLikelihood( self, problem, allpars ):
+    def logCLhood( self, problem, allpars ):
+        """
+        Return the constrained log( likelihood ).
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            parameters of the problem
+        """
+        logL = self.logLhood( problem, allpars )
+
+        return self.constrain( logL, problem, allpars )
+
+    def logLhood( self, problem, allpars ):
         """
         Return the log( likelihood ).
 
