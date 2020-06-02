@@ -89,7 +89,7 @@ class Problem( object ):
             self.xdata = copy.xdata
             self.ydata = copy.ydata
             self.weights = copy.weights
-            if copy.model and copy.model.isDynamic() :
+            if copy.model and ( copy.model.isDynamic() or copy.model.isModifiable() ) :
                 self.model = copy.model.copy()
             else :
                 self.model = copy.model

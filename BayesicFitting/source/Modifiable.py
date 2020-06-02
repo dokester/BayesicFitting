@@ -50,13 +50,15 @@ class Modifiable( object ):
         return self.modifiable
 
 
-    def vary( self, rng=None, **kwargs ) :
+    def vary( self, location=None, rng=None, **kwargs ) :
         """
         Vary the structure of a Modifiable Model
         Default implementation: does nothing.
 
         Parameters
         ----------
+        location : int
+            index of the item to be modified; otherwise random
         rng : RNG
             random number generator
         kwargs : keyword arguments
