@@ -146,7 +146,13 @@ class SplinesModel( LinearModel ):
         elif nrknots is None :
             raise ValueError( "Need either knots or (nrknots,min,max) or (nrknots,xrange)" )
 
-        super( SplinesModel, self ).__init__( order + nrknots - 1, copy=copy, **kwargs )
+        if 'nparams' in kwargs :
+            npar = kwargs['nparams']
+            del kwargs['nparams']
+        else :
+            npar = order + nrknots - 1
+
+        super( SplinesModel, self ).__init__( npar, copy=copy, **kwargs )
         self.order = order
         if knots is None :
             if xrange is not None :
