@@ -63,7 +63,7 @@ class Walker( object ):
 
     """
 
-    def __init__( self, id, problem, allpars, fitIndex, parent=-1, start=0, copy=None ):
+    def __init__( self, wid, problem, allpars, fitIndex, parent=-1, start=0, copy=None ):
         """
         Constructor.
 
@@ -71,7 +71,7 @@ class Walker( object ):
 
         Parameters
         ----------
-        id : int
+        wid : int
             id of the walker
         problem : Problem
             the problem being used. Parameters are copied from its model.
@@ -88,7 +88,7 @@ class Walker( object ):
             the walker to be copied
 
         """
-        self.id = id
+        self.id = wid
         self.allpars = allpars.copy()
         self.fitIndex = fitIndex
 

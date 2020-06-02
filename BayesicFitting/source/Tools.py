@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import numpy as numpy
 import math as math
+import numbers
 import sys
 import trace
 import re
@@ -327,7 +328,7 @@ def printclass( cls, nitems=8 ) :
     numpy.set_printoptions( precision=3, threshold=10, edgeitems=4 )
 
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
-    print( cls )
+    print( cls, " at ", id( cls ) )
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
     atr = vars( cls )
     ld = list( atr.keys() )
@@ -335,15 +336,26 @@ def printclass( cls, nitems=8 ) :
     for key in ld :
         print( "%-16.16s"%key, end="" )
         val = atr[key]
-        nv = length( val )
         if isinstance( val, (list,numpy.ndarray) ) :
-            print( val, nv )
+            printlist( val )
         elif isinstance( val, str ) :
             print( shortName( val ) )
         elif key == "model" :
             print( val.shortName( ) )
         else :
             print( val )
+
+def printlist( val, nitems=8 ) :
+    nv = length( val )
+    if nv == 0 or isinstance( val[0], numbers.Number ) :
+        print( val, nv )
+        return
+#    print( "[", end="" )
+    sep = "["
+    for k in range( min( nv, nitems ) ) :
+        print( "%s%s"%(sep, shortName( str( val[k] ) ) ), end="" )
+        sep = " "
+    print( "%s"%("... ]" if nitems < nv else "]"), nv )
 
 def shortName( val ):
     """

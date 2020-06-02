@@ -183,7 +183,8 @@ class Prior( object ):
 
         """
         if self.isOutOfLimits( par ):
-            raise ValueError( "Parameter outside supplied limits" )
+            raise ValueError( "Parameter outside supplied limits: %8.2f < %8.2f < %8.2f"%
+                            (self.lowLimit, par, self.highLimit) )
 
     def stayInLimits( self, par ):
         """

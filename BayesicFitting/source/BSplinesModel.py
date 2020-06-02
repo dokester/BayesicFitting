@@ -230,7 +230,6 @@ class BSplinesModel( LinearModel ):
 
         return partial
 
-
     def baseDerivative( self, xdata, params ) :
         """
         Return the derivative df/dx at each xdata (=x).
@@ -251,7 +250,7 @@ class BSplinesModel( LinearModel ):
 
     def baseName( self ):
         """ Returns a string representation of the model. """
-        return "B-Splines of order %d with %d knots."%( self.order, len( self.knots) )
+        return "BSplines of order %d with %d knots."%( self.order, len( self.knots) )
 
     def baseParameterUnit( self, k ):
         """

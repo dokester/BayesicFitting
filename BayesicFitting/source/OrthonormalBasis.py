@@ -68,6 +68,7 @@ class OrthonormalBasis( object ):
             uv += numpy.inner( u, vec ) * u
         uvec = vec - uv
         uvec /= numpy.linalg.norm( uvec )
+
         if nb == 0 :
             self.basis = uvec.reshape( (1,-1) )
         else :
