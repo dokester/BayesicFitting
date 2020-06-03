@@ -994,7 +994,21 @@ are known in advance.
 
 Since version 2.0 the **ErrorDistribution**s has changed its interface.
 Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
-Now the resposiblities of ErrorDistribution and Problem are better separated. 
+Now the responsiblities of ErrorDistribution and Problem are better separated. 
+
+To avoid certain combinations of parameters a "constrain" attribute can be 
+attached to an **ErrorDistribution**. It needs to be a user-provided callable 
+method in the form
+
+    def insideSphere( logL, problem, allpars ) :
+        return logL if numpy.sum( numpy.square( allpars ) ) < 1.0 else -math.inf
+
+    errdis.constrain = insideSphere
+
+When the to be avoided condition occurs logL should be returned as -INF; 
+otherwise logL should be returned unchanged. It should be noted that the 
+acceptable area should be large enough that it can reasonly be sampled randomly
+for an initial ensemble of **Walker**s.
 
 The use of a mixture of 2 error distributions is shown in
 [outliers2](#../examples/outliers-2.ipynb).
@@ -1062,6 +1076,16 @@ high speed equals low accuracy.
 
 See below for lists of available [**Engine**s](#list-engines).
 
+Each iteration of **NestedSampler** the **Engine**s in the list are 
+selected in a random order and executed until enough movement is provided 
+to the **Walker**. By setting the attributes "slow" to an **Engine**, it 
+is selected only every slow-th iteration. With
+
+    ns.engine[1].slow = 3  
+
+the **GibbsEngine** is selected every third iteration only. To be used for 
+expensive, biased or unbalanced **Engines**.
+
 ### Other keyword arguments
 
 Just like the **Fitter**s **NestedSampler** can have a keywords
@@ -1099,6 +1123,8 @@ kernels and miscellaneous.
 
 + **ArctanModel**<br>
     Arctangus Model. See [example](../examples/arctanfit.ipynb)
++ **BasicSplinesModel**<br>
+    General splines model of arbitrary order and with arbitrary knot settings.
 + **BSplinesModel**<br>
     General b-splines model of arbitrary order and with arbitrary knot settings.
 + **ChebyshevPolynomialModel**<br>
@@ -1184,6 +1210,8 @@ They can only be used with **NestedSampler**.
     General polynomial model of variable degree.
 + **RepeatingModel**<br>
     Variable number of repetitions of the same Model
++ **SplinesDynamicModel**<br>
+    BasicSplinesModel with unknown number of knots and locations
 
 #### Compound models.
 
@@ -1210,7 +1238,8 @@ common to all classes that inherit from them.
     Anchestor of all non-linear models.
 + **Dynamic**<br>
     Contains a number of methods common to Dynamic models.
-
++ **Modifiable**<br>
+    Contains a number of methods common to Modifiable models.
 
 <a name="synops-fitter"></a>  
 ### Fitters

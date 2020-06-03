@@ -144,6 +144,15 @@ However, if the noise scale is fixed during the run of NestedSampler,
 the standard deviations on the parameters is as much off as the true noise 
 scale differs from the provided noise scale.
 
+### **Starting Problems with NestedSampler.**<br>
+Sometimes it looks like NestedSampler cannot find the maximum in the likelihood
+landscape. The path to the likelihood mountain is lost in the n-dim space 
+spanned by the parameters. A tighter prior might help. Or setting the attribute
+minimumIterations to something large. By default it is 100. Enlarging it, gives 
+NestedSampler more opportunities to explore the parameter space. <br>
+Ensuring that the prior space contains the expected values for the posterior 
+parameter values, can also help.
+
 ### **Parameters at the edge**<br>
 The standard deviations of the parameters are calculated as the
 square root of chisq multiplied by the diagonal elements of the inverse

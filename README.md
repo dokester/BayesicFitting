@@ -3,8 +3,8 @@
 A package for model fitting and bayesian evidence calculation.
 
 (In case you are wondering what that is about take a 
-quick look at [this example.](./BayesicFitting/examples/sealevel.ipynb))
-
+quick look at [this example.]
+(https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples/sealevel.ipynb))
 
 Citation index:
 DOI: 10.5281/zenodo.2597200
@@ -84,7 +84,9 @@ to construct a model.
 
 ### examples
 
-In [BayesicFitting/examples](./BayesicFitting/examples) a number of scripts can be
+In [BayesicFitting/examples]
+(https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples)
+a number of scripts can be
 found to exercise the classes. They are in the form of jupyter
 notebooks. Some are using real data; others have synthetic data
 specially constructed to make some point. 
@@ -103,27 +105,28 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
-In the [documenation](./docs) directory a number of documents
-can be found. 
+In the [documenation]
+(https://github.com/dokester/BayesicFitting/blob/master/docs)
+directory a number of documents can be found. 
 
 
-+ [Manual](./docs/manual.md)<br>
++ [Manual](https://github.com/dokester/BayesicFitting/blob/master/docs/manual.md)<br>
 A first draft of a manual. It obviously needs more work.
 
-+ [Troubles](./docs/troubles.md)<br>
++ [Troubles](https://github.com/dokester/BayesicFitting/blob/master/docs/troubles.md)<br>
 A list of troublesome situations and what to do about it.
 
-+ [Glossary](./docs/glossary.md)<br>
++ [Glossary](https://github.com/dokester/BayesicFitting/blob/master/docs/glossary.md)<br>
 A list of the terms used throughout this package, with explanations.
 
-+ [Design](./docs/design.md)<br>
++ [Design](https://github.com/dokester/BayesicFitting/blob/master/docs/design.md)<br>
 An architectural design document, displaying the relationships between 
 the classes. 
 
-+ [Style](./docs/style.md)<br>
++ [Style](https://github.com/dokester/BayesicFitting/blob/master/docs/style.md)<br>
 A few notes on my style of code and documenation.
 
-+ [References](./docs/references.md)<br>
++ [References](https://github.com/dokester/BayesicFitting/blob/master/docs/references.md)<br>
 A list of external references for BayesicFitting.
 
 ### test
@@ -191,48 +194,48 @@ More work needs to be done in:
  + 28 December 2018 version 2.0.0
    * Introduction of Problem Classes: 
      - Problem. <br>
-Base class for problems to be handled by NestedSampler.
+	Base class for problems to be handled by NestedSampler.
      - ClassicProblem. <br>
-Common class for everything that was possible in version 1.
-ClassicProblem is transparant as all interfaces to NestedSampler have remained 
-the same as they were in version 1.0, even though behind the scenes a 
-ClassicProblem has been invoked.
+	Common class for everything that was possible in version 1.
+	ClassicProblem is transparant as all interfaces to NestedSampler have remained 
+	the same as they were in version 1.0, even though behind the scenes a 
+	ClassicProblem has been invoked.
      - ErrorsInXandYProblem. <br>
-Problem that have errors in the xdata  and in the ydata.
+	Problem that have errors in the xdata  and in the ydata.
      - ... more to come.
    * Introduction of Walker and WalkerList to represent the internal ensemble
-in NestedSampler. 
+     in NestedSampler. 
    * Adaptations in NestedSampler, ErrorDistributions, Engines, Sample, SampleList.
    * Better separation of responsibilities of ErrorDistribution and Problem. <br>
-Consequently ErrorDistribution has a new initialisation, which is incompatible 
-with previous versions. In most cases this has no effect on the calling 
-sequences of NestedSampler.
+     Consequently ErrorDistribution has a new initialisation, which is incompatible 
+     with previous versions. In most cases this has no effect on the calling 
+     sequences of NestedSampler.
    * Rename GenGaussErrorDistribution into ExponentialErrorDistribution.
    * New testharnesses and examples.
    * Adaptations of documentation: manual and design.
 
  + 16 Jan 2019 version 2.1.0
    * MultipleOutputProblem.
-Problems with more dimensional outputs 
+     Problems with more dimensional outputs 
    * StellarOrbitModel. 
-A 2 dim output model to calculate the orbit of a double star
+     A 2 dim output model to calculate the orbit of a double star
    * Keppler2ndLaw.
-To calculate the radius and true anomaly according to Kepplers 2nd law. 
-(and derivatives)
+     To calculate the radius and true anomaly according to Kepplers 2nd law. 
+     (and derivatives)
    * RadialVelocityModel: adapted to Kepplers2ndLaw. A slight change in the 
-order of the parameters.
+     order of the parameters.
    * NestedSampler: some improvements in output layout.
    * New tests, examples and updates for documentation.
 
  + 7 Feb 2019 version 2.2.0
    * ChordEngine. Implementation of the POLYCHORD engine, developed 
-by Handley etal. (2015) MNRAS 
+     by Handley etal. (2015) MNRAS 
    * OrthogonalBasis. Helper class fot ChordEngine.
    * Tests and examples
 
  + 19 Feb 2019 version 2.2.1 
    * AmoebaFitter still mentioned GenGaussErrorDistribution; replaced 
-by ExponentialErrorDistribution
+     by ExponentialErrorDistribution
    * Some documentation issues repaired.
 
  + 20 Jun 2019 version 2.3.0 
