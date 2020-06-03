@@ -309,28 +309,29 @@ class TestDynamicModel( unittest.TestCase ):
         xx = numpy.arange( 101, dtype=float )
         yy = problem.model.result( xx, allpars )
         if numpy.any( yy < 0 ):
-            return -1.e20
+            return -math.inf
         else :
             return logL
 
-    def TBDtestNS( self ) :
+    def testNS( self ) :
+        ky = numpy.arange( 100, dtype=int )
+        py = numpy.asarray( [0,0,0,0.3,0.5,1.1,3.9,13.4,20.6,23.1] )
+
+        perc = py[ ky // 10 ]
+        year = numpy.asarray( ky, dtype=float )
+
         print( "  Test SplinesDynamicModel in NestedSampler" )
-        year = numpy.asarray( [5,15,25,35,45,55,65,75,85,95], dtype=float )
-        perc = numpy.asarray( [0,0,0,0.3,0.5,1.1,3.9,13.4,20.6,23.1] )
-        wgt  = numpy.asarray( [4,4,4,4,4,4,4,4,4,4], dtype=float )
 
         # We need initial knot settings
         knots =[0, 50, 100]
 
         mdl = SplinesDynamicModel( knots=knots, maxKnots=5 )
-        mdl.setLimits( lowLimits=[-1.0,-1.0], highLimits=[+1.0,1.0] )
+        mdl.setLimits( lowLimits=[-20.0,-20.0], highLimits=[+30.0,30.0] )
 
-        wg1 = wgt * 2
-        print( wg1 )
-        ns = NestedSampler( year, mdl, perc, weights=wg1, seed=1234 )
+        ns = NestedSampler( year, mdl, perc, seed=1234 )
         ns.distribution.setLimits( [0.01,100] )
         ns.distribution.constrain = self.constrainPos
-        ns.minimumIterations = 1000
+        ns.verbose = 2
         evid = ns.sample( )
 
         sl = ns.samples
