@@ -87,6 +87,8 @@ class StartEngine( Engine ):
         npar = len( allp )
         onp = problem.npars
 
+        if hasattr( self.errdis, "constrain" ) and callable( self.errdis.constrain ) :
+            maxtrials = self.maxtrials * 100
         ktry = 0
         while True :
 
@@ -114,17 +116,11 @@ class StartEngine( Engine ):
             uval = self.rng.rand( len( fitIndex ) )
             allp[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
 
-#           ## fiture extension
-#           model = problem.model
-#           if self.constrain :
-#               xdata = self.errdis.xdata
-#               allp = self.constrain( model, allp, xdata )
-
             logL = self.errdis.logLikelihood( problem, allp )
 
             if numpy.isfinite( logL ) :
                 break
-            elif ktry > ( self.maxtrials + walker.id ) :
+            elif ktry > ( maxtrials + walker.id ) :
                 raise RuntimeError( "Cannot find valid starting solutions at walker %d" % walker.id )
             else :
                 ktry += 1

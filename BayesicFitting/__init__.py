@@ -27,10 +27,11 @@ TBC: How much time does this take. Everything is translated ??
 from .source.AmoebaFitter import AmoebaFitter
 from .source.AnnealingAmoeba import AnnealingAmoeba
 from .source.ArctanModel import ArctanModel
+from .source.BasicSplinesModel import BasicSplinesModel
 from .source.BSplinesModel import BSplinesModel
 from .source.BaseFitter import BaseFitter
 from .source.BaseModel import BaseModel
-#from .source.BernouilliErrorDistribution import BernouilliErrorDistribution 
+#from .source.BernouilliErrorDistribution import BernouilliErrorDistribution
 from .source.BirthEngine import BirthEngine
 from .source.BracketModel import BracketModel
 #from .source.CategoricalFitter import CategoricalFitter
@@ -94,7 +95,7 @@ from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
-#from .source.NeuralNetModel import NeuralNetModel
+from .source.NeuralNetModel import NeuralNetModel
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
@@ -129,6 +130,7 @@ from .source.SineModel import SineModel
 from .source.SineSplineDriftModel import SineSplineDriftModel
 from .source.SineSplineModel import SineSplineModel
 from .source.SplinesModel import SplinesModel
+from .source.SplinesDynamicModel import SplinesDynamicModel
 from .source.StartEngine import StartEngine
 from .source.StepEngine import StepEngine
 from .source.StellarOrbitModel import StellarOrbitModel
