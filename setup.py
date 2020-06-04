@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = '2.4.4'
+__version__ = '2.5.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -26,7 +26,7 @@ setup(
     long_description_content_type='text/markdown',
     url="https://github.com/dokester/BayesicFitting",
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
-                'optimization','nested sampling', 'fitting'],
+                'regression', 'inference', 'optimization','nested sampling', 'fitting'],
     packages=['BayesicFitting', 'BayesicFitting/source', 'BayesicFitting/source/kernels',
 #              'BayesicFitting/alpha',
               'BayesicFitting/test', 'BayesicFitting/examples'],

@@ -10,12 +10,15 @@ Citation index:
 DOI: 10.5281/zenodo.2597200
 
 
-## What's new in versions 2.4.4
-   * Moved BayesicFitting/BayesicFitting/documentation to BayesicFitting/docs
-   * Added a references.md file which collects (external) references.
-   * Updated the docs files.
-   * Handling of weight in accordance with the definition in the Glossary.
-   * Add keyword tail= to formatter to display last items of an array.
+## What's new in versions 2.5.0
+   * Add new models: BasicSplinesModel and SplinesDynamicModel
+   * Option for constraints on the likelihood
+   * Option for slow engines (working every slow-th iteration in NestedSampler)
+   * Restructure growPrior setting
+   * Print formatting in NestedSampler
+   * Adapt to SplinesDynamicModel
+   * Homogenized and improved plotoptions in test harnesses
+   * Three more exmaples added
 
 ## Content
 
@@ -266,6 +269,13 @@ More work needs to be done in:
    * Add random seed to several examples to make them more stable.
 
  + 17 Mar 2020 version 2.4.4
+   * Moved BayesicFitting/BayesicFitting/documentation to BayesicFitting/docs
+   * Added a references.md file which collects (external) references.
+   * Updated the docs files.
+   * Handling of weight in accordance with the definition in the Glossary.
+   * Add keyword tail= to formatter to display last items of an array.
+
+ + 4 Jun 2020 version 2.5.0
    * See above in Whats new.
 
 
