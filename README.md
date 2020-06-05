@@ -18,7 +18,9 @@ DOI: 10.5281/zenodo.2597200
    * Print formatting in NestedSampler
    * Adapt to SplinesDynamicModel
    * Homogenized and improved plotoptions in test harnesses
-   * Three more exmaples added
+   * Three more examples added
+## What's new in versions 2.5.1
+   * comment out NeuralNetModel (not yet available) and some typos.
 
 ## Content
 

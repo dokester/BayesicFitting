@@ -45,7 +45,7 @@ class StellarOrbitModel( NonLinearModel ):
     p_3 : T     time since periastron passage (0<p_3<period)
     p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = pi = in sky plane)
     p_5 : Omega position angle of the ascending node (0<Omega<2pi; 0 = north )
-    p_6 : omega longitude of periastron (0<omega<2pi; 0 = periastrom in ascending node )
+    p_6 : omega longitude of periastron (0<omega<2pi; 0 = periastron in ascending node )
 
     The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0].
     It is a non-linear model.

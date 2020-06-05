@@ -95,7 +95,7 @@ from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
-from .source.NeuralNetModel import NeuralNetModel
+#from .source.NeuralNetModel import NeuralNetModel
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
