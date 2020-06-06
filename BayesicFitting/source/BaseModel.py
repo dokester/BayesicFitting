@@ -324,6 +324,7 @@ class BaseModel( object ):
             return
 
         self.priors[k] = prior
+
         return
 
     def hasPriors( self, isBound=True ) :

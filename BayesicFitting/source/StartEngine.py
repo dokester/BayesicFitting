@@ -87,8 +87,9 @@ class StartEngine( Engine ):
         npar = len( allp )
         onp = problem.npars
 
+        maxtrials = self.maxtrials
         if hasattr( self.errdis, "constrain" ) and callable( self.errdis.constrain ) :
-            maxtrials = self.maxtrials * 100
+            maxtrials *= 100
         ktry = 0
         while True :
 

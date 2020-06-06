@@ -20,7 +20,9 @@ DOI: 10.5281/zenodo.2597200
    * Homogenized and improved plotoptions in test harnesses
    * Three more examples added
 ## What's new in versions 2.5.1
-   * comment out NeuralNetModel (not yet available) and some typos.
+   * Comment out NeuralNetModel (not yet available) and some typos.
+## What's new in versions 2.5.2
+   * Two more bugs smashed (in StartEngine and Prior)
 
 ## Content
 

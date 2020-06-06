@@ -152,7 +152,8 @@ class Prior( object ):
         scale : float or None
             scale factor
         """
-        self.setLimits( limits=limits )
+        if limits is not None :
+            self.setLimits( limits=limits )
         if scale is not None :
             self.scale = scale
 
