@@ -7,11 +7,11 @@ from numpy import int64
 import math
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -71,6 +71,10 @@ def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
 #    print( "init  ", gindent, gllen, gmax, fmt )
 
 def fma( array, **kwargs ) :
+    """
+    Syntactic sugar for
+        formatter( ..., max=None, ... )
+    """
     return formatter( array, max=None, **kwargs )
 
 def formatter( array, format=None, indent=None, linelength=None, max=-1, tail=0 ) :
@@ -174,6 +178,9 @@ def recursive_format( result, array, format=None, indent=0, tail=0 ) :
     sp -=1
     return result
 
-def spaces( int ) :
-    return ( " " * int )
+def spaces( ksp ) :
+    """
+    Return ksp spaces.
+    """
+    return ( " " * ksp )
 

@@ -27,7 +27,7 @@ from .Modifiable import Modifiable
 class ClassicProblem( Problem ):
     """
     A ClassicProblem is an optimization of parameters which involves
-    the fitting of data to a Model at a fixed set of x values..
+    the fitting of data to a Model at a fixed set of x values.
 
     Problems can be solved by NestedSampler, with appropriate Engines and
     ErrorDistributions.
@@ -49,7 +49,7 @@ class ClassicProblem( Problem ):
     def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
         """
         Constructor for classic problems.
-        <br>
+
         Parameters
         ----------
         model : Model

@@ -6,11 +6,11 @@ from .ScaledErrorDistribution import ScaledErrorDistribution
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2018
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  *
 #  * This file is part of the BayesicFitting package.
@@ -120,6 +120,9 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         return scale
 
     def funct( self, scale ) :
+        """
+        Internal use, only.
+        """
         return ( numpy.sum( numpy.log( self.res2 + scale * scale ) ) -
                 self.sumweight * ( 2 * math.log( scale ) + math.sqrt( 2.0 ) ) )
 
