@@ -8,11 +8,11 @@ from .Kepplers2ndLaw import Kepplers2ndLaw
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2019
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  *
 #  * This file is part of the BayesicFitting package.
@@ -42,10 +42,13 @@ class StellarOrbitModel( NonLinearModel ):
     p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
     p_1 : a     semi major axis (>0)
     p_2 : P     period of the orbit (>0)
-    p_3 : T     time since periastron passage (0<p_3<period)
+    p_3 : T     phase since periastron passage (0<p_3<2pi)
     p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = pi = in sky plane)
-    p_5 : Omega position angle of the ascending node (0<Omega<2pi; 0 = north )
-    p_6 : omega longitude of periastron (0<omega<2pi; 0 = periastron in ascending node )
+    p_5 : Omega position angle from North to the line of nodes (0<Omega<pi; 0 = north )
+    p_6 : omega longitude from the node (in p_5) to the periastron (0<omega<2pi; 0 = periastron in node )
+
+    Due to the fact that the orbit can be mirrored in the sky plane, one of p_5 or p_6
+    has to be limited to [0,pi] and the other to [0,2pi].
 
     The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0].
     It is a non-linear model.
@@ -103,8 +106,8 @@ class StellarOrbitModel( NonLinearModel ):
 
         """
         param = [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
-        names = ["eccentricity", "semimajoraxis", "period", "periastron phase",
-                  "inclination", "ascending node", "ascending long"]
+        names = ["eccentricity", "semimajoraxis", "period", "phase since periastron",
+                  "inclination", "north2nodes", "nodes2periastron"]
 
         setatt( self, "noutput", 2 )
         setatt( self, "spherical", spherical )
@@ -137,8 +140,8 @@ class StellarOrbitModel( NonLinearModel ):
         p_2 : P     period of the orbit (>0)
         p_3 : p     phase since periastron passage (0<p<2pi)
         p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-        p_5 : Omega position angle of the ascending node
-        p_6 : omega longitude of periastron
+        p_5 : Omega position angle of the line of nodes
+        p_6 : omega longitude of periastron from lines of nodes
 
         """
         inclin = params[4]
@@ -215,7 +218,7 @@ class StellarOrbitModel( NonLinearModel ):
         p_2 : P     period of the orbit (>0)
         p_3 : p     phase since periastron passage (0<p<2pi)
         p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-        p_5 : O(mega) position angle of the ascending node (0<Omega<2pi)
+        p_5 : O(mega) position angle of the line of nodes (0<Omega<pi)
         p_6 : o(mega) longitude of periastron (0<omega<2pi)
 
         """
@@ -262,11 +265,6 @@ class StellarOrbitModel( NonLinearModel ):
             dfdx[:,0] = +st * dRdx + rho * ct * dtdx
             dfdx[:,1] = -ct * dRdx + rho * st * dtdx
 
-#            dfdx[:,0] = ct * dRdx - rho * st * dtdx
-#            dfdx[:,1] = st * dRdx + rho * ct * dtdx
-
-
-
         return dfdx
 
 
@@ -293,7 +291,7 @@ class StellarOrbitModel( NonLinearModel ):
         p_2 : P     period of the orbit (>0)
         p_3 : p     phase since periastron passage (0<p<2pi)
         p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-        p_5 : O     position angle of the ascending node
+        p_5 : O     position angle of the line of nodes
         p_6 : o     longitude of periastron
 
         """
@@ -409,7 +407,7 @@ class StellarOrbitModel( NonLinearModel ):
 
     def baseParameterUnit( self, k ):
         """
-        Return the unit of a parameter.
+        Return the unit of a parameter. (TBC)
 
         Parameters
         ----------
@@ -417,8 +415,13 @@ class StellarOrbitModel( NonLinearModel ):
             the kth parameter.
 
         """
+
         if k == 0:
-            return units.Unit( units.si.rad ) / self.xUnit
-        return self.yUnit
+            return units.Unit( )
+        elif k == 1 :
+            return self.yUnit
+        elif k == 2 :
+            return 1.0 / self.xUnit
+        return units.Unit( units.si.rad )
 
 

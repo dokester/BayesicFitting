@@ -7,11 +7,11 @@ from .NonLinearModel import NonLinearModel
 from .Kepplers2ndLaw import Kepplers2ndLaw
 
 __author__ = "Do Kester"
-__year__ = 2018
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  *
 #  * This file is part of the BayesicFitting package.
@@ -37,7 +37,7 @@ class RadialVelocityModel( NonLinearModel ) :
     p_0 : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
     p_1 : amplitude    of the velocity variation (>0)
     p_2 : period       of the velocity variation (>0)
-    p_3 : phase        time shift since periastron (0<p<2pi)
+    p_3 : phase        phase of periastron (0<p<2pi)
     p_4 : periastron   longitude of periastron (0<p<2pi)
 
     This class uses @Kepplers2ndLaw to find radius and true anomaly.
