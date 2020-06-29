@@ -80,8 +80,6 @@ class TestTools( unittest.TestCase ) :
         self.assertTrue( Tools.isBetween( 2, 2, 2 ) )
 
 
-
-
     def testBaseModel( self ) :
         atc = BaseModel( 4 )
         atc.posIndex = [1,2]
@@ -178,6 +176,67 @@ class TestTools( unittest.TestCase ) :
         x = Tools.toArray( [3,4.5], ndim=2 )
         print( x, x.shape, x.__class__ )
         self.assertTrue( isinstance( x, numpy.ndarray ) and x.ndim == 2 )
+
+    def testAverage( self ) :
+        print( "===== Average ================================" )
+        xx = numpy.asarray( [10,20,30], dtype=float )
+        aver = numpy.average( xx )
+        stdv = numpy.std( xx )
+
+        ax1, sx1 = Tools.average( xx )
+        print( ax1, sx1 )
+        self.assertTrue( ax1 == aver )
+        self.assertTrue( sx1 == stdv )
+
+        ax2, sx2 = Tools.average( xx, circular=[0,360] )
+        print( ax2, sx2 )
+        self.assertAlmostEqual( ax2, aver )
+        self.assertAlmostEqual( sx2, stdv )
+
+        ax3, sx3 = Tools.average( xx, circular=[-180,180] )
+        print( ax3, sx3 )
+        self.assertAlmostEqual( ax3, aver )
+        self.assertAlmostEqual( sx3, stdv )
+
+        xx -= 15
+        xx[0] += 360
+        aver -= 15
+
+        ax1, sx1 = Tools.average( xx )
+        print( ax1, sx1 )
+        self.assertFalse( ax1 == aver )
+        self.assertFalse( sx1 == stdv )
+
+        ax2, sx2 = Tools.average( xx, circular=[0,360] )
+        print( ax2, sx2 )
+        self.assertAlmostEqual( ax2, aver )
+        self.assertAlmostEqual( sx2, stdv )
+
+        ax3, sx3 = Tools.average( xx, circular=[-180,180] )
+        print( ax3, sx3 )
+        self.assertAlmostEqual( ax3, aver )
+        self.assertAlmostEqual( sx3, stdv )
+
+        wgt = numpy.array( [0.7, 1.4, 0.7] )
+        stdv = math.sqrt( numpy.average( [100, 0, 100], weights=wgt ) )
+        print( aver, stdv )
+
+        ax1, sx1 = Tools.average( xx )
+        print( ax1, sx1 )
+        self.assertFalse( ax1 == aver )
+        self.assertFalse( sx1 == stdv )
+
+        ax2, sx2 = Tools.average( xx, circular=[0,360], weights=wgt )
+        print( ax2, sx2 )
+        self.assertAlmostEqual( ax2, aver )
+        self.assertAlmostEqual( sx2, stdv )
+
+        ax3, sx3 = Tools.average( xx, circular=[-180,180], weights=wgt )
+        print( ax3, sx3 )
+        self.assertAlmostEqual( ax3, aver )
+        self.assertAlmostEqual( sx3, stdv )
+
+
 
     @classmethod
     def suite( cls ):
