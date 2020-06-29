@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = '2.5.2'
+__version__ = '2.5.3'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -24,7 +24,7 @@ setup(
     description='A Python Toolbox for Bayesian fitting.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url="https://github.com/dokester/BayesicFitting",
+    url="https://www.bayesicfitting.nl",
     keywords = ['Bayesian', 'modeling', 'evidence', 'statistics', 'analysis',
                 'regression', 'inference', 'optimization','nested sampling', 'fitting'],
     packages=['BayesicFitting', 'BayesicFitting/source', 'BayesicFitting/source/kernels',

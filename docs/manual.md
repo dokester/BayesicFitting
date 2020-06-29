@@ -890,8 +890,8 @@ From the **SampleList** numerous items can be extracted.
     mlpar = slist.maxLikelihoodParameters
 
 In the examples directory the use of **NestedSampler** is demonstrated
-in [HD2039](#../examples/HD2039.ipynb) and
-[outliers2](#../examples/outliers-2.ipynb).
+in [HD2039](../examples/HD2039.ipynb) and
+[outliers2](../examples/outliers-2.ipynb).
 
 
 ### Samples and SampleList
@@ -1559,11 +1559,11 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 <a name="refs"></a>  
 ## 4. References
 
-<a name="ref1"></a>  
+<a name="ref1"></a>
 1. D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
 Oxford University Press. 2006.<br>
 
-<a name="ref2"></a>  
+<a name="ref2"></a>
 2. C.M. Bishop. **Pattern Recognition and Machine Learning.**
 Springer Science. 2006.<br>
 

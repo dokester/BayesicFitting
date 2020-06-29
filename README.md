@@ -1,6 +1,6 @@
 # BayesicFitting Readme.
 
-A package for model fitting and bayesian evidence calculation.
+A package for model fitting and Bayesian evidence calculation.
 
 (In case you are wondering what that is about take a 
 quick look at [this example.]
@@ -23,6 +23,9 @@ DOI: 10.5281/zenodo.2597200
    * Comment out NeuralNetModel (not yet available) and some typos.
 ## What's new in versions 2.5.2
    * Two more bugs smashed (in StartEngine and Prior)
+## What's new in versions 2.5.3
+   * Averaging of circular variables
+   * Update of static class attributes
 
 ## Content
 
@@ -36,13 +39,15 @@ DOI: 10.5281/zenodo.2597200
 ## 1. History 
 
 The BayesicFitting package is a python version of the the fitter classes
-in Herschel Common Science System (HCSS). The HCSS version was written
+in Herschel Common Science System (HCSS). HCSS was the all encompassing
+software system for the operations and analysis of the ESA satelite 
+Herschel. The HCSS version was written
 in JAVA mostly by me. I encoded features and classes that were requested
 by my Herschel colleagues or that I remembered having used myself during
 my lifelong career as data analyst for earlier satellites as IRAS, ISO
 and AKARI. So most of the stuff in here was needed and used at a certain
 moment in time. Even now the package is developing in directions that
-are needed by my work for JWST. 
+are needed by my work for the James Webb Space Telescope (JWST). 
 
 The HCSS system is in the public domain under GPL3. It was used by the 3
 instrument groups of the Herschel satellite to write calibration and
@@ -144,8 +149,7 @@ BayesicFitting/test. They can be execised as:
     python -m unittest <file>
 
 where python refers to python3 and file refers to one of the files in
-BayesicFitting/test.
-
+BayesicFitting/test.<br>
 As most functionality is tested in a test harness, examples on how to
 use the classes can be found there too.
 
@@ -156,29 +160,36 @@ A package like this is never finished. Always more classes and/or
 functionalities can be added. I present it now as it is in the hope it
 will be usefull and it will generate feedback.
 
+According to Wikipedia -> "Software release life cycle" it is called 
+"Perpetual Beta". It continues to be in a beta-release because new 
+classes and features can be added.
+
 More work needs to be done in:
 
-  * Documentation, especially the manual.
-  * Examples, more of them and covering more classes.
-  * Introduction of more Problems: OrderProblem, ...
+  * Introduction of more Classes: NeuralNetModel, OrderProblem, ...
 
 <a name="versions"></a>
 ## 5. Versions
 
  +  4 Jan 2018 version 0.9.0.<br>
    * Initial upload to github.
+
  + 26 Jan 2018 version <br>
+
  +  5 Mar 2018 version 1.0.1 <br>
    * Package on pypi.com. 
    * Restructured all import statement to comply with PYPI package.
+
  + 14 Mar 2018 version 1.0.2 <br>
    * Added Dynamic Models 
    * Added piping of models
+
  + 23 Mar 2018 version 1.0.3 <br>
    * Some issues with ErrorDistributions and map fitting
    * 2-d fitting examples added
    * All examples revisited
    * Links in README.md updated
+
  + 28 May 2018 version 1.0.4 <br>
    * New classes: CircularUniformPrior, PseudoVoigtModel
    * VoigtModel uses scipy.special.wozf() and has partials now,
@@ -187,17 +198,22 @@ More work needs to be done in:
    * Threading optional in NestedSampler.
    * New classes: UniformErrorDistribution, FreeShapeModel and kernels/Tophat
    * added to testharnesses and examples
+
  + 27 June 2018 version 1.0.5<br>
    * New classes: RadialVelocityModel and MixedErrorDistribution
    * testharnesses and examples
    * documentation updates
+
  + 28 June 2018 version 1.0.6
    * longdescription set to markdown (Still not OK on pypi.org)
+
  + 28 July 2018 version 1.0.7
    * small compilation error in 1.0.6
+
  + 11 October 2018 version 1.0.8
    * refactoring the setting of attributes in Models
    * documentation (manual, design, etc.) updated.
+
  + 28 December 2018 version 2.0.0
    * Introduction of Problem Classes: 
      - Problem. <br>
@@ -282,4 +298,6 @@ More work needs to be done in:
  + 4 Jun 2020 version 2.5.0
    * See above in Whats new.
 
+
+<br><br><br><br>
 
