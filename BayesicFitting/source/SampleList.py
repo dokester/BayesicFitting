@@ -5,11 +5,11 @@ from . import Tools
 from .Sample import Sample
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  *
 #  * This file is part of the BayesicFitting package.
@@ -296,10 +296,25 @@ class SampleList( list ):
             ValueError when using Dynamic Models
 
         """
-        ( a, s ) = self.averstd( "parameters" )
-        self.stdevs = s
-        return a
+        mdl = self[0].model
+        if not ( mdl.hasPriors() and any( [mdl.getPrior( k ).isCircular() for k in range( mdl.npchain )] ) ) :
+            ( a, s ) = self.averstd( "parameters" )
+            self.stdevs = s
+            return a
 
+        par, wgt = self.getParAndWgtEvolution()
+        np = self[0].model.npchain
+        param = numpy.zeros( np, dtype=float )
+        stdev = numpy.zeros( np, dtype=float )
+        for k in range( np ) :
+            pr = mdl.getPrior( k )
+            clh = None if not pr.isCircular() else pr.getLimits()
+            param[k], stdev[k] = Tools.average( par[:,k], weights=wgt, circular=clh )
+
+        self.parameters = param
+        self.stdevs = stdev
+
+        return self.parameters
 
         """
         np = self[0].model.npchain
@@ -421,6 +436,23 @@ class SampleList( list ):
             return numpy.asarray( pe )
         else :
             return numpy.asarray( pe )[:,kpar]
+
+    def getParAndWgtEvolution( self ):
+        """
+        Return the evolution of parameters and weights.
+
+        In case of dynamic models the number of parameters may vary.
+        They are zero-padded. Use `getNumberOfParametersEvolution`
+        to get the actual number.
+
+        """
+        pe = []
+        we = []
+        for sample in self :
+            pe += [sample.parameters]
+            we += [sample.logW]
+        return ( numpy.asarray( pe ), numpy.exp( numpy.asarray( we ) ) )
+
 
     def getNumberOfParametersEvolution( self ):
         """ Return the evolution of the number of parameters.  """

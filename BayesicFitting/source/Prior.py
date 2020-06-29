@@ -2,11 +2,11 @@ import numpy as numpy
 import math as math
 
 __author__ = "Do Kester"
-__year__ = 2018
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 
 #  *
@@ -230,6 +230,12 @@ class Prior( object ):
     def getRange( self ):
         """ Return the range.  """
         return self.highLimit - self.lowLimit
+
+    def isCircular( self ) :
+        """
+        By default False
+        """
+        return False
 
     def domain2Unit( self, dval ):
         """

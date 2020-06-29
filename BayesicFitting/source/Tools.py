@@ -10,11 +10,11 @@ import re
 from astropy.table import Table
 
 __author__ = "Do Kester"
-__year__ = 2019
+__year__ = 2020
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.5.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -410,4 +410,44 @@ def track( statement ) :
     r = tracer.results()
     r.write_results(show_missing=True, coverdir=".")
 
+def average( xx, weights=None, circular=None ) :
+    """
+    Return (weighted) average and standard deviation of input array.
 
+    Parameters
+    ----------
+    xx : array_like
+        input to be averaged
+    weights : array_like
+        if present these are the weights
+    circular : list of 2 floats
+        the input is a circular item between [low,high]
+    """
+    if circular is None :
+        if weights is None :
+            weights = numpy.ones_like( xx )
+        sw = numpy.sum( weights )
+        xw = xx * weights
+        sx = numpy.sum( xw )
+        s2 = numpy.sum( xw * xx )
+        averx = sx /sw
+        stdvx = math.sqrt( s2 / sw - averx * averx )
+
+    else :
+        range = circular[1] - circular[0]
+        d2r = 2 * math.pi / range
+        rr = ( xx - circular[0] ) * d2r
+        asx = numpy.average( numpy.sin( rr ), weights=weights )
+        acx = numpy.average( numpy.cos( rr ), weights=weights )
+        averx = math.atan2( asx, acx )
+
+        ## make rr relative to average and put 0.0 in mid of range.
+        rr = ( rr - averx + math.pi ) % ( 2 * math.pi ) - math.pi
+        stdvx = math.sqrt( numpy.average( rr * rr, weights=weights ) ) / d2r
+
+        ## put the average inside the circular domain
+        averx = averx / d2r + circular[0]
+        while averx < circular[0] : averx += range
+        while averx > circular[1] : averx -= range
+
+    return( averx, stdvx )
