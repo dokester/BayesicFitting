@@ -350,10 +350,13 @@ def printlist( val, nitems=8 ) :
     if nv == 0 or isinstance( val[0], numbers.Number ) :
         print( val, nv )
         return
-#    print( "[", end="" )
+
     sep = "["
     for k in range( min( nv, nitems ) ) :
-        print( "%s%s"%(sep, shortName( str( val[k] ) ) ), end="" )
+        try :
+            print( "%s%s"%(sep, val[k].__name__ ), end="" )
+        except :
+            print( "%s%s"%(sep, shortName( str( val[k] ) ) ), end="" )
         sep = " "
     print( "%s"%("... ]" if nitems < nv else "]"), nv )
 
@@ -362,7 +365,7 @@ def shortName( val ):
     Return a short version the string representation: upto first non-letter.
     """
     m = re.match( "^[0-9a-zA-Z_]*", val )
-    return m.group(0)
+    return m[0]
 
 
 def nicenumber( x ) :
