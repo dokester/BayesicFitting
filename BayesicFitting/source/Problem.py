@@ -95,7 +95,7 @@ class Problem( object ):
                 self.model = copy.model
             self.partype = copy.partype
 
-        if self.model is None or self.model.cyclic is None :
+        if self.model is None or not hasattr( self.model, "cyclic" ) :
             self.cyclicCorrection = self.cycor0
         elif isinstance( self.model.cyclic, dict ) :
             self.cyclicCorrection = self.cycor2

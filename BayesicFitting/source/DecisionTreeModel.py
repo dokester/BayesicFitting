@@ -106,6 +106,9 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
 
     """
 
+    NSPLITPRIOR = 3
+
+
     def __init__( self, ndim=1, depth=0, split=0.5, kdim=0, itypes=[0], modifiable=True,
                         dynamic=True, code=None, growPrior=None, copy=None, **kwargs ):
         """
@@ -185,8 +188,10 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
             setatt( self, "growPrior", growPrior )
             setatt( self, "itypes", itypes )
             setatt( self, "ncomp", ( 0x1 << depth ) - 1 )
-            setatt( self, "nsplit", 3 )
-            self.setLimits( 0, 1 )
+#            setatt( self, "nsplit", 3 )
+#            self.setLimits( 0, 1 )
+            setatt( self, "nsplit", self.NSPLITPRIOR )
+            self.setLimits( lowLimits=0.0, highLimits=1.0 )
         else :
             setatt( self, "growPrior", copy.growPrior )
             setatt( self, "ncomp", copy.ncomp )
@@ -229,6 +234,22 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
             setatt( dtm.rite, "parent", dtm )
 
         return dtm
+
+    def __getattr__( self, name ) :
+        """
+        Return None when the named attribute has not been set.
+
+        Parameters
+        ----------
+        name : string
+            name of the attribute
+        """
+        if ( ( name == "split" ) or ( name == "mask" ) or ( name == "itypes" ) or
+             ( name == "dimension" ) or ( name == "maxComp" ) or ( name == "minComp" ) or
+             ( name == "parent" ) ) :
+            return None
+        else :
+            return super().__getattr__( name )
 
     def setSplitOrMask( self, itype, split ) :
         """ For internal use only """
@@ -792,8 +813,6 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
 
         """
         if self.ncomp < 1 or ( self.minComp is not None and self.ncomp <= self.minComp ):
-            print( "False in 1", self.ncomp, self.minComp )
-            print( self.fullName() )
             return False
 
         if rng is not None :
@@ -804,8 +823,6 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
 #       npp = parent.countLeaf()
 
         if parent is None :
-            print( "False in 2", location, id( leaf ) )
-            print( self.fullName( ids=True ) )
             return False
 
 

@@ -163,13 +163,19 @@ class BaseModel( object ):
         name : string
             name of the attribute
         """
-        if name == "parNames" :
+        if name == "priors" :
+            return None
+
+        elif name == "parNames" :
+#        if name == "parNames" :
             raise AttributeError( "Model has no defined parameter names." )
 
         for k,pn in enumerate( self.parNames ) :
             if name == pn :
                 return self.parameters[k]
 
+        ## Raise error for any remaining attributes, not found standardly
+        raise AttributeError( "Model has no attribute %s." % name )
 
 
     #  *****RESULT**************************************************************
