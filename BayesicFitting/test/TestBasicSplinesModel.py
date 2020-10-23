@@ -7,6 +7,7 @@ from astropy import units
 import math
 import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE
+from numpy.testing import assert_array_equal as assertAE
 
 from BayesicFitting import formatter as fmt
 from BayesicFitting import *
@@ -97,7 +98,7 @@ class Test( unittest.TestCase ):
                 plt.plot( x, dy, cc[k+3] )
                 for i in range( sm.npars ) :
                     plt.plot( x, pt[:,i] )
-
+                plt.plot( kn1, [-0.02]*8, 'r|' )
                 plt.show()
 
     def test3( self ) :
@@ -105,25 +106,47 @@ class Test( unittest.TestCase ):
 
         x = numpy.linspace( 0, 100, 1001, dtype=float )
 
-        kn = [0.000, 0.170, 16.049, 28.465, 36.358, 36.374, 36.829, 59.589, 59.699, 70.193, 75.844, 88.918, 88.919,  100.000]
+        kn = [0.000, 1.470, 16.049, 28.465, 36.358, 36.374, 36.829,
+              59.589, 59.699, 70.193, 75.844, 88.918, 88.919,  100.000]
 
         sm = BasicSplinesModel( knots=kn )
         par = numpy.ones( sm.npars, dtype=float )
-
 
         y = sm.result( x, par )
         dy = sm.derivative( x, par )
         pt = sm.partial( x, par )
 
+        fm = BasicSplinesModel( knots=kn, fixed={0:0.0, -1:0.0} )
+        far = numpy.ones( fm.npars, dtype=float )
+
+        print( fm.npbase, fm.npars, fm.npmax, len( far ) )
+        print( fm.parlist )
+        assertAE( fm.parlist, numpy.arange( 14, dtype=int ) + 1 )
+        print( fm.fixed )
+        assertAE( list( fm.fixed.keys() ), [0, 15] )
+
+
+        fy = fm.result( x, far )
+        fdy = fm.derivative( x, far )
+        fpt = fm.partial( x, far )
+
+
         cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
         if self.doplot :
             for k in kn :
                 plt.plot( [k,k], [0,1], 'k:' )
+
             plt.plot( x, y, cc[0] )
             plt.plot( x, dy, cc[3] )
             for i in range( sm.npars ) :
                 plt.plot( x, pt[:,i] )
 
+            plt.plot( x, fy+2, cc[0] )
+            plt.plot( x, fdy+2, cc[3] )
+            for i in range( fm.npars ) :
+                plt.plot( x, fpt[:,i]+2 )
+
+            plt.ylim( -0.3, 3.3 )
             plt.show()
 
     def test4a( self ) :
@@ -299,7 +322,7 @@ class Test( unittest.TestCase ):
 
 
     def bstest7( self, kn, order=3, plot=False ) :
-        print( "==== test 7 ====================" )
+        print( "==== test 7 ========= order = %d ===========" % ( order ) )
 
         x = numpy.linspace( 0, 10, 101, dtype=float )
 
@@ -350,6 +373,7 @@ class Test( unittest.TestCase ):
         self.bstest8( order=4 )
 
     def bstest8( self, order=3 ) :
+        print( "==== test 8 ========= order %d ===========" % ( order ) )
 
         x = numpy.linspace( 0, 10, 101, dtype=float )
         cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
@@ -376,6 +400,23 @@ class Test( unittest.TestCase ):
             plt.ylim( -0.1, 6 )
             plt.show()
 
+
+    def test9( self ) :
+        print( "==== test ========= fixed parameters ==========="  )
+
+        fm = BasicSplinesModel( nrknots=8, min=0, max=10, fixed={0:0.0, -1:0.0} )
+
+        print( fm.parlist )
+        assertAE( fm.parlist, numpy.arange( 8, dtype=int ) + 1 )
+        print( fm.fixed )
+        assertAE( list( fm.fixed.keys() ), [0, 9] )
+
+        fm = BasicSplinesModel( nrknots=8, min=0, max=10, fixed={0:0, 1:0, -2:0, -1:0} )
+
+        print( fm.parlist )
+        assertAE( fm.parlist, numpy.arange( 6, dtype=int ) + 2 )
+        print( fm.fixed )
+        assertAE( list( fm.fixed.keys() ), [0, 1, 8, 9] )
 
 
     def plot1( self ):

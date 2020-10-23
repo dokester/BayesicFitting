@@ -118,8 +118,8 @@ class TestEngine2( unittest.TestCase ):
 
         engine = StartEngine( wl, errdis )
         Tools.printclass( engine.walkers[0] )
-        for walker in engine.walkers :
-            engine.execute( walker, -math.inf )
+        for kw in range( len( engine.walkers ) ) :
+            engine.execute( kw, -math.inf )
 
         pevo = wl.getParameterEvolution()
         if plot :
@@ -140,7 +140,7 @@ class TestEngine2( unittest.TestCase ):
                     wl[klo].allpars = wl[kok].allpars.copy()
                     break
 
-            engine.execute( wl[klo], lowL )
+            engine.execute( klo, lowL )
             p1 = wl[klo].allpars[:2]
             if k % 100 == 0 :
                 print( k, klo, fmt(p1), fmt(wl[klo].logL) )

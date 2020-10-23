@@ -87,8 +87,9 @@ class TestStartEngine( TestEngine ):
         print( engine )
         minv = [ math.inf] * len( engine.walkers[0].allpars )
         maxv = [-math.inf] * len( engine.walkers[0].allpars )
-        for samp in engine.walkers :
-            engine.execute( samp, -math.inf )
+        for kw in range( len( engine.walkers ) ) :
+            engine.execute( kw, -math.inf )
+            samp = engine.walkers[kw]
             minv = numpy.fmin( minv, samp.allpars )
             maxv = numpy.fmax( maxv, samp.allpars )
             if samp.id <= 1 or samp.id >= 98 :

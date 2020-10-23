@@ -5,6 +5,7 @@ import os
 import numpy as numpy
 from astropy import units
 import math
+import matplotlib.pyplot as plt
 
 #from StdTests import stdModeltest
 
@@ -67,19 +68,21 @@ class TestModifiable( unittest.TestCase ):
     def test2( self ) :
         print( "  Test Modifiable Splines" )
 
-        t = numpy.linspace( 0, 100, 201, dtype=float )
-        y = numpy.sin( 2 * math.pi * numpy.exp( t / 150 ) )
+#        t = numpy.linspace( 0, 100, 201, dtype=float )
+        t = numpy.linspace( 0, 100, 41, dtype=float )
+        y = numpy.sin( 2 * math.pi * numpy.exp( t / 70 ) )
 
-        knots =[0, 25, 50, 75, 100]
+        knots =[0, 10, 25, 40, 50, 60, 75, 100]
 
         mdl = SplinesDynamicModel( knots=knots, dynamic=False )
         mdl.setLimits( lowLimits=[-2.0], highLimits=[+2.0] )
 
         engs = ["galilean", "struct"]
 
-        ns = NestedSampler( t, mdl, y, seed=1234, engines=engs )
+        ns = NestedSampler( t, mdl, y, seed=31234, engines=engs )
         ns.distribution.setLimits( [0.01,100] )
         ns.verbose = 2
+#        ns.engines[1].slow = 5
 
         evid = ns.sample( plot=self.doplot )
 
@@ -87,11 +90,11 @@ class TestModifiable( unittest.TestCase ):
 
         cc = ['k,', 'b,', 'r,', 'g,', 'c,', 'm,']
         sl = ns.samples
-        ka = numpy.zeros( ( 5, len( sl ) ), dtype=float )
+        ka = numpy.zeros( ( len( knots ), len( sl ) ), dtype=float )
         for k,s in enumerate( sl ) :
             ka[:,k] = s.model.knots
         for j in range( len( knots ) ) :
-            plt.plot( ka[j,:]. cc[j] )
+            plt.plot( ka[j,:], cc[j % 6] )
         plt.show()
 
     def test3( self ) :

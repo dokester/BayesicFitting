@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
-
+from MultiDimAverageModel import MultiDimAverageModel
+from BoxedErrorDistribution import BoxedErrorDistribution
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -253,6 +254,116 @@ class TestErrorDistribution( unittest.TestCase ):
         scale = 1.0
         for i in range( 11 ) :
             param = numpy.asarray( [i-5,5,1], dtype=float )
+            print( param, "  :  ", end="" )
+            for k in range( 9 ):
+                print( " %8.3f" % ged.logLikelihood( problem, param ), end="" )
+                param[1] += 1
+            print( "" )
+
+    def constrainBox( self, logL, problem, allpars ):
+        box = [-2,2]
+        for p in allpars[:-1] :
+            if ( p < box[0] ) or ( p > box[1] ) :
+                return -math.inf
+
+        return logL
+
+    def testGaussErrorDistribution1( self ):
+
+        print( "=======   Test Gauss Error Distribution 1 ==================" )
+
+        ndim = 2
+        poly = MultiDimAverageModel( ndim )
+        param = numpy.asarray( [0,0,1], dtype=float )
+        ged = GaussErrorDistribution( )
+        ged.constrain = self.constrainBox
+        self.assertTrue( ged.acceptWeight() )
+
+        numpy.random.seed( 2345 )
+        ydata = numpy.random.randn( ndim * 11 ).reshape( 11, ndim )
+
+        print( fmt( ydata ) )
+        problem = MultipleOutputProblem( model=poly, xdata=self.x, ydata=ydata )
+#                weights=self.wgt )
+
+        fitIndex = [0,1,-1]
+
+        print( fmt( poly.result( self.x, param[:ndim] ) ) )
+
+
+        #   data = { -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 }
+        #   f( x ) = { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 }
+        #   f - d=     1   1  -1   1  -1 -1  1 -1  1  0  -1
+
+        chisq = ged.getChisq( problem, param )
+        print( "chisq = %8.3f"%( chisq ) )
+
+        pp = numpy.array( [0,0,1], dtype=float )
+        print( " 0 0: ", fmt( ged.logLdata( problem, pp ), max=None ) )
+        pp = numpy.array( [0,1,1], dtype=float )
+        print( " 0 1: ", fmt( ged.logLdata( problem, pp ), max=None ) )
+        pp = numpy.array( [1,1,1], dtype=float )
+        print( " 1 1: ", fmt( ged.logLdata( problem, pp ), max=None ) )
+        pp = numpy.array( [1,0,1], dtype=float )
+        print( " 1 0: ", fmt( ged.logLdata( problem, pp ), max=None ) )
+
+
+
+        lLdata = ged.logLdata( problem, param )
+        logL0 = numpy.sum( lLdata )
+
+        logL = ged.logLikelihood( problem, param )
+        altL = ged.logLikelihood_alt( problem, param )
+        print( "logL  = %8.3f  %8.3f  %8.3f" % ( logL, logL0, altL ) )
+#        assertAAE( logL, altL )
+        assertAAE( logL, logL0 )
+
+        scale = 0.1
+        param[2] = scale
+        logL = ged.logLikelihood( problem, param )
+        altL = ged.logLikelihood_alt( problem, param )
+        print( "logL  = %8.3f  %8.3f" % ( logL, altL ) )
+#        assertAAE( logL, altL )
+
+        scale = 1.0
+        param[2] = scale
+#        fitIndex = numpy.arange( 3 )
+        fitIndex = numpy.asarray( [0,1,-1] )
+        dL = ged.partialLogL( problem, param, fitIndex )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
+        print( "partial = ", dL )
+#        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
+        print( "numpart = ", nL )
+        assertAAE( dL, nL, 5 )
+
+        print( "Using scale = 0.5 and weights." )
+        scale = 0.5
+        param[2] = scale
+
+        wgts = []
+        for k in range( ndim ) :
+            wgts = numpy.append( wgts, self.wgt )
+
+        problem.weights = wgts
+
+        logL = ged.logLikelihood( problem, param )
+        print( "logL = %8.3f  %8.3f" % ( logL, logL0 ) )
+
+        lLdata = ged.logLdata( problem, param )
+        logL0 = numpy.sum( lLdata )
+        assertAAE( logL, logL0 )
+
+        dL = ged.partialLogL( problem, param, fitIndex )
+#        print( "partalt = ", ged.partialLogL_alt( problem, param, fitIndex ) )
+        nL = ged.numPartialLogL( problem, param, fitIndex )
+        print( "partial = ", dL )
+        print( "numpart = ", nL )
+        assertAAE( dL, nL, 5 )
+
+        print( ged.logLikelihood )
+        scale = 1.0
+        for i in range( 11 ) :
+            param = numpy.asarray( [i-5,-4,1], dtype=float )
             print( param, "  :  ", end="" )
             for k in range( 9 ):
                 print( " %8.3f" % ged.logLikelihood( problem, param ), end="" )

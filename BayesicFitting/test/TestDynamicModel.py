@@ -332,7 +332,7 @@ class TestDynamicModel( unittest.TestCase ):
         ns.distribution.setLimits( [0.01,100] )
         ns.distribution.constrain = self.constrainPos
         ns.verbose = 2
-        evid = ns.sample( )
+        evid = ns.sample( plot=self.doplot )
 
         sl = ns.samples
         ay = numpy.linspace( 0, 100, 101, dtype=float )
@@ -478,9 +478,9 @@ class TestDynamicModel( unittest.TestCase ):
         print( "====================" )
 
         seng = StartEngine( sl, errdis )
-        for s in sl :
+        for k, s in enumerate( sl ) :
             print( "Walker  ", s.id, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
-            seng.execute( s, 0.0 )
+            seng.execute( k, 0.0 )
 
         logl = sl.getLogLikelihoodEvolution()
         lowl = numpy.min( logl )
@@ -490,12 +490,12 @@ class TestDynamicModel( unittest.TestCase ):
         beng = BirthEngine( sl, errdis )
         deng = DeathEngine( sl, errdis )
         print( "start  np ", m.npchain )
-        for s in sl :
+        for k, s in enumerate( sl ) :
             Tools.printclass( s )
-            suc = beng.execute( s, lowl )
+            suc = beng.execute( k, lowl )
             print( "Birth  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
             Tools.printclass( s )
-            suc = deng.execute( s, lowl )
+            suc = deng.execute( k, lowl )
             print( "Death  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
 
 

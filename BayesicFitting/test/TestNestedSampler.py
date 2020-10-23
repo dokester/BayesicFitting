@@ -13,7 +13,7 @@ from FitPlot import plotFit
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 from BayesicFitting import fma
-
+#from BayesicFitting import NestedSampler1 as NestedSampler
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -125,8 +125,8 @@ class TestNestedSampler( unittest.TestCase ):
 
 #        print( "Elapsed ", endt - start )
 
-    def test2( self ):
-        print( "=========== Nested Sampler test 2 ======================" )
+    def test2a( self ):
+        print( "=========== Nested Sampler test 2a ======================" )
 
         plot = self.doplot
 
@@ -152,14 +152,65 @@ class TestNestedSampler( unittest.TestCase ):
         print( "LMFstdv ", fmt( lmf.stdevs, max=None ) )
 
         ns = NestedSampler( x, gm, y )
+        ns.verbose = 2
 
         evi = ns.sample()
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
 
-        ns = NestedSampler( x, gm, y, verbose=0 )
+    def test2b( self ):
+        print( "=========== Nested Sampler test 2b ======================" )
+
+        plot = self.doplot
+
+        pp, y0, x, y, w = self.makeData( 2 )
+
+        x = numpy.append( x, x )
+        y = numpy.append( y, y )
+
+        gm = GaussModel( )
+        gm.addModel( PolynomialModel(1) )
+
+        print( gm.shortName( ) )
+        print( gm._next.shortName( ) )
+
+        lolim = numpy.asarray( [-10,-10,  0,-10,-10], dtype=float )
+        hilim = numpy.asarray( [ 10, 10, 10, 10, 10], dtype=float )
+
+        gm.setLimits( lolim, hilim )
+        ns = NestedSampler( x, gm, y )
+        ns.verbose = 2
         ns.distribution.setLimits( [0.01, 100] )
+
+        evi = ns.sample()
+        print( "NS pars ", fmt( ns.parameters ) )
+        print( "NS stdv ", fmt( ns.stdevs ) )
+        print( "NS scal ", fmt( ns.scale ) )
+
+    def test2c( self ):
+        print( "=========== Nested Sampler test 2c ======================" )
+
+        plot = self.doplot
+
+        pp, y0, x, y, w = self.makeData( 2 )
+
+        x = numpy.append( x, x )
+        y = numpy.append( y, y )
+
+        gm = GaussModel( )
+        gm.addModel( PolynomialModel(1) )
+
+        print( gm.shortName( ) )
+        print( gm._next.shortName( ) )
+
+        lolim = numpy.asarray( [-10,-10,  0,-10,-10], dtype=float )
+        hilim = numpy.asarray( [ 10, 10, 10, 10, 10], dtype=float )
+
+        gm.setLimits( lolim, hilim )
+        ns = NestedSampler( x, gm, y, discard=10 )
+        ns.distribution.setLimits( [0.01, 100] )
+        ns.verbose = 2
 
         evi = ns.sample()
         print( "NS pars ", fmt( ns.parameters ) )
@@ -169,12 +220,13 @@ class TestNestedSampler( unittest.TestCase ):
 #        print( "truth  ", pp )
 #        self.dofit( ns, pp, plot=plot )
 
-    def test2a( self ):
-        print( "=========== Nested Sampler test 2a ======================" )
+    def test4( self ):
+        print( "=========== Nested Sampler test 4 ======================" )
 
         pp = 0.0
+        numpy.random.seed( 13456 )
 
-        for N in [10, 40, 160] :
+        for N in [10, 40, 160, 640, 2560] :
             print( "======= ", N, " points ======" )
             x = numpy.linspace( -1.0, 1.0, N, dtype=float )
             y = numpy.random.randn( N )
@@ -188,9 +240,11 @@ class TestNestedSampler( unittest.TestCase ):
 
             lmf = LevenbergMarquardtFitter( x, pm )
             pars = lmf.fit( y )
+            lmfevid = lmf.getEvidence( limits=[lolim,hilim], noiseLimits=[0.01,100] )
             print( "LMFpars ", fmt( pars, max=None ) )
             print( "LMFstdv ", fmt( lmf.stdevs, max=None ) )
             print( "LMFscal ", fmt( lmf.scale ) )
+            print( "LMFevid ", fmt( lmfevid ) )
 
             ns = NestedSampler( x, pm, y, verbose=0 )
             ns.distribution.setLimits( [0.01, 100] )
@@ -199,6 +253,7 @@ class TestNestedSampler( unittest.TestCase ):
             print( "NS pars ", fmt( ns.parameters ) )
             print( "NS stdv ", fmt( ns.stdevs ) )
             print( "NS scal ", fmt( ns.scale ) )
+            print( "NS evid ", fmt( evi ), " +- ", fmt( ns.precision ) )
 
 
 

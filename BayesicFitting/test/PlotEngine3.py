@@ -74,7 +74,9 @@ class TestEngine3( unittest.TestCase ):
 
     def testGibbsEngine( self, plot=False ):
         print( "\n   Gibbs Engine Test\n" )
-        self.stdenginetest( GibbsEngine, nsamp=10, plot=plot )
+        self.stdenginetest( GibbsEngine, nsamp=10, seed=789, plot=plot )
+        self.stdenginetest( GibbsEngine, nsamp=10, seed=456, plot=plot )
+        self.stdenginetest( GibbsEngine, nsamp=10, seed=123, plot=plot )
 
     def plotGibbsEngine2( self ):
         self.testGibbsEngine2( plot=True )
@@ -90,11 +92,11 @@ class TestEngine3( unittest.TestCase ):
         self.testStepEngine( plot=True )
 
     def testStepEngine( self, plot=False ):
-        print( "\n   Step Engine Test 2\n" )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-200, plot=plot )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-170, plot=plot )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-165, plot=plot )
-        self.stdenginetest2( StepEngine, nsamp=10, lowL=-163, plot=plot )
+        print( "\n   Step Engine Test\n" )
+        self.stdenginetest( StepEngine, nsamp=10, seed=321, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=10, seed=654, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=10, seed=987, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=10, seed=100, plot=plot )
 
     def plotGalileanEngine( self ):
         self.testGalileanEngine( plot=True )
@@ -235,7 +237,7 @@ class TestEngine3( unittest.TestCase ):
         for k in range( nsamp ) :
             w = wl[0]
             w.allpars = allpars.copy()
-            engine.execute( w, Llow )
+            engine.execute( 0, Llow )
             pars = wl[0].allpars[:-1]
             if plot == 1 :
                 plt.plot( pars[kp0], pars[kp1], 'r.' )
@@ -294,15 +296,17 @@ class TestEngine3( unittest.TestCase ):
 
         ay = numpy.linspace( -1, 1, 21 )
         ax = numpy.linspace( -1, 1, 21 )
-        v = [-200, -170, -165, -163]
+        v = [-180, -170, -165, -163]
 
         lowL = -170
 
         engine = StartEngine( wl, errdis )
-        for samp in engine.walkers :
+        for ks in range( nsamp ) :
+            samp = wl[ks]
             while True :
-                engine.execute( samp, -math.inf )
-                if samp.logL > lowL : break
+                engine.execute( samp.id, -math.inf )
+#                print( fmt( ks ), fmt( wl[ks].logL ), fmt( samp.id ), fmt( samp.logL ) )
+                if wl[ks].logL > lowL : break
 
         engine = myengine( wl, errdis, seed=seed )
         engine.plotter = Plotter()
@@ -316,16 +320,23 @@ class TestEngine3( unittest.TestCase ):
             plt.contour( ax, ay, map, v )
             plt.plot( [mk0], [mk1], 'k*' )
 
+
             klo = engine.rng.randint( 0, nsamp )
+
+            p0 = [w.allpars[0] for w in wl]
+            p1 = [w.allpars[1] for w in wl]
+            plt.plot( p0, p1, 'm.' )
 
             p0 = wl[klo].allpars[:2]
             plt.plot( p0[0], p0[1], 'k.' )
+
+
             engine.calculateUnitRange()
 
-            engine.execute( wl[klo], lowL )
+            engine.execute( wl[klo].id, lowL )
             p1 = wl[klo].allpars[:2]
 
-            print( klo, p1, wl[klo].logL )
+            print( klo, fmt( p1 ), fmt( wl[klo].logL ) )
             plt.show()
 
 
@@ -340,10 +351,12 @@ class TestEngine3( unittest.TestCase ):
         wl = WalkerList( problem, nsamp, allpars, [0,1]  )
 
         engine = StartEngine( wl, errdis )
-        for samp in engine.walkers :
+        for ks in range( nsamp ) :
+            samp = wl[ks]
             while True :
-                engine.execute( samp, -math.inf )
-                if samp.logL > lowL : break
+                engine.execute( samp.id, -math.inf )
+#                print( fmt( ks ), fmt( wl[ks].logL ), fmt( samp.id ), fmt( samp.logL ) )
+                if wl[ks].logL > lowL : break
 
         pevo = wl.getParameterEvolution()
 #        print( fmt( pevo ) )
@@ -395,7 +408,7 @@ class TestEngine3( unittest.TestCase ):
 
         for k in range( 100 ) :
             wl[klo].allpars[:2] = p0
-            engine.execute( wl[klo], lowL )
+            engine.execute( wl[klo].id, lowL )
             p1 = wl[klo].allpars[:2]
             plt.plot( p1[0], p1[1], 'r.' )
 
@@ -414,11 +427,14 @@ class Plotter( object ) :
         self.k0 = kp[0]
         self.k1 = kp[1]
         self.col = ['k', 'r', 'g', 'b', 'm', 'y']
-        self.sym = ['.', ',', 'o', '+', 's', '*']
+        self.sym = ['.', ',', 'o', '+', 'x', '*']
 
-    def start( self ):
+    def start( self, param=None ):
         """ start the plot. """
         plt.figure( 1, figsize=self.figsize )
+        if param is not None :
+            self.point( param, col=1, sym=2 )
+
 
 
     def point( self, param, col=0, sym=0 ) :
@@ -445,8 +461,13 @@ class Plotter( object ) :
             self.point( ptry, col=col, sym=sym )
         self.iter += 1
 
-    def stop( self ):
+    def stop( self, param=None, name=None ):
         """ Stop (show) the plot. """
+        if param is not None :
+            self.point( param, col=2, sym=2 )
+        if name is not None :
+            plt.title( name )
+
         plt.xlabel( "Param %d" % self.k0 )
         plt.ylabel( "Param %d" % self.k1 )
         plt.show()

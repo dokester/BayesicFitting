@@ -436,6 +436,44 @@ class TestCompoundModel( unittest.TestCase ):
 
         numpy.testing.assert_array_equal( m.result( x ), mc.result( x ) )
 
+    def testModelName( self ):
+        print( "  Test model names" )
+
+        pm = PolynomialModel( 2 )
+        gm = GaussModel( fixed={0:pm} )
+        sm = SineModel()
+        m1 = gm / sm
+        self.assertTrue( gm.npbase == 5 )
+        self.assertTrue( m1.npchain == 8 )
+        print( '-------------------------------------------------------------' )
+        print( m1 )
+
+        print( '-------------------------------------------------------------' )
+        print( m1._toString( "toS   ", npars=2 ) )
+
+        em = PowerModel( 1, fixed={0:1.0} )
+        em += BasicSplinesModel( nrknots=8, min=0, max=10 )
+        em += ExpModel()
+        m2 = em | m1
+        self.assertTrue( em.npbase == 0 )
+        self.assertTrue( em.npchain == 12 )
+        self.assertTrue( m2.npchain == 20 )
+        print( '-------------------------------------------------------------' )
+        m2str = m2.__str__()
+        print( m2str )
+        print( m2str[-30:] )
+
+        self.assertTrue( m2str[-30:] == "p_19 * sin( 2PI * x * p_17 ) }" )
+
+        for k in range( m2.npchain ) :
+            print( fmt( k ), "%-13.13s"%m2.getParameterName(k), fmt( m2[k] ) )
+
+
+
+
+
+
+
     def suite( cls ):
         return unittest.TestCase.suite( CompoundModelTest.__class__ )
 

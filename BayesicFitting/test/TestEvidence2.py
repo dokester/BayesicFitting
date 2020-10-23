@@ -392,6 +392,43 @@ class TestEvidence2( unittest.TestCase  ) :
 
         print( "Average  ", fmt( logz ), " +- ", fmt( dlz ) )
 
+    def test5a( self ) :
+        print( "====test5a==discard===================" )
+        plot = self.doplot
+
+        nn = 10
+        x = numpy.linspace( 0, 2, nn, dtype=float )
+        ym = 0.3 + 0.5 * x
+        nf = 0.1
+        numpy.random.seed( 2345 )
+        noise = numpy.random.randn( nn )
+
+        y = ym + nf * noise
+        limits = [-1,2]
+
+        model = PolynomialModel( 1 )
+        model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
+
+        s = 0.0
+        s2 = 0.0
+        mr = 5
+        for k in [1,5,10,20,40] :
+            dis = GaussErrorDistribution( scale=0.5 )
+            ns = NestedSampler( x, model, y, distribution=dis, verbose=0, discard=k )
+
+            logE = ns.sample()
+            par2 = ns.parameters
+            logz2 = ns.logZ
+            dlz2 = ns.logZprecision
+            s += logz2
+            s2 += logz2 * logz2
+            print( fmt( k ), "  pars  ", fmt( par2 ), "  logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
+
+        logz = s / mr
+        dlz = math.sqrt( s2 / mr - logz * logz )
+
+        print( "Average  ", fmt( logz ), " +- ", fmt( dlz ) )
+
     def test6( self ) :
         print( "====test6  Laplace ================" )
         plot = self.doplot
@@ -445,7 +482,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "stdv  ", fmt( ns.stdevs ) )
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
-        self.assertTrue( abs( logz2 - logz1 ) < 3 * dlz2 )
+        self.assertTrue( abs( logz2 - logz1 ) < 4 * dlz2 )
 #        print( logz0 - logz1, logz0 - logz2 )
 
         samples = ns.samples
@@ -536,73 +573,6 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
-    def test6_1( self ) :
-        print( "====test6_1  Laplace ================" )
-        plot = self.doplot
-
-        nn = 20
-        x = numpy.linspace( 0, 2, nn, dtype=float )
-        ym = 0.3 + 0.5 * x
-        nf = 0.9
-        numpy.random.seed( 2345 )
-        noise = numpy.random.laplace( size=nn )
-
-        y = ym + nf * noise
-        limits = [-1,2]
-
-        if plot :
-            plt.plot( x, ym, 'k-' )
-            plt.plot( x, y, 'r.' )
-
-        model = PolynomialModel( 1 )
-        model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-
-        bf = AmoebaFitter( x, model, errdis="laplace" )
-
-        pars = bf.fit( y, tolerance=1e-20 )
-        print( "pars  ", fmt( pars ) )
-        print( "stdv  ", fmt( bf.stdevs ) )
-        logz0 = bf.getLogZ( limits=limits )
-        logl0 = bf.logLikelihood
-        print( "logZ  ", fmt( logz0 ), "   logL  ", fmt( logl0 ) )
-
-        errdis = LaplaceErrorDistribution( scale=nf )
-        problem = ClassicProblem( model, xdata=x, ydata=y )
-        logz1, logl1 = plotErrdis2d( errdis, problem, limits=limits, max=0,
-                        plot=plot )
-        if plot :
-            plt.plot( pars[0], pars[1], 'k.' )
-
-        print( "logZ  ", fmt( logz1 ), "   logL  ", fmt( logl1 ) )
-
-
-        model = PolynomialModel( 1 )
-        model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-        ns = NestedSampler( x, model, y, distribution='laplace', verbose=0 )
-
-        logE = ns.sample()
-
-        par2 = ns.parameters
-        logE = ns.logZ
-        dlz2 = ns.logZprecision
-        logz2 = ns.logZ
-        print( "pars  ", fmt( par2 ) )
-        print( "stdv  ", fmt( ns.stdevs ) )
-        print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
-
-        self.assertTrue( abs( logz2 - logz0 ) < 5 * dlz2 )
-
-        samples = ns.samples
-        parevo =samples.getParameterEvolution()
-        llevo = samples.getLogLikelihoodEvolution()
-        lwevo = samples.getLogWeightEvolution()
-
-        assertAAE( numpy.sum( numpy.exp( lwevo ) ), 1.0 )
-
-        if plot :
-            plt.plot( parevo[:,0], parevo[:,1], 'k,' )
-
-            plt.show()
 
     def test7( self ) :
         print( "====test7  Poisson ================" )

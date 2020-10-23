@@ -95,11 +95,12 @@ class TestEngine( unittest.TestCase ):
 
     def enginetest( self, engine ) :
         walkers = engine.walkers
-        for w in walkers :
-            problem = w.problem
+        fi = [0,1,2,-1]
+        for kw in range( len( walkers ) ) :
+            problem = walkers[kw].problem
             p = engine.unit2Domain( problem, engine.rng.rand( 4 ) )
             logL = engine.errdis.logLikelihood( problem, p )
-            engine.setWalker( w, problem, p, logL )
+            engine.setWalker( kw, problem, p, logL, fitIndex=fi )
             engine.reportSuccess()
             engine.reportCall()
 
