@@ -213,8 +213,8 @@ class BasicSplinesModel( SplinesModel ):
         hi = 1
         lo = 0
 
-        basis = numpy.zeros( (nk-1,np,self.npbase), dtype=float )
-        for k in range( self.npbase ) :
+        basis = numpy.zeros( (nk-1,np,self.npmax), dtype=float )
+        for k in range( self.npmax ) :
 
             if hi < nk : hi += 1
             if k >= np : lo += 1
@@ -252,12 +252,12 @@ class BasicSplinesModel( SplinesModel ):
         nk = len( self.knots )
         nh = ( np + 1 ) // 2
 
-        basis = numpy.zeros( (nk-1,np,self.npbase), dtype=float )
+        basis = numpy.zeros( (nk-1,np,self.npmax), dtype=float )
 
         knotix = numpy.zeros( np + 1, dtype=int )
         knotix[:np] = numpy.arange( np, dtype=int ) - np - 1
 
-        for k in range( self.npbase ) :
+        for k in range( self.npmax ) :
             dist = self.knots[knotix+1] - self.knots[knotix]
 
             bpar = self.findParameters( knotix, dist )
@@ -318,16 +318,12 @@ class BasicSplinesModel( SplinesModel ):
             xx[1+ne:-1-ne] = xmid
 
         x2k = self.makeKnotIndices( xx )
+
         for k in range( np ) :
             mat[:,k] = self.basicBlob( xx, basis[:,:,k], x2k, self.poly )
 
-#        print( fmt( mat, max=None ) )
-
         beta = numpy.ones( np, dtype=float )
         bpar = numpy.linalg.solve( mat, beta )
-
-#        print( fmt( numpy.sum( mat, 0 ), max=None ) )
-#        print( "bpar   ", fmt( bpar, max=None ) )
 
         return basis * bpar
 
@@ -435,13 +431,8 @@ class BasicSplinesModel( SplinesModel ):
         beta = numpy.zeros( np, dtype=float )
         beta[-1] = 1.0
 
-#        print( fmt( beta, max=16, linelength=200 ) )
-#        print( fmt( mat, max=16, linelength=200 ) )
-
         ## solve linear set of equations
         bspar = numpy.linalg.solve( mat, beta )
-
-#        print( fmt( bspar, max=16, linelength=200 ) )
 
         return bspar
 
@@ -458,7 +449,7 @@ class BasicSplinesModel( SplinesModel ):
             parameters to the model (ignored in LinearModels)
 
         """
-        np = self.npbase
+        np = self.npmax
         na = self.order + 1
 
         x2k = self.makeKnotIndices( xdata )
@@ -489,16 +480,27 @@ class BasicSplinesModel( SplinesModel ):
             list of indices active parameters (or None for all)
 
         """
-        np = self.npmax
+        np = self.npbase
         ni = Tools.length( xdata )
         partial = numpy.zeros( ( ni, np), dtype=float )
 
+        if parlist is None :
+            parlist = range( self.npmax )
+
         x2k = self.makeKnotIndices( xdata )
+        for k,kb in enumerate( parlist ) :
+            bss = self.basis[:,:,kb]
+            partial[:,k] = self.basicBlob( xdata, bss, x2k, self.poly )
+
+        return partial
+
+        """
         for kb in range( np ) :
             bss = self.basis[:,:,kb]
             partial[:,kb] = self.basicBlob( xdata, bss, x2k, self.poly )
 
         return partial
+        """
 
     def makeKnotIndices( self, xdata ) :
         """
@@ -562,7 +564,7 @@ class BasicSplinesModel( SplinesModel ):
         x2k = self.makeKnotIndices( xdata )
 
         fp = numpy.arange( self.order + 1 )
-        for n in range( self.npbase ) :
+        for n in range( self.npmax ) :
             dbs = self.basis[:,:,n] * fp
             dbs = dbs[:,1:]
             dfdx += self.basicBlob( xdata, dbs, x2k, polym1 ) * params[n]
