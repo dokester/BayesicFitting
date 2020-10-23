@@ -101,6 +101,7 @@ from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
 from .source.OrthonormalBasis import OrthonormalBasis
 from .source.PadeModel import PadeModel
+from .source.PhantomSampler import PhantomSampler
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel
 from .source.PolySurfaceModel import PolySurfaceModel
