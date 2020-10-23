@@ -677,6 +677,7 @@ class Model( FixedModel ):
     def _toString( self, indent, npars=0 ) :
         opname = [" null\n", " +\n", " -\n", " *\n", " /\n", " |\n" ]
         np = self.npbase
+
         if self._next is None :
             return super( Model, self )._toString( npars=npars )
 
@@ -894,6 +895,7 @@ class Model( FixedModel ):
             nh = len( highLimits )
             ml = max( ml, nh )
         if ml == 0 : return
+
         if ml > self.npchain :
             warnings.warn( "More limits given than parameters present: %d < %d" %
                             ( ml, self.npchain ) )
@@ -1403,7 +1405,7 @@ class Brackets( Model ):
         return Brackets( self.model.copy(), copy=self )
 
 
-    #  *****RESULT**************************************************************
+    #  *****Brackets RESULT**************************************************************
     def baseResult( self, xdata, param ):
         """
         Returns the result calculated at the xdatas.
@@ -1418,7 +1420,7 @@ class Brackets( Model ):
         """
         return self.model.result( xdata, param )
 
-    #  *****PARTIAL*************************************************************
+    #  *****Brackets PARTIAL*************************************************************
     def basePartial( self, xdata, param, parlist=None ):
         """
         Returns the partial derivatives calculated at the xdatas.
@@ -1435,7 +1437,7 @@ class Brackets( Model ):
         """
         return self.model.partial( xdata, param )
 
-    #  *****DERIVATIVE***********************************************************
+    #  *****Brackets DERIVATIVE***********************************************************
     def baseDerivative( self, xdata, param ):
         """
         Returns the derivative (df/dx) calculated at the xdatas.
@@ -1460,7 +1462,7 @@ class Brackets( Model ):
     def nextPrior( self ) :
         yield self.model.nextPrior()
 
-    #  *************************************************************************
+    #  ******Brackets BASENAME*******************************************************************
     def baseName( self ):
         """ Returns a string representation of the model.  """
         indent = "  "
@@ -1487,6 +1489,9 @@ class Brackets( Model ):
             Also check if the prior is bound.
         """
         return self.model.hasPriors( isBound=isBound )
+
+
+    #  ******Brackets Parameter NAME*******************************************************************
 
     def baseParameterName( self, k ):
         """

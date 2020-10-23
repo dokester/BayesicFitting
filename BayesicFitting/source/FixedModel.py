@@ -107,6 +107,12 @@ class FixedModel( BaseModel ):
         npar = nparams
         if fixed is not None :
             for k in fixed.keys() :
+                if k < 0 :                  # convert negative indices into positive ones
+                    val = fixed[k]
+                    del( fixed[k] )
+                    k += npar
+                    fixed[k] = val
+            for k in fixed.keys() :
                 if isinstance( fixed[k], BaseModel ) :
                     mlist += [k]
                     npar += fixed[k].npchain
@@ -243,6 +249,7 @@ class FixedModel( BaseModel ):
             return param
 
         pars = numpy.zeros( self._npb, dtype=float )
+
         pars[self.parlist] = param
         if len( self.mlist ) == 0 :
             fl =  list( self.fixed.keys() )
@@ -441,15 +448,18 @@ class FixedModel( BaseModel ):
             basename = re.sub( "q_", "p_", basename )
 
         if npars == 0 : return basename
-        k = 0
-        par0 = "p_0"
-        par1 = "q_%d"%(k+npars)
-        while re.search( par0, basename ) :
-            basename = re.sub( par0, par1, basename )
-            k += 1
-            par0 = "p_%d "%k
-            par1 = "q_%d "%(k+npars)
-        basename = re.sub( "q_", "p_", basename )
+
+        i = 0
+        while True :
+            i = basename.find( 'p_', i + 1 )
+            if i < 0 : break
+            j = basename.find( ' ', i )
+            k = int( basename[i+2:j] )
+            basename = basename.replace( "p_%d "%k, "q_%d "%(k+npars) )
+
+        basename = basename.replace( "q_", "p_" )
+
         return basename
+
 
 

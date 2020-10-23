@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 
 class EtalonModel( NonLinearModel ):
     """
-    Sinusoidal Model with drifting frequency.
+    Etalon Model.
 
         f( x:p ) = p_0 / ( 1.0 + p_1 * sin^2( \pi p_2 x + p_3 ) )
 
