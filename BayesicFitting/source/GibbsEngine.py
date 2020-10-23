@@ -4,6 +4,7 @@ from .Formatter import formatter as fmt
 from .Formatter import fma
 
 from .Engine import Engine
+from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
 __year__ = 2020
@@ -43,7 +44,7 @@ class GibbsEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ) :
         """
         Constructor.
 
@@ -53,15 +54,15 @@ class GibbsEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        slow : None or int > 0
-            Run this engine every slow-th iteration. None for all.
         copy : GibbsEngine
             to be copied
-        seed : int
-            for random number generator
+        kwargs : for Engine
+            "slow", "seed", "verbose"
 
         """
-        super( ).__init__( walkers, errdis, slow=slow, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
+
+        self.plotter = DummyPlotter()
 
     def copy( self ):
         """ Return copy of this.  """
@@ -71,16 +72,18 @@ class GibbsEngine( Engine ):
         return str( "GibbsEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by diffusing the parameters.
 
         Parameters
         ----------
-        walker : Sample
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place or append
 
         Returns
         -------
@@ -89,7 +92,7 @@ class GibbsEngine( Engine ):
         """
         self.reportCall()
 
-        walker = walker.copy()              ## work on local copy
+        walker = self.walkers[kw].copy()              ## work on local copy
 
         problem = walker.problem
         fitIndex = walker.fitIndex
@@ -98,6 +101,8 @@ class GibbsEngine( Engine ):
         ur = self.unitRange * ( 1 + 2.0 / len( self.walkers ) )
 
         param = walker.allpars
+        self.plotter.start( param=param )
+
         if self.verbose > 4 :
             print( "alpar ", fma( param ), fmt( walker.logL ), fmt( lowLhood) )
             fip = param[fitIndex]
@@ -105,48 +110,50 @@ class GibbsEngine( Engine ):
             print( "fitin ", fma( fitIndex ), self.maxtrials )
             print( "unitr ", fma( self.unitRange ) )
 
-        Lbest = self.walkers[-1].logL
         t = 0
         for c in perm :
-            param = walker.allpars.copy()
+
             save = param[c]
+            ptry = param.copy()
             usav = self.domain2Unit( problem, save, kpar=c )
             while True :
                 step = 2 * self.rng.rand() - 1.0
                 if c < len( ur ) :
                     step *= ur[c]
-                ptry = usav + step
-                if 0 < ptry < 1 : break
+                utry = usav + step
+                if 0 < utry < 1 : break
 
             kk = 0
             while True :
                 kk += 1
-                param[c] = self.unit2Domain( problem, ptry, kpar=c )
+                ptry[c] = self.unit2Domain( problem, utry, kpar=c )
 
-                Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
+                Ltry = self.errdis.updateLogL( problem, ptry, parval={c : save} )
 
                 if self.verbose > 4 :
-                    print( "Gibbs ", fma(param), fmt(Ltry), kk, fmt( step ) )
+                    print( "Gibbs ", fma(ptry), fmt(Ltry), kk, fmt( step ) )
 
                 if Ltry >= lowLhood:
+                    self.plotter.move( param, ptry, col=0, sym=0 )
                     self.reportSuccess( )
-                    self.setWalker( walker, problem, param, Ltry, fitIndex=fitIndex )
+                    param = ptry
+
+                    update = len( self.walkers ) if append else kw
+                    self.setWalker( update, problem, param, Ltry, fitIndex=fitIndex )
                     t += 1
                     break
                 elif kk < self.maxtrials :
+                    self.plotter.move( param, ptry, col=5, sym=4 )
                     while True :
-                        ptry = usav + step * ( 2 * self.rng.rand() - 1.0 )
-                        if 0 < ptry < 1 : break
+                        utry = usav + step * ( 2 * self.rng.rand() - 1.0 )
+                        if 0 < utry < 1 : break
                     self.reportReject( )
                 else :
                     self.reportFailed()
                     param[c] = save
                     break
 
-            if Ltry > Lbest :
-                Lbest = Ltry
-                self.setWalker( self.walkers[-1], problem, param.copy(), Lbest, fitIndex=fitIndex )
-                self.reportBest()
+        self.plotter.stop( param=param, name="GibbsEngine" )
 
         return t                        # nr of succesfull steps
 

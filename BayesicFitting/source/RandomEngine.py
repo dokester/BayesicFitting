@@ -64,16 +64,18 @@ class RandomEngine( Engine ):
         return str( "RandomEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, update ):
         """
         Execute the engine by a random selection of the parameters.
 
         Parameters
         ----------
-        walker : Sample
-            sample to diffuse
+        kw : int
+            index of Walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        update : int
+            index the walkers should be updated in (may be different from kw)
 
         Returns
         -------
@@ -82,6 +84,7 @@ class RandomEngine( Engine ):
         """
         self.reportCall()
 
+        walker = self.walkers[kw].copy()
         problem = walker.problem
         fitIndex = walker.fitIndex
 
@@ -110,7 +113,7 @@ class RandomEngine( Engine ):
                 Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
                 if Ltry >= lowLhood:
                     self.reportSuccess( )
-                    self.setWalker( walker, problem, param, Ltry, fitIndex=fitIndex )
+                    self.setWalker( kw, problem, param, Ltry, fitIndex=fitIndex )
                     t += 1
                     break
                 elif kk < self.maxtrials :

@@ -1,6 +1,8 @@
 import numpy as numpy
 from . import Tools
 
+from .Walker import Walker
+
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
@@ -100,6 +102,8 @@ class Engine( object ):
             self.unitMin = None
             self.verbose = verbose
             if slow is not None : self.slow = slow
+            # self.setWalker = self.setWalkerAdd2List if usePhantoms else self.setWalkerInPlace
+            # self.lastWalkerId = 0
         else :
             self.maxtrials = copy.maxtrials
             self.rng = copy.rng
@@ -107,13 +111,68 @@ class Engine( object ):
             self.unitMin   = copy.unitMin
             self.verbose   = copy.verbose
             if hasattr( copy, "slow" ) : self.slow = copy.slow
+            # self.setWalker = copy.setWalker
+            # self.lastWalkerId = copy.lastWalkerId
 
     def copy( self ):
         """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
 
     #  *********SET & GET***************************************************
-    def setWalker( self, walker, problem, allpars, logL, fitIndex=None ) :
+    def setWalker( self, kw, problem, allpars, logL, fitIndex=None ) :
+        """
+        Update the walker with problem, allpars, LogL and logW.
+
+        Parameters
+        ----------
+        walker : Sample
+            sample to be updated
+
+        kw : int
+            index in walkerlist, of the walker to be replaced
+        problem : Problem
+            the problem in the walker
+        allpars : array_like
+            list of all parameters
+        logL : float
+            log Likelihood
+        fitIndex : array_like
+            (new) fitIndex
+        """
+        id = 0 if kw >= len( self.walkers ) else self.walkers[kw].id
+        walker = Walker( id, problem, allpars, fitIndex )
+        walker.logL = logL
+        self.walkers.setWalker( walker, kw )
+
+        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
+
+    def XXXsetWalkerInPlace( self, kw, problem, allpars, logL, fitIndex=None ) :
+        """
+        Update the walker with problem, allpars, LogL and logW.
+
+        Parameters
+        ----------
+        walker : Sample
+            sample to be updated
+
+        kw : int
+            index in walkerlist, of the walker to be replaced
+        problem : Problem
+            the problem in the walker
+        allpars : array_like
+            list of all parameters
+        logL : float
+            log Likelihood
+        fitIndex : array_like
+            (new) fitIndex
+        """
+        walker = Walker( self.walkers[kw].id, problem, allpars, fitIndex )
+        walker.logL = logL
+        self.walkers[kw] = walker
+
+        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
+
+    def XXXsetWalkerAdd2List( self, walker, problem, allpars, logL, fitIndex=None ) :
         """
         Update the walker with problem, allpars, LogL and logW.
 
@@ -131,12 +190,10 @@ class Engine( object ):
             (new) fitIndex
 
         """
-        walker.logL = logL
-        walker.allpars = allpars
-        walker.problem = problem
-        if fitIndex is not None :
-            walker.fitIndex = fitIndex
-        self.walkers[walker.id] = walker
+        wlkr = Walker( self.lastWalkerId, problem, allpars, fitIndex )
+        wlkr.logL = logL
+        self.Walkers += [wlkr]
+        self.lastWalkerId += 1
 
 
     def checkBest( self, problem, allpars, logL, fitIndex=None ) :
@@ -156,7 +213,7 @@ class Engine( object ):
             (new) fitIndex
         """
         if logL > self.walkers[-1].logL :
-            self.setWalker( self.walkers[-1], problem, allpars.copy(), logL, fitIndex )
+            self.setWalker( -1, problem, allpars.copy(), logL, fitIndex )
             self.reportBest()
 
 ######## domain <> unit ###########################################
@@ -281,7 +338,6 @@ class Engine( object ):
 
         minv = self.walkers[kmx].allpars.copy()
         maxv = self.walkers[kmx].allpars.copy()
-#        mean = numpy.zeros( npmax, dtype=float )
         nval = numpy.zeros( npmax, dtype=int )
 
         for walker in self.walkers :
@@ -289,11 +345,11 @@ class Engine( object ):
 #            print( "Eng   ", fi, minv, walker.allpars )
             minv[fi] = numpy.fmin( minv[fi], walker.allpars[fi] )
             maxv[fi] = numpy.fmax( maxv[fi], walker.allpars[fi] )
-#            mean[fi] += walker.allpars[fi]
             nval[fi] += 1
 
         problem = self.walkers[kmx].problem
         fi = self.walkers[kmx].fitIndex
+
         maxv[fi] = self.domain2Unit( problem, maxv[fi], kpar=fi )
         minv[fi] = self.domain2Unit( problem, minv[fi], kpar=fi )
 
@@ -303,7 +359,6 @@ class Engine( object ):
 
         self.unitRange = numpy.abs( maxv - minv )
         self.unitMin = numpy.fmin( minv, maxv )
-#        self.unitMean = self.domain2Unit( problem, mean / nval, kpar=fi )
 
 #        print( "Eng1  ", self.unitRange )
         return
@@ -335,7 +390,7 @@ class DummyPlotter( object ) :
     def __init__( self, iter=0 ) :
         self.iter = iter
 
-    def start( self ):
+    def start( self, param=None ):
         """ start the plot. """
         pass
 
@@ -351,7 +406,7 @@ class DummyPlotter( object ) :
         """
         pass
 
-    def stop( self ):
+    def stop( self, param=None, name=None ):
         """ Stop (show) the plot. """
         pass
 

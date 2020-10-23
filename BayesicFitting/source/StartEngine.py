@@ -63,7 +63,7 @@ class StartEngine( Engine ):
         return str( "StartEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood ):
         """
         Execute the engine by a random selection of the parameters.
 
@@ -79,6 +79,7 @@ class StartEngine( Engine ):
         int : the number of successfull moves
 
         """
+        walker = self.walkers[kw]
         problem = walker.problem
         model = problem.model
         fitIndex = walker.fitIndex
@@ -126,10 +127,12 @@ class StartEngine( Engine ):
             else :
                 ktry += 1
 
-        self.setWalker( walker, problem, allp, logL, fitIndex=fitIndex )
+        self.setWalker( walker.id, problem, allp, logL, fitIndex=fitIndex )
+
 
         wlkr = self.walkers[walker.id]
         wlkr.check( nhyp=self.errdis.nphypar )
+#        print( fmt( walker.id ), fmt( wlkr.allpars ), fmt( wlkr.logL ), fmt( allp ), fmt( logL ) )
 
         return len( fitIndex )
 

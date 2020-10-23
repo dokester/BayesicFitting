@@ -75,32 +75,34 @@ class BirthEngine( Engine ):
         return str( "BirthEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by adding a component and diffusing the parameters.
 
         Parameters
         ----------
-        walker : Sample
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place or append
 
         Returns
         -------
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
+        walker = self.walkers[kw].copy()            ## work on local copy.
+
         nhyp = self.errdis.nphypar
         walker.problem.model.parameters = walker.allpars[:-nhyp]
 
-        self.reportCall()
-
-        cwalker = walker.copy()                  ## work on local copy.
-
-        problem = cwalker.problem
-        allp = cwalker.allpars
-        ftry = cwalker.fitIndex
+        problem = walker.problem
+        allp = walker.allpars
+        ftry = walker.fitIndex
 
         if self.verbose > 4 :
             print( "BEN0  ", walker.id, walker.parent, len( allp ), len( ftry ) )
@@ -117,7 +119,7 @@ class BirthEngine( Engine ):
         np = model.npbase
 
         if self.verbose > 4 :
-            print( "BEN1  ", cwalker.id, nc, np, len( allp ), len( ftry ) )
+            print( "BEN1  ", walker.id, nc, np, len( allp ), len( ftry ) )
 
         if not ( nc < model.growPrior.unit2Domain( self.rng.rand() ) and
                  model.grow( offset=off, rng=self.rng ) ):
@@ -144,8 +146,9 @@ class BirthEngine( Engine ):
 
             if Ltry >= lowLhood:
                 self.reportSuccess()
-                self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
-                wlkr = self.walkers[walker.id]
+                update = len( self.walkers ) if append else kw
+                self.setWalker( update, problem, ptry, Ltry, fitIndex=ftry )
+                wlkr = self.walkers[update]
                 wlkr.check( nhyp=nhyp )
                 return dnp
             else :

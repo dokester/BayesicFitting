@@ -58,7 +58,7 @@ class GalileanEngine( Engine ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Default Constructor.
 
@@ -68,15 +68,14 @@ class GalileanEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        slow : None or int > 0
-            Run this engine every slow-th iteration. None for all.
         copy : GalileanEngine
             to be copied
-        seed : int
-            for random number generator
+        kwargs : for Engine
+            "slow", "seed", "verbose"
+
         """
-        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
-                        seed=seed, verbose=verbose  )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
+
         self.nstep = 5
 
         self.plotter = DummyPlotter( )
@@ -93,16 +92,18 @@ class GalileanEngine( Engine ):
         return str( "GalileanEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by diffusing the parameters.
 
         Parameters
         ----------
-        walker : Sample
-            walker to diffuse
+        kw : int
+            index in walkerlist, of the walker
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place of append
 
         Returns
         -------
@@ -111,7 +112,7 @@ class GalileanEngine( Engine ):
         """
         self.reportCall()
 
-        walker = walker.copy()
+        walker = self.walkers[kw].copy()
         problem = walker.problem
         Lhood = walker.logL
         allpars = walker.allpars
@@ -122,7 +123,7 @@ class GalileanEngine( Engine ):
         Ltry = 0
         size = 0.5
 
-        self.plotter.start( )
+        self.plotter.start( param=allpars )
         um = UnitMovements( walker, self, size )
 
         nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
@@ -188,12 +189,9 @@ class GalileanEngine( Engine ):
                 step += 1
                 trial = 0
 
-                ## check if better than Lbest in walkers[-1]
-                self.checkBest( problem, ptry, Ltry, fitIndex )
-
                 ## update the walker
-                self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
-
+                update = len( self.walkers ) if append else kw
+                self.setWalker( update, problem, allpars, Lhood, fitIndex=fitIndex )
 
             else:
                 inside += 1
@@ -210,19 +208,11 @@ class GalileanEngine( Engine ):
             if not ( step < nstep and trial < maxtrial ):
                 break
 
-#        if npout > 0 :
-#            self.setWalker( walker, problem, allpars, Lhood, fitIndex=fitIndex )
-#        elif self.verbose > 4 :
-
-
         if npout == 0 and self.verbose > 4 :
             warnings.warn( "GalileanEngine: no steps found" )
 
-#        if npout == 0 :
-#            print( "Galilean ", walker.id, trial, step, npout, fma( ptry ) )
 
-
-        self.plotter.stop()
+        self.plotter.stop( param=allpars, name="GalileanEngine" )
         return npout
 
 class UnitMovements( object ):
@@ -264,6 +254,8 @@ class UnitMovements( object ):
         Return a new stepped parameter set.
         """
         uv = self.uvel
+        # add small random contribution to velocity
+        uv += self.uniform() * self.upran * 0.1
         pv = self.upar + uv * f
 
         # check if outside [0,1]

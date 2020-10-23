@@ -77,33 +77,37 @@ class DeathEngine( Engine ):
         return str( "DeathEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by removins a component.
 
         Parameters
         ----------
-        walker : Walker
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place or append
 
         Returns
         -------
         int : the number of successfull moves
 
         """
+        self.reportCall()
+
+        walker = self.walkers[kw].copy()          ## work on local copy
+
         nhyp = self.errdis.nphypar
         walker.problem.model.parameters = walker.allpars[:-nhyp]
 
-        self.reportCall()
 
-        cwalker = walker.copy()          ## work on local copy
-        problem = cwalker.problem
+        problem = walker.problem
         model = problem.model
-        allp = cwalker.allpars
+        allp = walker.allpars
         ptry = allp
-        ftry = cwalker.fitIndex
+        ftry = walker.fitIndex
 
         off = 0
         while model is not None and not isinstance( model, Dynamic ) :
@@ -114,7 +118,7 @@ class DeathEngine( Engine ):
         np = model.npbase
 
         if self.verbose > 4 :
-            print( "DEN1  ", cwalker.id, nc, np, len( ptry ), len( ftry ) )
+            print( "DEN1  ", walker.id, nc, np, len( ptry ), len( ftry ) )
 
         # shuffle the parameters (if needed) before throwing the last one out.
         ptry = model.shuffle( ptry, off, np, self.rng )
@@ -136,8 +140,9 @@ class DeathEngine( Engine ):
 
         if Ltry >= lowLhood:
             self.reportSuccess()
-            self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
-            wlkr = self.walkers[walker.id]
+            update = len( self.walkers ) if append else kw
+            self.setWalker( update, problem, ptry, Ltry, fitIndex=ftry )
+            wlkr = self.walkers[update]
             wlkr.check( nhyp=nhyp )
             return abs( dnp )
 

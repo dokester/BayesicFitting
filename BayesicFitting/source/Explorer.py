@@ -88,6 +88,7 @@ class Explorer( object ):
         self.verbose = ns.verbose
         self.threads = threads
         self.iteration = ns.iteration
+        self.usePhantoms = hasattr( ns, "usePhantoms" ) and ns.usePhantoms
 
         self.selectEngines = self.allEngines    ## default: always use all engines
         for eng in self.engines :
@@ -95,7 +96,7 @@ class Explorer( object ):
                 self.selectEngines = self.selEngines    ## use selection
                 break
 
-    def explore( self, worst, lowLhood ):
+    def explore( self, worst, lowLhood, iteration ):
         """
         Explore the likelihood function, using threads.
 
@@ -107,11 +108,11 @@ class Explorer( object ):
             level of the low likelihood
 
         """
-        engines = self.selectEngines( self.iteration )
+        engines = self.selectEngines( iteration )
 
         if not self.threads :
             for kw in worst :
-                self.exploreWalker( kw, lowLhood, self.engines, self.rng )
+                self.exploreWalker( kw, lowLhood, engines, self.rng )
 
             return
 
@@ -129,7 +130,7 @@ class Explorer( object ):
         for thread in explorerThreads :
             thread.join( )
 
-            for k,engine in enumerate( self.engines ) :
+            for k,engine in enumerate( engines ) :
                 nc = 0
                 for i in range( nrep ) :
                     nc += thread.engines[k].report[i]
@@ -141,10 +142,24 @@ class Explorer( object ):
                 print( e )
             raise Exception( "Thread Error" )
 
-    def exploreWalker( self, wlkrid, lowLhood, engines, rng ):
-        """ For internal use only """
+    def exploreWalker( self, kw, lowLhood, engines, rng ):
+        """
+        Move the walker around until it is randomly distributed over the prior and
+        higher in logL then lowLhood
 
-        walker = self.walkers[wlkrid]
+        Parameters
+        ----------
+        kw : int
+            index in walkerlist, of the walker to be explored
+        lowLhood : float
+            minimum value for the log likelihood
+        engine : list of Engine
+            to be used
+        rng : RandomState
+            random number generator
+        """
+
+        walker = self.walkers[kw]
         oldlogL = walker.logL
 
         maxmoves = len( walker.fitIndex ) / self.rate
@@ -156,13 +171,13 @@ class Explorer( object ):
         while moves < maxmoves and trials < maxtrials :
 
             for engine in rng.permutation( engines ) :
-                walker = self.walkers[wlkrid]
-                moves += engine.execute( walker, lowLhood )
+                moves += engine.execute( kw, lowLhood, append=self.usePhantoms )
 
-                if self.verbose >= 4 or self.walkers[wlkrid].logL < lowLhood :
-                    wlkr = self.walkers[wlkrid]
+                update = len( self.walkers ) - 1 if self.usePhantoms else kw
+                if self.verbose >= 4 or self.walkers[update].logL < lowLhood :
+                    wlkr = self.walkers[update]
                     print( "%4d %-15.15s %4d %10.3f %10.3f ==> %3d  %10.3f"%
-                            ( trials, engine, wlkrid, lowLhood, oldlogL, moves,
+                            ( trials, engine, update, lowLhood, oldlogL, moves,
                                 wlkr.logL ) )
                     print( "IN       ", fmt( walker.allpars, max=None ), len( walker.allpars ) )
                     print( "OUT      ", fmt( wlkr.allpars, max=None ), len( wlkr.allpars ) )
@@ -177,11 +192,11 @@ class Explorer( object ):
 
             trials += 1
 
-        if moves == 0 or self.verbose >= 4 :
-            self.logLcheck( self.walkers[wlkrid] )
+        if moves == 0 :
+            self.logLcheck( self.walkers[kw] )
 
-        if self.walkers[wlkrid].logL < lowLhood :
-            raise Exception( "%10.3f < %10.3f" % ( self.walkers[wlkrid].logL, lowLhood )  )
+        if self.walkers[update].logL < lowLhood :
+            raise Exception( "%10.3f < %10.3f" % ( self.walkers[kw].logL, lowLhood )  )
 
         return
 
@@ -196,8 +211,9 @@ class Explorer( object ):
         """
         engines = []
         for eng in self.engines :
-            if not ( hasattr( eng, "slow" ) and ( iteration % eng.slow ) > 0 )  :
+            if not hasattr( eng, "slow" ) or ( iteration % eng.slow ) == 0 :
                 engines += [eng]
+
         return engines
 
     def allEngines( self, iteration ) :

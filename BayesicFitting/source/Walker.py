@@ -103,9 +103,6 @@ class Walker( object ):
             self.problem = problem.copy()
             self.logL = copy.logL
 
-#        print( "Walker  ", id, len(allpars), len(fitIndex), problem.npars, self.problem.npars )
-
-
     def copy( self ):
         """
         Copy.

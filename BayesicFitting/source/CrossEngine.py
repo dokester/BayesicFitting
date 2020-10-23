@@ -70,14 +70,14 @@ class CrossEngine( Engine ):
         return str( "CrossEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ) :
+    def execute( self, kw, lowLhood ) :
         """
         Execute the engine by diffusing the parameters.
 
         Parameters
         ----------
-        walker : Sample
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
 
@@ -88,6 +88,7 @@ class CrossEngine( Engine ):
         """
         self.reportCall()
 
+        walker = self.walkers[kw].copy()
         problem = walker.problem
         fitIndex = walker.fitIndex
 
@@ -129,7 +130,7 @@ class CrossEngine( Engine ):
             Ltry = self.errdis.logLikelihood( problem, param )
             if Ltry >= lowLhood:
                 self.reportSuccess( )
-                self.setSample( walker, problem, param, Ltry )
+                self.setWalker( kw, problem, param, Ltry, fitIndex=fitIndex )
                 return nf
             elif kk <= self.maxtrials :
                 param = walker.allpars[:]

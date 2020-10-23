@@ -74,7 +74,7 @@ class ChordEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, debug=False, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ) :
         """
         Constructor.
 
@@ -84,18 +84,12 @@ class ChordEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        slow : None or int > 0
-            Run this engine every slow-th iteration. None for all.
         copy : ChordEngine
             to be copied
-        seed : int
-            for rng
-        verbose : int
-            <= 4 : silent
-            > 4  : info about engine execution
-
+        kwargs : for Engine
+            "slow", "seed", "verbose"
         """
-        super( ).__init__( walkers, errdis, slow=slow, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
 
         self.nstep = 5
         self.maxtrials = 25
@@ -111,16 +105,18 @@ class ChordEngine( Engine ):
 
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by diffusing the parameters.
 
         Parameters
         ----------
-        walker : Walker
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place or append
 
         Returns
         -------
@@ -128,15 +124,15 @@ class ChordEngine( Engine ):
 
         """
         self.reportCall()
-        self.plotter.start()
 
-        walker = walker.copy()
+        walker = self.walkers[kw].copy()
         problem = walker.problem
         fitIndex = walker.fitIndex
         np = len( fitIndex )
 
         param = walker.allpars
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
+        self.plotter.start( param=param )
 
         # Determine n-dim box boundaries in which the parameters are located
         if np > len( self.unitRange ) :
@@ -170,8 +166,6 @@ class ChordEngine( Engine ):
             print( "umin  ", fmt( umin ) )
             print( "umax  ", fmt( umax ) )
             print( "usav  ", fmt( usav ) )
-
-        self.plotter.point( param, col=0, sym=2 )
 
         reset = True
         ptry = param.copy()
@@ -227,7 +221,7 @@ class ChordEngine( Engine ):
                     self.plotter.move( param, ptry, col=0, sym=0 )
 
                     ## check if better than Lbest in walkers[-1]
-                    self.checkBest( problem, ptry, Ltry, fitIndex )
+                    # self.checkBest( problem, ptry, Ltry, fitIndex )
 
                     ## keep the trial parameters
                     param = ptry.copy()
@@ -246,7 +240,8 @@ class ChordEngine( Engine ):
 #                    reset = False
 
                     ## update the walker
-                    self.setWalker( walker, problem, ptry, Ltry, fitIndex=fitIndex )
+                    update = len( self.walkers ) if append else kw
+                    self.setWalker( update, problem, ptry, Ltry, fitIndex=fitIndex )
 
                     break
 
@@ -270,7 +265,7 @@ class ChordEngine( Engine ):
         if step == 0 and self.verbose > 4 :
             warnings.warn( "ChordEngine: no steps found" )
 
-        self.plotter.stop()
+        self.plotter.stop( param=param, name="ChordEngine" )
 
         return step
 

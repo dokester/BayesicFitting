@@ -53,16 +53,16 @@ class WalkerList( list ):
     Author       Do Kester
 
     """
-    def __init__( self, problem, nsamples, allpars, fitIndex ):
+    def __init__( self, problem, nwalkers, allpars, fitIndex ):
         """
         Constructor.
 
         Parameters
         ----------
-        nsamples : int
-            number of samples created.
+        nwalkers : int
+            number of walkerss created.
         problem : Problem
-            to be used in the samples
+            to be used in the walkerss
         allpars : array_like
             parameters and hyperparams of the problem
         fitIndex : array_like
@@ -75,7 +75,7 @@ class WalkerList( list ):
         self.logZ = 0.0
         self.info = 0.0
         allpars = numpy.asarray( allpars )
-        self.addWalkers( problem, nsamples, allpars, fitIndex )
+        self.addWalkers( problem, nwalkers, allpars, fitIndex )
 
 
     def addWalkers( self, problem, nWalkers, allpars, fitIndex ):
@@ -88,23 +88,43 @@ class WalkerList( list ):
             self._count += 1
 
     # ===========================================================================
-    def add( self, samplelist, index ):
+    def setWalker( self, walker, index ):
+        """
+        replace/append a Walker to this list
+
+        Parameters
+        ----------
+        walker : Walker
+            the list to take to copy from
+        index : int
+            the index at which to set
+        """
+#        print( "setWalker  ", id( self ), len( self ), walker.id, index )
+
+        if index < len( self ) :
+            self[index] = walker
+
+        else :
+            walker.id = self._count
+            self._count += 1
+            self.append( walker )
+
+    def XXXadd( self, walkerlist, index ):
         """
         Add a ( copy if a ) Walker from an ( other ) list to this one.
 
         Parameters
         ----------
-        samplelist : WalkerList
+        walkerlist : WalkerList
             the list to take to copy from
         index : int
             the item from the list
 
         """
-        sample = samplelist[index].copy()
-        sample.id = self._count
+        walker = walkerlist[index].copy()
+        walker.id = self._count
         self._count += 1
-        self.append( sample )
-        self.normalized = False
+        self.append( walker )
 
     def copy( self, src, des ):
         """
@@ -118,7 +138,6 @@ class WalkerList( list ):
             the destination item
 
         """
-
         id = self[des].id
         self[des] = self[src].copy()
         self[des].id = id
@@ -146,8 +165,8 @@ class WalkerList( list ):
 
         """
         pe = []
-        for sample in self :
-            pe += [sample.parameters]
+        for walker in self :
+            pe += [walker.parameters]
         if kpar is None :
             return numpy.asarray( pe )
         else :
@@ -155,12 +174,12 @@ class WalkerList( list ):
 
     def getScaleEvolution( self ):
         """ Return the evolution of the scale.  """
-        pe = [sample.hypars for sample in self]
+        pe = [walker.hypars for walker in self]
         return numpy.asarray( pe )
 
     def getLogLikelihoodEvolution( self ):
         """ Return the evolution of the log( Likelihood ).  """
-        pe = [sample.logL for sample in self]
+        pe = [walker.logL for walker in self]
         return numpy.asarray( pe )
 
     def getLowLogL( self ):
@@ -170,10 +189,10 @@ class WalkerList( list ):
         low = self[0].logL
         klo = 0
         k = 0
-        for sample in self :
-            if sample.logL < low :
+        for walker in self :
+            if walker.logL < low :
                 klo = k
-                low = sample.logL
+                low = walker.logL
             k += 1
         return ( low, klo )
 

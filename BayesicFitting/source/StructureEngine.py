@@ -79,16 +79,18 @@ class StructureEngine( Engine ):
         return str( "StructureEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by changing a component.
 
         Parameters
         ----------
-        walker : Sample
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place or append in walkerlist
 
         Returns
         -------
@@ -99,15 +101,17 @@ class StructureEngine( Engine ):
 
         t = 0
         k = 0
-        perm = self.rng.permutation( walker.problem.model.ncomp - 2 )
+        perm = self.rng.permutation( self.walkers[kw].problem.model.ncomp - 2 )     ## TBC
         for p in perm :
-            dt = self.executeOnce( walker.id, lowLhood, location=p+1 )
-            k = 0 if dt > 0 else k + 1
+            update = len( self.walkers ) if append else kw
+            dt = self.executeOnce( kw, lowLhood, update, location=p+1 )
+            if dt > 0 :
+                kw = update
             t += dt
 
         return t
 
-    def executeOnce( self, wlkrid, lowLhood, location=None ) :
+    def executeOnce( self, wlkrid, lowLhood, update, location=None ) :
         """
         One execution call.
         """
@@ -146,13 +150,10 @@ class StructureEngine( Engine ):
 
         if Ltry >= lowLhood:
             self.reportSuccess()
-            self.setWalker( cwalker, problem, ptry, Ltry, fitIndex=ftry )
-            wlkr = self.walkers[walker.id]
+            self.setWalker( update, problem, ptry, Ltry, fitIndex=ftry )
+            wlkr = self.walkers[update]
 
             wlkr.check( nhyp=self.errdis.nphypar )
-
-            ## check if better than Lbest in walkers[-1]
-            self.checkBest( problem, ptry, Ltry, ftry )
 
             return 1
 

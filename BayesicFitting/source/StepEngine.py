@@ -4,6 +4,7 @@ from .Formatter import formatter as fmt
 from .Formatter import fma
 
 from .Engine import Engine
+from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
 __year__ = 2020
@@ -61,6 +62,8 @@ class StepEngine( Engine ):
 
         """
         super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        self.plotter = DummyPlotter()
+
 
     def copy( self ):
         """ Return copy of this.  """
@@ -71,16 +74,18 @@ class StepEngine( Engine ):
 
 
     #  *********EXECUTE***************************************************
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by diffusing the parameters.
 
         Parameters
         ----------
-        walker : Walker
-            walker to diffuse
+        kw : int
+            index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
+        append : bool
+            set walker in place or append
 
         Returns
         -------
@@ -89,7 +94,7 @@ class StepEngine( Engine ):
         """
         self.reportCall()
 
-        walker = walker.copy()
+        walker = self.walkers[kw].copy()
         problem = walker.problem
         fitIndex = walker.fitIndex
         np = len( fitIndex )
@@ -99,6 +104,7 @@ class StepEngine( Engine ):
         urange += 2 * dur
 
         param = walker.allpars
+        self.plotter.start( param=param )
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
 
         if self.verbose > 4 :
@@ -109,13 +115,13 @@ class StepEngine( Engine ):
             print( "unitr ", fma( self.unitRange ) )
 
 
-
         sz = 1.0
-        ptry = param.copy()
-        step = ( 2 * self.rng.rand( np ) - 1 ) * urange
+#        step = ( 2 * self.rng.rand( np ) - 1 ) * urange
+        step = ( self.rng.rand( np ) - 0.5 ) * urange
         kk = 0
-        while True :
-            kk += 1
+#        while True :
+        while kk < 4 :
+            ptry = param.copy()
 
             while True :
                 utry = usav + step
@@ -125,9 +131,9 @@ class StepEngine( Engine ):
                 nq1 = len( q1 )
 
                 if nq0 > 0 :
-                    step[q0] = ( 2 * self.rng.rand( nq0 ) - 1 ) * urange[q0]
+                    step[q0] = ( self.rng.rand( nq0 ) - 0.5 ) * urange[q0]
                 elif nq1 > 0 :
-                    step[q1] = ( 2 * self.rng.rand( nq1 ) - 1 ) * urange[q1]
+                    step[q1] = ( self.rng.rand( nq1 ) - 0.5 ) * urange[q1]
                 else :
                     break
 
@@ -139,16 +145,27 @@ class StepEngine( Engine ):
                 print( "Step  ", fma(ptry), fmt(Ltry), kk, fmt( sz ) )
 
             if Ltry >= lowLhood:
+                self.plotter.move( param, ptry, col=0, sym=0 )
                 self.reportSuccess( )
-                self.setWalker( walker, problem, ptry, Ltry, fitIndex=fitIndex )
-                break
+
+                update = len( self.walkers ) if append else kw
+                self.setWalker( update, problem, ptry, Ltry, fitIndex=fitIndex )
+                param = ptry
+                usav = utry
+                sz = 1.0
+                step = ( self.rng.rand( np ) - 0.5 ) * urange
+                kk += 1
+#                break
             elif kk <= self.maxtrials :
+                self.plotter.move( param, ptry, col=5, sym=4 )
                 sz *= 0.7
                 step *= sz
                 self.reportReject( )
             else :
                 self.reportFailed()
                 break
+
+        self.plotter.stop( param=param, name="StepEngine" )
 
         return np                        # nr of succesfull steps
 
