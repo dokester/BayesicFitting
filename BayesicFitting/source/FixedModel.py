@@ -1,6 +1,7 @@
 import numpy as numpy
 from astropy import units
 import re
+import string
 import warnings
 from . import Tools
 
@@ -10,7 +11,7 @@ from .Tools import setAttribute as setatt
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -430,34 +431,50 @@ class FixedModel( BaseModel ):
     def _toString( self, npars=0 ) :
         basename = self.baseName()
 
+#        print( "FM %d  " % npars, basename )
+
         if self.fixed is not None :
             for k in self.fixed.keys() :
-                par = "p_%d "%k
+                par = r"p_%d([^0-9]|$)"%k
                 if k in self.mlist :
-                    val = "(%s) " % self.fixed[k].shortName()
+                    val = r"(%s) " % self.fixed[k].shortName()
                 else :
-                    val = "(%.1f) "%self.fixed[k]
+                    val = r"(%.1f) "%self.fixed[k]
                 basename = re.sub( par, val, basename )
+#            print( "FM1   ", basename )
+#            print( "ParL  ", self.parlist )
             i = 0
-            par = "q_0 "
             for k in self.parlist :
-                old = "p_%d "%k
+                old = r"p_%d([^0-9]|$)"%k
+                par = r"q_%d\1"%i
                 basename = re.sub( old, par, basename )
                 i += 1
-                par = "q_%d "%i
-            basename = re.sub( "q_", "p_", basename )
+#                print( "FM    ", basename )
+            basename = re.sub( r"q_", r"p_", basename )
+
+#        print( "FM2   ", basename )
+
 
         if npars == 0 : return basename
 
+#        print( "FM11  ", basename )
+
         i = 0
         while True :
-            i = basename.find( 'p_', i + 1 )
-            if i < 0 : break
-            j = basename.find( ' ', i )
-            k = int( basename[i+2:j] )
-            basename = basename.replace( "p_%d "%k, "q_%d "%(k+npars) )
+            mo = re.search( r'p_([0-9]*)', basename, flags=re.MULTILINE )
+            if mo is None : break
+
+            span = mo.span()
+            k = int( basename[span[0]+2:span[1]] )
+#            print( "FM    ", span, k, npars )
+            basename = re.sub( r'p_%d'%k, r'q_%d'%(k+npars), basename, flags=re.MULTILINE )
+
+
+#        print( "FM12  ", basename )
 
         basename = basename.replace( "q_", "p_" )
+
+#        print( "FM13  ", basename )
 
         return basename
 
