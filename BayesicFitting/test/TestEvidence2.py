@@ -470,7 +470,8 @@ class TestEvidence2( unittest.TestCase  ) :
 
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-        ns = NestedSampler( x, model, y, distribution='laplace', verbose=0, rate=0.5 )
+        ns = NestedSampler( x, model, y, distribution='laplace', seed=8907,
+                    verbose=0, rate=0.5 )
 
         logE = ns.sample()
 

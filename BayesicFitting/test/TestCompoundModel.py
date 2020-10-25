@@ -451,6 +451,16 @@ class TestCompoundModel( unittest.TestCase ):
         print( '-------------------------------------------------------------' )
         print( m1._toString( "toS   ", npars=2 ) )
 
+        sm = SplinesModel( [0,1,2] )
+        pm = PolynomialModel( 0 )
+        lm = LorentzModel( )
+        m3 = sm + lm + pm
+        print( '-------------------------------------------------------------' )
+        print( m3 )
+
+
+
+
         em = PowerModel( 1, fixed={0:1.0} )
         em += BasicSplinesModel( nrknots=8, min=0, max=10 )
         em += ExpModel()
@@ -461,7 +471,6 @@ class TestCompoundModel( unittest.TestCase ):
         print( '-------------------------------------------------------------' )
         m2str = m2.__str__()
         print( m2str )
-        print( m2str[-30:] )
 
         self.assertTrue( m2str[-30:] == "p_19 * sin( 2PI * x * p_17 ) }" )
 
