@@ -5,7 +5,7 @@ from .Engine import Engine
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -64,7 +64,7 @@ class RandomEngine( Engine ):
         return str( "RandomEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, update ):
+    def execute( self, kw, lowLhood, append=False ):
         """
         Execute the engine by a random selection of the parameters.
 
@@ -74,8 +74,8 @@ class RandomEngine( Engine ):
             index of Walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        update : int
-            index the walkers should be updated in (may be different from kw)
+        append : bool
+            set walker in place or append
 
         Returns
         -------
@@ -113,7 +113,8 @@ class RandomEngine( Engine ):
                 Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
                 if Ltry >= lowLhood:
                     self.reportSuccess( )
-                    self.setWalker( kw, problem, param, Ltry, fitIndex=fitIndex )
+                    update = len( self.walkers ) if append else kw
+                    self.setWalker( update, problem, param, Ltry, fitIndex=fitIndex )
                     t += 1
                     break
                 elif kk < self.maxtrials :

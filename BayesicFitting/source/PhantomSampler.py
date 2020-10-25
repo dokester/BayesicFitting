@@ -50,7 +50,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -83,12 +83,12 @@ class PhantomSampler( NestedSampler ):
     and are subsequently transferred to the list of posterior samples.
 
     In principle it speeds up the calculations by a factor step, of course it
-    pays in precision.
+    pays in exploratory power and precision.
 
 
     Attributes
     ----------
-    step : int
+    step : int (< 10)
         percentage of the walkers to replace
 
     Attributes from NestedSampler
@@ -199,8 +199,11 @@ class PhantomSampler( NestedSampler ):
             >4  for debugging
 
         """
+        if step <= 10 :
+            self.step = step
+        else :
+            raise ValueError( "Please keep step <= 10" )
 
-        self.step = step
         self.initEnsemble = ensemble
         self.usePhantoms = True
 #        self.walkers = []

@@ -11,7 +11,7 @@ from .Formatter import formatter as fmt
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
