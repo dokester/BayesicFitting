@@ -815,7 +815,7 @@ TBW. Setting limits is still in an experimental stage.
 -->
 
 <a name="ns"></a>
-## 5. NestedSampler 
+## 5. NestedSampler and PhantomSampler 
 
 **NestedSampler** is a novel technique to do Bayesian calculations.  It
 samples the Posterior while integrating it to calculate the evidence.
@@ -841,6 +841,15 @@ Nested sampling is an idea of David McKay and John Skilling.
 Skilling has written a separate chapter in [Sivia's book](#ref1)
 explaining the Nested Sampling idea, including an algorithm in C, which
 served as the basis (via C, and JAVA) for our implementation. 
+
+**PhantomSampler** is an extension of **NestedSampler**, in the sense 
+that it uses (some of) the intermediate positions that the walkers take 
+when they are wandered around by the **Engine**s. These positions are 
+commonly known as Phantoms. How many phantoms are used, is governed by 
+the keyword step=. In each iteration `step` percent of the ensemble is 
+replace by new phantom walkers. The benefits of the scheme is a step-fold
+increase in calculation speed; the downside is less precision and less
+exploratory power. The value of `step` is limited to 10.
 
 **NestedSampler** needs more information to run than ordinary
 **Fitter**s. It needs priors for all  its parameters and it needs a
@@ -1326,6 +1335,8 @@ BaseFitters contain common methods for fitters that inherit from them.
     See [example1](../examples/HD2039.ipynb) or
     [example2](../examples/alphaComae.ipynb) or
     [example3](../examples/outliers-2.ipynb)
++ **PhantomSampler**<br>
+    A possibly faster version of NestedSampler
 + **Explorer**<br>
     Helper class of NestedSampler to run the **Engine**s.
 + **Walker**<br>

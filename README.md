@@ -10,22 +10,13 @@ Citation index:
 DOI: 10.5281/zenodo.2597200
 
 
-## What's new in versions 2.5.0
-   * Add new models: BasicSplinesModel and SplinesDynamicModel
-   * Option for constraints on the likelihood
-   * Option for slow engines (working every slow-th iteration in NestedSampler)
-   * Restructure growPrior setting
-   * Print formatting in NestedSampler
-   * Adapt to SplinesDynamicModel
-   * Homogenized and improved plotoptions in test harnesses
-   * Three more examples added
-## What's new in versions 2.5.1
-   * Comment out NeuralNetModel (not yet available) and some typos.
-## What's new in versions 2.5.2
-   * Two more bugs smashed (in StartEngine and Prior)
-## What's new in versions 2.5.3
-   * Averaging of circular variables
-   * Update of static class attributes
+## What's new in versions 2.6.0
+   * New class: PhantomSampler; adaptations in Engines, Explorer, WalkerList
+   * Restructured NestedSampler to accommodate PhantomSampler
+   * Test harnass for PhantomSampler
+   * Option: fix parameters in BasicSplinesModel
+   * Confusing __str__ method in compound models improved
+
 
 ## Content
 
@@ -296,8 +287,28 @@ More work needs to be done in:
    * Add keyword tail= to formatter to display last items of an array.
 
  + 4 Jun 2020 version 2.5.0
-   * See above in Whats new.
+   * Add new models: BasicSplinesModel and SplinesDynamicModel
+   * Option for constraints on the likelihood
+   * Option for slow engines (working every slow-th iteration in NestedSampler)
+   * Restructure growPrior setting
+   * Print formatting in NestedSampler
+   * Adapt to SplinesDynamicModel
+   * Homogenized and improved plotoptions in test harnesses
+   * Three more examples added
 
+ + 5 Jun 2020 versions 2.5.1
+   * Comment out NeuralNetModel (not yet available) and some typos.
+
+ + 6 Jun 2020 versions 2.5.2
+   * Two more bugs smashed (in StartEngine and Prior)
+
+ + 29 Jun 2020 versions 2.5.3
+   * Averaging of circular variables
+   * Update of static class attributes
+   * Attribute and printing issues.
+
+ + 23 Oct 2020 version 2.6.0
+   * See above in Whats new
 
 <br><br><br><br>
 

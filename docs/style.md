@@ -31,7 +31,7 @@ convention.
 Code statements should read like sentences optimized for the user/coder
 to read. The computer does not care as long as it is grammatically
 correct. See [Obfuscated C](https://ioccc.org), a competition in writing 
-unreadable code.
+unreadable, but working code for a bad example. 
 
   + Readable sentences have spaces between words. Operators are words: + reads
 as "plus", = reads as "is". So operators have spaces on each side. <br>
