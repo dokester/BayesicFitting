@@ -238,23 +238,25 @@ class TestPrior( unittest.TestCase ) :
         self.stdTestPrior( prior )
         self.domainTest( prior )
 
+        maxdom = prior.MAXVAL * prior.scale
         print( prior.unit2Domain( 0.5 ) )
         print( prior.unit2Domain( 0.0 ) )
         self.assertAlmostEqual( prior.unit2Domain( 1 - 1.0 / 1024 ), 6.93147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0.693147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.0 ), 0 )
-        self.assertTrue( prior.unit2Domain( 1.0 ) == math.inf )
+        self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
 
         prior.scale = 10
         print( prior )
         self.stdTestPrior( prior )
 
+        maxdom = prior.MAXVAL * prior.scale
         self.assertTrue( prior.scale == 10.0 )
         self.assertTrue( prior.zeroFraction == 0 )
         self.assertAlmostEqual( prior.unit2Domain( 1 -1.0 / 1024 ), 69.3147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 6.93147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.0 ), 0 )
-        self.assertTrue( prior.unit2Domain( 1.0 ) == math.inf )
+        self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
 
         cp = prior.copy( )
         print( cp )
@@ -263,7 +265,7 @@ class TestPrior( unittest.TestCase ) :
         self.assertAlmostEqual( cp.unit2Domain( 1 -1.0 / 1024 ), 69.3147180559945 )
         self.assertAlmostEqual( cp.unit2Domain( 0.5 ), 6.93147180559945 )
         self.assertAlmostEqual( cp.unit2Domain( 0.0 ), 0 )
-        self.assertTrue( cp.unit2Domain( 1.0 ) == float( "+Infinity") )
+        self.assertTrue( cp.unit2Domain( 1.0 ) == maxdom )
 
         self.stdTestPrior( cp )
 
@@ -280,12 +282,13 @@ class TestPrior( unittest.TestCase ) :
 
         self.stdTestPrior( prior, utest=False )
 
+        maxdom = prior.MAXVAL * prior.scale
         self.assertAlmostEqual( prior.unit2Domain( 1 - 1.0 / 2048 ), 69.3147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 6.93147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
         self.assertAlmostEqual( prior.unit2Domain( 0.25 ), 0 )
         self.assertAlmostEqual( prior.unit2Domain( 0.0 ), 0 )
-        self.assertTrue( prior.unit2Domain( 1.0 ) == math.inf )
+        self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
         print( prior.domain2Unit( 0 ) )
         uv = prior.domain2Unit( 0 )
         self.assertTrue( prior.domain2Unit(prior.unit2Domain(uv) ) != uv )
@@ -305,21 +308,23 @@ class TestPrior( unittest.TestCase ) :
 
         cp = ExponentialPrior( prior=prior, scale=10 )
         print( cp )
+        maxdom = cp.MAXVAL * cp.scale
         self.assertTrue( cp.zeroFraction == 0.5 )
         self.assertTrue( cp.scale == 10 )
         print( cp.domain2Unit( 0 ) )
         self.assertAlmostEqual( cp.unit2Domain( 1 - 1.0 / 2048 ), 69.3147180559945 )
         self.assertAlmostEqual( cp.unit2Domain( 0.75 ), 6.93147180559945 )
         self.assertAlmostEqual( cp.unit2Domain( 0.4 ), 0 )
-        self.assertTrue( cp.unit2Domain( 1.0 ) == float( "+Infinity") )
+        self.assertTrue( cp.unit2Domain( 1.0 ) == maxdom )
 
         prior = ExponentialPrior( 2 )
         print( prior )
+        maxdom = prior.MAXVAL * prior.scale
         self.assertTrue( prior.scale == 2 )
         self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(0.0) ), 0.0 )
         self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(3) ), 3 )
         self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(50) ), 50.0, 4 )
-        self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(100) ), math.inf )
+        self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(100) ), maxdom )
 
         prior.zeroFraction = 0.3
         print( prior )
@@ -350,38 +355,42 @@ class TestPrior( unittest.TestCase ) :
         prior = LaplacePrior( )
         print( prior )
         self.assertTrue( prior.scale == 1 )
-        print( prior.unit2Domain( 1.0 ) )
+        print( prior.unit2Domain( 0.0 ) )
         print( prior.unit2Domain( 0.25 ) )
         print( prior.unit2Domain( 0.50 ) )
         print( prior.unit2Domain( 0.75 ) )
-        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 1.0 ) )
 
         self.stdTestPrior( prior )
         self.domainTest( prior )
 
-        self.assertTrue( prior.unit2Domain(1.0 ) == math.inf )
+        maxdom = prior.center + prior.MAXVAL * prior.scale
+        self.assertTrue( prior.unit2Domain(1.0 ) == maxdom )
         self.assertAlmostEqual( prior.unit2Domain(0.75 ), 0.693147180559945 )
         self.assertAlmostEqual( prior.unit2Domain(0.5 ), 0 )
         self.assertAlmostEqual( prior.unit2Domain(0.25 ), -0.693147180559945 )
         self.assertAlmostEqual( prior.unit2Domain(1.0 / 2048 ), -6.93147180559945 )
-        self.assertTrue( prior.unit2Domain(0.0 ) == -math.inf )
+        self.assertTrue( prior.unit2Domain(0.0 ) == -maxdom )
 
         prior.scale = 10
         print( prior )
+        maxdom = prior.center + prior.MAXVAL * prior.scale
         self.assertTrue( prior.scale == 10 )
         self.assertAlmostEqual( prior.unit2Domain(1.0 / 2048 ), -69.3147180559945 )
         self.assertAlmostEqual( prior.unit2Domain(0.25 ), -6.93147180559945 )
         self.assertAlmostEqual( prior.unit2Domain(0.5 ), 0 )
-        self.assertTrue( prior.unit2Domain(1.0 ) == math.inf )
+        self.assertTrue( prior.unit2Domain(1.0 ) == maxdom )
 
         cp = prior.copy( )
+        cp.center = 100
+        maxdom = cp.center + cp.MAXVAL * cp.scale
         print( cp )
         self.stdTestPrior( cp )
         self.assertTrue( cp.scale == 10.0 )
-        self.assertAlmostEqual( cp.unit2Domain(1.0 / 2048 ), -69.3147180559945 )
-        self.assertAlmostEqual( cp.unit2Domain(0.25 ), -6.93147180559945 )
-        self.assertAlmostEqual( cp.unit2Domain(0.5 ), 0 )
-        self.assertTrue( cp.unit2Domain(1.0 ) == math.inf )
+        self.assertAlmostEqual( cp.unit2Domain(1.0 / 2048 ), 100 - 69.3147180559945 )
+        self.assertAlmostEqual( cp.unit2Domain(0.25 ), 100 - 6.93147180559945 )
+        self.assertAlmostEqual( cp.unit2Domain(0.5 ), 100 )
+        self.assertTrue( cp.unit2Domain(1.0 ) == maxdom )
 
         prior.scale = 1.0
         print( prior )
@@ -460,25 +469,35 @@ class TestPrior( unittest.TestCase ) :
         self.stdTestPrior( prior )
         self.domainTest( prior )
 
-        self.assertTrue( prior.unit2Domain( 1.0 ) == math.inf )
+        maxdom = prior.center + prior.MAXVAL * prior.scale
+        mindom = prior.center - prior.MAXVAL * prior.scale
+        self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
         self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 0.47693627620446982 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
         self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -0.47693627620446982 )
-        self.assertTrue( prior.unit2Domain( 0.0 ) == -math.inf )
+        self.assertTrue( prior.unit2Domain( 0.0 ) == mindom )
 
         prior.scale = 10
         print( prior )
+        maxdom = prior.center + prior.MAXVAL * prior.scale
         self.assertTrue( prior.scale == 10 )
         self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -4.7693627620446982 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
-        self.assertTrue( prior.unit2Domain( 1.0 ) == math.inf )
+        self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
 
         cp = prior.copy( )
         print( cp )
+        cp.center = 100
+        maxdom = cp.center + cp.MAXVAL * cp.scale
+        mindom = cp.center - cp.MAXVAL * cp.scale
         self.assertTrue( cp.scale == 10.0 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -4.7693627620446982 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
-        self.assertTrue( prior.unit2Domain( 1.0 ) == math.inf )
+        print( cp.unit2Domain( 0.25 ), 100 - 4.7693627620446982 )
+        print( cp.unit2Domain( 0.5 ), 100 )
+        self.assertAlmostEqual( cp.unit2Domain( 0.25 ), 100 - 4.7693627620446982 )
+        self.assertAlmostEqual( cp.unit2Domain( 0.5 ), 100 )
+        self.assertTrue( cp.unit2Domain( 1.0 ) == maxdom )
+        self.assertTrue( cp.unit2Domain( 0.0 ) == mindom )
+
         print( prior.domain2Unit( 0 ) )
         uval = [0.1*k for k in range(11)]
         for uv in uval :
