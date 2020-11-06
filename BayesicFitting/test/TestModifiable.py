@@ -117,6 +117,48 @@ class TestModifiable( unittest.TestCase ):
 
         evid = ns.sample( plot=self.doplot )
 
+    def test4( self ) :
+        print( "  Test Modifiable Splines compound" )
+
+        NP = 41
+        t = numpy.linspace( 0, 100, NP, dtype=float )
+        dt = GaussModel().result( t, [10.0, 34, 10] )
+
+        ym = numpy.sin( 0.1 * ( t + dt ) )
+        y = ym + 0.1 * numpy.random.randn( NP )
+
+        knots =[0, 25, 50, 75, 100]
+        xm = SplinesDynamicModel( knots=knots, dynamic=False )
+        xm += PowerModel( 1, fixed={0:1.0} )
+        xm.setPrior( 0, LaplacePrior( center=0, scale=4 ) )
+
+        sm = SineModel()
+        sm.setLimits( lowLimits=[-2.0], highLimits=[+2.0] )
+
+        mdl = xm | sm
+
+        ns = NestedSampler( t, mdl, y, seed=31234 )
+        ns.distribution.setLimits( [0.01,100] )
+        ns.verbose = 2
+        ns.engines[2].verbose = 5
+        ns.engines[2].slow = 5
+
+        evid = ns.sample( plot=self.doplot )
+
+        if not self.doplot : return
+
+        cc = ['k,', 'b,', 'r,', 'g,', 'c,', 'm,']
+        sl = ns.samples
+        yfit = numpy.zeros( NP, dtype=float )
+        for s in sl :
+            knts = s.model.knots
+            yft = BasicSplinesModel( knts ).result( t, s.parameters[:7] )
+            yfit += yft * s.weight
+        plt.plot( t, yfit, 'b-' )
+        plt.plot( t, ns.yfit, 'g-' )
+        plt.plot( t, y, 'k.' )
+        plt.show()
+
 
     def suite( cls ):
         return unittest.TestCase.suite( TestModifiable.__class__ )
