@@ -63,7 +63,7 @@ class MonteCarlo( object ):
     """
 
     #  *****CONSTRUCTORS********************************************************
-    def __init__( self, xdata, model, covariance, index=None, seed=12345 ):
+    def __init__( self, xdata, model, covariance, index=None, seed=12345, mcycles=25 ):
         """
         Create a new MonteCarlo, providing inputs and model.
 
@@ -83,6 +83,8 @@ class MonteCarlo( object ):
             indices of parameters to fit
         seed : int
             seed for random number generator
+        mcycles : int
+            number of cycles in the MonteCarlo procedure to estimate error bars.
 
         Raises
         ------
@@ -94,7 +96,7 @@ class MonteCarlo( object ):
         self.nxdata = Tools.length( xdata )
         self.model = model
         self.index = index
-        self.mcycles = 25
+        self.mcycles = mcycles
         self._random = numpy.random
         self._random.seed( seed )
         self.decompose( covariance )
@@ -107,7 +109,7 @@ class MonteCarlo( object ):
     #  *****MONTE CARLO ERROR***************************************************
     def getError( self, xdata=None ):
         """
-        Calculates :math:\sigma:math:-confidence regions on the model given some inputs.
+        Calculates 1 &sigma;-confidence regions on the model given some inputs.
 
         From the full covariance matrix ( = inverse of the Hessian ) random
         samples are drawn, which are added to the parameters. With this new
