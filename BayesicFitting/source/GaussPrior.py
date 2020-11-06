@@ -59,6 +59,8 @@ class GaussPrior( Prior ):
     SPI = 1.0 / math.sqrt( math.pi )
     LSPI = math.log( SPI )
 
+    MAXVAL = 6
+
     #  *********CONSTRUCTOR***************************************************
     def __init__( self, center=0.0, scale=1.0, prior=None ):
         """
@@ -110,7 +112,12 @@ class GaussPrior( Prior ):
             value within [0,1]
 
         """
-        return special.erfinv( 2 * uval - 1 ) * self.scale + self.center
+        dom = special.erfinv( 2 * uval - 1 )
+        if math.isfinite( dom ) :
+            return dom * self.scale + self.center
+        else :
+            fs = - self.MAXVAL if uval < 0.5 else self.MAXVAL
+            return self.center + fs * self.scale
 
 #    def partialDomain2Unit( self, dval ):
     def result( self, x ):

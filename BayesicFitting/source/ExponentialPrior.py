@@ -70,6 +70,8 @@ class ExponentialPrior( Prior ):
     Author: Do Kester.
     """
 
+    MAXVAL = 40
+
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, scale=1.0, prior=None ):
         """
@@ -130,7 +132,7 @@ class ExponentialPrior( Prior ):
 
         """
         uv = 1 - uval
-        if uv == 0 : return math.inf
+        if uv == 0 : return self.MAXVAL * self.scale
         if ( uv > self._shift ) :
             self._uval = self._rng.random() * self.zeroFraction     # arbitrary
             return 0

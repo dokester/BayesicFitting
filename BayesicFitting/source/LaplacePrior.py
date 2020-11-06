@@ -64,6 +64,8 @@ class LaplacePrior( Prior ):
 
     """
 
+    MAXVAL = 40         ## scale units
+
     #  *********CONSTRUCTOR***************************************************
     def __init__( self, center=0.0, scale=1.0, prior=None ):
         """
@@ -118,13 +120,22 @@ class LaplacePrior( Prior ):
             value within [0,1]
 
         """
-        if uval == 0 : return -math.inf
-        elif uval == 1 : return math.inf
         scl = self.scale
+#        if uval == 0 : return self.center - self.MAXVAL * scl
+#        if uval == 1 : return self.center + self.MAXVAL * scl
+
         if uval > 0.5:
             uval = 1 - uval
             scl *= -1
-        return self.center + math.log( 2 * uval ) * scl
+        try :
+            return self.center + math.log( 2 * uval ) * scl
+        except :
+            return self.center - self.MAXVAL * scl
+
+
+#        sf = self.MAXVAL if uval == 0 else math.log( 2 * uval )
+#        return self.center + sf * scl
+#        return self.center + math.log( 2 * uval ) * scl
 
     def result( self, x ):
         """
