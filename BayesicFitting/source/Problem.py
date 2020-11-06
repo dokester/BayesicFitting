@@ -80,10 +80,10 @@ class Problem( object ):
         super( ).__init__( )
 
         if copy is None :
-            self.xdata = xdata
-            self.ydata = ydata
+            self.xdata = None if xdata is None else numpy.asarray( xdata )
+            self.ydata = None if ydata is None else numpy.asarray( ydata )
             self.model = model
-            self.weights = weights
+            self.weights = None if weights is None else numpy.asarray( weights )
             self.partype = float
         else :
             self.xdata = copy.xdata

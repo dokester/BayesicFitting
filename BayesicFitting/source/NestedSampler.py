@@ -521,7 +521,7 @@ class NestedSampler( object ):
                 print( " ", self.problem.model._toString( "  " ) )
             else :
                 print( " ", self.problem )
-            print( "Using a", self.distribution, "with", end="" )
+            print( "Using a", self.distribution, end="" )
             np = -1
             cstr = " with "
             for name,hyp in zip( self.distribution.PARNAMES, self.distribution.hyperpar ) :
@@ -556,8 +556,8 @@ class NestedSampler( object ):
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
 #               scale = self.getScale( self.walker[kw] )
-                print( "%8d %10.3g %8.1f %10.3g %6d "%( self.iteration, self.logZ,
-                    self.info, self.lowLhood, np ), fmt( pl ) )
+                print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
+                    self.info, self.lowLhood, np ), fmt( pl[-1] ), fmt( pl ) )
 
             self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
 
@@ -568,7 +568,7 @@ class NestedSampler( object ):
                 print( "\nIteration   logZ        H     LowL     npar    parameters" )
             pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
             np = len( pl )
-            print( "%8d %10.3g %8.1f %10.3g %6d "%( self.iteration, self.logZ,
+            print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
                     self.info, self.lowLhood, np ) )
             print( fmt( pl, max=None ) )
 
@@ -580,7 +580,7 @@ class NestedSampler( object ):
 
     def getMaxIter( self ) :
         """
-        Retrun the maximum number of iteration.
+        Return the maximum number of iteration.
         """
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.worst )
 
@@ -725,6 +725,14 @@ class NestedSampler( object ):
 
         if name == "ensemble" :
             return len( self.walkers )
+        elif name == "xdata" :
+            return self.problem.xdata
+        elif name == "model" :
+            return self.problem.model
+        elif name == "ydata" :
+            return self.problem.ydata
+        elif name == "weights" :
+            return self.problem.weights
         elif name == "worst" :
             return self.discard
         elif name == "evidence" :
@@ -786,9 +794,12 @@ class NestedSampler( object ):
         if isinstance( name, Problem ) :
             self.problem = name
             if model is not None : self.problem.model = model
-            if xdata is not None : self.problem.xdata = xdata
-            if ydata is not None : self.problem.ydata = ydata
-            if weights is not None : self.problem.weights = weights
+#            if xdata is not None : self.problem.xdata = xdata
+#            if ydata is not None : self.problem.ydata = ydata
+#            if weights is not None : self.problem.weights = weights
+            if xdata is not None : self.problem.xdata = numpy.asarray( xdata )
+            if ydata is not None : self.problem.ydata = numpy.asarray( ydata )
+            if weights is not None : self.problem.weights = numpy.asarray( weights )
             return
 
         if not isinstance( name, str ) :

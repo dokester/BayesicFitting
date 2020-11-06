@@ -124,7 +124,7 @@ class StructureEngine( Engine ):
 
         if self.verbose > 4 :
             print( "SEN0  ", walker.id, walker.parent, len( ptry ), len( ftry ), walker.logL )
-            print( "      ", fmt( cwalker.problem.model.knots, max=None ) )
+            print( "      ", fmt( problem.model.knots, max=None ) )
 
         off = 0
         model = problem.model
@@ -146,7 +146,7 @@ class StructureEngine( Engine ):
 
         if self.verbose > 4 :
             print( "SEN3  ", fmt( ptry, max=None ), Ltry, lowLhood )
-            print( "      ", fmt( cwalker.problem.model.knots, max=None ) )
+            print( "      ", fmt( problem.model.knots, max=None ) )
 
         if Ltry >= lowLhood:
             self.reportSuccess()

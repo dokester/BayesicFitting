@@ -180,7 +180,7 @@ class BaseFitter( object ):
             self.xdata = self.imageAssistant.getIndices( xdata )
         else :
             self.imageAssistant = None
-            self.xdata = numpy.array( xdata )
+            self.xdata = numpy.asarray( xdata )
 
         if isinstance( xdata, Table ) :
             ndim = len( xdata.columns )
@@ -243,6 +243,10 @@ class BaseFitter( object ):
             ydata = self.imageAssistant.getydata( ydata )
             if weights is not None :
                 weights = self.imageAssistant.getydata( weights )
+        else :
+            ydata = numpy.asarray( ydata )
+            if weights is not None :
+                weights = numpy.asarray( weights )
 
         self.weights = weights
 
