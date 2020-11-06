@@ -10,7 +10,8 @@ Citation index:
 DOI: 10.5281/zenodo.2597200
 
 
-## What's new in versions 2.6.0
+## What's new.
+ + 23 Oct 2020 version 2.6.0
    * New class: PhantomSampler; adaptations in Engines, Explorer, WalkerList
    * Restructured NestedSampler to accommodate PhantomSampler
    * Test harnass for PhantomSampler
