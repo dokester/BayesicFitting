@@ -17,6 +17,10 @@ DOI: 10.5281/zenodo.2597200
    * Option: fix parameters in BasicSplinesModel
    * Confusing __str__ method in compound models improved
 
+ + 6 Nov 2020 versions 2.6.1
+   * Avoid infinities in unbound Priors
+   * mcycles in initialization of MonteCarlo
+   * convert xdata, ydata, weights using numpy.asarray
 
 ## Content
 
