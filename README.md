@@ -23,6 +23,10 @@ DOI: 10.5281/zenodo.2597200
    * mcycles in initialization of MonteCarlo
    * convert xdata, ydata, weights using numpy.asarray
 
+ + 11 Dec 2020 versions 2.6.2
+   * Add limits and circular to Priors
+   * Finetune Engines
+
 ## Content
 
 1. [History](#history)

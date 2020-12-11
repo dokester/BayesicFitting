@@ -987,6 +987,12 @@ priors are taken from the constituent simple models, including the
 repetition of the last prior. So priors should be set, before using the
 simple model in a compound one. 
 
+Suitable **Prior**s can have limits, which may be circularly folded.
+
+    lp = LaplacePrior( center=1.0, scale=0.5, circular=3 )
+    pr = UniformPrior( limits=[2,3], circular=True )
+
+
 See below for lists of available [**Prior**s](#list-priors).
 
 ### ErrorDistribution
