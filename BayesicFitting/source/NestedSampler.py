@@ -48,7 +48,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -540,7 +540,7 @@ class NestedSampler( object ):
                 print( "Using threads." )
 
         if self.verbose > 1 :
-            print( "Iteration     logZ        H       LowL     npar    parameters" )
+            print( "Iteration     logZ        H       LowL     npar     scale  parameters" )
 
     def iterReport( self, kw, plot=False ) :
 
@@ -558,6 +558,7 @@ class NestedSampler( object ):
 #               scale = self.getScale( self.walker[kw] )
                 print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
                     self.info, self.lowLhood, np ), fmt( pl[-1] ), fmt( pl ) )
+#                    fmt( self.end ), self.ensemble, self.worst, fmt( self.getMaxIter() ) )
 
             self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
 
@@ -622,8 +623,7 @@ class NestedSampler( object ):
         ----------
         worst : int
             Number of walkers used in the update
-        logWidth : float
-            width of the slice
+
         """
 
         for kw in range( worst ) :
@@ -652,26 +652,6 @@ class NestedSampler( object ):
 #        self.logWidth -= worst / self.ensemble
 
         return
-
-    def XXXstoreSamples( self, worst ):
-        """
-        Store worst walkers into samplelist and remove the stored walkers
-
-        Parameters
-        ----------
-        worst : [int]
-            list of worst Walkers
-        logWidth : float
-            width of the slice
-        """
-        for kw in range( worst ) :
-            logWeight = self.logWidth + self.walkers[kw].logL
-            logWidth -= 1.0 / self.ensemble
-
-            # wlkr = self.walkers[kw]
-            # print( self.iteration, kw, wlkr.id, wlkr.parent, wlkr.start, smpl.id, smpl.start )
-
-        # self.walkers = self.walkers[worst:]           # remove the stored walkers
 
     def copyWalker( self, worst ):
         """

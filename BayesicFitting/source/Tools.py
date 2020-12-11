@@ -433,8 +433,11 @@ def average( xx, weights=None, circular=None ) :
         xw = xx * weights
         sx = numpy.sum( xw )
         s2 = numpy.sum( xw * xx )
-        averx = sx /sw
-        stdvx = math.sqrt( s2 / sw - averx * averx )
+        averx = sx / sw
+
+        rr = xx - averx
+        stdvx = math.sqrt( numpy.average( rr * rr, weights=weights ) )
+#        stdvx = math.sqrt( s2 / sw - averx * averx )
 
     else :
         range = circular[1] - circular[0]

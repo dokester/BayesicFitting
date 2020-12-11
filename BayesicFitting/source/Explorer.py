@@ -8,7 +8,7 @@ from . import Tools
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -87,7 +87,6 @@ class Explorer( object ):
         self.maxtrials = ns.maxtrials
         self.verbose = ns.verbose
         self.threads = threads
-        self.iteration = ns.iteration
         self.usePhantoms = hasattr( ns, "usePhantoms" ) and ns.usePhantoms
 
         self.selectEngines = self.allEngines    ## default: always use all engines
@@ -108,6 +107,7 @@ class Explorer( object ):
             level of the low likelihood
 
         """
+        self.iteration = iteration
         engines = self.selectEngines( iteration )
 
         if not self.threads :
@@ -171,7 +171,7 @@ class Explorer( object ):
         while moves < maxmoves and trials < maxtrials :
 
             for engine in rng.permutation( engines ) :
-                moves += engine.execute( kw, lowLhood, append=self.usePhantoms )
+                moves += engine.execute( kw, lowLhood, append=self.usePhantoms,iteration=self.iteration )
 
                 update = len( self.walkers ) - 1 if self.usePhantoms else kw
                 if self.verbose >= 4 or self.walkers[update].logL < lowLhood :
@@ -179,8 +179,8 @@ class Explorer( object ):
                     print( "%4d %-15.15s %4d %10.3f %10.3f ==> %3d  %10.3f"%
                             ( trials, engine, update, lowLhood, oldlogL, moves,
                                 wlkr.logL ) )
-                    print( "IN       ", fmt( walker.allpars, max=None ), len( walker.allpars ) )
-                    print( "OUT      ", fmt( wlkr.allpars, max=None ), len( wlkr.allpars ) )
+                    print( "IN       ", fmt( walker.allpars, max=None, linelength=200 ), len( walker.allpars ) )
+                    print( "OUT      ", fmt( wlkr.allpars, max=None, linelength=200 ), len( wlkr.allpars ) )
 
                     if len( wlkr.allpars ) < len( wlkr.fitIndex ) :
                         raise ValueError( "Walker parameter %d fitIndex %d" %
@@ -249,7 +249,7 @@ class Explorer( object ):
         wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if wlogL != walker.logL :
             Tools.printclass( walker )
-            print( "Iteration %4d %4d %10.3f  %10.3f" % (self.iteration, walker.id, walker.logL, wlogL ) )
+            print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, walker.id, walker.logL, wlogL ) )
             print( fmt( walker.allpars, max=None ) )
             raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
                                 ( walker.logL, wlogL ) )

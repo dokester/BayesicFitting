@@ -6,6 +6,7 @@ import math
 from . import Tools
 from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
+from .Formatter import fma
 from . import Plotter
 import sys
 import warnings
@@ -50,7 +51,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -238,11 +239,16 @@ class PhantomSampler( NestedSampler ):
         """
         self.walkers[:worst] = []
 
-#        print( "updateW  ", worst, len( self.walkers ), fmt(self.walkers[0].logL), fmt(self.walkers[-1].logL) )
+        e0 = self.engines[0]
+#        print( "updateW  ", worst, len( self.walkers ), fma( e0.unitRange, linelength=200 ) )
 
-        # Explore the copied walker(s)
-        wlist = [self.rng.randint( worst, self.ensemble )]
-        explorer.explore( wlist, self.lowLhood, self.iteration )
+        while len( self.walkers ) <= self.initEnsemble :
+            # Explore the copied walker(s)
+            wlist = [self.rng.randint( worst, self.ensemble )]
+            explorer.explore( wlist, self.lowLhood, self.iteration )
+#            if self.iteration >= 1755 :
+#                print( "explore   ", wlist, self.ensemble, e0.size, min(e0.unitRange), max( e0.unitRange) )
+
 
         while len( self.walkers ) > self.initEnsemble :
             ks = self.initEnsemble - self.step
