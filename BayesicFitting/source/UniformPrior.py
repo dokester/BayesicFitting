@@ -5,7 +5,7 @@ from .Prior import Prior
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -56,7 +56,7 @@ class UniformPrior( Prior ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, limits=None, prior=None ):
+    def __init__( self, limits=None, circular=False, prior=None ):
         """
         Constructor.
 
@@ -65,34 +65,29 @@ class UniformPrior( Prior ):
         limits : None or [float,float]
             None    no limits are set
             2 floats    lowlimit and highlimit
+        circular : bool or float
+            True : circular with period from limits[0] to limits[1]
+            float : period of circularity
         prior : UniformPrior
             to be copied
         """
-        super( UniformPrior, self ).__init__( limits=limits, prior=prior )
+        super( ).__init__( limits=limits, circular=circular, prior=prior )
 
     def copy( self ):
         """ Return a (deep) copy of itself. """
-        return UniformPrior( prior=self, limits=[self.lowLimit,self.highLimit] )
-
-    def __setattr__( self, name, value ) :
-        if name == "_range" :
-            object.__setattr__( self, name, value )
-        else :
-            super( UniformPrior, self ).__setattr__( name, value )
-
-        if name == "lowLimit" or name == "highLimit" :
-            self._range = self.highLimit - self.lowLimit
+        return UniformPrior( prior=self, limits=self.limits, circular=self.circular )
 
     def getIntegral( self ) :
         """
         Return integral of UniformPrior from lowLimit to highLimit.
         """
-        return self._range
+        return self._urng
 
     def domain2Unit( self, dval ):
         """
-        Return a value in [0,1] given a value within the valid domain of
-        a parameter for a Uniform distribution.
+        Return the dval as uval
+
+        In Prior.limitedDomain2Unit the dval is transformed into a uval
 
         Parameters
         ----------
@@ -100,14 +95,13 @@ class UniformPrior( Prior ):
             value within the domain of a parameter
 
         """
-        if math.isinf( self._range ) :
-            raise AttributeError( "Limits are needed for UniformPrior" )
-        return 0 if self.isOutOfLimits( dval ) else ( dval - self.lowLimit ) / self._range
+        return dval
 
     def unit2Domain( self, uval ):
         """
-        Return a value within the valid domain of the parameter given a value
-        between [0,1] for a Uniform distribution.
+        Return the uval as dval
+
+        In Prior.limitedUnit2Domain the uval is transformed into a dval
 
         Parameters
         ----------
@@ -115,9 +109,7 @@ class UniformPrior( Prior ):
             value within [0,1]
 
         """
-        if math.isinf( self._range ) :
-            raise AttributeError( "Limits are needed for UniformPrior" )
-        return uval * self._range + self.lowLimit
+        return uval
 
     def result( self, x ):
         """
@@ -129,10 +121,10 @@ class UniformPrior( Prior ):
             value within the domain of a parameter
 
         """
-        if math.isinf( self._range ) :
+        if math.isinf( self._urng ) :
             raise AttributeError( "Limits are needed for UniformPrior" )
 
-        return 0.0 if self.isOutOfLimits( x ) else 1.0 / self._range
+        return 0.0 if self.isOutOfLimits( x ) else 1.0 / self._urng
 
 
 # logResult has no better definition than the default: just take the math.log of result.
@@ -154,11 +146,15 @@ class UniformPrior( Prior ):
         """ Return true if the integral over the prior is bound.  """
         return self.hasLowLimit( ) and self.hasHighLimit( )
 
-    def __str__( self ):
+    def shortName( self ):
+        """ Return a string representation of the prior.  """
+        return str( "UniformPrior" + ( " unbound." if not self.isBound( ) else "" ) )
+
+
+    def xxx__str__( self ):
         """ Return a string representation of the prior.  """
         return str( "UniformPrior " + ( "unbound." if not self.isBound( )
                 else ( "between %.2f and %.2f"%( self.lowLimit, self.highLimit ) ) ) )
 
-#      * End of UniformPrior
 
 

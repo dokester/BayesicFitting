@@ -4,7 +4,7 @@ from .UniformPrior import UniformPrior
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,39 +26,21 @@ __status__ = "Perpetual Beta"
 
 class CircularUniformPrior( UniformPrior ):
     """
-    Cricular Uniform prior distribution, for location parameters.
+    Circular Uniform prior distribution, for location parameters.
     The lowLimit is wrapped onto the highLimit.
 
-    A circular uniform prior is a proper prior ( i.e. its integral is bound ).
-    Because of its wrapping around needs limits, low and high, such that
-    -Inf < low < high < +Inf.
+    A wrapper around:
+        UniformPrior( circular=... limits=... )
 
-        Pr( x ) = 1 / ( high - low )   if low < x < high else 0
-
-    For computational purposes the unit range is from [1/3..2/3]; the u value
-    always returns in that range. The wings are needed for the wrapping.
-
-    The d value aways returns inside the range [low..high]
-
-    domain2Unit: u = ( d - lo ) / range
-                 u = ( u + 1 ) / 3              ## shrink to [1/3..2/3]
-    The u value can reach any value in [0..1].
-    unit2Domain: u = ( 3 * u ) % 1.0            ## wrap around
-                 d = u  * range + lo
-
-    Attributes from UniformPrior
-    ----------------------------
-    _range : float
-        valid range ( highLimit - lowLimit )
 
     Attributes from Prior
     --------------------=
-    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
+    lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, limits=None, prior=None ):
+    def __init__( self, circular=None, limits=None, prior=None ):
         """
         Constructor.
 
@@ -66,50 +48,20 @@ class CircularUniformPrior( UniformPrior ):
         ----------
         limits : array of 2 floats
             [low,high]  range of the prior. Low is wrapped onto high.
+        circular : float
+            period of circularity
         prior : CircularUniformPrior
             to be copied.
 
         """
-        super( CircularUniformPrior, self ).__init__( limits=limits, prior=prior )
+        if circular is None :
+            circular = True             ## use limits as period
+
+        super( ).__init__( circular=circular, limits=limits, prior=prior )
 
     def copy( self ):
         """ Return a (deep) copy of itself. """
-        return CircularUniformPrior( prior=self, limits=[self.lowLimit,self.highLimit] )
-
-    def isCircular( self ) :
-        """
-        Always True
-        """
-        return True
-
-    def domain2Unit( self, dval ):
-        """
-        Return a value in [0,1] given a value within the valid domain of
-        a parameter for a Uniform distribution.
-
-        Parameters
-        ----------
-        dval : float
-            value within the domain of a parameter
-
-        """
-        uval = super( CircularUniformPrior, self ).domain2Unit( dval )
-        return ( uval + 1 ) / 3.0
-
-    def unit2Domain( self, uval ):
-        """
-        Return a value within the valid domain of the parameter given a value
-        between [0,1] for a Uniform distribution.
-
-        Parameters
-        ----------
-        uval : float
-            value within [0,1]
-
-        """
-        uval = ( uval * 3 ) % 1.0
-        return super( CircularUniformPrior, self ).unit2Domain( uval )
-
+        return CircularUniformPrior( prior=self, limits=self.limits, circular=self.circular )
 
     def __str__( self ):
         """ Return a string representation of the prior.  """

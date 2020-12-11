@@ -6,7 +6,7 @@ from .Prior import Prior
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -62,7 +62,7 @@ class CauchyPrior( Prior ):
     """
 
     #  *********CONSTRUCTOR***************************************************
-    def __init__( self, center=0.0, scale=1, prior=None ):
+    def __init__( self, center=0.0, scale=1, limits=None, circular=False, prior=None ):
         """
         Constructor.
 
@@ -72,16 +72,24 @@ class CauchyPrior( Prior ):
             of the prior
         scale : float
             of the prior
+        limits : None or [float,float]
+            None    no limits are set
+            2 floats    lowlimit and highlimit
+        circular : bool or float
+            bool : y|n circular with period from limits[0] to limits[1]
+            float : period of circularity
         prior : CauchyPrior
             prior to copy (with new scale if applicable)
 
         """
-        super( CauchyPrior, self ).__init__( prior=prior )
         self.center = center
         self.scale = scale
 
+        super( CauchyPrior, self ).__init__( limits=limits, circular=circular, prior=prior )
+
     def copy( self ):
-        return CauchyPrior( prior=self, center=self.center, scale=self.scale )
+        return CauchyPrior( prior=self, center=self.center, scale=self.scale,
+                            limits=self.limits, circular=self.circular )
 
     def domain2Unit( self, dval ):
         """
@@ -146,9 +154,9 @@ class CauchyPrior( Prior ):
         """ Return true if the integral over the prior is bound.  """
         return True
 
-    def __str__( self ):
+    def shortName( self ):
         """ Return a string representation of the prior.  """
-        return str( "Cauchy prior with scale = %.2f"%( self.scale ) )
+        return str( "CauchyPrior" )
 
 
 

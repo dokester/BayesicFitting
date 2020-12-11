@@ -5,7 +5,7 @@ from .Prior import Prior
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -38,7 +38,7 @@ class LaplacePrior( Prior ):
 
     By default: center = 0.0 and scale = 1.
 
-    It can also have a limited domain. (To be done)
+    It can also have a limited domain.
     By default the domain is [-Inf,+Inf].
     In computational practice the domain is limited to about [-36,36] scale units
 
@@ -67,7 +67,7 @@ class LaplacePrior( Prior ):
     MAXVAL = 40         ## scale units
 
     #  *********CONSTRUCTOR***************************************************
-    def __init__( self, center=0.0, scale=1.0, prior=None ):
+    def __init__( self, center=0.0, scale=1.0, limits=None, circular=False, prior=None ):
         """
         Constructor.
 
@@ -77,16 +77,25 @@ class LaplacePrior( Prior ):
             of the prior
         scale : float
             of the prior
+        limits : None or list of 2 float/None
+            None : no limits.
+            2 limits, resp low and high
+        circular : bool or float
+            bool : y|n circular with period from limits[0] to limits[1]
+            float :period of circularity
         prior : LaplacePrior
             prior to copy (with new scale if applicable)
 
         """
-        super( LaplacePrior, self ).__init__( prior=prior )
         self.center = center
         self.scale = scale
 
+        super( LaplacePrior, self ).__init__( limits=limits, circular=circular, prior=prior )
+
+
     def copy( self ):
-        return LaplacePrior( prior=self, center=self.center, scale=self.scale )
+        return LaplacePrior( prior=self, center=self.center, scale=self.scale,
+                             limits=self.limits, circular=self.circular )
 
     def domain2Unit( self, dval ):
         """
@@ -103,8 +112,10 @@ class LaplacePrior( Prior ):
 
         """
         d = dval - self.center
-        return ( 0.5 * math.exp(  d / self.scale ) if ( d < 0 ) else
+        uval = ( 0.5 * math.exp(  d / self.scale ) if ( d < 0 ) else
            1.0 - 0.5 * math.exp( -d / self.scale ) )
+
+        return uval
 
     def unit2Domain( self, uval ):
         """
@@ -121,9 +132,6 @@ class LaplacePrior( Prior ):
 
         """
         scl = self.scale
-#        if uval == 0 : return self.center - self.MAXVAL * scl
-#        if uval == 1 : return self.center + self.MAXVAL * scl
-
         if uval > 0.5:
             uval = 1 - uval
             scl *= -1
@@ -131,11 +139,6 @@ class LaplacePrior( Prior ):
             return self.center + math.log( 2 * uval ) * scl
         except :
             return self.center - self.MAXVAL * scl
-
-
-#        sf = self.MAXVAL if uval == 0 else math.log( 2 * uval )
-#        return self.center + sf * scl
-#        return self.center + math.log( 2 * uval ) * scl
 
     def result( self, x ):
         """
@@ -147,6 +150,7 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
+        if self.isOutOfLimits( x ) : return 0
         return 0.5 * math.exp( -abs( x - self.center ) / self.scale ) / self.scale
 
     def logResult( self, x ):
@@ -159,9 +163,9 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        xc = x - self.center
-        if self.isOutOfLimits( xc ) : return -math.inf
+        if self.isOutOfLimits( x ) : return -math.inf
 
+        xc = x - self.center
         return math.log( 0.5 / self.scale ) - abs( xc ) / self.scale
 
     def partialLog( self, x ):
@@ -174,16 +178,27 @@ class LaplacePrior( Prior ):
             the value
 
         """
-        if x == self.center : return 0
+        if x == self.center : return 0                  ## actually a cusp
+        elif self.isOutOfLimits( x ) : return math.nan
+
         return -1 / self.scale if x > self.center else 1 / self.scale
 
     def isBound( self ):
         """ Return true if the integral over the prior is bound.  """
         return True
 
-    def __str__( self ):
+    def shortName( self ) :
+        return "LaplacePrior"
+
+    def xxx__str__( self ):
         """ Return a string representation of the prior.  """
-        return str( "Laplace prior with scale = %.2f"%( self.scale ) )
+        name = str( "Laplace prior at (%.2f %.2f)" % ( self.center, self.scale ) )
+
+        if self.hasLimits() :
+            name += str( " circular" if self.isCircular() else " with limits" )
+            name += str( " between (%.2f %.2f)" % ( self.lowLimit, self.highLimit ) )
+
+        return name
 
 
 

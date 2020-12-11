@@ -5,7 +5,7 @@ from .Prior import Prior
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -50,9 +50,8 @@ class GaussPrior( Prior ):
 
     Attributes from Prior
     --------------------=
-    lowLimit, highLimit, deltaP, _lowDomain, _highDomain
+    lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 
-    lowLimit and highLimit cannot be used in this implementation.
 
     """
 
@@ -62,7 +61,7 @@ class GaussPrior( Prior ):
     MAXVAL = 6
 
     #  *********CONSTRUCTOR***************************************************
-    def __init__( self, center=0.0, scale=1.0, prior=None ):
+    def __init__( self, center=0.0, scale=1.0, limits=None, circular=False, prior=None ):
         """
         Constructor.
 
@@ -72,17 +71,25 @@ class GaussPrior( Prior ):
             of the location of the prior
         scale : float
             of the exponential
+        limits : None or [float,float]
+            None    no limits are set
+            2 floats    lowlimit and highlimit
+        circular : bool or float
+            bool : y|n circular with period from limits[0] to limits[1]
+            float : period of circularity
         prior : GaussPrior
             prior to copy (with new scale if applicable)
 
         """
-        super( GaussPrior, self ).__init__( prior=prior )
         self.center = center
         self.scale = scale
 
+        super( ).__init__( limits=limits, circular=circular, prior=prior )
+
     def copy( self ):
         """ Copy the prior """
-        return GaussPrior( prior=self, center=self.center, scale=self.scale )
+        return GaussPrior( prior=self, center=self.center, scale=self.scale,
+                           limits=self.limits, circular=self.circular )
 
     def domain2Unit( self, dval ):
         """
@@ -162,9 +169,9 @@ class GaussPrior( Prior ):
         """ Return true if the integral over the prior is bound.  """
         return True
 
-    def __str__( self ):
+    def shortName( self ):
         """ Return a string representation of the prior.  """
-        return str( "Gauss prior with scale = %.2f"%( self.scale ) )
+        return str( "GaussPrior" )
 
 
 

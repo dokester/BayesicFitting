@@ -1,12 +1,13 @@
 import math as math
 import random as random
 
+from .Tools import setAttribute as setatt
 from .Prior import Prior
 
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -84,12 +85,12 @@ class ExponentialPrior( Prior ):
             prior to copy (with new scale if applicable)
 
         """
-        super( ExponentialPrior, self ).__init__( prior=prior )
-        self.lowLimit = 0.0
-        self._lowDomain = 0.0
         self.scale = scale
         self.zeroFraction = 0.0
         self._uval = 0.0
+
+        super( ).__init__( domain=[0,math.inf], prior=prior )
+
         if prior is not None :
             self.zeroFraction = prior.zeroFraction
             self.lowLimit = prior.lowLimit
@@ -111,12 +112,12 @@ class ExponentialPrior( Prior ):
         if name == "zeroFraction" :
             if not ( 0 <= value < 1 ) :
                 raise ValueError( "Fraction of zeroes must be between [0,1]" )
-            object.__setattr__( self, name, float( value ) )
-            object.__setattr__( self, "_shift", 1.0 - value )
+            setatt( self, name, float( value ) )
+            setatt( self, "_shift", 1.0 - value )
             random.seed( 34567 )
-            object.__setattr__( self, "_rng", random )
+            setatt( self, "_rng", random )
         elif name == "_uval" :
-            object.__setattr__( self, name, float( value ) )
+            setatt( self, name, float( value ) )
         else :
             super( ExponentialPrior, self ).__setattr__( name, value )
 

@@ -1,11 +1,12 @@
 import math as math
 
 from .Prior import Prior
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -73,38 +74,16 @@ class JeffreysPrior( Prior ):
         prior : JeffreysPrior
             prior to copy (with new limits if applicable)
         """
-        super( JeffreysPrior, self ).__init__( limits=limits, prior=prior )
-
-        #   private attributes at default values
-        object.__setattr__( self, "_logLo", -math.inf )
-        object.__setattr__( self, "_norm", math.inf )
-        object.__setattr__( self, "_lowDomain", 0 )
-
-        if limits is None and prior is not None :
-            limits = ( prior.lowLimit, prior.highLimit )
-        if limits is not None :
-            self.setLimits( limits )
-        else :
-            self.lowLimit = 0.0
+        super( ).__init__( limits=limits, domain=[0,math.inf], prior=prior )
 
     def copy( self ):
-        return JeffreysPrior( prior=self )
-
-    def __setattr__( self, name, value ) :
-        if name in ["_logLo", "_norm"] :
-            object.__setattr__( self, name, float( value ) )
-        else :
-            super( JeffreysPrior, self ).__setattr__( name, value )
-
-        if name == "lowLimit" or name == "highLimit" :
-            self._logLo = -math.inf if ( self.lowLimit <= 0 ) else math.log( self.lowLimit )
-            self._norm = math.log( self.highLimit ) - self._logLo
+        return JeffreysPrior( prior=self, limits=self.limits )
 
     def getIntegral( self ) :
         """
         Return the integral of JeffreysPrior from lowLimit to highLimit.
         """
-        return self._norm
+        return self._urng
 
     def domain2Unit( self, dval ):
         """
@@ -117,10 +96,7 @@ class JeffreysPrior( Prior ):
             value within the domain of a parameter
 
         """
-        u = ( math.log( dval ) - self._logLo ) / self._norm
-        if math.isnan( u ) :
-            raise AttributeError( "Limits are needed for JeffreysPrior" )
-        return u
+        return math.log( dval )
 
 
     def unit2Domain( self, uval ):
@@ -134,10 +110,7 @@ class JeffreysPrior( Prior ):
             value within [0,1]
 
         """
-        d = math.exp( uval * self._norm + self._logLo )
-        if math.isnan( d ) :
-            raise AttributeError( "Limits are needed for JeffreysPrior" )
-        return d
+        return math.exp( uval )
 
     def result( self, x ):
         """
@@ -149,7 +122,7 @@ class JeffreysPrior( Prior ):
             value within the domain of a parameter
 
         """
-        r = 0 if self.isOutOfLimits( x ) else 1.0 / ( x * self._norm )
+        r = 0 if self.isOutOfLimits( x ) else 1.0 / ( x * self._urng )
         if math.isnan( r ) :
             raise AttributeError( "Limits are needed for JeffreysPrior" )
         return r
@@ -173,7 +146,12 @@ class JeffreysPrior( Prior ):
         """ Return true if the integral over the prior is bound.  """
         return self.hasLowLimit( ) and self.hasHighLimit( )
 
-    def __str__( self ):
+    def shortName( self ):
+        """ Return a string representation of the prior.  """
+        return str( "JeffreysPrior" + ( " unbound." if not self.isBound( ) else "" ) )
+
+
+    def xxx__str__( self ):
         """ Return a string representation of the prior.  """
         return str( "Jeffreys prior " + ( "unbound." if not self.isBound( )
             else ( "between %.2f and %.2f"%( self.lowLimit, self.highLimit ) ) ) )
