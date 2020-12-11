@@ -215,9 +215,10 @@ class TestBaseFitter( unittest.TestCase  ) :
         pm.setLimits( lolim, hilim )
         print( "limits par[0]  ", pm.priors[0].lowLimit, pm.priors[0].highLimit )
         print( "limits par[1]  ", pm.priors[1].lowLimit, pm.priors[1].highLimit )
-        print( "ranges         ", pm.priors[0]._range, pm.priors[1]._range )
-        self.assertTrue( pm.priors[0]._range == 20.0 )
-        self.assertTrue( pm.priors[1]._range == 20.0 )
+        print( "umin           ", pm.priors[0]._umin, pm.priors[1]._umin )
+        print( "ranges         ", pm.priors[0]._urng, pm.priors[1]._urng )
+        self.assertTrue( pm.priors[0]._urng == 20.0 )
+        self.assertTrue( pm.priors[1]._urng == 20.0 )
 
         bf.fixedScale = None
         evi6 = bf.getLogZ( )

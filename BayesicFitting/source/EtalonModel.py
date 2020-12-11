@@ -42,7 +42,7 @@ class EtalonModel( NonLinearModel ):
     where
         p_0 = amplitude
         p_1 = finesse,
-        p_2 = periods per wavenumber
+        p_2 = frequency in 1/wavenumber
         p_3 = phase,
     As always x = input; it is in wavenumbers
 
@@ -97,7 +97,7 @@ class EtalonModel( NonLinearModel ):
 
         """
         param = [1.0, 1.0, 1.0, 0.0]
-        names = ["amplitude", "finesse", "period", "phase"]
+        names = ["amplitude", "finesse", "frequency", "phase"]
         super( EtalonModel, self ).__init__( 4, copy=copy, params=param,
                     names=names, **kwargs )
 

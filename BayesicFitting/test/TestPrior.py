@@ -46,17 +46,18 @@ class TestPrior( unittest.TestCase ) :
     def testUniformPrior( self ):
 
         print( "===== Uniform Prior Tests ==========================\n" )
+#        self.assertWarns( UserWarning, UniformPrior )
         prior = UniformPrior( )
         print( prior )
         self.assertTrue( prior._lowDomain == -math.inf )
         self.assertTrue( prior._highDomain == +math.inf )
         self.assertFalse( prior.isBound() )
-        self.assertRaises( AttributeError, prior.unit2Domain, 0.0 )
-        self.assertRaises( AttributeError, prior.domain2Unit, 0.0 )
-        self.assertRaises( AttributeError, prior.result, 1.0 )
+#        self.assertRaises( AttributeError, prior.unit2Domain, 0.0 )
+#        self.assertRaises( AttributeError, prior.domain2Unit, 0.0 )
+#        self.assertRaises( AttributeError, prior.result, 1.0 )
 
         prior.setLimits( [0,5] )
-        print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._range ) )
+        print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._urng ) )
         print( prior )
 
         values = {0.0:0.0, 0.5:2.5, 1.0:5.0 }
@@ -83,25 +84,23 @@ class TestPrior( unittest.TestCase ) :
         self.assertTrue( prior.partialDomain2Unit( 5.9 ) == 0.0 )
         self.assertTrue( prior.partialDomain2Unit( 10.3 ) == 1.0 / ( 48 - 6) )
         self.assertTrue( prior.partialDomain2Unit( 48.1 ) == 0.0 )
-        self.assertAlmostEqual( prior.partialDomain2Unit(0.9 ), prior.numPartialDomain2Unit( 0.9 ) )
+        self.assertAlmostEqual( prior.partialDomain2Unit( 18.9 ), prior.numPartialDomain2Unit( 18.9 ) )
 
     def testCircularUniformPrior( self ):
 
         print( "===== CircularUniform Prior Tests ==========================\n" )
+#        self.assertWarns( UserWarning, CircularUniformPrior )
         prior = CircularUniformPrior( )
         print( prior )
         self.assertTrue( prior._lowDomain == -math.inf )
         self.assertTrue( prior._highDomain == +math.inf )
         self.assertFalse( prior.isBound() )
-        self.assertRaises( AttributeError, prior.unit2Domain, 0.0 )
-        self.assertRaises( AttributeError, prior.domain2Unit, 0.0 )
-        self.assertRaises( AttributeError, prior.result, 1.0 )
 
         prior.setLimits( [0,5] )
-        print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._range ) )
+        print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._urng ) )
         print( prior )
 
-        values = {0.0:0.0, 0.5:2.5, 1.0:0.0 }
+        values = {0.0:0.0, 0.5:2.5, 1.0:5.0 }
         self.stdTestPrior( prior, values=values, utest=False )
 
         cp = prior.copy( )
@@ -125,39 +124,41 @@ class TestPrior( unittest.TestCase ) :
         self.assertTrue( prior.partialDomain2Unit( 5.9 ) == 0.0 )
         self.assertTrue( prior.partialDomain2Unit( 10.3 ) == 1.0 / ( 48 - 6) )
         self.assertTrue( prior.partialDomain2Unit( 48.1 ) == 0.0 )
-        self.assertAlmostEqual( prior.partialDomain2Unit(0.9 ), prior.numPartialDomain2Unit( 0.9 ) )
+        self.assertAlmostEqual( prior.partialDomain2Unit(8.9 ), prior.numPartialDomain2Unit( 8.9 ) )
 
     def testJeffreysPrior( self ):
         print( "===== Jeffreys Prior Tests ===========================\n" )
+#        self.assertWarns( UserWarning, JeffreysPrior )
         prior = JeffreysPrior( )
         print( prior )
-        self.assertTrue( prior.lowLimit == 0 )
-        self.assertTrue( prior.highLimit == math.inf )
+
         self.assertTrue( prior._lowDomain == 0 )
         self.assertTrue( prior._highDomain == +math.inf )
-        self.assertTrue( prior._logLo == -math.inf )
-        self.assertTrue( prior._norm == +math.inf )
         self.assertFalse( prior.isBound() )
 
         prior = JeffreysPrior( limits=[0.01,100] )
         print( prior )
+        print( prior._umin, prior._urng )
+
         self.assertEqual( prior.lowLimit, 0.01 )
         self.assertEqual( prior.highLimit, 100 )
         self.assertTrue( prior._lowDomain == 0 )
         self.assertTrue( prior._highDomain == +math.inf )
-        self.assertEqual( prior._logLo, math.log( 0.01 ) )
-        self.assertEqual( prior._norm, math.log(100) - math.log(0.01) )
+        self.assertEqual( prior._umin, math.log( 0.01 ) )
+        self.assertEqual( prior._urng, math.log(100) - math.log(0.01) )
         self.assertTrue( prior.isBound() )
 
         values = {0.0:0.01, 0.5:1.0, 1.0:100.0}
         self.stdTestPrior( prior, values=values )
-        self.assertTrue( prior._logLo == math.log( 0.01 ) )
-        self.assertTrue( prior._norm == math.log( 10000.0 ) )
+        self.assertTrue( prior._umin == math.log( 0.01 ) )
+        self.assertTrue( prior._urng == math.log( 10000.0 ) )
 
         prior.setLimits( numpy.asarray( [1.,6.] ) )
         print( prior )
-        self.assertTrue( prior._logLo == math.log( 1.0 ) )
-        self.assertTrue( prior._norm == math.log( 6.0 ) )
+        print( prior._umin, prior._urng )
+
+        self.assertTrue( prior._umin == math.log( 1.0 ) )
+        self.assertTrue( prior._urng == math.log( 6.0 ) )
 
         values = {0.0: 1.0, 0.5: 2.449489742783178, 1.0:6.0}
         self.stdTestPrior( prior, values=values )
@@ -168,16 +169,20 @@ class TestPrior( unittest.TestCase ) :
 
         prior = JeffreysPrior( numpy.asarray( [6.,48.] ) )
         print( prior )
-        self.assertTrue( prior._logLo == math.log( 6.0 ) )
-        self.assertTrue( prior._norm == math.log( 48.0 ) - math.log( 6.0 ) )
+        self.assertTrue( prior._umin == math.log( 6.0 ) )
+        self.assertTrue( prior._urng == math.log( 48.0 ) - math.log( 6.0 ) )
         values = {0.0:6.0, 1.0:48.0}
         self.stdTestPrior( prior, values=values )
 
 
     def stdTestPrior( self, prior, utest=True, values={} ) :
+        print( "----- Standard test ----------------------------------------" )
+
         for ku in range( 11 ) :
             u = 0.1 * ku
             d = prior.unit2Domain( u )
+#            uu = u * prior._urng + prior._umin
+#            print( ku, u, uu, math.exp( uu ), d, prior.isOutOfLimits( math.exp( uu ) ) )
             v = prior.domain2Unit( d )
             f = prior.unit2Domain( v )
             print( "Unit %10.7f %10.7f  Domain %10.7f %10.7f"%( u, v, d, f ) )
@@ -205,6 +210,8 @@ class TestPrior( unittest.TestCase ) :
                 self.assertAlmostEqual( prior.domain2Unit( values[v] ), v )
 
     def domainTest( self, prior ) :
+        print( "----- Domain test ----------------------------------------" )
+
         print( prior.unit2Domain( 1.0 ) )
         print( prior.unit2Domain( 0.99999999999999993 ) )
         print( prior.unit2Domain( 0.9999999999999999 ) )
@@ -410,6 +417,41 @@ class TestPrior( unittest.TestCase ) :
         self.assertAlmostEqual( prior.partialDomain2Unit(9 ), prior.numPartialDomain2Unit( 9 ), 4 )
         self.assertAlmostEqual( prior.partialDomain2Unit(1 ), prior.numPartialDomain2Unit( 1 ), 4 )
 
+    def testLaplacePrior1( self ):
+        print( "===== Laplace Prior with limits ==============================\n" )
+
+        prior = LaplacePrior( limits=[-1.5,None], center=1, scale=2 )
+        print( prior )
+        print( "u2d   ", prior.unit2Domain )
+        print( "bu2d  ", prior.baseUnit2Domain )
+
+
+        self.assertTrue( prior.scale == 2 )
+        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 0.25 ) )
+        print( prior.unit2Domain( 0.50 ) )
+        print( prior.unit2Domain( 0.75 ) )
+        print( prior.unit2Domain( 1.0 ) )
+
+        self.stdTestPrior( prior )
+        self.domainTest( prior )
+
+    def testLaplacePrior2( self ):
+        print( "===== Circular Laplace Prior  ==============================\n" )
+
+        prior = LaplacePrior( circular=math.pi, center=1, scale=2 )
+        print( prior )
+        self.assertTrue( prior.scale == 2 )
+        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 0.25 ) )
+        print( prior.unit2Domain( 0.50 ) )
+        print( prior.unit2Domain( 0.75 ) )
+        print( prior.unit2Domain( 1.0 ) )
+
+        self.stdTestPrior( prior, utest=False )
+        self.domainTest( prior )
+
+
     def testCauchyPrior( self ):
         print( "===== Cauchy Prior Tests ===========================\n" )
 
@@ -458,6 +500,40 @@ class TestPrior( unittest.TestCase ) :
         self.assertAlmostEqual( prior.partialDomain2Unit(-1 ), prior.numPartialDomain2Unit( -1 ), 4 )
         self.assertAlmostEqual( prior.partialDomain2Unit(9 ), prior.numPartialDomain2Unit( 9 ), 4 )
         self.assertAlmostEqual( prior.partialDomain2Unit(1 ), prior.numPartialDomain2Unit( 1 ), 4 )
+
+    def testCauchyPrior1( self ):
+        print( "===== Cauchy Prior with limits ==============================\n" )
+
+        prior = CauchyPrior( limits=[-1.5,None], center=1, scale=2 )
+        print( prior )
+        print( "u2d   ", prior.unit2Domain )
+        print( "bu2d  ", prior.baseUnit2Domain )
+
+
+        self.assertTrue( prior.scale == 2 )
+        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 0.25 ) )
+        print( prior.unit2Domain( 0.50 ) )
+        print( prior.unit2Domain( 0.75 ) )
+        print( prior.unit2Domain( 1.0 ) )
+
+        self.stdTestPrior( prior )
+        self.domainTest( prior )
+
+    def testCauchyPrior2( self ):
+        print( "===== Circular Cauchy Prior  ==============================\n" )
+
+        prior = CauchyPrior( circular=math.pi, center=1, scale=2 )
+        print( prior )
+        self.assertTrue( prior.scale == 2 )
+        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 0.25 ) )
+        print( prior.unit2Domain( 0.50 ) )
+        print( prior.unit2Domain( 0.75 ) )
+        print( prior.unit2Domain( 1.0 ) )
+
+        self.stdTestPrior( prior, utest=False )
+        self.domainTest( prior )
 
     def testGaussPrior( self ):
         print( "===== Gauss Prior Tests ===========================\n" )
@@ -523,6 +599,40 @@ class TestPrior( unittest.TestCase ) :
         self.assertAlmostEqual( prior.partialDomain2Unit(-1 ), prior.numPartialDomain2Unit( -1 ), 4 )
         self.assertAlmostEqual( prior.partialDomain2Unit(9 ), prior.numPartialDomain2Unit( 9 ), 4 )
         self.assertAlmostEqual( prior.partialDomain2Unit(1 ), prior.numPartialDomain2Unit( 1 ), 4 )
+
+    def testGaussPrior1( self ):
+        print( "===== Gauss Prior with limits ==============================\n" )
+
+        prior = GaussPrior( limits=[-1.5,None], center=1, scale=2 )
+        print( prior )
+        print( "u2d   ", prior.unit2Domain )
+        print( "bu2d  ", prior.baseUnit2Domain )
+
+
+        self.assertTrue( prior.scale == 2 )
+        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 0.25 ) )
+        print( prior.unit2Domain( 0.50 ) )
+        print( prior.unit2Domain( 0.75 ) )
+        print( prior.unit2Domain( 1.0 ) )
+
+        self.stdTestPrior( prior )
+        self.domainTest( prior )
+
+    def testGaussPrior2( self ):
+        print( "===== Circular Gauss Prior  ==============================\n" )
+
+        prior = GaussPrior( circular=math.pi, center=1, scale=2 )
+        print( prior )
+        self.assertTrue( prior.scale == 2 )
+        print( prior.unit2Domain( 0.0 ) )
+        print( prior.unit2Domain( 0.25 ) )
+        print( prior.unit2Domain( 0.50 ) )
+        print( prior.unit2Domain( 0.75 ) )
+        print( prior.unit2Domain( 1.0 ) )
+
+        self.stdTestPrior( prior, utest=False )
+        self.domainTest( prior )
 
     @classmethod
     def suite( cls ):

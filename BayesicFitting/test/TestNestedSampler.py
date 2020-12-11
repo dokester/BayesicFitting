@@ -279,11 +279,8 @@ class TestNestedSampler( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
 
         ns = NestedSampler( x, gm, y, w )
-        ns.distribution.setLimits( [0.01, 100] )
+        ns.distribution.setLimits( [0.01, 10] )
 
-        Tools.printclass( ns )
-
-        print( "truth  ", pp )
         self.dofit( ns, pp, plot=plot )
 
 

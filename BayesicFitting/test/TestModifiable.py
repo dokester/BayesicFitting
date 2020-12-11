@@ -140,7 +140,7 @@ class TestModifiable( unittest.TestCase ):
         ns = NestedSampler( t, mdl, y, seed=31234 )
         ns.distribution.setLimits( [0.01,100] )
         ns.verbose = 2
-        ns.engines[2].verbose = 5
+#        ns.engines[2].verbose = 5
         ns.engines[2].slow = 5
 
         evid = ns.sample( plot=self.doplot )

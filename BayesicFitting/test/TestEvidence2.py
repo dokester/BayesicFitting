@@ -246,7 +246,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
 
         dis = GaussErrorDistribution( scale=nf )
-        ns = NestedSampler( x, model, y, distribution=dis, verbose=0 )
+        ns = NestedSampler( x, model, y, distribution=dis, verbose=0, seed=34512 )
 
         logE = ns.sample()
         par2 = ns.parameters

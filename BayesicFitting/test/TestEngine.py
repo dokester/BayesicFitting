@@ -73,8 +73,8 @@ class TestEngine( unittest.TestCase ):
         print( errdis.hyperpar[0].prior )
         print( errdis.hyperpar[0].prior.lowLimit )
         print( errdis.hyperpar[0].prior.highLimit )
-        print( errdis.hyperpar[0].prior._logLo )
-        print( errdis.hyperpar[0].prior._norm )
+        print( errdis.hyperpar[0].prior._umin )
+        print( errdis.hyperpar[0].prior._urng )
 
         fi = [0,1,2,-1]
         problem = ClassicProblem( m, xdata, data )

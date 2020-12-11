@@ -41,7 +41,7 @@ class TestPrior2( unittest.TestCase  ) :
         pr = UniformPrior( limits=[-10,10] )
         d = [pr.unit2Domain( v ) for v in u]
 
-        fac = NP / 2.5
+        fac = NP / 4
         x = np.asarray( [-12,-10,-10,10,10,12], dtype=float )
         a = fac / pr._range
         y = np.asarray( [0,0,a,a,0,0], dtype=float )
@@ -51,13 +51,13 @@ class TestPrior2( unittest.TestCase  ) :
         # example data
         NP = 10000
         u = np.random.rand( NP )
-        pr = JeffreysPrior( limits=[0.1,9] )
+        pr = JeffreysPrior( limits=[1.0,9.0] )
         d = [pr.unit2Domain( v ) for v in u]
 
-        fac = NP / 5.5
+        fac = NP / 7
         x = np.arange( 51 ) / 5
         y = np.zeros( 51, dtype=float )
-        y[1:46] = fac / ( ( math.log( pr.highLimit ) - math.log( pr.lowLimit ) ) * x[1:46] )
+        y[5:46] = fac / ( ( math.log( pr.highLimit ) - math.log( pr.lowLimit ) ) * x[5:46] )
         self.histo( d, pr, fun=(x,y) )
 
     def testPlotExponential( self ) :
@@ -67,7 +67,7 @@ class TestPrior2( unittest.TestCase  ) :
         pr = ExponentialPrior( scale=3 )
         d = [pr.unit2Domain( v ) for v in u]
 
-        fac = 0.5 * NP
+        fac = NP / 3
         x = np.arange( 51 ) * pr.scale / 5
         y = fac * np.exp( - x / pr.scale ) / pr.scale
         self.histo( d, pr, fun=(x,y) )
@@ -79,7 +79,24 @@ class TestPrior2( unittest.TestCase  ) :
         pr = LaplacePrior( scale=4 )
         d = [pr.unit2Domain( v ) for v in u]
 
+        Tools.printclass( pr )
+
         fac = math.sqrt( 2.0 ) * NP
+        fac = NP
+        x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
+        y = fac * np.exp( - np.abs( x ) / pr.scale ) / ( 2 * pr.scale )
+        self.histo( d, pr, fun=(x,y) )
+
+    def testPlotLaplace2( self ) :
+        # example data
+        NP = 10000
+        u = np.random.rand( NP )
+        pr = LaplacePrior( scale=4, limits=[-10,None] )
+        d = [pr.unit2Domain( v ) for v in u]
+
+        Tools.printclass( pr )
+
+        fac = 0.7 * NP
         x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
         y = fac * np.exp( - np.abs( x ) / pr.scale ) / ( 2 * pr.scale )
         self.histo( d, pr, fun=(x,y) )
@@ -91,7 +108,7 @@ class TestPrior2( unittest.TestCase  ) :
         pr = GaussPrior( scale=4 )
         d = [pr.unit2Domain( v ) for v in u]
         x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
-        fac = NP / 2.5
+        fac = NP / 4
         y = [fac * pr.result( v )/4 for v in x]
         self.histo( d, pr, fun=(x,y) )
 
@@ -107,7 +124,7 @@ class TestPrior2( unittest.TestCase  ) :
         q = np.where( d > 50 )
         d[q] = 50
         x = ( np.arange( 101 ) - 50 ) * pr.scale / 5
-        fac = 2 * NP
+        fac = 1.2 * NP
         y = [fac * pr.result( v ) for v in x]
         self.histo( d, pr, fun=(x,y) )
 
@@ -119,9 +136,9 @@ class TestPrior2( unittest.TestCase  ) :
         print( fmt( fun[1] ) )
 
         if self.doplot :
-            num_bins = 50
+            num_bins = 80
             # the histogram of the data
-            n, bins, patches = plt.hist(x, num_bins, facecolor='green', alpha=0.5)
+            n, bins, patches = plt.hist( x, num_bins, facecolor='green', alpha=0.5 )
 
             # add a 'best fit' line
             if fun is not None :
