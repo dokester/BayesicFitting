@@ -9,7 +9,7 @@ from .Engine import DummyPlotter
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -72,7 +72,7 @@ class GibbsEngine( Engine ):
         return str( "GibbsEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False ):
+    def execute( self, kw, lowLhood, append=False, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -84,6 +84,8 @@ class GibbsEngine( Engine ):
             lower limit in logLikelihood
         append : bool
             set walker in place or append
+        iteration : int
+            iteration number
 
         Returns
         -------
@@ -110,7 +112,7 @@ class GibbsEngine( Engine ):
             print( "fitin ", fma( fitIndex ), self.maxtrials )
             print( "unitr ", fma( self.unitRange ) )
 
-        t = 0
+        steps = 0
         for c in perm :
 
             save = param[c]
@@ -140,7 +142,7 @@ class GibbsEngine( Engine ):
 
                     update = len( self.walkers ) if append else kw
                     self.setWalker( update, problem, param, Ltry, fitIndex=fitIndex )
-                    t += 1
+                    steps += 1
                     break
                 elif kk < self.maxtrials :
                     self.plotter.move( param, ptry, col=5, sym=4 )
@@ -155,6 +157,6 @@ class GibbsEngine( Engine ):
 
         self.plotter.stop( param=param, name="GibbsEngine" )
 
-        return t                        # nr of succesfull steps
+        return steps                        # nr of succesfull steps
 
 

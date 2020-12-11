@@ -146,55 +146,6 @@ class Engine( object ):
 
         self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
 
-    def XXXsetWalkerInPlace( self, kw, problem, allpars, logL, fitIndex=None ) :
-        """
-        Update the walker with problem, allpars, LogL and logW.
-
-        Parameters
-        ----------
-        walker : Sample
-            sample to be updated
-
-        kw : int
-            index in walkerlist, of the walker to be replaced
-        problem : Problem
-            the problem in the walker
-        allpars : array_like
-            list of all parameters
-        logL : float
-            log Likelihood
-        fitIndex : array_like
-            (new) fitIndex
-        """
-        walker = Walker( self.walkers[kw].id, problem, allpars, fitIndex )
-        walker.logL = logL
-        self.walkers[kw] = walker
-
-        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
-
-    def XXXsetWalkerAdd2List( self, walker, problem, allpars, logL, fitIndex=None ) :
-        """
-        Update the walker with problem, allpars, LogL and logW.
-
-        Parameters
-        ----------
-        walker : Sample
-            sample to be updated
-        problem : Problem
-            the problem in the walker
-        allpars : array_like
-            list of all parameters
-        logL : float
-            log Likelihood
-        fitIndex : array_like
-            (new) fitIndex
-
-        """
-        wlkr = Walker( self.lastWalkerId, problem, allpars, fitIndex )
-        wlkr.logL = logL
-        self.Walkers += [wlkr]
-        self.lastWalkerId += 1
-
 
     def checkBest( self, problem, allpars, logL, fitIndex=None ) :
         """
@@ -352,10 +303,6 @@ class Engine( object ):
 
         maxv[fi] = self.domain2Unit( problem, maxv[fi], kpar=fi )
         minv[fi] = self.domain2Unit( problem, minv[fi], kpar=fi )
-
-        q = numpy.where( numpy.logical_or( maxv <= minv, nval < len( self.walkers ) ) )
-        maxv[q] = 1.0
-        minv[q] = 0.0
 
         self.unitRange = numpy.abs( maxv - minv )
         self.unitMin = numpy.fmin( minv, maxv )

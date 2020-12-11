@@ -7,7 +7,7 @@ from .Formatter import formatter as fmt
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -75,7 +75,7 @@ class BirthEngine( Engine ):
         return str( "BirthEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False ):
+    def execute( self, kw, lowLhood, append=False, iteration=0 ):
         """
         Execute the engine by adding a component and diffusing the parameters.
 
@@ -87,6 +87,8 @@ class BirthEngine( Engine ):
             lower limit in logLikelihood
         append : bool
             set walker in place or append
+        iteration : int
+            iteration number
 
         Returns
         -------

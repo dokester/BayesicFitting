@@ -9,7 +9,7 @@ from .Engine import DummyPlotter
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -74,7 +74,7 @@ class StepEngine( Engine ):
 
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False ):
+    def execute( self, kw, lowLhood, append=False, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -86,10 +86,12 @@ class StepEngine( Engine ):
             lower limit in logLikelihood
         append : bool
             set walker in place or append
+        iteration : int
+            iteration number
 
         Returns
         -------
-        int : the number of successfull moves
+        int : the number of successfull steps
 
         """
         self.reportCall()
@@ -116,10 +118,9 @@ class StepEngine( Engine ):
 
 
         sz = 1.0
-#        step = ( 2 * self.rng.rand( np ) - 1 ) * urange
         step = ( self.rng.rand( np ) - 0.5 ) * urange
         kk = 0
-#        while True :
+
         while kk < 4 :
             ptry = param.copy()
 
@@ -167,6 +168,6 @@ class StepEngine( Engine ):
 
         self.plotter.stop( param=param, name="StepEngine" )
 
-        return np                        # nr of succesfull steps
+        return kk                        # nr of succesfull steps
 
 

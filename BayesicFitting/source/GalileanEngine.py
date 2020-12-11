@@ -12,7 +12,7 @@ from .Engine import DummyPlotter
 __author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.6.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -57,6 +57,8 @@ class GalileanEngine( Engine ):
 
     """
 
+    SIZE = 0.5
+
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
@@ -77,6 +79,7 @@ class GalileanEngine( Engine ):
         super( ).__init__( walkers, errdis, copy=copy, **kwargs )
 
         self.nstep = 5
+        self.size = self.SIZE
 
         self.plotter = DummyPlotter( )
 
@@ -92,7 +95,7 @@ class GalileanEngine( Engine ):
         return str( "GalileanEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False ):
+    def execute( self, kw, lowLhood, append=False, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -110,6 +113,10 @@ class GalileanEngine( Engine ):
         int : the number of successfull moves
 
         """
+#        if iteration >= 1755 :
+#            self.verbose = 5
+
+
         self.reportCall()
 
         walker = self.walkers[kw].copy()
@@ -121,7 +128,7 @@ class GalileanEngine( Engine ):
         npout = 0
         inside = 0
         Ltry = 0
-        size = 0.5
+        size = self.size
 
         self.plotter.start( param=allpars )
         um = UnitMovements( walker, self, size )
@@ -132,11 +139,12 @@ class GalileanEngine( Engine ):
 
         ptry = allpars.copy()
         if self.verbose > 4 :
-            print( "alpar ", fma( ptry ), fmt( Lhood ), fmt( lowLhood) )
+            print( "LogL  ", fmt( Lhood ), " LowL  ", fmt( lowLhood), nstep, maxtrial, size )
+            print( "alpar ", fma( ptry, linelength=200 ) )
             fip = allpars[fitIndex]
-            print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
-            print( "fitin ", fma( fitIndex ), nstep, maxtrial )
-            print( "unitr ", fma( self.unitRange ), size )
+            print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex ), linelength=200) )
+#            print( "fitin ", fma( fitIndex, linelength=200 ) )
+            print( "unitr ", fma( self.unitRange, linelength=200 ), self.unitRange[-2] )
 
         step = 0
         trial = 0
@@ -178,6 +186,10 @@ class GalileanEngine( Engine ):
 
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
+            if self.verbose > 4 :
+                print( "uval  ", fma( um.upar, linelength=200 ) )
+#                print( "Ltry  ", Ltry, "  Lowl  ", lowLhood, self.walkers[-1].logL )
+
             if Ltry >= lowLhood:
                 self.plotter.move( allpars, ptry, col=0, sym=0 )
 
@@ -203,14 +215,21 @@ class GalileanEngine( Engine ):
                     self.reportFailed( )
 
             if self.verbose > 4 :
-                print( "GEng  ", fma(ptry), fmt(Ltry), inside, step, trial, fmt( size ) )
+                print( "GEng  ", fma(ptry, linelength=200) )
+                print( "Ltry  ", fmt(Ltry), inside, step, trial, fmt( size ) )
+
 
             if not ( step < nstep and trial < maxtrial ):
                 break
 
-        if npout == 0 and self.verbose > 4 :
-            warnings.warn( "GalileanEngine: no steps found" )
 
+
+        if npout == 0 :
+            self.size = max( 0.9 * self.size, 1e-6 )
+            if self.verbose > 4 :
+                warnings.warn( "GalileanEngine: no steps found" )
+        else :
+            self.size = min( self.SIZE, self.size * 1.1 )
 
         self.plotter.stop( param=allpars, name="GalileanEngine" )
         return npout
@@ -255,7 +274,7 @@ class UnitMovements( object ):
         """
         uv = self.uvel
         # add small random contribution to velocity
-        uv += self.uniform() * self.upran * 0.1
+        uv *= 1 + ( self.uniform() * 0.1 )
         pv = self.upar + uv * f
 
         # check if outside [0,1]
