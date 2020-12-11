@@ -41,6 +41,13 @@ class GaussPrior( Prior ):
     domain2unit: u = 0.5 * ( erf( ( d - center ) / scale ) + 1 )
     unit2domain: d = erfinv( 2 * u - 1 ) * scale + center
 
+    Examples
+    --------
+    >>> pr = GaussPrior()                         # center=0, scale=1
+    >>> pr = GaussPrior( center=1.0, scale=0.5 )
+    >>> pr = GaussPrior( limits=[0,None] )        # limited to values >= 0
+    >>> pr = GaussPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
+
     Attributes
     ----------
     center : float

@@ -47,6 +47,12 @@ class JeffreysPrior( Prior ):
     domain2unit: u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );
     unit2domain: d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
 
+    Examples
+    --------
+    >>> pr = JeffreysPrior()                       # unbound prior
+    >>> pr = JeffreysPrior( limits=[0.1,1.0] )     # limited to the range [0.1,1.0]
+
+
     Hidden Attributes
     -----------------
     _logLo : float

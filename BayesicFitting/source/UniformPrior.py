@@ -43,6 +43,13 @@ class UniformPrior( Prior ):
     domain2Unit: u = ( d - lo ) / range
     unit2Domain: d = u * range + lo
 
+    Examples
+    --------
+    >>> pr = UniformPrior()                                 # unbound prior
+    >>> pr = UniformPrior( limits=[0,10] )                  # limited to the range [0,10]
+    >>> pr = UniformPrior( circular=math.pi )               # circular between 0 and pi
+    >>> pr = UniformPrior( limits=[2,4], circular=True )    # circular between 2 and 4
+
     Attributes
     ----------
     _range : float

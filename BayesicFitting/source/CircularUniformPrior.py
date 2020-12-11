@@ -32,6 +32,10 @@ class CircularUniformPrior( UniformPrior ):
     A wrapper around:
         UniformPrior( circular=... limits=... )
 
+    Examples
+    --------
+    >>> pr = CircularUniformPrior( circular=math.pi )       # circular between [0,pi]
+    >>> pr = CircularUniformPrior( limits=[3,10] )          # circular between [3,10]
 
     Attributes from Prior
     --------------------=

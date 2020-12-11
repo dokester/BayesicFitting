@@ -49,6 +49,13 @@ class LaplacePrior( Prior ):
     unit2domain: d = c + log( 2 * u ) * scale                   if u < 0.5
                      c - log( 2 * ( 1 - u ) ) * scale           otherwise
 
+    Examples
+    --------
+    >>> pr = LaplacePrior()                         # center=0, scale=1
+    >>> pr = LaplacePrior( center=1.0, scale=0.5 )
+    >>> pr = LaplacePrior( limits=[0,None] )        # limites to values >= 0
+    >>> pr = LaplacePrior( center=1, circular=3 )   # circular between 0.5 and 2.5
+
     Attributes
     ----------
     center : float

@@ -48,6 +48,11 @@ class ExponentialPrior( Prior ):
     Optionally one can set a zero fraction as the fraction of u where the unit2Domain
     method returns a 0.
 
+    Examples
+    --------
+    >>> pr = ExponentialPrior()                     # scale=1.0
+    >>> pr = ExponentialPrior( scale=5.0 )          # scale=5
+
     Attributes
     ----------
     scale : float

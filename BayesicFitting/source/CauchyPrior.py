@@ -46,6 +46,13 @@ class CauchyPrior( Prior ):
     domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
     unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
 
+    Examples
+    --------
+    >>> pr = CauchyPrior()                         # center=0, scale=1
+    >>> pr = CauchyPrior( center=1.0, scale=0.5 )
+    >>> pr = CauchyPrior( limits=[0,None] )        # lowlimit=0, highlimit=inf
+    >>> pr = CauchyPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
+
     Attributes
     ----------
     center : float
