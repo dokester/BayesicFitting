@@ -87,6 +87,59 @@ class TestEvidence2( unittest.TestCase  ) :
 
             plt.show()
 
+    def test1a( self ) :
+        print( "====test1a============================" )
+        nn = 100
+        x = numpy.zeros( nn, dtype=float )
+        ym = 0.2 + 0.5 * x
+        nf = 1.0
+        nf = 0.1
+        numpy.random.seed( 2345 )
+        noise = numpy.random.randn( nn )
+
+        y = ym + nf * noise
+        limits = [-20,20]
+
+        pm = PolynomialModel( 0 )
+        bf = Fitter( x, pm )
+
+        pars = bf.fit( y )
+        logz0 = bf.getLogZ( limits=limits )
+        logl0 = bf.logLikelihood
+        print( "pars  ", fmt( pars ) )
+        print( "stdv  ", fmt( bf.stdevs ) )
+        print( "logZ  ", fmt( logz0 ), "   logl  ", fmt( logl0 ) )
+
+        errdis = GaussErrorDistribution( )
+        problem = ClassicProblem( pm, xdata=x, ydata=y )
+        logz1, maxll = plotErrdis( errdis, problem, limits=limits,
+                                    max=0, plot=self.doplot )
+
+        print( "logZ  ", fmt( logz1 ) )
+
+        model = PolynomialModel( 0 )
+        model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
+        ns = NestedSampler( x, model, y, verbose=0 )
+
+        logE = ns.sample()
+
+        par2 = ns.parameters
+        stdv = ns.stdevs
+        logz2 = ns.logZ
+        dlz2 = ns.logZprecision
+        print( "pars  ", fmt( par2 ) )
+        print( "stdv  ", fmt( stdv ) )
+        print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
+
+        self.assertTrue( abs( logz2 - logz0 ) < 2*dlz2 )
+
+        samples = ns.samples
+        parevo =samples.getParameterEvolution()
+        llevo = samples.getLogLikelihoodEvolution()
+        lwevo = samples.getLogWeightEvolution()
+
+        assertAAE( numpy.sum( numpy.exp( lwevo ) ), 1.0 )
+
     def test2( self ) :
         print( "====test2============================" )
         nn = 100
@@ -470,7 +523,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-        ns = NestedSampler( x, model, y, distribution='laplace', seed=8907,
+        ns = NestedSampler( x, model, y, distribution='laplace', seed=8945,
                     verbose=0, rate=0.5 )
 
         logE = ns.sample()

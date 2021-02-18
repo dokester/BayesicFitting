@@ -80,7 +80,7 @@ class TestEngine2( unittest.TestCase ):
 
     def testGalileanEngine( self ):
         print( "\n   Galilean Engine Test\n" )
-        self.stdenginetest( GalileanEngine, iter=101, nsamp=10, plot=self.doplot )
+        self.stdenginetest( GalileanEngine, iter=201, nsamp=10, plot=self.doplot )
 
     def testChordEngine( self ):
         print( "\n   Chord Engine Test\n" )
@@ -158,6 +158,10 @@ class TestEngine2( unittest.TestCase ):
             pevo = wl.getParameterEvolution()
             plt.plot( pevo[:,0], pevo[:,1], 'r.' )
             plt.show()
+
+        print( lowL, mmx )
+        print( p1[0], mk0, abs( p1[0] - mk0 ) )
+        print( p1[1], mk1, abs( p1[1] - mk1 ) )
 
         self.assertTrue( lowL > mmx )
         self.assertTrue( abs( p1[0] - mk0 ) < 1 )

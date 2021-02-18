@@ -247,7 +247,7 @@ class TestPhantomSampler( unittest.TestCase ):
 
         gm.setLimits( lolim, hilim )
 
-        ns = PhantomSampler( x, gm, y, w, seed=8907 )
+        ns = PhantomSampler( x, gm, y, w, seed=89071 )
         ns.distribution.setLimits( [0.01, 100] )
 
         Tools.printclass( ns )

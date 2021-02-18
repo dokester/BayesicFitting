@@ -74,7 +74,7 @@ class TestEngine3( unittest.TestCase ):
 
     def testGibbsEngine( self, plot=False ):
         print( "\n   Gibbs Engine Test\n" )
-        self.stdenginetest( GibbsEngine, nsamp=10, seed=789, plot=plot )
+        self.stdenginetest( GibbsEngine, nsamp=100, seed=789, plot=plot )
         self.stdenginetest( GibbsEngine, nsamp=10, seed=456, plot=plot )
         self.stdenginetest( GibbsEngine, nsamp=10, seed=123, plot=plot )
 
@@ -93,19 +93,19 @@ class TestEngine3( unittest.TestCase ):
 
     def testStepEngine( self, plot=False ):
         print( "\n   Step Engine Test\n" )
-        self.stdenginetest( StepEngine, nsamp=10, seed=321, plot=plot )
-        self.stdenginetest( StepEngine, nsamp=10, seed=654, plot=plot )
-        self.stdenginetest( StepEngine, nsamp=10, seed=987, plot=plot )
-        self.stdenginetest( StepEngine, nsamp=10, seed=100, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=100, seed=321, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=100, seed=654, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=100, seed=987, plot=plot )
+        self.stdenginetest( StepEngine, nsamp=100, seed=100, plot=plot )
 
     def plotGalileanEngine( self ):
         self.testGalileanEngine( plot=True )
 
     def testGalileanEngine( self, plot=False ):
         print( "\n   Galilean Engine Test\n" )
-        self.stdenginetest( GalileanEngine, nsamp=10, seed=421, plot=plot )
-        self.stdenginetest( GalileanEngine, nsamp=10, seed=132, plot=plot )
-        self.stdenginetest( GalileanEngine, nsamp=10, seed=142, plot=plot )
+        self.stdenginetest( GalileanEngine, nsamp=100, seed=121, plot=plot )
+        self.stdenginetest( GalileanEngine, nsamp=100, seed=132, plot=plot )
+        self.stdenginetest( GalileanEngine, nsamp=100, seed=142, plot=plot )
 
     def plotGalileanEngine2( self ):
         self.testGalileanEngine2( plot=True )
@@ -129,7 +129,9 @@ class TestEngine3( unittest.TestCase ):
 
     def testChordEngine( self, plot=False ):
         print( "\n   Chord Engine Test\n" )
-        self.stdenginetest( ChordEngine, nsamp=10, seed=4213, plot=plot )
+        self.stdenginetest( ChordEngine, nsamp=100, seed=4213, plot=plot )
+        self.stdenginetest( ChordEngine, nsamp=100, seed=4214, plot=plot )
+        self.stdenginetest( ChordEngine, nsamp=100, seed=4215, plot=plot )
 
     def plotChordEngine2( self ):
         self.testChordEngine2( plot=True )
@@ -310,13 +312,14 @@ class TestEngine3( unittest.TestCase ):
 
         engine = myengine( wl, errdis, seed=seed )
         engine.plotter = Plotter()
-        engine.nstep = 10
+        engine.nstep = 4
+        engine.debug = True
 #        engine.verbose = 5
 
         pevo = wl.getParameterEvolution()
         for k in range( 5 ) :
             engine.plotter.iter = 1
-            plt.figure( str( myengine ) )
+            plt.figure( str( myengine ), figsize=(4,4) )
             plt.contour( ax, ay, map, v )
             plt.plot( [mk0], [mk1], 'k*' )
 
@@ -421,7 +424,7 @@ class TestEngine3( unittest.TestCase ):
 
 class Plotter( object ) :
 
-    def __init__( self, iter=0, kp=(0,1), figsize=[6,6] ) :
+    def __init__( self, iter=0, kp=(0,1), figsize=(5,5) ) :
         self.iter = iter
         self.figsize = figsize
         self.k0 = kp[0]
@@ -431,7 +434,7 @@ class Plotter( object ) :
 
     def start( self, param=None ):
         """ start the plot. """
-        plt.figure( 1, figsize=self.figsize )
+        plt.figure( 1, figsize=(5,5) )
         if param is not None :
             self.point( param, col=1, sym=2 )
 
@@ -455,11 +458,11 @@ class Plotter( object ) :
         k1 = self.k1
         cl = self.col[col] + '-'
         plt.plot( [param[k0], ptry[k0]], [param[k1], ptry[k1]], cl )
-        if self.iter % 2 == 0 :
-            plt.text( ptry[k0], ptry[k1], "%d" % self.iter )
+
         if sym is not None :
+            plt.text( ptry[k0], ptry[k1], "%d" % self.iter )
             self.point( ptry, col=col, sym=sym )
-        self.iter += 1
+            self.iter += 1
 
     def stop( self, param=None, name=None ):
         """ Stop (show) the plot. """
@@ -468,8 +471,8 @@ class Plotter( object ) :
         if name is not None :
             plt.title( name )
 
-        plt.xlabel( "Param %d" % self.k0 )
-        plt.ylabel( "Param %d" % self.k1 )
+#        plt.xlabel( "Param %d" % self.k0 )
+#        plt.ylabel( "Param %d" % self.k1 )
         plt.show()
 
 

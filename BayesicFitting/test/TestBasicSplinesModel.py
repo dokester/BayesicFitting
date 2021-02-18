@@ -231,6 +231,41 @@ class Test( unittest.TestCase ):
 
             plt.show()
 
+    def test6c( self ) :
+        kn = numpy.asarray( [-10,10], dtype=float )
+        for k in range( 5 ) :
+            self.bstest5( kn, order=k )
+
+    def test6d( self ) :
+        kn = numpy.asarray( [-10, 0, 10], dtype=float )
+        self.bstest5( kn )
+
+    def bstest5( self, kn, order=3 ) :
+        print( "==== test 6 ====================" )
+
+        x = numpy.linspace( min(kn), max(kn), 101, dtype=float )
+
+        n = 0
+        cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
+
+        sm = BasicSplinesModel( knots=kn, order=order )
+        par = numpy.ones( sm.npars, dtype=float )
+
+        ysm = sm.result( x, par )
+        pts = sm.partial( x, par )
+
+        print( fmt( numpy.sum( pts, 0 ), max=None ) )
+
+        if self.doplot :
+
+            for k in kn :
+                plt.plot( [k,k], [0,1], 'k:' )
+
+            plt.plot( x, ysm, 'k-' )
+            for i in range( sm.npars ) :
+                plt.plot( x, pts[:,i], cc[3] )
+
+            plt.show()
 
     def test6a( self ) :
         kn = numpy.linspace( 0, 10, 11, dtype=float )
@@ -260,7 +295,7 @@ class Test( unittest.TestCase ):
     def bstest6( self, kn, order=3 ) :
         print( "==== test 6 ====================" )
 
-        x = numpy.linspace( 0, 10, 101, dtype=float )
+        x = numpy.linspace( min(kn), max(kn), 101, dtype=float )
 
         n = 0
         cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
@@ -417,6 +452,15 @@ class Test( unittest.TestCase ):
         assertAE( fm.parlist, numpy.arange( 6, dtype=int ) + 2 )
         print( fm.fixed )
         assertAE( list( fm.fixed.keys() ), [0, 1, 8, 9] )
+
+
+    def test10( self ) :
+        print( "   Test BasicSplinesModel      " )
+
+        mdl = BasicSplinesModel( knots=[-2.0, 2.1] )
+
+        print( "   Test DynamicModel      " )
+        mdl = BasicSplinesModel( knots=[-2.0, 0.0, 2.0] )
 
 
     def plot1( self ):
