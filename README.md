@@ -11,21 +11,12 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
- + 23 Oct 2020 version 2.6.0
-   * New class: PhantomSampler; adaptations in Engines, Explorer, WalkerList
-   * Restructured NestedSampler to accommodate PhantomSampler
-   * Test harnass for PhantomSampler
-   * Option: fix parameters in BasicSplinesModel
-   * Confusing __str__ method in compound models improved
+ + 18 Feb 2021 version 2.7.0
+   * New class: EvidenceProblem & ModelDistribution; adaptations in NestedSampler and tests.
+   * Change in constrain method definition
+   * decay in ExpModel
+   * some seldom errors, clean-up & new test harnasses. 
 
- + 6 Nov 2020 versions 2.6.1
-   * Avoid infinities in unbound Priors
-   * mcycles in initialization of MonteCarlo
-   * convert xdata, ydata, weights using numpy.asarray
-
- + 11 Dec 2020 versions 2.6.2
-   * Add limits and circular to Priors
-   * Finetune Engines
 
 ## Content
 
@@ -317,6 +308,22 @@ More work needs to be done in:
    * Attribute and printing issues.
 
  + 23 Oct 2020 version 2.6.0
+   * New class: PhantomSampler; adaptations in Engines, Explorer, WalkerList
+   * Restructured NestedSampler to accommodate PhantomSampler
+   * Test harnass for PhantomSampler
+   * Option: fix parameters in BasicSplinesModel
+   * Confusing __str__ method in compound models improved
+
+ + 6 Nov 2020 versions 2.6.1
+   * Avoid infinities in unbound Priors
+   * mcycles in initialization of MonteCarlo
+   * convert xdata, ydata, weights using numpy.asarray
+
+ + 11 Dec 2020 versions 2.6.2
+   * Add limits and circular to Priors
+   * Finetune Engines
+
+ + 18 Feb 2021 version 2.7.0
    * See above in Whats new
 
 <br><br><br><br>
