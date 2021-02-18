@@ -12,9 +12,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Tophat import Tophat
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020        Do Kester
+#  *    2020 - 2021 Do Kester
 
 class BasicSplinesModel( SplinesModel ):
     """
@@ -419,7 +419,12 @@ class BasicSplinesModel( SplinesModel ):
             n += 1
             k += 1
 
+        """
         ## more normalization
+        if kpar > 0 :
+            mat[-1,-1] = 1.0             ## at right normalize to 1.0
+
+        """
         if kpar > 0 :
             if len( knotix ) == 2 :
                 cc = ( ( np - kpar ) * knots[0] + kpar * knots[1] ) / np
@@ -431,8 +436,14 @@ class BasicSplinesModel( SplinesModel ):
         beta = numpy.zeros( np, dtype=float )
         beta[-1] = 1.0
 
-        ## solve linear set of equations
-        bspar = numpy.linalg.solve( mat, beta )
+#        print( fmt( mat, max=None ) )
+
+        try :
+            ## solve linear set of equations
+            bspar = numpy.linalg.solve( mat, beta )
+        except numpy.linalg.LinAlgError :
+            mat[-1,-1] = 1.0
+            bspar = numpy.linalg.solve( mat, beta )
 
         return bspar
 

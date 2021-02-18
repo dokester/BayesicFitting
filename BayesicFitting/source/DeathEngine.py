@@ -6,9 +6,9 @@ from .Dynamic import Dynamic
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL"
-__version__ = "2.6.2"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2021 Do Kester
 
 
 class DeathEngine( Engine ):
@@ -102,7 +102,7 @@ class DeathEngine( Engine ):
         walker = self.walkers[kw].copy()          ## work on local copy
 
         nhyp = self.errdis.nphypar
-        walker.problem.model.parameters = walker.allpars[:-nhyp]
+        walker.problem.model.parameters = walker.allpars[:-nhyp] if nhyp > 0 else walker.allpars
 
 
         problem = walker.problem
@@ -120,7 +120,7 @@ class DeathEngine( Engine ):
         np = model.npbase
 
         if self.verbose > 4 :
-            print( "DEN1  ", walker.id, nc, np, len( ptry ), len( ftry ) )
+            print( "DEN1  ", walker.id, nc, np, fmt( ptry, max=None ), len( ftry ) )
 
         # shuffle the parameters (if needed) before throwing the last one out.
         ptry = model.shuffle( ptry, off, np, self.rng )
