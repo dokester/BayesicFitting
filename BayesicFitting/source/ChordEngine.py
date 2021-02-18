@@ -7,11 +7,12 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 from .OrthonormalBasis import OrthonormalBasis
 from .Formatter import formatter as fmt
+from .Formatter import fma
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -239,7 +240,7 @@ class ChordEngine( Engine ):
                     vel = self.rng.rand( np ) - 0.5
 
                     ## TBC; for now reset always.
-#                    reset = False
+                    reset = False
 
                     ## update the walker
                     update = len( self.walkers ) if append else kw
@@ -277,21 +278,28 @@ class ChordEngine( Engine ):
         Check if endpoints are indeed outside the lowLhood domain.
         """
 
+        param = self.unit2Domain( problem, usav, kpar=fitIndex )
+
         ## Step out
         if t == 0 :
             t = 0.01 * tmax
         while True :
-            if abs( t ) >= abs( tmax ) :
-                return tmax
-            self.reportFailed()
+#            self.reportFailed()
 
             utry = usav + vel * t
             ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
             Ltry = self.errdis.logLikelihood( problem, ptry )
             if Ltry <= lowLhood :
+                self.plotter.move( param, ptry, col=4 )
                 return t
             else :
                 t *= 2
+                if abs( t ) >= abs( tmax ) :
+                    utry = usav + vel * tmax
+                    ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
+                    self.plotter.move( param, ptry, col=4 )
+                    return tmax
+
         return t
 
 
