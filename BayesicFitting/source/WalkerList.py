@@ -109,23 +109,6 @@ class WalkerList( list ):
             self._count += 1
             self.append( walker )
 
-    def XXXadd( self, walkerlist, index ):
-        """
-        Add a ( copy if a ) Walker from an ( other ) list to this one.
-
-        Parameters
-        ----------
-        walkerlist : WalkerList
-            the list to take to copy from
-        index : int
-            the item from the list
-
-        """
-        walker = walkerlist[index].copy()
-        walker.id = self._count
-        self._count += 1
-        self.append( walker )
-
     def copy( self, src, des ):
         """
         Copy one item of the list onto another.

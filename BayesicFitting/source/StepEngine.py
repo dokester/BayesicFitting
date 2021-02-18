@@ -36,10 +36,10 @@ __status__ = "Perpetual Beta"
 
 class StepEngine( Engine ):
     """
-    Move a a walker in a random direction.
+    Move a walker in a random direction.
 
-    The StepEngine tries to move a selection of the parameters
-    in a random order.
+    The StepEngine tries to move the parameters at most 4 times in
+    a random direction.
 
     Author       Do Kester.
 

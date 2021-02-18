@@ -6,9 +6,9 @@ from .NonLinearModel import NonLinearModel
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 class VoigtModel( NonLinearModel ):
     """
@@ -199,7 +199,6 @@ class VoigtModel( NonLinearModel ):
         """
         Return the derivative df/dx at each xdata (=x).
 
-        <code>
             z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
             z0 = 1j * p3 / ( p2 * sqrt2 )
 
@@ -210,7 +209,6 @@ class VoigtModel( NonLinearModel ):
             dwdz = 2j / sqrt(pi) - 2 * z * wofzz
 
             dzdx = 1 / ( p2 * sqrt2 )
-        </code>
 
         Parameters
         ----------

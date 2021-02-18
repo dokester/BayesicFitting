@@ -257,8 +257,3 @@ class PhantomSampler( NestedSampler ):
             del( self.walkers[k] )
 
 
-    def XXXiterReport( self, kw, plot=False ) :
-
-        print( id( self.walkers ), len( self.walkers ), len( self.samples ), self.walkers[0].logL, self.walkers[-1].logL )
-
-        super().iterReport( kw, plot=plot )

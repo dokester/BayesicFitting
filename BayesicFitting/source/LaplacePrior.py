@@ -197,15 +197,4 @@ class LaplacePrior( Prior ):
     def shortName( self ) :
         return "LaplacePrior"
 
-    def xxx__str__( self ):
-        """ Return a string representation of the prior.  """
-        name = str( "Laplace prior at (%.2f %.2f)" % ( self.center, self.scale ) )
-
-        if self.hasLimits() :
-            name += str( " circular" if self.isCircular() else " with limits" )
-            name += str( " between (%.2f %.2f)" % ( self.lowLimit, self.highLimit ) )
-
-        return name
-
-
 

@@ -10,9 +10,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 class GalileanEngine( Engine ):
     """
@@ -113,9 +113,6 @@ class GalileanEngine( Engine ):
         int : the number of successfull moves
 
         """
-#        if iteration >= 1755 :
-#            self.verbose = 5
-
 
         self.reportCall()
 
@@ -143,7 +140,6 @@ class GalileanEngine( Engine ):
             print( "alpar ", fma( ptry, linelength=200 ) )
             fip = allpars[fitIndex]
             print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex ), linelength=200) )
-#            print( "fitin ", fma( fitIndex, linelength=200 ) )
             print( "unitr ", fma( self.unitRange, linelength=200 ), self.unitRange[-2] )
 
         step = 0

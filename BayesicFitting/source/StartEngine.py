@@ -7,9 +7,9 @@ from .Dynamic import Dynamic
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 class StartEngine( Engine ):
     """
@@ -91,6 +91,7 @@ class StartEngine( Engine ):
         maxtrials = self.maxtrials
         if hasattr( self.errdis, "constrain" ) and callable( self.errdis.constrain ) :
             maxtrials *= 100
+
         ktry = 0
         while True :
 
@@ -127,12 +128,12 @@ class StartEngine( Engine ):
             else :
                 ktry += 1
 
+
         self.setWalker( walker.id, problem, allp, logL, fitIndex=fitIndex )
 
 
         wlkr = self.walkers[walker.id]
         wlkr.check( nhyp=self.errdis.nphypar )
-#        print( fmt( walker.id ), fmt( wlkr.allpars ), fmt( wlkr.logL ), fmt( allp ), fmt( logL ) )
 
         return len( fitIndex )
 
