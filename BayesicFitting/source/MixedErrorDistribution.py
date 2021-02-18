@@ -10,9 +10,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020  Do Kester
+#  *    2018 - 2021 Do Kester
 
 
 class MixedErrorDistribution( ErrorDistribution ):

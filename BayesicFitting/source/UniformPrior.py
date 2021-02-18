@@ -158,10 +158,5 @@ class UniformPrior( Prior ):
         return str( "UniformPrior" + ( " unbound." if not self.isBound( ) else "" ) )
 
 
-    def xxx__str__( self ):
-        """ Return a string representation of the prior.  """
-        return str( "UniformPrior " + ( "unbound." if not self.isBound( )
-                else ( "between %.2f and %.2f"%( self.lowLimit, self.highLimit ) ) ) )
-
 
 

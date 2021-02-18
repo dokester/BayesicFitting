@@ -9,9 +9,9 @@ from .BaseModel import BaseModel
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *   2017 - 2020  Do Kester
+#  *   2017 - 2021 Do Kester
 
 class FixedModel( BaseModel ):
     """
