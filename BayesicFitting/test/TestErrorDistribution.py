@@ -260,11 +260,11 @@ class TestErrorDistribution( unittest.TestCase ):
                 param[1] += 1
             print( "" )
 
-    def constrainBox( self, logL, problem, allpars ):
+    def constrainBox( self, logL, problem, allpars, logLlow ):
         box = [-2,2]
         for p in allpars[:-1] :
             if ( p < box[0] ) or ( p > box[1] ) :
-                return -math.inf
+                return logLlow - 1
 
         return logL
 
@@ -312,6 +312,7 @@ class TestErrorDistribution( unittest.TestCase ):
         lLdata = ged.logLdata( problem, param )
         logL0 = numpy.sum( lLdata )
 
+        ged.lowLhood = -math.inf        ## is normally set by NS
         logL = ged.logLikelihood( problem, param )
         altL = ged.logLikelihood_alt( problem, param )
         print( "logL  = %8.3f  %8.3f  %8.3f" % ( logL, logL0, altL ) )
@@ -677,6 +678,24 @@ class TestErrorDistribution( unittest.TestCase ):
                 print( " %8.3f" % ggd.logLikelihood( problem, param ), end="" )
                 param[1] += 1
             print( "" )
+
+    def testModelDistribution( self ):
+        print( "====== Test Model Distribution ======================" )
+        poly = PolynomialModel( 1 )
+        param = numpy.asarray( [12, 10], dtype=float )
+        data = numpy.asarray( self.data + 13, dtype=int )
+        print( "Data : ", data )
+
+        problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
+
+        ed = ModelDistribution( limits=[0.01,10] )
+        printclass( ed )
+
+
+
+
+
+
 
     def testPoissonErrorDistribution( self ):
         print( "====== Test Poisson Error Distribution ======================" )

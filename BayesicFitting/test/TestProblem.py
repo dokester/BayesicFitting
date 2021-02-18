@@ -16,7 +16,7 @@ from BayesicFitting import formatter as fmt
 from BayesicFitting import fma
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2021
 __license__ = "GPL3"
 __version__ = "0.9"
 __maintainer__ = "Do"
@@ -465,6 +465,55 @@ class TestProblem( unittest.TestCase ):
 
 #        dmdx = problem.derivative( p )
 #        print( dmdx )
+
+    def test7( self ) :
+        print( "====test7 EvidenceProblem============================" )
+        nn = 11
+        x = numpy.linspace( -1, 1, nn, dtype=float )
+        ym = self.x
+
+        model = PolynomialModel( 0 )
+        self.assertRaises( ValueError, EvidenceProblem, model=model, xdata=x, ydata=ym )
+
+        model = SplinesDynamicModel( knots=[-1.0, 1.1] )
+
+        problem = EvidenceProblem( model=model, xdata=x, ydata=ym )
+
+        print( problem.shortName() )
+        Tools.printclass( problem )
+
+        engs = problem.myEngines()
+        self.assertTrue( len( engs ) == 3 )
+        self.assertTrue( engs[0] == "birth" )
+        self.assertTrue( engs[1] == "death" )
+        self.assertTrue( engs[2] == "struct" )
+
+        self.assertTrue( problem.myStartEngine() == "start" )
+        self.assertTrue( problem.myDistribution() == "model" )
+
+    def test7a( self ) :
+        print( "====test7a EvidenceProblem============================" )
+        nn = 11
+        x = numpy.linspace( -1, 1, nn, dtype=float )
+        ym = self.data
+
+        model = SplinesDynamicModel( knots=[-1.0, 1.0] )
+        model.setLimits( lowLimits=-100, highLimits=100 )
+
+        problem = EvidenceProblem( model=model, xdata=x, ydata=ym )
+#        problem = ClassicProblem( model=model, xdata=x, ydata=ym )
+
+        ns = NestedSampler( problem=problem )
+        ns.verbose = 2
+
+        logE = ns.sample( )
+
+        ns = NestedSampler( problem=problem, limits=[0.1,10.0] )
+        ns.verbose = 2
+
+        logE = ns.sample( )
+
+
 
 
     def testcr1( self ) :

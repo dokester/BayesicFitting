@@ -22,6 +22,7 @@ from .Problem import Problem
 from .ClassicProblem import ClassicProblem
 from .ErrorsInXandYProblem import ErrorsInXandYProblem
 from .MultipleOutputProblem import MultipleOutputProblem
+from .EvidenceProblem import EvidenceProblem
 
 from .ErrorDistribution import ErrorDistribution
 from .ScaledErrorDistribution import ScaledErrorDistribution
@@ -31,6 +32,7 @@ from .PoissonErrorDistribution import PoissonErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .UniformErrorDistribution import UniformErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
+from .ModelDistribution import ModelDistribution
 #from .BernouilliErrorDistribution import BernouilliErrorDistribution
 
 from .Engine import Engine
@@ -46,9 +48,9 @@ from .DeathEngine import DeathEngine
 from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -71,7 +73,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 class NestedSampler( object ):
     """
@@ -308,6 +310,16 @@ class NestedSampler( object ):
         if problem is None :
             problem = "classic"
 
+#        else :
+#            if model is None :
+#                model = problem.model
+#            if xdata is None :
+#                xdata = problem.xdata
+#            if ydata is None :
+#                ydata = problem.ydata
+#            if weights is None :
+#                weights = problem.weights
+
         self.setProblem( problem, model=model, xdata=xdata, ydata=ydata, weights=weights )
 
         if model is None :
@@ -540,7 +552,17 @@ class NestedSampler( object ):
                 print( "Using threads." )
 
         if self.verbose > 1 :
-            print( "Iteration     logZ        H       LowL     npar     scale  parameters" )
+            tail = self.distribution.nphypar
+            if tail == 0 :
+                print( "Iteration     logZ        H       LowL     npar parameters" )
+            else :
+                print( "Iteration     logZ        H       LowL     npar parameters", end="" )
+                for k in range( 1,  min( 5, len( fitIndex ) - tail ) ) :
+                    print( "        ", end="" )
+                for k in range( tail ) :
+                    print( "   %s" %self.distribution.hyparname( k ), end="" )
+                print( "" )
+
 
     def iterReport( self, kw, plot=False ) :
 
@@ -555,10 +577,10 @@ class NestedSampler( object ):
             else :
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
-#               scale = self.getScale( self.walker[kw] )
+                tail = self.distribution.nphypar
                 print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
-                    self.info, self.lowLhood, np ), fmt( pl[-1] ), fmt( pl ) )
-#                    fmt( self.end ), self.ensemble, self.worst, fmt( self.getMaxIter() ) )
+                    self.info, self.lowLhood, np ), fmt( pl, max=4, tail=tail ) )
+
 
             self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
 
@@ -766,7 +788,8 @@ class NestedSampler( object ):
         problemdict = {
             "classic"  : ClassicProblem,
             "errors"   : ErrorsInXandYProblem,
-            "multiple" : MultipleOutputProblem
+            "multiple" : MultipleOutputProblem,
+            "evidence" : EvidenceProblem
         }
 #           "salesman" : SalesmanProblem
 #           "order" : OrderProblem
@@ -774,9 +797,6 @@ class NestedSampler( object ):
         if isinstance( name, Problem ) :
             self.problem = name
             if model is not None : self.problem.model = model
-#            if xdata is not None : self.problem.xdata = xdata
-#            if ydata is not None : self.problem.ydata = ydata
-#            if weights is not None : self.problem.weights = weights
             if xdata is not None : self.problem.xdata = numpy.asarray( xdata )
             if ydata is not None : self.problem.ydata = numpy.asarray( ydata )
             if weights is not None : self.problem.weights = numpy.asarray( weights )
@@ -841,6 +861,8 @@ class NestedSampler( object ):
             self.distribution = UniformErrorDistribution( scale=scale, limits=limits )
         elif name == "exponential" :
             self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )
+        elif name == "model" :
+            self.distribution = ModelDistribution( scale=scale, limits=limits )
 #        elif name == "bernouilli" :
 #            self.distribution = BernouilliErrorDistribution()
         else :
@@ -941,6 +963,7 @@ class NestedSampler( object ):
                 raise ValueError( "Unknown StartEngine name : %10s" % name )
 
         # Calculate logL for all walkers.
+        self.distribution.lowLhood = -math.inf
         for walker in self.walkers :
             self.initialEngine.execute( walker.id, -math.inf )
 

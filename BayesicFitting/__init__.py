@@ -57,6 +57,7 @@ from .source.ErrorDistribution import ErrorDistribution
 from .source.ErrorsInXandYProblem import ErrorsInXandYProblem
 from .source.EtalonDriftModel import EtalonDriftModel
 from .source.EtalonModel import EtalonModel
+from .source.EvidenceProblem import EvidenceProblem
 from .source.ExpModel import ExpModel
 from .source.Explorer import Explorer
 from .source.ExponentialErrorDistribution import ExponentialErrorDistribution
@@ -90,7 +91,7 @@ from .source.LorentzModel import LorentzModel
 from .source.MaxLikelihoodFitter import MaxLikelihoodFitter
 from .source.MixedErrorDistribution import MixedErrorDistribution
 from .source.Model import Model
-#from .source.ModelLikelihood import ModelLikelihood
+from .source.ModelDistribution import ModelDistribution
 from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
