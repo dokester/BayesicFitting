@@ -102,11 +102,36 @@ class TestModels( unittest.TestCase ):
 
         stdModeltest( m, p, plot=self.doplot )
 
+    """
+    def testEtalonVarModel( self ):
+        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
+        print( "******ETALON VAR***********************" )
+        m = EtalonVarModel( )
+        p = numpy.asarray( [1.2, 0.6, 2.0, 0.2], dtype=float )
+
+        stdModeltest( m, p, plot=self.doplot )
+
+    def testEtalonVarModel2( self ):
+        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
+        print( "******ETALON VAR 2***********************" )
+        pm = BasicSplinesModel( knots=[-1.0, 0.1, 1.0] )
+        m = EtalonVarModel( fixed={1:pm} )
+        p = numpy.asarray( [1.0, 5.5, 0.2, 0.03, 0.04, 0.05, 0.02, 0.01], dtype=float )
+
+        stdModeltest( m, p, plot=self.doplot )
+    """
     def testExpModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******EXP**************************" )
         m = ExpModel( )
         p = numpy.asarray( [1.2,-0.1], dtype=float )
+
+        stdModeltest( m, p, plot=self.doplot )
+
+        print( "******DECAY************************" )
+
+        m = ExpModel( decay=True )
+        p = numpy.asarray( [1.2,0.1], dtype=float )
 
         stdModeltest( m, p, plot=self.doplot )
 

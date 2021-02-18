@@ -1,11 +1,12 @@
 import numpy as numpy
 from . import Tools
 from .NonLinearModel import NonLinearModel
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 class ExpModel( NonLinearModel ):
     """
@@ -44,6 +45,17 @@ class ExpModel( NonLinearModel ):
 
     Beware of a positive 2nd parameter; when positive the model is going off
     to Infinity very quickly.
+
+    When decay is True the model changes into a decay model:
+
+        f( x:p ) = p_0 * exp( - p_1 * x )
+
+    The parameters are initialized at {1.0, 1.0}.
+
+    Attributes
+    ----------
+        sign : [-1,1]
+        Whether decay is True or False.
 
     Attributes from Model
     ---------------------
@@ -66,7 +78,7 @@ class ExpModel( NonLinearModel ):
     Author  Do Kester
 
     """
-    def __init__( self, copy=None, **kwargs ):
+    def __init__( self, decay=False, copy=None, **kwargs ):
         """
         Exponential model.
         <br>
@@ -74,6 +86,8 @@ class ExpModel( NonLinearModel ):
 
         Parameters
         ----------
+        decay : boolean
+            changes sign of parameter[1]
         copy : ExpModel
             to be copied
         fixed : None or dictionary of {int:float|Model}
@@ -83,14 +97,21 @@ class ExpModel( NonLinearModel ):
             See: @FixedModel
 
         """
-        param = [1.0,-1.0]
-        names = ["amplitude","slope"]
+        if decay :
+            setatt( self, "sign", -1 )
+            param = [1.0,1.0]
+            names = ["amplitude","decay"]
+        else :
+            setatt( self, "sign", 1 )
+            param = [1.0,-1.0]
+            names = ["amplitude","slope"]
+
         super( ExpModel, self ).__init__( 2, copy=copy, params=param,
                 names=names, **kwargs )
 
     def copy( self ):
         """ Copy method.  """
-        return ExpModel( copy=self )
+        return ExpModel( decay=(self.sign==-1), copy=self )
 
     def baseResult( self, xdata, params ):
         """
@@ -104,7 +125,7 @@ class ExpModel( NonLinearModel ):
             values for the parameters
 
         """
-        return numpy.multiply( numpy.exp( numpy.multiply( params[1], xdata ) ), params[0] )
+        return params[0] * numpy.exp( self.sign * params[1] * xdata )
 
     def basePartial( self, xdata, params, parlist=None ):
         """
@@ -123,10 +144,10 @@ class ExpModel( NonLinearModel ):
         np = self.npbase if parlist is None else len( parlist )
         partial = numpy.ndarray( ( Tools.length( xdata ), np ) )
 
-        e = numpy.exp( params[1] * xdata )
+        e = numpy.exp( self.sign * params[1] * xdata )
 
         parts = { 0 : ( lambda: e ),
-                  1 : ( lambda: params[0] * e * xdata ) }
+                  1 : ( lambda: self.sign * params[0] * e * xdata ) }
 
         if parlist is None :
             parlist = range( self.npmax )
@@ -148,14 +169,14 @@ class ExpModel( NonLinearModel ):
             values for the parameters
 
         """
-        return numpy.multiply( params[1], self.baseResult( xdata, params ) )
+        return self.sign * params[1] * self.baseResult( xdata, params )
 
     def baseName( self ):
         """
         Returns a string representation of the model.
 
         """
-        return str( "Exp: f( x:p ) = p_0 * exp( p_1 * x )" )
+        return str( "Exp: f( x:p ) = p_0 * exp( %sp_1 * x )" % ( "" if self.sign == 1 else "- " ) )
 
     def baseParameterUnit( self, k ):
         """
