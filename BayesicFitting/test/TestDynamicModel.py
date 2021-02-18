@@ -304,12 +304,11 @@ class TestDynamicModel( unittest.TestCase ):
             plt.show()
 
 
-
-    def constrainPos( self, logL, problem, allpars ):
+    def constrainPos( self, logL, problem, allpars, logLlow ):
         xx = numpy.arange( 101, dtype=float )
         yy = problem.model.result( xx, allpars )
         if numpy.any( yy < 0 ):
-            return -math.inf
+            return logLlow - 1
         else :
             return logL
 

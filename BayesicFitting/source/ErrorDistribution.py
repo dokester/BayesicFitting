@@ -6,9 +6,9 @@ from . import Tools
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -62,7 +62,7 @@ class ErrorDistribution( object ):
         number of hyper parameters in this error distribution
     constrain : None or callable
         None:     Use logLikelihood as is
-        callable: logL = func( logL, problem, allpars )
+        callable: logL = func( logL, problem, allpars, lowLhood )
                   returning a (modified) value of the logLikelihood.
     """
 
@@ -113,20 +113,21 @@ class ErrorDistribution( object ):
 
         """
         if name == "constrain" :
-            ## Choose one of 2 likelihood functions in "logLikelihood"
-            if value is None :
-                setatt( self, "logLikelihood", self.logLhood )
-            elif callable( value ) :
-                setatt( self, "logLikelihood", self.logCLhood )
-            else :
-                raise ValueError( "Constrain is not a callable function" )
+            if hasattr( self, "logLdata" ) :
+                ## Choose one of 2 likelihood functions in "logLikelihood"
+                if value is None :
+                    setatt( self, "logLikelihood", self.logLhood )
+                elif callable( value ) :
+                    setatt( self, "logLikelihood", self.logCLhood )
+                else :
+                    raise ValueError( "Constrain is not a callable function" )
 
             setatt( self, "constrain", value )
             return
 
         key0 = ["hyperpar", "fixed"]
         keys = {"hyperpar": HyperParameter}
-        key1 = {"deltaP": float, "ncalls": int, "nparts": int, "fixed": dict }
+        key1 = {"deltaP": float, "lowLhood": float, "ncalls": int, "nparts": int, "fixed": dict }
         if ( Tools.setNoneAttributes( self, name, value, key0 ) or
              Tools.setListOfAttributes( self, name, value, keys ) or
              Tools.setSingleAttributes( self, name, value, key1 ) ) :
@@ -355,7 +356,7 @@ class ErrorDistribution( object ):
         """
         logL = self.logLhood( problem, allpars )
 
-        return self.constrain( logL, problem, allpars )
+        return self.constrain( logL, problem, allpars, self.lowLhood )
 
     def logLhood( self, problem, allpars ):
         """
