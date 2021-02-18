@@ -7,9 +7,9 @@ from .ExponentialPrior import ExponentialPrior
 from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.7.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 
 class Dynamic( object ):
@@ -334,7 +334,8 @@ class Dynamic( object ):
         kol = offset + location
 
         kh = kol if dnp > 0 else kol + dnp
-        while findex[k] >=0 and findex[k] < kh :    ## copy first parts
+#        while findex[k] >=0 and findex[k] < kh :    ## copy first parts
+        while k < lfin and findex[k] >=0 and findex[k] < kh :    ## copy first parts
             newfi[k] = findex[k]
             k += 1
         kl = k if dnp > 0 else k - dnp              ## where we are if findex
