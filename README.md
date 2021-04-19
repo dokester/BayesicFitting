@@ -17,6 +17,8 @@ DOI: 10.5281/zenodo.2597200
    * decay in ExpModel
    * some seldom errors, clean-up & new test harnasses. 
 
+ + 19 April 2021 version 2.7.1
+   * remove CrossEngine completely
 
 ## Content
 
