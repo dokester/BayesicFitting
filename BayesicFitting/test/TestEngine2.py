@@ -74,10 +74,6 @@ class TestEngine2( unittest.TestCase ):
         print( "\n   Step Engine Test\n" )
         self.stdenginetest( StepEngine, iter=1001, nsamp=10, plot=self.doplot )
 
-#    def testCrossEngine( self ):
-#        print( "\n   Cross Engine Test\n" )
-#        self.stdenginetest( CrossEngine, iter=800, nsamp=100, plot=self.doplot )
-
     def testGalileanEngine( self ):
         print( "\n   Galilean Engine Test\n" )
         self.stdenginetest( GalileanEngine, iter=201, nsamp=10, plot=self.doplot )

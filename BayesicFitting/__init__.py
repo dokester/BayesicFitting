@@ -46,7 +46,7 @@ from .source.ClassicProblem import ClassicProblem
 from .source.CombiModel import CombiModel
 from .source.ConstantModel import ConstantModel
 from .source.ConvergenceError import ConvergenceError
-from .source.CrossEngine import CrossEngine
+#from .source.CrossEngine import CrossEngine
 from .source.CurveFitter import CurveFitter
 #from .source.CyclicResults import CyclicResults
 from .source.DeathEngine import DeathEngine
@@ -94,6 +94,7 @@ from .source.Model import Model
 from .source.ModelDistribution import ModelDistribution
 from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
+#from .source.MultiLogisticModel import MultiLogisticModel
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
 #from .source.NeuralNetModel import NeuralNetModel
