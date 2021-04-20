@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
-from MultiDimAverageModel import MultiDimAverageModel
+#from MultiDimAverageModel import MultiDimAverageModel
 from BoxedErrorDistribution import BoxedErrorDistribution
 
 __author__ = "Do Kester"
@@ -268,7 +268,7 @@ class TestErrorDistribution( unittest.TestCase ):
 
         return logL
 
-    def testGaussErrorDistribution1( self ):
+    def XXXtestGaussErrorDistribution1( self ):
 
         print( "=======   Test Gauss Error Distribution 1 ==================" )
 
