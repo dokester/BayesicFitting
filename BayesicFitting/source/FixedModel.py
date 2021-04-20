@@ -107,12 +107,13 @@ class FixedModel( BaseModel ):
         mlist = []
         npar = nparams
         if fixed is not None :
+            fixfix = {}
             for k in fixed.keys() :
+                val = fixed[k]
                 if k < 0 :                  # convert negative indices into positive ones
-                    val = fixed[k]
-                    del( fixed[k] )
                     k += npar
-                    fixed[k] = val
+                fixfix[k] = val
+            fixed = fixfix
             for k in fixed.keys() :
                 if isinstance( fixed[k], BaseModel ) :
                     mlist += [k]
@@ -461,7 +462,7 @@ class FixedModel( BaseModel ):
 
         i = 0
         while True :
-            mo = re.search( r'p_([0-9]*)', basename, flags=re.MULTILINE )
+            mo = re.search( r'p_([0-9]+)', basename, flags=re.MULTILINE )
             if mo is None : break
 
             span = mo.span()
