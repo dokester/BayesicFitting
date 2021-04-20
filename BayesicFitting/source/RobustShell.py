@@ -200,9 +200,9 @@ class RobustShell( IterativeFitter ):
         if onesided is None :
             return 0
         elif isinstance( onesided, str ) :
-            if onesided[0] is "p" or onesided[0] is "P" :
+            if onesided[0] == "p" or onesided[0] == "P" :
                 return +1
-            elif onesided[0] is "n" or onesided[0] is "N" :
+            elif onesided[0] == "n" or onesided[0] == "N" :
                 return -1
             else :
                 raise ValueError( "Unknown string for onesided: %s" % onesided )
