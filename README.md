@@ -20,6 +20,11 @@ DOI: 10.5281/zenodo.2597200
  + 19 April 2021 version 2.7.1
    * remove CrossEngine completely
 
+ + 20 April 2021 version 2.7.2
+   * put some tests on hold
+   * few minor issues/errors
+
+
 ## Content
 
 1. [History](#history)
