@@ -10,7 +10,6 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
-from Sphere import Sphere
 
 import matplotlib.pyplot as plt
 
