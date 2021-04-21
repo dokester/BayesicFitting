@@ -14,14 +14,14 @@ import matplotlib.pyplot as plt
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 #from MultiDimAverageModel import MultiDimAverageModel
-from BoxedErrorDistribution import BoxedErrorDistribution
+#from BoxedErrorDistribution import BoxedErrorDistribution
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "2.7.3"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  *
 #  * This file is part of the BayesicFitting package.
@@ -38,7 +38,7 @@ __status__ = "Development"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *  2017 Do Kester
+#  *  2017 - 2021  Do Kester
 
 class TestErrorDistribution( unittest.TestCase ):
     """
