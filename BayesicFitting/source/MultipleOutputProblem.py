@@ -17,7 +17,7 @@ from .Formatter import formatter as fmt
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2021 Do Kester
 
 class MultipleOutputProblem( Problem ):
     """
@@ -49,11 +49,11 @@ class MultipleOutputProblem( Problem ):
         Parameters
         ----------
         model : Model
-            the model to be solved. One with multiple outputs: model.nouput > 1
+            the model to be solved. One with multiple outputs: model.ndout > 1
         xdata : array_like
             independent variable
         ydata : array_like
-            dependent variable. shape = (len(xdata), model.noutput)
+            dependent variable. shape = (len(xdata), model.ndout)
         weights : array_like or None
             weights associated with ydata: shape = as xdata or as ydata
         copy : Problem
@@ -62,8 +62,8 @@ class MultipleOutputProblem( Problem ):
         """
         if weights is not None :
             if len( weights.shape ) == 1 :
-                wgts = numpy.zeros( ( len( weights ), model.noutput ), dtype=float )
-                for k in range( model.noutput ) :
+                wgts = numpy.zeros( ( len( weights ), model.ndout ), dtype=float )
+                for k in range( model.ndout ) :
                     wgts[:,k] = weights
                 weights = wgts
             weights = weights.flatten()
@@ -107,7 +107,7 @@ class MultipleOutputProblem( Problem ):
         parts = self.model.partial( self.xdata, param )
 
         partial = parts[0]
-        for k in range( 1, self.model.noutput ) :
+        for k in range( 1, self.model.ndout ) :
             partial = numpy.append( partial, parts[k], 1 )
 
         return partial.reshape( -1, self.npars )

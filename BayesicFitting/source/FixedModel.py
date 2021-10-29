@@ -7,11 +7,12 @@ from . import Tools
 
 from .BaseModel import BaseModel
 from .Tools import setAttribute as setatt
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -334,18 +335,14 @@ class FixedModel( BaseModel ):
         if parlist is None :
             parlist = numpy.arange( self.npbase )
 
-        i = 0
-
-        for k in parlist :
+        for i, k in enumerate( parlist ) :
             dp = next( dpg )
             par[k] += 0.5 * dp
             r1 = FixedModel.result( self, xdata, par )
             par[k] -= dp
             r2 = FixedModel.result( self, xdata, par )
             partial[:,i] = ( r1 - r2 ) / dp
-#            print( k, i, params[k], dp, par[k], r1, r2, partial[:,i] )
             par[k] = params[k]
-            i += 1
         try :
             dpg.close()
         except :
@@ -384,7 +381,7 @@ class FixedModel( BaseModel ):
         in the model.
 
         If `fixed` contains a Model, the derivative cannot be constructed
-        from the constituent models. Use `numDerivative` instaed.
+        from the constituent models. Use `numDerivative` instead.
 
         Parameters
         ----------
@@ -416,23 +413,34 @@ class FixedModel( BaseModel ):
         ValueError when the number of xdata dimensions > 1.
 
         """
-        if self.ndim > 1 :
-            raise ValueError( "Not implemented for dimensions > 1" )
-
         dx = self.deltaP[0]
-        xd = xdata + dx
-        r1 = FixedModel.result( self, xd, param )
-        xd = xdata - dx
-        r2 = FixedModel.result( self, xd, param )
 
-        return ( r1 - r2 ) / ( 2 * dx )
+        if self.ndim == 1 :
+            xd = xdata + dx
+            r1 = FixedModel.result( self, xd, param )
+            xd = xdata - dx
+            r2 = FixedModel.result( self, xd, param )
+
+            return ( r1 - r2 ) / ( 2 * dx )
+
+        ## More dimensions in xdata
+        df = numpy.zeros_like( xdata )
+        for i in range( self.ndim ) :
+            x = xdata,copy
+            x[:,i] += dx
+            r1 = FixedModel.result( self, x, param )
+            x[:,i] -= 2 * dx
+            r2 = FixedModel.result( self, x, param )
+            df[:,i] = ( r1 - r2 ) / ( 2 * dx )
+        return df
+
+
+
 
 
     #  *****TOSTRING***********************************************************
     def _toString( self, npars=0 ) :
         basename = self.baseName()
-
-#        print( "FM %d  " % npars, basename )
 
         if self.fixed is not None :
             for k in self.fixed.keys() :
@@ -442,23 +450,16 @@ class FixedModel( BaseModel ):
                 else :
                     val = r"(%.1f) "%self.fixed[k]
                 basename = re.sub( par, val, basename )
-#            print( "FM1   ", basename )
-#            print( "ParL  ", self.parlist )
+
             i = 0
             for k in self.parlist :
                 old = r"p_%d([^0-9]|$)"%k
                 par = r"q_%d\1"%i
                 basename = re.sub( old, par, basename )
                 i += 1
-#                print( "FM    ", basename )
             basename = re.sub( r"q_", r"p_", basename )
 
-#        print( "FM2   ", basename )
-
-
         if npars == 0 : return basename
-
-#        print( "FM11  ", basename )
 
         i = 0
         while True :
@@ -467,15 +468,9 @@ class FixedModel( BaseModel ):
 
             span = mo.span()
             k = int( basename[span[0]+2:span[1]] )
-#            print( "FM    ", span, k, npars )
             basename = re.sub( r'p_%d'%k, r'q_%d'%(k+npars), basename, flags=re.MULTILINE )
 
-
-#        print( "FM12  ", basename )
-
         basename = basename.replace( "q_", "p_" )
-
-#        print( "FM13  ", basename )
 
         return basename
 

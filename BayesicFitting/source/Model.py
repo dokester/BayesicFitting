@@ -13,9 +13,9 @@ from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 
 class Model( FixedModel ):
@@ -242,6 +242,12 @@ class Model( FixedModel ):
         """
         if name == 'npars' or name == 'npchain' :
             return self._head._npchain
+        elif name == 'ndout' :
+            return 1
+        elif name == 'lastndout' :
+            last = self
+            while last._next is not None : last = last._next
+            return last.ndout
 
         return super( Model, self ).__getattr__( name )
 
@@ -401,9 +407,15 @@ class Model( FixedModel ):
         """
         if self.isDynamic() and model.isDynamic():
             raise ValueError( "Only one Dynamic model in a chain" )
-        if self.ndim != model.ndim:
-            raise ValueError( "Trying to add incompatible models, with dimensions: %d and %d"%
-                                (self.ndim, model.ndim) )
+        if operation != self.PIP :
+            opname = ["", "+", "-", "*", "/", "|" ]
+            if self.ndim != model.ndim:
+                raise ValueError( "Trying to combine incompatible model dimensions: %d %s %d"%
+                                (self.ndim, opname[operation], model.ndim) )
+        else :
+            if self.lastndout != model.ndim :
+                raise ValueError( "Trying to pipe incompatible models:  %d | %d"%
+                                (self.lastndout, model.ndim) )
 
         if model._next is not None :
             model = Brackets( model )     # provide brackets if model is a chain
@@ -528,7 +540,11 @@ class Model( FixedModel ):
         """
         result = None
         df = numpy.zeros_like( xdata )
+        if self.ndout > 1 :
+            df = numpy.asarray( [df] * self.ndout )
+
         xdata = Tools.toArray( xdata )
+
         df = self._recursiveDerivative( xdata, param, result, df,
                     useNum=useNum )
         return df
@@ -555,6 +571,8 @@ class Model( FixedModel ):
 
         else :
             nextdf = numpy.zeros_like( xdata, dtype=float )
+
+#        print( "Model2  ", df.shape, nextdf.shape, self._operation )
 
         if self._operation <= self.ADD :
             df += nextdf
@@ -622,6 +640,9 @@ class Model( FixedModel ):
 
         if np > 0 :
             xd = xdata if self._operation is not self.PIP else result
+
+#            print( "_rP   ", self._operation, xd, useNum )
+
             if useNum:
                 nextpartial = super( Model, self ).numPartial( xd, par )
             else:
@@ -648,14 +669,60 @@ class Model( FixedModel ):
         elif self._operation == self.PIP :
             nextres = 'dummy'       ## not needed, but needs something
 
+#            print( "Model ", self.__str__() )
+
             if useNum :
                 dfdx = super( Model, self ).numDerivative( result, par )
             else :
                 dfdx = super( Model, self ).derivative( result, par )
-            partial = numpy.multiply( partial.transpose(), dfdx ).transpose()
 
-        partial = ( nextpartial if partial is None
+#            print( "Model  : ", dfdx.shape, numpy.asarray( partial ).shape )
+
+
+            # Models G pars p and H pars q
+
+            # F(x:pq) ==>  H(G(x:p):q)            G(x:p) | H(*:q)   
+            # dF/dp   ==>  dH/dG * dG/dp          H.derivative(G,p) * G.partial(x,q)
+            # dF/dq   ==>  dH(G(x:p):q) / dq      G.partial(H,q)
+
+            # G.ndout mustbe H.ndim
+            # partial <== G
+            # dfdx    <== H
+
+            if not isinstance( partial, list ) :        # G.ndout = 1  ==> H.ndim = 1
+                if dfdx.ndim == 1 :                    # H.ndout = 1
+                    partial = numpy.multiply( partial.transpose(), dfdx ).transpose()
+                elif dfdx.ndim == 2 :                  # H.ndout > 1  ==> partial is list
+                    part = []
+                    for k in range( dfdx.shape[-1] ) :
+                        part += [numpy.multiply( partial.transpose(), dfdx[:,k] ).transpose()]
+                    partial = part
+                else :
+                    print( "Error in pipe ndims partial ", partial.shape, " dfdx  ", dfdx.shape )
+            else :                                      # G.ndout > 1 ==> H.ndim > 1
+                if dfdx.ndim == 2 :                    # H.ndout = 1
+                    part = 0
+                    for k,pt in enumerate( partial ) :
+                        part += numpy.multiply( pt.transpose(), dfdx[:,k] )
+                    partial = part.transpose()
+                elif dfdx.ndim == 3 :                  # H.ndout > 1
+                    plst = []
+                    for i in range( dfdx.shape[0] ) :
+                        part = 0
+                        for k,pt in enumerate( partial ) :
+                            part += numpy.multiply( pt.transpose(), dfdx[i,:,k] )
+                        plst += [part.transpose()]
+                    partial = plst
+                else :
+                    print( "Error in pipe dimensions partial ", len( partial ), partial[0].shape, " dfdx  ", dfdx.shape )
+
+
+        if not isinstance( partial, list ) :
+            partial = ( nextpartial if partial is None
                     else numpy.append( partial, nextpartial, axis=1 ) )
+        else :
+            for k in range( len( partial ) ) :
+                partial[k] = numpy.append( partial[k], nextpartial[k], axis=1 )
 
         model = self._next
         if model is None:
@@ -1298,12 +1365,20 @@ class Model( FixedModel ):
         try :
             df = self.derivative( xdata, params )
             numdf = self.numDerivative( xdata, params )
+            snum = self.strictNumericDerivative( xdata, params )
             hasderiv = True
         except :
             hasderiv = False
 
         partial = self.partial( xdata, params )
-        numeric = self.numPartial( xdata, params )
+        snmp = self.strictNumericPartial( xdata, params )
+        try :
+            numeric = self.numPartial( xdata, params )
+        except :
+            numeric = snmp
+            
+
+#        print( "xdata  ", xdata, sz )
 
         kerr = 0
         lrang = range( sz[0] )
@@ -1321,17 +1396,32 @@ class Model( FixedModel ):
             print( "     par     value      partial   numpartial      numeric" )
 
             if hasderiv :
-                snum = self.strictNumeric( xdata[k], params )
-                print( "      df             %10.5f   %10.5f   %10.5f" %
-                        ( df[k], numdf[k], snum ) )
-                if ( abs( df[k] - snum ) > 0.001 or
-                     abs( numdf[k] - snum ) > 0.001 ) :
-                    kerr += 1
+                if self.ndim == 1 :
+#                    snum = self.strictNumericDerivative( xdata[k], params )
+                    print( "      df             %10.5f   %10.5f   %10.5f" %
+                            ( df[k], numdf[k], snum[k] ) )
+                    if ( abs( df[k] - snum[k] ) > 0.001 or
+                         abs( numdf[k] - snum[k] ) > 0.001 ) :
+                        kerr += 1
+                else : 
+#                    snum = self.strictNumericDerivative( xdata[k,:], params )
+#                    print( "testP  ", xdata.shape, df.shape, numdf.shape, snum.shape )
+                    for i in range( self.ndim ) :
+                        print( i, k, self.ndim, lrang )
+                        print( "      df%i            %10.5f   %10.5f   %10.5f" %
+                                ( i, df[k,i], numdf[k,i], snum[k,i] ) )
+                        if ( abs( df[k,i] - snum[k,i] ) > 0.001 or
+                             abs( numdf[k,i] - snum[k,i] ) > 0.001 ) :
+                            kerr += 1
+                    
 
+
+#            xd = xdata[k] if self.ndim == 1 else xdata[k,:]
+#            snmp = self.strictNumericPartial( xd, params )
+#            print( "TestP   ", partial.shape, numeric.shape, snmp.shape )
             for i in range( self.npchain ) :
-                snum = self.strictNumeric( xdata[k], params, kpar=i )
-                if ( abs( partial[k,i] - snum ) > 0.001 or
-                     abs( numeric[k,i] - snum ) > 0.001 ) :
+                if ( abs( partial[k,i] - snmp[k,i] ) > 0.001 or
+                     abs( numeric[k,i] - snmp[k,i] ) > 0.001 ) :
                     err = 1
                 else :
                     err = 0
@@ -1339,40 +1429,110 @@ class Model( FixedModel ):
 
                 if err == 1 or random.random() < 5.0 / self.npchain :
                     print( "    %4d  %8.3f   %10.5f   %10.5f   %10.5f"%
-                            (i, params[i], partial[k,i], numeric[k,i], snum) )
+                            (i, params[i], partial[k,i], numeric[k,i], snmp[k,i]) )
 
         return kerr
 
-    def strictNumeric( self, x, param, kpar=None ) :
+    def strictNumericPartial( self, xdata, params, parlist=None ) :
         """
-        Strictly numeric calculation of derivative.
+        Strictly numeric calculation of partials to params.
 
         For compound models it is different from numPartial and numDerivative.
 
         Parameters
         ----------
-        x : float or array-like
-            xdata
-        param : array-like
+        xdata : float
+            single xdata point (possibly multidimensional)
+        params : array-like
             parameters
-        kpar : None or int
-            None : return derivative to x
+        kpar : None or int or list of int
             int  : return derivative to parameter kpar.
         """
-        x = Tools.toArray( x, ndim=self.ndim )
+        nxdata = Tools.length( xdata )
+        if self.lastndout <= 1 :
+            partial = numpy.zeros( ( nxdata, self.npars ), dtype=float  )
+            assignPart = self.assignDF1
+        else :
+            partial = [ numpy.zeros( ( nxdata, self.npars ), dtype=float  ) 
+                        for k in range( self.ndout ) ]
+            assignPart = self.assignDF2 
+
+
+
+        dpg = Tools.makeNext( self.deltaP, 0 )
+        
+        par = params.copy()
+        if parlist is None :
+            parlist = numpy.arange( self.npars )
+        
+        for i, k in enumerate( parlist ) :
+            dp = next( dpg )   
+            par[k] += 0.5 * dp
+            r1 = self.result( xdata, par )
+            par[k] -= dp   
+            r2 = self.result( xdata, par )
+
+            assignPart( partial, i, ( r1 - r2 ) / dp )
+            par[k] = params[k]
+        try :
+            dpg.close()
+        except :
+            pass
+        return partial
+
+    def assignDF1( self, partial, i, dpi ) :
+        partial[:,i] = dpi
+
+    def assignDF2( self, partial, i, dpi ) :
+
+#        print( "assignDF2  ", len( partial ), partial[0].shape, dpi.shape )
+        for k in range( self.ndout ) :
+            partial[k][:,i] = dpi[:,k]
+
+
+    def strictNumericDerivative( self, xdata, param ) :
+        """
+        Strictly numeric calculation of derivative.
+
+        For compound models it is different from numPartial and numDerivative.
+
+            ## More dimensions in x
+
+        Parameters
+        ----------
+        xdata : float
+            single xdata point (possibly multidimensional)
+        param : array-like
+            parameters
+        """
 
         dx = self.deltaP[0]
-        if kpar is None :
-            r1 = self.result( x+dx, param )
-            r2 = self.result( x-dx, param )
+
+        if self.ndim == 1 :
+            r1 = self.result( xdata+dx, param )
+            r2 = self.result( xdata-dx, param )
             return ( r1 - r2 ) / ( 2 * dx )
 
-        pp = param.copy()
-        pp[kpar] += dx
-        r1 = self.result( x, pp )
-        pp[kpar] -= 2 * dx
-        r2 = self.result( x, pp )
-        return ( r1 - r2 ) / ( 2 * dx )
+        ## More dimensions in xdata
+        if self.ndout == 1 :
+            df = numpy.zeros_like( xdata )
+            assignDF = self.assignDF1
+        else :
+            df = [ numpy.zeros_like( xdata ) for k in range( self.ndout ) ]
+            assignDF = self.assignDF2
+
+
+        for i in range( self.ndim ) :
+            x = xdata.copy()
+            x[:,i] += dx
+            r1 = self.result( x, param )
+            x[:,i] -= 2 * dx
+            r2 = self.result( x, param )
+
+            assignDF( df, i, ( r1 - r2 ) / ( 2 * dx ) )
+
+        return df
+
 
 ##### End Model #########################################################
 
