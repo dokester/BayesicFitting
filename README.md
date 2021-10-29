@@ -11,19 +11,12 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
- + 18 Feb 2021 version 2.7.0
-   * New class: EvidenceProblem & ModelDistribution; adaptations in NestedSampler and tests.
-   * Change in constrain method definition
-   * decay in ExpModel
-   * some seldom errors, clean-up & new test harnasses. 
-
- + 19 April 2021 version 2.7.1
-   * remove CrossEngine completely
-
- + 20 April 2021 version 2.7.2
-   * put some tests on hold
-   * few minor issues/errors
-
+ + 29 Oct 2021 version 2.8.0
+   * New class: BernoulliErrorDistribution and SoftMaxModel, tests, examples and data
+   * Adaptations To BernoulliED in some other classes
+   * Multi-dim input and output issues
+   * Updated some other tests and examples
+   * Documentation and other small issues.
 
 ## Content
 
@@ -331,6 +324,19 @@ More work needs to be done in:
    * Finetune Engines
 
  + 18 Feb 2021 version 2.7.0
+   * New class: EvidenceProblem & ModelDistribution; adaptations in NestedSampler and tests.
+   * Change in constrain method definition
+   * decay in ExpModel
+   * some seldom errors, clean-up & new test harnasses. 
+
+ + 19 April 2021 version 2.7.1
+   * remove CrossEngine completely
+
+ + 20 April 2021 version 2.7.2
+   * put some tests on hold
+   * few minor issues/errors
+
+ + 29 Oct 2021 version 2.8.0
    * See above in Whats new
 
 <br><br><br><br>
