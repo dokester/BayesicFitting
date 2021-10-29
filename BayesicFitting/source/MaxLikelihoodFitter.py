@@ -6,14 +6,14 @@ from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .UniformErrorDistribution import UniformErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
-#from .BernouilliErrorDistribution import BernouilliErrorDistribution
+#from .BernoulliErrorDistribution import BernoulliErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .ClassicProblem import ClassicProblem
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -36,7 +36,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON ( Java code )
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 class MaxLikelihoodFitter( IterativeFitter ):
     """
@@ -319,8 +319,8 @@ class _LogL( _Chisq ) :
         elif errdis == 'poisson' :
             self.errdis = PoissonErrorDistribution( )
             self.hypar = []
-#        elif errdis == 'bernouilli' :
-#            self.errdis = BernouilliErrorDistribution( )
+#        elif errdis == 'bernoulli' :
+#            self.errdis = BernoulliErrorDistribution( )
 #            self.hypar = []
         elif errdis == 'exponential' :
             self.errdis = ExponentialErrorDistribution( scale=scale, power=power )

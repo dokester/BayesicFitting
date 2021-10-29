@@ -34,7 +34,6 @@ from .PoissonErrorDistribution import PoissonErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
 from .UniformErrorDistribution import UniformErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
-#from .BernouilliErrorDistribution import BernouilliErrorDistribution
 
 from .Engine import Engine
 from .StartEngine import StartEngine
@@ -49,9 +48,9 @@ from .DeathEngine import DeathEngine
 from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -70,7 +69,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 class PhantomSampler( NestedSampler ):
     """
@@ -157,7 +156,7 @@ class PhantomSampler( NestedSampler ):
             "cauchy"        CauchyErrorDstribution with 1 hyperpar scale
             "uniform"       UniformErrorDistribution with 1 hyperpar scale
             "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
-            "bernouilli"    BernouilliErrorDistribution no hyperpar (NOTYET)
+            "bernoulli"     BernoulliErrorDistribution no hyperpar
 
             ErrorDistribution Externally defined ErrorDistribution
         limits : None or [low,high] or [[low],[high]]

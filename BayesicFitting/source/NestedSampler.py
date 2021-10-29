@@ -33,7 +33,7 @@ from .CauchyErrorDistribution import CauchyErrorDistribution
 from .UniformErrorDistribution import UniformErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .ModelDistribution import ModelDistribution
-#from .BernouilliErrorDistribution import BernouilliErrorDistribution
+from .BernoulliErrorDistribution import BernoulliErrorDistribution
 
 from .Engine import Engine
 from .StartEngine import StartEngine
@@ -50,7 +50,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -109,12 +109,12 @@ class NestedSampler( object ):
 
     There are different likelihood functions available: Gaussian (Normal),
     Laplace (Norm-1), Uniform (Norm-Inf), Poisson (for counting processes),
-    Bernouilli (for categories), Cauchy (aka Lorentz) and
+    Bernoulli (for categories), Cauchy (aka Lorentz) and
     Exponential (generalized Gaussian).
     A mixture of ErrorDistributions can also be defined.
     By default the Gaussian distribution is used.
 
-    Except for Poisson and Bernouilli , all others are ScaledErrorDistributions.
+    Except for Poisson and Bernoulli , all others are ScaledErrorDistributions.
     The scale is a HyperParameter which can either be fixed, by setting the
     attribute errdis.scale or optimized, given the model parameters and the data.
     By default it is optimized for Gaussian and Laplace distributions.
@@ -261,7 +261,7 @@ class NestedSampler( object ):
             "poisson"       PoissonErrorDistribution no hyperpar
             "cauchy"        CauchyErrorDstribution with 1 hyperpar scale
             "uniform"       UniformErrorDistribution with 1 hyperpar scale
-            "bernouilli"    BernouilliErrorDistribution no hyperpar
+            "bernoulli"     BernoulliErrorDistribution no hyperpar
             "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
 
             ErrorDistribution Externally defined ErrorDistribution
@@ -386,7 +386,7 @@ class NestedSampler( object ):
         """
         keep = self.initSample( keep=keep )
 
-        self.initReport( keep=keep, plot=plot )
+        tail = self.initReport( keep=keep, plot=plot )
 
         explorer = Explorer( self, threads=self.threads )
 
@@ -411,7 +411,7 @@ class NestedSampler( object ):
 
             self.updateEvidence( worst )            # Update Z and H and store posterior samples
 
-            self.iterReport( worst - 1, plot=plot ) # some output when needed
+            self.iterReport( worst - 1, tail, plot=plot ) # some output when needed
 
             self.samples.weed( self.maxsize )       # remove overflow in samplelist
 
@@ -551,8 +551,12 @@ class NestedSampler( object ):
             if self.threads :
                 print( "Using threads." )
 
+        tail = 0
         if self.verbose > 1 :
-            tail = self.distribution.nphypar
+            while fitIndex[-tail-1] < 0 : 
+                tail += 1
+
+#            tail = self.distribution.nphypar
             if tail == 0 :
                 print( "Iteration     logZ        H       LowL     npar parameters" )
             else :
@@ -563,8 +567,9 @@ class NestedSampler( object ):
                     print( "   %s" %self.distribution.hyparname( k ), end="" )
                 print( "" )
 
+        return tail
 
-    def iterReport( self, kw, plot=False ) :
+    def iterReport( self, kw, tail, plot=False ) :
 
         if self.verbose >= 3 or ( self.verbose >= 1 and
                                   self.iteration % 100 == 0 ):
@@ -577,9 +582,11 @@ class NestedSampler( object ):
             else :
                 pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
                 np = len( pl )
-                tail = self.distribution.nphypar
+#                tail = self.distribution.nphypar
                 print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
                     self.info, self.lowLhood, np ), fmt( pl, max=4, tail=tail ) )
+#                print( "%-16.16s " % self.engines[1], end="" )
+#                self.engines[1].printReport()
 
 
             self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
@@ -599,13 +606,48 @@ class NestedSampler( object ):
             self.report()
 
         if self.doLastPlot( plot ) :
-            Plotter.plotFit( self.problem.xdata, self.problem.ydata, yfit=self.yfit, residuals=True )
+#            Plotter.plotFit( self.problem.xdata, self.problem.ydata, yfit=self.yfit, residuals=True )
+            Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata, 
+                    figsize=[12,8], residuals=True )
 
     def getMaxIter( self ) :
         """
         Return the maximum number of iteration.
         """
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.worst )
+
+    def getMaxIterMED( self ) :
+        """
+        Return the maximum number of iteration in case of EvidenceProblem.
+        """
+        try :
+            self.csEvid += [math.exp( self.logZ )]
+        except :
+            self.csEvid = [math.exp( self.logZ )]
+
+        if self.iteration < self.minimumIterations :
+            return self.minimumIterations
+
+        kmed = 0
+        medlim = 0.5 * self.csEvid[-1]
+        for cs in self.csEvid :
+            if cs > medlim : break
+            kmed += 1
+
+        return self.end * kmed
+
+
+    def getMaxIterEP( self ) :
+        """
+        Return the maximum number of iteration in case of EvidenceProblem.
+        """
+        if self.iteration < self.minimumIterations :
+            return self.minimumIterations
+        if ( self.samples[-1].logW < self.samples[-100].logW and 
+             self.samples[-1].logW < self.logZ - 16 ) :
+            return self.iteration
+        else :
+            return self.iteration + 100  
 
 #   det getScale( self, walker ) :
 #       np = walker.model.npchain
@@ -825,7 +867,7 @@ class NestedSampler( object ):
             None    distribution is Problem dependent.
             string  name of distribution; one of
                     "gauss", "laplace", "poisson", "cauchy", "uniform",
-                    "exponential", "bernouilli (TBD)"
+                    "exponential", "bernoulli"
             ErrorDistribution use this one
         limits : None or [low,high] or [[low],[high]]
             None    no limits implying fixed hyperparameters (scale,power,etc)
@@ -863,8 +905,10 @@ class NestedSampler( object ):
             self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )
         elif name == "model" :
             self.distribution = ModelDistribution( scale=scale, limits=limits )
-#        elif name == "bernouilli" :
-#            self.distribution = BernouilliErrorDistribution()
+#            self.getMaxIter = self.getMaxIterEP
+#            self.minimumIterations = max( self.minimumIterations, 100 )
+        elif name == "bernoulli" :
+            self.distribution = BernoulliErrorDistribution()
         else :
             raise ValueError( "Unknown error distribution %s" % name )
 
@@ -966,6 +1010,10 @@ class NestedSampler( object ):
         self.distribution.lowLhood = -math.inf
         for walker in self.walkers :
             self.initialEngine.execute( walker.id, -math.inf )
+
+#        for w in self.walkers :
+#            print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )
+#            w.check( nhyp=self.distribution.nphypar )
 
     def plotData( self, plot=False ):
         """
