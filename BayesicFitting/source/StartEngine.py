@@ -1,15 +1,17 @@
 import numpy as numpy
 from astropy import units
 import math
+import warnings
 from . import Tools
 from .Formatter import formatter as fmt
 from .Dynamic import Dynamic
 from .Engine import Engine
+from .ErrorsInXandYProblem import ErrorsInXandYProblem
 
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.7.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -128,13 +130,18 @@ class StartEngine( Engine ):
             else :
                 ktry += 1
 
-
         self.setWalker( walker.id, problem, allp, logL, fitIndex=fitIndex )
 
-
         wlkr = self.walkers[walker.id]
-        wlkr.check( nhyp=self.errdis.nphypar )
+#        print( walker.id, wlkr.id, wlkr.problem.model.npars, len( wlkr.allpars ), fmt( wlkr.logL ) )
+
+        nhyp = self.errdis.nphypar 
+        
+        nuisance = len( problem.xdata ) if isinstance( problem, ErrorsInXandYProblem ) else 0
+
+        wlkr.check( nhyp=nhyp, nuisance=nuisance )
 
         return len( fitIndex )
+
 
 

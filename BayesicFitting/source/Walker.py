@@ -170,21 +170,25 @@ class Walker( object ):
         return str( "Walker: %3d" % self.id )
 
 
-    def check( self, nhyp=0 ) :
+    def check( self, nhyp=0, nuisance=0 ) :
         """
         Perform some sanity checks.
         """
-        np = self.problem.npars
+        np = self.problem.model.npars
+        na = len( self.allpars )
+        nm = len( self.problem.model.parameters )
 
-        if not len( self.allpars ) == ( np + nhyp ) :
+        if not na == ( np + nhyp + nuisance):
             Tools.printclass( self )
             Tools.printclass( self.problem )
             raise ValueError( "Walker %d inconsistent parameter length : %d is not ( %d + %d )" %
-                ( self.id, len( self.allpars ), np, nhyp ) )
+                ( self.id, na, np, nhyp ) )
 
-#        if not len( self.allpars ) == len( self.fitIndex ) :
-#            raise ValueError( "Walker parameter length = %d fitIndex ( %d )" %
-#                ( len( self.allpars ), len( self.fitIndex ) ) )
+        if not nm == ( na - nhyp - nuisance) :
+            Tools.printclass( self )
+            Tools.printclass( self.problem.model )
+            raise ValueError( "Walker %d inconsistent with model: allpars: %d, model: %d, hyp: %d )" %
+                ( self.id, na, nm, nhyp ) )
 
         ## Does this (all hypars > 0) always have to be true ???
         if nhyp > 0 and self.allpars[-nhyp] <= 0 :
