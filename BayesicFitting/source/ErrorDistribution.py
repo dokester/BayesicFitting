@@ -8,7 +8,7 @@ from .Tools import setAttribute as setatt
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 

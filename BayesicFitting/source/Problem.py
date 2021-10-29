@@ -56,7 +56,7 @@ class Problem( object ):
     weights : array_like
         weights associated with ydata
     npars : int
-        number of parameters in the problem (might include nuisance parameters)
+        number of parameters in the model of the problem
     partype : float | int
         type of the parameters
 

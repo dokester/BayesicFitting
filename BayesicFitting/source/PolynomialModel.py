@@ -4,9 +4,9 @@ from . import Tools
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA Code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 
 class PolynomialModel( LinearModel ):
@@ -124,10 +124,8 @@ class PolynomialModel( LinearModel ):
         x = numpy.ones( nxdata )
 
         partial = numpy.zeros( ( nxdata, self.npmax ), dtype=float )
-        k = 0
-        for i in range( self.npmax ) :
+        for k in range( self.npmax ) :
             partial[:,k] = x
-            k += 1
             x *= xdata
 
         if parlist is None :

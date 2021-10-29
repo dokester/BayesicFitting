@@ -104,7 +104,7 @@ class EvidenceProblem( ClassicProblem ):
 
     def myDistribution( self ) :
         """
-        Return the default preferred ModelDistribution: "modeldis"
+        Return the default preferred ModelDistribution: "model"
         """
         return "model"
 

@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2021 Do Kester
 
 class SineAmpModel( LinearModel ):
     """
@@ -128,7 +128,7 @@ class SineAmpModel( LinearModel ):
 
         """
         nxdata = Tools.length( xdata )
-        np = self.npbase if parlist is None else len( parlist )
+        np = self.npmax if parlist is None else len( parlist )
         partial = numpy.zeros( ( nxdata, np ), dtype=float )
 
         parts = { 0 : ( lambda: numpy.cos( 2 * math.pi * self.frequency * xdata ) ),

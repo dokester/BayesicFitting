@@ -8,7 +8,7 @@ from .Tools import printclass
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -85,6 +85,10 @@ class Prior( object ):
     _urng : float
         urange (hi-lo) in unit
     """
+
+##  TBD : 1. change all self.attribute = value to setattr( "attribute, value )
+##        2. forbid external settings of (most) attributes except through methods
+
 
     #*********CONSTRUCTORS***************************************************
     def __init__( self, limits=None, circular=False, domain=[-math.inf,math.inf],

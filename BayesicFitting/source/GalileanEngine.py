@@ -12,7 +12,7 @@ from .Engine import DummyPlotter
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -166,7 +166,7 @@ class GalileanEngine( Engine ):
                 um.mirrorOnLowL( dLdp )
                 ptry[fitIndex] = um.stepPars( 1 - f )
 
-                self.plotter.move( pedge, ptry, col=2, sym=0 )
+                self.plotter.move( pedge, ptry, col=2 )
             else:                                       # mirroring failed; do reverse
                 size *= 0.7
                 um.reverseVelocity( size )

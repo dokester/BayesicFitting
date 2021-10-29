@@ -8,9 +8,9 @@ from .Kepplers2ndLaw import Kepplers2ndLaw
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.7.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2021 Do Kester
 
 class StellarOrbitModel( NonLinearModel ):
     """
@@ -59,7 +59,7 @@ class StellarOrbitModel( NonLinearModel ):
     ----------
     keppler : Kepplers2ndLaw()
         to calculate the radius and true anomaly
-    noutput : int
+    ndout : int
         The number of outputs is 2. Use @MultipleOutputProblem.
     spherical : bool
         if True return the results in spherical coordinates.
@@ -109,7 +109,7 @@ class StellarOrbitModel( NonLinearModel ):
         names = ["eccentricity", "semimajoraxis", "period", "phase since periastron",
                   "inclination", "north2nodes", "nodes2periastron"]
 
-        setatt( self, "noutput", 2 )
+        setatt( self, "ndout", 2 )
         setatt( self, "spherical", spherical )
 
         super( StellarOrbitModel, self ).__init__( 7, copy=copy, params=param,
