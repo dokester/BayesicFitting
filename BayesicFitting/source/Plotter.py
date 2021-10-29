@@ -7,9 +7,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "2.8.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #
 # The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #
-#   2017 - 2020 Do Kester
+#   2017 - 2021 Do Kester
 
 def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
              residuals=False ) :
@@ -106,3 +106,128 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
     if show :
         plt.show()
 
+
+def plotSampleList( sl, xdata, ydata, errors=None, xlow=None, xhigh=None, npt=10000,
+        xlabel=None, ylabel=None, title=None, figsize=[7,5], residuals=False,
+        xlim=None, ylim=None, filename=None, transparent=False ) :
+    """
+    Plot the posterior as npt points from the SampleList.
+
+    Parameters
+    ==========
+    sl : SampleList
+        the samplelist containing samples from the posterior
+    xdata : arraylike
+        the xdata values; plotted for comparison
+    ydata : arraylike
+        the ydata values; plotted for comparison
+    xlow : float
+        lower edge of the model plot
+        default min( xdata )
+    xhigh : float
+        higher edge of the model plot
+        default max( xdata )
+    npt : int
+        number of points from the sample (def 10000)
+    xlabel : str
+        use as xlabel
+    ylabel : str
+        use as ylabel
+    title  : str
+        use as title
+    figsize : list of 2 floats
+        size of the figure
+    residuals : bool
+        plot the residuals in a lower panel
+
+    """
+    if xlabel is None : xlabel = "xdata"
+    if ylabel is None : ylabel = "ydata"
+
+    plt.figure( figsize=figsize )
+    ax0 = plt
+
+    km = sl.medianIndex
+    smp = sl[km]
+
+    if residuals :
+        plt.subplots_adjust( hspace=0.001 )
+        gs = gridspec.GridSpec( 2, 1, height_ratios=[4,1] )
+
+        ax1 = plt.subplot( gs[1] )
+        # plot zero line
+        ax1.plot( [min( xdata ),max( xdata )], [0,0], 'k-' )
+
+
+        res = ydata - sl.average( xdata )
+        nd = int( math.log10( len( ydata ) ) )
+        mrksz = ( 5 - nd ) if nd < 4 else 1
+        ax1.plot( xdata, res, 'k.', markersize=mrksz )
+        ax1.margins( 0.05, 0.05 )
+        yt = plt.ylim()
+        ymx = max( abs( yt[0] ), abs( yt[1] ) )
+        ytk = Tools.nicenumber( 0.7 * ymx )
+
+#        print( "Plotter  ", fmt( yt ), fmt( ymx ), fmt( ytk ) )
+ 
+        plt.yticks( [-ytk, 0.0, ytk] )
+        plt.ylim( -ymx, ymx )
+        plt.ylabel( "residuals" )
+        plt.xlabel( xlabel )
+
+        ax0 = plt.subplot( gs[0] )
+        xticklabels = ax0.get_xticklabels()
+        plt.setp( xticklabels, visible=False )
+
+
+    if xlow is None : xlow = numpy.min( xdata )
+    if xhigh is None : xhigh = numpy.max( xdata )
+    xrng = xhigh - xlow
+
+    # plot npt samples from posterior
+    ntot = 0
+    swgt = 0.0
+
+    for s in sl :
+        swgt += s.weight * npt
+        ns = int( swgt )
+        if ns == 0 : continue
+    
+        #print( s.weight, swgt, ns )
+        xs = numpy.random.rand( ns ) * xrng + xlow
+
+        ax0.plot( xs, s.model.result( xs, s.parameters ), 'r.', markersize=2 )
+        swgt -= ns
+        ntot += ns
+
+    # plot data
+    if errors is None :
+        ax0.plot( xdata, ydata, 'k.' )
+    else :
+        ax0.errorbar( xdata, ydata, yerr=errors, fmt='k.' )
+    
+    # plot average in green
+    xs = numpy.linspace( xlow, xhigh, 201 )
+    ax0.plot( xs, sl.average( xs ), 'g-' )
+
+    plt.ylabel( ylabel )
+    if not residuals :
+        plt.xlabel( xlabel )
+
+    if xlim is not None :
+        plt.xlim( xlim[0], xlim[1] )
+    if ylim is None :
+        ylo = min( ydata )
+        yhi = max( ydata )
+        ylo -= 0.05 * ( yhi - ylo )
+        yhi += 0.05 * ( yhi - ylo )
+
+    plt.ylim( ylo, yhi )
+
+    if title is not None :
+        plt.title( title )
+
+    if filename is None :
+        plt.show()
+    else :
+        plt.savefig( filename, transparent=transparent )
