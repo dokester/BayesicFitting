@@ -15,7 +15,7 @@ from .Tools import setAttribute as setatt
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "2.7.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -107,7 +107,7 @@ class ModelDistribution( ScaledErrorDistribution ):
 
 
     #  *********LIKELIHOODS***************************************************
-    def logLikelihood( self, problem, allpars ) :
+    def logLikelihood_alt( self, problem, allpars ) :
         """
         Return the log( likelihood ) for a Gaussian distribution.
 
@@ -126,8 +126,10 @@ class ModelDistribution( ScaledErrorDistribution ):
 
         try :
             noiselim = self.hyperpar[0].getLimits()
+            fscale = None
         except :
             noiselim = None
+            fscale = self.scale
 
         if noiselim is None and mdl.npars < len( allpars ) :
             allpars[-1] = self.hyperpar[0].hypar
@@ -137,9 +139,9 @@ class ModelDistribution( ScaledErrorDistribution ):
 
         if self.arbiter is None :
             if isinstance( mdl, LinearModel ) :
-                ftr = Fitter( problem.xdata, mdl )
+                ftr = Fitter( problem.xdata, mdl, fixedScale=fscale )
             else :
-                ftr = LevenbergMarquardtFitter( problem.xdata, mdl )
+                ftr = LevenbergMarquardtFitter( problem.xdata, mdl, fixedScale=fscale )
         elif isinstance( self.abriter, BaseFitter ) :
             ftr = self.arbiter
 
@@ -150,13 +152,13 @@ class ModelDistribution( ScaledErrorDistribution ):
             name = str.lower( self.arbiter )
 
             if name == "fitter" :
-                ftr = Fitter( problem.xdata, mdl )
+                ftr = Fitter( problem.xdata, mdl, fixedScale=fscale )
             elif name.startswith( "leven" ) :
-                ftr = LevenbergMarquardtFitter( problem.xdata, model )
+                ftr = LevenbergMarquardtFitter( problem.xdata, model, fixedScale=fscale )
             elif name.startswith( "curve" ) :
-                ftr = CurveFitter( problem.xdata, model )
+                ftr = CurveFitter( problem.xdata, model, fixedScale=fscale )
             elif name.startswith( "amoeba" ) :
-                ftr = AmoebaFitter( problem.xdata, model )
+                ftr = AmoebaFitter( problem.xdata, model, fixedScale=fscale )
 
 #               produces circular imports
 #            elif name.startswith( "nested" ) :
@@ -170,21 +172,44 @@ class ModelDistribution( ScaledErrorDistribution ):
             else :
                 raise ValueError( "Cannot interpret %s" % self.arbiter )
 
+#        print( "MD Fitr    ", ftr ) 
+
         try :
             pars = ftr.fit( problem.ydata )
             evidence = ftr.getLogZ( limits=mdl.getLimits(), noiseLimits=noiselim )
 
             allpars[:mdl.npars] = pars
-#            if noiselim is not None :
-#                allpars[-1] = ftr.scale
+            if noiselim is not None :
+                allpars[-1] = ftr.scale
 
 #            print( problem.npars, mdl.npars, noiselim, ftr.scale, allpars )
 
         except numpy.linalg.LinAlgError :
             evidence = - sys.float_info.max
+        except ValueError :                         # math domain error
+            evidence = - sys.float_info.max
 
 
         return evidence
+
+    def logLdata( self, problem, allpars, mockdata=None ) :
+        """
+        Return the log( likelihood ) for each residual
+           
+        logL = sum( logLdata )
+
+        Parameters
+        ----------
+        problem : Problem
+            to be solved
+        allpars : array_like
+            list of all parameters in the problem   
+        mockdata : array_like
+            as calculated by the model
+        
+        """
+        return self.logLikelihood_alt( problem, allpars )
+
 
     def __str__( self ) :
         return "ModelDistribution"
