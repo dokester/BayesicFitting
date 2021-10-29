@@ -104,7 +104,6 @@ class DeathEngine( Engine ):
         nhyp = self.errdis.nphypar
         walker.problem.model.parameters = walker.allpars[:-nhyp] if nhyp > 0 else walker.allpars
 
-
         problem = walker.problem
         model = problem.model
         allp = walker.allpars

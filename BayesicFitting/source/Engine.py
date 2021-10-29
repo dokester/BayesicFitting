@@ -4,9 +4,9 @@ from . import Tools
 from .Walker import Walker
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "2.7.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2021 Do Kester
 
 class Engine( object ):
     """
@@ -144,7 +144,8 @@ class Engine( object ):
         walker.logL = logL
         self.walkers.setWalker( walker, kw )
 
-        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
+#       DONT DO THIS ANY MORE        
+#        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
 
 
     def checkBest( self, problem, allpars, logL, fitIndex=None ) :
