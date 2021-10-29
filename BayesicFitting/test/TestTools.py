@@ -236,6 +236,26 @@ class TestTools( unittest.TestCase ) :
         self.assertAlmostEqual( ax3, aver )
         self.assertAlmostEqual( sx3, stdv )
 
+    def testNicenumber( self ) :
+        self.oneNiceNumbertest( 0.00634, 0.006 )
+        self.oneNiceNumbertest( -0.013, -0.01 )
+        self.oneNiceNumbertest( 0.13, 0.1 )
+        self.oneNiceNumbertest( 0, 0 )
+        self.oneNiceNumbertest( 1.3, 1 )
+        self.oneNiceNumbertest( 31.3, 30 )
+        self.oneNiceNumbertest( 801.3, 800 )
+
+        self.oneNiceNumbertest( -1.3, -1 )
+        self.oneNiceNumbertest( -5.3, -5 )
+        self.oneNiceNumbertest( -1001.3, -1000 )
+
+
+    def oneNiceNumbertest( self, x, n ) :
+        k = Tools.nicenumber( x )
+        print( "nicenumber of %f is %f (%f)" % ( x, k, n ) )
+        self.assertTrue( k == n )
+
+
 
 
     @classmethod

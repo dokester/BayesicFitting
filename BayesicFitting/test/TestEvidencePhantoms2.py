@@ -671,7 +671,7 @@ class TestEvidence2( unittest.TestCase  ) :
             plt.show()
 
     def XXXtest9( self ) :
-        print( "====test9  Bernouilli ================" )
+        print( "====test9  Bernoulli ================" )
         plot = self.doplot
 
         nn = 61
@@ -688,7 +688,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
         model.setLimits( lowLimits=[-3,-2], highLimits=[3,2] )
 
-        ns = PhantomSampler( x, model, y, distribution='bernouilli', verbose=2 )
+        ns = PhantomSampler( x, model, y, distribution='bernoulli', verbose=2 )
 #            engines=["chord"] )
 #            engines=["galilean"] )
 
@@ -706,7 +706,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "logZ  ", fmt( logz ), " +- ", fmt( dlz ) )
         print( "logL  ", fmt( ns.distribution.logLikelihood( ns.problem, par2 ) ) )
 
-        bf = AmoebaFitter( x, model, errdis="bernouilli" )
+        bf = AmoebaFitter( x, model, errdis="bernoulli" )
 
         pars = bf.fit( y, tolerance=1e-20 )
         print( "pars  ", fmt( pars ) )
@@ -725,7 +725,7 @@ class TestEvidence2( unittest.TestCase  ) :
         plt.show()
 
     def XXXtest10( self ) :
-        print( "====test10  Bernouilli ================" )
+        print( "====test10  Bernoulli ================" )
         plot = self.doplot
 
         nn = 1000
@@ -746,7 +746,7 @@ class TestEvidence2( unittest.TestCase  ) :
         print( problem.npars, problem.ncateg )
         print( problem.ydata.shape )
 
-        ns = PhantomSampler( problem=problem, distribution='bernouilli' )
+        ns = PhantomSampler( problem=problem, distribution='bernoulli' )
         ns.verbose = 2
 
 #        Tools.printclass( ns )

@@ -31,7 +31,7 @@ from .source.BasicSplinesModel import BasicSplinesModel
 from .source.BSplinesModel import BSplinesModel
 from .source.BaseFitter import BaseFitter
 from .source.BaseModel import BaseModel
-#from .source.BernouilliErrorDistribution import BernouilliErrorDistribution
+from .source.BernoulliErrorDistribution import BernoulliErrorDistribution
 from .source.BirthEngine import BirthEngine
 from .source.BracketModel import BracketModel
 #from .source.CategoricalFitter import CategoricalFitter
@@ -94,7 +94,6 @@ from .source.Model import Model
 from .source.ModelDistribution import ModelDistribution
 from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
-#from .source.MultiLogisticModel import MultiLogisticModel
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
 #from .source.NeuralNetModel import NeuralNetModel
@@ -132,6 +131,7 @@ from .source.SineDriftModel import SineDriftModel
 from .source.SineModel import SineModel
 from .source.SineSplineDriftModel import SineSplineDriftModel
 from .source.SineSplineModel import SineSplineModel
+from .source.SoftMaxModel import SoftMaxModel
 from .source.SplinesModel import SplinesModel
 from .source.SplinesDynamicModel import SplinesDynamicModel
 from .source.StartEngine import StartEngine
@@ -163,6 +163,7 @@ from .source.Formatter import formatter
 from .source.Formatter import fma
 from .source.Formatter import formatter_init
 from .source.Plotter import plotFit
+from .source.Plotter import plotSampleList
 from .source.Tools import printclass
 from .source import Tools
 #from .source import bspline

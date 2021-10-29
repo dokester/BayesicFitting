@@ -11,8 +11,8 @@ though all the computation is done in 8-byte floats, limited resources
 and sometimes the obnoxious shape of the likelihood landscape (or
 &chi;<sup>2</sup>-landscape) can make life for the fitter difficult.
 Another common bear on the road is the (near-)degeneracy in the model
-with respect to the data. It sometimes looks more like an art than a
-craft. 
+with respect to the data. It sometimes looks more like an art or a
+craft than like science
 
 For diagnostic (and debugging) purposes in the iterative fitters there
 is the `verbose` option, which prints increasingly more information for
@@ -143,6 +143,11 @@ square root of the number of points. Nestedsampler is doing that too.
 However, if the noise scale is fixed during the run of NestedSampler, 
 the standard deviations on the parameters is as much off as the true noise 
 scale differs from the provided noise scale.
+
+Even worse, if you set the scale of the error distribution to a fixed value 
+while the residuals are significantly smaller, their contributions to the 
+likelihood are all similarly small.   
+
 
 ### **Starting Problems with NestedSampler.**<br>
 Sometimes it looks like NestedSampler cannot find the maximum in the likelihood

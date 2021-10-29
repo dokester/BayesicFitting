@@ -38,7 +38,7 @@ __status__ = "Development"
 #  *
 #  *    2016 Do Kester
 
-class TestCompoundModel( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -296,6 +296,23 @@ class TestCompoundModel( unittest.TestCase ):
         model *= ExpModel()
         print( model )
         p = numpy.asarray( [0.0, 0.4, 0.2, 1.0, 0.0, 1.0, 1.3, -0.2] )
+        x = numpy.linspace( 0, 10, 101, dtype=float )
+
+        y = model.result( x, p )
+
+        stdModeltest( model, p, x=x, plot=self.doplot )
+
+    def testPipe3( self ) :
+        model = SoftMaxModel( ndim=1, ndout=2 )
+        model |= PolySurfaceModel( 3 )
+
+        print( model.npars )
+#        print( model )
+
+#        print( PolySurfaceModel( 2 ) )
+#        print( PolySurfaceModel( 3 ) )
+
+        p = numpy.asarray( [0.0, 0.4, 0.2, 1.0, 0.0, 0.0, 0.4, 0.2, 1.0, 0.0, 0.0, 0.4] )
         x = numpy.linspace( 0, 10, 101, dtype=float )
 
         y = model.result( x, p )

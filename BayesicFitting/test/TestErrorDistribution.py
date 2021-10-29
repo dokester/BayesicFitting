@@ -754,17 +754,20 @@ class TestErrorDistribution( unittest.TestCase ):
             print( "" )
 
 
-    def XXXtestBernouilliErrorDistribution( self ):
-        print( "====== Test Bernouilli Error Distribution ======================" )
+    def testBernoulliErrorDistribution( self ):
+        print( "====== Test Bernoulli Error Distribution ======================" )
         poly = LogisticModel( fixed={0:1} )
-        param = numpy.asarray( [0, 1], dtype=float )
+        param = numpy.asarray( [0,1], dtype=float )
         data = numpy.asarray( [0,0,0,0,0,1,1,1,1,1,1], dtype=int )
+        data = numpy.asarray( [1,1,1,1,1,1,0,0,0,0,0], dtype=int )
+
+        print( "x    : ", fmt( self.x, max=None ) )
         print( "Data : ", fmt( data, max=None ) )
         print( "yfit : ", fmt( poly.result( self.x, param ), max=None ) )
 
         problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
 
-        ped = BernouilliErrorDistribution( )
+        ped = BernoulliErrorDistribution( )
         self.assertFalse( ped.acceptWeight() )
 
         logL = ped.logLikelihood( problem, param )
@@ -786,10 +789,10 @@ class TestErrorDistribution( unittest.TestCase ):
 
         fitIndex = [0,1]
         dL = ped.partialLogL( problem, param, fitIndex )
-        aL = ped.partialLogL_alt( problem, param, fitIndex )
+#        aL = ped.partialLogL_alt( problem, param, fitIndex )
         nL = ped.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
-        print( "altpart = ", aL )
+#        print( "altpart = ", aL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 

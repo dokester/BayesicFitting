@@ -164,13 +164,15 @@ class TestFixedModels( unittest.TestCase ):
         p = numpy.asarray( [0.2,0.1,1.9,-1.2,1.3], dtype=float )
         print( sm.partial( x, p[2:] ) )
         print( m.partial( x, p ) )
+        print( m )
+        print( m.result( x, p ) )
+        stdModeltest( m, p, plot=self.doplot )
+
         pm = PolynomialModel( 2, fixed={0:1.0} )
         pm *= SineModel()
         print( pm )
         print( pm.result( x, p ) )
-        print( m )
-        print( m.result( x, p ) )
-        stdModeltest( m, p, plot=self.doplot )
+        stdModeltest( pm, p, plot=self.doplot )
 
     def testChebyshevPolynomialModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )

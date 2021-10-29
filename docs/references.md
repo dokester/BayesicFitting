@@ -59,6 +59,11 @@ AIP Conf. Proc., 1636, 62. 2014.<br>
 **Derivation of sideband gain ratio for Herschel/HIFI**
 A &amp; A 599 A115. 2017.<br>
 
+<a name="kester8"></a>  
++ Do Kester and Migo Mueller.
+**BayesicFitting, a PYTHON toolbox for Bayesian fitting and Evidence Calculation**
+Astronomy and Computing in press. 2021.<br>
+
 <a name="linden"></a>  
 + W. von der Linden, V. Dose, U. Toussaint. 
 **Bayesian Probabilty Theory.** 

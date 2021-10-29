@@ -43,7 +43,7 @@ class Test( unittest.TestCase ) :
 
     def test1( self ) :
 
-        print( "===========Graus Prior Limitation ===========" )
+        print( "===========Gauss Prior Limitation ===========" )
 
         NP = 100
         x = numpy.zeros( NP, dtype=float )

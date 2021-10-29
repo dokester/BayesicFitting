@@ -93,18 +93,14 @@ def stdModeltest( model, par, x=None, plot=None, warn=[] ):
         tc.assertTrue( model.testPartial( x[1], par ) == 0 )
         model.xUnit = units.m
         model.yUnit = units.kg
-        print( model.parlist )
+        Tools.printclass( model )
         for k in range( model.npchain ):
             print( "%d  %-12s  %-12s"%(k, model.getParameterName( k ),
                     model.getParameterUnit( k ) ) )
 
 
         print( "Integral   ", model.getIntegralUnit( ) )
-#        plt.plot( x, model.result( x, par ), 'k.' )
-#        plt.show( )
         nerr = model.testPartial( x, par )
-#        print( nerr )
-
         tc.assertTrue( nerr == 0 )
 
         mc = model.copy( )
@@ -133,6 +129,7 @@ def std2dModeltest( model, par, x=None, plot=None, warn=[] ):
         numpy.set_printoptions( precision=3, suppress=True )
 
         print( "***Std2dModelTest***************" )
+
         if x is None :
             x  = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8]] )
 

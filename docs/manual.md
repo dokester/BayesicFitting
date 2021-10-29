@@ -6,7 +6,8 @@
 
 ## Bayesian model fitting and evidence calculation.
 
-
+We have a paper out in "Astronomy and Computing" about BayesicFitting.
+[Kester and Mueller (2021)](./references.md/#kester8).
 
 <!--
 Fitting is about finding a model, a mathematical relation, that best
@@ -19,12 +20,12 @@ It is achieved by minimizing the distance between the model and the data.
 It is assumed that the reader is familiar with the Bayesian ways to
 perform inference from data. If not,
 there are enough books on the market that explain what it is about. 
-E.g. [Sivia](./references.md/#sivia), 
-[Bishop](./references.md/#bishop),
-[von der Linden](./references.md/#linden) and 
-[Jaynes](./references/#jaynes).
+E.g. [Sivia (2006)](./references.md/#sivia), 
+[Bishop (2006)](./references.md/#bishop),
+[von der Linden (2014)](./references.md/#linden) and 
+[Jaynes (2003)](./references/#jaynes).
 The equations implemented in this toolbox can be found in
-[Kester 2](./references.md/#kester2).
+[Kester (2004)](./references.md/#kester2).
 
 
 The BayesicFitting toolbox can be used to fit data to a model *and* to 
@@ -267,7 +268,7 @@ models and apply the operation.
 For compound models the (partial) derivatives, (parameter) names etc are 
 properly defined.
 
-All operations are also available as assignment operators: += -= *= /= |=
+All operations are also available as assignment operators: +=, -=, *=, /=, and |=.
 
 
 #### Addition (+)
@@ -325,15 +326,39 @@ A special operation that can be applied to two models
 is the pipe, indicated by |. It acts like the (unix) pipe: the
 result of the left-hand model is used as input of the right-hand model.
 
+When m<sub>1</sub>, m<sub>2</sub> and m<sub>3</sub> are models implementing
+
+> **m<sub>1</sub> = f<sub>1</sub>(x:p)**
+> **m<sub>2</sub> = f<sub>2</sub>(x:q)**
+> **m<sub>3</sub> = f<sub>3</sub>(x:r)**
+
+then
+
+> **m<sub>4</sub> = m<sub>1</sub> | m<sub>2</sub> = f<sub>4</sub>(x:p,q) = f<sub>2</sub>( f<sub>1</sub>(x:p), q )**.
+
+The input of m<sub>2</sub> is relacced by the result of m<sub>1</sub>. While in case of
+
+> **m<sub>5</sub> = m<sub>1</sub> | m<sub>2</sub> + m<sub>3</sub> = f<sub>5</sub>(x:p,q,r) = f<sub>2</sub>( f<sub>1</sub>(x:p), q ) + f<sub>3</sub>(x:r)**.
+
+the m1 only influences m2, not m3. To influence both m<sub>2</sub> and m<sub>3</sub>, brackets are needed.
+
+> **m<sub>6</sub> = m<sub>1</sub> | ( m<sub>2</sub> + m<sub>3</sub> ) = f<sub>6</sub>(x:p,q,r) = 
+f<sub>2</sub>( f<sub>1</sub>(x:p), q ) + f<sub>3</sub>( f<sub>1</sub>(x:p),:r )**.
+
+
+<!---
 When m1, m2 and m3 are models, implementing f1( x:p ), f2( x:q ) and f3( x,r ), 
 resp., then m4 = m1 | m2 implements f4( x:p,q ) = f2( f1(x:p), q ).
 m5 = m1 | m2 + m3 implements f5( x:p,q,r ) = f2( f1(x:p):q ) + f3(x:r);
 i.e. the m1 only influences m2, not m3.
 To influence both m2 and m3, write m6 = m2 + m3 and m7 = m1 | m6 
 It implements f5( x:p,q,r ) = f2( f1(x:p):q ) + f3( f1(x:p):r ) 
+--->
 
 This is the only place where a 2-d model can be combined with a 1-d
-model as the output of a 2-d model is 1 dimensional.
+model as the output of a 2-d model is 1 dimensional. Or in general the 
+output dimensionality of the left hand model must conform the input 
+dimensionality of the right hand model.
 
 In the FixedModels paragraph a gauss modulated arctan model was
 constructed. In that model the gauss and the arctan had its own x-shift
@@ -385,7 +410,7 @@ is different from
 The first is processed as `( m1 * m2 ) + m3` while the second is processed
 as `m1 * ( m2 + m3 )`. The brackets are introduced implicitly. 
 This feature was used in the piping example above.
-Explicit placement of brackets can be done with **BracketModel**.
+Explicit placement of brackets can be done as m = m1 * ( m2 + m3 ).
 
 ### ConstantModel
 
@@ -393,7 +418,7 @@ The **ConstantModel** returns the same (constant) result no matter what
 the input. The result can be a single value (0, 1 or whatever) or the 
 result of another **Model** with known parameters or even a table.
 
-The **ConstantModel** has no parameters and strictly speaken, it can not
+The **ConstantModel** has no parameters and strictly speaking, it can not
 be fitted. It states that the the data, except for the constant form, is
 mere noise.  It might seem a useless class, but it can be interesting in
 model comparison. E.g. to decide whether some feature is present or not.
@@ -513,12 +538,13 @@ It is indeed debatable whether the internal structure is not just
 another set of parameters. We chose this way as changes in the internal
 structure can be much more complicated than a simple change in value. 
 
+<a name="multioutput"></a>
 ### Multiple Output Models
 
 Some models are easier defined when it results in 2 (or more) values per
 observation. Eg. the outcome of football match (3-1), or the position of
 a star in orbit around another (distance and angle). These model have an
-extra attribute `noutput` indicating how many output values per
+extra attribute `ndout` indicating how many output values per
 observation are present. 
 
 The use of **MultipleOutputProblem** is needed in **NestedSampler** to
@@ -668,12 +694,12 @@ it must always be used to compare one model with other model(s).
 For the casual user the evidence is the single item that lifts Bayesian
 fitting way above ordinary fitting. Wonderful things can be done with it
 that are beyond the standard ways. See my papers 
-[Kester 1](./references.md/#kester1), 
-[Kester 3](./references.md/#kester3), 
-[Kester 4](./references.md/#kester4), 
-[Kester 5](./references.md/#kester5), 
-[Kester 6](./references.md/#kester6) and
-[Kester 7](./references.md/#kester7).
+[Kester (1999)](./references.md/#kester1), 
+[Kester, Beitema and Lutz (2009)](./references.md/#kester3), 
+[Kester and Bontekoe(2010)](./references.md/#kester4), 
+[Kester (2010)](./references.md/#kester5), 
+[Kester, Avruch and Teyssier (2014)](./references.md/#kester6) and
+[Kester, Higgins and Teyssier (2017)](./references.md/#kester7).
 
  
 The evidence can only be calculated when the limits on the parameters
@@ -838,7 +864,7 @@ appropriately weighted.
 **ErrorDistribution** to calculate the likelihoods.
 
 Nested sampling is an idea of David McKay and John Skilling.
-Skilling has written a separate chapter in [Sivia's book](#ref1)
+Skilling has written a separate chapter in [Sivia's book](./refrences.md/#sivia)
 explaining the Nested Sampling idea, including an algorithm in C, which
 served as the basis (via C, and JAVA) for our implementation. 
 
@@ -987,7 +1013,10 @@ priors are taken from the constituent simple models, including the
 repetition of the last prior. So priors should be set, before using the
 simple model in a compound one. 
 
-Suitable **Prior**s can have limits, which may be circularly folded.
+Suitable **Prior**s can have limits, which may be circularly folded for
+parameters that represent a phase or a period.
+The circular keyword either takes a boolean, to indicate that it is circular 
+between the limits, or a float to define the period of circularity.
 
     lp = LaplacePrior( center=1.0, scale=0.5, circular=3 )
     pr = UniformPrior( limits=[2,3], circular=True )
@@ -999,7 +1028,8 @@ See below for lists of available [**Prior**s](#list-priors).
 
 The **ErrorDistribution** determines the likelihood function.
 
-Except the **PoissonErrorDistribution** all others have one or more
+Except the **PoissonErrorDistribution** and the
+**BernoulliErrorDistribution** all others have one or more
 **HyperParameter**s which are governed by a **Prior**, unless they
 are known in advance.
 
@@ -1007,28 +1037,47 @@ are known in advance.
     dis.setLimits( [0.1, 1.0] )
     ns = NestedSampler( xdata, model, ydata, distribution=dis )
 
-Since version 2.0 the **ErrorDistribution**s has changed its interface.
-Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
-Now the responsiblities of ErrorDistribution and Problem are better separated. 
+The **GaussErrorDistribution** is an descendant of the abstract 
+**ScaledErrorDistribution**. As is the **LaplaceErrorDistribution**, the
+**ExponentialErrorDistribution** and the **UniformErrorDistribution**.
+They are all different norms of the residuals. The
+**ExponentialErrorDistribution** has another **HyperParameter** called
+power, It is the (fractional) norm.
+
+The **PoissonErrorDistribution** is for counting experiments, with 
+integer-valued data. 
+
+The **BernoulliErrorDistribution** is for categorical data.  It needs a
+model with as much outputs (ndout) as there are categories.  The
+dependent variable (y) contains an integer (< ndout) indicating to whci
+category this data point belongs.  Each model output gives the
+probability (0 <= p <= 1), that the item falls in that category.  
+At present only the **SoftMaxModel** is available. 
+
+The use of a mixture of 2 error distributions
+(**MixedErrorDistribution**) is shown in
+[outliers2](#../examples/outliers-2.ipynb).
 
 To avoid certain combinations of parameters a "constrain" attribute can be 
 attached to an **ErrorDistribution**. It needs to be a user-provided callable 
 method in the form
 
-    def insideSphere( logL, problem, allpars ) :
-        return logL if numpy.sum( numpy.square( allpars ) ) < 1.0 else -math.inf
+    def insideSphere( logL, problem, allpars, lowLogL ) :
+        return logL if numpy.sum( numpy.square( allpars ) ) < 1.0 else lowlogL - 1
 
     errdis.constrain = insideSphere
 
-When the to be avoided condition occurs logL should be returned as -INF; 
-otherwise logL should be returned unchanged. It should be noted that the 
+When the to be avoided condition occurs logL is returned as one less than the 
+low likelihood limit so it will never be selected. 
+Otherwise logL should be returned unchanged. It should be noted that the 
 acceptable area should be large enough that it can reasonly be sampled randomly
 for an initial ensemble of **Walker**s.
 
-The use of a mixture of 2 error distributions is shown in
-[outliers2](#../examples/outliers-2.ipynb).
-
 See below for lists of available [**ErrorDistribution**s](#list-errdis).
+
+Since version 2.0 the **ErrorDistribution**s has changed its interface.
+Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
+Now the responsiblities of ErrorDistribution and Problem are better separated. 
 
 ### Problem
 
@@ -1044,9 +1093,33 @@ there are weights. The **ClassicProblem** is invoked by default.
 
 Other **Problem**s need to be separately invoked.
 
-    problem = ErrorsInXandYProblem( model, xdata, ydata )
+In case there could be errors both in the independent variable (x) and in
+the dependent variable (y), the **ErrorsInXandYProblem** should be
+invoked. To solve this kind of problems we need to assign extra
+parameters for all values of the independent variable (x). These new
+positions need to be estimated along with the parameters of the model
+itself. These new parameters need a prior. A **GaussPrior** with a fixed
+scale is advised. The priors will be centered on the measured x values.
+
+    prior = GaussPrior( scale=0.1 )
+    problem = ErrorsInXandYProblem( model, xdata, ydata, prior=prior )
     ns = NestedSampler( problem=problem )
     evidence = ns.sample()
+
+The extra parameters needed here, are called nuisance parameters.
+
+For models that naturally produce 2 or more dimensional outputs (like
+the **StellarOrbitModel**) the **MultipleOutputProblem** need to be
+invoked. It just reshapes the residuals into a 1-dim array before it is
+used to calculate the likelihood..
+
+The **EvidenceProblem** uses the evidence calculated for different
+instantiations of a **Modifiable** model, as "likelihood" in a next
+level of Bayes' rule to determine which of the instantiations is best.
+The "likelihood" to be used here is the **ModelDistribution**. It
+calculates the evidence of the model either as a Gaussian approximation
+or by using **NestedSampler** on a **ClassicProblem**.
+
 
 See below for lists of available [**Problem**s](#list-problems). 
 More **Problem**s can be expected in later versions.
@@ -1158,8 +1231,10 @@ kernels and miscellaneous.
     Harmonic oscillator Model. See [example](../examples/harmonicfit.ipynb)
 + **KernelModel**<br>
     Kernel Model, a Model build around a [**Kernel**](#synops-kernel).
++ **LogisticModel**<br>
+    Logistic function.
 + **LorentzModel**<br>
-    Lorentzian Model.
+    Lorentz profile
 + **PadeModel**<br>
     General Pade model of arbitrary degrees in numerator and denominator.
     See [example](../examples/boyles-law.ipynb) 
@@ -1211,6 +1286,11 @@ kernels and miscellaneous.
 + **StellarOrbitModel**<br>
     Orbit of a double star as function of time, resulting in 2d sky position.
     [Boule](#ref6). See [example](../examples/alphaComae.ipynb)
+
+#### Simple models more-dimensional inputs and outputs
+
++ **SoftMaxModel**<br>
+    Generalization of the LogisticModel over multiple inputs and outputs
 
 #### Simple dynamic or modifiable models.
 
@@ -1362,6 +1442,9 @@ BaseFitters contain common methods for fitters that inherit from them.
 + **ErrorsInXandYProblem**<br>
     Classic problem with errors in both xdata and ydata.
     See [example](../examples/XandYErrors.ipynb)
++ **EvidenceProblem**<br>
+    For **Dynamic** and **Modifiable** models. [Kester and Mueller (2021)](./references.md/#kester8).
+    see [example](../examples/chirp2.ipynb).
 + **MultipleOutputProblem**<br>
     Problems with more dimensional output values
     See [example](../examples/alphaComae.ipynb)
@@ -1400,8 +1483,8 @@ BaseFitters contain common methods for fitters that inherit from them.
 <a name="list-errdis"></a>
 #### Error distributions.
 
-+ **CauchyErrorDistribution**<br>
-    To calculate a Cauchy or Lorentz likelihood.
++ **BernoulliErrorDistribution**<br>
+    To calculate a likelihood for categorials.
 + **GaussErrorDistribution**<br>
     To calculate a Gauss likelihood.
     See [example](../examples/outliers-2.ipynb)
@@ -1412,6 +1495,9 @@ BaseFitters contain common methods for fitters that inherit from them.
 + **MixedErrorDistribution**<br>
     A mixture of 2 errordistributions
     See [example](../examples/outliers-2.ipynb)
++ **ModelDistribution**<br>
+    For use in **EvidenceProblem**
+    See [example](../examples/chirp.ipynb)
 + **PoissonErrorDistribution**<br>
     To calculate a Poisson likelihood.
     See [example](../examples/summerdays.ipynb)
@@ -1480,6 +1566,16 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 
 
 <table>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+}
+</style>
+
 <tr>
   <th>name</th>
   <th>function</th>
@@ -1573,65 +1669,3 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 + **Tools**<br>
     Various tools.
 
-<a name="refs"></a>  
-## 4. References
-
-<a name="ref1"></a>
-1. D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
-Oxford University Press. 2006.<br>
-
-<a name="ref2"></a>
-2. C.M. Bishop. **Pattern Recognition and Machine Learning.**
-Springer Science. 2006.<br>
-
-<a name="ref3"></a>  
-3. W. von der Linden, V. Dose, U. Toussaint. **Bayesian Probabilty Theory.** 
-Cambridge University Press. 2014.<br>
-
-<a name="ref4"></a>  
-4. E.T. Jaynes. **Probability Theory.**
-Cambridge University Press. 2003.<br>
-
-<a name="ref5"></a>  
-5. P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
-Cambridge University Press. 2005.<br>
-
-<a name="ref6"></a>  
-6. C. Boule, K. Andrews, A. Penfield, I. Puckette, K. A. Goodale and 
-S. A. Harfenist. **Determining Binary Stellar Orbits Using Kepplers Equation**.
-Journal of Double Star Observations, Vol 13, p 189. 2017.<br>
-
-<a name="ref7"></a>  
-7. Do Kester. **Straight Lines.**
-Maximum Entropy and Bayesian Methods. Eds: Von der Linden, W., et al.
-Garching, Kluwer Academic Publishers, pp. 179-188, 1999.<br>
-
-<a name="ref8"></a>  
-8. Do Kester and Romke Bontekoe.
-**Darwinian Model Building.**
-Bayesian Inference and Maximum Entropy Methods in Science and Engineering.
-Eds: Ali-Mohammad Djafari et al. Chamonix. 
-AIP Conference Proceedings 1305, p.49. 2010.<br>
-
-<a name="ref9"></a>  
-9. Do Kester.
-**The Ball is Round.**
-Bayesian Inference and Maximum Entropy Methods in Science and Engineering.
-Eds: Ali-Mohammad Djafari et al. Chamonix.
-AIP Conference Proceedings 1305. p.107. 2010.<br>
-
-<a name="ref10"></a>  
-10. D. Kester, D. Beintema and D. Lutz. 
-**SWS Fringes and Models**
-ESA SP-481, Vilspa, pp. 375-378. 2009.<br>
-
-<a name="ref11"></a>  
-11. Do Kester, Ian Avruch and David Teyssier. 
-**Correction of Electric Standing Waves.** 
-in Bayesian Inference and Maximum Entropy Methods in Science and Engineering,
-AIP Conf. Proc., 1636, 62. 2014.<br>
-
-<a name="ref12"></a>  
-12. Do Kester, Ronan Higgins and David Teyssier.
-**Derivation of sideband gain ratio for Herschel/HIFI**
-A &amp; A 599 A115. 2017.<br>

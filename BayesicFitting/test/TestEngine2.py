@@ -56,7 +56,7 @@ class TestEngine2( unittest.TestCase ):
 
         xdata = numpy.linspace( 0.0, 10.0, np )
         data = numpy.ceil( numpy.arange( np, dtype=float ) / 2.3 + 2.4 )
-        numpy.random.seed( 345345 )
+        numpy.random.seed( 4534 )
         data += 0.4 * numpy.random.randn( np )
 #        print( data )
         numpy.set_printoptions( precision=3, suppress=True )

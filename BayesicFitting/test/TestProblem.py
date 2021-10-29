@@ -376,6 +376,7 @@ class TestProblem( unittest.TestCase ):
 
         xopt = ns.samples.nuisance
         yopt = mdl.result( xopt, ns.parameters )
+
         plt.plot( xopt, yopt, 'k-' )
         for k in range( 4 ):
             plt.plot( [x[k],xopt[k]], [y[k],yopt[k]], 'g-')
@@ -505,13 +506,12 @@ class TestProblem( unittest.TestCase ):
 
         ns = NestedSampler( problem=problem )
         ns.verbose = 2
-
-        logE = ns.sample( )
+        logE = ns.sample( plot=self.doplot )
 
         ns = NestedSampler( problem=problem, limits=[0.1,10.0] )
         ns.verbose = 2
 
-        logE = ns.sample( )
+        logE = ns.sample( plot=self.doplot )
 
 
 
