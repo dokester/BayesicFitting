@@ -107,8 +107,8 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
         plt.show()
 
 
-def plotSampleList( sl, xdata, ydata, errors=None, xlow=None, xhigh=None, npt=10000,
-        xlabel=None, ylabel=None, title=None, figsize=[7,5], residuals=False,
+def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
+        residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5], 
         xlim=None, ylim=None, filename=None, transparent=False ) :
     """
     Plot the posterior as npt points from the SampleList.
@@ -121,24 +121,28 @@ def plotSampleList( sl, xdata, ydata, errors=None, xlow=None, xhigh=None, npt=10
         the xdata values; plotted for comparison
     ydata : arraylike
         the ydata values; plotted for comparison
-    xlow : float
-        lower edge of the model plot
-        default min( xdata )
-    xhigh : float
-        higher edge of the model plot
-        default max( xdata )
+    errors : None of arraylike
+        (No) errors on the ydata are displayed
     npt : int
-        number of points from the sample (def 10000)
-    xlabel : str
+        number of points from the sample (10000)
+    residuals : bool
+        plot the residuals in a lower panel (False)
+    xlabel : None or str
         use as xlabel
-    ylabel : str
+    ylabel : None or str
         use as ylabel
-    title  : str
+    title  : None or str
         use as title
+    xlim : None or list of 2 floats
+        limits on x-axis
+    ylim : None or list of 2 floats
+        limits on y-axis
     figsize : list of 2 floats
         size of the figure
-    residuals : bool
-        plot the residuals in a lower panel
+    filename  : None or str
+        name of png file; otherwise show
+    transparent : bool
+        make the png file transparent
 
     """
     if xlabel is None : xlabel = "xdata"
@@ -180,9 +184,9 @@ def plotSampleList( sl, xdata, ydata, errors=None, xlow=None, xhigh=None, npt=10
         plt.setp( xticklabels, visible=False )
 
 
-    if xlow is None : xlow = numpy.min( xdata )
-    if xhigh is None : xhigh = numpy.max( xdata )
-    xrng = xhigh - xlow
+    if xlim is None : 
+        xlim = [numpy.min( xdata ), numpy.max( xdata )]
+    xrng = xlim[1] - xlim[0]
 
     # plot npt samples from posterior
     ntot = 0
@@ -194,7 +198,7 @@ def plotSampleList( sl, xdata, ydata, errors=None, xlow=None, xhigh=None, npt=10
         if ns == 0 : continue
     
         #print( s.weight, swgt, ns )
-        xs = numpy.random.rand( ns ) * xrng + xlow
+        xs = numpy.random.rand( ns ) * xrng + xlim[0]
 
         ax0.plot( xs, s.model.result( xs, s.parameters ), 'r.', markersize=2 )
         swgt -= ns
@@ -214,14 +218,13 @@ def plotSampleList( sl, xdata, ydata, errors=None, xlow=None, xhigh=None, npt=10
     if not residuals :
         plt.xlabel( xlabel )
 
-    if xlim is not None :
-        plt.xlim( xlim[0], xlim[1] )
     if ylim is None :
         ylo = min( ydata )
         yhi = max( ydata )
         ylo -= 0.05 * ( yhi - ylo )
         yhi += 0.05 * ( yhi - ylo )
 
+    plt.xlim( xlim[0], xlim[1] )
     plt.ylim( ylo, yhi )
 
     if title is not None :
