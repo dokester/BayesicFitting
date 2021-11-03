@@ -62,7 +62,7 @@ A &amp; A 599 A115. 2017.<br>
 <a name="kester8"></a>  
 + Do Kester and Migo Mueller.
 **BayesicFitting, a PYTHON toolbox for Bayesian fitting and Evidence Calculation**
-Astronomy and Computing in press. 2021.<br>
+Astronomy and Computing, Vol 37, 100503. 2021. doi: 10.1016/j.ascom.2021.100503<br>
 
 <a name="linden"></a>  
 + W. von der Linden, V. Dose, U. Toussaint. 

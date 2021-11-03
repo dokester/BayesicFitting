@@ -76,7 +76,7 @@ A list of troublesome situations and what to do about it.
 An architectural design document, displaying the relationships between 
 the classes. 
 
-+ [Style](./style.md)<br>
++ [Style](./code-style.md)<br>
 A document about coding style adhered to by this project.
 
 + [References](./references.md)  

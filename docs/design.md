@@ -591,32 +591,3 @@ likelihood boundary. The **GalileanEngine** is the most efficient
 engine.  
 
 
-<!--
-
-<a name="reference"></a>
-
-## 5. References.
-
-[1]: D.S. Sivia and J. Skilling. **Data Analysis, A Bayesian Tutorial.** 
-2nd Edition. Oxford University Press. 2006.<br>
-[2]: C.M. Bishop. **Pattern Recognition and Machine Learning.**
-Springer Science. 2006.<br>
-[3]: W. von der Linden, V. Dose, U. Toussaint. **Bayesian Probabilty
-Theory.** 
-Cambridge University Press. 2014.<br>
-[4]: E.T. Jaynes. **Probability Theory.**
-Cambridge University Press. 2003.<br>
-[5]: W.H.Press, S.A.Teukolsky, W.T.Vetterling and B.P.Flannery 
-**Numerical Recipes**, 
-Cambridge University Press. 1988-2007. <br>
-
-
-D.J.M.Kester (2004), "A Software Package for Parameter Estimation and 
-Model Comparison."
-In: Bayesian Inference and Maximum Entropy Methods in Science and Engineering
-Eds: R. Fischer et al.
-Garching, 2004, AIP Conference Proceedings 735 2004, p. 379.<br>
-Also available 
-<a href="http://www.sron.rug.nl/~do/publications/maxent04.ps">here</a>.
--->
-
