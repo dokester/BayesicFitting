@@ -50,7 +50,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2021
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "2.8.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -210,7 +210,7 @@ class NestedSampler( object ):
     Author       Do Kester.
 
     """
-    TWOP32 = 2 ** 32
+    TWOP31 = 2 ** 31        ## 2 ** 32 raises an error on Windows systems.
     ENSEMBLE = 100
 
     #  *********CONSTRUCTORS***************************************************
@@ -960,7 +960,7 @@ class NestedSampler( object ):
 
             try :
                 Eng = enginedict[name]
-                seed = self.rng.randint( self.TWOP32 )
+                seed = self.rng.randint( self.TWOP31 )
                 engine = Eng( self.walkers, self.distribution,
                               seed=seed, verbose=self.verbose )
             except :
@@ -1000,7 +1000,7 @@ class NestedSampler( object ):
             try :
                 name = self.problem.myStartEngine()
                 StartEng = startdict[name]
-                seed = self.rng.randint( self.TWOP32 )
+                seed = self.rng.randint( self.TWOP31 )
                 self.initialEngine = StartEng( self.walkers, self.distribution,
                         seed=seed )
             except :
