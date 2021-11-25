@@ -6,7 +6,7 @@ A package for model fitting and Bayesian evidence calculation.
 quick look at [this example.]
 (https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples/sealevel.ipynb))
 
-Citation index:
+Citation index for the BayesicFitting package:
 DOI: 10.5281/zenodo.2597200
 
 
@@ -17,6 +17,11 @@ DOI: 10.5281/zenodo.2597200
    * Multi-dim input and output issues
    * Updated some other tests and examples
    * Documentation and other small issues.
+
+ + 25 Nov 2021 version 2.8.1
+   * Cleanup in Plotter
+   * Documentation issues; Replaced style.md by code-style.md
+   * Correcting error on Windows systme
 
 ## Content
 
@@ -126,7 +131,7 @@ A list of the terms used throughout this package, with explanations.
 An architectural design document, displaying the relationships between 
 the classes. 
 
-+ [Style](https://github.com/dokester/BayesicFitting/blob/master/docs/style.md)<br>
++ [Style](https://github.com/dokester/BayesicFitting/blob/master/docs/code-style.md)<br>
 A few notes on my style of code and documenation.
 
 + [References](https://github.com/dokester/BayesicFitting/blob/master/docs/references.md)<br>
