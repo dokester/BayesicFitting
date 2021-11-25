@@ -211,6 +211,8 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         ax0.errorbar( xdata, ydata, yerr=errors, fmt='k.' )
     
     # plot average in green
+    xlow = min( xdata )
+    xhigh = max( xdata )
     xs = numpy.linspace( xlow, xhigh, 201 )
     ax0.plot( xs, sl.average( xs ), 'g-' )
 
