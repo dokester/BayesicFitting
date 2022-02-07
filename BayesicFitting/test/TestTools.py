@@ -176,6 +176,12 @@ class TestTools( unittest.TestCase ) :
         x = Tools.toArray( [3,4.5], ndim=2 )
         print( x, x.shape, x.__class__ )
         self.assertTrue( isinstance( x, numpy.ndarray ) and x.ndim == 2 )
+        x = Tools.toArray( [3,4.5,5], ndim=3 )
+        print( x, x.shape, x.__class__ )
+        self.assertTrue( isinstance( x, numpy.ndarray ) and x.ndim == 2 )
+        x = Tools.toArray( [[3,4.5],[6,5]], ndim=2 )
+        print( x, x.shape, x.__class__ )
+        self.assertTrue( isinstance( x, numpy.ndarray ) and x.ndim == 2 )
 
     def testAverage( self ) :
         print( "===== Average ================================" )

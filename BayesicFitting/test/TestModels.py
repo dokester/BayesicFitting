@@ -55,8 +55,13 @@ class TestModels( unittest.TestCase ):
 
         model = PadeModel( 1, 2 )
         model += PolynomialModel( 1 )
-        print( model )
-        print( model.shortName() )
+        name = str( model )
+        print( name )
+        self.assertTrue( name[-1] == 'x' )
+        self.assertTrue( name[-5] == '5' )
+        sn = model.shortName()
+        print( sn )
+        self.assertTrue( sn[-1] == 'l' )
 
     def testArctanModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
@@ -82,7 +87,18 @@ class TestModels( unittest.TestCase ):
         p = []
         stdModeltest( m, p )
 
-        print( "******CONSTANT*******************" )
+        print( "******CONSTANT VALUE*******************" )
+        sm = SineModel()
+        m = ConstantModel( fixedModel=sm )
+        m.values = [2.0, 0.0, 0.5]
+        stdModeltest( m, p, silent=False )
+
+        print( "******CONSTANT MODEL*******************" )
+        tbl = numpy.linspace( 0, 1, 11 )
+        m = ConstantModel( table=tbl )
+        stdModeltest( m, p )
+
+        print( "******CONSTANT TABLE*******************" )
         m = ConstantModel( values = 5.5 )
         stdModeltest( m, p )
 

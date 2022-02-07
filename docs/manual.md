@@ -550,6 +550,34 @@ observation are present.
 The use of **MultipleOutputProblem** is needed in **NestedSampler** to
 flatten the multiple outputs.
 
+<a name="externalmodel"></a>
+### External Models
+
+The class **AstropyModel** is a wrapper for models originating from
+astropy.modeling.Model. Any **FittableModel**, wrapped in an
+**AstropyModel** can be used in BayesicFittings fitters and samplers.
+
+    from astropy import modeling
+    gm = modeling.models.Gaussian1D()
+    model = AstropyModel( gm )
+
+Using **UserModel** externally generated functional of the form f(x:p)
+can participate.
+
+    def f( x, p ) :
+        return p[0] * numpy.sin( p[1] * x + p[2] * numpy.log( x + p[3] ) )
+    model = UserModel( 4, f )		# 4 is the number of parameters
+	
+Optionally the partial derivatives df/dp and df/dx, and a name can be
+provided too. Otherwise numerically calculated values will be used.
+
+    model = UserModel( 4, f, userPartial=dfdp, userDeriv=dfdx, 
+                       userName="myName" )
+
+Where dfdp and dfdx are methods: dfdp( x, p ) and dfdx( x, p ). The
+correctness of the (partial) derivatives can be checked with the method
+
+    model.testPartial( x, p, silent=False )
 
 <a name="fitters"></a>
 ## 4. Fitters 
@@ -841,13 +869,18 @@ TBW. Setting limits is still in an experimental stage.
 -->
 
 <a name="ns"></a>
-## 5. NestedSampler and PhantomSampler 
+## 5. NestedSampler, PhantomSampler and NestedSolver
 
 **NestedSampler** is a novel technique to do Bayesian calculations.  It
 samples the Posterior while integrating it to calculate the evidence.
 The evidence and the samples from the posterior are the main results of
 NestedSampler. From the samples, the optimal values for the model
 parameters, its standard deviations etc can be calculated.
+
+Nested sampling is an idea of David McKay and John Skilling.
+Skilling has written a separate chapter in [Sivia's book](./refrences.md/#sivia)
+explaining the Nested Sampling idea, including an algorithm in C, which
+served as the basis (via JAVA) for our implementation. 
 
 **NestedSampler** applies an ensemble of walkers, initially evenly
 distributed over the prior probability. Then an iterative process is
@@ -858,15 +891,9 @@ provided it keeps a higher likelihood than the value of the discarded
 walker. This way the ensemble of walkers stays randomly distributed over
 the prior while the ensemble as a whole slowly ascends the likelihood
 to the top. The discarded walker is kept as a sample of the posterior,
-appropriately weighted.
-
-**NestedSampler** uses a **Prior** for the initial distribution and an
-**ErrorDistribution** to calculate the likelihoods.
-
-Nested sampling is an idea of David McKay and John Skilling.
-Skilling has written a separate chapter in [Sivia's book](./refrences.md/#sivia)
-explaining the Nested Sampling idea, including an algorithm in C, which
-served as the basis (via C, and JAVA) for our implementation. 
+appropriately weighted. 
+**NestedSampler** uses **Prior**s for the initial distribution of the 
+parameters and an **ErrorDistribution** to calculate the likelihoods.
 
 **PhantomSampler** is an extension of **NestedSampler**, in the sense 
 that it uses (some of) the intermediate positions that the walkers take 
@@ -914,7 +941,7 @@ optimal fit of the model are available from **NestedSampler**.
     param = ns.parameters
     stdev = ns.standardDeviations
     scale = ns.scale
-    yfit  = ns.modelfi
+    yfit  = ns.modelfit
 
 The values are actually obtained from the **SampleList**, a list of
 **Sample**s, that is the other result of the **NestedSampler**.
@@ -929,6 +956,57 @@ in [HD2039](../examples/HD2039.ipynb) and
 [outliers2](../examples/outliers-2.ipynb).
 
 
+**NestedSolver** applies the same algorithm to **OrderProblem**s, where 
+the problem is solved by finding an optimal order. The parameters are no
+floats but integers, putting things in order.  
+
+
+
+### Problem
+
+The **Problem** classes have been introduced in version 2.0. They are
+meant to broaden the applicability of NestedSampler beyond the classic
+problems that we addressed before. A **Problem** collects all items that 
+are needed to solve the problem, where the parameters constitute the
+solution. 
+
+A **ClassicProblem** consists of a parameterized model with a list of
+measured data at the locations of the indepemdent variables. Optionally
+there are weights. The **ClassicProblem** is invoked by default.
+
+Other **Problem**s need to be separately invoked.
+
+In case there could be errors both in the independent variable (x) and in
+the dependent variable (y), the **ErrorsInXandYProblem** should be
+invoked. To solve this kind of problems we need to assign extra
+parameters for all values of the independent variable (x). These new
+positions need to be estimated along with the parameters of the model
+itself. These new parameters need a prior. A **GaussPrior** with a fixed
+scale is advised. The priors will be centered on the measured x values.
+
+    prior = GaussPrior( scale=0.1 )
+    problem = ErrorsInXandYProblem( model, xdata, ydata, prior=prior )
+    ns = NestedSampler( problem=problem )
+    evidence = ns.sample()
+
+The extra parameters needed here, are called nuisance parameters.
+
+For models that naturally produce 2 or more dimensional outputs (like
+the **StellarOrbitModel**) the **MultipleOutputProblem** need to be
+invoked. It just reshapes the residuals into a 1-dim array before it is
+used to calculate the likelihood..
+
+The **EvidenceProblem** uses the evidence calculated for different
+instantiations of a **Modifiable** model, as "likelihood" in a next
+level of Bayes' rule to determine which of the instantiations is best.
+The "likelihood" to be used here is the **ModelDistribution**. It
+calculates the evidence of the model either as a Gaussian approximation
+or by using **NestedSampler** on a **ClassicProblem**.
+
+
+See below for lists of available [**Problem**s](#list-problems). 
+More **Problem**s can be expected in later versions.
+ 
 ### Samples and SampleList
 
 A **Sample** is a collection of items.
@@ -1049,7 +1127,7 @@ integer-valued data.
 
 The **BernoulliErrorDistribution** is for categorical data.  It needs a
 model with as much outputs (ndout) as there are categories.  The
-dependent variable (y) contains an integer (< ndout) indicating to whci
+dependent variable (y) contains an integer (< ndout) indicating to which
 category this data point belongs.  Each model output gives the
 probability (0 <= p <= 1), that the item falls in that category.  
 At present only the **SoftMaxModel** is available. 
@@ -1079,51 +1157,6 @@ Since version 2.0 the **ErrorDistribution**s has changed its interface.
 Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
 Now the responsiblities of ErrorDistribution and Problem are better separated. 
 
-### Problem
-
-The **Problem** classes have been introduced in version 2.0. They are
-meant to broaden the applicability of NestedSampler beyond the classic
-problems that we addressed before. A **Problem** collects all items that 
-are needed to solve the problem, where the parameters constitute the
-solution. 
-
-A **ClassicProblem** consists of a parameterized model with a list of
-measured data at the locations of the indepemdent variables. Optionally
-there are weights. The **ClassicProblem** is invoked by default.
-
-Other **Problem**s need to be separately invoked.
-
-In case there could be errors both in the independent variable (x) and in
-the dependent variable (y), the **ErrorsInXandYProblem** should be
-invoked. To solve this kind of problems we need to assign extra
-parameters for all values of the independent variable (x). These new
-positions need to be estimated along with the parameters of the model
-itself. These new parameters need a prior. A **GaussPrior** with a fixed
-scale is advised. The priors will be centered on the measured x values.
-
-    prior = GaussPrior( scale=0.1 )
-    problem = ErrorsInXandYProblem( model, xdata, ydata, prior=prior )
-    ns = NestedSampler( problem=problem )
-    evidence = ns.sample()
-
-The extra parameters needed here, are called nuisance parameters.
-
-For models that naturally produce 2 or more dimensional outputs (like
-the **StellarOrbitModel**) the **MultipleOutputProblem** need to be
-invoked. It just reshapes the residuals into a 1-dim array before it is
-used to calculate the likelihood..
-
-The **EvidenceProblem** uses the evidence calculated for different
-instantiations of a **Modifiable** model, as "likelihood" in a next
-level of Bayes' rule to determine which of the instantiations is best.
-The "likelihood" to be used here is the **ModelDistribution**. It
-calculates the evidence of the model either as a Gaussian approximation
-or by using **NestedSampler** on a **ClassicProblem**.
-
-
-See below for lists of available [**Problem**s](#list-problems). 
-More **Problem**s can be expected in later versions.
- 
 
 ### Engine
 

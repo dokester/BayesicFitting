@@ -78,6 +78,7 @@ class Test( unittest.TestCase ):
         m = GaussModel()
         p = PolynomialModel( 2 )
         m1 = m | p
+        Tools.printclass( m1 )
         self.assertTrue( isinstance( m1, Model ) )
         self.assertTrue( m1.npchain == 6 )
 
@@ -303,19 +304,26 @@ class Test( unittest.TestCase ):
         stdModeltest( model, p, x=x, plot=self.doplot )
 
     def testPipe3( self ) :
-        model = SoftMaxModel( ndim=1, ndout=2 )
+        model = StellarOrbitModel( )
         model |= PolySurfaceModel( 3 )
 
         print( model.npars )
-#        print( model )
+        printclass( model )
+        printclass( model._next )
 
-#        print( PolySurfaceModel( 2 ) )
-#        print( PolySurfaceModel( 3 ) )
-
-        p = numpy.asarray( [0.0, 0.4, 0.2, 1.0, 0.0, 0.0, 0.4, 0.2, 1.0, 0.0, 0.0, 0.4] )
+        p = numpy.asarray( [0.0, 0.4, 0.2, 1.0, 0.0, 0.0, 0.4, 0.2, 1.0, 0.0, 0.0, 0.4,
+                            -0.1, -0.2, 0.3, 0.0, 0.0] )
         x = numpy.linspace( 0, 10, 101, dtype=float )
 
         y = model.result( x, p )
+        print( y.shape )
+        print( fmt( y ) )
+        pp = model.partial( x, p )
+        print( pp.shape )
+        print( fmt( pp ) )
+        dd = model.derivative( x, p )
+        print( dd.shape )
+        print( fmt( dd ) )
 
         stdModeltest( model, p, x=x, plot=self.doplot )
 

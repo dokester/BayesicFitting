@@ -45,6 +45,7 @@ class TestDynamicModel( unittest.TestCase ):
     def __init__( self, testname ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+        self.dofull = ( "DOFULL" in os.environ and os.environ["DOFULL"] == "1" )
 
     def testDynamic( self ) :
         print( "  Test Dynamic" )
@@ -331,6 +332,9 @@ class TestDynamicModel( unittest.TestCase ):
         ns.distribution.setLimits( [0.01,100] )
         ns.distribution.constrain = self.constrainPos
         ns.verbose = 2
+        if not self.dofull :
+            ns.ensemble = 10
+
         evid = ns.sample( plot=self.doplot )
 
         sl = ns.samples
@@ -521,6 +525,9 @@ class TestDynamicModel( unittest.TestCase ):
 
         ns.distribution.setLimits( [0.01, 100] )
 
+        if not self.dofull :
+            ns.ensemble = 10
+
         logE = ns.sample( plot=self.doplot )
 
 
@@ -552,6 +559,9 @@ class TestDynamicModel( unittest.TestCase ):
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
 
+        if not self.dofull :
+            ns.ensemble = 10
+
         logE = ns.sample( plot=self.doplot )
         print( "scale  ", ns.scale )
 
@@ -579,6 +589,9 @@ class TestDynamicModel( unittest.TestCase ):
         ns = NestedSampler( x, pm, y, seed=2031967 )
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
+
+        if not self.dofull :
+            ns.ensemble = 10
 
         logE = ns.sample( plot=self.doplot )
         sl = ns.samples

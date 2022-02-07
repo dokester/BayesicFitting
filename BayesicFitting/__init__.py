@@ -27,6 +27,7 @@ TBC: How much time does this take. Everything is translated ??
 from .source.AmoebaFitter import AmoebaFitter
 from .source.AnnealingAmoeba import AnnealingAmoeba
 from .source.ArctanModel import ArctanModel
+from .source.AstropyModel import AstropyModel
 from .source.BasicSplinesModel import BasicSplinesModel
 from .source.BSplinesModel import BSplinesModel
 from .source.BaseFitter import BaseFitter
@@ -97,6 +98,7 @@ from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
 #from .source.NeuralNetModel import NeuralNetModel
+from .source import NeuralNetUtilities
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 #from .source.OrderEngine import OrderEngine
@@ -141,23 +143,25 @@ from .source.StructureEngine import StructureEngine
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior
+from .source.UserModel import UserModel
 from .source.VoigtModel import VoigtModel
 from .source.Walker import Walker
 from .source.WalkerList import WalkerList
 
 ## OrderProblems
-#from .source.DistanceCostFunction import DistanceCostFunction
-#from .source.NestedSolver import NestedSolver
-#from .source.LoopEngine import LoopEngine
-#from .source.MoveEngine import MoveEngine
-#from .source.OrderEngine import OrderEngine
-#from .source.OrderProblem import OrderProblem
-#from .source.ReverseEngine import ReverseEngine
-#from .source.SalesmanProblem import SalesmanProblem
-#from .source.ShuffleEngine import ShuffleEngine
+from .source.DistanceCostFunction import DistanceCostFunction
+from .source.LoopEngine import LoopEngine
+from .source.MoveEngine import MoveEngine
+from .source.NearEngine import NearEngine
+from .source.NestedSolver import NestedSolver
+from .source.OrderEngine import OrderEngine
+from .source.OrderProblem import OrderProblem
+from .source.ReverseEngine import ReverseEngine
+from .source.SalesmanProblem import SalesmanProblem
+from .source.ShuffleEngine import ShuffleEngine
 #from .source.StartNearEngine import StartNearEngine
-#from .source.StartOrderEngine import StartOrderEngine
-#from .source.SwitchEngine import SwitchEngine
+from .source.StartOrderEngine import StartOrderEngine
+from .source.SwitchEngine import SwitchEngine
 
 from .source.Formatter import formatter
 from .source.Formatter import fma

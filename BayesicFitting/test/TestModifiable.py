@@ -46,6 +46,7 @@ class Test( unittest.TestCase ):
     def __init__( self, testname ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+        self.dofull = ( "DOFULL" in os.environ and os.environ["DOFULL"] == "1" )
 
     def makeData( self, npt=51, noise=0.1 ) :
         t = numpy.linspace( 0, 100, npt, dtype=float )
@@ -71,6 +72,9 @@ class Test( unittest.TestCase ):
         ns = NestedSampler( t, mdl, y, seed=1234, engines=engs )
         ns.distribution.setLimits( [0.01,100] )
         ns.verbose = 2
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
 
         evid = ns.sample( plot=self.doplot )
 
@@ -89,6 +93,9 @@ class Test( unittest.TestCase ):
         ns.distribution.setLimits( [0.01,100] )
         ns.verbose = 2
 #        ns.engines[1].slow = 5
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
 
         evid = ns.sample( plot=self.doplot )
 
@@ -117,6 +124,9 @@ class Test( unittest.TestCase ):
         ns = NestedSampler( t, mdl, y, seed=1234, engines=engs )
         ns.distribution.setLimits( [0.01,1] )
         ns.verbose = 2
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
 
         evid = ns.sample( plot=self.doplot )
 
@@ -161,6 +171,9 @@ class Test( unittest.TestCase ):
         ns.verbose = 2
 #        ns.engines[2].verbose = 5
         ns.engines[2].slow = 5
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
 
         evid = ns.sample( plot=self.doplot )
 
@@ -204,6 +217,10 @@ class Test( unittest.TestCase ):
         
         ns.verbose = 2
         ns.minimumIterations = 2000
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
+            ns.minimumIterations = 500
         
         evid = ns.sample( plot=self.doplot )
 
@@ -317,8 +334,12 @@ class Test( unittest.TestCase ):
         print( fmt( ns.xdata ) )
         print( fmt( ns.ydata ) )
         ns.verbose = 2
-        ns.minimumIterations = 2000
-        
+
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
+            ns.minimumIterations = 500 
+       
         evid = ns.sample( plot=self.doplot )
 
         if not self.doplot : return
@@ -373,7 +394,12 @@ class Test( unittest.TestCase ):
         ns = NestedSampler( problem=ep, distribution=distr )
         
         ns.verbose = 2
-        ns.minimumIterations = 2000
+
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
+            ns.minimumIterations = 500
+
         
         evid = ns.sample( plot=self.doplot )
 

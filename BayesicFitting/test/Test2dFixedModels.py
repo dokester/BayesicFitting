@@ -161,10 +161,7 @@ class Test2dFixedModels( unittest.TestCase ):
 
         numpy.set_printoptions( precision=3, suppress=True )
         print( model.partial( x, par ) )
-        print( x[5,:] )
-        self.assertTrue( model.testPartial( [x[5,:]], model.parameters ) == 0 )
 
-        self.assertTrue( model.testPartial( [x[0,:]], par ) == 0 )
         model.xUnit = [units.m, units.s]
         model.yUnit = units.kg
         for k in range( model.getNumberOfParameters() ):

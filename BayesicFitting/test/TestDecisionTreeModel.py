@@ -43,6 +43,7 @@ class TestDecisionTreeModel( unittest.TestCase ):
     def __init__( self, testname ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+        self.dofull = ( "DOFULL" in os.environ and os.environ["DOFULL"] == "1" )
 
     def test1( self ):
         print( "  Test 1 DecisionTreeModel" )
@@ -394,6 +395,8 @@ class TestDecisionTreeModel( unittest.TestCase ):
         ns.verbose = 2
         ns.weed = 10000
         ns.distribution.setLimits( [0.01, 100] )
+        if not self.dofull :
+            ns.ensemble = 10
 
         logE = ns.sample( )
 

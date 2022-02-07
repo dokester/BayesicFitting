@@ -76,7 +76,7 @@ class TestSampleList( unittest.TestCase ):
             self.assertTrue( s.parameters[2] == 1 )
             self.assertTrue( s.parameters[3] == 0 )
 
-            self.assertTrue( len( s.fitIndex ) == 4 )
+            self.assertTrue( s.fitIndex is None or len( s.fitIndex ) == 4 )
             k += 1
 
         ap = numpy.append( gm.parameters, [0.5] )

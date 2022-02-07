@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import warnings
 
 from BayesicFitting import *
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -52,6 +53,39 @@ class TestKernels( unittest.TestCase ):
         if self.doplot :
             self.plotK( [Huber] )
 
+    def testGauss( self ) :
+        print( "**** Gauss ********************" )
+        km = KernelModel( kernel=Gauss() )
+        gm = GaussModel()
+        k2 = Kernel2dModel( kernel=Gauss() )
+
+        x  = numpy.asarray( [-1.0, -0.4, 0.0, 0.4, 1.0] )
+        x += 0.02
+        p = [1.0, 0.0, 0.2]
+        x2 = numpy.append( x, x ).reshape( 2, -1 ).T
+        p2 = [1.0, 0.0, 0.0, 0.2]
+        print( fmt( x2 ) )
+
+        print( fmt( gm.result( x, p ) ) )
+        print( fmt( km.result( x, p ) ) )
+        print( fmt( k2.result( x2, p2 ) ) )
+        print( fmt( gm.partial( x, p ) ) )
+        print( fmt( km.partial( x, p ) ) )
+        print( fmt( k2.partial( x2, p2 ) ) )
+        print( fmt( gm.derivative( x, p ) ) )
+        print( fmt( km.derivative( x, p ) ) )
+        print( fmt( k2.derivative( x2, p2 ) ) )
+        
+        x3 = numpy.asarray( [[-1.0, -0.8], [-0.6, -0.4], [-0.2, 0.0], [0.2, 0.4], [0.6, 0.8],
+                [1.0, -1.0], [-0.8, -0.6], [-0.4, -0.2], [0.0, 0.2], [0.4, 0.6], [0.8, 1.0]] )
+        p3 = [-1.1, 0.5, 0.04, 1.2]
+
+        print( "k2 df  ", fmt( k2.derivative( x3[0:1,:], p3 ), max=None ) )
+        print( "k2 num ", fmt( k2.strictNumericDerivative( x3[0:1,:], p3 ), max=None ) )
+        print( fmt( gm.derivative( x3[0:1,0], [-1.1, 0.5, 1.2] ) ) )
+        print( fmt( gm.strictNumericDerivative( x3[0:1,0], [-1.1, 0.5, 1.2] ) ) )
+        print( fmt( gm.derivative( x3[0:1,1], [-1.1, 0.04, 1.2] ) ) )
+        print( fmt( gm.strictNumericDerivative( x3[0:1,1], [-1.1, 0.04, 1.2] ) ) )
 
 
     def testKernels( self ):

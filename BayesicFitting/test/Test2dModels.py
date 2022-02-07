@@ -176,21 +176,14 @@ class Test2dModels( unittest.TestCase ):
             print( model.shortName() + ": Further no-partial warnings ignored." )
             warnings.simplefilter( "ignore" )
 
-        print( "test 1" )
         numpy.set_printoptions( precision=3, suppress=True )
-        print( "test 2" )
-        print( model.partial( x, par ) )
-        print( "test 3" )
-        print( x[5,:] )
-        print( "test 4" )
-        self.assertTrue( model.testPartial( [x[5,:]], model.parameters ) == 0 )
-        print( "test 5" )
 
+        self.assertTrue( model.testPartial( [x[5,:]], model.parameters ) == 0 )
         self.assertTrue( model.testPartial( [x[0,:]], par ) == 0 )
-        print( "test 6" )
+
         model.xUnit = [units.m, units.s]
         model.yUnit = units.kg
-        print( "test 7" )
+
         for k in range( model.getNumberOfParameters() ):
             print( "%d  %-12s  %-12s"%(k, model.getParameterName( k ), model.getParameterUnit( k ) ) )
 

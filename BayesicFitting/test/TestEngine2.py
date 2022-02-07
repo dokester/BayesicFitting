@@ -126,7 +126,12 @@ class TestEngine2( unittest.TestCase ):
 
         col = ['k-', 'r-', 'g-', 'b-']
         engine = myengine( wl, errdis )
+        if isinstance( engine, ChordEngine ) :
+            engine.debug = True
         for k in range( iter ) :
+            if k == iter - 1 :
+                engine.verbose = 5
+
             lowL, klo = wl.getLowLogL()
             p0 = wl[klo].allpars[:2]
             engine.calculateUnitRange()
@@ -144,6 +149,7 @@ class TestEngine2( unittest.TestCase ):
             if plot :
                 plt.plot( [p0[0],p1[0]], [p0[1],p1[1]], col[klo%4] )
 
+            
         print( lowL, p1 )
         print( mmx, mk0, mk1 )
         engine.printReport()

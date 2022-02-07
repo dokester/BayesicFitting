@@ -5,9 +5,9 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 from astropy import units
 import unittest
 import os
-import FitPlot
 
 from BayesicFitting import *
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -90,6 +90,9 @@ class TestFitter( unittest.TestCase ):
         par = fitter.fit( y )
         alt = altfit.fit( y )
 
+        plotFit( self.x, data=y, model=model, fitter=fitter, residuals=True, show=self.doplot )
+
+
         print( "offst = %f  alt = %f  truth = %f"%(par[0], alt[0], self.aa) )
         print( "slope = %f  alt = %f  truth = %f"%(par[1], alt[1], self.bb) )
         assertAAE( par, alt )
@@ -106,8 +109,9 @@ class TestFitter( unittest.TestCase ):
         assertAAE( std, ast )
 
         par1 = altfit.fit( y, keep={0:par[0]} )
-        if plot :
-            FitPlot.plotFit( self.x, y, model0, residuals=True )
+
+        plotFit( self.x, data=y, model=model0, fitter=altfit, residuals=False, 
+            figsize=[12,7], xlim=[0,12], ylim=[-10,10], show=self.doplot )
 
         self.assertTrue( 2 == len( par1) )
         assertAAE( par1, par )
@@ -119,8 +123,11 @@ class TestFitter( unittest.TestCase ):
 
         par1 = altfit.fit( y )
         print( par, par1 )
-        if plot :
-            FitPlot.plotFit( self.x, y, model0 )
+
+        print( "x  ", self.x )
+        print( "y  ", y )
+
+        plotFit( self.x, data=y, model=model0, show=self.doplot )
 
         self.assertTrue( 2 == len( par1) )
         assertAAE( par, par )
@@ -143,23 +150,32 @@ class TestFitter( unittest.TestCase ):
         print( "\n   Fitter Test 2 Normalize  \n" )
         model = PolynomialModel( 2 )
 
-        sm = PowerModel( 1.0 )
+        sm = PowerModel( 1 )
 
         numpy.random.seed( 2345 )
         x = numpy.linspace( 0.0, 10.0, 101 )
         y = 1.0 + 0.5 * x - 0.2 * x * x +  numpy.random.randn( 101 ) * 0.1
 
         sm += model                     ## degenerate model par[0] == par[2]
+
+        print( sm )
+
         fitter = Fitter( x, sm )
 
         self.assertTrue( sm.npchain == 4 )
-        ppp = fitter.fit( y )
+
+        print( fmt( fitter.hessian ) )
+
+        ppp = fitter.fit( y, plot=self.doplot )
         print( ppp )
 #        self.assertRaises( numpy.linalg.linalg.LinAlgError, fitter.fit, y )
 
         fitter.normalize( [0.0, 0.0, 1.0, 0.0], 1.0 )       ## fix par[2] at 1.0
 
-        par = fitter.fit( y )
+        print( fmt( fitter.hessian ) )
+        print( fmt( fitter.covariance ) )
+
+        par = fitter.fit( y, plot=self.doplot )
 
         print( "param = ", sm.parameters )
         assertAAE( par[2], 1.0 )

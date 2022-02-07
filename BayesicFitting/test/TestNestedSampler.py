@@ -50,6 +50,7 @@ class TestNestedSampler( unittest.TestCase ):
     def __init__( self, testname ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+        self.dofull = ( "DOFULL" in os.environ and os.environ["DOFULL"] == "1" )
 
     def makeData( self, n=3 ) :
 
@@ -113,11 +114,13 @@ class TestNestedSampler( unittest.TestCase ):
         ns = NestedSampler( x, gm, y, w, threads=True, engines=["galilean", "gibbs"] )
 #        ns.verbose = 4
 
-        self.dofit( ns, pp, plot=plot )
+        self.dofit( ns, pp )
 
         sl = ns.samples
 
         printclass( sl[0] )
+
+        plotSampleList( sl, x, y, residuals=True, show=plot )
 
 #        start = time.time()
 #        SampleMovie( sl, problem=ns.problem, kpar=[1,0] )
@@ -183,6 +186,7 @@ class TestNestedSampler( unittest.TestCase ):
         ns.verbose = 2
         ns.distribution.setLimits( [0.01, 100] )
 
+
         evi = ns.sample()
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
@@ -216,6 +220,8 @@ class TestNestedSampler( unittest.TestCase ):
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
+
+        plotSampleList( ns.samples, x, y, residuals=True, show=plot )
 
 #        print( "truth  ", pp )
 #        self.dofit( ns, pp, plot=plot )
@@ -281,8 +287,9 @@ class TestNestedSampler( unittest.TestCase ):
         ns = NestedSampler( x, gm, y, w )
         ns.distribution.setLimits( [0.01, 10] )
 
-        self.dofit( ns, pp, plot=plot )
+        self.dofit( ns, pp )
 
+        plotSampleList( ns.samples, x, y, show=plot )
 
     def dofit( self, ns, pp, plot=False ) :
         logE = ns.sample( plot=plot )

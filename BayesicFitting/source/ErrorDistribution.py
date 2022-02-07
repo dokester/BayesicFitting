@@ -6,9 +6,9 @@ from . import Tools
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -405,6 +405,7 @@ class ErrorDistribution( object ):
 
             return dL
         except :
+#            raise
             print( "Using numeric partialLogL." )
             return self.numPartialLogL( problem, allpars, fitIndex )
 

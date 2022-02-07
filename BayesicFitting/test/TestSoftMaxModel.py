@@ -47,6 +47,7 @@ class Test( unittest.TestCase ):
     def __init__( self, testname ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+        self.dofull = ( "DOFULL" in os.environ and os.environ["DOFULL"] == "1" )
 
 
     def test1( self ):
@@ -88,6 +89,15 @@ class Test( unittest.TestCase ):
 
         stdModeltest( model, p, x=x, plot=self.doplot )
  
+    def test1b( self ) :
+        model = SoftMaxModel( ndim=1, ndout=2, offset=True, normed=False )
+
+        print( model.npars )
+        p = numpy.asarray( [1.0, 1.0, 2.0, 2.0] )
+        x = numpy.linspace( 0, 10, 101, dtype=float )
+
+        stdModeltest( model, p, x=x, plot=self.doplot )
+ 
 
 
     def makeData( self, nin, npt, ndout ) :
@@ -114,15 +124,7 @@ class Test( unittest.TestCase ):
 
         print( "param  ", p )
 
-#        stdModeltest( m, p, x=x, plot=self.doplot )
-
-
-        self.dtest( x, m, p )
-
-        print( "Make copy of model: ", m )
-        mc = m.copy()
-
-        self.dtest( x, mc, p )
+        stdModeltest( m, p, x=x, plot=self.doplot )
 
 
     def test2b( self ) :
@@ -141,12 +143,7 @@ class Test( unittest.TestCase ):
 
         print( "param  ", p )
 
-        self.dtest( x, m, p )
-
-        print( "Make copy of model: ", m )
-        mc = m.copy()
-
-        self.dtest( x, mc, p )
+        stdModeltest( m, p, x=x, plot=self.doplot )
 
 
 
@@ -164,14 +161,9 @@ class Test( unittest.TestCase ):
         p = numpy.linspace( -1.0, 1.0, m.npars )
         print( "param  ", p )
 
-        self.dtest( x, m, p )
+        stdModeltest( m, p, x=x, plot=self.doplot )
 
-        print( "Make copy of model: ", m )
-        mc = m.copy()
-
-        self.dtest( x, mc, p )
-
-    def dtest( self, x, m, p ) :
+    def xxxdtest( self, x, m, p ) :
 
         f = m.result( x, p )
         print( "Result   ", f.shape )
@@ -346,6 +338,10 @@ class Test( unittest.TestCase ):
         erdis = "bernoulli"
         ns = NestedSampler( problem=problem, distribution=erdis, verbose=2 )
 
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
+
         loge = ns.sample()
 
         sl = ns.samples
@@ -402,6 +398,10 @@ class Test( unittest.TestCase ):
 
         erdis = "bernoulli"
         ns = NestedSampler( problem=problem, distribution=erdis, verbose=2 )
+
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
 
         loge = ns.sample()
 
@@ -463,6 +463,10 @@ class Test( unittest.TestCase ):
 
         erdis = "bernoulli"
         ns = NestedSampler( problem=problem, distribution=erdis, verbose=2 )
+
+        ## Comment next if-statement out for a full run of NestedSampler
+        if not self.dofull :
+            ns.ensemble = 10
 
         loge = ns.sample()
 
@@ -532,7 +536,7 @@ class Test( unittest.TestCase ):
 
     @classmethod
     def suite( cls ):
-        return unittest.TestCase.suite( TestStellarOrbitModel.__class__ )
+        return unittest.TestCase.suite( TestSoftMaxModel.__class__ )
 
 if __name__ == '__main__':
     unittest.main( )

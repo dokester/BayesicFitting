@@ -64,6 +64,21 @@ class TestImageAssistant( unittest.TestCase ):
         print( ymap1 )
         assertAAE( ymap1, ymap + 1 )
 
+        xy0 = ia.getPositions( ymap, center=False )
+        print( xy0 )
+        self.assertTrue( xy0[0,0] == 0 and xy0[5,1] == 2 )
+
+        xy1 = ia.getPositions( ymap )
+        print( xy1 )
+        assertAAE( xy1, xy0+0.5 )
+
+        xy2 = ia.getPositions( ymap, deproject=numpy.log )
+        print( xy2 )
+        assertAAE( xy2, numpy.log( xy1 ) )
+
+        
+
+
     def testImageAssistantF( self ):
 
         print( "====ImageAssistant F ===================" )

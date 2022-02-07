@@ -58,6 +58,7 @@ class TestPrior( unittest.TestCase ) :
 
         prior.setLimits( [0,5] )
         print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._urng ) )
+        self.assertTrue( prior._urng == prior.getIntegral() )
         print( prior )
 
         values = {0.0:0.0, 0.5:2.5, 1.0:5.0 }
@@ -159,6 +160,7 @@ class TestPrior( unittest.TestCase ) :
 
         self.assertTrue( prior._umin == math.log( 1.0 ) )
         self.assertTrue( prior._urng == math.log( 6.0 ) )
+        self.assertTrue( prior._urng == prior.getIntegral() )
 
         values = {0.0: 1.0, 0.5: 2.449489742783178, 1.0:6.0}
         self.stdTestPrior( prior, values=values )

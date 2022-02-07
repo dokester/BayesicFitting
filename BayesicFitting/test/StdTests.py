@@ -68,7 +68,7 @@ def classequal( cls1, cls2 ) :
 #    print( "Both classes equal" )
 
 
-def stdModeltest( model, par, x=None, plot=None, warn=[] ):
+def stdModeltest( model, par, x=None, plot=None, silent=True, warn=[] ):
         tc = unittest.TestCase()
 
         print( "***StdModelTest***************" )
@@ -83,15 +83,24 @@ def stdModeltest( model, par, x=None, plot=None, warn=[] ):
             warnings.simplefilter( "ignore" )
 
 #        numpy.set_printoptions( precision=3, suppress=True )
-        print( "result:\n", model.result( x, par ) )
+#        res = model.result( x, par )        
+#        print( "result: ", res.shape )
+#        print( fmt( res ) )
+#        part = model.partial( x, par )
+#        if isinstance( part, list ) :
+#            print( "partial: ", len( part ), part[0].shape )
+#        else :
+#            print( "partial: ", part.shape )
 
-        print( "partial:\n", model.partial( x, par ) )
+        print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++" )
+        tc.assertTrue( model.testPartial( x[1], par, silent=silent ) == 0 )
+        print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++" )
+        tc.assertTrue( model.testPartial( x[4], model.parameters, silent=silent ) == 0 )
 
-        tc.assertTrue( model.testPartial( x[1], par ) == 0 )
-        tc.assertTrue( model.testPartial( x[4], model.parameters ) == 0 )
+#        tc.assertTrue( model.testPartial( x[1], par ) == 0 )
+        model.xUnit = ( units.m if model.ndim == 1 else
+                        [units.m for k in range( model.ndim )] )
 
-        tc.assertTrue( model.testPartial( x[1], par ) == 0 )
-        model.xUnit = units.m
         model.yUnit = units.kg
         Tools.printclass( model )
         for k in range( model.npchain ):
@@ -100,15 +109,15 @@ def stdModeltest( model, par, x=None, plot=None, warn=[] ):
 
 
         print( "Integral   ", model.getIntegralUnit( ) )
-        nerr = model.testPartial( x, par )
+        nerr = model.testPartial( x, par, silent=silent )
         tc.assertTrue( nerr == 0 )
 
         mc = model.copy( )
 #        Tools.printclass( model )
 #        Tools.printclass( mc )
+
         classequal( model, mc )
         print( "model and copy are the same" )
-
 
         for k in range( mc.getNumberOfParameters() ):
             print( "%d  %-12s  %-12s"%(k, mc.getParameterName( k ), mc.getParameterUnit( k ) ) )
@@ -116,15 +125,15 @@ def stdModeltest( model, par, x=None, plot=None, warn=[] ):
         model.parameters = par
 
         for (k,xk,r1,r2) in zip( range( x.size ), x, model.result( x ), mc.result( x ) ) :
-            print( "%3d %8.3f  %10.3f %10.3f" % ( k, xk, r1, r2 ) )
-            tc.assertAlmostEqual( r1, r2 )
-        tc.assertTrue( mc.testPartial( x, par ) == 0 )
+#            print( "%3d %8.3f  %10.3f %10.3f" % ( k, xk, r1, r2 ) )
+            assertAAE( r1, r2 )
+        tc.assertTrue( mc.testPartial( x, par, silent=silent ) == 0 )
 
         if plot :
             plotModel( model, par, xx=x )
 
 
-def std2dModeltest( model, par, x=None, plot=None, warn=[] ):
+def XXXstd2dModeltest( model, par, x=None, plot=None, warn=[] ):
         tc = unittest.TestCase()
         numpy.set_printoptions( precision=3, suppress=True )
 

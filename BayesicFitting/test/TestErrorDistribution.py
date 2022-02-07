@@ -10,6 +10,7 @@ from astropy import units
 import math
 import sys
 import matplotlib.pyplot as plt
+from StdTests import stdModeltest
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
@@ -454,8 +455,13 @@ class TestErrorDistribution( unittest.TestCase ):
         poly = PolynomialModel( 1 )
         param = numpy.asarray( [1,10], dtype=float )
         ged = LaplaceErrorDistribution( )
-        ggd = ExponentialErrorDistribution( )
+        ggd = ExponentialErrorDistribution( limits=[[0.1,0.5],[10,3]] )
         self.assertTrue( ggd.acceptWeight() )
+
+        self.assertTrue( ggd.hyperpar[0].prior.lowLimit == 0.1 )
+        self.assertTrue( ggd.hyperpar[0].prior.highLimit == 10 )
+        self.assertTrue( ggd.hyperpar[1].prior.lowLimit == 0.5 )
+        self.assertTrue( ggd.hyperpar[1].prior.highLimit == 3 )
 
         #   data = { -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 }
         #   f( x ) = { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 }
@@ -487,9 +493,11 @@ class TestErrorDistribution( unittest.TestCase ):
         lpfi = numpy.asarray( [0,1,-1] )
         logL = ged.logLikelihood( problem, lppar )
         lggL = ggd.logLikelihood( problem, ggpar )
+        altL = ggd.logLikelihood_alt( problem, ggpar )
 
-        print( "lggL  = %8.3f   logL  = %8.3f" % ( lggL, logL ) )
+        print( "lggL  = %8.3f   logL  = %8.3f   alt  = %8.3f" % ( lggL, logL, altL ) )
         assertAAE( logL, lggL )
+        assertAAE( altL, lggL )
 
         lLdata = ggd.logLdata( problem, ggpar )
         logL0 = numpy.sum( lLdata )
@@ -507,8 +515,10 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "numpart = ", nL )
 #        print( "partalt = ", ged.partialLogL_alt( problem, lppar, lpfi ) )
         print( "numpart = ", nG )
-        print( "partalt = ", ggd.partialLogL_alt( problem, ggpar, ggfi ) )
+        aG = ggd.partialLogL_alt( problem, ggpar, ggfi )
+        print( "partalt = ", aG )
 
+        assertAAE( dG, aG, 5 )
         assertAAE( dG[:3], dL, 5 )
         assertAAE( dG, nG, 5 )
         assertAAE( dL, nL, 5 )
@@ -562,6 +572,10 @@ class TestErrorDistribution( unittest.TestCase ):
         param = numpy.asarray( [0.9,10], dtype=float )
         ged = GaussErrorDistribution( )
         ggd = ExponentialErrorDistribution( )
+
+        print( str( ged ) )
+        print( str( ggd ) )
+
         self.assertTrue( ggd.acceptWeight() )
 
         #   data = { -11, -9, -5, -5, -1, 1, 1, 5, 5, 8, 11 }
@@ -707,6 +721,8 @@ class TestErrorDistribution( unittest.TestCase ):
         problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
 
         ped = PoissonErrorDistribution( )
+        print( str( ped ) )
+
         self.assertFalse( ped.acceptWeight() )
 
         logL = ped.logLikelihood( problem, param )
@@ -744,6 +760,10 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
+        aG = ped.partialLogL_alt( problem, param, fitIndex )
+        print( "partalt = ", aG )
+        assertAAE( dL, aG, 5 )
+
         scale = 1.0
         for i in range( 10 ) :
             param = numpy.asarray( [8+i,4], dtype=float )
@@ -757,7 +777,7 @@ class TestErrorDistribution( unittest.TestCase ):
     def testBernoulliErrorDistribution( self ):
         print( "====== Test Bernoulli Error Distribution ======================" )
         poly = LogisticModel( fixed={0:1} )
-        param = numpy.asarray( [0,1], dtype=float )
+        param = numpy.asarray( [0.5,1.0], dtype=float )
         data = numpy.asarray( [0,0,0,0,0,1,1,1,1,1,1], dtype=int )
         data = numpy.asarray( [1,1,1,1,1,1,0,0,0,0,0], dtype=int )
 
@@ -768,6 +788,8 @@ class TestErrorDistribution( unittest.TestCase ):
         problem = ClassicProblem( model=poly, xdata=self.x, ydata=data )
 
         ped = BernoulliErrorDistribution( )
+        print( str( ped ) )
+
         self.assertFalse( ped.acceptWeight() )
 
         logL = ped.logLikelihood( problem, param )
@@ -789,10 +811,10 @@ class TestErrorDistribution( unittest.TestCase ):
 
         fitIndex = [0,1]
         dL = ped.partialLogL( problem, param, fitIndex )
-#        aL = ped.partialLogL_alt( problem, param, fitIndex )
         nL = ped.numPartialLogL( problem, param, fitIndex )
+        aL = ped.partialLogL_alt( problem, param, fitIndex )
         print( "partial = ", dL )
-#        print( "altpart = ", aL )
+        print( "altpart = ", aL )
         print( "numpart = ", nL )
         assertAAE( dL, nL, 5 )
 
@@ -853,6 +875,10 @@ class TestErrorDistribution( unittest.TestCase ):
         print( "numpart = ", nL )
         assertAAE( dL, nL, 2 )
 
+        aG = ced.partialLogL_alt( problem, param, fi )
+        print( "partalt = ", aG )
+        assertAAE( dL, aG, 5 )
+
 
         for i in range( 11 ):
             param = numpy.asarray( [i-5,5,1], dtype=float )
@@ -870,6 +896,8 @@ class TestErrorDistribution( unittest.TestCase ):
         problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
 
         ced = LaplaceErrorDistribution( )
+        print( str( ced ) )
+
         self.assertTrue( ced.acceptWeight() )
 
         param = numpy.asarray( [1,10,1], dtype=float )
@@ -937,6 +965,8 @@ class TestErrorDistribution( unittest.TestCase ):
         problem = ClassicProblem( model=poly, xdata=self.x, ydata=self.data )
 
         ced = UniformErrorDistribution( )
+        print( str( ced ) )
+
         print( "x   ", self.x )
         print( "y   ", self.data )
         self.assertTrue( ced.acceptWeight() )
@@ -1010,6 +1040,8 @@ class TestErrorDistribution( unittest.TestCase ):
         ed2 = UniformErrorDistribution( )
 
         ced = MixedErrorDistribution( ed1, ed2  )
+        print( str( ced ) )
+
         param = numpy.asarray( [0.0, 0.3, 5, 0.7 ], dtype=float )
         if self.doplot :
             for k in range( 5 ) :
