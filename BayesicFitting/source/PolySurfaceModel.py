@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 class PolySurfaceModel( LinearModel ):
     """
@@ -102,6 +102,12 @@ class PolySurfaceModel( LinearModel ):
                 copy=copy, **kwargs )
         self.degree = degree
 
+        if copy is not None and hasattr( copy, "xindex" ) :
+            setatt( self, "xindex", copy.xindex )
+            setatt( self, "yindex", copy.yindex )
+            setatt( self, "xfact", copy.xfact )
+            setatt( self, "yfact", copy.yfact )
+            
 
     def copy( self ):
         """ Copy method.  """
@@ -188,13 +194,13 @@ class PolySurfaceModel( LinearModel ):
             n = 1
             k = 1
             while k < np :
-                print( np, k, n )
+#                print( np, k, n )
                 indx += [i for i in range( k, k+n )]
                 fact += [n-f for f in range( n )]
                 k += n + 1
                 n += 1
 
-                print( "X  ", fmt( indx, max=None ), fmt( fact, max=None ) )
+#                print( "X  ", fmt( indx, max=None ), fmt( fact, max=None ) )
 
             setatt( self, "xindex", indx )
             setatt( self, "xfact", fact )
@@ -204,13 +210,13 @@ class PolySurfaceModel( LinearModel ):
             k = 2
             n = 1
             while k < np :
-                print( np, k, n )
+#                print( np, k, n )
                 indx += [i for i in range( k, k+n )]
                 fact += [f+1 for f in range( n )]
                 k += n + 1
                 n += 1
 
-                print( "Y  ", fmt( indx, max=None ), fmt( fact, max=None ) )
+#                print( "Y  ", fmt( indx, max=None ), fmt( fact, max=None ) )
 
             setatt( self, "yindex", indx )
             setatt( self, "yfact", fact )
