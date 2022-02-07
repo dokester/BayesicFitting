@@ -9,14 +9,6 @@
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
 [Kester and Mueller (2021)](./references.md/#kester8).
 
-<!--
-Fitting is about finding a model, a mathematical relation, that best
-represents the data. Data is obtained in some measurement where at 
-location `x` a value `y` is found.  
-It is achieved by minimizing the distance between the model and the data.
--->
-
-
 It is assumed that the reader is familiar with the Bayesian ways to
 perform inference from data. If not,
 there are enough books on the market that explain what it is about. 
@@ -561,7 +553,7 @@ astropy.modeling.Model. Any **FittableModel**, wrapped in an
     gm = modeling.models.Gaussian1D()
     model = AstropyModel( gm )
 
-Using **UserModel** externally generated functional of the form f(x:p)
+Using **UserModel**, externally generated functionals of the form f(x:p)
 can participate.
 
     def f( x, p ) :
@@ -578,6 +570,8 @@ Where dfdp and dfdx are methods: dfdp( x, p ) and dfdx( x, p ). The
 correctness of the (partial) derivatives can be checked with the method
 
     model.testPartial( x, p, silent=False )
+
+The methods are compared with numeric calculations of df/dp and df/dx.
 
 <a name="fitters"></a>
 ## 4. Fitters 
@@ -958,7 +952,14 @@ in [HD2039](../examples/HD2039.ipynb) and
 
 **NestedSolver** applies the same algorithm to **OrderProblem**s, where 
 the problem is solved by finding an optimal order. The parameters are no
-floats but integers, putting things in order.  
+floats but integers, that provide an ordering of the data. The iconic 
+example is the traveling salesman problem. However all kind of scheduling 
+problems fall in this category too.
+
+A problem specific cost function functions as a (unnormalized) likelihood. 
+
+The **NestedSolver** returns the last (best) sample as the solution to the 
+order problem.
 
 
 
@@ -1002,6 +1003,10 @@ level of Bayes' rule to determine which of the instantiations is best.
 The "likelihood" to be used here is the **ModelDistribution**. It
 calculates the evidence of the model either as a Gaussian approximation
 or by using **NestedSampler** on a **ClassicProblem**.
+
+The **OrderProblem** is for integer valued problems where the solution 
+is found in some ordering of the data. The only example now is the
+**SalesmanProblem**. 
 
 
 See below for lists of available [**Problem**s](#list-problems). 
@@ -1157,6 +1162,9 @@ Since version 2.0 the **ErrorDistribution**s has changed its interface.
 Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
 Now the responsiblities of ErrorDistribution and Problem are better separated. 
 
+For the only **OrderProblem** at present we provide the **DistanceCostFunction** 
+to obtain a simile of the likelihood.
+
 
 ### Engine
 
@@ -1187,6 +1195,11 @@ number of parameters.
 
 When a model is modifiable, the **StructurEngine** is added to the
 engine list, to randomly change the structure of the model.
+
+For the **SalesmanProblem** 5 engines are provided that all change the 
+order in the parameters by some way: **MoveEngine**, **ReverseEngine**,
+**SwitchEngine**, **LoopEngine**, **ShuffleEngine** and **NearEngine"".
+
 
 **Engine**s are selectable in the construction.
 The keyword `rate` governs the speed of the engines. High rate equals
@@ -1298,6 +1311,14 @@ kernels and miscellaneous.
 + **VoigtModel**<br>
     Voigt's Gauss Lorentz convoluted model for spectral line profiles.
 
+#### Simple wrapper models
++ **AstropyModel**<br>
+    Wrapper fro FittableModels from astropy.modeling
+    See [example](../examples/Hermite1d-AstropyModel.ipynb)
++ **UserModel**<br>
+    Wrapper for a user provided function f(x:p)
+    See [example](../examples/Bessel-J0-UserModel.ipynb)
+
 #### Simple models 2-dimensional inputs
 
 + **EtalonDriftModel**<br>
@@ -1368,6 +1389,12 @@ common to all classes that inherit from them.
     Contains a number of methods common to Dynamic models.
 + **Modifiable**<br>
     Contains a number of methods common to Modifiable models.
+
+#### Helpers.
+
++ **NeuralNetUtilities**<br>
+    Building blocks for SoftMaxModel and NeuralNetModel (TDB). 
+
 
 <a name="synops-fitter"></a>  
 ### Fitters
@@ -1456,6 +1483,8 @@ BaseFitters contain common methods for fitters that inherit from them.
     [example3](../examples/outliers-2.ipynb)
 + **PhantomSampler**<br>
     A possibly faster version of NestedSampler
++ **NesteSolver**<br>
+    A version of NestedSampler for for **OrderProblem**s
 + **Explorer**<br>
     Helper class of NestedSampler to run the **Engine**s.
 + **Walker**<br>
@@ -1481,6 +1510,12 @@ BaseFitters contain common methods for fitters that inherit from them.
 + **MultipleOutputProblem**<br>
     Problems with more dimensional output values
     See [example](../examples/alphaComae.ipynb)
++ **OrderProblem**<br>
+    Problems where the order of the data provides the solution.
++ **SalesmanProblem**<br>
+    Traveling salesman problem.
+    See [example](../examples/roundtrip.ipynb)
+
 
 <!-- dont remove -->
 
@@ -1518,6 +1553,8 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **BernoulliErrorDistribution**<br>
     To calculate a likelihood for categorials.
++ **DistanceCostFunction**<br>
+    To calculate the distrance travelled by the salesman.
 + **GaussErrorDistribution**<br>
     To calculate a Gauss likelihood.
     See [example](../examples/outliers-2.ipynb)
@@ -1582,6 +1619,23 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **StructureEngine**<br>
     Vary the internal structure of a modifiable model randomly.
+
+<!-- dont remove -->
+
++ **LoopEngine**<br>
+    Unloop a loop
++ **MoveEngine**<br>
+    Move part of the parameter list to another position
++ **NearEngine**<br>
+    Move to the nearest location first
++ **ReverseEngine**<br>
+    Reverse part of the parameter list in place
++ **ShuffleEngine**<br>
+    Shuffle part of the parameter list in place
++ **StartOrderEngine**<br>
+    Initilize the order problem
++ **SwitchEngine**<br>
+    Switch two positions
 
 <!-- dont remove -->
 
