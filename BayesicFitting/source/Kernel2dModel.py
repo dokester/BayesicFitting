@@ -9,9 +9,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Gauss import Gauss
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2021 Do Kester
+#  *    2016 - 2022 Do Kester
 
 class Kernel2dModel( NonLinearModel ):
     """
@@ -265,8 +265,11 @@ class BaseShape2d( object ):
     def deriv( self, xdata, params, kp ) :
         x = ( xdata[:,0] - params[1] ) / params[3]
         y = ( xdata[:,1] - params[2] ) / params[kp]
-        df = [params[0] * self.kernel.partial( x ) / params[3],
-              params[0] * self.kernel.partial( y ) / params[kp]]
+        r = numpy.sqrt( x * x + y * y )
+        drdx = x / r
+        drdy = y / r
+        df = [params[0] * self.kernel.partial( r ) * drdx / params[3],
+              params[0] * self.kernel.partial( r ) * drdy / params[kp]]
         return df
 
 
@@ -373,10 +376,13 @@ class Rotated( BaseShape2d ):
 
         u = ( x * c - y * s ) / params[3]
         v = ( x * s + y * c ) / params[4]
-        df = [params[0] * ( self.kernel.partial( u ) * c / params[3] +
-                            self.kernel.partial( v ) * s / params[4] ),
-              params[0] * ( self.kernel.partial( v ) * c / params[4] -
-                            self.kernel.partial( u ) * s / params[3] )]
+        r = numpy.sqrt( u * u + v * v )
+        drdu = numpy.where( r == 0, 1.0, u / r )
+        drdv = numpy.where( r == 0, 1.0, v / r )
+        p0dkdr = params[0] * self.kernel.partial( r )
+        df = [ p0dkdr * ( drdu * c / params[3] + drdv * s / params[4] ),
+               p0dkdr * ( drdv * c / params[4] - drdu * s / params[3] ) ]
+
         return df
 
     def partial( self, xdata, params, parlist=None ):
