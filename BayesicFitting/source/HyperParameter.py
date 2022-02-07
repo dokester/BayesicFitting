@@ -3,11 +3,12 @@ from astropy import units
 import math
 from . import Tools
 from .Prior import Prior
+from .JeffreysPrior import JeffreysPrior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -25,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2022 Do Kester
 
 class HyperParameter( object ):
     """
@@ -69,7 +70,7 @@ class HyperParameter( object ):
             False:  Optimize the parameter too (when relevant)
                     It might need a prior and/or limits to be set
         prior : None or Prior
-            None : no prior set
+            None : no prior is set if no limits are given else JeffreysPrior
             prior probability on the hyperparameter
         limits : None or list of 2 floats [lo,hi]
             low limit and high limit on hypar.
@@ -85,6 +86,9 @@ class HyperParameter( object ):
         if prior is not None :
             self.prior.setLimits( limits )
             self.isFixed = False
+        elif limits is not None :
+            self.prior = JeffreysPrior( limits=limits ) 
+
 
         if copy is not None :
             self.hypar = copy.hypar
