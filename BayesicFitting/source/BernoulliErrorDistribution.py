@@ -6,9 +6,9 @@ from .Formatter import fma
 from .ErrorDistribution import ErrorDistribution
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "2.9.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2021 Do Kester
+#  *    2018 - 2022 Do Kester
 
 
 class BernoulliErrorDistribution( ErrorDistribution ):
@@ -174,6 +174,12 @@ class BernoulliErrorDistribution( ErrorDistribution ):
         mock = problem.result( allpars )
         dM = problem.partial( allpars )
         dLdM = numpy.zeros_like( mock )
+
+        if problem.model.lastndout == 1 :
+            dLdM = 1.0 / numpy.where( problem.ydata == 0, mock, 1 - mock )
+            dL = numpy.sum( numpy.multiply( dLdM, dM.T ), axis=1 )
+            return dL
+
         for k in range( problem.model.lastndout ) :
             q = numpy.where( problem.ydata == k )
             dLdM[q,k] = 1.0 / mock[q,k]
@@ -206,13 +212,21 @@ class BernoulliErrorDistribution( ErrorDistribution ):
 
         dM = problem.partial( allpars )
         dLdM = numpy.zeros_like( mock )
-        for k in range( problem.model.lastndout ) :
-            q = numpy.where( problem.ydata == k )
-            dLdM[q,k] = 1.0 / mock[q,k]
 
-        dL = numpy.tensordot( dLdM, numpy.asarray( dM ), axes=([0,1],[1,0]) )
+        if problem.model.lastndout == 1 :
+            dLdM = 1.0 / numpy.where( problem.ydata == 0, mock, mock - 1 )
+            dL = numpy.multiply( dLdM, dM.T )
 
-#        print( "nextP   ", dLdM.shape, len( dM ), dM[0].shape, dL.shape )
+        else :
+            for k in range( problem.model.lastndout ) :
+                q = numpy.where( problem.ydata == k )
+                dLdM[q,k] = 1.0 / mock[q,k]
+
+            dL = numpy.tensordot( dLdM, numpy.asarray( dM ), axes=([0,1],[1,0]) )
+
+#        r0 = numpy.log( numpy.where( problem.ydata == 0, mock - 0.001, 1 - mock + 0.001 ) )
+#        r1 = numpy.log( numpy.where( problem.ydata == 0, mock + 0.001, 1 - mock - 0.001 ) )
+
 
         for k in fitIndex :
             yield dL[k]
