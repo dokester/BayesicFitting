@@ -4,6 +4,7 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 from .Model import Model
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2020
@@ -100,16 +101,19 @@ class Sample( object ):
         if copy is None :
             self.model = model
             self.parameters = parameters if parameters is not None else model.parameters
-            self.fitIndex = fitIndex if fitIndex is not None else numpy.arange( model.npars )
+#            self.fitIndex = fitIndex if fitIndex is not None else numpy.arange( model.npars )
+            self.fitIndex = fitIndex
 
             self.logL = 0.0
             self.logW = 0.0
         else :
-            self.model = copy.model.copy()
+            self.model = None if copy.model is None else copy.model.copy()
+            self.fitIndex = None if copy.fitIndex is None else copy.fitIndex.copy()
+#            self.model = copy.model.copy()
+#            self.fitIndex = copy.fitIndex.copy()
             self.parameters = copy.parameters.copy()
             if hasattr( copy, "nuisance" ) : self.nuisance = copy.nuisance.copy()
             if hasattr( copy, "hyper" ) : self.hyper = copy.hyper.copy()
-            self.fitIndex = copy.fitIndex.copy()
             self.logL = copy.logL
             self.logW = copy.logW
 
@@ -149,7 +153,7 @@ class Sample( object ):
             object.__setattr__( self, name, value )
             return
 
-        key0 = [ "model" ]
+        key0 = [ "model", "fitIndex" ]
         key1 = {"id" : int, "parent" : int, "start" : int, "model": Model,
                 "logL" : float, "logW" : float }
         key2 = {"fitIndex" : int, "nuisance" : float, "hyper" : float }
