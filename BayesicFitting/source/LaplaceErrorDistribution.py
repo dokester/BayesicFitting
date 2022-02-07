@@ -129,8 +129,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         Return the sum of the absolute values of the residuals.
 
-        ..math ::
-            \sum ( | res | )
+            sum ( | res | )
 
         Parameters
         ----------

@@ -7,9 +7,9 @@ from .HyperParameter import HyperParameter
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2022 Do Kester
 
 
 class ExponentialErrorDistribution( ScaledErrorDistribution ):
@@ -161,7 +161,7 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         chipow = self.getChipow( problem, allpars ) / math.pow( scale, power )
         norm = math.log( 0.5 * power / scale ) - special.gammaln( 1.0 / power )
 
-        return self.sumweight * norm - chipow
+        return problem.sumweight * norm - chipow
 
     def logLdata( self, problem, allpars, mockdata=None ) :
         """
@@ -322,7 +322,7 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
             else :
                 yield dlp - rsp * numpy.log( ars )
 
-        return
+#        return
 
     def __str__( self ) :
         return "Exponential error distribution"

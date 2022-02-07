@@ -5,9 +5,9 @@ from . import Tools
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2022 Do Kester
 
 class EtalonDriftModel( NonLinearModel ):
     """
@@ -112,9 +112,6 @@ class EtalonDriftModel( NonLinearModel ):
         sx = params[1] * numpy.sin( x )
         return params[0] / ( 1.0 + sx * sx )
 
-#        sx = numpy.sin( x )
-#        return params[0] / ( 1.0 + params[1] * sx * sx )
-
     def baseDerivative( self, xdata, params ):
         """
         Returns the derivative of f to x (df/dx) at the input values.
@@ -132,12 +129,11 @@ class EtalonDriftModel( NonLinearModel ):
 
         p1 = params[1] * params[1]
         dd = 1 + p1 * sx * sx
-#        dd = 1 + params[1] * sx * sx
 
         dd *= dd
         df = - 2 * math.pi * params[0] * p1 * params[2] * sx * numpy.cos( x ) / dd
-#        df = - 2 * math.pi * params[0] * params[1] * params[2] * sx * numpy.cos( x ) / dd
-        return [df * params[2], df * params[4]]
+
+        return [df * params[2], df * params[4]].T
 
     def basePartial( self, xdata, params, parlist=None ):
         """

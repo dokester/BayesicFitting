@@ -11,9 +11,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Tophat import Tophat
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -36,7 +36,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2022 Do Kester
 
 class FreeShapeModel( LinearModel ):
     """
@@ -96,7 +96,7 @@ class FreeShapeModel( LinearModel ):
 
     """
     def __init__( self, npix, copy=None, shape=None, nconvolve=0,
-                  center=0.5, xlo=0, xhi=None, **kwargs ):
+                  center=0.5, xlo=0.0, xhi=None, **kwargs ):
         """
         Free Shape model with npix pixels.
 
@@ -116,7 +116,7 @@ class FreeShapeModel( LinearModel ):
         center : float (between 0..1)
             positions where the pixels are centered.
             default: 0.5 -> pixels run from k to k+1
-        xlo : float ( default 0 )
+        xlo : float ( default 0.0 )
             lowest value in xdata
         xhi : float ( default np )
             highest value in xdata

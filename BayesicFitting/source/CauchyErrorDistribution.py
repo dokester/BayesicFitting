@@ -6,9 +6,9 @@ from .ScaledErrorDistribution import ScaledErrorDistribution
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2022 Do Kester
 
 
 class CauchyErrorDistribution( ScaledErrorDistribution ):
@@ -206,7 +206,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
                 dL[i] = 2 * numpy.sum( res * dM[:,k] / r2s )
                 i += 1
             else :
-                dL[-1] = self.ndata / scale - numpy.sum( 2 * scale / r2s )
+                dL[-1] = problem.ndata / scale - numpy.sum( 2 * scale / r2s )
 
         return dL
 

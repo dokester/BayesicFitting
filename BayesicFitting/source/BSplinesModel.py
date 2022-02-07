@@ -9,9 +9,9 @@ from . import splinelab
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2022 Do Kester
 
 class BSplinesModel( LinearModel ):
     """
@@ -169,11 +169,11 @@ class BSplinesModel( LinearModel ):
                 min = numpy.min( xrange )
                 max = numpy.max( xrange )
             knots = numpy.linspace( min, max, nrknots, dtype=float )
-        setatt( self, "knots", knots )
+        self.knots = knots
 
         augknots = splinelab.augknt( knots, order )
         setatt( self, "_bspline", bspline.Bspline( augknots, self.order, last=True ) )
-        setatt( self, "eps", 0 )
+        self.eps = 0.0
 
     def copy( self ):
         return BSplinesModel( copy=self )

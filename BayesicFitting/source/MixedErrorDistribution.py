@@ -10,9 +10,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2021 Do Kester
+#  *    2018 - 2022 Do Kester
 
 
 class MixedErrorDistribution( ErrorDistribution ):
@@ -235,12 +235,6 @@ class MixedErrorDistribution( ErrorDistribution ):
 
                 yield ( f * lhd1 * fff * npg1 )
 
-        try :
-            pg1.close()
-            pg2.close()
-        except :
-            pass
-        return
 
     def __str__( self ) :
         n1 = re.match( "^[a-zA-Z_]*", self.errdis1.__str__() ).group(0)

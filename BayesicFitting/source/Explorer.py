@@ -167,7 +167,8 @@ class Explorer( object ):
 
         self.errdis.lowLhood = lowLhood
 
-        maxmoves = len( walker.fitIndex ) / self.rate
+#        maxmoves = len( walker.fitIndex ) / self.rate
+        maxmoves = len( walker.allpars ) / self.rate
         maxtrials = self.maxtrials / self.rate
 
         moves = 0
