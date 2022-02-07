@@ -7,9 +7,9 @@ from .PolynomialModel import PolynomialModel
 from .PolySurfaceModel import PolySurfaceModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2022 Do Kester
 
 class ConstantModel( Model ):
     """
@@ -194,14 +194,17 @@ class ConstantModel( Model ):
             values for the parameters. (irrelevant)
 
         """
-        return numpy.zeros_like( xdata )
+        if self.fixedModel is None :
+            return numpy.zeros_like( xdata )
+
+        return self.fixedModel.derivative( xdata, self.fixedModel.parameters )
 
     def baseName( self ):
         """
         Returns a string representation of the model.
 
         """
-        content = "tabular result" if self.table is not None else self.fixedModel.__str__()
+        content = "tabular result" if self.table is not None else self.fixedModel.shortName()
         return str( "ConstantModel: f( x ) = " + content )
 
 
