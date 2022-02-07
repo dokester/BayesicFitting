@@ -48,9 +48,9 @@ from .DeathEngine import DeathEngine
 from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.1"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -73,7 +73,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 class NestedSampler( object ):
     """
@@ -310,22 +310,12 @@ class NestedSampler( object ):
         if problem is None :
             problem = "classic"
 
-#        else :
-#            if model is None :
-#                model = problem.model
-#            if xdata is None :
-#                xdata = problem.xdata
-#            if ydata is None :
-#                ydata = problem.ydata
-#            if weights is None :
-#                weights = problem.weights
-
         self.setProblem( problem, model=model, xdata=xdata, ydata=ydata, weights=weights )
 
         if model is None :
             model = self.problem.model
 
-        if not model.hasPriors() and model.npars > 0:
+        if model is not None and not model.hasPriors() and model.npars > 0:
             warnings.warn( "Model needs priors and/or limits" )
 
         self.keep = keep
@@ -553,7 +543,7 @@ class NestedSampler( object ):
 
         tail = 0
         if self.verbose > 1 :
-            while fitIndex[-tail-1] < 0 : 
+            while fitIndex is not None and fitIndex[-tail-1] < 0 : 
                 tail += 1
 
 #            tail = self.distribution.nphypar
@@ -580,7 +570,10 @@ class NestedSampler( object ):
                     nwln = ""
                 print( ">", end=nwln, flush=True )
             else :
-                pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
+                pl = self.walkers[kw].allpars
+                fi = self.walkers[kw].fitIndex
+                if fi is not None : 
+                    pl = pl[fi]
                 np = len( pl )
 #                tail = self.distribution.nphypar
                 print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
@@ -596,7 +589,10 @@ class NestedSampler( object ):
         if self.verbose > 0 :
             if self.verbose == 1 :
                 print( "\nIteration   logZ        H     LowL     npar    parameters" )
-            pl = self.walkers[kw].allpars[self.walkers[kw].fitIndex]
+            pl = self.walkers[kw].allpars
+            fi = self.walkers[kw].fitIndex
+            if fi is not None : 
+                pl = pl[fi]
             np = len( pl )
             print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
                     self.info, self.lowLhood, np ) )
