@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from . import NeuralNetUtilities
 from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 from .Formatter import fma
@@ -9,9 +10,9 @@ from .Formatter import fma
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,26 +31,25 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2021 Do Kester
+#  *    2020 - 2022 Do Kester
 
 
 class SoftMaxModel( NonLinearModel ):
     """
-    Softmax Model is a generalization of the LogisticModel over multiple outputs
+    Softmax Model is a Logistic model if the number of outputs is 1.
+    Otherwise it is generalization of the LogisticModel over multiple outputs
 
                        exp( sum_k( x_k * p_kn ) + q_n ) )
         f_n( x:p ) = -------------------------------------------
                      sum_i( exp( sum_k( x_k * p_ki ) + q_i ) ) )
 
 
-
-
-        0       0       0       0       0       0   K inputs
+        0       0       0       0       0       0   I inputs
         |\     /|\     /|\     /|\     /|\     /|
 
-          all inputs connect to all outputs        K*N parameters
+          all inputs connect to all outputs        I*N connecting parameters
 
-           \|/     \|/     \|/     \|/     \|/     N offsets (if offset)
+           \|/     \|/     \|/     \|/     \|/      N offset parameters (if offset)
             0       0       0       0       0       N outputs
 
 
@@ -114,6 +114,22 @@ class SoftMaxModel( NonLinearModel ):
             param += [0.0] * ndout
             np += ndout
 
+        if offset :
+            raster = NeuralNetUtilities.ConnectWithBias( ndim=ndim, ndout=ndout )
+        else :
+            raster = NeuralNetUtilities.Connect( ndim=ndim, ndout=ndout )
+
+        if normed :
+            if ndout == 1 :
+                trans = NeuralNetUtilities.Logistic()
+            else :
+                trans = NeuralNetUtilities.Softmax( ndout=ndout )
+        else : 
+            trans = NeuralNetUtilities.Identity()
+
+        setatt( self, "raster", raster )
+        setatt( self, "trans", trans )
+
         setatt( self, "offset", offset )
         setatt( self, "in2out", in2out )
         setatt( self, "ndout", ndout )
@@ -125,34 +141,6 @@ class SoftMaxModel( NonLinearModel ):
         """ Copy method.  """
         return SoftMaxModel( ndim=self.ndim, ndout=self.ndout, normed=self.normed,
                                    offset=self.offset, copy=self )
-
-    def unnormedResult( self, xdata, params ):
-        """
-        Returns the unnormalized result of the model function: F_n( x_k ) as array of
-        shape [nx,ndout], where nx number of data points and ndout is the number of
-        outputs.
-
-        Note: This is the same for dfdz
-
-        Parameters
-        ----------
-        xdata : array_like
-            values at which to calculate the result
-        params : array_like
-            values for the parameters.
-
-        """
-        ## xdata.shape = [nx,nin]
-
-        par = params[:self.in2out]
-        if self.ndim == 1 :
-            z = numpy.outer( xdata, par )
-        else :
-            z = numpy.inner( xdata, par.reshape( self.ndout, self.ndim ) )
-        if self.offset :
-            z += params[self.in2out:]
-
-        return numpy.exp( z )
 
     def baseResult( self, xdata, params ):
         """
@@ -168,16 +156,8 @@ class SoftMaxModel( NonLinearModel ):
             values for the parameters.
 
         """
-        res = self.unnormedResult( xdata, params )
+        res = self.trans.result( self.raster.result( xdata, params ), params )
 
-        if self.normed :
-            norm = numpy.sum( res, axis=1 )
-#            print( fma( res ) )
-#            print( "NORM  ", fma( norm ) )
-            res = ( res.T / norm ).T
-#            print( fma( res ) )
-
-#        return res
         return res if self.ndout > 1 else res[:,0]
 
     def basePartial( self, xdata, params, parlist=None ):
@@ -195,62 +175,12 @@ class SoftMaxModel( NonLinearModel ):
             list of indices active parameters (or None for all)
 
         """
-        ## npars = nin * ndout
-        ## list: ndout times [nx,npars]
+        dfdr = self.trans.derivative( self.raster.result( xdata, params ), params )
+        drdp = self.raster.partial( xdata, params )
 
-        shp = ( Tools.length( xdata ), self.npbase )
+        part = self.trans.pipe( dfdr, drdp )
 
-        partial = [numpy.zeros( shp, dtype=float ) for k in range( self.ndout )]
-
-        dudz = self.unnormedResult( xdata, params )     ## shape = [nx,ndout]
-
-        if not self.normed :
-            i2o = numpy.arange( self.ndim, dtype=int )
-            koff = self.in2out
-
-            print( "MLM1   ", dudz.shape, xdata.shape )
-            for n in range( self.ndout ) :
-                partial[n][:,i2o] = ( dudz[:,n] * xdata.T ).T
-                i2o += self.ndim
-                if self.offset :
-                    partial[n][:,koff] = dudz[:,n]
-                    koff += 1
-            return partial if self.ndout > 1 else partial[0]
-
-        ## Normalized case
-
-        f = dudz
-        norm = numpy.sum( f, axis=1 )
-        n2 = norm * norm    
-
-#        print( "SMM  dudz  ", fmt( dudz ), fmt( norm ) )
-
-        xd = xdata if self.ndim > 1 else xdata.reshape( -1, 1 ) 
-        for i in range( self.ndout ) :
-
-            ## k counts inputs; n count outputs.
-            k = 0
-            n = 0
-            for pk in range( self.in2out ) :
-                if i == n :
-                    partial[i][:,pk] = xd[:,k] * f[:,n] * ( norm - f[:,n] ) / n2
-                else :
-                    partial[i][:,pk] = - xd[:,k] * f[:,n] * f[:,i] / n2
-
-                k += 1
-                if k == self.ndim :
-                    k = 0
-                    n += 1
-            for pk in range( self.in2out, self.npbase ) :
-                n = pk - self.in2out
-                if i == n :
-                    partial[i][:,pk] = f[:,n] * ( norm - f[:,n] ) / n2
-                else :
-                    partial[i][:,pk] = - f[:,n] * f[:,i] / n2
-
-
-        return partial if self.ndout > 1 else partial[0]
-
+        return part[0,:,:] if self.ndout == 1 else list( part ) 
 
     def baseDerivative( self, xdata, params ) :
         """
@@ -267,33 +197,15 @@ class SoftMaxModel( NonLinearModel ):
             values for the parameters.
 
         """
-        nx = Tools.length( xdata )
-        dfdx = numpy.zeros( (self.ndout, nx, self.ndim ), dtype=float )
+        dfdr = self.trans.derivative( self.raster.result( xdata, params ), params )
+        drdx = self.raster.derivative( xdata, params )
 
-        par = params[:self.in2out].reshape( self.ndout, self.ndim )
+        der = self.trans.pipe( dfdr, drdx )
 
-        dudz = self.unnormedResult( xdata, params )
-
-#        print( "Deriv   ", xdata.shape, par.shape, dudz.shape, dfdx.shape )
-
-        if not self.normed :
-            for n in range( self.ndout ) :
-                for k in range( self.ndim ) :
-                   dfdx[n,:,k] =  dudz[:,n] * par[n,k]
-            return dfdx
-
-        ## Normalized case
-
-        dfdz = self.dfdz( dudz )               ## shape = [nx,ndout,ndout]
-
-#        print( "DerivN  ", xdata.shape, par.shape, dfdz.shape, dfdx.shape )
-
-        for n in range( self.ndout ) :
-            for k in range( self.ndim ) :
-#                print( n, k, o2i )
-                dfdx[n,:,k] =  numpy.sum( dfdz[:,:,n] * par[:,k], axis=1 )
-
-        return dfdx
+        if self.ndout == 1 :
+            return der[0,:,0] if self.ndim == 1 else der[0,:,:] 
+        else :
+            return der[:,:,0].T if self.ndim == 1 else list( der )
 
 
     def baseName( self ):
@@ -314,39 +226,6 @@ class SoftMaxModel( NonLinearModel ):
             parameter number.
 
         """
-        return 1 / self.xUnit
-
-
-############## TBD ##########################
-
-    def dfdz( self, f ) :
-        """
-        Returns the derivative of the normalized results of f(z) = exp(z):
-
-           y(z) = f(z) / SUM( f(z) 
-
-        where the sum is over the second index: ndout
-
-        Parameters
-        ----------
-        f : array_like [nxdata,ndout]
-            function
-
-        """
-        norm = numpy.sum( f, axis=1 )
-        n2 = norm * norm
-        shp = ( Tools.length( f ), self.ndout, self.ndout )
-        dfdz = numpy.zeros( shp, dtype=float )
-        
-        for n in range( self.ndout ) :
-            for k in range( self.ndout ) :
-                dfdz[:,k,n] = - ( f[:,k] * f[:,n] / n2 )
-            dfdz[:,n,n] = ( ( norm - f[:,n]  ) * f[:,n] / n2 ).T
-
-
-#        print( "dfdz   ", dfdz.shape )
-#        print( fma( dfdz[0,:,:] ) )
-
-        return dfdz
-
+        xu = 1 if k > self.ndim * self.ndout else ( self.xUnit if self.ndim == 1 else self.xUnit[k % self.ndim] )
+        return units.Unit( 1 ) / xu
 
