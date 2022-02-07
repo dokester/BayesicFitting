@@ -5,9 +5,9 @@ from .Tools import setAttribute as setatt
 from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.6.1"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -25,7 +25,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2022 Do Kester
 
 class Problem( object ):
     """
@@ -116,6 +116,18 @@ class Problem( object ):
         """
         return Problem( copy=self )
 
+
+    def __setattr__( self, name, value ):
+        """
+        Set attributes.
+
+        """
+        setatt( self, name, value )
+        if name == "weights" :
+            try :
+                delattr( self, "sumweight" )
+            except :
+                pass
 
     def __getattr__( self, name ) :
         """
