@@ -269,6 +269,18 @@ class Engine( object ):
         print( " %10d %10d %10d %10d %10d" % (self.report[0], self.report[1],
                               self.report[2], self.report[3], self.report[4] ) )
 
+    def successRate( self ) :
+        """
+        Return percentage of success.
+        """
+        if not hasattr( self, "save" ) :
+            self.save = [0, 0]
+
+        srate = ( 100 * ( self.report[0] - self.save[0] ) / 
+                  ( self.report[0] + self.report[1] + self.report[2] - self.save[1] ) )
+
+        self.save = [self.report[0], ( self.report[0] + self.report[1] + self.report[2] )]
+        return srate
 
     def calculateUnitRange( self ):
         """
@@ -314,13 +326,13 @@ class Engine( object ):
     def __str__( self ) :
         return str( "Engine" )
 
-    def execute( self, walker, lowLhood ):
+    def execute( self, kw, lowLhood ):
         """
         Execute the engine for diffusing the parameters
 
         Parameters
         ----------
-        walker : Sample
+        kw : walker-id
             walker to diffuse
         lowLhood : float
             low limit on the loglikelihood
