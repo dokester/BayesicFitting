@@ -7,9 +7,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,10 +27,11 @@ __status__ = "Perpetual Beta"
 #
 # The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #
-#   2017 - 2021 Do Kester
+#   2017 - 2022 Do Kester
 
 def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
-             residuals=False ) :
+             residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5], 
+             xlim=None, ylim=None, filename=None, transparent=False ) :
     """
     Plot the data of a fit.
 
@@ -51,11 +52,31 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
         display the plot
     residuals : bool
         plot the residuals in a separate panel
+    xlabel : None or str
+        use as xlabel
+    ylabel : None or str
+        use as ylabel
+    title  : None or str
+        use as title
+    xlim : None or list of 2 floats
+        limits on x-axis
+    ylim : None or list of 2 floats
+        limits on y-axis
+    figsize : list of 2 floats
+        size of the figure
+    filename  : None or str
+        name of png file; otherwise show
+    transparent : bool
+        make the png file transparent
     """
+
+    if xlabel is None : xlabel = "xdata"
+    if ylabel is None : ylabel = "ydata"
+
+    plt.figure( "Fitter Results", figsize=figsize )
 
     minx = numpy.min( x )
     maxx = numpy.max( x )
-    plt.figure( "Fitter Results" )
     ax0 = plt
 
     if yfit is None and model is not None :
@@ -76,7 +97,7 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
 
         plt.yticks( [-xtk, 0.0, xtk] )
         plt.ylabel( "residual" )
-        plt.xlabel( "xdata" )
+        plt.xlabel( xlabel )
 
         ax0 = plt.subplot( gs[0] )
         xticklabels = ax0.get_xticklabels()
@@ -99,17 +120,29 @@ def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
         ax0.plot( x, yfit, 'r-' )
 
     ax0.margins( 0.05, 0.05 )
-    plt.ylabel( "ydata" )
+    plt.ylabel( ylabel )
     if not residuals :
-        plt.xlabel( "xdata" )
+        plt.xlabel( xlabel )
 
-    if show :
-        plt.show()
+    if xlim is not None :
+        plt.xlim( xlim[0], xlim[1] )
+    if ylim is not None :
+        plt.ylim( ylim[0], ylim[1] )
+
+    if title is not None :
+        plt.title( title )
+
+    if filename is None :
+        if show : plt.show()
+    else :
+        plt.savefig( filename, transparent=transparent )
+
+
 
 
 def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5], 
-        xlim=None, ylim=None, filename=None, transparent=False ) :
+        xlim=None, ylim=None, filename=None, transparent=False, show=True ) :
     """
     Plot the posterior as npt points from the SampleList.
 
@@ -162,7 +195,6 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         # plot zero line
         ax1.plot( [min( xdata ),max( xdata )], [0,0], 'k-' )
 
-
         res = ydata - sl.average( xdata )
         nd = int( math.log10( len( ydata ) ) )
         mrksz = ( 5 - nd ) if nd < 4 else 1
@@ -185,8 +217,11 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
 
 
     if xlim is None : 
-        xlim = [numpy.min( xdata ), numpy.max( xdata )]
-    xrng = xlim[1] - xlim[0]
+        xlo = numpy.min( xdata )
+        xhi = numpy.max( xdata )
+    else :
+        xlo, xhi = tuple( xlim )
+    xrng = xhi - xlo
 
     # plot npt samples from posterior
     ntot = 0
@@ -198,7 +233,7 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         if ns == 0 : continue
     
         #print( s.weight, swgt, ns )
-        xs = numpy.random.rand( ns ) * xrng + xlim[0]
+        xs = numpy.random.rand( ns ) * xrng + xlo
 
         ax0.plot( xs, s.model.result( xs, s.parameters ), 'r.', markersize=2 )
         swgt -= ns
@@ -211,28 +246,33 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         ax0.errorbar( xdata, ydata, yerr=errors, fmt='k.' )
     
     # plot average in green
-    xlow = min( xdata )
-    xhigh = max( xdata )
-    xs = numpy.linspace( xlow, xhigh, 201 )
-    ax0.plot( xs, sl.average( xs ), 'g-' )
+    xs = numpy.linspace( xlo, xhi, 201 )
+    yfit = sl.average( xs )
+    ax0.plot( xs, yfit, 'g-' )
 
     plt.ylabel( ylabel )
     if not residuals :
         plt.xlabel( xlabel )
 
     if ylim is None :
-        ylo = min( ydata )
-        yhi = max( ydata )
+        ylo = min( min( ydata ), min( yfit ) )
+        yhi = max( max( ydata ), max( yfit ) )
         ylo -= 0.05 * ( yhi - ylo )
         yhi += 0.05 * ( yhi - ylo )
 
-    plt.xlim( xlim[0], xlim[1] )
+    if xlim is None :
+        xlo -= 0.05 * xrng
+        xhi += 0.05 * xrng
+
+    plt.xlim( xlo, xhi )
     plt.ylim( ylo, yhi )
 
     if title is not None :
         plt.title( title )
 
     if filename is None :
-        plt.show()
+        if show : plt.show()
     else :
         plt.savefig( filename, transparent=transparent )
+
+
