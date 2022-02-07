@@ -2,6 +2,9 @@
 
 A package for model fitting and Bayesian evidence calculation.
 
+We have a paper out in "Astronomy and Computing" about BayesicFitting.
+[Kester and Mueller (2021)](./references.md/#kester8).
+
 (In case you are wondering what that is about take a 
 quick look at [this example.]
 (https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples/sealevel.ipynb))
@@ -11,17 +14,18 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
- + 29 Oct 2021 version 2.8.0
-   * New class: BernoulliErrorDistribution and SoftMaxModel, tests, examples and data
-   * Adaptations To BernoulliED in some other classes
-   * Multi-dim input and output issues
-   * Updated some other tests and examples
-   * Documentation and other small issues.
+ + 07 Feb 2022 version 3.0.0
+   * New classes: AstropyModel and UserModel
+   * New class: NeuralNetUtilities
+   * New classes: NestedSolver, OrderProblem, SalesmanProblem, DistanceCostFunction
+   * New classes: OrderEngine, MoveEngine, SwitchEngine, LoopEngine, ShuffleEngine
+   * New classes: ReverseEngine, NearEngine, StartOrderEngine
+   * Make pipe work for more dimensional output | input
+   * Test harnesses for the new classes
+   * New examples for AstropyModel, UserModel and SalesmanProblem
+   * Update existing examples to improve coverage of pytest
+   * update Manual
 
- + 25 Nov 2021 version 2.8.1
-   * Cleanup in Plotter
-   * Documentation issues; Replaced style.md by code-style.md
-   * Correcting error on Windows systme
 
 ## Content
 
@@ -162,7 +166,7 @@ classes and features can be added.
 
 More work needs to be done in:
 
-  * Introduction of more Classes: NeuralNetModel, OrderProblem, ...
+  * Introduction of more Classes: NeuralNetModel, ...
 
 <a name="versions"></a>
 ## 5. Versions
@@ -342,6 +346,18 @@ More work needs to be done in:
    * few minor issues/errors
 
  + 29 Oct 2021 version 2.8.0
+   * New class: BernoulliErrorDistribution and SoftMaxModel, tests, examples and data
+   * Adaptations To BernoulliED in some other classes
+   * Multi-dim input and output issues
+   * Updated some other tests and examples
+   * Documentation and other small issues.
+
+ + 25 Nov 2021 version 2.8.1
+   * Cleanup in Plotter
+   * Documentation issues; Replaced style.md by code-style.md
+   * Correcting error on Windows systme
+
+ + 07 Feb 2022 version 3.0.0
    * See above in Whats new
 
 <br><br><br><br>
