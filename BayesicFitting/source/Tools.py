@@ -10,9 +10,9 @@ import re
 from astropy.table import Table
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.0.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2021 Do Kester
+#  *    2016 - 2022 Do Kester
 
 
 def getItem( ilist, k ) :
@@ -259,7 +259,7 @@ def toArray( x, ndim=1, dtype=None ) :
     """
     if isinstance( x, Table ) :
         return x
-    return numpy.array( x, dtype=dtype, copy=False, ndmin=ndim )
+    return numpy.array( x, dtype=dtype, copy=False, ndmin=min( ndim, 2 ) )
 
 def isList( item, cls ) :
     """
