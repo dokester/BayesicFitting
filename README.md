@@ -3,7 +3,7 @@
 A package for model fitting and Bayesian evidence calculation.
 
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
-[Kester and Mueller (2021)](./references.md/#kester8).
+[Kester and Mueller (2021)](./docs/references.md/#kester8).
 
 (In case you are wondering what that is about take a 
 quick look at [this example.]
@@ -14,6 +14,9 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
+ + 05 Apr 2022 version 3.0.1
+   * Addressing issue #18: UserModel does not work for multiple dimensions.
+
  + 07 Feb 2022 version 3.0.0
    * New classes: AstropyModel and UserModel
    * New class: NeuralNetUtilities

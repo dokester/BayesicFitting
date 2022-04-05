@@ -11,7 +11,7 @@ from .Model import Model
 __author__ = "Do Kester"
 __year__ = 2022
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.0.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -120,7 +120,7 @@ class UserModel( Model ):
 
         self.setMethod( "userResult", userResult )
 
-        super( ).__init__( npars, copy=copy, **kwargs )
+        super( ).__init__( npars, ndim=ndim, copy=copy, **kwargs )
 
         if copy is not None :
             setatt( self, "userPartial", copy.userPartial )
@@ -133,7 +133,7 @@ class UserModel( Model ):
 
     def copy( self ):
         """ Copy method.  """
-        return UserModel( self.npars, self.baseResult, copy=self )
+        return UserModel( self.npars, self.baseResult, ndim=self.ndim, copy=self )
 
     def setMethod( self, name, userMethod, numeric=None ) :
         if callable( userMethod ) :

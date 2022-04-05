@@ -77,6 +77,10 @@ def etalonDer( xdata, params ) :
     dd *= dd
     return - 2 * math.pi * params[0] * params[1] * params[2] * sx * numpy.cos( x ) / dd
 
+def fitfunc(x, p):
+    return x[:,0]*p[0] + x[:,1]*p[1] + p[2]
+
+
 class Test( unittest.TestCase ):
     """
     Test harness for Models
@@ -118,6 +122,27 @@ class Test( unittest.TestCase ):
         assertAE( m1.result( x, p ), m2.result( x, p ) )        
         assertAE( m1.partial( x, p ), m2.partial( x, p ) )        
         assertAE( m1.derivative( x, p ), m2.derivative( x, p ) )        
+
+
+    def test3( self ):
+        print( "******USER MODEL 2***********************" )
+
+        # Make 10 random 2-dimensional points
+        x = numpy.random.rand( 10, 2 )
+
+        # Make fake data + noise
+        p = numpy.array( [1,2,3] )
+        cleandata = fitfunc( x, p )
+        noisedata = cleandata * numpy.random.normal( 1, 0.05, x.shape[0] )
+
+        # Find model parameters from noisy data
+        model = UserModel( len(p), fitfunc, ndim=2 )
+        fitter = Fitter( x, model )
+        param = fitter.fit( noisedata )
+
+        self.assertTrue( model.ndim == 2 )
+        print( param )
+
 
 
 
