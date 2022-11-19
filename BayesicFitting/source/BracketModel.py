@@ -4,10 +4,10 @@ from .Model import Brackets
 from . import Tools
 from .Tools import setAttribute as setatt
 
-_author__ = "Do Kester"
+__author__ = "Do Kester"
 __year__ = 2020
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 

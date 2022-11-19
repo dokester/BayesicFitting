@@ -3,6 +3,13 @@ import numpy as numpy
 from .Problem import Problem
 from .Formatter import formatter as fmt
 
+__author__ = "Do Kester"
+__year__ = 2022
+__license__ = "GPL3"
+__version__ = "3.1.0"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
+
 #  * This file is part of the BayesicFitting package.
 #  *
 #  * BayesicFitting is free software: you can redistribute it and/or modify
