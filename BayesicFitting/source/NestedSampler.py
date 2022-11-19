@@ -27,6 +27,7 @@ from .EvidenceProblem import EvidenceProblem
 from .ErrorDistribution import ErrorDistribution
 from .ScaledErrorDistribution import ScaledErrorDistribution
 from .GaussErrorDistribution import GaussErrorDistribution
+from .Gauss2dErrorDistribution import Gauss2dErrorDistribution
 from .LaplaceErrorDistribution import LaplaceErrorDistribution
 from .PoissonErrorDistribution import PoissonErrorDistribution
 from .CauchyErrorDistribution import CauchyErrorDistribution
@@ -50,7 +51,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2022
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -215,9 +216,9 @@ class NestedSampler( object ):
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata=None, model=None, ydata=None, weights=None,
-                problem=None, distribution=None, limits=None, keep=None, ensemble=100,
-                discard=1, seed=80409, rate=1.0, engines=None, maxsize=None,
-                threads=False, verbose=1 ) :
+                problem=None, distribution=None, limits=None, keep=None, 
+                ensemble=100, discard=1, seed=80409, rate=1.0, 
+                engines=None, maxsize=None, threads=False, verbose=1 ) :
         """
         Create a new class, providing inputs and model.
 
@@ -332,7 +333,6 @@ class NestedSampler( object ):
         self.rate = rate
         self.restart = None                     ## TBD
 
-        self.minimumIterations = 100
         self.end = 2.0
         self.maxtrials = 5
         self.threads = threads
@@ -344,6 +344,8 @@ class NestedSampler( object ):
         elif limits is not None :
             self.setErrorDistribution( self.problem.myDistribution(), limits=limits )
         else :
+#MA            scale = 0.0 if problem.hasAccuracy else 1.0
+#MA            self.setErrorDistribution( self.problem.myDistribution(), scale=scale )
             self.setErrorDistribution( self.problem.myDistribution(), scale=1.0 )
 
         self.setEngines( engines )
@@ -372,9 +374,10 @@ class NestedSampler( object ):
             "iter" 	show iterations
             "all"  	show iterations and final result
             "last" 	show final result
-
+            "test"      plot iterations but dont show (for testing)
         """
         keep = self.initSample( keep=keep )
+        self.minimumIterations = 10 * self.ensemble
 
         tail = self.initReport( keep=keep, plot=plot )
 
@@ -383,7 +386,6 @@ class NestedSampler( object ):
         self.logZ = -sys.float_info.max
         self.info = 0
         self.logWidth = math.log( 1.0 - math.exp( -1.0 / self.ensemble ) )
-
 
 #        TBD put self.logWidth in the saved file too
 #        if self.optionalRestart() :
@@ -499,12 +501,25 @@ class NestedSampler( object ):
 
 
     def doIterPlot( self, plot ) :
+        """
+        Returns
+        -------
+        int 0   no plot
+            1   plot
+            2   plot but dont show (for testing)
+        """
         if isinstance( plot, str ) :
-            return plot == 'iter' or plot == 'all'
+            return 1 if plot == 'iter' or plot == 'all' else 2
         else :
-            return False
+            return 0
 
     def doLastPlot( self, plot ) :
+        """
+        Return
+        ------
+        True when the last plot is requested (plot equals 'last' or 'all' or True)
+        False otherwise
+        """
         if isinstance( plot, str ) :
             return plot == 'last' or plot == 'all'
         else :
@@ -514,6 +529,7 @@ class NestedSampler( object ):
     def initReport( self, keep=None, plot=False ) :
 
         self.plotData( plot=self.doIterPlot( plot ) )
+#        self.plotData( plot=plot )
 
         if self.verbose >= 1 :
             fitIndex = self.walkers[0].fitIndex
@@ -575,14 +591,12 @@ class NestedSampler( object ):
                 if fi is not None : 
                     pl = pl[fi]
                 np = len( pl )
-#                tail = self.distribution.nphypar
+
                 print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
                     self.info, self.lowLhood, np ), fmt( pl, max=4, tail=tail ) )
-#                print( "%-16.16s " % self.engines[1], end="" )
-#                self.engines[1].printReport()
-
 
             self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
+#            self.plotResult( self.walkers[kw], self.iteration, plot=plot )
 
     def lastReport( self, kw, plot=False ) :
 
@@ -602,7 +616,6 @@ class NestedSampler( object ):
             self.report()
 
         if self.doLastPlot( plot ) :
-#            Plotter.plotFit( self.problem.xdata, self.problem.ydata, yfit=self.yfit, residuals=True )
             Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata, 
                     figsize=[12,8], residuals=True )
 
@@ -611,43 +624,6 @@ class NestedSampler( object ):
         Return the maximum number of iteration.
         """
         return max( self.minimumIterations, self.end * self.ensemble * self.info / self.worst )
-
-    def getMaxIterMED( self ) :
-        """
-        Return the maximum number of iteration in case of EvidenceProblem.
-        """
-        try :
-            self.csEvid += [math.exp( self.logZ )]
-        except :
-            self.csEvid = [math.exp( self.logZ )]
-
-        if self.iteration < self.minimumIterations :
-            return self.minimumIterations
-
-        kmed = 0
-        medlim = 0.5 * self.csEvid[-1]
-        for cs in self.csEvid :
-            if cs > medlim : break
-            kmed += 1
-
-        return self.end * kmed
-
-
-    def getMaxIterEP( self ) :
-        """
-        Return the maximum number of iteration in case of EvidenceProblem.
-        """
-        if self.iteration < self.minimumIterations :
-            return self.minimumIterations
-        if ( self.samples[-1].logW < self.samples[-100].logW and 
-             self.samples[-1].logW < self.logZ - 16 ) :
-            return self.iteration
-        else :
-            return self.iteration + 100  
-
-#   det getScale( self, walker ) :
-#       np = walker.model.npchain
-#       return self.distribution.getScale( walker.model, params=walker.allpars[:np] )
 
 #  ===================================================================================
     def optionalRestart( self ):
@@ -848,7 +824,8 @@ class NestedSampler( object ):
             myProblem = problemdict[name]
             self.problem = myProblem( model, xdata=xdata, ydata=ydata, weights=weights )
         except :
-            raise ValueError( "Unknown problem name %s" % name )
+            raise 
+#            raise ValueError( "Unknown problem name %s" % name )
 
 
 
@@ -899,10 +876,10 @@ class NestedSampler( object ):
             self.distribution = UniformErrorDistribution( scale=scale, limits=limits )
         elif name == "exponential" :
             self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )
+        elif name == "gauss2d" :
+            self.distribution = Gauss2dErrorDistribution( scale=scale, limits=limits )
         elif name == "model" :
             self.distribution = ModelDistribution( scale=scale, limits=limits )
-#            self.getMaxIter = self.getMaxIterEP
-#            self.minimumIterations = max( self.minimumIterations, 100 )
         elif name == "bernoulli" :
             self.distribution = BernoulliErrorDistribution()
         else :
@@ -1011,22 +988,27 @@ class NestedSampler( object ):
 #            print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )
 #            w.check( nhyp=self.distribution.nphypar )
 
-    def plotData( self, plot=False ):
+    def plotData( self, plot=0 ):
         """
         Initialize the plot with data.
 
         Parameters
         ----------
-        plot : bool
-            whether to plot.
+        plot : int (one of (0,1,2)
+            0 immediate return, no action
+            1 plot
+            2 plot but dont show (for testing)
         """
-        if not plot :
+        if plot == 0 :
             return
         plt.figure( 'iterplot' )
         plt.plot( self.problem.xdata, self.problem.ydata, 'k.' )
-        plt.show( block=False )
+        if plot == 2 :
+            plt.close()
+        else :
+            plt.show( block=False )
 
-    def plotResult( self, walker, iter, plot=False ):
+    def plotResult( self, walker, iter, plot=0 ):
         """
         Plot the results for a walker.
 
@@ -1036,30 +1018,37 @@ class NestedSampler( object ):
             the walker to plot
         iter : int
             iteration number
-        plot : bool
-            whether to plot.
+        plot : int (one of (0,1,2)
+            0 immediate return, no action
+            1 plot
+            2 plot but dont show (for testing)
         """
-        if not plot :
+        if plot == 0 :
             return
 
         plt.figure( 'iterplot' )
         if self.line is not None :
             ax = plt.gca()
             plt.pause( 0.02 )
-            ax.lines.remove( self.line )
+            ax.remove( )
+#            ax.lines.remove( self.line )
             self.text.set_text( "Iteration %d" % iter )
         else :
-            self.text = plt.title( "Iteration %d" % iter )
             self.ymin, self.ymax = plt.ylim()
 
         param = walker.allpars
         model = walker.problem.model
         mock = model.result( self.problem.xdata, param )
+        plt.plot( self.problem.xdata, self.problem.ydata, 'k.' )
+        self.text = plt.title( "Iteration %d" % iter )
         self.line, = plt.plot( self.problem.xdata, mock, 'r-' )
         dmin = min( self.ymin, numpy.min( mock ) )
         dmax = max( self.ymax, numpy.max( mock ) )
         plt.ylim( dmin, dmax )
-        plt.show( block=False )
+        if plot == 2 :
+            plt.close()
+        else :
+            plt.show( block=False )
 
 
     def report( self ):
