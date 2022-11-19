@@ -2,12 +2,13 @@ import numpy as numpy
 import re
 
 from .Tools import setAttribute as setatt
+from .Tools import printclass as printclass
 from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
 __year__ = 2022
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -55,6 +56,8 @@ class Problem( object ):
         dependent variable (static)
     weights : array_like
         weights associated with ydata
+    varyy : float or ndarry of shape (ndata,)
+        Variance in the errors of the ydata
     npars : int
         number of parameters in the model of the problem
     partype : float | int
@@ -66,7 +69,8 @@ class Problem( object ):
     """
 
     #  *************************************************************************
-    def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
+    def __init__( self, model=None, xdata=None, ydata=None, weights=None, 
+                  accuracy=None, copy=None ):
         """
         Problem Constructor.
 
@@ -80,6 +84,9 @@ class Problem( object ):
             dependent variable
         weights : array_like or None
             weights associated with ydata
+        accuracy : float or ndarray of shape (ndata,)
+            accuracy scale for the datapoints
+            all the same or one for each data point
         copy : Problem
             to be copied
 
@@ -92,10 +99,13 @@ class Problem( object ):
             self.model = model
             self.weights = None if weights is None else numpy.asarray( weights )
             self.partype = float
+            self.setAccuracy( accuracy=accuracy )
         else :
             self.xdata = copy.xdata
             self.ydata = copy.ydata
             self.weights = copy.weights
+            self.varyy = copy.varyy
+            self.hasAccuracy = copy.hasAccuracy
             if copy.model and ( copy.model.isDynamic() or copy.model.isModifiable() ) :
                 self.model = copy.model.copy()
             else :
@@ -103,7 +113,7 @@ class Problem( object ):
             self.partype = copy.partype
 
         if self.model is None or not hasattr( self.model, "cyclic" ) :
-            self.cyclicCorrection = self.cycor0
+            pass                                    # default is no correction
         elif isinstance( self.model.cyclic, dict ) :
             self.cyclicCorrection = self.cycor2
         else :
@@ -128,6 +138,8 @@ class Problem( object ):
                 delattr( self, "sumweight" )
             except :
                 pass
+        else :
+            setatt( self, name, value )
 
     def __getattr__( self, name ) :
         """
@@ -140,7 +152,8 @@ class Problem( object ):
         """
         if name == 'npars' :
             return self.model.npars
-
+        elif name == 'varyy' :
+            return 0
         elif name == 'sumweight' :            # Return the sum over weight vector.
             if self.hasWeights() :
                 self.sumweight = numpy.sum( self.weights )
@@ -150,10 +163,25 @@ class Problem( object ):
         elif name == 'ndata' :
             self.ndata = len( self.ydata )        # number of data points/tuples
             return self.ndata
+        elif name == 'logScale' :
+            return 0.0
         else :
             raise AttributeError( "Unknown attribute " + name )
 
         return None
+
+    def setAccuracy( self, accuracy=None ) :
+        """
+        set the value for accuracy.
+
+        Paramaters
+        ----------
+        accuracy : float or array of NDATA floats or None
+            Either one value for all or one for each data point
+            When None the value is set to 0 (for easy computational reasons)
+        """
+        self.hasAccuracy = accuracy is not None
+        self.varyy = accuracy * accuracy if self.hasAccuracy else 0
 
     def hasWeights( self ):
         """ Return whether it has weights.  """
@@ -191,10 +219,15 @@ class Problem( object ):
         res = self.ydata - ( self.result( param ) if mockdata is None else mockdata )
         return self.cyclicCorrection( res )
 
-    def cycor0( self, res ):
-        """
-        Returns the residuals, unadultered
 
+    def cyclicCorrection( self, res ):
+        """
+        No correction.
+
+        Returns 
+        -------
+            the residuals, unadultered
+        
         Parameters
         ----------
         res : array_like
@@ -261,7 +294,7 @@ class Problem( object ):
 
 
 
-    def weightedResiduals( self, param, mockdata=None, extra=False ) :
+    def XXXweightedResiduals( self, param, mockdata=None, extra=False ) :
         """
         Returns the (weighted) residuals, calculated at the xdata.
 
@@ -289,7 +322,7 @@ class Problem( object ):
             return res if self.weights is None else res * self.weights
 
 
-    def weightedResSq( self, param, mockdata=None, extra=False ) :
+    def weightedResSq( self, allpars, mockdata=None, extra=False ) :
         """
         Returns the (weighted) squared residuals, calculated at the xdata.
 
@@ -297,7 +330,7 @@ class Problem( object ):
 
         Parameters
         ----------
-        param : array_like
+        allpars : array_like
             values for the parameters.
         mockdata : array_like
             model fit at xdata
@@ -305,7 +338,7 @@ class Problem( object ):
             true  : return ( wgt * res^2, wgt * res )
             false : return wgt * res^2
         """
-        res = self.residuals( param, mockdata=mockdata )
+        res = self.residuals( allpars[:self.npars], mockdata=mockdata )
 
         resw = res if self.weights is None else res * self.weights
         return ( resw * res, resw ) if extra else resw * res
