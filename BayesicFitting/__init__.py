@@ -24,6 +24,8 @@ TBC: How much time does this take. Everything is translated ??
 
 """
 
+from .source.GaussPriorNew import GaussPrior as GaussPriorNew
+
 from .source.AmoebaFitter import AmoebaFitter
 from .source.AnnealingAmoeba import AnnealingAmoeba
 from .source.ArctanModel import ArctanModel
@@ -69,6 +71,7 @@ from .source.FixedModel import FixedModel
 from .source.FreeShapeModel import FreeShapeModel
 from .source.GalileanEngine import GalileanEngine
 from .source.GaussErrorDistribution import GaussErrorDistribution
+from .source.Gauss2dErrorDistribution import Gauss2dErrorDistribution
 from .source.GaussModel import GaussModel
 from .source.GaussPrior import GaussPrior
 from .source.GibbsEngine import GibbsEngine
