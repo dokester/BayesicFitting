@@ -3,9 +3,17 @@ from astropy import units
 import re
 import warnings
 from . import Tools
+from .Tools import setAttribute as setatt
 
 from .Problem import Problem
 from .Formatter import formatter as fmt
+
+__author__ = "Do Kester"
+__year__ = 2022
+__license__ = "GPL3"
+__version__ = "3.1.0"
+__url__ = "https://www.bayesicfitting.nl"
+__status__ = "Perpetual Beta"
 
 #  * This file is part of the BayesicFitting package.
 #  *
@@ -37,6 +45,15 @@ class ErrorsInXandYProblem( Problem ):
     The target are nuisance parameters which are not part of the modeling
     solution.
 
+    Define
+        xd = xdata, yd = ydata, u = target, F(u:P) = model( target )
+    And the mismathes in both directions.
+        X = u - xd 
+        Y = F(u:p) - yd
+
+    Both distances need to be minimized, possibly in the presence of a correlation 
+    between the mismatches X and Y 
+
     As the targets need to be optimised they need a Prior. In the present
     implementation there is the same Prior for all targets, which the centered on
     each of the xdata values.
@@ -47,6 +64,13 @@ class ErrorsInXandYProblem( Problem ):
     ----------
     prior : Prior
         Priors for the x-axis nuisance parameters.
+    varxx : float or ndarray of shape (ndata,)
+        Variance in the xdata errors
+    varyy : float or ndarray of shape (ndata,)
+        Variance in the ydata errors
+    varxy : float or ndarray of shape (ndata,)
+        Covariance in the xdata and ydata errors
+
 
 
     Attributes from Problem
@@ -60,7 +84,7 @@ class ErrorsInXandYProblem( Problem ):
 
     #  *************************************************************************
     def __init__( self, model=None, xdata=None, ydata=None, weights=None,
-                    prior=None, copy=None ):
+                    prior=None, covar=None, accuracy=None, copy=None ):
         """
         Problem Constructor.
 
@@ -73,7 +97,21 @@ class ErrorsInXandYProblem( Problem ):
         ydata : array_like or None
             dependent variable
         weights : array_like or None
-            weights associated with ydata
+            weights associated with data
+        covar : ndarray of shape (2,2) or (ndata,2,2)
+            covariance matrix of the errors in x and y
+            (2,2) : valid for all datapoints
+            (ndata,2,2): one for each datpoint
+            Default is [[1,0],[0,1]]
+        accuracy : ndarray of shape (2,) or (3,) or (ndata,2) or (ndata,3)
+            accuracy scale for the datapoints
+            (2,) scale for resp. y and x, valid for all datapoints
+            (3,) scale for y and y, and correlation coefficient between y and x, valid for all
+            (ndata,2) or (ndata,3) one set of values for each datapoint
+            Alternative for covarince matrix. 
+            covar = [[ acc[0]^2, 0], [0, acc[1]^2]] no correlation
+                  = [[ acc[0]^2, r], [r, acc[1]^2]] where r = acc[0] * acc[1] * acc[2]
+            accuracy is converted to covar; default is covar.
         prior : Prior
             prior for the x-axis nuisance parameters. All centered on each of the xdata
         copy : Problem
@@ -85,9 +123,14 @@ class ErrorsInXandYProblem( Problem ):
 
         if copy is None :
             self.prior = prior
+            self.setAccuracy( accuracy=accuracy, covar=covar )
         else :
             self.prior = copy.prior
-
+            self.varxx = copy.varxx
+            self.varxy = copy.varxy
+            self.varyy = copy.varyy
+            self.determinant = copy.determinant
+            self.sumweight = copy.sumweight
 
     def copy( self ):
         """
@@ -95,6 +138,101 @@ class ErrorsInXandYProblem( Problem ):
 
         """
         return ErrorsInXandYProblem( copy=self )
+
+    def __setattr__( self, name, value ):
+        """
+        Set attributes.
+
+        """
+        if name == "accuracy" :
+            self.setAccuracy( accuracy=value )
+        elif name == "covar" :
+            self.setAccuracy( covar=value )
+        else :
+            super().__setattr__( name, value )
+
+
+    def setAccuracy( self, accuracy=None, covar=None ) :
+        """
+        Store 3 items from the covar matrix : 
+
+            | var_yy, var_xy |
+            | var_xy, var_xx |
+
+        When the accuracy is given, convert it to these items by
+        var_yy = acc[0] * acc[0]
+        var_xx = acc[1] * acc[1]
+        var_xy = acc[0] * acc[1] * acc[2]
+
+        Store also the determinant of the covariance matrix. 
+
+        When both accuracy and covar are None
+          var_yy = 0 
+          var_xx = 1
+          var_xy = 0
+
+        Raises
+        ------
+        AttributeError. When both accuracy and covar are not None.
+
+        Parameters
+        ----------
+        accuracy : ndarray of shape (2,) or (3,) or (ndata,2) or (ndata,3)
+            accuracy scale for the datapoints
+            (2,) scale for resp. y and x, valid for all datapoints
+            (3,) scale for y and y, and correlation coefficient between y and x, valid for all
+            (ndata,2) or (ndata,3) one set of values for each datapoint
+            Alternative for covarince matrix. 
+            vxy = 0 if no correlation else acc[0] * acc[1] * acc[2]
+            covar = [[ acc[0]^2, vxy      ],
+                     [ vxy     , acc[1]^2 ]] 
+            accuracy is converted to covar; default is covar.
+        covar : ndarray of shape (2,2) or (ndata,2,2) or None
+            covariance matrix of the errors in x and y
+
+        """
+        hasAcc = True
+        if accuracy is None :
+            if  covar is None :
+                varyy = 0.0         # scale will fill the value in this case
+                varxx = 0.0
+                varxy = 0.0
+                hasAcc = False
+            else :
+                covar = numpy.asarray( covar )
+                cdim = covar.ndim
+                varyy = covar[0,0] if cdim == 2 else covar[:,0,0]
+                varxx = covar[1,1] if cdim == 2 else covar[:,1,1]
+                varxy = covar[0,1] if cdim == 2 else covar[:,0,1]
+        else :
+            if covar is None :
+                accuracy = numpy.asarray( accuracy )
+                adim = accuracy.ndim
+                varyy = accuracy[0] if adim == 1 else accuracy[:,0]
+                varxx = accuracy[1] if adim == 1 else accuracy[:,1]
+                if accuracy.shape[-1] == 3 :
+                    varxy = accuracy[2] if adim == 1 else accuracy[:,2]
+                    varxy *= varyy * varxx
+                else :
+                    varxy = 0.0
+                varyy *= varyy
+                varxx *= varxx
+            else :
+                raise AttributeError( "Covar and Accuracy are mutually exclusive" )
+
+        setatt( self, "hasAccuracy", hasAcc )
+        setatt( self, "varyy", varyy )
+        setatt( self, "varxx", varxx )
+        setatt( self, "varxy", varxy )
+
+        det = varyy * varxx - varxy * varxy
+        setatt( self, "determinant", det )
+
+
+    def hasWeights( self ):
+        """ Return whether it has weights.  """
+        return self.weights is not None
+
 
     #  *****RESULT**************************************************************
     def result( self, param ):
@@ -114,6 +252,16 @@ class ErrorsInXandYProblem( Problem ):
     def splitParam( self, param ) :
         """
         Split the parameters into Model parameters and targets.
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters + nuisance params.
+
+        Return
+        ------
+        tuple of ( targets, model parameters )
+
         """
         np = self.model.npars
         return ( param[np:], param[:np] )
@@ -123,21 +271,33 @@ class ErrorsInXandYProblem( Problem ):
         """
         Return the partials as a matrix [2*nx,np+nx], where nx is the number of
         datapoints and np the number of parameters in the model.
-        The upper left submatrix [nx,np] contains dM/dp
-        the upper right submatrix [nx,nx] contains dM/dx on the diagonal
-        the lower left submatrix [nx,np] contains zeros
-        the lower right submatrix [nx,nx] contains the identity matrix
+
+            The upper left submatrix (nx,np) contains dM/dp
+            the upper right submatrix (nx,nx) contains dM/dx on the diagonal
+            the lower left submatrix (nx,np) contains zeros
+            the lower right submatrix (nx,nx) contains the identity matrix
+
+        Parameters
+        ----------
+        param : array_like
+            values for the parameters + nuisance params.
 
         """
         ( xd, pars ) = self.splitParam( param )
         np = self.model.npars
         nx = len( xd )
+
         part = numpy.zeros( ( 2*nx, np+nx ), dtype=float )
+
+        idmat = numpy.identity( nx, dtype=float )
+        ## upper-left  : model partial
         part[:nx,:np] = self.model.partial( xd, pars )
-        dfdx = self.model.derivative( xd, pars )
-        for k in range( nx ) :
-            part[k,k+np] = dfdx[k]
-            part[k+nx,k+np] = 1.0
+        ## upper-right : model derivative on diagonal
+        part[:nx,np:] = self.model.derivative( xd, pars ) * idmat
+        ## lower-left  : zeros
+        ## lower-right : identity
+        part[nx:,np:] = idmat
+
         return part
 
     def derivative( self, param ) :
@@ -188,84 +348,76 @@ class ErrorsInXandYProblem( Problem ):
 
         return self.prior.unit2Domain( uval ) + self.xdata[kpar-self.model.npars]
 
-    def residuals( self, param, mockdata=None ) :
+    def getXYresiduals( self, param ) :
         """
-        Return the (weighted) true distance between (xdata,ydata) and (xtry,ytry) where xtry are
-        the trial values for xdata and ytry = model.result( xtry, param )
-
-        res = hypothenusa( xdata - xtry, ydata - ytry ) * weights
+        Return residuals in y-direction and x-direction.
 
         Parameters
         ----------
         param : array_like
             model parameters and xdata parameters
-        mockdata : array_like
-            model fit data model.result( xtry, param )
+
+        Returns
+        -------
+        tuple of (y residuals, x residuals)
         """
         ( xd, pars ) = self.splitParam( param )
-        res = self.ydata - self.result( param )
-        return numpy.hypot( res, self.xdata - xd )
+        yres = self.ydata - self.model.result( xd, pars )
+        return ( yres, self.xdata - xd )
 
-
-    def weightedResiduals( self, param, mockdata=None, extra=False ) :
-        """
-        Returns the (weighted) residuals, calculated at the xdata.
-
-        Parameters
-        ----------
-        param : array_like
-            values for the parameters.
-        mockdata : array_like
-            model fit at xdata
-        extra : bool (False)
-            true  : return ( wgt * dist, wgt * [yres,xres] / dist )
-            false : return wgt * dist
-        """
-        ( xd, pars ) = self.splitParam( param )
-        yres = self.ydata - self.result( param )
-        xres = self.xdata - xd
-        dist = numpy.hypot( xres, yres )
-
-        if extra :
-            if self.weights is None :
-                exres = numpy.append( yres / dist, xres / dist )
-                return ( dist, exres )
-            else :
-                exres = numpy.append( self.weights * yres / dist, self.weights * xres / dist )
-                return ( dist * self.weights, exres )
-        else :
-            return dist if self.weights is None else dist * self.weights
-
-
-
-    def weightedResSq( self, param, mockdata=None, extra=False ) :
+    def weightedResSq( self, allpars, mockdata=None, extra=False ) :
         """
         Return the (weighted) squared distance between (xdata,ydata) and (xtry,ytry) where xtry are
         the trial values for xdata and ytry = model.result( xtry, param )
 
         Parameters
         ----------
-        param : array_like
-            model parameters and xdata parameters
+        allpars : array_like
+            model parameters, xdata parameters, and noise scale
         mockdata : array_like
             model fit data model.result( xtry, param )
         extra : bool (False)
             true  : return ( wgt * res^2, wgt * [yres,xres] )
             false : return wgt * res^2
         """
-        ( xd, pars ) = self.splitParam( param )
-        yres = self.ydata - self.result( param )
-        xres = self.xdata - xd
+        np = self.npars 
+        param = allpars[:np] 
+        ( yres, xres ) = self.getXYresiduals( param )
 
-        res2 = numpy.square( yres ) + numpy.square( xres )
-        if extra :
-            if self.weights is not None :
-                res2 *= self.weights
-                xres *= self.weights
-                yres *= self.weights
-            return ( res2, numpy.append( yres, xres ) )
+        xres2 = xres * xres
+        yres2 = yres * yres
 
-        return res2 if self.weights is None else res2 * self.weights
+        s2 = allpars[np] * allpars[np]
+        det = self.determinant + s2 * ( self.varyy + self.varxx + s2 )
+
+        # values from inverse covar matrix
+        myy = ( self.varxx + s2 ) / det
+        mxx = ( self.varyy + s2 ) / det
+        mxy = -self.varxy / det
+
+        yrot2 = yres2 * myy
+        xrot2 = xres2 * mxx
+        xyrot = xres * yres * mxy
+
+        res2 = xrot2 + yrot2 + 2 * xyrot            # equiprobable distance squared
+
+        if self.weights is not None : 
+            res2 *= self.weights
+
+        if not extra :
+            return res2 
+
+        xr = xres * mxx + yres * mxy
+        yr = yres * myy + xres * mxy
+
+        xyr2 = xres2 + yres2
+
+        if self.weights is not None : 
+            xr *= self.weights
+            yr *= self.weights
+            xyr2 *= self.weights
+
+        return ( res2, numpy.append( yr, xr ), xyr2 )
 
     def myEngines( self ) :
         """
@@ -281,14 +433,13 @@ class ErrorsInXandYProblem( Problem ):
 
     def myDistribution( self ) :
         """
-        Return a default preferred ErrorDistribution: "gauss"
+        Return a default preferred ErrorDistribution: "gauss2d"
         """
-        return "gauss"
+        return "gauss2d"
 
     #  *****TOSTRING***********************************************************
-    def __str__( self ):
+    def baseName( self ):
         """ Returns a string representation of the model.  """
         return "ErrorsInXandYProblem of %s" % self.model
-
 
 
