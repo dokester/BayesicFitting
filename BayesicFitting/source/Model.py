@@ -15,7 +15,7 @@ from .Tools import setAttribute as setatt
 __author__ = "Do Kester"
 __year__ = 2022
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -1215,59 +1215,6 @@ class Model( FixedModel ):
             mdl = mdl._next
         return haslim
 
-    def XXXstayInLimits( self, oldpar, trypar, parlist ):
-        """
-        Return parameters guaranteed to be within limits.
-
-        If out-of-limits the parameter is replaced by the midpoint between the
-        old parameter and the limit.
-
-        Parameters
-        ----------
-        oldpar : array_like
-            old parameters ( must be inside limits )
-        trypar : array_like
-            parameters to be checked
-        fitindex : array_like
-            indices of the fitable parameters
-
-        """
-        if self.priors is None : return trypar
-
-        i = 0
-        for k in parlist :
-            if self.getPrior( k ).isOutOfLimits( trypar[i] ) :
-                 trypar[i] = 0.5 * ( self.getPrior( k ).stayInLimits( trypar[i] ) + oldpar[i] )
-            i += 1
-        return trypar
-
-    #  *************************************************************************
-    def XXXcheckLimits( self, param, parlist ):
-        """
-        Checks whether the parameters are within limits.
-
-        It only works in *Fitter classes which can support it. Eg. Fitter
-        itself cannot handle limits as it would turn the problem into
-        a *non*-linear one.
-
-        Parameters
-        ----------
-        param : list of float
-            parameters to be checked
-        parlist : list of int
-            indices of the fitable parameters
-
-        Raises
-        ------
-        ValueError when out of limits.
-
-        """
-        if self.priors is None : return
-
-        i = 0
-        for k in parlist :
-            self.getPrior( k ).checkLimit( param[i] )
-            i += 1
 
     #  ****** UNIT <--> DOMAIN ********************************************
     def unit2Domain( self, uvalue, kpar=None ):
