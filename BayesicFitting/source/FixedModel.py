@@ -239,7 +239,7 @@ class FixedModel( BaseModel ):
             values for the parameters.
 
         """
-        expparam = self.expand( xdata, param )
+        expparam = self.expand( xdata, param )[:self.npmax]
         return super( FixedModel, self ).result( xdata, expparam )
 
     def expand( self, xdata, param ) :

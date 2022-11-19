@@ -328,7 +328,8 @@ def printclass( cls, nitems=8 ) :
     numpy.set_printoptions( precision=3, threshold=10, edgeitems=4 )
 
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
-    print( cls, " at ", id( cls ) )
+#    print( cls, " at ", id( cls ) )
+    print( cls )
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
     atr = vars( cls )
     ld = list( atr.keys() )
@@ -348,7 +349,10 @@ def printclass( cls, nitems=8 ) :
 def printlist( val, nitems=8 ) :
     nv = length( val )
     if nv == 0 or isinstance( val[0], numbers.Number ) :
-        print( val, nv )
+        if nv <= nitems :
+            print( val )
+        else :
+            print( val, nv )
         return
 
     sep = "["
@@ -358,7 +362,8 @@ def printlist( val, nitems=8 ) :
         except :
             print( "%s%s"%(sep, shortName( str( val[k] ) ) ), end="" )
         sep = " "
-    print( "%s"%("... ]" if nitems < nv else "]"), nv )
+#    print( "%s" % ( "... ]" if nitems < nv else "]" ), nv )
+    print( "%s" % ( ( "... ] %d" % nv ) if nitems < nv else "]" ) )
 
 def shortName( val ):
     """

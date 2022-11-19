@@ -10,9 +10,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 class GalileanEngine( Engine ):
     """
@@ -168,7 +168,7 @@ class GalileanEngine( Engine ):
 
                 self.plotter.move( pedge, ptry, col=2 )
             else:                                       # mirroring failed; do reverse
-                size *= 0.7
+#                size *= 0.7
                 um.reverseVelocity( size )
                 ptry[fitIndex] = um.stepPars( 1.0 )
 
@@ -268,9 +268,10 @@ class UnitMovements( object ):
         """
         Return a new stepped parameter set.
         """
+        self.uvel *= self.perf
         uv = self.uvel
         # add small random contribution to velocity
-        uv *= 1 + ( self.uniform() * 0.1 )
+#        uv *= 1 + ( self.uniform() * 0.1 )
         pv = self.upar + uv * f
 
         # check if outside [0,1]
@@ -295,6 +296,7 @@ class UnitMovements( object ):
         Set a (random) unit velocity.
         """
         self.uvel = self.uniform() * self.upran * size
+        self.perf = 1 + self.uniform() * 0.1
 
     def reverseVelocity( self, size ):
         """

@@ -62,6 +62,14 @@ class NearEngine( OrderEngine ):
         """
         super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
 
+#        if copy is None :
+#            ## initialize nearest at -1
+#            self.nearest = numpy.zeros_like( walkers[0].problem.parameters ) - 1
+#        else :
+#            self.nearest = copy.nearest
+
+
+
     def copy( self ):
         """ Return copy of this.  """
         return NearEngine( self.walkers, self.errdis, copy=self )
@@ -91,29 +99,40 @@ class NearEngine( OrderEngine ):
         np = problem.npars
         param = walker.allpars
 
+        if not hasattr( self, "nearest" ) :
+            self.nearest = numpy.zeros_like( param ) - 1
+
+
         ks = self.rng.randint( np )
         ptry = numpy.roll( param, ks )
 
-
         xd = problem.xdata
-        ksel = [0,1]
-        ksel = ptry[ksel]
-        dmin = problem.distance( xd[ksel,:], [0,1] )[0]         # need only one distance
-#        print( 0, fmt( ksel ), fmt( dmin ), fmt( dmin ) )
-        
-        kmin = 1
-        for k in range( 2, np ) :
-            ksel[1] = ptry[k]
-            d = problem.distance( xd[ksel,:], [0,1] )[0]
-#            print( k, fmt( ksel ), fmt( d ), fmt( dmin ) )
-            if d < dmin :
-                dmin = d
-                kmin = k
+        # k* are indices in the ptry list
+        # n* are indices in the xdata list (eg. nearest)
 
-        if kmin == 1 or kmin == np - 1 :        ## it is already the NN
+        n0 = ptry[0]
+        nsel = [n0,ptry[1]]
+        if self.nearest[n0] < 0 :                                   # not yet calculated
+            dmin = problem.distance( xd[nsel,:], [0,1] )[0]         # need only one distance
+#            print( 0, fmt( nsel ), fmt( dmin ), fmt( dmin ) )
+        
+            kmin = 1
+            for k in range( 2, np ) :                               # find nearest
+                nsel[1] = ptry[k]
+                d = problem.distance( xd[nsel,:], [0,1] )[0]
+#                print( k, fmt( nsel ), fmt( d ), fmt( dmin ) )
+                if d < dmin :
+                    dmin = d
+                    kmin = k
+            self.nearest[n0] = ptry[kmin]                           # store for later use
+
+        else :                                                      # it is stored
+            np = self.nearest[n0]                                   # get the nearest
+            kmin = numpy.where( ptry == np )[0][0]                  # find where NN is in ptry
+
+        if kmin == 1 :                                              # it is already the NN 
             self.reportFailed()
             return 0
-
 
         ## make the NN the last one
         pkm = ptry[kmin]
@@ -125,9 +144,10 @@ class NearEngine( OrderEngine ):
         Ltry = self.errdis.logLikelihood( problem, ptry )
 
         if self.verbose > 4 :
-            print( "Near     ", ks, kmin, fmt( dmin ), fmt( lowLhood ), fmt( Ltry ) )
+            print( "Near     ", ks, n0, kmin, fmt( lowLhood ), fmt( Ltry ) )
             print( fmt( param, max=None, format='%3d' ) )
             print( fmt( ptry, max=None, format='%3d' ) )
+            print( fmt( self.nearest, max=None, format='%3d' ) )
 
         if Ltry >= lowLhood:
             self.reportSuccess( )

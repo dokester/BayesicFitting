@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 class GibbsEngine( Engine ):
     """
@@ -44,7 +44,7 @@ class GibbsEngine( Engine ):
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, **kwargs ) :
+    def __init__( self, walkers, errdis, nstep=2, copy=None, **kwargs ) :
         """
         Constructor.
 
@@ -61,6 +61,7 @@ class GibbsEngine( Engine ):
 
         """
         super( ).__init__( walkers, errdis, copy=copy, **kwargs )
+        self.nstep = nstep
 
         self.plotter = DummyPlotter()
 
@@ -105,7 +106,8 @@ class GibbsEngine( Engine ):
             for k in range( 1, self.nstep ) :
                 perm = numpy.append( perm, pm )
 
-        ur = self.unitRange * ( 1 + 2.0 / len( self.walkers ) )
+#        ur = self.unitRange * ( 1 + 2.0 / len( self.walkers ) )
+        ur = self.unitRange * 1.10                      ## add 10% on the edges.
 
         param = walker.allpars
         self.plotter.start( param=param )

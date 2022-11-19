@@ -10,9 +10,9 @@ from .Formatter import formatter as fmt
 from .Formatter import fma
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -145,9 +145,9 @@ class ChordEngine( Engine ):
         uran = self.unitRange[fitIndex]
         umin = self.unitMin[fitIndex]
 
-        dur = 2 * numpy.max( uran ) / len( self.walkers )       # extend range a bit
+        dur = 5 * numpy.max( uran ) / len( self.walkers )       # extend range a bit
         uran += 2 * dur
-        umin = self.unitMin[fitIndex] - dur
+        umin -= dur
         umax = umin + uran
 
         # make sure that 0 <= umin < usav < umax <= 1
