@@ -5,9 +5,9 @@ from .ScaledErrorDistribution import ScaledErrorDistribution
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2022 Do Kester
 
 
 class GaussErrorDistribution( ScaledErrorDistribution ):
@@ -125,9 +125,10 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
 
-        scale = allpars[-1]
-        chisq = self.getChisq( problem, allpars ) / ( scale * scale )
-        return ( - problem.sumweight * ( 0.5 * self.LOG2PI + math.log( scale ) ) -
+        s2 = allpars[-1] * allpars[-1] + problem.varyy
+        chisq = self.getChisq( problem, allpars ) / s2
+
+        return ( - problem.sumweight * ( 0.5 * ( self.LOG2PI + math.log( s2 ) ) ) -
                        0.5 * chisq )
 
     def logLdata( self, problem, allpars, mockdata=None ) :
@@ -148,13 +149,16 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         """
         scale = allpars[-1]
 
-        res2 = -0.5 * problem.weightedResSq( allpars[:-1], mockdata=mockdata )
+        res2 = -0.5 * problem.weightedResSq( allpars, mockdata=mockdata )
 
-        res2 /= ( scale * scale )
+        s2 = scale * scale + problem.varyy 
+        res2 /= s2
+
         if problem.weights is None :
-            res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) )
+            res2 -= ( 0.5 * ( self.LOG2PI + math.log( s2 ) ) )
         else :
-            res2 -= ( 0.5 * self.LOG2PI + math.log( scale ) ) * problem.weights
+            res2 -= ( 0.5 * ( self.LOG2PI + math.log( s2 ) ) ) * problem.weights
+
         return res2
 
 
@@ -178,8 +182,8 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         self.nparts += 1                    ## counts calls to partialLogL
 
         scale = allpars[-1]
-        s2 = scale * scale
-        ( res2, res ) = problem.weightedResSq( allpars[:-1], extra=True )
+        s2 = scale * scale + problem.varyy
+        ( res2, res ) = problem.weightedResSq( allpars, extra=True )
 
         dM = problem.partial( allpars[:-1] )
 
@@ -190,7 +194,10 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
                 dL[i] = numpy.sum( res * dM[:,k] ) / s2
                 i += 1
             else :
-                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) / scale
+                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) * scale / s2
+
+
+#                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) / scale
 
         return dL
 
@@ -215,7 +222,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         np = problem.npars
         param = allpars[:np]
 
-        ( res2, res ) = problem.weightedResSq( allpars[:-1], mockdata=mockdata, extra=True )
+        ( res2, res ) = problem.weightedResSq( allpars, mockdata=mockdata, extra=True )
 
         dM = problem.partial( param )
 
@@ -223,15 +230,13 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 #        dM = problem.partial( param, mockdata=mockdata )
 
         scale = allpars[-1]
-        s2 = scale * scale
+        s2 = scale * scale + problem.varyy
         for  k in fitIndex:
             if k >= 0 :                         ## the parameters
                 yield ( res * dM[:,k] ) / s2
             else :                              ## the scale
                 wgt = 1.0 if problem.weights is None else problem.weights
-                yield ( res2 / s2 - wgt ) / scale
-
-        return
+                yield ( res2 / s2 - wgt ) * scale / s2
 
     def hessianLogL( self, problem, allpars, fitIndex ) :
         """

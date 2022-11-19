@@ -4,11 +4,12 @@ import math
 from .HyperParameter import HyperParameter
 from . import Tools
 from .Tools import setAttribute as setatt
-
+from .Formatter import formatter as fmt
+ 
 __author__ = "Do Kester"
 __year__ = 2022
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -406,7 +407,7 @@ class ErrorDistribution( object ):
             return dL
         except :
 #            raise
-            print( "Using numeric partialLogL." )
+#            print( "Using numeric partialLogL." )
             return self.numPartialLogL( problem, allpars, fitIndex )
 
 
@@ -445,12 +446,14 @@ class ErrorDistribution( object ):
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         p = allpars.copy( )
         i = 0
+
         for k in fitIndex :
             p[k] = allpars[k] - self.deltaP
             lm = self.logLikelihood( problem, p )
             p[k] = allpars[k] + self.deltaP
             lp = self.logLikelihood( problem, p )
             dL[i] = 0.5 * ( lp - lm ) / self.deltaP
+
             i += 1
             p[k]= allpars[k]
         return dL
