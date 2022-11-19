@@ -170,7 +170,7 @@ class Test( unittest.TestCase ):
 
 
     def test5( self ):
-        print( "******ASTROPY MODEL 1***********************" )
+        print( "******ASTROPY MODEL 5***********************" )
         gm = modeling.models.Gaussian2D()
 
 #        print( gm.param_names )
@@ -182,6 +182,18 @@ class Test( unittest.TestCase ):
         x = numpy.linspace( -5, 5, 11, dtype=float )
         x = numpy.stack( (x, x) ).T
 #        print( x )
+
+        stdModeltest( m, p, x=x, plot=self.doplot )
+
+    def test6( self ):
+        print( "******ASTROPY MODEL 6***********************" )
+        gm = modeling.models.Gaussian1D()
+
+        pm = PolynomialModel( 1 )
+        m = AstropyModel( gm, fixed={2:pm} )
+        p = numpy.asarray( [1.2, -0.1, 3.0, -0.3], dtype=float )
+
+        x = numpy.linspace( -5, 5, 11, dtype=float )
 
         stdModeltest( m, p, x=x, plot=self.doplot )
 

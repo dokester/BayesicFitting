@@ -619,6 +619,7 @@ class TestEvidence2( unittest.TestCase  ) :
 
     def test8( self ) :
         print( "====test8  Uniform ================" )
+        print( "====================" )
         plot = self.doplot
 
         nn = 200

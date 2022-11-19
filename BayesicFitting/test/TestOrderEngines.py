@@ -133,7 +133,11 @@ class Test( unittest.TestCase ):
 #        print( problem.xdata )
 
         n2 = np * np
-        pars = numpy.arange( n2, dtype=int )
+        pars0 = numpy.arange( n2, dtype=int )
+        if random :
+            pars = numpy.random.permutation( pars0 )
+        else :
+            pars = pars0
         fi = numpy.arange( n2, dtype=int )
         sl = WalkerList( problem, nwalker, pars, fi )
 
@@ -165,19 +169,19 @@ class Test( unittest.TestCase ):
             newp = neww.allpars
 
             psort = numpy.sort( neww.allpars )
-            assertAE( psort, pars )
+            assertAE( psort, pars0 )
 
             if plot :
                 xy0 = problem.xdata[pars]
                 plt.plot( xy0[:,0], xy0[:,1], 'k-' )
-                plt.plot( [xy0[-1,0], xy0[0,0]], [xy0[-1,1], xy0[0,1]], 'b-' )
+#                plt.plot( [xy0[-1,0], xy0[0,0]], [xy0[-1,1], xy0[0,1]], 'b-' )
                 xy1 = problem.xdata[newp]
                 plt.plot( xy1[:,0], xy1[:,1], 'r-.' )
-                plt.plot( [xy1[-1,0], xy1[0,0]], [xy1[-1,1], xy1[0,1]], 'g-.' )
+#                plt.plot( [xy1[-1,0], xy1[0,0]], [xy1[-1,1], xy1[0,1]], 'g-.' )
                 for kp in range( n2 ) :
-                    plt.text( xy0[kp,0], xy0[kp,1], "%d"%kp,
+                    plt.text( xy0[kp,0], xy0[kp,1], "%d"%pars[kp],
                                {'color': 'black', 'ha': 'right'} )
-                    plt.text( xy1[kp,0], xy1[kp,1], "%d"%kp,
+                    plt.text( xy1[kp,0], xy1[kp,1], "%d"%newp[kp],
                                {'color': 'red', 'ha': 'left'} )
 
 
@@ -188,7 +192,7 @@ class Test( unittest.TestCase ):
         for k in range( 1000 ) :
             myeng.execute( wid, -math.inf )
             psort = numpy.sort( steng.walkers[wid].allpars )
-            assertAE( psort, pars )
+            assertAE( psort, pars0 )
 
     def suite( cls ):
         return unittest.TestCase.suite( TestOrderEngines.__class__ )

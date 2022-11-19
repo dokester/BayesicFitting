@@ -77,7 +77,7 @@ class Test( unittest.TestCase ):
 
 
         if self.doplot :
-            pars = sl[-1].allpars
+            pars = sl.allpars
 
             x = problem.xdata[pars,0]
             y = problem.xdata[pars,1]
@@ -111,7 +111,7 @@ class Test( unittest.TestCase ):
         problem = SalesmanProblem( xdata, distance="spheric" )
         print( "mindis  ", problem.scale )
 
-        engs = ["move", "reverse", "switch"]
+        engs = ["move", "reverse", "switch", "near"]
 
         ns = NestedSolver( problem, engines=engs, verbose=2, seed=80409 )
 

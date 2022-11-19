@@ -16,7 +16,7 @@ from FitPlot import plotErrdis
 from FitPlot import plotErrdis2d
 
 
-class TestEvidence2( unittest.TestCase  ) :
+class Test( unittest.TestCase  ) :
 
     def __init__( self, testname ):
         super( ).__init__( testname )
@@ -139,6 +139,170 @@ class TestEvidence2( unittest.TestCase  ) :
         lwevo = samples.getLogWeightEvolution()
 
         assertAAE( numpy.sum( numpy.exp( lwevo ) ), 1.0 )
+
+
+    def TBDtestGP( self ) :
+        gp = GaussPrior( center=0, scale=1 )
+
+        xx = numpy.linspace( -6, 6, 1201, dtype=float )
+
+        s = 0.0
+        t = 0.0
+        ss = numpy.zeros_like( xx )
+        for k,x in enumerate( xx ) :
+            ss[k] = gp.result( x )
+            s += gp.result( x )
+            t += math.exp( gp.logResult( x ) )
+
+        print( s )
+        print( t )
+
+        ge = GaussErrorDistribution( scale=1 )
+        model = PolynomialModel(0)
+        yy = numpy.zeros_like( xx )
+        problem = ClassicProblem( xdata=yy, model=model, ydata=xx )
+        pars = [0.0, 1.0] 
+        le = ge.logLdata( problem, pars )
+        ee = numpy.exp( le )
+        e = numpy.sum( ee )
+        print( e )
+
+        if self.doplot :
+            plt.plot( xx, ss, 'k-' )
+            plt.plot( xx, ee, 'r-' )
+            plt.show()
+
+
+
+    def addPrior( self, logL, problem, allpars, logLlow ):
+        return logL + self.prior.logResult( allpars[0] ) + math.log( self.limits[1] - self.limits[0] )
+
+    def TBDtest1b( self ) :
+
+        print( "====test1b============================" )
+        nn = 1
+        x = numpy.zeros( nn, dtype=float )
+        ym = x + 0.5
+
+        nf = 0.1
+        numpy.random.seed( 2345 )
+        noise = numpy.random.randn( nn )
+        y = ym + nf * noise
+
+        self.limits = [-10,10]
+        pm = PolynomialModel( 0 )
+
+        self.prior = GaussPrior( center=5, scale=3 )
+        self.stdtest( x, pm, y, nr=10 )
+
+    def stdtest( self, x, model, y, nr=0 ) :
+
+        print( "+++NS  %s +++++++" % str( self.prior ) )
+
+        model.setPrior( 0, self.prior )
+
+        ns = NestedSampler( x, model, y, verbose=2 )
+#        ns.minimumIterations = 500
+        logE = ns.sample()
+
+        par1 = ns.parameters
+        std1 = ns.stdevs
+        logz1 = ns.logZ
+        dlz1 = ns.logZprecision
+        print( "pars  ", fmt( par1 ) )
+        print( "stdv  ", fmt( std1 ) )
+        print( "logZ  ", fmt( logz1 ), " +- ", fmt( dlz1 ) )
+        for k in range( nr ) :
+            ns = NestedSampler( x, model, y, verbose=0, seed=k )
+            evi = ns.sample()
+            p = ns.parameters
+            s = ns.stdevs
+            lz = ns.logZ
+            er = ns.logZprecision
+            print( fmt( k ), fmt( p ), fmt( s ), fmt( lz ), fmt( er ) )
+
+        print( "+++NS  %s alt +++++++" % str( self.prior ) )
+
+        model.setPrior( 0, UniformPrior( limits=self.limits ) )
+
+        ed = GaussErrorDistribution( )
+        ed.constrain = self.addPrior
+        ns = NestedSampler( x, model, y, verbose=2, distribution=ed )
+
+        logE = ns.sample()
+
+        par2 = ns.parameters
+        std2 = ns.stdevs
+        logz2 = ns.logZ
+        dlz2 = ns.logZprecision
+        print( "pars  ", fmt( par2 ) )
+        print( "stdv  ", fmt( std2 ) )
+        print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
+        for k in range( nr ) :
+            ns = NestedSampler( x, model, y, verbose=0, distribution=ed, seed=k )
+            evi = ns.sample()
+            p = ns.parameters
+            s = ns.stdevs
+            lz = ns.logZ
+            er = ns.logZprecision
+            print( fmt( k ), fmt( p ), fmt( s ), fmt( lz ), fmt( er ) )
+
+        self.assertTrue( abs( logz1 - logz2 ) < dlz2 )
+
+    def TBDtest1c( self ) :
+
+        print( "====test1c============================" )
+        nn = 100
+        x = numpy.zeros( nn, dtype=float )
+        ym = x + 0.5
+
+        nf = 0.1
+        numpy.random.seed( 2345 )
+        noise = numpy.random.randn( nn )
+        y = ym + nf * noise
+
+        self.limits = [-100,100]
+        pm = PolynomialModel( 0 )
+
+        self.prior = UniformPrior( limits=self.limits )
+        self.stdtest( x, pm, y, nr=0 )
+
+    def TBDtest1d( self ) :
+
+        print( "====test1d============================" )
+        nn = 100
+        x = numpy.zeros( nn, dtype=float )
+        ym = x + 0.5
+
+        nf = 0.1
+        numpy.random.seed( 2345 )
+        noise = numpy.random.randn( nn )
+        y = ym + nf * noise
+
+        self.limits = [-100,100]
+        pm = PolynomialModel( 0 )
+
+        self.prior = LaplacePrior( center=4.4, scale=2 )
+        self.stdtest( x, pm, y, nr=0 )
+
+    def TBDtest1e( self ) :
+
+        print( "====test1e============================" )
+        nn = 100
+        x = numpy.zeros( nn, dtype=float )
+        ym = x + 0.5
+
+        nf = 0.1
+        numpy.random.seed( 2345 )
+        noise = numpy.random.randn( nn )
+        y = ym + nf * noise
+
+        self.limits = [-100,100]
+        pm = PolynomialModel( 0 )
+
+        self.prior = CauchyPrior( center=4.4, scale=2 )
+        self.stdtest( x, pm, y, nr=0 )
+
 
     def test2( self ) :
         print( "====test2============================" )
@@ -299,7 +463,7 @@ class TestEvidence2( unittest.TestCase  ) :
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
 
         dis = GaussErrorDistribution( scale=nf )
-        ns = NestedSampler( x, model, y, distribution=dis, verbose=0, seed=34512 )
+        ns = NestedSampler( x, model, y, distribution=dis, verbose=0, seed=3451 )
 
         logE = ns.sample()
         par2 = ns.parameters
@@ -747,7 +911,7 @@ class TestEvidence2( unittest.TestCase  ) :
         if plot :
             plt.show()
 
-    def XXXtest9( self ) :
+    def TBDtest9( self ) :
         print( "====test9  Bernoulli ================" )
         plot = self.doplot
 
@@ -801,7 +965,7 @@ class TestEvidence2( unittest.TestCase  ) :
         plt.plot( x, yfit2, 'g-' )
         plt.show()
 
-    def XXXtest10( self ) :
+    def TBDtest10( self ) :
         print( "====test10  Bernoulli ================" )
         plot = self.doplot
 

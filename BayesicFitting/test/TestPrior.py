@@ -549,17 +549,22 @@ class TestPrior( unittest.TestCase ) :
 
         maxdom = prior.center + prior.MAXVAL * prior.scale
         mindom = prior.center - prior.MAXVAL * prior.scale
+        print( "Domain from %f to %f" % (mindom, maxdom ) )
+        print( prior.unit2Domain( 1.0 ), prior.unit2Domain( 0.75 ) ) 
         self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
-        self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 0.47693627620446982 )
+        self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 0.4769362762044699 )
+
+        # value for the new (btter version of GaussPrior
+#        self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 0.6744897501960818 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -0.47693627620446982 )
+        self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -0.4769362762044699 )
         self.assertTrue( prior.unit2Domain( 0.0 ) == mindom )
 
         prior.scale = 10
         print( prior )
         maxdom = prior.center + prior.MAXVAL * prior.scale
         self.assertTrue( prior.scale == 10 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -4.7693627620446982 )
+        self.assertAlmostEqual( prior.unit2Domain( 0.25 ), -4.769362762044699 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
         self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
 
@@ -569,9 +574,9 @@ class TestPrior( unittest.TestCase ) :
         maxdom = cp.center + cp.MAXVAL * cp.scale
         mindom = cp.center - cp.MAXVAL * cp.scale
         self.assertTrue( cp.scale == 10.0 )
-        print( cp.unit2Domain( 0.25 ), 100 - 4.7693627620446982 )
+        print( cp.unit2Domain( 0.25 ), 100 - 6.744897501960818 )
         print( cp.unit2Domain( 0.5 ), 100 )
-        self.assertAlmostEqual( cp.unit2Domain( 0.25 ), 100 - 4.7693627620446982 )
+        self.assertAlmostEqual( cp.unit2Domain( 0.25 ), 100 - 4.769362762044699 )
         self.assertAlmostEqual( cp.unit2Domain( 0.5 ), 100 )
         self.assertTrue( cp.unit2Domain( 1.0 ) == maxdom )
         self.assertTrue( cp.unit2Domain( 0.0 ) == mindom )
@@ -595,6 +600,9 @@ class TestPrior( unittest.TestCase ) :
         print( "partial 10. : ", prior.partialDomain2Unit( 10. ) )
         print( "numpart 10. : ", prior.numPartialDomain2Unit( 10. ) )
         self.assertAlmostEqual( prior.partialDomain2Unit(0.0 ), 0.5641895835477563 )
+
+        # Value for new (better) GaussPrior.
+        # self.assertAlmostEqual( prior.partialDomain2Unit(0.0 ), 0.3989422804014327 )
         print( prior.partialDomain2Unit( 9 ) )
         print( prior.numPartialDomain2Unit( 9 ) )
         self.assertAlmostEqual( prior.partialDomain2Unit(-9 ), prior.numPartialDomain2Unit( -9 ), 4 )

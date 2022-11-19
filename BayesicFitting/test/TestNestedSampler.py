@@ -52,9 +52,9 @@ class TestNestedSampler( unittest.TestCase ):
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
         self.dofull = ( "DOFULL" in os.environ and os.environ["DOFULL"] == "1" )
 
-    def makeData( self, n=3 ) :
+    def makeData( self, n=3, ndata=201 ) :
 
-        N = 201
+        N = ndata
         a0 = 8.0
         x0 = 0.7
         s0 = 0.4
@@ -133,10 +133,7 @@ class TestNestedSampler( unittest.TestCase ):
 
         plot = self.doplot
 
-        pp, y0, x, y, w = self.makeData( 2 )
-
-        x = numpy.append( x, x )
-        y = numpy.append( y, y )
+        pp, y0, x, y, w = self.makeData( 2, ndata=401 )
 
         gm = GaussModel( )
         gm.addModel( PolynomialModel(1) )
@@ -162,15 +159,18 @@ class TestNestedSampler( unittest.TestCase ):
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
 
+        print( "NS wgt  ", fmt( ns.weights ) )
+        print( "NS info ", fmt( ns.information ) )
+        print( "NS hypp ", fmt( ns.hypars ) )
+        print( "NS sthp ", fmt( ns.stdevHypars ) )
+
+
     def test2b( self ):
         print( "=========== Nested Sampler test 2b ======================" )
 
         plot = self.doplot
 
-        pp, y0, x, y, w = self.makeData( 2 )
-
-        x = numpy.append( x, x )
-        y = numpy.append( y, y )
+        pp, y0, x, y, w = self.makeData( 2, ndata=401 )
 
         gm = GaussModel( )
         gm.addModel( PolynomialModel(1) )
@@ -180,11 +180,15 @@ class TestNestedSampler( unittest.TestCase ):
 
         lolim = numpy.asarray( [-10,-10,  0,-10,-10], dtype=float )
         hilim = numpy.asarray( [ 10, 10, 10, 10, 10], dtype=float )
-
         gm.setLimits( lolim, hilim )
-        ns = NestedSampler( x, gm, y )
+
+        erdis = GaussErrorDistribution( limits=[0.01,100])
+        eng1 = GibbsEngine( None, erdis )
+        eng2 = ChordEngine( None, erdis )
+
+        ns = NestedSampler( x, gm, y, engines=( eng1, eng2 ), distribution=erdis )
         ns.verbose = 2
-        ns.distribution.setLimits( [0.01, 100] )
+#        ns.distribution.setLimits( [0.01, 100] )
 
 
         evi = ns.sample()
@@ -197,10 +201,7 @@ class TestNestedSampler( unittest.TestCase ):
 
         plot = self.doplot
 
-        pp, y0, x, y, w = self.makeData( 2 )
-
-        x = numpy.append( x, x )
-        y = numpy.append( y, y )
+        pp, y0, x, y, w = self.makeData( 2, ndata=401 )
 
         gm = GaussModel( )
         gm.addModel( PolynomialModel(1) )
@@ -216,7 +217,7 @@ class TestNestedSampler( unittest.TestCase ):
         ns.distribution.setLimits( [0.01, 100] )
         ns.verbose = 2
 
-        evi = ns.sample()
+        evi = ns.sample( plot="test" )
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )

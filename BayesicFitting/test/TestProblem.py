@@ -39,7 +39,7 @@ __status__ = "Development"
 #  *
 #  *  2017 Do Kester
 
-class TestProblem( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Problem classes.
 
@@ -81,17 +81,18 @@ class TestProblem( unittest.TestCase ):
 
         self.assertTrue( problem.sumweight == problem.ndata )
         self.assertFalse( problem.hasWeights() )
+        self.assertFalse( problem.hasAccuracy )
         r = problem.residuals( [0.0] )
         print( fma(r) )
         print( fmt(numpy.sum( r )), fmt(numpy.sum( numpy.abs( r ) )) )
         self.assertAlmostEqual( numpy.sum( r ), 0 )
         self.assertAlmostEqual( numpy.sum( numpy.abs( r ) ), 6 )
 
-        r, s = problem.weightedResiduals( [0.0], extra=True )
-        self.assertAlmostEqual( numpy.sum( r ), 0 )
-        self.assertAlmostEqual( numpy.sum( numpy.abs( r ) ), 6 )
-        self.assertTrue( s[0] == s[4] == -1 )
-        self.assertTrue( s[6] == s[10] == 1 )
+#        r, s = problem.weightedResiduals( [0.0], extra=True )
+#        self.assertAlmostEqual( numpy.sum( r ), 0 )
+#        self.assertAlmostEqual( numpy.sum( numpy.abs( r ) ), 6 )
+#        self.assertTrue( s[0] == s[4] == -1 )
+#        self.assertTrue( s[6] == s[10] == 1 )
 
 
         r,s = problem.weightedResSq( [0.0], extra=True )
@@ -110,14 +111,14 @@ class TestProblem( unittest.TestCase ):
         self.assertAlmostEqual( numpy.sum( numpy.abs( r ) ), 6.0 )
 
 
-        r, s = problem.weightedResiduals( [0.0], extra=True )
-        self.assertTrue( numpy.sum( r ) == 0.0 )
-        self.assertTrue( numpy.sum( numpy.abs( r ) ) == 8.4 )
+#        r, s = problem.weightedResiduals( [0.0], extra=True )
+#        self.assertTrue( numpy.sum( r ) == 0.0 )
+#        self.assertTrue( numpy.sum( numpy.abs( r ) ) == 8.4 )
 
-        self.assertTrue( s[0] == s[4] == -1 )
-        self.assertTrue( s[1] == s[3] == -2 )
-        self.assertTrue( s[6] == s[10] == 1 )
-        self.assertTrue( s[7] == s[9] == 2 )
+#        self.assertTrue( s[0] == s[4] == -1 )
+#        self.assertTrue( s[1] == s[3] == -2 )
+#        self.assertTrue( s[6] == s[10] == 1 )
+#        self.assertTrue( s[7] == s[9] == 2 )
 
         r,s = problem.weightedResSq( [0.0], extra=True )
         self.assertTrue( numpy.sum( r ) == 6.0 )
@@ -132,12 +133,278 @@ class TestProblem( unittest.TestCase ):
         self.assertTrue( problem.myStartEngine() == "start" )
         self.assertTrue( problem.myDistribution() == "gauss" )
 
+    def test2a( self ) :
+        print( "====test2a ErrorsInXandYProblem============================" )
+        nn = 4
+        x = numpy.asarray( [0,2,8,10],dtype=float )
+        y = numpy.asarray( [2,0,10,8],dtype=float )
+
+        model = PolynomialModel( 1 )
+        par = [0.0, 1.0] + [1.0, 1.0, 9.0, 9.0]
+
+        problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y )
+        Tools.printclass( problem )
+
+        self.assertFalse( problem.hasAccuracy )
+        self.assertTrue( problem.determinant == 0 )
+        self.assertTrue( problem.varyy == 0 )
+        self.assertTrue( problem.varxx == 0 )
+        self.assertTrue( problem.varxy == 0 )
+        self.assertTrue( problem.sumweight == 4 )
+
+        self.stdtest( problem, par )
+
+    def test2b( self ) :
+        print( "====test2b ErrorsInXandYProblem============================" )
+        nn = 4
+        x = numpy.asarray( [0,2,8,10],dtype=float )
+        y = numpy.asarray( [2,0,10,8],dtype=float )
+        model = PolynomialModel( 1 )
+        par = [0.0, 1.0] + [1.0, 1.0, 9.0, 9.0]
+
+        wgt = [2,1,1,2]
+        problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y, weights=wgt )
+        Tools.printclass( problem )
+
+        self.assertFalse( problem.hasAccuracy )
+        self.assertTrue( problem.determinant == 0 )
+        self.assertTrue( problem.varyy == 0 )
+        self.assertTrue( problem.varxx == 0 )
+        self.assertTrue( problem.varxy == 0 )
+        self.assertTrue( problem.sumweight == 6 )
+
+        self.stdtest( problem, par )
+
+    def test2c( self ) :
+        print( "====test2c ErrorsInXandYProblem============================" )
+        nn = 4
+        x = numpy.asarray( [0,2,8,10],dtype=float )
+        y = numpy.asarray( [2,0,10,8],dtype=float )
+        model = PolynomialModel( 1 )
+        par = [0.0, 1.0] + [1.0, 1.0, 9.0, 9.0]
+
+        problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y, covar=[[1,0],[0,2]] )
+        Tools.printclass( problem )
+
+        self.assertTrue( problem.hasAccuracy )
+        self.assertTrue( problem.determinant == 2 )
+        self.assertTrue( problem.varyy == 1 )
+        self.assertTrue( problem.varxx == 2 )
+        self.assertTrue( problem.varxy == 0 )
+        self.assertTrue( problem.sumweight == 4 )
+
+        self.stdtest( problem, par, plot=self.doplot )
+
+    def test2d( self ) :
+        print( "====test2d ErrorsInXandYProblem============================" )
+        nn = 4
+        x = numpy.asarray( [0,2,8,10],dtype=float )
+        y = numpy.asarray( [2,0,10,8],dtype=float )
+        model = PolynomialModel( 1 )
+        par = [0.0, 1.0] + [1.0, 1.0, 8.0, 8.0]
+
+        acc = numpy.array( [1.0, 1.0, -0.5] )
+        cov = numpy.array( [[1.0,-0.5],[-0.5,1]], dtype=float )
+
+        problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y, accuracy=acc )
+        Tools.printclass( problem )
+
+        self.assertTrue( problem.hasAccuracy )
+        self.assertTrue( problem.determinant == 0.75 )
+        self.assertTrue( problem.varyy == 1 )
+        self.assertTrue( problem.varxx == 1 )
+        self.assertTrue( problem.varxy == -0.5 )
+        self.assertTrue( problem.sumweight == 4 )
+
+        self.stdtest( problem, par, covar=cov, plot=self.doplot )
+
+    def test2e( self ) :
+        print( "====test2e ErrorsInXandYProblem============================" )
+        nn = 4
+        x = numpy.asarray( [0,2,8,10],dtype=float )
+        y = numpy.asarray( [2,0,10,8],dtype=float )
+        model = PolynomialModel( 1 )
+        par = [0.0, 1.0] + [1.0, 1.0, 9.0, 9.0]
+
+        clst = [[[0.8,0.4],[0.4,1]], [[0.3,-0.4],[-0.4,1]], [[1.8,0.7],[0.7,1]], [[1.2,-0.1],[-0.1,1]]]
+        cov = numpy.array( clst, dtype=float )
+        print( cov )
+
+        problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y, covar=cov )
+        Tools.printclass( problem )
+
+        self.assertTrue( problem.hasAccuracy )
+        assertAAE( problem.determinant, [0.64, 0.14, 1.31, 1.19], 3  )
+        assertAAE( problem.varyy, [0.8, 0.3, 1.8, 1.2] )
+        assertAAE( problem.varxx, [1.0, 1.0, 1.0, 1.0] )
+        assertAAE( problem.varxy, [0.4,-0.4, 0.7,-0.1] )
+        self.assertTrue( problem.sumweight == 4 )
+
+        self.stdtest( problem, par, covar=cov, plot=self.doplot )
+
+    def test2f( self ) :
+        print( "====test2e ErrorsInXandYProblem============================" )
+        nn = 4
+        x = numpy.asarray( [0,2,8,10],dtype=float )
+        y = numpy.asarray( [2,0,10,8],dtype=float )
+        model = PolynomialModel( 1 )
+        par = [0.0, 1.0] + [1.0, 1.0, 9.0, 9.0]
+
+        alst = [[1, 1, 0.4], [2,1,-0.1], [1, 2, 0], [3, 3, -0.9]]
+        acc = numpy.array( alst, dtype=float )
+        print( acc )
+
+        problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y, accuracy=acc )
+        Tools.printclass( problem )
+
+        self.assertTrue( problem.hasAccuracy )
+        assertAAE( problem.determinant, [0.84, 3.96, 4.0, 15.39], 3  )
+        assertAAE( problem.varyy, [1.0, 4.0, 1.0, 9.0] )
+        assertAAE( problem.varxx, [1.0, 1.0, 4.0, 9.0] )
+        assertAAE( problem.varxy, [0.4,-0.2, 0.0,-8.1] )
+        self.assertTrue( problem.sumweight == 4 )
+
+        self.stdtest( problem, par, plot=self.doplot )
+
+    def xxxtest0b( self ) :
+        print( "====test0b ErrorsInXandYProblem============================" )
+
+        numpy.random.seed( 123456 )
+        xx = numpy.random.randn( 100 ) * 0.6
+        yy = numpy.random.randn( 100 ) * 0.4
+        zz = numpy.random.randn( 100 ) * 0.5
+        cov = numpy.cov( xx - zz, - ( yy - zz ) )
+        val, vec = numpy.linalg.eig( cov )
+        print( cov )
+        print( val )
+        print( vec )
+
+        c = vec[0,0]
+        s = vec[1,0]
+        a = val[0]
+        b = val[1]
+        print( c )
+        print( s )
+        
+        c2 = c * c
+        s2 = s * s
+        a2 = a * a
+        b2 = b * b
+        NP = 21
+        map = numpy.zeros( (NP, NP), dtype=float )
+
+        for k in range( NP ) :
+            x = 0.4 * ( k - 10 )
+            x2 = x * x
+            for i in range( NP ) :
+                y = 0.4 * ( i - 10 )
+                y2 = y * y
+                r2 = ( a2 * x2 * s2 + b2 * x2 * c2 + 
+                       2 * ( b2 - a2 ) * c * s * x * y +
+                       a2 * y2 * c2 + b2 * y2 * s2 ) / ( a2 * b2 )
+                map[i,k] = r2
+
+        plt.figure( 2, figsize=(6,6) )
+        plt.plot( xx - zz, zz - yy, 'k.' )
+
+        ay = numpy.linspace( -4, 4, NP )
+        ax = numpy.linspace( -4, 4, NP )
+
+        cnts = [0.5, 1.0, 2.0, 4.0, 10, 20]
+
+#        print( map )
+
+        plt.contour( ax, ay, map, cnts )
+
+        plt.axis( 'equal' )
+
+        plt.show()
+
+
+    def stdtest( self, problem, par, covar=None, plot=False, dosample=False ) :
+        npar = len( par )
+
+        problem.model.setLimits( -4, 4 )
+        problem.prior = GaussPrior( scale=1 )
+
+        print( problem.shortName() )
+        print( "xdat   ", fmt( problem.xdata ) )
+        print( "ydat   ", fmt( problem.ydata ) )
+
+        if not problem.hasWeights :
+            self.assertTrue( problem.sumweight == problem.ndata )
+
+        md = problem.result( par )
+        print( "mock  ", fma( md ) )
+        r = problem.residuals( par, mockdata=md )
+        print( "res   ", fma(r) )
+        print( "sum   ", fmt(numpy.sum( r )), fmt(numpy.sum( numpy.abs( r ) )) )
+        sqrt2 = math.sqrt( 2 )
+
+
+        allpar = par + [1.0]
+        rs = problem.weightedResSq( allpar, extra=True )
+        print( "res2  ", fma( rs[0] ) )
+        print( "y x   ", fma( rs[1] ) )
+        print( "xr2   ", fma( rs[2] ) )
+
+        wgts = problem.weights
+        print( "wgt   ", fmt( wgts ) )
+        swgt = problem.sumweight
+        print( "swgt  ", fmt( swgt ) )
+
+        if dosample :
+            engs = ["gibbs", "chord"]
+            ns = NestedSampler( problem=problem, engines=engs )
+            ns.distribution.setLimits( [0.1, 10] )
+            ns.verbose = 2
+
+            evi = ns.sample()
+
+            paropt = ns.parameters
+            print( "Prob npars :", ns.walkers[0].problem.npars )
+            print( "Parameters :", fmt( ns.parameters, max=10 ) )
+            print( "StDevs     :", fmt( ns.stdevs, max=10 ) )
+            xopt = ns.samples.nuisance
+            print( "xdata      :", fmt( problem.xdata, max=10 ))
+            print( "Nuisance   :", fmt( xopt, max=10 ) )
+            print( "StdevNuis  :", fmt( ns.samples.stdevNuis, max=10 ))
+            print( "Scale      :", fmt( ns.scale ) )
+        
+
+        if not plot : return
+
+        x = problem.xdata
+        y = problem.ydata
+        nx = len( x )
+        plt.figure( 1, figsize=(6,6) )
+        plt.plot( x, y, 'k.' )
+        plt.plot( x, problem.model.result( x, [0,1] ), 'k-' )
+
+        if dosample :
+            plt.plot( xopt, problem.model.result( xopt, paropt ), 'g-' )
+
+        if covar is not None :
+            val, vec = numpy.linalg.eig( covar )
+            tt = numpy.linspace( 0, 2 * math.pi, 91 )
+            if vec.ndim == 2 :
+                xx = numpy.append( val[0] * numpy.cos( tt ), val[1] * numpy.sin( tt ) ).reshape( 2, -1 ).T
+                xx = numpy.inner( xx, vec )
+            for k in range( nx ) :
+                if vec.ndim == 3 :
+                    xx = numpy.append( val[k,0] * numpy.cos( tt ), val[k,1] * numpy.sin( tt ) ).reshape( 2, -1 ).T
+                    xx = numpy.inner( xx, vec[k,:,:] )
+                plt.plot( x[k] + xx[:,0], y[k] + xx[:,1], 'r-' ) 
+
+        plt.axis( 'equal' )
+        plt.show()
+
+
     def test2( self ) :
         print( "====test2 ErrorsInXandYProblem============================" )
         nn = 4
         x = numpy.asarray( [0,2,8,10],dtype=float )
         y = numpy.asarray( [2,0,10,8],dtype=float )
-
 
         model = PolynomialModel( 1 )
         par = [0.0, 1.0] + [1.0, 1.0, 9.0, 9.0]
@@ -145,50 +412,25 @@ class TestProblem( unittest.TestCase ):
 
         problem = ErrorsInXandYProblem( model=model, xdata=x, ydata=y )
 
-        print( problem.shortName() )
-        Tools.printclass( problem )
+#        problem.weights = numpy.asarray( [1,1,2,2], dtype=float )
 
-        self.assertTrue( problem.sumweight == problem.ndata )
-        self.assertFalse( problem.hasWeights() )
-        md = problem.result( par )
-        print( "mock  ", fma( md ) )
-        r = problem.residuals( par, mockdata=md )
-        print( "res   ", fma(r) )
-        print( "sum   ", fmt(numpy.sum( r )), fmt(numpy.sum( numpy.abs( r ) )) )
-        sqrt2 = math.sqrt( 2 )
-        self.assertAlmostEqual( numpy.sum( r ), 4*sqrt2 )
-        self.assertAlmostEqual( numpy.sum( numpy.abs( r ) ), 4*sqrt2 )
+        yres, xres = problem.getXYresiduals( par )
+        print( "yres  ", fma( yres ) )
+        print( "xres  ", fma( yres ) )
+        print( "res2  ", fma( xres*xres + yres*yres ) )
 
-        r, s = problem.weightedResiduals( par, extra=True )
-        print( "res   ", fma( r ) )
-        print( "      ", fma( s ) )
-        self.assertAlmostEqual( numpy.sum( r ), 4*sqrt2 )
-        self.assertAlmostEqual( numpy.sum( s ), 0 )
-        for k in [1,3,4,6] :
-            self.assertAlmostEqual( s[k], -sqrt2/2 )
-        for k in [0,2,5,7] :
-            self.assertAlmostEqual( s[k],  sqrt2/2 )
+        print( fmt( problem.varyy ), fmt( problem.varxy ), fmt( problem.varxx ), fmt( problem.determinant ) )
 
-
-        r,s = problem.weightedResSq( par, extra=True )
-        print( "res2  ", fma( r ) )
-        print( "      ", fma( s ) )
-        self.assertAlmostEqual( numpy.sum( r ), 8.0 )
-        self.assertAlmostEqual( numpy.sum( s ), 0.0 )
-
-        self.assertAlmostEqual( s[0] + s[2] + s[5] + s[7],  4 )
-        self.assertAlmostEqual( s[1] + s[3] + s[4] + s[6], -4 )
-
-        problem.weights = numpy.asarray( [1,1,2,2], dtype=float )
-
-        self.assertTrue( problem.sumweight == 6 )
-        self.assertTrue( problem.hasWeights() )
-
-        r,s = problem.weightedResSq( par, extra=True )
-        print( "res2w ", fma( r ) )
-        print( "      ", fma( s ) )
-        self.assertTrue( numpy.sum( r ) == 12.0 )
-        self.assertTrue( numpy.sum( s ) == 0 )
+        allpars = par + [1.0]
+        rs = problem.weightedResSq( allpars, extra=True )
+        print( "res2w ", fma( rs[0] ) )
+        print( "      ", fma( rs[1] ) )
+        print( "      ", fma( rs[2] ) )
+        self.assertFalse( problem.hasAccuracy )
+#        self.assertTrue( numpy.sum( rs[0] ) == 12.0 )
+        self.assertTrue( numpy.sum( rs[1] ) == 0 )
+#        self.assertTrue( problem.sumweight == 6 )
+#        self.assertTrue( problem.hasWeights() )
 
         engs = problem.myEngines()
         self.assertTrue( len( engs ) == 3 )
@@ -197,14 +439,15 @@ class TestProblem( unittest.TestCase ):
         self.assertTrue( engs[2] == "chord" )
 
         self.assertTrue( problem.myStartEngine() == "start" )
-        self.assertTrue( problem.myDistribution() == "gauss" )
+        self.assertTrue( problem.myDistribution() == "gauss2d" )
 
         print( "=======   Try Gauss Error Distribution  ==================" )
 
         ## reset the weights
 #        problem.weights = None
 
-        ged = GaussErrorDistribution( )
+        ged = Gauss2dErrorDistribution( )
+#        ged.deltaP = -0.01
         param = numpy.append( par, [1.0] )
 
         fitIndex = [k for k in range( npar )] + [-1]
@@ -229,7 +472,7 @@ class TestProblem( unittest.TestCase ):
 
         scale = 1.0
         param[-1] = scale
-        fitIndex = numpy.asarray( [0,1,-1] )
+
         dL = ged.partialLogL( problem, param, fitIndex )
         nL = ged.numPartialLogL( problem, param, fitIndex )
         print( "partial = ", dL )
@@ -294,6 +537,7 @@ class TestProblem( unittest.TestCase ):
         ns.setEngines( ["galilean", "gibbs"] )
         ns.problem.prior = UniformPrior( limits=[-2.0,2.0] )
         #ns.minimumIterations = 1000
+        self.assertFalse( ns.problem.hasAccuracy )
 
 #        print( ns.problem.npars )
 
@@ -362,6 +606,7 @@ class TestProblem( unittest.TestCase ):
 #        ns.setEngines( ["galilean"] )
         ns.problem.prior = UniformPrior( limits=[-2.0,2.0] )
 #        ns.verbose=5
+        self.assertFalse( ns.problem.hasAccuracy )
 
         Tools.printclass( ns.problem )
         Tools.printclass( ns.distribution )
@@ -380,6 +625,7 @@ class TestProblem( unittest.TestCase ):
         plt.plot( xopt, yopt, 'k-' )
         for k in range( 4 ):
             plt.plot( [x[k],xopt[k]], [y[k],yopt[k]], 'g-')
+        plt.axis( 'equal' )
         plt.show()
 
     def test5( self ) :
@@ -392,6 +638,7 @@ class TestProblem( unittest.TestCase ):
         p = [ 0.0, 1.1, 4.0, 0.01, 0.0, 0.0, 0.0]
 
         problem = MultipleOutputProblem( model=mdl, xdata=x, ydata=y, weights=w )
+        self.assertFalse( problem.hasAccuracy )
 
         print( problem.weights )
 
@@ -482,6 +729,7 @@ class TestProblem( unittest.TestCase ):
 
         print( problem.shortName() )
         Tools.printclass( problem )
+        self.assertFalse( problem.hasAccuracy )
 
         engs = problem.myEngines()
         self.assertTrue( len( engs ) == 3 )
@@ -505,11 +753,15 @@ class TestProblem( unittest.TestCase ):
 #        problem = ClassicProblem( model=model, xdata=x, ydata=ym )
 
         ns = NestedSampler( problem=problem )
+        Tools.printclass( problem )
+        print( ns.distribution.scale )
+
         ns.verbose = 2
         logE = ns.sample( plot=self.doplot )
 
         ns = NestedSampler( problem=problem, limits=[0.1,10.0] )
         ns.verbose = 2
+        self.assertFalse( ns.problem.hasAccuracy )
 
         logE = ns.sample( plot=self.doplot )
 

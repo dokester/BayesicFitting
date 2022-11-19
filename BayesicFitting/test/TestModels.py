@@ -10,7 +10,7 @@ import warnings
 from StdTests import stdModeltest
 
 from BayesicFitting import *
-
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -118,24 +118,6 @@ class TestModels( unittest.TestCase ):
 
         stdModeltest( m, p, plot=self.doplot )
 
-    """
-    def testEtalonVarModel( self ):
-        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
-        print( "******ETALON VAR***********************" )
-        m = EtalonVarModel( )
-        p = numpy.asarray( [1.2, 0.6, 2.0, 0.2], dtype=float )
-
-        stdModeltest( m, p, plot=self.doplot )
-
-    def testEtalonVarModel2( self ):
-        x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
-        print( "******ETALON VAR 2***********************" )
-        pm = BasicSplinesModel( knots=[-1.0, 0.1, 1.0] )
-        m = EtalonVarModel( fixed={1:pm} )
-        p = numpy.asarray( [1.0, 5.5, 0.2, 0.03, 0.04, 0.05, 0.02, 0.01], dtype=float )
-
-        stdModeltest( m, p, plot=self.doplot )
-    """
     def testExpModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******EXP**************************" )
@@ -198,6 +180,14 @@ class TestModels( unittest.TestCase ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******GAUSS*************************" )
         m = GaussModel( )
+
+        p = numpy.asarray( [1.2,-0.2,-0.3], dtype=float )
+        print( fmt( p ) )
+        pc = m.correctParameters( p )
+        print( fmt( pc ) )
+        self.assertTrue( pc[2] == 0.3 )
+
+
         p = numpy.asarray( [1.2,-0.2,0.3], dtype=float )
 
         stdModeltest( m, p, plot=self.doplot )
@@ -212,6 +202,12 @@ class TestModels( unittest.TestCase ):
         print( pm.parameters )
         gm.addModel( pm )
         par = numpy.asarray( [3,0.2,0.2,0.1,0.1], dtype=float )
+
+        par[2] = -0.2
+        print( par )
+        pc = gm.correctParameters( par )
+        print( pc )
+
 
         stdModeltest( gm, par, plot=self.doplot )
 
