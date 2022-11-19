@@ -34,9 +34,9 @@ class LaplacePrior( Prior ):
     """
     Laplace prior distribution.
 
-        Pr( x ) = exp( - |x - center| / scale )
+        Pr( x ) = 1 / ( 2 s ) exp( - |x - c| / s )
 
-    By default: center = 0.0 and scale = 1.
+    By default: c = center = 0.0 and s = scale = 1.
 
     It can also have a limited domain.
     By default the domain is [-Inf,+Inf].

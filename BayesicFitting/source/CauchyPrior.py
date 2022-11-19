@@ -35,9 +35,9 @@ class CauchyPrior( Prior ):
     """
     Cauchy prior distribution.
 
-        Pr( x ) =  scale / ( &pi; * ( scale^2 + ( x - center )^2 )
+        Pr( x ) =  s / ( &pi; * ( s^2 + ( x - c )^2 )
 
-    By default: center = 0 and scale = 1.
+    By default: c = center = 0 and s = scale = 1.
 
     It can also have a limited domain. (To be done)
     By default the domain is [-Inf,+Inf].
