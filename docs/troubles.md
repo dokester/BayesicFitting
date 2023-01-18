@@ -16,19 +16,21 @@ craft than like science
 
 For diagnostic (and debugging) purposes in the iterative fitters there
 is the `verbose` option, which prints increasingly more information for
-higher values.
+higher values. 
 
 It is also a good idea to visually inspect the results of the fit. All
 fitters have a method<br> 
 `fitter.plotResult( xdata, ydata, model )`<br> 
 It is more easily called by turning on the plot option in the fit method:<br>
 `fitter.fit( ydata, plot=True )`<br>
+Or for a **NestedSampler** called ns:<br>
+`ns.sample( plot=True )`
 
 Here are some guidelines that might help to get usefull results.
 
 <a name="restriction"></a>
 ### **Constraints on the independent variable(s)**<br>
-The independent variable(s) (x) should be nice numbers, ie. roughly of
+The independent variable(s) (x) should be "nice" numbers, ie. roughly of
 order 1. Mostly the fitter obtains solutions by manipulating a matrix
 consisting of a direct product of the partial derivatives of the model
 to each of its parameters. If the elements of this matrix wildly vary in
@@ -65,7 +67,8 @@ The SingularValueDecompositionFitter has less problems as it evenly
 distributes the value over the degenerated parameters. 
 Try hasDegeneracy() to check for this condition.<br>
 -->
-In general it is better to use models which are not degenerated.   
+Although NestedSampler has no problems with degenerate models,
+it is in general better to use simpler models.
 
 <a name="warning"></a>
 ### **Runtime Warning.**<br>
@@ -148,6 +151,8 @@ Even worse, if you set the scale of the error distribution to a fixed value
 while the residuals are significantly smaller, their contributions to the 
 likelihood are all similarly small.   
 
+In those cases, it is better to add the scale factor as an extra 
+(hyper)parameter to the problem. Actually in almost all case it is better to do so.
 
 ### **Starting Problems with NestedSampler.**<br>
 Sometimes it looks like NestedSampler cannot find the maximum in the likelihood
@@ -157,6 +162,9 @@ minimumIterations to something large. By default it is 100. Enlarging it, gives
 NestedSampler more opportunities to explore the parameter space. <br>
 Ensuring that the prior space contains the expected values for the posterior 
 parameter values, can also help.
+
+Sometimes it just helps to restart NestedSampler with another seed for the 
+random number generator. 
 
 ### **Parameters at the edge**<br>
 The standard deviations of the parameters are calculated as the

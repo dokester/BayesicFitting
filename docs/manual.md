@@ -7,7 +7,8 @@
 ## Bayesian model fitting and evidence calculation.
 
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
-[Kester and Mueller (2021)](./references.md/#kester8).
+[Kester and Mueller (2021)](./references.md/#kester8) or find it directly
+[here](https://www.sciencedirect.com/science/article/pii/S2213133721000573).
 
 It is assumed that the reader is familiar with the Bayesian ways to
 perform inference from data. If not,
@@ -32,8 +33,8 @@ posterior.
 
 
 The easiest way to get started with this package is to look into the 
-[examples](../examples) directory and find an example that looks like
-the problem to be solved.
+[examples](../BayesicFitting/examples) 
+directory and find an example that looks like the problem to be solved.
 
 To run the examples start a notebook by typing 
 
@@ -115,7 +116,7 @@ indicated as **p** (or `pars`, `param` or `params`) and the dependent
 variable is called **y** (or `ydata`).
 The relation between them is a mathematical function **f**.
 
-> **y = f(x:p)**
+![ManualEquation-1](images/maneq-1.png "Eq 1")
 
 The result of the function together with its derivatives, parameter
 values, and other possibly usefull information is packed into the
@@ -155,13 +156,13 @@ Simple models are objects that are created by invoking one model class.
 Both `m1` and `m2` are simple models. The first assumes a linear relation 
 between `xdata` and `ydata`.
 
-> **f(x:p) = p<sub>0</sub> + p<sub>1</sub> * x**
+![ManualEquation-2](images/maneq-2.png "Eq 2")
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
 The second model `m2` encapsulates the function
 
-> **f(x:p) = p<sub>0</sub> * exp( -0.5 * ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<sup>2</sup> )**
+![ManualEquation-3](images/maneq-3.png "Eq 3")
 
 It has 3 parameters to be fitted.
 
@@ -320,32 +321,20 @@ result of the left-hand model is used as input of the right-hand model.
 
 When m<sub>1</sub>, m<sub>2</sub> and m<sub>3</sub> are models implementing
 
-> **m<sub>1</sub> = f<sub>1</sub>(x:p)**
-> **m<sub>2</sub> = f<sub>2</sub>(x:q)**
-> **m<sub>3</sub> = f<sub>3</sub>(x:r)**
+![ManualEquation-4](images/maneq-4.png "Eq 4")
 
 then
 
-> **m<sub>4</sub> = m<sub>1</sub> | m<sub>2</sub> = f<sub>4</sub>(x:p,q) = f<sub>2</sub>( f<sub>1</sub>(x:p), q )**.
+![ManualEquation-5](images/maneq-5.png "Eq 5")
 
 The input of m<sub>2</sub> is relacced by the result of m<sub>1</sub>. While in case of
 
-> **m<sub>5</sub> = m<sub>1</sub> | m<sub>2</sub> + m<sub>3</sub> = f<sub>5</sub>(x:p,q,r) = f<sub>2</sub>( f<sub>1</sub>(x:p), q ) + f<sub>3</sub>(x:r)**.
+![ManualEquation-6](images/maneq-6.png "Eq 6")
 
 the m1 only influences m2, not m3. To influence both m<sub>2</sub> and m<sub>3</sub>, brackets are needed.
 
-> **m<sub>6</sub> = m<sub>1</sub> | ( m<sub>2</sub> + m<sub>3</sub> ) = f<sub>6</sub>(x:p,q,r) = 
-f<sub>2</sub>( f<sub>1</sub>(x:p), q ) + f<sub>3</sub>( f<sub>1</sub>(x:p),:r )**.
+![ManualEquation-7](images/maneq-7.png "Eq 7")
 
-
-<!---
-When m1, m2 and m3 are models, implementing f1( x:p ), f2( x:q ) and f3( x,r ), 
-resp., then m4 = m1 | m2 implements f4( x:p,q ) = f2( f1(x:p), q ).
-m5 = m1 | m2 + m3 implements f5( x:p,q,r ) = f2( f1(x:p):q ) + f3(x:r);
-i.e. the m1 only influences m2, not m3.
-To influence both m2 and m3, write m6 = m2 + m3 and m7 = m1 | m6 
-It implements f5( x:p,q,r ) = f2( f1(x:p):q ) + f3( f1(x:p):r ) 
---->
 
 This is the only place where a 2-d model can be combined with a 1-d
 model as the output of a 2-d model is 1 dimensional. Or in general the 
@@ -375,7 +364,7 @@ Figure 5 shows examples of Compound Models with a pipe.
 Compound models are **Model**s and can be combined with other (compound)
 models into a new model. This way quite complicated models can be formed
 without worrying about internal consistency. 
-See the [gaussfit example](../examples/gaussfit.ipynb).
+See the [gaussfit example](../BayesicFitting/examples/gaussfit.ipynb).
 
 Compound models are non-linear
 unless all its constituents are linear and its operations are additive.
@@ -579,7 +568,7 @@ The methods are compared with numeric calculations of df/dp and df/dx.
 A **Fitter** is an algorithm that minimizes the errors **&epsilon;**,
 the differences between the data, **y**, and the model, **f(x:p)**.
 
-> **&epsilon; = y - f(x:p)**
+![ManualEquation-8](images/maneq-8.png "Eq 8")
 
 The best fit is found through optimization of the parameters **p**.
 Traditionally this is done by finding the minimum of
@@ -596,9 +585,21 @@ Several likelihood functions are available in BayesicFitting. They are
 called [**ErrorDistribution**](#list-errdis).
 Using the **GaussErrorDistribution** is equivalent to using the
 least-squares method.
- 
 
-### Weights.
+### Data Quality.
+
+In a fitting process, it often occurs that data points are of different 
+quality due to a variety of reasons. 
+We can express the quatilies as either importance weights attached to 
+the data points, or as a scale factor in the residuals. 
+In our paper [Kester and Mueller (2021)](./references.md/#kester8) we 
+expressed our preference for weights.
+However, we reconsidered it in the light of correlated errors in both axes.
+[Kester 2023](./dataquality.html)
+Since version 3.1.0 of BayesicFitting, we offer both options.
+
+
+#### Weights.
 
 Up on fitting, weights can be provided as a vector of the same length as
 the data vector. 
@@ -613,8 +614,19 @@ variances; they could be derived in any other way. One specially usefull
 feature of the use of weights, is that some weights might be set to zero,
 causing those points not to contribute at all to the fit.
 
-As weights are obviously more flexible that standard deviations, weights
-are preferred in BayesicFitting, throughout.
+#### Accuracy.
+
+The accuracy is a (set of) numbers that represent a user provided estimate 
+of the size of the errors.<br>
+Accuracies do not change the "number of observations", as weights do. Each 
+measurement might have a different accuracy; it is still one measurement. 
+When choosing weight = accuracy<sup>-2</sup>, the difference only matters 
+in the calculation of the evidence.<br>
+Accuracy can be 1 number, valid for all data, or a vector of N, one value for 
+each data point. When there are possibly errors in both the dependent variable 
+and the independent variable, it can be a matrix of (N,2) or of (N,3). 
+In the latter case the third number is the (Pearson) correlation coefficient 
+between both variables. 
 
 
 ### Linear Fitters.
@@ -774,7 +786,7 @@ Or in the fit method itself.
     params = fitter.fit( ydata, keep={key:value} )
 
 to fix the parameter for this fit only.
-In both case key is a parameter index and value is a float at which
+In both cases, key is a parameter index and value is a float at which
 the parameter should be fixed.
 
 Note that [fixing the parameter in the model](#fixedmodel) replaces
@@ -973,7 +985,8 @@ solution.
 
 A **ClassicProblem** consists of a parameterized model with a list of
 measured data at the locations of the indepemdent variables. Optionally
-there are weights. The **ClassicProblem** is invoked by default.
+there are weights and/or accuracies. 
+The **ClassicProblem** is invoked by default.
 
 Other **Problem**s need to be separately invoked.
 
@@ -1198,7 +1211,7 @@ engine list, to randomly change the structure of the model.
 
 For the **SalesmanProblem** 5 engines are provided that all change the 
 order in the parameters by some way: **MoveEngine**, **ReverseEngine**,
-**SwitchEngine**, **LoopEngine**, **ShuffleEngine** and **NearEngine"".
+**SwitchEngine**, **LoopEngine**, **ShuffleEngine** and **NearEngine**.
 
 
 **Engine**s are selectable in the construction.

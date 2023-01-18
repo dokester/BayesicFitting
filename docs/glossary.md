@@ -41,9 +41,24 @@ squares of the stdevs. However weights do not need to be inverse
 variances; they can also be derived in other ways. One specially usefull
 feature of the use of weights, is that some weights might be set to zero,
 causing those points not to contribute at all to the fit.<br>
-As weights are obviously more flexible that standard deviations, weights 
-are preferred in BayesicFitting, throughout.<br>
 Size = N.
+
+<a name="accuracy"></a>
+### **accuracy**<br>
+The accuracy is a (set of) numbers that represent a user provided estimate 
+of the size of the errors.<br>
+Accuracies do not change the "number of observations", as weights do. Each 
+measurement might have a different accuracy; it is still one measurement. 
+When choosing weight = accuracy<sup>-2</sup>, the difference only matters 
+in the calculation of the evidence.<br>
+Accuracy can be 1 number, valid for all data, or a vector of N, one value for 
+each data point. When there are possibly errors in both the dependent variable 
+and the independent variable, it can be a matrix of (N,2) or of (N,3). 
+In the latter case the third number is the (Pearson) correlation coefficient 
+between both variables. 
+<br>
+Size = 1 or 2 or 3 (all datapoints the same value) or <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N or (2,N) or (3,N) (one value for each data point).
 
 <a name="model"></a>
 ### **Model**<br>
@@ -61,14 +76,14 @@ Size = K.
 <a name="problem"></a>
 ### **Problem**<br>
 A container object that collects all elements of a problem e.g. the Model, the 
-independent and dependent variables and if present, the weights. **Problem**s
-are only relevant in the context of NestedSampler.
+independent and dependent variables and if present, the weights and/or accuracies. 
+Problems are only relevant in the context of NestedSampler.
 
 <a name="chisq"></a>
 ### **Chisq**<br>
-Chisq is the global misfit of the data (D) wrt the model (M), multiplied with 
-the weights, if applicable : <br>
-&chi;<sup>2</sup> = &Sigma; w * ( D - M )<sup>2</sup> <br>
+Chisq is the global misfit of the data (D) wrt the model (M), scaled by the 
+accuracies and/or multiplied with the weights, if applicable : <br>
+&chi;<sup>2</sup> = &Sigma; w * (( D - M ) / &sigma; )<sup>2</sup> <br>
 Least squares is the same as log of the likelihood of an Gaussian error
 distribution. Least squares is easy Bayes.
 In least-squares setting, the fitters minimize Chisq to find the optimal 
