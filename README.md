@@ -14,6 +14,9 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
+ + 18 Jan 2023 version 3.1.1
+   * remode GaussPriorNew from __init__.py
+
  + 18 Jan 2023 version 3.1.0 (still working on the same update)
    * Implementing accuracy in fitters and samplers
    * Update of documentation

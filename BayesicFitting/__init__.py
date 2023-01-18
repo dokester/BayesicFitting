@@ -24,8 +24,6 @@ TBC: How much time does this take. Everything is translated ??
 
 """
 
-from .source.GaussPriorNew import GaussPrior as GaussPriorNew
-
 from .source.AmoebaFitter import AmoebaFitter
 from .source.AnnealingAmoeba import AnnealingAmoeba
 from .source.ArctanModel import ArctanModel
