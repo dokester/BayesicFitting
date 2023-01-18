@@ -9,7 +9,7 @@ from .Dynamic import Dynamic
 from .Modifiable import Modifiable
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2023 Do Kester
 
 class ClassicProblem( Problem ):
     """
@@ -46,14 +46,15 @@ class ClassicProblem( Problem ):
 
     Attributes from Problem
     -----------------------
-    model, xdata, ydata, weights
+    model, xdata, ydata, weights, accuracy, varyy
 
     Author :         Do Kester
 
     """
 
     #  *************************************************************************
-    def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
+    def __init__( self, model=None, xdata=None, ydata=None, weights=None, 
+                    accuracy=None, copy=None ):
         """
         Constructor for classic problems.
 
@@ -67,12 +68,15 @@ class ClassicProblem( Problem ):
             dependent variable
         weights : array_like or None
             weights associated with ydata
+        accuracy : float or array_like
+            accuracy scale for the datapoints
+            all the same or one for each data point
         copy : Problem
             to be copied
 
         """
         super( ).__init__( model=model, xdata=xdata, ydata=ydata, weights=weights,
-                           copy=copy )
+                           accuracy=accuracy, copy=copy )
 
 
     def copy( self ):

@@ -4,9 +4,9 @@ import math
 from .BaseFitter import BaseFitter
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2023 Do Kester
 
 class QRFitter( BaseFitter ):
     """
@@ -115,7 +115,7 @@ class QRFitter( BaseFitter ):
         self.needsNewDecomposition = True
         self.qrmat = None
 
-    def fit( self, ydata, weights=None, keep=None ):
+    def fit( self, ydata, weights=None, accuracy=None, keep=None ):
         """
         Return model parameters fitted to the data, including weights.
 
@@ -125,6 +125,8 @@ class QRFitter( BaseFitter ):
             the data vector to be fitted
         weights : array_like
             weights pertaining to the data ( = 1.0 / sigma^2 )
+        accuracy : float or array_like
+            accuracy of (individual) data
         keep : dict of {int:float}
             dictionary of indices (int) to be kept at a fixed value (float)
             The values will override those at initialization.
@@ -134,10 +136,11 @@ class QRFitter( BaseFitter ):
         ValueError when ydata or weights contain a NaN
 
         """
-        fi, ydata, weights = self.fitprolog( ydata, weights=weights, keep=keep )
+        fi, ydata, fitwgts = self.fitprolog( ydata, weights=weights, 
+                        accuracy=accuracy, keep=keep )
 
         if self.model.isNullModel() :
-            self.chiSquared( ydata, weights )
+            self.chiSquared( ydata, fitwgts )
             return numpy.asarray( 0 )
 
         ydatacopy = ydata.copy( )
@@ -147,8 +150,10 @@ class QRFitter( BaseFitter ):
             fxpar[fi] = 0.0
             ydatacopy = numpy.subtract( ydatacopy, self.model.result( self.xdata, fxpar) )
 
-        wgts = ( numpy.ones_like( ydata, dtype=float ) if weights is None else
-                 numpy.sqrt( weights ) )
+#        wgts = ( numpy.ones_like( ydata, dtype=float ) if fitwgts is None else
+#                 numpy.sqrt( fitwgts ) )
+
+        wgts = numpy.full_like( ydata, fitwgts, dtype=float )
 
         if hasattr( self, "normdata" ) :
             normweight = math.sqrt( self.normweight )
@@ -172,7 +177,7 @@ class QRFitter( BaseFitter ):
 
         params = self.insertParameters( params, index=fi )
         self.model.parameters = params
-        self.chiSquared( ydata, weights=weights )
+        self.chiSquared( ydata, weights=fitwgts )
 
         return params
 

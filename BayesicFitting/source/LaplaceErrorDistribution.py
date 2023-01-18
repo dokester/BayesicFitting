@@ -5,9 +5,9 @@ from .Formatter import formatter as fmt
 from .ScaledErrorDistribution import ScaledErrorDistribution
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class LaplaceErrorDistribution( ScaledErrorDistribution ):
@@ -125,7 +125,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         return sumres / problem.sumweight
 
 
-    def getSumRes( self, problem, allpars=None ):
+    def getSumRes( self, problem, allpars=None, scale=1 ):
         """
         Return the sum of the absolute values of the residuals.
 
@@ -138,8 +138,10 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         allpars : array_like
             None take parameters from problem.model
             list of all parameters in the problem
+        scale : float or array_like
+            scale of residuals (from accuracies or noisescale of errdis)
         """
-        res = self.getResiduals( problem, allpars=allpars )
+        res = self.getResiduals( problem, allpars=allpars ) / scale
 
         if problem.weights is not None :
             res *= problem.weights
@@ -161,9 +163,17 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
 
-        scale = allpars[-1]
-        sumres = self.getSumRes( problem, allpars ) / scale
-        return - problem.sumweight * ( self.LOG2 + math.log( scale ) ) - sumres
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
+        sumres = self.getSumRes( problem, allpars, scale=scale )
+        if isinstance( scale, float ) :
+            norm = problem.sumweight * ( self.LOG2 + math.log( scale ) ) 
+        elif problem.hasWeights() :
+            norm = numpy.sum( problem.weights * ( self.LOG2 + numpy.log( scale ) ) )
+        else :
+            norm = numpy.sum( self.LOG2 + numpy.log( scale ) )
+
+        return -( norm + sumres )
+
 
     def logLdata( self, problem, allpars, mockdata=None ) :
         """
@@ -184,8 +194,8 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         np = problem.npars
         res = problem.residuals( allpars[:np], mockdata=mockdata )
 
-        scale = allpars[-1]
-        res = - numpy.abs( res ) / scale - ( self.LOG2 + math.log( scale ) )
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
+        res = - numpy.abs( res ) / scale - ( self.LOG2 + numpy.log( scale ) )
         if problem.weights is not None :
             res = res * problem.weights
         return res
@@ -194,6 +204,8 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
+        dL/ds is not implemented for problems with accuracy
+        
         Parameters
         ----------
         problem : Problem
@@ -205,12 +217,12 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
 
         """
         self.nparts += 1
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
 
         dM = problem.partial( allpars[:-1] )
         res = problem.residuals( allpars[:-1] )
         wgt = numpy.ones_like( res, dtype=float ) if problem.weights is None else problem.weights
-        wgt = numpy.copysign( wgt, res )
+        wgt = numpy.copysign( wgt, res ) / scale
 
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
@@ -219,14 +231,16 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
                 dL[i] = numpy.sum( wgt * dM[:,k] )
                 i += 1
             else :
-                dL[-1] = self.getSumRes( problem, allpars ) / scale - problem.sumweight
-        return dL / scale
+                dL[-1] = self.getSumRes( problem, allpars=allpars, scale=scale ) - problem.sumweight
+        return dL
 
     def nextPartialData( self, problem, allpars, fitIndex, mockdata=None ) :
         """
         Return the partial derivative of elements of the log( likelihood )
         to the parameters.
 
+        dL/ds is not implemented for problems with accuracy
+        
         Parameters
         ----------
         problem : Problem
@@ -240,7 +254,7 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
 
         """
         param = allpars[:-1]
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         res = problem.residuals( param, mockdata=mockdata )
 
         dM = problem.partial( param )

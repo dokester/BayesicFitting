@@ -10,10 +10,12 @@ from .PoissonErrorDistribution import PoissonErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .ClassicProblem import ClassicProblem
 
+from .Formatter import formatter as fmt
+
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -36,7 +38,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON ( Java code )
-#  *    2016 - 2021 Do Kester
+#  *    2016 - 2023 Do Kester
 
 class MaxLikelihoodFitter( IterativeFitter ):
     """
@@ -118,9 +120,10 @@ class MaxLikelihoodFitter( IterativeFitter ):
             landscape = _Chisq( self, data, weights, index=index )
             self.isChisq = True
         else :
+            distr = self.errdis.lower()
             scale = 1.0 if self.fixedScale is None else self.fixedScale
             landscape = _LogL( self, data, weights, index=index,
-                    errdis=self.errdis, scale=scale, power=self.power )
+                    errdis=distr, scale=scale, power=self.power )
             self.isChisq = False
 
         self.landscape = landscape
@@ -196,7 +199,7 @@ class MaxLikelihoodFitter( IterativeFitter ):
         r2 = func( pars )
         grat = numpy.subtract( r2, r1 ) / dp
 
-        print( "At %4d  grad : %10.4f  num : %10.4f"%(at, df[at], grat) )
+#        print( "At %4d  grad : %10.4f  num : %10.4f"%(at, df[at], grat) )
 
         return ( abs( grat - df[at] ) > 0.001 )
 
@@ -291,7 +294,7 @@ class _LogL( _Chisq ) :
             the weights
         index : array_like
             fit index
-        errdis : "gauss" | "laplace" | "cauchy" | "poisson" | "gengauss"
+        errdis : "gauss" | "laplace" | "cauchy" | "poisson" | "exponential"
             errordistribution to be used to calculate logLikelihood
         scale : float (1.0)
             scale if applicable in errdis
@@ -330,7 +333,14 @@ class _LogL( _Chisq ) :
 
     def getScale( self ) :
         errdis = self.errdis
-        return errdis.toSigma( errdis.getScale( self.problem ) )
+        allpars = numpy.append( self.problem.model.parameters, self.hypar )
+
+        scl = errdis.getScale( self.problem, allpars=allpars )
+        if len( self.hypar ) <=1 :
+            return errdis.toSigma( scl ) 
+        else :
+            self.hypar[0] = scl
+            return errdis.toSigma( self.hypar ) 
 
 
     def func( self, par ) :

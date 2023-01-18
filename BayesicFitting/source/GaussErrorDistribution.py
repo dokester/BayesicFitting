@@ -5,7 +5,7 @@ from .ScaledErrorDistribution import ScaledErrorDistribution
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class GaussErrorDistribution( ScaledErrorDistribution ):
@@ -126,10 +126,19 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         self.ncalls += 1
 
         s2 = allpars[-1] * allpars[-1] + problem.varyy
-        chisq = self.getChisq( problem, allpars ) / s2
+        chisq = numpy.sum( problem.weightedResSq( allpars ) / s2 )
 
-        return ( - problem.sumweight * ( 0.5 * ( self.LOG2PI + math.log( s2 ) ) ) -
-                       0.5 * chisq )
+        if isinstance( s2, float ) :
+            norm = problem.sumweight * ( self.LOG2PI + numpy.log( s2 ) )
+        elif problem.hasWeights() :
+            norm = numpy.sum( problem.weights * ( self.LOG2PI + numpy.log( s2 ) ) )
+        else :
+            norm = numpy.sum( self.LOG2PI + numpy.log( s2 ) )
+
+        return -0.5 * ( chisq + norm )
+
+#        return ( - problem.sumweight * ( 0.5 * ( self.LOG2PI + numpy.log( s2 ) ) ) -
+#                       0.5 * chisq )
 
     def logLdata( self, problem, allpars, mockdata=None ) :
         """
@@ -155,9 +164,9 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
         res2 /= s2
 
         if problem.weights is None :
-            res2 -= ( 0.5 * ( self.LOG2PI + math.log( s2 ) ) )
+            res2 -= ( 0.5 * ( self.LOG2PI + numpy.log( s2 ) ) )
         else :
-            res2 -= ( 0.5 * ( self.LOG2PI + math.log( s2 ) ) ) * problem.weights
+            res2 -= ( 0.5 * ( self.LOG2PI + numpy.log( s2 ) ) ) * problem.weights
 
         return res2
 
@@ -187,17 +196,21 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         dM = problem.partial( allpars[:-1] )
 
+        wgt = problem.weights if problem.hasWeights() else 1.0
+
         dL = numpy.zeros( len( fitIndex ), dtype=float )
         i = 0
         for  k in fitIndex :
             if k >= 0 :
-                dL[i] = numpy.sum( res * dM[:,k] ) / s2
+                dL[i] = numpy.sum( res * dM[:,k] / s2 )
                 i += 1
             else :
-                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) * scale / s2
+                sc = scale / s2
+                s4 = sc / s2
+                dL[-1] = numpy.sum( res2 * s4 - wgt * sc )
 
-
-#                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) / scale
+#                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) * scale / s2
+#                dL[-1] = ( numpy.sum( res2 ) / s2 - problem.sumweight ) / scale 
 
         return dL
 

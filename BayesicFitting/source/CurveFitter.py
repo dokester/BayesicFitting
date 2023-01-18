@@ -11,9 +11,9 @@ from .IterativeFitter import IterativeFitter
 from .IterationPlotter import IterationPlotter
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2023 Do Kester
 
 class CurveFitter( IterativeFitter ):
     """
@@ -63,7 +63,7 @@ class CurveFitter( IterativeFitter ):
             the model function to be fitted
         method : 'lm' | 'trf' | 'dogbox'
             method to be used
-        fixedScale : float
+        fixedScale : None or float
             the fixed noise scale.
         map : bool (False)
             When true, the xdata should be interpreted as a map.
@@ -81,7 +81,7 @@ class CurveFitter( IterativeFitter ):
 
     #  *************************************************************************
     def fit( self, ydata, weights=None, inipar=None, keep=None, limits=None,
-            plot=False, **kwargs ):
+            accuracy=None, plot=False, **kwargs ):
         """
         Return      parameters for the model fitted to the data array.
 
@@ -92,6 +92,8 @@ class CurveFitter( IterativeFitter ):
         weights : array_like
             weights pertaining to the data
             The weights are relative weights unless fixedScale is set.
+        accuracy : float or array_like
+            accuracy of (individual) data
         inipar : array_like
             inital parameters (default from Model)
         keep :  dict of {int:float}
@@ -112,13 +114,15 @@ class CurveFitter( IterativeFitter ):
         ------
             ValueError when ydata or weights contain a NaN
         """
-        fitIndex, ydata, weights = self.fitprolog( ydata, weights=weights, keep=keep )
+        fitIndex, ydata, weights = self.fitprolog( ydata, weights=weights, 
+                            accuracy=accuracy, keep=keep )
 
         abssigma = ( self.fixedScale is not None )
         if weights is None :
             sigma = ( None if not abssigma else
                       numpy.full_like( ydata, 1 / math.sqrt( self.fixedScale ), dtype=float ) )
         else :
+            weights = numpy.full_like( ydata, weights, dtype=float )
             wgts = numpy.where( weights == 0, 1e-20, weights )      # avoid division by 0
             sigma = 1 / numpy.sqrt( wgts )
 
@@ -126,7 +130,7 @@ class CurveFitter( IterativeFitter ):
         if limits is not None :
             bounds = limits
         elif self.model.priors :
-            bounds = ( self.model.lowLimits, self.model.highLimits )
+            bounds = self.model.getLimits()
         else :
             bounds = ( -numpy.inf, numpy.inf )
 
@@ -150,15 +154,17 @@ class CurveFitter( IterativeFitter ):
             nw = numpy.where( self.normweight == 0, ms / 1e10, self.normweight )
             sigma = numpy.append( sigma, 1.0 / numpy.sqrt( nw ) )
 
+
         # Call scipy.curve_fit
         out = curve_fit( self.result, self.xdata, ydat, p0=p0,
             sigma=sigma, absolute_sigma=abssigma, bounds=bounds, jac=self.jacobian,
             method=self.method, **kwargs )
 
         pars = self.insertParameters( out[0], index=fitIndex )
-        pcov = out[1]
         self.model.parameters = pars
-        self.covariance = pcov
+        ## Curvefit is not using the same definition for covariance as BF.
+#        pcov = out[1]
+#        self.covariance = pcov
         self.chiSquared( ydata, weights=weights )
 
         self.fulloutput = out

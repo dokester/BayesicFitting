@@ -4,9 +4,9 @@ import math
 from .ScaledErrorDistribution import ScaledErrorDistribution
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -142,12 +142,17 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
 
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
 
         ares = numpy.abs( problem.residuals( allpars[:-1] ) )
 
         if all( ares < scale ) :
-            return - math.log( 2 * scale ) * problem.sumweight
+            if isinstance( scale, float ) :
+                return - numpy.log( 2 * scale ) * problem.sumweight
+            elif problem.hasWeights() :
+                return - numpy.sum( numpy.log( 2 * scale ) * problem.weights )
+            else :
+                return - numpy.sum( numpy.log( 2 * scale ) )
 
         return -math.inf
 
@@ -169,10 +174,11 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         """
         if mockdata is None :
             mockdata = problem.result( allpars[:-1] )
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
+
         ares = numpy.abs( problem.ydata - mockdata )
 
-        lld = numpy.where( ares < scale, -math.log( 2 * scale ), -math.inf )
+        lld = numpy.where( ares < scale, -numpy.log( 2 * scale ), -math.inf )
         if problem.weights is not None :
             lld *= problem.weights
         return lld
@@ -181,6 +187,8 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
     def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
         Return the partial derivative of log( likelihood ) to the parameters.
+
+        dL/ds is not implemented for problems with accuracy
 
         Parameters
         ----------
@@ -201,6 +209,8 @@ class UniformErrorDistribution( ScaledErrorDistribution ):
         """
         Return the partial derivative of elements of the log( likelihood )
         to the parameters.
+
+        dL/ds is not implemented for problems with accuracy
 
         Parameters
         ----------

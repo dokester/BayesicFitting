@@ -12,9 +12,9 @@ from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2023 Do Kester
 
 class IterativeFitter( BaseFitter ):
     """
@@ -150,7 +150,7 @@ class IterativeFitter( BaseFitter ):
             y = self.model.result( self.xdata, param )
             self.plotter.plotResult( self.xdata, y, self._iter )
 
-    def fitprolog( self, ydata, weights=None, keep=None ) :
+    def fitprolog( self, ydata, weights=None, accuracy=None, keep=None ) :
         """
         Prolog for all iterative Fitters.
 
@@ -165,6 +165,8 @@ class IterativeFitter( BaseFitter ):
             the data vector to be fitted
         weights : array_like
             weights pertaining to the data
+        accuracy : float or array_like
+            accuracy of (individual) data
         keep : dict of {int:float}
             dictionary of indices (int) to be kept at a fixed value (float)
 
@@ -180,7 +182,7 @@ class IterativeFitter( BaseFitter ):
         self.iter = 0
         self.ntrans = 0
 
-        return super( IterativeFitter, self ).fitprolog( ydata, weights=weights, keep=keep )
+        return super( ).fitprolog( ydata, weights=weights, accuracy=accuracy, keep=keep )
 
     #  *************************************************************************
     def fit( self, ydata, weights=None, keep=None, **kwargs ):

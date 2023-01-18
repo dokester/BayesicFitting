@@ -1,11 +1,12 @@
 import math
+import numpy
 from scipy import special
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -23,7 +24,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 
 class GaussPrior( Prior ):
@@ -145,7 +146,8 @@ class GaussPrior( Prior ):
 
         """
         xs = ( x - self.center ) / self.scale
-        return self.SPI * math.exp( - xs * xs )
+        return self.SPI * numpy.exp( - xs * xs )
+#        return self.SPI * math.exp( - xs * xs )
 
     def logResult( self, x ):
         """

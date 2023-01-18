@@ -8,9 +8,9 @@ from .MaxLikelihoodFitter import MaxLikelihoodFitter
 #from ConvergenceError import ConvergenceError
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2023 Do Kester
 
 
 class ScipyFitter( MaxLikelihoodFitter ):
@@ -176,7 +176,7 @@ class ScipyFitter( MaxLikelihoodFitter ):
     #  *************************************************************************
     def fit( self, data, weights=None, par0=None, keep=None, limits=None,
                 maxiter=None, tolerance=None, constraints=(), verbose=0,
-                plot=False, callback=None, **options ):
+                accuracy=None, plot=False, callback=None, **options ):
         """
         Return      parameters for the model fitted to the data array.
 
@@ -186,6 +186,8 @@ class ScipyFitter( MaxLikelihoodFitter ):
             the data vector to be fitted
         weights : array_like
             weights pertaining to the data
+        accuracy : float or array_like
+            accuracy of (individual) data
         par0 : array_like
             initial values of the function. Default from Model.
         keep : dict of {int:float}
@@ -220,7 +222,8 @@ class ScipyFitter( MaxLikelihoodFitter ):
             ConvergenceError if it stops when the tolerance has not yet been reached.
 
         """
-        fitIndex, data, weights = self.fitprolog( data, weights=weights, keep=keep )
+        fitIndex, data, weights = self.fitprolog( data, weights=weights, 
+                        accuracy=accuracy, keep=keep )
 
         inipar = self.model.parameters[fitIndex]
 

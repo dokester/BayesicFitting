@@ -6,9 +6,9 @@ from .ScaledErrorDistribution import ScaledErrorDistribution
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class CauchyErrorDistribution( ScaledErrorDistribution ):
@@ -146,11 +146,22 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
 
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
+        s2 = numpy.square( scale )
         res = problem.residuals( allpars[:-1] )
         res2 = numpy.square( res )
-        return ( problem.ndata * ( math.log( scale ) - self.LOGPI ) -
-                 numpy.sum( numpy.log( res2 + scale * scale ) ) )
+        if isinstance( scale, float ) :
+            logL = ( problem.ndata * ( math.log( scale ) - self.LOGPI ) -
+                     numpy.sum( numpy.log( res2 + s2 ) ) )
+        else :
+            logL = ( -problem.ndata * self.LOGPI + 
+                    numpy.sum( numpy.log( scale / ( res2 + s2 ) ) ) )
+
+        return logL
+ 
+#            ( numpy.sum ( numpy.log( scale ) - self.LOGPI ) -
+#                     numpy.sum( numpy.log( res2 + scale * scale ) ) )
+
 
     def logLdata( self, problem, allpars, mockdata=None ) :
         """
@@ -170,10 +181,10 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         res = problem.residuals( allpars[:-1], mockdata=mockdata )
 
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         s2 = scale * scale
         res2 = res * res
-        return math.log( scale ) - self.LOGPI - numpy.log( res2 + s2 )
+        return numpy.log( scale ) - self.LOGPI - numpy.log( res2 + s2 )
 
     def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
@@ -182,6 +193,8 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
 
         Alternate calculation
 
+        dL/ds is not implemented for problems with accuracy
+        
         Parameters
         ----------
         problem : Problem
@@ -194,7 +207,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         """
         self.nparts += 1
 
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         res = problem.residuals( allpars[:-1] )
         r2s = res * res + scale * scale
         dM = problem.partial( allpars[:-1] )
@@ -215,6 +228,8 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
         Return the partial derivative of log( likelihood ) to the parameters
         in fitIndex.
 
+        dL/ds is not implemented for problems with accuracy
+        
         Parameters
         ----------
         problem : Problem
@@ -228,7 +243,7 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
 
         """
         res = problem.residuals( allpars[:-1], mockdata=mockdata )
-        scale = allpars[-1]
+        scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         r2s = res * res + scale * scale
 
         dM = problem.partial( allpars[:-1] )

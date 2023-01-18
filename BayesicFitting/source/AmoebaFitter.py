@@ -6,9 +6,9 @@ from .MaxLikelihoodFitter import MaxLikelihoodFitter
 from .AnnealingAmoeba import AnnealingAmoeba
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class AmoebaFitter( MaxLikelihoodFitter ):
     """
@@ -105,7 +105,7 @@ class AmoebaFitter( MaxLikelihoodFitter ):
     def fit( self, data, weights=None, par0=None, keep=None, size=None,
                     seed=4567, temp=0, limits=None, maxiter=1000,
                     tolerance=0.0001, cooling=0.95, steps=10,
-                    verbose=0, plot=False, callback=None ):
+                    verbose=0, plot=False, accuracy=None, callback=None ):
 ### TBC parameter defaults
 
 
@@ -121,6 +121,8 @@ class AmoebaFitter( MaxLikelihoodFitter ):
         weights : array_like
             weights pertaining to the data
             The weights are relative weights unless `scale` is set.
+        accuracy : float or array_like
+            accuracy of (individual) data
         par0 : array_like
             initial values of teh parameters of the model
             default: from model
@@ -159,7 +161,8 @@ class AmoebaFitter( MaxLikelihoodFitter ):
             where `val` is the minimizable array
 
         """
-        fitIndex, data, weights = self.fitprolog( data, weights=weights, keep=keep )
+        fitIndex, data, weights = self.fitprolog( data, weights=weights, 
+                        accuracy=accuracy, keep=keep )
 
         func = self.makeFuncs( data, weights=weights, index=fitIndex, ret=1 )
 

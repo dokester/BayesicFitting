@@ -12,9 +12,9 @@ from . import Plotter
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.6.1"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -36,7 +36,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2023 Do Kester
 
 class BaseFitter( object ):
     """
@@ -215,11 +215,11 @@ class BaseFitter( object ):
         self.minimumScale = scale
 
 
-    def fitprolog( self, ydata, weights=None, keep=None ) :
+    def fitprolog( self, ydata, weights=None, accuracy=None, keep=None ) :
         """
         Prolog for all Fitters.
 
-        1. Checks data/weighs for Nans
+        1. Checks data/weighs/accuracy for Nans
         2. Makes fitIndex.
 
         Parameters
@@ -228,6 +228,8 @@ class BaseFitter( object ):
             the data vector to be fitted
         weights : array_like
             weights pertaining to the data
+        accuracy : float or array_like
+            accuracy of (individual) data
         keep : dict of {int:float}
             dictionary of indices (int) to be kept at a fixed value (float)
 
@@ -235,30 +237,46 @@ class BaseFitter( object ):
         -------
         fitIndex : ndarray of int
             Indices of the parameters that need fitting
-
+        ydata : ndarray
+            Only different from input when ydata is a map 
+        fitwgts : float or ndarray
+            Combines weights and accuracy into ( weights / accuracy^2 )
+            1.0 if both are None
         """
-        self.checkNan( ydata, weights=weights )
+        self.checkNan( ydata, weights=weights, accuracy=accuracy )
 
         if self.imageAssistant is not None :
             ydata = self.imageAssistant.getydata( ydata )
             if weights is not None :
                 weights = self.imageAssistant.getydata( weights )
+            if Tools.length( accuracy ) > 1  :
+                accuracy = self.imageAssistant.getydata( accuracy )
         else :
             ydata = numpy.asarray( ydata )
             if weights is not None :
                 weights = numpy.asarray( weights )
 
         self.weights = weights
+        self.accuracy = accuracy
 
+        self.fitWgts = 1.0
+        self.sumwgt = self.nxdata
+        if weights is not None : 
+            self.fitWgts *= weights
+            self.sumwgt = numpy.sum( weights )
+        if accuracy is not None :
+            self.fitWgts /= ( accuracy * accuracy )
+           
         if keep is not None :
-            return ( self.keepFixed( keep ), ydata, weights )
+            return ( self.keepFixed( keep ), ydata, self.fitWgts )
 
         if self.fitIndex is None :
             self.npfit = self.model.npchain
-            return ( numpy.arange( self.model.npchain, dtype=int ), ydata, weights )
+            return ( numpy.arange( self.model.npchain, dtype=int ), 
+                     ydata, self.fitWgts )
 
         self.npfit = len( self.fitIndex )
-        return ( self.fitIndex, ydata, weights )
+        return ( self.fitIndex, ydata, self.fitWgts )
 
     def fitpostscript( self, ydata, plot=False ) :
         """
@@ -375,40 +393,53 @@ class BaseFitter( object ):
         Warning when parameters have been reset at the limits.
 
         """
-        pars = fitmethod( ydata, weights=weights )          # perform the fit
-        if self.model.priors is None :                           # no priors -> no limits
+        pars = self.fit( ydata, weights=weights, keep=keep )          # perform the fit
+#        pars = fitmethod( ydata, weights=weights )          # perform the fit
+        if self.model.priors is None :                  # no priors -> no limits
             return pars
 
-        sfix = self.keep                                    # save original fixed setting
+        sfix = self.keep                                # save original fixed setting
 
         npchain = self.model.npchain
         params = self.model.parameters
         index = self.fitIndex
+#        print( "index  ", fmt( index ) )
         if index is None :
-            index = range( npchain )
-            fix = []
+            index = [*range( npchain )]                 # unpack range object into list
+            fix = {}
         else :
             fix = sfix.copy()
+
+        if keep is not None :
+            for k in keep.keys() : 
+                fix[k] = keep[k]
+
+#        print( "index  ", fmt( index ) )
+#        print( "fix    ", fmt( fix ) )
 
         ool = 0
         for k in index :                                    # check limits for params
             if params[k] < self.model.getPrior( k ).lowLimit :
-                fix = fix + [k]                             # add to original fixed
                 params[k] = self.model.getPrior( k ).lowLimit
+                fix[k] = params[k]
                 ool += 1
             elif params[k] > self.model.getPrior( k ).highLimit :
-                fix = fix + [k]
                 params[k] = self.model.getPrior( k ).highLimit
+                fix[k] = params[k]
                 ool += 1
 
         if ool > 0 :                                        # some transgressions
+            print( "ool    ", fmt( ool ), fmt( fix ) )
             self.keepFixed( fix )                           # fix them
-            pars = fitmethod( ydata, weights=weights )      # run fit again
+#            pars = fitmethod( ydata, weights=weights )      # run fit again
+            pars = self.fit( ydata, weights=weights, keep=fix )      # run fit again
+#            print( "pars   ", fmt( pars, max=None ) )
+#            print( fmt( sfix ) )
             self.keepFixed( sfix )                          # reset original fitIndex
             if sfix is not None :                           # select parameters
                 pars = [self.model.parameters[k] for k in self.fitIndex]
                 fix = list( set( fix ) - set( sfix ) )
-            warnings.warn( "Parameters ", fix, " exceeded limits." )
+#            warnings.warn( "Parameters ", fix, " exceeded limits." )
 
         return pars                                         # return parameters
 
@@ -435,9 +466,10 @@ class BaseFitter( object ):
         """
         raise NotImplementedError( "BaseFitter is a base class, not suitable itself to perform fits." )
 
-    def checkNan( self, ydata, weights=None ):
+    def checkNan( self, ydata, weights=None, accuracy=None ):
         """
-        Check there are no Nans or Infs in ydata or weights.
+        Check there are no Nans or Infs in ydata or weights or accuracy.
+        Check also for zeros or negatives in accuracy.
 
         Parameters
         ----------
@@ -445,6 +477,8 @@ class BaseFitter( object ):
             data to be fitted.
         weights : array_like
             weights pertaining to ydata
+        accuracy : float or array_like
+            accuracy of (individual) data
 
         Raises
         ------
@@ -454,6 +488,11 @@ class BaseFitter( object ):
             raise ValueError( "Fitter: NaNs or Infs in ydata" )
         if  weights is not None and not numpy.all( numpy.isfinite( weights ) ) :
             raise ValueError( "Fitter: NaNs or Infs in weights" )
+        if  accuracy is not None :
+            if not numpy.all( numpy.isfinite( accuracy ) ) :
+                raise ValueError( "Fitter: NaNs or Infs in accuracy" )
+            if not numpy.all( accuracy > 0 ) :
+                raise ValueError( "Fitter: zeros or negatives in accuracy" )
 
     def __getattr__( self, name ) :
         """
@@ -469,6 +508,8 @@ class BaseFitter( object ):
         elif name == 'parameters' :
             return self.model.parameters
         elif name == 'weights' :            ## not present return None
+            return None
+        elif name == 'fitWgts' :            ## not present return None
             return None
         elif name == 'sumwgt' :             ## not present return nxdata
             return self.nxdata
@@ -487,7 +528,6 @@ class BaseFitter( object ):
             return self.getScale()
         elif name == "stdevScale" :
             return self.scale / math.sqrt( 2 * self.sumwgt )
-#            return self.scale / math.sqrt( 2 * self.nxdata )
         elif name == 'evidence' :
             return self.getEvidence()
         elif name == 'logZ' :
@@ -538,9 +578,9 @@ class BaseFitter( object ):
 
         """
         if params is None : params = self.model.parameters
-        if weights is None : weights = self.weights
+        if weights is None : weights = self.fitWgts
 
-        self.sumwgt = self.nxdata if weights is None else numpy.sum( weights )
+#        self.sumwgt = self.nxdata if weights is None else numpy.sum( weights )
 
         if self.model.isNullModel() :
             return
@@ -550,6 +590,8 @@ class BaseFitter( object ):
         if hasattr( self, "normweight" ) :
             if weights is None :
                 weights = numpy.ones( self.nxdata, dtype=float )
+            elif Tools.isInstance( weights, float ) :
+                weights = numpy.full( self.nxdata, weights, dtype=float )
             weights = numpy.append( weights, self.normweight )
 
         design = design.transpose()
@@ -698,11 +740,9 @@ class BaseFitter( object ):
 
         """
         res2 = numpy.square( ydata - self.model.result( self.xdata, params ) )
-        if weights is not None:
+        if weights is not None:         ## for weight and accuracy
             res2 *= weights
-            self.sumwgt = numpy.sum( weights )
-        else:
-            self.sumwgt = self.nxdata
+
         self.chisq = numpy.sum( res2 )
         if self.chisq <= 0 :
             raise ValueError( str( self ) + ": chisq <= 0" )
@@ -778,7 +818,6 @@ class BaseFitter( object ):
         RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
         """
-#        dof = self.nxdata - self.npfit
         dof = self.sumwgt - self.npfit
         if dof <= 0 :
             raise RuntimeError( "More parameters than (weighted) data points" )
@@ -825,9 +864,20 @@ class BaseFitter( object ):
         var : float
             variance
         """
-        return -0.5 * ( self.sumwgt * math.log( 2 * math.pi * var ) +
-                        self.chisq / var )
 
+        if self.accuracy is not None :
+            if Tools.length( self.accuracy ) > 1 :
+                slacc = numpy.sum( numpy.log( self.accuracy ) )
+            else :
+                slacc = self.sumwgt * numpy.log( self.accuracy )
+        else :
+            slacc = 0
+
+#        print( "BF1    ", var, slacc, self.chisq, self.sumwgt )
+
+        return -0.5 * ( self.sumwgt * math.log( 2 * math.pi * var ) +
+                        self.chisq / var ) - slacc
+            
     def getLogZ( self, limits=None, noiseLimits=None ):
         """
         Calculation of the evidence, log( Z ), for the model given the data.
@@ -854,7 +904,6 @@ class BaseFitter( object ):
         RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
         """
-#        dof = self.nxdata - self.npfit
         dof = self.sumwgt - self.npfit
         if dof <= 0 :
             raise RuntimeError( "More parameters than (weighted) data points" )
@@ -867,6 +916,7 @@ class BaseFitter( object ):
         else :
             autoScale = False
             scale = 1.0 if self.fixedScale is None else self.fixedScale
+#            print( "BF    ", self.fixedScale, scale )
             s2 = scale * scale
             self.logOccam = 0.0
 
@@ -875,6 +925,8 @@ class BaseFitter( object ):
 
         # obtain the loglikelihood.
         self.logLikelihood = self.getLogLikelihood( autoscale=autoScale, var=s2 )
+#        print( "BF2    ", self.logLikelihood )
+
 
         if self.npfit == 0 :
             return self.logLikelihood + self.logOccam

@@ -7,7 +7,7 @@ from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
  
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -214,7 +214,7 @@ class ErrorDistribution( object ):
             param = problem.model.parameters
         else :
             nh = self.nphypar
-            param = allpars[:-nh]
+            param = allpars[:-nh] if nh > 0 else allpars
 
         res2 = problem.weightedResSq( param )
 

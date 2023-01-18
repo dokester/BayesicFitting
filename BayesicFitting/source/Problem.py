@@ -6,7 +6,7 @@ from .Tools import printclass as printclass
 from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2022 Do Kester
+#  *    2018 - 2023 Do Kester
 
 class Problem( object ):
     """
@@ -105,6 +105,7 @@ class Problem( object ):
             self.ydata = copy.ydata
             self.weights = copy.weights
             self.varyy = copy.varyy
+            self.accuracy = copy.accuracy
             self.hasAccuracy = copy.hasAccuracy
             if copy.model and ( copy.model.isDynamic() or copy.model.isModifiable() ) :
                 self.model = copy.model.copy()
@@ -181,7 +182,8 @@ class Problem( object ):
             When None the value is set to 0 (for easy computational reasons)
         """
         self.hasAccuracy = accuracy is not None
-        self.varyy = accuracy * accuracy if self.hasAccuracy else 0
+        self.accuracy = accuracy if self.hasAccuracy else 0
+        self.varyy = self.accuracy * self.accuracy
 
     def hasWeights( self ):
         """ Return whether it has weights.  """

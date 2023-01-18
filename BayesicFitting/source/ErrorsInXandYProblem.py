@@ -9,7 +9,7 @@ from .Problem import Problem
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -129,6 +129,7 @@ class ErrorsInXandYProblem( Problem ):
             self.varxx = copy.varxx
             self.varxy = copy.varxy
             self.varyy = copy.varyy
+            
             self.determinant = copy.determinant
             self.sumweight = copy.sumweight
 
@@ -208,19 +209,30 @@ class ErrorsInXandYProblem( Problem ):
             if covar is None :
                 accuracy = numpy.asarray( accuracy )
                 adim = accuracy.ndim
-                varyy = accuracy[0] if adim == 1 else accuracy[:,0]
-                varxx = accuracy[1] if adim == 1 else accuracy[:,1]
-                if accuracy.shape[-1] == 3 :
-                    varxy = accuracy[2] if adim == 1 else accuracy[:,2]
-                    varxy *= varyy * varxx
+#                print( "SetAcc  ", accuracy, adim )
+                varxy = 0.0
+                if adim == 0 :
+                    varyy = accuracy
+                    varxx = accuracy
+                elif adim == 1 :
+                    varyy = accuracy[0] 
+                    varxx = accuracy[1]
+                    if accuracy.shape[-1] == 3 :
+                        varxy = accuracy[2]
                 else :
-                    varxy = 0.0
+                    varyy = accuracy[:,0]
+                    varxx = accuracy[:,1]
+                    if accuracy.shape[-1] == 3 :
+                        varxy = accuracy[:,2]
+
+                varxy *= varyy * varxx
                 varyy *= varyy
                 varxx *= varxx
             else :
                 raise AttributeError( "Covar and Accuracy are mutually exclusive" )
 
         setatt( self, "hasAccuracy", hasAcc )
+        setatt( self, "accuracy", accuracy if self.hasAccuracy else 0 )
         setatt( self, "varyy", varyy )
         setatt( self, "varxx", varxx )
         setatt( self, "varxy", varxy )

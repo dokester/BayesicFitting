@@ -4,9 +4,9 @@ from .BaseFitter import BaseFitter
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2023 Do Kester
 
 class Fitter( BaseFitter ):
     """
@@ -93,7 +93,7 @@ class Fitter( BaseFitter ):
         """
         super( Fitter, self ).__init__( xdata, model, map=map, keep=keep, fixedScale=fixedScale )
 
-    def fit( self, ydata, weights=None, keep=None, plot=False ):
+    def fit( self, ydata, weights=None, accuracy=None, keep=None, plot=False ):
         """
         Return model parameters fitted to the data, including weights.
 
@@ -112,6 +112,8 @@ class Fitter( BaseFitter ):
             the data vector to be fitted
         weights : array_like
             weights pertaining to the data ( = 1.0 / sigma^2 )
+        accuracy : float or array_like
+            accuracy of (individual) data
         keep : dict of {int:float}
             dictionary of indices (int) to be kept at a fixed value (float)
             The values will override those at initialization.
@@ -124,13 +126,14 @@ class Fitter( BaseFitter ):
             ValueError when ydata or weights contain a NaN
 
         """
-        fitIndex, ydata, weights = self.fitprolog( ydata, weights=weights, keep=keep )
+        fitIndex, ydata, fitWgts = self.fitprolog( ydata, weights=weights, 
+                    accuracy=accuracy, keep=keep )
 
         if self.model.isNullModel() :
-            self.chiSquared( ydata, weights )
+            self.chiSquared( ydata, fitWgts )
             return numpy.asarray( 0 )
 
-        hessian = self.getHessian( weights=weights, index=fitIndex )
+        hessian = self.getHessian( weights=fitWgts, index=fitIndex )
         ydatacopy = ydata.copy( )
         # subtract influence of fixed parameters on the data
         if fitIndex is not None :
@@ -138,8 +141,8 @@ class Fitter( BaseFitter ):
             fxpar[fitIndex] = 0.0
             ydatacopy = numpy.subtract( ydatacopy, self.model.result( self.xdata, fxpar) )
 
-        if weights is not None :
-            ydatacopy *= weights
+        if fitWgts is not None :
+            ydatacopy *= fitWgts
         if hasattr( self, "normdfdp" ) :
             ydatacopy = numpy.append( ydatacopy, self.normdata * self.normweight )
 
@@ -149,7 +152,7 @@ class Fitter( BaseFitter ):
 
         params = self.insertParameters( params, index=fitIndex )
         self.model.parameters = params
-        self.chiSquared( ydata, params=params, weights=weights)
+        self.chiSquared( ydata, params=params, weights=fitWgts)
 
         self.fitpostscript( ydata, plot=plot )
 

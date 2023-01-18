@@ -7,9 +7,9 @@ from .HyperParameter import HyperParameter
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class ExponentialErrorDistribution( ScaledErrorDistribution ):
@@ -155,13 +155,21 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
 
-        scale = allpars[-2]
+        scale = allpars[-2] if not problem.hasAccuracy else problem.accuracy
         power = allpars[-1]
 
-        chipow = self.getChipow( problem, allpars ) / math.pow( scale, power )
-        norm = math.log( 0.5 * power / scale ) - special.gammaln( 1.0 / power )
+        chipow = self.getChipow( problem, allpars, scale )
 
-        return problem.sumweight * norm - chipow
+        if isinstance( scale, float ) :
+            norm = problem.sumweight * math.log( 0.5 * power / scale )
+        elif problem.hasWeights() :
+            norm = numpy.sum( problem.weights * numpy.log( 0.5 * power / scale ) )
+        else :
+            norm = numpy.sum( numpy.log( 0.5 * power / scale ) )
+
+        sumpow = problem.sumweight * special.gammaln( 1.0 / power )
+
+        return norm - sumpow - chipow
 
     def logLdata( self, problem, allpars, mockdata=None ) :
         """
@@ -179,19 +187,19 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
             as calculated by the model
 
         """
-        scale = allpars[-2]
+        scale = allpars[-2] if not problem.hasAccuracy else problem.accuracy
         power = allpars[-1]
 
         res = problem.residuals( allpars[:-2], mockdata=mockdata )
-
         lld = - numpy.power( numpy.abs( res / scale ), power )
-        norm = math.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
+
+        norm = numpy.log( power / ( 2 * scale ) ) - special.gammaln( 1.0 / power )
         lld += norm
         if problem.weights is not None :
             lld *= problem.weights
         return lld
 
-    def getChipow( self, problem, allpars=None ) :
+    def getChipow( self, problem, allpars=None, scale=1 ) :
         """
         Return chisq.
 
@@ -204,9 +212,10 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         allpars : array_like
             None take parameters from problem.model
             list of all parameters in the problem
-
+        scale : float or array_like
+            present scale
         """
-        res = problem.residuals( allpars[:-2] )
+        res = problem.residuals( allpars[:-2] ) / scale
         power = allpars[-1]
 
         ares = numpy.power( numpy.abs( res ), power )
@@ -235,6 +244,8 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         """
         Return the partial derivative of log( likelihood ) to the parameters.
 
+        dL/ds is not implemented for problems with accuracy
+        
         Parameters
         ----------
         problem : Problem
@@ -247,7 +258,7 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         """
         self.ncalls += 1
 
-        scale = allpars[-2]
+        scale = allpars[-2] if not problem.hasAccuracy else problem.accuracy
         power = allpars[-1]
         res = problem.residuals( allpars[:-2] )
 
@@ -281,6 +292,8 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         Return the partial derivative of all elements of the log( likelihood )
         to the parameters.
 
+        dL/ds is not implemented for problems with accuracy
+        
         Parameters
         ----------
         problem : Problem
@@ -295,7 +308,7 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         """
         param = allpars[:-2]
         res = problem.residuals( param, mockdata=mockdata )
-        scale = allpars[-2]
+        scale = allpars[-2] if not problem.hasAccuracy else problem.accuracy
         power = allpars[-1]
 
         ars = numpy.abs( res / scale )

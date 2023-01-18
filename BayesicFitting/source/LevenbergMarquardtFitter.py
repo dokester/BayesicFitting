@@ -8,9 +8,9 @@ from .ConvergenceError import ConvergenceError
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class LevenbergMarquardtFitter( IterativeFitter ):
@@ -128,7 +128,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
     #  *************************************************************************
     def fit( self, data, weights=None, par0=None, keep=None, limits=None,
                 maxiter=None, tolerance=None, verbose=None, plot=False,
-                callback=None ):
+                accuracy=None, callback=None ):
         """
         Return Model fitted to the data arrays.
 
@@ -140,6 +140,8 @@ class LevenbergMarquardtFitter( IterativeFitter ):
             the data vector to be fitted
         weights : array_like
             weights pertaining to the data
+        accuracy : float or array_like
+            accuracy of (individual) data
         par0 : array_like
             initial values for the parameters of the model
             default: from model
@@ -175,7 +177,8 @@ class LevenbergMarquardtFitter( IterativeFitter ):
         if tolerance is None : tolerance = self.tolerance
         if verbose is None : verbose = self.verbose
 
-        fitIndex, data, weights = self.fitprolog( data, weights=weights, keep=keep )
+        fitIndex, data, fitWgts = self.fitprolog( data, weights=weights, 
+                        accuracy=accuracy, keep=keep )
 
 
         trypar = self.model.parameters if par0 is None else par0
@@ -183,7 +186,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
 #        if fitIndex is not None and len( fitIndex ) < len( par0 ) :
 #            par0 = par0[fitIndex]
 
-        self.chi = self.chiSquaredExtra( data, trypar, weights=weights ) + 1
+        self.chi = self.chiSquaredExtra( data, trypar, weights=fitWgts ) + 1
 
         self.lamda = 0.001
 
@@ -193,7 +196,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
 
         while self.iter < maxiter :
 
-            trypar, trychi = self.trialfit( trypar, fitIndex, data, weights, verbose, maxiter )
+            trypar, trychi = self.trialfit( trypar, fitIndex, data, fitWgts, verbose, maxiter )
             self.model.parameters = trypar
 
             tol = tolerance if self.chi < 1 else tolerance * self.chi
@@ -251,6 +254,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
             newpar = fitpar + 0.5 * numpy.linalg.solve( hessian, vector )
 
             onEdge, edgePar, edgeInd = self.checkLimits( newpar, fi )
+            onEdge = False
 
             if onEdge :
                 newpar = edgePar
