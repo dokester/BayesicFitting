@@ -35,7 +35,7 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
-class TestModels( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Models
 
@@ -45,6 +45,35 @@ class TestModels( unittest.TestCase ):
     def __init__( self, testname ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
+
+    def test0( self ) :
+        model = SincModel()
+        param = [1,2,3,4]
+        self.assertRaises( ValueError, model.__setattr__, "parameters", param )
+        model.parameters = [1,2,3]
+        model.stdevs = [1,2,3]
+        cm = model.copy()
+        self.assertTrue( all( model.stdevs == cm.stdevs ) )
+
+        cm += PolynomialModel( 1 )
+
+        self.assertRaises( IndexError, cm.isolateModel, 2 )
+
+        sm = PolySurfaceModel( 2 )
+        cm = PolynomialModel( 2 )
+        self.assertRaises( ValueError, cm.appendModel, sm, 1 )
+
+        sm = HarmonicDynamicModel( 1 )
+        cm = SplinesDynamicModel( knots=[1,2,3] )
+        self.assertRaises( ValueError, cm.appendModel, sm, 1 )
+
+        self.assertRaises( IndexError, model.getPrior, 6 ) 
+        self.assertRaises( IndexError, model.getParameterName, 6 ) 
+        self.assertRaises( IndexError, model.getParameterUnit, 6 ) 
+
+        prior = UniformPrior( limits=[0,1] )
+        self.assertRaises( IndexError, model.setPrior, 6, prior ) 
+
 
     def testToString( self ) :
         model = PadeModel( 1, 2 )

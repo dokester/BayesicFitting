@@ -10,6 +10,8 @@ import math
 from numpy.testing import assert_array_almost_equal as assertAAE
 from FitPlot import plotFit
 
+import matplotlib as mpl
+
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 from BayesicFitting import fma
@@ -39,7 +41,7 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
-class TestNestedSampler( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -94,6 +96,29 @@ class TestNestedSampler( unittest.TestCase ):
 
         return pp, y0, x, y, w
 
+
+    def test0( self ):
+        print( "=========== Nested Sampler test 0 ======================" )
+
+        pp, y0, x, y, w = self.makeData( n=1 )
+        gm = GaussModel( )
+
+        self.assertWarns( UserWarning, NestedSampler, xdata=x, model=gm, ydata=y )
+
+        lolim = numpy.asarray( [-10,-10,  0], dtype=float )
+        hilim = numpy.asarray( [ 10, 10, 10], dtype=float )
+        gm.setLimits( lolim, hilim )
+
+        problem = ClassicProblem( model=gm, xdata=x, ydata=y, accuracy=0.1 )
+
+        ns = NestedSampler( problem=problem, distribution="laplace", limits=[0.01,1] )
+        self.assertRaises( AttributeError, ns.sample )
+
+        self.assertRaises( ValueError, NestedSampler, problem=problem, distribution=1 )
+        self.assertRaises( ValueError, NestedSampler, problem=problem, distribution="lapalce" )
+
+        self.assertRaises( ValueError, NestedSampler, problem=problem, engines=[1.2] )
+        self.assertRaises( ValueError, NestedSampler, problem=problem, engines=["glibbs"] )
 
     def test1( self ):
         print( "=========== Nested Sampler test 1 ======================" )
@@ -218,6 +243,41 @@ class TestNestedSampler( unittest.TestCase ):
         ns.verbose = 2
 
         evi = ns.sample( plot="test" )
+        print( "NS pars ", fmt( ns.parameters ) )
+        print( "NS stdv ", fmt( ns.stdevs ) )
+        print( "NS scal ", fmt( ns.scale ) )
+
+        plotSampleList( ns.samples, x, y, residuals=True, show=plot )
+
+#        print( "truth  ", pp )
+#        self.dofit( ns, pp, plot=plot )
+
+    def test2d( self ):
+        print( "=========== Nested Sampler test 2c ======================" )
+
+        plot = self.doplot
+
+        pp, y0, x, y, w = self.makeData( 3, ndata=401 )
+
+        acc = 0.1
+
+        print( "Accur   ", fmt( acc ) )
+
+        gm = GaussModel( )
+        gm.addModel( PolynomialModel(1) )
+
+        print( gm.shortName( ) )
+        print( gm._next.shortName( ) )
+
+        lolim = numpy.asarray( [-10,-10,  0,-10,-10], dtype=float )
+        hilim = numpy.asarray( [ 10, 10, 10, 10, 10], dtype=float )
+
+        gm.setLimits( lolim, hilim )
+        ns = NestedSampler( x, gm, y, accuracy=acc )
+        ns.distribution.setLimits( [0.01, 100] )
+#        ns.verbose = 2
+
+        evi = ns.sample( )
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )

@@ -62,8 +62,25 @@ class TestNLFitters( unittest.TestCase ):
         options = {"temp": 10.0, "maxiter": 10000, "verbose": 1 }
         stdFittertest( AmoebaFitter, 201, errdis='gauss', plot=self.doplot, options=options )
 
-    def testNelderMeadFitter( self ):
+    def testAmoebaFitter3( self ):
+        options = {"temp": 10.0, "maxiter": 10000 }
+        stdFittertest( AmoebaFitter, 201, errdis='cauchy', plot=self.doplot, options=options )
+
+    def testAmoebaFitter4( self ):
+        options = {"maxiter": 10000 }
+        options = {"temp": 10.0, "maxiter": 10000 }
+        stdFittertest( AmoebaFitter, 201, errdis='Exponential', plot=self.doplot, options=options )
+
+    def testNelderMeadFitter1( self ):
         stdFittertest( NelderMeadFitter, 201, plot=self.doplot, options={"maxiter": 3000} )
+
+    def testNelderMeadFitter2( self ):
+        self.assertRaises( AttributeError, stdFittertest, NelderMeadFitter, 201, 
+                          errdis='Uniform', options={'maxiter':100} )
+
+    def testNelderMeadFitter3( self ):
+        self.assertRaises( ValueError, stdFittertest, NelderMeadFitter, 201, 
+                          errdis='Unifom', options={'maxiter':100} )
 
     def testPowellFitter( self ):
         stdFittertest( PowellFitter, 201, plot=self.doplot )

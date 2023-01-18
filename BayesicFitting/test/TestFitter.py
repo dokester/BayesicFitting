@@ -189,6 +189,90 @@ class TestFitter( unittest.TestCase ):
 
 #        assertAAE( std, ast )
 
+
+    def test3( self ):
+
+        p = [3.2, -0.1, 0.3, 1.1, 2.1]
+        ss = 0.3
+
+        ndata = 101
+        x = numpy.linspace( -1, +1, ndata, dtype=float )
+        y = ( x - p[1] ) / p[2]
+        numpy.random.seed( 3456 )
+        y = p[0] * numpy.exp( -y * y ) + ss * numpy.random.randn( ndata )
+        y += ( p[3] + p[4] * x )
+        p1 = p
+
+
+
+        print( "++++++++++++++++++++++++++++++++++++++++++++++++++" )
+        print( "Testing Linear Fitter with limits" )
+        print( "++++++++++++++++++++++++++++++++++++++++++++++++++" )
+
+
+        print( "   1. no limits and keep in fit " )
+        modl1 = PolynomialModel( 4 )
+
+        amfit = Fitter( x, modl1 )
+
+        par0 = amfit.limitsFit( amfit.fit, y )
+        print( "pars0   ", fmt( par0 ) )
+        print( "stdv0   ", fmt( amfit.stdevs ) )
+        print( "chisq0  ", amfit.chisq )
+
+        par1 = amfit.limitsFit( amfit.fit, y, keep={0:3.3} )
+        print( "pars1   ", fmt( par1 ) )
+        print( "stdv1   ", fmt( amfit.stdevs ) )
+        print( "chisq1  ", amfit.chisq )
+
+        printclass( amfit )
+
+        print( "   2. limits and keep in fit " )
+        modl2 = PolynomialModel( 4 )
+        modl2.setLimits( [-7.0], [7.0] )
+
+        lmfit = Fitter( x, modl2 )
+
+        par2 = lmfit.limitsFit( lmfit.fit, y )
+        print( "pars2   ", fmt( par2 ) )
+        print( "stdv2   ", fmt( lmfit.stdevs ) )
+        print( "chisq2  ", lmfit.chisq )
+
+        par3 = lmfit.limitsFit( lmfit.fit, y, keep={0:3.3} )
+        print( "pars3   ", fmt( par3 ) )
+        print( "stdv3   ", fmt( lmfit.stdevs ) )
+        print( "chisq3  ", lmfit.chisq )
+
+        printclass( lmfit )
+
+        print( "   3. limits and keep in fitter and fit " )
+        modl3 = PolynomialModel( 4 )
+        modl3.setLimits( [-7.0], [7.0] )
+
+        lmfit = Fitter( x, modl3, keep={4:5.0} )
+
+        par4 = lmfit.limitsFit( lmfit.fit, y )
+        print( "pars4   ", fmt( par4 ) )
+        print( "stdv4   ", fmt( lmfit.stdevs ) )
+        print( "chisq4  ", lmfit.chisq )
+
+        par5 = lmfit.limitsFit( lmfit.fit, y, keep={0:3.3} )
+        print( "pars5   ", fmt( par5 ) )
+        print( "stdv5   ", fmt( lmfit.stdevs ) )
+        print( "chisq5  ", lmfit.chisq )
+
+        printclass( lmfit )
+
+        if self.doplot :
+            xx = numpy.linspace( -1, +1, 1001 )
+            plt.plot( x, y, 'k+' )
+            plt.plot( xx, modl1.result( xx ), 'k-' )
+
+            plt.plot( xx, modl2.result( xx ), 'r-' )
+            plt.show()
+
+
+
 if __name__ == '__main__':
     unittest.main( )
 

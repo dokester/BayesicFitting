@@ -41,7 +41,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  *  2017 - 2021  Do Kester
 
-class TestErrorDistribution( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -66,124 +66,6 @@ class TestErrorDistribution( unittest.TestCase ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
         numpy.set_printoptions(formatter={'float': '{: 0.3f}'.format})
-
-    def test1( self ) :
-        print( "====test1============================" )
-        nn = 10000
-        x = numpy.linspace( 0, 1, nn, dtype=float )
-        ym = 0.0 * x
-        nf = 0.01
-
-        model = PolynomialModel( 0 )
-        model.parameters = 0.0
-        problem = ClassicProblem( model=model, xdata=x, ydata=ym )
-        fitIndex=[0]
-
-        numpy.random.seed( 2345 )
-        noise = numpy.random.randn( nn )
-
-        errdis = GaussErrorDistribution( )
-        allpars = [0.0, 1.0]
-        print( errdis )
-        for k in range( 5 ) :
-            noise = numpy.random.randn( nn )
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-        if self.doplot:
-            self.ploterrdis( noise, errdis, problem, allpars )
-
-        nf = 0.01
-        errdis = LaplaceErrorDistribution( )
-        print( errdis )
-        for k in range( 5 ) :
-            noise = numpy.random.laplace( size=nn )
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-        if self.doplot:
-            self.ploterrdis( noise, errdis, problem, allpars )
-
-        nf = 0.01
-        errdis = UniformErrorDistribution( )
-        print( errdis )
-        for k in range( 5 ) :
-            noise = 0.5 - numpy.random.rand( nn )
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-        if self.doplot:
-            self.ploterrdis( noise, errdis, problem, allpars )
-
-        nf = 0.01
-        errdis = CauchyErrorDistribution ( )
-        cp = CauchyPrior()
-        print( errdis )
-        for k in range( 5 ) :
-            noise = numpy.random.rand( nn )
-            noise = cp.unit2Domain( noise )
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-        if self.doplot :
-            self.ploterrdis( noise, errdis, problem, allpars )
-
-
-        nf = 0.01
-        errdis = ExponentialErrorDistribution( )
-        allpars = [0.0, 1.0, 1.0]
-        print( errdis, "  power=1" )
-        for k in range( 5 ) :
-            noise = numpy.random.laplace( size=nn )
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-
-        nf = 0.01
-        errdis = ExponentialErrorDistribution( )
-        allpars = [0.0, 1.0, 2.0]
-        print( errdis, "  power=2"  )
-        for k in range( 5 ) :
-            noise = numpy.random.randn( nn )
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-
-        nf = 0.01
-        power = 10
-        errdis = ExponentialErrorDistribution ( )
-        allpars = [0.0, 1.0, 10.0]
-        print( errdis, "  power=%d" % power  )
-        for k in range( 5 ) :
-            noise = 2 * numpy.random.rand( nn ) - 1.0
-            y = ym + nf * noise
-            problem.ydata = y
-            print( fmt( k ), fmt( nf ), fmt( errdis.getScale( problem, allpars ) ) )
-            nf *= 10
-
-        allpars = [0.0, 1.0, power]
-        if self.doplot :
-            self.ploterrdis( noise, errdis, problem, allpars )
-
-    def ploterrdis( self, noise, errdis, problem, allpars ) :
-        num_bins = 20
-#        plt.hist( noise, num_bins, normed=1, facecolor='g', alpha=0.5 )
-        plt.hist( noise, num_bins, facecolor='g', alpha=0.5 )
-        xx = numpy.linspace( -0.3, 0.3, 601, dtype=float )
-        lik = numpy.zeros_like( xx )
-        for k,p in enumerate( xx ) :
-            allpars[0] = p
-            lik[k] = errdis.logLikelihood( problem, allpars )
-        maxlik = numpy.max( lik )
-        plt.plot( xx, numpy.exp( lik - maxlik ), 'r-' )
-        plt.title( errdis.__str__() )
-        plt.show()
 
 
     def testGaussErrorDistribution( self ):
@@ -704,11 +586,6 @@ class TestErrorDistribution( unittest.TestCase ):
 
         ed = ModelDistribution( limits=[0.01,10] )
         printclass( ed )
-
-
-
-
-
 
 
     def testPoissonErrorDistribution( self ):

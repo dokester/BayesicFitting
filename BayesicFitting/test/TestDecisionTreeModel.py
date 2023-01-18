@@ -33,7 +33,7 @@ __status__ = "Development"
 #  *
 #  *    2016 Do Kester
 
-class TestDecisionTreeModel( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -166,7 +166,7 @@ class TestDecisionTreeModel( unittest.TestCase ):
         code, dims, splim = dtm.encode()
         dt2 = DecisionTreeModel( code=code, kdim=dims, split=splim )
         print( "CODE  ", dt2.encode() )
-        print( dt2.fullName( ids=True ) )
+        print( dt2.fullName( ids=False ) )
 
 
 
@@ -178,12 +178,12 @@ class TestDecisionTreeModel( unittest.TestCase ):
                     split=0.5, depth=dep, itypes=[0,1,3,5]*5 )
             code, dims, splim = dtm.encode()
             print( "DEPTH  ", dep, " CODE  ", code, dims, splim )
-            print( dtm.fullName( ids=True ) )
+            print( dtm.fullName( ids=False ) )
 
 
             dt2 = DecisionTreeModel( code=code, kdim=dims, split=splim )
             print( "CODE  ", dt2.encode() )
-            print( dt2.fullName( ids=True ) )
+            print( dt2.fullName( ids=False ) )
 
         dtm = DecisionTreeModel( ndim=20, kdim=[0,1,2,3,4,5,6,7,8,9],
                     split=0.5, depth=0, itypes=[0,1,3,5]*5 )
@@ -191,11 +191,11 @@ class TestDecisionTreeModel( unittest.TestCase ):
         dtm.grow( location=1, kdim=3, split=0.3 )
         code, dims, splim = dtm.encode()
         print( "CODE  ", code, dims, splim )
-        print( dtm.fullName( ids=True ) )
+        print( dtm.fullName( ids=False ) )
 
         dt2 = DecisionTreeModel( code=code, kdim=dims, split=splim )
         print( "CODE  ", dt2.encode() )
-        print( dt2.fullName( ids=True ) )
+        print( dt2.fullName( ids=False ) )
 
 
 
@@ -206,9 +206,9 @@ class TestDecisionTreeModel( unittest.TestCase ):
                     split=0.5, depth=0 )
         dtm.parameters = numpy.arange( dtm.npars, dtype=float ) + 1
 
-        print( dtm.fullName( ids=True ) )
+        print( dtm.fullName( ids=False ) )
         print( dtm.encode() )
-        print( dtm.copy().fullName( ids=True ) )
+        print( dtm.copy().fullName( ids=False ) )
         print( fmt( dtm.parameters, max=None ) )
 
         Tools.printclass( dtm )
@@ -222,9 +222,9 @@ class TestDecisionTreeModel( unittest.TestCase ):
 
         print( "GROW    at location 1 dim 1 split 0.44" )
         dtm.grow( offset=0, location=1, kdim=1, split=0.44 )
-        print( dtm.fullName( ids=True ) )
+        print( dtm.fullName( ids=False ) )
         print( dtm.encode() )
-        print( dtm.copy().fullName( ids=True ) )
+        print( dtm.copy().fullName( ids=False ) )
         print( fmt( dtm.parameters, max=None ) )
 
         print( "GROW    at location 1 dim 2 split 0.54" )
@@ -246,9 +246,9 @@ class TestDecisionTreeModel( unittest.TestCase ):
 
         print( "SHRINK  at location 4" )
         dtm.shrink( offset=0, location=4 )
-        print( dtm.fullName( ids=True ) )
+        print( dtm.fullName( ids=False ) )
         print( dtm.encode() )
-        print( dtm.copy().fullName( ids=True ) )
+        print( dtm.copy().fullName( ids=False ) )
         print( fmt( dtm.parameters, max=None ) )
 
         print( "SHRINK  at location 0" )

@@ -97,10 +97,13 @@ class Test( unittest.TestCase ):
         print( hi )
 
         m1 = p + m
-        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
-        print( lo )
-        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
-        print( hi )
+
+        ( lo, hi ) = m1.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == 7 )
+        self.assertTrue( len( hi ) == 7 )
+
 
         r = RepeatingModel( 3, m )
         print( r.npchain, m.npchain, m.npbase )
@@ -113,13 +116,20 @@ class Test( unittest.TestCase ):
         Tools.printclass( r )
         for k in range( r.npchain ) :
             print( k, r.par2model( k ) )
-        lo = [r.getPrior(k).lowLimit for k in range( r.npchain )]
-        print( lo )
+        ( lo, hi ) = r.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == 9 )
+        self.assertTrue( len( hi ) == 9 )
+
+
         m1 = p + r
-        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
-        print( lo )
-        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
-        print( hi )
+        ( lo, hi ) = m1.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == 13 )
+        self.assertTrue( len( hi ) == 13 )
+
 
         r = RepeatingModel( 3, m, same=2 )
         print( r.npchain, m.npchain, m.npbase )
@@ -134,10 +144,13 @@ class Test( unittest.TestCase ):
         lo = [r.getPrior(k).lowLimit for k in range( r.npchain )]
         print( lo )
         m1 = p + r
-        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
-        print( lo )
-        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
-        print( hi )
+        ( lo, hi ) = m1.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == 11 )
+        self.assertTrue( len( hi ) == 11 )
+
+
 
         m = GaussModel()
         r = RepeatingModel( 3, m, same=2 )
@@ -155,6 +168,12 @@ class Test( unittest.TestCase ):
         lo = [r.getPrior(k).lowLimit for k in range( r.npchain )]
         print( lo )
         m1 = p + r
+        ( lo, hi ) = m1.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == m1.npchain )
+        self.assertTrue( len( hi ) == m1.npchain )
+
         lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
         print( lo )
         hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
@@ -163,6 +182,12 @@ class Test( unittest.TestCase ):
         h = HarmonicModel( 3 )
         h.setLimits( lowLimits=[-110,-111], highLimits=[110,111] )
         m1 = p + h
+        ( lo, hi ) = m1.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == m1.npchain )
+        self.assertTrue( len( hi ) == m1.npchain )
+
         lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
         print( lo )
         hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
@@ -171,10 +196,12 @@ class Test( unittest.TestCase ):
         h = HarmonicDynamicModel( 3 )
         h.setLimits( lowLimits=[-110,-111], highLimits=[110,111] )
         m1 = p + h
-        lo = [m1.getPrior(k).lowLimit for k in range( m1.npchain )]
-        print( lo )
-        hi = [m1.getPrior(k).highLimit for k in range( m1.npchain )]
-        print( hi )
+        ( lo, hi ) = m1.getLimits()
+        print( "lolim   ", lo )
+        print( "hilim   ", hi )
+        self.assertTrue( len( lo ) == m1.npchain )
+        self.assertTrue( len( hi ) == m1.npchain )
+
 
 
     def testOneModel( self ):

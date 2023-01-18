@@ -264,6 +264,8 @@ def stdFittertest( myfitter, npt, xmin=-10.0, xmax=10.0, noise=0.1, plot=False,
     ftr = myfitter( x, mdl, map=map, keep=keep, errdis=errdis, scale=scale, power=power )
 
     print( "###############  Test ", ftr, '  ###################################' )
+    if errdis is not None :
+        print( "Using ", errdis )
 
     par = ftr.fit( y, **options )
     chi = ftr.chisq
