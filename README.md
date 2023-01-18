@@ -14,20 +14,18 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
- + 05 Apr 2022 version 3.0.1
-   * Addressing issue #18: UserModel does not work for multiple dimensions.
+ + 18 Jan 2023 version 3.1.0 (still working on the same update)
+   * Implementing accuracy in fitters and samplers
+   * Update of documentation
+   * More tests
 
- + 07 Feb 2022 version 3.0.0
-   * New classes: AstropyModel and UserModel
-   * New class: NeuralNetUtilities
-   * New classes: NestedSolver, OrderProblem, SalesmanProblem, DistanceCostFunction
-   * New classes: OrderEngine, MoveEngine, SwitchEngine, LoopEngine, ShuffleEngine
-   * New classes: ReverseEngine, NearEngine, StartOrderEngine
-   * Make pipe work for more dimensional output | input
-   * Test harnesses for the new classes
-   * New examples for AstropyModel, UserModel and SalesmanProblem
-   * Update existing examples to improve coverage of pytest
-   * update Manual
+ + 19 Nov 2022 version 3.1.0
+   * Gauss2dErrorDistribution: New Class to handle correlated errors in X and Y
+   * ErrorDistribution and GaussErrorDistribution : adaptation for covariant errors.
+   * Small updates and corrections and removal of unused methods
+   * Added / corrected version information and documentation issues
+   * Rerun all examples and added tests
+
 
 
 ## Content
@@ -360,7 +358,22 @@ More work needs to be done in:
    * Documentation issues; Replaced style.md by code-style.md
    * Correcting error on Windows systme
 
+ + 05 Apr 2022 version 3.0.1
+   * Addressing issue #18: UserModel does not work for multiple dimensions.
+
  + 07 Feb 2022 version 3.0.0
+   * New classes: AstropyModel and UserModel
+   * New class: NeuralNetUtilities
+   * New classes: NestedSolver, OrderProblem, SalesmanProblem, DistanceCostFunction
+   * New classes: OrderEngine, MoveEngine, SwitchEngine, LoopEngine, ShuffleEngine
+   * New classes: ReverseEngine, NearEngine, StartOrderEngine
+   * Make pipe work for more dimensional output | input
+   * Test harnesses for the new classes
+   * New examples for AstropyModel, UserModel and SalesmanProblem
+   * Update existing examples to improve coverage of pytest
+   * update Manual
+
+ + 19 Nov 2022 version 3.1.0
    * See above in Whats new
 
 <br><br><br><br>

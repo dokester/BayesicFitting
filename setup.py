@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = '3.0.1'
+__version__ = '3.1.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -37,5 +37,6 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Topic :: Scientific/Engineering"
     ],
-    include_package_data=True
+    include_package_data=True,
+    zip_safe=True
 )
