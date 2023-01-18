@@ -13,7 +13,7 @@ from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2022 Do Kester
+#  *    2016 - 2023 Do Kester
 
 
 class Model( FixedModel ):
@@ -315,7 +315,7 @@ class Model( FixedModel ):
             np += last.npbase
             last = last._next
             i += 1
-        raise IndexError( "There are only " + i + " models in this compound model" )
+        raise IndexError( "There are only %d models in this compound model" % i )
 
     #  *************************************************************************
     def addModel( self, model ):
@@ -1180,7 +1180,6 @@ class Model( FixedModel ):
         limits : tuple of 2 array-like or of 2 None (if `self.priors` is None)
             (lowlimits, highlimits)
 
-        """
         lolim = []
         hilim = []
         mdl = self
@@ -1192,6 +1191,14 @@ class Model( FixedModel ):
 
             mdl = mdl._next
         return (lolim, hilim)
+        """
+
+        lolim = [self.getPrior(k).lowLimit for k in range( self.npchain )]
+        hilim = [self.getPrior(k).highLimit for k in range( self.npchain )]
+        return (lolim, hilim)
+
+
+
 
     #  *************************************************************************
     def hasLimits( self, fitindex=None ):

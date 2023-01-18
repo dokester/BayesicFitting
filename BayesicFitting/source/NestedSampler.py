@@ -49,7 +49,7 @@ from .DeathEngine import DeathEngine
 from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
@@ -74,7 +74,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class NestedSampler( object ):
     """
@@ -216,8 +216,8 @@ class NestedSampler( object ):
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata=None, model=None, ydata=None, weights=None,
-                problem=None, distribution=None, limits=None, keep=None, 
-                ensemble=100, discard=1, seed=80409, rate=1.0, 
+                accuracy=None, problem=None, distribution=None, limits=None, 
+                keep=None, ensemble=100, discard=1, seed=80409, rate=1.0, 
                 engines=None, maxsize=None, threads=False, verbose=1 ) :
         """
         Create a new class, providing inputs and model.
@@ -236,6 +236,9 @@ class NestedSampler( object ):
             array of dependent (to be fitted) data
         weights : array_like (None)
             weights pertaining to ydata
+        accuracy : float or array_like
+            accuracy scale for the datapoints
+            all the same or one for each data point
         problem : None or string or Problem
             Defines the kind of problem to be solved.
 
@@ -311,7 +314,8 @@ class NestedSampler( object ):
         if problem is None :
             problem = "classic"
 
-        self.setProblem( problem, model=model, xdata=xdata, ydata=ydata, weights=weights )
+        self.setProblem( problem, model=model, xdata=xdata, ydata=ydata, weights=weights,
+                         accuracy=accuracy )
 
         if model is None :
             model = self.problem.model
@@ -342,11 +346,9 @@ class NestedSampler( object ):
         if distribution is not None :
             self.setErrorDistribution( distribution, limits=limits )
         elif limits is not None :
-            self.setErrorDistribution( self.problem.myDistribution(), limits=limits )
+            self.setErrorDistribution( limits=limits )
         else :
-#MA            scale = 0.0 if problem.hasAccuracy else 1.0
-#MA            self.setErrorDistribution( self.problem.myDistribution(), scale=scale )
-            self.setErrorDistribution( self.problem.myDistribution(), scale=1.0 )
+            self.setErrorDistribution( scale=1.0 )
 
         self.setEngines( engines )
 
@@ -377,6 +379,13 @@ class NestedSampler( object ):
             "test"      plot iterations but dont show (for testing)
         """
         keep = self.initSample( keep=keep )
+
+        if ( self.problem.hasAccuracy and self.walkers[0].fitIndex[-1] < 0 and 
+                not isinstance( self.distribution, GaussErrorDistribution ) ) :
+            raise AttributeError( "%s cannot be combined with accuracies and variable scale" %
+                                    self.distribution ) 
+
+
         self.minimumIterations = 10 * self.ensemble
 
         tail = self.initReport( keep=keep, plot=plot )
@@ -473,6 +482,8 @@ class NestedSampler( object ):
         for sp in self.distribution.hyperpar :
             if not sp.isFixed and sp.isBound() :
                 fitlist += [nh]                             # it is to be optimised
+            elif self.problem.hasAccuracy and nh == -self.distribution.nphypar :
+                allpars[nh] = 0                             # fix (model)scale at 0
             else :
                 allpars[nh] = self.distribution.hypar[nh]   # fill in the fixed value
 
@@ -777,7 +788,8 @@ class NestedSampler( object ):
 
     #  *********DISTRIBUTIONS***************************************************
 
-    def setProblem( self, name, model=None, xdata=None, ydata=None, weights=None ) :
+    def setProblem( self, name, model=None, xdata=None, ydata=None, weights=None,
+                    accuracy=None ) :
         """
         Set the problem for this run.
 
@@ -797,6 +809,8 @@ class NestedSampler( object ):
             dependent variable
         weights : array_like or None
             weights associated with ydata
+        accuracy : float or array_like or None
+            of the data
 
         """
         problemdict = {
@@ -814,6 +828,7 @@ class NestedSampler( object ):
             if xdata is not None : self.problem.xdata = numpy.asarray( xdata )
             if ydata is not None : self.problem.ydata = numpy.asarray( ydata )
             if weights is not None : self.problem.weights = numpy.asarray( weights )
+            if accuracy is not None : self.problem.setAccuracy( accuracy=accuracy )
             return
 
         if not isinstance( name, str ) :
@@ -822,7 +837,8 @@ class NestedSampler( object ):
         name = str.lower( name )
         try :
             myProblem = problemdict[name]
-            self.problem = myProblem( model, xdata=xdata, ydata=ydata, weights=weights )
+            self.problem = myProblem( model, xdata=xdata, ydata=ydata, weights=weights,
+                                      accuracy=accuracy )
         except :
             raise 
 #            raise ValueError( "Unknown problem name %s" % name )
@@ -840,7 +856,7 @@ class NestedSampler( object ):
             None    distribution is Problem dependent.
             string  name of distribution; one of
                     "gauss", "laplace", "poisson", "cauchy", "uniform",
-                    "exponential", "bernoulli"
+                    "exponential", "gauss2d", "model", "bernoulli"
             ErrorDistribution use this one
         limits : None or [low,high] or [[low],[high]]
             None    no limits implying fixed hyperparameters (scale,power,etc)
@@ -902,12 +918,12 @@ class NestedSampler( object ):
         if enginedict is None :
             enginedict = {
                 "galilean" : GalileanEngine,
-                "chord" :    ChordEngine,
-                "birth" : 	 BirthEngine,
-                "death" : 	 DeathEngine,
-                "struct": 	 StructureEngine,
-                "gibbs" : 	 GibbsEngine,
-                "step"  : 	 StepEngine }
+                "chord" : ChordEngine,
+                "birth" : BirthEngine,
+                "death" : DeathEngine,
+                "struct": StructureEngine,
+                "gibbs" : GibbsEngine,
+                "step"  : StepEngine }
 
         if engines is None :
             engines = self.problem.myEngines()
@@ -1004,7 +1020,10 @@ class NestedSampler( object ):
         plt.figure( 'iterplot' )
         plt.plot( self.problem.xdata, self.problem.ydata, 'k.' )
         if plot == 2 :
+            plt.figure( "iterplot", clear=True )
             plt.close()
+            plt.cla()
+            plt.clf()
         else :
             plt.show( block=False )
 
@@ -1046,7 +1065,10 @@ class NestedSampler( object ):
         dmax = max( self.ymax, numpy.max( mock ) )
         plt.ylim( dmin, dmax )
         if plot == 2 :
+            plt.figure( "iterplot", clear=True )
             plt.close()
+            plt.cla()
+            plt.clf()
         else :
             plt.show( block=False )
 

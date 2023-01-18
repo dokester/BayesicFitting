@@ -48,9 +48,9 @@ from .DeathEngine import DeathEngine
 from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -69,7 +69,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class PhantomSampler( NestedSampler ):
     """
@@ -104,9 +104,9 @@ class PhantomSampler( NestedSampler ):
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata=None, model=None, ydata=None, weights=None,
-                problem=None, distribution=None, limits=None, keep=None, ensemble=100,
-                seed=80409, rate=1.0, engines=None, maxsize=None,
-                threads=False, verbose=1, step=4 ) :
+                accuracy=None, problem=None, distribution=None, limits=None, 
+                keep=None, ensemble=100, seed=80409, rate=1.0, engines=None, 
+                maxsize=None, threads=False, verbose=1, step=4 ) :
         """
         Create a new class, providing inputs and model.
 
@@ -129,6 +129,9 @@ class PhantomSampler( NestedSampler ):
             array of dependent (to be fitted) data
         weights : array_like (None)
             weights pertaining to ydata
+        accuracy : float or array_like
+            accuracy scale for the datapoints
+            all the same or one for each data point
         problem : None or string or Problem
             Defines the kind of problem to be solved.
 
@@ -199,6 +202,7 @@ class PhantomSampler( NestedSampler ):
             >4  for debugging
 
         """
+
         if step <= 10 :
             self.step = step
         else :
@@ -208,9 +212,10 @@ class PhantomSampler( NestedSampler ):
         self.usePhantoms = True
 #        self.walkers = []
 
+        ## ensemble=None entails a dynamic emsemble value.
         super().__init__( xdata=xdata, model=model, ydata=ydata, weights=weights,
-                problem=problem, distribution=distribution, limits=limits, keep=keep,
-                ensemble=None, seed=seed, rate=rate, engines=engines, maxsize=maxsize,
+                accuracy=accuracy, problem=problem, distribution=distribution, limits=limits, 
+                keep=keep, ensemble=None, seed=seed, rate=rate, engines=engines, maxsize=maxsize,
                 threads=threads, verbose=verbose )
 
 
@@ -245,8 +250,8 @@ class PhantomSampler( NestedSampler ):
             # Explore the copied walker(s)
             wlist = [self.rng.randint( worst, self.ensemble )]
             explorer.explore( wlist, self.lowLhood, self.iteration )
-#            if self.iteration >= 1755 :
-#                print( "explore   ", wlist, self.ensemble, e0.size, min(e0.unitRange), max( e0.unitRange) )
+
+#            print( "explore   ", wlist, self.ensemble, min(e0.unitRange), max( e0.unitRange) )
 
 
         while len( self.walkers ) > self.initEnsemble :

@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2022
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2022 Do Kester
 
 
 threadErrors = []

@@ -7,9 +7,9 @@ from .Problem import Problem
 from .Sample import Sample
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "3.1.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class Walker( object ):
     """
@@ -191,5 +191,6 @@ class Walker( object ):
                 ( self.id, na, nm, nhyp ) )
 
         ## Does this (all hypars > 0) always have to be true ???
-        if nhyp > 0 and self.allpars[-nhyp] <= 0 :
+#MA        if nhyp > 0 and self.allpars[-nhyp] < 0 :
+        if nhyp > 0 and self.allpars[-nhyp] < 0 :
             raise ValueError( "Sample has non-positive hyperparameter: %f" % self.allpars[-nhyp] )
