@@ -1,11 +1,12 @@
 import numpy as numpy
 
 from .Engine import Engine
+from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -24,23 +25,34 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  * A JAVA version of this code was part of the Herschel Common
-#  * Science System (HCSS), also under GPL3.
-#  *
-#  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class RandomEngine( Engine ):
     """
-    RandomEngine generates a random trial sample.
+    RandomEngine.
 
-    It is used to initialize the set of trial samples.
+    It generates a random trial point from the available unit box.
+    If it is OK (> lowLhood) it is kept. 
+    The execute method returns immediately as the new point is random and 
+    completely independent of the fiducial point.
+
+    If is is not OK, the trial point is shrunk by a random amount toward 
+    the fiducial point, until it is accepted.
+    Now the new point is not independent of the fiducial point. We start 
+    the execution again starting from the new point. 
+
+    The restart is repeated a few times after which he new point is deemed
+    sufficiently independent. 
+
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
 
     Author       Do Kester.
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Constructor.
         Parameters
@@ -51,10 +63,11 @@ class RandomEngine( Engine ):
             error distribution to be used
         copy : RandomEngine
             engine to be copied
-        seed : int
-            for random number generator
+        kwargs : for Engine
+            "phantoms", "slow", "seed", "verbose"
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
+        self.plotter = DummyPlotter()
 
     def copy( self ):
         """ Return copy of this.  """
@@ -88,44 +101,73 @@ class RandomEngine( Engine ):
 
         walker = self.walkers[kw].copy()
         problem = walker.problem
-        fitIndex = walker.fitIndex
+        fi = walker.fitIndex
+        nf = len( fi )
+        param = walker.allpars
+        
+        ## Make a unit box to find a new walker in
+        nap = len( param )
+        um, ux = self.getUnitMinmax( problem, lowLhood, npars=nap )
 
-        perm = self.rng.permutation( fitIndex )
-
-        ### Needs more study to make the engine effective.
         mlen = len( self.walkers )
-        ur = self.unitRange * mlen / ( mlen - 1 )
-        um = self.unitMin - ur / mlen
-        q = numpy.where( um < 0 )
-        um[q] = 0
-        ux = um + ur
-        q = numpy.where( ux > 1 )
-        ux[q] = 1 - um[q]
+        dr = 10 * ( ux - um ) / mlen
+        um -= dr
+        um = numpy.where( um < 0, 0.0, um )
+        ux += dr
+        ux = numpy.where( ux > 1, 1.0, ux )
+
+        self.plotter.start( param=walker.allpars )
 
         t = 0
-        for c in perm :
-            param = walker.allpars.copy( )
-            save = param[c]
+        for tt in range( self.nstep ) :
+            ptry = param.copy()
+            uval = self.rng.uniform( um, ux, nap )
+            ptry[fi] = self.unit2Domain( problem, uval, kpar=fi )
+
+            Ltry = self.errdis.logLikelihood( problem, ptry )
+
+            if Ltry >= lowLhood :       ## Lucky, in 1 step a truely random point
+                self.plotter.move( param, ptry, col=0, sym=2 )
+                self.reportSuccess()
+                update = len( self.walkers ) if append else kw
+                self.setWalker( update, problem, ptry, Ltry, fitIndex=fi )
+
+                self.plotter.stop( param=ptry, name="RandomEngine" )
+                return nf                  # nr of successfull params moves
+
+            self.plotter.move( param, ptry, col=5, sym=4 )
+            """
+            ## not lucky; shrink onto the fiducial point
+            utry = self.domain2Unit( problem, param )
             kk = 0
             while True :
                 kk += 1
-                uval = self.rng.uniform( um[c], ux[c], 1 )
-                param[c] = self.unit2Domain( problem, uval, c )
+                dr = self.rng.uniform( 0.0, 1.0, 1 )
+                uval = ( 1 - dr ) * utry + dr * uval
+                ptry[fi] = self.unit2Domain( problem, uval, kpar=fi )
 
-                Ltry = self.errdis.updateLogL( problem, param, parval={c : save} )
+                Ltry = self.errdis.logLikelihood( problem, ptry )
                 if Ltry >= lowLhood:
                     self.reportSuccess( )
+                    self.plotter.move( param, ptry, col=0, sym=4 )
                     update = len( self.walkers ) if append else kw
-                    self.setWalker( update, problem, param, Ltry, fitIndex=fitIndex )
+                    self.setWalker( update, problem, ptry, Ltry, fitIndex=fi )
+                    param = ptry
                     t += 1
                     break
                 elif kk < self.maxtrials :
                     self.reportReject( )
+                    self.plotter.move( param, ptry, col=5, sym=4 )
                 else :
                     self.reportFailed()
-                    param[c] = save
                     break
+            """
+        if t == 0 :
+            self.reportFailed()
+            return 0
 
-        return t                        # nr of succesfull steps
+        self.plotter.stop( param=ptry, name="RandomEngine" )
+
+        return nf                        # nr of successfull params moves
 
 

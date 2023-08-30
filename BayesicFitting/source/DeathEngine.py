@@ -6,9 +6,9 @@ from .Dynamic import Dynamic
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL"
-__version__ = "2.7.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018 - 2021 Do Kester
+#  *    2018 - 2023 Do Kester
 
 
 class DeathEngine( Engine ):
@@ -43,13 +43,17 @@ class DeathEngine( Engine ):
 
     The member is kept when the logLikelihood > lowLhood.
 
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
+
     Author       Do Kester.
 
     """
 #    _deathrate = 1.0
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, slow=None, copy=None, seed=23455, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Constructor.
 
@@ -59,15 +63,13 @@ class DeathEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        slow : None or int > 0
-            Run this engine every slow-th iteration. None for all.
         copy : GalileanEngine
             to be copied
-        seed : int
-            for random number generator
+        kwargs : for Engine
+            "phantoms", "slow", "seed", "verbose"
         """
-        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
-                    seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
+
 
     def copy( self ):
         """ Return copy of this.  """

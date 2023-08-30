@@ -6,9 +6,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL"
-__version__ = "2.6.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2020 Do Kester
+#  *    2019 - 2023 Do Kester
 
 class StructureEngine( Engine ):
     """
@@ -43,14 +43,14 @@ class StructureEngine( Engine ):
 
     Attributes from Engine
     ----------------------
-    walkers, errdis, slow, maxtrials, rng, report, unitRange, unitMin, verbose
+    walkers, errdis, slow, maxtrials, rng, report, phantoms, verbose
 
     Author       Do Kester.
 
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, slow=None, copy=None, seed=23455, verbose=0 ) :
+    def __init__( self, walkers, errdis, copy=None, **kwargs ) :
         """
         Constructor.
 
@@ -60,16 +60,14 @@ class StructureEngine( Engine ):
             walkers to be diffused
         errdis : ErrorDistribution
             error distribution to be used
-        slow : None or int > 0
-            Run this engine every slow-th iteration. None for all.
         copy : StructureEngine
             to be copied
-        seed : int
-            for random number generator
+        kwargs : for Engine
+            "phantoms", "slow", "seed", "verbose"
 
         """
-        super( ).__init__( walkers, errdis, slow=slow, copy=copy,
-                    seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
+
 
     def copy( self ):
         """ Return copy of this.  """
@@ -102,7 +100,6 @@ class StructureEngine( Engine ):
         self.reportCall()
 
         t = 0
-        k = 0
         perm = self.rng.permutation( self.walkers[kw].problem.model.ncomp - 2 )     ## TBC
         for p in perm :
             update = len( self.walkers ) if append else kw

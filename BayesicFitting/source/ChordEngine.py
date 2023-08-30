@@ -10,9 +10,9 @@ from .Formatter import formatter as fmt
 from .Formatter import fma
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -62,14 +62,12 @@ class ChordEngine( Engine ):
 
     Attributes
     ----------
-    nstep : int
-        average number of orthogonal steps
     debug : bool
         perform the step-out action too
 
     Attributes from Engine
     ----------------------
-    walkers, errdis, slow, maxtrials, rng, verbose, report, unitRange, unitMin
+    walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMin
 
     Author       Do Kester.
 
@@ -92,7 +90,6 @@ class ChordEngine( Engine ):
         """
         super( ).__init__( walkers, errdis, copy=copy, **kwargs )
 
-        self.nstep = 5
         self.maxtrials = 25
         self.plotter = DummyPlotter()
         self.debug = False
@@ -138,12 +135,14 @@ class ChordEngine( Engine ):
         self.plotter.start( param=param )
 
         # Determine n-dim box boundaries in which the parameters are located
-        if np > len( self.unitRange ) :
-            self.unitRange = numpy.ones( np, dtype=float )
-            self.unitMin = numpy.zeros( np, dtype=float )
+#        if np > len( self.unitRange ) :
+#            self.unitRange = numpy.ones( np, dtype=float )
+#            self.unitMin = numpy.zeros( np, dtype=float )
 
-        uran = self.unitRange[fitIndex]
-        umin = self.unitMin[fitIndex]
+        nap = len( param )
+        uran, umin = self.getUnitRange( problem, lowLhood, npars=nap )
+        uran = uran[fitIndex]
+        umin = umin[fitIndex]
 
         dur = 5 * numpy.max( uran ) / len( self.walkers )       # extend range a bit
         uran += 2 * dur
@@ -179,9 +178,6 @@ class ChordEngine( Engine ):
             ## orthonormalise the random vector
             vel = onb.normalise( vel, reset=reset )
 
-            if self.verbose > 4 :
-                print( ks, step, "vel   ", fmt( vel ) )
-
             ## append travel times wrt usav (==0) to all edges umin and umax
             ## tt contains entrance times as negative values
             ## and exit times as positive values.
@@ -200,13 +196,20 @@ class ChordEngine( Engine ):
                 t0 = self.stepOut( problem, ptry, usav, vel, t0, t0max, lowLhood, fitIndex )
                 t1 = self.stepOut( problem, ptry, usav, vel, t1, t1max, lowLhood, fitIndex )
 
+            if self.verbose > 4 :
+                print( ks, step, "vel   ", fmt( vel ), fmt( tt ), fmt( t0 ), fmt( t1 ) )
+
             kk = 0
             while True :
                 kk += 1
 
-                assert t0 < 0 < t1, "%f < %f < %f"%(t0,0,t1)
+                # assert t0 < 0 < t1, "%f < %f < %f"%(t0,0,t1)
+                if not ( t0 < 0 < t1 and math.isfinite( t0 ) and math.isfinite( t1 ) ) : 
+                    break
+
                 ## dt is timestep wrt. usav (at 0)
                 dt = t0 + self.rng.rand( 1 ) * ( t1 - t0 )
+
                 utry = usav + vel * dt
 
                 ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
@@ -270,7 +273,7 @@ class ChordEngine( Engine ):
 
         self.plotter.stop( param=param, name="ChordEngine" )
 
-        return step
+        return step * np            # nr of successfull parameter moves
 
 
     def stepOut( self, problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) :

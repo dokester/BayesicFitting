@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,17 +26,21 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2022 Do Kester
+#  *    2018 - 2023 Do Kester
 
 class OrderEngine( Engine ):
     """
     The OrderEngine is the base engine for all order problems
 
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
+
     Author       Do Kester.
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Constructor.
 
@@ -48,11 +52,11 @@ class OrderEngine( Engine ):
             error distribution to be used
         copy : OrderEngine
             to be copied
-        seed : int
-            for random number generator
+        kwargs : dict for Engine
+            "phantoms", "slow", "seed", "verbose"
 
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )   
 
     def copy( self ):
         """ Return copy of this.  """

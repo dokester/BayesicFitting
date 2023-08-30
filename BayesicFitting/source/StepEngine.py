@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class StepEngine( Engine ):
     """
@@ -41,11 +41,16 @@ class StepEngine( Engine ):
     The StepEngine tries to move the parameters at most 4 times in
     a random direction.
 
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose   
+
+
     Author       Do Kester.
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ) :
         """
         Constructor.
 
@@ -57,11 +62,10 @@ class StepEngine( Engine ):
             error distribution to be used
         copy : StepEngine
             to be copied
-        seed : int
-            for rng
-
+        kwargs : for Engine
+            "phantoms", "slow", "seed", "verbose"
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
         self.plotter = DummyPlotter()
 
 
@@ -101,11 +105,14 @@ class StepEngine( Engine ):
         fitIndex = walker.fitIndex
         np = len( fitIndex )
 
-        urange = self.unitRange[fitIndex]
-        dur = urange / len( self.walkers )      ## why this ???
-        urange += 2 * dur
-
         param = walker.allpars
+        nap = len( param )
+        urange, umin = self.getUnitRange( problem, lowLhood, npars=nap )
+        urange = urange[fitIndex]
+
+        dur = urange / len( self.walkers )      ## some fraction
+        urange += 2 * dur                       ## extension
+
         self.plotter.start( param=param )
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
 
@@ -114,16 +121,17 @@ class StepEngine( Engine ):
             fip = param[fitIndex]
             print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
             print( "fitin ", fma( fitIndex ), self.maxtrials )
-            print( "unitr ", fma( self.unitRange ) )
+            print( "unitr ", fma( urange ) )
 
 
         sz = 1.0
         step = ( self.rng.rand( np ) - 0.5 ) * urange
-        kk = 0
+        ks = kt = 0
 
-        while kk < 4 :
+        while ks < self.nstep :
             ptry = param.copy()
 
+            # iterate until all utry is in [0,1]
             while True :
                 utry = usav + step
                 q0 = numpy.where( utry < 0 )[0]
@@ -138,13 +146,14 @@ class StepEngine( Engine ):
                 else :
                     break
 
+            # calculate ptry from utry and hence the trial og Likelihood.
             ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
-
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
             if self.verbose > 4 :
-                print( "Step  ", fma(ptry), fmt(Ltry), kk, fmt( sz ) )
+                print( "Step  ", fma(ptry), fmt(Ltry), ks, kt, fmt( sz ) )
 
+            # success. Update walker. reset size and step
             if Ltry >= lowLhood:
                 self.plotter.move( param, ptry, col=0, sym=0 )
                 self.reportSuccess( )
@@ -155,19 +164,25 @@ class StepEngine( Engine ):
                 usav = utry
                 sz = 1.0
                 step = ( self.rng.rand( np ) - 0.5 ) * urange
-                kk += 1
-#                break
-            elif kk <= self.maxtrials :
+                ks += 1
+                kt = 0
+            # failed. reverse and shrink step
+            elif kt <= self.maxtrials :
                 self.plotter.move( param, ptry, col=5, sym=4 )
-                sz *= 0.7
+
+                step = ( self.rng.rand( np ) - 0.5 ) * urange
+
+                sz *= -0.7
                 step *= sz
+                kt += 1
                 self.reportReject( )
+            # failed too many times
             else :
                 self.reportFailed()
                 break
 
         self.plotter.stop( param=param, name="StepEngine" )
 
-        return kk                        # nr of succesfull steps
+        return np * ks                       # nr of successfull parameter moves
 
 

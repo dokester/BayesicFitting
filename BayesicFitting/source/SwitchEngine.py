@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .OrderEngine import OrderEngine
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -26,7 +26,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2022 Do Kester
+#  *    2018 - 2023 Do Kester
 
 class SwitchEngine( OrderEngine ):
     """
@@ -41,12 +41,16 @@ class SwitchEngine( OrderEngine ):
 
     The walker is kept when the logLikelihood > lowLhood
 
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
+
     Author       Do Kester.
 
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Constructor.
 
@@ -58,11 +62,11 @@ class SwitchEngine( OrderEngine ):
             error distribution to be used
         copy : SwitchEngine
             to be copied
-        seed : int
-            for random number generator
+        kwargs : dict for Engine
+            "phantoms", "slow", "seed", "verbose"
 
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )                  
 
     def copy( self ):
         """ Return copy of this.  """

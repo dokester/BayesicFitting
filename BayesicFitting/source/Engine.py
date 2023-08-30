@@ -2,11 +2,13 @@ import numpy as numpy
 from . import Tools
 
 from .Walker import Walker
+from .PhantomCollection import PhantomCollection
+from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.7.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class Engine( object ):
     """
@@ -46,6 +48,8 @@ class Engine( object ):
         error distribution to be used
     slow : int
         If slow > 0, run this engine every slow-th iteration.
+    phantoms : PhantomCollection
+        Collection of valid walker positions collected during engine execution
     maxtrials : int
         maximum number of trials for various operations
     rng : numpy.random.RandomState
@@ -63,6 +67,9 @@ class Engine( object ):
     Author       Do Kester.
 
     """
+    NSTEP  = 5              #  number of steps
+    MAXTRIALS = 5           # maximum number of trials
+
     SUCCESS = 0             #  succesfull move
     REJECT = 1              #  rejected move
     FAILED = 2              #  failed to move
@@ -71,9 +78,12 @@ class Engine( object ):
 
     #  *********CONSTRUCTORS***************************************************
 
-    def __init__( self, walkers, errdis, slow=None, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, slow=None, phantoms=None, copy=None, 
+                    seed=4213, verbose=0 ):
         """
         Constructor.
+
+        Only one PhantomCollection should be present for all Engines.
 
         Parameters
         ----------
@@ -83,6 +93,9 @@ class Engine( object ):
             error distribution to be used
         slow : None or int > 0
             Run this engine every slow-th iteration. None for all.
+        phantoms : None or PhantomCollection
+            Container for all valid walkers, that have been tried. But were not kept.
+            To calculate the spread of the parameters vs likelihood.
         seed : int
             for random number generator
         verbose : int
@@ -96,23 +109,20 @@ class Engine( object ):
         self.report = [0]*5
 
         if copy is None :
-            self.maxtrials = 5
+            self.maxtrials = self.MAXTRIALS
+            self.nstep = self.NSTEP
             self.rng = numpy.random.RandomState( seed )
-            self.unitRange = None
-            self.unitMin = None
             self.verbose = verbose
             if slow is not None : self.slow = slow
-            # self.setWalker = self.setWalkerAdd2List if usePhantoms else self.setWalkerInPlace
-            # self.lastWalkerId = 0
+            if not phantoms is None :
+                self.phantoms = phantoms
         else :
             self.maxtrials = copy.maxtrials
+            self.nstep = copy.nstep
             self.rng = copy.rng
-            self.unitRange = copy.unitRange
-            self.unitMin   = copy.unitMin
             self.verbose   = copy.verbose
             if hasattr( copy, "slow" ) : self.slow = copy.slow
-            # self.setWalker = copy.setWalker
-            # self.lastWalkerId = copy.lastWalkerId
+            self.phantoms = copy.phantoms
 
     def copy( self ):
         """ Return a copy of this engine.  """
@@ -143,6 +153,8 @@ class Engine( object ):
         walker = Walker( id, problem, allpars, fitIndex )
         walker.logL = logL
         self.walkers.setWalker( walker, kw )
+
+        self.phantoms.storeItems( walker )
 
 #       DONT DO THIS ANY MORE        
 #        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
@@ -235,6 +247,8 @@ class Engine( object ):
         kpar = [k for k in range( np )]
         nh = len( val ) - np
         kpar += [-k for k in range( nh, 0, -1 )]
+
+#        print( "MI    ", np, len( val ), nh, kpar )
         return kpar
 
     def reportCall( self ):
@@ -278,50 +292,54 @@ class Engine( object ):
 
         srate = ( 100 * ( self.report[0] - self.save[0] ) / 
                   ( self.report[0] + self.report[1] + self.report[2] - self.save[1] ) )
-
         self.save = [self.report[0], ( self.report[0] + self.report[1] + self.report[2] )]
         return srate
 
-    def calculateUnitRange( self ):
-        """
-        Calculate the range of the present parameter values in unit values.
 
-        For Dynamic models the range is calculated for those parameters present in all models;
-        it is 1.0 for other parameters.
-
+    def getUnitMinmax( self, problem, lowLhood, npars=None ) :
         """
-        kmx = 0
-        if not self.walkers[0].problem.model.isDynamic() :
-            npmax = len( self.walkers[0].allpars )
+        Calculate unit minimum and maximum from the Phantoms
+
+        Parameters
+        ----------
+        lowLhood : float
+            low likelihood boundary
+        npars : int
+            number of (all) parameters
+        """
+
+        if not problem.model.isDynamic() :
+            plst = None
+            pamin, pamax = self.phantoms.getParamMinmax( lowLhood )
         else :
-            npmax = 0
-            for k, walker in enumerate( self.walkers ) :
-                if len( walker.allpars ) > npmax :
-                    npmax = len( walker.allpars )
-                    kmx = k
+            nh = self.errdis.nphypar     
+            plst = [k for k in range( npars - nh )] + [k for k in range( -nh, 0 )]
+            pamin, pamax = self.phantoms.getParamMinmax( lowLhood, np=npars )
 
-        minv = self.walkers[kmx].allpars.copy()
-        maxv = self.walkers[kmx].allpars.copy()
-        nval = numpy.zeros( npmax, dtype=int )
+        umax = ( numpy.ones( npars, dtype=float )  if pamax is None
+                else self.domain2Unit( problem, pamax, kpar=plst ) )
+        umin = ( numpy.zeros( npars, dtype=float )  if pamin is None
+                else self.domain2Unit( problem, pamin, kpar=plst ) )
+        umin = numpy.fmin( umin, umax )
 
-        for walker in self.walkers :
-            fi = walker.fitIndex
-#            print( "Eng   ", fi, minv, walker.allpars )
-            minv[fi] = numpy.fmin( minv[fi], walker.allpars[fi] )
-            maxv[fi] = numpy.fmax( maxv[fi], walker.allpars[fi] )
-            nval[fi] += 1
+        return ( umin, umax )
 
-        problem = self.walkers[kmx].problem
-        fi = self.walkers[kmx].fitIndex
+    def getUnitRange( self, problem, lowLhood, npars=None ) :
+        """
+        Calculate unit range and minimum from PhantomCollection
 
-        maxv[fi] = self.domain2Unit( problem, maxv[fi], kpar=fi )
-        minv[fi] = self.domain2Unit( problem, minv[fi], kpar=fi )
-
-        self.unitRange = numpy.abs( maxv - minv )
-        self.unitMin = numpy.fmin( minv, maxv )
-
-#        print( "Eng1  ", self.unitRange )
-        return
+        Parameters
+        ----------
+        lowLhood : float
+            low likelihood boundary
+        npars : int
+            number of (all) parameters
+        """
+        umin, umax = self.getUnitMinmax( problem, lowLhood, npars=npars )
+ 
+        uran = numpy.abs( umax - umin )
+                
+        return ( uran, umin )
 
     def __str__( self ) :
         return str( "Engine" )
@@ -347,10 +365,10 @@ class Engine( object ):
 
 class DummyPlotter( object ) :
 
-    def __init__( self, iter=0 ) :
+    def __init__( self, iter=1 ) :
         self.iter = iter
 
-    def start( self, param=None ):
+    def start( self, param=None, ulim=None ):
         """ start the plot. """
         pass
 

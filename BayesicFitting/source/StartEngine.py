@@ -9,9 +9,9 @@ from .Engine import Engine
 from .ErrorsInXandYProblem import ErrorsInXandYProblem
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.7.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class StartEngine( Engine ):
     """
@@ -42,11 +42,15 @@ class StartEngine( Engine ):
 
     It is used to initialize the set of trial samples.
 
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
+
     Author       Do Kester.
 
     """
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, copy=None, seed=4213, verbose=0 ):
+    def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Constructor.
         Parameters
@@ -55,7 +59,7 @@ class StartEngine( Engine ):
             engine to be copied
 
         """
-        super( ).__init__( walkers, errdis, copy=copy, seed=seed, verbose=verbose )
+        super( ).__init__( walkers, errdis, copy=copy, **kwargs )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -119,6 +123,7 @@ class StartEngine( Engine ):
                 allp = numpy.zeros( npar + np0 - onp, dtype=float )
 
             uval = self.rng.rand( len( fitIndex ) )
+
             allp[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
 
             logL = self.errdis.logLikelihood( problem, allp )

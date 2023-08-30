@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,13 +32,17 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 class GibbsEngine( Engine ):
     """
     Move a one parameter at a time by a random amount.
 
     The walker is kept when the logLikelihood > lowLhood
+
+    Attributes from Engine
+    ----------------------
+    walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
     Author       Do Kester.
 
@@ -57,17 +61,17 @@ class GibbsEngine( Engine ):
         copy : GibbsEngine
             to be copied
         kwargs : for Engine
-            "slow", "seed", "verbose"
+            "slow", "seed", "phantoms", "verbose"
 
         """
         super( ).__init__( walkers, errdis, copy=copy, **kwargs )
-        self.nstep = nstep
 
+        self.nstep = nstep
         self.plotter = DummyPlotter()
 
     def copy( self ):
         """ Return copy of this.  """
-        return GibbsEngine( self.walkers, self.errdis, copy=self )
+        return GibbsEngine( self.walkers, self.errdis, nstep=self.nstep, copy=self )
 
     def __str__( self ):
         return str( "GibbsEngine" )
@@ -100,24 +104,25 @@ class GibbsEngine( Engine ):
         problem = walker.problem
         fitIndex = walker.fitIndex
 
+        # concatenate nstep permutations of par into perm.
         perm = self.rng.permutation( fitIndex )
         if hasattr( self, "nstep" ) :
             pm = perm
             for k in range( 1, self.nstep ) :
                 perm = numpy.append( perm, pm )
 
-#        ur = self.unitRange * ( 1 + 2.0 / len( self.walkers ) )
-        ur = self.unitRange * 1.10                      ## add 10% on the edges.
-
         param = walker.allpars
         self.plotter.start( param=param )
+
+        ur, um = self.getUnitRange( problem, lowLhood, npars=len( param ) )
+        ur *= 1.10                                   ## add 10% on the edges.
 
         if self.verbose > 4 :
             print( "alpar ", fma( param ), fmt( walker.logL ), fmt( lowLhood) )
             fip = param[fitIndex]
             print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
             print( "fitin ", fma( fitIndex ), self.maxtrials )
-            print( "unitr ", fma( self.unitRange ) )
+            print( "unitr ", fma( ur ) )
 
         steps = 0
         for c in perm :
@@ -164,6 +169,6 @@ class GibbsEngine( Engine ):
 
         self.plotter.stop( param=param, name="GibbsEngine" )
 
-        return steps                        # nr of succesfull steps
+        return steps                       # nr of succesfull parameter steps
 
 
