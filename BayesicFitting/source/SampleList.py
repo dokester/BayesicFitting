@@ -5,9 +5,9 @@ from . import Tools
 from .Sample import Sample
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -316,31 +316,10 @@ class SampleList( list ):
 
         return self.parameters
 
-        """
-        np = self[0].model.npchain
-        param = numpy.zeros( np, dtype=float )
-        stdev = numpy.zeros( np, dtype=float )
-        sumwt = 0.0
-        for sample in self :
-            if sample.model.npchain != np :
-                raise ValueError( "Models with different " + "numbers of parameters: Cannot average" )
-            wt = math.exp( sample.logW )
-            sumwt += wt
-            wp = wt * sample.parameters
-            param = param + wp
-            stdev = stdev + wp * sample.parameters
-
-        stdev = numpy.sqrt( stdev - param * param )
-        self.parameters = param
-        self.stdevs = stdev
-
-        return self.parameters
-        """
-
     def getHypars( self ) :
         """
         Return the hyper parameters
-        """
+
         nhp = len( self[0].hyper )
 
         hypar = numpy.zeros( nhp, dtype=float )
@@ -355,6 +334,11 @@ class SampleList( list ):
         self.stdevHypars = numpy.sqrt( hydev - hypar * hypar )
         self.hypars = hypar
         return self.hypars
+        """
+        ( a, s ) = self.averstd( "hyper" )
+        self.stdevHypars = s
+        self.hypars = a
+        return a
 
     def getNuisance( self ) :
         """
@@ -373,19 +357,17 @@ class SampleList( list ):
         name : str
             name of an attribute from Sample
         """
-        np = len( getattr( self[0], name ) )
-
-        aver = numpy.zeros( np, dtype=float )
-        stdv = numpy.zeros( np, dtype=float )
+        aver = 0.0
+        stdv = 0.0
         sw = 0.0
         for sample in self :
             wt = math.exp( sample.logW )
             sw += wt
             ss = getattr( sample, name )
             ws = wt * ss
-            aver = aver + ws
-            stdv = stdv + ws * ss
-        stdv = numpy.sqrt( stdv - aver * aver )
+            aver += ws
+            stdv += ws * ss
+        stdv = numpy.sqrt( numpy.maximum( stdv - aver * aver, 0 ) )
 
         return ( aver, stdv )
 
@@ -536,9 +518,11 @@ class SampleList( list ):
             the input
 
         """
-        ndata = Tools.length( xdata )
-        result = numpy.zeros( ndata, dtype=float )
-        error = numpy.zeros( ndata, dtype=float )
+#        ndata = Tools.length( xdata )
+#        result = numpy.zeros( ndata, dtype=float )
+#        error = numpy.zeros( ndata, dtype=float )
+        result = 0
+        error = 0
         sumwgt = 0
         for sample in self :
             yfit = sample.model.result( xdata, sample.parameters )

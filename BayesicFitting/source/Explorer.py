@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 threadErrors = []
@@ -167,7 +167,6 @@ class Explorer( object ):
 
         self.errdis.lowLhood = lowLhood
 
-#        maxmoves = len( walker.fitIndex ) / self.rate
         maxmoves = len( walker.allpars ) / self.rate
         maxtrials = self.maxtrials / self.rate
 
@@ -177,11 +176,11 @@ class Explorer( object ):
         while moves < maxmoves and trials < maxtrials :
 
             for engine in rng.permutation( engines ) :
-                mv = engine.execute( kw, lowLhood, append=self.usePhantoms,iteration=self.iteration )
+                mv = engine.execute( kw, lowLhood, append=self.usePhantoms, 
+                                     iteration=self.iteration )
                 moves += mv
 
                 update = len( self.walkers ) - 1 if self.usePhantoms else kw
-#                if self.verbose >= 4 or self.walkers[update].logL < lowLhood :
 
                 if self.verbose >= 4 and mv > 0 :
                     wlkr = self.walkers[update]
@@ -257,6 +256,7 @@ class Explorer( object ):
         """
         walker.check( nhyp=self.errdis.nphypar )
 
+        wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if walker.problem.model.npars < len( walker.allpars ) - self.errdis.nphypar :
             Tools.printclass( walker )
             print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, walker.id, walker.logL, wlogL ) )
@@ -264,8 +264,6 @@ class Explorer( object ):
             raise ValueError( "Inconsistency in length of modelparams (%d) and allpars (%d - %d)" %
                                 ( walker.problem.model.npars, len( walker.allpars ), self.errdis.nphypar ) )
 
-
-        wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
         if wlogL != walker.logL :
             Tools.printclass( walker )
             print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, walker.id, walker.logL, wlogL ) )

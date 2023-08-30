@@ -6,9 +6,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Biweight import Biweight
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.7.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class RobustShell( IterativeFitter ):
@@ -271,6 +271,11 @@ class RobustShell( IterativeFitter ):
         return wgt
 
     def __getattr__( self, name ) :
+
+        ## A little bit of a kludge here.
+        if name == "accuracy" :
+            return self.fitter.accuracy
+
         return super( RobustShell, self ).__getattr__( name )
 
     def __str__( self ):

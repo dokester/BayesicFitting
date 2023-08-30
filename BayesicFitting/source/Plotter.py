@@ -7,9 +7,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #
 # The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #
-#   2017 - 2022 Do Kester
+#   2017 - 2023 Do Kester
 
 def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
              residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5], 
@@ -184,9 +184,11 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
     plt.figure( figsize=figsize )
     ax0 = plt
 
-    km = sl.medianIndex
-    smp = sl[km]
+#    km = sl.medianIndex
+#    smp = sl[km]
 
+#    ndout = sl[0].model.ndout if hasattr( sl[0].model, "ndout" ) else 0
+#    ck = ['k.', 'r.', 'g.', 'b.']
     if residuals :
         plt.subplots_adjust( hspace=0.001 )
         gs = gridspec.GridSpec( 2, 1, height_ratios=[4,1] )
@@ -198,7 +200,7 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         res = ydata - sl.average( xdata )
         nd = int( math.log10( len( ydata ) ) )
         mrksz = ( 5 - nd ) if nd < 4 else 1
-        ax1.plot( xdata, res, 'k.', markersize=mrksz )
+        ax1.plot( xdata, res, '.', markersize=mrksz )
         ax1.margins( 0.05, 0.05 )
         yt = plt.ylim()
         ymx = max( abs( yt[0] ), abs( yt[1] ) )
@@ -255,8 +257,8 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         plt.xlabel( xlabel )
 
     if ylim is None :
-        ylo = min( min( ydata ), min( yfit ) )
-        yhi = max( max( ydata ), max( yfit ) )
+        ylo = min( numpy.amin( ydata ), numpy.amin( yfit ) )
+        yhi = max( numpy.amax( ydata ), numpy.amax( yfit ) )
         ylo -= 0.05 * ( yhi - ylo )
         yhi += 0.05 * ( yhi - ylo )
 

@@ -233,7 +233,7 @@ class Arctan( BaseNeuralNetworkUtilities ) :
 
 class Logistic( BaseNeuralNetworkUtilities ) :
     """
-    To covert outputs to categorical probabilities.
+    To convert outputs to categorical probabilities.
     For 1 choice (category) only: True or False
 
     Transfer

@@ -8,7 +8,7 @@ from .LogFactorial import logFactorial
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -149,6 +149,7 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
         with warnings.catch_warnings():
             warnings.simplefilter( "ignore", category=RuntimeWarning )
+#            print( problem.ydata.shape, mockdata.shape, lfdata.shape  )
             lld = problem.ydata * numpy.log( mockdata ) - mockdata - lfdata
 
         lld = numpy.where( numpy.isfinite( lld ), lld, -math.inf )

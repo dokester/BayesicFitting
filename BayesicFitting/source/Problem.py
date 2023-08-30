@@ -8,7 +8,7 @@ from .Dynamic import Dynamic
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -346,7 +346,7 @@ class Problem( object ):
         return ( resw * res, resw ) if extra else resw * res
 
     def isDynamic( self ) :
-        return self.model.isDynamic()
+        return self.model is not None and  self.model.isDynamic()
 
 
     def domain2Unit( self, dval, kpar ) :

@@ -15,7 +15,7 @@ from .Tools import setAttribute as setatt
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -782,8 +782,6 @@ class Model( FixedModel ):
         dHdG: array of form [O][N,K]
             Derivative of H to G  
         """
-        parr = numpy.asarray( dGd )
-
         part = []
         for dd in dHdG :
             pp = 0
@@ -1518,7 +1516,11 @@ class Model( FixedModel ):
 
         random.seed( 13010804 )
 
-        snum = self.strictNumericDerivative( xdata, params )
+        try :
+            snum = self.strictNumericDerivative( xdata, params )
+        except :
+            snum = 0
+
         try :
             df = self.derivative( xdata, params )
             if df is None :

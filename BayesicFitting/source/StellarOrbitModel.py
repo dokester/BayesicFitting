@@ -8,9 +8,9 @@ from .Kepplers2ndLaw import Kepplers2ndLaw
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2022 Do Kester
+#  *    2018 - 2023 Do Kester
 
 class StellarOrbitModel( NonLinearModel ):
     """
@@ -199,9 +199,6 @@ class StellarOrbitModel( NonLinearModel ):
         rp[:,1] = numpy.arctan2( xy[:,0], -xy[:,1] )
         return rp
 
-    def XXXderivative( self, xdata, params ):
-        return self.baseDerivative( xdata, params )
-
     def baseDerivative( self, xdata, params ):
         """
         Returns the derivative (df/dx) of the model function.
@@ -267,9 +264,6 @@ class StellarOrbitModel( NonLinearModel ):
 
         return dfdx
 
-
-    def XXXpartial( self, xdata, params, parlist=None ) :
-        return self.basePartial( xdata, params, parlist=parlist )
 
     def basePartial( self, xdata, params, parlist=None ) :
         """

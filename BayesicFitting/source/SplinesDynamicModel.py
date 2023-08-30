@@ -9,9 +9,9 @@ from .Modifiable import Modifiable
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2020 Do Kester
+#  *    2020 - 2023 Do Kester
 
 class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
     """
@@ -150,9 +150,14 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
             setatt( self, "growPrior", copy.growPrior.copy() )
 
 
-    def copy( self ):
-        return SplinesDynamicModel( knots=self.knots, modifiable=self.modifiable,
-                                    dynamic=self.dynamic, copy=self )
+    def copy( self, modifiable=None, dynamic=None ):
+        if modifiable is None :
+            modifiable = self.modifiable
+        if dynamic is None :
+            dynamic = self.dynamic
+
+        return SplinesDynamicModel( knots=self.knots, modifiable=modifiable,
+                                    dynamic=dynamic, copy=self )
 
     def __setattr__( self, name, value ) :
         if self.setDynamicAttribute( name, value ) :
@@ -302,6 +307,8 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
             print( "Knots ", k, fmt( r1 ), fmt( r2 ), fmt( dis ), fmt( self.knots, max=None ) )
             print( "Pars  ", fmt( mdlpar, max=None ) )
             print( "Old   ", kl, fmt( mdlpar[kl:kl+2] ), "  New  ", fmt( value ) )
+
+            raise ValueError( "Out of limits Prior" )
             return False
 
 #        print( "SD  p1 ", npars, nrknots, k, location, kl )
