@@ -6,16 +6,18 @@ import sys
 from .ScaledErrorDistribution import ScaledErrorDistribution
 from .LinearModel import LinearModel
 from .Fitter import Fitter
+from .BaseFitter import BaseFitter
+from .CurveFitter import CurveFitter
+from .AmoebaFitter import AmoebaFitter
 from .LevenbergMarquardtFitter import LevenbergMarquardtFitter
-#from .NestedSampler import NestedSampler
 from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.7.2"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2021 Do Kester
+#  *    2019 - 2023 Do Kester
 
 
 class ModelDistribution( ScaledErrorDistribution ):
@@ -62,7 +64,7 @@ class ModelDistribution( ScaledErrorDistribution ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, arbiter=None, scale=1.0, limits=None, copy=None ):
+    def __init__( self, arbiter=None, scale=1.0, limits=None, copy=None, **kwargs ):
         """
         Default Constructor.
 
@@ -72,7 +74,7 @@ class ModelDistribution( ScaledErrorDistribution ):
             to provide the evidence
             None    select fitter automatically
             BaseFiter   Use this fitter
-            str     "fitter", "levenberg", "curve", "amoeba"
+            str     "fitter", "levenberg", "curve", "amoeba", "NestedSampler"
 
         scale : float
             noise scale
@@ -85,8 +87,12 @@ class ModelDistribution( ScaledErrorDistribution ):
         copy : ModelDistribution
             distribution to be copied.
 
+        kwargs : dict
+            to be applied to arbiter
+
         """
         setatt( self, "arbiter", arbiter )
+        setatt( self, "kwarbs", kwargs )
 
 #        setatt( self, "limits", limits )
 #        setatt( self, "scale", scale )
@@ -136,13 +142,15 @@ class ModelDistribution( ScaledErrorDistribution ):
 
 #        print( "MD   ", noiselim, fmt( allpars, max=None ) )
 
+        kwarbs = self.kwarbs
 
         if self.arbiter is None :
             if isinstance( mdl, LinearModel ) :
-                ftr = Fitter( problem.xdata, mdl, fixedScale=fscale )
+                ftr = Fitter( problem.xdata, mdl, fixedScale=fscale, **kwarbs )
             else :
-                ftr = LevenbergMarquardtFitter( problem.xdata, mdl, fixedScale=fscale )
-        elif isinstance( self.abriter, BaseFitter ) :
+                ftr = LevenbergMarquardtFitter( problem.xdata, mdl, fixedScale=fscale,
+                            **kwarbs )
+        elif isinstance( self.arbiter, BaseFitter ) :
             ftr = self.arbiter
 
         elif not isinstance( self.arbiter, str ) :
@@ -152,22 +160,37 @@ class ModelDistribution( ScaledErrorDistribution ):
             name = str.lower( self.arbiter )
 
             if name == "fitter" :
-                ftr = Fitter( problem.xdata, mdl, fixedScale=fscale )
+                ftr = Fitter( problem.xdata, mdl, fixedScale=fscale, **kwarbs )
             elif name.startswith( "leven" ) :
-                ftr = LevenbergMarquardtFitter( problem.xdata, model, fixedScale=fscale )
+                ftr = LevenbergMarquardtFitter( problem.xdata, mdl, fixedScale=fscale, 
+                            **kwarbs )
             elif name.startswith( "curve" ) :
-                ftr = CurveFitter( problem.xdata, model, fixedScale=fscale )
+                ftr = CurveFitter( problem.xdata, mdl, fixedScale=fscale, **kwarbs )
             elif name.startswith( "amoeba" ) :
-                ftr = AmoebaFitter( problem.xdata, model, fixedScale=fscale )
+                ftr = AmoebaFitter( problem.xdata, mdl, fixedScale=fscale, **kwarbs )
 
-#               produces circular imports
-#            elif name.startswith( "nested" ) :
-#                ns = NestedSampler( problem=problem, limits=noiselim, verbose=0 )
-#                evidence = ns.sample()
-#                allpars[:mdl.npars] = pars
-#                if noiselim is not None :
-#                    allpars[-1] = ftr.scale
-#                return evidence
+            elif name.startswith( "nested" ) :
+
+                ## Import NestedSampler here to avoid circular imports
+                from .NestedSampler import NestedSampler
+                ######################################################
+
+                ## we need a static version of the model
+                model = mdl.copy( modifiable=False, dynamic=False )
+
+                ## add items to kwarbs if not already present
+                if not "ensemble" in kwarbs :
+                    kwarbs["ensemble"] = 10
+                if not "verbose" in kwarbs :
+                    kwarbs["verbose"] = 0
+
+                ns = NestedSampler( model=model, xdata=problem.xdata, ydata=problem.ydata,
+                        weights=problem.weights, limits=noiselim, **kwarbs )
+                evidence = ns.sample()
+                allpars[:mdl.npars] = ns.parameters
+                if noiselim is not None :
+                    allpars[-1] = ns.scale
+                return evidence
 
             else :
                 raise ValueError( "Cannot interpret %s" % self.arbiter )
