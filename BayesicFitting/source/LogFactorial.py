@@ -3,9 +3,9 @@ import math
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -104,6 +104,9 @@ def logFactorial( k ):
     logfactarray = numpy.asarray( logfact )
 
     k = numpy.asarray( k, dtype=int )
+    ksh = k.shape
+
+    k = k.flatten()
 
     lf = numpy.zeros( len( k ), dtype=float )
     q = numpy.where( k < 100 )[0]
@@ -114,6 +117,6 @@ def logFactorial( k ):
     x = numpy.asarray( k[b], dtype=float )
     lf[b] = 0.9189385332046727 + ( x + 0.5 ) * numpy.log( x ) - x + 1.0 / ( 12.0 * x )
 
-    return lf
+    return lf.reshape( ksh )
 
 
