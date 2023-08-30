@@ -33,7 +33,11 @@ __status__ = "Perpetual Beta"
 gllen = 120
 gindent = 0
 gmax = 5
-fmt = { "float64" : " %8.3f", "int64" : " %8d", "bool" : " %d", "object" : "%s" }
+fmt = { "float64" : " %8.3f", 
+        "int64" : " %8d", 
+        "uint8" : " %8d", 
+        "bool" : " %d", 
+        "object" : "%s" }
 
 
 def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
