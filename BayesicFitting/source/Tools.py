@@ -13,7 +13,7 @@ from astropy.table import Table
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -50,6 +50,36 @@ def getItem( ilist, k ) :
     """
     return ( ilist if not isinstance( ilist, list ) else
              ilist[-1] if k >= len( ilist ) else ilist[k] )
+
+
+def firstIndex( iterable, condition=lambda x: True ) :
+    """
+    Returns the index of first item in the `iterable` that
+    satisfies the `condition`.
+
+    If the condition is not given, it returns 0
+
+    Parameters
+    ----------
+    iterable : iterable
+        to find the first item in
+    condition : lambda function
+        the condition
+
+    Raises
+    ------
+    StopIteration: if no item satysfing the condition is found.
+
+    >>> first( (1,2,3), condition=lambda x: x % 2 == 0)
+    2
+    >>> first(range(3, 100))
+    3
+    >>> first( () )
+    Traceback (most recent call last):
+    ...
+    StopIteration
+    """
+    return next( k for k,x in enumerate( iterable ) if condition( x ) )
 
 
 def getColumnData( xdata, kcol ) :
@@ -336,7 +366,7 @@ def printclass( cls, nitems=8 ) :
     ld = list( atr.keys() )
     ld.sort()
     for key in ld :
-        print( "%-16.16s"%key, end="" )
+        print( "%-15.15s "%key, end="" )
         val = atr[key]
         if isinstance( val, (list,numpy.ndarray) ) :
             printlist( val )
@@ -347,7 +377,15 @@ def printclass( cls, nitems=8 ) :
         elif inspect.ismethod( val ) :
             print( "-->", val.__str__().split()[2] )
         else :
-            print( val )
+            try :
+                valstr = val.__str__()
+                if valstr.startswith( '<BayesicFitting' ) :
+                    print( valstr.split()[0].split( '.' )[-1] )
+                else : 
+                    print( valstr )
+            except :
+                print( val )
+            
 
 def printlist( val, nitems=8 ) :
     nv = length( val )
@@ -358,6 +396,10 @@ def printlist( val, nitems=8 ) :
             print( val, nv )
         return
 
+#    if val.dimensions > 1 :
+#        print( "array of shape", val.shape )
+#        return
+
     sep = "["
     for k in range( min( nv, nitems ) ) :
         try :
@@ -365,7 +407,6 @@ def printlist( val, nitems=8 ) :
         except :
             print( "%s%s"%(sep, shortName( str( val[k] ) ) ), end="" )
         sep = " "
-#    print( "%s" % ( "... ]" if nitems < nv else "]" ), nv )
     print( "%s" % ( ( "... ] %d" % nv ) if nitems < nv else "]" ) )
 
 def shortName( val ):
@@ -446,12 +487,10 @@ def average( xx, weights=None, circular=None ) :
         sw = numpy.sum( weights )
         xw = xx * weights
         sx = numpy.sum( xw )
-        s2 = numpy.sum( xw * xx )
         averx = sx / sw
 
         rr = xx - averx
         stdvx = math.sqrt( numpy.average( rr * rr, weights=weights ) )
-#        stdvx = math.sqrt( s2 / sw - averx * averx )
 
     else :
         range = circular[1] - circular[0]
