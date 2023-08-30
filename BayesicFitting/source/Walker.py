@@ -9,7 +9,7 @@ from .Sample import Sample
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -63,7 +63,7 @@ class Walker( object ):
 
     """
 
-    def __init__( self, wid, problem, allpars, fitIndex, parent=-1, start=0, copy=None ):
+    def __init__( self, wid, problem, allpars, fitIndex, logL=0, parent=-1, start=0, copy=None ):
         """
         Constructor.
 
@@ -80,6 +80,8 @@ class Walker( object ):
         fitIndex : None or array_like
             indices of allpars to be fitted
             None is all
+        logL : float
+            log Likelihood
         parent : int
             id of the parent (-1 for Adam/Eve)
         start : int
@@ -96,7 +98,7 @@ class Walker( object ):
             self.start = start
             self.parent = parent
             self.problem = problem
-            self.logL = 0.0
+            self.logL = logL
         else :
             self.start = copy.start
             self.parent = copy.parent
