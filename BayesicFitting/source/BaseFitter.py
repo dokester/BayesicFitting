@@ -14,7 +14,7 @@ from .Formatter import formatter as fmt
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -363,7 +363,7 @@ class BaseFitter( object ):
         return self.yfit
 
 
-    def limitsFit( self, fitmethod, ydata, weights=None, keep=None ) :
+    def limitsFit( self, ydata, weights=None, keep=None ) :
         """
         Fit the data to the model.
         When a parameter(s) transgresses the limits, it set and fixed at that limit
@@ -372,8 +372,6 @@ class BaseFitter( object ):
 
         Parameter
         ---------
-        fitmethod : callable fitmethod( ydata, weights=weights )
-            A fit method from the BaseFitter family
         ydata : array_like
             data that the model needs to be fit to
         weights : array_like
@@ -394,7 +392,7 @@ class BaseFitter( object ):
 
         """
         pars = self.fit( ydata, weights=weights, keep=keep )          # perform the fit
-#        pars = fitmethod( ydata, weights=weights )          # perform the fit
+
         if self.model.priors is None :                  # no priors -> no limits
             return pars
 
@@ -431,7 +429,6 @@ class BaseFitter( object ):
         if ool > 0 :                                        # some transgressions
             print( "ool    ", fmt( ool ), fmt( fix ) )
             self.keepFixed( fix )                           # fix them
-#            pars = fitmethod( ydata, weights=weights )      # run fit again
             pars = self.fit( ydata, weights=weights, keep=fix )      # run fit again
 #            print( "pars   ", fmt( pars, max=None ) )
 #            print( fmt( sfix ) )
