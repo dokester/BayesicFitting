@@ -32,7 +32,7 @@ from .NearEngine import NearEngine
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -219,6 +219,9 @@ class NestedSolver( NestedSampler ):
 
         return self.samples[-1]
 
+    def __str__( self ):
+        """ Return the name of this sampler.  """
+        return str( "NestedSolver" )
 
     #  *********DISTRIBUTIONS***************************************************
     def setErrorDistribution( self, name=None, scale=1.0, power=2.0 ):
