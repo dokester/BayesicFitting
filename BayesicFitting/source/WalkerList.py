@@ -5,9 +5,9 @@ from . import Tools
 from .Walker import Walker
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class WalkerList( list ):
@@ -53,38 +53,49 @@ class WalkerList( list ):
     Author       Do Kester
 
     """
-    def __init__( self, problem, nwalkers, allpars, fitIndex ):
+    def __init__( self, problem=None, ensemble=0, allpars=None, fitIndex=None, 
+                  walker=None,  walkerlist=None ):
         """
         Constructor.
 
+        To be valid it needs either problem/allpars/fitindex or walker or walkerlist
+
         Parameters
         ----------
-        nwalkers : int
-            number of walkerss created.
-        problem : Problem
-            to be used in the walkerss
+        problem : Problem or None
+            to construct a walker to be added.
+        ensemble : int
+            number of walkers
         allpars : array_like
-            parameters and hyperparams of the problem
-        fitIndex : array_like
-            indices of allpars to be fitted
-
+            parameters of the problem
+        fitIndex : array of int
+            list of parameters to be fitted.
+        walker : Walker or None
+            walker to be added.
+        walkerlist : Walkerlist or None
+            walkerlist to be incorporated.
         """
+        if not walkerlist is None :
+            super( WalkerList, self ).__init__( walkerlist )
+            self._count = len( walkerlist )
+            return
+
         super( WalkerList, self ).__init__( )
         self._count = 0
-        self.iteration = 0
-        self.logZ = 0.0
-        self.info = 0.0
-        allpars = numpy.asarray( allpars )
-        self.addWalkers( problem, nwalkers, allpars, fitIndex )
+
+        if problem is not None :
+            walker = Walker( 0, problem, allpars, fitIndex )
+
+        self.addWalkers( walker, ensemble )
 
 
-    def addWalkers( self, problem, nWalkers, allpars, fitIndex ):
-        for i in range( nWalkers ) :
-            if problem.model and problem.model.isDynamic() :
-                problem = problem.copy()
-                fitIndex = fitIndex.copy()
-            walker = Walker( self._count, problem, allpars, fitIndex )
-            self.append( walker )
+    def addWalkers( self, walker, ensemble ):
+        for i in range( ensemble ) :
+            wlkr = walker.copy()
+            if wlkr.problem.model and wlkr.problem.model.isDynamic() :
+                wlkr.fitIndex = walker.fitIndex.copy()
+            wlkr.id = self._count
+            self.append( wlkr )
             self._count += 1
 
     # ===========================================================================
@@ -109,7 +120,7 @@ class WalkerList( list ):
             self._count += 1
             self.append( walker )
 
-    def copy( self, src, des ):
+    def copy( self, src, des, wlist=None ):
         """
         Copy one item of the list onto another.
 
@@ -119,10 +130,15 @@ class WalkerList( list ):
             the source item
         des : int
             the destination item
+        wlist : WalkerList or None
+            Copy from this WalkerList (None == self)
 
         """
+        if wlist is None :
+            wlist = self
+
         id = self[des].id
-        self[des] = self[src].copy()
+        self[des] = wlist[src].copy()
         self[des].id = id
 
 
@@ -132,6 +148,97 @@ class WalkerList( list ):
         """
         return numpy.logaddexp( x, y )
 
+    def firstIndex( self, lowL ) :
+        """
+        Return index of the first walker with walker.logL > lowL
+
+        Parameters
+        ----------
+        lowL : float
+            low Likelihood
+        """
+        return next( ( k for k,w in enumerate( self ) if w.logL > lowL ), 
+                    None if len( self ) == 0 else len( self)  )
+
+
+    def insertWalker( self, walker ):
+        """
+        Insert walker to this list keeping it sorted in logL
+
+        Parameters
+        ----------
+        walker : Walker
+            the list to take to copy from
+        """
+        klow = self.firstIndex( walker.logL )
+        if klow is None :
+            self.setWalker( walker, 0 )
+            return self
+
+        cnt = self._count
+
+        wl = WalkerList( walkerlist=[walker] )
+
+        if len( self[klow:] ) > 0 :
+            wl = wl + WalkerList( walkerlist=self[klow:] )
+
+        if len( self[:klow] ) > 0 :
+            self = WalkerList( walkerlist=self[:klow] ) + wl
+        else :
+            self = wl
+
+        self = WalkerList( walkerlist=self )
+        self._count = cnt + 1
+
+        return self
+
+    def cropOnLow( self, lowL ) :
+        """
+        Return WalkerList with all LogL > lowL
+
+        Precondition: self is ordered on logL
+
+        Parameters
+        ----------
+        lowL : float
+            low Likelihood
+        """
+        cnt = self._count
+        self = WalkerList( walkerlist=self[self.firstIndex( lowL ):] )
+        self._count = cnt
+        return self
+
+
+    def getLogL( self, walker=None ) :
+        """
+        Return the logL of the/all walker
+
+        Parameters
+        ----------
+        walker : None or Walker
+            None return value for all walkers
+            get the logL from
+        """
+        if walker is None :
+            return self.getLogLikelihoodEvolution()
+        return walker.logL
+
+
+    def allPars( self ):
+        """
+        Return a 2d array of all parameters.
+
+        In case of dynamic models the number of parameters may vary.
+        They are zero-padded. Use `getNumberOfParametersEvolution`
+        to get the actual number.
+
+        Parameters
+        ----------
+        kpar : int or tuple of ints
+            the parameter to be selected. Default: all
+
+        """
+        return numpy.asarray( [walker.allpars for walker in self] )
 
     def getParameterEvolution( self, kpar=None ):
         """
@@ -178,5 +285,8 @@ class WalkerList( list ):
                 low = walker.logL
             k += 1
         return ( low, klo )
+
+    def __str__( self ) :
+        return str( "Walkerlist with %3d walkers" % len( self ))
 
 
