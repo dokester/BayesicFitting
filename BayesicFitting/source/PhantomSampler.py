@@ -50,7 +50,7 @@ from .StructureEngine import StructureEngine
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -219,6 +219,10 @@ class PhantomSampler( NestedSampler ):
                 threads=threads, verbose=verbose )
 
 
+    def __str__( self ):
+        """ Return the name of this sampler.  """
+        return str( "PhantomSampler" )
+
     def __getattr__( self, name ) :
         if name == "worst" :
             return int( ( len( self.walkers ) * self.step ) // 100 )
@@ -243,7 +247,7 @@ class PhantomSampler( NestedSampler ):
         """
         self.walkers[:worst] = []
 
-        e0 = self.engines[0]
+#        e0 = self.engines[0]
 #        print( "updateW  ", worst, len( self.walkers ), fma( e0.unitRange, linelength=200 ) )
 
         while len( self.walkers ) <= self.initEnsemble :
