@@ -1,12 +1,14 @@
 import math
 import numpy
 from scipy import special
+
+from .Formatter import formatter as fmt
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -24,23 +26,25 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2023 Do Kester
 
 
 class GaussPrior( Prior ):
     """
-    Gauss prior distribution.
+    Gauss prior distribution. Use  normalized version:
 
-        Pr( x ) = exp( - ( ( x - c ) / scale )^2 )
+        Pr( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 * ( ( x - c ) / s )^2 )
 
-    By default: center = 0 and scale = 1.
+    By default: c = center = 0 and s = scale = 1.
 
     It can also have a limited domain. (To be done)
     By default the domain is [-Inf,+Inf].
-    In computational practice the domain is limited to about [-6, 6] scale units.
+    In computational practice the domain is limited to about [-8.5, 8.5] scale units.
 
-    domain2unit: u = 0.5 * ( erf( ( d - center ) / scale ) + 1 )
-    unit2domain: d = erfinv( 2 * u - 1 ) * scale + center
+    According to integral-calculator.com we have:
+
+    domain2unit: u = 0.5 * ( erf( ( d - c ) / ( s * &sqrt; 2 ) ) + 1 )
+    unit2domain: d = erfinv( 2 * u - 1 ) * s * &sqrt; 2 + c
 
     Examples
     --------
@@ -63,10 +67,11 @@ class GaussPrior( Prior ):
 
     """
 
-    SPI = 1.0 / math.sqrt( math.pi )
-    LSPI = math.log( SPI )
+    S2PI = 1.0 / math.sqrt( 2 * math.pi )
+    LS2PI = math.log( S2PI )
+    SQRT2 = math.sqrt( 2.0 )
 
-    MAXVAL = 6
+    MAXVAL = 8.5
 
     #  *********CONSTRUCTOR***************************************************
     def __init__( self, center=0.0, scale=1.0, limits=None, circular=False, prior=None ):
@@ -104,7 +109,7 @@ class GaussPrior( Prior ):
         Return a value in [0,1] given a value within the valid domain of
         a parameter for a Gauss distribution.
 
-        domain2unit: u = 0.5 * ( erf( ( d - center ) / scale ) + 1 )
+        domain2unit: u = 0.5 * ( erf( ( d - center ) / ( &sqrt; 2 * scale ( ) + 1 )
 
         Parameters
         ----------
@@ -112,14 +117,14 @@ class GaussPrior( Prior ):
             value within the domain of a parameter
 
         """
-        return 0.5 * ( special.erf( ( dval - self.center ) / self.scale ) + 1 )
+        return 0.5 * ( special.erf( ( dval - self.center ) / ( self.SQRT2 * self.scale ) ) + 1 )
 
     def unit2Domain( self, uval ):
         """
         Return a value within the valid domain of the parameter given a value
         between [0,1] for a Gauss distribution.
 
-        unit2domain: d = erfinv( 2 * u - 1 ) * scale + center
+        unit2domain: d = erfinv( 2 * u - 1 ) * scale * &sqrt; 2 + center
 
         Parameters
         ----------
@@ -129,12 +134,13 @@ class GaussPrior( Prior ):
         """
         dom = special.erfinv( 2 * uval - 1 )
         if math.isfinite( dom ) :
-            return dom * self.scale + self.center
+            return dom * self.scale * self.SQRT2 + self.center
         else :
             fs = - self.MAXVAL if uval < 0.5 else self.MAXVAL
-            return self.center + fs * self.scale
+            return self.center + fs * self.scale        # * self.SQRT2 (is in MAXVAL)
 
 #    def partialDomain2Unit( self, dval ):
+
     def result( self, x ):
         """
         Return a the result of the distribution function at x.
@@ -146,8 +152,7 @@ class GaussPrior( Prior ):
 
         """
         xs = ( x - self.center ) / self.scale
-        return self.SPI * numpy.exp( - xs * xs )
-#        return self.SPI * math.exp( - xs * xs )
+        return self.S2PI / self.scale * numpy.exp( - 0.5 * xs * xs )
 
     def logResult( self, x ):
         """
@@ -160,7 +165,8 @@ class GaussPrior( Prior ):
 
         """
         xs = ( x - self.center ) / self.scale
-        return self.LSPI - ( xs * xs )
+#        print( "GP   xs ", fmt( xs ) )
+        return self.LS2PI - math.log( self.scale ) - 0.5 * ( xs * xs )
 
     def partialLog( self, x ):
         """
@@ -172,7 +178,7 @@ class GaussPrior( Prior ):
             the value
 
         """
-        return -2 * ( x - self.center ) / ( self.scale * self.scale )
+        return - ( x - self.center ) / ( self.scale * self.scale )
 
     def isBound( self ):
         """ Return true if the integral over the prior is bound.  """
