@@ -1,14 +1,15 @@
 import numpy as numpy
 from astropy import units
 import math
+import warnings
 from . import Tools
 
 from .OrderProblem import OrderProblem
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -27,7 +28,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2022 Do Kester
+#  *    2018 - 2023 Do Kester
 
 
 class SalesmanProblem( OrderProblem ):
@@ -54,10 +55,11 @@ class SalesmanProblem( OrderProblem ):
 
     """
 
-    DISNAMES = ["User Defined", "Manhattan", "Euclidic", "Spherical"]
+    DISNAMES = ["User Defined", "Manhattan", "Euclidic", "Spherical", "Tabulated"]
 
 
-    def __init__( self, xdata=None, weights=None, distance="euclid", scale=None, copy=None ):
+    def __init__( self, xdata=None, weights=None, distance="euclid", scale=None, table=None,
+                  oneway=False, copy=None ):
         """
         Traveling Salesman problem.
 
@@ -73,10 +75,15 @@ class SalesmanProblem( OrderProblem ):
             "manh"   : Manhattan distance (1 norm) (2 or more dimensions)
             "euclid" : Euclidic (2 norm) (2 or more dimensions) 
             "spher"  : spherical, distance over sphere (2 dimensions only) 
+            "table"  : tabulated distance values
             callable of the form callable( xdata, pars )
         scale : None or float
             scale all distances by this number.
             None : take minimum distance as scale
+        table : arraylike or None
+            table of all distances, Only when distance is "tabulated"
+        oneway : bool
+            Don't close the loop; cut at position 0.
         copy : SalesmanProblem
             to be copied
 
@@ -85,26 +92,33 @@ class SalesmanProblem( OrderProblem ):
 
         if copy is not None :
             self.distance = copy.distance
-            self.iddis = copy.iddis
+            self.disname = copy.disname
             self.scale = copy.scale
+            self.oneway = copy.oneway
             return
+
+        self.oneway = oneway
 
         if callable( distance ) :
             self.distance = distance
-            self.iddis = 0
+            self.disname = self.DISNAMES[0]
 
         elif isinstance( distance, str ) :
             dis = distance.lower()[0]
 
-            self.iddis = 2
+            self.disname = self.DISNAMES[2]
             if dis == "e" :
                 self.distance = self.euclidic
             elif dis == "m" :
                 self.distance = self.manhattan
-                self.iddis = 1
+                self.disname = self.DISNAMES[1]
             elif dis == "s" :
                 self.distance = self.spherical
-                self.iddis = 3
+                self.disname = self.DISNAMES[3]    
+            elif dis == "t" :
+                self.distance = self.tabulated
+                self.disname = self.DISNAMES[4]
+                self.table = table
             else :
                 warnings.warn( "Unknown distance ", distance, " Using euclidic in stead" )
                 self.distance = self.euclidic
@@ -152,6 +166,9 @@ class SalesmanProblem( OrderProblem ):
         """
         res = self.distance( self.xdata, params ) / self.scale
 
+        if self.oneway :
+            res[-1] = 0                     # dont return home.
+
         if self.weights is None :
             return res 
         else :
@@ -174,7 +191,7 @@ class SalesmanProblem( OrderProblem ):
             number of positions to roll 
         """
         xd = xdata[pars]
-        r = numpy.abs( xd - numpy.roll( xd, -roll, axis=0 ) )
+        r = numpy.abs( xd - numpy.roll( xd, -roll, axis=0 ) )    ## leaving from xd
         return numpy.sum( r, 1 )
 
     def euclidic( self, xdata, pars, roll=1 ) :
@@ -194,7 +211,7 @@ class SalesmanProblem( OrderProblem ):
             number of positions to roll 
         """
         xd = xdata[pars]
-        r = numpy.square( xd - numpy.roll( xd, -roll, axis=0 ) )
+        r = numpy.square( xd - numpy.roll( xd, -roll, axis=0 ) )        ## leaving from xd
         return numpy.sqrt( numpy.sum( r, 1 ) )
 
     def spherical( self, xdata, pars, roll=1 ) :
@@ -253,6 +270,26 @@ class SalesmanProblem( OrderProblem ):
 
         return dis 
 
+    def tabulated( self, xdata, pars, roll=1 ) :
+        """
+        Use tabulated distances from self.table
+
+        Each distance is 
+            dis[k] = table[ pars[k], pars[k+roll] ]
+
+        Parameters
+        ----------
+        xdata : array-like of shape (ndata,ndim) 
+            positional info in several dimensions
+        pars : list of indices
+            designating the order of the nodess
+        roll : int
+            number of positions to roll 
+        """
+
+        r = self.table[ pars, numpy.roll( pars, -roll ) ]
+        return r
+
     def minimumDistance( self ) :
         """
         Return the smallest distance in the data.
@@ -272,7 +309,7 @@ class SalesmanProblem( OrderProblem ):
 
         """
         return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
-                    ( self.ndim, self.npars, self.DISNAMES[self.iddis] ) )
+                    ( self.ndim, self.npars, self.disname ) )
 
 
 
