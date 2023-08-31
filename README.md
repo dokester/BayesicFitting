@@ -5,31 +5,39 @@ A package for model fitting and Bayesian evidence calculation.
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
 [Kester and Mueller (2021)](./docs/references.md/#kester8).
 
-(In case you are wondering what that is about take a 
-quick look at [this example.]
-(https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples/sealevel.ipynb))
+In case you are wondering what that is about take a quick look at 
+[this example.](https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples/sealevel.ipynb)
 
 Citation index for the BayesicFitting package:
 DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
- + 18 Jan 2023 version 3.1.1
-   * remode GaussPriorNew from __init__.py
-
- + 18 Jan 2023 version 3.1.0 (still working on the same update)
-   * Implementing accuracy in fitters and samplers
-   * Update of documentation
-   * More tests
-
- + 19 Nov 2022 version 3.1.0
-   * Gauss2dErrorDistribution: New Class to handle correlated errors in X and Y
-   * ErrorDistribution and GaussErrorDistribution : adaptation for covariant errors.
-   * Small updates and corrections and removal of unused methods
-   * Added / corrected version information and documentation issues
-   * Rerun all examples and added tests
-
-
+ +  31 Aug 2023 version 3.2.0
+   * The new class, PhantomCollection is part of NestedSampler. It contains a sorted 
+     WalkerList, in which all valid positions are collected, proper walkers 
+     and phantoms. Each iteration the phantoms with log likelihood lower than the 
+     low limit for that iteration, are removed. The PhantomCollection is used 
+     to get a better estimate on the size of the bounding box for the  walkers and
+     to obtain starting positions for new walkers. In general the PhantomCollection 
+     contains an order of magnitude more items than the WalkerList itself. 
+   * NestedSampler has a new stopping criterion. It also stops when the log of the 
+     relative contribution to the logZ (evidence) integral is less than -tolerance (=12). 
+   * FootballModel: new class. Model to estimate strengths of football teams in 
+     several key parameters. 
+   * Address PhantomCollection and add **kwargs in all Engines
+   * Quadratic (in stead of linear) interpolation on edge in GalileanEngine
+   * Unnormalized Gauss prior changed into a normalized one
+   * Some documentation issues
+   * More dimensional arrays in LogFactorial
+   * __str__() method in NestedSolver and PhantomSampler
+   * Avoid numeric instabilities in sqrt in SampleList
+   * New tools in Tools
+   * More construction options in WalkerList
+   * New example: Uefa2022.ipynb
+   * New tests: TestPhantomCollection, TestFootballModel
+   * Adaptations in existing tests
+   * Reran all tests and examples
 
 ## Content
 
@@ -361,9 +369,6 @@ More work needs to be done in:
    * Documentation issues; Replaced style.md by code-style.md
    * Correcting error on Windows systme
 
- + 05 Apr 2022 version 3.0.1
-   * Addressing issue #18: UserModel does not work for multiple dimensions.
-
  + 07 Feb 2022 version 3.0.0
    * New classes: AstropyModel and UserModel
    * New class: NeuralNetUtilities
@@ -376,7 +381,25 @@ More work needs to be done in:
    * Update existing examples to improve coverage of pytest
    * update Manual
 
+ + 05 Apr 2022 version 3.0.1
+   * Addressing issue #18: UserModel does not work for multiple dimensions.
+
  + 19 Nov 2022 version 3.1.0
+   * Gauss2dErrorDistribution: New Class to handle correlated errors in X and Y
+   * ErrorDistribution and GaussErrorDistribution : adaptation for covariant errors.
+   * Small updates and corrections and removal of unused methods
+   * Added / corrected version information and documentation issues
+   * Rerun all examples and added tests
+
+ + 18 Jan 2023 version 3.1.0 (still working on the same update)
+   * Implementing accuracy in fitters and samplers
+   * Update of documentation
+   * More tests
+
+ + 18 Jan 2023 version 3.1.1
+   * remove GaussPriorNew from __init__.py
+
+ +  7 July 2023 version 3.2.0
    * See above in Whats new
 
 <br><br><br><br>
