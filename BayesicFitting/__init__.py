@@ -35,9 +35,6 @@ from .source.BaseModel import BaseModel
 from .source.BernoulliErrorDistribution import BernoulliErrorDistribution
 from .source.BirthEngine import BirthEngine
 from .source.BracketModel import BracketModel
-#from .source.CategoricalFitter import CategoricalFitter
-#from .source.CategoricalLikelihood import CategoricalLikelihood
-#from .source.CategoricalProblem import CategoricalProblem
 from .source.CauchyErrorDistribution import CauchyErrorDistribution
 from .source.CauchyPrior import CauchyPrior
 from .source.CircularUniformPrior import CircularUniformPrior
@@ -47,9 +44,9 @@ from .source.ClassicProblem import ClassicProblem
 from .source.CombiModel import CombiModel
 from .source.ConstantModel import ConstantModel
 from .source.ConvergenceError import ConvergenceError
-#from .source.CrossEngine import CrossEngine
 from .source.CurveFitter import CurveFitter
-#from .source.CyclicResults import CyclicResults
+#from .source.DarwinModel import DarwinModel
+#from .source.DarwinProblem import DarwinProblem
 from .source.DeathEngine import DeathEngine
 from .source.DecisionTreeModel import DecisionTreeModel
 from .source.Dynamic import Dynamic
@@ -65,6 +62,7 @@ from .source.ExponentialErrorDistribution import ExponentialErrorDistribution
 from .source.ExponentialPrior import ExponentialPrior
 from .source.Fitter import Fitter
 from .source.FixedModel import FixedModel
+from .source.FootballModel import FootballModel
 #from .source.FreeShape2dModel import FreeShape2dModel
 from .source.FreeShapeModel import FreeShapeModel
 from .source.GalileanEngine import GalileanEngine
@@ -72,6 +70,9 @@ from .source.GaussErrorDistribution import GaussErrorDistribution
 from .source.Gauss2dErrorDistribution import Gauss2dErrorDistribution
 from .source.GaussModel import GaussModel
 from .source.GaussPrior import GaussPrior
+#from .source.Gene import *
+#from .source.Genome import Genome
+#from .source.GenomeMaker import GenomeMaker
 from .source.GibbsEngine import GibbsEngine
 from .source.HarmonicModel import HarmonicModel
 from .source.HarmonicDynamicModel import HarmonicDynamicModel
@@ -102,9 +103,9 @@ from .source.NestedSampler import NestedSampler
 from .source import NeuralNetUtilities
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
-#from .source.OrderEngine import OrderEngine
 from .source.OrthonormalBasis import OrthonormalBasis
 from .source.PadeModel import PadeModel
+from .source.PhantomCollection import PhantomCollection
 from .source.PhantomSampler import PhantomSampler
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel
