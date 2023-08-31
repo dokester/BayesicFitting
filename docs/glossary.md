@@ -44,7 +44,7 @@ causing those points not to contribute at all to the fit.<br>
 Size = N.
 
 <a name="accuracy"></a>
-### **accuracy**<br>
+### **Accuracy**<br>
 The accuracy is a (set of) numbers that represent a user provided estimate 
 of the size of the errors.<br>
 Accuracies do not change the "number of observations", as weights do. Each 
