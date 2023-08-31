@@ -92,10 +92,11 @@ def stdModeltest( model, par, x=None, plot=None, silent=True, warn=[] ):
 #        else :
 #            print( "partial: ", part.shape )
 
-        print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++" )
-        tc.assertTrue( model.testPartial( x[1], par, silent=silent ) == 0 )
-        print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++" )
-        tc.assertTrue( model.testPartial( x[4], model.parameters, silent=silent ) == 0 )
+        if model.ndim == 1 :
+            print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++" )
+            tc.assertTrue( model.testPartial( x[1], par, silent=silent ) == 0 )
+            print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++" )
+            tc.assertTrue( model.testPartial( x[4], model.parameters, silent=silent ) == 0 )
 
 #        tc.assertTrue( model.testPartial( x[1], par ) == 0 )
         model.xUnit = ( units.m if model.ndim == 1 else

@@ -831,7 +831,7 @@ class Test( unittest.TestCase  ) :
 
         model = PolynomialModel( 1 )
         model.setLimits( lowLimits=limits[0], highLimits=limits[1] )
-        ns = NestedSampler( x, model, y, distribution='poisson', verbose=0, seed=23456 )
+        ns = NestedSampler( x, model, y, distribution='poisson', verbose=0, seed=123 )
 
         logE = ns.sample()
 
@@ -893,9 +893,9 @@ class Test( unittest.TestCase  ) :
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
         eng = ns.engines[0]
-        eng.calculateUnitRange()
-        print( eng.unitRange )
-        print( eng.unitMin )
+        print( "Uran  ", eng.getUnitRange( ns.problem, ns.lowLhood ) )
+#        print( eng.unitRange )
+#        print( eng.unitMin )
 
         for w in ns.walkers :
             pars = w.allpars

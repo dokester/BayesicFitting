@@ -68,6 +68,11 @@ class TestLogFactorial( unittest.TestCase ):
         print( lf2[k] )
         assertAAE( lf1, lf2 )
 
+        d2 = numpy.arange( 10, dtype=int ).reshape( (5,2) )
+        lfd2 = logFactorial( d2 )
+        print( lfd2 )
+
+
 
     @classmethod
     def suite( cls ):

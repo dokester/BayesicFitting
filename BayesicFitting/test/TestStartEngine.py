@@ -57,12 +57,13 @@ class TestStartEngine( TestEngine ):
 
         errdis = GaussErrorDistribution( )
         errdis.setLimits( [0.1, 10.0] )
-        ap = [1.0, 0.0, 0.3, 0.2]
+        ap = numpy.asarray( [1.0, 0.0, 0.3, 0.2] )
         fi = [0,1,2,-1]
 
         wl = WalkerList( problem, 100, ap, fi )
 
-        engine = StartEngine( wl, errdis )
+        phc = PhantomCollection( dynamic=False )
+        engine = StartEngine( wl, errdis, phantoms=phc )
         self.startenginetest( engine )
 
         print( "    make copy of engine" )

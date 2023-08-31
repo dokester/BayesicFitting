@@ -224,10 +224,7 @@ class TestEngine3( unittest.TestCase ):
             engine.plotter = Plotter()
         engine.verbose = 5 if nsamp < 10 else 0
 
-        engine.calculateUnitRange()
-        engine.unitRange = numpy.array( [1.0] * m.npars )
-        engine.unitMin = numpy.array( [0.0] * m.npars )
-        engine.unitMean = numpy.array( [0.5] * m.npars )
+#        uran, umin = engine.getUnitRange( problem, Llow, npars=m.npars+1 )
         engine.maxtrials = 20
 
         count = numpy.zeros( order, dtype=int )
@@ -334,7 +331,7 @@ class TestEngine3( unittest.TestCase ):
             plt.plot( p0[0], p0[1], 'k.' )
 
 
-            engine.calculateUnitRange()
+#            engine.calculateUnitRange()
 
             engine.execute( wl[klo].id, lowL )
             p1 = wl[klo].allpars[:2]
@@ -407,7 +404,7 @@ class TestEngine3( unittest.TestCase ):
         klo = engine.rng.randint( 0, nsamp )
 
         p0 = wl[klo].allpars[:2]
-        engine.calculateUnitRange()
+#        engine.calculateUnitRange()
 
         for k in range( 100 ) :
             wl[klo].allpars[:2] = p0

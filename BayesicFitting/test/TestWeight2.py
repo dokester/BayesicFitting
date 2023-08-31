@@ -1,4 +1,4 @@
-# run with : python3 -m unittest TestScale
+# run with : python3 -m unittest Testweight2
 
 import unittest
 import os
@@ -6,7 +6,6 @@ import numpy as numpy
 from astropy import units
 import math
 from numpy.testing import assert_array_almost_equal as assertAAE
-
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
@@ -48,6 +47,9 @@ class TestWeight2( unittest.TestCase ):
         super( TestWeight2, self ).__init__( name )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
+
+    def test0( self ) :
+        pass
 
     def test1( self ):
 

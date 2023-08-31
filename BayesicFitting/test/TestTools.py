@@ -65,6 +65,28 @@ class TestTools( unittest.TestCase ) :
 
         Tools.printclass( atc )
 
+    def testPrintClass( self ) :
+
+        mdl = ArctanModel()
+        x = numpy.linspace( -1, 1, 101 )
+        Tools.printclass( mdl )
+#        Tools.printclass( x )
+
+        problem = ClassicProblem( model=mdl, xdata=x, ydata=x )
+        Tools.printclass( problem )
+
+        Tools.printclass( Fitter( x, mdl ) )
+
+        prior = UniformPrior()
+        Tools.printclass( prior )
+        prior = UniformPrior( circular=True, limits=[0,2] )
+        Tools.printclass( prior )
+        prior = UniformPrior( limits=[0,2] )
+        Tools.printclass( prior )
+
+        mdl.setPrior( 0, prior )
+        Tools.printclass( NestedSampler( problem=problem ) )
+
     def testIsBetween( self ) :
         self.assertTrue( Tools.isBetween( 1, 2, 3 ) )
         self.assertTrue( Tools.isBetween( 3, 2, 1 ) )
@@ -142,6 +164,11 @@ class TestTools( unittest.TestCase ) :
             print( k, nx )
             self.assertTrue( ( nx == (k+4) and k < 6 ) or nx == 5 )
         xgen.close()
+
+    def testFirstIndex( self ) :
+        self.assertTrue( Tools.firstIndex( (1,2,3) ) == 0 )
+        self.assertTrue( Tools.firstIndex( (1,2,3), condition=lambda x: x % 2 == 0 ) == 1 )
+        self.assertRaises( StopIteration, Tools.firstIndex, (1,2,3), lambda x: x == 0 )
 
     def testLength( self ) :
         print( "===== length ================================" )

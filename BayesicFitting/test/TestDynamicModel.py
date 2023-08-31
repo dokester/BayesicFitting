@@ -35,7 +35,7 @@ __status__ = "Development"
 #  *
 #  *    2016 Do Kester
 
-class TestDynamicModel( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -480,7 +480,8 @@ class TestDynamicModel( unittest.TestCase ):
         print( m.npchain, m.npbase, m._next.npbase, len( allpars ) )
         print( "====================" )
 
-        seng = StartEngine( sl, errdis )
+        phc = PhantomCollection( dynamic=True )
+        seng = StartEngine( sl, errdis, phantoms=phc )
         for k, s in enumerate( sl ) :
             print( "Walker  ", s.id, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
             seng.execute( k, 0.0 )
@@ -490,8 +491,15 @@ class TestDynamicModel( unittest.TestCase ):
         print( "logl  ", fmt( logl, max=None ) )
         print( "lowl  ", fmt( lowl ) )
 
-        beng = BirthEngine( sl, errdis )
-        deng = DeathEngine( sl, errdis )
+#        Tools.printclass( phc )
+        for k in phc.phantoms.keys() :
+            for w in phc.phantoms[k] :
+                print( fmt( k ), fmt( w.logL ) )
+                print( fmt( w.allpars, tail=3 ) )
+
+
+        beng = BirthEngine( sl, errdis, phantoms=phc )
+        deng = DeathEngine( sl, errdis, phantoms=phc )
         print( "start  np ", m.npchain )
         for k, s in enumerate( sl ) :
             Tools.printclass( s )
@@ -500,6 +508,12 @@ class TestDynamicModel( unittest.TestCase ):
             Tools.printclass( s )
             suc = deng.execute( k, lowl )
             print( "Death  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
+
+        for k in phc.phantoms.keys() :
+            for w in phc.phantoms[k] :
+                print( fmt( k ), fmt( w.logL ) )
+                print( fmt( w.allpars, tail=3 ) )
+
 
 
     def testNestedSampler( self ) :
@@ -518,11 +532,12 @@ class TestDynamicModel( unittest.TestCase ):
         lolim = [-10]
         hilim = [+10]
         pm.setLimits( lowLimits=lolim, highLimits=hilim )
-        Tools.printclass( pm )
+#        Tools.printclass( pm )
 
         engines = None
         ns = NestedSampler( x, pm, y, seed=2031967, engines=engines )
 
+        ns.verbose = 1
         ns.distribution.setLimits( [0.01, 100] )
 
         if not self.dofull :
@@ -595,9 +610,9 @@ class TestDynamicModel( unittest.TestCase ):
 
         logE = ns.sample( plot=self.doplot )
         sl = ns.samples
-        print( "maxlik   ", fmt( sl.maxLikelihoodParameters, max=None ) )
-        print( "median   ", fmt( sl.medianParameters, max=None ) )
-        print( "modus    ", fmt( sl.modusParameters, max=None ) )
+        print( "maxlik   ", fmt( sl.maxLikelihoodParameters, max=None, indent=10 ) )
+        print( "median   ", fmt( sl.medianParameters, max=None, indent=10 ) )
+        print( "modus    ", fmt( sl.modusParameters, max=None, indent=10 ) )
         print( "scale    ", fmt( ns.scale ) )
 
 

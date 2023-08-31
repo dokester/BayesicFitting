@@ -37,7 +37,7 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
-class TestStellarOrbitModel( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Stellar Orbit Model
 
@@ -170,6 +170,32 @@ class TestStellarOrbitModel( unittest.TestCase ):
         assertAAE( xy1, xy2 )
         assertAAE( rp1, rp2 )
         assertAAE( rp2, rp3 )
+
+    def test5( self ) :
+
+        print( "****** STELLAR ORBIT test 5 ***************" )
+        m = StellarOrbitModel( spherical=False )
+
+        xdata = numpy.linspace( 0, 10, 13 )
+
+        ydata = numpy.asarray( [[1.0, 0.6, 0.3, 0.0, -0.4, -0.7, -1.1, -0.7, -0.4, 0.0, 0.3, 0.6, 1.0],
+                                [0.0, 0.3, 0.6, 1.0, 0.6, 0.3, 0.0, -0.3, -0.6, -1.0, -0.6, -0.3, 0.0]] )
+        ydata = ydata.transpose()
+
+        twopi = 2 * math.pi
+        m.setPrior( 0, UniformPrior( limits=[0.2,1] ) )
+        m.setPrior( 1, UniformPrior( limits=[0.0,2.0] ) )
+        m.setPrior( 2, UniformPrior( limits=[0,20] ) )
+        m.setPrior( 3, UniformPrior( circular=twopi ) )
+        m.setPrior( 4, UniformPrior( circular=math.pi ) )
+        m.setPrior( 5, UniformPrior( circular=math.pi ) )
+        m.setPrior( 6, UniformPrior( circular=twopi ) )
+
+        problem = MultipleOutputProblem( model=m, xdata=xdata, ydata=ydata )
+
+        ns = NestedSampler( problem=problem, limits=[0.1,2], verbose=2 )
+
+        ns.sample( plot=self.doplot )
 
 
     def dtest( self, x, m, p ) :

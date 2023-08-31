@@ -34,7 +34,7 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
-class TestEngine2( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -64,7 +64,7 @@ class TestEngine2( unittest.TestCase ):
 
     def testRandomEngine( self ):
         print( "\n   Random Engine Test\n" )
-        self.stdenginetest( RandomEngine, iter=200, nsamp=10, plot=self.doplot )
+        self.stdenginetest( RandomEngine, iter=1001, nsamp=10, plot=self.doplot )
 
     def testGibbsEngine( self ):
         print( "\n   Gibbs Engine Test\n" )
@@ -86,9 +86,9 @@ class TestEngine2( unittest.TestCase ):
         m, xdata, data = self.initEngine()
         problem = ClassicProblem( m, xdata=xdata, ydata=data )
 
-        Tools.printclass( problem )
+#        Tools.printclass( problem )
         errdis = GaussErrorDistribution( scale=0.5 )
-        Tools.printclass( errdis )
+#        Tools.printclass( errdis )
 
         allpars = numpy.append( m.parameters, [0.5] )
         fitIndex = [0,1]
@@ -106,14 +106,15 @@ class TestEngine2( unittest.TestCase ):
                     mk0 = k0 - 10
 
 #        print( map )
-        print( mk0, mk1, mmx )
+        print( "Max map at (%d,%d) of %f" % ( mk0, mk1, mmx ) )
 
         ax = numpy.linspace( -10, 10, 21 )
         ay = numpy.linspace(   0, 10, 41 )
         v = [-500000,-100000,-50000,-10000,-5000, -3000, -1000, -500, -300, -200]
 
-        engine = StartEngine( wl, errdis )
-        Tools.printclass( engine.walkers[0] )
+        trials = PhantomCollection( dynamic=m.isDynamic() )
+        engine = StartEngine( wl, errdis, phantoms=trials )
+#        Tools.printclass( engine.walkers[0] )
         for kw in range( len( engine.walkers ) ) :
             engine.execute( kw, -math.inf )
 
@@ -125,7 +126,7 @@ class TestEngine2( unittest.TestCase ):
             plt.plot( pevo[:,0], pevo[:,1], 'k.' )
 
         col = ['k-', 'r-', 'g-', 'b-']
-        engine = myengine( wl, errdis )
+        engine = myengine( wl, errdis, phantoms=trials )
         if isinstance( engine, ChordEngine ) :
             engine.debug = True
         for k in range( iter ) :
@@ -134,17 +135,19 @@ class TestEngine2( unittest.TestCase ):
 
             lowL, klo = wl.getLowLogL()
             p0 = wl[klo].allpars[:2]
-            engine.calculateUnitRange()
+
             while True :
                 kok = engine.rng.randint( 0, nsamp )
                 if kok != klo :
                     wl[klo].allpars = wl[kok].allpars.copy()
                     break
-
+            
             engine.execute( klo, lowL )
             p1 = wl[klo].allpars[:2]
             if k % 100 == 0 :
-                print( k, klo, fmt(p1), fmt(wl[klo].logL) )
+                uran, umin = engine.getUnitRange( problem, lowL, npars=3 )
+                print( k, klo, fmt(p1), fmt(wl[klo].logL), trials.length(),
+                    uran, umin,  )
 
             if plot :
                 plt.plot( [p0[0],p1[0]], [p0[1],p1[1]], col[klo%4] )

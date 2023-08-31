@@ -11,6 +11,7 @@ from numpy.testing import assert_array_almost_equal as assertAAE
 from FitPlot import plotFit
 
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
@@ -152,7 +153,7 @@ class Test( unittest.TestCase ):
 #        endt = time.time()
 
 #        print( "Elapsed ", endt - start )
-
+ 
     def test2a( self ):
         print( "=========== Nested Sampler test 2a ======================" )
 
@@ -166,8 +167,8 @@ class Test( unittest.TestCase ):
         print( gm.shortName( ) )
         print( gm._next.shortName( ) )
 
-        lolim = numpy.asarray( [-10,-10,  0,-10,-10], dtype=float )
-        hilim = numpy.asarray( [ 10, 10, 10, 10, 10], dtype=float )
+        lolim = numpy.asarray( [-10,-10,  0.01,-10,-10], dtype=float )
+        hilim = numpy.asarray( [ 10, 10, 10,    10, 10], dtype=float )
 
         gm.setLimits( lolim, hilim )
 
@@ -221,6 +222,27 @@ class Test( unittest.TestCase ):
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
 
+        print( "NS info ", fmt( ns.information ) )
+        print( "NS hypp ", fmt( ns.hypars ) )
+        print( "NS sthp ", fmt( ns.stdevHypars ) )
+
+        if not plot :
+            return
+
+        kh = ns.histinsert 
+        kh -= numpy.ones( len(kh), dtype=int )
+        print( min( kh ), max( kh ) )
+
+        plt.hist( kh, 100, alpha=0.5, range=(0,100) )
+        bn = numpy.zeros( 100 )
+        for k in kh :
+            bn[k] += 1
+
+        plt.plot( bn, 'k.' )
+        plt.show()
+
+
+
     def test2c( self ):
         print( "=========== Nested Sampler test 2c ======================" )
 
@@ -246,6 +268,9 @@ class Test( unittest.TestCase ):
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
+
+        print( "NS hypp ", fmt( ns.hypars ) )
+        print( "NS sthp ", fmt( ns.stdevHypars ) )
 
         plotSampleList( ns.samples, x, y, residuals=True, show=plot )
 
@@ -281,6 +306,8 @@ class Test( unittest.TestCase ):
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
+        print( "NS hypp ", fmt( ns.hypars ) )
+        print( "NS sthp ", fmt( ns.stdevHypars ) )
 
         plotSampleList( ns.samples, x, y, residuals=True, show=plot )
 

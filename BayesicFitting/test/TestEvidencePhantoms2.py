@@ -16,7 +16,7 @@ from FitPlot import plotErrdis
 from FitPlot import plotErrdis2d
 
 
-class TestEvidence2( unittest.TestCase  ) :
+class Test( unittest.TestCase  ) :
 
     def __init__( self, testname ):
         super( ).__init__( testname )
@@ -391,6 +391,7 @@ class TestEvidence2( unittest.TestCase  ) :
             dis = GaussErrorDistribution( scale=0.5 )
             ns = PhantomSampler( x, model, y, distribution=dis, verbose=0, seed=k+12*step )
             ns.step = step
+#            ns.verbose = 3
 
             logE = ns.sample()
             par2 = ns.parameters
@@ -653,9 +654,9 @@ class TestEvidence2( unittest.TestCase  ) :
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
         eng = ns.engines[0]
-        eng.calculateUnitRange()
-        print( eng.unitRange )
-        print( eng.unitMin )
+        print( fmt( eng.getUnitRange( ns.problem, ns.walkers[0].logL) ) )
+#        print( eng.unitRange )
+#        print( eng.unitMin )
 
         for w in ns.walkers :
             pars = w.allpars

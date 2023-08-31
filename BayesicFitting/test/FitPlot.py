@@ -117,13 +117,14 @@ def plotErrdis2d( errdis, problem, limits=[-10,10], nslim=None, max=None,
 
     par = problem.model.parameters
     pars = numpy.append( par, errdis.hypar )
+
     r0lo = limits[0]
     r0hi = limits[1]
     r0 = numpy.linspace( r0lo, r0hi, np, dtype=float )
     if nslim is None :
         r1lo, r1hi = ( r0lo, r0hi )
         r1 = numpy.linspace( r1lo, r1hi, np, dtype=float )
-        prior1 = numpy.zeros_like( r1 ) + 1 / ( r1hi - r1lo )
+        prior1 = numpy.full_like( r1, 1 / ( r1hi - r1lo ) )
     else :
         r1lo, r1hi = ( nslim[0], nslim[1] )
         r1 = numpy.linspace( r1lo, r1hi, np, dtype=float )
@@ -132,7 +133,7 @@ def plotErrdis2d( errdis, problem, limits=[-10,10], nslim=None, max=None,
 
 
     pixsz = ( r0hi - r0lo ) * ( r1hi - r1lo ) / ( np * np )
-    prior0 = numpy.zeros_like( r0 ) + 1 / ( r0hi - r0lo )
+    prior0 = numpy.full_like( r0, 1 / ( r0hi - r0lo ) )
     prior = numpy.outer( prior1, prior0 ) * pixsz
     zp = numpy.sum( prior )
 #    print( numpy.sum( prior0 ), numpy.sum( prior1 ), zp )

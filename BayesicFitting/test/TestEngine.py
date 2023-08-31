@@ -84,7 +84,8 @@ class TestEngine( unittest.TestCase ):
         allpars = numpy.append( m.parameters, 1.0 )
         wl = WalkerList( problem, 100, allpars, fi )
 
-        engine = Engine( wl, errdis )
+        phantoms = PhantomCollection()
+        engine = Engine( wl, errdis, phantoms=phantoms )
 
         self.enginetest( engine )
 
@@ -96,10 +97,13 @@ class TestEngine( unittest.TestCase ):
     def enginetest( self, engine ) :
         walkers = engine.walkers
         fi = [0,1,2,-1]
+        lowL = math.inf
         for kw in range( len( walkers ) ) :
             problem = walkers[kw].problem
             p = engine.unit2Domain( problem, engine.rng.rand( 4 ) )
             logL = engine.errdis.logLikelihood( problem, p )
+            if logL < lowL :
+                lowL = logL
             engine.setWalker( kw, problem, p, logL, fitIndex=fi )
             engine.reportSuccess()
             engine.reportCall()
@@ -113,11 +117,11 @@ class TestEngine( unittest.TestCase ):
         print( engine.walkers[0] )
         print( engine.walkers[0].allpars )
 
-        engine.calculateUnitRange()
+        ur, um = engine.getUnitRange( problem, lowL )
 
-        print( "UnitR ", engine.unitRange )
+        print( "UnitR ", ur )
 
-        print( "DomR  ", engine.unit2Domain( problem, engine.unitRange ) )
+        print( "DomR  ", engine.unit2Domain( problem, ur ) )
         engine.printReport()
 
 

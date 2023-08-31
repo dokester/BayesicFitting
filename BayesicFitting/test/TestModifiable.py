@@ -389,17 +389,21 @@ class Test( unittest.TestCase ):
         mdl.setLimits( lowLimits=[-10.0], highLimits=[+10.0] )
         
         ep = EvidenceProblem( model=mdl, xdata=t, ydata=y )
-        distr = ModelDistribution( )
+
+        kwa = {"engines" : ["gibbs", "chord" ] }
+        distr = ModelDistribution( arbiter="NestedSampler", **kwa )
         
-        ns = NestedSampler( problem=ep, distribution=distr )
-        
-        ns.verbose = 2
+        ns = NestedSampler( problem=ep, distribution=distr, ensemble=10 )
+
+        ns.minimumIterations = 5
+        ns.maxIterations = 10
+        ns.verbose = 3
 
         ## Comment next if-statement out for a full run of NestedSampler
         if not self.dofull :
-            ns.ensemble = 10
-            ns.minimumIterations = 500
+            ns.maxIterations = 10
 
+        Tools.printclass( ns )
         
         evid = ns.sample( plot=self.doplot )
 

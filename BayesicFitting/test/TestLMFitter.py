@@ -189,12 +189,14 @@ class Test( unittest.TestCase ):
 
         amfit = LMFitter( x, modl1 )
 
-        par0 = amfit.limitsFit( amfit.fit, y )
+#        par0 = amfit.limitsFit( amfit.fit, y )
+        par0 = amfit.limitsFit( y )
         print( "pars0   ", fmt( par0 ) )
         print( "stdv0   ", fmt( amfit.stdevs ) )
         print( "chisq0  ", amfit.chisq )
 
-        par1 = amfit.limitsFit( amfit.fit, y, keep={0:3.3} )
+#        par1 = amfit.limitsFit( amfit.fit, y, keep={0:3.3} )
+        par1 = amfit.limitsFit( y, keep={0:3.3} )
         print( "pars1   ", fmt( par1 ) )
         print( "stdv1   ", fmt( amfit.stdevs ) )
         print( "chisq1  ", amfit.chisq )
@@ -210,12 +212,14 @@ class Test( unittest.TestCase ):
 
         lmfit = LMFitter( x, modl2 )
 
-        par2 = lmfit.limitsFit( lmfit.fit, y )
+#        par2 = lmfit.limitsFit( lmfit.fit, y )
+        par2 = lmfit.limitsFit( y )
         print( "pars2   ", fmt( par2 ) )
         print( "stdv2   ", fmt( lmfit.stdevs ) )
         print( "chisq2  ", lmfit.chisq )
 
-        par3 = lmfit.limitsFit( lmfit.fit, y, keep={0:3.3} )
+#        par3 = lmfit.limitsFit( lmfit.fit, y, keep={0:3.3} )
+        par3 = lmfit.limitsFit( y, keep={0:3.3} )
         print( "pars3   ", fmt( par3 ) )
         print( "stdv3   ", fmt( lmfit.stdevs ) )
         print( "chisq3  ", lmfit.chisq )
@@ -231,12 +235,14 @@ class Test( unittest.TestCase ):
 
         lmfit = LMFitter( x, modl3, keep={4:5.0} )
 
-        par4 = lmfit.limitsFit( lmfit.fit, y )
+#        par4 = lmfit.limitsFit( lmfit.fit, y )
+        par4 = lmfit.limitsFit( y )
         print( "pars4   ", fmt( par4 ) )
         print( "stdv4   ", fmt( lmfit.stdevs ) )
         print( "chisq4  ", lmfit.chisq )
 
-        par5 = lmfit.limitsFit( lmfit.fit, y, keep={0:3.3} )
+#        par5 = lmfit.limitsFit( lmfit.fit, y, keep={0:3.3} )
+        par5 = lmfit.limitsFit( y, keep={0:3.3} )
         print( "pars5   ", fmt( par5 ) )
         print( "stdv5   ", fmt( lmfit.stdevs ) )
         print( "chisq5  ", lmfit.chisq )
@@ -264,7 +270,8 @@ class Test( unittest.TestCase ):
         amfit = LMFitter( x, modl1 )
 
         print( "truth   ", fmt( p1 ) )
-        par1 = amfit.limitsFit( amfit.fit, y )
+#        par1 = amfit.limitsFit( amfit.fit, y )
+        par1 = amfit.limitsFit( y )
 
         print( "pars1   ", fmt( par1 ) )
         assertAAE( par1, p1, 1 )
@@ -282,7 +289,8 @@ class Test( unittest.TestCase ):
         modl2.parameters = par1
         lmfit = LMFitter( x, modl2 )
 
-        par2 = lmfit.limitsFit( lmfit.fit, y )
+#        par2 = lmfit.limitsFit( lmfit.fit, y )
+        par2 = lmfit.limitsFit( y )
         print( "pars2   ", fmt( par2 ) )
 
         print( "chisq2  ", lmfit.chisq )
