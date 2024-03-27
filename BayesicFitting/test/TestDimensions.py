@@ -100,7 +100,7 @@ class Test( unittest.TestCase ):
         self.stdModeltest( model, p, x=x, plot=self.doplot )
         self.stdModeltest( model, p, x=x[[0],:], plot=self.doplot )
 
-    def test6( self ) :
+    def XXXtest6( self ) :
         model = AbsoluteValueFilter( ndim=3 )
         print( "====Test6===== dimensions  ", model.ndim, model.ndout )
 

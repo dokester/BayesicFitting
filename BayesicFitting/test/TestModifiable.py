@@ -399,7 +399,7 @@ class Test( unittest.TestCase ):
         
         ns = NestedSampler( problem=ep, limits=[0.1,10], ensemble=10, verbose=2 )
 
-        ev = ns.sample( plot=True )
+        ev = ns.sample( plot=self.doplot )
 
         sl = ns.samples
 
