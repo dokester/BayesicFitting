@@ -15,9 +15,9 @@ from .Tools import setAttribute as setatt
 
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2023 Do Kester
+#  *    2019 - 2024 Do Kester
 
 
 class ModelDistribution( ScaledErrorDistribution ):
@@ -64,7 +64,8 @@ class ModelDistribution( ScaledErrorDistribution ):
     """
 
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, arbiter=None, scale=1.0, limits=None, copy=None, **kwargs ):
+    def __init__( self, arbiter=None, scale=1.0, limits=None, 
+                  copy=None, **kwargs ):
         """
         Default Constructor.
 
@@ -94,15 +95,11 @@ class ModelDistribution( ScaledErrorDistribution ):
         setatt( self, "arbiter", arbiter )
         setatt( self, "kwarbs", kwargs )
 
-#        setatt( self, "limits", limits )
-#        setatt( self, "scale", scale )
-
         super( ).__init__( limits=limits, scale=scale, copy=copy )
 
     def copy( self ):
         """ Return copy of this.  """
         return ModelDistribution( copy=self, arbiter=self.arbiter )
-#        return ModelDistribution( copy=self, arbiter=self.arbiter, scale=self.scale, limits=self.limits )
 
     def acceptWeight( self ):
         """
@@ -130,6 +127,10 @@ class ModelDistribution( ScaledErrorDistribution ):
         """
         mdl = problem.model
 
+        if allpars is None :
+            allpars = self.rng.rand( mdl.npars + self.nhypar )
+            allpars = problem.unit2Domain( allpars )
+
         try :
             noiselim = self.hyperpar[0].getLimits()
             fscale = None
@@ -139,8 +140,6 @@ class ModelDistribution( ScaledErrorDistribution ):
 
         if noiselim is None and mdl.npars < len( allpars ) :
             allpars[-1] = self.hyperpar[0].hypar
-
-#        print( "MD   ", noiselim, fmt( allpars, max=None ) )
 
         kwarbs = self.kwarbs
 
@@ -183,13 +182,18 @@ class ModelDistribution( ScaledErrorDistribution ):
                     kwarbs["ensemble"] = 10
                 if not "verbose" in kwarbs :
                     kwarbs["verbose"] = 0
-
+                if not "engines" in kwarbs :
+                    kwarbs["engines"] = ["chord", "step"]
                 ns = NestedSampler( model=model, xdata=problem.xdata, ydata=problem.ydata,
                         weights=problem.weights, limits=noiselim, **kwarbs )
-                evidence = ns.sample()
-                allpars[:mdl.npars] = ns.parameters
-                if noiselim is not None :
-                    allpars[-1] = ns.scale
+
+                try :
+                    evidence = ns.sample()
+                    allpars[:mdl.npars] = ns.parameters
+                    if noiselim is not None :
+                        allpars[-1] = ns.scale
+                except RuntimeError :
+                    evidence = -math.inf
                 return evidence
 
             else :
