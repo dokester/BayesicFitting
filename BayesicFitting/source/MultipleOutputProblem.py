@@ -4,9 +4,9 @@ from .Problem import Problem
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -24,7 +24,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2024 Do Kester
 
 class MultipleOutputProblem( Problem ):
     """
@@ -49,7 +49,8 @@ class MultipleOutputProblem( Problem ):
     """
 
     #  *************************************************************************
-    def __init__( self, model=None, xdata=None, ydata=None, weights=None, copy=None ):
+    def __init__( self, model=None, xdata=None, ydata=None, weights=None, 
+                  accuracy=None, copy=None ):
         """
         Problem Constructor.
 
@@ -63,20 +64,19 @@ class MultipleOutputProblem( Problem ):
             dependent variable. shape = (len(xdata), model.ndout)
         weights : array_like or None
             weights associated with ydata: shape = as xdata or as ydata
+        accuracy : float or ndarray of shape (ndata,)
+            accuracy scale for the datapoints
+            all the same or one for each data point
         copy : Problem
             to be copied
 
         """
-        if weights is not None :
-            if len( weights.shape ) == 1 :
-                wgts = numpy.zeros( ( len( weights ), model.ndout ), dtype=float )
-                for k in range( model.ndout ) :
-                    wgts[:,k] = weights
-                weights = wgts
-            weights = weights.flatten()
-
+        if copy is None :
+            weights = self.expandFlat( weights, model.ndout )
+            accuracy = self.expandFlat( accuracy, model.ndout )
+    
         super( ).__init__( model=model, xdata=xdata, ydata=ydata, weights=weights,
-                           copy=copy )
+                           accuracy=accuracy, copy=copy )
 
 
     def copy( self ):
@@ -86,6 +86,20 @@ class MultipleOutputProblem( Problem ):
         """
         return MultipleOutputProblem( copy=self )
 
+
+    def expandFlat( self, weights, ndout ) :
+        """
+        Expand and flatten the arrays.
+
+        """
+        if weights is not None :
+            if len( weights.shape ) == 1 :
+                wgts = numpy.zeros( ( len( weights ), ndout ), dtype=float )
+                for k in range( ndout ) :
+                    wgts[:,k] = weights
+                weights = wgts
+            weights = weights.flatten()
+        return weights
 
     #  *****RESULT**************************************************************
     def result( self, param ):
@@ -157,9 +171,9 @@ class MultipleOutputProblem( Problem ):
         return "gauss"
 
     #  *****TOSTRING***********************************************************
-    def __str__( self ):
+    def baseName( self ):
         """ Returns a string representation of the model.  """
-        return "MultipleOutputProblem of " + self.model
+        return "MultipleOutputProblem"
 
 
 

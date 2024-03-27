@@ -9,9 +9,9 @@ from .Problem import Problem
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -452,6 +452,6 @@ class ErrorsInXandYProblem( Problem ):
     #  *****TOSTRING***********************************************************
     def baseName( self ):
         """ Returns a string representation of the model.  """
-        return "ErrorsInXandYProblem of %s" % self.model
+        return "ErrorsInXandYProblem"
 
 

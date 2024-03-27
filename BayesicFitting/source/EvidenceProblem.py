@@ -9,9 +9,9 @@ from .Dynamic import Dynamic
 from .Modifiable import Modifiable
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2021 Do Kester
+#  *    2018 - 2024 Do Kester
 
 class EvidenceProblem( ClassicProblem ):
     """
@@ -111,7 +111,7 @@ class EvidenceProblem( ClassicProblem ):
     #  *****TOSTRING***********************************************************
     def baseName( self ):
         """ Returns a string representation of the model.  """
-        return "EvidenceProblem of " + self.model.__str__()
+        return "EvidenceProblem"
 
 
 

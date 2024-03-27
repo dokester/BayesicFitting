@@ -1,14 +1,16 @@
 import numpy as numpy
 import re
 
+from .Tools import shortName as ToolsShortName
 from .Tools import setAttribute as setatt
 from .Tools import printclass as printclass
+
 from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2024 Do Kester
 
 class Problem( object ):
     """
@@ -379,20 +381,17 @@ class Problem( object ):
     #  *****TOSTRING***********************************************************
     def __str__( self ):
         """ Returns a string representation of the model.  """
-        return self.baseName( )
+        return self._toString()
 
-    def _toString( self, spaces ) :
-        return self.baseName()
+    def _toString( self, indent="" ) :
+        if hasattr( self, "model" ) and self.model is not None :
+            return "%s of %s" % ( self.baseName(), self.model.shortName() )
+        else :
+            return self.baseName()
 
-
-    def shortName( self ):
-        """
-        Return a short version the string representation: upto first non-letter.
-
-        """
-        m = re.match( "^[a-zA-Z_]*", self.baseName() )
-        return m.group(0)
+    def shortName( self ) :
+        return ToolsShortName( self._toString() )
 
     def baseName( self ) :
-        return "Problem of %s" % self.model.shortName()
+        return "Problem"
 
