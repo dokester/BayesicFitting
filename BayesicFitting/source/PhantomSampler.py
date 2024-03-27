@@ -52,7 +52,7 @@ __year__ = 2023
 __license__ = "GPL3"
 __version__ = "3.2.0"
 __url__ = "https://www.bayesicfitting.nl"
-__status__ = "Perpetual Beta"
+__status__ = "Alpha"
 
 #  *
 #  * This file is part of the BayesicFitting package.
