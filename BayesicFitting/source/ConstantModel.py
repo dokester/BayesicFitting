@@ -7,9 +7,9 @@ from .PolynomialModel import PolynomialModel
 from .PolySurfaceModel import PolySurfaceModel
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2022 Do Kester
+#  *    2016 - 2024 Do Kester
 
 class ConstantModel( Model ):
     """
@@ -168,7 +168,7 @@ class ConstantModel( Model ):
 
         return self.fixedModel.result( xdata )
 
-    def basePartial( self, xdata, params ) :
+    def basePartial( self, xdata, params, parlist=None ) :
         """
         Returns the partials at the xdata value. (=empty array)
 
@@ -178,6 +178,8 @@ class ConstantModel( Model ):
             values at which to calculate the result
         params : array_like
             values for the parameters. (irrelevant)
+        parlist : None
+            only to complete the necessary argument list
 
         """
         return numpy.zeros( ( Tools.length( xdata ), self.npbase ), dtype=float )

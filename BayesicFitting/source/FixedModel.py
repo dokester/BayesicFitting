@@ -10,9 +10,9 @@ from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *   2017 - 2021 Do Kester
+#  *   2017 - 2024 Do Kester
 
 class FixedModel( BaseModel ):
     """
@@ -415,6 +415,7 @@ class FixedModel( BaseModel ):
         """
         dx = self.deltaP[0]
 
+        ## One dimensional input; one or more dimensional outputs
         if self.ndim == 1 :
             xd = xdata + dx
             r1 = FixedModel.result( self, xd, param )
@@ -423,19 +424,31 @@ class FixedModel( BaseModel ):
 
             return ( r1 - r2 ) / ( 2 * dx )
 
-        ## More dimensions in xdata
-        df = numpy.zeros_like( xdata )
-        for i in range( self.ndim ) :
-            x = xdata,copy
-            x[:,i] += dx
-            r1 = FixedModel.result( self, x, param )
-            x[:,i] -= 2 * dx
-            r2 = FixedModel.result( self, x, param )
-            df[:,i] = ( r1 - r2 ) / ( 2 * dx )
-        return df
+        ## More dimensional input; one output
+        if self.ndout == 1 :
+            df = numpy.zeros_like( xdata )
+            for i in range( self.ndim ) :
+                x = xdata.copy()
+                x[:,i] += dx
+                r1 = FixedModel.result( self, x, param )
+                x[:,i] -= 2 * dx
+                r2 = FixedModel.result( self, x, param )
+                df[:,i] = ( r1 - r2 ) / ( 2 * dx )
+            return df
 
-
-
+        ## more dimensional input and output
+        dfdx = []
+        for k in range( self.ndout ) :
+            df = numpy.zeros_like( xdata )
+            for i in range( self.ndim ) :
+                x = xdata.copy()
+                x[:,i] += dx
+                r1 = FixedModel.result( self, x, param )
+                x[:,i] -= 2 * dx
+                r2 = FixedModel.result( self, x, param )
+                df[:,i] = ( r1 - r2 ) / ( 2 * dx )
+            dfdx += [df]
+        return dfdx
 
 
     #  *****TOSTRING***********************************************************

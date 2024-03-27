@@ -12,9 +12,9 @@ from .UniformPrior import UniformPrior
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL"
-__version__ = "2.5.3"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,21 +37,24 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 202024 Do Kester
 
 class RepeatingModel( Model, Dynamic ):
     """
-    RepeatingModel is a dynamic model, that calls the same model zero or more times,
-    each time with the next set of parameters.
+    RepeatingModel is a dynamic model, that calls the same model zero or more 
+    times, each time with the next set of parameters.
 
-    RepeatingModel is a Dynamic model that grows and shrinks according to a growPrior.
-    The growPrior defaults to ExponentialPrior, unless a maxComp (max nr of components)
-    then it defaults to a UniformPrior with limits minComp .. maxComp.
+    RepeatingModel is a Dynamic model that grows and shrinks according to a 
+    growPrior. The growPrior defaults to ExponentialPrior, unless a maxComp 
+    (max nr of components) then it defaults to a UniformPrior with limits 
+    minComp .. maxComp.
 
-    When isDynamic is set to False or minComp == maxComp, the RepeatingModel is a normal
-    model with a static number of parameters/components.
+    When isDynamic is set to False or minComp == maxComp, the RepeatingModel is 
+    a normal model with a static number of parameters/components.
 
-    Priors and/or limits for the RepeatingModel are stored in the (encapsulated) model.
+    Priors and/or limits for the RepeatingModel are stored in the (encapsulated)
+    model. So the priors are taken from the same set for subsequent repetitions
+    of the model call. 
 
     It can be arranged that all similar parameters are the same, represented by the
     same parameters. Use keywords same=.
@@ -435,27 +438,54 @@ class RepeatingModel( Model, Dynamic ):
 
         return dfdx
 
-    def setLimits( self, lowLimits=None, highLimits=None ) :
+    def xxxsetLimits( self, lowLimits=None, highLimits=None ) :
         self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
+
+    def setPrior( self, kpar, prior=None, **kwargs ) :
+        """
+        Set the prior for the indicated parameter of the repeated model.
+
+        All repeated parameters have the same Prior.
+
+        Parameters
+        ----------
+        kpar : int
+            parameter number of the repeated model.
+        prior : Prior
+            prior for parameter kpar
+        kwargs : keyword arguments
+            attributes to be passed to the prior
+
+        Raise:
+        ------
+        IndexException
+            When more Priors are set than fit inside the repeated model
+
+        """
+        if kpar < self.model.npars :
+            self.model.setPrior( kpar, prior=prior, **kwargs )
+        else :
+            raise IndexError( "RepeatingModel cannot have more priors than %s" %
+                               self.model.shortname() )
 
     def hasPriors( self ) :
         return self.model.hasPriors()
 
-    def basePrior( self, k ):
+    def basePrior( self, kpar ):
         """
-        Return the prior for parameter k.
+        Return the prior for parameter with index kpar.
 
         Parameters
         ----------
-        k : int
-            the parameter to be selected.
+        kpar : int
+            index of the parameter to be selected.
         """
-        i,k = self.par2model( k )
+        i,k = self.par2model( kpar )
         return self.model.getPrior( i )
 
     def baseName( self ):
         """ Return a string representation of the model.  """
-        return ( "Repeat %d times:\n  " % self.ncomp + self.model.baseName( ) )
+        return ( "Repeat %d times: " % self.ncomp + self.model.shortName( ) )
 
     def baseParameterName( self, k ):
         """
@@ -468,7 +498,8 @@ class RepeatingModel( Model, Dynamic ):
 
         """
         i,k = self.par2model( k )
-        return self.model.getParameterName( i ) + "_%d" % k
+        return ( self.model.getParameterName( i ) + 
+                    ( "_%d" % k if not i in self.same else "" ) )
 
     def baseParameterUnit( self, k ):
         """

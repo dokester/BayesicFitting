@@ -9,9 +9,9 @@ from .BracketModel import BracketModel
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 202024 Do Kester
 
 class CombiModel( BracketModel ):
     """
@@ -50,6 +50,8 @@ class CombiModel( BracketModel ):
 
     For consistency reasons it is not possible to change the attributes of a
     CombiModel. It is better to make a new one with the required settings.
+
+    As we have copies of the same model, each model can have its own priors.
 
     Attributes
     ----------
@@ -347,18 +349,21 @@ class CombiModel( BracketModel ):
         m = re.match( "^[a-zA-Z_]*", shortname )
         return str( "Combi of %d times "%self.nrepeat + m.group(0) )
 
-    def baseParameterName( self, k ):
+    def baseParameterName( self, kpar ):
         """
         Return the name of the indicated parameter.
 
         Parameters
         ---------
-        k : int
+        kpar : int
             parameter number.
 
         """
-        return ( self.model.getParameterName( self.expandindex[k] % self.nmp ) +
-                "_%d" % ( self.expandindex[k] / self.nmp ) )
+        k = self.select[kpar] % self.nmp
+        name = self.model.getParameterName( k )
+        if not ( k in self.addindex or k in self.mulindex ) :
+            name += "_%d" % ( self.select[kpar] / self.nmp )
+        return name
 
     def baseParameterUnit( self, k ):
         """
@@ -370,7 +375,26 @@ class CombiModel( BracketModel ):
             parameter number.
 
         """
-        return self.model.getParameterUnit( self.expandindex[k] )
+        return self.model.getParameterUnit( self.select[k] % self.nmp )
 
+    def getPrior( self, kpar ) :
+        """
+        Return the prior for parameter kpar.
+
+        First try at the kpar location, possibly further in the chain;
+        Upon failure try at the equivalent position in the head model
+    
+        Parameters
+        ----------
+        kpar : int
+            index of the parameter to be selected.
+        """
+#        print( kpar, self.parameters[kpar] )
+        try :
+            return self.model.getPrior( kpar )
+        except IndexError :
+            k = self.select[kpar] % self.nmp
+#            print( k, self.expandindex[kpar], self.nmp, self.select[kpar] )
+            return self.model.getPrior( k )
 
 

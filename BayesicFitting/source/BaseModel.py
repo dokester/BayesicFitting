@@ -9,9 +9,9 @@ from .Prior import Prior
 from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 202024 Do Kester
 
 class BaseModel( object ):
     """
@@ -152,6 +152,9 @@ class BaseModel( object ):
             return
 
         raise AttributeError(
+
+
+
             "Model has no attribute " + name + " of type " + str( value.__class__ ) )
 
     def __getattr__( self, name ) :
@@ -298,38 +301,45 @@ class BaseModel( object ):
         """
         return self.baseDerivative( xdata, param )
 
-    def setPrior( self, k, prior=None, **kwargs ) :
+    def setPrior( self, kpar, prior=None, **kwargs ) :
         """
         set the prior and/or limits for the indicated parameter.
 
-        The prior (by default UniformPrior) is appended when k is equal to np, the
-        length of the existing list of priors. It replaces the prior when k < np
-        and it generates an error when k > np
+        The prior (by default UniformPrior) is appended when kpar is equal to np, 
+        the length of the existing list of priors. 
+        It replaces the prior when kpar < np and 
+        it generates an error when kpar > np
 
         Parameters
-        ---------
-        k : int
+        ----------
+        kpar : int
             parameter number.
         prior : Prior
             prior for the parameter
         kwargs : dict
             attributes to be passed to the prior
 
+        Raises
+        ------
+        IndexError
+            when kpar is larger than the length of priors list already present 
+
         """
         np = Tools.length( self.priors )
-        assert k <= np, "The par number %d is larger than the length of the priors %d"%(k,np)
-
+        if kpar > np :
+            raise IndexError( "The par number %d > the length of the priors %d" % 
+                              ( kpar, np ) )
 
         if prior is None :
-            prior = UniformPrior( ) if np == 0 else self.basePrior( k ).copy()
+            prior = UniformPrior( ) if np == 0 else self.basePrior( kpar ).copy()
 
         prior.setAttributes( **kwargs )
 
-        if k == np :
+        if kpar == np :
             self.priors = [prior] if self.priors is None else self.priors + [prior]
             return
 
-        self.priors[k] = prior
+        self.priors[kpar] = prior
 
         return
 
@@ -345,76 +355,76 @@ class BaseModel( object ):
         return ( self.priors is not None and ( ( not isBound ) or
                  all( [p.isBound() for p in self.priors] ) ) )
 
-    def getPrior( self, k ) :
+    def getPrior( self, kpar ) :
         """
         Return the prior of the indicated parameter.
 
         Parameters
         ---------
-        k : int
+        kpar : int
             parameter number.
         """
-        return self.basePrior( k )
+        return self.basePrior( kpar )
 
-    def basePrior( self, k ) :
+    def basePrior( self, kpar ) :
         """
         Return the prior of the indicated parameter.
 
         Parameters
         ----------
-        k : int
+        kpar : int
             parameter number.
         """
         np = Tools.length( self.priors )
         if np == 0 :
             raise IndexError( "The model does not have priors." )
 
-        if k < np:
-            return self.priors[k]
+        if kpar < np:
+            return self.priors[kpar]
         else :
             return self.priors[-1]
 
-    def getParameterName( self, k ) :
+    def getParameterName( self, kpar ) :
         """
         Return the name of the indicated parameter.
 
         Parameters
         ---------
-        k : int
+        kpar : int
             parameter number.
         """
-        return self.baseParameterName( k )
+        return self.baseParameterName( kpar )
 
 
-    def baseParameterName( self, k ) :
+    def baseParameterName( self, kpar ) :
         """
         Return the name of the indicated parameter.
 
         Parameters
         ---------
-        k : int
+        kpar : int
             parameter number.
         """
-        return self.parNames[k]
+        return self.parNames[kpar]
 
-    def getParameterUnit( self, k ) :
+    def getParameterUnit( self, kpar ) :
         """
         Return the unit of the indicated parameter.
 
         Parameters
         ---------
-        k : int
+        kpar : int
             parameter number.
         """
-        return self.baseParameterUnit( k )
+        return self.baseParameterUnit( kpar )
 
-    def baseParameterUnit( self, k ) :
+    def baseParameterUnit( self, kpar ) :
         """
         Return the name of the indicated parameter.
 
         Parameters
         ---------
-        k : int
+        kpar : int
             parameter number.
         """
         return units.Unit( 1.0 )

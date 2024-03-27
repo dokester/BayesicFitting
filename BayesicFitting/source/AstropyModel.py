@@ -10,9 +10,9 @@ from .Formatter import formatter as fmt
 from .Model import Model
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -69,11 +69,6 @@ class AstropyModel( Model ):
     Attributes from BaseModel
     --------------------------
         npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
-
-    Alternate
-    ---------
-    `GaussModel()` is equivalent to `KernelModel( kernel=Gauss() )`.
-
 
     """
 

@@ -10,12 +10,13 @@ from .FixedModel import FixedModel
 #from .UniformPrior import UniformPrior
 from . import Tools
 from .Formatter import formatter as fmt
+from .Formatter import fma
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +38,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2024 Do Kester
 
 
 class Model( FixedModel ):
@@ -641,15 +642,10 @@ class Model( FixedModel ):
         par = param[at:at+np]
         nextres = None
 
-        if np > 0 :
-            xd = xdata if self._operation != self.PIP else result
+        xd = xdata if self._operation != self.PIP else result
 
-            nextpartial = ( super( ).numPartial( xd, par ) if useNum else
-                            super( ).partial( xd, par ) )
-
-        else :
-            inlen = Tools.length( xdata )
-            nextpartial = numpy.ndarray( (inlen,0), dtype=float )
+        nextpartial = ( super( ).numPartial( xd, par ) if useNum else
+                        super( ).partial( xd, par ) )
 
         if self._operation == self.SUB :
             nextpartial = numpy.negative( nextpartial )
@@ -936,18 +932,18 @@ class Model( FixedModel ):
     #  *****TOSTRING***********************************************************
     def __str__( self ):
         """ Returns a string representation of the model.  """
-        return self._toString( "" )
+        return self._toString( )
 
-    def _toString( self, indent, npars=0 ) :
+    def _toString( self, indent="", npars=0 ) :
         opname = [" null\n", " +\n", " -\n", " *\n", " /\n", " |\n" ]
         np = self.npbase
 
         if self._next is None :
-            return super( Model, self )._toString( npars=npars )
+            return super( )._toString( npars=npars )
 
-        return ( super( Model, self )._toString( npars=npars ) +
+        return ( super( )._toString( npars=npars ) +
                  opname[self._next._operation] +
-                 indent + self._next._toString( indent, npars=npars+np ) )
+                 indent + self._next._toString( indent=indent, npars=npars+np ) )
 
     def shortName( self ) :
         """
@@ -955,10 +951,9 @@ class Model( FixedModel ):
         """
         opname = [" null\n", " + ", " - ", " * ", " / ", " | " ]
         if self._next is None :
-            return super( Model, self ).shortName()
+            return super( ).shortName()
 
-        return ( super( Model, self ).shortName( ) +
-                 opname[self._next._operation] +
+        return ( super( ).shortName( ) + opname[self._next._operation] +
                  self._next.shortName( ) )
 
 
@@ -1025,101 +1020,104 @@ class Model( FixedModel ):
             mdl = mdl._next
         return hasp
 
-    def getPrior( self, k ):
+    def getPrior( self, kpar ):
         """
         Return the prior of the indicated parameter.
 
         Parameters
         ----------
-        k : int
+        kpar : int
             parameter number.
 
         Raises
         ------
-        IndexError when k is larger than the number of parameters.
+        IndexError when kpar is larger than the number of parameters.
 
         """
         np = self.npbase
-        if k < np:
-            return super( Model, self  ).getPrior( k )
+        if kpar < np:
+            return super( Model, self  ).getPrior( kpar )
         elif self._next != None:
-            return self._next.getPrior( k - np )
+            return self._next.getPrior( kpar - np )
         else:
-            raise IndexError( "The (compound) model does not have %d parameters"%( k + 1 ) )
+            raise IndexError( "The (compound) model does not have %d parameters"%
+                              ( kpar + 1 ) )
 
-    def setPrior( self, k, prior=None, **kwargs ):
+    def setPrior( self, kpar, prior=None, **kwargs ):
         """
         Set the prior for the indicated parameter.
 
         Parameters
         ----------
-        k : int
+        kpar : int
             parameter number.
         prior : Prior
-            prior for parameter k
+            prior for parameter kpar
         kwargs : keyword arguments
             attributes to be passed to the prior
 
         Raises
         ------
-        IndexError when k is larger than the number of parameters.
+        IndexError when kpar is larger than the number of parameters.
 
         """
         np = self.npbase
-        if k < np:
-            super( Model, self  ).setPrior( k, prior=prior, **kwargs )
+        if kpar < np:
+            super( Model, self  ).setPrior( kpar, prior=prior, **kwargs )
         elif self._next != None:
-            self._next.setPrior( k - np, prior=prior, **kwargs )
+            self._next.setPrior( kpar - np, prior=prior, **kwargs )
         else:
-            raise IndexError( "The (compound) model does not have %d parameters"%( k + 1 ) )
+            raise IndexError( "The (compound) model does not have %d parameters"%
+                              ( kpar + 1 ) )
 
 
     #  ***PARAMETER NAME *******************************************************
-    def getParameterName( self, k ):
+    def getParameterName( self, kpar ):
         """
         Return the name of the indicated parameter.
 
         Parameters
         ----------
-        k : int
+        kpsr : int
             parameter number.
 
         Raises
         ------
-        IndexError when k is larger than the number of parameters.
+        IndexError when kpar is larger than the number of parameters.
 
         """
         np = self.npbase
-        if k < np:
-            return super( Model, self ).getParameterName( k )
+        if kpar < np:
+            return super( Model, self ).getParameterName( kpar )
         elif self._next != None:
-            return self._next.getParameterName( k - np )
+            return self._next.getParameterName( kpar - np )
         else:
-            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
-                              " parameters." )
+            raise IndexError( "The (compound) model does not have %d parameters."%
+                               ( kpar + 1 ) )
 
-    def getParameterUnit( self, k ):
+    def getParameterUnit( self, kpar ):
         """
         Return the unit of the indicated parameter.
 
         Parameters
         ----------
-        k : int
+        kpar : int
             parameter number.
 
         Raise
         -----
-        IndexError when k is > number of parameters
+        IndexError when kpar is > number of parameters
 
         """
         np = self.npbase
-        if k < np:
-            return super( Model, self).getParameterUnit( k )
+        if kpar < np:
+            return super( Model, self).getParameterUnit( kpar )
         elif self._next != None:
-            return self._next.getParameterUnit( k - np )
+            return self._next.getParameterUnit( kpar - np )
         else:
-            raise IndexError( "The (compound) model does not have " + str( k + 1 ) +
-                              " parameters." )
+            raise IndexError( "The (compound) model does not have %d parameters."%
+                               ( kpar + 1 ) )
+
 
     def getIntegralUnit( self ):
         """ Return the unit of the integral of the model over x. """
@@ -1236,6 +1234,7 @@ class Model( FixedModel ):
         """
         if kpar is not None :
             return self.getPrior( kpar ).unit2Domain( uvalue )
+
 
         pgen = self.nextPrior(  )
         dval = numpy.fromiter( ( next( pgen ).unit2Domain( uv ) for uv in uvalue ), float )
@@ -1705,12 +1704,13 @@ class Model( FixedModel ):
 
         for i in range( self.ndim ) :
             x = xdata.copy()
+            
             x[:,i] += dx
             r1 = self.result( x, param )
             x[:,i] -= 2 * dx
             r2 = self.result( x, param )
-
-            assignDF( df, i, ( r1 - r2 ) / ( 2 * dx ) )
+            dpi = ( r1 - r2 ) / ( 2 * dx )
+            assignDF( df, i, dpi )
 
         return df
 
@@ -1794,20 +1794,54 @@ class Brackets( Model ):
         return self.model.derivative( xdata, param )
 
 
-    def setLimits( self, lowLimits=None, highLimits=None ) :
+    def XXXsetLimits( self, lowLimits=None, highLimits=None ) :
         self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
 
-    def getLimits( self ) :
+    def XXXgetLimits( self ) :
         return self.model.getLimits()
+
+    def setPrior( self, kpar, prior=None, **kwargs ):
+        np = self.npbase
+        if kpar < np :
+            return self.model.setPrior( kpar, prior=prior, **kwargs )
+        else :
+            return super().setPrior( kpar, prior=prior, **kwargs )
+
+    def getPrior( self, kpar ) :
+        np = self.npbase
+        if kpar < np :
+            return self.model.getPrior( kpar )
+        else :
+            return super().getPrior( kpar )
+
+    """
+    def setPrior( self, kpar, prior=None, **kwargs ):
+        return self.model.setPrior( kpar, prior=prior, **kwargs )
+
+    def getPrior( self, kpar ) :
+        return self.model.getPrior( kpar )
+    """
 
     def nextPrior( self ) :
         yield self.model.nextPrior()
 
+    def _toString( self, indent="", npars=0 ) :
+        opname = [" null\n", " +\n", " -\n", " *\n", " /\n", " |\n" ]
+        np = self.npbase
+        indbrk = indent + "  " * self.deep
+
+        brktstr = "{ " + self.model._toString( indent=indbrk, npars=npars ) + " }"
+        if self._next is None :
+            return brktstr
+
+        return ( brktstr + opname[self._next._operation] +
+                 indent + self._next._toString( indent=indent, npars=npars+np ) )
+
     #  ******Brackets BASENAME*******************************************************************
-    def baseName( self ):
-        """ Returns a string representation of the model.  """
-        indent = "  "
-        return "{ " + self.model._toString( indent * self.deep ) + " }"
+#    def baseName( self ):
+#        """ Returns a string representation of the model.  """
+#        indent = "  "
+#        return "{ " + self.model._toString( indent * self.deep ) + " }"
 
     def basePrior( self, k ) :
         """
