@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 
 class GaussPrior( Prior ):
@@ -97,7 +97,14 @@ class GaussPrior( Prior ):
         self.center = center
         self.scale = scale
 
+        if circular is True and center == 0 and limits is not None :
+            self.center = 0.5 * ( limits[0] + limits[1] )
+
+        self.limint = self.limitedIntegral( center=center, circular=circular, 
+                                            limits=limits )
+
         super( ).__init__( limits=limits, circular=circular, prior=prior )
+
 
     def copy( self ):
         """ Copy the prior """
@@ -113,8 +120,8 @@ class GaussPrior( Prior ):
 
         Parameters
         ----------
-        dval : float
-            value within the domain of a parameter
+        dval : float or array_like
+            value(s) within the domain of a parameter
 
         """
         return 0.5 * ( special.erf( ( dval - self.center ) / ( self.SQRT2 * self.scale ) ) + 1 )
@@ -128,18 +135,16 @@ class GaussPrior( Prior ):
 
         Parameters
         ----------
-        uval : float
-            value within [0,1]
+        uval : float or array_like
+            value(s) within [0,1]
 
         """
+#       MAXVAL already contains the SQRT2 factor
         dom = special.erfinv( 2 * uval - 1 )
-        if math.isfinite( dom ) :
-            return dom * self.scale * self.SQRT2 + self.center
-        else :
-            fs = - self.MAXVAL if uval < 0.5 else self.MAXVAL
-            return self.center + fs * self.scale        # * self.SQRT2 (is in MAXVAL)
+        return numpy.where( numpy.isfinite( dom ), 
+                dom * self.scale * self.SQRT2 + self.center,
+                numpy.copysign( self.MAXVAL, uval - 0.5 ) * self.scale + self.center )
 
-#    def partialDomain2Unit( self, dval ):
 
     def result( self, x ):
         """
@@ -147,12 +152,14 @@ class GaussPrior( Prior ):
 
         Parameters
         ----------
-        x : float
+        x : float or array_like
             value within the domain of a parameter
 
         """
         xs = ( x - self.center ) / self.scale
-        return self.S2PI / self.scale * numpy.exp( - 0.5 * xs * xs )
+        return numpy.where( self.isOutOfLimits( x ), 0,
+               self.S2PI / ( self.scale * self.limint ) * 
+               numpy.exp( - 0.5 * xs * xs ) )
 
     def logResult( self, x ):
         """
@@ -165,8 +172,11 @@ class GaussPrior( Prior ):
 
         """
         xs = ( x - self.center ) / self.scale
-#        print( "GP   xs ", fmt( xs ) )
-        return self.LS2PI - math.log( self.scale ) - 0.5 * ( xs * xs )
+        sl = math.log( self.scale * self.limint )
+
+        return numpy.where( self.isOutOfLimits( x ), -math.inf,  
+                            self.LS2PI - sl - 0.5 * xs * xs ) 
+#        return self.LS2PI - math.log( self.scale ) - 0.5 * ( xs * xs )
 
     def partialLog( self, x ):
         """

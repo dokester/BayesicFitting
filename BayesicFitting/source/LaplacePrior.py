@@ -1,11 +1,13 @@
 import math
+import numpy
+import warnings
 
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 202024 Do Kester
 
 
 class LaplacePrior( Prior ):
@@ -70,8 +72,7 @@ class LaplacePrior( Prior ):
     lowLimit and highLimit cannot be used in this implementation.
 
     """
-
-    MAXVAL = 40         ## scale units
+    MAXVAL = 40                 ## scale units
 
     #  *********CONSTRUCTOR***************************************************
     def __init__( self, center=0.0, scale=1.0, limits=None, circular=False, prior=None ):
@@ -97,7 +98,13 @@ class LaplacePrior( Prior ):
         self.center = center
         self.scale = scale
 
-        super( LaplacePrior, self ).__init__( limits=limits, circular=circular, prior=prior )
+        if circular is True and center == 0 and limits is not None :
+            self.center = 0.5 * ( limits[0] + limits[1] )    
+
+        self.limint = self.limitedIntegral( center=center, circular=circular, 
+                                            limits=limits )
+
+        super().__init__( limits=limits, circular=circular, prior=prior )
 
 
     def copy( self ):
@@ -118,10 +125,13 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        d = dval - self.center
-        uval = ( 0.5 * math.exp(  d / self.scale ) if ( d < 0 ) else
-           1.0 - 0.5 * math.exp( -d / self.scale ) )
-
+        dv = ( dval - self.center ) / self.scale
+        try :
+            uval = ( 0.5 * math.exp( dv ) if dv < 0 else 
+                    1.0 - 0.5 * math.exp( -dv ) )
+        except ValueError :
+            uval = numpy.where( dv < 0, 0.5 * numpy.exp(  dv ),
+                                  1.0 - 0.5 * numpy.exp( -dv ) )
         return uval
 
     def unit2Domain( self, uval ):
@@ -138,14 +148,24 @@ class LaplacePrior( Prior ):
             value within [0,1]
 
         """
-        scl = self.scale
-        if uval > 0.5:
-            uval = 1 - uval
-            scl *= -1
+        uv = 2 * uval
         try :
-            return self.center + math.log( 2 * uval ) * scl
-        except :
-            return self.center - self.MAXVAL * scl
+            if uv == 0 :
+                dv = -self.MAXVAL
+            elif uv == 2 :
+                dv = self.MAXVAL
+            elif uv <= 1 :
+                dv = math.log( uv )
+            else :
+                dv = -math.log( 2 - uv )
+        except ValueError :
+            with warnings.catch_warnings():
+                warnings.simplefilter( "ignore", category=RuntimeWarning )
+                dv = numpy.where( ( uv == 0 ) | ( uv == 2 ),
+                    numpy.copysign( self.MAXVAL, uv - 1 ),
+                    numpy.where( uv <= 1, numpy.log( uv ),
+                                 -numpy.log( 2 - uv ) ) )
+        return self.center + dv * self.scale
 
     def result( self, x ):
         """
@@ -157,8 +177,9 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        if self.isOutOfLimits( x ) : return 0
-        return 0.5 * math.exp( -abs( x - self.center ) / self.scale ) / self.scale
+        xs = ( x - self.center ) / self.scale
+        return numpy.where( self.isOutOfLimits( x ), 0, 
+                0.5 * numpy.exp( -abs( xs ) ) / ( self.scale * self.limint ) )
 
     def logResult( self, x ):
         """
@@ -170,10 +191,9 @@ class LaplacePrior( Prior ):
             value within the domain of a parameter
 
         """
-        if self.isOutOfLimits( x ) : return -math.inf
-
-        xc = x - self.center
-        return math.log( 0.5 / self.scale ) - abs( xc ) / self.scale
+        xs = ( x - self.center ) / self.scale
+        sl = -math.log( 2 * self.scale * self.limint )
+        return numpy.where( self.isOutOfLimits( x ), -math.inf, sl - abs( xs ) )
 
     def partialLog( self, x ):
         """

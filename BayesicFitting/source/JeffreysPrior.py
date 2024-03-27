@@ -1,12 +1,14 @@
 import math as math
+import numpy as numpy
+import warnings
 
 from .Prior import Prior
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester.
+#  *    2016 - 202024 Do Kester.
 
 class JeffreysPrior( Prior ):
     """
@@ -102,7 +104,10 @@ class JeffreysPrior( Prior ):
             value within the domain of a parameter
 
         """
-        return math.log( dval )
+        if numpy.any( dval <= 0 ) :
+            raise ValueError()
+
+        return numpy.log( dval )
 
 
     def unit2Domain( self, uval ):
@@ -116,7 +121,7 @@ class JeffreysPrior( Prior ):
             value within [0,1]
 
         """
-        return math.exp( uval )
+        return numpy.exp( uval )
 
     def result( self, x ):
         """
@@ -128,10 +133,15 @@ class JeffreysPrior( Prior ):
             value within the domain of a parameter
 
         """
-        r = 0 if self.isOutOfLimits( x ) else 1.0 / ( x * self._urng )
-        if math.isnan( r ) :
+        if math.isnan( self._urng ) :
             raise AttributeError( "Limits are needed for JeffreysPrior" )
-        return r
+        try :
+            return 0 if self.isOutOfLimits( x ) else 1.0 / ( x * self._urng )
+        except ValueError :
+            with warnings.catch_warnings():
+                warnings.simplefilter( "ignore", category=RuntimeWarning )
+                return numpy.where( self.isOutOfLimits( x ), 0, 
+                                    1.0 / ( x * self._urng ) )
 
 # logResult has no better definition than the default: just take the math.log of result.
 # No specialized method here.
@@ -146,7 +156,10 @@ class JeffreysPrior( Prior ):
             the value
 
         """
-        return math.nan if self.isOutOfLimits( p ) else -1 / p
+        try :
+            return math.nan if self.isOutOfLimits( p ) else -1 / p
+        except ValueError :
+            return numpy.where( self.isOutOfLimits( p ), math.nan, -1 / p )
 
     def isBound( self ):
         """ Return true if the integral over the prior is bound.  """

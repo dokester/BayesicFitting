@@ -1,11 +1,12 @@
 import math
+import numpy as numpy
 
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 202024 Do Kester
 
 class UniformPrior( Prior ):
     """
@@ -102,7 +103,7 @@ class UniformPrior( Prior ):
             value within the domain of a parameter
 
         """
-        return dval
+        return dval             # from Prior.limitedDomain2Unit
 
     def unit2Domain( self, uval ):
         """
@@ -116,7 +117,7 @@ class UniformPrior( Prior ):
             value within [0,1]
 
         """
-        return uval
+        return uval             # from Prior.limitedUnit2Domain
 
     def result( self, x ):
         """
@@ -124,15 +125,17 @@ class UniformPrior( Prior ):
 
         Parameters
         ----------
-        x : float
+        x : float or array_like
             value within the domain of a parameter
 
         """
         if math.isinf( self._urng ) :
             raise AttributeError( "Limits are needed for UniformPrior" )
 
-        return 0.0 if self.isOutOfLimits( x ) else 1.0 / self._urng
-
+        try :
+            return 0.0 if self.isOutOfLimits( x ) else 1.0 / self._urng
+        except ValueError :
+            return numpy.where( self.isOutOfLimits( x ), 0.0, 1.0 / self._urng )
 
 # logResult has no better definition than the default: just take the math.log of result.
 # No specialized method here.
@@ -143,11 +146,14 @@ class UniformPrior( Prior ):
 
         Parameters
         ----------
-        p : float
+        p : float or array_like
             the value
 
         """
-        return math.nan if self.isOutOfLimits( p ) else 0
+        try :
+            return math.nan if self.isOutOfLimits( p ) else 0
+        except ValueError :
+            return numpy.where( self.isOutOfLimits( p ), math.nan, 0 )
 
     def isBound( self ):
         """ Return true if the integral over the prior is bound.  """

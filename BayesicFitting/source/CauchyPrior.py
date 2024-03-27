@@ -4,9 +4,9 @@ import math
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.6.2"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 202024 Do Kester
 
 
 class CauchyPrior( Prior ):
@@ -92,7 +92,13 @@ class CauchyPrior( Prior ):
         self.center = center
         self.scale = scale
 
-        super( CauchyPrior, self ).__init__( limits=limits, circular=circular, prior=prior )
+        if circular is True and center == 0 and limits is not None :
+            self.center = 0.5 * ( limits[0] + limits[1] )
+
+        self.limint = self.limitedIntegral( center=center, circular=circular, 
+                                            limits=limits )
+
+        super().__init__( limits=limits, circular=circular, prior=prior )
 
     def copy( self ):
         return CauchyPrior( prior=self, center=self.center, scale=self.scale,
@@ -139,7 +145,9 @@ class CauchyPrior( Prior ):
 
         """
         xc = x - self.center
-        return self.scale / ( ( self.scale * self.scale + xc * xc ) * math.pi )
+        return numpy.where( self.isOutOfLimits( x ), 0, 
+                    self.scale / ( ( self.scale * self.scale + xc * xc ) * 
+                    math.pi * self.limint ) )
 
 # logResult has no better definition than the default: just take the math.log of result.
 # No specialized method here.

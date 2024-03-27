@@ -6,9 +6,9 @@ from .Tools import setAttribute as setatt
 from .Tools import printclass
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2024 Do Kester
 
 class Prior( object ):
     """
@@ -125,6 +125,38 @@ class Prior( object ):
         """ Return a copy """
         return Prior( prior=self, limits=self.limits, circular=self.circular )
 
+    def limitedIntegral( self, center=0, circular=False, limits=None ) :
+        """
+        Calculate the Integral of the prior where tails are cut off
+        due to limits or circularity.
+
+        Parameters
+        ----------
+        center : float
+            of the prior
+        circular : bool or float
+            bool : y|n circular with period from limits[0] to limits[1]
+            float :period of circularity
+        limits : None or list of 2 float/None
+            None : no limits.
+            2 limits, resp low and high
+        """
+        if limits is None and circular is not False :
+            limits = [center - circular / 2, center + circular / 2 ]
+
+#        print( center, circular, limits )
+#        print( self.center, self.scale, self.domain2Unit )
+
+
+        val0 = 0
+        val1 = 1
+        if limits is not None :
+            if limits[0] is not None :
+                val0 = self.domain2Unit( limits[0] )
+            if limits[1] is not None :
+                val1 = self.domain2Unit( limits[1] )
+        return val1 - val0
+
     def setLimits( self, limits=None ):
         """
         Set limits.
@@ -181,7 +213,18 @@ class Prior( object ):
             setatt( self, "domain2Unit", self.limitedDomain2Unit )
 
     def setPriorAttributes( self, limits, circular ) :
+        """
+        Set circular attributes.
 
+        Parameters
+        ----------
+        limits : None or array of 2 floats
+            defining the period
+        circular : bool or float
+            False   pass
+            True    Calculate period and center from limits
+            float   period
+        """
         if isinstance( circular, bool ) :
             self.setLimits( limits )
             if circular and limits is not None :
@@ -222,9 +265,15 @@ class Prior( object ):
         return self.baseUnit2Domain( uval * self._urng + self._umin )
 
     def circularDomain2Unit( self, dval ) :
+        """ 
+        Make domain circular in unit by shrinking: domain ==> unit ==> [1/3,2/3]
+        """ 
         return ( self.limitedDomain2Unit( dval ) + 1 ) / 3
 
     def circularUnit2Domain( self, uval ) :
+        """
+        Unpack circular unit to domain: [1/3,2/3] ==> unit ==> domain
+        """
         return self.limitedUnit2Domain( ( uval * 3 ) % 1 )
 
     def __setattr__( self, name, value ) :
@@ -234,7 +283,7 @@ class Prior( object ):
         Also set scale for Priors that need a scale.
 
         """
-        keys = ["lowLimit", "highLimit", "deltaP", "center", "scale",
+        keys = ["lowLimit", "highLimit", "limint", "deltaP", "center", "scale",
                 "_lowDomain", "_highDomain", "_umin", "_urng", "circular"]
 
         if name == "scale"  and value <= 0 :
@@ -292,11 +341,11 @@ class Prior( object ):
 
         Parameters
         ----------
-        par : float
+        par : float or array_like
             the parameter to check
 
         """
-        return ( par < self.lowLimit ) or ( par > self.highLimit )
+        return ( par < self.lowLimit ) | ( par > self.highLimit )
 
     def checkLimit( self, par ):
         """
@@ -342,7 +391,7 @@ class Prior( object ):
 
     def hasLimits( self ):
         """ Return true if it has any limits.  """
-        return self.hasLowLimit() and self.hasHighLimit()
+        return self.hasLowLimit() or self.hasHighLimit()
 
     def getLimits( self ):
         """ Return the limits.  """
