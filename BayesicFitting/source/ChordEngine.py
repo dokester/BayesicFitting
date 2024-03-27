@@ -10,9 +10,9 @@ from .Formatter import formatter as fmt
 from .Formatter import fma
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -133,14 +133,10 @@ class ChordEngine( Engine ):
         param = walker.allpars
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
         self.plotter.start( param=param )
+#        self.startJourney( usav )
 
-        # Determine n-dim box boundaries in which the parameters are located
-#        if np > len( self.unitRange ) :
-#            self.unitRange = numpy.ones( np, dtype=float )
-#            self.unitMin = numpy.zeros( np, dtype=float )
-
-        nap = len( param )
-        uran, umin = self.getUnitRange( problem, lowLhood, npars=nap )
+        # Determine n-dim box boundaries in which the parameters are located 
+        uran, umin = self.getUnitRange( problem, lowLhood )
         uran = uran[fitIndex]
         umin = umin[fitIndex]
 
@@ -163,11 +159,11 @@ class ChordEngine( Engine ):
         vel = self.rng.rand( np ) - 0.5
 
         if self.verbose > 4 :
-            print( "++++++++++++++++++++++++++++++++++++++++++" )
-            print( walker.id, nstep, fmt(lowLhood), fmt( param ) )
-            print( "umin  ", fmt( umin ) )
-            print( "umax  ", fmt( umax ) )
-            print( "usav  ", fmt( usav ) )
+            print( "Chord     LogL  ", fmt( walker.logL ), " LowL  ", fmt( lowLhood), nstep, self.maxtrials )
+            print( "alpar ", fma( param, linelength=200 ) )
+            print( "usav  ", fma( usav ) )
+            print( "umin  ", fma( umin ) )
+            print( "umax  ", fma( umax ) )
 
         reset = True
         ptry = param.copy()
@@ -182,6 +178,10 @@ class ChordEngine( Engine ):
             ## tt contains entrance times as negative values
             ## and exit times as positive values.
             tt = numpy.append( ( umin - usav ) / vel, ( umax - usav ) / vel )
+            if self.verbose > 4 :
+                print( "uvel  ", fma( vel ) )
+                print( "ttb   ", fma( tt[:10] ) )
+                print( "tte   ", fma( tt[10:] ) )
 
             ## find smallest entrance and exit times
             t1 = numpy.min( numpy.where( tt > 0, tt, +math.inf ) )
@@ -190,11 +190,18 @@ class ChordEngine( Engine ):
             ## same now for the values at the edges of the unit box (0,1)
             if self.debug :
                 tt = numpy.append( - usav / vel, ( 1.0 - usav ) / vel )
+                if self.verbose > 4 :
+                    print( "tt0   ", fma( tt[:10] ) )
+                    print( "tt1   ", fma( tt[10:] ) )
                 t1max = numpy.min( numpy.where( tt > 0, tt, +math.inf ) )
                 t0max = numpy.max( numpy.where( tt < 0, tt, -math.inf ) )
 
-                t0 = self.stepOut( problem, ptry, usav, vel, t0, t0max, lowLhood, fitIndex )
-                t1 = self.stepOut( problem, ptry, usav, vel, t1, t1max, lowLhood, fitIndex )
+                tt0 = self.stepOut( problem, ptry, usav, vel, t0, t0max, lowLhood, fitIndex )
+                tt1 = self.stepOut( problem, ptry, usav, vel, t1, t1max, lowLhood, fitIndex )
+
+                print( fmt( ( t0max, tt0, t0, t1, tt1, t1max ), max=None ) )
+                t0 = tt0
+                t1 = tt1
 
             if self.verbose > 4 :
                 print( ks, step, "vel   ", fmt( vel ), fmt( tt ), fmt( t0 ), fmt( t1 ) )
@@ -225,13 +232,14 @@ class ChordEngine( Engine ):
                     step += 1
 
                     self.plotter.move( param, ptry, col=0, sym=0 )
+#                    self.calcJourney( usav - utry )
 
                     ## check if better than Lbest in walkers[-1]
                     # self.checkBest( problem, ptry, Ltry, fitIndex )
 
                     ## keep the trial parameters
                     param = ptry.copy()
-                    usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
+                    usav = utry
 
                     # make sure that 0 <= umin < usav < umax <= 1
                     umin = numpy.where( usav < umin, 2 * usav - umin, umin )
@@ -304,7 +312,3 @@ class ChordEngine( Engine ):
                     return tmax
 
         return t
-
-
-
-

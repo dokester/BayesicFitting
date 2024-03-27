@@ -4,9 +4,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -25,7 +25,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class RandomEngine( Engine ):
     """
@@ -107,7 +107,7 @@ class RandomEngine( Engine ):
         
         ## Make a unit box to find a new walker in
         nap = len( param )
-        um, ux = self.getUnitMinmax( problem, lowLhood, npars=nap )
+        um, ux = self.getUnitMinmax( problem, lowLhood )
 
         mlen = len( self.walkers )
         dr = 10 * ( ux - um ) / mlen

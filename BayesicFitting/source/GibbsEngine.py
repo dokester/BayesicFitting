@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class GibbsEngine( Engine ):
     """
@@ -114,7 +114,7 @@ class GibbsEngine( Engine ):
         param = walker.allpars
         self.plotter.start( param=param )
 
-        ur, um = self.getUnitRange( problem, lowLhood, npars=len( param ) )
+        ur, um = self.getUnitRange( problem, lowLhood )
         ur *= 1.10                                   ## add 10% on the edges.
 
         if self.verbose > 4 :

@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class StepEngine( Engine ):
     """
@@ -106,8 +106,7 @@ class StepEngine( Engine ):
         np = len( fitIndex )
 
         param = walker.allpars
-        nap = len( param )
-        urange, umin = self.getUnitRange( problem, lowLhood, npars=nap )
+        urange, umin = self.getUnitRange( problem, lowLhood )
         urange = urange[fitIndex]
 
         dur = urange / len( self.walkers )      ## some fraction
@@ -115,11 +114,11 @@ class StepEngine( Engine ):
 
         self.plotter.start( param=param )
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
+#        self.startJourney( usav )
 
         if self.verbose > 4 :
             print( "alpar ", fma( param ), fmt( walker.logL ), fmt( lowLhood) )
-            fip = param[fitIndex]
-            print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex )))
+            print( "uap   ", fma( usav ) )
             print( "fitin ", fma( fitIndex ), self.maxtrials )
             print( "unitr ", fma( urange ) )
 
@@ -146,7 +145,7 @@ class StepEngine( Engine ):
                 else :
                     break
 
-            # calculate ptry from utry and hence the trial og Likelihood.
+            # calculate ptry from utry and hence the trial of Likelihood.
             ptry[fitIndex] = self.unit2Domain( problem, utry, kpar=fitIndex  )
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
@@ -156,6 +155,7 @@ class StepEngine( Engine ):
             # success. Update walker. reset size and step
             if Ltry >= lowLhood:
                 self.plotter.move( param, ptry, col=0, sym=0 )
+#                self.calcJourney( utry - usav )
                 self.reportSuccess( )
 
                 update = len( self.walkers ) if append else kw
@@ -170,9 +170,7 @@ class StepEngine( Engine ):
             elif kt <= self.maxtrials :
                 self.plotter.move( param, ptry, col=5, sym=4 )
 
-                step = ( self.rng.rand( np ) - 0.5 ) * urange
-
-                sz *= -0.7
+                sz *= ( -1 if kt % 2 == 0 else self.rng.rand( 1 ) )
                 step *= sz
                 kt += 1
                 self.reportReject( )

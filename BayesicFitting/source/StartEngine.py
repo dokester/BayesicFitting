@@ -7,11 +7,12 @@ from .Formatter import formatter as fmt
 from .Dynamic import Dynamic
 from .Engine import Engine
 from .ErrorsInXandYProblem import ErrorsInXandYProblem
+from .ModelDistribution import ModelDistribution
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class StartEngine( Engine ):
     """
@@ -110,6 +111,8 @@ class StartEngine( Engine ):
                     off += model.npbase
                     model = model._next
 
+
+#                print( "SE   ", model.ncomp, model.maxComp, self.errdis )
                 npbase = model.npbase
                 ## Grow the dynamic model a number of times according to growPrior
                 while ( model.ncomp < model.growPrior.unit2Domain( self.rng.rand() ) and
@@ -124,9 +127,14 @@ class StartEngine( Engine ):
 
             uval = self.rng.rand( len( fitIndex ) )
 
+#            print( "SE FI  ", fitIndex )
+#            print( allp.__class__, fitIndex.__class__ )
+
             allp[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
 
             logL = self.errdis.logLikelihood( problem, allp )
+
+#            print( "SE 2  ", fmt( logL ) )
 
             if numpy.isfinite( logL ) :
                 break

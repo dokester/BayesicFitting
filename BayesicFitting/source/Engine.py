@@ -1,14 +1,15 @@
 import numpy as numpy
 from . import Tools
 
+from .LevenbergMarquardtFitter import LevenbergMarquardtFitter
 from .Walker import Walker
 from .PhantomCollection import PhantomCollection
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class Engine( object ):
     """
@@ -101,13 +102,14 @@ class Engine( object ):
         verbose : int
             report about the engines when verbose > 4
         copy : Engine
-            engine to be copied
-
+            engine to be copied 
         """
         self.walkers = walkers
         self.errdis = errdis
         self.report = [0]*5
 
+        self.checkBest = self.noBoost
+ 
         if copy is None :
             self.maxtrials = self.MAXTRIALS
             self.nstep = self.NSTEP
@@ -128,8 +130,27 @@ class Engine( object ):
         """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
 
+    def bestBoost( self, problem, myFitter=None ) :
+        """
+        When a logL is found better that all the rest, try to update
+        it using a fitter.
+
+        Parameters
+        problem : Problem
+            the problem at hand
+        myFitter : None or Fitter
+            None fetches LevenbergMarquardtFitter
+            a (non-linear) fitter
+        """
+        self.checkBest = self.doBoost
+        if myFitter is None :
+            myFitter = LevenbergMarquardtFitter
+        self.fitter = myFitter( problem.xdata, problem.model )
+
+
+
     #  *********SET & GET***************************************************
-    def setWalker( self, kw, problem, allpars, logL, fitIndex=None ) :
+    def setWalker( self, kw, problem, allpars, logL, walker=None, fitIndex=None ) :
         """
         Update the walker with problem, allpars, LogL and logW.
 
@@ -146,39 +167,71 @@ class Engine( object ):
             list of all parameters
         logL : float
             log Likelihood
+        walker : Walker or None
+            Copy this walker or create new one
         fitIndex : array_like
             (new) fitIndex
         """
-        id = 0 if kw >= len( self.walkers ) else self.walkers[kw].id
-        walker = Walker( id, problem, allpars, fitIndex )
-        walker.logL = logL
-        self.walkers.setWalker( walker, kw )
+        if walker is None :
+            id = 0 if kw >= len( self.walkers ) else self.walkers[kw].id
+            wlkr = Walker( id, problem, allpars, fitIndex )
+        else :
+            wlkr = walker.copy()
+            wlkr.allpars = allpars    # Tools.toArray( allpars, ndim=1, dtype=float )
 
-        self.phantoms.storeItems( walker )
+        wlkr.logL = logL
+        self.checkBest( wlkr )
 
-#       DONT DO THIS ANY MORE        
-#        self.checkBest( problem, allpars, logL, fitIndex=fitIndex )
+        self.walkers.setWalker( wlkr, kw )
 
+        self.phantoms.storeItems( wlkr )
 
-    def checkBest( self, problem, allpars, logL, fitIndex=None ) :
+    def noBoost( self, walker ) :
+        pass
+
+    def doBoost( self, walker ) :
         """
-        Check if Ltry better than the best at self.walkers[-1].
-        If so replace.
+        Check if walker is best in phantoms and try to optimize.
 
         Parameters
         ----------
-        problem : Problem
-            the problem in the walker
-        logL : float
-            likelihood
-        allpars : array_like
-            parameters of problem
-        fitIndex : array_like
-            (new) fitIndex
+        walker : Walker
+            new walker to be checked
         """
-        if logL > self.walkers[-1].logL :
-            self.setWalker( -1, problem, allpars.copy(), logL, fitIndex )
-            self.reportBest()
+        wlist = self.phantoms.getList( walker )
+
+        if wlist is None or wlist[-1].logL >= walker.logL :
+            return
+
+#        print( "Best   ", fmt( walker.logL ) )
+#        print( fmt( walker.allpars, max=None ) )
+
+        problem = walker.problem
+        nh = self.errdis.nphypar
+        par0 = walker.allpars[:-nh]
+        try :
+            self.fitter.model = problem.model
+            pars = self.fitter.fit( problem.ydata, par0=par0 )
+        except :
+            return
+
+        if nh == 0 :
+            ptry = pars
+        elif walker.fitIndex[-1] == -1 :
+            ptry = numpy.append( pars, self.fitter.getScale() )
+        else :
+            ptry = numpy.append( pars, walker.allpars[-1] )
+
+        Ltry = self.errdis.logLikelihood( problem, ptry )
+
+        if Ltry > walker.logL :
+            walker.allpars = ptry
+            walker.logL = Ltry
+
+#        print( "Better ", fmt( walker.logL ) )
+#        print( fmt( walker.allpars, max=None ) )
+
+        self.reportBest()
 
 ######## domain <> unit ###########################################
 
@@ -243,12 +296,39 @@ class Engine( object ):
                 dval[i] = self.errdis.unit2Domain( uval[i], kp )
         return dval
 
+    def startJourney( self, unitStart ) :
+        """
+        Calculate the starting position and reset
+
+        Parameters
+        ----------
+        unitStart : array_like
+            start position in npars-dimensions in unit space
+        """
+        self.journey = 0
+        self.jstart = numpy.sqrt( numpy.sum( unitStart * unitStart ) )
+
+    def calcJourney( self, unitDistance ) :
+        """
+        Calculate the distance travelled since reset
+
+        Parameters
+        ----------
+        unitDistance : array_like
+            step size in npars-dimensions in unit space
+        """
+        self.journey += numpy.sqrt( numpy.sum( unitDistance * unitDistance ) )
+
+    def reportJourney( self ) :
+        try :
+            return ( self.jstart, self.journey )
+        except :
+            return ( 0,0 )
+
     def makeIndex( self, np, val ) :
         kpar = [k for k in range( np )]
         nh = len( val ) - np
         kpar += [-k for k in range( nh, 0, -1 )]
-
-#        print( "MI    ", np, len( val ), nh, kpar )
         return kpar
 
     def reportCall( self ):
@@ -279,9 +359,13 @@ class Engine( object ):
         """
         self.report[self.BEST] += 1
 
-    def printReport( self ) :
-        print( " %10d %10d %10d %10d %10d" % (self.report[0], self.report[1],
+    def printReport( self, best=False ) :
+        if best :
+            print( " %10d %10d %10d %10d %10d" % (self.report[0], self.report[1],
                               self.report[2], self.report[3], self.report[4] ) )
+        else :
+            print( " %10d %10d %10d %10d" % (self.report[0], self.report[1],
+                              self.report[2], self.report[4] ) )
 
     def successRate( self ) :
         """
@@ -296,46 +380,41 @@ class Engine( object ):
         return srate
 
 
-    def getUnitMinmax( self, problem, lowLhood, npars=None ) :
+    def getUnitMinmax( self, problem, lowLhood ) :
         """
         Calculate unit minimum and maximum from the Phantoms
 
         Parameters
         ----------
+        problem : Problem
+            To extract the unit range for
         lowLhood : float
             low likelihood boundary
-        npars : int
-            number of (all) parameters
         """
+        npars = problem.npars
+        pamin, pamax = self.phantoms.getParamMinmax( lowLhood, np=problem.npars )
 
-        if not problem.model.isDynamic() :
-            plst = None
-            pamin, pamax = self.phantoms.getParamMinmax( lowLhood )
-        else :
-            nh = self.errdis.nphypar     
-            plst = [k for k in range( npars - nh )] + [k for k in range( -nh, 0 )]
-            pamin, pamax = self.phantoms.getParamMinmax( lowLhood, np=npars )
-
+        npars += self.errdis.nphypar
         umax = ( numpy.ones( npars, dtype=float )  if pamax is None
-                else self.domain2Unit( problem, pamax, kpar=plst ) )
+                else self.domain2Unit( problem, pamax ) )
         umin = ( numpy.zeros( npars, dtype=float )  if pamin is None
-                else self.domain2Unit( problem, pamin, kpar=plst ) )
+                else self.domain2Unit( problem, pamin ) )
         umin = numpy.fmin( umin, umax )
 
         return ( umin, umax )
 
-    def getUnitRange( self, problem, lowLhood, npars=None ) :
+    def getUnitRange( self, problem, lowLhood ) :
         """
         Calculate unit range and minimum from PhantomCollection
 
         Parameters
         ----------
+        problem : Problem
+            To extract the unit range for
         lowLhood : float
             low likelihood boundary
-        npars : int
-            number of (all) parameters
         """
-        umin, umax = self.getUnitMinmax( problem, lowLhood, npars=npars )
+        umin, umax = self.getUnitMinmax( problem, lowLhood )
  
         uran = numpy.abs( umax - umin )
                 
@@ -346,7 +425,7 @@ class Engine( object ):
 
     def execute( self, kw, lowLhood ):
         """
-        Execute the engine for diffusing the parameters
+        Execute the engine for difusing the parameters
 
         Parameters
         ----------

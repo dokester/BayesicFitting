@@ -5,9 +5,9 @@ from .Engine import Engine
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class BirthEngine( Engine ):
     """
@@ -108,7 +108,7 @@ class BirthEngine( Engine ):
         ftry = walker.fitIndex
 
         if self.verbose > 4 :
-            print( "BEN0  ", walker.id, walker.parent, fmt( allp, max=None ), len( ftry ) )
+            print( "Birth  ", walker.id, walker.parent, fmt( allp, max=None ), len( ftry ) )
 
         off = 0
         model = problem.model
@@ -122,11 +122,11 @@ class BirthEngine( Engine ):
         np = model.npbase
 
         if self.verbose > 4 :
-            print( "BEN1  ", walker.id, nc, np, len( allp ), len( ftry ) )
+            print( "       ", walker.id, nc, np, len( allp ), len( ftry ) )
 
         if not ( nc < model.growPrior.unit2Domain( self.rng.rand() ) and
                  model.grow( offset=off, rng=self.rng ) ):
-            self.reportReject()
+            self.reportFailed()
             return 0
 
         dnp = model.npbase - np         # parameter change

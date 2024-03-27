@@ -12,9 +12,9 @@ from .Engine import DummyPlotter
 import matplotlib.pyplot as plt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class GalileanEngine( Engine ):
     """
@@ -145,6 +145,9 @@ class GalileanEngine( Engine ):
         step = 0
         trial = 0
 
+#        um.setParameters( problem, allpars )
+#        self.startJourney( um.upar )
+
         while True:
             trial += 1
             f = -1
@@ -190,6 +193,7 @@ class GalileanEngine( Engine ):
 
             if Ltry >= lowLhood:
                 self.plotter.move( allpars, ptry, col=0, sym=0 )
+#                self.calcJourney( um.upar - um.uptry )
 
                 um.acceptTrial()
 
@@ -203,7 +207,8 @@ class GalileanEngine( Engine ):
 
                 ## update the walker
                 update = len( self.walkers ) if append else kw
-                self.setWalker( update, problem, allpars, Lhood, fitIndex=fitIndex )
+                self.setWalker( update, problem, allpars, Lhood, walker=walker,
+                                fitIndex=fitIndex )
 
             else:
                 inside += 1
@@ -287,11 +292,11 @@ class UnitMovements( object ):
         self.engine = engine
         self.setParameters( self.problem, walker.allpars )
 
-
-        nap = len( walker.allpars )
-        uran, umin = engine.getUnitRange( self.problem, lowLhood, npars=nap )
+        uran, umin = engine.getUnitRange( self.problem, lowLhood )
         self.upran = uran[self.fitIndex]
-        self.uvel = self.setVelocity( size )
+
+        self.upran = numpy.amax( self.upran )
+        self.uvel = self.getVelocity( size )
 
     def uniform( self ) :
         """
@@ -310,27 +315,23 @@ class UnitMovements( object ):
         """
         Return a new trial parameter set.
         """
-
         uv = self.uvel
-        pv = self.upar + uv * f
+        up = self.upar + uv * f
 
         # check if outside [0,1]
-        pv, uv = numpy.where( pv <= 0, ( -pv, -uv ), ( pv, uv ) )
-        self.ptry, self.vtry = numpy.where( pv >= 1, ( 2 - pv, -uv ), ( pv, uv ) )
+        up, uv = numpy.where( up <= 0, ( -up, -uv ), ( up, uv ) )
+        self.uptry, self.uvtry = numpy.where( up >= 1, ( 2 - up, -uv ), ( up, uv ) )
 
         # When on edge, start a new direction with the same signs
-        if not all( self.vtry == self.uvel ) :
-            uv = self.setVelocity( size ) 
-#            vt = self.vtry.copy()
-            self.vtry = numpy.copysign( uv, self.vtry )
+        if not all( self.uvtry == self.uvel ) :
+            uv = self.getVelocity( size ) 
+            self.uvtry = numpy.copysign( uv, self.uvtry )
 
-#            print( "newV  ", fmt( self.uvel ), fmt( vt ), fmt( uv ), fmt( self.vtry ) )
-
-        return self.engine.unit2Domain( self.problem, self.ptry, kpar=self.fitIndex )
+        return self.engine.unit2Domain( self.problem, self.uptry, kpar=self.fitIndex )
 
     def acceptTrial( self ) :
-        self.upar = self.ptry
-        self.uvel = self.vtry
+        self.upar = self.uptry
+        self.uvel = self.uvtry
 
     def mirrorOnLowL( self, dLdp ):
         """
@@ -343,9 +344,9 @@ class UnitMovements( object ):
         self.uvel -= 2 * dLdp * inprod / sumsq
 
 
-    def setVelocity( self, size ):
+    def getVelocity( self, size ):
         """
-        Set a (random) unit velocity.
+        Return a new (random) unit velocity.
         """
         return self.uniform() * self.upran * size
 
@@ -354,15 +355,18 @@ class UnitMovements( object ):
         Reverse the unit velocity when mirroring fails.
         Add small perturbation.
         """
+        ff = 0.1                                # 10 percent
+        uvpert = self.getVelocity( ff * size )  # unit velocity perturbance
+        self.uvel *= ( ff - 1 )                 # reverse uvel and take 90 %
+        self.uvel += uvpert                     # add perturbance
 
-        upv = self.uvel                 # keep original velocity
-        self.setVelocity( size )        # get a new one to perturb
+        """
+        TBC I dont think this is any good.
+
+        uv = self.uvel                 # keep original velocity
+        self.uvel = self.getVelocity( size )        # get a new one to perturb
         nm = len( self.engine.walkers )
         self.uvel = size * ( self.np * self.uvel - nm * upv ) / ( nm + self.np )
 
         """
-        ff = 0.3
-        self.uvel = self.setVelocity( ff )      # pertubance of 10 percent
-        self.uvel -= self.vold * ( 1 - ff )     # reverse previous (before mirror) direction
-        self.uvel *= size
-        """
+
