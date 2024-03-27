@@ -3,12 +3,11 @@
 
 import unittest
 import numpy as numpy
+from numpy.testing import assert_array_almost_equal as assertAAE
 import math
 
-from BayesicFitting import Prior, UniformPrior, JeffreysPrior, ExponentialPrior
-from BayesicFitting import LaplacePrior, CauchyPrior, GaussPrior
-from BayesicFitting import CircularUniformPrior
-
+from BayesicFitting import *
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -92,24 +91,34 @@ class Test( unittest.TestCase ) :
         print( "===== CircularUniform Prior Tests ==========================\n" )
 #        self.assertWarns( UserWarning, CircularUniformPrior )
         prior = CircularUniformPrior( )
-        print( prior )
+        printclass( prior )
         self.assertTrue( prior._lowDomain == -math.inf )
         self.assertTrue( prior._highDomain == +math.inf )
         self.assertFalse( prior.isBound() )
 
         prior.setLimits( [0,5] )
         print( "lowlim %f  highlim %f range %f"%( prior.lowLimit, prior.highLimit, prior._urng ) )
-        print( prior )
+        printclass( prior )
 
         values = {0.0:0.0, 0.5:2.5, 1.0:5.0 }
         self.stdTestPrior( prior, values=values, utest=False )
 
+        prior = UniformPrior( limits=[1,4], circular=True )
+        printclass( prior )
+        self.stdTestPrior( prior )
+
+        prior = UniformPrior( circular=4 )
+        printclass( prior )
+        self.stdTestPrior( prior )
+
+
+
         cp = prior.copy( )
         print( cp )
-        self.stdTestPrior( cp, values=values, utest=False )
+        self.stdTestPrior( cp )
 
         prior = UniformPrior( numpy.asarray( [6.,48.] ) )
-        print( prior )
+        printclass( prior )
         values = {0.0:6, 0.5:27, 1.0:48 }
         self.stdTestPrior( prior, values=values, utest=False )
 
@@ -181,16 +190,34 @@ class Test( unittest.TestCase ) :
         print( "----- Standard test ----------------------------------------" )
 
         for ku in range( 11 ) :
-            u = 0.1 * ku
+            u = 1/3 + 1/30 * ku if prior.isCircular() else 0.1 * ku
             d = prior.unit2Domain( u )
-#            uu = u * prior._urng + prior._umin
-#            print( ku, u, uu, math.exp( uu ), d, prior.isOutOfLimits( math.exp( uu ) ) )
+
             v = prior.domain2Unit( d )
             f = prior.unit2Domain( v )
             print( "Unit %10.7f %10.7f  Domain %10.7f %10.7f"%( u, v, d, f ) )
             self.assertAlmostEqual( d, f )
-            if utest :
+            if utest and ku < 10 :
                 self.assertAlmostEqual( v, u )
+
+        u = numpy.arange( 10 ) * 0.1
+        if prior.isCircular() :
+            u = 1/3 * ( u + 1 )
+        d = prior.unit2Domain( u )
+        v = prior.domain2Unit( d )
+        f = prior.unit2Domain( v )
+        print( fmt( u, max=None ) )
+        print( fmt( v, max=None ) )
+        assertAAE( u, v )
+        print( fmt( d, max=None ) )
+        print( fmt( f, max=None ) )
+        assertAAE( d, f )
+
+        lr0 = numpy.log( prior.result( d ) )
+        lr1 = prior.logResult( d )
+        print( fmt( lr0, max=None ) )
+        print( fmt( lr1, max=None ) )
+        assertAAE( lr0, lr1 )
 
         # define a number of x values
         xx = [-10,-5, -1, 0, 1, 3, 6, 6.1, 48, math.inf]
@@ -237,12 +264,9 @@ class Test( unittest.TestCase ) :
         prior = ExponentialPrior( )
         print( prior )
         self.assertTrue( prior.scale == 1.0 )
-        self.assertTrue( prior.zeroFraction == 0 )
         self.assertTrue( prior._lowDomain == 0 )
         self.assertTrue( prior._highDomain == +math.inf )
         self.assertTrue( prior.isBound() )
-        self.assertTrue( prior._uval == 0.0 )
-        self.assertTrue( prior._shift == 1.0 )
 
         self.stdTestPrior( prior )
         self.domainTest( prior )
@@ -261,7 +285,6 @@ class Test( unittest.TestCase ) :
 
         maxdom = prior.MAXVAL * prior.scale
         self.assertTrue( prior.scale == 10.0 )
-        self.assertTrue( prior.zeroFraction == 0 )
         self.assertAlmostEqual( prior.unit2Domain( 1 -1.0 / 1024 ), 69.3147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 6.93147180559945 )
         self.assertAlmostEqual( prior.unit2Domain( 0.0 ), 0 )
@@ -270,7 +293,6 @@ class Test( unittest.TestCase ) :
         cp = prior.copy( )
         print( cp )
         self.assertTrue( cp.scale == 10.0 )
-        self.assertTrue( cp.zeroFraction == 0 )
         self.assertAlmostEqual( cp.unit2Domain( 1 -1.0 / 1024 ), 69.3147180559945 )
         self.assertAlmostEqual( cp.unit2Domain( 0.5 ), 6.93147180559945 )
         self.assertAlmostEqual( cp.unit2Domain( 0.0 ), 0 )
@@ -278,52 +300,15 @@ class Test( unittest.TestCase ) :
 
         self.stdTestPrior( cp )
 
-        self.assertRaises( ValueError, prior.__setattr__, "zeroFraction", 1.3 )
-        self.assertRaises( ValueError, prior.__setattr__, "zeroFraction", -0.3 )
-
-
-        prior.zeroFraction = 0.5
-        print( prior )
-        self.assertTrue( prior.scale == 10.0 )
-        self.assertTrue( prior.zeroFraction == 0.5 )
-        self.assertTrue( prior._uval == 0.0 )
-        self.assertTrue( prior._shift == 0.5 )
-
-        self.stdTestPrior( prior, utest=False )
-
-        maxdom = prior.MAXVAL * prior.scale
-        self.assertAlmostEqual( prior.unit2Domain( 1 - 1.0 / 2048 ), 69.3147180559945 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.75 ), 6.93147180559945 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.5 ), 0 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.25 ), 0 )
-        self.assertAlmostEqual( prior.unit2Domain( 0.0 ), 0 )
-        self.assertTrue( prior.unit2Domain( 1.0 ) == maxdom )
-        print( prior.domain2Unit( 0 ) )
-        uv = prior.domain2Unit( 0 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(uv) ) != uv )
-        print( "partial 0.0 : ", prior.partialDomain2Unit( 0.0 ) )
-        print( "numpart 0.0 : ", prior.numPartialDomain2Unit( 0.0 ) )
-        print( "partial 0.1 : ", prior.partialDomain2Unit( 0.1 ) )
-        print( "partial  1. : ", prior.partialDomain2Unit( 1.0 ) )
-        print( "partial 10. : ", prior.partialDomain2Unit( 10. ) )
-        self.assertAlmostEqual( prior.partialDomain2Unit(0.0 ), 0.05 )
-        print( prior.partialDomain2Unit( 9 ) )
-        print( prior.numPartialDomain2Unit( 9 ) )
-        self.assertAlmostEqual( prior.partialDomain2Unit(9 ), prior.numPartialDomain2Unit( 9 ), 4 )
-        self.assertAlmostEqual( prior.partialDomain2Unit(1 ), prior.numPartialDomain2Unit( 1 ), 4 )
-
-        prior.scale = 100.0
-        self.assertTrue( prior.scale == 100.0 )
 
         cp = ExponentialPrior( prior=prior, scale=10 )
         print( cp )
         maxdom = cp.MAXVAL * cp.scale
-        self.assertTrue( cp.zeroFraction == 0.5 )
         self.assertTrue( cp.scale == 10 )
         print( cp.domain2Unit( 0 ) )
-        self.assertAlmostEqual( cp.unit2Domain( 1 - 1.0 / 2048 ), 69.3147180559945 )
-        self.assertAlmostEqual( cp.unit2Domain( 0.75 ), 6.93147180559945 )
-        self.assertAlmostEqual( cp.unit2Domain( 0.4 ), 0 )
+        self.assertAlmostEqual( cp.unit2Domain( 1 - 1.0 / 2048 ), 76.24618986 )
+        self.assertAlmostEqual( cp.unit2Domain( 0.75 ), 13.862943611 )
+        self.assertAlmostEqual( cp.unit2Domain( 0.4 ), 5.108256237 )
         self.assertTrue( cp.unit2Domain( 1.0 ) == maxdom )
 
         prior = ExponentialPrior( 2 )
@@ -335,28 +320,6 @@ class Test( unittest.TestCase ) :
         self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(50) ), 50.0, 4 )
         self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(100) ), maxdom )
 
-        prior.zeroFraction = 0.3
-        print( prior )
-        self.assertTrue( prior.scale == 2.0 )
-        self.assertTrue( prior.zeroFraction == 0.3 )
-        self.assertTrue( prior._uval == 0.0 )
-        self.assertTrue( prior._shift == 0.7 )
-
-        self.stdTestPrior( prior, utest=False )
-        print( prior._uval )
-        print( prior.domain2Unit( 0 ) )
-        print( prior._uval )
-        uv = prior.domain2Unit( 0 )
-        self.assertTrue( uv == prior.domain2Unit( 0) )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.0) ) <= 0.3 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.1) ) <= 0.3 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.2) ) <= 0.3 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.3) ) <= 0.3 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.7) ) == 0.7 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.8) ) == 0.8 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(0.9) ) == 0.9 )
-        self.assertTrue( prior.domain2Unit(prior.unit2Domain(1.0) ) == 1.0 )
-        self.assertAlmostEqual( prior.unit2Domain(prior.domain2Unit(0.0) ), 0.0 )
 
     def testLaplacePrior( self ):
         print( "===== Laplace Prior Tests ==============================\n" )

@@ -378,19 +378,48 @@ class Test( unittest.TestCase ):
 
         plt.show()
 
+    def test8a( self ) :
+        print( "8a  Test Dynamic Modifiable Splines: evidence scale = 1.0" )
+
+        t,y = self.makeData()
+
+        mxk = 11
+        knots = numpy.linspace( 0, 100, mxk )
+        mdl = SplinesDynamicModel( knots=knots, dynamic=True, maxKnots=mxk, 
+                minKnots=mxk, minDistance=0.01 )
+        mdl.setLimits( lowLimits=[-10.0], highLimits=[+10.0] )
+        
+        printclass( mdl )
+        printclass( mdl.growPrior )
+        print( mdl.ncomp )
+
+
+        ep = ClassicProblem( model=mdl, xdata=t, ydata=y )
+
+        
+        ns = NestedSampler( problem=ep, limits=[0.1,10], ensemble=10, verbose=2 )
+
+        ev = ns.sample( plot=True )
+
+        sl = ns.samples
+
+        print( sl.getParameters() )
+
     def test8( self ) :
         print( "8  Test Dynamic Modifiable Splines: evidence scale = 1.0" )
 
         t,y = self.makeData()
 
-        knots =[0, 100]
+        knots = [0, 100]
         mxk = 15
         mdl = SplinesDynamicModel( knots=knots, dynamic=True, maxKnots=mxk, minDistance=0.01 )
         mdl.setLimits( lowLimits=[-10.0], highLimits=[+10.0] )
         
         ep = EvidenceProblem( model=mdl, xdata=t, ydata=y )
 
-        kwa = {"engines" : ["gibbs", "chord" ] }
+#        kwa = {"engines" : ["gibbs", "chord" ], "verbose" : 3, "limits" :[0.1,10] }
+
+        kwa = Tools.getKwargs( engines=["gibbs", "chord"], verbose=0, limits=[0.1,10] )
         distr = ModelDistribution( arbiter="NestedSampler", **kwa )
         
         ns = NestedSampler( problem=ep, distribution=distr, ensemble=10 )

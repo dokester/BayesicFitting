@@ -3,6 +3,7 @@
 import unittest
 import numpy as numpy
 import math
+import inspect
 from datetime import date
 
 from BayesicFitting import *
@@ -53,7 +54,7 @@ class ATestClass( object ) :
         Tools.setAttribute( self, name, value, type=type, islist=islist, isnone=isnone )
 
 
-class TestTools( unittest.TestCase ) :
+class Test( unittest.TestCase ) :
     """
     Test harness for Fitter class.
 
@@ -64,6 +65,19 @@ class TestTools( unittest.TestCase ) :
         atc = ATestClass()
 
         Tools.printclass( atc )
+
+    def testSubclassof( self ) :
+
+        self.assertTrue( Tools.subclassof( GaussModel, Model ) ) 
+        self.assertTrue( Tools.subclassof( GaussModel, BaseModel ) )
+        self.assertTrue( Tools.subclassof( GaussModel, NonLinearModel ) )
+        self.assertTrue( Tools.subclassof( Model, object ) )
+
+        self.assertFalse( Tools.subclassof( "GaussModel", BaseModel ) )
+        self.assertFalse( Tools.subclassof( GaussModel, VoigtModel ) )
+        self.assertFalse( Tools.subclassof( GaussModel, Fitter ) )
+        self.assertFalse( Tools.subclassof( GaussModel, LinearModel ) )
+
 
     def testPrintClass( self ) :
 

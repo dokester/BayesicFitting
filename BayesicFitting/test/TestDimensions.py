@@ -6,6 +6,7 @@ import numpy as numpy
 from astropy import units
 import math
 import matplotlib.pyplot as plt
+from numpy.testing import assert_array_almost_equal as assertAAE
 
 #from BayesicFitting import PolynomialModel, SineModel
 #from Model import Model
@@ -99,6 +100,18 @@ class Test( unittest.TestCase ):
         self.stdModeltest( model, p, x=x, plot=self.doplot )
         self.stdModeltest( model, p, x=x[[0],:], plot=self.doplot )
 
+    def test6( self ) :
+        model = AbsoluteValueFilter( ndim=3 )
+        print( "====Test6===== dimensions  ", model.ndim, model.ndout )
+
+        print( model )
+
+        p = numpy.asarray( [] )
+        x = numpy.linspace( -4, 10, 12, dtype=float ).reshape( (4,3) )
+
+        self.stdModeltest( model, p, x=x, plot=self.doplot )
+#        self.stdModeltest( model, p, x=x[[0],:], plot=self.doplot )
+
     def test5( self ) :
         model = Kernel2dModel( )
         print( "====Test5===== dimensions  ", model.ndim, model.ndout )
@@ -112,16 +125,33 @@ class Test( unittest.TestCase ):
 
     def stdModeltest( self, model, p, x, plot=False ) :
 
+        print( fma( x ) )
+        print( x.shape )
+        self.assertTrue( x.ndim == 1 or x.shape[1] == model.ndim )
+
         print( "result:" )
-        print( fmt( model.result( x, p ) ) )
+        res = model.result( x, p )
+        print( fma( res ) )
+        self.assertTrue( res.ndim == 1 or res.shape[1] == model.ndout )
+
         print( "derivative:" )
-        print( fmt( model.derivative( x, p ) ) )
-        print( "strict:" )
-        print( fmt( model.strictNumericDerivative( x, p ) ) )
+        der = model.derivative( x, p )
+        print( fma( der ) )
+        print( "strict numderiv:" )
+        snd = model.strictNumericDerivative( x, p )
+        print( fma( snd ) )
+        assertAAE( der, snd )
+
         print( "partial:" )
-        print( fmt( model.partial( x, p ) ) )
-        print( "strict:" )
-        print( fmt( model.strictNumericPartial( x, p ) ) )
+        prt = model.partial( x, p )
+        print( fma( prt ) )
+        print( "strict partial:" )
+        snp = model.strictNumericPartial( x, p )
+        print( fma( snp ) ) 
+        assertAAE( prt, snp )
+
+#        print( snd )
+#        print( snp )
 #        print( "numeric:" )
 #        print( fmt( model.numPartial( x, p ) ) )
 

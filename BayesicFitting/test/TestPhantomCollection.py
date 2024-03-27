@@ -60,22 +60,25 @@ class Test( unittest.TestCase  ) :
     def test2( self ) :
         print( "====test 2 Dynamic====================" )
 
-        m = PolynomialDynamicModel( 3 )
-        m.setPrior( 0, UniformPrior( limits=[-5,5] ) )
-        problem = ClassicProblem( model=m )
-
-        N = 10
+        N = 30
         numpy.random.seed( 12345 )
 
         phc = PhantomCollection( dynamic=True )
         for k in range( N ) :
             np = numpy.random.randint( 3, high=6 )
+
+            m = PolynomialDynamicModel( np-1 )
+            m.setPrior( 0, UniformPrior( limits=[-5,5] ) )
+            problem = ClassicProblem( model=m )
+
             pars = numpy.random.randn( np ) * 30 / ( k + 1 )
             logL = -numpy.sum( numpy.square( pars ) )
-#            print( fmt( np ), fmt( logL ), fmt( pars ) )
+            print( fmt( np ), fmt( logL ), fmt( pars ) )
             walker = Walker( k, problem, pars, None, logL=logL )
             phc.storeItems( walker )
-#            print( fmt( np ), fmt( phc.phantoms[np].logL[np] ), fmt( phc.pars[np] ) )
+            self.assertTrue( np == phc.phantoms[np][0].problem.npars )
+
+        printclass( phc )
 
         for n in range( 3, 6 ) :
             for k, ph in enumerate( phc.phantoms[n] ) :
@@ -83,14 +86,18 @@ class Test( unittest.TestCase  ) :
 
 #        lowL = min( [numpy.amin( ph.logL ) for ph in phc.phantoms] )
         lowL = min( [numpy.amin( phc.phantoms[k].getLogL() ) for k in phc.phantoms.keys()] )
-        print( "low   ", lowL )
+        low0 = min( [phc.phantoms[k][0].logL for k in phc.phantoms.keys()] )
+
+        print( "low   ", lowL, low0 )
+        self.assertTrue( lowL == low0 )
+
         np = 5
         ur, um = phc.getParamMinmax( lowL, np=np )
         print( "parange  ", fmt( ur ) )
         print( "parmin   ", fmt( um ) )
 
-        for k in range( N, 4*N ) :
-            lowL = min( [numpy.amin( phc.phantoms[k].getLogL() ) for k in phc.phantoms.keys()] )
+        for k in range( N, 2*N ) :
+            lowL = min( [phc.phantoms[k][0].logL for k in phc.phantoms.keys()] )
             np = numpy.random.randint( 3, high=6 )
             while True :
                 pars = numpy.random.randn( np ) * 30 / ( k + 1 )

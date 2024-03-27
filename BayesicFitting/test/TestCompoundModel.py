@@ -536,7 +536,7 @@ class Test( unittest.TestCase ):
 
 
     def suite( cls ):
-        return unittest.TestCase.suite( CompoundModelTest.__class__ )
+        return unittest.TestCase.suite( CompoundModel.__class__ )
 
 
 if __name__ == '__main__':

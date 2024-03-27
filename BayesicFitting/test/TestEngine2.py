@@ -145,7 +145,7 @@ class Test( unittest.TestCase ):
             engine.execute( klo, lowL )
             p1 = wl[klo].allpars[:2]
             if k % 100 == 0 :
-                uran, umin = engine.getUnitRange( problem, lowL, npars=3 )
+                uran, umin = engine.getUnitRange( problem, lowL )
                 print( k, klo, fmt(p1), fmt(wl[klo].logL), trials.length(),
                     uran, umin,  )
 

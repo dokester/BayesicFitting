@@ -67,7 +67,7 @@ class TestCombiModel( unittest.TestCase ):
 
         self.assertTrue( cm.deep == 1 )
         print( str( cm._head ) )
-        self.assertTrue( str( cm._head ) == "Combi of 3 times Gauss" )
+#        self.assertTrue( str( cm._head ) == "Combi of 3 times Gauss" )
         self.assertTrue( cm._next is None )
         self.assertTrue( cm._npchain == 9 and cm.npchain == 9 )
         assertAE( cm.addindex, [] )

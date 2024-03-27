@@ -604,6 +604,8 @@ class Test( unittest.TestCase ):
         ns = NestedSampler( x, pm, y, seed=2031967 )
         ns.distribution.setLimits( [0.01, 100] )
 #        ns.distribution.scale = 0.02
+        ns.verbose = 2
+        ns.bestBoost = True
 
         if not self.dofull :
             ns.ensemble = 10

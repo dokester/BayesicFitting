@@ -144,7 +144,9 @@ class Test( unittest.TestCase ):
 
         sl = ns.samples
 
-        printclass( sl[0] )
+        printclass( sl[-1] )
+
+        printclass( ns.walkers[-1] )
 
         plotSampleList( sl, x, y, residuals=True, show=plot )
 
@@ -262,6 +264,7 @@ class Test( unittest.TestCase ):
         gm.setLimits( lolim, hilim )
         ns = NestedSampler( x, gm, y, discard=10 )
         ns.distribution.setLimits( [0.01, 100] )
+        ns.bestBoost = True
         ns.verbose = 2
 
         evi = ns.sample( plot="test" )
@@ -278,7 +281,7 @@ class Test( unittest.TestCase ):
 #        self.dofit( ns, pp, plot=plot )
 
     def test2d( self ):
-        print( "=========== Nested Sampler test 2c ======================" )
+        print( "=========== Nested Sampler test 2d ======================" )
 
         plot = self.doplot
 
@@ -372,12 +375,14 @@ class Test( unittest.TestCase ):
 
         gm.setLimits( lolim, hilim )
 
-        ns = NestedSampler( x, gm, y, w )
+        ns = NestedSampler( x, gm, y, w, seed=99 )
         ns.distribution.setLimits( [0.01, 10] )
+        ns.copymode = 1
+#        ns.bestBoost = True
 
-        self.dofit( ns, pp )
+        self.dofit( ns, pp, plot=plot )
 
-        plotSampleList( ns.samples, x, y, show=plot )
+#        plotSampleList( ns.samples, x, y, show=plot )
 
     def dofit( self, ns, pp, plot=False ) :
         logE = ns.sample( plot=plot )

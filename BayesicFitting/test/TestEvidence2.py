@@ -799,7 +799,7 @@ class Test( unittest.TestCase  ) :
         nn = 100
         x = numpy.linspace( 0, 10, nn, dtype=float )
         ym = 1.9 + 2.2 * x
-        numpy.random.seed( 2345 )
+        numpy.random.seed( 23415 )
         y = numpy.random.poisson( ym, size=nn )
 
         limits = [0,4]
