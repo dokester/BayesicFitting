@@ -6,9 +6,9 @@ from .WalkerList import WalkerList
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *           2023 Do Kester
+#  *           2024 Do Kester
 
 class PhantomCollection( object ):
     """
@@ -83,12 +83,19 @@ class PhantomCollection( object ):
             self.lowLhood = {}
             self.paramMax = {}
             self.paramMin = {}
+            self.getList = self.getDynamicList
             self.getParamMinmax = self.getDynamic
             self.storeItems = self.storeDynamic
             self.length = self.lengthDynamic
         else :
             self.phantoms = WalkerList( )
             self.lowLhood = -math.inf
+
+    def __str__( self ):
+        """ Return the name of this object.  """
+        return "PhantomCollection"
+
+    ##  Methods for static models
 
     def length( self, np=0 ) :
         """
@@ -101,12 +108,17 @@ class PhantomCollection( object ):
         """
         return len( self.phantoms )
 
-    def __str__( self ):
-        """ Return the name of this object.  """
-        return str( "PhantomCollection" )
+    def getList( self, walker ) :
+        """
+        Return the applicable WalkerList
 
-    ##  Methods for static models
-
+        Parameters
+        ----------
+        walker : Walker
+            return list pertaining to this walker (not used here)
+        """
+        return self.phantoms
+ 
     def storeItems( self, walker ) :
         """
         Store both items as arrays.
@@ -118,7 +130,6 @@ class PhantomCollection( object ):
         """
         self.ncalls += 1
         self.phantoms = self.phantoms.insertWalker( walker )
-
 
     def calculateParamMinmax( self, lowLhood, np=0 ):
         """
@@ -174,7 +185,19 @@ class PhantomCollection( object ):
         """
         if np is None :
             return numpy.sum( [len( ph ) for ph in self.phantoms.values()] )
-        return len( self.phantoms[np] )
+        return len( self.phantoms[np] ) if np in self.phantoms else 0
+
+    def getDynamicList( self, walker ) :
+        """
+        Return the applicable WalkerList or None if not present.
+
+        Parameters
+        ----------
+        walker : Walker
+            return list pertaining to this walker
+        """
+        np = walker.problem.npars
+        return self.phantoms[np] if np in self.phantoms else None
 
     def storeDynamic( self, walker ) :
         """
@@ -188,7 +211,7 @@ class PhantomCollection( object ):
             parameters
         """
         self.ncalls += 1
-        np = len( walker.allpars )
+        np = walker.problem.npars
         if not np in self.phantoms :
             self.phantoms[np] = WalkerList()
 
@@ -207,7 +230,11 @@ class PhantomCollection( object ):
 
         """
         self.lowLhood[np] = lowLhood
-        self.phantoms[np].cropOnLow( lowLhood )
+        if np in self.phantoms :
+            self.phantoms[np] = self.phantoms[np].cropOnLow( lowLhood )
+        else :
+            self.phantoms[np] = WalkerList()
+
 
         if self.length( np ) <= self.minpars :
             self.paramMax[np] = None
