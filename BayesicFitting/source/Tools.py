@@ -11,9 +11,9 @@ import inspect
 from astropy.table import Table
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2024 Do Kester
 
 
 def getItem( ilist, k ) :
@@ -70,11 +70,11 @@ def firstIndex( iterable, condition=lambda x: True ) :
     ------
     StopIteration: if no item satysfing the condition is found.
 
-    >>> first( (1,2,3), condition=lambda x: x % 2 == 0)
+    >>> firstIndex( (1,2,3), condition=lambda x: x % 2 == 0)
     2
-    >>> first(range(3, 100))
+    >>> firstIndex( range( 3, 100 ) )
     3
-    >>> first( () )
+    >>> firstIndex( () )
     Traceback (most recent call last):
     ...
     StopIteration
@@ -107,6 +107,11 @@ def isBetween( xs, x, xe ) :
     """
     return ( xs <= x <= xe ) or ( xe <= x <= xs )
 
+def getKwargs( **kwargs ) :
+    """
+    Return kwargs as dictionary
+    """
+    return kwargs
 
 def setAttribute( obj, name, value, type=None, islist=False, isnone=False ) :
 
@@ -352,11 +357,35 @@ def decorate( src, des, copy=True ) :
         object.__setattr__( des, key, value )
 
 
+def subclassof( sub, cls ) :
+    """
+    Determine if sub inherits from the class cls
+    
+    Parameters
+    ----------
+    sub : class object
+        supposed sub class
+    cls : class object
+        supposed parent class
+    """
+    if not inspect.isclass( sub ) : 
+        return False
+
+    while sub != cls and sub != object :
+        tre = inspect.getclasstree( [sub], unique=True )   
+        sub = tre[0][0]
+
+    return sub is cls
+
 def printclass( cls, nitems=8 ) :
     """
     Print the attributes of a class.
     """
     numpy.set_printoptions( precision=3, threshold=10, edgeitems=4 )
+
+    ###  Import Model here to avoid circular imports ###
+    from .Model import Model
+    from .Problem import Problem
 
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
 #    print( cls, " at ", id( cls ) )
@@ -372,10 +401,12 @@ def printclass( cls, nitems=8 ) :
             printlist( val )
         elif isinstance( val, str ) :
             print( shortName( val ) )
+        elif isinstance( val, ( Model, Problem ) ) :
+            print( val._toString( indent="                " ) )
         elif key == "model" :
             print( val.shortName( ) )
         elif inspect.ismethod( val ) :
-            print( "-->", val.__str__().split()[2] )
+            print( "-->", val.__name__ )
         else :
             try :
                 valstr = val.__str__()
@@ -385,6 +416,7 @@ def printclass( cls, nitems=8 ) :
                     print( valstr )
             except :
                 print( val )
+    print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
             
 
 def printlist( val, nitems=8 ) :
