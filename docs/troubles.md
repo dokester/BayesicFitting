@@ -29,6 +29,8 @@ Or for a **NestedSampler** called ns:<br>
 Here are some guidelines that might help to get usefull results.
 
 <a name="restriction"></a>
+## Restrictions on Data<br>
+
 ### **Constraints on the independent variable(s)**<br>
 The independent variable(s) (x) should be "nice" numbers, ie. roughly of
 order 1. Mostly the fitter obtains solutions by manipulating a matrix
@@ -58,7 +60,8 @@ the noise level attains a more usefull value. <br>
 Check whether &chi;<sup>2</sup> is of the order of the
 number of datapoints. 
 
-### **Model Degeneracy**<br>
+<a name="models"></a>
+## Model Degeneracy<br>
 Sometimes the model is degenerate, meaning that 2 (or more) of its 
 parameters are essentially measuring the same thing. 
 Trying to fit data using Fitter to such a model results in a singular matrix.
@@ -70,7 +73,8 @@ Try hasDegeneracy() to check for this condition.<br>
 Although NestedSampler has no problems with degenerate models,
 it is in general better to use simpler models.
 
-<a name="warning"></a>
+<a name="warnings"></a>
+## Errors and warnings
 ### **Runtime Warning.**<br>
 It can happen that a runtime warning is thrown during the run of a 
 fitter (or of NestedSampler). In most cases the results are still OK.
@@ -78,7 +82,20 @@ The program sailed undamaged pass the obstacle. Although some extra
 precautions should be taken with the results, the warnings can almost
 always be ignored.
 
-<a name="help"></a>
+### **Division by zero.**<br>
+Sometimes a nonlinear fitter produces a division-by-zero warning. When 
+the fitter just continues and produces sensible results, the warnings
+can be ignored. They are caused by a noise scale equal to 0, when 
+calculating the loglikelihood. As +inf is larger than any other number 
+the fitter cannot have a minimum there. 
+
+### **Matrix is degenerate**<br>
+The model is (almost) degenerate under the data it is presented to. In
+general this signals that the model is not the best one for the data at
+hand. Use a simpler model.
+
+<a name="fitters"></a>
+## Fitters.<br>
 ### **(Nonlinear)Fitter does not find the minimum.**<br>
 When a non-linear fitter searches for a minimum, it migh happen that for
 almost all values of the parameters &chi;<sup>2</sup> does not have a
@@ -98,25 +115,13 @@ should be found, feed them to the system as initial parameters.
 Otherwise you have to use the AmoebaFitter in the annealing mode or even
 do exhaustive search. Both strategies take a lot more time.
 
-### **Nonlinear fitters produce warnings.**<br>
-Sometimes a nonlinear fitter produces a division-by-zero warning. When 
-the fitter just continues and produces sensible results, the warnings
-can be ignored. They are caused by a noise scale equal to 0, when 
-calculating the loglikelihood. As +inf is larger than any other number 
-the fitter cannot have a minimum there. 
-
-### **Matrix is degenerate**<br>
-The model is (almost) degenerate under the data it is presented to. In
-general this signals that the model is not the best one for the data at
-hand. Use a simpler model.
-
 ### **AmoebaFitter does not start.**<br>
 The size of the Simplex in the AmoebaFitter is by default 1.  When your
 x-data is  very much larger (or smaller) than 1 and you set your
 startValues accordingly,  you might want to adapt the size of the
 simplex too.  In extreme cases the 1 vanishes in the precision of the
 startValues and the  simplex is frozen in some dimension(s). Use
-AmoebaFitter.fit( data, size=simplexsize ).
+`AmoebaFitter.fit( data, size=simplexsize )`.
 
 ### **&chi;<sup>2</sup> is zero.**<br>
 This can only happen when the data fit the
@@ -128,7 +133,7 @@ a noise of 1/sqrt(12), the standard deviation of a uniform distribution.
 The actual position of each datapoint can be anywhere between two
 digitization levels (presumably at distance 1). 
 This noise can be added to the internal &chi;<sup>2</sup> with 
-setChiSquared( N/12 ).
+`setChiSquared( N/12 )`.
 
 ### **Standard deviations seem too large.**<br>
 When you think that the standard deviations on the parameters are 
@@ -140,31 +145,12 @@ while the confidence region is still acceptable. <br>
 The confidence region is actually is better indicator for how well the model
 performs than the standard deviations on the parameters.  
 
-### **NestedSampler and standard deviations.**<br>
-Standard deviations are proportional to the noise scale divided by the 
-square root of the number of points. Nestedsampler is doing that too. 
-However, if the noise scale is fixed during the run of NestedSampler, 
-the standard deviations on the parameters is as much off as the true noise 
-scale differs from the provided noise scale.
+In a linear fit, the standard deviations are calculated for the point 
+where xdata is zero. When all your xdata values are actually quite large,
+then the stdevs for a position way outside the actual range. However, 
+due to the covariance between the stdevs, the confidence region in the 
+range of xdata is acceptale. 
 
-Even worse, if you set the scale of the error distribution to a fixed value 
-while the residuals are significantly smaller, their contributions to the 
-likelihood are all similarly small.   
-
-In those cases, it is better to add the scale factor as an extra 
-(hyper)parameter to the problem. Actually in almost all case it is better to do so.
-
-### **Starting Problems with NestedSampler.**<br>
-Sometimes it looks like NestedSampler cannot find the maximum in the likelihood
-landscape. The path to the likelihood mountain is lost in the n-dim space 
-spanned by the parameters. A tighter prior might help. Or setting the attribute
-minimumIterations to something large. By default it is 100. Enlarging it, gives 
-NestedSampler more opportunities to explore the parameter space. <br>
-Ensuring that the prior space contains the expected values for the posterior 
-parameter values, can also help.
-
-Sometimes it just helps to restart NestedSampler with another seed for the 
-random number generator. 
 
 ### **Parameters at the edge**<br>
 The standard deviations of the parameters are calculated as the
@@ -180,4 +166,83 @@ chisq is at one of the limits. This constraint minimum is not a
 stationary point any more so the assumptions above about a neat valley
 in the chisq landscape, curving up to all sides are not met.
 What the resulting calculations will give is anyones guess. 
+
+
+<a name="nestedsampler"></a>
+## NestedSampler<br>
+
+The **NestedSampler** has much of the restrictions and problems the 
+**Fitter**s also have. Runtime warnings can commonly be ignored when
+the final results seem to be OK.
+
+One important difference is that in **Fitter**s the fit is independent 
+on the noise scale. In **NS** it is not. **NestedSampler** takes the 
+provided noise scale seriously. By default `scale=1` and unfortunately, 
+that is in almost all cases wrong.
+
+It is much better to fit the noise scale along with the model. For that, 
+the noise scale needs a prior. By default it is a **JeffreysPrior**, 
+which needs limits to convert into a valid prior, integrating to 1.
+  
+
+### **Standard Deviations.**<br>
+Standard deviations are proportional to the noise scale divided by the 
+square root of the number of points. Nestedsampler is doing that too. 
+However, if the noise scale is fixed during the run of NestedSampler, 
+the standard deviations on the parameters is as much off as the true noise 
+scale differs from the provided noise scale.
+
+Even worse, if you set the scale of the error distribution to a fixed value 
+while the residuals are significantly smaller, their contributions to the 
+likelihood are all similarly small.   
+
+In those cases, it is better to add the scale factor as an extra 
+(hyper)parameter to the problem. 
+Actually in almost all case it is better to do so.
+
+### **Starting Problems.**<br>
+Sometimes it looks like NestedSampler cannot find the maximum in the likelihood
+landscape. The path to the likelihood mountain is lost in the n-dim space 
+spanned by the parameters. A tighter prior might help. Or setting the attribute
+`minimumIterations` to something large. By default it is 100. Enlarging it, gives 
+NestedSampler more opportunities to explore the parameter space. <br>
+Ensuring that the prior space contains the expected values for the posterior 
+parameter values, can also help.
+
+It may help to restart NestedSampler with another seed for the 
+random number generator.
+ 
+
+### **Premature Freezing**<br>
+
+Premature freezing happens when the **NestedSampler** stops and obviously 
+has not reached its goal. The parameters are not well optimized and got 
+stuck somewhere along the way. This can happen when the changes needed
+in the model only affect a small part of the data. The rest of the data
+is comfortable with the status quo. It is now easier to adapt the noise
+scale to encompass the deviating points, than to find the path to the
+top.
+
+For **NS** all data points are independent, even when we see a clear
+systematic behaviour in the residuals, fitters, including **NS** do not
+have that overview. 
+
+The keyword `bestBoost` was introduced to address this issue. When set
+`True`, every valid step is checked whether it is better than any of the
+previous steps residing in the **PhantomCollection**.  If so, a
+**Fitter** is run, starting at the best position to improve the best
+even further.  As this is happening in the **PhantomCollection** it does
+not affect the evidence calculation.  But it opens a corridor to the
+top. 
+
+
+
+
+
+
+
+
+
+
+
 

@@ -13,31 +13,38 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
- +  31 Aug 2023 version 3.2.0
-   * The new class, PhantomCollection is part of NestedSampler. It contains a sorted 
-     WalkerList, in which all valid positions are collected, proper walkers 
-     and phantoms. Each iteration the phantoms with log likelihood lower than the 
-     low limit for that iteration, are removed. The PhantomCollection is used 
-     to get a better estimate on the size of the bounding box for the  walkers and
-     to obtain starting positions for new walkers. In general the PhantomCollection 
-     contains an order of magnitude more items than the WalkerList itself. 
-   * NestedSampler has a new stopping criterion. It also stops when the log of the 
-     relative contribution to the logZ (evidence) integral is less than -tolerance (=12). 
-   * FootballModel: new class. Model to estimate strengths of football teams in 
-     several key parameters. 
-   * Address PhantomCollection and add **kwargs in all Engines
-   * Quadratic (in stead of linear) interpolation on edge in GalileanEngine
-   * Unnormalized Gauss prior changed into a normalized one
-   * Some documentation issues
-   * More dimensional arrays in LogFactorial
-   * __str__() method in NestedSolver and PhantomSampler
-   * Avoid numeric instabilities in sqrt in SampleList
-   * New tools in Tools
-   * More construction options in WalkerList
-   * New example: Uefa2022.ipynb
-   * New tests: TestPhantomCollection, TestFootballModel
-   * Adaptations in existing tests
-   * Reran all tests and examples
+
+ + 27 March 2024 version 3.2.1<br>
+   A lot of fairly small stuff.
+   * __status__ changed to Alpha for some newer additions
+   * Priors: 
+      - Adapt to input arrays 
+      - Made limited and/or circular
+      - Proper integral when limited
+   * Engines:
+      - Add bestCheck and bestBoost
+      - Minor restructoring
+   * Models:
+      - Minor restructoring and renaming
+      - setLimits() replaced by setPrior() in RepeatingModel
+      - provide for more dimensions of outputs in derivative
+   * Problems:
+      - toString() method restructured
+   * Walker and WalkerList:
+      - Add logPrior attribute
+      - Change in inheritance reporting
+   * PhantomCollection:
+      - getList() method
+   * NestedSampler:
+      - Add repiter attribute: report every repiter when verbose=2
+      - Add bestBoost
+   * ModelDistribution:
+      - put internal sample() method in try-except block
+   * Tools:
+      - subclassof() method
+      - printclass finetuning
+   * Test and documentation. Update.
+
 
 ## Content
 
@@ -175,6 +182,10 @@ will be usefull and it will generate feedback.
 According to Wikipedia -> "Software release life cycle" it is called 
 "Perpetual Beta". It continues to be in a beta-release because new 
 classes and features can be added.
+
+Some of the newer additions will be indicated as having and "Alpha" 
+status and keep that until they ripened somewhat further. 
+The classes are more prone to change in their interfaces, methods etc.
 
 More work needs to be done in:
 
@@ -399,8 +410,37 @@ More work needs to be done in:
  + 18 Jan 2023 version 3.1.1
    * remove GaussPriorNew from __init__.py
 
- +  7 July 2023 version 3.2.0
+ + 31 Aug 2023 version 3.2.0
+   * The new class, PhantomCollection is part of NestedSampler. It contains a sorted 
+     WalkerList, in which all valid positions are collected, proper walkers 
+     and phantoms. Each iteration the phantoms with log likelihood lower than the 
+     low limit for that iteration, are removed. The PhantomCollection is used 
+     to get a better estimate on the size of the bounding box for the  walkers and
+     to obtain starting positions for new walkers. In general the PhantomCollection 
+     contains an order of magnitude more items than the WalkerList itself. 
+   * NestedSampler has a new stopping criterion. It also stops when the log of the 
+     relative contribution to the logZ (evidence) integral is less than -tolerance (=12). 
+   * FootballModel: new class. Model to estimate strengths of football teams in 
+     several key parameters. 
+   * Address PhantomCollection and add **kwargs in all Engines
+   * Quadratic (in stead of linear) interpolation on edge in GalileanEngine
+   * Unnormalized Gauss prior changed into a normalized one
+   * Some documentation issues
+   * More dimensional arrays in LogFactorial
+   * __str__() method in NestedSolver and PhantomSampler
+   * Avoid numeric instabilities in sqrt in SampleList
+   * New tools in Tools
+   * More construction options in WalkerList
+   * New example: Uefa2022.ipynb
+   * New tests: TestPhantomCollection, TestFootballModel
+   * Adaptations in existing tests
+   * Reran all tests and examples
+
+ + 20 March 2024 version 3.2.1
    * See above in Whats new
+
+
+
 
 <br><br><br><br>
 

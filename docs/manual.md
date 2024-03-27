@@ -32,16 +32,18 @@ posterior.
 ## Quick Start
 
 
-The easiest way to get started with this package is to look into the 
-[examples](../BayesicFitting/examples) 
-directory and find an example that looks like the problem to be solved.
+The easiest way to get started with this package is to look into the [examples]
+(https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
+directory at github.com and find an example that looks like the problem 
+to be solved.
 
-To run the examples start a notebook by typing 
+To run the examples, find the examples directory or download it from github,
+and start a notebook in that directory by typing 
 
     jupyter notebook
 
-in the examples directory. Select the example in the list that appears in
-the browser. Copy and edit the example until it works on the problem at hand.
+Select the example in the list that appears in the browser. 
+Copy and edit the example until it works on the problem at hand.
 
 
 ## Contents
@@ -73,7 +75,7 @@ the classes.
 A document about coding style adhered to by this project.
 
 + [References](./references.md)  
-A list of external references for BayesisFitting.
+A list of external references for BayesicFitting.
 
 <a name="intro"></a>  
 ## 1. Introduction
@@ -86,7 +88,7 @@ selected order, etc. Similarly there are collections of **Fitter**s,
 **ErrorDistribution**s, **Prior**s and **Engine**s. 
 
 Each class and all of its methods are fully documented, using document
-strings.
+strings. See the Reference Manual.
 
 The classes can be divided into 3 broad categories **Model**s,
 **Fitter**s and classes pertaining to the **NestedSampler**. 
@@ -125,9 +127,9 @@ class.
 Assuming that `m` is a **Model**, all following attributes and methods are 
 defined.
 
-    np = m.nrpars                       # number of parameters in the model
+    np = m.npars                        # number of parameters in the model
     p = m.parameters                    # list of parameters of the model
-    nd = m.ndim	                        # number of dimensions in the model
+    nd = m.ndim	                        # number of input dimensions in the model
     r = m.result( xdata, pars )         # results of f(xdata:pars)
     r = m( xdata )                      # short for m.result( xdata, p )
     dfdp = m.partial( xdata, pars )     # partial derivative of f to p
@@ -141,11 +143,13 @@ defined.
 Most **Model**s are 1-dimensional i.e. they require a 1-dimensional
 input vector. Two- or more-dimensional models need 2 or more numbers for
 each result it produces. One could think of fitting  maps or cubes. The
-results of any model is always a 1-dimensional vector, except when 
-[not](#multioutput).
+results of any model is almost always a 1-dimensional vector, except 
+when it is a [multiple output model](#multioutput).
 
-In general, models of different dimensionality cannot be combined.
+In general, models of different dimensionality cannot be combined into
+[compound models](#compoundmodel).
 
+<a name="simplemodel"></a>
 ### Simple Models.
 
 Simple models are objects that are created by invoking one model class.
@@ -168,7 +172,7 @@ It has 3 parameters to be fitted.
 
 ![SimpleModels](images/manual-1.png "Figure 1")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 1 shows 3 simple models: PolynomialModel (blue), GaussModel (red) 
 and ArctanModel (green).
@@ -210,7 +214,7 @@ done with simple models.
 <a name="fixedmodel"></a>
 ### Fixed Models.
 
-Upon construction of a simple model the value(s) of one or more
+Upon construction of a simple model, the value(s) of one or more
 parameters can be fixed.  Either with a constant value, turning the
 model into one with less parameters, or with another **Model**. In the
 latter case the parameter is changing as the **Model**. Results and
@@ -238,7 +242,7 @@ See also the [mrs-fringes example](../BayesicFitting/examples/mrs-fringes.ipynb)
 
 ![FixedModels](images/manual-2.png "Figure 2")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 2 shows the 2 fixed models listed above: PolynomialModel (red)
 and ArctanModel (green).
@@ -251,13 +255,15 @@ parameters are fixed with constants.
 A fixed model is a **Model**, i.e. all actions valid for **Model**s can be 
 done with fixed models.
 
-
+<a name="compoundmodel"></a>
 ### Compound Models.
 
 **Model**s can be combined by various operations (+, -, *, /, |) into a new
 (compound) model. 
 The 4 arithmetic operators do the obvious: they take the results of both 
 models and apply the operation. 
+The last operation is a pipe. It feeds the output of the first model, as 
+input to the second model. 
 For compound models the (partial) derivatives, (parameter) names etc are 
 properly defined.
 
@@ -278,7 +284,7 @@ To construct an absorption line with a voigt profile on a constant background:
 
 ![CompoundModels1](images/manual-3.png "Figure 3")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 3 shows examples of Compound Models using addition and subtraction. 
 </td></tr>
@@ -306,7 +312,7 @@ in this case 1.0 for any value of `x`.
 
 ![CompoundModels2](images/manual-4.png "Figure 4")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 4 shows examples of Compound Models using multiplication and division.
 </td></tr>
@@ -355,7 +361,7 @@ models.
 
 ![CompoundModels3](images/manual-5.png "Figure 5")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 5 shows examples of Compound Models with a pipe.
 </td></tr>
@@ -397,7 +403,9 @@ Explicit placement of brackets can be done as m = m1 * ( m2 + m3 ).
 
 The **ConstantModel** returns the same (constant) result no matter what 
 the input. The result can be a single value (0, 1 or whatever) or the 
-result of another **Model** with known parameters or even a table.
+result of another **Model** with known parameters or even a table. 
+However, if a table is used, the table values are returned as result, 
+irrespective of whatever the input was.
 
 The **ConstantModel** has no parameters and strictly speaking, it can not
 be fitted. It states that the the data, except for the constant form, is
@@ -424,13 +432,17 @@ have a fixed separation. The remaining parameters are
 
 ![CombiModel](images/manual-c.png "Figure 6")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 6 shows example of a Combi Model.
 </td></tr>
 </table>
     
 See also the [combifit example](../BayesicFitting/examples/combifit.ipynb).
+
+A **Repeating Model** is another way to define a repetition of the same model.
+The difference is that **RepeatingModel**s can be [dynamic](#dynamic).
+
 
 ### Kernel Models
 
@@ -446,7 +458,7 @@ value is 0 everywhere except for a region around zero.
 
 ![KernelModels](images/manual-k.png "Figure 7")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 7 shows examples of KernelModels. The Biweight kernel is in blue;
 the Cosine in green. The remaining 3 are 0, 1 and 4 convolutions of Tophat.
@@ -466,13 +478,14 @@ Two dimensional kernel models also exist: **Kernel2dModel**. They come is
 
 ![Kernel2dModels](images/manual-k2.png "Figure 8")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 8 shows examples of Kernel2dModels. Lower left is a circular 2d
 kernel; lower right an elliptic one and in the upper center a rotated one. 
 </td></tr>
 </table>
 
+<a name="dynamic"></a>  
 ### Dynamic Models
 
 Dynamic models can alter their behaviour by changing the number of 
@@ -501,7 +514,7 @@ mdl3 consists of at least 1 repetition of a **GaussModel**, up to 6 repetions
 are possible, where all **GaussModel**s have the same value for the 2nd
 parameters (width).
 
-
+<a name="modifiable"></a>
 ### Modifiable Models
 
 Modifiable models can alter the internal structure of the model. E.g.
@@ -583,8 +596,8 @@ Other methods focus around the likelihood, which is maximized. Maximum
 likelihood is attained when the errors are minimal.
 Several likelihood functions are available in BayesicFitting. They are
 called [**ErrorDistribution**](#list-errdis).
-Using the **GaussErrorDistribution** is equivalent to using the
-least-squares method.
+Using the **GaussErrorDistribution**, while maximizing the likelihood 
+is equivalent to using the least-squares method.
 
 ### Data Quality.
 
@@ -613,6 +626,7 @@ squares of the stdevs. However weights do not need to be inverse
 variances; they could be derived in any other way. One specially usefull
 feature of the use of weights, is that some weights might be set to zero,
 causing those points not to contribute at all to the fit.
+
 
 #### Accuracy.
 
@@ -647,7 +661,7 @@ This package has 2 linear fitters: **Fitter** and **QRFitter**.
     
 ![LinFit](images/manual-6.png "Figure 9")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 9. A simple linear fit. The black dots are the data,
 the red line is the model and the green line a one-sigma
@@ -678,7 +692,7 @@ maximum likelihood fitters too.
 
 ![NonLinFit](images/manual-7.png "Figure 10")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 10. A non-linear fit.
 </td></tr>
@@ -711,8 +725,8 @@ and the [evidence](./glossary.md/#evidence).
     covar = ftr.covariance           # covariance matrix
     chisq = ftr.chisq                # chisq at the optimal params
     scale = ftr.scale                # scale of the remaining noise
-    yfit = ftr.getResult()           # fitted model values
-    yfit = model( xdata )            # same as previous
+    yfit  = ftr.getResult()          # fitted model values
+    yfit  = model( xdata )           # same as previous
     yband = ftr.monteCarloError()    # 1-sigma confidence region
 
 All items above are more or less derived from the covariance matrix at
@@ -742,8 +756,8 @@ scale. [Priors](./glossary.md/#prior) for the parameters are assumed to
 be Uniform, for the scale it is JeffreysPrior.
 
 It is up to the user to make sure that the optimal parameters and noise
-scale are well within the limits provided. Otherwise the gaussian evidence
-calculation is invalid.
+scale are well within the limits provided. Otherwise the gaussian 
+approximation of the evidence calculation is invalid.
 
     limits = [-100.0,100.0]             # either 2 floats: all pars same limit. Or
     lo = [-100.0, 0.0, 10.0]            # lower limits for the parameters
@@ -786,14 +800,14 @@ Or in the fit method itself.
     params = fitter.fit( ydata, keep={key:value} )
 
 to fix the parameter for this fit only.
-In both cases, key is a parameter index and value is a float at which
+In both cases, `key` is a parameter index and `value` is a float at which
 the parameter should be fixed.
 
 Note that [fixing the parameter in the model](#fixedmodel) replaces
 a parameter permanently with the chosen value. 
 
-See the [fix parameters example](../BayesicFitting/examples/fix-parameters.ipynb) for
-the suble differences between fixing the model, the fitter or the fit.. 
+See the [fix parameters example](../BayesicFitting/examples/fix-parameters.ipynb)
+for the suble differences between fixing the model, the fitter or the fit.
 
 ### Two or more dimensions.
 
@@ -821,8 +835,9 @@ map is set.
     print( mdl( fitter.xdata ).shape )      # the model however, returns  
     > [12]                                  # a 1-d version of y
 
-See [simplemap](../BayesicFitting/examples/simplemap.ipynb) for more about the use of the
-keyword "map". And [randommap](../BayesicFitting/examples/randommap.ipynb) for random
+See [simplemap](../BayesicFitting/examples/simplemap.ipynb) for more about 
+the use of the keyword `map`. 
+And [randommap](../BayesicFitting/examples/randommap.ipynb) for random
 observation in a 2-d object and about the explicit use of
 **ImageAssistant**.
 
@@ -850,7 +865,7 @@ governed by one of the [kernels](../BayesicFitting/source/kernels).
 
 ![RobustFit](images/manual-8.png "Figure 11")
 <table><tr>
-<td style="width: 50px;">  </td>
+<td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 11. A robust fit. The data points are in black; the outliers are
 red. The normal fit is the red line; the robust fit is green. In the
@@ -904,7 +919,7 @@ parameters and an **ErrorDistribution** to calculate the likelihoods.
 **PhantomSampler** is an extension of **NestedSampler**, in the sense 
 that it uses (some of) the intermediate positions that the walkers take 
 when they are wandered around by the **Engine**s. These positions are 
-commonly known as Phantoms. How many phantoms are used, is governed by 
+commonly known as phantoms. How many phantoms are used, is governed by 
 the keyword step=. In each iteration `step` percent of the ensemble is 
 replace by new phantom walkers. The benefits of the scheme is a step-fold
 increase in calculation speed; the downside is less precision and less
@@ -974,7 +989,7 @@ The **NestedSolver** returns the last (best) sample as the solution to the
 order problem.
 
 
-
+<a name="problem"></a>
 ### Problem
 
 The **Problem** classes have been introduced in version 2.0. They are
@@ -1012,7 +1027,7 @@ used to calculate the likelihood..
 
 The **EvidenceProblem** uses the evidence calculated for different
 instantiations of a **Modifiable** model, as "likelihood" in a next
-level of Bayes' rule to determine which of the instantiations is best.
+level of Bayes' theorem to determine which of the instantiations is best.
 The "likelihood" to be used here is the **ModelDistribution**. It
 calculates the evidence of the model either as a Gaussian approximation
 or by using **NestedSampler** on a **ClassicProblem**.
@@ -1025,6 +1040,7 @@ is found in some ordering of the data. The only example now is the
 See below for lists of available [**Problem**s](#list-problems). 
 More **Problem**s can be expected in later versions.
  
+<a name="samples"></a>
 ### Samples and SampleList
 
 A **Sample** is a collection of items.
@@ -1059,6 +1075,7 @@ provided in **SampleList**, all items derived from individual
 
 before averaging them.
     
+<a name="walkers"></a>
 ### Walkers and WalkerList.
 
 The internal ensemble of trial points is designed as a **WalkerList**, 
@@ -1078,7 +1095,7 @@ default `maxsize=None`.
     ns = NestedSampler( xdata, model, ydata, ensemble=200, discard=5,
                         threads=True, maxsize=5000 ) 
 
-
+<a name="prior"></a>
 ### Prior
 
 Before **NestedSampler** can be started with `ns.sample()` the **Model**
@@ -1120,6 +1137,7 @@ between the limits, or a float to define the period of circularity.
 
 See below for lists of available [**Prior**s](#list-priors).
 
+<a name="distribution"></a>
 ### ErrorDistribution
 
 The **ErrorDistribution** determines the likelihood function.
@@ -1167,7 +1185,10 @@ When the to be avoided condition occurs logL is returned as one less than the
 low likelihood limit so it will never be selected. 
 Otherwise logL should be returned unchanged. It should be noted that the 
 acceptable area should be large enough that it can reasonly be sampled randomly
-for an initial ensemble of **Walker**s.
+for an initial ensemble of **Walker**s. 
+Although the constrain is applied during the calculation of the likelihood, 
+it is actually a prior condition. It is known beforehand that there are areas 
+in the parameter space that are inaccessable cq. should be avoided.
 
 See below for lists of available [**ErrorDistribution**s](#list-errdis).
 
@@ -1176,9 +1197,10 @@ Previously it was called as `GaussErrorDistribution( xdata, ydata )`.
 Now the responsiblities of ErrorDistribution and Problem are better separated. 
 
 For the only **OrderProblem** at present we provide the **DistanceCostFunction** 
-to obtain a simile of the likelihood.
+to obtain a proxy of the likelihood.
 
 
+<a name="engine"></a>
 ### Engine
 
 An **Engine** is piece of programming that moves a walker around in
@@ -1233,6 +1255,25 @@ is selected only every slow-th iteration. With
 the **GibbsEngine** is selected every third iteration only. To be used for 
 expensive, biased or unbalanced **Engines**.
 
+<a name="phantoms"></a>
+### PhantomCollection
+
+The **PhantomCollection** collects all valid steps that each walker take 
+on their way to randomization. For non-dynamic models the **PhantomCollection**
+is just a **WalkerList** containing a walker at each step. For dynamic models, 
+it is a dictionary with the number of parameters as key and a **WalkerList** 
+as value. The **WalkerList**s are kept sorted according to their log Likelihood 
+and cropped to the present likelihood constraint. 
+
+The **PhantomCollection** is used as a proxy for a bounding box that encompasses 
+the accessable likelihood area, given the present likelihood constraint.
+
+Other uses of the **PhantomCollection** are under development.
+ 
+
+
+
+
 ### Other keyword arguments
 
 Just like the **Fitter**s **NestedSampler** can have a keywords
@@ -1240,6 +1281,15 @@ Just like the **Fitter**s **NestedSampler** can have a keywords
 known value. Both keywords act as in the **Fitter**s.
 Also analog to the fitters, the `sample()` method can have the
 keywords `keep` and `plot`.
+
+When the keyword `bestBoost` is set to `True`, every walker step is 
+checked whether it is the best in the **PhantomCollection**. 
+If so, a **Fitter** is run, starting from the best point to improve 
+it even further. As this is done in the **PhantomCollection**, it does 
+not affect the evidence calculation, but it could open a corridor
+to the top that otherwise might not be found. By default `bestBoost` 
+is `False`. Other options are `True`, using a **LevenbergMarquardtFitter**,
+or the name of some other (non-linear) fitter which is then used.
 
 The keyword `verbose` determines how much output the program generates.
 
@@ -1252,7 +1302,7 @@ The keyword `seed` seeds the random number generator, to ensure the same
 random sequence each run.
 
     ns = NestedSampler( xdata, model, ydata, weights=wgts, keep={0:1.0},
-                        seed=123456, verbose=2 ) 
+                        seed=123456, verbose=2, bestBoost=True ) 
     logE = ns.sample( keep={2:3.14}, plot=True )
 
 <a name="synopsis"></a>
@@ -1617,8 +1667,6 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **ChordEngine**<br>
     Select a random point on a chord sliced though the likelihood.
-+ **CrossEngine**<br>
-    Cross over between 2 walkers.
 + **GalileanEngine**<br>
     Move all parameters in forward steps, with mirroring on the edge.
 + **GibbsEngine**<br>
