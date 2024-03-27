@@ -7,9 +7,9 @@ from .Problem import Problem
 from .Sample import Sample
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class Walker( object ):
     """
@@ -46,10 +46,14 @@ class Walker( object ):
         id of the parent (-1 for Adam/Eve)
     start : int
         iteration in which the walker is constructed
+    step : int
+        number of randomization steps since copy
     problem : Problem
         the problem being addressed
     logL : float
         log Likelihood = log Prob( data | params )
+    logPrior : float
+        log Prior for the model
     allpars : array_like
         list of parameters and hyperparameters
     fitIndex : array_like
@@ -99,11 +103,13 @@ class Walker( object ):
             self.parent = parent
             self.problem = problem
             self.logL = logL
+            self.logPrior = 0
         else :
             self.start = copy.start
             self.parent = copy.parent
             self.problem = problem.copy()
             self.logL = copy.logL
+            self.logPrior = copy.logPrior
 
     def copy( self ):
         """
@@ -129,7 +135,7 @@ class Walker( object ):
         if np > nm :
             sample.nuisance = self.allpars[nm:np]
 
-        sample.logL = self.logL
+        sample.logL = self.logL + self.logPrior
         sample.logW = logW
         return sample
 
@@ -161,7 +167,7 @@ class Walker( object ):
             return
 
         key1 = {"id" : int, "parent" : int, "start" : int, "problem": Problem,
-                "logL" : float }
+                "logL" : float, "logPrior" : float }
         if Tools.setSingleAttributes( self, name, value, key1 ) :
             pass
         else :

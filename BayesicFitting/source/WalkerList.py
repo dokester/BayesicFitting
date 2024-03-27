@@ -2,12 +2,13 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
+from .Tools import setAttribute as setatt
 from .Walker import Walker
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.1"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 
 class WalkerList( list ):
@@ -120,7 +121,7 @@ class WalkerList( list ):
             self._count += 1
             self.append( walker )
 
-    def copy( self, src, des, wlist=None ):
+    def copy( self, src, des, wlist=None, start=0 ):
         """
         Copy one item of the list onto another.
 
@@ -132,14 +133,18 @@ class WalkerList( list ):
             the destination item
         wlist : WalkerList or None
             Copy from this WalkerList (None == self)
-
+        start : int
+            iteration where this walker was created
         """
         if wlist is None :
             wlist = self
 
         id = self[des].id
         self[des] = wlist[src].copy()
-        self[des].id = id
+        setatt( self[des], "id", id )
+        setatt( self[des], "parent", src )
+        setatt( self[des], "start", start )
+        setatt( self[des], "step", 0 )
 
 
     def logPlus( self, x, y ):
@@ -150,7 +155,9 @@ class WalkerList( list ):
 
     def firstIndex( self, lowL ) :
         """
-        Return index of the first walker with walker.logL > lowL
+        Return  index of the first walker with walker.logL > lowL, 
+                None if list is empty
+                len  if no item applies 
 
         Parameters
         ----------
@@ -238,7 +245,13 @@ class WalkerList( list ):
             the parameter to be selected. Default: all
 
         """
-        return numpy.asarray( [walker.allpars for walker in self] )
+        nap = max( [len( w.allpars ) for w in self] )
+
+        pe = numpy.zeros( ( len( self ), nap ), dtype=float )
+        for k, walker in enumerate( self ) :
+            pe[k,:len( walker.allpars )] = walker.allpars
+
+        return pe
 
     def getParameterEvolution( self, kpar=None ):
         """
