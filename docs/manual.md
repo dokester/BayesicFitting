@@ -118,7 +118,10 @@ indicated as **p** (or `pars`, `param` or `params`) and the dependent
 variable is called **y** (or `ydata`).
 The relation between them is a mathematical function **f**.
 
+{:comment}
 ![ManualEquation-1](images/maneq-1.png "Eq 1")
+{:/comment}
+$$ y = f(x:p) $$
 
 The result of the function together with its derivatives, parameter
 values, and other possibly usefull information is packed into the
@@ -160,7 +163,10 @@ Simple models are objects that are created by invoking one model class.
 Both `m1` and `m2` are simple models. The first assumes a linear relation 
 between `xdata` and `ydata`.
 
+{:comment}
 ![ManualEquation-2](images/maneq-2.png "Eq 2")
+{:/comment}
+$$ f(x:p) = p_0 + p_1 x $$
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
