@@ -169,10 +169,11 @@ Simple models are objects that are created by invoking one model class.
 Both `m1` and `m2` are simple models. The first assumes a linear relation 
 between `xdata` and `ydata`.
 
-{:comment}
+<!--
 ![ManualEquation-2](images/maneq-2.png "Eq 2")
-{:/comment}
-$$ f(x:p) = p_0 + p_1 x $$
+-->
+
+$$ \showleft{ f(x:p) = p_0 + p_1 x } $$
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
