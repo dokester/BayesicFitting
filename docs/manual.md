@@ -123,10 +123,10 @@ The relation between them is a mathematical function **f**.
 -->
 
 $$ 
-\begin{flushleft}
+\begin{equation}
 \tag{1}
-y = f(x:p) 
-\end{flushleft}
+y = f(x:p)
+\end{equation}
 $$
 
 The result of the function together with its derivatives, parameter
