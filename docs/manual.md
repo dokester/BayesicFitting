@@ -173,7 +173,7 @@ between `xdata` and `ydata`.
 ![ManualEquation-2](images/maneq-2.png "Eq 2")
 -->
 
-$$ \showleft{ f(x:p) = p_0 + p_1 x } $$
+$$ \shoveleft{ f(x:p) = p_0 + p_1 x } $$
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
