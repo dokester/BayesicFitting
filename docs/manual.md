@@ -122,7 +122,12 @@ The relation between them is a mathematical function **f**.
 ![ManualEquation-1](images/maneq-1.png "Eq 1")
 -->
 
-$$ y = f(x:p) $$
+$$ 
+\begin{flushleft}
+\tag{1}
+y = f(x:p) 
+\end{flushleft}
+$$
 
 The result of the function together with its derivatives, parameter
 values, and other possibly usefull information is packed into the
