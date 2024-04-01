@@ -118,9 +118,10 @@ indicated as **p** (or `pars`, `param` or `params`) and the dependent
 variable is called **y** (or `ydata`).
 The relation between them is a mathematical function **f**.
 
-{:comment}
+<!--
 ![ManualEquation-1](images/maneq-1.png "Eq 1")
-{:/comment}
+-->
+
 $$ y = f(x:p) $$
 
 The result of the function together with its derivatives, parameter
