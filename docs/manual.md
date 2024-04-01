@@ -174,10 +174,10 @@ between `xdata` and `ydata`.
 -->
 
 $$ 
-\begin{equation}
+\begin{multiline}
 \tag{2}
-\shoveleft{ f(x:p) = p_0 + p_1 x }
-\end{equation}
+\shoveleft{ f(x:p) = p_0 + p_1 x }\\
+\end{multiline}
 $$
 
 It has 2 parameters that can be optimized to fit the `ydata`.
@@ -190,9 +190,8 @@ The second model `m2` encapsulates the function
 
 $$ 
 \begin{equation}
-\tag{2}
+\tag{3}
 f(x:p) = p_0 \exp{ -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 }
-\hfill
 \end{equation}
 $$
 
