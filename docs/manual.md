@@ -173,13 +173,28 @@ between `xdata` and `ydata`.
 ![ManualEquation-2](images/maneq-2.png "Eq 2")
 -->
 
-$$ \shoveleft{ f(x:p) = p_0 + p_1 x } $$
+$$ 
+\begin{equation}
+\tag{2}
+\shoveleft{ f(x:p) = p_0 + p_1 x }
+\end{equation}
+$$
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
 The second model `m2` encapsulates the function
 
+<!--
 ![ManualEquation-3](images/maneq-3.png "Eq 3")
+-->
+
+$$ 
+\begin{equation}
+\tag{2}
+f(x:p) = p_0 \exp{ -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 }
+\hfill
+\end{equation}
+$$
 
 It has 3 parameters to be fitted.
 
