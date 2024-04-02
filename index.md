@@ -8,8 +8,8 @@
 
 # UNDER CONSTRUCTION
 
-[Manual]({% /docs/manual.md %})
+[Manual](./docs/manual.md)
 
 
 
-{% include README.md %}
+
