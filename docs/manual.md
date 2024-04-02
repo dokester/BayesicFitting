@@ -191,6 +191,7 @@ The second model `m2` encapsulates the function
 $$ 
 \begin{flalign}
 \tag{3}
+\quad 
 f(x:p) = p_0 \exp\left( -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 \right)&&
 \end{flalign}
 $$
@@ -354,19 +355,55 @@ result of the left-hand model is used as input of the right-hand model.
 
 When m<sub>1</sub>, m<sub>2</sub> and m<sub>3</sub> are models implementing
 
+<!--
 ![ManualEquation-4](images/maneq-4.png "Eq 4")
+-->
+
+$$ 
+\begin{flalign}
+\tag{4}
+\quad m_1 = f_1(x:p) && \notag \\
+\quad m_2 = f_2(x:q) && \notag \\
+\quad m_3 = f_3(x:r) && 
+\end{flalign}
+$$
+
 
 then
 
+<!--
 ![ManualEquation-5](images/maneq-5.png "Eq 5")
+-->
+
+$$ 
+\begin{flalign}
+\quad m_4 = m_1 | m_2 = f_2(f_1(x:p):q) &&
+\end{flalign}
+$$
 
 The input of m<sub>2</sub> is relacced by the result of m<sub>1</sub>. While in case of
 
+<!--
 ![ManualEquation-6](images/maneq-6.png "Eq 6")
+-->
+
+$$ 
+\begin{flalign}
+\quad m_5 = m_1 | m_2 + m_3 = f_2(f_1(x:p):q) + f_3(x:r) &&
+\end{flalign}
+$$
 
 the m1 only influences m2, not m3. To influence both m<sub>2</sub> and m<sub>3</sub>, brackets are needed.
 
+<!--
 ![ManualEquation-7](images/maneq-7.png "Eq 7")
+-->
+
+$$ 
+\begin{flalign}
+\quad m_5 = m_1 | ( m_2 + m_3 ) = f_2(f_1(x:p):q) + f_3(f_1(x:p):r) &&
+\end{flalign}
+$$
 
 
 This is the only place where a 2-d model can be combined with a 1-d
