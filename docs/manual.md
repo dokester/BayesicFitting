@@ -123,10 +123,10 @@ The relation between them is a mathematical function **f**.
 -->
 
 $$ 
-\begin{equation}
+\begin{flalign}
 \tag{1}
-y = f(x:p)
-\end{equation}
+\quad y = f(x:p) &&
+\end{flalign}
 $$
 
 The result of the function together with its derivatives, parameter
@@ -174,10 +174,10 @@ between `xdata` and `ydata`.
 -->
 
 $$ 
-\begin{eqnarray}
+\begin{flalign}
 \tag{2}
-\shoveleft{ f(x:p) &=& p_0 + p_1 x }
-\end{eqnarray}
+\quad f(x:p) = p_0 + p_1 x &&
+\end{flalign}
 $$
 
 It has 2 parameters that can be optimized to fit the `ydata`.
