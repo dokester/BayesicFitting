@@ -648,7 +648,17 @@ The methods are compared with numeric calculations of df/dp and df/dx.
 A **Fitter** is an algorithm that minimizes the errors **&epsilon;**,
 the differences between the data, **y**, and the model, **f(x:p)**.
 
+<!--
 ![ManualEquation-8](images/maneq-8.png "Eq 8")
+-->
+
+$$ 
+\begin{flalign}
+\tag{8}
+\quad \epsilon = y - f(x:p) &&
+\end{flalign}
+$$
+
 
 The best fit is found through optimization of the parameters **p**.
 Traditionally this is done by finding the minimum of
