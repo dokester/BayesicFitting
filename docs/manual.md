@@ -191,7 +191,7 @@ The second model `m2` encapsulates the function
 $$ 
 \begin{flalign}
 \tag{3}
-f(x:p) = p_0 \exp\left( -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 \right)
+f(x:p) = p_0 \exp\left( -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 \right)&&
 \end{flalign}
 $$
 
