@@ -362,8 +362,8 @@ When m<sub>1</sub>, m<sub>2</sub> and m<sub>3</sub> are models implementing
 $$ 
 \begin{flalign}
 \tag{4}
-\quad m_1 = f_1(x:p) && \notag \\
-\quad m_2 = f_2(x:q) && \notag \\
+\quad m_1 = f_1(x:p) && \\
+\quad m_2 = f_2(x:q) && \\
 \quad m_3 = f_3(x:r) && 
 \end{flalign}
 $$
@@ -377,6 +377,7 @@ then
 
 $$ 
 \begin{flalign}
+\tag{5}
 \quad m_4 = m_1 | m_2 = f_2(f_1(x:p):q) &&
 \end{flalign}
 $$
@@ -389,6 +390,7 @@ The input of m<sub>2</sub> is relacced by the result of m<sub>1</sub>. While in 
 
 $$ 
 \begin{flalign}
+\tag{6}
 \quad m_5 = m_1 | m_2 + m_3 = f_2(f_1(x:p):q) + f_3(x:r) &&
 \end{flalign}
 $$
@@ -401,6 +403,7 @@ the m1 only influences m2, not m3. To influence both m<sub>2</sub> and m<sub>3</
 
 $$ 
 \begin{flalign}
+\tag{7}
 \quad m_5 = m_1 | ( m_2 + m_3 ) = f_2(f_1(x:p):q) + f_3(f_1(x:p):r) &&
 \end{flalign}
 $$
