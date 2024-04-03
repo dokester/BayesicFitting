@@ -36,7 +36,7 @@ toolbox. More extensive information on them can be found in the
 [examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
 section.
 
-TBD 10
+TBD 11
 
 
 
