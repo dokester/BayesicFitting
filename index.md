@@ -1,5 +1,5 @@
 ---
-navcon: [Manual](./docs/manual.md)
+navcon: [Manual]
 ---
 
 BayesicFitting is a toolbox for the fitting of models to data in a Bayesian way.
@@ -18,7 +18,7 @@ classes. Another third are fitters in one guise or another and miscelleaneous st
 The remaining third is needed for Nested Sampling, a novel way to solve Bayesian
 inference problems, developed by John Skilling and David MacKay.
 
-The package is stored at [giyhub](https://github.com/dokester/BayesicFitting)
+The package is stored at [github](https://github.com/dokester/BayesicFitting)
 and [pypi](https://pypi.org/project/BayesicFitting/).
 The easiest way to install it is via
 
@@ -31,10 +31,12 @@ A design document about the structure of the package. A glossary
 defining the term used and a help document about restrictions and trouble
 shooting. All can be found in the sidebar.  
 
-The pictures on the right side are a few examples of what can achieved with the 
+The pictures below are a few examples of what can achieved with the 
 toolbox. More extensive information on them can be found in the 
+[examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
+section.
 
-
+TBD
 
 
 
