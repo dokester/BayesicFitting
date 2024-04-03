@@ -1,5 +1,5 @@
 ---
-navcon: [{% link ./docs/manual.md %}]
+navcon: [./docs/]
 ---
 
 BayesicFitting is a toolbox for the fitting of models to data in a Bayesian way.
