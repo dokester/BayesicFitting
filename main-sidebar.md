@@ -9,5 +9,4 @@
 
 [design](./docs/design.md)
 
-[code](./docs/code-style.md)
 
