@@ -40,11 +40,7 @@
 
         <aside id="sidebar">
           <p>
-            {% for asset in page.navcon %}
-              {% if asset.path contains 'md' %} 
-                <a href="{{ asset.path | relative_url }}">{{ asset.path }}</a>
-              {% endif %}
-            {% endfor %}
+            {% include {{ page.navcon }} %}
           </p>
 
           {% if site.show_downloads %}
