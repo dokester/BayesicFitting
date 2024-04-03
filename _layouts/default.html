@@ -39,9 +39,8 @@
         </section>
 
         <aside id="sidebar">
-          <p>
-            {% include_relative {{ page.navcon }} %}
-          </p>
+
+          {% include_relative {{ page.navcon }} %}
 
           {% if site.show_downloads %}
             <a href="{{ site.github.zip_url }}" class="button">
