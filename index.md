@@ -1,5 +1,5 @@
 ---
-navcon: [main-sidebar.md]
+navcon: [./main-sidebar.md]
 ---
 
 BayesicFitting is a toolbox for the fitting of models to data in a Bayesian way.
@@ -36,7 +36,7 @@ toolbox. More extensive information on them can be found in the
 [examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
 section.
 
-TBD TBD TBD
+TBD TBD TBD TBD
 
 
 
