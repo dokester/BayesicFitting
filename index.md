@@ -36,7 +36,7 @@ toolbox. More extensive information on them can be found in the
 [examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
 section.
 
-Link to [readme](./README.md].
+Link to [readme](./README.md).
 
 
 
