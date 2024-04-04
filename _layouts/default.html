@@ -41,14 +41,8 @@
         <aside id="sidebar" font-size=15px>
 
           {% if page.navcon  %}
-	    {% include {{ page.navcon }} %}
+	    {% include_relative {{ page.navcon }} %}
           {% endif %}
-
-          <!--
-          <a href="./docs/manual.md">manual</a>
-
-          <a href="./docs/troubles.md">trouble</a>
-          -->
 
           {% if site.show_downloads %}
             <a href="{{ site.github.zip_url }}" class="button">
