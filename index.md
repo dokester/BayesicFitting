@@ -1,5 +1,5 @@
 ---
-navcon: home-sidebar.html
+navcon: home-sidebar.md
 ---
 
 BayesicFitting is a toolbox for the fitting of models to data in a Bayesian way.
