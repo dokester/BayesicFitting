@@ -1,3 +1,7 @@
+---
+navcon: main-sidebar.html
+---
+
 # BayesicFitting Readme.
 
 A package for model fitting and Bayesian evidence calculation.
