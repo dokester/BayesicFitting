@@ -34,13 +34,13 @@
 
     <div id="content-wrapper">
       <div class="inner clearfix">
-        <section id="main-content">
+        <section id="main-content" name="mainpage">
           {{ content }}
         </section>
 
         <aside id="sidebar">
 
-	  {% include main-sidebar.html %}
+	  {% include {{navcon}} %}
 
           <!--
           <a href="./docs/manual.md">manual</a>
