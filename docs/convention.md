@@ -27,30 +27,31 @@ constants and should not be changed.
 in python the difference between private and public exists only by
 convention. 
 
-## Coding conventions<br>
+## Coding conventions
+
 Code statements should read like sentences optimized for the user/coder
 to read. The computer does not care as long as it is grammatically
 correct. See [Obfuscated C](https://ioccc.org), a competition in writing 
-unreadable, but working code for a bad example. 
+unreadable but working code, for a bad example. 
 
-  + Readable sentences have spaces between words. Operators are words: + reads
-as "plus", = reads as "is". So operators have spaces on each side. <br>
-Except when the "=" is part of a keyword argument. In that case there are 
+  + Readable sentences have spaces between words. Operators are words: `+` reads
+as "plus", `=` reads as "is". So operators have spaces on each side. <br>
+Except when the `=` is part of a keyword argument. In that case there are 
 no spaces around it. To visually connect the argument to the keyword.
 
-  + Brackets as ()[]{} have spaces too if they are selfstanding. E.g. in
+  + Brackets as `()[]{}` have spaces too if they are selfstanding. E.g. in
 grouping things together, in equations, tuples, lists or dictionaries. 
 
-  + If parentheses, (), are part of a function the opening parenthesis
+  + If parentheses, `()`, are part of a function the opening parenthesis
 clings to the functionname, followed by a space. The closing one is
 preceeded and followed by a space.
 
-  + Brackets, [], that index an array or a dictionary, have no spaces at
+  + Brackets, `[]`, that index an array or a dictionary, have no spaces at
 all, indicating the close connection between the index and the indexed
 item.
 
   + The same close relationship exists between an object and its methods or
-attributes. So the connecting dot, ., has no spaces.
+attributes. So the connecting dot, `.`, has no spaces.
 
   + The comma is fuctioning as a punctuation mark, separating items in a
 list or a dictionary. So it has a space after it, but not before.
