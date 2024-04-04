@@ -1,5 +1,5 @@
 ---
-navcon: main-sidebar.html
+navcon: home-sidebar.html
 ---
 
 # BayesicFitting Readme.
