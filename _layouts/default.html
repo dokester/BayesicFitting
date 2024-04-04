@@ -40,7 +40,9 @@
 
         <aside id="sidebar">
 
-	  {% include {{page.navcon}} %}
+          {% if page.navcon  %}
+	    {% include {{ page.navcon }} %}
+          {% endif %}
 
           <!--
           <a href="./docs/manual.md">manual</a>
