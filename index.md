@@ -7,9 +7,9 @@ navcon: home-sidebar.md
 |---
 | Global | Documentation | Notes | Examples
 |:-|:-|:-|:-
-| [Home](index.md) | [manual](./docs/manual.md) | TBD | TBD |
-| [readme](./README.md) | [glossary](./docs/glossary.md) |  |  |
-|  | [design](./docs/design.md) |  |  |
+| [Home](index.md) | [Manual](./docs/manual.md) | TBD | TBD |
+| [Readme](./README.md) | [Glossary](./docs/glossary.md) |  |  |
+|  | [Design](./docs/design.md) |  |  |
 |---
 
 

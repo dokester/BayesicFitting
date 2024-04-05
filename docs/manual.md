@@ -6,23 +6,6 @@
 
 # BayesicFitting Manual
 
-
-|---
-| Contents | Global | Documentation | Notes |                      
-|:-|:-|:-|:-
-|  | [Home](../index.md) | [manual](./docs/manual.md) | TBD |
-|  | [readme](../README.md) | [glossary](./docs/glossary.md) |  |
-|  | [design](./docs/design.md) |  |          
-|---
-
-
-
-
-
-
-
-
-
 ## Bayesian model fitting and evidence calculation.
 
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
@@ -64,37 +47,19 @@ and start a notebook in that directory by typing
 Select the example in the list that appears in the browser. 
 Copy and edit the example until it works on the problem at hand.
 
-
 ## Contents
-1. [Introduction](#intro)
-2. [Imports](#imports)
-3. [Models](#models)
-4. [Fitters](#fitters)
-5. [NestedSampler](#ns)
-6. [Synopsis](#synopsis)  
-    + [Models](#synops-model)  
-    + [Fitters](#synops-fitter)  
-    + [NestedSampler](#synops-ns)  
-    + [Kernels](#synops-kernel)  
-    + [Miscellaneous](#synops-miscel)  
 
-## External Documents
+|---
+| Contents | Global | Documentation | Notes |                      
+|:-|:-|:-|:-
+| [Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
+| [Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
+| [Models](#models) | | [Design](./docs/design.md) |  |          
+| [Fitters](#fitters) | | [Troubles](./troubles.md) | |
+| [NestedSampler](#ns) | | [Style](./code-style.md) | |
+| [Synopsis](#synopsis) | | [References](./references.md) | |
+|---
 
-+ [Glossary](./glossary.md)<br>
-A list of the terms used throughout this package, with explanations.
-
-+ [Troubles](./troubles.md)<br>
-A list of troublesome situations and what to do about it.
-
-+ [Design](./design.md)<br>
-An architectural design document, displaying the relationships between 
-the classes. 
-
-+ [Style](./code-style.md)<br>
-A document about coding style adhered to by this project.
-
-+ [References](./references.md)  
-A list of external references for BayesicFitting.
 
 <a name="intro"></a>  
 ## 1. Introduction
