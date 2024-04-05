@@ -4,10 +4,8 @@
 ## Some Links
 
 + [home](https://dokester.github.io/BayesicFitting)
-+ [readme](./README.md)
-+ [manual](./docs/manual.md)
-+ [troubles](./docs/troubles.md)
-+ [design](./docs/design.md)
++ [readme]({{ site.baseurl }} {% link ./README.md %})
++ [manual]({{ site.baseurl }} {% link docs/manual.md %})
 
 
 
