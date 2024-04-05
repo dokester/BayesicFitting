@@ -38,7 +38,7 @@ section.
 
 Link to [readme](./README.md).
 
-
+Link to [manual](./docs/manual.md).
 
 
 
