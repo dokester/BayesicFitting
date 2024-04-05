@@ -8,6 +8,21 @@
 
 ## Bayesian model fitting and evidence calculation.
 
+## Contents
+
+
+| Contents | Global | Documentation | Notes |                      
+|:-|:-|:-|:-
+| [Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
+| [Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
+| [Models](#models) | | [Design](./docs/design.md) |  |          
+| [Fitters](#fitters) | | [Troubles](./troubles.md) | |
+| [NestedSampler](#ns) | | [Style](./code-style.md) | |
+| [Synopsis](#synopsis) | | [References](./references.md) | |
+
+
+## Abstract
+
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
 [Kester and Mueller (2021)](./references.md/#kester8) or find it directly
 [here](https://www.sciencedirect.com/science/article/pii/S2213133721000573).
@@ -47,18 +62,6 @@ and start a notebook in that directory by typing
 Select the example in the list that appears in the browser. 
 Copy and edit the example until it works on the problem at hand.
 
-## Contents
-
-|---
-| Contents | Global | Documentation | Notes |                      
-|:-|:-|:-|:-
-| [Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
-| [Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
-| [Models](#models) | | [Design](./docs/design.md) |  |          
-| [Fitters](#fitters) | | [Troubles](./troubles.md) | |
-| [NestedSampler](#ns) | | [Style](./code-style.md) | |
-| [Synopsis](#synopsis) | | [References](./references.md) | |
-|---
 
 
 <a name="intro"></a>  
