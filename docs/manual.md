@@ -13,15 +13,18 @@
 
 | Contents | Global | Documentation | Notes                      
 |:-|:-|:-|:-|
-| [Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
-| [Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
-| [Models](#models) | | [Design](./docs/design.md) |  |          
-| [Fitters](#fitters) | | [Troubles](./troubles.md) | |
-| [NestedSampler](#ns) | | [Style](./code-style.md) | |
-| [Synopsis](#synopsis) | | [References](./references.md) | |
+| [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
+| [2. Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
+| [3. Models](#model) | | [Design](./docs/design.md) |  |          
+| [4. Fitters](#fitter) | | [Troubles](./troubles.md) | |
+| [5. NestedSampler](#ns) | | [Style](./code-style.md) | |
+| [6. Synopsis](#synopsis) | | [References](./references.md) | |
 
 
-## Abstract
+<a name="intro"></a>  
+## 1. Introduction
+
+### Abstract
 
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
 [Kester and Mueller (2021)](./references.md/#kester8) or find it directly
@@ -46,7 +49,7 @@ approximation, or in case of NestedSampler by integrating over the
 posterior.
 
 <a name="quickstart"></a>
-## Quick Start
+### Quick Start
 
 
 The easiest way to get started with this package is to look into the [examples]
@@ -63,9 +66,7 @@ Select the example in the list that appears in the browser.
 Copy and edit the example until it works on the problem at hand.
 
 
-
-<a name="intro"></a>  
-## 1. Introduction
+### Structure
 
 The toolbox contains over 100 classes. Each class forms an object that
 encapsulates several methods. The name of the class is a good
@@ -95,7 +96,7 @@ which imports all classes. In the remainder of this manual it is assumed
 that all necessary imports have been performed in the code listed.
 
 
-<a name="models"></a>
+<a name="model"></a>
 ## 3. Models 
 
 A model is a class that encapsulates a relation between independent 
@@ -629,7 +630,7 @@ correctness of the (partial) derivatives can be checked with the method
 
 The methods are compared with numeric calculations of df/dp and df/dx.
 
-<a name="fitters"></a>
+<a name="fitter"></a>
 ## 4. Fitters 
 
 A **Fitter** is an algorithm that minimizes the errors **&epsilon;**,
@@ -1784,92 +1785,21 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 **Kernel2dModel**. They also find use in the **RobustShell**.
 
 
-<table>
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 10px;
-}
-</style>
-
-<tr>
-  <th>name</th>
-  <th>function</th>
-  <th>bound</th>
-  <th>comment</th>
-</tr>
-<tr>
-  <td><b>Biweight</b></td>
-  <td>( 1-x<sup>2</sup> )<sup>2</sup></td> 
-  <td>true</td>
-</tr>
-<tr>
-  <td><b>CosSquare</b></td>
-  <td>cos<sup>2</sup>( 0.5 &pi; x )</td>
-  <td>true</td>
-</tr>
-<tr>
-  <td><b>Cosine</b></td>
-  <td>cos( 0.5 &pi; x )</td> 
-  <td>true</td>
-</tr>
-<tr>
-  <td><b>Gauss</b></td>
-  <td>exp( -0.5 x<sup>2</sup> )</td> 
-  <td>false</td>
-</tr>
-<tr>
-  <td><b>Huber</b></td>
-  <td>min( 1, 1/|x| )</td> 
-  <td>false</td>
-  <td>improper because infinite integral</td>
-</tr>
-<tr>
-  <td><b>Lorentz</b></td>
-  <td>1 / ( 1 + x<sup>2</sup> )</td> 
-  <td>false</td>
-</tr>
-<tr>
-  <td><b>Parabola</b></td>
-  <td>1 - x<sup>2</sup></td> 
-  <td>true</td>
-</tr>
-<tr>
-  <td><b>Sinc</b></td>
-  <td>sin(x) / x</td> 
-  <td>false</td>
-  <td>do not use in <b>RobustShell</b></td>
-</tr>
-<tr>
-  <td><b>Tophat</b></td>
-  <td>convolution</td> 
-  <td>true</td>
-  <td>0 to 6 convolutions of Uniform
-</tr>
-<tr>
-  <td><b>Triangle</b></td>
-  <td>1 - |x|</td> 
-  <td>true</td>
-</tr>
-<tr>
-  <td><b>Tricube</b></td>
-  <td>( 1 - |x|<sup>3</sup> )<sup>3</sup></td> 
-  <td>true</td>
-</tr>
-<tr>
-  <td><b>Triweight</b></td>
-  <td>( 1 - x<sup>2</sup> )<sup>3</sup></td>  
- <td>true</td>
-</tr>
-<tr>
-  <td><b>Uniform</b></td>
-  <td>1.0</td> 
-  <td>true</td>
-</tr>
-</table>
+| Name | Function | Bound | Comment |
+|:-|:-|:-|:-|
+| **Biweight** | $$ ( 1-x^2 )^2 $$ | true |
+| **CosSquare** | $$ \cos^2 ( 0.5 \pi x ) $$ | true |
+| **Cosine** | $$ \cos( 0.5 \pi x ) $$ | true |
+| **Gauss** | $$ \exp( -0.5 x^2 ) $$ | false |
+| **Huber** | $$ \min( 1, 1/|x| $$ ) | false | improper because infinite integral
+| **Lorentz** | $$ 1 / ( 1 + x^2 ) $$ | false |
+| **Parabola** | $$ 1 - x^2 $$ | true |
+| **Sinc** | $$ \sin(x) / x $$ | false | do not use in **RobustShell** |
+| **Tophat** | convolution | true | 0 to 6 convolutions of Uniform
+| **Triangle** | $$ 1 - |x| $$ | true |
+| **Tricube** | $$ ( 1 - |x|^3 )^3 $$ | true |
+| **Triweight** | $$ ( 1 - x^2 )^3 $$ | true |
+| **Uniform** | $$ 1.0 $$ | true |
 
 
 <a name="synops-miscel"></a>
