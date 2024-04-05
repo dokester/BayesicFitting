@@ -41,7 +41,7 @@
         <aside id="sidebar" font-size=15px>
 
           {% if page.navcon  %}
-	    {% include_relative {{ page.navcon | markdownify }} %}
+	    {{ page.navcon | markdownify }}
           {% endif %}
 
           {% if site.show_downloads %}
