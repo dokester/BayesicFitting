@@ -1787,19 +1787,19 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 
 | Name | Function | Bound | Comment |
 |:-|:-|:-|:-|
-| **Biweight** | $$ ( 1-x^2 )^2 $$ | true | |
-| **CosSquare** | $$ \cos^2 ( 0.5 \pi x ) $$ | true | |
-| **Cosine** | $$ \cos( 0.5 \pi x ) $$ | true | |
-| **Gauss** | $$ \exp( -0.5 x^2 ) $$ | false | |
-| **Huber** | $$ \min( 1, 1/\vert x \vert $$ ) | false | improper because infinite integral
-| **Lorentz** | $$ 1 / ( 1 + x^2 ) $$ | false | |
-| **Parabola** | $$ 1 - x^2 $$ | true | |
-| **Sinc** | $$ \sin(x) / x $$ | false | do not use in **RobustShell** |
+| **Biweight** | ( 1-x^2 )^2 | true | |
+| **CosSquare** | \cos^2 ( 0.5 \pi x ) | true | |
+| **Cosine** | \cos( 0.5 \pi x ) | true | |
+| **Gauss** | \exp( -0.5 x^2 ) | false | |
+| **Huber** | \min( 1, 1/\|x\| ) | false | improper because infinite integral
+| **Lorentz** | 1 / ( 1 + x^2 ) | false | |
+| **Parabola** | 1 - x^2 | true | |
+| **Sinc** | \sin(x) / x | false | do not use in **RobustShell** |
 | **Tophat** | convolution | true | 0 to 6 convolutions of Uniform |
-| **Triangle** | $$ 1 - \vert x \vert $$ | true | |
-| **Tricube** | $$ ( 1 - \vert x \vert^3 )^3 $$ | true | |
-| **Triweight** | $$ ( 1 - x^2 )^3 $$ | true | |
-| **Uniform** | $$ 1.0 $$ | true | |
+| **Triangle** | 1 - \|x\| | true | |
+| **Tricube** | ( 1 - \|x\|^3 )^3 | true | |
+| **Triweight** | ( 1 - x^2 )^3 | true | |
+| **Uniform** | 1.0 | true | |
 
 
 <a name="synops-miscel"></a>
