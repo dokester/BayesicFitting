@@ -1,5 +1,5 @@
 ---
-
+img1: docs/images/Julius-experiment_6_0.png
 ---
 
 
@@ -1788,13 +1788,13 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 | Name | Function | Bound | Comment |
 |:-|:-|:-|:-|
 | **Biweight** | ( 1-x^2 )^2 | true | |
-| **CosSquare** | \cos^2 ( 0.5 \pi x ) | true | |
-| **Cosine** | \cos( 0.5 \pi x ) | true | |
-| **Gauss** | \exp( -0.5 x^2 ) | false | |
-| **Huber** | \min( 1, 1/\|x\| ) | false | improper because infinite integral
+| **CosSquare** | cos^2 ( 0.5 &pi; x ) | true | |
+| **Cosine** | cos( 0.5 &pi; x ) | true | |
+| **Gauss** | exp( -0.5 x^2 ) | false | |
+| **Huber** | min( 1, 1/\|x\| ) | false | improper because infinite integral
 | **Lorentz** | 1 / ( 1 + x^2 ) | false | |
 | **Parabola** | 1 - x^2 | true | |
-| **Sinc** | \sin(x) / x | false | do not use in **RobustShell** |
+| **Sinc** | sin(x) / x | false | do not use in **RobustShell** |
 | **Tophat** | convolution | true | 0 to 6 convolutions of Uniform |
 | **Triangle** | 1 - \|x\| | true | |
 | **Tricube** | ( 1 - \|x\|^3 )^3 | true | |
