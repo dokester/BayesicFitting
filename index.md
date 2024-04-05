@@ -36,6 +36,14 @@ toolbox. More extensive information on them can be found in the
 [examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
 section.
 
+|---
+| Global | Documentation | Notes | Examples
+|:-|:-|:-|:-
+| [Home](index.md) | [manual](.docs/manual.md) | TBD | TBD |
+| [readme](./README.md) | [glossary](./docs/glossary.md) |  |  |
+|  | [design](./docs/design.md) |  |  |
+|---
+
 Link to [readme](./README.md).
 
 Link to [manual](./docs/manual.md).
