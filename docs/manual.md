@@ -11,8 +11,8 @@
 ## Contents
 
 
-| Contents | Global | Documentation | Notes |                      
-|:-|:-|:-|:-
+| Contents | Global | Documentation | Notes                      
+-----------------------
 | [Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
 | [Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
 | [Models](#models) | | [Design](./docs/design.md) |  |          
