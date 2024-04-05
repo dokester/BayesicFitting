@@ -1,5 +1,7 @@
 ---
-img1: docs/images/Julius-experiment_6_0.png
+img1: ./images/Julius-experiment_6_0.png
+img2: ./images/Gregory.png
+
 ---
 
 

@@ -40,13 +40,15 @@
 
         <aside id="sidebar" font-size=15px>
 
-          {% if page.navcon  %}
-	    {{ page.navcon | markdownify }}
+          {% if page.img1 %}
+           <img src={{ page.img1 }} title="Figure 1" />
           {% endif %}
           <p>
-          <img src="docs/images/temp-rijn2.png" title="Figure 1" /></p>
+          {% if page.img2 %}
+           <img src={{ page.img2 }} title="Figure 2" />
+          {% endif %}
           <p>
-          <img src={{ page.img1 }} title="Figure 2" /></p>
+
 
 
           {% if site.show_downloads %}
