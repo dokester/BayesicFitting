@@ -6,6 +6,23 @@
 
 # BayesicFitting Manual
 
+
+|---
+| Contents | Global | Documentation | Notes |                      
+|:-|:-|:-|:-
+|  | [Home](../index.md) | [manual](./docs/manual.md) | TBD |
+|  | [readme](../README.md) | [glossary](./docs/glossary.md) |  |
+|  | [design](./docs/design.md) |  |          
+|---
+
+
+
+
+
+
+
+
+
 ## Bayesian model fitting and evidence calculation.
 
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
