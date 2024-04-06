@@ -3,8 +3,6 @@ img1: ./docs/images/temp-rijn2.png
 img2: ./docs/images/Gregory.png
 ---
 
-# BayesicFitting is a toolbox for the fitting 
-# of models to data in a Bayesian way.
 
 
 ## Navigation
@@ -16,8 +14,10 @@ img2: ./docs/images/Gregory.png
 | Notes (TDB) | [Design](./docs/design.md) |  |
 |  | [Trouble](.docs/troubles.md) | |
 
+## Home
 
-<p>
+BayesicFitting is a PYTHON toolbox for the fitting  of models to data 
+in a Bayesian way.
 
 Data in this context means a set of (measured) points x and y. 
 The model provides some (mathematical) relation between the x and y.
