@@ -1,6 +1,6 @@
 ---
 img1: ./images/Julius-experiment_6_0.png
-img2: ./images/Gregory.png
+img2: ./images/83Aqr.png
 
 ---
 
@@ -10,17 +10,17 @@ img2: ./images/Gregory.png
 
 ## Bayesian model fitting and evidence calculation.
 
-## Contents
+## Navigation
 
 
-| Contents | Global | Documentation | Notes                      
-|:-|:-|:-|:-|
-| [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) | TBD |
-| [2. Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |  |
-| [3. Models](#model) | | [Design](./docs/design.md) |  |          
-| [4. Fitters](#fitter) | | [Troubles](./troubles.md) | |
-| [5. NestedSampler](#ns) | | [Style](./code-style.md) | |
-| [6. Synopsis](#synopsis) | | [References](./references.md) | |
+| Manual | Global | Documentation                     
+|:-|:-|:-|
+| [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) |
+| [2. Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |
+| [3. Models](#model) | Notes (TBD) | [Design](./docs/design.md) |
+| [4. Fitters](#fitter) | | [Troubles](./troubles.md) |
+| [5. NestedSampler](#ns) | | [Style](./code-style.md) |
+| [6. Synopsis](#synopsis) | | [References](./references.md) |
 
 
 <a name="intro"></a>  

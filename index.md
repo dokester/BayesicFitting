@@ -1,17 +1,23 @@
 ---
-img1: docs/images/temp-rijn2.png
+img1: ./docs/images/temp-rijn2.png
+img2: ./docs/images/Gregory.png
 ---
 
-## BayesicFitting is a toolbox for the fitting of models to data in a Bayesian way.
+# BayesicFitting is a toolbox for the fitting 
+# of models to data in a Bayesian way.
 
 
-| Global | Documentation | Notes | Examples
-|:-|:-|:-|:-
-| [Home](index.md) | [Manual](./docs/manual.md) | TBD | TBD |
-| [Readme](./README.md) | [Glossary](./docs/glossary.md) |  |  |
-|  | [Design](./docs/design.md) |  |  |
-|  | [Trouble](.docs/troubles.md) | | |
+## Navigation
 
+| Global | Documentation | Examples
+|:-|:-|:-|
+| [Home](index.md) | [Manual](./docs/manual.md) | TBD |
+| [Readme](./README.md) | [Glossary](./docs/glossary.md) |  |
+| Notes (TDB) | [Design](./docs/design.md) |  |
+|  | [Trouble](.docs/troubles.md) | |
+
+
+<p>
 
 Data in this context means a set of (measured) points x and y. 
 The model provides some (mathematical) relation between the x and y.
