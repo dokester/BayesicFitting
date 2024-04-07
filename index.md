@@ -1,6 +1,8 @@
 ---
 img1: ./docs/images/temp-rijn2.png
+cap1" "Temperature of the Rhine"
 img2: ./docs/images/Gregory.png
+cap2: "Is a signal present or not"
 ---
 
 
@@ -21,7 +23,8 @@ in a Bayesian way.
 
 Data in this context means a set of (measured) points x and y. 
 The model provides some (mathematical) relation between the x and y.
-Fitting adapts the model such that certain criteria are optimized.
+Fitting adapts the model such that certain criteria are optimized, 
+making the model as close as possible to the data. 
 
 The BayesicFitting toolbox also answers the question whether one model fits 
 the data better than another. Especially this latter aspect raises Bayesian 
@@ -46,7 +49,7 @@ A design document about the structure of the package. A glossary
 defining the term used and a help document about restrictions and trouble
 shooting. All can be found in the sidebar.  
 
-The pictures below are a few examples of what can achieved with the 
+The pictures in the side bar are a few examples of what can achieved with the 
 toolbox. More extensive information on them can be found in the 
 [examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
 section.

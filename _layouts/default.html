@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
 
@@ -29,6 +30,19 @@
         {% if site.github.is_user_page %}
           <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
         {% endif %}
+
+        <div class="w3-dropdown-hover" w3-right>
+          <button class="w3-button">Documentation</button>
+          <div class="w3-dropdown-content w3-bar w3-yellow">
+            <a href="man-index.html" target="main-frame" class="w3-bar-item w3-button">Manual</a>
+            <a href="glos-index.html" target="main-frame" class="w3-bar-item w3-button">Glossary</a>
+            <a href="help-index.html" target="main-frame" class="w3-bar-item w3-button">Help</a>
+            <a href="des-index.html" target="main-frame" class="w3-bar-item w3-button">Design</a>
+            <a href="style-index.html" target="main-frame" class="w3-bar-item w3-button">Style</a>
+          </div>
+        </div>
+
+
       </div>
     </header>
 
@@ -40,15 +54,16 @@
 
         <aside id="sidebar" font-size=15px>
 
+          <p>
           {% if page.img1 %}
-           <img src={{ page.img1 }} width=250px title="Figure 1" />
+            &nbsp;&nbsp;Examples from BayesicFitting.
+            <img src={{ page.img1 }} width=200px title="Figure 1" />
           {% endif %}
           <p>
           {% if page.img2 %}
-           <img src={{ page.img2 }} width=250px title="Figure 2" />
+           <img src={{ page.img2 }} width=200px title="Figure 2" />
           {% endif %}
-	  Examples of results obtained with BayesicFitting.
-          <p>
+
 
 
 

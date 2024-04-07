@@ -6,7 +6,7 @@ img2: ./images/83Aqr.png
 
 
 
-# BayesicFitting Manual
+# Manual
 
 ## Bayesian model fitting and evidence calculation.
 
