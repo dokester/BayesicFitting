@@ -2,7 +2,7 @@ theme: jekyll-theme-architect
 title: [BayesicFitting]
 description: [Bayesian Fitting and Evidence Calculation]
 examples: 
-  - ./docs/images/temp-rijn.png
+  - ./docs/images/temp_rijn.png
   - ./docs/images/Julius.png
   - ./docs/images/HD76700.png
   - ./docs/images/83Aqr.png

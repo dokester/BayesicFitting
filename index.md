@@ -1,18 +1,14 @@
 ---
-img1: ./docs/images/temp-rijn.png
-img2: ./docs/images/Gregory.png
 ---
-
-
 
 ## Navigation
 
-| Global | Documentation | Examples
-|:-|:-|:-|
-| [Home](index.md) | [Manual](./docs/manual.md) | TBD |
-| [Readme](./README.md) | [Glossary](./docs/glossary.md) |  |
-| Notes (TDB) | [Design](./docs/design.md) |  |
-|  | [Trouble](.docs/troubles.md) | |
+| Global | Documentation 
+|:-|:-|
+| [Home](index.md) | [Manual](./docs/manual.md) |
+| [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
+| Notes (TDB) | [Design](./docs/design.md) |
+| [Examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples) | [Trouble](.docs/troubles.md) |
 
 ## Home
 

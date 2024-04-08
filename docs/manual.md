@@ -1,6 +1,4 @@
 ---
-img1: ./images/Julius.png
-img2: ./images/83Aqr.png
 ---
 
 
