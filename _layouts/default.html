@@ -50,7 +50,6 @@
 
           {% assign somex = site.examples | sample: 2 %}
           {% for ex in somex %}
-            {{ ex.img | absolute_url }}
             <img src={{ ex.img | absolute_url }} width=200px title={{ ex.img }} />
             &nbsp;&nbsp;&nbsp;&nbsp;{{ ex.cap }}
             <p>
