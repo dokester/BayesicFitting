@@ -47,13 +47,14 @@
           <p>
           &nbsp;&nbsp;Examples from BayesicFitting.
           {% for ex in  site.examples %}
-            {{ ex }}
+            {{ ex.img }}
+            {{ ex.cap }}
           {% endfor %}
           <p>
           {{ site.examples | sample | absolute_url }}
           <p>
           <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 1" />
-
+          
           <p>
 
           <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 2" />

@@ -2,9 +2,14 @@ theme: jekyll-theme-architect
 title: [BayesicFitting]
 description: [Bayesian Fitting and Evidence Calculation]
 examples: 
-  - ./docs/images/temp_rijn.png
-  - ./docs/images/Julius.png
-  - ./docs/images/HD76700.png
-  - ./docs/images/83Aqr.png
-  - ./docs/images/Gregory.png
+  - img: ./docs/images/rijntemp.png
+    cap: "Average temperature of the Rhine"
+  - img: ./docs/images/Julius.png
+    cap: "Light absorption by tea"
+  - img: ./docs/images/HD76700.png
+    cap: "Exoplanet around HD76700"
+  - img: ./docs/images/83Aqr.png
+    cap: "Orbit of doublestar 83 Aqr"
+  - img: ./docs/images/Gregory.png
+    cap: "A signal or not"
 
