@@ -47,7 +47,9 @@
           <p>
           {% if page.img1 %}
             &nbsp;&nbsp;Examples from BayesicFitting.
-            <img src={{ site.examples | sample }} width=200px title="Figure 1" />
+	    {% assign image = {{ site.examples | sample }}
+            {{ image }}
+            <img src={{ image | absolute_url }} width=200px title="Figure 1" />
           {% endif %}
           <p>
           {% if page.img2 %}

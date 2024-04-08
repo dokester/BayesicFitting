@@ -1,5 +1,5 @@
 ---
-img1: ./docs/images/temp-rijn2.png
+img1: ./docs/images/temp-rijn.png
 cap1" "Temperature of the Rhine"
 img2: ./docs/images/Gregory.png
 cap2: "Is a signal present or not"

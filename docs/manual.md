@@ -1,7 +1,6 @@
 ---
-img1: ./images/Julius-experiment_6_0.png
+img1: ./images/Julius.png
 img2: ./images/83Aqr.png
-
 ---
 
 
