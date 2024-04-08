@@ -57,7 +57,9 @@
 -->
           <p>
 
-          {{ site.examples | sample: 2 }}
+          {% assign somex = {{ site.examples | sample: 2 }} %}
+          {{ somex }}
+
 
           {% for ex in {{ site.examples | sample: 2 }} %}
             {{ ex.img | absolute_url }}

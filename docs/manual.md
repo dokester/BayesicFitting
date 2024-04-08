@@ -1,8 +1,6 @@
 ---
 ---
 
-
-
 # Manual
 
 ## Bayesian model fitting and evidence calculation.
