@@ -1,6 +1,3 @@
----
-navcon: home-sidebar.md
----
 
 # BayesicFitting Readme.
 
