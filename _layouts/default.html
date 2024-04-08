@@ -46,39 +46,15 @@
 
           <p>
           &nbsp;&nbsp;Examples from BayesicFitting.
-
-<!--
-          {% for ex in  site.examples %}
-            {{ ex.img }}
-            <p>
-            {{ ex.cap }}
-            <p>
-          {% endfor %}
--->
           <p>
 
           {% assign somex = site.examples | sample: 2 %}
-          {{ somex }}
-
-
           {% for ex in somex %}
             {{ ex.img | absolute_url }}
-            <img src={{ ex.img | absolute_url }} width=200px title="Figure" />
-            {{ ex.cap }}
+            <img src={{ ex.img | absolute_url }} width=200px title={{ ex.img }} />
+            &nbsp;&nbsp;&nbsp;&nbsp;{{ ex.cap }}
             <p>
           {% endfor %}
-<!--
-          {{ site.examples | sample | absolute_url }}
-          <p>
-
-          <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 1" />
-          
-          <p>
-
-          <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 2" />
-
--->
-
 
           {% if site.show_downloads %}
             <a href="{{ site.github.zip_url }}" class="button">
