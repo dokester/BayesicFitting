@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
 
@@ -39,19 +39,6 @@
       <div class="inner clearfix">
         <section id="main-content">
 
-        <div class="w3-dropdown-hover" w3-left>
-          <button class="w3-button">Navigation</button>
-          <div class="w3-dropdown-content w3-bar w3-blue">
-            <a href="docs/manual.md" class="w3-bar-item w3-button">Manual</a>
-            <a href="docs/glossary.md" target="main-frame" class="w3-bar-item w3-button">Glossary</a>
-            <a href="./docs/troubles.md" class="w3-bar-item w3-button">Help</a>
-            <a href="./docs/design.md" target="main-frame" class="w3-bar-item w3-button">Design</a>
-            <a href=".docs/convention.md" target="main-frame" class="w3-bar-item w3-button">Style</a>
-          </div>
-        </div>
-
-
-
           {{ content }}
         </section>
 
@@ -60,7 +47,7 @@
           <p>
           {% if page.img1 %}
             &nbsp;&nbsp;Examples from BayesicFitting.
-            <img src={{ page.img1 }} width=200px title="Figure 1" />
+            <img src={{ site.examples | sample }} width=200px title="Figure 1" />
           {% endif %}
           <p>
           {% if page.img2 %}
