@@ -45,18 +45,18 @@
         <aside id="sidebar" font-size=15px>
 
           <p>
-          {% if page.img1 %}
-            &nbsp;&nbsp;Examples from BayesicFitting.
-            {% for ex in  site.examples %}
-              {{ ex }}
-            {% endfor %}
-            {{ site.examples | sample | absolute_url }}
-            <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 1" />
-          {% endif %}
+          &nbsp;&nbsp;Examples from BayesicFitting.
+          {% for ex in  site.examples %}
+            {{ ex }}
+          {% endfor %}
           <p>
-          {% if page.img2 %}
-           <img src={{ page.img2 }} width=200px title="Figure 2" />
-          {% endif %}
+          {{ site.examples | sample | absolute_url }}
+          <p>
+          <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 1" />
+
+          <p>
+
+          <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 2" />
 
 
 
