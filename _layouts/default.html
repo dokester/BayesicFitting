@@ -50,9 +50,8 @@
             {% for ex in  site.examples %}
               {{ ex }}
             {% endfor %}
-	    {% assign image = {{ site.examples | sample }} %}
-            {{ site.examples | sample }}
-            <img src={{ site.examples | sample }} width=200px title="Figure 1" />
+            {{ site.examples | sample | absolute_url }}
+            <img src={{ site.examples | sample | absolute_url }} width=200px title="Figure 1" />
           {% endif %}
           <p>
           {% if page.img2 %}
