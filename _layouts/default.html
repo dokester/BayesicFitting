@@ -45,13 +45,13 @@
         <aside id="sidebar" font-size=15px>
 
           <p>
-          &nbsp;&nbsp;Examples from BayesicFitting.
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Examples from BayesicFitting.
           <p>
 
           {% assign somex = site.examples | sample: 2 %}
           {% for ex in somex %}
             <img src={{ ex.img | absolute_url }} width=200px title={{ ex.img }} />
-            &nbsp;&nbsp;&nbsp;&nbsp;{{ ex.cap }}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ ex.cap }}
             <p>
           {% endfor %}
 

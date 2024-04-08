@@ -8,7 +8,7 @@
 | [Home](index.md) | [Manual](./docs/manual.md) |
 | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
 | Notes (TDB) | [Design](./docs/design.md) |
-| [Examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples) | [Trouble](.docs/troubles.md) |
+| [Examples][exlink] | [Trouble](./docs/troubles.md) |
 
 ## Home
 
@@ -20,10 +20,9 @@ The model provides some (mathematical) relation between the x and y.
 Fitting adapts the model such that certain criteria are optimized, 
 making the model as close as possible to the data. 
 
-The BayesicFitting toolbox also answers the question whether one model fits 
+The BayesicFitting toolbox can also answer the question whether one model fits 
 the data better than another. Especially this latter aspect raises Bayesian 
 fitting above other model fitting procedures.
-
 
 BayesicFitting consists of more than 100 Python classes, of which a third are model
 classes. Another third are fitters in one guise or another and miscelleaneous stuff.
@@ -43,11 +42,11 @@ A design document about the structure of the package. A glossary
 defining the term used and a help document about restrictions and trouble
 shooting. All can be found in the sidebar.  
 
-The pictures in the side bar are a few examples of what can achieved with the 
-toolbox. More extensive information on them can be found in the 
-[examples](https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
-section.
+The pictures in the side bars are a few examples of what can achieved with the 
+toolbox. More examples can be found on 
+[examples][exlink]..
 
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
 
 
