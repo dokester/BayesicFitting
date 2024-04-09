@@ -1,5 +1,18 @@
+---
+---
 
-# BayesicFitting Readme.
+## Navigation
+
+| Global | Documentation
+|:-|:-|
+| [Home](./index.md) | [Manual](./docs/manual.md) |
+| [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
+| Notes (TDB) | [Design](./docs/design.md) |
+| [Examples][exlink] | [Trouble](./docs/troubles.md) |                             
+
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+# Readme.
 
 A package for model fitting and Bayesian evidence calculation.
 

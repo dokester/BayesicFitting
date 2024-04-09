@@ -1,14 +1,20 @@
+---
+---
+
+
+## Navigation
+
+| Contents | Global | Documentation |
+|:-|:-|:-|
+| 1. [Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) |
+| 2. [Model Classes](#modelclasses) | [Readme](../README.md) | [Glossary](./glossary.md) |
+| 3. [Fitter Classes](#fitterclasses) | Notes (TBD) | [Design](./design.md) |
+| 4. [Nested Sampling](#nested)| [Examples][exlink] | [Troubles](./troubles.md) |
+| 5. [References](./references.md) | | [Style](./convention.md) |
+
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
 # Architectural Design Document.
-
-
-## Contents.
-
-1. [Introduction](#intro)
-2. [Model Classes](#modelclasses)
-3. [Fitter Classes](#fitterclasses)
-4. [Nested Sampling](#nested)
-5. [References](./references.md)
 
 <a name="intro"></a>
 ## 1. Introduction

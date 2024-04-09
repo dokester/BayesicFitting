@@ -1,6 +1,11 @@
+---
+---
+
 <a name="glossary"> </a>
 
-| Glossary | Glossary | Global | Documnetation 
+## Navigation
+
+| Contents 1 | Contents 2 | Global | Documentation 
 |:-|:-|:-|:-|
 | [Independent Variable](#indepvar) | [Dependent Variable](#depvar)  | [Home](../index.md) | [Manual](./manual.md) |
 | [Weight](#weight) | [Accuracy](#accuracy) | [Readme](../README.md) | [Glossary](./glossary.md) |

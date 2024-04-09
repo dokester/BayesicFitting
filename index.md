@@ -5,12 +5,14 @@
 
 | Global | Documentation 
 |:-|:-|
-| [Home](index.md) | [Manual](./docs/manual.md) |
+| [Home](./index.md) | [Manual](./docs/manual.md) |
 | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
 | Notes (TDB) | [Design](./docs/design.md) |
 | [Examples][exlink] | [Trouble](./docs/troubles.md) |
 
-## Home
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+# Home
 
 BayesicFitting is a PYTHON toolbox for the fitting  of models to data 
 in a Bayesian way.
@@ -46,7 +48,6 @@ The pictures in the side bars are a few examples of what can achieved with the
 toolbox. More examples can be found on 
 [examples][exlink].
 
-[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
 
 
