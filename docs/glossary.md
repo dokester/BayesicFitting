@@ -20,6 +20,9 @@
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
+<p>
+========================================================================
+<p>
 
 # Glossary 
 

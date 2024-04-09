@@ -1,11 +1,32 @@
+---
+---
 
-# BayesicFitting Coding Style Notes
+## Navigation
 
+
+| Contents | Global | Documentation
+|:-|:-|:-|
+| [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) |
+| [2. Naming](#names) | [Readme](../README.md) | [Glossary](./glossary.md) |
+| [3. Coding](#code) | Notes (TBD) | [Design](./design.md) |
+| [4. Documentation](#documentation) | [Examples][exlink] | [Troubles](./troubles.md) |
+
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+<p>
+================================================================
+<p>
+
+# Coding Style.
+
+<a name="intro" </a>
+## Introduction
 
 Here I present my style rules, developed over more that 40 years of
 programming. I was quite pleased when I learned that they mostly comply
 with PEP 8.
 
+<a name="names" </a>
 ## Naming conventions
 
   + All classes are written in CamelCase, capitalizing each word and glueing
@@ -27,6 +48,7 @@ constants and should not be changed.
 in python the difference between private and public exists only by
 convention. 
 
+<a name="code" </a>
 ## Coding conventions
 
 Code statements should read like sentences optimized for the user/coder
@@ -61,6 +83,7 @@ code. To make this task clear, it should stand alone with a space in
 front of it. The other task is to separate items in a dictionary:
 something between a separator and an operator. 
 
+<a name="documentation" </a>
 ## Documentation<br>
 All classes and methods have a document string in which the usage is explained.
 The attributes of the classes and the parameters of the methods are also 

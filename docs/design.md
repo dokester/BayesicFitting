@@ -14,6 +14,10 @@
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
+<p>
+=======================================================================
+<p>
+
 # Architectural Design Document.
 
 <a name="intro"></a>

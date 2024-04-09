@@ -1,7 +1,31 @@
+---
+---
+
+## Navigation
+
+
+| Contents | Global | Documentation
+|:-|:-|:-|
+| [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) |
+| [2. Data](#restriction) | [Readme](../README.md) | [Glossary](./glossary.md) |
+| [3. Models](#models) | Notes (TBD) | [Design](./design.md) |
+| [4. Fitters](#fitters) | [Examples][exlink] | [Troubles](./troubles.md) |
+| [5. NestedSampler](#nestedsampler) | | [Style](./convention.md) |
+| [6. Synopsis](#synopsis) | | [References](./references.md) |
+
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+<p>
+===========================================================
+<p>
+
 
 # Restrictions and Trouble Shooting.
 
 **The math is all OK; computation is the nightmare.**
+
+<a name="intro"></a>
+## Introduction<br>
 
 
 Although the theory of model fitting is quite straightforward, the
