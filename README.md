@@ -3,12 +3,13 @@
 
 ## Navigation
 
-| Global | Documentation
-|:-|:-|
-| [Home](./index.md) | [Manual](./docs/manual.md) |
-| [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
-| Notes (TDB) | [Design](./docs/design.md) |
-| [Examples][exlink] | [Trouble](./docs/troubles.md) |                             
+| Content | Global | Documentation
+|:-|:-|:-|
+| 1. [History](#history) | [Home](./index.md) | [Manual](./docs/manual.md) |
+| 2. [Setup](#setup) | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
+| 3. [Structure](#structure) | Notes (TDB) | [Design](./docs/design.md) |
+| 4. [Status](#status) | [Examples][exlink] | [Trouble](./docs/troubles.md) |
+| 5. [Versions](#versions) | | |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
@@ -60,27 +61,19 @@ DOI: 10.5281/zenodo.2597200
    * Test and documentation. Update.
 
 
-## Content
-
-1. [History](#history)
-2. [Setup](#setup)
-3. [Structure](#structure)
-4. [Status](#status)
-5. [Versions](#versions)
-
 <a name="history"></a>
 ## 1. History 
 
 The BayesicFitting package is a python version of the the fitter classes
 in Herschel Common Science System (HCSS). HCSS was the all encompassing
 software system for the operations and analysis of the ESA satelite 
-Herschel. The HCSS version was written
-in JAVA mostly by me. I encoded features and classes that were requested
+Herschel. The HCSS version of the fitting software was written
+in JAVA, mostly by me. I encoded features and classes that were requested
 by my Herschel colleagues or that I remembered having used myself during
 my lifelong career as data analyst for earlier satellites as IRAS, ISO
 and AKARI. So most of the stuff in here was needed and used at a certain
-moment in time. Even now the package is developing in directions that
-are needed by my work for the James Webb Space Telescope (JWST). 
+moment in time. Later, the package was developing in directions that
+were needed by my work for the James Webb Space Telescope (JWST). 
 
 The HCSS system is in the public domain under GPL3. It was used by the 3
 instrument groups of the Herschel satellite to write calibration and
@@ -129,9 +122,7 @@ to construct a model.
 
 ### examples
 
-In [BayesicFitting/examples]
-(https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples)
-a number of scripts can be
+In [BayesicFitting/examples][exlink] a number of scripts can be
 found to exercise the classes. They are in the form of jupyter
 notebooks. Some are using real data; others have synthetic data
 specially constructed to make some point. 
@@ -150,28 +141,27 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
-In the [documenation]
-(https://github.com/dokester/BayesicFitting/blob/master/docs)
+In the [documenation](https://dokester.github.io/bayesicfitting)
 directory a number of documents can be found. 
 
 
-+ [Manual](https://github.com/dokester/BayesicFitting/blob/master/docs/manual.md)<br>
++ [Manual](https://dokester.github.io/bayesicfitting/docs/manual.md):
 A first draft of a manual. It obviously needs more work.
 
-+ [Troubles](https://github.com/dokester/BayesicFitting/blob/master/docs/troubles.md)<br>
++ [Troubles](https://dokester.github.io/bayesicfitting/docs/troubles.md):
 A list of troublesome situations and what to do about it.
 
-+ [Glossary](https://github.com/dokester/BayesicFitting/blob/master/docs/glossary.md)<br>
++ [Glossary](https://dokester.github.io/bayesicfitting/docs/glossary.md):
 A list of the terms used throughout this package, with explanations.
 
-+ [Design](https://github.com/dokester/BayesicFitting/blob/master/docs/design.md)<br>
++ [Design](https://dokester.github.io/bayesicfitting/docs/design.md):
 An architectural design document, displaying the relationships between 
 the classes. 
 
-+ [Style](https://github.com/dokester/BayesicFitting/blob/master/docs/code-style.md)<br>
++ [Style](https://dokester.github.io/bayesicfitting/docs/convention.md):
 A few notes on my style of code and documenation.
 
-+ [References](https://github.com/dokester/BayesicFitting/blob/master/docs/references.md)<br>
++ [References](https://dokester.github.io/bayesicfitting/docs/references.md):
 A list of external references for BayesicFitting.
 
 ### test
@@ -203,7 +193,7 @@ The classes are more prone to change in their interfaces, methods etc.
 
 More work needs to be done in:
 
-  * Introduction of more Classes: NeuralNetModel, ...
+  * Introduction of more Classes: NeuralNetModel, Filters (maybe) ...
 
 <a name="versions"></a>
 ## 5. Versions
