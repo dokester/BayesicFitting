@@ -44,7 +44,7 @@ shooting. All can be found in the sidebar.
 
 The pictures in the side bars are a few examples of what can achieved with the 
 toolbox. More examples can be found on 
-[examples][exlink]..
+[examples][exlink].
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 

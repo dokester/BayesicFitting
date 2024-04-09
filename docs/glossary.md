@@ -1,4 +1,21 @@
 <a name="glossary"> </a>
+
+| Glossary | Glossary | Global | Documnetation 
+|:-|:-|:-|:-|
+| [Independent Variable](#indepvar) | [Dependent Variable](#depvar)  | [Home](../index.md) | [Manual](./manual.md) |
+| [Weight](#weight) | [Accuracy](#accuracy) | [Readme](../README.md) | [Glossary](./glossary.md) |
+| [Model](#model) | [Parameter](#param) | Notes (TBD) | [Design](./design.md) |
+| [Problem](#problem) | [Chisq](#chisq) | [Examples][exlink] | [Troubles](./troubles.md) |
+| [Likelihood](#lhood) | [Standard Deviation](#stdev) | | [Style](./convention.md) |
+| [Scale](#noise) | [Confidence Region](#confidence) | | |
+| [Design Matrix](#design) | [Hessian Matrix](#hessian) | | |
+| [Covariance Matrix](#covar) | [Prior](#prior) | | |
+| [Posterior](#posterior) | [Evidence](#evidence) | | |
+| [Information](#information) | | |
+
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+
 # Glossary 
 
 A list of terms used in this package, with a short explanation. 
