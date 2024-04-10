@@ -5,8 +5,8 @@
 
 | Notes | Global | Documentation
 |:-|:-|:-|
-| [Splines(./splines.md) | [Home](../index.md) | [Manual](./manual.md) |
-| [Quality](./dataquality.md] | [Readme](../README.md) | [Glossary](./glossary.md)  |
+| [Splines](./splines.md) | [Home](../index.md) | [Manual](./manual.md) |
+| [Quality](./dataquality.md) | [Readme](../README.md) | [Glossary](./glossary.md)  |
 |  | [Notes](./notes.md) | [Design](./design.md) |
 |  | [Examples][exlink] | [Trouble](./troubles.md) |
 |  | | |
@@ -19,7 +19,7 @@ Here we present a number of notes related to BayesicFitting.
 
 ## Splines.
 
-The [splines](./doc/splines.md) note presents details on the construction and 
+The [splines](./splines.md) note presents details on the construction and 
 algorithm of splines in 
 
  + **SplinesModel**  simple, fast and dense
@@ -31,7 +31,7 @@ algorithm of splines in
 
 ## Data Quality.   
 
-The [quality](./doc/dataquality.md) note discusses the merits of defining 
+The [quality](./dataquality.md) note discusses the merits of defining 
 data quality in terms of accuracy versus weights.
 
 
