@@ -1,4 +1,6 @@
-.
+---
+---
+
 # Splines Model
 
 ## Introduction
@@ -37,8 +39,8 @@ My first implementation of splines were based on this continuity only.
 
 Assume we have a set of knots as in
 
->    |------------|------|---------|-------------------|---
->    k0           k1     k2        k3                  k4   etc..
+    |------------|------|---------|-------------------|---
+    k0           k1     k2        k3                  k4   etc..
 
 The set of knots defines the domain where the spline model is valid.
 
