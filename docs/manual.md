@@ -105,7 +105,7 @@ variable, parameters and a dependent variable.
 The independent variable is called **x** (or `xdata`); de parameters are 
 indicated as **p** (or `pars`, `param` or `params`) and the dependent 
 variable is called **y** (or `ydata`).
-The relation between them is a mathematical function **f**. $$f(x)$$
+The relation between them is a mathematical function **f**.
 
 <!--
 ![ManualEquation-1](images/maneq-1.png "Eq 1")
