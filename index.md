@@ -7,7 +7,7 @@
 |:-|:-|
 | [Home](./index.md) | [Manual](./docs/manual.md) |
 | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
-| Notes (TDB) | [Design](./docs/design.md) |
+| [Notes](./docs/notes.md) | [Design](./docs/design.md) |
 | [Examples][exlink] | [Trouble](./docs/troubles.md) |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
