@@ -111,7 +111,7 @@ The relation between them is a mathematical function **f**.
 ![ManualEquation-1](images/maneq-1.png "Eq 1")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{1}
 \quad y = f(x:p) &&
@@ -162,7 +162,7 @@ between `xdata` and `ydata`.
 ![ManualEquation-2](images/maneq-2.png "Eq 2")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{2}
 \quad f(x:p) = p_0 + p_1 x &&
@@ -177,7 +177,7 @@ The second model `m2` encapsulates the function
 ![ManualEquation-3](images/maneq-3.png "Eq 3")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{3}
 \quad 
@@ -348,7 +348,7 @@ When m<sub>1</sub>, m<sub>2</sub> and m<sub>3</sub> are models implementing
 ![ManualEquation-4](images/maneq-4.png "Eq 4")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{4}
 \quad m_1 = f_1(x:p) && \\
@@ -364,7 +364,7 @@ then
 ![ManualEquation-5](images/maneq-5.png "Eq 5")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{5}
 \quad m_4 = m_1 | m_2 = f_2(f_1(x:p):q) &&
@@ -377,7 +377,7 @@ The input of m<sub>2</sub> is relacced by the result of m<sub>1</sub>. While in 
 ![ManualEquation-6](images/maneq-6.png "Eq 6")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{6}
 \quad m_5 = m_1 | m_2 + m_3 = f_2(f_1(x:p):q) + f_3(x:r) &&
@@ -390,7 +390,7 @@ the m1 only influences m2, not m3. To influence both m<sub>2</sub> and m<sub>3</
 ![ManualEquation-7](images/maneq-7.png "Eq 7")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{7}
 \quad m_5 = m_1 | ( m_2 + m_3 ) = f_2(f_1(x:p):q) + f_3(f_1(x:p):r) &&
@@ -641,7 +641,7 @@ the differences between the data, **y**, and the model, **f(x:p)**.
 ![ManualEquation-8](images/maneq-8.png "Eq 8")
 -->
 
-$$ 
+$$
 \begin{flalign}
 \tag{8}
 \quad \epsilon = y - f(x:p) &&
