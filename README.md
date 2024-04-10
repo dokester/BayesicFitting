@@ -7,7 +7,7 @@
 |:-|:-|:-|
 | 1. [History](#history) | [Home](./index.md) | [Manual](./docs/manual.md) |
 | 2. [Setup](#setup) | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
-| 3. [Structure](#structure) | Notes (TDB) | [Design](./docs/design.md) |
+| 3. [Structure](#structure) | [Notes](./docs/notes.md) | [Design](./docs/design.md) |
 | 4. [Status](#status) | [Examples][exlink] | [Trouble](./docs/troubles.md) |
 | 5. [Versions](#versions) | | |
 
