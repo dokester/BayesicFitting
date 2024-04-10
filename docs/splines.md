@@ -44,7 +44,7 @@ Assume we have a set of knots as in
 
 The set of knots defines the domain where the spline model is valid.
 
-We define a 3rd order polynomial to the first knot segement $$ (k_0 ,k_1) $$.
+We define a 3rd order polynomial to the first knot segement $$ (k_0,k_1) $$
 
 $$
 \begin{flalign}
@@ -53,7 +53,7 @@ $$
 \end{flalign}
 $$
 
-Where $$ x_0 $$ is the distance to $$ k_0 : x_0  = x - k_0 $$.
+Where $$ x_0 $$ is the distance to $$ k_0 : x_0  = x - k_0 $$
 
 For the second segment $$ (k_1,k_2 ) $$ we extend the function of the previous segment
 and add 
@@ -64,14 +64,14 @@ $$
               &=&  0  \notag
 \end{flalign}
 \qquad
-begin{flalign}
+\begin{flalign}
 \tag{2}
 if x &>& k_1 \\ 
 if x &<& k_1  
 \end{flalign}
 $$
 
-where $$ x_1 $$ is the distance to $$ k_1 : x_1 = x - k_1 $$.
+where $$ x_1 $$ is the distance to $$ k_1 : x_1 = x - k_1 $$
 
 Note that the function $$ f_1 $$ is continuously differentiable to
 the 3rd derivative. For $$ x < k_1 $$ it is all 0; for $$ x > k_1 $$
@@ -158,7 +158,7 @@ We encapsulated the bspline package into our **BSplinesModel**.
 
 In figure 2 a set of basis splines of order 3 is displayed, using
 parameters all equal to 1.0. 
-The knots are at [0,1,4,5,6,7,8,10]; 8 knots resulting in 10 basis
+The knots are at (0,1,4,5,6,7,8,10). 8 knots resulting in 10 basis
 functions and as many parameters.
 The sum of the components is the black line
 constant at 1.0.
@@ -205,8 +205,8 @@ $$
 >    x_0            x_1 
 
 The property 3-smooth implies that the function and it first and
-second derivative are 0 at $$ x_1 $$, while the function is unbound,
-arbitrary at $$ x_0 $$. We normalize the blob in $$ x_0 $$ at 1. 
+second derivative are 0 at $$ x_1 $$ while the function is unbound,
+arbitrary at $$ x_0 $$ We normalize the blob in $$ x_0 $$ at 1. 
 
 $$
 \begin{flalign}
@@ -238,10 +238,10 @@ $$
 \end{flalign}
 $$
 
-The function, $$ f_1 $$ is 1-smooth at $$ x_0 $$.
+The function, $$ f_1 $$ is 1-smooth at $$ x_0 $$
 $$ f_1 $$ and $$ f_2 $$ are 3-smooth at $$ x_1 $$
-and $$ f_2 $$ is 3-smooth with 0 at $$ x_2 $$. 
-Again we need a normalization at $$ x_1 $$.
+and $$ f_2 $$ is 3-smooth with 0 at $$ x_2 $$ 
+Again we need a normalization at $$ x_1 $$
 
 $$
 \begin{flalign}
@@ -281,7 +281,7 @@ size nrknots, and can be solved directly.
 ### Small number of knots
 
 In case we have a cubic spline on a set of 2 knots, $$ x_0 $$ and
-$$ x_1 $$, the smoothnes at the knots is given in the table below. 
+$$ x_1 $$ the smoothnes at the knots is given in the table below. 
 
 | blob | x_0  | x_1  |
 |:-|:-|:-|
@@ -291,8 +291,8 @@ $$ x_1 $$, the smoothnes at the knots is given in the table below.
 | 4 | 3-smooth | 0-smooth 
 
 
-In case we have a cubic spline on a set of 3 knots, $$ x_0 $$,
-$$ x_1 $$ and $$ x_2 $$, the smoothnes at the knots is given in the 
+In case we have a cubic spline on a set of 3 knots, $$ x_0 $$
+$$ x_1 $$ and $$ x_2 $$ the smoothnes at the knots is given in the 
 table below. 
 
 | blob | x_0  | x_1  | x_2 
@@ -312,28 +312,34 @@ Up on initialization of the class all polynomial coefficients are
 calculated and normalized. This takes some time, but after that the
 calculation of the spline results, S, is fast.
 
-In the model each blob $$ f_k $$ has assigned a parameter $$ p_k $$.
+In the model each blob $$ f_k $$ has assigned a parameter $$ p_k $$
 
+$$
 \begin{flalign}
 \tag{8}
 \quad S(x:p) = \sum p_k f_k( x ) &&
 \end{flalign}
+$$
 
 We can expand the $$ f_k $$ into its blob coefficients.
 
+$$
 \begin{flalign}
 \tag{9}
 \quad S(x:p) = \sum p_k ( a_k + b_k x + c_k x^2 + d_k x^3 ) &&
 \end{flalign}
+$$
 
 And then multiply and sum the parameters and coefficients to speed up
 the calculations.
 
+$$
 \begin{flalign}
 \tag{10}
 \quad S(x:p) = \sum ( p_k a_k ) + \sum ( p_k b_k ) x + \sum ( p_k c_k ) x^2 + 
                \sum ( p_k d_k ) x^3 &&  
 \end{flalign}
+$$
 
 
 The coefficients and the parameters can be multiplied together, forming
