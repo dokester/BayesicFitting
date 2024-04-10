@@ -106,7 +106,7 @@ The algorithm is implemented in **SplinesModel**.
 
 In figure 1 the model is displayed with all its components.
 
-![Splines](images/splines-1.png){: width=450px }
+![Splines](images/splines-1.png "Fig 1")
 
 <table><tr>
 <td style="width: 50px;">   
