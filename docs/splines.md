@@ -17,12 +17,11 @@ The behaviour of splines of different orders is explained in the table.
 
 | order | Behaviour between Knots | Continuity at Knots |
 |:-|:-|:-|
-| 0 | piecewise constant | not continuous at all 
-| 1 | piecewise linear | lines are continuous (connected) 
-| 2 | parabolic pieces | 1st derivatives are also continuous 
-| 3 | cubic pieces | 2nd derivatives are also continuous 
-| n&gt;3 | n-th order polynomials | (n-1)-th derivatives are also continuous 
-
+| 0 | piecewise constant | not continuous at all |
+| 1 | piecewise linear | lines are continuous (connected) |
+| 2 | parabolic pieces | 1st derivatives are also continuous |
+| 3 | cubic pieces | 2nd derivatives are also continuous |
+| n&gt;3 | n-th order polynomials | (n-1)-th derivatives are also continuous |
 
 The most often used splines are cubic splines on a regular grid of
 knots.
@@ -38,19 +37,17 @@ My first implementation of splines were based on this continuity only.
 
 Assume we have a set of knots as in
 
-
-    |------------|------|---------|-------------------|---
-    k0           k1     k2        k3                  k4   etc..
-
+>    |------------|------|---------|-------------------|---
+>    k0           k1     k2        k3                  k4   etc..
 
 The set of knots defines the domain where the spline model is valid.
 
-We define a 3rd order polynomial to the first knot segement (k_0 ,k_1 ).
+We define a 3rd order polynomial to the first knot segement $$ (k_0 ,k_1) $$.
 
 $$
 \begin{flalign}
 \tag{1}
-\quad f_0 (x) = p_0  + p_1 x_0 + p_2 x_0^2 + p_3 x_0^3 &&
+\quad f_0 (x) = p_0 + p_1 x_0 + p_2 x_0^2 + p_3 x_0^3 &&
 \end{flalign}
 $$
 
@@ -113,7 +110,7 @@ In figure 1 the model is displayed with all its components.
 <td style="width: 50px;">   
 <td style="width: 450px;">
 Figure 1 shows the the splines model and all its components.
-The knots are located at [0,2,4,6,8,10].
+The knots are located at (0,2,4,6,8,10).
 </tr>
 </table>
 
