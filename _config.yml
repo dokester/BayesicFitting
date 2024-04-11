@@ -1,8 +1,8 @@
 # My theme
 theme: jekyll-theme-architect
 
-# Use Github Flavoured Markdown
-markdown: GFM
+# Use kramdown
+markdown: kramdown
 
 # Specific for BayesicFitting
 title: [BayesicFitting]
