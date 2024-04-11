@@ -46,12 +46,12 @@ The set of knots defines the domain where the spline model is valid.
 
 We define a 3rd order polynomial to the first knot segement $(k_0,k_1)$
 
-```math
+$$
 \begin{flalign}
 \tag{1}
 \quad f_0 (x) = p_0 + p_1 x_0 + p_2 x_0^2 + p_3 x_0^3 &&
 \end{flalign}
-```
+$$
 
 Where $x_0$ is the distance to $k_0 : x_0  = x - k_0$.
 
