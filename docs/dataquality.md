@@ -611,9 +611,9 @@ $$
 \tag{32} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} = 
 - \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \times \hspace{16em}\\
-\hspace{8em} \left( 1 - \frac{v_{xx} ( y - m )^2 - 
+\hspace{6em} \left( 1 - \frac{v_{xx} ( y - m )^2 - 
 2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right) - \\
-\frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} \hspace{16em} &&
+\frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} \hspace{15em} &&
 \end{flalign}
 $$
 
