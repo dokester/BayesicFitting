@@ -61,8 +61,8 @@ and add
 $$
 \begin{flalign}
 \tag{2}
-\quad f_1 (x) = p_4 x_1^3 \qquad \mbox{if} x > k_1 && \\ 
-              = 0  \quad  \qquad \mbox{if} x < k_1 && 
+\quad f_1 (x) = p_4 x_1^3 \qquad \qquad   \mbox{if}\ x > k_1 && \\ 
+              = 0  \quad\;  \qquad \qquad \mbox{if}\ x < k_1 && 
 \end{flalign}
 $$
 
@@ -229,8 +229,8 @@ In each segment a 3rd order polynomial function is defined.
 $$
 \begin{flalign}
 \tag{6}
-\quad && f_1(x) = a_1 + b_1 x + c_1 x^2 + d_1 x^3 \\
-\quad && f_2(x) = a_2 + b_2 x + c_2 x^2 + d_2 x^3
+\quad f_1(x) = a_1 + b_1 x + c_1 x^2 + d_1 x^3 && \\
+\quad f_2(x) = a_2 + b_2 x + c_2 x^2 + d_2 x^3 &&
 \end{flalign}
 $$
 
@@ -242,14 +242,14 @@ Again we need a normalization at $x_1$.
 $$
 \begin{flalign}
 \tag{7}
-\quad f_1(x_0) = 0 && \\
+\quad f_1(x_0) = 0 \quad && \\
 \quad f_1(x_1) = f_2(x_1) && \\
 \quad f'_1(x_1) = f'_2(x_1) && \\
 \quad f''_1(x_1) = f''_2(x_1) && \\
-\quad f_2(x_1) = 0 && \\
-\quad f'_2(x_1) = 0 && \\
-\quad f''_2(x_1) = 0 && \\
-\quad f_1(x_1) = 1 &&
+\quad f_2(x_1) = 0 \quad && \\
+\quad f'_2(x_1) = 0 \quad && \\
+\quad f''_2(x_1) = 0 \quad && \\
+\quad f_1(x_1) = 1 \quad &&
 \end{flalign}
 $$
 
