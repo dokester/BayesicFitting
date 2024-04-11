@@ -60,14 +60,9 @@ and add
 
 $$
 \begin{flalign}
-\quad f_1 (x) = p_4 x_1^3 \\ 
-              = 0  \notag
-\end{flalign}
-\qquad
-\begin{flalign}
 \tag{2}
-\mbox{if} x > k_1 && \\ 
-\mbox{if} x < k_1 && 
+\quad f_1 (x) = p_4 x_1^3 \qquad \mbox{if} x > k_1 && \\ 
+              = 0  \quad  \qquad \mbox{if} x < k_1 && 
 \end{flalign}
 $$
 
@@ -212,10 +207,10 @@ arbitrary at $x_0$. We normalize the blob in $x_0$ at 1.
 $$
 \begin{flalign}
 \tag{5}
-\quad f_1(x_1) &=& 0 \\
-\quad f'_1(x_1) &=& 0 \\
-\quad f''_1(x_1) &=& 0 \\
-\quad f_1(x_0) &=& 1
+\quad f_1(x_1) = 0 && \\
+\quad f'_1(x_1) = 0 && \\
+\quad f''_1(x_1) = 0 && \\
+\quad f_1(x_0) = 1 &&
 \end{flalign}
 $$
 
@@ -234,8 +229,8 @@ In each segment a 3rd order polynomial function is defined.
 $$
 \begin{flalign}
 \tag{6}
-\quad f_1(x) = a_1 + b_1 x + c_1 x^2 + d_1 x^3 && \\
-\quad f_2(x) = a_2 + b_2 x + c_2 x^2 + d_2 x^3 &&
+\quad && f_1(x) = a_1 + b_1 x + c_1 x^2 + d_1 x^3 \\
+\quad && f_2(x) = a_2 + b_2 x + c_2 x^2 + d_2 x^3
 \end{flalign}
 $$
 
