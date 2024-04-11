@@ -596,7 +596,7 @@ So in case of Eq.&nbsp;23 we have
 
 $$
 \begin{flalign}
-\tag{29} \quad
+\tag{31} \quad
 \frac{\partial v_{yy}}{\partial \sigma_m} = 2 \sigma_m, \hspace{2em}
 \frac{\partial v_{xx}}{\partial \sigma_m} = 2 \sigma_m, \hspace{2em}
 \frac{\partial D}{\partial \sigma_m} = 2 \sigma_m ( \sigma^2 + \tau^2 +
@@ -608,11 +608,11 @@ Combining these
 
 $$
 \begin{flalign}
-\tag{30} \quad
+\tag{32} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} = 
-- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D}
-\times \left( 1 - \frac{v_{xx} ( y - m )^2 - 
-2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right) -
+- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \times \\
+\left( 1 - \frac{v_{xx} ( y - m )^2 - 
+2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right) - \\
 \frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} &&
 \end{flalign}
 $$
