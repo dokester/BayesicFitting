@@ -610,10 +610,10 @@ $$
 \begin{flalign}
 \tag{32} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} = 
-- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \times \hspace{16em}\\
-\hspace{6em} \left( 1 - \frac{v_{xx} ( y - m )^2 - 
+- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \times \hspace{14em}\\
+\left( 1 - \frac{v_{xx} ( y - m )^2 - 
 2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right) - \\
-\frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} \hspace{15em} &&
+\frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} \hspace{13em} &&
 \end{flalign}
 $$
 
@@ -764,7 +764,7 @@ Using weights Eq.&nbsp;3 changes in
 
 $$
 \begin{flalign}
-\tag{30} \quad
+\tag{32} \quad
 L = \prod_i \mathcal{L}_i^{w_i} &&
 \end{flalign}
 $$
