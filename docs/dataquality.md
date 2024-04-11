@@ -377,11 +377,9 @@ data. E.g. for a Gaussian distribution as prior
 $$
 \begin{flalign}
 \tag{17} \quad
-\begin{eqnarray}
-p( x | t, \tau ) & = & \sqrt {\frac{1}{2\pi\tau^2}} \exp\left( - \frac{1}{2} 
-\left(\frac{x - t}{\tau} \right)^2 \right) \nonumber \\
-& = & p( t | x, \tau ) 
-\end{eqnarray} &&
+p( x | t, \tau ) = \sqrt {\frac{1}{2\pi\tau^2}} \exp\left( - \frac{1}{2} 
+\left(\frac{x - t}{\tau} \right)^2 \right) 
+= p( t | x, \tau ) &&
 \end{flalign}
 $$
 
@@ -392,7 +390,7 @@ In its simplest form the likelihood becomes
 
 $$
 \begin{flalign}
-\tag{17} \quad
+\tag{18} \quad
 \mathcal{L}_i = \frac{1}{2 \pi \sigma_i \tau_i}
 \exp \left( -0.5 \left( 
 \left( \frac{y_i - m_i}{\sigma_i} \right)^2 +
@@ -408,7 +406,7 @@ More succinctly, the likelihood can be written in matrix notation as
 
 $$
 \begin{flalign}
-\tag{18} \quad
+\tag{19} \quad
 \mathcal{L}_i = \frac{1}{2\pi\sqrt{\det V_{i}}} \exp\left( - \frac{1}{2} 
 ( z_i - \zeta_i )^T V_i^{-1} ( z_i - \zeta_i ) \right) &&
 \end{flalign}
@@ -418,12 +416,10 @@ where
 
 $$
 \begin{flalign}
-\begin{equation}
-\tag{19} \quad
+\tag{20} \quad
 z_i = \left( \begin{array}{c} y_i \\ x_i \end{array} \right), \hspace{2em}
 \zeta_i = \left( \begin{array}{c} m_i \\ t_i \end{array} \right), \hspace{2em}
 V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right) &&
-\end{equation}
 \end{flalign}
 $$
 
@@ -454,7 +450,7 @@ matrix, <i>V<sub>i</sub></i>, needs to be replaced by a covariance matrix.
 
 $$
 \begin{flalign}
-\tag{20} \quad
+\tag{21} \quad
 V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\ \varrho_i & \tau_i^2 \end{array} \right)  &&
 \end{flalign}
 $$
@@ -483,7 +479,7 @@ the covariance matrix would be
 
 $$
 \begin{flalign}
-\tag{21} \quad
+\tag{22} \quad
 V = \left( \begin{array}{cc} \sigma_U^2 + \sigma_B^2 & -\sigma_B^2 \\ 
 -\sigma_B^2 & \sigma_V^2 + \sigma_B^2 \end{array} \right)  &&
 \end{flalign}
@@ -500,7 +496,7 @@ reverts to
 
 $$
 \begin{flalign}
-\tag{22} \quad
+\tag{23} \quad
 V_i = \left( \begin{array}{cc} \sigma_i^2 + \sigma_m^2& \varrho_i \\ \varrho_i &
 \tau_i^2 + \sigma_m^2 \end{array} \right)  &&
 \end{flalign}
@@ -517,7 +513,7 @@ covariance matrix of Eq.&nbsp;22. Firstly we write the covariance matrix as
 
 $$
 \begin{flalign}
-\tag{23} \quad
+\tag{24} \quad
 V = \left( \begin{array}{cc} v_{yy} & v_{xy} \\ 
                              v_{xy} & v_{xx} \end{array} \right)  &&
 \end{flalign}
@@ -529,7 +525,7 @@ The determinant of V becomes
 
 $$
 \begin{flalign}
-\tag{24} \quad
+\tag{25} \quad
 D = v_{yy} v_{xx} - v_{xy}^2 &&
 \end{flalign}
 $$
@@ -538,7 +534,7 @@ And the inverse of V is
 
 $$
 \begin{flalign}
-\tag{25} \quad
+\tag{26} \quad
 V^{-1} = \frac{1}{D} 
 \left( \begin{array}{cc} v_{xx} & -v_{xy} \\ 
                         -v_{xy} &  v_{yy} \end{array} \right)  &&
@@ -548,11 +544,12 @@ $$
 In most computations we need the likelihood in logarithmic form.
 
 $$
-\begin{eqnarray}
-\log \mathcal{L}_i & = & - \log( 2 \pi ) - 0.5 \log( D ) + \nonumber \\
-&& - \frac{v_{xx} ( y - m )^2 - 2 v_{xy} ( y - m ) ( x - t ) +
-v_{yy} ( x - t )^2}{2 D}
-\end{eqnarray}
+\begin{flalign}
+\tag{27} \quad
+\log \mathcal{L}_i = - \log( 2 \pi ) - 0.5 \log( D ) -
+\frac{v_{xx} ( y - m )^2 - 2 v_{xy} ( y - m ) ( x - t ) +
+v_{yy} ( x - t )^2}{2 D} &&
+\end{flalign}
 $$
 
 All relevant items in Eq.&nbsp;28 need indices <i>i</i>. They are
@@ -564,7 +561,7 @@ the unknown model accuracy, <i>&sigma;<sub>m</sub></i> as in Eq.&nbsp;23.
 
 $$
 \begin{flalign}
-\tag{26} \quad
+\tag{28} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial \theta} =
 \frac{v_{xx} ( y - m ) - v_{xy} ( x - t ) }{D} \frac{\partial
 m}{\partial \theta} &&
@@ -573,7 +570,7 @@ $$
 
 $$
 \begin{flalign}
-\tag{27} \quad
+\tag{29} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial t_k} = 
 \left( \frac{  v_{xx} ( y - m ) - v_{xy}( x - t ) }{D} 
 \frac{\partial m}{ \partial t} +
@@ -589,7 +586,7 @@ subsequently in <i>D</i>.
 
 $$
 \begin{flalign}
-\tag{28} \quad
+\tag{30} \quad
 D = ( \sigma^2 + \sigma_m^2 ) ( \tau^2 + \sigma_{m}^2 ) - \varrho^2  &&
 \end{flalign}
 $$
@@ -609,14 +606,14 @@ $$
 Combining these 
 
 $$
-\begin{eqnarray}
-\frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} & = &
-- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \nonumber \\
-&& \times \left( 1 - \frac{v_{xx} ( y - m )^2 - 
-2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right)
-\nonumber \\
-&& - \frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D}
-\end{eqnarray}
+\begin{flalign}
+\tag{30} \quad
+\frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} = 
+- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D}
+\times \left( 1 - \frac{v_{xx} ( y - m )^2 - 
+2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right) -
+\frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} &&
+\end{flalign}
 $$
 
 
