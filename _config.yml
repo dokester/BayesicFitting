@@ -1,4 +1,10 @@
+# My theme
 theme: jekyll-theme-architect
+
+# Use Github Flavoured Markdown
+markdown: GFM
+
+# Specific for BayesicFitting
 title: [BayesicFitting]
 description: [Bayesian Fitting and Evidence Calculation]
 examples: 
