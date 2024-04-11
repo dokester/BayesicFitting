@@ -407,7 +407,7 @@ More succinctly, the likelihood can be written in matrix notation as
 $$
 \begin{flalign}
 \tag{19} \quad
-\mathcal{L}_i = \frac{1}{2\pi\sqrt{\det V_{i}}} \exp\left( - \frac{1}{2} 
+\mathcal{L}_i = \frac{1}{2\pi\sqrt{\det V_{i}}} \exp\left( -0.5 
 ( z_i - \zeta_i )^T V_i^{-1} ( z_i - \zeta_i ) \right) &&
 \end{flalign}
 $$
@@ -417,8 +417,8 @@ where
 $$
 \begin{flalign}
 \tag{20} \quad
-z_i = \left( \begin{array}{c} y_i \\ x_i \end{array} \right), \hspace{2em}
-\zeta_i = \left( \begin{array}{c} m_i \\ t_i \end{array} \right), \hspace{2em}
+z_i = \left( \begin{array}{c} y_i \\ x_i \end{array} \right) \qquad
+\zeta_i = \left( \begin{array}{c} m_i \\ t_i \end{array} \right) \qquad
 V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right) &&
 \end{flalign}
 $$
@@ -451,7 +451,8 @@ matrix, <i>V<sub>i</sub></i>, needs to be replaced by a covariance matrix.
 $$
 \begin{flalign}
 \tag{21} \quad
-V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\ \varrho_i & \tau_i^2 \end{array} \right)  &&
+V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\ 
+\varrho_i & \tau_i^2 \end{array} \right)  &&
 \end{flalign}
 $$
 
