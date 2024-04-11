@@ -53,12 +53,12 @@ We define a 3rd order polynomial to the first knot segement $(k_0,k_1)$
 \end{flalign}
 ```
 
-Where $`x_0`$ is the distance to $k_0 : x_0  = x - k_0$.
+Where $x_0$ is the distance to $k_0 : x_0  = x - k_0$.
 
 For the second segment $(k_1,k_2)$ we extend the function of the previous segment
 and add 
 
-$
+$$
 \begin{flalign}
 \quad f_1 (x) &=& p_4 x_1^3 \\ 
               &=&  0  \notag
@@ -69,13 +69,13 @@ $
 if x &>& k_1 \\ 
 if x &<& k_1  
 \end{flalign}
-$
+$$
 
 where $x_1$ is the distance to $k_1 : x_1 = x - k_1$.
 
-Note that the function $$ f_1 $$ is continuously differentiable to
-the 3rd derivative. For $$ x < k_1 $$ it is all 0; for $$ x > k_1 $$
-it is a 3rd order polynomial and at $$ x = k_1 $$  the
+Note that the function $f_1$ is continuously differentiable to
+the 3rd derivative. For $x < k_1$ it is all 0; for $x > k_1$
+it is a 3rd order polynomial and at $x = k_1$  the
 derivatives from the up-side are all 0, equal to those from the
 low-side. 
 
@@ -83,12 +83,12 @@ For the next segments we repeat this procedure.
 
 So in the end we have a spline function $f(x)$ as
 
-$
+$$
 \begin{flalign}
 \tag{3}
 \quad f(x) = p_0 + p_1 x_0 + p_2 x_0^2 + p_3 x_0^3 + \sum p_{i+4} x_i^3 &&
 \end{flalign}
-$
+$$
 
 Obviously this (piecewise) function is continuously differentiable to 
 the 3rd derivative as it is a sum of continuously differentiable
@@ -164,13 +164,13 @@ functions and as many parameters.
 The sum of the components is the black line
 constant at 1.0.
 
-![de Boor Splines](images/splines-2.png){: width=450px }
+![de Boor Splines](images/splines-2.png)
 
 <table><tr>
 <td style="width: 50px;">   
 <td style="width: 450px;">
-Figure 2 shows the de Boor splines model and all its components. The
-position of the knots is indicated with red bars low in the plot.
+Figure 2 shows the de Boor splines model and all its components.<br> 
+The position of the knots is indicated with red bars low in the plot.
 </tr>
 </table>
 
@@ -194,12 +194,12 @@ at the right side.
 
 We have a 3rd order polynomial between the first 2 knots.
 
-$
+$$
 \begin{flalign}
 \tag{4}
 \quad f_1(x)  = a + b x + c x^2  + d x^3 &&
 \end{flalign}
-$
+$$
 
           f_1        
     |------------|----
@@ -209,7 +209,7 @@ The property 3-smooth implies that the function and it first and
 second derivative are 0 at $x_1$, while the function is unbound,
 arbitrary at $x_0$. We normalize the blob in $x_0$ at 1. 
 
-$
+$$
 \begin{flalign}
 \tag{5}
 \quad f_1(x_1) &=& 0 \\
@@ -217,7 +217,7 @@ $
 \quad f''_1(x_1) &=& 0 \\
 \quad f_1(x_0) &=& 1
 end{flalign}
-$
+$$
 
 Now we have 4 equations with 4 unknown coefficients (a,b,c,d) which we can solve.
 
@@ -227,24 +227,24 @@ For the second blob we see that it is defined over two knot segments.
 In each segment a 3rd order polynomial function is defined. 
 
          f_1           f_2        
-    |------------|------|---
+    |--------------|--------|---
     x_0            x_1      x_2 
 
 
-$
+$$
 \begin{flalign}
 \tag{6}
 \quad f_1(x) &=& a_1 + b_1 x + c_1 x^2 + d_1 x^3 \\
 \quad f_2(x) &=& a_2 + b_2 x + c_2 x^2 + d_2 x^3
 \end{flalign}
-$
+$$
 
-The function, $f_1$ is 1-smooth at $x_0$
-$f_1$ and $$ f_2 $$ are 3-smooth at $x_1$
+The function, $f_1$ is 1-smooth at $x_0$;
+$f_1$ and $f_2$ are 3-smooth at $x_1$,
 and $f_2$ is 3-smooth with 0 at $x_2$. 
 Again we need a normalization at $x_1$.
 
-$
+$$
 \begin{flalign}
 \tag{7}
 \quad f_1(x_0) &=& 0 \\
@@ -256,13 +256,13 @@ $
 \quad f''_2(x_1) &=& 0 \\
 \quad f_1(x_1) &=& 1
 \end{flalign}
-$
+$$
 
 We have 8 equations and 8 coefficients (4 per function) so it can be solved directly.
 
 ### Next Blobs.
 
-A pattern is developing. The next blob is 2-smooth at x_0  and
+A pattern is developing. The next blob is 2-smooth at $x_0$, and
 3-smooth at all other knots, resulting in 12 polynomial coefficients.
 The ones after that are 3-smooth everywhere over 4 knot segments,
 resulting in 16 coefficients.
@@ -276,13 +276,14 @@ We would rather have the blobs such that a constant line at 1.0 would be
 the result when all parameters are set to 1.0.
 
 So we calculate the results at the top position of the blobs (more or
-less) and set all these results to 1.0. This is a matrix equation of
+less; it does not matter that much as is should be 1 everywhere) and set 
+all these results to 1.0. This is a matrix equation of
 size nrknots, and can be solved directly. 
 
 ### Small number of knots
 
 In case we have a cubic spline on a set of 2 knots, $x_0$ and
-$x_1$ the smoothnes at the knots is given in the table below. 
+$x_1$, we have 4 blobs. The smoothnes at the knots is given in the table below. 
 
 | blob | x_0  | x_1  |
 |:-|:-|:-|
@@ -291,9 +292,8 @@ $x_1$ the smoothnes at the knots is given in the table below.
 | 3 | 2-smooth | 1-smooth 
 | 4 | 3-smooth | 0-smooth 
 
-
 In case we have a cubic spline on a set of 3 knots, $x_0$,
-$x_1$ and $x_2$, the smoothnes at the knots is given in the 
+$x_1$ and $x_2$, the smoothnes of the blobs at the knots is given in the 
 table below. 
 
 | blob | x_0  | x_1  | x_2 
@@ -315,32 +315,32 @@ calculation of the spline results, S, is fast.
 
 In the model each blob $f_k$ has assigned a parameter $p_k$.
 
-$
+$$
 \begin{flalign}
 \tag{8}
 \quad S(x:p) = \sum p_k f_k( x ) &&
 \end{flalign}
-$
+$$
 
 We can expand the $f_k$ into its blob coefficients.
 
-$
+$$
 \begin{flalign}
 \tag{9}
 \quad S(x:p) = \sum p_k ( a_k + b_k x + c_k x^2 + d_k x^3 ) &&
 \end{flalign}
-$
+$$
 
 And then multiply and sum the parameters and coefficients to speed up
 the calculations.
 
-$
+$$
 \begin{flalign}
 \tag{10}
 \quad S(x:p) = \sum ( p_k a_k ) + \sum ( p_k b_k ) x + \sum ( p_k c_k ) x^2 + 
                \sum ( p_k d_k ) x^3 &&  
 \end{flalign}
-$
+$$
 
 
 The coefficients and the parameters can be multiplied together, forming

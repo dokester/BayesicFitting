@@ -1,8 +1,6 @@
 ---
 ---
 
-<details>
-
 ## Navigation
 
 | Contents | Global | Documentation
@@ -13,8 +11,6 @@
 | [4. Fitters](#fitter) | [Examples][exlink] | [Troubles](./troubles.md) |
 | [5. NestedSampler](#ns) | | [Style](./convention.md) |
 | [6. Synopsis](#synopsis) | | [References](./references.md) |
-
-</details>
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
