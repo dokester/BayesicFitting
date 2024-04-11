@@ -207,10 +207,10 @@ arbitrary at $x_0$. We normalize the blob in $x_0$ at 1.
 $$
 \begin{flalign}
 \tag{5}
+\quad f_1(x_0) = 1 && \\
 \quad f_1(x_1) = 0 && \\
 \quad f'_1(x_1) = 0 && \\
-\quad f''_1(x_1) = 0 && \\
-\quad f_1(x_0) = 1 &&
+\quad f''_1(x_1) = 0 &&
 \end{flalign}
 $$
 
@@ -219,7 +219,9 @@ Now we have 4 equations with 4 unknown coefficients (a,b,c,d) which we can solve
 ### Second Blob.
 
 For the second blob we see that it is defined over two knot segments.
-In each segment a 3rd order polynomial function is defined. 
+In each segment a 3rd order polynomial function is defined: $f_1$ and
+$f_2$. Note that these functions are different from the $f_1$ of the 
+first blob.
 
          f_1           f_2        
     |--------------|--------|---
@@ -234,10 +236,10 @@ $$
 \end{flalign}
 $$
 
-The function, $f_1$ is 1-smooth at $x_0$;
+The function, $f_1$ is 1-smooth at $x_0$, i.e. touching zero;
 $f_1$ and $f_2$ are 3-smooth at $x_1$,
 and $f_2$ is 3-smooth with 0 at $x_2$. 
-Again we need a normalization at $x_1$.
+Again we need a normalization at $x_1$ for both $f_1$ and $f_2$.
 
 $$
 \begin{flalign}
@@ -246,10 +248,10 @@ $$
 \quad f_1(x_1) = f_2(x_1) && \\
 \quad f'_1(x_1) = f'_2(x_1) && \\
 \quad f''_1(x_1) = f''_2(x_1) && \\
-\quad f_2(x_1) = 0 \quad\ \quad && \\
-\quad f'_2(x_1) = 0 \quad\ \quad && \\
-\quad f''_2(x_1) = 0 \quad\ \quad && \\
-\quad f_1(x_1) = 1 \quad\ \quad &&
+\quad f_1(x_1) = 1 \quad\ \quad && \\
+\quad f_2(x_2) = 0 \quad\ \quad && \\
+\quad f'_2(x_2) = 0 \quad\ \quad && \\
+\quad f''_2(x_2) = 0 \quad\ \quad &&
 \end{flalign}
 $$
 
