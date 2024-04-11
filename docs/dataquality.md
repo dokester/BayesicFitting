@@ -288,7 +288,7 @@ $$
 \begin{flalign}
 \tag{13} \quad
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi (\sigma_i^2 + \sigma_{m,i}^2)}} \exp\left(
--0.5 \,  \frac{ ( y_i - m_i )^2}{\sigma_i^2 + \sigma_{m,i}^2} \right) &&
+-0.5 \  \frac{ ( y_i - m_i )^2}{\sigma_i^2 + \sigma_{m,i}^2} \right) &&
 \end{flalign}
 $$
 
@@ -347,7 +347,7 @@ or 13, whatever the case is, with the probability for the residuals in
 $$
 \begin{flalign}
 \tag{16} \quad
-\mathcal{L}_i \muleq \sqrt {\frac{1}{2\pi\tau_i^2}} \exp\left( -0.5 
+\mathcal{L}_i *= \sqrt {\frac{1}{2\pi\tau_i^2}} \exp\left( -0.5 
 \left(\frac{x_i - t_i}{\tau_i} \right)^2 \right) &&
 \end{flalign}
 $$
@@ -375,11 +375,14 @@ given the target, is the same as the probabilty of the target given the
 data. E.g. for a Gaussian distribution as prior
 
 $$
+\begin{flalign}
+\tag{17} \quad
 \begin{eqnarray}
 p( x | t, \tau ) & = & \sqrt {\frac{1}{2\pi\tau^2}} \exp\left( - \frac{1}{2} 
 \left(\frac{x - t}{\tau} \right)^2 \right) \nonumber \\
 & = & p( t | x, \tau ) 
-\end{eqnarray}
+\end{eqnarray} &&
+\end{flalign}
 $$
 
 where the scale of the distribution, <i>&tau;</i>, needs to be
@@ -415,10 +418,12 @@ where
 
 $$
 \begin{flalign}
+\begin{equation}
 \tag{19} \quad
 z_i = \left( \begin{array}{c} y_i \\ x_i \end{array} \right), \hspace{2em}
 \zeta_i = \left( \begin{array}{c} m_i \\ t_i \end{array} \right), \hspace{2em}
 V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right) &&
+\end{equation}
 \end{flalign}
 $$
 
