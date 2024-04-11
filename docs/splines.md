@@ -61,8 +61,8 @@ and add
 $$
 \begin{flalign}
 \tag{2}
-\quad f_1 (x) = p_4 x_1^3 \qquad \qquad   \mbox{if}\ x > k_1 && \\ 
-              = 0  \quad\;  \qquad \qquad \mbox{if}\ x < k_1 && 
+\quad f_1 (x) = p_4 x_1^3 \qquad \qquad \mbox{if}\ x > k_1 && \\ 
+              = 0  \quad\;\qquad \qquad \mbox{if}\ x < k_1 && 
 \end{flalign}
 $$
 
@@ -242,14 +242,14 @@ Again we need a normalization at $x_1$.
 $$
 \begin{flalign}
 \tag{7}
-\quad f_1(x_0) = 0 \quad && \\
+\quad f_1(x_0) = 0 \quad \quad \quad && \\
 \quad f_1(x_1) = f_2(x_1) && \\
 \quad f'_1(x_1) = f'_2(x_1) && \\
 \quad f''_1(x_1) = f''_2(x_1) && \\
-\quad f_2(x_1) = 0 \quad && \\
-\quad f'_2(x_1) = 0 \quad && \\
-\quad f''_2(x_1) = 0 \quad && \\
-\quad f_1(x_1) = 1 \quad &&
+\quad f_2(x_1) = 0 \quad \quad \quad && \\
+\quad f'_2(x_1) = 0 \quad \quad \quad && \\
+\quad f''_2(x_1) = 0 \quad \quad \quad && \\
+\quad f_1(x_1) = 1 \quad \quad \quad &&
 \end{flalign}
 $$
 
