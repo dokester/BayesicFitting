@@ -35,17 +35,19 @@ fit the data with an as-yet-unspecified model
 
 
 $$
-\begin{equation}
-m_i = F( x_i : \theta )
-\end{equation}
+\begin{flalign}
+\tag{1} \quad
+m_i = F( x_i : \theta ) &&
+\end{flalign}
 $$
 
 such that some norm of the residuals, <i>r<sub>i</sub></i>, are minimumized over the parameters, <i>&theta;</i>.
 
 $$
-\begin{equation}
-r_i = y_i - m_i
-\end{equation}
+\begin{flalign}
+\tag{2} \quad
+r_i = y_i - m_i &&
+\end{flalign}
 $$
 
 
@@ -73,9 +75,10 @@ at individual data points, <i>x<sub>i</sub></i>.
 
 
 $$
-\begin{equation}
-L = \prod_i \mathcal{L}_i
-\end{equation}
+\begin{flalign}
+\tag{3} \quad
+L = \prod_i \mathcal{L}_i &&
+\end{flalign}
 $$
 
 
@@ -85,9 +88,10 @@ this note.
 
 
 $$
-\begin{equation}
-\mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma^2}} \exp\left( - \frac{1}{2 \sigma^2} (y_i - m_i )^2 \right)
-\end{equation}
+\begin{flalign}
+\tag{4} \quad
+\mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma^2}} \exp\left( - \frac{1}{2 \sigma^2} (y_i - m_i )^2 \right) &&
+\end{flalign}
 $$
 
 
@@ -126,10 +130,11 @@ We can easily extend this to floating values of the weight,
 With these assumptions Eq.&nbsp;4 transforms into 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{5} \quad
 \mathcal{L}_i = \left(\frac{1}{2\pi\sigma^2}\right)^{w_i/2} \exp\left( -
-\frac{w_i}{2 \sigma^2} (y_i - m_i)^2 \right)
-\end{equation}
+\frac{w_i}{2 \sigma^2} (y_i - m_i)^2 \right) &&
+\end{flalign}
 $$
 
 
@@ -149,10 +154,11 @@ data, not part of the likelihood.
 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{6} \quad
 \mathcal{L}_i = \left(\frac{1}{2\pi \sigma_i^2}\right)^{1/2} 
-\exp\left( -\frac{1}{2} \left(\frac{y_i - m_i}{\sigma_i}\right)^2 \right)
-\end{equation}
+\exp\left( -\frac{1}{2} \left(\frac{y_i - m_i}{\sigma_i}\right)^2 \right) &&
+\end{flalign}
 $$
 
 
@@ -161,21 +167,25 @@ The likelihood of Eq.&nbsp;6 is shown in Fig.1 as the red line, using a value fo
 This is a normalized likelihood, so when the width decreases, the height must increase.
 
 
-Even if we put, as usual <i>w = s<sup>-2</sup></i> (as in Fig.1), there is still a difference between 
-Eq.&nbsp;5 and Eq.&nbsp;6. The exponential parts of the equations turn out the same, but the normalizing
-parts are different. The least-squares and the maximum likelihood solutions only depend 
-on the exponential parts. So they do not differ in both representations of the data quality.
-The Bayesian solution, posterior and evidence, take the full likelihood into account, 
-so they are different. Which one is better is up to the user to decide: which of the notions, 
-weighting or scaling, reflects better on the problem and the data at hand.
+Even if we put, as usual <i>w = s<sup>-2</sup></i> (as in Fig.1), there
+is still a difference between Eq.&nbsp;5 and Eq.&nbsp;6.  The
+exponential parts of the equations turn out the same, but the
+normalizing parts are different.  The least-squares and the maximum
+likelihood solutions only depend on the exponential parts.  So they do
+not differ in both representations of the data quality.  The Bayesian
+solution, posterior and evidence, take the full likelihood into account,
+so they are different.  Which one is better is up to the user to decide:
+which of the notions, weighting or scaling, reflects better on the
+problem and the data at hand. 
 
 In the logarithm the likelihood transform into
 
 
-$$
-\begin{equation}
-\log L = \sum_i \log( \mathcal{L}( x_i ) )
-\end{equation}
+$$ 
+\begin{flalign}
+\tag{7} \quad
+\log L = \sum_i \log( \mathcal{L}( x_i ) ) &&
+\end{flalign}
 $$
 
 
@@ -184,28 +194,32 @@ Eq.&nbsp;4 (no differing data quality) transforms (N is the number of data point
 
 
 $$
-\begin{equation}
-\log L = -0.5 N \log( 2\pi \sigma^2 ) - \frac{1}{2 \sigma^2} \sum_i ( y_i - m_i )^2
-\end{equation}
+\begin{flalign}
+\tag{8} \quad
+\log L = -0.5 N \log( 2\pi \sigma^2 ) - \frac{1}{2 \sigma^2} \sum_i ( y_i - m_i )^2 &&
+\end{flalign}
 $$
 
 Equation 5 (using weights) transforms into.
 
 
 $$
-\begin{equation}
-\log L = -0.5 \log( 2\pi \sigma^2 ) \sum_i w_i - \frac{1}{2 \sigma^2} \sum_k w_i ( y_i - m_i )^2
-\end{equation}
+\begin{flalign}
+\tag{9} \quad
+\log L = -0.5 \log( 2\pi \sigma^2 ) \sum_i w_i - \frac{1}{2 \sigma^2} 
+\sum_k w_i ( y_i - m_i )^2 &&
+\end{flalign}
 $$
 
 Equation 6 (using scales) transforms into.
 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{10} \quad
 \log L = -0.5 N \log( 2\pi ) - \sum_i \log( \sigma_i ) - \frac{1}{2}
-\sum_i \left( \frac{y_i - m_i}{\sigma_i}\right)^2
-\end{equation}
+\sum_i \left( \frac{y_i - m_i}{\sigma_i}\right)^2 &&
+\end{flalign}
 $$
 
 ## 3. Quality as Errors
@@ -225,10 +239,11 @@ calculated. We just assume it is there.
 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{11} \quad
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma^2}} \exp\left( - \frac{1}{2} 
-\left(\frac{y_i - m_i}{\sigma} \right)^2 \right)
-\end{equation}
+\left(\frac{y_i - m_i}{\sigma} \right)^2 \right) &&
+\end{flalign}
 $$
 
 The scale, <i>&sigma;</i>, is either a given of the problem or an extra
@@ -244,10 +259,11 @@ data point, replacing the <i>&sigma;</i> in Eq.&nbsp;2 by
 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{12} \quad
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma_i^2}} \exp\left( - \frac{1}{2} 
-\left(\frac{y_i - m_i}{\sigma_i} \right)^2 \right)
-\end{equation}
+\left(\frac{y_i - m_i}{\sigma_i} \right)^2 \right) &&
+\end{flalign}
 $$
 
 ### 3.3. Errors in the Model
@@ -269,10 +285,11 @@ so clear cut. In section 4 we discuss that situation.
 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{13} \quad
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi (\sigma_i^2 + \sigma_{m,i}^2)}} \exp\left(
--0.5 \,  \frac{ ( y_i - m_i )^2}{\sigma_i^2 + \sigma_{m,i}^2} \right)
-\end{equation}
+-0.5 \,  \frac{ ( y_i - m_i )^2}{\sigma_i^2 + \sigma_{m,i}^2} \right) &&
+\end{flalign}
 $$
 
 All <i>&sigma;</i> values might be the same for all data points,
@@ -290,18 +307,20 @@ Eq.1 we have
  
 
 $$
-\begin{equation}
-m_i = F( t_i : \theta )
-\end{equation}
+\begin{flalign}
+\tag{14} \quad
+m_i = F( t_i : \theta ) &&
+\end{flalign}
 $$
 
 And in addition to Eq.&nbsp;2 we have an extra residual to minimize; this
 time for the unknown <i>x</i>-location, for which holds that
 
 $$
-\begin{equation}
-\varepsilon_i = x_i - t_i
-\end{equation}
+\begin{flalign}
+\tag{15} \quad
+\varepsilon_i = x_i - t_i &&
+\end{flalign}
 $$
 
 The unknown <i>x</i>-locations are so called nuisance parameters of the
@@ -326,10 +345,11 @@ or 13, whatever the case is, with the probability for the residuals in
 
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{16} \quad
 \mathcal{L}_i \muleq \sqrt {\frac{1}{2\pi\tau_i^2}} \exp\left( -0.5 
-\left(\frac{x_i - t_i}{\tau_i} \right)^2 \right)
-\end{equation}
+\left(\frac{x_i - t_i}{\tau_i} \right)^2 \right) &&
+\end{flalign}
 $$
 
 where <i>&tau;</i> is the accuracy of the data points in
@@ -368,12 +388,13 @@ specified, estimated by the user.
 In its simplest form the likelihood becomes
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{17} \quad
 \mathcal{L}_i = \frac{1}{2 \pi \sigma_i \tau_i}
 \exp \left( -0.5 \left( 
 \left( \frac{y_i - m_i}{\sigma_i} \right)^2 +
-\left( \frac{x_i - t_i}{\tau_i} \right)^2 \right) \right)
-\end{equation}
+\left( \frac{x_i - t_i}{\tau_i} \right)^2 \right) \right) &&
+\end{flalign}
 $$
 
 The values of <i>m<sub>i</sub></i> are now evalutated on the targets 
@@ -383,20 +404,22 @@ of <i>x</i>:
 More succinctly, the likelihood can be written in matrix notation as
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{18} \quad
 \mathcal{L}_i = \frac{1}{2\pi\sqrt{\det V_{i}}} \exp\left( - \frac{1}{2} 
-( z_i - \zeta_i )^T V_i^{-1} ( z_i - \zeta_i ) \right)
-\end{equation}
+( z_i - \zeta_i )^T V_i^{-1} ( z_i - \zeta_i ) \right) &&
+\end{flalign}
 $$
 
 where
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{19} \quad
 z_i = \left( \begin{array}{c} y_i \\ x_i \end{array} \right), \hspace{2em}
 \zeta_i = \left( \begin{array}{c} m_i \\ t_i \end{array} \right), \hspace{2em}
-V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right)
-\end{equation}
+V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right) &&
+\end{flalign}
 $$
 
 So <i>z<sub>i</sub></i> is the data vector, the
@@ -425,9 +448,10 @@ When the errors in <i>x</i> and <i>y</i> are correlated, the variance
 matrix, <i>V<sub>i</sub></i>, needs to be replaced by a covariance matrix.
 
 $$
-\begin{equation}
-V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\ \varrho_i & \tau_i^2 \end{array} \right) 
-\end{equation}
+\begin{flalign}
+\tag{20} \quad
+V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\ \varrho_i & \tau_i^2 \end{array} \right)  &&
+\end{flalign}
 $$
 
 where <i>&rho;<sub>i</sub></i> is the covariance factor between
@@ -453,10 +477,11 @@ If the accuracies of U, B and V were <i>&sigma;<sub>U</sub></i>,
 the covariance matrix would be
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{21} \quad
 V = \left( \begin{array}{cc} \sigma_U^2 + \sigma_B^2 & -\sigma_B^2 \\ 
--\sigma_B^2 & \sigma_V^2 + \sigma_B^2 \end{array} \right) 
-\end{equation}
+-\sigma_B^2 & \sigma_V^2 + \sigma_B^2 \end{array} \right)  &&
+\end{flalign}
 $$
 
 All this, of course, under conditions of independent measurements
@@ -469,10 +494,11 @@ closest (in 2 dimensions) to the data points. The covariance matrix
 reverts to   
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{22} \quad
 V_i = \left( \begin{array}{cc} \sigma_i^2 + \sigma_m^2& \varrho_i \\ \varrho_i &
-\tau_i^2 + \sigma_m^2 \end{array} \right) 
-\end{equation}
+\tau_i^2 + \sigma_m^2 \end{array} \right)  &&
+\end{flalign}
 $$
 
 The model mismatch is supposed to be independent of the other
@@ -485,10 +511,11 @@ For computational reasons, we write out Eq.&nbsp;19, using the
 covariance matrix of Eq.&nbsp;22. Firstly we write the covariance matrix as
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{23} \quad
 V = \left( \begin{array}{cc} v_{yy} & v_{xy} \\ 
-                             v_{xy} & v_{xx} \end{array} \right) 
-\end{equation}
+                             v_{xy} & v_{xx} \end{array} \right)  &&
+\end{flalign}
 $$
 
 Where the <i>v</i>'s are (co)variances of <i>y</i> and <i>x</i>.
@@ -496,19 +523,21 @@ Where the <i>v</i>'s are (co)variances of <i>y</i> and <i>x</i>.
 The determinant of V becomes
 
 $$
-\begin{equation}
-D = v_{yy} v_{xx} - v_{xy}^2
-\end{equation}
+\begin{flalign}
+\tag{24} \quad
+D = v_{yy} v_{xx} - v_{xy}^2 &&
+\end{flalign}
 $$
 
 And the inverse of V is
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{25} \quad
 V^{-1} = \frac{1}{D} 
 \left( \begin{array}{cc} v_{xx} & -v_{xy} \\ 
-                        -v_{xy} &  v_{yy} \end{array} \right) 
-\end{equation}
+                        -v_{xy} &  v_{yy} \end{array} \right)  &&
+\end{flalign}
 $$
 
 In most computations we need the likelihood in logarithmic form.
@@ -529,20 +558,22 @@ parameters, <i>&theta;</i>, to the targets, <i>t</i>, and, if present to
 the unknown model accuracy, <i>&sigma;<sub>m</sub></i> as in Eq.&nbsp;23.
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{26} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial \theta} =
 \frac{v_{xx} ( y - m ) - v_{xy} ( x - t ) }{D} \frac{\partial
-m}{\partial \theta}
-\end{equation}
+m}{\partial \theta} &&
+\end{flalign}
 $$
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{27} \quad
 \frac{\partial \log \mathcal{L}_i}{\partial t_k} = 
 \left( \frac{  v_{xx} ( y - m ) - v_{xy}( x - t ) }{D} 
 \frac{\partial m}{ \partial t} +
-\frac{ v_{yy} ( x - t ) - v_{xy}( y - m ) }{D}\right) \delta_{ik}
-\end{equation}
+\frac{ v_{yy} ( x - t ) - v_{xy}( y - m ) }{D}\right) \delta_{ik} &&
+\end{flalign}
 $$
 
 Where <i>&delta;<sub>i,k</sub></i> is the Kronecker delta.
@@ -552,20 +583,22 @@ The unknown model scale is present in <i>v<sub>yy</sub></i>,
 subsequently in <i>D</i>. 
 
 $$
-\begin{equation}
-D = ( \sigma^2 + \sigma_m^2 ) ( \tau^2 + \sigma_{m}^2 ) - \varrho^2 
-\end{equation}
+\begin{flalign}
+\tag{28} \quad
+D = ( \sigma^2 + \sigma_m^2 ) ( \tau^2 + \sigma_{m}^2 ) - \varrho^2  &&
+\end{flalign}
 $$
 
 So in case of Eq.&nbsp;23 we have
 
 $$
-\begin{equation}
+\begin{flalign}
+\tag{29} \quad
 \frac{\partial v_{yy}}{\partial \sigma_m} = 2 \sigma_m, \hspace{2em}
 \frac{\partial v_{xx}}{\partial \sigma_m} = 2 \sigma_m, \hspace{2em}
 \frac{\partial D}{\partial \sigma_m} = 2 \sigma_m ( \sigma^2 + \tau^2 +
-2 \sigma_m^2 )
-\end{equation}
+2 \sigma_m^2 ) &&
+\end{flalign}
 $$
 
 Combining these 
@@ -727,9 +760,10 @@ individual points, as in Eq.&nbsp;3.
 Using weights Eq.&nbsp;3 changes in
 
 $$
-\begin{equation}
-L = \prod_i \mathcal{L}_i^{w_i}
-\end{equation}
+\begin{flalign}
+\tag{30} \quad
+L = \prod_i \mathcal{L}_i^{w_i} &&
+\end{flalign}
 $$
 
 It is irrelevant what the exact form of the individual likelihoods is.
