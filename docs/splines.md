@@ -44,7 +44,7 @@ Assume we have a set of knots as in
 
 The set of knots defines the domain where the spline model is valid.
 
-We define a 3rd order polynomial to the first knot segement $(k_0,k_1)$
+We define a 3rd order polynomial to the first knot segment $$(k_0,k_1)$$
 
 $$
 \begin{flalign}
@@ -53,7 +53,7 @@ $$
 \end{flalign}
 $$
 
-Where $x_0$ is the distance to $k_0 : x_0  = x - k_0$.
+Where $$x_0$$ is the distance to $$k_0 : x_0  = x - k_0$$.
 
 For the second segment $(k_1,k_2)$ we extend the function of the previous segment
 and add 
@@ -218,9 +218,9 @@ Now we have 4 equations with 4 unknown coefficients (a,b,c,d) which we can solve
 
 ### Second Blob.
 
-For the second blob we see that it is defined over two knot segments.
+The second blob is defined over two knot segments.
 In each segment a 3rd order polynomial function is defined: $f_1$ and
-$f_2$. Note that these functions are different from the $f_1$ of the 
+$f_2$. Note that this function, $f_1$, are different from the $f_1$ of the 
 first blob.
 
          f_1           f_2        
