@@ -43,10 +43,16 @@ latex-->
 | ![DatQualEquation-1](images/dqeq-1.png "Eq 1") | (1) |
 |:-|-------------------------------------------------------------------------------:|
 
-
-<div style="text-align:left"> ![DatQualEquation-1](images/dqeq-1.png "Eq 1") </div>
-<div style="text-align:right"> (1) </div>
-
+<table width=100%; border=0px>
+<tr>
+<th width=5%></th>
+<th width=90% align=left></th>
+<th width=5% align=right></th>
+</tr><tr>
+<td></td
+<td> ![DatQualEquation-1](images/dqeq-1.png "Eq 1") </td>
+<td> (1) </td>
+</tr></table>
 
 such that some norm of the residuals, *r<sub>i</sub>*, are minimumized over the parameters, *&theta;*.
 
@@ -721,11 +727,11 @@ The schemes above only work on scaled error distributions; so not for  Poisson
 and Bernouilli distributions.
 
 In the table below is indicated what is implemented in BayesicFitting with
-<div><b style='color:green'>&check;</b></div>,
-and  what is not implemented with <div><b style='color:red'>&cross;</b><div>. 
+<span><b style='color:green'>&check;</b></span>,
+and  what is not implemented with <span><b style='color:red'>&cross;</b><span>. 
 The numbers in brackets refer to notes.
 
-The orange <div><b style='color:orange'>&sigma;<sub>m</sub></b></div> indicate a
+The orange <span><b style='color:orange'>&sigma;<sub>m</sub></b></span> indicate a
 scale factor due to the incompleteness of the model. It might either be
 known or unknown.  
 In the latter case the scale needs to be estimated from the data.
