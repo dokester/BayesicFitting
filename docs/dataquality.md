@@ -179,7 +179,7 @@ problem and the data at hand.
 In the logarithm the likelihood transform into
 
 
-$$ 
+$$
 \begin{flalign}
 \tag{7} \quad
 \log L = \sum_i \log( \mathcal{L}( x_i ) ) &&
@@ -345,7 +345,7 @@ $x$.
 $$
 \begin{flalign}
 \tag{16} \quad
-\mathcal{L}_i *= \sqrt {\frac{1}{2\pi\tau_i^2}} \exp\left( -0.5 
+\mathcal{L}_i \muleq \sqrt {\frac{1}{2\pi\tau_i^2}} \exp\left( -0.5 
 \left(\frac{x_i - t_i}{\tau_i} \right)^2 \right) &&
 \end{flalign}
 $$
