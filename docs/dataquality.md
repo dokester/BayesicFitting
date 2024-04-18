@@ -52,8 +52,9 @@ r_i = y_i - m_i
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-2](images/dqeq-2.png "Eq 2") | (2) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -86,8 +87,9 @@ L = \prod_i \mathcal{L}_i
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-3](images/dqeq-3.png "Eq 3") | (3) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -102,8 +104,9 @@ this note.
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-4](images/dqeq-4.png "Eq 4") | (4) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -146,8 +149,9 @@ With these assumptions Eq. 4 transforms into
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-5](images/dqeq-5.png "Eq 5") | (5) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -173,8 +177,9 @@ data, not part of the likelihood.
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-6](images/dqeq-6.png "Eq 6") | (6) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -203,8 +208,9 @@ In the logarithm the likelihood transform into
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-7](images/dqeq-7.png "Eq 7") | (7) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -218,8 +224,9 @@ Eq. 4 (no differing data quality) transforms (N is the number of data points).
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-8](images/dqeq-8.png "Eq 8") | (8) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 Equation 5 (using weights) transforms into.
@@ -232,8 +239,9 @@ Equation 5 (using weights) transforms into.
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-9](images/dqeq-9.png "Eq 9") | (9) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 Equation 6 (using scales) transforms into.
@@ -246,8 +254,9 @@ Equation 6 (using scales) transforms into.
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-10](images/dqeq-10.png "Eq 10") | (10) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 ## 3. Quality as Errors
@@ -273,8 +282,9 @@ calculated. We just assume it is there.
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-11](images/dqeq-11.png "Eq 11") | (11) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 The scale, *&sigma;*, is either a given of the problem or an extra
@@ -296,8 +306,9 @@ data point, replacing the *&sigma;* in Eq. 2 by
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-12](images/dqeq-12.png "Eq 12") | (12) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 ### 3.3. Errors in the Model
@@ -325,8 +336,9 @@ so clear cut. In section 4 we discuss that situation.
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-13](images/dqeq-13.png "Eq 13") | (13) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 All *&sigma;* values might be the same for all data points,
@@ -349,8 +361,9 @@ m_i = F( t_i : \theta )
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-14](images/dqeq-14.png "Eq 14") | (14) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 And in addition to Eq. 2 we have an extra residual to minimize; this
@@ -362,8 +375,9 @@ time for the unknown *x*-location, for which holds that
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-15](images/dqeq-15.png "Eq 15") | (15) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 The unknown *x*-locations are so called nuisance parameters of the
@@ -394,8 +408,9 @@ or 13, whatever the case is, with the probability for the residuals in
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-16](images/dqeq-16.png "Eq 16") | (16) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 where *&tau;* is the accuracy of the data points in
@@ -428,8 +443,9 @@ p( x | t, \tau ) = \sqrt {\frac{1}{2\pi\tau^2}} \exp\left( - \frac{1}{2}
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-17](images/dqeq-17.png "Eq 17") | (17) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 where the scale of the distribution, *&tau;*, needs to be
@@ -446,8 +462,9 @@ In its simplest form the likelihood becomes
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-18](images/dqeq-18.png "Eq 18") | (18) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 The values of *m<sub>i</sub>* are now evalutated on the targets 
@@ -462,8 +479,9 @@ More succinctly, the likelihood can be written in matrix notation as
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-19](images/dqeq-19.png "Eq 19") | (19) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 where
@@ -476,8 +494,9 @@ V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-20](images/dqeq-20.png "Eq 20") | (20) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 So *z<sub>i</sub>* is the data vector, the
@@ -512,8 +531,9 @@ V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-21](images/dqeq-21.png "Eq 21") | (21) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 where *&rho;<sub>i</sub>* is the covariance factor between
@@ -545,8 +565,9 @@ V = \left( \begin{array}{cc} \sigma_U^2 + \sigma_B^2 & -\sigma_B^2 \\
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-22](images/dqeq-22.png "Eq 22") | (22) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 All this, of course, under conditions of independent measurements
@@ -565,8 +586,9 @@ V_i = \left( \begin{array}{cc} \sigma_i^2 + \sigma_m^2& \varrho_i \\ \varrho_i &
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-23](images/dqeq-23.png "Eq 23") | (23) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 The model mismatch is supposed to be independent of the other
@@ -585,8 +607,9 @@ V = \left( \begin{array}{cc} v_{yy} & v_{xy} \\
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-24](images/dqeq-24.png "Eq 24") | (24) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 Where the *v*'s are (co)variances of *y* and *x*.
@@ -599,8 +622,9 @@ D = v_{yy} v_{xx} - v_{xy}^2
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-25](images/dqeq-25.png "Eq 25") | (25) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 And the inverse of V is
@@ -613,8 +637,9 @@ V^{-1} = \frac{1}{D}
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-26](images/dqeq-26.png "Eq 26") | (26) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 In most computations we need the likelihood in logarithmic form.
@@ -627,8 +652,9 @@ v_{yy} ( x - t )^2}{2 D}
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-27](images/dqeq-27.png "Eq 27") | (27) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 All relevant items in Eq. 28 need indices *i*. They are
@@ -646,8 +672,9 @@ m}{\partial \theta}
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-28](images/dqeq-28.png "Eq 28") | (28) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 <!--latex
@@ -659,8 +686,9 @@ latex-->
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-29](images/dqeq-29.png "Eq 29") | (29) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 Where *&delta;<sub>i,k</sub>* is the Kronecker delta.
@@ -675,8 +703,9 @@ D = ( \sigma^2 + \sigma_m^2 ) ( \tau^2 + \sigma_{m}^2 ) - \varrho^2
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-30](images/dqeq-30.png "Eq 30") | (30) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 So in case of Eq. 23 we have
@@ -690,8 +719,9 @@ So in case of Eq. 23 we have
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-31](images/dqeq-31.png "Eq 31") | (31) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 Combining these 
@@ -706,8 +736,9 @@ Combining these
 \end{eqnarray*}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-32](images/dqeq-32.png "Eq 32") | (32) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 
@@ -862,8 +893,9 @@ L = \prod_i \mathcal{L}_i^{w_i}
 \end{displaymath}
 latex-->
 
-|:-|-:|
+
 | ![DatQualEquation-33](images/dqeq-33.png "Eq 33") | (33) |
+|:-|-------------------------------------------------------------------------------:|
 
 
 It is irrelevant what the exact form of the individual likelihoods is.
