@@ -18,7 +18,7 @@ maximum.
 The behaviour of splines of different orders is explained in the table.
 
 | order | Behaviour between Knots | Continuity at Knots |
-|:-|:-|:-|
+|:-:|:-:|:-:|
 | 0 | piecewise constant | not continuous at all |
 | 1 | piecewise linear | lines are continuous (connected) |
 | 2 | parabolic pieces | 1st derivatives are also continuous |
@@ -52,8 +52,8 @@ We define a 3rd order polynomial to the first knot segment $(k_0,k_1)$
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-1](images/speq-1.png "Eq 1") | (1) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-1](images/speq-1.png "Eq 1") | (1) |
+|:-:|:-|-------------------------------------------------:|
 
 Where *x<sub>0</sub>* is the distance to *k<sub>0</sub> : x<sub>0</sub>  = x - k<sub>0</sub>*.
 
@@ -71,8 +71,8 @@ and add
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-2](images/speq-2.png "Eq 2") | (2) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-2](images/speq-2.png "Eq 2") | (2) |
+|:-:|:-|-------------------------------------------------:|
 
 where *x<sub>1</sub>* is the distance to *k<sub>1</sub> : x<sub>1</sub> = x - k<sub>1</sub>*.
 
@@ -92,8 +92,8 @@ So in the end we have a spline function *f(x)* as
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-3](images/speq-3.png "Eq 3") | (3) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-3](images/speq-3.png "Eq 3") | (3) |
+|:-:|:-|-------------------------------------------------:|
 
 Obviously this (piecewise) function is continuously differentiable to 
 the 3rd derivative as it is a sum of continuously differentiable
@@ -168,8 +168,8 @@ functions and as many parameters.
 The sum of the components is the black line
 constant at 1.0.
 
-![de Boor Splines](images/splines-2.png)
-
+| &nbsp; ![de Boor Splines](images/splines-2.png)
+|:-:
 <table><tr>
 <td style="width: 50px;">   
 <td style="width: 450px;">
@@ -204,12 +204,12 @@ We have a 3rd order polynomial between the first 2 knots.
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-4](images/speq-4.png "Eq 4") | (4) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-4](images/speq-4.png "Eq 4") | (4) |
+|:-:|:-|-------------------------------------------------:|
 
-          f<sub>1</sub>        
+          f_1        
     |------------|----
-    x<sub>0</sub>            x<sub>1</sub> 
+    x_0          x_1 
 
 The property 3-smooth implies that the function and it first and
 second derivative are 0 at *x<sub>1</sub>*, while the function is unbound,
@@ -224,8 +224,8 @@ arbitrary at *x<sub>0</sub>*. We normalize the blob in *x<sub>0</sub>* at 1.
 \end{eqnarray*}
 latex-->
 
-| ![DatQualEquation-5](images/speq-5.png "Eq 5") | (5) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-5](images/speq-5.png "Eq 5") | (5) |
+|:-:|:-|-------------------------------------------------:|
 
 Now we have 4 equations with 4 unknown coefficients (a,b,c,d) which we can solve.
 
@@ -236,9 +236,9 @@ In each segment a 3rd order polynomial function is defined: *f<sub>1</sub>* and
 *f<sub>2</sub>*. Note that this function, *f<sub>1</sub>*, are different from the *f<sub>1</sub>* of the 
 first blob.
 
-         f<sub>1</sub>           f<sub>2</sub>        
+         f_1           f_2        
     |--------------|--------|---
-    x<sub>0</sub>            x<sub>1</sub>      x<sub>2</sub> 
+    x_0            x_1      x_2
 
 
 <!--latex
@@ -248,8 +248,8 @@ first blob.
 \end{eqnarray*}
 latex-->
 
-| ![DatQualEquation-6](images/speq-6.png "Eq 6") | (6) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-6](images/speq-6.png "Eq 6") | (6) |
+|:-:|:-|-------------------------------------------------:|
 
 The function, *f<sub>1</sub>* is 1-smooth at *x<sub>0</sub>*, i.e. touching zero;
 *f<sub>1</sub>* and *f<sub>2</sub>* are 3-smooth at *x<sub>1</sub>*,
@@ -269,8 +269,8 @@ Again we need a normalization at *x<sub>1</sub>* for both *f<sub>1</sub>* and *f
 \end{eqnarray*}
 latex-->
 
-| ![DatQualEquation-7](images/speq-7.png "Eq 7") | (7) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-7](images/speq-7.png "Eq 7") | (7) |
+|:-:|:-|-------------------------------------------------:|
 
 We have 8 equations and 8 coefficients (4 per function) so it can be solved directly.
 
@@ -300,7 +300,7 @@ In case we have a cubic spline on a set of 2 knots, *x<sub>0</sub>* and
 *x<sub>1</sub>*, we have 4 blobs. The smoothnes at the knots is given in the table below. 
 
 | blob | x<sub>0</sub>  | x<sub>1</sub>  |
-|:-|:-|:-|
+|:-:|:-:|:-:|
 | 1 | 0-smooth | 3-smooth 
 | 2 | 1-smooth | 2-smooth 
 | 3 | 2-smooth | 1-smooth 
@@ -311,7 +311,7 @@ In case we have a cubic spline on a set of 3 knots, *x<sub>0</sub>*,
 table below. 
 
 | blob | x<sub>0</sub>  | x<sub>1</sub>  | x<sub>2</sub> 
-|:-|:-|:-|:-|
+|:-:|:-:|:-:|:-:|
 | 1 | 0-smooth | 3-smooth | n/a 
 | 2 | 1-smooth | 3-smooth | 3-smooth 
 | 3 | 2-smooth | 3-smooth | 2-smooth 
@@ -335,8 +335,8 @@ In the model each blob *f<sub>k</sub>* has assigned a parameter *p<sub>k</sub>*.
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-8](images/speq-8.png "Eq 8") | (8) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-8](images/speq-8.png "Eq 8") | (8) |
+|:-:|:-|-------------------------------------------------:|
 
 We can expand the *f<sub>k</sub>* into its blob coefficients.
 
@@ -346,8 +346,8 @@ We can expand the *f<sub>k</sub>* into its blob coefficients.
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-9](images/speq-9.png "Eq 9") | (9) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-9](images/speq-9.png "Eq 9") | (9) |
+|:-:|:-|-------------------------------------------------:|
 
 And then multiply and sum the parameters and coefficients to speed up
 the calculations.
@@ -359,8 +359,8 @@ the calculations.
 \end{displaymath}
 latex-->
 
-| ![DatQualEquation-10](images/speq-10.png "Eq 10") | (10) |
-|:-|-------------------------------------------------:|
+| &nbsp; | ![DatQualEquation-10](images/speq-10.png "Eq 10") | (10) |
+|:-:|:-|-------------------------------------------------:|
 
 
 The coefficients and the parameters can be multiplied together, forming
