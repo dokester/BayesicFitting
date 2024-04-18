@@ -34,21 +34,27 @@ Assume we have N data points $D = {x_i,y_i}$. We want to
 fit the data with an as-yet-unspecified model
 
 
-$$
-\begin{flalign}
-\tag{1} \quad
-m_i = F( x_i : \theta ) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+m_i = F( x_i : \theta ) 
+\end{displaymath}
+latex-->
 
-such that some norm of the residuals, $r_i$, are minimumized over the parameters, $\theta$.
+|:-|-:|
+| ![DatQualEquation-1](images/dqeq-1.png "Eq 1") | (1) |
 
-$$
-\begin{flalign}
-\tag{2} \quad
-r_i = y_i - m_i &&
-\end{flalign}
-$$
+
+such that some norm of the residuals, *r<sub>i</sub>*, are minimumized over the parameters, *&theta;*.
+
+<!--latex
+\begin{displaymath}
+r_i = y_i - m_i 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-2](images/dqeq-2.png "Eq 2") | (2) |
+
 
 
 ## 2. Quality as Weights
@@ -64,22 +70,25 @@ The common suggestion, repeated in our paper, that the choice between weights an
 scales is irrelevant with respect to the final fitting results, is somewhat too fast.
 Up on closer inspection it turns out that the least-squares results and the maximum
 likelihood results are indeed the same, provided that we choose 
-$w = \sigma^-2$, where $w$ is the weight and
-$\sigma$ is the accuracy.
+*w = &sigma;<sup>-2</sup>*, where *w* is the weight and
+*&sigma;* is the accuracy.
 However, the calculation of the size
 of the posterior and consequently, the evidence is different. The
 overall shape of the posterior is not affected.
 
 The crux is in the likelihood. The likelihood is the product of the error distribution values 
-at individual data points, $x_i$. 
+at individual data points, *x<sub>i</sub>*. 
 
 
-$$
-\begin{flalign}
-\tag{3} \quad
-L = \prod_i \mathcal{L}_i &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+L = \prod_i \mathcal{L}_i 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-3](images/dqeq-3.png "Eq 3") | (3) |
+
 
 
 When we choose a Gaussian error distribution we obtain for individual data points,
@@ -87,32 +96,35 @@ without weights. We will address other error distributions later on in
 this note.
 
 
-$$
-\begin{flalign}
-\tag{4} \quad
-\mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma^2}} \exp\left( - \frac{1}{2 \sigma^2} (y_i - m_i )^2 \right) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+\mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma^2}} \exp\left( - \frac{1}{2 \sigma^2} (y_i - m_i )^2 \right) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-4](images/dqeq-4.png "Eq 4") | (4) |
 
 
-where $y_i$ is the measured value at location $x_i$ and 
-$m_i = F(x_i : \theta)$.
-It is the value returned by the model, $F$,
-at the same location and for certain values of the parameter vector, $\theta$,
+
+where *y<sub>i</sub>* is the measured value at location *x<sub>i</sub>* and 
+*m<sub>i</sub> = F(x<sub>i</sub> : &theta;)*.
+It is the value returned by the model, *F*,
+at the same location and for certain values of the parameter vector, *&theta;*,
 also known as mock data..
-The scale factor, $\sigma$, is in the narrative of KM,  part of the likelihood.
+The scale factor, *&sigma;*, is in the narrative of KM,  part of the likelihood.
 It is either a fixed value or a hyperparameter to be estimated in the problem too.
 
 The likelihood of Eq. 2 is displayed in Fig. 1, using the black line. It is shown as a function 
-of the residuals $r = y - m$. The scale factor $\sigma$, is set to 1.0.
+of the residuals *r = y - m*. The scale factor *&sigma;*, is set to 1.0.
 
 ![logL](images/logL.png)
 <div>
 <table><tr>
 <td style="width: 50px"> </td>
 <td style="width: 550px">
-Figure 1. The Gaussian likelihood as function of residual size. In black for \sigma = 1,
-in green for $w$ = 2, and in red for $\sigma$ = &frac12;&radic;2.
+Figure 1. The Gaussian likelihood as function of residual size. In black for &sigma; = 1,
+in green for *w* = 2, and in red for *&sigma;* = &frac12;&radic;2.
 </td></tr>
 </table>
 </div>
@@ -120,25 +132,28 @@ in green for $w$ = 2, and in red for $\sigma$ = &frac12;&radic;2.
 When there are qualitative differences between individual data points, there are 2 ways 
 to handle them: via weighting of the datapoints, and via scaling of the residuals.
 For weighting we assume that a data point that has 
-a weight, $w$ has the same impact as $w$ (of the same) data points with
+a weight, *w* has the same impact as *w* (of the same) data points with
 a weight equal to 1. 
 We can easily extend this to floating values of the weight,
-$w_i$.
+*w<sub>i</sub>*.
 
 With these assumptions Eq. 4 transforms into 
 
-$$
-\begin{flalign}
-\tag{5} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \left(\frac{1}{2\pi\sigma^2}\right)^{w_i/2} \exp\left( -
-\frac{w_i}{2 \sigma^2} (y_i - m_i)^2 \right) &&
-\end{flalign}
-$$
+\frac{w_i}{2 \sigma^2} (y_i - m_i)^2 \right) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-5](images/dqeq-5.png "Eq 5") | (5) |
+
 
 
 This is the formula we have been using in our NestedSampler. 
 
-In Fig. 1 the likelihood of Eq. 5 is displayed in green for a weight value, $w = 2$. 
+In Fig. 1 the likelihood of Eq. 5 is displayed in green for a weight value, *w = 2*. 
 This likelihood is *not* normalized as it is actually a product of 2 likelihoods
 of the form of Eq. 4. The latter is less than 1, everywhere, so the green line is 
 consistently below the black line.
@@ -146,26 +161,29 @@ consistently below the black line.
 
 However, there is another option, where we know the accuracy of the errors on the
 data point, e.g. when the data point is the result of a previous calculation.
-Assume $\sigma_i$ represents the size of the errors. In
-this narrative the $\sigma$'s are a given. They are part of the
+Assume *&sigma;<sub>i</sub>* represents the size of the errors. In
+this narrative the *&sigma;*'s are a given. They are part of the
 data, not part of the likelihood. 
 
 
-$$
-\begin{flalign}
-\tag{6} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \left(\frac{1}{2\pi \sigma_i^2}\right)^{1/2} 
-\exp\left( -\frac{1}{2} \left(\frac{y_i - m_i}{\sigma_i}\right)^2 \right) &&
-\end{flalign}
-$$
+\exp\left( -\frac{1}{2} \left(\frac{y_i - m_i}{\sigma_i}\right)^2 \right) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-6](images/dqeq-6.png "Eq 6") | (6) |
+
 
 
 The likelihood of Eq. 6 is shown in Fig.1 as the red line, using a value for
-$\sigma = 1/ \sqrt 2$.
+*&sigma; = 1/ &radix; 2*.
 This is a normalized likelihood, so when the width decreases, the height must increase.
 
 
-Even if we put, as usual $w = s^-2$ (as in Fig.1), there
+Even if we put, as usual *w = s<sup>-2</sup>* (as in Fig.1), there
 is still a difference between Eq. 5 and Eq. 6.  The
 exponential parts of the equations turn out the same, but the
 normalizing parts are different.  The least-squares and the maximum
@@ -179,46 +197,58 @@ problem and the data at hand.
 In the logarithm the likelihood transform into
 
 
-$$
-\begin{flalign}
-\tag{7} \quad
-\log L = \sum_i \log( \mathcal{L}( x_i ) ) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+\log L = \sum_i \log( \mathcal{L}( x_i ) ) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-7](images/dqeq-7.png "Eq 7") | (7) |
+
 
 
 
 Eq. 4 (no differing data quality) transforms (N is the number of data points).
 
 
-$$
-\begin{flalign}
-\tag{8} \quad
-\log L = -0.5 N \log( 2\pi \sigma^2 ) - \frac{1}{2 \sigma^2} \sum_i ( y_i - m_i )^2 &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+\log L = -0.5 N \log( 2\pi \sigma^2 ) - \frac{1}{2 \sigma^2} \sum_i ( y_i - m_i )^2 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-8](images/dqeq-8.png "Eq 8") | (8) |
+
 
 Equation 5 (using weights) transforms into.
 
 
-$$
-\begin{flalign}
-\tag{9} \quad
+<!--latex
+\begin{displaymath}
 \log L = -0.5 \log( 2\pi \sigma^2 ) \sum_i w_i - \frac{1}{2 \sigma^2} 
-\sum_k w_i ( y_i - m_i )^2 &&
-\end{flalign}
-$$
+\sum_k w_i ( y_i - m_i )^2 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-9](images/dqeq-9.png "Eq 9") | (9) |
+
 
 Equation 6 (using scales) transforms into.
 
 
-$$
-\begin{flalign}
-\tag{10} \quad
+<!--latex
+\begin{displaymath}
 \log L = -0.5 N \log( 2\pi ) - \sum_i \log( \sigma_i ) - \frac{1}{2}
-\sum_i \left( \frac{y_i - m_i}{\sigma_i}\right)^2 &&
-\end{flalign}
-$$
+\sum_i \left( \frac{y_i - m_i}{\sigma_i}\right)^2 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-10](images/dqeq-10.png "Eq 10") | (10) |
+
 
 ## 3. Quality as Errors
 
@@ -231,38 +261,44 @@ Here we assume that the likelihood is a Gaussian error distribution.
 
 ### 3.1. Single scale
 
-All errors are from a Normal distribution with a single scale, $\sigma$.
-At this point it does not matter how the model $m_i$ is
+All errors are from a Normal distribution with a single scale, *&sigma;*.
+At this point it does not matter how the model *m<sub>i</sub>* is
 calculated. We just assume it is there.
 
 
-$$
-\begin{flalign}
-\tag{11} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma^2}} \exp\left( - \frac{1}{2} 
-\left(\frac{y_i - m_i}{\sigma} \right)^2 \right) &&
-\end{flalign}
-$$
+\left(\frac{y_i - m_i}{\sigma} \right)^2 \right) 
+\end{displaymath}
+latex-->
 
-The scale, $\sigma$, is either a given of the problem or an extra
+|:-|-:|
+| ![DatQualEquation-11](images/dqeq-11.png "Eq 11") | (11) |
+
+
+The scale, *&sigma;*, is either a given of the problem or an extra
 (hyper)parameter, that must be estimated from the data. 
 
 ### 3.2. Known Accuracies
 
 For each of the data points, the accuracy is known as
-$\sigma_i$. The likelihood is the same as in Eq.2 except
-that the accuracies, $\sigma_i$, are different at each
-data point, replacing the $\sigma$ in Eq. 2 by
-$\sigma_i$.
+*&sigma;<sub>i</sub>*. The likelihood is the same as in Eq.2 except
+that the accuracies, *&sigma;<sub>i</sub>*, are different at each
+data point, replacing the *&sigma;* in Eq. 2 by
+*&sigma;<sub>i</sub>*.
 
 
-$$
-\begin{flalign}
-\tag{12} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi\sigma_i^2}} \exp\left( - \frac{1}{2} 
-\left(\frac{y_i - m_i}{\sigma_i} \right)^2 \right) &&
-\end{flalign}
-$$
+\left(\frac{y_i - m_i}{\sigma_i} \right)^2 \right) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-12](images/dqeq-12.png "Eq 12") | (12) |
+
 
 ### 3.3. Errors in the Model
 
@@ -270,7 +306,7 @@ When our (knowledge of the) model is incomplete, not embodying all
 subtleties present in the data, there can be (systematic) errors which
 are not caught when knowing the accuracies only. The model
 incompleteness might be known at the level of each data point as 
-$\sigma_m,i$, or globally as $\sigma_m$.
+*&sigma;<sub>m</sub>,i*, or globally as *&sigma;<sub>m</sub>*.
 The latter might be an unknowm quantity, estimatable as a hyperparameter
 of the problem.
 
@@ -282,87 +318,99 @@ the sum of the individual variances. For other distributions it is not
 so clear cut. In section 4 we discuss that situation.
 
 
-$$
-\begin{flalign}
-\tag{13} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \sqrt {\frac{1}{2\pi (\sigma_i^2 + \sigma_{m,i}^2)}} \exp\left(
--0.5 \  \frac{ ( y_i - m_i )^2}{\sigma_i^2 + \sigma_{m,i}^2} \right) &&
-\end{flalign}
-$$
+-0.5 \  \frac{ ( y_i - m_i )^2}{\sigma_i^2 + \sigma_{m,i}^2} \right) 
+\end{displaymath}
+latex-->
 
-All $\sigma$ values might be the same for all data points,
+|:-|-:|
+| ![DatQualEquation-13](images/dqeq-13.png "Eq 13") | (13) |
+
+
+All *&sigma;* values might be the same for all data points,
 provided they are a given in the problem. Only one of them can be
 sensibly estimated from the data. 
 
 
 
-### 3.4. Errors in $x$ and $y$
+### 3.4. Errors in *x* and *y*
 
-When we have errors in $x$ and $y$ of similar size, we do not
+When we have errors in *x* and *y* of similar size, we do not
 know the exact location of the independent variable. We have to estimate
-them too. We call them the targets, $t_i$. In stead of
+them too. We call them the targets, *t<sub>i</sub>*. In stead of
 Eq.1 we have 
  
 
-$$
-\begin{flalign}
-\tag{14} \quad
-m_i = F( t_i : \theta ) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+m_i = F( t_i : \theta ) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-14](images/dqeq-14.png "Eq 14") | (14) |
+
 
 And in addition to Eq. 2 we have an extra residual to minimize; this
-time for the unknown $x$-location, for which holds that
+time for the unknown *x*-location, for which holds that
 
-$$
-\begin{flalign}
-\tag{15} \quad
-\varepsilon_i = x_i - t_i &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+\varepsilon_i = x_i - t_i 
+\end{displaymath}
+latex-->
 
-The unknown $x$-locations are so called nuisance parameters of the
+|:-|-:|
+| ![DatQualEquation-15](images/dqeq-15.png "Eq 15") | (15) |
+
+
+The unknown *x*-locations are so called nuisance parameters of the
 problem, each with their own prior. They have to be integrated over all
 possible values to obtain the values for the model parameters,
-$\theta$.  When using the nested sampling algorithm, it means that
+*&theta;*.  When using the nested sampling algorithm, it means that
 the nuisance parameters just can be ignored. 
 
 PG1 presents a case where the nuisance parameters are integrated
 analytically, so they are removed from the problem. PG1 needs to assume
 that the model is a straight line and that one prior suffices for all
 targets. The latter encodes the case where the possible range
-of the values for the targets, $t$, is much smaller than the
-possible range of the errors, $\epsilon_i$. PG1 ends up with one
+of the values for the targets, *t*, is much smaller than the
+possible range of the errors, *\epsilon<sub>i</sub>*. PG1 ends up with one
 (maybe 2) nuisance parameters in stead of N.
 
 We think that these conditions are too restrictive; we prefer working
 with nuisance parameters for the N targets. Again. using a Gaussian
 error distribution, we multiply the probabilities of Eqs. 11, 12, 
 or 13, whatever the case is, with the probability for the residuals in 
-$x$.
+*x*.
 
 
-$$
-\begin{flalign}
-\tag{16} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i \muleq \sqrt {\frac{1}{2\pi\tau_i^2}} \exp\left( -0.5 
-\left(\frac{x_i - t_i}{\tau_i} \right)^2 \right) &&
-\end{flalign}
-$$
+\left(\frac{x_i - t_i}{\tau_i} \right)^2 \right) 
+\end{displaymath}
+latex-->
 
-where $\tau$ is the accuracy of the data points in
-the $x$-direction.
+|:-|-:|
+| ![DatQualEquation-16](images/dqeq-16.png "Eq 16") | (16) |
+
+
+where *&tau;* is the accuracy of the data points in
+the *x*-direction.
 
 As the targets are (nuisance) parameters to the problem, they need a
 prior. As said before, PG1 chooses a single prior for all targets and
 he could integrate the nuisance parameters out (for straight line
 models). We want a prior for each target as we think that in most cases
-the values for $x_i$ are not drawn from a single
+the values for *x<sub>i</sub>* are not drawn from a single
 distribution, but are significantly different in themselves with an
 added error contribution. This leads to priors which are centered on the
-data point values of $x_i$. This may seem like cheating
+data point values of *x<sub>i</sub>*. This may seem like cheating
 as we are using the data for establishing the prior. But it is not. We
-know beforehand that the targets need to be near the $x$-data,
+know beforehand that the targets need to be near the *x*-data,
 whatever these data points are. We are not looking at the data and
 decide what to choose; we already know what to do. 
 
@@ -372,93 +420,108 @@ between target and data, it holds that the probability of the data,
 given the target, is the same as the probabilty of the target given the
 data. E.g. for a Gaussian distribution as prior
 
-$$
-\begin{flalign}
-\tag{17} \quad
+<!--latex
+\begin{displaymath}
 p( x | t, \tau ) = \sqrt {\frac{1}{2\pi\tau^2}} \exp\left( - \frac{1}{2} 
 \left(\frac{x - t}{\tau} \right)^2 \right) 
-= p( t | x, \tau ) &&
-\end{flalign}
-$$
+= p( t | x, \tau ) 
+\end{displaymath}
+latex-->
 
-where the scale of the distribution, $\tau$, needs to be
+|:-|-:|
+| ![DatQualEquation-17](images/dqeq-17.png "Eq 17") | (17) |
+
+
+where the scale of the distribution, *&tau;*, needs to be
 specified, estimated by the user. 
 
 In its simplest form the likelihood becomes
 
-$$
-\begin{flalign}
-\tag{18} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \frac{1}{2 \pi \sigma_i \tau_i}
 \exp \left( -0.5 \left( 
 \left( \frac{y_i - m_i}{\sigma_i} \right)^2 +
-\left( \frac{x_i - t_i}{\tau_i} \right)^2 \right) \right) &&
-\end{flalign}
-$$
+\left( \frac{x_i - t_i}{\tau_i} \right)^2 \right) \right) 
+\end{displaymath}
+latex-->
 
-The values of $m_i$ are now evalutated on the targets 
-of $x$: $m_i = F(t_i:\theta)$.
+|:-|-:|
+| ![DatQualEquation-18](images/dqeq-18.png "Eq 18") | (18) |
+
+
+The values of *m<sub>i</sub>* are now evalutated on the targets 
+of *x*: *m<sub>i</sub> = F(t<sub>i</sub>:&theta;)*.
 
 More succinctly, the likelihood can be written in matrix notation as
 
-$$
-\begin{flalign}
-\tag{19} \quad
+<!--latex
+\begin{displaymath}
 \mathcal{L}_i = \frac{1}{2\pi\sqrt{\det V_{i}}} \exp\left( -0.5 
-( z_i - \zeta_i )^T V_i^{-1} ( z_i - \zeta_i ) \right) &&
-\end{flalign}
-$$
+( z_i - \zeta_i )^T V_i^{-1} ( z_i - \zeta_i ) \right) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-19](images/dqeq-19.png "Eq 19") | (19) |
+
 
 where
 
-$$
-\begin{flalign}
-\tag{20} \quad
+<!--latex
+\begin{displaymath}
 z_i = \left( \begin{array}{c} y_i \\ x_i \end{array} \right) \qquad
 \zeta_i = \left( \begin{array}{c} m_i \\ t_i \end{array} \right) \qquad
-V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right) &&
-\end{flalign}
-$$
+V_i = \left( \begin{array}{cc} \sigma_i^2 & 0 \\ 0 & \tau_i^2 \end{array} \right) 
+\end{displaymath}
+latex-->
 
-So $z_i$ is the data vector, the
-$\zeta_i$ is the target vector and $V_i$
+|:-|-:|
+| ![DatQualEquation-20](images/dqeq-20.png "Eq 20") | (20) |
+
+
+So *z<sub>i</sub>* is the data vector, the
+*&zeta;<sub>i</sub>* is the target vector and *V<sub>i</sub>*
 is the variance matrix. The variance matrix contains 
-$\sigma_y$ being the accuracy deemed for the
-$y$-data, eventually compounded by the accuracy (known or unknown)
-for the model values at the target values, $t$, as in Eq. 5. 
-The values for $\sigma_x$ are the accuracies deemed for the
-$x$-data. Both $\sigma$'s might be known on the level of
+*&sigma;<sub>y</sub>* being the accuracy deemed for the
+*y*-data, eventually compounded by the accuracy (known or unknown)
+for the model values at the target values, *t*, as in Eq. 5. 
+The values for *&sigma;<sub>x</sub>* are the accuracies deemed for the
+*x*-data. Both *&sigma;*'s might be known on the level of
 individual data points, or only globally for the problem as a whole.
 
 When there are errors on both axes, the contours of equal likelihood 
 form nested ellipsoids, whose semimajor axes are multiples of
-$\sigma_x$ and $\sigma_y$. The target
-positions, $t$, are found where these ellipisoids touch the model
-function, $F$. 
+*&sigma;<sub>x</sub>* and *&sigma;<sub>y</sub>*. The target
+positions, *t*, are found where these ellipisoids touch the model
+function, *F*. 
 The optimal solution is found where the distances from data to targets
 is minimal. Geometrically, we have to find those parameters,
-$\theta$, for which the ellipsoidal distance from data to model is
+*&theta;*, for which the ellipsoidal distance from data to model is
 minimal.   
 
-### 3.5. Correlated errors in $x$ and $y$
+### 3.5. Correlated errors in *x* and *y*
 
-When the errors in $x$ and $y$ are correlated, the variance
-matrix, $V_i$, needs to be replaced by a covariance matrix.
+When the errors in *x* and *y* are correlated, the variance
+matrix, *V<sub>i</sub>*, needs to be replaced by a covariance matrix.
 
-$$
-\begin{flalign}
-\tag{21} \quad
+<!--latex
+\begin{displaymath}
 V_i = \left( \begin{array}{cc} \sigma_i^2 & \varrho_i \\ 
-\varrho_i & \tau_i^2 \end{array} \right)  &&
-\end{flalign}
-$$
+\varrho_i & \tau_i^2 \end{array} \right)  
+\end{displaymath}
+latex-->
 
-where $\rho_i$ is the covariance factor between
-$x_i$ and $y_i$.
+|:-|-:|
+| ![DatQualEquation-21](images/dqeq-21.png "Eq 21") | (21) |
+
+
+where *&rho;<sub>i</sub>* is the covariance factor between
+*x<sub>i</sub>* and *y<sub>i</sub>*.
 With this replacement, the likelihood of Eq. 18 stays the same.
 
 With correlated errors, the ellipsoids are rotated according to the
-correlation between $x$ and $y$. We still want to find the
+correlation between *x* and *y*. We still want to find the
 minimum in the ellipsoidal distances from data to model.  
 
 #### 3.5.1. Example
@@ -471,34 +534,40 @@ bands: U - B and B - V.
 By construction the the errors in the differences are (anti)correlated.
 Every error in B shows negative in U - B and positive in B - V. 
 
-If the accuracies of U, B and V were $\sigma_U$,  
-$\sigma_B$,  and $\sigma_V$, resp.,
+If the accuracies of U, B and V were *&sigma;<sub></sub>U*,  
+*&sigma;<sub></sub>B*,  and *&sigma;<sub></sub>V*, resp.,
 the covariance matrix would be
 
-$$
-\begin{flalign}
-\tag{22} \quad
+<!--latex
+\begin{displaymath}
 V = \left( \begin{array}{cc} \sigma_U^2 + \sigma_B^2 & -\sigma_B^2 \\ 
--\sigma_B^2 & \sigma_V^2 + \sigma_B^2 \end{array} \right)  &&
-\end{flalign}
-$$
+-\sigma_B^2 & \sigma_V^2 + \sigma_B^2 \end{array} \right)  
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-22](images/dqeq-22.png "Eq 22") | (22) |
+
 
 All this, of course, under conditions of independent measurements
 
 #### 3.5.2. Model Mismatch
 
 When there is also an mismatch in the model of (possibly unknown) size
-$\sigma_m$, the most probable model function is the one
+*&sigma;<sub>m</sub>*, the most probable model function is the one
 closest (in 2 dimensions) to the data points. The covariance matrix
 reverts to   
 
-$$
-\begin{flalign}
-\tag{23} \quad
+<!--latex
+\begin{displaymath}
 V_i = \left( \begin{array}{cc} \sigma_i^2 + \sigma_m^2& \varrho_i \\ \varrho_i &
-\tau_i^2 + \sigma_m^2 \end{array} \right)  &&
-\end{flalign}
-$$
+\tau_i^2 + \sigma_m^2 \end{array} \right)  
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-23](images/dqeq-23.png "Eq 23") | (23) |
+
 
 The model mismatch is supposed to be independent of the other
 accuracies; it does not affect the covariance.
@@ -509,110 +578,137 @@ accuracies; it does not affect the covariance.
 For computational reasons, we write out Eq. 19, using the
 covariance matrix of Eq. 22. Firstly we write the covariance matrix as
 
-$$
-\begin{flalign}
-\tag{24} \quad
+<!--latex
+\begin{displaymath}
 V = \left( \begin{array}{cc} v_{yy} & v_{xy} \\ 
-                             v_{xy} & v_{xx} \end{array} \right)  &&
-\end{flalign}
-$$
+                             v_{xy} & v_{xx} \end{array} \right)  
+\end{displaymath}
+latex-->
 
-Where the $v$'s are (co)variances of $y$ and $x$.
+|:-|-:|
+| ![DatQualEquation-24](images/dqeq-24.png "Eq 24") | (24) |
+
+
+Where the *v*'s are (co)variances of *y* and *x*.
 
 The determinant of V becomes
 
-$$
-\begin{flalign}
-\tag{25} \quad
-D = v_{yy} v_{xx} - v_{xy}^2 &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+D = v_{yy} v_{xx} - v_{xy}^2 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-25](images/dqeq-25.png "Eq 25") | (25) |
+
 
 And the inverse of V is
 
-$$
-\begin{flalign}
-\tag{26} \quad
+<!--latex
+\begin{displaymath}
 V^{-1} = \frac{1}{D} 
 \left( \begin{array}{cc} v_{xx} & -v_{xy} \\ 
-                        -v_{xy} &  v_{yy} \end{array} \right)  &&
-\end{flalign}
-$$
+                        -v_{xy} &  v_{yy} \end{array} \right)  
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-26](images/dqeq-26.png "Eq 26") | (26) |
+
 
 In most computations we need the likelihood in logarithmic form.
 
-$$
-\begin{flalign}
-\tag{27} \quad
+<!--latex
+\begin{displaymath}
 \log \mathcal{L}_i = - \log( 2 \pi ) - 0.5 \log( D ) -
 \frac{v_{xx} ( y - m )^2 - 2 v_{xy} ( y - m ) ( x - t ) +
-v_{yy} ( x - t )^2}{2 D} &&
-\end{flalign}
-$$
+v_{yy} ( x - t )^2}{2 D} 
+\end{displaymath}
+latex-->
 
-All relevant items in Eq. 28 need indices $i$. They are
+|:-|-:|
+| ![DatQualEquation-27](images/dqeq-27.png "Eq 27") | (27) |
+
+
+All relevant items in Eq. 28 need indices *i*. They are
 omitted to keep it (relatively) simple.
 
 We also need the partial derivatives of the log-likelihood to the
-parameters, $\theta$, to the targets, $t$, and, if present to
-the unknown model accuracy, $\sigma_m$ as in Eq. 23.
+parameters, *&theta;*, to the targets, *t*, and, if present to
+the unknown model accuracy, *&sigma;<sub>m</sub>* as in Eq. 23.
 
-$$
-\begin{flalign}
-\tag{28} \quad
+<!--latex
+\begin{displaymath}
 \frac{\partial \log \mathcal{L}_i}{\partial \theta} =
 \frac{v_{xx} ( y - m ) - v_{xy} ( x - t ) }{D} \frac{\partial
-m}{\partial \theta} &&
-\end{flalign}
-$$
+m}{\partial \theta} 
+\end{displaymath}
+latex-->
 
-$$
-\begin{flalign}
-\tag{29} \quad
+|:-|-:|
+| ![DatQualEquation-28](images/dqeq-28.png "Eq 28") | (28) |
+
+
+<!--latex
+\begin{displaymath}
 \frac{\partial \log \mathcal{L}_i}{\partial t_k} = 
 \left( \frac{  v_{xx} ( y - m ) - v_{xy}( x - t ) }{D} 
 \frac{\partial m}{ \partial t} +
-\frac{ v_{yy} ( x - t ) - v_{xy}( y - m ) }{D}\right) \delta_{ik} &&
-\end{flalign}
-$$
+\frac{ v_{yy} ( x - t ) - v_{xy}( y - m ) }{D}\right) \delta_{ik} 
+\end{displaymath}
+latex-->
 
-Where $&delta;_i,k$ is the Kronecker delta.
+|:-|-:|
+| ![DatQualEquation-29](images/dqeq-29.png "Eq 29") | (29) |
 
-The unknown model scale is present in $v_yy$, 
-$v_xx$,  and
-subsequently in $D$. 
 
-$$
-\begin{flalign}
-\tag{30} \quad
-D = ( \sigma^2 + \sigma_m^2 ) ( \tau^2 + \sigma_{m}^2 ) - \varrho^2  &&
-\end{flalign}
-$$
+Where *&delta;<sub>i,k</sub>* is the Kronecker delta.
+
+The unknown model scale is present in *v<sub>yy</sub>*, 
+*v<sub>xx</sub>*,  and
+subsequently in *D*. 
+
+<!--latex
+\begin{displaymath}
+D = ( \sigma^2 + \sigma_m^2 ) ( \tau^2 + \sigma_{m}^2 ) - \varrho^2  
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-30](images/dqeq-30.png "Eq 30") | (30) |
+
 
 So in case of Eq. 23 we have
 
-$$
-\begin{flalign}
-\tag{31} \quad
+<!--latex
+\begin{displaymath}
 \frac{\partial v_{yy}}{\partial \sigma_m} = 2 \sigma_m, \hspace{2em}
 \frac{\partial v_{xx}}{\partial \sigma_m} = 2 \sigma_m, \hspace{2em}
 \frac{\partial D}{\partial \sigma_m} = 2 \sigma_m ( \sigma^2 + \tau^2 +
-2 \sigma_m^2 ) &&
-\end{flalign}
-$$
+2 \sigma_m^2 ) 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-31](images/dqeq-31.png "Eq 31") | (31) |
+
 
 Combining these 
 
-$$
-\begin{flalign}
-\tag{32} \quad
-\frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} = 
-- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \times \hspace{14em}\\
-\left( 1 - \frac{v_{xx} ( y - m )^2 - 
+<!--latex
+\begin{eqnarray*}
+\frac{\partial \log \mathcal{L}_i}{\partial \sigma_m} & = &
+- \frac{\sigma_m ( v_{xx} + v_{yy} + 2 \sigma_m^2)}{D} \times \\
+& & \left( 1 - \frac{v_{xx} ( y - m )^2 - 
 2 v_{xy} ( y - m ) ( x - t ) + v_{yy} ( x - t )^2}{D} \right) - \\
-\frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} \hspace{14em} &&
-\end{flalign}
-$$
+& & \frac{\sigma_m ( ( x - t )^2 + ( y - m )^2 )}{D} 
+\end{eqnarray*}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-32](images/dqeq-32.png "Eq 32") | (32) |
+
 
 
 ## 4. Other Error Distributions
@@ -625,7 +721,7 @@ In the table below is indicated what is implemented in BayesicFitting with
 and  what is not implemented with <div><b style='color:red'>&cross;</b><div>. 
 The numbers in brackets refer to notes.
 
-The orange <div><b style='color:orange'>\sigma_m</b></div> indicate a
+The orange <div><b style='color:orange'>&sigma;<sub>m</sub></b></div> indicate a
 scale factor due to the incompleteness of the model. It might either be
 known or unknown.  
 In the latter case the scale needs to be estimated from the data.
@@ -760,12 +856,15 @@ The overall likelihood is the product of the likelihoods of the
 individual points, as in Eq.&nbsp;3.
 Using weights Eq.&nbsp;3 changes in
 
-$$
-\begin{flalign}
-\tag{33} \quad
-L = \prod_i \mathcal{L}_i^{w_i} &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+L = \prod_i \mathcal{L}_i^{w_i} 
+\end{displaymath}
+latex-->
+
+|:-|-:|
+| ![DatQualEquation-33](images/dqeq-33.png "Eq 33") | (33) |
+
 
 It is irrelevant what the exact form of the individual likelihoods is.
 They can all be combined in this way with weights.
