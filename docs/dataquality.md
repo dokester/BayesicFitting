@@ -43,16 +43,6 @@ latex-->
 | ![DatQualEquation-1](images/dqeq-1.png "Eq 1") | (1) |
 |:-|-------------------------------------------------------------------------------:|
 
-<table width=100%; border=0px>
-<tr>
-<th width=5%></th>
-<th width=90% align=left></th>
-<th width=5% align=right></th>
-</tr><tr>
-<td></td
-<td> ![DatQualEquation-1](images/dqeq-1.png "Eq 1") </td>
-<td> (1) </td>
-</tr></table>
 
 such that some norm of the residuals, *r<sub>i</sub>*, are minimumized over the parameters, *&theta;*.
 
