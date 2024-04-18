@@ -40,8 +40,8 @@ m_i = F( x_i : \theta )
 \end{displaymath}
 latex-->
 
-|:-|-:|
 | ![DatQualEquation-1](images/dqeq-1.png "Eq 1") | (1) |
+|:-|-:|
 
 
 such that some norm of the residuals, *r<sub>i</sub>*, are minimumized over the parameters, *&theta;*.
