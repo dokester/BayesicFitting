@@ -207,9 +207,9 @@ latex-->
 | &nbsp; | ![DatQualEquation-4](images/speq-4.png "Eq 4") | (4) |
 |:-:|:-|-------------------------------------------------:|
 
-          f_1        
+          f1        
     |------------|----
-    x_0          x_1 
+    x0          x1 
 
 The property 3-smooth implies that the function and it first and
 second derivative are 0 at *x<sub>1</sub>*, while the function is unbound,
@@ -236,9 +236,9 @@ In each segment a 3rd order polynomial function is defined: *f<sub>1</sub>* and
 *f<sub>2</sub>*. Note that this function, *f<sub>1</sub>*, are different from the *f<sub>1</sub>* of the 
 first blob.
 
-         f_1           f_2        
+         f1           f2        
     |--------------|--------|---
-    x_0            x_1      x_2
+    x0            x1      x2
 
 
 <!--latex

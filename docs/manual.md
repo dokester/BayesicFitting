@@ -106,16 +106,14 @@ indicated as **p** (or `pars`, `param` or `params`) and the dependent
 variable is called **y** (or `ydata`).
 The relation between them is a mathematical function **f**.
 
-<!--
-![ManualEquation-1](images/maneq-1.png "Eq 1")
--->
+<!--latex
+\begin{displaymath}
+y = f(x:p) 
+\end{displaymath}
+latex-->
 
-$$
-\begin{flalign}
-\tag{1}
-\quad y = f(x:p) &&
-\end{flalign}
-$$
+| &nbsp; | ![manualEquation-1](images/maneq-1.png "Eq 1") | (1) |
+|:-:|:-|-------------------------------------------------:|
 
 The result of the function together with its derivatives, parameter
 values, and other possibly usefull information is packed into the
@@ -157,32 +155,27 @@ Simple models are objects that are created by invoking one model class.
 Both `m1` and `m2` are simple models. The first assumes a linear relation 
 between `xdata` and `ydata`.
 
-<!--
-![ManualEquation-2](images/maneq-2.png "Eq 2")
--->
+<!--latex
+\begin{displaymath}
+f(x:p) = p_0 + p_1 x 
+\end{displaymath}
+latex-->
 
-$$
-\begin{flalign}
-\tag{2}
-\quad f(x:p) = p_0 + p_1 x &&
-\end{flalign}
-$$
+| &nbsp; | ![manualEquation-2](images/maneq-2.png "Eq 2") | (2) |
+|:-:|:-|-------------------------------------------------:|
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
 The second model `m2` encapsulates the function
 
-<!--
-![ManualEquation-3](images/maneq-3.png "Eq 3")
--->
+<!--latex
+\begin{displaymath}
+f(x:p) = p_0 \exp\left( -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 \right)
+\end{displaymath}
+latex-->
 
-$$
-\begin{flalign}
-\tag{3}
-\quad 
-f(x:p) = p_0 \exp\left( -0.5 \left( \frac{ x - p_1 }{ p_2 } \right) ^ 2 \right)&&
-\end{flalign}
-$$
+| &nbsp; | ![manualEquation-3](images/maneq-3.png "Eq 3") | (3) |
+|:-:|:-|-------------------------------------------------:|
 
 It has 3 parameters to be fitted.
 
@@ -219,7 +212,7 @@ done with simple models.
 + `tiny` : float<br>
     very small value, replacing zero valued when found on NonZero.<br>
     (default : 1e-20)
-+ `deltaP` : array_like<br>
++ `deltaP` : array-like<br>
     (list of) width(s) for numerical partial calculation.<br>
     (default : 0.00001)
 + `parNames` : list of str<br>
@@ -318,7 +311,7 @@ them to 1.0 the model avoids degeneracy.
 
 
 #### Division (/)
-To construct the inverse of **(p<sub>0</sub> + p<sub>1</sub> * x<sup>2</sup>)**:
+To construct the inverse of *(p<sub>0</sub> + p<sub>1</sub> x<sup>2</sup>)*:
 
     m7 = ConstantModel( values=1 ) / PolynomialModel( 2, fixed={1:0.0} )
 
@@ -341,60 +334,55 @@ A special operation that can be applied to two models
 is the pipe, indicated by |. It acts like the (unix) pipe: the
 result of the left-hand model is used as input of the right-hand model.
 
-When m<sub>1</sub>, m<sub>2</sub> and m<sub>3</sub> are models implementing
+When *m<sub>1</sub>*, *m<sub>2</sub>* and *m<sub>3</sub>* are models implementing
 
-<!--
-![ManualEquation-4](images/maneq-4.png "Eq 4")
--->
 
-$$
-\begin{flalign}
-\tag{4}
-\quad m_1 = f_1(x:p) && \\
-\quad m_2 = f_2(x:q) && \\
-\quad m_3 = f_3(x:r) && 
-\end{flalign}
-$$
+<!--latex
+\begin{eqnarray*}
+\quad m_1 &=& f_1(x:p)  \\
+\quad m_2 &=& f_2(x:q)  \\
+\quad m_3 &=& f_3(x:r)  
+\end{eqnarray*}
+latex-->
+
+| &nbsp; | ![manualEquation-4](images/maneq-4.png "Eq 4") | (4) |
+|:-:|:-|-------------------------------------------------:|
 
 
 then
 
-<!--
-![ManualEquation-5](images/maneq-5.png "Eq 5")
--->
 
-$$
-\begin{flalign}
-\tag{5}
-\quad m_4 = m_1 | m_2 = f_2(f_1(x:p):q) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+m_4 = m_1 | m_2 = f_2(f_1(x:p):q) 
+\end{displaymath}
+latex-->
 
-The input of m<sub>2</sub> is relacced by the result of m<sub>1</sub>. While in case of
+| &nbsp; | ![manualEquation-5](images/maneq-5.png "Eq 5") | (5) |
+|:-:|:-|-------------------------------------------------:|
 
-<!--
-![ManualEquation-6](images/maneq-6.png "Eq 6")
--->
+The input of *m<sub>2</sub>* is relacced by the result of *m<sub>1</sub>*. While in case of
 
-$$
-\begin{flalign}
-\tag{6}
-\quad m_5 = m_1 | m_2 + m_3 = f_2(f_1(x:p):q) + f_3(x:r) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+m_5 = m_1 | m_2 + m_3 = f_2(f_1(x:p):q) + f_3(x:r) 
+\end{displaymath}
+latex-->
 
-the m1 only influences m2, not m3. To influence both m<sub>2</sub> and m<sub>3</sub>, brackets are needed.
+| &nbsp; | ![manualEquation-6](images/maneq-6.png "Eq 6") | (6) |
+|:-:|:-|-------------------------------------------------:|
 
-<!--
-![ManualEquation-7](images/maneq-7.png "Eq 7")
--->
+the m1 only influences m2, not m3. To influence both *m<sub>2</sub>* and *m<sub>3</sub>*, 
+brackets are needed.
 
-$$
-\begin{flalign}
-\tag{7}
-\quad m_5 = m_1 | ( m_2 + m_3 ) = f_2(f_1(x:p):q) + f_3(f_1(x:p):r) &&
-\end{flalign}
-$$
+<!--latex
+\begin{displaymath}
+m_6 = m_1 | ( m_2 + m_3 ) = f_2(f_1(x:p):q) + f_3(f_1(x:p):r) 
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![manualEquation-7](images/maneq-7.png "Eq 7") | (7) |
+|:-:|:-|-------------------------------------------------:|
 
 
 This is the only place where a 2-d model can be combined with a 1-d
@@ -636,16 +624,14 @@ The methods are compared with numeric calculations of df/dp and df/dx.
 A **Fitter** is an algorithm that minimizes the errors **&epsilon;**,
 the differences between the data, **y**, and the model, **f(x:p)**.
 
-<!--
-![ManualEquation-8](images/maneq-8.png "Eq 8")
--->
+<!--latex
+\begin{displaymath}
+\epsilon = y - f(x:p) 
+\end{displaymath}
+latex-->
 
-$$
-\begin{flalign}
-\tag{8}
-\quad \epsilon = y - f(x:p) &&
-\end{flalign}
-$$
+| &nbsp; | ![manualEquation-8](images/maneq-8.png "Eq 8") | (8) |
+|:-:|:-|-------------------------------------------------:|
 
 
 The best fit is found through optimization of the parameters **p**.
@@ -947,11 +933,9 @@ suppression of irrelevant points.
 <!--
 ### Normalize
 
-TBW. Normalize is still in an experimental stage. 
 
 ### Set limits.
 
-TBW. Setting limits is still in an experimental stage. 
 -->
 
 <a name="ns"></a>
@@ -1116,17 +1100,17 @@ A **Sample** is a collection of items.
     id of the parent of this sample.
 + model : Model<br>
     the model being used.
-+ parameters : array_like<br>
++ parameters : array-like<br>
     list of model parameters.
-+ hyper : array_like (optional)<br>
++ hyper : array-like (optional)<br>
     list of hyper parameters from the **ErrorDistribution**.
-+ nuisance : array_like (optional)<br>
++ nuisance : array-like (optional)<br>
     list of nuisance parameters from **ErrorsInXandYProblem**.
 + logL : float<br>
     log Likelihood = log Prob( data | params )
 + logW : float<br>
     log weight. Relative weight of this sample.
-+ fitIndex : None or array_like<br>
++ fitIndex : None or array-like<br>
     list of all parameters to be fitted; None is all.
 
 **Sample**s can be collected in a **SampleList**.
@@ -1787,18 +1771,18 @@ They can be encapsulated in a **KernelModel** or in a 2dim
 
 | Name | Function | Bound | Comment |
 |:-|:-|:-|:-|
-| **Biweight** | ( 1-x^2 )^2 | true | |
-| **CosSquare** | cos^2 ( 0.5 &pi; x ) | true | |
+| **Biweight** | ( 1-x<sup>2</sup> )<sup>2</sup> | true | |
+| **CosSquare** | cos<sup>2</sup> ( 0.5 &pi; x ) | true | |
 | **Cosine** | cos( 0.5 &pi; x ) | true | |
-| **Gauss** | exp( -0.5 x^2 ) | false | |
+| **Gauss** | exp( -0.5 x<sup>2</sup> ) | false | |
 | **Huber** | min( 1, 1/\|x\| ) | false | improper because infinite integral
-| **Lorentz** | 1 / ( 1 + x^2 ) | false | |
-| **Parabola** | 1 - x^2 | true | |
+| **Lorentz** | 1 / ( 1 + x<sup>2</sup> ) | false | |
+| **Parabola** | 1 - x<sup>2</sup> | true | |
 | **Sinc** | sin(x) / x | false | do not use in **RobustShell** |
 | **Tophat** | convolution | true | 0 to 6 convolutions of Uniform |
 | **Triangle** | 1 - \|x\| | true | |
-| **Tricube** | ( 1 - \|x\|^3 )^3 | true | |
-| **Triweight** | ( 1 - x^2 )^3 | true | |
+| **Tricube** | ( 1 - \|x\|<sup>3</sup> )<sup>3</sup> | true | |
+| **Triweight** | ( 1 - x<sup>2</sup> )<sup>3</sup> | true | |
 | **Uniform** | 1.0 | true | |
 
 
