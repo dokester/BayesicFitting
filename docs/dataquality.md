@@ -317,7 +317,7 @@ When our (knowledge of the) model is incomplete, not embodying all
 subtleties present in the data, there can be (systematic) errors which
 are not caught when knowing the accuracies only. The model
 incompleteness might be known at the level of each data point as 
-*&sigma;<sub>m</sub>,i*, or globally as *&sigma;<sub>m</sub>*.
+*&sigma;<sub>m,i</sub>*, or globally as *&sigma;<sub>m</sub>*.
 The latter might be an unknowm quantity, estimatable as a hyperparameter
 of the problem.
 
