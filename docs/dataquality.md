@@ -41,7 +41,7 @@ m_i = F( x_i : \theta )
 latex-->
 
 | ![DatQualEquation-1](images/dqeq-1.png "Eq 1") | (1) |
-|:-|-:|
+|:-|-------------------------------------------------------------------------------:|
 
 
 <div style="text-align:left"> ![DatQualEquation-1](images/dqeq-1.png "Eq 1") </div>
