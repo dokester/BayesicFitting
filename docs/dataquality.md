@@ -44,6 +44,10 @@ latex-->
 |:-|-:|
 
 
+<div style="text-align:left"> ![DatQualEquation-1](images/dqeq-1.png "Eq 1") </div>
+<div style="text-align:right"> (1) </div>
+
+
 such that some norm of the residuals, *r<sub>i</sub>*, are minimumized over the parameters, *&theta;*.
 
 <!--latex
