@@ -18,4 +18,14 @@ examples:
     cap: "Orbit of doublestar 83 Aqr"
   - img: ./docs/images/Gregory.png
     cap: "A signal or not"
+  - img: ./docs/images/corona.png
+    cap: "Early Covid mortality rate"
+  - img: ./docs/images/boyle.png
+    cap: "Boyle's data and law"
+  - img: ./docs/images/methanol.png
+    cap: "Alias in spectral continuum"
+  - img: ./docs/images/HD2039.png
+    cap: "Exoplanet on HD 2039"
+  - img: ./docs/images/spectrallines.png
+    cap: "Lines in methanol spectrum"
 
