@@ -12,6 +12,8 @@
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
+=============================================================
+
 # Home
 
 BayesicFitting is a PYTHON toolbox for the fitting  of models to data 
