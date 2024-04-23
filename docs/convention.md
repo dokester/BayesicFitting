@@ -8,12 +8,12 @@
 |:-|:-|:-|
 | [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) |
 | [2. Naming](#names) | [Readme](../README.md) | [Glossary](./glossary.md) |
-| [3. Coding](#code) | Notes (TBD) | [Design](./design.md) |
+| [3. Coding](#code) | [Notes](./notes.md) | [Design](./design.md) |
 | [4. Documentation](#documentation) | [Examples][exlink] | [Troubles](./troubles.md) |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
-
+&nbsp;
 
 # Coding Style.
 
