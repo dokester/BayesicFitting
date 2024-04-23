@@ -5,11 +5,11 @@
 
 ## Navigation
 
-| Contents 1 | Contents 2 | Global | Documentation 
+| Contents 1 | Contents 2 | Global | Documentation |
 |:-|:-|:-|:-|
 | [Independent Variable](#indepvar) | [Dependent Variable](#depvar)  | [Home](../index.md) | [Manual](./manual.md) |
 | [Weight](#weight) | [Accuracy](#accuracy) | [Readme](../README.md) | [Glossary](./glossary.md) |
-| [Model](#model) | [Parameter](#param) | Notes (TBD) | [Design](./design.md) |
+| [Model](#model) | [Parameter](#param) | [Notes](./notes.md) | [Design](./design.md) |
 | [Problem](#problem) | [Chisq](#chisq) | [Examples][exlink] | [Troubles](./troubles.md) |
 | [Likelihood](#lhood) | [Standard Deviation](#stdev) | | [Style](./convention.md) |
 | [Scale](#noise) | [Confidence Region](#confidence) | | |
@@ -20,7 +20,7 @@
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
-
+&nbsp;
 
 # Glossary 
 

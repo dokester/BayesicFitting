@@ -12,7 +12,7 @@
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
-=============================================================
+&nbsp;
 
 # Home
 

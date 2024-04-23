@@ -3,7 +3,7 @@
 
 ## Navigation
 
-| Notes | Global | Documentation
+| Notes | Global | Documentation |
 |:-|:-|:-|
 | [Splines](./splines.md) | [Home](../index.md) | [Manual](./manual.md) |
 | [Quality](./dataquality.md) | [Readme](../README.md) | [Glossary](./glossary.md)  |
@@ -12,6 +12,8 @@
 |  | | |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+&nbsp;
 
 # Notes
 

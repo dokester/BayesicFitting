@@ -3,18 +3,19 @@
 
 ## Navigation
 
-| Contents | Global | Documentation
-|:-|:-|:-|
+| Contents | Global | Documentation |
+| :- | :- | :- |
 | [1. Introduction](#intro) | [Home](../index.md) | [Manual](./manual.md) |
 | [2. Imports](#imports) | [Readme](../README.md) | [Glossary](./glossary.md) |
 | [3. Models](#model) | [Notes](./notes.md) | [Design](./design.md) |
 | [4. Fitters](#fitter) | [Examples][exlink] | [Troubles](./troubles.md) |
 | [5. NestedSampler](#ns) | | [Style](./convention.md) |
 | [6. Synopsis](#synopsis) | | [References](./references.md) |
+| :- | :- | :- |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
-
+&nbsp;
 
 # Manual
 
