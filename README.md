@@ -3,8 +3,8 @@
 
 ## Navigation
 
-| Content | Global | Documentation
-|:-|:-|:-|
+| Content | Global | Documentation |
+| :- | :- | :- |
 | 1. [History](#history) | [Home](./index.md) | [Manual](./docs/manual.md) |
 | 2. [Setup](#setup) | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
 | 3. [Structure](#structure) | [Notes](./docs/notes.md) | [Design](./docs/design.md) |
@@ -12,6 +12,8 @@
 | 5. [Versions](#versions) | | |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+&nbsp;
 
 # Readme.
 
