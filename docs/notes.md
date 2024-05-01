@@ -7,7 +7,7 @@
 |:-|:-|:-|
 | [Splines](./splines.md) | [Home](../index.md) | [Manual](./manual.md) |
 | [Quality](./dataquality.md) | [Readme](../README.md) | [Glossary](./glossary.md)  |
-|  | [Notes](./notes.md) | [Design](./design.md) |
+| [BoundingBox](./BoundingBox.md) | [Notes](./notes.md) | [Design](./design.md) |
 |  | [Examples][exlink] | [Trouble](./troubles.md) |
 |  | | |
 
