@@ -1,10 +1,10 @@
-## Bounding Boxes 
+# Bounding Boxes 
 
 We want to investigate how bounding boxes behave in higher dimensions.
 
 Bounding boxes are rectangular N-dimensional boxes encompassing an
 ensemble of M (random) points, fullfilling some (likelihood) constraint. 
-
+See our paper [Kester and Mueller (2021)](./references.md/#kester8).
 
 We will plot 100 random points inside 4 N-balls of radius 1.0, for resp
 N = [2,4,6,8], in black, red, green and blue.  And their bounding boxes. 
@@ -15,22 +15,21 @@ rejected.  For an 8-ball only one in 73 points are OK.  The random
 points tend to concentrate to the middle. 
 
 
-
 | ndim | nsamples | rejected |
-|-:|-:|-:|
+|:-:|:-:|:-:|
 | 2 | 100 | 22 |
 | 4 | 100 | 233 |
 | 6 | 100 | 991 |
 | 8 | 100 | 7306 |
 
+&nbsp;
 
 ![png](images/BB_4_1.png)
     
 
-This will not get us to a 1000-ball.
+This will not get us to a 1000-ball. We try something different.
 
-
-We try something else to get to a 1000-ball. 
+## Distribution
 
 We calculate the distribution of points thrown randomly into an N-ball,
 as projected on a line through the center.  It is obvious that this
@@ -43,10 +42,14 @@ For a 3-ball (cannonball) there is the volume of a circle present at
 every x.  It is proportional to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;d<sub>3</sub>( x ) ~ ( 1 - x * x ) = d<sub>2</sub>( x ) <sup>2</sup>
 
-For a 4-ball (hyperball) there the projection is a 3-ball, proportional to<br>
+For a 4-ball (hyperball) there the projection is a 3-ball present at every x.
+It is proportional to<br>
 &nbsp;&nbsp;&nbsp;&nbsp;d<sub>4</sub>( x ) ~ d<sub>2</sub>( x ) <sup>3</sup>
     
 Etc.
+
+In the figure below we plotted the distribution for powers of, upto 1024.
+They are all scaled to a maximum of 1. 
 
     
 ![png](images/BB_6_0.png)
@@ -68,13 +71,15 @@ for an ensemble of M points will miss on average 1/M volume area.
 N-balls (and other objects) in higher dimensions are quite
 couterintuitive. 
 
-Below we do some sanity checks, whether the distributions conform a
+## Sanity check
+
+Below we investigate, whether the distributions conform a
 random ensemble of M=5000 points
 
-In the figure below, we have M/N points in N (=2,3,4,8,10) dimensions. 
+In the figure below, we have 5000 points in N (=2,3,4,8,10) dimensions. 
 In green we see the calculated distribution scaled to a maximum of 1.0. 
 In red we have a histogram of the ensemble projected on each of the
-dimensional axes.  M*5000 point in all, scaled to the same volume. 
+dimensional axes.  N*5000 point in all, scaled to the same volume. 
 
 
 On the right hand side we plot the moments of the distributions as
@@ -100,8 +105,10 @@ standard on uniformity. (made by rejection sampling).
 
 The experiment follows the theory quite well.
 
+## More checks
+
 Next we check the distribution of random points in 10 N-dim shells of
-equal volume and in 8 perpendicular sectors.  We take 10000 points
+equal volume and in 8 perpendicular sectors.  We take 10000 points,
 random in spheres of 2,3,4,6, and 8 dimensions, by rejection sampling. 
 We expect 1000 points in each shell and 1250 in each sector. 
 
@@ -115,8 +122,6 @@ The sectors are defined when ndim >= 3 and then dividing dimensions 1,
 2, and 3 in its positive and negative values.
 
 
-
-    
 ![png](images/BB_12.png)
     
 
