@@ -1,6 +1,7 @@
 # Bounding Boxes 
 
-We want to investigate how bounding boxes behave in higher dimensions.
+In the note we want to investigate how bounding boxes behave in higher
+dimensions. 
 
 Bounding boxes are rectangular N-dimensional boxes encompassing an
 ensemble of M (random) points, fullfilling some (likelihood) constraint. 
@@ -11,7 +12,7 @@ N = [2,4,6,8], in black, red, green and blue.  And their bounding boxes.
 They are found by rejection sampling. 
 
 Note that for higer dimensions, more and more points need to be
-rejected.  For an 8-ball only one in 73 points are OK.  The random
+rejected.  For an 8-ball only one in 73 points is OK.  The random
 points tend to concentrate to the middle. 
 
 
@@ -27,7 +28,8 @@ points tend to concentrate to the middle.
 ![png](images/BB_4_1.png)
     
 
-This will not get us to a 1000-ball. We try something different.
+With all tese rejections it will not get us to a 1000-ball. 
+We need to find something different.
 
 ## Distribution
 
@@ -61,6 +63,46 @@ points of which the sum of the squares must to be less than 1.  It is
 easiest for all of them to be quite small.  Nontheless points with all
 almost 0's, except one that is between -1 and +1 are also part of the
 N-ball.  These points are exceedingly rare.  The bulk sits around 0. 
+
+Quite counterintuitively, more and more "space" is located at the edges
+of the N-ball as N increases. However when displayed in a 2-d image,
+almost all of this space is projected away to small values. 
+
+In the table we show the relation between radius and the contained space
+for a number of dimensions. The higer the dimension the more space
+is concentrated near the edges of the unit sphere. 
+
+
+<div>
+<table width=100%; border=1px>
+<tr>
+<th colspan=6>Radii encompassing equal percentages of space</th>
+</tr><tr>
+<th>dimensions</th>
+<th>20 %</th>
+<th>40 %</th>
+<th>60 %</th>
+<th>80 %</th>
+<th>100 %</th>
+</tr><tr>
+<td>  1</td><td>0.200</td><td>0.400</td><td>0.600</td><td>0.800</td><td>1.000</td>
+</tr><tr>
+<td>  2</td><td>0.447</td><td>0.632</td><td>0.775</td><td>0.894</td><td>1.000</td>
+</tr><tr>
+<td>  4</td><td>0.669</td><td>0.795</td><td>0.880</td><td>0.946</td><td>1.000</td>
+</tr><tr>
+<td>  8</td><td>0.818</td><td>0.892</td><td>0.938</td><td>0.972</td><td>1.000</td>
+</tr><tr>
+<td> 10</td><td>0.851</td><td>0.912</td><td>0.950</td><td>0.978</td><td>1.000</td>
+</tr><tr>
+<td> 20</td><td>0.923</td><td>0.955</td><td>0.975</td><td>0.989</td><td>1.000</td>
+</tr><tr>
+<td> 50</td><td>0.968</td><td>0.982</td><td>0.990</td><td>0.996</td><td>1.000</td>
+</tr><tr>
+<td>100</td><td>0.984</td><td>0.991</td><td>0.995</td><td>0.998</td><td>1.000</td>
+</tr>
+</table>
+</div>
 
 The bounding box, defined as the upper and lower values in each
 dimension of an ensemble of points, randomly drawn from the N-ball, also

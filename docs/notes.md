@@ -27,7 +27,7 @@ algorithm of splines in
  + **SplinesModel**  simple, fast and dense
  + **BSplinesModel** recursive de Boor algoritme, slow
  + **BasicSplineModel** non-recursive de Boor, faster
- + **SplinesDynamicModel** a **BasicSplinesModel which is 
+ + **SplinesDynamicModel** a **BasicSplinesModel** which is 
    - **Dynamic** in the number of knots
    - **Modifiable** in the position of the knots
 
@@ -36,5 +36,8 @@ algorithm of splines in
 The [quality](./dataquality.md) note discusses the merits of defining 
 data quality in terms of accuracy versus weights.
 
+## BoundingBox
+
+A look at bounding boxez in higher dimensions.
 
 

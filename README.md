@@ -12,18 +12,20 @@
 | 5. [Versions](#versions) | | |
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+[srclink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/source
+[kllink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/source/kernels
 
 &nbsp;
 
 # Readme.
 
-A package for model fitting and Bayesian evidence calculation.
+BayesicFitting is a package for model fitting and Bayesian evidence calculation.
+
+In case you are wondering what that is about take a quick look at 
+the examples in the side bars.
 
 We have a paper out in "Astronomy and Computing" about BayesicFitting.
 [Kester and Mueller (2021)](./docs/references.md/#kester8).
-
-In case you are wondering what that is about take a quick look at 
-[this example.](https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/examples/sealevel.ipynb)
 
 Citation index for the BayesicFitting package:
 DOI: 10.5281/zenodo.2597200
@@ -33,7 +35,7 @@ DOI: 10.5281/zenodo.2597200
 
  + 27 March 2024 version 3.2.1<br>
    A lot of fairly small stuff.
-   * __status__ changed to Alpha for some newer additions
+   * \_\_status\_\_ changed to Alpha for some newer additions
    * Priors: 
       - Adapt to input arrays 
       - Made limited and/or circular
@@ -117,9 +119,9 @@ The BayesicFitting package consists of over 100 classes, each class in
 its own file. These classes can be divided into 3 broad categories:
 models, fitters and nested sampling. About 50 models, 10 fitters and the
 remainder is needed to run the nested sampling algorithm. All these
-classes are in a directory BayesicFitting/source. A special type of
-functions are found in BayesicFitting/source/kernels. They can be used
-to construct a model.
+classes are in a directory [BayesicFitting/source][srclink]. 
+A special type of functions are found in [BayesicFitting/source/kernels][kllink]. 
+They can be used to construct a model.
 
 
 ### examples
@@ -143,27 +145,26 @@ notebook file (.ipynb), which can be run.
 
 ### documentation
 
-In the [documenation](https://dokester.github.io/bayesicfitting)
+In the [documenation](./docs)
 directory a number of documents can be found. 
 
++ [Manual](./docs/manual.md):
+The manual for the package.
 
-+ [Manual](https://dokester.github.io/bayesicfitting/docs/manual.md):
-A first draft of a manual. It obviously needs more work.
-
-+ [Troubles](https://dokester.github.io/bayesicfitting/docs/troubles.md):
++ [Troubles](./docs/troubles.md):
 A list of troublesome situations and what to do about it.
 
-+ [Glossary](https://dokester.github.io/bayesicfitting/docs/glossary.md):
++ [Glossary](./docs/glossary.md):
 A list of the terms used throughout this package, with explanations.
 
-+ [Design](https://dokester.github.io/bayesicfitting/docs/design.md):
++ [Design](./docs/design.md):
 An architectural design document, displaying the relationships between 
 the classes. 
 
-+ [Style](https://dokester.github.io/bayesicfitting/docs/convention.md):
++ [Style](./docs/convention.md):
 A few notes on my style of code and documenation.
 
-+ [References](https://dokester.github.io/bayesicfitting/docs/references.md):
++ [References](./docs/references.md):
 A list of external references for BayesicFitting.
 
 ### test
@@ -190,12 +191,12 @@ According to Wikipedia -> "Software release life cycle" it is called
 classes and features can be added.
 
 Some of the newer additions will be indicated as having and "Alpha" 
-status and keep that until they ripened somewhat further. 
-The classes are more prone to change in their interfaces, methods etc.
+status and keep that until they matured somewhat further. 
+These classes are more prone to change in their interfaces, methods etc.
 
 More work needs to be done in:
 
-  * Introduction of more Classes: NeuralNetModel, Filters (maybe) ...
+  * Introduction of more Classes: NeuralNetModel, Evolving Models, Filters (maybe) ...
 
 <a name="versions"></a>
 ## 5. Versions

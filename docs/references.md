@@ -14,6 +14,11 @@ Springer Science. 2006.<br>
 + P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
 Cambridge University Press. 2005.<br>
 
+<a name="handley"></a>
++ WJ Handley, MP Hobson and AN Lasenby.
+**POLYCHORD: next-generation nested sampling.**
+MNRAS (2015) Volume 453, Issue 4, p 4384–4398
+
 <a name="jaynes"></a>  
 + E.T. Jaynes. **Probability Theory.**
 Cambridge University Press. 2003.<br>

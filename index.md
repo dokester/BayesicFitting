@@ -44,7 +44,7 @@ This site is dedicated to documentation. It contains a manual about the
 use of the package and a reference manual with details about each class.
 A design document about the structure of the package. A glossary
 defining the term used and a help document about restrictions and trouble
-shooting. All can be found in the sidebar.  
+shooting. All can be found in the navigation table.  
 
 The pictures in the side bars are a few examples of what can achieved with the 
 toolbox. More examples can be found on 

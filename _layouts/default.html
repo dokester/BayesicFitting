@@ -18,6 +18,28 @@
 {% seo %}
 
     {% include head-custom.html %}
+
+    <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 12px 16px;
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    </style>
+
   </head>
 
   <body>
@@ -41,6 +63,49 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
+
+<div class="dropdown">
+  <span style="background-color: DodgerBlue; color: White; border:5px 
+solid DodgerBlue">Navigation</span>
+  <div class="dropdown-content">
+  <p>            
+<table>
+<thead>
+<tr>
+<th align="left">Global</th>
+<th align="left">Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="/BayesicFitting/">Home</a></td>
+<td align="left"><a
+href="/BayesicFitting/docs/manual.html">Manual</a></td>
+</tr>
+<tr>
+<td align="left"><a href="/BayesicFitting/README.html">Readme</a></td>
+<td align="left"><a
+href="/BayesicFitting/docs/glossary.html">Glossary</a></td>
+</tr>
+<tr>
+<td align="left"><a
+href="/BayesicFitting/docs/notes.html">Notes</a></td>
+<td align="left"><a
+href="/BayesicFitting/docs/design.html">Design</a></td>
+</tr>
+<tr>
+<td align="left"><a href=
+"https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples">
+Examples</a></td>
+<td align="left"><a
+href="/BayesicFitting/docs/troubles.html">Trouble</a></td>
+</tr>
+</tbody>
+</table>
+
+</p>
+  </div>
+</div>
 
           {{ content }}
         </section>

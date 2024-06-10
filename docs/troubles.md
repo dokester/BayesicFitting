@@ -39,12 +39,17 @@ is the `verbose` option, which prints increasingly more information for
 higher values. 
 
 It is also a good idea to visually inspect the results of the fit. All
-fitters have a method<br> 
-`fitter.plotResult( xdata, ydata, model )`<br> 
-It is more easily called by turning on the plot option in the fit method:<br>
-`fitter.fit( ydata, plot=True )`<br>
-Or for a **NestedSampler** called ns:<br>
-`ns.sample( plot=True )`
+fitters have a method
+
+    fitter.plotResult( xdata, ydata, model )
+ 
+It is more easily called by turning on the plot option in the fit method:
+
+    fitter.fit( ydata, plot=True )
+
+Or for a **NestedSampler** called ns:
+
+    ns.sample( plot=True )
 
 Here are some guidelines that might help to get usefull results.
 
@@ -60,8 +65,8 @@ size, loss of precision is quickly attained. <br>
 E.g. a polynomial model of order 3 with an independent variable which
 has values from 1 to 100, will have a matrix with values ranging between
 1 and 10<sup>12</sup>. Mathematically this is all OK, computation ...<br>
-The Fitter software can not and does not scale its inputs in any way. It
-takes it all at face value. It is upto the user to present the Fitters
+The  software can not and does not scale its inputs in any way. It
+takes it all at face value. It is upto the user to present the software
 with usable data. 
 
 ### **Constraints on the dependent variable**<br>
@@ -90,6 +95,11 @@ The SingularValueDecompositionFitter has less problems as it evenly
 distributes the value over the degenerated parameters. 
 Try hasDegeneracy() to check for this condition.<br>
 -->
+It can also happen that the model is in principle non-degenerate. 
+But the data do not encompass the full range of possibilties the 
+model has to offer. The model is (almost) degenerate under this 
+particular data set. For other data sets it could be OK. 
+
 Although NestedSampler has no problems with degenerate models,
 it is in general better to use simpler models.
 
