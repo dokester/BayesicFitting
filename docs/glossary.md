@@ -3,6 +3,7 @@
 
 <a name="glossary"> </a>
 
+<!--
 ## Navigation
 
 | Contents 1 | Contents 2 | Global | Documentation |
@@ -17,6 +18,38 @@
 | [Covariance Matrix](#covar) | [Prior](#prior) | | |
 | [Posterior](#posterior) | [Evidence](#evidence) | | |
 | [Information](#information) | | |
+-->
+
+<div class="dropdown2">
+  <span style="background-color: DodgerBlue; color: White; border:5px
+solid DodgerBlue">Contents</span>  
+  <div class="dropdown-content">
+
+| Contents |
+|:-:|
+| [Independent Variable](#indepvar) |
+| [Dependent Variable](#depvar)  |
+| [Weight](#weight) |
+| [Accuracy](#accuracy) |
+| [Model](#model) |
+| [Parameter](#param) |
+| [Problem](#problem) |
+| [Chisq](#chisq) |
+| [Likelihood](#lhood) |
+| [Standard Deviation](#stdev) |
+| [Scale](#noise) |
+| [Confidence Region](#confidence) |
+| [Design Matrix](#design) |
+| [Hessian Matrix](#hessian) |
+| [Covariance Matrix](#covar) |
+| [Prior](#prior) |
+| [Posterior](#posterior) |
+| [Evidence](#evidence) |
+| [Information](#information) |
+
+  </div>
+</div>
+
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 

@@ -1,7 +1,7 @@
 ---
 ---
 
-
+<!--
 ## Navigation
 
 | Contents | Global | Documentation |
@@ -11,6 +11,24 @@
 | 3. [Fitter Classes](#fitterclasses) | [Notes](./notes.md) | [Design](./design.md) |
 | 4. [Nested Sampling](#nested)| [Examples][exlink] | [Troubles](./troubles.md) |
 | 5. [References](./references.md) | | [Style](./convention.md) |
+-->
+
+<div class="dropdown2">
+  <span style="background-color: DodgerBlue; color: White; border:5px
+solid DodgerBlue">Contents</span>  
+  <div class="dropdown-content">
+
+| Content | 
+| :-: | 
+| 1. [Introduction](#intro) |
+| 2. [Model Classes](#modelclasses) |
+| 3. [Fitter Classes](#fitterclasses) |
+| 4. [Nested Sampling](#nested)|
+| 5. [References](./references.md) |
+
+  </div>
+</div>
+
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 

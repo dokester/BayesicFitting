@@ -74,8 +74,8 @@ posterior.
 ### Quick Start
 
 
-The easiest way to get started with this package is to look into the [examples]
-(https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples)
+The easiest way to get started with this package is to look into the 
+[examples][exlink]
 directory at github.com and find an example that looks like the problem 
 to be solved.
 

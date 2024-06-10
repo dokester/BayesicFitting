@@ -1,6 +1,6 @@
 ---
 ---
-
+<!--
 ## Navigation
 
 
@@ -10,6 +10,25 @@
 | [2. Naming](#names) | [Readme](../README.md) | [Glossary](./glossary.md) |
 | [3. Coding](#code) | [Notes](./notes.md) | [Design](./design.md) |
 | [4. Documentation](#documentation) | [Examples][exlink] | [Troubles](./troubles.md) |
+-->
+
+<div class="dropdown2">
+  <span style="background-color: DodgerBlue; color: White; border:5px
+solid DodgerBlue">Contents</span>  
+  <div class="dropdown-content">
+
+| Content | 
+| :-: |
+| [1. Introduction](#intro) |
+| [2. Naming](#names) |
+| [3. Coding](#code) |
+| [4. Documentation](#documentation) |
+
+  </div>
+</div>
+
+
+
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
