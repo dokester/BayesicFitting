@@ -1,7 +1,6 @@
 ---
 ---
 
-<a name="glossary"> </a>
 
 <!--
 ## Navigation
@@ -50,6 +49,7 @@ solid DodgerBlue">Contents</span>
   </div>
 </div>
 
+<a name="glossary"> </a>
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
