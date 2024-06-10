@@ -1,6 +1,7 @@
 ---
 ---
 
+<!--
 ## Navigation
 
 | Global | Documentation 
@@ -9,6 +10,7 @@
 | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
 | [Notes](./docs/notes.md) | [Design](./docs/design.md) |
 | [Examples][exlink] | [Trouble](./docs/troubles.md) |
+-->
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
