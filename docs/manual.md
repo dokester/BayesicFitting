@@ -20,11 +20,11 @@ solid DodgerBlue">Contents</span>
   <div class="dropdown-content">
 
 | Contents |
-| :-: | :-: | :-: |
-| [1. Introduction](#intro) | 
-| [2. Imports](#imports) | 
-| [3. Models](#model) | 
-| [4. Fitters](#fitter) | 
+| :-: |
+| [1. Introduction](#intro) |
+| [2. Imports](#imports) |
+| [3. Models](#model) |
+| [4. Fitters](#fitter) |
 | [5. NestedSampler](#ns) |
 | [6. Synopsis](#synopsis) |
 
