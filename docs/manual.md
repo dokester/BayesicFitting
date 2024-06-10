@@ -1,6 +1,6 @@
 ---
 ---
-
+<!--
 ## Navigation
 
 | Contents | Global | Documentation |
@@ -12,6 +12,27 @@
 | [5. NestedSampler](#ns) | | [Style](./convention.md) |
 | [6. Synopsis](#synopsis) | | [References](./references.md) |
 | :- | :- | :- |
+-->
+
+<div class="dropdown2">
+  <span style="background-color: DodgerBlue; color: White; border:5px
+solid DodgerBlue">Contents</span>  
+  <div class="dropdown-content">
+
+| Contents |
+| :-: | :-: | :-: |
+| [1. Introduction](#intro) | 
+| [2. Imports](#imports) | 
+| [3. Models](#model) | 
+| [4. Fitters](#fitter) | 
+| [5. NestedSampler](#ns) |
+| [6. Synopsis](#synopsis) |
+
+
+</div>
+</div>
+
+
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 

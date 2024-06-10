@@ -53,6 +53,6 @@ data quality in terms of accuracy versus weights.
 
 ## BoundingBox
 
-A look at bounding boxez in higher dimensions.
+A look at bounding boxes in higher dimensions.
 
 
