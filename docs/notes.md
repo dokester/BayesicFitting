@@ -1,6 +1,6 @@
 ---
 ---
-
+<!--
 ## Navigation
 
 | Notes | Global | Documentation |
@@ -10,6 +10,21 @@
 | [BoundingBox](./BoundingBox.md) | [Notes](./notes.md) | [Design](./design.md) |
 |  | [Examples][exlink] | [Trouble](./troubles.md) |
 |  | | |
+-->
+
+<div class="dropdown2">
+  <span style="background-color: DodgerBlue; color: White; border:5px
+solid DodgerBlue">Contents</span>  
+  <div class="dropdown-content">
+
+| Notes |
+|:-:|
+| [Splines](./splines.md) |
+| [Quality](./dataquality.md) |
+| [BoundingBox](./BoundingBox.md) |
+
+</div>
+</div>
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
