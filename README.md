@@ -1,6 +1,6 @@
 ---
 ---
-
+<!--
 ## Navigation
 
 | Content | Global | Documentation |
@@ -10,6 +10,24 @@
 | 3. [Structure](#structure) | [Notes](./docs/notes.md) | [Design](./docs/design.md) |
 | 4. [Status](#status) | [Examples][exlink] | [Trouble](./docs/troubles.md) |
 | 5. [Versions](#versions) | | |
+-->
+
+<div class="dropdown">
+  <span style="background-color: DodgerBlue; color: White; border:5px 
+solid DodgerBlue">Contents</span>
+  <div class="dropdown-content">
+
+| Content |
+| :- | 
+| 1. [History](#history) |
+| 2. [Setup](#setup) | 
+| 3. [Structure](#structure) | 
+| 4. [Status](#status) | 
+| 5. [Versions](#versions) |
+
+  </div>
+</div>
+
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 [srclink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/source
