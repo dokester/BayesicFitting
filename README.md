@@ -12,7 +12,7 @@
 | 5. [Versions](#versions) | | |
 -->
 
-<div class="dropdown">
+<div class="dropdown2">
   <span style="background-color: DodgerBlue; color: White; border:5px 
 solid DodgerBlue">Contents</span>
   <div class="dropdown-content">
