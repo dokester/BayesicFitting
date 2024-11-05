@@ -1,24 +1,13 @@
 ---
 ---
-<!--
-## Navigation
-
-| Content | Global | Documentation |
-| :- | :- | :- |
-| 1. [History](#history) | [Home](./index.md) | [Manual](./docs/manual.md) |
-| 2. [Setup](#setup) | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
-| 3. [Structure](#structure) | [Notes](./docs/notes.md) | [Design](./docs/design.md) |
-| 4. [Status](#status) | [Examples][exlink] | [Trouble](./docs/troubles.md) |
-| 5. [Versions](#versions) | | |
--->
 
 <div class="dropdown2">
   <span style="background-color: DodgerBlue; color: White; border:5px 
 solid DodgerBlue">Contents</span>
   <div class="dropdown-content">
 
-| Content |
-| :- | 
+| Contents |
+| :-: | 
 | 1. [History](#history) |
 | 2. [Setup](#setup) | 
 | 3. [Structure](#structure) | 
@@ -50,6 +39,9 @@ DOI: 10.5281/zenodo.2597200
 
 
 ## What's new.
+
+ + 05 Nov 2024 version 3.2.2<br>
+   Adapt to numpy-2 and pertaining Scipy, Astropy and MatplotLib
 
  + 27 March 2024 version 3.2.1<br>
    A lot of fairly small stuff.

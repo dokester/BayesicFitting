@@ -8,7 +8,7 @@ from .Tools import printclass
 __author__ = "Do Kester"
 __year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -194,7 +194,7 @@ class Prior( object ):
             umax = self.domain2Unit( self.highLimit )
             self._umin = self.domain2Unit( self.lowLimit )
             self._urng = umax - self._umin
-        except :
+        except Exception :
             self._urng = math.inf
 
 #        print( "Prior 3 ", self._umin, self._urng )
@@ -395,7 +395,7 @@ class Prior( object ):
 
     def getLimits( self ):
         """ Return the limits.  """
-        return numpy.array( [ self.lowLimit, self.highLimit ] )
+        return numpy.asarray( [ self.lowLimit, self.highLimit ] )
 
     def getIntegral( self ) :
         """
@@ -474,7 +474,7 @@ class Prior( object ):
         """
         try :
             return numpy.log( self.result( p ) )
-        except :
+        except Exception :
             return -math.inf
 
     def numPartialDomain2Unit( self, dval ):

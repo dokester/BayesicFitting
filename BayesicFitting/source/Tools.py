@@ -13,7 +13,7 @@ from astropy.table import Table
 __author__ = "Do Kester"
 __year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -257,14 +257,14 @@ def makeNext( x, k ) :
     """
     try :
         _xnext = x[-1]
-    except :
+    except Exception :
         _xnext = x
     while True :
         try :
             _xnext = x[k]
             yield _xnext
             k += 1
-        except :
+        except Exception :
             yield _xnext
 
 
@@ -276,7 +276,7 @@ def length( x ) :
         return 0
     try :
         return len( x )
-    except :
+    except Exception :
         return 1
 
 def toArray( x, ndim=1, dtype=None ) :
@@ -295,7 +295,7 @@ def toArray( x, ndim=1, dtype=None ) :
     """
     if isinstance( x, Table ) :
         return x
-    return numpy.array( x, dtype=dtype, copy=False, ndmin=min( ndim, 2 ) )
+    return numpy.array( x, dtype=dtype, ndmin=min( ndim, 2 ) )
 
 def isList( item, cls ) :
     """
@@ -352,7 +352,7 @@ def decorate( src, des, copy=True ) :
         if copy :
             try :
                 value = value.copy()
-            except :
+            except Exception :
                 pass
         object.__setattr__( des, key, value )
 
@@ -371,13 +371,13 @@ def subclassof( sub, cls ) :
     if not inspect.isclass( sub ) : 
         return False
 
-    while sub != cls and sub != object :
+    while sub != cls and sub is not object :
         tre = inspect.getclasstree( [sub], unique=True )   
         sub = tre[0][0]
 
     return sub is cls
 
-def printclass( cls, nitems=8 ) :
+def printclass( cls, nitems=8, printId=False ) :
     """
     Print the attributes of a class.
     """
@@ -388,8 +388,7 @@ def printclass( cls, nitems=8 ) :
     from .Problem import Problem
 
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
-#    print( cls, " at ", id( cls ) )
-    print( cls )
+    print( cls, " at ", id( cls ) ) if printId else  print( cls )
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
     atr = vars( cls )
     ld = list( atr.keys() )
@@ -398,7 +397,7 @@ def printclass( cls, nitems=8 ) :
         print( "%-15.15s "%key, end="" )
         val = atr[key]
         if isinstance( val, (list,numpy.ndarray) ) :
-            printlist( val )
+            printlist( val, nitems=nitems )
         elif isinstance( val, str ) :
             print( shortName( val ) )
         elif isinstance( val, ( Model, Problem ) ) :
@@ -414,7 +413,7 @@ def printclass( cls, nitems=8 ) :
                     print( valstr.split()[0].split( '.' )[-1] )
                 else : 
                     print( valstr )
-            except :
+            except Exception :
                 print( val )
     print( "+++++++++++++++++++++++++++++++++++++++++++++++++++++++" )
             
@@ -436,7 +435,7 @@ def printlist( val, nitems=8 ) :
     for k in range( min( nv, nitems ) ) :
         try :
             print( "%s%s"%(sep, val[k].__name__ ), end="" )
-        except :
+        except Exception :
             print( "%s%s"%(sep, shortName( str( val[k] ) ) ), end="" )
         sep = " "
     print( "%s" % ( ( "... ] %d" % nv ) if nitems < nv else "]" ) )

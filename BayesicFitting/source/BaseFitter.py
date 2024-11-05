@@ -14,7 +14,7 @@ from .Formatter import formatter as fmt
 __author__ = "Do Kester"
 __year__ = 2023
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -334,7 +334,7 @@ class BaseFitter( object ):
         if index is None :
             index = self.fitIndex
 
-        fitpar = numpy.array( fitpar, dtype=float, copy=False, ndmin=1 )
+        fitpar = numpy.array( fitpar, dtype=float, ndmin=1 )
 
         if index is None or len( fitpar ) == len( self.model.parameters ) :
             return fitpar

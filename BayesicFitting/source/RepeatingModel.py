@@ -14,7 +14,7 @@ from .Prior import Prior
 __author__ = "Do Kester"
 __year__ = 2024
 __license__ = "GPL"
-__version__ = "3.2.1"
+__version__ = "3.2.2"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -204,9 +204,9 @@ class RepeatingModel( Model, Dynamic ):
 
         index = []
         for k in range( self.model.npbase ) :
-            if not k in self.same :
+            if k not in self.same :
                 index += [k]
-        self.index = numpy.array( index, dtype=int )
+        self.index = numpy.asarray( index, dtype=int )
 
     def grow( self, offset=0, rng=None, **kwargs ):
         """
@@ -348,7 +348,8 @@ class RepeatingModel( Model, Dynamic ):
              values for the parameters
 
         """
-        result = numpy.zeros( Tools.length( xdata ), dtype=float )
+#        result = numpy.zeros( Tools.length( xdata ), dtype=float )
+        result = 0.0
         if self.ncomp == 0 :
             return result
 
@@ -499,7 +500,7 @@ class RepeatingModel( Model, Dynamic ):
         """
         i,k = self.par2model( k )
         return ( self.model.getParameterName( i ) + 
-                    ( "_%d" % k if not i in self.same else "" ) )
+                    ( "_%d" % k if i not in self.same else "" ) )
 
     def baseParameterUnit( self, k ):
         """
