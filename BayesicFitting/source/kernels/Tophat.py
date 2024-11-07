@@ -114,7 +114,7 @@ class Conv1( object ) :
 class Conv2( object ) :
 
     def result( self, x ) :
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 1.5 )[0]
         res = numpy.zeros_like( x )
@@ -132,7 +132,7 @@ class Conv2( object ) :
         return res
 
     def partial( self, x ):
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 1.5 )[0]
         res = numpy.zeros_like( x )
@@ -151,7 +151,7 @@ class Conv2( object ) :
 
 class Conv3( object ) :
     def result( self, x ) :
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 2.0 )[0]
         res = numpy.zeros_like( x )
@@ -170,7 +170,7 @@ class Conv3( object ) :
         return res
 
     def partial( self, x ):
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 2.0 )[0]
         res = numpy.zeros_like( x )
@@ -190,7 +190,7 @@ class Conv3( object ) :
 
 class Conv4( object ) :
     def result( self, x ) :
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 2.5 )[0]
         res = numpy.zeros_like( x )
@@ -211,7 +211,7 @@ class Conv4( object ) :
         return res
 
     def partial( self, x ):
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 2.5 )[0]
         res = numpy.zeros_like( x )
@@ -233,7 +233,7 @@ class Conv4( object ) :
 
 class Conv5( object ) :
     def result( self, x ) :
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 3.0 )[0]
         res = numpy.zeros_like( x )
@@ -255,7 +255,7 @@ class Conv5( object ) :
         return res
 
     def partial( self, x ):
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 3.0 )[0]
         res = numpy.zeros_like( x )
@@ -278,7 +278,7 @@ class Conv5( object ) :
 
 class Conv6( object ) :
     def result( self, x ) :
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 3.5 )[0]
         res = numpy.zeros_like( x )
@@ -307,7 +307,7 @@ class Conv6( object ) :
         return res
 
     def partial( self, x ):
-        x = numpy.array( x, copy=False, ndmin=1 )
+        x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
         q = numpy.where( ax < 3.5 )[0]
         res = numpy.zeros_like( x )
