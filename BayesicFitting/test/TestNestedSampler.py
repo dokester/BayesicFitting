@@ -375,7 +375,7 @@ class Test( unittest.TestCase ):
 
         gm.setLimits( lolim, hilim )
 
-        ns = NestedSampler( x, gm, y, w, seed=99 )
+        ns = NestedSampler( x, gm, y, w, seed=999 )
         ns.distribution.setLimits( [0.01, 10] )
         ns.copymode = 1
 #        ns.bestBoost = True
