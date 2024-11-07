@@ -169,20 +169,20 @@ class Test( unittest.TestCase ):
 
         print( fmt( fitter.hessian ) )
 
-        ppp = fitter.fit( y, plot=self.doplot )
-        print( ppp )
-#        self.assertRaises( numpy.linalg.linalg.LinAlgError, fitter.fit, y )
+#        ppp = fitter.fit( y, plot=self.doplot )
+#        print( ppp )
+        self.assertRaises( numpy.linalg.linalg.LinAlgError, fitter.fit, y )
 
         fitter.normalize( [0.0, 0.0, 1.0, 0.0], 1.0 )       ## fix par[2] at 1.0
-
-        print( fmt( fitter.hessian ) )
-        print( fmt( fitter.covariance ) )
 
         par = fitter.fit( y, plot=self.doplot )
 
         print( "param = ", sm.parameters )
         assertAAE( par[2], 1.0 )
         assertAAE( par, [ -0.5, 1.0, 1.0, -0.2], 1 )
+
+        print( fmt( fitter.hessian ) )
+        print( fmt( fitter.covariance ) )
 
         chisq = fitter.chisq
         print( "chisq = %f"%( chisq) )
