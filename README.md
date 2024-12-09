@@ -40,8 +40,11 @@ DOI: 10.5281/zenodo.2597200
 
 ## What's new.
 
+ + 09 Dec 2024 version 3.2.3<br>
+   Issue 27: Remove invalid escape sequences from docstrings.
+
  + 05 Nov 2024 version 3.2.2<br>
-   Adapt to numpy-2 and pertaining Scipy, Astropy and MatplotLib
+   Issue 24: Adapt to numpy-2 and pertaining Scipy, Astropy and MatplotLib
 
  + 27 March 2024 version 3.2.1<br>
    A lot of fairly small stuff.
