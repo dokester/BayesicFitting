@@ -6,9 +6,9 @@ from .LinearModel import LinearModel
 from .SplinesModel import SplinesModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,13 +26,13 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2024 Do Kester
 
 class SineSplineModel( LinearModel ):
     """
     Sine of fixed frequency with splineslike amplitudes/phases.
 
-        f( x:p ) = SM0 \cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )
+        f( x:p ) = SM0 cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )
 
     Where SM0 and SM1 are splines models with defined knots and order.
 

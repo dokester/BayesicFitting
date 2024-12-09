@@ -6,9 +6,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Biweight import Biweight
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2024 Do Kester
 
 
 class RobustShell( IterativeFitter ):
@@ -46,7 +46,7 @@ class RobustShell( IterativeFitter ):
     downweighted. "Normal" points keep their weights, more or less.
 
     Apart from methods specific to the robustification, RobustShell has a fit method
-    and little else from the Fitter family. Methods to get the :math:`\chi^2`,
+    and little else from the Fitter family. Methods to get chi^2,
     the covariance matrix, the evidence, the noise scale etc. should be taken from
     the embedded fitter.
 

@@ -6,9 +6,9 @@ from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.6.0"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,13 +31,13 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2015 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2024 Do Kester
 
 class EtalonModel( NonLinearModel ):
     """
     Etalon Model.
 
-        f( x:p ) = p_0 / ( 1.0 + p_1 * sin^2( \pi p_2 x + p_3 ) )
+        f( x:p ) = p_0 / ( 1.0 + p_1 * sin^2( &pi; p_2 x + p_3 ) )
 
     where
         p_0 = amplitude

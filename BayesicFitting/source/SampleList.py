@@ -5,9 +5,9 @@ from . import Tools
 from .Sample import Sample
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -541,7 +541,7 @@ class SampleList( list ):
     # ===== MONTE CARLO ERRORS ===================================================
     def monteCarloError( self, xdata ):
         """
-        Calculates 1-\sigma-confidence regions on the model given some inputs.
+        Calculates 1-sigma-confidence regions on the model given some inputs.
 
         The model is run with the input for the parameters in each of the
         samples. Appropiately weighted standard deviations are calculated

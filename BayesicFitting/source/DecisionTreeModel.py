@@ -13,9 +13,9 @@ from .ExponentialPrior import ExponentialPrior
 from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2020 Do Kester
+#  *    2019 - 2024 Do Kester
 
 
 class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
@@ -50,10 +50,10 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
     Booleans that contain unknowns should be coded as categorial.
 
         f( x:p ) = DTM
-                    \left => DTM (or None)
-                    \rite => DTM (or None)
-                    \dimension
-                    \split or \mask
+                     |-> left => DTM (or None)
+                     |-> rite => DTM (or None)
+                     |-> dimension
+                     |-> split or mask
 
     The tree is searched left to right.
 
@@ -203,7 +203,7 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
         while True :
             try :
                 child = next( gen )
-            except :
+            except Exception :
                 break
             if child.itypes is not None :
                 del( child.itypes )
@@ -662,7 +662,7 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
         while kl < kbranch :
             try :
                 child = next( gen )
-            except :
+            except Exception :
                 break
             if not child.isLeaf() :
                 kl += 1
@@ -700,7 +700,7 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
         while True :
             try :
                 child = next( gen )
-            except :
+            except Exception :
                 break
 
             if child.isLeaf() :

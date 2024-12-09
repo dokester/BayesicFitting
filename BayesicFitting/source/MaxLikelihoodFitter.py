@@ -13,9 +13,9 @@ from .ClassicProblem import ClassicProblem
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -38,7 +38,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON ( Java code )
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2024 Do Kester
 
 class MaxLikelihoodFitter( IterativeFitter ):
     """
@@ -238,8 +238,8 @@ class _Chisq( object ):
         """
         Return the function to be minimized.
         In this case
-        .. math::
-            \chi^2 = \sum( D_i - F(x_i:p) )^2
+
+            chi^2 = sum( D_i - F(x_i:p) )^2
 
         """
         param = self._outer.insertParameters( par, index=self._index )
@@ -256,8 +256,8 @@ class _Chisq( object ):
     def dfunc( self, par ):
         """
         Return the gradient of func to the parameters p.
-        .. math::
-            d\chi^2/dp = -2 \sum( D_i - F_i ) dF_i/dp
+
+            d chi^2/dp = -2 sum( D_i - F_i ) dF_i/dp
         """
         param = self._outer.insertParameters( par, index=self._index )
         res = numpy.subtract( self._outer.model.result( self._outer.xdata, param ), self._data )

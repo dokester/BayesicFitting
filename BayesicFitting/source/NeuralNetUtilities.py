@@ -7,9 +7,9 @@ from .Formatter import formatter as fmt
 
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -63,7 +63,7 @@ class BaseNeuralNetworkUtilities( object ) :
 
 
 class Connect( BaseNeuralNetworkUtilities ):
-    """
+    r"""
     Connects one layer to the next.
 
         0       0       0       0       0       0   K inputs

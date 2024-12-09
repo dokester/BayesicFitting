@@ -10,9 +10,9 @@ from .Formatter import fma
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2024
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.3"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,11 +31,11 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2022 Do Kester
+#  *    2020 - 2024 Do Kester
 
 
 class SoftMaxModel( NonLinearModel ):
-    """
+    r"""
     Softmax Model is a Logistic model if the number of outputs is 1.
     Otherwise it is generalization of the LogisticModel over multiple outputs
 
