@@ -1,13 +1,6 @@
 ---
 ---
 
-
-[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
-
-<!--
-[PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)
--->
-
 <div class="dropdown2">
   <span style="background-color: DodgerBlue; color: White; border:5px 
 solid DodgerBlue">Contents</span>
@@ -24,6 +17,7 @@ solid DodgerBlue">Contents</span>
   </div>
 </div>
 
+[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 [srclink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/source
