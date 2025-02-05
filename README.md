@@ -1,12 +1,12 @@
 ---
 ---
 
-<!--
-[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)]
-(https://pepy.tech/projects/bayesicfitting)
--->
 
+[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
+
+<!--
 [PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)
+-->
 
 <div class="dropdown2">
   <span style="background-color: DodgerBlue; color: White; border:5px 
