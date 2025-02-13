@@ -19,6 +19,10 @@ solid DodgerBlue">Contents</span>
 
 [![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
 
+[![Tests Status](./reports/junit/tests-badge.svg?dummy=8484744)](./reports/junit/junit.xml)
+[![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/coverage.xml)
+
+
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 [srclink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/source
 [kllink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/source/kernels
