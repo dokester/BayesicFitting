@@ -18,8 +18,8 @@ solid DodgerBlue">Contents</span>
 </div>
 
 [![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
-![Tests Status](./reports/junit/tests-badge.svg?dummy=8484744)
-![Coverage Status](./reports/coverage/coverage-badge.svg)
+![Tests Status](./docs/images/tests-badge.svg)
+![Coverage Status](./docs/images/coverage-badge.svg)
 
 <!--  With link to tests en coverage
 [![Tests Status](./reports/junit/tests-badge.svg?dummy=8484744)](./reports/junit/junit.xml)
