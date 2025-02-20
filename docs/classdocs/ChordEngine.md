@@ -3,7 +3,7 @@
 
 
 <a name="ChordEngine"></a>
-<table><thead style="background-color:#E0FFE0; align:; width:100%"><tr><th>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th align="left>"
 <strong>class ChordEngine(</strong> Engine )
 </th></tr></thead></table>
 
@@ -44,7 +44,7 @@ walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMi
 Author       Do Kester.
 
 <a name="ChordEngine"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
 </th></tr></thead></table>
 
@@ -62,14 +62,14 @@ Constructor.
 * kwargs  : ( for Engine)<br>
     "slow", "seed", "verbose"
 <a name="copy"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 
 Return copy of this. 
 
 <a name="__setattr__"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>__setattr__(</strong> name, value )
 </th></tr></thead></table>
 
@@ -77,11 +77,11 @@ Return copy of this.
 Set attributes.
 
 <a name="__str__"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>__str__(</strong> )
 </th></tr></thead></table>
 <a name="execute"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
 </th></tr></thead></table>
 
@@ -102,18 +102,18 @@ Execute the engine by diffusing the parameters.
 * int  : ( the number of successfull moves)<br>
 
 <a name="stepOut"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
 </th></tr></thead></table>
 
 
 Check if endpoints are indeed outside the lowLhood domain.
 <a name="plotOut"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>plotOut(</strong> problem, usave, vel, t0, t1 ) 
 </th></tr></thead></table>
 <a name="plotOutDummy"></a>
-<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>plotOutDummy(</strong> problem, usave, vel, t0, t1 ) 
 </th></tr></thead></table>
 
