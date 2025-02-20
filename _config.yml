@@ -6,7 +6,7 @@ markdown: GFM
 
 # Specific for BayesicFitting
 title: [BayesicFitting]
-description: [Bayesian Fitting and Evidence Calculation]
+description: [Bayesian Model Fitting and Evidence Calculation]
 examples: 
   - img: ./docs/images/rijntemp.png
     cap: "Average temperature of the Rhine"
@@ -15,13 +15,13 @@ examples:
   - img: ./docs/images/HD76700.png
     cap: "Exoplanet around HD76700"
   - img: ./docs/images/83Aqr.png
-    cap: "Orbit of doublestar 83 Aqr"
+    cap: "Orbit of double star 83 Aqr"
   - img: ./docs/images/Gregory.png
     cap: "A signal or not"
   - img: ./docs/images/corona.png
     cap: "Early Covid mortality rate"
   - img: ./docs/images/boyle.png
-    cap: "Boyle's data and law"
+    cap: "Boyle's law in his own data"
   - img: ./docs/images/methanol.png
     cap: "Alias in spectral continuum"
   - img: ./docs/images/HD2039.png
