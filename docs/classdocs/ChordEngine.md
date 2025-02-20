@@ -1,9 +1,9 @@
 ---
 ---
 <a name="ChordEngine"></a>
-<thead style="background-color:red; width:100%"><tr><th>
+<table><thead style="background-color:red; width:100%"><tr><th>
 <strong>class ChordEngine(</strong> Engine )
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Move a a walker in a random direction.
@@ -29,11 +29,11 @@ MNRAS (2015) Volume 453, Issue 4, p 4384–4398
 
 <b>Attributes</b>
     <br>
-reset : bool (False)
+* reset  : ( bool (False))<br>
     always reset othonormal basis 
-extend : bool (False)
+* extend  : ( bool (False))<br>
     perform the step-out action until logL < lowL
-plotter : 
+* plotter  : ( )<br>
 
 <b>Attributes from Engine</b>
     <br>
@@ -42,78 +42,78 @@ walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMi
 Author       Do Kester.
 
 <a name="ChordEngine"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Constructor.
 
 <b>Parameters</b>
 <br>
-walkers : WalkerList
+* walkers  : ( WalkerList)<br>
     walkers to be diffused
-errdis : ErrorDistribution
+* errdis  : ( ErrorDistribution)<br>
     error distribution to be used
-copy : ChordEngine
+* copy  : ( ChordEngine)<br>
     to be copied
-kwargs : for Engine
+* kwargs  : ( for Engine)<br>
     "slow", "seed", "verbose"
 <a name="copy"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>copy(</strong> )
-</th></tr></thead>
+</th></tr></thead></table>
 
 Return copy of this. 
 
 <a name="__setattr__"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>__setattr__(</strong> name, value )
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Set attributes.
 
 <a name="__str__"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>__str__(</strong> )
-</th></tr></thead>
+</th></tr></thead></table>
 <a name="execute"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Execute the engine by diffusing the parameters.
 
 <b>Parameters</b>
 <br>
-kw : int
+* kw  : ( int)<br>
     index of walker to diffuse
-lowLhood : float
+* lowLhood  : ( float)<br>
     lower limit in logLikelihood
-iteration : int
+* iteration  : ( int)<br>
     iteration number
 
 <b>Returns</b>
 <br>
-int : the number of successfull moves
+* int  : ( the number of successfull moves)<br>
 
 <a name="stepOut"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Check if endpoints are indeed outside the lowLhood domain.
 <a name="plotOut"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>plotOut(</strong> problem, usave, vel, t0, t1 ) 
-</th></tr></thead>
+</th></tr></thead></table>
 <a name="plotOutDummy"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:green; width:100%"><tr><th>
 <strong>plotOutDummy(</strong> problem, usave, vel, t0, t1 ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 <thead style="background-color:dodgerblue; width:100%"><tr><th>
 <strong>Methods inherited from Engine</strong></th></tr></thead>

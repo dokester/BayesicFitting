@@ -46,34 +46,3 @@ Documentation on classes, methods, arguments and attributes are found in this
 reference manual. 
 
 
-
-
-
-
-
-# Notes
-
-Here we present a number of notes related to BayesicFitting.
-
-## Splines.
-
-The [splines](./splines.md) note presents details on the construction and 
-algorithm of splines in 
-
- + **SplinesModel**  simple, fast and dense
- + **BSplinesModel** recursive de Boor algoritme, slow
- + **BasicSplineModel** non-recursive de Boor, faster
- + **SplinesDynamicModel** a **BasicSplinesModel** which is 
-   - **Dynamic** in the number of knots
-   - **Modifiable** in the position of the knots
-
-## Data Quality.   
-
-The [quality](./dataquality.md) note discusses the merits of defining 
-data quality in terms of accuracy versus weights.
-
-## BoundingBox
-
-A look at bounding boxes in higher dimensions.
-
-
