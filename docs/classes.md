@@ -8,8 +8,8 @@ solid DodgerBlue">Contents</span>
 
 | classes |
 |:-:|
-| [ArctanModel](./classdocs/ChordEngine.md) |
-| [ErrorDistribution](./classdocs/Engine.md) |
+| [ChordEngine](./classdocs/ChordEngine.md) |
+| [Engine](./classdocs/Engine.md) |
 | [NestedSolver](./classdocs/NestedSolver.md) |
 
 </div>

@@ -1,7 +1,9 @@
 ---
 ---
+
+
 <a name="NestedSolver"></a>
-<table><thead style="background-color:lightred; width:100%"><tr><th>
+<table><thead style="background-color:#E0FFE0; align:; width:100%"><tr><th>
 <strong>class NestedSolver(</strong> NestedSampler )
 </th></tr></thead></table>
 
@@ -74,7 +76,7 @@ Author       Do Kester.
 
 
 <a name="NestedSolver"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>NestedSolver(</strong> problem, distribution=None, keep=None,
  ensemble=100, discard=1, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
@@ -135,7 +137,7 @@ keep : None or dict of {int:float}
     3 : more about every iteration
 
 <a name="solve"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 
@@ -157,14 +159,14 @@ keep : None or dict of {int:float}
     Show a plot of the results
 
 <a name="__str__"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>__str__(</strong> )
 </th></tr></thead></table>
 
 Return the name of this sampler. 
 
 <a name="setErrorDistribution"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 
@@ -181,7 +183,7 @@ Set the error distribution for calculating the likelihood.
     fixed power of distribution
 
 <a name="setEngines"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 
@@ -196,7 +198,7 @@ enginedict : dictionary of { str : Engine }
     connecting names to Engines
 
 <a name="initWalkers"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 

@@ -1,7 +1,9 @@
 ---
 ---
+
+
 <a name="Engine"></a>
-<table><thead style="background-color:lightred; width:100%"><tr><th>
+<table><thead style="background-color:#E0FFE0; align:; width:100%"><tr><th>
 <strong>class Engine(</strong> object )
 </th></tr></thead></table>
 
@@ -12,7 +14,6 @@ An Engine moves around a walker in a random way such that its likelood
 remain above the low-likelihood-limit.
 
 <b>Attributes</b>
-
 * walkers  : ( WalkerList)<br>
     list of walkers to be diffused
 * errdis  : ( ErrorDistribution)<br>
@@ -38,7 +39,7 @@ remain above the low-likelihood-limit.
 Author       Do Kester.
 
 <a name="Engine"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>Engine(</strong> walkers, errdis, slow=None, phancol=None, copy=None,
  seed=4213, verbose=0 )
 </th></tr></thead></table>
@@ -66,14 +67,14 @@ Only one PhantomCollection should be present for all Engines.
 * copy  : ( Engine)<br>
     engine to be copied 
 <a name="copy"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>copy(</strong> )
 </th></tr></thead></table>
 
 Return a copy of this engine. 
 
 <a name="bestBoost"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>bestBoost(</strong> problem, myFitter=None ) 
 </th></tr></thead></table>
 
@@ -88,7 +89,7 @@ myFitter : None or Fitter
     None fetches LevenbergMarquardtFitter
     a (non-linear) fitter
 <a name="setWalker"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) 
 </th></tr></thead></table>
 
@@ -113,11 +114,11 @@ Update the walker with problem, allpars, LogL and logW.
 * fitIndex  : ( array_like)<br>
     (new) fitIndex
 <a name="noBoost"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>noBoost(</strong> walker ) 
 </th></tr></thead></table>
 <a name="doBoost"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>doBoost(</strong> walker ) 
 </th></tr></thead></table>
 
@@ -129,7 +130,7 @@ Check if walker is best in phancol and try to optimize.
 * walker  : ( Walker)<br>
     new walker to be checked
 <a name="domain2Unit"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>domain2Unit(</strong> problem, dval, kpar=None ) 
 </th></tr></thead></table>
 
@@ -146,7 +147,7 @@ Return value in [0,1] for the selected parameter.
     selected parameter index, where kp is index in [parameters, hyperparams]
     None means all
 <a name="unit2Domain"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>unit2Domain(</strong> problem, uval, kpar=None ) 
 </th></tr></thead></table>
 
@@ -163,7 +164,7 @@ Return domain value for the selected parameter.
     selected parameter indices, where kp is index in [parameters, hyperparams]
     None means all.
 <a name="startJourney"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>startJourney(</strong> unitStart ) 
 </th></tr></thead></table>
 
@@ -175,7 +176,7 @@ Calculate the starting position and reset
 * unitStart  : ( array_like)<br>
     start position in npars-dimensions in unit space
 <a name="calcJourney"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>calcJourney(</strong> unitDistance ) 
 </th></tr></thead></table>
 
@@ -187,7 +188,7 @@ Calculate the distance travelled since reset
 * unitDistance  : ( array_like)<br>
     step size in npars-dimensions in unit space
 <a name="unitTripSquare"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>unitTripSquare(</strong> unitDistance ) 
 </th></tr></thead></table>
 
@@ -199,61 +200,61 @@ Return the squared unit distance
 * unitDistance  : ( array_like)<br>
     step size in npars-dimensions in unit space
 <a name="reportJourney"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>reportJourney(</strong> ) 
 </th></tr></thead></table>
 <a name="makeIndex"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>makeIndex(</strong> np, val ) 
 </th></tr></thead></table>
 <a name="reportCall"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>reportCall(</strong> )
 </th></tr></thead></table>
 
 Store a call to engine 
 
 <a name="reportSuccess"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>reportSuccess(</strong> )
 </th></tr></thead></table>
 
 
 Add 1 to the number of succesfull steps: logL < lowLhood.
 <a name="reportReject"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>reportReject(</strong> )
 </th></tr></thead></table>
 
 
 Add 1 to the number of rejected steps: logL > lowLhood.
 <a name="reportFailed"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>reportFailed(</strong> )
 </th></tr></thead></table>
 
 
 Add 1 to the number of failed steps: could not construct a step.
 <a name="reportBest"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>reportBest(</strong> )
 </th></tr></thead></table>
 
 
 Add 1 to the number of best likelihoods found upto now.
 <a name="printReport"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>printReport(</strong> best=False ) 
 </th></tr></thead></table>
 <a name="successRate"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>successRate(</strong> ) 
 </th></tr></thead></table>
 
 
 Return percentage of success.
 <a name="getUnitMinmax"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>getUnitMinmax(</strong> problem, lowLhood, nap ) 
 </th></tr></thead></table>
 
@@ -269,7 +270,7 @@ Calculate unit minimum and maximum from the Phantoms
 * nap  : ( int)<br>
     number of all parameters
 <a name="getUnitRange"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>getUnitRange(</strong> problem, lowLhood, nap ) 
 </th></tr></thead></table>
 
@@ -285,11 +286,11 @@ Calculate unit range and minimum from PhantomCollection
 * nap  : ( int)<br>
     number of all parameters
 <a name="__str__"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>__str__(</strong> ) 
 </th></tr></thead></table>
 <a name="execute"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>execute(</strong> kw, lowLhood )
 </th></tr></thead></table>
 
@@ -307,37 +308,39 @@ Execute the engine for difusing the parameters
 
 * int  : ( number of succesfull moves)<br>
 
+
+
 <a name="DummyPlotter"></a>
-<table><thead style="background-color:lightred; width:100%"><tr><th>
+<table><thead style="background-color:#E0FFE0; align:; width:100%"><tr><th>
 <strong>class DummyPlotter(</strong> object ) 
 </th></tr></thead></table>
 <a name="Engine"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>Engine(</strong> iter=1 ) 
 </th></tr></thead></table>
 <a name="start"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>start(</strong> param=None, ulim=None )
 </th></tr></thead></table>
 
 start the plot. 
 
 <a name="point"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>point(</strong> param, col=None, sym=0 )
 </th></tr></thead></table>
 
 
 Place a point at position param using color col and symbol sym.
 <a name="move"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>move(</strong> param, ptry, col=None, sym=None )
 </th></tr></thead></table>
 
 
 Move parameters at position param to ptry using color col.
 <a name="stop"></a>
-<table><thead style="background-color:limegreen; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; align:; width:100%"><tr><th>
 <strong>stop(</strong> param=None, name=None )
 </th></tr></thead></table>
 
