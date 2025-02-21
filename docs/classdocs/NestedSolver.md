@@ -3,14 +3,14 @@
 
 
 <a name="NestedSolver"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>"
+<table><thead background-color=#FFE0E0; width=100%><tr><th text-align=left>
 <strong>class NestedSolver(</strong> NestedSampler )
 </th></tr></thead></table>
 
 <b></b>
 
 <a name="NestedSolver"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th text-align:left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
 <strong>NestedSolver(</strong> problem, distribution=None, keep=None,
  ensemble=100, discard=1, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
@@ -19,35 +19,35 @@
 <b></b>
 
 <a name="solve"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th text-align:left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 
 <b></b>
 
 <a name="__str__"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th text-align:left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
 <strong>__str__(</strong> )
 </th></tr></thead></table>
 
 Return the name of this sampler. 
 
 <a name="setErrorDistribution"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th text-align:left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 
 <b></b>
 
 <a name="setEngines"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th text-align:left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 
 <b></b>
 
 <a name="initWalkers"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th text-align:left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 
