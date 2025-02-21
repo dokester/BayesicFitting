@@ -4,7 +4,7 @@
 
 <a name="ChordEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ChordEngine(</strong> [Engine](./Engine.md) )
+<strong>class ChordEngine(</strong> <a href="./Engine.html">Engine</a> )
 </th></tr></thead></table>
 <p>
 
@@ -127,7 +127,7 @@ Check if endpoints are indeed outside the lowLhood domain.
 <p>
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
-<strong>Methods inherited from</strong> [Engine](./Engine.md)</th></tr></thead></table>
+<strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 
 

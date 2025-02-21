@@ -4,7 +4,7 @@
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class NestedSolver(</strong> [NestedSampler](./NestedSampler.md) )
+<strong>class NestedSolver(</strong> <a href="./NestedSampler.html">NestedSampler</a> )
 </th></tr></thead></table>
 <p>
 
@@ -224,7 +224,7 @@ startdict : dictionary of { str : Engine }
     connecting a name to a StartEngine
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
-<strong>Methods inherited from</strong> [NestedSampler](./NestedSampler.md)</th></tr></thead></table>
+<strong>Methods inherited from</strong> <a href="./NestedSampler.html">NestedSampler</a></th></tr></thead></table>
 
 
 

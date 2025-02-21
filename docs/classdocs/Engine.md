@@ -4,7 +4,7 @@
 
 <a name="Engine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Engine(</strong> [object](./object.md) )
+<strong>class Engine(</strong> <a href="./object.html">object</a> )
 </th></tr></thead></table>
 <p>
 
@@ -338,7 +338,7 @@ Execute the engine for difusing the parameters
 
 <a name="DummyPlotter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class DummyPlotter(</strong> [object](./object.md) ) 
+<strong>class DummyPlotter(</strong> <a href="./object.html">object</a> ) 
 </th></tr></thead></table>
 <p>
 <a name="Engine"></a>
