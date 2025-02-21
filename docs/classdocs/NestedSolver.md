@@ -33,42 +33,42 @@ an overall sense.
 
 <b>Attributes</b>
 
-* xdata  : ( array_like)<br>
+* xdata  :  array_like<br>
     array of independent input values
-* model  : ( Model)<br>
+* model  :  Model<br>
     the model function to be fitted
-* ydata  : ( array_like)<br>
+* ydata  :  array_like<br>
     array of dependent (to be fitted) data
-* weights  : ( array_like (None))<br>
+* weights  :  array_like (None)<br>
     weights pertaining to ydata
-* distribution  : ( ErrorDistribution)<br>
+* distribution  :  ErrorDistribution<br>
     to calculate the loglikelihood
-* ensemble  : ( int (100))<br>
+* ensemble  :  int (100)<br>
     number of walkers
-* discard  : ( int (1))<br>
+* discard  :  int (1)<br>
     number of walkers to be replaced each generation
-* rng  : ( RandomState)<br>
+* rng  :  RandomState<br>
     random number generator
-* seed  : ( int (80409))<br>
+* seed  :  int (80409)<br>
     seed of rng
-* rate  : ( float (1.0))<br>
+* rate  :  float (1.0)<br>
     speed of exploration
-* maxsize  : ( None or int)<br>
+* maxsize  :  None or int<br>
     maximum size of the resulting sample list (None : no limit)
-* end  : ( float (2.0))<br>
+* end  :  float (2.0)<br>
     stopping criterion
-* verbose  : ( int)<br>
+* verbose  :  int<br>
     level of blabbering
 
-* walkers  : ( SampleList)<br>
+* walkers  :  SampleList<br>
     ensemble of Samples that explore the likelihood space
-* samples  : ( SampleList)<br>
+* samples  :  SampleList<br>
     Samples resulting from the exploration
-* engines  : ( list of Engine)<br>
+* engines  :  list of Engine<br>
     Engine that move the walkers around within the given constraint: logL > lowLogL
-* initialEngine  : ( Engine)<br>
+* initialEngine  :  Engine<br>
     Engine that distributes the walkers over the available space
-* restart  : ( StopStart (TBW))<br>
+* restart  :  StopStart (TBW)<br>
     write intermediate results to (optionally) start from.
 
 
@@ -87,7 +87,7 @@ Create a new class, providing inputs and model.
 
 <b>Parameters</b>
 
-* problem  : ( OrderProblem)<br>
+* problem  :  OrderProblem<br>
     Problem with integer parameters
 keep : None or dict of {int:float}
     None : none of the model parameters are kept fixed.
@@ -95,7 +95,7 @@ keep : None or dict of {int:float}
     Hyperparameters follow model parameters.
     The values will override those at initialization.
     They are used in this instantiation, unless overwritten at the call to sample()
-* distribution  : ( None or String or ErrorDistribution)<br>
+* distribution  :  None or String or ErrorDistribution<br>
     None   : DistanceCostFunction is chosen.
 
     "distance" : `DistanceCostFunction`      no hyperpar
@@ -104,15 +104,15 @@ keep : None or dict of {int:float}
              which implements logLikelihood
 
     When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.
-* ensemble  : ( int (100))<br>
+* ensemble  :  int (100)<br>
     number of walkers
-* discard  : ( int (1))<br>
+* discard  :  int (1)<br>
     number of walkers to be replaced each generation
-* seed  : ( int (80409))<br>
+* seed  :  int (80409)<br>
     seed of rng
-* rate  : ( float (1.0))<br>
+* rate  :  float (1.0)<br>
     speed of exploration
-* engines  : ( None or (list of) string or (list of) Engine)<br>
+* engines  :  None or (list of) string or (list of) Engine<br>
     to randomly move the walkers around, within the likelihood bound.
 
     "move"    : insert a snippet of parameters at another location
@@ -126,11 +126,11 @@ keep : None or dict of {int:float}
 
     engine  : a class inheriting from Engine. At least implementing
               execute( walker, lowLhood )
-* maxsize  : ( None or int)<br>
+* maxsize  :  None or int<br>
     maximum size of the resulting sample list (None : no limit)
-* threads  : ( bool (False))<br>
+* threads  :  bool (False)<br>
     Use Threads to distribute the diffusion of discarded samples over the available cores.
-* verbose  : ( int (1))<br>
+* verbose  :  int (1)<br>
     0 : silent
     1 : basic information
     2 : more about every 100th iteration
@@ -155,7 +155,7 @@ keep : None or dict of {int:float}
     Hyperparameters follow model parameters
     The values will override those at initialization.
     They are only used in this call of fit.
-* plot  : ( bool)<br>
+* plot  :  bool<br>
     Show a plot of the results
 
 <a name="__str__"></a>
@@ -175,11 +175,11 @@ Set the error distribution for calculating the likelihood.
 
 <b>Parameters</b>
 
-* name  : ( string)<br>
+* name  :  string<br>
     name of distribution
-* scale  : ( float)<br>
+* scale  :  float<br>
     fixed scale of distribution
-* power  : ( float)<br>
+* power  :  float<br>
     fixed power of distribution
 
 <a name="setEngines"></a>
@@ -192,7 +192,7 @@ initialize the engines.
 
 <b>Parameters</b>
 
-* engines  : ( list of string)<br>
+* engines  :  list of string<br>
     list of engine names
 enginedict : dictionary of { str : Engine }
     connecting names to Engines
@@ -207,11 +207,11 @@ Initialize the walkers at random values of parameters and scale
 
 <b>Parameters</b>
 
-* ensemble  : ( int)<br>
+* ensemble  :  int<br>
     length od the walkers list
-* allpars  : ( array_like)<br>
+* allpars  :  array_like<br>
     array of parameters
-* fitIndex  : ( array_like)<br>
+* fitIndex  :  array_like<br>
     indices of allpars to be fitted
 startdict : dictionary of { str : Engine }
     connecting a name to a StartEngine
@@ -251,5 +251,4 @@ startdict : dictionary of { str : Engine }
 * [<strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )](./NestedSampler.md#initWalkers)
 * [<strong>plotResult(</strong> walker, iter, plot=0 )](./NestedSampler.md#plotResult)
 * [<strong>report(</strong> )](./NestedSampler.md#report)
-* [<strong>Methods inherited from object</strong></th></tr></thead>](./NestedSampler.md#report)
 

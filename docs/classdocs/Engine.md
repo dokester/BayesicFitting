@@ -15,26 +15,26 @@ remain above the low-likelihood-limit.
 
 <b>Attributes</b>
 
-* walkers  : ( WalkerList)<br>
+* walkers  :  WalkerList<br>
     list of walkers to be diffused
-* errdis  : ( ErrorDistribution)<br>
+* errdis  :  ErrorDistribution<br>
     error distribution to be used
-* slow  : ( int)<br>
+* slow  :  int<br>
     If slow > 0, run this engine every slow-th iteration.
-* phancol  : ( PhantomCollection)<br>
+* phancol  :  PhantomCollection<br>
     Collection of valid walker positions collected during engine execution
-* maxtrials  : ( int)<br>
+* maxtrials  :  int<br>
     maximum number of trials for various operations
-* rng  : ( numpy.random.RandomState)<br>
+* rng  :  numpy.random.RandomState<br>
     random number generator
-* verbose  : ( int)<br>
+* verbose  :  int<br>
     if verbose > 4 report about the engines. (mostly for debugging)
 
-* report  : ( list of int (read only))<br>
+* report  :  list of int (read only)<br>
     reports number of succes, accepted, rejected, failed calls. Plus the total.
-* unitRange  : ( array_like (read only))<br>
+* unitRange  :  array_like (read only)<br>
     present max size of the parameter cloud (in unitspace: [0,1])
-* unitMin  : ( array_like (read only))<br>
+* unitMin  :  array_like (read only)<br>
     present minimum values of the parameter cloud (in unitspace: [0,1])
 
 Author       Do Kester.
@@ -52,20 +52,20 @@ Only one PhantomCollection should be present for all Engines.
 
 <b>Parameters</b>
 
-* walkers  : ( list of Walker)<br>
+* walkers  :  list of Walker<br>
     walkers to be diffused
-* errdis  : ( ErrorDistribution)<br>
+* errdis  :  ErrorDistribution<br>
     error distribution to be used
-* slow  : ( None or int > 0)<br>
+* slow  :  None or int > 0<br>
     Run this engine every slow-th iteration. None for all.
-* phancol  : ( None or PhantomCollection)<br>
+* phancol  :  None or PhantomCollection<br>
     Container for all valid walkers, that have been tried. But were not kept.
     To calculate the spread of the parameters vs likelihood.
-* seed  : ( int)<br>
+* seed  :  int<br>
     for random number generator
-* verbose  : ( int)<br>
+* verbose  :  int<br>
     report about the engines when verbose > 4
-* copy  : ( Engine)<br>
+* copy  :  Engine<br>
     engine to be copied 
 <a name="copy"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -99,20 +99,20 @@ Update the walker with problem, allpars, LogL and logW.
 
 <b>Parameters</b>
 
-* walker  : ( Sample)<br>
+* walker  :  Sample<br>
     sample to be updated
 
-* kw  : ( int)<br>
+* kw  :  int<br>
     index in walkerlist, of the walker to be replaced
-* problem  : ( Problem)<br>
+* problem  :  Problem<br>
     the problem in the walker
-* allpars  : ( array_like)<br>
+* allpars  :  array_like<br>
     list of all parameters
-* logL  : ( float)<br>
+* logL  :  float<br>
     log Likelihood
-* walker  : ( Walker or None)<br>
+* walker  :  Walker or None<br>
     Copy this walker or create new one
-* fitIndex  : ( array_like)<br>
+* fitIndex  :  array_like<br>
     (new) fitIndex
 <a name="noBoost"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -128,7 +128,7 @@ Check if walker is best in phancol and try to optimize.
 
 <b>Parameters</b>
 
-* walker  : ( Walker)<br>
+* walker  :  Walker<br>
     new walker to be checked
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -140,11 +140,11 @@ Return value in [0,1] for the selected parameter.
 
 <b>Parameters</b>
 
-* problem  : ( Problem)<br>
+* problem  :  Problem<br>
     the problem involved
-* dval  : ( float)<br>
+* dval  :  float<br>
     domain value for the selected parameter
-* kpar  : ( None or array_like)<br>
+* kpar  :  None or array_like<br>
     selected parameter index, where kp is index in [parameters, hyperparams]
     None means all
 <a name="unit2Domain"></a>
@@ -157,11 +157,11 @@ Return domain value for the selected parameter.
 
 <b>Parameters</b>
 
-* problem  : ( Problem)<br>
+* problem  :  Problem<br>
     the problem involved
-* uval  : ( array_like)<br>
+* uval  :  array_like<br>
     unit value for the selected parameter
-* kpar  : ( None or array_like)<br>
+* kpar  :  None or array_like<br>
     selected parameter indices, where kp is index in [parameters, hyperparams]
     None means all.
 <a name="startJourney"></a>
@@ -174,7 +174,7 @@ Calculate the starting position and reset
 
 <b>Parameters</b>
 
-* unitStart  : ( array_like)<br>
+* unitStart  :  array_like<br>
     start position in npars-dimensions in unit space
 <a name="calcJourney"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -186,7 +186,7 @@ Calculate the distance travelled since reset
 
 <b>Parameters</b>
 
-* unitDistance  : ( array_like)<br>
+* unitDistance  :  array_like<br>
     step size in npars-dimensions in unit space
 <a name="unitTripSquare"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -198,7 +198,7 @@ Return the squared unit distance
 
 <b>Parameters</b>
 
-* unitDistance  : ( array_like)<br>
+* unitDistance  :  array_like<br>
     step size in npars-dimensions in unit space
 <a name="reportJourney"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -264,11 +264,11 @@ Calculate unit minimum and maximum from the Phantoms
 
 <b>Parameters</b>
 
-* problem  : ( Problem)<br>
+* problem  :  Problem<br>
     To extract the unit range for
-* lowLhood  : ( float)<br>
+* lowLhood  :  float<br>
     low likelihood boundary
-* nap  : ( int)<br>
+* nap  :  int<br>
     number of all parameters
 <a name="getUnitRange"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -280,11 +280,11 @@ Calculate unit range and minimum from PhantomCollection
 
 <b>Parameters</b>
 
-* problem  : ( Problem)<br>
+* problem  :  Problem<br>
     To extract the unit range for
-* lowLhood  : ( float)<br>
+* lowLhood  :  float<br>
     low likelihood boundary
-* nap  : ( int)<br>
+* nap  :  int<br>
     number of all parameters
 <a name="__str__"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -300,14 +300,14 @@ Execute the engine for difusing the parameters
 
 <b>Parameters</b>
 
-* kw  : ( walker-id)<br>
+* kw  :  walker-id<br>
     walker to diffuse
-* lowLhood  : ( float)<br>
+* lowLhood  :  float<br>
     low limit on the loglikelihood
 
 <b>Returns</b>
 
-* int  : ( number of succesfull moves)<br>
+* int  :  number of succesfull moves<br>
 
 
 

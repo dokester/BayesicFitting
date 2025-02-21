@@ -10,6 +10,7 @@ solid DodgerBlue">Contents</span>
 |:-:|
 | [ChordEngine](./classdocs/ChordEngine.md) |
 | [Engine](./classdocs/Engine.md) |
+| [NestedSampler](./classdocs/NestedSampler.md) |
 | [NestedSolver](./classdocs/NestedSolver.md) |
 
 </div>

@@ -1,9 +1,11 @@
 ---
 ---
+
+
 <a name="NestedSampler"></a>
-<thead style="background-color:red; width:100%"><tr><th>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th align="left>"
 <strong>class NestedSampler(</strong> object )
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Nested Sampling is a novel technique to do Bayesian calculations.
@@ -91,60 +93,60 @@ For modifiable models 1 engine is defined.
     It can only be switched on for Modifiable Models.
 
 <b>Attributes</b>
-    <br>
-xdata : array_like
+
+* xdata  :  array_like<br>
     array of independent input values
-model : Model
+* model  :  Model<br>
     the model function to be fitted
-ydata : array_like
+* ydata  :  array_like<br>
     array of dependent (to be fitted) data
-weights : array_like (None)
+* weights  :  array_like (None)<br>
     weights pertaining to ydata
-problem : Problem (ClassicProblem)
+* problem  :  Problem (ClassicProblem)<br>
     to be solved (container of model, xdata, ydata and weights)
-distribution : ErrorDistribution
+* distribution  :  ErrorDistribution<br>
     to calculate the loglikelihood
-ensemble : int (100)
+* ensemble  :  int (100)<br>
     number of walkers
-discard : int (1)
+* discard  :  int (1)<br>
     number of walkers to be replaced each generation
-rng : RandomState
+* rng  :  RandomState<br>
     random number generator
-seed : int (80409)
+* seed  :  int (80409)<br>
     seed of rng
-rate : float (1.0)
+* rate  :  float (1.0)<br>
     speed of exploration
-maxsize : None or int
+* maxsize  :  None or int<br>
     maximum size of the resulting sample list (None : no limit)
-minimumIterations : int (100)
+* minimumIterations  :  int (100)<br>
     minimum number of iterations (adapt when starting problems occur)
-end : float (2.0)
+* end  :  float (2.0)<br>
     stopping criterion
-tolerance : float (-12)
+* tolerance  :  float (-12)<br>
     stopping criterion: stop if log( dZ / Z ) < tolerance
-verbose : int
+* verbose  :  int<br>
     level of blabbering
-walkers : WalkerList
+* walkers  :  WalkerList<br>
     ensemble of walkers that explore the likelihood space
-samples : SampleList
+* samples  :  SampleList<br>
     Samples resulting from the exploration
-engines : list of Engine
+* engines  :  list of Engine<br>
     Engine that move the walkers around within the given constraint: logL > lowLogL
-initialEngine : Engine
+* initialEngine  :  Engine<br>
     Engine that distributes the walkers over the available space
-restart : StopStart (TBW)
+* restart  :  StopStart (TBW)<br>
     write intermediate results to (optionally) start from.
 
 Author       Do Kester.
 
 <a name="NestedSampler"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>NestedSampler(</strong> xdata=None, model=None, ydata=None, weights=None,
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=ENSEMBLE, discard=1, seed=80409, rate=RATE,
  bestBoost=False, usePhantoms=True,
  engines=None, maxsize=None, threads=False, verbose=1 ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Create a new class, providing inputs and model.
@@ -153,20 +155,20 @@ Either (model,xdata,ydata) needs to be provided or a completely filled
 problem.
 
 <b>Parameters</b>
-<br>
-xdata : array_like
+
+* xdata  :  array_like<br>
     array of independent input values
-model : Model
+* model  :  Model<br>
     the model function to be fitted
     the model needs priors for the parameters and (maybe) limits
-ydata : array_like
+* ydata  :  array_like<br>
     array of dependent (to be fitted) data
-weights : array_like (None)
+* weights  :  array_like (None)<br>
     weights pertaining to ydata
-accuracy : float or array_like
+* accuracy  :  float or array_like<br>
     accuracy scale for the datapoints
     all the same or one for each data point
-problem : None or string or Problem
+* problem  :  None or string or Problem<br>
     Defines the kind of problem to be solved.
 
     None        same as "classic"
@@ -182,7 +184,7 @@ keep : None or dict of {int:float}
     Hyperparameters follow model parameters.
     The values will override those at initialization.
     They are used in this instantiation, unless overwritten at the call to sample()
-distribution : None or String or ErrorDistribution
+* distribution  :  None or String or ErrorDistribution<br>
     Defines the ErrorDistribution to be used
     When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.
 
@@ -196,27 +198,27 @@ distribution : None or String or ErrorDistribution
     "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
 
     ErrorDistribution Externally defined ErrorDistribution
-limits : None or [low,high] or [[low],[high]]
+* limits  :  None or [low,high] or [[low],[high]]<br>
     None    no limits implying fixed hyperparameters of the distribution
     low     low limit on hyperpars
     high    high limit on hyperpars
     When limits are set the hyperpars are not fixed.
-ensemble : int
+* ensemble  :  int<br>
     number of walkers
-discard : int
+* discard  :  int<br>
     number of walkers to be replaced each generation
-seed :int
+* seed  : int<br>
     seed of random number generator
-rate : float
+* rate  :  float<br>
     speed of exploration
-bestBoost : bool or Fitter
+* bestBoost  :  bool or Fitter<br>
     False   no updates of best logLikelihood
     True    boost the fit using LevenbergMarquardtFitter
     fitter  boost the fit using this fitter.
-usePhantoms : bool
+* usePhantoms  :  bool<br>
     True    Copy starting walkers from phantoms
     False   Copy starting walkers from walkers
-engines : None or (list of) string or (list of) Engine
+* engines  :  None or (list of) string or (list of) Engine<br>
     to randomly move the walkers around, within the likelihood bound.
 
     None        use a Problem defined selection of engines
@@ -233,11 +235,11 @@ engines : None or (list of) string or (list of) Engine
     "struct"    StructureEngine change the (internal) structure.
 
     Engine      an externally defined (list of) Engine
-maxsize : None or int
+* maxsize  :  None or int<br>
     maximum size of the resulting sample list (None : no limit)
-threads : bool (False)
+* threads  :  bool (False)<br>
     Use Threads to distribute the diffusion of discarded samples over the available cores.
-verbose : int (1)
+* verbose  :  int (1)<br>
     0   silent
     1   basic information
     2   more about every 100th iteration
@@ -262,9 +264,9 @@ sample      initSample
 
 
 <a name="sample"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>sample(</strong> keep=None, plot=False )
-</th></tr></thead>
+</th></tr></thead></table>
 ******SAMPLE************************************************************
 sample( self, keep=None, plot=False )
 
@@ -350,9 +352,9 @@ self.lastReport( -1, plot=plot )
 
 return self.evidence
 <a name="initSample"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>initSample(</strong> ensemble=None, keep=None ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 initSample( self, ensemble=None, keep=None ) 
 
@@ -378,16 +380,16 @@ in Use
  sortLogL( self, walkers ) 
  return numpy.argsort( [w.logL for w in walkers] )
 <a name="walkerLogL"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>walkerLogL(</strong> w ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 walkerLogL( self, w ) 
 return w.logL
 <a name="makeFitlist"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>makeFitlist(</strong> keep=None ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 makeFitlist( self, keep=None ) 
 
@@ -424,9 +426,9 @@ if keep is not None
 return ( fitlist, allpars )
 
 <a name="doIterPlot"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>doIterPlot(</strong> plot ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 doIterPlot( self, plot ) 
 
@@ -441,9 +443,9 @@ if isinstance( plot, str )
 else 
     return 0
 <a name="doLastPlot"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>doLastPlot(</strong> plot ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 doLastPlot( self, plot ) 
 
@@ -454,9 +456,9 @@ else
     return True if plot else False
 
 <a name="initReport"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>initReport(</strong> keep=None ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 initReport( self, keep=None ) 
 
@@ -505,9 +507,9 @@ if self.verbose > 1
 
 return tail
 <a name="iterReport"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>iterReport(</strong> kw, tail, plot=False ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 iterReport( self, kw, tail, plot=False ) 
 
@@ -525,9 +527,9 @@ if self.verbose >= 3 or ( self.verbose >= 1 and
     self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
 
 <a name="printIterRep"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 printIterRep( self, kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
 
@@ -544,9 +546,9 @@ print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
         end=end )
 
 <a name="lastReport"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>lastReport(</strong> kw, plot=False ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 lastReport( self, kw, plot=False ) 
 
@@ -574,17 +576,17 @@ if self.verbose >= 1
 if self.doLastPlot( plot ) 
     self.plotLast()
 <a name="plotLast"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>plotLast(</strong> ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 plotLast( self ) 
 Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata, 
             figsize=[12,8], residuals=True )
 <a name="XXXgetMaxIter"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>XXXgetMaxIter(</strong> ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 XXXgetMaxIter( self ) 
 
@@ -594,9 +596,9 @@ maxi = ( self.iteration if self.logdZ < self.tolerance else
 maxi = max( self.minimumIterations, maxi )
 return maxi if self.maxIterations is None else min( maxi, self.maxIterations )
 <a name="nextIteration"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>nextIteration(</strong> ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 nextIteration( self ) 
 
@@ -615,9 +617,9 @@ if self.iteration > self.end * self.ensemble * self.info / self.worst
     return False
 return True
 <a name="__str__"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>__str__(</strong> )
-</th></tr></thead>
+</th></tr></thead></table>
 
 
 Return the name of this sampler. 
@@ -627,9 +629,9 @@ return str( "NestedSampler" )
 
 
 <a name="optionalRestart"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>optionalRestart(</strong> )
-</th></tr></thead>
+</th></tr></thead></table>
 ==============================================================================
 optionalRestart( self )
 
@@ -642,9 +644,9 @@ if self.restart is not None and self.restart.wantRestore( )
     return True
 return False
 <a name="optionalSave"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>optionalSave(</strong> )
-</th></tr></thead>
+</th></tr></thead></table>
 
 optionalSave( self )
 
@@ -656,9 +658,9 @@ if self.restart is not None and self.restart.wantSave( ) and self.iteration % 10
     self.restart.save( self.walkers, self.samples )
 
 <a name="updateEvidence"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>updateEvidence(</strong> worst ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 updateEvidence( self, worst ) 
 
@@ -692,9 +694,9 @@ self.logUnitDomain += self.logDomainFraction
 
 return
 <a name="unitDomain"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>unitDomain(</strong> ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 unitDomain( self ) 
 
@@ -702,9 +704,9 @@ unitDomain( self )
 return math.exp( self.logUnitDomain )
 
 <a name="copyWalker"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>copyWalker(</strong> worst )
-</th></tr></thead>
+</th></tr></thead></table>
 
 copyWalker( self, worst )
 
@@ -716,9 +718,9 @@ for k in range( worst )
      setatt( self.walkers[k], "start", self.iteration )
      setatt( self.walkers[k], "step", 0 )
 <a name="copyWalkerFromPhantoms"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>copyWalkerFromPhantoms(</strong> worst )
-</th></tr></thead>
+</th></tr></thead></table>
 
 copyWalkerFromPhantoms( self, worst )
 
@@ -736,9 +738,9 @@ for k in range( worst )
      setatt( self.walkers[k], "start", self.iteration )
 
 <a name="updateWalkers"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>updateWalkers(</strong> explorer, worst ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 updateWalkers( self, explorer, worst ) 
 
@@ -751,9 +753,9 @@ explorer.explore( wlist, self.lowLhood, self.iteration )
 
 
 <a name="__setattr__"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>__setattr__(</strong> name, value ) 
-</th></tr></thead>
+</th></tr></thead></table>
 ********INTERNALS***************************************************
 __setattr__( self, name, value ) 
 
@@ -779,9 +781,9 @@ else
         for eng in self.engines 
             eng.verbose = value
 <a name="__getattr__"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>__getattr__(</strong> name ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 __getattr__( self, name ) 
 
@@ -823,11 +825,11 @@ elif name == "modelfit" or name == "yfit"
 
 ********DISTRIBUTIONS***************************************************
 <a name="setProblem"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,
 
  accuracy=None ) 
-</th></tr></thead>
+</th></tr></thead></table>
 setProblem( self, name, model=None, xdata=None, ydata=None, weights=None,
             accuracy=None ) 
 
@@ -865,9 +867,9 @@ except
 
 
 <a name="setErrorDistribution"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )
-</th></tr></thead>
+</th></tr></thead></table>
 ********DISTRIBUTIONS***************************************************
 setErrorDistribution( self, name=None, limits=None, scale=1.0, power=2.0 )
 
@@ -904,9 +906,9 @@ elif name == "bernoulli"
 else 
     raise ValueError( "Unknown error distribution %s" % name )
 <a name="setEngines"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
-</th></tr></thead>
+</th></tr></thead></table>
 
 setEngines( self, engines=None, enginedict=None ) 
 
@@ -956,9 +958,9 @@ for name in engines
 
 
 <a name="setInitialEngine"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th></tr></thead>
+</th></tr></thead></table>
 ********INITIALIZATION***************************************************
 setInitialEngine( self, ensemble, allpars, fitIndex, startdict=None )
 
@@ -993,9 +995,9 @@ self.distribution.lowLhood = -math.inf
 # pass the PhantomCollection to the initial engine
 self.initialEngine.phancol = self.phancol
 <a name="initWalkers"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th></tr></thead>
+</th></tr></thead></table>
 
 initWalkers( self, ensemble, allpars, fitIndex, startdict=None )
 
@@ -1014,9 +1016,9 @@ for walker in self.walkers
      w.check( nhyp=self.distribution.nphypar )
 
 <a name="plotResult"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>plotResult(</strong> walker, iter, plot=0 )
-</th></tr></thead>
+</th></tr></thead></table>
 
 plotResult( self, walker, iter, plot=0 )
 
@@ -1049,9 +1051,9 @@ dd = 0.05 * ( dmax - dmin )
 plt.ylim( dmin - dd, dmax + dd )
 
 <a name="report"></a>
-<thead style="background-color:green; width:100%"><tr><th>
+<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
 <strong>report(</strong> )
-</th></tr></thead>
+</th></tr></thead></table>
 
 report( self )
 
@@ -1076,7 +1078,3 @@ print( "Evidence    %10.3f +- %10.3f" % (self.evidence, self.precision ) )
 
 
 
-<thead style="background-color:dodgerblue; width:100%"><tr><th>
-<strong>Methods inherited from object</strong></th></tr></thead>
-
-awk -f inherits.awk object.md

@@ -31,11 +31,11 @@ MNRAS (2015) Volume 453, Issue 4, p 4384–4398
 
 <b>Attributes</b>
 
-* reset  : ( bool (False))<br>
+* reset  :  bool (False)<br>
     always reset othonormal basis 
-* extend  : ( bool (False))<br>
+* extend  :  bool (False)<br>
     perform the step-out action until logL < lowL
-* plotter  : ( )<br>
+* plotter  :  <br>
 
 <b>Attributes from Engine</b>
 
@@ -53,13 +53,13 @@ Constructor.
 
 <b>Parameters</b>
 
-* walkers  : ( WalkerList)<br>
+* walkers  :  WalkerList<br>
     walkers to be diffused
-* errdis  : ( ErrorDistribution)<br>
+* errdis  :  ErrorDistribution<br>
     error distribution to be used
-* copy  : ( ChordEngine)<br>
+* copy  :  ChordEngine<br>
     to be copied
-* kwargs  : ( for Engine)<br>
+* kwargs  :  for Engine<br>
     "slow", "seed", "verbose"
 <a name="copy"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
@@ -90,16 +90,16 @@ Execute the engine by diffusing the parameters.
 
 <b>Parameters</b>
 
-* kw  : ( int)<br>
+* kw  :  int<br>
     index of walker to diffuse
-* lowLhood  : ( float)<br>
+* lowLhood  :  float<br>
     lower limit in logLikelihood
-* iteration  : ( int)<br>
+* iteration  :  int<br>
     iteration number
 
 <b>Returns</b>
 
-* int  : ( the number of successfull moves)<br>
+* int  :  the number of successfull moves<br>
 
 <a name="stepOut"></a>
 <table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
