@@ -7,10 +7,14 @@
 <strong>class Engine(</strong> object )
 </th></tr></thead></table>
 
+
 Engine defines common properties of all Engines.
+
 An Engine moves around a walker in a random way such that its likelood
 remain above the low-likelihood-limit.
+
 <b>Attributes</b>
+
 * walkers  :  WalkerList<br>
     list of walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -25,12 +29,14 @@ remain above the low-likelihood-limit.
     random number generator<br>
 * verbose  :  int<br>
     if verbose > 4 report about the engines. (mostly for debugging)<br>
+
 * report  :  list of int (read only)<br>
     reports number of succes, accepted, rejected, failed calls. Plus the total.<br>
 * unitRange  :  array_like (read only)<br>
     present max size of the parameter cloud (in unitspace: [0,1])<br>
 * unitMin  :  array_like (read only)<br>
     present minimum values of the parameter cloud (in unitspace: [0,1])<br>
+
 Author       Do Kester.
 
 <a name="Engine"></a>
@@ -39,9 +45,13 @@ Author       Do Kester.
  seed=4213, verbose=0 )
 </th></tr></thead></table>
 
+
 Constructor.
+
 Only one PhantomCollection should be present for all Engines.
+
 <b>Parameters</b>
+
 * walkers  :  list of Walker<br>
     walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -69,8 +79,10 @@ Return a copy of this engine.
 <strong>bestBoost(</strong> problem, myFitter=None ) 
 </th></tr></thead></table>
 
+
 When a logL is found better that all the rest, try to update
 it using a fitter.
+
 Parameters
 problem : Problem
     the problem at hand<br>
@@ -82,10 +94,14 @@ myFitter : None or Fitter
 <strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) 
 </th></tr></thead></table>
 
+
 Update the walker with problem, allpars, LogL and logW.
+
 <b>Parameters</b>
+
 * walker  :  Sample<br>
     sample to be updated<br>
+
 * kw  :  int<br>
     index in walkerlist, of the walker to be replaced<br>
 * problem  :  Problem<br>
@@ -107,8 +123,11 @@ Update the walker with problem, allpars, LogL and logW.
 <strong>doBoost(</strong> walker ) 
 </th></tr></thead></table>
 
+
 Check if walker is best in phancol and try to optimize.
+
 <b>Parameters</b>
+
 * walker  :  Walker<br>
     new walker to be checked
 <a name="domain2Unit"></a>
@@ -116,8 +135,11 @@ Check if walker is best in phancol and try to optimize.
 <strong>domain2Unit(</strong> problem, dval, kpar=None ) 
 </th></tr></thead></table>
 
+
 Return value in [0,1] for the selected parameter.
+
 <b>Parameters</b>
+
 * problem  :  Problem<br>
     the problem involved<br>
 * dval  :  float<br>
@@ -130,8 +152,11 @@ Return value in [0,1] for the selected parameter.
 <strong>unit2Domain(</strong> problem, uval, kpar=None ) 
 </th></tr></thead></table>
 
+
 Return domain value for the selected parameter.
+
 <b>Parameters</b>
+
 * problem  :  Problem<br>
     the problem involved<br>
 * uval  :  array_like<br>
@@ -144,8 +169,11 @@ Return domain value for the selected parameter.
 <strong>startJourney(</strong> unitStart ) 
 </th></tr></thead></table>
 
+
 Calculate the starting position and reset
+
 <b>Parameters</b>
+
 * unitStart  :  array_like<br>
     start position in npars-dimensions in unit space
 <a name="calcJourney"></a>
@@ -153,8 +181,11 @@ Calculate the starting position and reset
 <strong>calcJourney(</strong> unitDistance ) 
 </th></tr></thead></table>
 
+
 Calculate the distance travelled since reset
+
 <b>Parameters</b>
+
 * unitDistance  :  array_like<br>
     step size in npars-dimensions in unit space
 <a name="unitTripSquare"></a>
@@ -162,8 +193,11 @@ Calculate the distance travelled since reset
 <strong>unitTripSquare(</strong> unitDistance ) 
 </th></tr></thead></table>
 
+
 Return the squared unit distance 
+
 <b>Parameters</b>
+
 * unitDistance  :  array_like<br>
     step size in npars-dimensions in unit space
 <a name="reportJourney"></a>
@@ -186,11 +220,13 @@ Store a call to engine
 <strong>reportSuccess(</strong> )
 </th></tr></thead></table>
 
+
 Add 1 to the number of succesfull steps: logL < lowLhood.
 <a name="reportReject"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportReject(</strong> )
 </th></tr></thead></table>
+
 
 Add 1 to the number of rejected steps: logL > lowLhood.
 <a name="reportFailed"></a>
@@ -198,11 +234,13 @@ Add 1 to the number of rejected steps: logL > lowLhood.
 <strong>reportFailed(</strong> )
 </th></tr></thead></table>
 
+
 Add 1 to the number of failed steps: could not construct a step.
 <a name="reportBest"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportBest(</strong> )
 </th></tr></thead></table>
+
 
 Add 1 to the number of best likelihoods found upto now.
 <a name="printReport"></a>
@@ -214,14 +252,18 @@ Add 1 to the number of best likelihoods found upto now.
 <strong>successRate(</strong> ) 
 </th></tr></thead></table>
 
+
 Return percentage of success.
 <a name="getUnitMinmax"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>getUnitMinmax(</strong> problem, lowLhood, nap ) 
 </th></tr></thead></table>
 
+
 Calculate unit minimum and maximum from the Phantoms
+
 <b>Parameters</b>
+
 * problem  :  Problem<br>
     To extract the unit range for<br>
 * lowLhood  :  float<br>
@@ -233,8 +275,11 @@ Calculate unit minimum and maximum from the Phantoms
 <strong>getUnitRange(</strong> problem, lowLhood, nap ) 
 </th></tr></thead></table>
 
+
 Calculate unit range and minimum from PhantomCollection
+
 <b>Parameters</b>
+
 * problem  :  Problem<br>
     To extract the unit range for<br>
 * lowLhood  :  float<br>
@@ -250,13 +295,18 @@ Calculate unit range and minimum from PhantomCollection
 <strong>execute(</strong> kw, lowLhood )
 </th></tr></thead></table>
 
+
 Execute the engine for difusing the parameters
+
 <b>Parameters</b>
+
 * kw  :  walker-id<br>
     walker to diffuse<br>
 * lowLhood  :  float<br>
     low limit on the loglikelihood<br>
+
 <b>Returns</b>
+
 * int  :  number of succesfull moves<br>
 
 
@@ -281,11 +331,13 @@ start the plot.
 <strong>point(</strong> param, col=None, sym=0 )
 </th></tr></thead></table>
 
+
 Place a point at position param using color col and symbol sym.
 <a name="move"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>move(</strong> param, ptry, col=None, sym=None )
 </th></tr></thead></table>
+
 
 Move parameters at position param to ptry using color col.
 <a name="stop"></a>

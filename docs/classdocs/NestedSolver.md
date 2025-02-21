@@ -7,24 +7,32 @@
 <strong>class NestedSolver(</strong> NestedSampler )
 </th></tr></thead></table>
 
+
 NestedSolver is an extension of NestedSampler. It uses the
 likelihood-climbing technique to find a solution in an ordering
 problem. The negative value of the costfunction, commonly defined
 in ordering problems, is maximised. In this sense the costfunction
 is acting as the logLikelihood.
+
 For more information about this technique see NestedSampler.
+
 For the random walk of the parameters 4 so-called engines are written.
 By default only he first is switched on.
+
 MoveEngine    : insert a snippet of parameters at another location
 ReverseEngine : reverse the order of a snippet of parameters
 ShuffleEngine : shuffle part of the parameter list
 SwitchEngine  : switch two elements
 LoopEngine    : uncross a crossing loop
 NearEngine    : find the nearest location and go there first. 
+
 The last 2 engines are not random. They are mostly (?) taking steps 
 uphill. Mixing them with other engines maintain detailed balance in 
 an overall sense. 
+
+
 <b>Attributes</b>
+
 * xdata  :  array_like<br>
     array of independent input values<br>
 * model  :  Model<br>
@@ -51,6 +59,7 @@ an overall sense.
     stopping criterion<br>
 * verbose  :  int<br>
     level of blabbering<br>
+
 * walkers  :  SampleList<br>
     ensemble of Samples that explore the likelihood space<br>
 * samples  :  SampleList<br>
@@ -61,7 +70,10 @@ an overall sense.
     Engine that distributes the walkers over the available space<br>
 * restart  :  StopStart (TBW)<br>
     write intermediate results to (optionally) start from.<br>
+
+
 Author       Do Kester.
+
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
@@ -70,8 +82,11 @@ Author       Do Kester.
  maxsize=None, threads=False, verbose=1 ) 
 </th></tr></thead></table>
 
+
 Create a new class, providing inputs and model.
+
 <b>Parameters</b>
+
 * problem  :  OrderProblem<br>
     Problem with integer parameters<br>
 keep : None or dict of {int:float}
@@ -82,9 +97,12 @@ keep : None or dict of {int:float}
     They are used in this instantiation, unless overwritten at the call to sample()<br>
 * distribution  :  None or String or ErrorDistribution<br>
     None   : DistanceCostFunction is chosen.<br>
+
     "distance" : `DistanceCostFunction`      no hyperpar<br>
+
     errdis : A class inheriting from ErrorDistribution<br>
              which implements logLikelihood<br>
+
     When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
 * ensemble  :  int (100)<br>
     number of walkers<br>
@@ -96,13 +114,16 @@ keep : None or dict of {int:float}
     speed of exploration<br>
 * engines  :  None or (list of) string or (list of) Engine<br>
     to randomly move the walkers around, within the likelihood bound.<br>
+
     "move"    : insert a snippet of parameters at another location<br>
     "reverse" : reverse the order of a snippet of parameters<br>
     "shuffle" : shuffle part of the parameter list<br>
     "switch"  : switch two elements<br>
     "loop"    : find two paths that cross, then uncross them<br>
     "near"    : find the nearest location and go there first. <br>
+
     None    : take default [all of above].<br>
+
     engine  : a class inheriting from Engine. At least implementing<br>
               execute( walker, lowLhood )<br>
 * maxsize  :  None or int<br>
@@ -120,10 +141,15 @@ keep : None or dict of {int:float}
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 
+
 Solve an order problem.
+
 Return the last sample, representing the best solution.
+
 The more sammples (with solutions) can be found in the sample list.
+
 <b>Parameters</b>
+
 keep : None or dict of {int:float}
     Dictionary of indices (int) to be kept at a fixed value (float)<br>
     Hyperparameters follow model parameters<br>
@@ -144,8 +170,11 @@ Return the name of this sampler.
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 
+
 Set the error distribution for calculating the likelihood.
+
 <b>Parameters</b>
+
 * name  :  string<br>
     name of distribution<br>
 * scale  :  float<br>
@@ -158,8 +187,11 @@ Set the error distribution for calculating the likelihood.
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 
+
 initialize the engines.
+
 <b>Parameters</b>
+
 * engines  :  list of string<br>
     list of engine names<br>
 enginedict : dictionary of { str : Engine }
@@ -170,8 +202,11 @@ enginedict : dictionary of { str : Engine }
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 
+
 Initialize the walkers at random values of parameters and scale
+
 <b>Parameters</b>
+
 * ensemble  :  int<br>
     length od the walkers list<br>
 * allpars  :  array_like<br>

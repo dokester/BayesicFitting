@@ -7,30 +7,40 @@
 <strong>class ChordEngine(</strong> Engine )
 </th></tr></thead></table>
 
+
 Move a a walker in a random direction.
+
 The ChordEngine draws a random line through the walker parameters in
 unit space, from unitMin (lowpoint) with lengths unitRange (highpoint).
+
 A random point on the line is selected. If the corresponding parameter
 set has a likelihood < LowLhood, it is accepted. Otherwise either the
 highpoint is reset to the random point (if randompoint > walkerpoint)
 or the lowpoint is replaced by the randompoint (if walker < random).
 Then a new random point on the line is selected, until the point is accepted.
+
 When the point is accepted, another random line is constructed
 through the new point and orthogonal to (all) previous ones.
 (The orthogonality is not implemented now. TBC).
+
 This is an independent implementation inspired by the polychord engine
 described in
 "POLYCHORD: next-generation nested sampling",
 WJ Handley, MP Hobson and AN Lasenby.
 MNRAS (2015) Volume 453, Issue 4, p 4384–4398
+
 <b>Attributes</b>
+
 * reset  :  bool (False)<br>
     always reset othonormal basis <br>
 * extend  :  bool (False)<br>
     perform the step-out action until logL < lowL<br>
 * plotter  :  <br>
+
 <b>Attributes from Engine</b>
+
 walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMin
+
 Author       Do Kester.
 
 <a name="ChordEngine"></a>
@@ -38,8 +48,11 @@ Author       Do Kester.
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
 </th></tr></thead></table>
 
+
 Constructor.
+
 <b>Parameters</b>
+
 * walkers  :  WalkerList<br>
     walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -60,6 +73,7 @@ Return copy of this.
 <strong>__setattr__(</strong> name, value )
 </th></tr></thead></table>
 
+
 Set attributes.
 
 <a name="__str__"></a>
@@ -71,21 +85,27 @@ Set attributes.
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
 </th></tr></thead></table>
 
+
 Execute the engine by diffusing the parameters.
+
 <b>Parameters</b>
+
 * kw  :  int<br>
     index of walker to diffuse<br>
 * lowLhood  :  float<br>
     lower limit in logLikelihood<br>
 * iteration  :  int<br>
     iteration number<br>
+
 <b>Returns</b>
+
 * int  :  the number of successfull moves<br>
 
 <a name="stepOut"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
 </th></tr></thead></table>
+
 
 Check if endpoints are indeed outside the lowLhood domain.
 <a name="plotOut"></a>
