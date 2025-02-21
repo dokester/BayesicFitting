@@ -4,8 +4,9 @@
 
 <a name="Engine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Engine(</strong> object )
+<strong>class Engine(</strong> [object](./object.md) )
 </th></tr></thead></table>
+<p>
 
 
 Engine defines common properties of all Engines.
@@ -44,6 +45,7 @@ Author       Do Kester.
 <strong>Engine(</strong> walkers, errdis, slow=None, phancol=None, copy=None,
  seed=4213, verbose=0 )
 </th></tr></thead></table>
+<p>
 
 
 Constructor.
@@ -71,6 +73,7 @@ Only one PhantomCollection should be present for all Engines.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
+<p>
 
 Return a copy of this engine. 
 
@@ -78,6 +81,7 @@ Return a copy of this engine.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>bestBoost(</strong> problem, myFitter=None ) 
 </th></tr></thead></table>
+<p>
 
 
 When a logL is found better that all the rest, try to update
@@ -93,6 +97,7 @@ myFitter : None or Fitter
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) 
 </th></tr></thead></table>
+<p>
 
 
 Update the walker with problem, allpars, LogL and logW.
@@ -118,10 +123,12 @@ Update the walker with problem, allpars, LogL and logW.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>noBoost(</strong> walker ) 
 </th></tr></thead></table>
+<p>
 <a name="doBoost"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>doBoost(</strong> walker ) 
 </th></tr></thead></table>
+<p>
 
 
 Check if walker is best in phancol and try to optimize.
@@ -134,6 +141,7 @@ Check if walker is best in phancol and try to optimize.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> problem, dval, kpar=None ) 
 </th></tr></thead></table>
+<p>
 
 
 Return value in [0,1] for the selected parameter.
@@ -151,6 +159,7 @@ Return value in [0,1] for the selected parameter.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> problem, uval, kpar=None ) 
 </th></tr></thead></table>
+<p>
 
 
 Return domain value for the selected parameter.
@@ -168,6 +177,7 @@ Return domain value for the selected parameter.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>startJourney(</strong> unitStart ) 
 </th></tr></thead></table>
+<p>
 
 
 Calculate the starting position and reset
@@ -180,6 +190,7 @@ Calculate the starting position and reset
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>calcJourney(</strong> unitDistance ) 
 </th></tr></thead></table>
+<p>
 
 
 Calculate the distance travelled since reset
@@ -192,6 +203,7 @@ Calculate the distance travelled since reset
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>unitTripSquare(</strong> unitDistance ) 
 </th></tr></thead></table>
+<p>
 
 
 Return the squared unit distance 
@@ -204,14 +216,17 @@ Return the squared unit distance
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportJourney(</strong> ) 
 </th></tr></thead></table>
+<p>
 <a name="makeIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>makeIndex(</strong> np, val ) 
 </th></tr></thead></table>
+<p>
 <a name="reportCall"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportCall(</strong> )
 </th></tr></thead></table>
+<p>
 
 Store a call to engine 
 
@@ -219,6 +234,7 @@ Store a call to engine
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportSuccess(</strong> )
 </th></tr></thead></table>
+<p>
 
 
 Add 1 to the number of succesfull steps: logL < lowLhood.
@@ -226,6 +242,7 @@ Add 1 to the number of succesfull steps: logL < lowLhood.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportReject(</strong> )
 </th></tr></thead></table>
+<p>
 
 
 Add 1 to the number of rejected steps: logL > lowLhood.
@@ -233,6 +250,7 @@ Add 1 to the number of rejected steps: logL > lowLhood.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportFailed(</strong> )
 </th></tr></thead></table>
+<p>
 
 
 Add 1 to the number of failed steps: could not construct a step.
@@ -240,6 +258,7 @@ Add 1 to the number of failed steps: could not construct a step.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>reportBest(</strong> )
 </th></tr></thead></table>
+<p>
 
 
 Add 1 to the number of best likelihoods found upto now.
@@ -247,10 +266,12 @@ Add 1 to the number of best likelihoods found upto now.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>printReport(</strong> best=False ) 
 </th></tr></thead></table>
+<p>
 <a name="successRate"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>successRate(</strong> ) 
 </th></tr></thead></table>
+<p>
 
 
 Return percentage of success.
@@ -258,6 +279,7 @@ Return percentage of success.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>getUnitMinmax(</strong> problem, lowLhood, nap ) 
 </th></tr></thead></table>
+<p>
 
 
 Calculate unit minimum and maximum from the Phantoms
@@ -274,6 +296,7 @@ Calculate unit minimum and maximum from the Phantoms
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>getUnitRange(</strong> problem, lowLhood, nap ) 
 </th></tr></thead></table>
+<p>
 
 
 Calculate unit range and minimum from PhantomCollection
@@ -290,10 +313,12 @@ Calculate unit range and minimum from PhantomCollection
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>__str__(</strong> ) 
 </th></tr></thead></table>
+<p>
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood )
 </th></tr></thead></table>
+<p>
 
 
 Execute the engine for difusing the parameters
@@ -313,16 +338,19 @@ Execute the engine for difusing the parameters
 
 <a name="DummyPlotter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class DummyPlotter(</strong> object ) 
+<strong>class DummyPlotter(</strong> [object](./object.md) ) 
 </th></tr></thead></table>
+<p>
 <a name="Engine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>Engine(</strong> iter=1 ) 
 </th></tr></thead></table>
+<p>
 <a name="start"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>start(</strong> param=None, ulim=None )
 </th></tr></thead></table>
+<p>
 
 start the plot. 
 
@@ -330,6 +358,7 @@ start the plot.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>point(</strong> param, col=None, sym=0 )
 </th></tr></thead></table>
+<p>
 
 
 Place a point at position param using color col and symbol sym.
@@ -337,6 +366,7 @@ Place a point at position param using color col and symbol sym.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>move(</strong> param, ptry, col=None, sym=None )
 </th></tr></thead></table>
+<p>
 
 
 Move parameters at position param to ptry using color col.
@@ -344,6 +374,7 @@ Move parameters at position param to ptry using color col.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>stop(</strong> param=None, name=None )
 </th></tr></thead></table>
+<p>
 
 Stop (show) the plot. 
 

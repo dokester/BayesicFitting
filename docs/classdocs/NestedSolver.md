@@ -4,8 +4,9 @@
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class NestedSolver(</strong> NestedSampler )
+<strong>class NestedSolver(</strong> [NestedSampler](./NestedSampler.md) )
 </th></tr></thead></table>
+<p>
 
 
 NestedSolver is an extension of NestedSampler. It uses the
@@ -81,6 +82,7 @@ Author       Do Kester.
  ensemble=100, discard=1, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
 </th></tr></thead></table>
+<p>
 
 
 Create a new class, providing inputs and model.
@@ -140,6 +142,7 @@ keep : None or dict of {int:float}
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
+<p>
 
 
 Solve an order problem.
@@ -162,6 +165,7 @@ keep : None or dict of {int:float}
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>__str__(</strong> )
 </th></tr></thead></table>
+<p>
 
 Return the name of this sampler. 
 
@@ -169,6 +173,7 @@ Return the name of this sampler.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
+<p>
 
 
 Set the error distribution for calculating the likelihood.
@@ -186,6 +191,7 @@ Set the error distribution for calculating the likelihood.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
+<p>
 
 
 initialize the engines.
@@ -201,6 +207,7 @@ enginedict : dictionary of { str : Engine }
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
+<p>
 
 
 Initialize the walkers at random values of parameters and scale
@@ -217,7 +224,7 @@ startdict : dictionary of { str : Engine }
     connecting a name to a StartEngine
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
-<strong>Methods inherited from NestedSampler</strong></th></tr></thead></table>
+<strong>Methods inherited from</strong> [NestedSampler](./NestedSampler.md)</th></tr></thead></table>
 
 
 

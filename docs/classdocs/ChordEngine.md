@@ -4,8 +4,9 @@
 
 <a name="ChordEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ChordEngine(</strong> Engine )
+<strong>class ChordEngine(</strong> [Engine](./Engine.md) )
 </th></tr></thead></table>
+<p>
 
 
 Move a a walker in a random direction.
@@ -47,6 +48,7 @@ Author       Do Kester.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
 </th></tr></thead></table>
+<p>
 
 
 Constructor.
@@ -65,6 +67,7 @@ Constructor.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
+<p>
 
 Return copy of this. 
 
@@ -72,6 +75,7 @@ Return copy of this.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>__setattr__(</strong> name, value )
 </th></tr></thead></table>
+<p>
 
 
 Set attributes.
@@ -80,10 +84,12 @@ Set attributes.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>__str__(</strong> )
 </th></tr></thead></table>
+<p>
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
 </th></tr></thead></table>
+<p>
 
 
 Execute the engine by diffusing the parameters.
@@ -105,6 +111,7 @@ Execute the engine by diffusing the parameters.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
 </th></tr></thead></table>
+<p>
 
 
 Check if endpoints are indeed outside the lowLhood domain.
@@ -112,13 +119,15 @@ Check if endpoints are indeed outside the lowLhood domain.
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>plotOut(</strong> problem, usave, vel, t0, t1 ) 
 </th></tr></thead></table>
+<p>
 <a name="plotOutDummy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>plotOutDummy(</strong> problem, usave, vel, t0, t1 ) 
 </th></tr></thead></table>
+<p>
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
-<strong>Methods inherited from Engine</strong></th></tr></thead></table>
+<strong>Methods inherited from</strong> [Engine](./Engine.md)</th></tr></thead></table>
 
 
 
@@ -145,7 +154,7 @@ Check if endpoints are indeed outside the lowLhood domain.
 * [<strong>getUnitRange(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitRange)
 * [<strong>__str__(</strong> ) ](./Engine.md#__str__)
 * [<strong>execute(</strong> kw, lowLhood )](./Engine.md#execute)
-* [<strong>class DummyPlotter(</strong> object ) ](./Engine.md#DummyPlotter)
+* [<strong>class DummyPlotter(</strong> [object](./object.md) ) ](./Engine.md#DummyPlotter)
 * [<strong>Engine(</strong> iter=1 ) ](./Engine.md#Engine)
 * [<strong>start(</strong> param=None, ulim=None )](./Engine.md#start)
 * [<strong>point(</strong> param, col=None, sym=0 )](./Engine.md#point)
