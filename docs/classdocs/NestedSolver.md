@@ -7,7 +7,61 @@
 <strong>class NestedSolver(</strong> NestedSampler )
 </th></tr></thead></table>
 
-<b></b>
+NestedSolver is an extension of NestedSampler. It uses the
+likelihood-climbing technique to find a solution in an ordering
+problem. The negative value of the costfunction, commonly defined
+in ordering problems, is maximised. In this sense the costfunction
+is acting as the logLikelihood.
+For more information about this technique see NestedSampler.
+For the random walk of the parameters 4 so-called engines are written.
+By default only he first is switched on.
+MoveEngine    : insert a snippet of parameters at another location
+ReverseEngine : reverse the order of a snippet of parameters
+ShuffleEngine : shuffle part of the parameter list
+SwitchEngine  : switch two elements
+LoopEngine    : uncross a crossing loop
+NearEngine    : find the nearest location and go there first. 
+The last 2 engines are not random. They are mostly (?) taking steps 
+uphill. Mixing them with other engines maintain detailed balance in 
+an overall sense. 
+<b>Attributes</b>
+* xdata  :  array_like<br>
+    array of independent input values<br>
+* model  :  Model<br>
+    the model function to be fitted<br>
+* ydata  :  array_like<br>
+    array of dependent (to be fitted) data<br>
+* weights  :  array_like (None)<br>
+    weights pertaining to ydata<br>
+* distribution  :  ErrorDistribution<br>
+    to calculate the loglikelihood<br>
+* ensemble  :  int (100)<br>
+    number of walkers<br>
+* discard  :  int (1)<br>
+    number of walkers to be replaced each generation<br>
+* rng  :  RandomState<br>
+    random number generator<br>
+* seed  :  int (80409)<br>
+    seed of rng<br>
+* rate  :  float (1.0)<br>
+    speed of exploration<br>
+* maxsize  :  None or int<br>
+    maximum size of the resulting sample list (None : no limit)<br>
+* end  :  float (2.0)<br>
+    stopping criterion<br>
+* verbose  :  int<br>
+    level of blabbering<br>
+* walkers  :  SampleList<br>
+    ensemble of Samples that explore the likelihood space<br>
+* samples  :  SampleList<br>
+    Samples resulting from the exploration<br>
+* engines  :  list of Engine<br>
+    Engine that move the walkers around within the given constraint: logL > lowLogL<br>
+* initialEngine  :  Engine<br>
+    Engine that distributes the walkers over the available space<br>
+* restart  :  StopStart (TBW)<br>
+    write intermediate results to (optionally) start from.<br>
+Author       Do Kester.
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
@@ -16,14 +70,67 @@
  maxsize=None, threads=False, verbose=1 ) 
 </th></tr></thead></table>
 
-<b></b>
+Create a new class, providing inputs and model.
+<b>Parameters</b>
+* problem  :  OrderProblem<br>
+    Problem with integer parameters<br>
+keep : None or dict of {int:float}
+    None : none of the model parameters are kept fixed.<br>
+    Dictionary of indices (int) to be kept at a fixed value (float).<br>
+    Hyperparameters follow model parameters.<br>
+    The values will override those at initialization.<br>
+    They are used in this instantiation, unless overwritten at the call to sample()<br>
+* distribution  :  None or String or ErrorDistribution<br>
+    None   : DistanceCostFunction is chosen.<br>
+    "distance" : `DistanceCostFunction`      no hyperpar<br>
+    errdis : A class inheriting from ErrorDistribution<br>
+             which implements logLikelihood<br>
+    When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
+* ensemble  :  int (100)<br>
+    number of walkers<br>
+* discard  :  int (1)<br>
+    number of walkers to be replaced each generation<br>
+* seed  :  int (80409)<br>
+    seed of rng<br>
+* rate  :  float (1.0)<br>
+    speed of exploration<br>
+* engines  :  None or (list of) string or (list of) Engine<br>
+    to randomly move the walkers around, within the likelihood bound.<br>
+    "move"    : insert a snippet of parameters at another location<br>
+    "reverse" : reverse the order of a snippet of parameters<br>
+    "shuffle" : shuffle part of the parameter list<br>
+    "switch"  : switch two elements<br>
+    "loop"    : find two paths that cross, then uncross them<br>
+    "near"    : find the nearest location and go there first. <br>
+    None    : take default [all of above].<br>
+    engine  : a class inheriting from Engine. At least implementing<br>
+              execute( walker, lowLhood )<br>
+* maxsize  :  None or int<br>
+    maximum size of the resulting sample list (None : no limit)<br>
+* threads  :  bool (False)<br>
+    Use Threads to distribute the diffusion of discarded samples over the available cores.<br>
+* verbose  :  int (1)<br>
+    0 : silent<br>
+    1 : basic information<br>
+    2 : more about every 100th iteration<br>
+    3 : more about every iteration<br>
 
 <a name="solve"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 
-<b></b>
+Solve an order problem.
+Return the last sample, representing the best solution.
+The more sammples (with solutions) can be found in the sample list.
+<b>Parameters</b>
+keep : None or dict of {int:float}
+    Dictionary of indices (int) to be kept at a fixed value (float)<br>
+    Hyperparameters follow model parameters<br>
+    The values will override those at initialization.<br>
+    They are only used in this call of fit.<br>
+* plot  :  bool<br>
+    Show a plot of the results<br>
 
 <a name="__str__"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
@@ -37,24 +144,44 @@ Return the name of this sampler.
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 
-<b></b>
+Set the error distribution for calculating the likelihood.
+<b>Parameters</b>
+* name  :  string<br>
+    name of distribution<br>
+* scale  :  float<br>
+    fixed scale of distribution<br>
+* power  :  float<br>
+    fixed power of distribution<br>
 
 <a name="setEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 
-<b></b>
+initialize the engines.
+<b>Parameters</b>
+* engines  :  list of string<br>
+    list of engine names<br>
+enginedict : dictionary of { str : Engine }
+    connecting names to Engines<br>
 
 <a name="initWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 
-<b></b>
+Initialize the walkers at random values of parameters and scale
+<b>Parameters</b>
+* ensemble  :  int<br>
+    length od the walkers list<br>
+* allpars  :  array_like<br>
+    array of parameters<br>
+* fitIndex  :  array_like<br>
+    indices of allpars to be fitted<br>
+startdict : dictionary of { str : Engine }
+    connecting a name to a StartEngine
 
-
-<table><thead style="background-color:#FFD0Do; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
 <strong>Methods inherited from NestedSampler</strong></th></tr></thead></table>
 
 
