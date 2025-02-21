@@ -3,7 +3,7 @@
 
 
 <a name="ChordEngine"></a>
-<table><thead background-color=#FFE0E0; width=100%><tr><th text-align=left>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>class ChordEngine(</strong> Engine )
 </th></tr></thead></table>
 
@@ -11,31 +11,31 @@
 <b></b>
 
 <a name="ChordEngine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
 </th></tr></thead></table>
 
 <b></b>
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 
 Return copy of this. 
 
 <a name="__setattr__"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>__setattr__(</strong> name, value )
 </th></tr></thead></table>
 
 
 <a name="__str__"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>__str__(</strong> )
 </th></tr></thead></table>
 <a name="execute"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
 </th></tr></thead></table>
 
@@ -43,22 +43,22 @@ Return copy of this.
 <b></b>
 
 <a name="stepOut"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
 </th></tr></thead></table>
 
 
 <a name="plotOut"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>plotOut(</strong> problem, usave, vel, t0, t1 ) 
 </th></tr></thead></table>
 <a name="plotOutDummy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th text-align=left>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>plotOutDummy(</strong> problem, usave, vel, t0, t1 ) 
 </th></tr></thead></table>
 
-<thead style="background-color:#FFD0Do; width:100%"><tr><th text-align=left>
-<strong>Methods inherited from Engine</strong></th></tr></thead>
+<table><thead style="background-color:#FFD0Do; width:100%"><tr><th style="text-align:left">
+<strong>Methods inherited from Engine</strong></th></tr></thead></table>
 
 
 
