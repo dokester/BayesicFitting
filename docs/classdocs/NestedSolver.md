@@ -1,13 +1,15 @@
 ---
 ---
 
+<div class="button">
+  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
+<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py target=_blank>Source</a></span></div>
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>class NestedSolver(</strong> <a href="./NestedSampler.html">NestedSampler</a> )
 </th></tr></thead></table>
 <p>
-
 
 NestedSolver is an extension of NestedSampler. It uses the
 likelihood-climbing technique to find a solution in an ordering
@@ -76,6 +78,7 @@ an overall sense.
 Author       Do Kester.
 
 
+
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>NestedSolver(</strong> problem, distribution=None, keep=None,
@@ -84,14 +87,13 @@ Author       Do Kester.
 </th></tr></thead></table>
 <p>
 
-
 Create a new class, providing inputs and model.
 
 <b>Parameters</b>
 
 * problem  :  OrderProblem<br>
     Problem with integer parameters<br>
-keep : None or dict of {int:float}
+* keep  :  None or dict of {int:float}<br>
     None : none of the model parameters are kept fixed.<br>
     Dictionary of indices (int) to be kept at a fixed value (float).<br>
     Hyperparameters follow model parameters.<br>
@@ -138,12 +140,12 @@ keep : None or dict of {int:float}
     2 : more about every 100th iteration<br>
     3 : more about every iteration<br>
 
+
 <a name="solve"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 <p>
-
 
 Solve an order problem.
 
@@ -153,7 +155,7 @@ The more sammples (with solutions) can be found in the sample list.
 
 <b>Parameters</b>
 
-keep : None or dict of {int:float}
+* keep  :  None or dict of {int:float}<br>
     Dictionary of indices (int) to be kept at a fixed value (float)<br>
     Hyperparameters follow model parameters<br>
     The values will override those at initialization.<br>
@@ -161,20 +163,12 @@ keep : None or dict of {int:float}
 * plot  :  bool<br>
     Show a plot of the results<br>
 
-<a name="__str__"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
-<strong>__str__(</strong> )
-</th></tr></thead></table>
-<p>
-
-Return the name of this sampler. 
 
 <a name="setErrorDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 <p>
-
 
 Set the error distribution for calculating the likelihood.
 
@@ -187,12 +181,12 @@ Set the error distribution for calculating the likelihood.
 * power  :  float<br>
     fixed power of distribution<br>
 
+
 <a name="setEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 <p>
-
 
 initialize the engines.
 
@@ -200,15 +194,15 @@ initialize the engines.
 
 * engines  :  list of string<br>
     list of engine names<br>
-enginedict : dictionary of { str : Engine }
+* enginedict  :  dictionary of { str : Engine }<br>
     connecting names to Engines<br>
+
 
 <a name="initWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 <p>
-
 
 Initialize the walkers at random values of parameters and scale
 
@@ -220,12 +214,11 @@ Initialize the walkers at random values of parameters and scale
     array of parameters<br>
 * fitIndex  :  array_like<br>
     indices of allpars to be fitted<br>
-startdict : dictionary of { str : Engine }
+* startdict  :  dictionary of { str : Engine }<br>
     connecting a name to a StartEngine
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NestedSampler.html">NestedSampler</a></th></tr></thead></table>
-
 
 
 * [<strong>sample(</strong> keep=None, plot=False )](./NestedSampler.md#sample)
@@ -239,23 +232,16 @@ startdict : dictionary of { str : Engine }
 * [<strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) ](./NestedSampler.md#printIterRep)
 * [<strong>lastReport(</strong> kw, plot=False ) ](./NestedSampler.md#lastReport)
 * [<strong>plotLast(</strong> ) ](./NestedSampler.md#plotLast)
-* [<strong>XXXgetMaxIter(</strong> ) ](./NestedSampler.md#XXXgetMaxIter)
+* [<strong>getMaxIter(</strong> ) ](./NestedSampler.md#getMaxIter)
 * [<strong>nextIteration(</strong> ) ](./NestedSampler.md#nextIteration)
-* [<strong>__str__(</strong> )](./NestedSampler.md#__str__)
 * [<strong>optionalRestart(</strong> )](./NestedSampler.md#optionalRestart)
 * [<strong>optionalSave(</strong> )](./NestedSampler.md#optionalSave)
 * [<strong>updateEvidence(</strong> worst ) ](./NestedSampler.md#updateEvidence)
-* [<strong>unitDomain(</strong> ) ](./NestedSampler.md#unitDomain)
 * [<strong>copyWalker(</strong> worst )](./NestedSampler.md#copyWalker)
 * [<strong>copyWalkerFromPhantoms(</strong> worst )](./NestedSampler.md#copyWalkerFromPhantoms)
+* [<strong>copyWalkerFromDynamicPhantoms(</strong> worst )](./NestedSampler.md#copyWalkerFromDynamicPhantoms)
 * [<strong>updateWalkers(</strong> explorer, worst ) ](./NestedSampler.md#updateWalkers)
-* [<strong>__setattr__(</strong> name, value ) ](./NestedSampler.md#__setattr__)
-* [<strong>__getattr__(</strong> name ) ](./NestedSampler.md#__getattr__)
 * [<strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,](./NestedSampler.md#setProblem)
-* [<strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )](./NestedSampler.md#setErrorDistribution)
-* [<strong>setEngines(</strong> engines=None, enginedict=None ) ](./NestedSampler.md#setEngines)
 * [<strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )](./NestedSampler.md#setInitialEngine)
-* [<strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )](./NestedSampler.md#initWalkers)
 * [<strong>plotResult(</strong> walker, iter, plot=0 )](./NestedSampler.md#plotResult)
 * [<strong>report(</strong> )](./NestedSampler.md#report)
-

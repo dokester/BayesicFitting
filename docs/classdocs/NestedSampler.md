@@ -1,12 +1,15 @@
 ---
 ---
 
+<div class="button">
+  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
+<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py target=_blank>Source</a></span></div>
 
 <a name="NestedSampler"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th align="left>"
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>class NestedSampler(</strong> object )
 </th></tr></thead></table>
-
+<p>
 
 Nested Sampling is a novel technique to do Bayesian calculations.
 
@@ -59,95 +62,96 @@ so-called engines are written.
 By default only engines 1 and 2 is switched on.
 
 1. GalileanEngine.
-    It walks all (super)parameters in a fixed direction for about 5 steps.
-    When a step ends outside the high likelihood region the direction is
-    mirrored on the lowLikelihood edge and continued.
+    It walks all (super)parameters in a fixed direction for about 5 steps.<br>
+    When a step ends outside the high likelihood region the direction is<br>
+    mirrored on the lowLikelihood edge and continued.<br>
 
 2. ChordEngine.
-    It draws a randomly oriented line through a point inside the region,
-    until it reaches outside the restricted likelihood region on both sides.
-    A random point is selected on the line until it is inside the likelihood region.
-    This process runs several times
+    It draws a randomly oriented line through a point inside the region,<br>
+    until it reaches outside the restricted likelihood region on both sides.<br>
+    A random point is selected on the line until it is inside the likelihood region.<br>
+    This process runs several times<br>
 
 3. GibbsEngine.
-    It moves each of the parameters by a random step, one at a time.
-    It is a randomwalk.
+    It moves each of the parameters by a random step, one at a time.<br>
+    It is a randomwalk.<br>
 
 4. StepEngine.
-    It moves all parameters in a random direction. It is a randomwalk.
+    It moves all parameters in a random direction. It is a randomwalk.<br>
 
 For dynamic models 2 extra engines are defined
 
 6. BirthEngine.
-    It tries to increase the number of parameters.
-    It can only be switched on for Dynamic Models.
+    It tries to increase the number of parameters.<br>
+    It can only be switched on for Dynamic Models.<br>
 
 7. DeathEngine.
-    It tries to decrease the number of parameters.
-    It can only be switched on for Dynamic Models.
+    It tries to decrease the number of parameters.<br>
+    It can only be switched on for Dynamic Models.<br>
 
 For modifiable models 1 engine is defined.
 
 8. StructureEngine.
-    It alters the internal structure of the model.
-    It can only be switched on for Modifiable Models.
+    It alters the internal structure of the model.<br>
+    It can only be switched on for Modifiable Models.<br>
 
 <b>Attributes</b>
 
 * xdata  :  array_like<br>
-    array of independent input values
+    array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted
+    the model function to be fitted<br>
 * ydata  :  array_like<br>
-    array of dependent (to be fitted) data
+    array of dependent (to be fitted) data<br>
 * weights  :  array_like (None)<br>
-    weights pertaining to ydata
+    weights pertaining to ydata<br>
 * problem  :  Problem (ClassicProblem)<br>
-    to be solved (container of model, xdata, ydata and weights)
+    to be solved (container of model, xdata, ydata and weights)<br>
 * distribution  :  ErrorDistribution<br>
-    to calculate the loglikelihood
+    to calculate the loglikelihood<br>
 * ensemble  :  int (100)<br>
-    number of walkers
+    number of walkers<br>
 * discard  :  int (1)<br>
-    number of walkers to be replaced each generation
+    number of walkers to be replaced each generation<br>
 * rng  :  RandomState<br>
-    random number generator
+    random number generator<br>
 * seed  :  int (80409)<br>
-    seed of rng
+    seed of rng<br>
 * rate  :  float (1.0)<br>
-    speed of exploration
+    speed of exploration<br>
 * maxsize  :  None or int<br>
-    maximum size of the resulting sample list (None : no limit)
+    maximum size of the resulting sample list (None : no limit)<br>
 * minimumIterations  :  int (100)<br>
-    minimum number of iterations (adapt when starting problems occur)
+    minimum number of iterations (adapt when starting problems occur)<br>
 * end  :  float (2.0)<br>
-    stopping criterion
+    stopping criterion<br>
 * tolerance  :  float (-12)<br>
-    stopping criterion: stop if log( dZ / Z ) < tolerance
+    stopping criterion: stop if log( dZ / Z ) < tolerance<br>
 * verbose  :  int<br>
-    level of blabbering
+    level of blabbering<br>
 * walkers  :  WalkerList<br>
-    ensemble of walkers that explore the likelihood space
+    ensemble of walkers that explore the likelihood space<br>
 * samples  :  SampleList<br>
-    Samples resulting from the exploration
+    Samples resulting from the exploration<br>
 * engines  :  list of Engine<br>
-    Engine that move the walkers around within the given constraint: logL > lowLogL
+    Engine that move the walkers around within the given constraint: logL > lowLogL<br>
 * initialEngine  :  Engine<br>
-    Engine that distributes the walkers over the available space
+    Engine that distributes the walkers over the available space<br>
 * restart  :  StopStart (TBW)<br>
-    write intermediate results to (optionally) start from.
+    write intermediate results to (optionally) start from.<br>
 
 Author       Do Kester.
 
+
 <a name="NestedSampler"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>NestedSampler(</strong> xdata=None, model=None, ydata=None, weights=None,
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=ENSEMBLE, discard=1, seed=80409, rate=RATE,
- bestBoost=False, usePhantoms=True,
+ bestBoost=False,
  engines=None, maxsize=None, threads=False, verbose=1 ) 
 </th></tr></thead></table>
-
+<p>
 
 Create a new class, providing inputs and model.
 
@@ -157,94 +161,91 @@ problem.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values
+    array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted
-    the model needs priors for the parameters and (maybe) limits
+    the model function to be fitted<br>
+    the model needs priors for the parameters and (maybe) limits<br>
 * ydata  :  array_like<br>
-    array of dependent (to be fitted) data
+    array of dependent (to be fitted) data<br>
 * weights  :  array_like (None)<br>
-    weights pertaining to ydata
+    weights pertaining to ydata<br>
 * accuracy  :  float or array_like<br>
-    accuracy scale for the datapoints
-    all the same or one for each data point
+    accuracy scale for the datapoints<br>
+    all the same or one for each data point<br>
 * problem  :  None or string or Problem<br>
-    Defines the kind of problem to be solved.
+    Defines the kind of problem to be solved.<br>
 
-    None        same as "classic"
-    "classic" 	ClassicProblem
-    "errors"	ErrorsInXandYProblem
-    "multiple"	MultipleOutputProblem
+    None        same as "classic"<br>
+    "classic" 	ClassicProblem<br>
+    "errors"	ErrorsInXandYProblem<br>
+    "multiple"	MultipleOutputProblem<br>
 
-    Problem     Externally defined Problem. When Problem has been provided,
-                xdata, model, weights and ydata are not used.
-keep : None or dict of {int:float}
-    None of the model parameters are kept fixed.
-    Dictionary of indices (int) to be kept at a fixed value (float).
-    Hyperparameters follow model parameters.
-    The values will override those at initialization.
-    They are used in this instantiation, unless overwritten at the call to sample()
+    Problem     Externally defined Problem. When Problem has been provided,<br>
+                xdata, model, weights and ydata are not used.<br>
+* keep  :  None or dict of {int:float}<br>
+    None of the model parameters are kept fixed.<br>
+    Dictionary of indices (int) to be kept at a fixed value (float).<br>
+    Hyperparameters follow model parameters.<br>
+    The values will override those at initialization.<br>
+    They are used in this instantiation, unless overwritten at the call to sample()<br>
 * distribution  :  None or String or ErrorDistribution<br>
-    Defines the ErrorDistribution to be used
-    When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.
+    Defines the ErrorDistribution to be used<br>
+    When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
 
-    None            same as "gauss"
-    "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0
-    "laplace"       LaplaceErrorDistribution with 1 hyperpar scale
-    "poisson"       PoissonErrorDistribution no hyperpar
-    "cauchy"        CauchyErrorDstribution with 1 hyperpar scale
-    "uniform"       UniformErrorDistribution with 1 hyperpar scale
-    "bernoulli"     BernoulliErrorDistribution no hyperpar
-    "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
+    None            same as "gauss"<br>
+    "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0<br>
+    "laplace"       LaplaceErrorDistribution with 1 hyperpar scale<br>
+    "poisson"       PoissonErrorDistribution no hyperpar<br>
+    "cauchy"        CauchyErrorDstribution with 1 hyperpar scale<br>
+    "uniform"       UniformErrorDistribution with 1 hyperpar scale<br>
+    "bernoulli"     BernoulliErrorDistribution no hyperpar<br>
+    "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)<br>
 
-    ErrorDistribution Externally defined ErrorDistribution
+    ErrorDistribution Externally defined ErrorDistribution<br>
 * limits  :  None or [low,high] or [[low],[high]]<br>
-    None    no limits implying fixed hyperparameters of the distribution
-    low     low limit on hyperpars
-    high    high limit on hyperpars
-    When limits are set the hyperpars are not fixed.
+    None    no limits implying fixed hyperparameters of the distribution<br>
+    low     low limit on hyperpars<br>
+    high    high limit on hyperpars<br>
+    When limits are set the hyperpars are not fixed.<br>
 * ensemble  :  int<br>
-    number of walkers
+    number of walkers<br>
 * discard  :  int<br>
-    number of walkers to be replaced each generation
+    number of walkers to be replaced each generation<br>
 * seed  : int<br>
-    seed of random number generator
+    seed of random number generator<br>
 * rate  :  float<br>
-    speed of exploration
+    speed of exploration<br>
 * bestBoost  :  bool or Fitter<br>
-    False   no updates of best logLikelihood
-    True    boost the fit using LevenbergMarquardtFitter
-    fitter  boost the fit using this fitter.
-* usePhantoms  :  bool<br>
-    True    Copy starting walkers from phantoms
-    False   Copy starting walkers from walkers
+    False   no updates of best logLikelihood<br>
+    True    boost the fit using LevenbergMarquardtFitter<br>
+    fitter  boost the fit using this fitter.<br>
 * engines  :  None or (list of) string or (list of) Engine<br>
-    to randomly move the walkers around, within the likelihood bound.
+    to randomly move the walkers around, within the likelihood bound.<br>
 
-    None        use a Problem defined selection of engines
-    "galilean"  GalileanEngine	move forward and mirror on edges
-    "chord"     ChordEngine   	select random point on random line
-    "gibbs" 	GibbsEngine 	move one parameter at a time
-    "step"  	StepEngine    	move all parameters in arbitrary direction
+    None        use a Problem defined selection of engines<br>
+    "galilean"  GalileanEngine	move forward and mirror on edges<br>
+    "chord"     ChordEngine   	select random point on random line<br>
+    "gibbs" 	GibbsEngine 	move one parameter at a time<br>
+    "step"  	StepEngine    	move all parameters in arbitrary direction<br>
 
-    For Dynamic models only
-    "birth" 	BirthEngine     increase the parameter list of a walker by one
-    "death" 	DeathEngine     decrease the parameter list of a walker by one
+    For Dynamic models only:<br>
+    "birth" 	BirthEngine     increase the parameter list of a walker by one<br>
+    "death" 	DeathEngine     decrease the parameter list of a walker by one<br>
 
-    For Modifiable models only
-    "struct"    StructureEngine change the (internal) structure.
+    For Modifiable models only:<br>
+    "struct"    StructureEngine change the (internal) structure.<br>
 
-    Engine      an externally defined (list of) Engine
+    Engine      an externally defined (list of) Engine<br>
 * maxsize  :  None or int<br>
-    maximum size of the resulting sample list (None : no limit)
+    maximum size of the resulting sample list (None : no limit)<br>
 * threads  :  bool (False)<br>
-    Use Threads to distribute the diffusion of discarded samples over the available cores.
+    Use Threads to distribute the diffusion of discarded samples over the available cores.<br>
 * verbose  :  int (1)<br>
-    0   silent
-    1   basic information
-    2   more about every 100th iteration
-    3   more about every iteration
-    >4  for debugging
+    0   silent<br>
+    1   basic information<br>
+    2   more about every 100th iteration<br>
+    3   more about every iteration<br>
+    >4  for debugging<br>
 
 
 
@@ -253,86 +254,79 @@ The order in which the main attributes are created.
 where       method                  attribute
 __init__    setProblem              self.problem
 __init__    setErrorDistribution    self.distribution
-__init__    setEngines              self.phancol
-                                    self.engines
+__init__    setEngines              self.phantoms
+                                    self.engines<br>
 __init__                            self.samples
 sample      initSample
-              initWalkers           self.walkers
-
+              initWalkers           self.walkers<br>
 
                 setInitialEngine    self.initialEngine
 
 
+
 <a name="sample"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>sample(</strong> keep=None, plot=False )
 </th></tr></thead></table>
-******SAMPLE************************************************************
+<p>******SAMPLE************************************************************
 sample( self, keep=None, plot=False )
 
 
 keep = self.initSample( keep=keep )
 
 if ( self.problem.hasAccuracy and self.walkers[0].fitIndex[-1] < 0 and 
-        not isinstance( self.distribution, GaussErrorDistribution ) ) 
-    raise AttributeError( "%s cannot be combined with accuracies and variable scale" %
-                            self.distribution ) 
+        not isinstance( self.distribution, GaussErrorDistribution ) ) :<br>
+    raise AttributeError( "%s cannot be combined with accuracies and variable scale" %<br>
+                            self.distribution ) <br>
 
-self.logUnitDomain = 0
-if self.usePhantoms 
-    self.copyWalker = self.copyWalkerFromPhantoms
+ if self.minimumIterations is None :<br>
+     self.minimumIterations = 10 * self.ensemble / self.discard<br>
 
 tail = self.initReport( keep=keep )
 
 explorer = Explorer( self, threads=self.threads )
 
 ## move all walkers around for initial exploration of the complete space.
-if not isinstance( self.problem.model, LinearModel ) or self.usePhantoms 
-     print( "BURNIN PHASE STARTS =================================" )
-    self.lowLhood = -sys.float_info.max
-    # Explore all walker(s)
-    explorer.explore( range( self.ensemble ), self.lowLhood, self.iteration )
-    self.iteration = 0                  # reset iteration number
-     print( "BURNIN PHASE ENDS ===================================" )
+if not isinstance( self.problem.model, LinearModel ) 
+    self.lowLhood = -sys.float_info.max<br>
+    # Explore all walker(s)<br>
+    explorer.explore( range( self.ensemble ), self.lowLhood, self.iteration )<br>
+    self.iteration = 0                  # reset iteration number<br>
 
-
-self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL
 
 self.logZ = -sys.float_info.max
 self.logdZ = 0
 self.info = 0
-self.logWidth = math.log( 1.0 - math.exp( -1.0 / self.livepointcount ) )
+self.logWidth = math.log( 1.0 - math.exp( -1.0 / self.ensemble ) )
 
- TBD put self.logWidth in the saved file too
- if self.optionalRestart() 
-     self.logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
+ TBD put self.logWidth in the saved file too<br>
+ if self.optionalRestart() :<br>
+     self.logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble<br>
 
-self.histinsert = []        ### TBC   what is this
-self.sumWidth = 0.0
-
+self.histinsert = []
 ## iterate until done
+ while self.iteration < self.getMaxIter( ):<br>
 while self.nextIteration() 
 
-    worst = self.worst                      # the worst are low in the sorted ensemble
-    self.lowLhood = self.walkers[worst-1].logL
+    self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL<br>
 
-    self.updateEvidence( worst )            # Update Z and H and store posterior samples
+    worst = self.worst                      # the worst are low in the sorted ensemble<br>
+    self.lowLhood = self.walkers[worst-1].logL<br>
 
-    self.iterReport( worst - 1, tail, plot=plot ) # some output when needed
+    self.updateEvidence( worst )            # Update Z and H and store posterior samples<br>
 
-    self.samples.weed( self.maxsize )       # remove overflow in samplelist
+    self.iterReport( worst - 1, tail, plot=plot ) # some output when needed<br>
 
-    self.iteration += 1
+    self.samples.weed( self.maxsize )       # remove overflow in samplelist<br>
 
-    self.updateWalkers( explorer, worst )
+    self.iteration += 1<br>
 
-    newL = self.walkers[worst-1].logL
-    self.histinsert += [self.walkers.firstIndex( newL )]
+    self.updateWalkers( explorer, worst )<br>
 
-    self.optionalSave( )
+    newL = self.walkers[worst-1].logL<br>
+    self.histinsert += [self.walkers.firstIndex( newL )]<br>
 
-    self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL
-
+    self.optionalSave( )<br>
 
 
 # End of Sampling: Update and store the remaining walkers
@@ -345,403 +339,416 @@ self.samples.normalize( )
 
 # put the info into the model
 if self.problem.model and not self.problem.isDynamic() 
-    self.problem.model.parameters = self.samples.parameters
-    self.problem.model.stdevs = self.samples.stdevs
+    self.problem.model.parameters = self.samples.parameters<br>
+    self.problem.model.stdevs = self.samples.stdevs<br>
 
 self.lastReport( -1, plot=plot )
 
 return self.evidence
+
 <a name="initSample"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>initSample(</strong> ensemble=None, keep=None ) 
 </th></tr></thead></table>
-
+<p>
 initSample( self, ensemble=None, keep=None ) 
 
 if keep is None 
-    keep = self.keep
+    keep = self.keep<br>
 fitIndex, allpars = self.makeFitlist( keep=keep )
 
 if ensemble is None 
-    ensemble = self.ensemble
+    ensemble = self.ensemble<br>
 self.initWalkers( ensemble, allpars, fitIndex )
 
 for eng in self.engines 
-    eng.walkers = self.walkers
-    eng.lastWalkerId = len( self.walkers )
-    if self.bestBoost 
-        eng.bestBoost( self.problem, myFitter=self.myFitter )
+    eng.walkers = self.walkers<br>
+    eng.lastWalkerId = len( self.walkers )<br>
+    if self.bestBoost :<br>
+        eng.bestBoost( self.problem, myFitter=self.myFitter )<br>
 
 self.distribution.ncalls = 0                      #  reset number of calls
 
 return keep
 
 in Use
- sortLogL( self, walkers ) 
- return numpy.argsort( [w.logL for w in walkers] )
+ sortLogL( self, walkers ) :<br>
+ return numpy.argsort( [w.logL for w in walkers] )<br>
+
 <a name="walkerLogL"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>walkerLogL(</strong> w ) 
 </th></tr></thead></table>
-
+<p>
 walkerLogL( self, w ) 
 return w.logL
+
 <a name="makeFitlist"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>makeFitlist(</strong> keep=None ) 
 </th></tr></thead></table>
-
+<p>
 makeFitlist( self, keep=None ) 
 
 
 allpars = numpy.zeros( self.problem.npars + self.distribution.nphypar,
-                       dtype=self.problem.partype )
+                       dtype=self.problem.partype )<br>
 
 np = self.problem.npars
 fitlist = [k for k in range( np )]
 nh = -self.distribution.nphypar
 for sp in self.distribution.hyperpar 
-    if not sp.isFixed and sp.isBound() 
-        fitlist += [nh]                             # it is to be optimised
-    elif self.problem.hasAccuracy and nh == -self.distribution.nphypar 
-        allpars[nh] = 0                             # fix (model)scale at 0
-    else 
-        allpars[nh] = self.distribution.hypar[nh]   # fill in the fixed value
+    if not sp.isFixed and sp.isBound() :<br>
+        fitlist += [nh]                             # it is to be optimised<br>
+    elif self.problem.hasAccuracy and nh == -self.distribution.nphypar :<br>
+        allpars[nh] = 0                             # fix (model)scale at 0<br>
+    else :<br>
+        allpars[nh] = self.distribution.hypar[nh]   # fill in the fixed value<br>
 
-    nh += 1
+    nh += 1<br>
 
 nh = self.distribution.nphypar
 if keep is not None 
-    fitl = []
-    kkeys = list( keep.keys() )
-    for k in range( np + nh ) 
-        if k in kkeys 
-            allpars[k] = keep[k]                    # save keep.value in allpars
-        elif fitlist[k] in kkeys 
-            allpars[k] = keep[fitlist[k]]           # save keep.value in allpars
-        else 
-            fitl += [fitlist[k]]                    # list of pars to be fitted
-    fitlist = fitl
+    fitl = []<br>
+    kkeys = list( keep.keys() )<br>
+    for k in range( np + nh ) :<br>
+        if k in kkeys :<br>
+            allpars[k] = keep[k]                    # save keep.value in allpars<br>
+        elif fitlist[k] in kkeys :<br>
+            allpars[k] = keep[fitlist[k]]           # save keep.value in allpars<br>
+        else :<br>
+            fitl += [fitlist[k]]                    # list of pars to be fitted<br>
+    fitlist = fitl<br>
 
 return ( fitlist, allpars )
 
+
 <a name="doIterPlot"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>doIterPlot(</strong> plot ) 
 </th></tr></thead></table>
-
+<p>
 doIterPlot( self, plot ) 
 
 
 if isinstance( plot, str ) 
-    if plot == 'iter' or plot == 'all' 
-        return 1
-    elif plot == 'test' 
-        return 2
-    else 
-        return 0
+    if plot == 'iter' or plot == 'all' :<br>
+        return 1<br>
+    elif plot == 'test' :<br>
+        return 2<br>
+    else :<br>
+        return 0<br>
 else 
-    return 0
+    return 0<br>
+
 <a name="doLastPlot"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>doLastPlot(</strong> plot ) 
 </th></tr></thead></table>
-
+<p>
 doLastPlot( self, plot ) 
 
 
 if isinstance( plot, str ) 
-    return plot == 'last' or plot == 'all'
+    return plot == 'last' or plot == 'all'<br>
 else 
-    return True if plot else False
+    return plot == True<br>
+
 
 <a name="initReport"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>initReport(</strong> keep=None ) 
 </th></tr></thead></table>
-
+<p>
 initReport( self, keep=None ) 
 
 if self.verbose >= 1 
-    fitIndex = self.walkers[0].fitIndex
-    print( "Fit", ( "all" if keep is None else fitIndex ),
-            ( "(nuisance)" if self.problem.nuispars > 0 else "" ), 
-            "parameters of" ) 
-    if self.problem.model 
-        print( " ", self.problem.model._toString( "  " ) )
-    else 
-        print( " ", self.problem )
-    print( "Using a", self.distribution, end="" )
-    np = -1
-    cstr = " with "
-    for name,hyp in zip( self.distribution.PARNAMES, self.distribution.hyperpar ) 
-        print( cstr, end="" )
-        if np in fitIndex 
-            print( "unknown %s" % name, end="" )
-        else 
-            print( "%s = %7.2f " % (name, hyp.hypar), end="" )
-        np -= 1
-        cstr = " and "
-    print( "\nMoving the walkers with ", end="" )
-    for eng in self.engines 
-        print( " ", eng, end="" )
-    print( "" )
-    if self.threads 
-        print( "Using threads." )
+    fitIndex = self.walkers[0].fitIndex<br>
+    print( "Fit", ( "all" if keep is None<br>
+                          else fitIndex ), "parameters of" )<br>
+    if self.problem.model :<br>
+        print( " ", self.problem.model._toString( "  " ) )<br>
+    else :<br>
+        print( " ", self.problem )<br>
+    print( "Using a", self.distribution, end="" )<br>
+    np = -1<br>
+    cstr = " with "<br>
+    for name,hyp in zip( self.distribution.PARNAMES, self.distribution.hyperpar ) :<br>
+        print( cstr, end="" )<br>
+        if np in fitIndex :<br>
+            print( "unknown %s" % name, end="" )<br>
+        else :<br>
+            print( "%s = %7.2f " % (name, hyp.hypar), end="" )<br>
+        np -= 1<br>
+        cstr = " and "<br>
+    print( "\nMoving the walkers with ", end="" )<br>
+    for eng in self.engines :<br>
+        print( " ", eng, end="" )<br>
+    print( "" )<br>
+    if self.threads :<br>
+        print( "Using threads." )<br>
 
 tail = 0
 if self.verbose > 1 
-    while fitIndex is not None and fitIndex[-tail-1] < 0 and len( fitIndex ) > tail + 1 : 
-        tail += 1
+    while fitIndex is not None and fitIndex[-tail-1] < 0 and len( fitIndex ) > tail + 1 : <br>
+        tail += 1<br>
 
-     tail = self.distribution.nphypar
-    if tail == 0 
-        print( "Iteration     logZ        H       LowL     npar parameters" )
-    else 
-        print( "Iteration     logZ        H       LowL     npar parameters", end="" )
-        for k in range( 1,  min( 5, len( fitIndex ) - tail ) ) 
-            print( "        ", end="" )
-        for k in range( tail ) 
-            print( "   %s" %self.distribution.hyparname( k ), end="" )
-        print( "" )
+     tail = self.distribution.nphypar<br>
+    if tail == 0 :<br>
+        print( "Iteration     logZ        H       LowL     npar parameters" )<br>
+    else :<br>
+        print( "Iteration     logZ        H       LowL     npar parameters", end="" )<br>
+        for k in range( 1,  min( 5, len( fitIndex ) - tail ) ) :<br>
+            print( "        ", end="" )<br>
+        for k in range( tail ) :<br>
+            print( "   %s" %self.distribution.hyparname( k ), end="" )<br>
+        print( "" )<br>
 
 return tail
+
 <a name="iterReport"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>iterReport(</strong> kw, tail, plot=False ) 
 </th></tr></thead></table>
-
+<p>
 iterReport( self, kw, tail, plot=False ) 
 
 if self.verbose >= 3 or ( self.verbose >= 1 and
-                          self.iteration % self.repiter == 0 )
-    if self.verbose == 1 
-        if ( self.iteration / self.repiter ) % 50 == 49 
-            nwln = "\n"
-        else 
-            nwln = ""
-        print( ">", end=nwln, flush=True )
-    else 
-        self.printIterRep( kw, tail=tail, max=4 )
+                          self.iteration % self.repiter == 0 ):<br>
+    if self.verbose == 1 :<br>
+        if ( self.iteration / self.repiter ) % 50 == 49 :<br>
+            nwln = "\n"<br>
+        else :<br>
+            nwln = ""<br>
+        print( ">", end=nwln, flush=True )<br>
+    else :<br>
+        self.printIterRep( kw, tail=tail, max=4 )<br>
 
-    self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
+    self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )<br>
+
 
 <a name="printIterRep"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
 </th></tr></thead></table>
-
+<p>
 printIterRep( self, kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
 
 pl = self.walkers[kw].allpars
 fi = self.walkers[kw].fitIndex
 if fi is not None : 
-    pl = pl[fi]
+    pl = pl[fi]<br>
 np = len( pl )
 
 print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
-        self.info, self.lowLhood, np ), 
-        parfmt % fmt( pl, max=max, tail=tail, indent=indent ), 
-         fmt( self.sumWidth ), fmt( self.livepointcount ), fmt( self.phancol.length() ),
-        end=end )
+        self.info, self.lowLhood, np ), <br>
+        parfmt % fmt( pl, max=max, tail=tail, indent=indent ), end=end )<br>
+
+
+
 
 <a name="lastReport"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>lastReport(</strong> kw, plot=False ) 
 </th></tr></thead></table>
-
+<p>
 lastReport( self, kw, plot=False ) 
 
- print( "SumWidth   ", fmt( self.sumWidth ) )
-
 if self.verbose > 0 
-    if self.verbose == 1 
-        print( "\nIteration     logZ        H       LowL     npar" )
+    if self.verbose == 1 :<br>
+        print( "\nIteration     logZ        H       LowL     npar" )<br>
 
-    self.printIterRep( kw, max=None, indent=13, parfmt="\nParameters  %s" )
+    self.printIterRep( kw, max=None, indent=13, parfmt="\nParameters  %s" )<br>
 
 
-     pl = self.walkers[kw].allpars
-     fi = self.walkers[kw].fitIndex
-     if fi is not None : 
-         pl = pl[fi]
-     np = len( pl )
-     print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
-             self.info, self.lowLhood, np ) )
-     print( "Parameters  ", fmt( pl, max=None, indent=13 ) )
+     pl = self.walkers[kw].allpars<br>
+     fi = self.walkers[kw].fitIndex<br>
+     if fi is not None : <br>
+         pl = pl[fi]<br>
+     np = len( pl )<br>
+     print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,<br>
+             self.info, self.lowLhood, np ) )<br>
+     print( "Parameters  ", fmt( pl, max=None, indent=13 ) )<br>
 
 if self.verbose >= 1 
-    self.report()
+    self.report()<br>
 
 if self.doLastPlot( plot ) 
-    self.plotLast()
+    self.plotLast()<br>
+
 <a name="plotLast"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>plotLast(</strong> ) 
 </th></tr></thead></table>
-
+<p>
 plotLast( self ) 
 Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata, 
-            figsize=[12,8], residuals=True )
-<a name="XXXgetMaxIter"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
-<strong>XXXgetMaxIter(</strong> ) 
-</th></tr></thead></table>
+            figsize=[12,8], residuals=True )<br>
 
-XXXgetMaxIter( self ) 
+<a name="getMaxIter"></a>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<strong>getMaxIter(</strong> ) 
+</th></tr></thead></table>
+<p>
+getMaxIter( self ) 
 
 
 maxi = ( self.iteration if self.logdZ < self.tolerance else 
-         self.end * self.ensemble * self.info / self.worst )
+         self.end * self.ensemble * self.info / self.worst )<br>
 maxi = max( self.minimumIterations, maxi )
 return maxi if self.maxIterations is None else min( maxi, self.maxIterations )
+
 <a name="nextIteration"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>nextIteration(</strong> ) 
 </th></tr></thead></table>
-
+<p>
 nextIteration( self ) 
 
 
-if self.walkers[0].logL >= self.walkers[-1].logL 
-    return False
 if self.iteration < self.minimumIterations 
-    return True
-if self.maxIterations is not None and self.iteration >= self.maxIterations 
-    return False
-if self.sumWidth < 0.999 
-    return True
+    return True<br>
 if self.logdZ < self.tolerance 
-    return False
+    return False<br>
+if self.maxIterations is not None and self.iteration > self.maxIterations 
+    return False<br>
 if self.iteration > self.end * self.ensemble * self.info / self.worst 
-    return False
+    return False<br>
 return True
-<a name="__str__"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
-<strong>__str__(</strong> )
-</th></tr></thead></table>
-
-
-Return the name of this sampler. 
-__str__( self )
-
-return str( "NestedSampler" )
-
 
 <a name="optionalRestart"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>optionalRestart(</strong> )
 </th></tr></thead></table>
-==============================================================================
+<p>
 optionalRestart( self )
 
 
 if self.restart is not None and self.restart.wantRestore( )
-    self.walkers, self.samples = self.restart.restore( self.walkers, self.samples )
-    self.logZ = self.walkers.logZ
-    self.info = self.walkers.info
-    self.iteration = self.walkers.iteration
-    return True
+    self.walkers, self.samples = self.restart.restore( self.walkers, self.samples )<br>
+    self.logZ = self.walkers.logZ<br>
+    self.info = self.walkers.info<br>
+    self.iteration = self.walkers.iteration<br>
+    return True<br>
 return False
+
 <a name="optionalSave"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>optionalSave(</strong> )
 </th></tr></thead></table>
-
+<p>
 optionalSave( self )
 
 
 if self.restart is not None and self.restart.wantSave( ) and self.iteration % 100 == 0
-    self.walkers.logZ = self.logZ
-    self.walkers.info = self.info
-    self.walkers.iteration = self.iteration
-    self.restart.save( self.walkers, self.samples )
+    self.walkers.logZ = self.logZ<br>
+    self.walkers.info = self.info<br>
+    self.walkers.iteration = self.iteration<br>
+    self.restart.save( self.walkers, self.samples )<br>
+
 
 <a name="updateEvidence"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>updateEvidence(</strong> worst ) 
 </th></tr></thead></table>
-
+<p>
 updateEvidence( self, worst ) 
 
 
 
 for kw in range( worst ) 
-    logWeight = self.logWidth + self.walkers[kw].logL + self.walkers[kw].logPrior
+    logWeight = self.logWidth + self.walkers[kw].logL + self.walkers[kw].logPrior<br>
 
-    # update evidence, logZ
-    logZnew = numpy.logaddexp( self.logZ, logWeight )
+    # update evidence, logZ<br>
+    logZnew = numpy.logaddexp( self.logZ, logWeight )<br>
 
-    # update Information, H
-    self.info = ( math.exp( logWeight - logZnew ) * self.lowLhood +
-            math.exp( self.logZ - logZnew ) * ( self.info + self.logZ ) - logZnew )
+    # update Information, H<br>
+    self.info = ( math.exp( logWeight - logZnew ) * self.lowLhood +<br>
+            math.exp( self.logZ - logZnew ) * ( self.info + self.logZ ) - logZnew )<br>
 
-    if math.isnan( self.info ) 
-        self.info = 0.0
-    self.logZ = logZnew
+    if math.isnan( self.info ) :<br>
+        self.info = 0.0<br>
+    self.logZ = logZnew<br>
 
-    # store posterior samples
-    smpl = self.walkers[kw].toSample( logWeight )
-    self.samples.add( smpl )
+    # store posterior samples<br>
+    smpl = self.walkers[kw].toSample( logWeight )<br>
+    self.samples.add( smpl )<br>
 
-    self.sumWidth += math.exp( self.logWidth )
-
-     self.logWidth -= 1.0 / ( self.ensemble - kw )
-    self.logWidth -= 1.0 / self.ensemble
+    self.logWidth -= 1.0 / ( self.ensemble - kw )<br>
 
 self.logdZ = logWeight - self.logZ
-self.logUnitDomain += self.logDomainFraction 
 
 return
-<a name="unitDomain"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
-<strong>unitDomain(</strong> ) 
-</th></tr></thead></table>
-
-unitDomain( self ) 
-
-
-return math.exp( self.logUnitDomain )
 
 <a name="copyWalker"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>copyWalker(</strong> worst )
 </th></tr></thead></table>
-
+<p>
 copyWalker( self, worst )
 
 
 for k in range( worst ) 
-    kcp = self.rng.randint( worst, self.ensemble )
-    self.walkers.copy( kcp, k, start=self.iteration )
-     setatt( self.walkers[k], "parent", kcp )
-     setatt( self.walkers[k], "start", self.iteration )
-     setatt( self.walkers[k], "step", 0 )
+    kcp = self.rng.randint( worst, self.ensemble )<br>
+    self.walkers.copy( kcp, k, start=self.iteration )<br>
+     setatt( self.walkers[k], "parent", kcp )<br>
+     setatt( self.walkers[k], "start", self.iteration )<br>
+     setatt( self.walkers[k], "step", 0 )<br>
+
 <a name="copyWalkerFromPhantoms"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>copyWalkerFromPhantoms(</strong> worst )
 </th></tr></thead></table>
-
+<p>
 copyWalkerFromPhantoms( self, worst )
 
 
-plen = self.phancol.length()
+plen = self.phantoms.length()
 
 for k in range( worst ) 
-    while True 
-        kcp = self.rng.randint( plen )
-        if self.phancol.phantoms[kcp].logL > self.lowLhood 
-            break
-    self.walkers.copy( kcp, k, wlist=self.phancol.phantoms,
-                       start=self.iteration )
-     setatt( self.walkers[k], "parent", kcp )
-     setatt( self.walkers[k], "start", self.iteration )
+    while True :<br>
+        kcp = self.rng.randint( plen )<br>
+        if self.phantoms.phantoms[kcp].logL > self.lowLhood :<br>
+            break<br>
+    self.walkers.copy( kcp, k, wlist=self.phantoms.phantoms,<br>
+                       start=self.iteration )<br>
+     setatt( self.walkers[k], "parent", kcp )<br>
+     setatt( self.walkers[k], "start", self.iteration )<br>
+
+<a name="copyWalkerFromDynamicPhantoms"></a>
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<strong>copyWalkerFromDynamicPhantoms(</strong> worst )
+</th></tr></thead></table>
+<p>
+copyWalkerFromDynamicPhantoms( self, worst )
+
+
+plen = self.phantoms.length()
+for k in range( worst ) 
+    while True :<br>
+        kcp = self.rng.randint( plen )<br>
+
+        for pk in self.phantoms.phantoms.keys() :<br>
+            pklen = self.phantoms.length( np=pk )<br>
+            if kcp < pklen :<br>
+                break<br>
+            kcp -= pklen<br>
+
+        if self.phantoms.phantoms[pk][kcp].logL > self.lowLhood :<br>
+            break<br>
+
+    self.walkers.copy( kcp, k, wlist=self.phantoms.phantoms[pk],<br>
+                       start=self.iteration )<br>
+     setatt( self.walkers[k], "parent", kcp )<br>
+     setatt( self.walkers[k], "start", self.iteration )<br>
+
+
 
 <a name="updateWalkers"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>updateWalkers(</strong> explorer, worst ) 
 </th></tr></thead></table>
-
+<p>
 updateWalkers( self, explorer, worst ) 
 
 
@@ -752,253 +759,184 @@ wlist = [k for k in range( worst )]
 explorer.explore( wlist, self.lowLhood, self.iteration )
 
 
-<a name="__setattr__"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
-<strong>__setattr__(</strong> name, value ) 
-</th></tr></thead></table>
-********INTERNALS***************************************************
-__setattr__( self, name, value ) 
 
-# for hypar fitting
-if name == "scale" and isinstance( self.distribution, ScaledErrorDistribution ) 
-    self.distribution.scale = value
-elif name == "power" and isinstance( self.distribution, ExponentialErrorDistribution ) 
-    self.distribution.power = value
-elif name == "copymode" and value == 1 
-    self.usePhantoms = True
-elif name == "bestUpdate" 
-
-    self.myFitter = None
-    if Tools.subclassof( value, BaseFitter ) 
-        object.__setattr__( self, name, True )
-        self.myFitter = value
-    else 
-        object.__setattr__( self, name, value )
-
-else 
-    object.__setattr__( self, name, value )
-    if name == "verbose" 
-        for eng in self.engines 
-            eng.verbose = value
-<a name="__getattr__"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
-<strong>__getattr__(</strong> name ) 
-</th></tr></thead></table>
-
-__getattr__( self, name ) 
-
-if name == "ensemble" or name == "livepointcount" 
-    return len( self.walkers )
-elif name == "xdata" 
-    return self.problem.xdata
-elif name == "model" 
-    return self.problem.model
-elif name == "ydata" 
-    return self.problem.ydata
-elif name == "weights" 
-    return self.problem.weights
-elif name == "worst" 
-    return self.discard
-elif name == "evidence" 
-    return self.logZ / math.log( 10.0 )
-elif name == "logZprecision" 
-    return math.sqrt( max( self.info, 0 ) / self.ensemble )
-elif name == "precision" 
-    return self.logZprecision / math.log( 10.0 )
-elif name == "information" 
-    return self.info
-elif name == "parameters" 
-    return self.samples.getParameters()
-elif name == "stdevs" or name == "standardDeviations" 
-    self.samples.getParameters()
-    return self.samples.stdevs
-elif name == "hypars" 
-    return self.samples.hypars
-elif name == "stdevHypars" 
-    return self.samples.stdevHypars
-elif name == "scale" 
-    return self.samples.hypars[0]
-elif name == "stdevScale" 
-    return self.samples.stdevHypars[0]
-elif name == "modelfit" or name == "yfit" 
-    return self.samples.average( self.problem.xdata )
-
-********DISTRIBUTIONS***************************************************
 <a name="setProblem"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,
-
+********INTERNALS***************************************************
  accuracy=None ) 
 </th></tr></thead></table>
-setProblem( self, name, model=None, xdata=None, ydata=None, weights=None,
+<p>setProblem( self, name, model=None, xdata=None, ydata=None, weights=None,
             accuracy=None ) 
 
 
 problemdict = {
-    "classic"  : ClassicProblem,
-    "errors"   : ErrorsInXandYProblem,
-    "multiple" : MultipleOutputProblem,
-    "evidence" : EvidenceProblem
+    "classic"  : ClassicProblem,<br>
+    "errors"   : ErrorsInXandYProblem,<br>
+    "multiple" : MultipleOutputProblem,<br>
+    "evidence" : EvidenceProblem<br>
 }
-    "salesman" : SalesmanProblem
-    "order" : OrderProblem
+    "salesman" : SalesmanProblem<br>
+    "order" : OrderProblem<br>
 
 if isinstance( name, Problem ) 
-    self.problem = name
-    if model is not None : self.problem.model = model
-    if xdata is not None : self.problem.xdata = numpy.asarray( xdata )
-    if ydata is not None : self.problem.ydata = numpy.asarray( ydata )
-    if weights is not None : self.problem.weights = numpy.asarray( weights )
-    if accuracy is not None : self.problem.setAccuracy( accuracy=accuracy )
-    return
+    self.problem = name<br>
+    if model is not None : self.problem.model = model<br>
+    if xdata is not None : self.problem.xdata = numpy.asarray( xdata )<br>
+    if ydata is not None : self.problem.ydata = numpy.asarray( ydata )<br>
+    if weights is not None : self.problem.weights = numpy.asarray( weights )<br>
+    if accuracy is not None : self.problem.setAccuracy( accuracy=accuracy )<br>
+    return<br>
 
 if not isinstance( name, str ) 
-    raise ValueError( "Cannot interpret ", name, " as string or Problem" )
+    raise ValueError( "Cannot interpret ", name, " as string or Problem" )<br>
 
 name = str.lower( name )
 try 
-    myProblem = problemdict[name]
-    self.problem = myProblem( model, xdata=xdata, ydata=ydata, weights=weights,
-                              accuracy=accuracy )
+    myProblem = problemdict[name]<br>
+    self.problem = myProblem( model, xdata=xdata, ydata=ydata, weights=weights,<br>
+                              accuracy=accuracy )<br>
 except 
-    raise 
-     raise ValueError( "Unknown problem name %s" % name )
+    raise <br>
+     raise ValueError( "Unknown problem name %s" % name )<br>
+
 
 
 
 <a name="setErrorDistribution"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
-********DISTRIBUTIONS***************************************************
+<p>********DISTRIBUTIONS***************************************************
 setErrorDistribution( self, name=None, limits=None, scale=1.0, power=2.0 )
 
 
 if name is None 
-    name = self.problem.myDistribution()
+    name = self.problem.myDistribution()<br>
 elif isinstance( name, ErrorDistribution ) 
-    self.distribution = name
-    return
+    self.distribution = name<br>
+    return<br>
 
 if not isinstance( name, str ) 
-    raise ValueError( "Cannot interpret ", name, " as string or ErrorDistribution" )
+    raise ValueError( "Cannot interpret ", name, " as string or ErrorDistribution" )<br>
 
 name = str.lower( name )
- print( name )
+ print( name )<br>
 if name == "gauss" 
-    self.distribution = GaussErrorDistribution( scale=scale, limits=limits )
+    self.distribution = GaussErrorDistribution( scale=scale, limits=limits )<br>
 elif name == "laplace" 
-    self.distribution = LaplaceErrorDistribution( scale=scale, limits=limits )
+    self.distribution = LaplaceErrorDistribution( scale=scale, limits=limits )<br>
 elif name == "poisson" 
-    self.distribution = PoissonErrorDistribution()
+    self.distribution = PoissonErrorDistribution()<br>
 elif name == "cauchy" 
-    self.distribution = CauchyErrorDistribution( scale=scale, limits=limits )
+    self.distribution = CauchyErrorDistribution( scale=scale, limits=limits )<br>
 elif name == "uniform" 
-    self.distribution = UniformErrorDistribution( scale=scale, limits=limits )
+    self.distribution = UniformErrorDistribution( scale=scale, limits=limits )<br>
 elif name == "exponential" 
-    self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )
+    self.distribution = ExponentialErrorDistribution( scale=scale, power=power, limits=limits )<br>
 elif name == "gauss2d" 
-    self.distribution = Gauss2dErrorDistribution( scale=scale, limits=limits )
+    self.distribution = Gauss2dErrorDistribution( scale=scale, limits=limits )<br>
 elif name == "model" 
-    self.distribution = ModelDistribution( scale=scale, limits=limits )
+    self.distribution = ModelDistribution( scale=scale, limits=limits )<br>
 elif name == "bernoulli" 
-    self.distribution = BernoulliErrorDistribution()
+    self.distribution = BernoulliErrorDistribution()<br>
 else 
-    raise ValueError( "Unknown error distribution %s" % name )
+    raise ValueError( "Unknown error distribution %s" % name )<br>
+
 <a name="setEngines"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
-
+<p>
 setEngines( self, engines=None, enginedict=None ) 
 
 
 ## the same for all engines. 
-self.phancol = PhantomCollection( dynamic=self.problem.isDynamic() )
+self.phantoms = PhantomCollection( dynamic=self.problem.isDynamic() )
 
 if enginedict is None 
-    enginedict = {
-        "galilean" : GalileanEngine,
-        "chord" : ChordEngine,
-        "birth" : BirthEngine,
-        "death" : DeathEngine,
-        "struct": StructureEngine,
-        "gibbs" : GibbsEngine,
-        "random": RandomEngine,
-        "step"  : StepEngine }
+    enginedict = {<br>
+        "galilean" : GalileanEngine,<br>
+        "chord" : ChordEngine,<br>
+        "birth" : BirthEngine,<br>
+        "death" : DeathEngine,<br>
+        "struct": StructureEngine,<br>
+        "gibbs" : GibbsEngine,<br>
+        "random": RandomEngine,<br>
+        "step"  : StepEngine }<br>
 
 if engines is None 
-    engines = self.problem.myEngines()
+    engines = self.problem.myEngines()<br>
 
 self.engines = []
 if isinstance( engines, str ) 
-    engines = [engines]
+    engines = [engines]<br>
 for name in engines 
-    if isinstance( name, Engine ) 
-        engine = name
-        engine.walkers  = self.walkers
-        engine.errdis   = self.distribution
-        engine.phancol = self.phancol
-        engine.verbose  = self.verbose
-        self.engines   += [engine]
-        continue
+    if isinstance( name, Engine ) :<br>
+        engine = name<br>
+        engine.walkers  = self.walkers<br>
+        engine.errdis   = self.distribution<br>
+        engine.phantoms = self.phantoms<br>
+        engine.verbose  = self.verbose<br>
+        self.engines   += [engine]<br>
+        continue<br>
 
-    if not isinstance( name, str ) 
-        raise ValueError( "Cannot interpret ", name, " as string or as Engine" )
+    if not isinstance( name, str ) :<br>
+        raise ValueError( "Cannot interpret ", name, " as string or as Engine" )<br>
 
-    try 
-        Eng = enginedict[name]
-        seed = self.rng.randint( self.TWOP31 )
-        engine = Eng( self.walkers, self.distribution, seed=seed, 
-                    phancol=self.phancol, verbose=self.verbose )
-    except Exception 
-        raise ValueError( "Unknown Engine name : %10s" % name )
+    try :<br>
+        Eng = enginedict[name]<br>
+        seed = self.rng.randint( self.TWOP31 )<br>
+        engine = Eng( self.walkers, self.distribution, seed=seed, <br>
+                    phantoms=self.phantoms, verbose=self.verbose )<br>
+    except :<br>
+        raise ValueError( "Unknown Engine name : %10s" % name )<br>
 
-    self.engines += [engine]
+    self.engines += [engine]<br>
+
 
 
 <a name="setInitialEngine"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
-********INITIALIZATION***************************************************
+<p>********INITIALIZATION***************************************************
 setInitialEngine( self, ensemble, allpars, fitIndex, startdict=None )
 
 
 if startdict is None 
-    startdict = { "start" : StartEngine }
+    startdict = { "start" : StartEngine }<br>
 
 # Make the walkers list
- walker = Walker( 0, self.problem, numpy.asarray( allpars ), fitIndex )
- self.walkers = WalkerList( walker=walker, ensemble=ensemble )
+ walker = Walker( 0, self.problem, numpy.asarray( allpars ), fitIndex )<br>
+ self.walkers = WalkerList( walker=walker, ensemble=ensemble )<br>
 
 if self.initialEngine is not None
-    # decorate with proper information
-    self.initialEngine.walkers = self.walkers
-    self.initialEngine.errdis = self.distribution
+    # decorate with proper information<br>
+    self.initialEngine.walkers = self.walkers<br>
+    self.initialEngine.errdis = self.distribution<br>
 
 else 
-    try 
-        name = self.problem.myStartEngine()
-        StartEng = startdict[name]
-        seed = self.rng.randint( self.TWOP31 )
-        self.initialEngine = StartEng( self.walkers, self.distribution,
-                seed=seed )
-    except Exception 
-        raise ValueError( "Unknown StartEngine name : %10s" % name )
-
-self.initialEngine.verbose = self.verbose
+    try :<br>
+        name = self.problem.myStartEngine()<br>
+        StartEng = startdict[name]<br>
+        seed = self.rng.randint( self.TWOP31 )<br>
+        self.initialEngine = StartEng( self.walkers, self.distribution,<br>
+                seed=seed )<br>
+    except :<br>
+        raise ValueError( "Unknown StartEngine name : %10s" % name )<br>
 
 # Calculate logL for all walkers.
 self.distribution.lowLhood = -math.inf
 
 # pass the PhantomCollection to the initial engine
-self.initialEngine.phancol = self.phancol
+self.initialEngine.phantoms = self.phantoms
+
 <a name="initWalkers"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
-
+<p>
 initWalkers( self, ensemble, allpars, fitIndex, startdict=None )
 
 
@@ -1009,35 +947,36 @@ self.walkers = WalkerList( walker=walker, ensemble=ensemble )
 self.setInitialEngine( ensemble, allpars, fitIndex, startdict=startdict )
 
 for walker in self.walkers 
-    self.initialEngine.execute( walker.id, -sys.float_info.max )
+    self.initialEngine.execute( walker.id, -math.inf )<br>
 
- for w in self.walkers 
-     print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )
-     w.check( nhyp=self.distribution.nphypar )
+ for w in self.walkers :<br>
+     print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )<br>
+     w.check( nhyp=self.distribution.nphypar )<br>
+
 
 <a name="plotResult"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>plotResult(</strong> walker, iter, plot=0 )
 </th></tr></thead></table>
-
+<p>
 plotResult( self, walker, iter, plot=0 )
 
 
 if plot == 0 
-    return
+    return<br>
 
 plt.figure( 'iterplot' )
 
 if self.line is not None 
-    ax = plt.gca()
-    if plot < 2 
-        plt.pause( 0.02 )       ## updates and displays the plot before pause
-    ax.remove( )
-    self.text.set_text( "Iteration %d" % iter )
+    ax = plt.gca()<br>
+    if plot < 2 :<br>
+        plt.pause( 0.02 )       ## updates and displays the plot before pause<br>
+    ax.remove( )<br>
+    self.text.set_text( "Iteration %d" % iter )<br>
 
 if self.ymin is None 
-    self.ymin = numpy.min( self.problem.ydata )
-    self.ymax = numpy.max( self.problem.ydata )
+    self.ymin = numpy.min( self.problem.ydata )<br>
+    self.ymax = numpy.max( self.problem.ydata )<br>
 
 param = walker.allpars
 model = walker.problem.model
@@ -1050,28 +989,29 @@ dmax = max( self.ymax, numpy.max( mock ) )
 dd = 0.05 * ( dmax - dmin ) 
 plt.ylim( dmin - dd, dmax + dd )
 
+
 <a name="report"></a>
-<table><thead style="background-color:#D0D0FF; width:100%"><tr><th style="align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>report(</strong> )
 </th></tr></thead></table>
-
+<p>
 report( self )
 
 
- print( "Rate        %f" % self.rate )
+ print( "Rate        %f" % self.rate )<br>
 print( "Engines              success     reject     failed", end="" )
 if self.bestBoost 
-    print( "       best", end="" )
+    print( "       best", end="" )<br>
 print( "      calls" )
 
 for engine in self.engines 
-    print( "%-16.16s " % engine, end="" )
-    engine.printReport( best=self.bestBoost )
+    print( "%-16.16s " % engine, end="" )<br>
+    engine.printReport( best=self.bestBoost )<br>
 print( "Calls to LogL     %10d" % self.distribution.ncalls, end="" )
 if self.distribution.nparts > 0 
-    print( "   to dLogL %10d" % self.distribution.nparts )
+    print( "   to dLogL %10d" % self.distribution.nparts )<br>
 else 
-    print( "" )
+    print( "" )<br>
 
 print( "Samples  %10d" % len( self.samples ) )
 print( "Evidence    %10.3f +- %10.3f" % (self.evidence, self.precision ) )

@@ -3,50 +3,30 @@
 
 <div class="button">
   <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py target=_blank>Source</a></span></div>
+<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StepEngine.py target=_blank>Source</a></span></div>
 
-<a name="ChordEngine"></a>
+<a name="StepEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ChordEngine(</strong> <a href="./Engine.html">Engine</a> )
+<strong>class StepEngine(</strong> <a href="./Engine.html">Engine</a> )
 </th></tr></thead></table>
 <p>
 
-Move a a walker in a random direction.
+Move a walker in a random direction.
 
-The ChordEngine draws a random line through the walker parameters in
-unit space, from unitMin (lowpoint) with lengths unitRange (highpoint).
-
-A random point on the line is selected. If the corresponding parameter
-set has a likelihood < LowLhood, it is accepted. Otherwise either the
-highpoint is reset to the random point (if randompoint > walkerpoint)
-or the lowpoint is replaced by the randompoint (if walker < random).
-Then a new random point on the line is selected, until the point is accepted.
-
-When the point is accepted, another random line is constructed
-through the new point and orthogonal to (all) previous ones.
-(The orthogonality is not implemented now. TBC).
-
-This is an independent implementation inspired by the polychord engine
-described in
-"POLYCHORD: next-generation nested sampling",
-WJ Handley, MP Hobson and AN Lasenby.
-MNRAS (2015) Volume 453, Issue 4, p 4384–4398
-
-<b>Attributes</b>
-
-* debug  :  bool<br>
-    perform the step-out action too<br>
+The StepEngine tries to move the parameters at most 4 times in
+a random direction.
 
 <b>Attributes from Engine</b>
 
-walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMin
+walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose   
+
 
 Author       Do Kester.
 
 
-<a name="ChordEngine"></a>
+<a name="StepEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
-<strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
+<strong>StepEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
 </th></tr></thead></table>
 <p>
 
@@ -58,10 +38,10 @@ Constructor.
     walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
     error distribution to be used<br>
-* copy  :  ChordEngine<br>
+* copy  :  StepEngine<br>
     to be copied<br>
 * kwargs  :  for Engine<br>
-    "slow", "seed", "verbose"
+    "phantoms", "slow", "seed", "verbose"
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
@@ -91,16 +71,8 @@ Execute the engine by diffusing the parameters.
 
 <b>Returns</b>
 
-* int  :  the number of successfull moves<br>
+* int  :  the number of successfull steps<br>
 
-
-<a name="stepOut"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
-<strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
-</th></tr></thead></table>
-<p>
-
-Check if endpoints are indeed outside the lowLhood domain.
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
