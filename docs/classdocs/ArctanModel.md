@@ -13,8 +13,8 @@
 
 Arctangus Model.
 
-    f( x:p ) = p_0 * arctan( p_2 * ( x - p_1 ) )<br>
-    p_0 = amplitude;  p_1 = center; p_2 = slope.<br>
+ f( x:p ) = p_0 * arctan( p_2 * ( x - p_1 ) )
+ p_0 = amplitude;  p_1 = center; p_2 = slope.
 
 As always x = input.
 
@@ -22,28 +22,28 @@ The parameters are initialized at {2/pi, 0.0, 1.0}. It is a non-linear model.
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+npchain, parameters, stdevs, xUnit, yUnit
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+npmax, fixed, parlist, mlist
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 <b>Example</b>
 
-    arct = ArctanModel( )<br>
-    print( arct.getNumberOfParameters( ) )<br>
-3
+    arct = ArctanModel( )
+    print( arct.getNumberOfParameters( ) )
+    3
 
 
 * Author :       Do Kester<br>
 
 
 <a name="ArctanModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>ArctanModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -55,23 +55,23 @@ Number of parameters is 3.
 <b>Parameters</b>
 
 * copy  :  ArctanModel<br>
-    to be copied<br>
+    to be copied
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+    int         index of parameter to fix permanently.
+    float|Model values for the fixed parameters.
+    Attribute fixed can only be set in the constructor.
+    See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -81,13 +81,13 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+    values at which to calculate the result
 * params  :  array_like<br>
-    values for the parameters.<br>
+    values for the parameters.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -97,15 +97,15 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+    values at which to calculate the result
 * params  :  array_like<br>
-    values for the parameters.<br>
+    values for the parameters.
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+    list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -115,13 +115,13 @@ Return the derivative df/dx at each input (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+    values at which to calculate the result
 * params  :  array_like<br>
-    values for the parameters.<br>
+    values for the parameters.
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -131,7 +131,7 @@ Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -141,7 +141,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+    parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">

@@ -19,30 +19,30 @@ Author       Do Kester
 
 <b>Examples</b>
 
-# assume x and y are Double1d data arrays.
-    x = numpy.arange( 100, dtype=float ) / 10<br>
-    y = 3.5 * SIN( x + 0.4 )                    # make sine<br>
-    numpy.random.seed( 12345L )                 # Gaussian random number generator<br>
-    y += numpy.random.randn( 100 ) * 0.2        # add noise<br>
-    sine = SineModel( )                         # sinusiodal model<br>
-    lolim = numpy.asarray( [1,-10,-10], dtype=float )<br>
-    hilim = numpy.asarray( [100,10,10], dtype=float )<br>
-    sine.setLimits( lolim, hilim )              # set limits on the model parameters<br>
-    amfit = AmoebaFitter( x, sine )<br>
-    param = amfit.fit( y, temp=10 )<br>
-    stdev = amfit.getStandardDeviation( )       # stdevs on the parameters<br>
-    chisq = amfit.getChiSquared( )<br>
-    scale = amfit.getScale( )                 # noise scale<br>
-    yfit  = amfit.getResult( )                # fitted values<br>
-    yfit  = sine( x )                         # fitted values ( same as previous )<br>
-    yband = amfit.monteCarloError( )               # 1 sigma confidence region<br>
-# for diagnostics ( or just for fun )
-    amfit = AmoebaFitter( x, sine )<br>
-    amfit.setTemperature( 10 )                # set a temperature to escape local minima<br>
-    amfit.setVerbose( 10 )                    # report every 10th iteration<br>
-    plotter = IterationPlotter( )             # from BayesicFitting<br>
-    amfit.setPlotter( plotter, 20 )            # make a plot every 20th iteration<br>
-    param = amfit.fit( y )<br>
+    # assume x and y are Double1d data arrays.
+    x = numpy.arange( 100, dtype=float ) / 10
+    y = 3.5 * SIN( x + 0.4 )                    # make sine
+    numpy.random.seed( 12345L )                 # Gaussian random number generator
+    y += numpy.random.randn( 100 ) * 0.2        # add noise
+    sine = SineModel( )                         # sinusiodal model
+    lolim = numpy.asarray( [1,-10,-10], dtype=float )
+    hilim = numpy.asarray( [100,10,10], dtype=float )
+    sine.setLimits( lolim, hilim )              # set limits on the model parameters
+    amfit = AmoebaFitter( x, sine )
+    param = amfit.fit( y, temp=10 )
+    stdev = amfit.getStandardDeviation( )       # stdevs on the parameters
+    chisq = amfit.getChiSquared( )
+    scale = amfit.getScale( )                 # noise scale
+    yfit  = amfit.getResult( )                # fitted values
+    yfit  = sine( x )                         # fitted values ( same as previous )
+    yband = amfit.monteCarloError( )               # 1 sigma confidence region
+    # for diagnostics ( or just for fun )
+    amfit = AmoebaFitter( x, sine )
+    amfit.setTemperature( 10 )                # set a temperature to escape local minima
+    amfit.setVerbose( 10 )                    # report every 10th iteration
+    plotter = IterationPlotter( )             # from BayesicFitting
+    amfit.setPlotter( plotter, 20 )            # make a plot every 20th iteration
+    param = amfit.fit( y )
 
 
 <b>Notes</b>
@@ -55,7 +55,7 @@ only exact for linear models with a fixed scale.
 
 
 <a name="AmoebaFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>AmoebaFitter(</strong> xdata, model, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -65,18 +65,18 @@ Create a new Amoeba class, providing inputs and model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    independent input values<br>
+    independent input values
 * model  :  Model<br>
-    the model function to be fitted<br>
+    the model function to be fitted
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        MaxLikelihoodFitter :   errdis, scale, power<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+    Possibly includes keywords from
+        MaxLikelihoodFitter :   errdis, scale, power
+        IterativeFitter :       maxIter, tolerance, verbose
+        BaseFitter :            map, keep, fixedScale
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, size=None,
  seed=4567, temp=0, limits=None, maxiter=1000,
  tolerance=0.0001, cooling=0.95, steps=10,
@@ -91,48 +91,48 @@ When done, it also calculates the hessian matrix and chisq.
 <b>Parameters</b>
 
 * data  :  array_like<br>
-     the data vector to be fitted<br>
+     the data vector to be fitted
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
-    The weights are relative weights unless `scale` is set.<br>
+    weights pertaining to the data
+    The weights are relative weights unless `scale` is set.
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+    accuracy of (individual) data
 * par0  :  array_like<br>
-    initial values of teh parameters of the model<br>
-    default: from model<br>
+    initial values of teh parameters of the model
+    default: from model
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values of keep are only valid for *this* fit<br>
-    See also `AmoebaFitter( ..., keep=dict )`<br>
+    dictionary of indices (int) to be kept at a fixed value (float)
+    The values of keep are only valid for *this* fit
+    See also `AmoebaFitter( ..., keep=dict )`
 * size  :  float or array_like<br>
-    step size of the simplex<br>
+    step size of the simplex
 * seed  :  int<br>
-    for random number generator<br>
+    for random number generator
 * temp  :  float<br>
-    temperature of annealing (0 is no annealing)<br>
+    temperature of annealing (0 is no annealing)
 * limits  :  None or list of 2 floats or list of 2 array_like<br>
-    None : no limits applied<br>
-    [lo,hi] : low and high limits for all values<br>
-    [la,ha] : low array and high array limits for the values<br>
+    None : no limits applied
+    [lo,hi] : low and high limits for all values
+    [la,ha] : low array and high array limits for the values
 * maxiter  :  int<br>
-    max number of iterations<br>
+    max number of iterations
 * tolerance  :  float<br>
-    stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance<br>
+    stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance
 * cooling  :  float<br>
-    cooling factor when annealing<br>
+    cooling factor when annealing
 * steps  :  int<br>
-    number of cycles in each cooling step.<br>
+    number of cycles in each cooling step.
 * verbose  :  int<br>
-    0 : silent<br>
-    1 : print results to output<br>
-    2 : print some info every 100 iterations<br>
-    3 : print some info all iterations<br>
+    0 : silent
+    1 : print results to output
+    2 : print some info every 100 iterations
+    3 : print some info all iterations
 * plot  :  bool<br>
-    plot the results.<br>
+    plot the results.
 * callback  :  callable<br>
-    is called each iteration as<br>
-    `val = callback( val )`<br>
-    where `val` is the minimizable array<br>
+    is called each iteration as
+    `val = callback( val )`
+    where `val` is the minimizable array
 
 
 <table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
