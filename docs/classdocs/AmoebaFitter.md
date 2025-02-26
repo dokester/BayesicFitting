@@ -1,10 +1,10 @@
 ---
 ---
+<p>
 
 <a name="AmoebaFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100% font-size:20px"><tr><th style="text-align:left">
-<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>Source</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Fitter using the simulated annealing simplex minimum finding algorithm,

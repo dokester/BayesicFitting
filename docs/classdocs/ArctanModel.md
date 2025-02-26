@@ -1,10 +1,10 @@
 ---
 ---
+<p>
 
 <a name="ArctanModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100% font-size:20px"><tr><th style="text-align:left">
-<strong>class ArctanModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ArctanModel.py target=_blank>Source</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class ArctanModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ArctanModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Arctangus Model.
