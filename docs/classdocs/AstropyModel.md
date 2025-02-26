@@ -1,32 +1,30 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py target=_blank>Source</a></span></div>
+<p>
+  
+<p>
 
 <a name="AstropyModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class AstropyModel(</strong> <a href="./Model.html">Model</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class AstropyModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Wrapper for Astropy Models, so they can be used in BayesicFitting.
 
 <b>Examples</b>
 
-    from astropy.modelling.models import Gaussian1D<br>
-    gm = Gaussian1D( mean=0, stddev=1, amplitude=1 )<br>
-   <br>
-    gauss = AstropyModel( gm )<br>
-    print( gauss )<br>
-AstropyModel( Gauss1D )
-    print( gauss.getNumberOfParameters( ) )<br>
-3
-    print( gauss( numpy.linspace( -5, 5, 11 ) ) )<br>
-[  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-   6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01<br>
-   1.11089965e-02   3.35462628e-04   3.72665317e-06]<br>
+    from astropy.modelling.models import Gaussian1D
+    gm = Gaussian1D( mean=0, stddev=1, amplitude=1 )
+   
+    gauss = AstropyModel( gm )
+    print( gauss )
+    AstropyModel( Gauss1D )
+    print( gauss.getNumberOfParameters( ) )
+    3
+    print( gauss( numpy.linspace( -5, 5, 11 ) ) )
+    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+       1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
 <b>Attributes</b>
 
@@ -35,19 +33,19 @@ AstropyModel( Gauss1D )
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+npchain, parameters, stdevs, xUnit, yUnit
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+npmax, fixed, parlist, mlist
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="AstropyModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>AstropyModel(</strong> astromodel, copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -58,7 +56,7 @@ Number of parameters is 3.
 
 <b>Parameters</b>
 
-* fitmodel  :  FittableModel<br>
+* astromodel  :  FittableModel<br>
     FittableModel from astropy.modeling  <br>
 * copy  :  GaussModel<br>
     to be copied<br>
@@ -70,14 +68,14 @@ Number of parameters is 3.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -93,7 +91,7 @@ Returns the result of the model function.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -111,7 +109,7 @@ Returns the partials at the input value.
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -127,7 +125,7 @@ Return the derivative df/dx at each xdata (=x).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -135,7 +133,7 @@ Return the derivative df/dx at each xdata (=x).
 Returns a string representation of the model.
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
