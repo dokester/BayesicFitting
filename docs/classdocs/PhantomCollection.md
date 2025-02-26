@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="PhantomCollection"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class PhantomCollection(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class PhantomCollection(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Helper class for NestedSamplers Engines to collect all trial walkers
@@ -43,7 +39,7 @@ Author       Do Kester.
 
 
 <a name="PhantomCollection"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PhantomCollection(</strong> dynamic=False )
 </th></tr></thead></table>
 <p>
@@ -56,7 +52,7 @@ Constructor.
     whether it is a dynamic model
 
 <a name="length"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>length(</strong> np=0 ) 
 </th></tr></thead></table>
 <p>
@@ -69,7 +65,7 @@ Return length of internal walkerlist
     number of parameters (in case of dynamic only)
 
 <a name="getList"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getList(</strong> walker ) 
 </th></tr></thead></table>
 <p>
@@ -82,7 +78,7 @@ Return the applicable WalkerList
     return list pertaining to this walker (not used here)
 
 <a name="storeItems"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>storeItems(</strong> walker ) 
 </th></tr></thead></table>
 <p>
@@ -95,7 +91,7 @@ Store both items as arrays.
     to be added to the PhantomCollection
 
 <a name="calculateParamMinmax"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calculateParamMinmax(</strong> lowLhood, np=0 )
 </th></tr></thead></table>
 <p>
@@ -111,7 +107,7 @@ Calculate the min and max values of the present parameter values.
 
 
 <a name="getParamMinmax"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParamMinmax(</strong> lowLhood, np=0 )
 </th></tr></thead></table>
 <p>
@@ -127,7 +123,7 @@ Obtain the min and max values of the present parameter values.
 
 
 <a name="lengthDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>lengthDynamic(</strong> np=None ) 
 </th></tr></thead></table>
 <p>
@@ -140,7 +136,7 @@ Return length of internal walkerlist
     number of parameters (in case of dynamic only)
 
 <a name="getDynamicList"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getDynamicList(</strong> walker ) 
 </th></tr></thead></table>
 <p>
@@ -153,7 +149,7 @@ Return the applicable WalkerList or None if not present.
     return list pertaining to this walker
 
 <a name="storeDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>storeDynamic(</strong> walker ) 
 </th></tr></thead></table>
 <p>
@@ -168,7 +164,7 @@ Put both items in the dictionaries with npars as key
     parameters
 
 <a name="calculateDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calculateDynamic(</strong> lowLhood, np=0 )
 </th></tr></thead></table>
 <p>
@@ -184,7 +180,7 @@ Calculate the min and max values of the present parameters of length np.
 
 
 <a name="getDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getDynamic(</strong> lowLhood, np=0 )
 </th></tr></thead></table>
 <p>

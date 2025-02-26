@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SurfaceSplinesModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SurfaceSplinesModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SurfaceSplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SurfaceSplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SurfaceSplinesModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Surface splines model of arbitrary order and knot settings.
@@ -25,12 +21,12 @@ The SplinesModel has more information about order and knots.
 
 <b>Examples</b>
 
-    nxk = 17<br>
-    nyk = 11<br>
-    xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160<br>
-    yknots = numpy.arange(  nyk , dtype=float ) * 10      # make knots from 0 to 100<br>
-    csm = SurfaceSplinesModel( xknots, yknots, 2 )<br>
-    print csm.getNumberOfParameters( )      # ( nxk + order - 1 )*( nyk + order - 1 )<br>
+    nxk = 17
+    nyk = 11
+    xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160
+    yknots = numpy.arange(  nyk , dtype=float ) * 10      # make knots from 0 to 100
+    csm = SurfaceSplinesModel( xknots, yknots, 2 )
+    print csm.getNumberOfParameters( )      # ( nxk + order - 1 )*( nyk + order - 1 )
 216
 # ... fitter etc. see Fitter
 
@@ -59,7 +55,7 @@ Category     mathematics/Fitting
 
 
 <a name="SurfaceSplinesModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SurfaceSplinesModel(</strong> knots, order=3, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -85,19 +81,19 @@ The number of parameters is ( length( knots ) + order - 1 )
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="calcNp"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calcNp(</strong> knots, order ) 
 </th></tr></thead></table>
 <p>
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -116,7 +112,7 @@ The partials are the powers of x (input) from 0 to degree.
     not used in this model
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -125,7 +121,7 @@ Returns a string representation of the model.
 
 
 <a name="baseParameterName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -138,7 +134,7 @@ Return the name of a parameter.
 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -150,14 +146,14 @@ Return the unit of a parameter.
     the kth parameter.<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 
 * [<strong>baseResult(</strong> xdata, params )](./LinearModel.md#baseResult)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

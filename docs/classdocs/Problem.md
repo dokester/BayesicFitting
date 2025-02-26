@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Problem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Problem(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Problem(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Problem implements the common parts of specialized Problems.
@@ -49,7 +45,7 @@ result method.
 
 
 <a name="Problem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Problem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, copy=None )
 </th></tr></thead></table>
@@ -75,7 +71,7 @@ Problem Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -84,7 +80,7 @@ Copy.
 
 
 <a name="setAccuracy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAccuracy(</strong> accuracy=None ) 
 </th></tr></thead></table>
 <p>
@@ -98,14 +94,14 @@ set the value for accuracy.
     When None the value is set to 0 (for easy computational reasons)
 
 <a name="hasWeights"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasWeights(</strong> )
 </th></tr></thead></table>
 <p>
 Return whether it has weights. 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
 </th></tr></thead></table>
 <p>
@@ -121,7 +117,7 @@ In this (base)class it is a placeholder.
 
 
 <a name="residuals"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>residuals(</strong> param, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -137,7 +133,7 @@ Returns the residuals, calculated at the xdata.
 
 
 <a name="cyclicCorrection"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cyclicCorrection(</strong> res )
 </th></tr></thead></table>
 <p>
@@ -155,7 +151,7 @@ No correction.
 
 
 <a name="cycor1"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cycor1(</strong> res )
 </th></tr></thead></table>
 <p>
@@ -169,7 +165,7 @@ Returns the residuals, all corrected for periodicity in residuals
 
 
 <a name="cycor2"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cycor2(</strong> res )
 </th></tr></thead></table>
 <p>
@@ -184,7 +180,7 @@ the result dimensions listed in the model.cyclic dictionary.
 
 
 <a name="cyclize"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cyclize(</strong> res, period ) 
 </th></tr></thead></table>
 <p>
@@ -211,7 +207,7 @@ Here p = period and &epsilon; = small deviation.
 corrected residuals.
 
 <a name="XXXweightedResiduals"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>XXXweightedResiduals(</strong> param, mockdata=None, extra=False ) 
 </th></tr></thead></table>
 <p>
@@ -231,7 +227,7 @@ Optionally (extra=True) the weighted signs of the residuals are returned too.
     false : return wgt * res
 
 <a name="weightedResSq"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) 
 </th></tr></thead></table>
 <p>
@@ -251,12 +247,12 @@ Optionally (extra=True) the weighted residuals themselves are returned too.
     false : return wgt * res^2
 
 <a name="isDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval, kpar ) 
 </th></tr></thead></table>
 <p>
@@ -271,7 +267,7 @@ Return value in [0,1] for the selected parameter.
     selected parameter index, where kp is index in [parameters, hyperparams]
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval, kpar ) 
 </th></tr></thead></table>
 <p>
@@ -286,12 +282,12 @@ Return domain value for the selected parameter.
     selected parameter indices, where kp is index in [parameters, hyperparams]
 
 <a name="shortName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> ) 
 </th></tr></thead></table>
 <p>

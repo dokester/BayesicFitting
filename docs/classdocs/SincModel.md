@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SincModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Sinc Model.
@@ -31,10 +27,10 @@ See [KernelModel](./KernelModel.md)
 
 <b>Examples</b>
 
-    sinc = SincModel( )<br>
-    print sinc.npchain<br>
+    sinc = SincModel( )
+    print sinc.npchain
 3
-    print( sinc( numpy.arange( 15, dtype=float )-7 ) )        # sinc function between [-7,+7]<br>
+    print( sinc( numpy.arange( 15, dtype=float )-7 ) )        # sinc function between [-7,+7]
 [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
 
 
@@ -56,7 +52,7 @@ none of its own
 
 
 <a name="SincModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SincModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -75,13 +71,13 @@ Number of parameters is 3.
     Attribute fixed can only be set in the constructor.
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./KernelModel.html">KernelModel</a></th></tr></thead></table>
 
 
@@ -93,7 +89,7 @@ Copy method.
 * [<strong>baseParameterUnit(</strong> k )](./KernelModel.md#baseParameterUnit)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 
 

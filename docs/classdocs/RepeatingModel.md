@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="RepeatingModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class RepeatingModel(</strong> <a href="./Model.html">Model,</a><a href="./Dynamic.html">Dynamic</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class RepeatingModel(</strong> <a href="./Model.html">Model,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 RepeatingModel is a dynamic model, that calls the same model zero or more 
@@ -62,27 +58,27 @@ same parameters. Use keywords same=.
 
 <b>Example</b>
 
-    # Define a model containing between 1 and 6 VoigtModels, starting with 3<br>
-    # and all with the same widths (for Gauss and Cauchy)<br>
-    vgt = VoigtModel()<br>
-    mdl = RepeatingModel( 3, vgt, minComp=1. maxComp=6, same=[2,3] )<br>
-    print( mdl.npbase )             # 4 + 2 + 2<br>
-    8<br>
-    # Define a static RepeatingModel of 5 GaussModels<br>
-    gm = GaussModel()<br>
-    mdl = RepeatingModel( 5, gm, isDynamic=False )<br>
-    print( mdl.npbase )             # 5 * 3<br>
-    15<br>
-    # Define a RepeatingModel with and exponential grow prior with scale 10<br>
-    mdl = RepeatingModel( 1, gm, growPrior=ExponentialPrior( scale=10 ) )<br>
-    print( mdl.npbase )             # 3<br>
-    3<br>
+    # Define a model containing between 1 and 6 VoigtModels, starting with 3
+    # and all with the same widths (for Gauss and Cauchy)
+    vgt = VoigtModel()
+    mdl = RepeatingModel( 3, vgt, minComp=1. maxComp=6, same=[2,3] )
+    print( mdl.npbase )             # 4 + 2 + 2
+    8
+    # Define a static RepeatingModel of 5 GaussModels
+    gm = GaussModel()
+    mdl = RepeatingModel( 5, gm, isDynamic=False )
+    print( mdl.npbase )             # 5 * 3
+    15
+    # Define a RepeatingModel with and exponential grow prior with scale 10
+    mdl = RepeatingModel( 1, gm, growPrior=ExponentialPrior( scale=10 ) )
+    print( mdl.npbase )             # 3
+    3
 
 Author       Do Kester
 
 
 <a name="RepeatingModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RepeatingModel(</strong> ncomp, model, minComp=0, maxComp=None, fixed=None,
  same=None, growPrior=None, dynamic=True, copy=None, **kwargs )
 </th></tr></thead></table>
@@ -118,19 +114,19 @@ ValueError when order is outside [min..max] range
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="changeNComp"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
 <p>
 <a name="setSame"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setSame(</strong> same ) 
 </th></tr></thead></table>
 <p>
@@ -143,7 +139,7 @@ Assign similar parameters the same value.
     similar parameters indicated as an index in encapsulated model.
 
 <a name="grow"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -163,7 +159,7 @@ Increase the the number of components by 1 (if allowed by maxComp)
 
 
 <a name="shrink"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -182,7 +178,7 @@ Remove an arbitrary item.
 
 
 <a name="shuffle"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shuffle(</strong> param, offset, np, rng ) 
 </th></tr></thead></table>
 <p>
@@ -201,12 +197,12 @@ Shuffle the parameters of the components (if they are equivalent)
     random number generator
 
 <a name="isDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -222,7 +218,7 @@ Returns the result of the model function.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -240,7 +236,7 @@ Returns the partials at the input value.
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -256,12 +252,12 @@ Returns the derivative df/dx at the input value.
 
 
 <a name="xxxsetLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>xxxsetLimits(</strong> lowLimits=None, highLimits=None ) 
 </th></tr></thead></table>
 <p>
 <a name="setPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs ) 
 </th></tr></thead></table>
 <p>
@@ -286,12 +282,12 @@ IndexException
 
 
 <a name="hasPriors"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="basePrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> kpar )
 </th></tr></thead></table>
 <p>
@@ -304,14 +300,14 @@ Return the prior for parameter with index kpar.
     index of the parameter to be selected.
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Return a string representation of the model. 
 
 <a name="baseParameterName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -325,7 +321,7 @@ Return the name of the indicated parameter.
 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -339,14 +335,14 @@ Return the unit of the indicated parameter.
 
 
 <a name="par2model"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>par2model(</strong> k ) 
 </th></tr></thead></table>
 <p>
 
 Return index in model and repetition nr for param k
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model,</a></th></tr></thead></table>
 
 
@@ -399,7 +395,7 @@ Return index in model and repetition nr for param k
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -408,7 +404,7 @@ Return index in model and repetition nr for param k
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 
@@ -416,7 +412,7 @@ Return index in model and repetition nr for param k
 * [<strong>checkPositive(</strong> param ) ](./BaseModel.md#checkPositive)
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Dynamic.html">Dynamic</a></th></tr></thead></table>
 
 

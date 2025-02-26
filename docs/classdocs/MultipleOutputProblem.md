@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="MultipleOutputProblem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class MultipleOutputProblem(</strong> <a href="./Problem.html">Problem</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class MultipleOutputProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 A MultipleOutputProblem is an optimization of parameters where the model
@@ -31,7 +27,7 @@ model, xdata, ydata, weights, partype
 
 
 <a name="MultipleOutputProblem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MultipleOutputProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, copy=None )
 </th></tr></thead></table>
@@ -57,7 +53,7 @@ Problem Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -66,7 +62,7 @@ Copy.
 
 
 <a name="expandFlat"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>expandFlat(</strong> weights, ndout ) 
 </th></tr></thead></table>
 <p>
@@ -75,7 +71,7 @@ Expand and flatten the arrays.
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
 </th></tr></thead></table>
 <p>
@@ -89,7 +85,7 @@ Returns the result calculated at the xdata.
 
 
 <a name="partial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -103,7 +99,7 @@ Returns the partials (df/dp) calculated at the xdata.
 
 
 <a name="derivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -116,7 +112,7 @@ Return the derivative of the internal model.
     list of model parameters
 
 <a name="residuals"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>residuals(</strong> param, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -124,7 +120,7 @@ Return the derivative of the internal model.
 Returns residuals in a flattened array.
 
 <a name="myEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -132,7 +128,7 @@ Returns residuals in a flattened array.
 Return a default list of preferred engines
 
 <a name="myStartEngine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -140,7 +136,7 @@ Return a default list of preferred engines
 Return the default preferred startengines
 
 <a name="myDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -148,13 +144,13 @@ Return the default preferred startengines
 Return the name of the preferred error distribution
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 
 

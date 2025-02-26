@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Explorer"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Explorer(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Explorer(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Explorer is a helper class of NestedSampler, which contains and runs the
@@ -41,7 +37,7 @@ Author       Do Kester.
 
 
 <a name="Explorer"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Explorer(</strong> ns, threads=False )
 </th></tr></thead></table>
 <p>
@@ -55,7 +51,7 @@ Construct Explorer from a NestedSampler object.
 
 
 <a name="explore"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>explore(</strong> worst, lowLhood, iteration )
 </th></tr></thead></table>
 <p>
@@ -71,7 +67,7 @@ Explore the likelihood function, using threads.
 
 
 <a name="exploreWalker"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>exploreWalker(</strong> kw, lowLhood, engines, rng )
 </th></tr></thead></table>
 <p>
@@ -91,7 +87,7 @@ higher in logL then lowLhood
     random number generator
 
 <a name="selEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>selEngines(</strong> iteration ) 
 </th></tr></thead></table>
 <p>
@@ -104,7 +100,7 @@ Select engines with slowly changing parameters once per so many iterations.
     iteration number
 
 <a name="allEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>allEngines(</strong> iteration ) 
 </th></tr></thead></table>
 <p>
@@ -117,12 +113,12 @@ Always use all engines.
     iteration number
 
 <a name="checkWalkers"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkWalkers(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="logLcheck"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLcheck(</strong> walker ) 
 </th></tr></thead></table>
 <p>

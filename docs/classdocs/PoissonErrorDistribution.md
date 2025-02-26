@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="PoissonErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class PoissonErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class PoissonErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 To calculate a Poisson likelihood.
@@ -31,7 +27,7 @@ Author       Do Kester.
 
 
 <a name="PoissonErrorDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PoissonErrorDistribution(</strong> copy=None )
 </th></tr></thead></table>
 <p>
@@ -45,14 +41,14 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return copy of this. 
 
 <a name="acceptWeight"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
 <p>
@@ -61,7 +57,7 @@ True if the distribution accepts weights.
 Always false for this distribution.
 
 <a name="getScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
 </th></tr></thead></table>
 <p>
@@ -79,7 +75,7 @@ Return the noise scale.
     list of all parameters in the problem
 
 <a name="logLikelihood_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars )
 </th></tr></thead></table>
 <p>
@@ -95,7 +91,7 @@ Return the log( likelihood ) for a Poisson distribution.
 
 
 <a name="logLdata"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -115,7 +111,7 @@ logL = sum( logLdata )
 
 
 <a name="partialLogL_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex )
 </th></tr></thead></table>
 <p>
@@ -132,7 +128,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
     indices of parameters to be fitted
 
 <a name="nextPartialData"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None )
 </th></tr></thead></table>
 <p>
@@ -150,7 +146,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 * mockdata  :  array_like<br>
     as calculated by the model
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

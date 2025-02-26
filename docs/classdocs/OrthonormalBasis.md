@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/OrthonormalBasis.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="OrthonormalBasis"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class OrthonormalBasis(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class OrthonormalBasis(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/OrthonormalBasis.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Helper class to construct a orthonormal basis from (random) vectors
@@ -22,7 +18,7 @@ Author       Do Kester.
 
 
 <a name="OrthonormalBasis"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>OrthonormalBasis(</strong> )
 </th></tr></thead></table>
 <p>
@@ -30,7 +26,7 @@ Author       Do Kester.
 Constructor.
 
 <a name="normalise"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalise(</strong> vec, reset=False ) 
 </th></tr></thead></table>
 <p>

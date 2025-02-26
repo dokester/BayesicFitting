@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="IterativeFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class IterativeFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class IterativeFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Base class with methods common to all iterative fitters.
@@ -49,7 +45,7 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 
 
 <a name="IterativeFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>IterativeFitter(</strong> xdata, model, maxIter=None, tolerance=0.0001, verbose=1, **kwargs ) 
 </th></tr></thead></table>
 <p>
@@ -82,7 +78,7 @@ kwargs for [BaseFitter](./BaseFitter.md)
 
 
 <a name="setParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setParameters(</strong> params )
 </th></tr></thead></table>
 <p>
@@ -97,7 +93,7 @@ A little superfluous: see {[link](./link.md) Model#setParameters}
 
 
 <a name="doPlot"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>doPlot(</strong> param, force=False )
 </th></tr></thead></table>
 <p>
@@ -113,7 +109,7 @@ Plot intermediate result.
 
 
 <a name="fitprolog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -143,7 +139,7 @@ Prolog for all iterative Fitters.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, keep=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -169,14 +165,14 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 
 
 <a name="report"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>report(</strong> verbose, param, chi, more=None, force=False ) 
 </th></tr></thead></table>
 <p>
 
 Report on intermediate results.
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

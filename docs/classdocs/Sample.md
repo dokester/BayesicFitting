@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Sample.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Sample"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Sample(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Sample(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Sample.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Sample is weighted random draw from a Posterior distribution as
@@ -47,7 +43,7 @@ Author       Do Kester
 
 
 <a name="Sample"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Sample(</strong> id, parent, start, model, parameters=None, fitIndex=None, copy=None )
 </th></tr></thead></table>
 <p>
@@ -73,7 +69,7 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -82,7 +78,7 @@ Copy.
 
 
 <a name="check"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>check(</strong> nhyp=0 ) 
 </th></tr></thead></table>
 <p>

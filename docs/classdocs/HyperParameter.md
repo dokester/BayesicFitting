@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="HyperParameter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class HyperParameter(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class HyperParameter(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Values and priors for the parameter(s) of an ErrorDistribution.
@@ -36,7 +32,7 @@ in NestedSampler
 
 
 <a name="HyperParameter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>HyperParameter(</strong> hypar=1, isFixed=True, prior=None, limits=None,
  copy=None )
 </th></tr></thead></table>
@@ -62,14 +58,14 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return a copy. 
 
 <a name="checkPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkPrior(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -79,7 +75,7 @@ Return a copy.
 ValueError when no prior has been set.
 
 <a name="setLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits )
 </th></tr></thead></table>
 <p>
@@ -93,21 +89,21 @@ Set the limits on the scale within the prior.
 
 
 <a name="getLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLimits(</strong> )
 </th></tr></thead></table>
 <p>
 Return the limits on the scale. 
 
 <a name="isBound"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> ) 
 </th></tr></thead></table>
 <p>
 Return true is the itergral over the prior is bound. 
 
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>
@@ -122,7 +118,7 @@ a parameter for the prior distribution.
 
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
 </th></tr></thead></table>
 <p>
@@ -137,7 +133,7 @@ between [0,1] for the prior distribution.
 
 
 <a name="partialDomain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialDomain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>

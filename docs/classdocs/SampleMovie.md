@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SampleMovie.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SampleMovie"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SampleMovie(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SampleMovie(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SampleMovie.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 SampleMovie produces a movie (mp4) from a SampleList
@@ -26,7 +22,7 @@ interactive setting.
 
 
 <a name="SampleMovie"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SampleMovie(</strong> samplelist, filename="samplemovie.mp4", problem=None, kpar=[0,1] ) 
 </th></tr></thead></table>
 <p>

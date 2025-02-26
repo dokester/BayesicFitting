@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="LaplaceErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class LaplaceErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class LaplaceErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 To calculate a Laplace likelihood.
@@ -38,7 +34,7 @@ Author       Do Kester.
 
 
 <a name="LaplaceErrorDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LaplaceErrorDistribution(</strong> scale=1.0, limits=None, copy=None ) 
 </th></tr></thead></table>
 <p>
@@ -59,14 +55,14 @@ Constructor of Laplace Distribution.
     distribution to be copied.
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return copy of this. 
 
 <a name="acceptWeight"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
 <p>
@@ -75,7 +71,7 @@ True if the distribution accepts weights.
 Always true for this distribution.
 
 <a name="toSigma"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSigma(</strong> scale ) 
 </th></tr></thead></table>
 <p>
@@ -87,7 +83,7 @@ Return sigma, the squareroot of the variance.
     the scale of this Laplace distribution.
 
 <a name="getScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
 </th></tr></thead></table>
 <p>
@@ -103,7 +99,7 @@ Return the noise scale
     list of all parameters in the problem
 
 <a name="getSumRes"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getSumRes(</strong> problem, allpars=None, scale=1 )
 </th></tr></thead></table>
 <p>
@@ -123,7 +119,7 @@ Return the sum of the absolute values of the residuals.
     scale of residuals (from accuracies or noisescale of errdis)
 
 <a name="logLikelihood_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
 </th></tr></thead></table>
 <p>
@@ -139,7 +135,7 @@ Return the log( likelihood ) for a Gaussian distribution.
 
 
 <a name="logLdata"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -159,7 +155,7 @@ logL = sum( logLdata )
 
 
 <a name="partialLogL_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
 </th></tr></thead></table>
 <p>
@@ -179,7 +175,7 @@ dL/ds is not implemented for problems with accuracy
 
 
 <a name="nextPartialData"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -201,7 +197,7 @@ dL/ds is not implemented for problems with accuracy
     as calculated by the model<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a></th></tr></thead></table>
 
 

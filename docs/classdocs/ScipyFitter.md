@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="ScipyFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Unified interface to the Scipy minimization module minimize, to fit data to a model.
@@ -20,22 +16,22 @@ scipy.optimize.minimize
 <b>Examples</b>
 
 # assume x and y are Double1d data arrays.
-    x = numpy.arange( 100, dtype=float ) / 10<br>
-    y = numpy.arange( 100, dtype=float ) / 122          # make slope<br>
-    y += 0.3 * numpy.random.randn( 100 )                # add noise<br>
-    y[9:12] += numpy.asarray( [5,10,7], dtype=float )   # make some peak<br>
-    gauss = GaussModel( )                               # Gaussian<br>
-    gauss += PolynomialModel( 1 )                       # add linear background<br>
-    print( gauss.npchain )<br>
-    cgfit = ConjugateGradientFitter( x, gauss )<br>
-    param = cgfit.fit( y )<br>
-    print( len( param ) )<br>
+    x = numpy.arange( 100, dtype=float ) / 10
+    y = numpy.arange( 100, dtype=float ) / 122          # make slope
+    y += 0.3 * numpy.random.randn( 100 )                # add noise
+    y[9:12] += numpy.asarray( [5,10,7], dtype=float )   # make some peak
+    gauss = GaussModel( )                               # Gaussian
+    gauss += PolynomialModel( 1 )                       # add linear background
+    print( gauss.npchain )
+    cgfit = ConjugateGradientFitter( x, gauss )
+    param = cgfit.fit( y )
+    print( len( param ) )
 5
-    stdev = cgfit.stdevs<br>
-    chisq = cgfit.chisq<br>
-    scale = cgfit.scale                                 # noise scale<br>
-    yfit  = cgfit.getResult( )                          # fitted values<br>
-    yband = cgfit.monteCarloEoor( )                         # 1 sigma confidence region<br>
+    stdev = cgfit.stdevs
+    chisq = cgfit.chisq
+    scale = cgfit.scale                                 # noise scale
+    yfit  = cgfit.getResult( )                          # fitted values
+    yband = cgfit.monteCarloEoor( )                         # 1 sigma confidence region
 
 <b>Notes</b>
 
@@ -80,7 +76,7 @@ scipy.optimize.minimize
 
 
 <a name="ScipyFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ScipyFitter(</strong> xdata, model, method=None, gradient=True, hessp=None,
  **kwargs ) 
 </th></tr></thead></table>
@@ -140,7 +136,7 @@ Create a class, providing inputs and model.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, constraints=(), verbose=0,
  accuracy=None, plot=False, callback=None, **options )
@@ -192,11 +188,11 @@ Return      parameters for the model fitted to the data array.
 
 
 <a name="collectVectors"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>collectVectors(</strong> par ) 
 </th></tr></thead></table>
 <p>
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th></tr></thead></table>
 
 
@@ -207,7 +203,7 @@ Return      parameters for the model fitted to the data array.
 * [<strong>testGradient(</strong> par, at, data, weights=None )](./MaxLikelihoodFitter.md#testGradient)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
@@ -217,7 +213,7 @@ Return      parameters for the model fitted to the data array.
 * [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

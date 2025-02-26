@@ -1,8 +1,6 @@
 ---
 ---
-<p>
-  
-<p>
+<br><br><br>
 
 <a name="BasicSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,12 +13,14 @@ The blobs have limited support. Each blob is a segment of polynomial order,
 between 2 knots. At the knots they are continuous (differentiable) upto order - 1.
 Similarly the edges of the blobs are smoothly connected to 0.
 
-order   support behaviour between knots     continuity at knots
-  0        1    piecewise constant          not continuous at all<br>
-  1        2    piecewise linear            lines are continuous (connected)<br>
-  2        3    parabolic pieces            1st derivatives are also continuous<br>
-  3        4    cubic pieces                2nd derivatives are also continuous<br>
- n>3      n+1   n-th order polynomials      (n-1)-th derivatives are also continuous<br>
+| order | support | behaviour between knots | continuity at knots |
+|:-----:|:-------:|:------------------------|:--------------------|
+|  0  |  1  | piecewise constant     | not continuous at all |
+|  1  |  2  | piecewise linear       | lines are continuous (connected) |
+|  2  |  3  |  parabolic pieces      | 1st derivatives are also continuous |
+|  3  |  4  | cubic pieces           | 2nd derivatives are also continuous |
+| n>3 | n+1 | n-th order polynomials | (n-1)-th derivatives are also continuous |
+
 
 The function result is the sum over all spline blobs, multiplied with
 the parameters, the amplitudes of the spline blobs.
@@ -48,17 +48,17 @@ This model is NOT for (cubic) spline interpolation.
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BasicSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : <br>
+    18
+    # or alternatively
     csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : <br>
+    18
+    # or alternatively
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
+    18
 
 <b>Attributes</b>
 
@@ -69,15 +69,15 @@ This model is NOT for (cubic) spline interpolation.
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+npchain, parameters, stdevs, xUnit, yUnit
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+npmax, fixed, parlist, mlist
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <b>Limitations</b>
@@ -211,12 +211,6 @@ At the edges it is less. Normalized to 1.0
 * par  :  2-d array<br>
     sets of poly parameters.
 
-
-## more normalization
-if kpar > 0 
-    mat[-1,-1] = 1.0             ## at right normalize to 1.0<br>
-
-
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
@@ -252,13 +246,6 @@ The partials are the powers of x (input) from 0 to degree.
 * parlist  :  array_like<br>
     list of indices active parameters (or None for all)<br>
 
-
-
-for kb in range( np ) 
-    bss = self.basis[:,:,kb]<br>
-    partial[:,kb] = self.basicBlob( xdata, bss, x2k, self.poly )<br>
-
-return partial
 
 <a name="makeKnotIndices"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">

@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="DecisionTreeModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class DecisionTreeModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./LinearModel.html">LinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class DecisionTreeModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 A DecisionTree Model (DTM) is mostly defined on multiple input dimensions (axes).
@@ -33,8 +29,8 @@ The parameters are all initialized at 0.0
 
 <b>Examples</b>
 
-    dtm = DecisionTreeModel( )<br>
-    print( dtm )<br>
+    dtm = DecisionTreeModel( )
+    print( dtm )
 * DecisionTree :  with 0 components and 1 parameters<br>
 
 <b>Attributes</b>
@@ -78,7 +74,7 @@ The parameters are all initialized at 0.0
 
 
 <a name="DecisionTreeModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DecisionTreeModel(</strong> ndim=1, depth=0, split=0.5, kdim=0, itypes=[0], modifiable=True,
  dynamic=True, code=None, growPrior=None, copy=None, **kwargs )
 </th></tr></thead></table>
@@ -110,21 +106,21 @@ The DTM standardly has a UniformPrior for all parameters, with limits [0,1]
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="setSplitOrMask"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setSplitOrMask(</strong> itype, split ) 
 </th></tr></thead></table>
 <p>
 For internal use only 
 
 <a name="isLeaf"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isLeaf(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -132,7 +128,7 @@ For internal use only
 Return true if self is a leaf
 
 <a name="partitionList"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partitionList(</strong> xdata, plist ) 
 </th></tr></thead></table>
 <p>
@@ -152,7 +148,7 @@ Partition the xdata in plist over 2 new lists according to the DTM-branch.
     together containing all indices in plist
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -168,14 +164,14 @@ Returns the result of the model function.
 
 
 <a name="recursiveResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveResult(</strong> xdata, params, kpar, plist, res ) 
 </th></tr></thead></table>
 <p>
 For internal use only 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -193,14 +189,14 @@ Returns the partials at the input value.
 
 
 <a name="recursivePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursivePartial(</strong> xdata, kpar, plist, part ) 
 </th></tr></thead></table>
 <p>
 For internal use only 
 
 <a name="sortXdata"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sortXdata(</strong> xdata )
 </th></tr></thead></table>
 <p>
@@ -214,14 +210,14 @@ Reorder the xdata according to the parameter ordering
 
 
 <a name="recursiveOrder"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveOrder(</strong> xdata, plist ) 
 </th></tr></thead></table>
 <p>
 For internal use only 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -237,7 +233,7 @@ Return the derivative df/dx at each xdata (=x).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -246,7 +242,7 @@ Returns a string representation of the model.
 
 
 <a name="fullName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fullName(</strong> ids=False )
 </th></tr></thead></table>
 <p>
@@ -260,14 +256,14 @@ Returns a string representation of the model.
 
 
 <a name="recursiveName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveName(</strong> name, indent, kpar, ids=False ) 
 </th></tr></thead></table>
 <p>
 For internal use only 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -281,7 +277,7 @@ Return the unit of the indicated parameter.
 
 
 <a name="walk"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>walk(</strong> )
 </th></tr></thead></table>
 <p>
@@ -291,7 +287,7 @@ Iterate tree in pre-order depth-first search order
 Found this piece of code on the internet. Fairly obscure.
 
 <a name="encode"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>encode(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -304,7 +300,7 @@ splim : list of split/mask values at the branches
 
 
 <a name="decode"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decode(</strong> code, kdim, splim, kbr ) 
 </th></tr></thead></table>
 <p>
@@ -324,7 +320,7 @@ For internal use in the Constructor.
     counter (start at 0)
 
 <a name="findLeaf"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findLeaf(</strong> kleaf ) 
 </th></tr></thead></table>
 <p>
@@ -337,7 +333,7 @@ Find a leaf in the tree, returning the leaf.
     index of the leaf to be found
 
 <a name="findBranch"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findBranch(</strong> kbranch ) 
 </th></tr></thead></table>
 <p>
@@ -350,7 +346,7 @@ Find a branch in the tree, returning the branch.
     index of the branch to be found
 
 <a name="check"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>check(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -363,7 +359,7 @@ Find a branch in the tree, returning the branch.
     index of the branch to be found
 
 <a name="findRoot"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findRoot(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -372,7 +368,7 @@ Return the root of the tree.
 
 
 <a name="count"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>count(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -380,7 +376,7 @@ Return the root of the tree.
 Return number of leafs and branches.
 
 <a name="countLeaf"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>countLeaf(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -388,7 +384,7 @@ Return number of leafs and branches.
 Return number of leafs.
 
 <a name="countBranch"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>countBranch(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -396,7 +392,7 @@ Return number of leafs.
 Return number of leafs.
 
 <a name="grow"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, location=0, split=0.5, kdim=0 )
 </th></tr></thead></table>
 <p>
@@ -422,7 +418,7 @@ Increase the the number of components by 1 (if allowed by maxComp)
 
 
 <a name="shrink"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, location=0 )
 </th></tr></thead></table>
 <p>
@@ -441,7 +437,7 @@ Remove an arbitrary item.
 
 
 <a name="vary"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=0, split=0.5, kdim=0 )
 </th></tr></thead></table>
 <p>
@@ -464,12 +460,12 @@ Vary the model structure by changing kdim and/or split at location
 * bool  :   succes<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Modifiable.html">Modifiable,</a></th></tr></thead></table>
 
 
 * [<strong>isModifiable(</strong> ) ](./Modifiable.md#isModifiable)
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Dynamic.html">Dynamic,</a></th></tr></thead></table>
 
 
@@ -481,7 +477,7 @@ Vary the model structure by changing kdim and/or split at location
 * [<strong>alterParameters(</strong> param, location, dnp, offset, value=None ) ](./Dynamic.md#alterParameters)
 * [<strong>alterFitindex(</strong> findex, location, dnp, offset ) ](./Dynamic.md#alterFitindex)
 * [<strong>shuffle(</strong> param, offset, np, rng ) ](./Dynamic.md#shuffle)
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 

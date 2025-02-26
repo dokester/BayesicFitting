@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Walker"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Walker(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Walker(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Walker is member of the cloud of points used in NestedSampler.
@@ -42,7 +38,7 @@ Author       Do Kester
 
 
 <a name="Walker"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Walker(</strong> wid, problem, allpars, fitIndex, logL=0, parent=-1, start=0, copy=None )
 </th></tr></thead></table>
 <p>
@@ -73,7 +69,7 @@ Either errdis or copy is obligatory.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -82,7 +78,7 @@ Copy.
 
 
 <a name="toSample"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSample(</strong> logW ) 
 </th></tr></thead></table>
 <p>
@@ -90,7 +86,7 @@ Copy.
 Return the contents of the Walker as a Sample.
 
 <a name="check"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>check(</strong> nhyp=0, nuisance=0 ) 
 </th></tr></thead></table>
 <p>

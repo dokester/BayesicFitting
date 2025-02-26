@@ -1,8 +1,6 @@
 ---
 ---
-<p>
-  
-<p>
+<br><br><br>
 
 <a name="BSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -23,7 +21,7 @@ spanned by the knots.
 It is a linear model.
 
 | order | behaviour between knots | continuity at knots |
-|:-----:|:-----------------------:|:-------------------:|
+|:-----:|:------------------------|:--------------------|
 |  0    | piecewise constant      | not continuous at all |
 |  1    | piecewise linear        | lines are continuous |
 |  2    | parabolic pieces        | 1st derivatives are also continuous |

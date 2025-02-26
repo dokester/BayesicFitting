@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CircularUniformPrior.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="CircularUniformPrior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class CircularUniformPrior(</strong> <a href="./UniformPrior.html">UniformPrior</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class CircularUniformPrior(</strong> <a href="./UniformPrior.html">UniformPrior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CircularUniformPrior.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Circular Uniform prior distribution, for location parameters.
@@ -19,8 +15,8 @@ A wrapper around
 
 <b>Examples</b>
 
-    pr = CircularUniformPrior( circular=math.pi )       # circular between [0,pi]<br>
-    pr = CircularUniformPrior( limits=[3,10] )          # circular between [3,10]<br>
+    pr = CircularUniformPrior( circular=math.pi )       # circular between [0,pi]
+    pr = CircularUniformPrior( limits=[3,10] )          # circular between [3,10]
 
 <b>Attributes from Prior</b>
 
@@ -28,7 +24,7 @@ lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 
 
 <a name="CircularUniformPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CircularUniformPrior(</strong> circular=None, limits=None, prior=None )
 </th></tr></thead></table>
 <p>
@@ -46,13 +42,13 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return a (deep) copy of itself. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./UniformPrior.html">UniformPrior</a></th></tr></thead></table>
 
 

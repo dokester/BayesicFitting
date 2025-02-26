@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogisticModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="LogisticModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class LogisticModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class LogisticModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogisticModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Logistic Model.
@@ -25,12 +21,12 @@ The parameters are initialized at {1.0, 0.0, 1.0}.
 
 <b>Examples</b>
 
-    lm = LogisticModel( )<br>
-    print( lm )<br>
+    lm = LogisticModel( )
+    print( lm )
 * Logistic :  f( x:p ) = p_0 / ( 1 + exp( ( p_1 - x ) / p_2 ) )<br>
-    print( lm.npars )<br>
+    print( lm.npars )
 3
-    print( lm( numpy.arange( 11 ) - 5 ) )<br>
+    print( lm( numpy.arange( 11 ) - 5 ) )
 [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
    6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01<br>
    1.11089965e-02   3.35462628e-04   3.72665317e-06]<br>
@@ -49,7 +45,7 @@ The parameters are initialized at {1.0, 0.0, 1.0}.
 
 
 <a name="LogisticModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LogisticModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -70,14 +66,14 @@ Number of parameters is 3.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -93,7 +89,7 @@ Returns the result of the model function.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -111,7 +107,7 @@ Returns the partials at the input value.
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -127,7 +123,7 @@ Return the derivative df/dx at each xdata (=x).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -136,7 +132,7 @@ Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -149,7 +145,7 @@ Return the unit of the indicated parameter.
     parameter number.<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 
 

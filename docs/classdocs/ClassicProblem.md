@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="ClassicProblem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ClassicProblem(</strong> <a href="./Problem.html">Problem</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class ClassicProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 A ClassicProblem is an optimization of parameters which involves
@@ -30,7 +26,7 @@ model, xdata, ydata, weights, accuracy, varyy
 
 
 <a name="ClassicProblem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ClassicProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, copy=None )
 </th></tr></thead></table>
@@ -56,7 +52,7 @@ Constructor for classic problems.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -66,7 +62,7 @@ Copy.
 The copy points to the same instance of model.
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
 </th></tr></thead></table>
 <p>
@@ -80,7 +76,7 @@ Returns the result calculated at the xdatas.
 
 
 <a name="partial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -93,7 +89,7 @@ Return the partials of the internal model.
     list of model parameters
 
 <a name="derivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -106,7 +102,7 @@ Return the derivative of the internal model.
     list of model parameters
 
 <a name="myEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -114,7 +110,7 @@ Return the derivative of the internal model.
 Return a default list of preferred engines
 
 <a name="myStartEngine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -122,7 +118,7 @@ Return a default list of preferred engines
 Return a default preferred start engines: "start"
 
 <a name="myDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -130,13 +126,13 @@ Return a default preferred start engines: "start"
 Return a default preferred ErrorDistribution: "gauss"
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 
 

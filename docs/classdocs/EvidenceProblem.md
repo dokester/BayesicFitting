@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="EvidenceProblem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class EvidenceProblem(</strong> <a href="./ClassicProblem.html">ClassicProblem</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class EvidenceProblem(</strong> <a href="./ClassicProblem.html">ClassicProblem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 An EvidenceProblem is a ClassicProblem containing a Dynamic and/or Modifiable
@@ -30,7 +26,7 @@ model, xdata, ydata, weights
 
 
 <a name="EvidenceProblem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>EvidenceProblem(</strong> model=None, xdata=None, ydata=None, weights=None, copy=None )
 </th></tr></thead></table>
 <p>
@@ -52,7 +48,7 @@ Constructor for classic problems.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -62,7 +58,7 @@ Copy.
 The copy points to the same instance of model.
 
 <a name="myEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -70,7 +66,7 @@ The copy points to the same instance of model.
 Return a default list of preferred engines
 
 <a name="myDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -78,13 +74,13 @@ Return a default list of preferred engines
 Return the default preferred ModelDistribution: "model"
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ClassicProblem.html">ClassicProblem</a></th></tr></thead></table>
 
 
@@ -94,7 +90,7 @@ Returns a string representation of the model.
 * [<strong>myStartEngine(</strong> ) ](./ClassicProblem.md#myStartEngine)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 
 

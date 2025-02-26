@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="ErrorsInXandYProblem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ErrorsInXandYProblem(</strong> <a href="./Problem.html">Problem</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class ErrorsInXandYProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 A ErrorsInXandYProblem is an optimization of parameters which involves
@@ -60,7 +56,7 @@ model, xdata, ydata, weights, partype
 
 
 <a name="ErrorsInXandYProblem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ErrorsInXandYProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  prior=None, covar=None, accuracy=None, copy=None )
 </th></tr></thead></table>
@@ -99,7 +95,7 @@ Problem Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -108,7 +104,7 @@ Copy.
 
 
 <a name="setAccuracy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAccuracy(</strong> accuracy=None, covar=None ) 
 </th></tr></thead></table>
 <p>
@@ -151,14 +147,14 @@ AttributeError. When both accuracy and covar are not None.
 
 
 <a name="hasWeights"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasWeights(</strong> )
 </th></tr></thead></table>
 <p>
 Return whether it has weights. 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
 </th></tr></thead></table>
 <p>
@@ -172,7 +168,7 @@ Returns the result calculated at the xdatas.
 
 
 <a name="splitParam"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>splitParam(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -190,7 +186,7 @@ tuple of ( targets, model parameters )
 
 
 <a name="partial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -210,7 +206,7 @@ datapoints and np the number of parameters in the model.
 
 
 <a name="derivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -223,7 +219,7 @@ Return the derivative to the Model.
     list of problem parameters
 
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval, kpar ) 
 </th></tr></thead></table>
 <p>
@@ -238,7 +234,7 @@ Return value in [0,1] for the selected parameter.
     selected parameter index, where kp is index in [parameters, hyperparams]
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval, kpar ) 
 </th></tr></thead></table>
 <p>
@@ -253,7 +249,7 @@ Return domain value for the selected parameter.
     selected parameter indices, where kp is index in [parameters, hyperparams]
 
 <a name="getXYresiduals"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getXYresiduals(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -270,7 +266,7 @@ Return residuals in y-direction and x-direction.
 tuple of (y residuals, x residuals)
 
 <a name="weightedResSq"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) 
 </th></tr></thead></table>
 <p>
@@ -289,7 +285,7 @@ the trial values for xdata and ytry = model.result( xtry, param )
     false : return wgt * res^2
 
 <a name="myEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -297,7 +293,7 @@ the trial values for xdata and ytry = model.result( xtry, param )
 Return a default list of preferred engines
 
 <a name="myStartEngine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -305,7 +301,7 @@ Return a default list of preferred engines
 Return a default preferred start engines: "start"
 
 <a name="myDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -313,13 +309,13 @@ Return a default preferred start engines: "start"
 Return a default preferred ErrorDistribution: "gauss2d"
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 
 

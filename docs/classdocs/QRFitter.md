@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="QRFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Fitter for linear models, using QR decomposition.
@@ -36,15 +32,15 @@ In that case it uses the same decomposition for all fits.
 <b>Examples</b>
 
 * # assume x and y are numpy.asarray data arrays : <br>
-    x = numpy.asarray.range( 100 )<br>
-    poly = PolynomialModel( 1 )                             # line<br>
-    fitter = QRFitter( x, poly )<br>
-    for k in range( 1, 4 ) :<br>
-        y = numpy.arange( 100 ) // k                        # digitization noise<br>
-        param = fitter.fit( y )                             # use same QR decomposition<br>
-        stdev = fitter.stdevs                               # stdevs on the parameters<br>
-        print( k, param )<br>
-        print( " ", stdev )<br>
+    x = numpy.asarray.range( 100 )
+    poly = PolynomialModel( 1 )                             # line
+    fitter = QRFitter( x, poly )
+    for k in range( 1, 4 ) 
+        y = numpy.arange( 100 ) // k                        # digitization noise
+        param = fitter.fit( y )                             # use same QR decomposition
+        stdev = fitter.stdevs                               # stdevs on the parameters
+        print( k, param )
+        print( " ", stdev )
 
 * Category :     Mathematics/Fitting<br>
 
@@ -65,7 +61,7 @@ In that case it uses the same decomposition for all fits.
 
 
 <a name="QRFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>QRFitter(</strong> xdata, model, map=False, keep=None )
 </th></tr></thead></table>
 <p>
@@ -93,7 +89,7 @@ input vector is needed a new object should be created.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None )
 </th></tr></thead></table>
 <p>
@@ -117,7 +113,7 @@ Return model parameters fitted to the data, including weights.
 ValueError when ydata or weights contain a NaN
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

@@ -1,6 +1,6 @@
 ---
 ---
-<p>
+<br><br><br>
 
 <a name="ArctanModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -30,9 +30,9 @@ npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 <b>Example</b>
 
-    arct = ArctanModel( )<br>
-    print( arct.getNumberOfParameters( ) )<br>
-    3<br>
+    arct = ArctanModel( )
+    print( arct.getNumberOfParameters( ) )
+    3
 
 
 * Author :       Do Kester<br>

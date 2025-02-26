@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Gauss2dErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Gauss2dErrorDistribution(</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Gauss2dErrorDistribution(</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 To calculate a Gauss likelihood in case of errors in X and Y
@@ -36,7 +32,7 @@ Author       Do Kester.
 
 
 <a name="Gauss2dErrorDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Gauss2dErrorDistribution(</strong> scale=1.0, limits=None, copy=None )
 </th></tr></thead></table>
 <p>
@@ -58,14 +54,14 @@ Default Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return copy of this. 
 
 <a name="TBDgetScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TBDgetScale(</strong> problem, allpars=None ) 
 </th></tr></thead></table>
 <p>
@@ -81,7 +77,7 @@ Return the noise scale.
     list of all parameters in the problem
 
 <a name="updateDeterminant"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateDeterminant(</strong> problem, scale ) 
 </th></tr></thead></table>
 <p>
@@ -96,7 +92,7 @@ Update the determinant of the covar matrix with scale
     present vale for the cale
 
 <a name="logLikelihood_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
 </th></tr></thead></table>
 <p>
@@ -114,7 +110,7 @@ Alternate calculation
 
 
 <a name="logLdata"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -134,7 +130,7 @@ logL = sum( logLdata )
 
 
 <a name="partialLogL_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
 </th></tr></thead></table>
 <p>
@@ -154,7 +150,7 @@ Alternate calculation
 
 
 <a name="nextPartialData"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
 </th></tr></thead></table>
 <p>
@@ -174,7 +170,7 @@ to the parameters in fitIndex.
     as calculated for the problem
 
 <a name="TBDhessianLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TBDhessianLogL(</strong> problem, allpars, fitIndex ) 
 </th></tr></thead></table>
 <p>
@@ -195,7 +191,7 @@ of the parameters.
 * fitIndex  :  array_like of int<br>
     indices of allpars to fit
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a></th></tr></thead></table>
 
 

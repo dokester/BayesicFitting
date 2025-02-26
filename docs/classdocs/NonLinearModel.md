@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="NonLinearModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class NonLinearModel(</strong> <a href="./Model.html">Model</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class NonLinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Anchestor of all non-linear models.
@@ -40,7 +36,7 @@ Author       Do Kester
 
 
 <a name="NonLinearModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NonLinearModel(</strong> nparams, ndim=1, copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -62,7 +58,7 @@ Parent class for all non linear models.
 
 
 <a name="setMixedModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setMixedModel(</strong> lindex )
 </th></tr></thead></table>
 <p>
@@ -79,21 +75,21 @@ Reset with SetMixedModel( null );
 
 
 <a name="isMixed"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isMixed(</strong> )
 </th></tr></thead></table>
 <p>
 Returns true when linear indices have been set 
 
 <a name="getNonLinearIndex"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNonLinearIndex(</strong> )
 </th></tr></thead></table>
 <p>
 Returns the index of the non-linear parameters. 
 
 <a name="partial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param=None, useNum=False )
 </th></tr></thead></table>
 <p>
@@ -110,7 +106,7 @@ Return the partial derivatives for the model.
     if True use numeric partial derivatives. Default False<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -165,7 +161,7 @@ Return the partial derivatives for the model.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -175,7 +171,7 @@ Return the partial derivatives for the model.
 * [<strong>basePartial(</strong> xdata, param, parlist=None ) ](./FixedModel.md#basePartial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

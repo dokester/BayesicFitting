@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CauchyPrior.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="CauchyPrior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class CauchyPrior(</strong> <a href="./Prior.html">Prior</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class CauchyPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CauchyPrior.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Cauchy prior distribution.
@@ -26,10 +22,10 @@ unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
 
 <b>Examples</b>
 
-    pr = CauchyPrior()                         # center=0, scale=1<br>
-    pr = CauchyPrior( center=1.0, scale=0.5 )<br>
-    pr = CauchyPrior( limits=[0,None] )        # lowlimit=0, highlimit=inf<br>
-    pr = CauchyPrior( center=1, circular=3 )   # circular between 0.5 and 2.5<br>
+    pr = CauchyPrior()                         # center=0, scale=1
+    pr = CauchyPrior( center=1.0, scale=0.5 )
+    pr = CauchyPrior( limits=[0,None] )        # lowlimit=0, highlimit=inf
+    pr = CauchyPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
 
 <b>Attributes</b>
 
@@ -46,7 +42,7 @@ lowLimit and highLimit cannot be used in this implementation.
 
 
 <a name="CauchyPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CauchyPrior(</strong> center=0.0, scale=1, limits=None, circular=False, prior=None )
 </th></tr></thead></table>
 <p>
@@ -70,12 +66,12 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>
@@ -92,7 +88,7 @@ domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
 
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
 </th></tr></thead></table>
 <p>
@@ -109,7 +105,7 @@ unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
 <p>
@@ -123,7 +119,7 @@ Return a the result of the distribution function at x.
 
 
 <a name="partialLog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> x )
 </th></tr></thead></table>
 <p>
@@ -137,20 +133,20 @@ Return partial derivative of log( Prior ) wrt parameter.
 
 
 <a name="isBound"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 <p>
 Return true if the integral over the prior is bound. 
 
 <a name="shortName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
 </th></tr></thead></table>
 <p>
 Return a string representation of the prior. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 
 

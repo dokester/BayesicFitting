@@ -1,6 +1,6 @@
 ---
 ---
-<p>
+<br><br><br>
 
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,30 +15,30 @@ Author       Do Kester
 
 <b>Examples</b>
 
-    # assume x and y are Double1d data arrays.<br>
-    x = numpy.arange( 100, dtype=float ) / 10<br>
-    y = 3.5 * SIN( x + 0.4 )                    # make sine<br>
-    numpy.random.seed( 12345L )                 # Gaussian random number generator<br>
-    y += numpy.random.randn( 100 ) * 0.2        # add noise<br>
-    sine = SineModel( )                         # sinusiodal model<br>
-    lolim = numpy.asarray( [1,-10,-10], dtype=float )<br>
-    hilim = numpy.asarray( [100,10,10], dtype=float )<br>
-    sine.setLimits( lolim, hilim )              # set limits on the model parameters<br>
-    amfit = AmoebaFitter( x, sine )<br>
-    param = amfit.fit( y, temp=10 )<br>
-    stdev = amfit.getStandardDeviation( )       # stdevs on the parameters<br>
-    chisq = amfit.getChiSquared( )<br>
-    scale = amfit.getScale( )                 # noise scale<br>
-    yfit  = amfit.getResult( )                # fitted values<br>
-    yfit  = sine( x )                         # fitted values ( same as previous )<br>
-    yband = amfit.monteCarloError( )               # 1 sigma confidence region<br>
-    # for diagnostics ( or just for fun )<br>
-    amfit = AmoebaFitter( x, sine )<br>
-    amfit.setTemperature( 10 )                # set a temperature to escape local minima<br>
-    amfit.setVerbose( 10 )                    # report every 10th iteration<br>
-    plotter = IterationPlotter( )             # from BayesicFitting<br>
-    amfit.setPlotter( plotter, 20 )            # make a plot every 20th iteration<br>
-    param = amfit.fit( y )<br>
+    # assume x and y are Double1d data arrays.
+    x = numpy.arange( 100, dtype=float ) / 10
+    y = 3.5 * SIN( x + 0.4 )                    # make sine
+    numpy.random.seed( 12345L )                 # Gaussian random number generator
+    y += numpy.random.randn( 100 ) * 0.2        # add noise
+    sine = SineModel( )                         # sinusiodal model
+    lolim = numpy.asarray( [1,-10,-10], dtype=float )
+    hilim = numpy.asarray( [100,10,10], dtype=float )
+    sine.setLimits( lolim, hilim )              # set limits on the model parameters
+    amfit = AmoebaFitter( x, sine )
+    param = amfit.fit( y, temp=10 )
+    stdev = amfit.getStandardDeviation( )       # stdevs on the parameters
+    chisq = amfit.getChiSquared( )
+    scale = amfit.getScale( )                 # noise scale
+    yfit  = amfit.getResult( )                # fitted values
+    yfit  = sine( x )                         # fitted values ( same as previous )
+    yband = amfit.monteCarloError( )               # 1 sigma confidence region
+    # for diagnostics ( or just for fun )
+    amfit = AmoebaFitter( x, sine )
+    amfit.setTemperature( 10 )                # set a temperature to escape local minima
+    amfit.setVerbose( 10 )                    # report every 10th iteration
+    plotter = IterationPlotter( )             # from BayesicFitting
+    amfit.setPlotter( plotter, 20 )            # make a plot every 20th iteration
+    param = amfit.fit( y )
 
 
 <b>Notes</b>

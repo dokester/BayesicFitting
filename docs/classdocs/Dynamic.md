@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Dynamic"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Dynamic(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Dynamic(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Class adjoint to Model which implements some dynamic behaviour.
@@ -30,7 +26,7 @@ Class adjoint to Model which implements some dynamic behaviour.
 
 
 <a name="Dynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Dynamic(</strong> dynamic=True ) 
 </th></tr></thead></table>
 <p>
@@ -43,12 +39,12 @@ Constructor for Dynamic
     True if the Model is to be considered dynamic.
 
 <a name="isDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="setGrowPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setGrowPrior(</strong> growPrior=None, min=1, max=None, name="Comp" ) 
 </th></tr></thead></table>
 <p>
@@ -68,7 +64,7 @@ Set the growth prior.
     name of the component
 
 <a name="setDynamicAttribute"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setDynamicAttribute(</strong> name, value ) 
 </th></tr></thead></table>
 <p>
@@ -89,7 +85,7 @@ Set attribute, if it belongs to a Dynamic Models.
 
 
 <a name="grow"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -109,7 +105,7 @@ Increase the degree by one upto maxComp ( if present ).
 
 
 <a name="shrink"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -129,7 +125,7 @@ Decrease the degree by one downto minComp ( default 1 ).
 
 
 <a name="alterParameterNames"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterParameterNames(</strong> dnp ) 
 </th></tr></thead></table>
 <p>
@@ -142,7 +138,7 @@ Renumber the parameter names.
     change in the number of parameters
 
 <a name="alterParameterSize"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterParameterSize(</strong> dnp, offset, location=None, value=0 ) 
 </th></tr></thead></table>
 <p>
@@ -159,7 +155,7 @@ Change the number of parameters and self.parameters.
     index in param[offset:] at which to insert/delete the new parameters
 
 <a name="alterParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterParameters(</strong> param, location, dnp, offset, value=None ) 
 </th></tr></thead></table>
 <p>
@@ -198,7 +194,7 @@ dnp:        -2
 
 
 <a name="alterFitindex"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterFitindex(</strong> findex, location, dnp, offset ) 
 </th></tr></thead></table>
 <p>
@@ -217,7 +213,7 @@ change the fit index to comply with the changed model.
     start index of the parameters of the dynamic model in param
 
 <a name="shuffle"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shuffle(</strong> param, offset, np, rng ) 
 </th></tr></thead></table>
 <p>

@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineDriftModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SineDriftModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SineDriftModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SineDriftModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineDriftModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Sinusoidal Model with drifting frequency.
@@ -24,14 +20,14 @@ The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model
 
 <b>Examples</b>
 
-    sine = SineDriftModel( )<br>
-    print( sine.npchain )<br>
-    pars = [0.1,0,1,0.0]<br>
-    sine.parameters = pars<br>
-    print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, no drift<br>
-    pars = [0.1,0,1,0.001]<br>
-    sine.parameters = pars<br>
-    print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, drifting<br>
+    sine = SineDriftModel( )
+    print( sine.npchain )
+    pars = [0.1,0,1,0.0]
+    sine.parameters = pars
+    print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, no drift
+    pars = [0.1,0,1,0.001]
+    sine.parameters = pars
+    print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, drifting
 
 
 <b>Attributes</b>
@@ -52,7 +48,7 @@ The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model
 
 
 <a name="SineDriftModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SineDriftModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -72,14 +68,14 @@ Number of parameters is 4.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -95,7 +91,7 @@ Returns the result of the model function.
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -111,7 +107,7 @@ Returns the derivative of f to x (df/dx) at the input values.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -129,7 +125,7 @@ Returns the partials at the input values.
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -138,7 +134,7 @@ Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -151,7 +147,7 @@ Return the name of a parameter.
     the kth parameter.<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 
 
@@ -161,7 +157,7 @@ Return the name of a parameter.
 * [<strong>partial(</strong> xdata, param=None, useNum=False )](./NonLinearModel.md#partial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -215,7 +211,7 @@ Return the name of a parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -224,7 +220,7 @@ Return the name of a parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

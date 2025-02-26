@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="ConstantModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 ConstantModel is a Model which does not have any parameters.
@@ -54,16 +50,16 @@ or a family of similar shapes.
 
 To make a model that decays to 1.0
 
-    model = ConstantModel( values=1.0 )<br>
-    model.addModel( ExpModel( ) )<br>
+    model = ConstantModel( values=1.0 )
+    model.addModel( ExpModel( ) )
 
 To make a model that returns a fixed cosine of frequency 5
 
-    model = ConstantModel( fixedModel=SineModel(), values=[1.0,0.0,5.0] )<br>
+    model = ConstantModel( fixedModel=SineModel(), values=[1.0,0.0,5.0] )
 
 
 <a name="ConstantModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ConstantModel(</strong> ndim=1, copy=None, fixedModel=None, values=None,
  table=None )
 </th></tr></thead></table>
@@ -93,14 +89,14 @@ At other vales than xdata, the model does not work.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -116,7 +112,7 @@ Returns a constant form.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
 <p>
@@ -134,7 +130,7 @@ Returns the partials at the xdata value. (=empty array)
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -150,7 +146,7 @@ Return the derivative df/dx at each point x (== 0).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -158,7 +154,7 @@ Return the derivative df/dx at each point x (== 0).
 Returns a string representation of the model.
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

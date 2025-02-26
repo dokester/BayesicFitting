@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="FreeShapeModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class FreeShapeModel(</strong> <a href="./LinearModel.html">LinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class FreeShapeModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Pixelated Model.
@@ -59,15 +55,15 @@ parameters are kept positive.
 
 <b>Examples</b>
 
-    nn = 100<br>
-    fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )<br>
-    print( fsm.shape )<br>
+    nn = 100
+    fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
+    print( fsm.shape )
 
 Author       Do Kester
 
 
 <a name="FreeShapeModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>FreeShapeModel(</strong> npix, copy=None, shape=None, nconvolve=0,
  center=0.5, xlo=0.0, xhi=None, **kwargs )
 </th></tr></thead></table>
@@ -98,14 +94,14 @@ The number of parameters equals the number of pixels
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="checkDomain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkDomain(</strong> xdata ) 
 </th></tr></thead></table>
 <p>
@@ -123,7 +119,7 @@ range = self.shape.range
 ValueError when outside domain.
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -139,7 +135,7 @@ Returns the result of the model function.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
 <p>
@@ -156,7 +152,7 @@ each of the parameters.
 
 
 <a name="TBCbaseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TBCbaseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -172,12 +168,12 @@ Returns the derivative of the model function df/dx.
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -190,7 +186,7 @@ Return the unit of the indicated parameter.
     parameter number.<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 

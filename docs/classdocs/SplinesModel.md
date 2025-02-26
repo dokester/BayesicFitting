@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SplinesModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 General splines model of arbitrary order and with arbitrary knot settings.
@@ -37,19 +33,19 @@ This model is NOT for (cubic) spline interpolation.
 
 <b>Examples</b>
 
-    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160<br>
-    csm = SplinesModel( knots=knots, order=2 )<br>
-    print csm.getNumberOfParameters( )<br>
+    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
+    csm = SplinesModel( knots=knots, order=2 )
+    print csm.getNumberOfParameters( )
 18
 * # or alternatively : <br>
-    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
+    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    print csm.getNumberOfParameters( )
 18
 * # or alternatively : <br>
-    npt = 161                                               # to include both 0 and 160.<br>
-    x = numpy.arange( npt, dtype=float )                    # x-values<br>
-    csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
+    npt = 161                                               # to include both 0 and 160.
+    x = numpy.arange( npt, dtype=float )                    # x-values
+    csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    print csm.getNumberOfParameters( )
 18
 
 <b>Attributes</b>
@@ -78,7 +74,7 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 
 
 <a name="SplinesModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SplinesModel(</strong> knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
  copy=None, **kwargs )
 </th></tr></thead></table>
@@ -122,12 +118,12 @@ minmax of knots. It deteriorates fastly going outside the domain.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -147,7 +143,7 @@ The partials are the powers of x (input) from 0 to degree.
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -163,14 +159,14 @@ Return the derivative df/dx at each xdata (=x).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -182,14 +178,14 @@ Return the name of the parameter.
 * k  :  int<br>
     index of the parameter.
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 
 * [<strong>baseResult(</strong> xdata, params )](./LinearModel.md#baseResult)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

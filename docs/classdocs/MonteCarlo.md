@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="MonteCarlo"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class MonteCarlo(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class MonteCarlo(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Helper class to calculate the confidence region of a fitted model.
@@ -40,7 +36,7 @@ Author:      Do Kester
 
 
 <a name="MonteCarlo"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MonteCarlo(</strong> xdata, model, covariance, index=None, seed=12345, mcycles=25 )
 </th></tr></thead></table>
 <p>
@@ -72,12 +68,12 @@ ValueError when model and input have different dimensions
 
 
 <a name="decompose"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decompose(</strong> covariance )
 </th></tr></thead></table>
 <p>
 <a name="getError"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getError(</strong> xdata=None )
 </th></tr></thead></table>
 <p>
@@ -97,7 +93,7 @@ xdata ; array_like
 
 
 <a name="randomVariant"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>randomVariant(</strong> xdata )
 </th></tr></thead></table>
 <p>

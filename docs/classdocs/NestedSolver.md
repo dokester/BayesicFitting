@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="NestedSolver"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class NestedSolver(</strong> <a href="./NestedSampler.html">NestedSampler</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class NestedSolver(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 NestedSolver is an extension of NestedSampler. It uses the
@@ -80,7 +76,7 @@ Author       Do Kester.
 
 
 <a name="NestedSolver"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NestedSolver(</strong> problem, distribution=None, keep=None,
  ensemble=100, discard=1, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
@@ -142,7 +138,7 @@ Create a new class, providing inputs and model.
 
 
 <a name="solve"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>solve(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 <p>
@@ -165,7 +161,7 @@ The more sammples (with solutions) can be found in the sample list.
 
 
 <a name="setErrorDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 <p>
@@ -183,7 +179,7 @@ Set the error distribution for calculating the likelihood.
 
 
 <a name="setEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 <p>
@@ -199,7 +195,7 @@ initialize the engines.
 
 
 <a name="initWalkers"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 <p>
@@ -217,7 +213,7 @@ Initialize the walkers at random values of parameters and scale
 * startdict  :  dictionary of { str : Engine }<br>
     connecting a name to a StartEngine
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NestedSampler.html">NestedSampler</a></th></tr></thead></table>
 
 

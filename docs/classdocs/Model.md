@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Model"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Model(</strong> <a href="./FixedModel.html">FixedModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Model(</strong> <a href="./FixedModel.html">FixedModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Model implements the common parts of (compound) models.
@@ -35,44 +31,44 @@ whether the partial has been implemented properly.
 
 <b>Example:</b>
 
-    x = numpy.arange( 10 )<br>
-    poly = PolynomialModel( 2 )             # quadratic model<br>
-    poly.parameters = [3,2,1]               # set the parameters for the model<br>
-    y = poly( x )                           # evaluate the model at x<br>
-    p0 = poly[0]                            # 3: the first parameter<br>
-   <br>
-    # To make a compound model consisting of a gaussian and a constant background<br>
-   <br>
-    gauss = GaussModel( )                   # gaussian model<br>
-    gauss += PolynomialModel( 0 )           # gaussian on a constant background<br>
-    print( gauss.getNumberOfParameters( ) )<br>
-    4<br>
-   <br>
-    # Set limits to this model<br>
-   <br>
-    lolim = [0,-10,0,-5]                    # lower limits for the parameters<br>
-    hilim = [10,10,2, 5]                    # high limits for parameters<br>
-    gauss.setLimits( lolim, hilim )         # set limits. Does not work with all Fitters<br>
-   <br>
-    # Pipe a model; The order of operation matters.<br>
-    # m5 = ( m1 | m2 ) + m3<br>
-   <br>
-    m1 = PolynomialModel( 1 )               # m1( x, p )<br>
-    m2 = SineModel()                        # m2( x, q )<br>
-    m3 = PolynomialModel( 0 )               # m3( x, r )<br>
-    m4 = m1 | m2                            # m2( m1( x, p ), q )<br>
-    m5 = m4 + m3                            # m2( m1( x, p ), q ) + m3( x, r )<br>
-    print( m5.parameters )                  # [p, q, r]<br>
-   <br>
-    # Implicit brackets<br>
-    # m5 = m1 | ( m2 + m3 )<br>
-   <br>
-    m1 = PolynomialModel( 1 )               # m1( x, p )<br>
-    m2 = SineModel()                        # m2( x, q )<br>
-    m3 = PolynomialModel( 0 )               # m3( x, r )<br>
-    m4 = m2 + m3                            # m2( x, q ) + m3( x, r )<br>
-    m5 = m1 | m4                            # m2( m1( x, p ), q ) + m3( m1( x, p ), r )<br>
-    print( m5.parameters )                  # [p, q, r]<br>
+    x = numpy.arange( 10 )
+    poly = PolynomialModel( 2 )             # quadratic model
+    poly.parameters = [3,2,1]               # set the parameters for the model
+    y = poly( x )                           # evaluate the model at x
+    p0 = poly[0]                            # 3: the first parameter
+   
+    # To make a compound model consisting of a gaussian and a constant background
+   
+    gauss = GaussModel( )                   # gaussian model
+    gauss += PolynomialModel( 0 )           # gaussian on a constant background
+    print( gauss.getNumberOfParameters( ) )
+    4
+   
+    # Set limits to this model
+   
+    lolim = [0,-10,0,-5]                    # lower limits for the parameters
+    hilim = [10,10,2, 5]                    # high limits for parameters
+    gauss.setLimits( lolim, hilim )         # set limits. Does not work with all Fitters
+   
+    # Pipe a model; The order of operation matters.
+    # m5 = ( m1 | m2 ) + m3
+   
+    m1 = PolynomialModel( 1 )               # m1( x, p )
+    m2 = SineModel()                        # m2( x, q )
+    m3 = PolynomialModel( 0 )               # m3( x, r )
+    m4 = m1 | m2                            # m2( m1( x, p ), q )
+    m5 = m4 + m3                            # m2( m1( x, p ), q ) + m3( x, r )
+    print( m5.parameters )                  # [p, q, r]
+   
+    # Implicit brackets
+    # m5 = m1 | ( m2 + m3 )
+   
+    m1 = PolynomialModel( 1 )               # m1( x, p )
+    m2 = SineModel()                        # m2( x, q )
+    m3 = PolynomialModel( 0 )               # m3( x, r )
+    m4 = m2 + m3                            # m2( x, q ) + m3( x, r )
+    m5 = m1 | m4                            # m2( m1( x, p ), q ) + m3( m1( x, p ), r )
+    print( m5.parameters )                  # [p, q, r]
 
 <b>Attributes</b>
 
@@ -101,7 +97,7 @@ Author       Do Kester
 
 
 <a name="Model"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Model(</strong> nparams=0, ndim=1, copy=None, params=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -127,21 +123,21 @@ the parammeters which are all initialized to 0.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return a copy. 
 
 <a name="chainLength"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chainLength(</strong> )
 </th></tr></thead></table>
 <p>
 Return length of the chain. 
 
 <a name="isNullModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isNullModel(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -149,7 +145,7 @@ Return length of the chain.
 Return True if the model has no parameters (a NullModel).
 
 <a name="isolateModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isolateModel(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -169,7 +165,7 @@ IndexError when the chain is shorter than k.
 
 
 <a name="addModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>addModel(</strong> model )
 </th></tr></thead></table>
 <p>
@@ -192,7 +188,7 @@ existing chain. For the use of "brackets" in a chain use BracketModel.
 
 
 <a name="subtractModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>subtractModel(</strong> model )
 </th></tr></thead></table>
 <p>
@@ -208,7 +204,7 @@ The final result is the difference of the models.
 
 
 <a name="multiplyModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>multiplyModel(</strong> model )
 </th></tr></thead></table>
 <p>
@@ -224,7 +220,7 @@ The final result is the product of the models.
 
 
 <a name="divideModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>divideModel(</strong> model )
 </th></tr></thead></table>
 <p>
@@ -240,7 +236,7 @@ The final result is the division of the models.
 
 
 <a name="pipeModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipeModel(</strong> model )
 </th></tr></thead></table>
 <p>
@@ -254,7 +250,7 @@ Make a compound model by piping the result into the next.
 
 
 <a name="appendModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>appendModel(</strong> model, operation )
 </th></tr></thead></table>
 <p>
@@ -273,7 +269,7 @@ Append a model to the present chain using a operation.
 ValueError when a model of a different dimensionality is offered.
 
 <a name="correctParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>correctParameters(</strong> params )
 </th></tr></thead></table>
 <p>
@@ -287,7 +283,7 @@ Check parameters for non-zero and positivity
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, param=None )
 </th></tr></thead></table>
 <p>
@@ -303,12 +299,12 @@ Return the result of the model as applied to an array of input data.
 
 
 <a name="operate"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>operate(</strong> res, pars, next )
 </th></tr></thead></table>
 <p>
 <a name="derivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> xdata, param, useNum=False )
 </th></tr></thead></table>
 <p>
@@ -326,7 +322,7 @@ Return the derivatives (df/dx) of the model at the inputs
 
 
 <a name="partial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param, useNum=False )
 </th></tr></thead></table>
 <p>
@@ -344,12 +340,12 @@ Return the partial derivatives of the model at the inputs
 
 
 <a name="selectPipe"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>selectPipe(</strong> ndim, ninter, ndout ) 
 </th></tr></thead></table>
 <p>
 <a name="pipe_0"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_0(</strong> dGd, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -365,7 +361,7 @@ Return partial in the form of [N,P]
     Derivative of H to G  
 
 <a name="pipe_1"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_1(</strong> dGd, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -381,7 +377,7 @@ Return partial in the form [O][N,P]
     Derivative of H to G  
 
 <a name="pipe_2"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_2(</strong> dGd, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -397,7 +393,7 @@ Return partial in the form of [N,P]
     Derivative of H to G  
 
 <a name="pipe_3"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_3(</strong> dGd, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -413,7 +409,7 @@ Return partial in the form of [O][NP]
     Derivative of H to G  
 
 <a name="pipe_4"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_4(</strong> dGdx, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -429,7 +425,7 @@ Return partial in the form of [N]
     Derivative of H to G  
 
 <a name="pipe_5"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_5(</strong> dGdx, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -445,7 +441,7 @@ Return derivative in the form of [N,O]
     Derivative of H to G  
 
 <a name="pipe_6"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_6(</strong> dGdx, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -461,7 +457,7 @@ Return derivative in the form of [N]
     Derivative of H to G  
 
 <a name="pipe_7"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_7(</strong> dGdx, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -477,7 +473,7 @@ Return derivative in the form of [N,O]
     Derivative of H to G  
 
 <a name="pipe_8"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_8(</strong> dGdx, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -493,7 +489,7 @@ Return derivative in the form of [N,I]
     Derivative of H to G  
 
 <a name="pipe_9"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_9(</strong> dGdx, dHdG ) 
 </th></tr></thead></table>
 <p>
@@ -509,7 +505,7 @@ Return derivative in the form of [O][N,I]
     Derivative of H to G  
 
 <a name="shortName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -517,14 +513,14 @@ Return derivative in the form of [O][N,I]
 Return a short version the string representation: upto first non-letter.
 
 <a name="getNumberOfParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNumberOfParameters(</strong> )
 </th></tr></thead></table>
 <p>
 Returns the number of parameters of the ( compound ) model. 
 
 <a name="numDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numDerivative(</strong> xdata, param )
 </th></tr></thead></table>
 <p>
@@ -540,7 +536,7 @@ Returns numerical derivatives (df/dx) of the model function.
 
 
 <a name="numPartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartial(</strong> xdata, param )
 </th></tr></thead></table>
 <p>
@@ -556,7 +552,7 @@ Returns numerical partial derivatives of the model function.
 
 
 <a name="isDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -564,7 +560,7 @@ Returns numerical partial derivatives of the model function.
 Return whether the model can change the number of parameters dynamically.
 
 <a name="hasPriors"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> isBound=True ) 
 </th></tr></thead></table>
 <p>
@@ -577,7 +573,7 @@ Return True when the model has priors for all its parameters.
     Also check if the prior is bound.
 
 <a name="getPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> kpar )
 </th></tr></thead></table>
 <p>
@@ -595,7 +591,7 @@ IndexError when kpar is larger than the number of parameters.
 
 
 <a name="setPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -617,7 +613,7 @@ IndexError when kpar is larger than the number of parameters.
 
 
 <a name="getParameterName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterName(</strong> kpar )
 </th></tr></thead></table>
 <p>
@@ -635,7 +631,7 @@ IndexError when kpar is larger than the number of parameters.
 
 
 <a name="getParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterUnit(</strong> kpar )
 </th></tr></thead></table>
 <p>
@@ -653,14 +649,14 @@ IndexError when kpar is > number of parameters
 
 
 <a name="getIntegralUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegralUnit(</strong> )
 </th></tr></thead></table>
 <p>
 Return the unit of the integral of the model over x. 
 
 <a name="setLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> lowLimits=None, highLimits=None )
 </th></tr></thead></table>
 <p>
@@ -681,7 +677,7 @@ It only works in *Fitter classes which support it.
 
 
 <a name="getLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLimits(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -706,7 +702,7 @@ mdl = self
 return (lolim, hilim)
 
 <a name="hasLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLimits(</strong> fitindex=None )
 </th></tr></thead></table>
 <p>
@@ -719,7 +715,7 @@ fitindex    list of indices to be fitted.
 
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uvalue, kpar=None )
 </th></tr></thead></table>
 <p>
@@ -735,7 +731,7 @@ Convert a value in [0,1] to one inside the limits of the parameter.
 
 
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dvalue, kpar=None )
 </th></tr></thead></table>
 <p>
@@ -751,7 +747,7 @@ Convert a value within the domain of the parameter to one in [0,1].
 
 
 <a name="partialDomain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialDomain2Unit(</strong> dvalue )
 </th></tr></thead></table>
 <p>
@@ -765,26 +761,26 @@ Return a the derivate of the domain2Unit function to dval.
 
 
 <a name="nextPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPrior(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="isMixed"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isMixed(</strong> )
 </th></tr></thead></table>
 <p>
 Return false. 
 
 <a name="getLinearIndex"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLinearIndex(</strong> )
 </th></tr></thead></table>
 <p>
 Return null. 
 
 <a name="testPartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>testPartial(</strong> xdata, params, silent=True )
 </th></tr></thead></table>
 <p>
@@ -808,7 +804,7 @@ The number of large deviations.
 
 
 <a name="strictNumericPartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>strictNumericPartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
 <p>
@@ -827,17 +823,17 @@ For compound models it is different from numPartial and numDerivative.
     int  : return derivative to parameter kpar.
 
 <a name="assignDF1"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>assignDF1(</strong> partial, i, dpi ) 
 </th></tr></thead></table>
 <p>
 <a name="assignDF2"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>assignDF2(</strong> partial, i, dpi ) 
 </th></tr></thead></table>
 <p>
 <a name="strictNumericDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>strictNumericDerivative(</strong> xdata, param ) 
 </th></tr></thead></table>
 <p>
@@ -855,7 +851,7 @@ For compound models it is different from numPartial and numDerivative.
 * param  :  array-like<br>
     parameters
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -865,7 +861,7 @@ For compound models it is different from numPartial and numDerivative.
 * [<strong>basePartial(</strong> xdata, param, parlist=None ) ](./FixedModel.md#basePartial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

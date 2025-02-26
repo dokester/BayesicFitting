@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SalesmanProblem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SalesmanProblem(</strong> <a href="./OrderProblem.html">OrderProblem</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SalesmanProblem(</strong> <a href="./OrderProblem.html">OrderProblem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Traveling Salesman Problem.
@@ -24,16 +20,16 @@ The parameters are initialized at [k for k in range( npars )]
 
 <b>Examples</b>
 
-     tsm = SalesmanProblem( 100 )<br>
-    print( tsm )<br>
+     tsm = SalesmanProblem( 100 )
+    print( tsm )
 TravelingSalesman in 2 dimensions with 100 nodes.
-    print( tsm.npars )<br>
+    print( tsm.npars )
 100
 
 
 
 <a name="SalesmanProblem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SalesmanProblem(</strong> xdata=None, weights=None, distance="euclid", scale=None, table=None,
  oneway=False, copy=None )
 </th></tr></thead></table>
@@ -67,14 +63,14 @@ Traveling Salesman problem.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="acceptWeight"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
 <p>
@@ -83,7 +79,7 @@ True if the distribution accepts weights.
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> params )
 </th></tr></thead></table>
 <p>
@@ -106,7 +102,7 @@ An array of distances
 
 
 <a name="manhattan"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>manhattan(</strong> xdata, pars, roll=1 ) 
 </th></tr></thead></table>
 <p>
@@ -126,7 +122,7 @@ Each distance is
     number of positions to roll 
 
 <a name="euclidic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>euclidic(</strong> xdata, pars, roll=1 ) 
 </th></tr></thead></table>
 <p>
@@ -146,7 +142,7 @@ Each distance is
     number of positions to roll 
 
 <a name="spherical"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>spherical(</strong> xdata, pars, roll=1 ) 
 </th></tr></thead></table>
 <p>
@@ -169,7 +165,7 @@ The results are in radian.
     number of positions to roll 
 
 <a name="tabulated"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>tabulated(</strong> xdata, pars, roll=1 ) 
 </th></tr></thead></table>
 <p>
@@ -189,7 +185,7 @@ Each distance is
     number of positions to roll 
 
 <a name="minimumDistance"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>minimumDistance(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -207,7 +203,7 @@ for roll in range( 2, ndata )
 return md
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -219,7 +215,7 @@ return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./OrderProblem.html">OrderProblem</a></th></tr></thead></table>
 
 
@@ -229,7 +225,7 @@ return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
 * [<strong>myDistribution(</strong> ) ](./OrderProblem.md#myDistribution)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 
 

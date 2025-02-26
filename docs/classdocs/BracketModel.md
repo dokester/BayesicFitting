@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="BracketModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 BracketModel provides brackets to a chain of Models.
@@ -50,20 +46,20 @@ Model.Brackets is an internal class inside Model.
 
 Explicit use of BrackeModel
 
-    m1 = GaussModel( )<br>
-    m1 += PolynomialModel( 0 )              # Gauss on a constant background<br>
-    m2 = BracketModel( m1 )<br>
-    m3 = SineModel( )<br>
-    m3 *= m2                                # sine * ( gauss + const )<br>
-    print( m3 )<br>
+    m1 = GaussModel( )
+    m1 += PolynomialModel( 0 )              # Gauss on a constant background
+    m2 = BracketModel( m1 )
+    m3 = SineModel( )
+    m3 *= m2                                # sine * ( gauss + const )
+    print( m3 )
 
 Implicit use of BrackeModel, automatically invoked when m2 is a chain
 
-    m1 = GaussModel( )<br>
-    m1 += PolynomialModel( 0 )              # m1 is a chain of models<br>
-    m3 = SineModel( )<br>
-    m3 *= m1                                # sine * ( gauss + const )<br>
-    print( m3 )                             # exactly the same<br>
+    m1 = GaussModel( )
+    m1 += PolynomialModel( 0 )              # m1 is a chain of models
+    m3 = SineModel( )
+    m3 *= m1                                # sine * ( gauss + const )
+    print( m3 )                             # exactly the same
 
 
 <b>Warning</b>
@@ -80,7 +76,7 @@ BracketModel is about rather advanced model building.
 
 
 <a name="BracketModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BracketModel(</strong> model, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -106,7 +102,7 @@ parameters that were 'fixed' in the constituent Models. They stay fixed.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
@@ -114,7 +110,7 @@ parameters that were 'fixed' in the constituent Models. They stay fixed.
 Copy a Bracket Model.
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Brackets.html">Brackets</a></th></tr></thead></table>
 
 

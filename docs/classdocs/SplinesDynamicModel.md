@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SplinesDynamicModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 BasicSplinesModel that is modifiable (knot locations) and dynamic (in number
@@ -17,19 +13,19 @@ of knots)
 
 <b>Examples</b>
 
-    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160<br>
-    csm = SplinesModel( knots=knots, order=2 )<br>
-    print csm.getNumberOfParameters( )<br>
+    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
+    csm = SplinesModel( knots=knots, order=2 )
+    print csm.getNumberOfParameters( )
 18
 * # or alternatively : <br>
-    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
+    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    print csm.getNumberOfParameters( )
 18
 * # or alternatively : <br>
-    npt = 161                                               # to include both 0 and 160.<br>
-    x = numpy.arange( npt, dtype=float )                    # x-values<br>
-    csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
+    npt = 161                                               # to include both 0 and 160.
+    x = numpy.arange( npt, dtype=float )                    # x-values
+    csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    print csm.getNumberOfParameters( )
 18
 
 <b>Attributes</b>
@@ -70,7 +66,7 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 
 
 <a name="SplinesDynamicModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SplinesDynamicModel(</strong> modifiable=True, dynamic=True, growPrior=None, minKnots=2, maxKnots=None,
  minDistance=0.01, copy=None, **kwargs )
 </th></tr></thead></table>
@@ -109,24 +105,24 @@ ValueError if not minKnots <= nrknots <= maxKnots
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> modifiable=None, dynamic=None )
 </th></tr></thead></table>
 <p>
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
 <a name="changeNComp"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
 <p>
 <a name="grow"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, force=False, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -148,7 +144,7 @@ Increase the degree by one upto maxComp ( if present ).
 
 
 <a name="shrink"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -168,12 +164,12 @@ Decrease the degree by one downto minComp ( default 1 ).
 
 
 <a name="vary"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=None ) 
 </th></tr></thead></table>
 <p>
 <a name="varyAlt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>varyAlt(</strong> offset=0, rng=None, **kwargs ) 
 </th></tr></thead></table>
 <p>
@@ -190,12 +186,12 @@ Vary the structure of a Modifiable Model
 * kwargs  :  keyword arguments<br>
     for specific implementations
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Modifiable.html">Modifiable,</a></th></tr></thead></table>
 
 
 * [<strong>isModifiable(</strong> ) ](./Modifiable.md#isModifiable)
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Dynamic.html">Dynamic,</a></th></tr></thead></table>
 
 
@@ -207,7 +203,7 @@ Vary the structure of a Modifiable Model
 * [<strong>alterParameters(</strong> param, location, dnp, offset, value=None ) ](./Dynamic.md#alterParameters)
 * [<strong>alterFitindex(</strong> findex, location, dnp, offset ) ](./Dynamic.md#alterFitindex)
 * [<strong>shuffle(</strong> param, offset, np, rng ) ](./Dynamic.md#shuffle)
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BasicSplinesModel.html">BasicSplinesModel</a></th></tr></thead></table>
 
 
@@ -224,7 +220,7 @@ Vary the structure of a Modifiable Model
 * [<strong>baseParameterUnit(</strong> k )](./BasicSplinesModel.md#baseParameterUnit)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./SplinesModel.html">SplinesModel</a></th></tr></thead></table>
 
 

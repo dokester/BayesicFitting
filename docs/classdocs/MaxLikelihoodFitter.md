@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="MaxLikelihoodFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class MaxLikelihoodFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class MaxLikelihoodFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Base class with methods common to fitters handling ErrorDistributions.
@@ -33,7 +29,7 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 
 
 <a name="MaxLikelihoodFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MaxLikelihoodFitter(</strong> xdata, model, errdis=None, scale=None, power=2.0,
  **kwargs )
 </th></tr></thead></table>
@@ -67,7 +63,7 @@ It does not work by itself.
 
 
 <a name="makeFuncs"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeFuncs(</strong> data, weights=None, index=None, ret=3 ) 
 </th></tr></thead></table>
 <p>
@@ -86,7 +82,7 @@ Make connection to the desired func, gradient and hessian.
     return (func), (func,dfunc) or (func,dfunc,hess)
 
 <a name="getScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -94,12 +90,12 @@ Make connection to the desired func, gradient and hessian.
 Return the stdev of the noise.
 
 <a name="getLogLikelihood"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) 
 </th></tr></thead></table>
 <p>
 <a name="normalize"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalize(</strong> normdfdp, normdata, weight=1.0 ) 
 </th></tr></thead></table>
 <p>
@@ -113,7 +109,7 @@ the method is not implemented for MaxLikelihoodFitters
 
 
 <a name="testGradient"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>testGradient(</strong> par, at, data, weights=None )
 </th></tr></thead></table>
 <p>
@@ -121,7 +117,7 @@ the method is not implemented for MaxLikelihoodFitters
 returns true if the test fails.
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
@@ -132,7 +128,7 @@ returns true if the test fails.
 * [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

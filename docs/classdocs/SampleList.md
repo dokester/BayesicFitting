@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SampleList.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="SampleList"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class SampleList(</strong> <a href="./list.html">list</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class SampleList(</strong> <a href="./list.html">list</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SampleList.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 SampleList is a list of Samples, see [Sample](./Sample.md)
@@ -77,7 +73,7 @@ Author       Do Kester
 
 
 <a name="SampleList"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SampleList(</strong> model, nsamples, parameters=None, fitIndex=None, ndata=1 )
 </th></tr></thead></table>
 <p>
@@ -99,12 +95,12 @@ Constructor.
 
 
 <a name="addSamples"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>addSamples(</strong> model, nSamples, parameters, fitIndex=None )
 </th></tr></thead></table>
 <p>
 <a name="sample"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sample(</strong> k, sample=None ) 
 </th></tr></thead></table>
 <p>
@@ -119,7 +115,7 @@ Set or return the k-th sample from the list.
     if present, set the kth sample with sample
 
 <a name="normalize"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalize(</strong> )
 </th></tr></thead></table>
 <p>
@@ -129,7 +125,7 @@ make Sum( weight ) = 1
 
 
 <a name="add"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>add(</strong> sample )
 </th></tr></thead></table>
 <p>
@@ -143,7 +139,7 @@ Add a Sample to the list
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> src, des )
 </th></tr></thead></table>
 <p>
@@ -159,7 +155,7 @@ Copy one item of the list onto another.
 
 
 <a name="weed"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>weed(</strong> maxsize=None )
 </th></tr></thead></table>
 <p>
@@ -173,7 +169,7 @@ weed( ) is called recursively until the size has the required length.
 
 
 <a name="logPlus"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logPlus(</strong> x, y )
 </th></tr></thead></table>
 <p>
@@ -181,7 +177,7 @@ weed( ) is called recursively until the size has the required length.
 Return  log( exp(x) + exp(y) )
 
 <a name="getParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameters(</strong> )
 </th></tr></thead></table>
 <p>
@@ -197,7 +193,7 @@ Calculate the average of the parameters and the standard deviations.
 
 
 <a name="getHypars"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getHypars(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -220,7 +216,7 @@ self.hypars = hypar
 return self.hypars
 
 <a name="getNuisance"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNuisance(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -228,7 +224,7 @@ return self.hypars
 Return the average of the nuisance parameters (if present)
 
 <a name="averstd"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>averstd(</strong> name ) 
 </th></tr></thead></table>
 <p>
@@ -241,7 +237,7 @@ Return the average and the stddevs of the named attribute from Sample
     name of an attribute from Sample
 
 <a name="getMedianIndex"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMedianIndex(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -249,7 +245,7 @@ Return the average and the stddevs of the named attribute from Sample
 Return the index at which the median can be found.
 
 <a name="getMaximumNumberOfParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMaximumNumberOfParameters(</strong> )
 </th></tr></thead></table>
 <p>
@@ -257,7 +253,7 @@ Return the index at which the median can be found.
 Return the maximum number of parameters (for Dynamic Models)
 
 <a name="getParameterEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterEvolution(</strong> kpar=None )
 </th></tr></thead></table>
 <p>
@@ -275,7 +271,7 @@ to get the actual number.
 
 
 <a name="getParAndWgtEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParAndWgtEvolution(</strong> )
 </th></tr></thead></table>
 <p>
@@ -288,28 +284,28 @@ to get the actual number.
 
 
 <a name="getNumberOfParametersEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNumberOfParametersEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the number of parameters. 
 
 <a name="getScaleEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScaleEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the scale. 
 
 <a name="getLogLikelihoodEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihoodEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the log( Likelihood ). 
 
 <a name="getLogWeightEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogWeightEvolution(</strong> )
 </th></tr></thead></table>
 <p>
@@ -321,7 +317,7 @@ See #getWeightEvolution( ).
 
 
 <a name="getWeightEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getWeightEvolution(</strong> )
 </th></tr></thead></table>
 <p>
@@ -332,28 +328,28 @@ The weights sum to 1.
 
 
 <a name="getParentEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParentEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the parentage. 
 
 <a name="getStartEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getStartEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the start generation. 
 
 <a name="getGeneration"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getGeneration(</strong> )
 </th></tr></thead></table>
 <p>
 Return the generation number pertaining to the evolution. 
 
 <a name="getLowLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLowLogL(</strong> )
 </th></tr></thead></table>
 <p>
@@ -361,7 +357,7 @@ Return the generation number pertaining to the evolution.
 Return the lowest value of logL in the samplelist, plus its index.
 
 <a name="average"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>average(</strong> xdata )
 </th></tr></thead></table>
 <p>
@@ -375,7 +371,7 @@ Return the (weighted) average result of the model(s) over the samples.
 
 
 <a name="monteCarloError"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>monteCarloError(</strong> xdata )
 </th></tr></thead></table>
 <p>
@@ -397,7 +393,7 @@ and returned at each input value.
     standard deviations at each input point<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./list.html">list</a></th></tr></thead></table>
 
 

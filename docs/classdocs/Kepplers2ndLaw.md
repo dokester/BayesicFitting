@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Kepplers2ndLaw"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Kepplers2ndLaw(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Kepplers2ndLaw(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Class for calculating Kepplers second law for planetary motion.
@@ -29,7 +25,7 @@ The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 
 
 <a name="meanAnomaly"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>meanAnomaly(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -49,7 +45,7 @@ M = 2 * pi * xdata / P - p
     parameters: eccentr, semimajor, period, ppass
 
 <a name="dMdx"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dMdx(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -62,7 +58,7 @@ Return derivatives of M (mean anomaly) to xdata
     derivatives of M to x (xdata)
 
 <a name="dMdpar"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dMdpar(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -77,7 +73,7 @@ Return derivatives of M (mean anomaly) to relevant parameters.
     derivatives of M to p (phase of periastron)
 
 <a name="eccentricAnomaly"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly(</strong> xdata, params, Estart=None ) 
 </th></tr></thead></table>
 <p>
@@ -87,7 +83,7 @@ Take the best one : Halleys method
 It converges in a few iterations for e <= 0.999999999
 
 <a name="eccentricAnomaly0"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly0(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -111,7 +107,7 @@ E = M + e * sin( E )
     parameters: eccentr, semimajor, period, ppass
 
 <a name="eccentricAnomaly1"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly1(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -133,7 +129,7 @@ E = M + e * sin( E )
     parameters: eccentr, semimajor, period, ppass
 
 <a name="eccentricAnomaly2"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly2(</strong> xdata, params, Estart=None ) 
 </th></tr></thead></table>
 <p>
@@ -157,7 +153,7 @@ E = M + e * sin( E )
     starting values for E
 
 <a name="dEdM"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dEdM(</strong> xdata, params, cosE ) 
 </th></tr></thead></table>
 <p>
@@ -170,7 +166,7 @@ Return derivatives of E (eccentric anomaly) to mean anomaly
     derivatives of E to M (mean anomaly)
 
 <a name="dEdx"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dEdx(</strong> xdata, params, cosE ) 
 </th></tr></thead></table>
 <p>
@@ -183,7 +179,7 @@ Return derivatives of E (eccentric anomaly) to xdata
     derivatives of E to x (xdata)
 
 <a name="dEdpar"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dEdpar(</strong> xdata, params, cosE, sinE ) 
 </th></tr></thead></table>
 <p>
@@ -200,7 +196,7 @@ Return derivatives of E (eccentric anomaly) to relevant parameters.
     derivatives of E to p (phase of periastron)
 
 <a name="radiusAndTrueAnomaly"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>radiusAndTrueAnomaly(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -239,7 +235,7 @@ Avoid cases where cos( E ) is too close to -1
 
 
 <a name="drvdE"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>drvdE(</strong> xdata, params, cosE, sinE ) 
 </th></tr></thead></table>
 <p>
@@ -265,7 +261,7 @@ Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
     derivatives of v to E (eccentric anomaly)
 
 <a name="drvdx"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>drvdx(</strong> xdata, params, cosE, sinE ) 
 </th></tr></thead></table>
 <p>
@@ -280,7 +276,7 @@ Return derivatives of r (radius) and v (true anomaly) to xdata
     derivatives of v to x (xdata)
 
 <a name="drvdpar"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>drvdpar(</strong> xdata, params, E, cosE, sinE ) 
 </th></tr></thead></table>
 <p>
@@ -305,7 +301,7 @@ Return derivatives of r (radius) and v (true anomaly) to relevant parameters.
     derivatives of v to p (phase of periastron)
 
 <a name="getMsini"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMsini(</strong> stellarmass ) 
 </th></tr></thead></table>
 <p>

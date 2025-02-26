@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="ImageAssistant"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class ImageAssistant(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class ImageAssistant(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 ImageAssistant contains 2 methods to assist with more dimensional
@@ -24,34 +20,34 @@ fitting.
 
 <b>Example</b>
 
-    ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )<br>
-    ias = ImageAssistant()<br>
-    ky = ias.getIndices( ymap )<br>
-    print( ky.shape )<br>
+    ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
+    ias = ImageAssistant()
+    ky = ias.getIndices( ymap )
+    print( ky.shape )
     (6,2)<br>
-    print( ky[4,0], ky[4,1], ymap[ ky[4,0], ky[4,1] ] )<br>
+    print( ky[4,0], ky[4,1], ymap[ ky[4,0], ky[4,1] ] )
     1 0 4<br>
-    ias = ImageAssistant( order='F')<br>
-    ky = ias.getIndices( ymap )<br>
-    print( ky.shape )<br>
+    ias = ImageAssistant( order='F')
+    ky = ias.getIndices( ymap )
+    print( ky.shape )
     (6,2)<br>
-    print( ky[4,0], ky[4,1], ymap[ ky[4,1], ky[4,0] ] )<br>
+    print( ky[4,0], ky[4,1], ymap[ ky[4,1], ky[4,0] ] )
     0 1 4<br>
 
 ## Suppose y is a 2-dimensional map of something
-    aass = ImageAssistant( )<br>
-    input = aass.getIndices( y )<br>
-    fitter = Fitter( input, some2dModel )<br>
-    pars = fitter.fit( aass.resizeData( y ) )<br>
-    yfit = some2dModel.result( input )                  # Double1d<br>
-    yfit2d = aass.resizeData( yfit, shape=y.shape )     # Double2d<br>
+    aass = ImageAssistant( )
+    input = aass.getIndices( y )
+    fitter = Fitter( input, some2dModel )
+    pars = fitter.fit( aass.resizeData( y ) )
+    yfit = some2dModel.result( input )                  # Double1d
+    yfit2d = aass.resizeData( yfit, shape=y.shape )     # Double2d
 
 
 Author       Do Kester
 
 
 <a name="ImageAssistant"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ImageAssistant(</strong> order='C' )
 </th></tr></thead></table>
 <p>
@@ -67,7 +63,7 @@ needed for the Fitters.
     'F' orders from fast to slow
 
 <a name="getIndices"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIndices(</strong> ya, order='C' )
 </th></tr></thead></table>
 <p>
@@ -89,7 +85,7 @@ To be used as input in the Fitter classes.
 
 
 <a name="getPositions"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPositions(</strong> ymap, order='C', center=True, deproject=None ) 
 </th></tr></thead></table>
 <p>
@@ -115,7 +111,7 @@ Return the (x,y) positions of the pixels in the map.
 numpy.array of floats : the positions of the pixels
 
 <a name="getydata"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getydata(</strong> ya )
 </th></tr></thead></table>
 <p>
@@ -128,7 +124,7 @@ Return a copy of ya as a 1 dim array.
     map to be reshaped
 
 <a name="resizeData"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>resizeData(</strong> res, shape=None )
 </th></tr></thead></table>
 <p>

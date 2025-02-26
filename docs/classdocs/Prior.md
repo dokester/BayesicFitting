@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Prior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Prior(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Prior(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Base class defining prior distributions.
@@ -61,7 +57,7 @@ The copy method is also necessary.
     urange (hi-lo) in unit
 
 <a name="Prior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Prior(</strong> limits=None, circular=False, domain=[-math.inf,math.inf],
  prior=None )
 </th></tr></thead></table>
@@ -83,14 +79,14 @@ Default constructor.
     prior to copy (with new limits if applicable)
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> ) 
 </th></tr></thead></table>
 <p>
 Return a copy 
 
 <a name="limitedIntegral"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitedIntegral(</strong> center=0, circular=False, limits=None ) 
 </th></tr></thead></table>
 <p>
@@ -110,7 +106,7 @@ due to limits or circularity.
     2 limits, resp low and high
 
 <a name="setLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits=None )
 </th></tr></thead></table>
 <p>
@@ -130,7 +126,7 @@ ValueError when low limit is larger than high limit or out of Domain
 
 
 <a name="setPriorAttributes"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPriorAttributes(</strong> limits, circular ) 
 </th></tr></thead></table>
 <p>
@@ -147,7 +143,7 @@ Set circular attributes.
     float   period
 
 <a name="isCircular"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isCircular(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -155,7 +151,7 @@ Set circular attributes.
 Whether circular
 
 <a name="limitedDomain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitedDomain2Unit(</strong> dval ) 
 </th></tr></thead></table>
 <p>
@@ -163,7 +159,7 @@ Whether circular
 Shrink domain to value in [0,1]
 
 <a name="limitedUnit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitedUnit2Domain(</strong> uval ) 
 </th></tr></thead></table>
 <p>
@@ -171,7 +167,7 @@ Shrink domain to value in [0,1]
 Expand value in [0,1] to domain
 
 <a name="circularDomain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>circularDomain2Unit(</strong> dval ) 
 </th></tr></thead></table>
 <p>
@@ -179,7 +175,7 @@ Expand value in [0,1] to domain
 Make domain circular in unit by shrinking: domain ==> unit ==> [1/3,2/3]
 
 <a name="circularUnit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>circularUnit2Domain(</strong> uval ) 
 </th></tr></thead></table>
 <p>
@@ -187,14 +183,14 @@ Make domain circular in unit by shrinking: domain ==> unit ==> [1/3,2/3]
 Unpack circular unit to domain: [1/3,2/3] ==> unit ==> domain
 
 <a name="unsetLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unsetLimits(</strong> )
 </th></tr></thead></table>
 <p>
 Remove all limits. 
 
 <a name="setAttributes"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAttributes(</strong> limits=None, scale=None ) 
 </th></tr></thead></table>
 <p>
@@ -209,7 +205,7 @@ Set possible attributes for a Prior.
     scale factor
 
 <a name="isOutOfLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isOutOfLimits(</strong> par )
 </th></tr></thead></table>
 <p>
@@ -223,7 +219,7 @@ True if the parameter is out of limits
 
 
 <a name="checkLimit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkLimit(</strong> par )
 </th></tr></thead></table>
 <p>
@@ -241,7 +237,7 @@ Check whether the parameter is within limits.
 
 
 <a name="stayInLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>stayInLimits(</strong> par )
 </th></tr></thead></table>
 <p>
@@ -255,35 +251,35 @@ Return lower limit or upper limit when parameter is outside.
 
 
 <a name="hasLowLimit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLowLimit(</strong> )
 </th></tr></thead></table>
 <p>
 Return true if the prior has its low limits set. 
 
 <a name="hasHighLimit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasHighLimit(</strong> )
 </th></tr></thead></table>
 <p>
 Return true if the prior has its high limits set. 
 
 <a name="hasLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLimits(</strong> )
 </th></tr></thead></table>
 <p>
 Return true if it has any limits. 
 
 <a name="getLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLimits(</strong> )
 </th></tr></thead></table>
 <p>
 Return the limits. 
 
 <a name="getIntegral"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegral(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -293,14 +289,14 @@ Return the integral of the prior over the valid range.
 Default: 1.0 (for bound priors)
 
 <a name="getRange"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getRange(</strong> )
 </th></tr></thead></table>
 <p>
 Return the range. 
 
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>
@@ -315,7 +311,7 @@ a parameter for a distribution.
 
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
 </th></tr></thead></table>
 <p>
@@ -330,7 +326,7 @@ between [0,1] for a distribution.
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> p )
 </th></tr></thead></table>
 <p>
@@ -346,7 +342,7 @@ If result is not defined, fall back to numerical derivative of Domain2Unit.
 
 
 <a name="partialDomain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialDomain2Unit(</strong> p )
 </th></tr></thead></table>
 <p>
@@ -360,7 +356,7 @@ Return the derivative of Domain2Unit, aka the result of the distribution at p
 
 
 <a name="logResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logResult(</strong> p ) 
 </th></tr></thead></table>
 <p>
@@ -374,7 +370,7 @@ Return the log of the result; -inf when p == 0.
 
 
 <a name="numPartialDomain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartialDomain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>
@@ -388,7 +384,7 @@ Return a the numeric derivate of the domain2Unit function to dval.
 
 
 <a name="partialLog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> p )
 </th></tr></thead></table>
 <p>
@@ -403,7 +399,7 @@ default numPartialLog
 
 
 <a name="numPartialLog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartialLog(</strong> p )
 </th></tr></thead></table>
 <p>
@@ -416,7 +412,7 @@ Return the numeric partial derivative of log( Prior ) wrt parameter.
 
 
 <a name="isBound"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 <p>

@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="PhantomSampler"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 PhantomSampler is a version of NestedSampler that removes step walkers from
@@ -39,7 +35,7 @@ Author       Do Kester.
 
 
 <a name="PhantomSampler"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PhantomSampler(</strong> xdata=None, model=None, ydata=None, weights=None,
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=100, seed=80409, rate=1.0, engines=None,
@@ -142,12 +138,12 @@ problem.
 
 
 <a name="initSample"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initSample(</strong> ensemble=None, keep=None ) 
 </th></tr></thead></table>
 <p>
 <a name="updateWalkers"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateWalkers(</strong> explorer, worst ) 
 </th></tr></thead></table>
 <p>
@@ -161,7 +157,7 @@ Update the walkerlist while appending the new (phantom) walkers to the list
 * worst  :  int<br>
     number of walkers to update
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NestedSampler.html">NestedSampler</a></th></tr></thead></table>
 
 

@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="LevenbergMarquardtFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Non-linear fitter using the Levenberg-Marquardt method.
@@ -26,31 +22,31 @@ Author       Do Kester.
 <b>Examples</b>
 
 * # assume x and y are Double1d data arrays : <br>
-    x = numpy.arange( 100, dtype=float ) / 10<br>
-    y = numpy.arange( 100, dtype=float ) / 122            # make slope<br>
-    rg = RandomGauss( seed=12345L )            # Gaussian random number generator<br>
-    y += rg( numpy.asarray( 100, dtype=float ) ) * 0.2            # add noise<br>
-    y[Range( 9,12 )] += numpy.asarray( [5,10,7], dtype=float )         # make some peak<br>
+    x = numpy.arange( 100, dtype=float ) / 10
+    y = numpy.arange( 100, dtype=float ) / 122            # make slope
+    rg = RandomGauss( seed=12345L )            # Gaussian random number generator
+    y += rg( numpy.asarray( 100, dtype=float ) ) * 0.2            # add noise
+    y[Range( 9,12 )] += numpy.asarray( [5,10,7], dtype=float )         # make some peak
 * # define a model :  GaussModel + background polynomial<br>
-    gauss = GaussModel( )                            # Gaussian<br>
-    gauss += PolynomialModel( 1 )                    # add linear background<br>
-    gauss.setParameters( numpy.asarray( [1,1,0.1,0,0], dtype=float ) )    # initial parameter guess<br>
-    print gauss.getNumberOfParameters( )                # 5 ( = 3 for Gauss + 2 for line )<br>
-    gauss.keepFixed( numpy.asarray( [2] ), numpy.asarray( [0.1], dtype=float ) )    # keep width fixed at 0.1<br>
-    lmfit = LevenbergMarquardtFitter( x, gauss )<br>
-    param = lmfit.fit( y )<br>
-    print param.length( )                             # 4 ( = 5 - 1 fixed )<br>
-    stdev = lmfit.getStandardDeviation( )             # stdevs on the parameters<br>
-    chisq = lmfit.getChiSquared( )<br>
-    scale = lmfit.getScale( )                         # noise scale<br>
-    yfit  = lmfit.getResult( )                        # fitted values<br>
-    yband = lmfit.monteCarloError( )                       # 1 sigma confidence region<br>
+    gauss = GaussModel( )                            # Gaussian
+    gauss += PolynomialModel( 1 )                    # add linear background
+    gauss.setParameters( numpy.asarray( [1,1,0.1,0,0], dtype=float ) )    # initial parameter guess
+    print gauss.getNumberOfParameters( )                # 5 ( = 3 for Gauss + 2 for line )
+    gauss.keepFixed( numpy.asarray( [2] ), numpy.asarray( [0.1], dtype=float ) )    # keep width fixed at 0.1
+    lmfit = LevenbergMarquardtFitter( x, gauss )
+    param = lmfit.fit( y )
+    print param.length( )                             # 4 ( = 5 - 1 fixed )
+    stdev = lmfit.getStandardDeviation( )             # stdevs on the parameters
+    chisq = lmfit.getChiSquared( )
+    scale = lmfit.getScale( )                         # noise scale
+    yfit  = lmfit.getResult( )                        # fitted values
+    yband = lmfit.monteCarloError( )                       # 1 sigma confidence region
 # for diagnostics ( or just for fun )
-    lmfit = LevenbergMarquardtFitter( x, gauss )<br>
-    lmfit.setVerbose( 2 )                             # report every 100th iteration<br>
-    plotter = IterationPlotter( )                     # from BayesicFitting<br>
-    lmfit.setPlotter( plotter, 20 )                   # make a plot every 20th iteration<br>
-    param = lmfit.fit( y )<br>
+    lmfit = LevenbergMarquardtFitter( x, gauss )
+    lmfit.setVerbose( 2 )                             # report every 100th iteration
+    plotter = IterationPlotter( )                     # from BayesicFitting
+    lmfit.setPlotter( plotter, 20 )                   # make a plot every 20th iteration
+    param = lmfit.fit( y )
 
 <b>Notes</b>
 
@@ -74,7 +70,7 @@ only exact for linear models with a fixed scale.
 
 
 <a name="LevenbergMarquardtFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LevenbergMarquardtFitter(</strong> xdata, model, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -96,7 +92,7 @@ Create a class, providing xdata and model.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, verbose=None, plot=False,
  accuracy=None, callback=None )
@@ -147,7 +143,7 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 
 
 <a name="chiSquaredExtra"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chiSquaredExtra(</strong> data, params, weights=None ) 
 </th></tr></thead></table>
 <p>
@@ -155,12 +151,12 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 Add normalizing data to chisq.
 
 <a name="trialfit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>trialfit(</strong> params, fi, data, weights, verbose, maxiter )
 </th></tr></thead></table>
 <p>
 <a name="getParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameters(</strong> )
 </th></tr></thead></table>
 <p>
@@ -171,14 +167,14 @@ Only for debugging; use Model.getParameters( ) otherwise
 
 
 <a name="checkLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkLimits(</strong> fitpar, fitindex )
 </th></tr></thead></table>
 <p>
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
@@ -188,7 +184,7 @@ Only for debugging; use Model.getParameters( ) otherwise
 * [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

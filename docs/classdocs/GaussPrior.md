@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="GaussPrior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class GaussPrior(</strong> <a href="./Prior.html">Prior</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class GaussPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Gauss prior distribution. Use  normalized version
@@ -28,10 +24,10 @@ unit2domain: d = erfinv( 2 * u - 1 ) * s * &sqrt; 2 + c
 
 <b>Examples</b>
 
-    pr = GaussPrior()                         # center=0, scale=1<br>
-    pr = GaussPrior( center=1.0, scale=0.5 )<br>
-    pr = GaussPrior( limits=[0,None] )        # limited to values >= 0<br>
-    pr = GaussPrior( center=1, circular=3 )   # circular between 0.5 and 2.5<br>
+    pr = GaussPrior()                         # center=0, scale=1
+    pr = GaussPrior( center=1.0, scale=0.5 )
+    pr = GaussPrior( limits=[0,None] )        # limited to values >= 0
+    pr = GaussPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
 
 <b>Attributes</b>
 
@@ -47,7 +43,7 @@ lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 
 
 <a name="GaussPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GaussPrior(</strong> center=0.0, scale=1.0, limits=None, circular=False, prior=None )
 </th></tr></thead></table>
 <p>
@@ -71,14 +67,14 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy the prior 
 
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>
@@ -95,7 +91,7 @@ domain2unit: u = 0.5 * ( erf( ( d - center ) / ( &sqrt; 2 * scale ( ) + 1 )
 
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
 </th></tr></thead></table>
 <p>
@@ -112,7 +108,7 @@ unit2domain: d = erfinv( 2 * u - 1 ) * scale * &sqrt; 2 + center
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
 <p>
@@ -126,7 +122,7 @@ Return a the result of the distribution function at x.
 
 
 <a name="logResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logResult(</strong> x )
 </th></tr></thead></table>
 <p>
@@ -140,7 +136,7 @@ Return a the log of the result of the prior.
 
 
 <a name="partialLog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> x )
 </th></tr></thead></table>
 <p>
@@ -154,20 +150,20 @@ Return partial derivative of log( Prior ) wrt x.
 
 
 <a name="isBound"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 <p>
 Return true if the integral over the prior is bound. 
 
 <a name="shortName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
 </th></tr></thead></table>
 <p>
 Return a string representation of the prior. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 
 

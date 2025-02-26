@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DistanceCostFunction.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="DistanceCostFunction"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class DistanceCostFunction(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class DistanceCostFunction(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DistanceCostFunction.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 To calculate a distance based cost function
@@ -26,7 +22,7 @@ Author       Do Kester.
 
 
 <a name="DistanceCostFunction"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DistanceCostFunction(</strong> copy=None )
 </th></tr></thead></table>
 <p>
@@ -40,14 +36,14 @@ Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return copy of this. 
 
 <a name="acceptWeight"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
 <p>
@@ -56,7 +52,7 @@ True if the distribution accepts weights.
 Always false for this distribution.
 
 <a name="logLikelihood_alt"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars )
 </th></tr></thead></table>
 <p>
@@ -72,7 +68,7 @@ Return the negative sum of the distances.
 
 
 <a name="logLdata"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars )
 </th></tr></thead></table>
 <p>
@@ -88,7 +84,7 @@ Return the individual distances (multiplied by the weights).
 
 
 <a name="partialLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL(</strong> model, param, fitIndex )
 </th></tr></thead></table>
 <p>
@@ -104,7 +100,7 @@ Does not work for this class
 * fitIndex  :  array_like<br>
     indices of the params to be fitted
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

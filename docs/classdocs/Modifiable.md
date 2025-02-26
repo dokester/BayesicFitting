@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Modifiable.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Modifiable"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Modifiable(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Modifiable(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Modifiable.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Class adjoint to Model which implements the modifiable behaviour of some Models.
@@ -17,7 +13,7 @@ In the inhertance list is should be *before* Model as it changes the behaviour o
 
 
 <a name="Modifiable"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Modifiable(</strong> modifiable=True ) 
 </th></tr></thead></table>
 <p>
@@ -30,12 +26,12 @@ Constructor for Modifiable
     True if the Model is to be considered modifiable.
 
 <a name="isModifiable"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isModifiable(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="vary"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> location=None, rng=None, **kwargs ) 
 </th></tr></thead></table>
 <p>

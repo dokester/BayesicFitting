@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="RobustShell"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 RobustShell tries to make a fit more robust in the presence of outliers.
@@ -83,22 +79,22 @@ Robust fitting is even more dangerous than ordinary fitting.
 
 <b>Example</b>
 
-    model = PolynomialModel( 1 )                # some model<br>
-    x = numpy.arange( 100, dtype=float ) / 100  # some x values<br>
-    y = numpy.arange( 100, dtype=float ) / 4    # digitization noise<br>
-    y[1,11,35,67] += 10                         # create outliers<br>
-    ftr = Fitter( x, model )                    # a fitter, a model and a x<br>
-    rob = RobustShell( ftr, domain=7 )          # robust fitter using someFtr<br>
-    par = rob.fit( y )                          # solution<br>
-    print( rob )                                #<br>
-    print( rob.weights )                        # print final weights<br>
-    print( ftr.chisq )                          # get from someFtr<br>
+    model = PolynomialModel( 1 )                # some model
+    x = numpy.arange( 100, dtype=float ) / 100  # some x values
+    y = numpy.arange( 100, dtype=float ) / 4    # digitization noise
+    y[1,11,35,67] += 10                         # create outliers
+    ftr = Fitter( x, model )                    # a fitter, a model and a x
+    rob = RobustShell( ftr, domain=7 )          # robust fitter using someFtr
+    par = rob.fit( y )                          # solution
+    print( rob )                                #
+    print( rob.weights )                        # print final weights
+    print( ftr.chisq )                          # get from someFtr
 
 Author       Do Kester.
 
 
 <a name="RobustShell"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RobustShell(</strong> fitter, kernel=Biweight, domain=None, onesided=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -124,7 +120,7 @@ Create a new class, providing the fitter to be used.
 
 
 <a name="setKernel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setKernel(</strong> kernel ) 
 </th></tr></thead></table>
 <p>
@@ -144,7 +140,7 @@ ValueError when kernel is not recognized.
 
 
 <a name="setOneSided"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setOneSided(</strong> onesided ) 
 </th></tr></thead></table>
 <p>
@@ -164,7 +160,7 @@ ValueError when onesided could not be interpreted.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, kernel=None, domain=None, onesided=None, **kwargs ) 
 </th></tr></thead></table>
 <p>
@@ -179,11 +175,11 @@ Perform a robustification step.
     keyword args to be passed to fitter.fit()
 
 <a name="getOneSidedWeights"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getOneSidedWeights(</strong> wgt, res, onesided ) 
 </th></tr></thead></table>
 <p>
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
@@ -193,7 +189,7 @@ Perform a robustification step.
 * [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

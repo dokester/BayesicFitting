@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="PolynomialDynamicModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 General polynomial model of an adaptable degree.
@@ -23,15 +19,15 @@ Author       Do Kester
 
 <b>Examples</b>
 
-    poly = PolynomialDynamicModel( )         # polynomial with unknown degree<br>
-    poly.grow( )                         # starts at degree = 0, npar = 1<br>
-    poly.grow( )                         # each grow( ) adds 1<br>
-    poly.grow( )<br>
-    poly.grow( )<br>
-    print poly.npchain<br>
+    poly = PolynomialDynamicModel( )         # polynomial with unknown degree
+    poly.grow( )                         # starts at degree = 0, npar = 1
+    poly.grow( )                         # each grow( ) adds 1
+    poly.grow( )
+    poly.grow( )
+    print poly.npchain
 5
-    poly.shrink( )                        # shrink( ) deletes 1 degree<br>
-    print poly.npbase<br>
+    poly.shrink( )                        # shrink( ) deletes 1 degree
+    print poly.npbase
 4
 
 <b>Attributes</b>
@@ -66,7 +62,7 @@ Category     mathematics/Fitting
 
 
 <a name="PolynomialDynamicModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolynomialDynamicModel(</strong> degree, minDegree=0, maxDegree=None, fixed=None,
  growPrior=None, copy=None, **kwargs )
 </th></tr></thead></table>
@@ -97,30 +93,30 @@ AttributeError when fixed parameters are requested
 ValueError when degree is outside [min..max] range
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="isDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
 <p>
 <a name="changeNComp"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
 <p>
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Return a string representation of the model. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./PolynomialModel.html">PolynomialModel,</a></th></tr></thead></table>
 
 
@@ -210,7 +206,7 @@ Return a string representation of the model.
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Dynamic.html">Dynamic</a></th></tr></thead></table>
 
 

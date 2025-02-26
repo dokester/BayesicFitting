@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="NestedSampler"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class NestedSampler(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class NestedSampler(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Nested Sampling is a novel technique to do Bayesian calculations.
@@ -144,7 +140,7 @@ Author       Do Kester.
 
 
 <a name="NestedSampler"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NestedSampler(</strong> xdata=None, model=None, ydata=None, weights=None,
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=ENSEMBLE, discard=1, seed=80409, rate=RATE,
@@ -265,7 +261,7 @@ sample      initSample
 
 
 <a name="sample"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sample(</strong> keep=None, plot=False )
 </th></tr></thead></table>
 <p>******SAMPLE************************************************************
@@ -347,7 +343,7 @@ self.lastReport( -1, plot=plot )
 return self.evidence
 
 <a name="initSample"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initSample(</strong> ensemble=None, keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -376,7 +372,7 @@ in Use
  return numpy.argsort( [w.logL for w in walkers] )<br>
 
 <a name="walkerLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>walkerLogL(</strong> w ) 
 </th></tr></thead></table>
 <p>
@@ -384,7 +380,7 @@ walkerLogL( self, w )
 return w.logL
 
 <a name="makeFitlist"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeFitlist(</strong> keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -424,7 +420,7 @@ return ( fitlist, allpars )
 
 
 <a name="doIterPlot"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>doIterPlot(</strong> plot ) 
 </th></tr></thead></table>
 <p>
@@ -442,7 +438,7 @@ else
     return 0<br>
 
 <a name="doLastPlot"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>doLastPlot(</strong> plot ) 
 </th></tr></thead></table>
 <p>
@@ -456,7 +452,7 @@ else
 
 
 <a name="initReport"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initReport(</strong> keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -507,7 +503,7 @@ if self.verbose > 1
 return tail
 
 <a name="iterReport"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>iterReport(</strong> kw, tail, plot=False ) 
 </th></tr></thead></table>
 <p>
@@ -528,7 +524,7 @@ if self.verbose >= 3 or ( self.verbose >= 1 and
 
 
 <a name="printIterRep"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
 </th></tr></thead></table>
 <p>
@@ -548,7 +544,7 @@ print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
 
 
 <a name="lastReport"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>lastReport(</strong> kw, plot=False ) 
 </th></tr></thead></table>
 <p>
@@ -577,7 +573,7 @@ if self.doLastPlot( plot )
     self.plotLast()<br>
 
 <a name="plotLast"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotLast(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -586,7 +582,7 @@ Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata,
             figsize=[12,8], residuals=True )<br>
 
 <a name="getMaxIter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMaxIter(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -599,7 +595,7 @@ maxi = max( self.minimumIterations, maxi )
 return maxi if self.maxIterations is None else min( maxi, self.maxIterations )
 
 <a name="nextIteration"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextIteration(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -617,7 +613,7 @@ if self.iteration > self.end * self.ensemble * self.info / self.worst
 return True
 
 <a name="optionalRestart"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>optionalRestart(</strong> )
 </th></tr></thead></table>
 <p>
@@ -633,7 +629,7 @@ if self.restart is not None and self.restart.wantRestore( )
 return False
 
 <a name="optionalSave"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>optionalSave(</strong> )
 </th></tr></thead></table>
 <p>
@@ -648,7 +644,7 @@ if self.restart is not None and self.restart.wantSave( ) and self.iteration % 10
 
 
 <a name="updateEvidence"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateEvidence(</strong> worst ) 
 </th></tr></thead></table>
 <p>
@@ -681,7 +677,7 @@ self.logdZ = logWeight - self.logZ
 return
 
 <a name="copyWalker"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalker(</strong> worst )
 </th></tr></thead></table>
 <p>
@@ -696,7 +692,7 @@ for k in range( worst )
      setatt( self.walkers[k], "step", 0 )<br>
 
 <a name="copyWalkerFromPhantoms"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalkerFromPhantoms(</strong> worst )
 </th></tr></thead></table>
 <p>
@@ -716,7 +712,7 @@ for k in range( worst )
      setatt( self.walkers[k], "start", self.iteration )<br>
 
 <a name="copyWalkerFromDynamicPhantoms"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalkerFromDynamicPhantoms(</strong> worst )
 </th></tr></thead></table>
 <p>
@@ -745,7 +741,7 @@ for k in range( worst )
 
 
 <a name="updateWalkers"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateWalkers(</strong> explorer, worst ) 
 </th></tr></thead></table>
 <p>
@@ -761,7 +757,7 @@ explorer.explore( wlist, self.lowLhood, self.iteration )
 
 
 <a name="setProblem"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,
 ********INTERNALS***************************************************
  accuracy=None ) 
@@ -804,7 +800,7 @@ except
 
 
 <a name="setErrorDistribution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )
 </th></tr></thead></table>
 <p>********DISTRIBUTIONS***************************************************
@@ -844,7 +840,7 @@ else
     raise ValueError( "Unknown error distribution %s" % name )<br>
 
 <a name="setEngines"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
 </th></tr></thead></table>
 <p>
@@ -897,7 +893,7 @@ for name in engines
 
 
 <a name="setInitialEngine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 <p>********INITIALIZATION***************************************************
@@ -933,7 +929,7 @@ self.distribution.lowLhood = -math.inf
 self.initialEngine.phantoms = self.phantoms
 
 <a name="initWalkers"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
 </th></tr></thead></table>
 <p>
@@ -955,7 +951,7 @@ for walker in self.walkers
 
 
 <a name="plotResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotResult(</strong> walker, iter, plot=0 )
 </th></tr></thead></table>
 <p>
@@ -991,7 +987,7 @@ plt.ylim( dmin - dd, dmax + dd )
 
 
 <a name="report"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>report(</strong> )
 </th></tr></thead></table>
 <p>

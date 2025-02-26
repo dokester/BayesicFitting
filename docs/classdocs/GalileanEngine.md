@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="GalileanEngine"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class GalileanEngine(</strong> <a href="./Engine.html">Engine</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class GalileanEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Move all parameters in forward steps, with optional mirroring on the edge.
@@ -29,7 +25,7 @@ Author       Do Kester.
 
 
 <a name="GalileanEngine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GalileanEngine(</strong> walkers, errdis, copy=None, **kwargs )
 </th></tr></thead></table>
 <p>
@@ -49,14 +45,14 @@ Default Constructor.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return copy of this. 
 
 <a name="execute"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )
 </th></tr></thead></table>
 <p>
@@ -78,7 +74,7 @@ Execute the engine by diffusing the parameters.
 
 
 <a name="quadinterpol"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>quadinterpol(</strong> L0, Lm, L1, lowL ) 
 </th></tr></thead></table>
 <p>
@@ -93,7 +89,7 @@ interpolation at y = lowL.
 * xvalue  :  float<br>
     largest of the two inside [0,1]
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 

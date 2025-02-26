@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="CombiModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class CombiModel(</strong> <a href="./BracketModel.html">BracketModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class CombiModel(</strong> <a href="./BracketModel.html">BracketModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 CombiModel combines a number of copies of the same model.
@@ -68,21 +64,21 @@ As we have copies of the same model, each model can have its own priors.
 
 <b>Examples</b>
 
-    gauss = GaussModel( )<br>
-    combi = CombiModel( gauss, 3, addCombi={1:[0,0.1,0.3]}, mulCombi={2,[0]*3} )<br>
-    print combi<br>
+    gauss = GaussModel( )
+    combi = CombiModel( gauss, 3, addCombi={1:[0,0.1,0.3]}, mulCombi={2,[0]*3} )
+    print combi
 Combi of 3 times GaussModel
-    print( combi.npchain, combi.nrepeat, combi.nmp, combi.nexpand )<br>
+    print( combi.npchain, combi.nrepeat, combi.nmp, combi.nexpand )
 5 3 3 9
-    print( combi.select )<br>
+    print( combi.select )
 [0 1 2 3 6]
-    print( combi.expandindex )<br>
+    print( combi.expandindex )
 [0 1 2 3 1 2 4 1 2]
-    print( combi.modelindex )<br>
+    print( combi.modelindex )
 [0 0 0 1 2]
-    print( combi.addindex )<br>
+    print( combi.addindex )
 [1 4 7]
-    print( combi.mulindex )<br>
+    print( combi.mulindex )
 [2 5 8]
 
 Category     mathematics/Fitting
@@ -98,7 +94,7 @@ to work.
 
 
 <a name="CombiModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CombiModel(</strong> model, nrepeat=1, copy=None, oper='add',
  addCombi=None, mulCombi=None, **kwargs )
 </th></tr></thead></table>
@@ -133,14 +129,14 @@ CombiModel combines several copies of the same model int one.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Copy method. 
 
 <a name="combine"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>combine(</strong> addCombi=None, mulCombi=None ) 
 </th></tr></thead></table>
 <p>
@@ -169,7 +165,7 @@ Copy method.
 
 
 <a name="makeExpandIndex"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeExpandIndex(</strong> expandindex, amindex ) 
 </th></tr></thead></table>
 <p>
@@ -177,17 +173,17 @@ Copy method.
 Make an expanded index enumerating the parameters for the full model
 
 <a name="setCombi"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setCombi(</strong> combi ) 
 </th></tr></thead></table>
 <p>
 <a name="expandParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>expandParameters(</strong> param ) 
 </th></tr></thead></table>
 <p>
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -203,7 +199,7 @@ Returns the result calculated at the xdatas.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
 <p>
@@ -221,7 +217,7 @@ Returns the partial derivatives calculated at the xdatas.
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -237,14 +233,14 @@ Returns the derivative (df/dx) calculated at the xdatas.
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
 <a name="baseParameterName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> kpar )
 </th></tr></thead></table>
 <p>
@@ -258,7 +254,7 @@ Return the name of the indicated parameter.
 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -272,7 +268,7 @@ Return the unit of the indicated parameter.
 
 
 <a name="getPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -287,13 +283,13 @@ Upon failure try at the equivalent position in the head model
 * kpar  :  int<br>
     index of the parameter to be selected.
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BracketModel.html">BracketModel</a></th></tr></thead></table>
 
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Brackets.html">Brackets</a></th></tr></thead></table>
 
 

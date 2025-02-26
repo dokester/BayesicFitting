@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="Fitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Fitter for linear models.
@@ -21,17 +17,17 @@ is the variant for linear models, ie. models linear in its parameters.
 <b>Examples</b>
 
 * # assume x and y are numpy.asarray data arrays : <br>
-    x = numpy.arange( 100 )<br>
-    y = numpy.arange( 100 ) // 4        # digitization noise<br>
-    poly = PolynomialModel( 1 )         # line<br>
-    fitter = Fitter( x, poly )<br>
-    param = fitter.fit( y )<br>
-    stdev = fitter.stdevs               # stdevs on the parameters<br>
-    chisq = fitter.chisq<br>
-    scale = fitter.scale                # noise scale<br>
-    yfit  = fitter.getResult( )         # fitted values<br>
-    yfit  = poly( x )                   # same as previous<br>
-    yband = fitter.monteCarloError( )        # 1 sigma confidence region<br>
+    x = numpy.arange( 100 )
+    y = numpy.arange( 100 ) // 4        # digitization noise
+    poly = PolynomialModel( 1 )         # line
+    fitter = Fitter( x, poly )
+    param = fitter.fit( y )
+    stdev = fitter.stdevs               # stdevs on the parameters
+    chisq = fitter.chisq
+    scale = fitter.scale                # noise scale
+    yfit  = fitter.getResult( )         # fitted values
+    yfit  = poly( x )                   # same as previous
+    yband = fitter.monteCarloError( )        # 1 sigma confidence region
 
 
 <b>Limitations</b>
@@ -44,7 +40,7 @@ Author  Do Kester
 
 
 <a name="Fitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Fitter(</strong> xdata, model, map=False, keep=None, fixedScale=None )
 </th></tr></thead></table>
 <p>
@@ -74,7 +70,7 @@ input vector is needed a new object should be created.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
 </th></tr></thead></table>
 <p>
@@ -110,7 +106,7 @@ and &beta; is the inproduct of the data with the D, design matrix.
     ValueError when ydata or weights contain a NaN<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

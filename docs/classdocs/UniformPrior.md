@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="UniformPrior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class UniformPrior(</strong> <a href="./Prior.html">Prior</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class UniformPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Uniform prior distribution, for location parameters.
@@ -25,10 +21,10 @@ unit2Domain: d = u * range + lo
 
 <b>Examples</b>
 
-    pr = UniformPrior()                                 # unbound prior<br>
-    pr = UniformPrior( limits=[0,10] )                  # limited to the range [0,10]<br>
-    pr = UniformPrior( circular=math.pi )               # circular between 0 and pi<br>
-    pr = UniformPrior( limits=[2,4], circular=True )    # circular between 2 and 4<br>
+    pr = UniformPrior()                                 # unbound prior
+    pr = UniformPrior( limits=[0,10] )                  # limited to the range [0,10]
+    pr = UniformPrior( circular=math.pi )               # circular between 0 and pi
+    pr = UniformPrior( limits=[2,4], circular=True )    # circular between 2 and 4
 
 <b>Attributes</b>
 
@@ -42,7 +38,7 @@ lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 
 <a name="UniformPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>UniformPrior(</strong> limits=None, circular=False, prior=None )
 </th></tr></thead></table>
 <p>
@@ -61,14 +57,14 @@ Constructor.
     to be copied
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 Return a (deep) copy of itself. 
 
 <a name="getIntegral"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegral(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -76,7 +72,7 @@ Return a (deep) copy of itself.
 Return integral of UniformPrior from lowLimit to highLimit.
 
 <a name="domain2Unit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
 </th></tr></thead></table>
 <p>
@@ -92,7 +88,7 @@ In Prior.limitedDomain2Unit the dval is transformed into a uval
 
 
 <a name="unit2Domain"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
 </th></tr></thead></table>
 <p>
@@ -108,7 +104,7 @@ In Prior.limitedUnit2Domain the uval is transformed into a dval
 
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
 <p>
@@ -122,7 +118,7 @@ Return a the result of the distribution function at x.
 
 
 <a name="partialLog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> p )
 </th></tr></thead></table>
 <p>
@@ -136,20 +132,20 @@ Return partial derivative of log( Prior ) wrt parameter.
 
 
 <a name="isBound"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 <p>
 Return true if the integral over the prior is bound. 
 
 <a name="shortName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
 </th></tr></thead></table>
 <p>
 Return a string representation of the prior. 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 
 

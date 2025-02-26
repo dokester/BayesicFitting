@@ -1,14 +1,10 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py target=_blank>Source</a></span></div>
+<br><br><br>
 
 <a name="WalkerList"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class WalkerList(</strong> <a href="./list.html">list</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class WalkerList(</strong> <a href="./list.html">list</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 WalkerList is a list of Walker.
@@ -30,7 +26,7 @@ Author       Do Kester
 
 
 <a name="WalkerList"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>WalkerList(</strong> problem=None, ensemble=0, allpars=None, fitIndex=None,
  walker=None, walkerlist=None )
 </th></tr></thead></table>
@@ -56,12 +52,12 @@ To be valid it needs either problem/allpars/fitindex or walker or walkerlist
     walkerlist to be incorporated.
 
 <a name="addWalkers"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>addWalkers(</strong> walker, ensemble )
 </th></tr></thead></table>
 <p>
 <a name="setWalker"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setWalker(</strong> walker, index )
 </th></tr></thead></table>
 <p>
@@ -76,7 +72,7 @@ replace/append a Walker to this list
     the index at which to set
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> src, des, wlist=None, start=0 )
 </th></tr></thead></table>
 <p>
@@ -95,7 +91,7 @@ Copy one item of the list onto another.
     iteration where this walker was created
 
 <a name="logPlus"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logPlus(</strong> x, y )
 </th></tr></thead></table>
 <p>
@@ -103,7 +99,7 @@ Copy one item of the list onto another.
 Return the log of sum.
 
 <a name="firstIndex"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>firstIndex(</strong> lowL ) 
 </th></tr></thead></table>
 <p>
@@ -118,7 +114,7 @@ Return  index of the first walker with walker.logL > lowL,
     low Likelihood
 
 <a name="insertWalker"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>insertWalker(</strong> walker )
 </th></tr></thead></table>
 <p>
@@ -131,7 +127,7 @@ Insert walker to this list keeping it sorted in logL
     the list to take to copy from
 
 <a name="cropOnLow"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cropOnLow(</strong> lowL ) 
 </th></tr></thead></table>
 <p>
@@ -146,7 +142,7 @@ Precondition: self is ordered on logL
     low Likelihood
 
 <a name="getLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogL(</strong> walker=None ) 
 </th></tr></thead></table>
 <p>
@@ -160,7 +156,7 @@ Return the logL of the/all walker
     get the logL from
 
 <a name="allPars"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>allPars(</strong> )
 </th></tr></thead></table>
 <p>
@@ -178,7 +174,7 @@ to get the actual number.
 
 
 <a name="getParameterEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterEvolution(</strong> kpar=None )
 </th></tr></thead></table>
 <p>
@@ -196,28 +192,28 @@ to get the actual number.
 
 
 <a name="getScaleEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScaleEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the scale. 
 
 <a name="getLogLikelihoodEvolution"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihoodEvolution(</strong> )
 </th></tr></thead></table>
 <p>
 Return the evolution of the log( Likelihood ). 
 
 <a name="getLowLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLowLogL(</strong> )
 </th></tr></thead></table>
 <p>
 
 Return the lowest value of logL in the walkerlist, plus its index.
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./list.html">list</a></th></tr></thead></table>
 
 
