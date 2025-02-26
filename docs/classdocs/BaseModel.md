@@ -1,14 +1,12 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py target=_blank>Source</a></span></div>
+<p>
+  
+<p>
 
 <a name="BaseModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class BaseModel(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class BaseModel(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 BaseModel implements the common parts of simple Models.
@@ -61,7 +59,7 @@ itself.
 
 
 <a name="BaseModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BaseModel(</strong> nparams=0, ndim=1, copy=None, posIndex=[], nonZero=[], **kwargs )
 </th></tr></thead></table>
 <p>
@@ -85,7 +83,7 @@ kwargs
     for internal use.
 
 <a name="result"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, param )
 </th></tr></thead></table>
 <p>
@@ -101,7 +99,7 @@ Returns the result calculated at the xdatas.
 
 
 <a name="partial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -119,7 +117,7 @@ Returns the partial derivatives calculated at the inputs.
 
 
 <a name="checkParameter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkParameter(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -133,7 +131,7 @@ Return parameters corrected for positivity and Non-zero.
 
 
 <a name="checkPositive"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkPositive(</strong> param ) 
 </th></tr></thead></table>
 <p>
@@ -147,7 +145,7 @@ Check parameters for positivity. Silently correct.
 
 
 <a name="checkZeroParameter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkZeroParameter(</strong> param )
 </th></tr></thead></table>
 <p>
@@ -161,7 +159,7 @@ Check parameters for Non-zero. Correct after one warning.
 
 
 <a name="isDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -169,7 +167,7 @@ Check parameters for Non-zero. Correct after one warning.
 Whether the model implements Dynamic
 
 <a name="isModifiable"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isModifiable(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -177,7 +175,7 @@ Whether the model implements Dynamic
 Whether the model implements Modifiable
 
 <a name="shortName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
 </th></tr></thead></table>
 <p>
@@ -186,7 +184,7 @@ Return a short version the string representation: upto first non-letter.
 
 
 <a name="derivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> xdata, param ) 
 </th></tr></thead></table>
 <p>
@@ -205,7 +203,7 @@ in the model.
 
 
 <a name="setPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs ) 
 </th></tr></thead></table>
 <p>
@@ -233,7 +231,7 @@ IndexError
 
 
 <a name="hasPriors"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> isBound=True ) 
 </th></tr></thead></table>
 <p>
@@ -246,7 +244,7 @@ Return True when the model has priors for all its parameters.
     Also check if the prior is bound.
 
 <a name="getPrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -259,7 +257,7 @@ Return the prior of the indicated parameter.
     parameter number.
 
 <a name="basePrior"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -272,7 +270,7 @@ Return the prior of the indicated parameter.
     parameter number.
 
 <a name="getParameterName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterName(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -285,7 +283,7 @@ Return the name of the indicated parameter.
     parameter number.
 
 <a name="baseParameterName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -298,7 +296,7 @@ Return the name of the indicated parameter.
     parameter number.
 
 <a name="getParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterUnit(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -311,7 +309,7 @@ Return the unit of the indicated parameter.
     parameter number.
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> kpar ) 
 </th></tr></thead></table>
 <p>
@@ -324,7 +322,7 @@ Return the name of the indicated parameter.
     parameter number.
 
 <a name="hasLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLimits(</strong> fitindex=None ) 
 </th></tr></thead></table>
 <p>

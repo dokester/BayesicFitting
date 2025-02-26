@@ -1,14 +1,12 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BSplinesModel.py target=_blank>Source</a></span></div>
+<p>
+  
+<p>
 
 <a name="BSplinesModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class BSplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class BSplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BSplinesModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 General b-splines model of arbitrary order and with arbitrary knot settings.
@@ -24,12 +22,12 @@ spanned by the knots.
 
 It is a linear model.
 
-order   behaviour between knots     continuity at knots
-  0     piecewise constant          not continuous at all<br>
-  1     piecewise linear            lines are continuous<br>
-  2     parabolic pieces            1st derivatives are also continuous<br>
-  3     cubic pieces                2nd derivatives are also continuous<br>
- n>3    n-th order polynomials      (n-1)-th derivatives are also continuous<br>
+|order | behaviour between knots | continuity at knots |
+|  0   | piecewise constant      | not continuous at all |
+|  1   | piecewise linear        | lines are continuous |
+|  2   | parabolic pieces        | 1st derivatives are also continuous |
+|  3   | cubic pieces            | 2nd derivatives are also continuous |
+| n>3  | n-th order polynomials  | (n-1)-th derivatives are also continuous |
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
@@ -47,20 +45,20 @@ This model is NOT for (cubic) spline interpolation.
 
 <b>Examples</b>
 
-    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160<br>
-    csm = BSplinesModel( knots=knots, order=2 )<br>
-    print csm.getNumberOfParameters( )<br>
-18
-* # or alternatively : <br>
-    csm = BSplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
-18
-* # or alternatively : <br>
-    npt = 161                                               # to include both 0 and 160.<br>
-    x = numpy.arange( npt, dtype=float )                    # x-values<br>
-    csm = BSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
-18
+    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
+    csm = BSplinesModel( knots=knots, order=2 )
+    print csm.getNumberOfParameters( )
+    18
+    # or alternatively
+    csm = BSplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    print csm.getNumberOfParameters( )
+    18
+    # or alternatively
+    npt = 161                                               # to include both 0 and 160.
+    x = numpy.arange( npt, dtype=float )                    # x-values
+    csm = BSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    print csm.getNumberOfParameters( )
+    18
 
 <b>Attributes</b>
 
@@ -92,7 +90,7 @@ Dont put the knots too closely so that there are no datapoints in between.
 
 
 <a name="BSplinesModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BSplinesModel(</strong> knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
  copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
@@ -135,12 +133,12 @@ minmax of knots. It does not exist outside that domain.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -164,7 +162,7 @@ ValueError when xdata < knots[0] or xdata > knots[1]
 
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -180,14 +178,14 @@ Return the derivative df/dx at each xdata (=x).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -199,7 +197,7 @@ Return the units of the parameter.
 * k  :  int<br>
     index of the parameter.
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 

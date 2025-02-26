@@ -1,14 +1,12 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py target=_blank>Source</a></span></div>
+<p>
+  
+<p>
 
 <a name="BasicSplinesModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class BasicSplinesModel(</strong> <a href="./SplinesModel.html">SplinesModel</a> )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class BasicSplinesModel(</strong> <a href="./SplinesModel.html">SplinesModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Splines model consisting of a basis of spline blobs.
@@ -47,19 +45,19 @@ This model is NOT for (cubic) spline interpolation.
 
 <b>Examples</b>
 
-    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160<br>
-    csm = BasicSplinesModel( knots=knots, order=2 )<br>
-    print csm.getNumberOfParameters( )<br>
+    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
+    csm = BasicSplinesModel( knots=knots, order=2 )
+    print csm.getNumberOfParameters( )
 18
 * # or alternatively : <br>
-    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
+    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    print csm.getNumberOfParameters( )
 18
 * # or alternatively : <br>
-    npt = 161                                               # to include both 0 and 160.<br>
-    x = numpy.arange( npt, dtype=float )                    # x-values<br>
-    csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots<br>
-    print csm.getNumberOfParameters( )<br>
+    npt = 161                                               # to include both 0 and 160.
+    x = numpy.arange( npt, dtype=float )                    # x-values
+    csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    print csm.getNumberOfParameters( )
 18
 
 <b>Attributes</b>
@@ -88,7 +86,7 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 
 
 <a name="BasicSplinesModel"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BasicSplinesModel(</strong> knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
  border=0, copy=None, **kwargs )
 </th></tr></thead></table>
@@ -138,12 +136,12 @@ minmax of knots. It deteriorates fastly going outside the domain.
 
 
 <a name="copy"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
 <p>
 <a name="makeBaseBasis"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeBaseBasis(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -157,12 +155,12 @@ Make a sets of polynomial bases for each of the parameters
 
 
 <a name="makeDist"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeDist(</strong> knotix ) 
 </th></tr></thead></table>
 <p>
 <a name="makePeriodicBasis"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makePeriodicBasis(</strong> ) 
 </th></tr></thead></table>
 <p>
@@ -176,7 +174,7 @@ Make a sets of polynomial bases for each of the parameters
 
 
 <a name="normalizeBasis"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalizeBasis(</strong> basis ) 
 </th></tr></thead></table>
 <p>
@@ -190,7 +188,7 @@ is returned when all model parameters are 1.
     parameters to the polynomials that make up the spline blobs
 
 <a name="findParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findParameters(</strong> knotix, dist, kpar=0 ) 
 </th></tr></thead></table>
 <p>
@@ -220,7 +218,7 @@ if kpar > 0
 
 
 <a name="baseResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
 <p>
@@ -236,7 +234,7 @@ Returns the functional result at the input value.
 
 
 <a name="basePartial"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
 <p>
@@ -263,7 +261,7 @@ for kb in range( np )
 return partial
 
 <a name="makeKnotIndices"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeKnotIndices(</strong> xdata ) 
 </th></tr></thead></table>
 <p>
@@ -276,7 +274,7 @@ Return a list of indices of the knots immediately preceeding the xdata.
     values at which to calculate the indices
 
 <a name="basicBlob"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basicBlob(</strong> xdata, basis, x2k, poly ) 
 </th></tr></thead></table>
 <p>
@@ -295,7 +293,7 @@ Calculates a spline blob for all of xdata
     model to calculate the splines
 
 <a name="baseDerivative"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
 <p>
@@ -311,14 +309,14 @@ Return the derivative df/dx at each xdata (=x).
 
 
 <a name="baseName"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
 <p>
 Returns a string representation of the model. 
 
 <a name="baseParameterUnit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
 <p>
@@ -330,7 +328,7 @@ Return the name of the parameter.
 * k  :  int<br>
     index of the parameter.
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./SplinesModel.html">SplinesModel</a></th></tr></thead></table>
 
 

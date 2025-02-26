@@ -1,14 +1,12 @@
 ---
 ---
-
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py target=_blank>Source</a></span></div>
+<p>
+  
+<p>
 
 <a name="BaseFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class BaseFitter(</strong> object )
-</th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>class BaseFitter(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 Base class for all Fitters.
@@ -27,7 +25,7 @@ Other Fitter classes relegate their calculation in these issues to this one.
 
 <b>Examples</b>
 
-# It is not possible to use this class. User Fitter, CurveFitter etc. in stead
+    # It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 
 <b>Note Also</b>
 
@@ -107,7 +105,7 @@ Other Fitter classes relegate their calculation in these issues to this one.
 
 
 <a name="BaseFitter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BaseFitter(</strong> xdata, model, map=False, keep=None, fixedScale=None )
 </th></tr></thead></table>
 <p>
@@ -146,7 +144,7 @@ ValueError when one of the following is true
 
 
 <a name="setMinimumScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setMinimumScale(</strong> scale=0 ) 
 </th></tr></thead></table>
 <p>
@@ -160,7 +158,7 @@ Introduce a minimum in scale calculation and consequently in chisq.
     minimum scale
 
 <a name="fitprolog"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -192,7 +190,7 @@ Prolog for all Fitters.
     1.0 if both are None
 
 <a name="fitpostscript"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitpostscript(</strong> ydata, plot=False ) 
 </th></tr></thead></table>
 <p>
@@ -200,7 +198,7 @@ Prolog for all Fitters.
 Produce a plot of the results.
 
 <a name="keepFixed"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>keepFixed(</strong> keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -223,7 +221,7 @@ Keeps parameters fixed at the provided values.
     list of parameter indices to be kept
 
 <a name="insertParameters"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>insertParameters(</strong> fitpar, index=None, into=None ) 
 </th></tr></thead></table>
 <p>
@@ -241,7 +239,7 @@ Insert fitparameters into the parameters when fitIndex is present.
 
 
 <a name="modelFit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>modelFit(</strong> ydata, weights=None, keep=None )
 </th></tr></thead></table>
 <p>
@@ -261,7 +259,7 @@ Return model fitted to the data.
 
 
 <a name="limitsFit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitsFit(</strong> ydata, weights=None, keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -293,7 +291,7 @@ Warning when parameters have been reset at the limits.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, keep=None ) 
 </th></tr></thead></table>
 <p>
@@ -317,7 +315,7 @@ NotImplementedError. BaseFitter cannot perform fits by itself.
 
 
 <a name="checkNan"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkNan(</strong> ydata, weights=None, accuracy=None )
 </th></tr></thead></table>
 <p>
@@ -339,7 +337,7 @@ Check also for zeros or negatives in accuracy.
 ValueError.
 
 <a name="getVector"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getVector(</strong> ydata, index=None )
 </th></tr></thead></table>
 <p>
@@ -358,7 +356,7 @@ It includes "normalized" data if present. See normalize().
 
 
 <a name="getHessian"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getHessian(</strong> params=None, weights=None, index=None )
 </th></tr></thead></table>
 <p>
@@ -378,7 +376,7 @@ It includes "normalized" data if present. See normalize()
 
 
 <a name="getInverseHessian"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getInverseHessian(</strong> params=None, weights=None, index=None )
 </th></tr></thead></table>
 <p>
@@ -396,7 +394,7 @@ Return the inverse of the Hessian Matrix, H.
 
 
 <a name="getCovarianceMatrix"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getCovarianceMatrix(</strong> )
 </th></tr></thead></table>
 <p>
@@ -408,7 +406,7 @@ Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 
 
 <a name="makeVariance"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeVariance(</strong> scale=None )
 </th></tr></thead></table>
 <p>
@@ -425,7 +423,7 @@ when we have a fixed scale.
     noise scale to be used
 
 <a name="normalize"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalize(</strong> normdfdp, normdata, weight=1.0 ) 
 </th></tr></thead></table>
 <p>
@@ -445,7 +443,7 @@ It is like adding a dummy measurement of one (or more) parameter to the data.
     weight of this measurement
 
 <a name="getDesign"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getDesign(</strong> params=None, xdata=None, index=None )
 </th></tr></thead></table>
 <p>
@@ -464,7 +462,7 @@ The design matrix is also known as the Jacobian Matrix.
 
 
 <a name="chiSquared"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chiSquared(</strong> ydata, params=None, weights=None )
 </th></tr></thead></table>
 <p>
@@ -488,7 +486,7 @@ ValueError when chisq <= 0.
 
 
 <a name="getStandardDeviations"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getStandardDeviations(</strong> )
 </th></tr></thead></table>
 <p>
@@ -507,7 +505,7 @@ datapoints while the noise scale, s, does not.
 
 
 <a name="monteCarloError"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>monteCarloError(</strong> xdata=None, monteCarlo=None)
 </th></tr></thead></table>
 <p>
@@ -532,7 +530,7 @@ MonteCarlo. For tweaking of that class can be done outside BaseFitter.
 
 
 <a name="getScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> )
 </th></tr></thead></table>
 <p>
@@ -548,7 +546,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
 
 <a name="getEvidence"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getEvidence(</strong> limits=None, noiseLimits=None )
 </th></tr></thead></table>
 <p>
@@ -576,7 +574,7 @@ ValueError when no Prior is available
 
 
 <a name="getLogLikelihood"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) 
 </th></tr></thead></table>
 <p>
@@ -593,7 +591,7 @@ It is implementing eq 19/20 last parts (Kester 2002) term by term
     variance
 
 <a name="getLogZ"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogZ(</strong> limits=None, noiseLimits=None )
 </th></tr></thead></table>
 <p>
@@ -623,7 +621,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
 
 <a name="plotResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotResult(</strong> xdata=None, ydata=None, model=None, residuals=True,
  confidence=False, show=True ) 
 </th></tr></thead></table>
