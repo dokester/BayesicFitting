@@ -23,11 +23,12 @@ spanned by the knots.
 It is a linear model.
 
 | order | behaviour between knots | continuity at knots |
-|  0   | piecewise constant      | not continuous at all |
-|  1   | piecewise linear        | lines are continuous |
-|  2   | parabolic pieces        | 1st derivatives are also continuous |
-|  3   | cubic pieces            | 2nd derivatives are also continuous |
-| n>3  | n-th order polynomials  | (n-1)-th derivatives are also continuous |
+|:-----:|:-----------------------:|:-------------------:|
+|  0    | piecewise constant      | not continuous at all |
+|  1    | piecewise linear        | lines are continuous |
+|  2    | parabolic pieces        | 1st derivatives are also continuous |
+|  3    | cubic pieces            | 2nd derivatives are also continuous |
+| n>3   | n-th order polynomials  | (n-1)-th derivatives are also continuous |
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
