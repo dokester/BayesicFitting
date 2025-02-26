@@ -30,9 +30,9 @@ npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 <b>Example</b>
 
-    arct = ArctanModel( )
-    print( arct.getNumberOfParameters( ) )
-    3
+    arct = ArctanModel( )<br>
+    print( arct.getNumberOfParameters( ) )<br>
+    3<br>
 
 
 * Author :       Do Kester<br>
@@ -51,12 +51,12 @@ Number of parameters is 3.
 <b>Parameters</b>
 
 * copy  :  ArctanModel<br>
-    to be copied
+    to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.
-    float|Model values for the fixed parameters.
-    Attribute fixed can only be set in the constructor.
-    See: [FixedModel](./FixedModel.md)
+    int         index of parameter to fix permanently.<br>
+    float|Model values for the fixed parameters.<br>
+    Attribute fixed can only be set in the constructor.<br>
+    See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -77,9 +77,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result
+    values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.
+    values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -93,11 +93,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result
+    values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.
+    values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)
+    list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -111,9 +111,9 @@ Return the derivative df/dx at each input (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result
+    values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.
+    values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -137,7 +137,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.
+    parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
