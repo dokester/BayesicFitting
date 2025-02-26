@@ -1,13 +1,9 @@
 ---
 ---
 
-<div class="button">
-  <span style="background-color: DodgerBlue; color: White;  border:5px solid DodgerBlue">
-<a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>Source</a></span></div>
-
 <a name="AmoebaFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
-<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )
+<table><thead style="background-color:#FFE0E0; width:100% font-size:20px"><tr><th style="text-align:left">
+<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>Source</a> )
 </th></tr></thead></table>
 <p>
 
@@ -76,7 +72,7 @@ Create a new Amoeba class, providing inputs and model.
 
 
 <a name="fit"></a>
-<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#E0FFE0; width:100%"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, size=None,
  seed=4567, temp=0, limits=None, maxiter=1000,
  tolerance=0.0001, cooling=0.95, steps=10,
