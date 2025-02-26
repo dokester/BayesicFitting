@@ -22,7 +22,7 @@ spanned by the knots.
 
 It is a linear model.
 
-|order | behaviour between knots | continuity at knots |
+| order | behaviour between knots | continuity at knots |
 |  0   | piecewise constant      | not continuous at all |
 |  1   | piecewise linear        | lines are continuous |
 |  2   | parabolic pieces        | 1st derivatives are also continuous |
