@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="CauchyPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,16 +9,18 @@
 
 Cauchy prior distribution.
 
-    Pr( x ) =  s / ( &pi; * ( s^2 + ( x - c )^2 )<br>
+Pr( x ) =  s / ( &pi; * ( s^2 + ( x - c )^2 )
 
 By default: c = center = 0 and s = scale = 1.
 
-It can also have a limited domain. (To be done)
+It can also have a limited domain.
 By default the domain is [-Inf,+Inf].
 In computational practice it is limited to [-1e16, 1e16]
 
-domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
-unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
+domain2unit: 
+    u = arctan( ( d - c ) / s ) / &pi; + 0.5<br>
+unit2domain: 
+    d = tan( ( u - 0.5 ) * &pi; ) * s + c<br>
 
 <b>Examples</b>
 
@@ -37,8 +39,6 @@ unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
 <b>Attributes from Prior</b>
 
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
-
-lowLimit and highLimit cannot be used in this implementation.
 
 
 <a name="CauchyPrior"></a>
@@ -79,7 +79,7 @@ Constructor.
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Cauchy distribution.
 
-domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
+u = arctan( ( d - c ) / s ) / &pi; + 0.5
 
 <b>Parameters</b>
 
@@ -96,7 +96,7 @@ domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Cauchy distribution.
 
-unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
+d = tan( ( u - 0.5 ) * &pi; ) * s + c
 
 <b>Parameters</b>
 
@@ -129,8 +129,7 @@ Return partial derivative of log( Prior ) wrt parameter.
 <b>Parameters</b>
 
 * x  :  float<br>
-    the value<br>
-
+    the value
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
