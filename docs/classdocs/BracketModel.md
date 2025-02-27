@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="BracketModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -31,30 +31,28 @@ Model.Brackets is an internal class inside Model.
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+npchain, parameters, stdevs, xUnit, yUnit
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+npmax, fixed, parlist, mlist
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <b>Examples</b>
 
-Explicit use of BrackeModel
 
+    ## Explicit use of BrackeModel
     m1 = GaussModel( )
     m1 += PolynomialModel( 0 )              # Gauss on a constant background
     m2 = BracketModel( m1 )
     m3 = SineModel( )
     m3 *= m2                                # sine * ( gauss + const )
     print( m3 )
-
-Implicit use of BrackeModel, automatically invoked when m2 is a chain
-
+    ## Implicit use of BrackeModel, automatically invoked when m2 is a chain
     m1 = GaussModel( )
     m1 += PolynomialModel( 0 )              # m1 is a chain of models
     m3 = SineModel( )
@@ -128,7 +126,7 @@ Copy a Bracket Model.
 * [<strong>baseParameterUnit(</strong> k )](./Brackets.md#baseParameterUnit)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -180,7 +178,7 @@ Copy a Bracket Model.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -189,7 +187,7 @@ Copy a Bracket Model.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 
