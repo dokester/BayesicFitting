@@ -9,14 +9,14 @@
 
 To calculate a Cauchy or Lorentz likelihood.
 
-f( x ) = s / ( &pi; * ( s^2 + x^2 ) )
+f( x ) = s / ( &pi; * ( s^2^ + x^2^ ) )
 
 where x = residual and s = scale
 
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
- logL = N ( log( s ) - log( &pi; ) ) - sum( log( x^2 + s^2 ) )<br>
+ logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x^2^ + s^2^ ) )<br>
 
 Weights are not possible in this error distribution. They are silently ignored.
 
@@ -93,7 +93,8 @@ Internal use, only.
 <p>
 
 Return the log( likelihood ) for a Cauchy distribution.
-Cauchy distr : f( x ) = s / ( pi * ( s^2 + x^2 ) )
+
+Cauchy distr : f( x ) = s / ( &pi; * ( s^2^ + x^2^ ) )
 
 where x = residual and s = scale
 
