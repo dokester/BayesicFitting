@@ -22,7 +22,7 @@ Weights are not possible in this error distribution. They are silently ignored.
 
 s is a hyperparameter, which might be estimated from the data.
 
-Author &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do Kester.
+Author       Do Kester.
 
 
 <a name="CauchyErrorDistribution"></a>
@@ -39,8 +39,8 @@ Constructor.
     noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
     None : no limits implying fixed scale<br>
-    low &nbsp;&nbsp;&nbsp;&nbsp;low limit on scale (needs to be >0)<br>
-    high &nbsp;&nbsp;&nbsp;high limit on scale<br>
+    low     low limit on scale (needs to be >0)<br>
+    high    high limit on scale<br>
     when limits are set, the scale is not fixed.<br>
 * copy  :  CauchyErrorDistribution<br>
     distribution to be copied.<br>
