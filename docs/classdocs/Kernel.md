@@ -22,27 +22,28 @@ All kernels are scaled such that its value at x=0 is 1.0.
 Several kernel functions, K( x ) are defined in this package
 
 | Name      | Definition        | Integral  | FWHM | range | comment     |
-|:----------|:------------------|----------:|:----:|:-----:|:------------|
-| Biweight  | ( 1-x^2 )^2       |     16/15 | 1.08 |  1.0  | aka Tukey   |
-| CosSquare | cos^2( 0.5*pi*x ) |       1.0 | 1.00 |  1.0  |             |
-| Cosine    | cos( 0.5*pi*x )   |      4/pi | 1.33 |  1.0  |             |
-| Gauss     | exp( -0.5*x*x )   | sqrt(2*pi)| 1.22 |  inf  |             |
+|:---------:|:-----------------:|:---------:|:----:|:-----:|:------------|
+| Biweight  |  ( 1-x^2 )^2      |     16/15 | 1.08 |  1.0  | aka Tukey   |
+| CosSquare | cos^2( 0.5*PI*x ) |       1.0 | 1.00 |  1.0  |             |
+| Cosine    | cos( 0.5*PI*x )   |      4/PI | 1.33 |  1.0  |             |
+| Gauss     | exp( -0.5*x*x )   | sqrt(2*PI)| 1.22 |  inf  |             |
 | Huber     | min( 1, 1/\|x\| ) |       inf | 4.00 |  inf  | improper    |
 |           |                   |           |      |       | aka Median  |
-| Lorentz   | 1 / ( 1 + x*x )   |        pi | 2.00 |  inf  |             |
+| Lorentz   | 1 / ( 1 + x*x )   |        PI | 2.00 |  inf  |             |
 | Parabola  | 1 - x*x           |       4/3 | 1.41 |  1.0  |             |
-| Sinc      | sin(pi*x)/(pi*x)  |       1.0 | 1.21 |  inf  |             |
+| Sinc      | sin(x) / x        |       1.0 | 1.21 |  1.0  |             |
 | Triangle  | 1 - \|x\|         |       1.0 | 1.00 |  1.0  |             |
 | Tricube   | ( 1 - \|x\|^3 )^3 |     81/70 | 1.18 |  1.0  |             |
 | Triweight | ( 1 - x^2 )^3     |     32/35 | 0.91 |  1.0  |             |
 | Uniform   | 1.0               |       2.0 | 2.00 |  1.0  | aka Clip    |
-| Tophat 0  | 1.0               |       1.0 | 1.00 |  0.5  | like Uniform|
+| Tophat 0  | 1.0               |       1.0 | 1.00 |  0.5  | aka Uniform |
 | Tophat 1  | 1 - \|x\|         |       1.0 | 1.00 |  1.0  | aka Triangle|
 | Tophat 2  | 2nd order polynome|       1.0 | 1.26 |  1.5  |             |
 | Tophat 3  | 3rd order polynome|       1.0 | 1.44 |  2.0  |             |
 | Tophat 4  | 4th order polynome|       1.0 | 1.60 |  2.5  |             |
 | Tophat 5  | 5th order polynome|       1.0 | 1.73 |  3.0  |             |
 | Tophat 6  | 6th order polynome|       1.0 | 1.86 |  3.5  |             |
+|:----------|:------------------|----------:|:----:|:-----:|:------------|
 
 For all bound Kernels the definition in the table is true for |x| < range;
 elsewhere it is 0.
@@ -59,9 +60,9 @@ in robust fitting (RobustShell) to get a madian-like solution for the outliers.
 * range  :  float<br>
     the region [-range..+range] where the kernel is non-zero.<br>
 
-Author      Do Kester
+* Author :       Do Kester<br>
 
-Category    mathematics/Fitting
+* Category :     mathematics/Fitting<br>
 
 
 <a name="Kernel"></a>
@@ -87,12 +88,13 @@ Constructor
 </th></tr></thead></table>
 <p>
 
-Return the result for input values.
+Return the result for one input value.
 
 <b>Parameters</b>
 
 * x  :  array-like<br>
-    input values
+    the input value<br>
+
 
 <a name="resultsq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -100,12 +102,14 @@ Return the result for input values.
 </th></tr></thead></table>
 <p>
 
-Return the result for squared input values.
+Return the result for one input value.
 
 <b>Parameters</b>
 
 * x  :  array-like<br>
-    the squares of the input values
+    the input value<br>
+* Parameters :  x the square of the input value<br>
+
 
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -113,12 +117,13 @@ Return the result for squared input values.
 </th></tr></thead></table>
 <p>
 
-Return the partial derivative wrt the input values.
+Return the partial derivative wrt input value.
 
 <b>Parameters</b>
 
 * x  :  array-like<br>
-    the input values
+    the input value<br>
+
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -126,8 +131,9 @@ Return the partial derivative wrt the input values.
 </th></tr></thead></table>
 <p>
 
-Return true when the kernel is bound, i.e.
-all non-zero values are between -1 and +1
+Return true when the kernel is bound.
+All non-zero values are between -1 and +1
+
 
 <a name="name"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
