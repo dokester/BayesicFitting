@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="CombiModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,7 +13,7 @@ Fixed relations can be set between similar parameters.
 The relations can be either multiplicative or additive.
 When these relations are set, they must be set for all models.
 
-    f( x:p ) = &sum; g( x:p )<br>
+ f( x:p ) = &sum; g( x:p )
 
 where g( x:p ) is a model ( e.g. GaussModel )
 
@@ -25,61 +25,61 @@ As we have copies of the same model, each model can have its own priors.
 <b>Attributes</b>
 
 * nrepeat  :  int<br>
-    number of Models in this CombiModel<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of Models in this CombiModel<br>
 * nmp  :  int<br>
-    number of parameters in each Model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters in each Model<br>
 * expandpar  :  array of float<br>
-    expanded parameters. to be used in the repeated models<br>
+&nbsp;&nbsp;&nbsp;&nbsp; expanded parameters. to be used in the repeated models<br>
 * npcmax  :  int<br>
-    number of parameters in expandpar (= nmp * nrepeat)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters in expandpar (= nmp * nrepeat)<br>
 * expandindex  :  array of int<br>
-    converts parameter index into expandpar index<br>
+&nbsp;&nbsp;&nbsp;&nbsp; converts parameter index into expandpar index<br>
 * addindex  :  array of int<br>
-    indices of additively connected parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of additively connected parameters<br>
 * addvalue  :  array of float<br>
-    list of values to be added to the parameters in addindex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of values to be added to the parameters in addindex<br>
 * mulindex  :  array of int<br>
-    indices of multiplicatively connected parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of multiplicatively connected parameters<br>
 * mulvalue  :  array of float<br>
-    list of values to be multiplied to the parameters in mulindex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of values to be multiplied to the parameters in mulindex<br>
 * select  :  array of int<br>
-    indices of expandpar to get parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of expandpar to get parameters<br>
 
 <b>Attributes from BracketModel</b>
 
-    model, deep<br>
+ model, deep
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+ npchain, parameters, stdevs, xUnit, yUnit
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+ npmax, fixed, parlist, mlist
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+ npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <b>Examples</b>
 
     gauss = GaussModel( )
     combi = CombiModel( gauss, 3, addCombi={1:[0,0.1,0.3]}, mulCombi={2,[0]*3} )
-    print combi
-Combi of 3 times GaussModel
+    print( combi )
+    Combi of 3 times GaussModel
     print( combi.npchain, combi.nrepeat, combi.nmp, combi.nexpand )
-5 3 3 9
+    5 3 3 9
     print( combi.select )
-[0 1 2 3 6]
+    [0 1 2 3 6]
     print( combi.expandindex )
-[0 1 2 3 1 2 4 1 2]
+    [0 1 2 3 1 2 4 1 2]
     print( combi.modelindex )
-[0 0 0 1 2]
+    [0 0 0 1 2]
     print( combi.addindex )
-[1 4 7]
+    [1 4 7]
     print( combi.mulindex )
-[2 5 8]
+    [2 5 8]
 
 Category     mathematics/Fitting
 
@@ -105,27 +105,27 @@ CombiModel combines several copies of the same model int one.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to be repeated<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be repeated<br>
 * nrepeat  :  int<br>
-    number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
 * oper  :  "add" or "mul"<br>
-    the repeated models are combined using this operation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the repeated models are combined using this operation<br>
 * addCombi  :  None or dict<br>
-    make additive connections between parameters<br>
-    None : no additive connection<br>
-    dict : { int : array }<br>
-        key : int<br>
-            index pointing to the key-th parameter in the model<br>
-        value : array of nrepeat floats<br>
-            values added to each of the key-th parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; make additive connections between parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no additive connection<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dict : { int : array }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key : int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; index pointing to the key-th parameter in the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value : array of nrepeat floats<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values added to each of the key-th parameters<br>
 * mulCombi  :  None or dict<br>
-    make multiplicative connections between parameters<br>
-    None : no multiplicative connection<br>
-    dict : { int : array }<br>
-        key : int<br>
-            index pointing to the key-th parameter in the model<br>
-        value : array of nrepeat floats<br>
-            values  multiplied to each of the key-th parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; make multiplicative connections between parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no multiplicative connection<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dict : { int : array }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key : int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; index pointing to the key-th parameter in the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value : array of nrepeat floats<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values  multiplied to each of the key-th parameters<br>
 
 
 <a name="copy"></a>
@@ -147,21 +147,21 @@ Copy method.
 <b>Parameters</b>
 
 * addCombi  :  None or dict<br>
-    make additive connections between parameters<br>
-    None : no additive connection<br>
-    dict : { int : array }<br>
-        key : int<br>
-            index pointing to the key-th parameter in the model<br>
-        value : array of nrepeat floats<br>
-            values added to each of the key-th parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; make additive connections between parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no additive connection<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dict : { int : array }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key : int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; index pointing to the key-th parameter in the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value : array of nrepeat floats<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values added to each of the key-th parameters<br>
 * mulCombi  :  None or dict<br>
-    make multiplicative connections between parameters<br>
-    None : no multiplicative connection<br>
-    dict : { int : array }<br>
-        key : int<br>
-            index pointing to the key-th parameter in the model<br>
-        value : array of nrepeat floats<br>
-            values  multiplied to each of the key-th parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; make multiplicative connections between parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no multiplicative connection<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dict : { int : array }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key : int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; index pointing to the key-th parameter in the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value : array of nrepeat floats<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values  multiplied to each of the key-th parameters<br>
 
 
 <a name="makeExpandIndex"></a>
@@ -193,9 +193,9 @@ Returns the result calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -209,11 +209,11 @@ Returns the partial derivatives calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    Not in use<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Not in use<br>
 
 
 <a name="baseDerivative"></a>
@@ -227,9 +227,9 @@ Returns the derivative (df/dx) calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -250,7 +250,7 @@ Return the name of the indicated parameter.
 <b>Parameters</b>
 
 * kpar  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="baseParameterUnit"></a>
@@ -264,7 +264,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="getPrior"></a>
@@ -301,7 +301,7 @@ Upon failure try at the equivalent position in the head model
 * [<strong>hasPriors(</strong> isBound=True ) ](./Brackets.md#hasPriors)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -353,7 +353,7 @@ Upon failure try at the equivalent position in the head model
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -362,7 +362,7 @@ Upon failure try at the equivalent position in the head model
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 
