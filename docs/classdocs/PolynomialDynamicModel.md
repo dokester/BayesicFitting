@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PolynomialDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -33,29 +33,29 @@ Author       Do Kester
 <b>Attributes</b>
 
 * minDegree  :  int<br>
-    minimum degree of the polynomial<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of the polynomial<br>
 * maxDegree  :  int or None<br>
-    maximum degree of the polynomial<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of the polynomial<br>
 
 <b>Attributes from Dynamic</b>
 
-    ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
 
 <b>Attributes from PolynomialModel</b>
 
-    degree<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 Category     mathematics/Fitting
@@ -76,16 +76,16 @@ Growth of the model is governed by a exponential prior ( scale=1 ).
 <b>Parameters</b>
 
 * degree  :  int<br>
-    degree to start with; it should be minDegree <= degree <= maxDegree<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree to start with; it should be minDegree <= degree <= maxDegree<br>
 * minDegree  :  int<br>
-    minimum degree of polynomial (def=0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=0)<br>
 * maxDegree  :  None or int<br>
-    maximum degree of polynomial (def=None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
 * growPrior  :  None or Prior<br>
-    governing the birth and death.<br>
-    ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior<br>
 * copy  :  PolynomialDynamicModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
 <b>Raises</b>
 
@@ -126,14 +126,14 @@ Return a string representation of the model.
 * [<strong>baseParameterUnit(</strong> k )](./PolynomialModel.md#baseParameterUnit)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 
 * [<strong>baseResult(</strong> xdata, params )](./LinearModel.md#baseResult)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

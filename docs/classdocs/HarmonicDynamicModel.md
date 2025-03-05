@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="HarmonicDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -20,31 +20,31 @@ Author       Do Kester
 <b>Attributes</b>
 
 * minOrder  :  int<br>
-    minimum degree of polynomial (def=1)<br>
-    Can also be read as minComp<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as minComp<br>
 * maxOrder  :  None or int<br>
-    maximum degree of polynomial (def=None)<br>
-    Can also be read as maxComp<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as maxComp<br>
 
 <b>Attributes from Dynamic</b>
 
-    ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior<br>
 
 <b>Attributes from HarmonicModel</b>
 
-    order, period<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order, period<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Examples</b>
@@ -71,20 +71,20 @@ Growth of the model is governed by a prior.
 <b>Parameters</b>
 
 * order  :  int<br>
-    order to start with. It should be minOrder <= order <= maxOrder<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order to start with. It should be minOrder <= order <= maxOrder<br>
 * minOrder  :  int<br>
-    minimum degree of polynomial (def=1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)<br>
 * maxOrder  :  None or int<br>
-    maximum degree of polynomial (def=None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
 * period  :  float<br>
-    period of the oscilation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; period of the oscilation<br>
 * fixed  :  None<br>
-    If fixed is not None an AttributeError is raised<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If fixed is not None an AttributeError is raised<br>
 * growPrior  :  None or Prior<br>
-    governing the birth and death.<br>
-    ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
 * copy  :  HarmonicDynamicModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
 <b>Raises</b>
 
@@ -139,7 +139,7 @@ Return a string representation of the model.
 * [<strong>baseParameterUnit(</strong> k )](./HarmonicModel.md#baseParameterUnit)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 

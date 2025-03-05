@@ -25,34 +25,36 @@ Model.Brackets is an internal class inside Model.
 <b>Attributes</b>
 
 * model  :  Model<br>
-    to be put inside of brackets<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be put inside of brackets<br>
 * deep  :  int<br>
-    container depth (only for nice printing).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; container depth (only for nice printing).<br>
 
 <b>Attributes from Model</b>
 
-npchain, parameters, stdevs, xUnit, yUnit
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-npmax, fixed, parlist, mlist
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Examples</b>
 
+Explicit use of BrackeModel
 
-    ## Explicit use of BrackeModel
     m1 = GaussModel( )
     m1 += PolynomialModel( 0 )              # Gauss on a constant background
     m2 = BracketModel( m1 )
     m3 = SineModel( )
     m3 *= m2                                # sine * ( gauss + const )
     print( m3 )
-    ## Implicit use of BrackeModel, automatically invoked when m2 is a chain
+
+Implicit use of BrackeModel, automatically invoked when m2 is a chain
+
     m1 = GaussModel( )
     m1 += PolynomialModel( 0 )              # m1 is a chain of models
     m3 = SineModel( )
@@ -67,9 +69,9 @@ BracketModel is about rather advanced model building.
 <b>Notes</b>
 
 1. You have to complete the BracketModel, including parameter reduction,
-   BEFORE you put it into a model chain.<br>
+&nbsp;&nbsp;&nbsp; BEFORE you put it into a model chain.<br>
 2. If you change a BracketModel which is part of a model chain, unexpected result
-   might happen.<br>
+&nbsp;&nbsp;&nbsp; might happen.<br>
 
 
 
@@ -87,12 +89,12 @@ parameters that were 'fixed' in the constituent Models. They stay fixed.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    to be put in the container.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be put in the container.<br>
 * copy  :  BracketModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  dict<br>
-    if fixed is not None raise AttributeError<br>
-    Use fixed on the constituent models.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if fixed is not None raise AttributeError<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Use fixed on the constituent models.<br>
 
 <b>Raises</b>
 

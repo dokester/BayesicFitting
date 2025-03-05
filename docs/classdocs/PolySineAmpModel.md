@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PolySineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,7 +11,7 @@ Sine of fixed frequency with polynomials as amplitudes.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-    f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )<br>
 
 P(y), Q(y) are Polynomials of a certain order, n.
 
@@ -24,23 +24,23 @@ It is a linear model in 2 dimensions, with 2n+2 papameters.
 <b>Attributes</b>
 
 * degree  :  int<br>
-    degree of the polynomials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials<br>
 * frequency  :  float<br>
-    frequency of the sine.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; frequency of the sine.<br>
 * pm  :  PolynomialModel<br>
-    polynomial to be multiplied with the (co)sine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; polynomial to be multiplied with the (co)sine<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -57,13 +57,13 @@ Number of parameters is 2n+2.
 <b>Parameters</b>
 
 * degree  :  int<br>
-    degree of the polynomials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials<br>
 * frequency  :  float<br>
-    the frequency, &omega;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the frequency, &omega;<br>
 * copy  :  PolySineAmpModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  dict<br>
-    If not None raise AttributeError.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
 <b>Raises</b>
 
@@ -88,11 +88,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like [2,ndata]<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -106,9 +106,9 @@ Returns the derivative of f to (x,y) (df/dx,df/dy) at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like [2,ndata]<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 
 
 <a name="baseName"></a>
@@ -130,7 +130,7 @@ Return the name of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -196,7 +196,7 @@ Return the name of a parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -205,7 +205,7 @@ Return the name of a parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

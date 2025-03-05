@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="LaplaceErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,7 +11,7 @@ To calculate a Laplace likelihood.
 
 For one residual, x, it holds
 
-    f( x ) = 1 / ( 2 s ) exp( - |x| / s )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = 1 / ( 2 s ) exp( - |x| / s )<br>
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -22,11 +22,11 @@ See: toSigma()
 The function is mostly used to calculate the likelihood L over N
 residuals, or easier using log likelihood, logL.
 
-    logL = log( N / ( 2 s ) ) - &sum;( |x| / s  )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N / ( 2 s ) ) - &sum;( |x| / s  )<br>
 
 Using weights this becomes
 
-    logL = log( &sum;( w ) / ( 2 s ) ) - &sum;( w |x| / s  )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) / ( 2 s ) ) - &sum;( w |x| / s  )<br>
 
 Using this error distribution results in median-like solutions.
 
@@ -44,12 +44,12 @@ Constructor of Laplace Distribution.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
-    None : no limits implying fixed scale<br>
-    low     low limit on scale (needs to be >0)<br>
-    high    high limit on scale<br>
-    when limits are set, the scale is *not* fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
 
 * copy  :  LaplaceErrorDistribution<br>
     distribution to be copied.
@@ -93,9 +93,9 @@ Return the noise scale
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="getSumRes"></a>
@@ -106,15 +106,15 @@ Return the noise scale
 
 Return the sum of the absolute values of the residuals.
 
-    sum ( | res | )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sum ( | res | )<br>
 
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * scale  :  float or array_like<br>
     scale of residuals (from accuracies or noisescale of errdis)
 
@@ -129,9 +129,9 @@ Return the log( likelihood ) for a Gaussian distribution.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 
 
 <a name="logLdata"></a>
@@ -147,11 +147,11 @@ logL = sum( logLdata )
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <a name="partialLogL_alt"></a>
@@ -167,11 +167,11 @@ dL/ds is not implemented for problems with accuracy
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="nextPartialData"></a>
@@ -188,13 +188,13 @@ dL/ds is not implemented for problems with accuracy
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -204,7 +204,7 @@ dL/ds is not implemented for problems with accuracy
 * [<strong>setLimits(</strong> limits ) ](./ScaledErrorDistribution.md#setLimits)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

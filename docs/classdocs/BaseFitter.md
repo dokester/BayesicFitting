@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="BaseFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -23,12 +23,12 @@ Other Fitter classes relegate their calculation in these issues to this one.
 
 <b>Examples</b>
 
-    # It is not possible to use this class. User Fitter, CurveFitter etc. in stead
+# It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 
 <b>Note Also</b>
 
 1. The calculation of the evidence is an Gaussian approximation which is
-   only exact for linear models with a fixed scale.<br>
+&nbsp;&nbsp;&nbsp; only exact for linear models with a fixed scale.<br>
 2. Attributes labelled as read only should not be set by a user.
 
 * Author :  Do Kester<br>
@@ -36,70 +36,70 @@ Other Fitter classes relegate their calculation in these issues to this one.
 <b>Attributes</b>
 
 * model  :  Model<br>
-    the model to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model to be fitted<br>
 * xdata  :  array_like<br>
-    independent variable(s)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; independent variable(s)<br>
 * nxdata  :  int (read only)<br>
-    length of the xdata vector(s)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; length of the xdata vector(s)<br>
 * ndim  :  int (read only)<br>
-    number of xdata vectors<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of xdata vectors<br>
 * weights  :  array_like<br>
-    the weights on the data from the last fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the weights on the data from the last fit<br>
 * imageAssistant  :  ImageAssistant<br>
-    to convert images to pixels indices, needed for a fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to convert images to pixels indices, needed for a fit<br>
 * keep  :  dict of {int : float}<br>
-    to keep the indexed (int) parameter at the provided value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to keep the indexed (int) parameter at the provided value (float)<br>
 * fitIndex  :  list of int (or None)<br>
-    list of parameter indices to fit (None is all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices to fit (None is all)<br>
 * npfit  :  int<br>
-    the number of parameters fitted in the last fit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters fitted in the last fit.<br>
 * fixedScale  :  float<br>
-    the fixed noise scale.<br>
-    The presence of `fixedScale` has consequences for the definitions of `chisq`,<br>
-    `(co)variance`, `stdevs` and `evidence`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the fixed noise scale.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The presence of `fixedScale` has consequences for the definitions of `chisq`,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; `(co)variance`, `stdevs` and `evidence`<br>
 
 * minimumScale  :  float<br>
-    introduce a minimum value for the noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; introduce a minimum value for the noise scale<br>
 * design  :  matrix (read only)<br>
-    the design matrix (partial of model to parameters)<br>
-    returns self.getDesign()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the design matrix (partial of model to parameters)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.getDesign()<br>
 
 <b>Attributes (available after a call to fit())</b>
 
 * yfit  :  array_like<br>
-    The model result at the optimal value for the parameters.<br>
-    If map is true, a map is returned.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The model result at the optimal value for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If map is true, a map is returned.<br>
 * chisq  :  float (read only)<br>
-    chisquared of the fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; chisquared of the fit<br>
 * parameters  :  ndarray<br>
-    parameters fitted to the model<br>
-    returns self.model.parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters fitted to the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.model.parameters<br>
 * stdevs, standardDeviations  :  array_like (read only)<br>
-    the standard deviations on the parameters<br>
-    returns self.getStandardDeviations()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the standard deviations on the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.getStandardDeviations()<br>
 * hessian  :  matrix (read only)<br>
-    the hessian matrix<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the hessian matrix<br>
 * covariance  :  matrix (read only)<br>
-    the covariance matrix<br>
-    returns self.getCovarianceMatrix()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the covariance matrix<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.getCovarianceMatrix()<br>
 * scale  :  float<br>
-    the noise scale<br>
-    returns self.getScale()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.getScale()<br>
 * sumwgt  :  float (read only)<br>
-    sum of the weights<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sum of the weights<br>
 * logZ  :  float (read only)<br>
-    the e-log of the evidence<br>
-    returns self.getLogZ()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the e-log of the evidence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.getLogZ()<br>
 * evidence  :  float (read only)<br>
-    the 10log of the evidence (logZ / log(10))<br>
-    returns self.getEvidence()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the 10log of the evidence (logZ / log(10))<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returns self.getEvidence()<br>
 
 <b>Attributes (available after a call to getLogZ() or getEvidence())</b>
 
 * logOccam  :  float (read only)<br>
-    Occam factor<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Occam factor<br>
 * logLikelihood  :  float (read only)<br>
-    log of the likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log of the likelihood<br>
 
 
 <a name="BaseFitter"></a>
@@ -117,28 +117,28 @@ input vector is needed a new object should be created.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    independent input variable(s)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; independent input variable(s)<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 * map  :  bool (False)<br>
-    When true, the xdata should be interpreted as a map.<br>
-    The fitting is done on the pixel indices of the map,<br>
-    using ImageAssistant<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When true, the xdata should be interpreted as a map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The fitting is done on the pixel indices of the map,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; using ImageAssistant<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values of keep will be used by the Fitter as long as the Fitter exists.<br>
-    See also fit( ..., keep=dict )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values of keep will be used by the Fitter as long as the Fitter exists.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See also fit( ..., keep=dict )<br>
 * fixedScale  :  None or float<br>
-    None : the noise scale is not fixed<br>
-    float: value of the fixed noise scale<br>
-    The value of fixedScale only influences the evidence calculation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : the noise scale is not fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float: value of the fixed noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The value of fixedScale only influences the evidence calculation<br>
 
 <b>Raises</b>
 
 ValueError when one of the following is true
-    1. Dimensionality of model and input does not match.<br>
-    2. Nans in input stream.<br>
-    3. Model is not the head of a compound model chain.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1. Dimensionality of model and input does not match.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2. Nans in input stream.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3. Model is not the head of a compound model chain.<br>
 
 
 <a name="setMinimumScale"></a>
@@ -148,7 +148,7 @@ ValueError when one of the following is true
 <p>
 
 Introduce a minimum in scale calculation and consequently in chisq.
-    chi^2 >= sumwgt * scale^2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; chi^2 >= sumwgt * scale^2<br>
 
 <b>Parameters</b>
 
@@ -169,22 +169,22 @@ Prolog for all Fitters.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 
 <b>Returns</b>
 
 * fitIndex  :  ndarray of int<br>
-    Indices of the parameters that need fitting<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Indices of the parameters that need fitting<br>
 * ydata  :  ndarray<br>
-    Only different from input when ydata is a map <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Only different from input when ydata is a map <br>
 * fitwgts  :  float or ndarray<br>
-    Combines weights and accuracy into ( weights / accuracy^2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Combines weights and accuracy into ( weights / accuracy^2 )<br>
     1.0 if both are None
 
 <a name="fitpostscript"></a>
@@ -204,14 +204,14 @@ Produce a plot of the results.
 Keeps parameters fixed at the provided values.
 
 1. The model will act exactly as if it were a model with less
-   parameters, although slightly less efficient.<br>
+&nbsp;&nbsp;&nbsp; parameters, although slightly less efficient.<br>
 2. Repeated calls start from scratch.
 3. Reset with keepFixed( None )
 
 <b>Parameters</b>
 
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 
 <b>Returns</b>
 
@@ -229,11 +229,11 @@ Insert fitparameters into the parameters when fitIndex is present.
 <b>Parameters</b>
 
 * fitpar  :  list of float<br>
-    (fitted) parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (fitted) parameters<br>
 * index  :  list of int<br>
-    list of parameter indices to be kept<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices to be kept<br>
 * into  :  list of float<br>
-    array into which the fitpar need to be inserted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array into which the fitpar need to be inserted.<br>
 
 
 <a name="modelFit"></a>
@@ -247,13 +247,13 @@ Return model fitted to the data.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * weights  :  None or array_like<br>
-    weights to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights to be used<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values will override those at initialization.<br>
-    They are only used in this call of fit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 
 
 <a name="limitsFit"></a>
@@ -270,18 +270,18 @@ When the chisq landscape is largely monomodal (no local minima) this is OK.
 <b>Parameter</b>
 
 * ydata  :  array_like<br>
-    data that the model needs to be fit to<br>
+&nbsp;&nbsp;&nbsp;&nbsp; data that the model needs to be fit to<br>
 * weights  :  array_like<br>
-    weights partaining to the data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights partaining to the data.<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values will override those at initialization.<br>
-    They are only used in this call of fit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 
 <b>Returns</b>
 
 * pars  :  array_like<br>
-    the parameters of the fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameters of the fit<br>
 
 <b>Raises</b>
 
@@ -299,13 +299,13 @@ Return model parameters fitted to the data.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * weights  :  array_like<br>
-    weights to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights to be used<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values will override those at initialization.<br>
-    They are only used in this call of fit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 
 <b>Raises</b>
 
@@ -324,11 +324,11 @@ Check also for zeros or negatives in accuracy.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    data to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; data to be fitted.<br>
 * weights  :  array_like<br>
-    weights pertaining to ydata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to ydata<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 
 <b>Raises</b>
 
@@ -347,10 +347,10 @@ It includes "normalized" data if present. See normalize().
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted. When such is appliccable, it should be<br>
-    multiplied by weights and/or appended by normdata.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted. When such is appliccable, it should be<br>
+&nbsp;&nbsp;&nbsp;&nbsp; multiplied by weights and/or appended by normdata.<br>
 * index  :  list of int<br>
-    index of parameters to be fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of parameters to be fixed<br>
 
 
 <a name="getHessian"></a>
@@ -366,11 +366,11 @@ It includes "normalized" data if present. See normalize()
 <b>Parameters</b>
 
 * params  :  array_like<br>
-    the model parameters to be considered<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model parameters to be considered<br>
 * weights  :  array_like<br>
-    weights to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights to be used<br>
 * index  :  list of int<br>
-    index of parameters to be fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of parameters to be fixed<br>
 
 
 <a name="getInverseHessian"></a>
@@ -384,11 +384,11 @@ Return the inverse of the Hessian Matrix, H.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * weights  :  array_like<br>
-    weights to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights to be used<br>
 * index  :  list of int<br>
-    index of parameters to be fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of parameters to be fixed<br>
 
 
 <a name="getCovarianceMatrix"></a>
@@ -398,7 +398,7 @@ Return the inverse of the Hessian Matrix, H.
 <p>
 
 Returns the inverse hessian matrix over the fitted parameters,
-        multiplied by the variance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; multiplied by the variance.<br>
 
 Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 
@@ -410,9 +410,9 @@ Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 <p>
 
 Return the (calculated) variance of the remaining noise. I.e.
-    var = chisq / dof<br>
+&nbsp;&nbsp;&nbsp;&nbsp; var = chisq / dof<br>
 when automatic noise scaling is requested or
-    var = scale^2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; var = scale^2<br>
 when we have a fixed scale.
 
 <b>Parameters</b>
@@ -434,9 +434,9 @@ It is like adding a dummy measurement of one (or more) parameter to the data.
 <b>Parameters</b>
 
 * normdfdp  :  array_like<br>
-    for each parameter to sum to value (same length as self.parameters)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; for each parameter to sum to value (same length as self.parameters)<br>
 * normdata  :  float<br>
-    simulated data value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; simulated data value<br>
 * weight  :  float<br>
     weight of this measurement
 
@@ -452,11 +452,11 @@ The design matrix is also known as the Jacobian Matrix.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    the independent input data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the independent input data<br>
 * params  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 * index  :  list of int<br>
-    index of parameters to be fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of parameters to be fixed<br>
 
 
 <a name="chiSquared"></a>
@@ -472,11 +472,11 @@ It is the (weighted) sum of the squared residuals.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * params  :  array_like<br>
-    parameters for the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model<br>
 * weights  :  array_like<br>
-    weights to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights to be used<br>
 
 <b>Raises</b>
 
@@ -491,7 +491,7 @@ ValueError when chisq <= 0.
 
 Calculates of standard deviations pertaining to the parameters.
 
-    &sigma;_i = s * sqrt( C[i,i] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &sigma;_i = s * sqrt( C[i,i] )<br>
 
 where C is the Covariance matrix, the inverse of the Hessian Matrix and
 s is the noiseScale.
@@ -522,9 +522,9 @@ MonteCarlo. For tweaking of that class can be done outside BaseFitter.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    input data over which to calculate the error bars.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars.<br>
 * monteCarlo  :  MonteCarlo<br>
-    a ready-made MonteCarlo class.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a ready-made MonteCarlo class.<br>
 
 
 <a name="getScale"></a>
@@ -536,7 +536,7 @@ MonteCarlo. For tweaking of that class can be done outside BaseFitter.
 <b>Return</b>
 
 * float  :  the noise scale<br>
-    scale = sqrt( chisq / DOF )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; scale = sqrt( chisq / DOF )<br>
 
 <b>Raise</b>
 
@@ -551,7 +551,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
 Calculation of the evidence, log10( Z ), for the model given the data.
 
-    E = log10( P( Model | data ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; E = log10( P( Model | data ) )<br>
 
 The calculation of the evidence uses a Gaussion approximation of the Posterior
 probability.
@@ -562,9 +562,9 @@ either from the priors in the model or from keywords "limits/noiseLimits".
 <b>Parameters</b>
 
 * limits  :  list of 2 floats/array_likes<br>
-    possible range of the parameters. ( [low,high] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; possible range of the parameters. ( [low,high] )<br>
 * noiseLimits  :  list of 2 floats<br>
-    possible range on noise scale ( [low,high] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; possible range on noise scale ( [low,high] )<br>
 
 <b>Raises</b>
 
@@ -584,7 +584,7 @@ It is implementing eq 19/20 last parts (Kester 2002) term by term
 <b>Parameters</b>
 
 * autoscale  :  bool<br>
-    whether the noise scale is optimized too<br>
+&nbsp;&nbsp;&nbsp;&nbsp; whether the noise scale is optimized too<br>
 * var  :  float<br>
     variance
 
@@ -596,7 +596,7 @@ It is implementing eq 19/20 last parts (Kester 2002) term by term
 
 Calculation of the evidence, log( Z ), for the model given the data.
 
-    logZ = log( P( Model | data ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logZ = log( P( Model | data ) )<br>
 
 The calculation of the evidence uses a Gaussion approximation of the Posterior
 probability.
@@ -607,9 +607,9 @@ either from the priors in the model or from keywords "limits/noiseLimits".
 <b>Parameters</b>
 
 * limits  :  list of 2 floats/array_likes<br>
-    possible range of the parameters. ( [low,high] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; possible range of the parameters. ( [low,high] )<br>
 * noiseLimits  :  list of 2 floats<br>
-    possible range on noise scale ( [low,high] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; possible range on noise scale ( [low,high] )<br>
 
 <b>Raises</b>
 
@@ -630,15 +630,15 @@ Plot the results of the fit.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    xdata of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xdata of the problem<br>
 * ydata  :  array_like<br>
-    ydata of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ydata of the problem<br>
 * model  :  Model<br>
-    the model the ydata are fitted to at xdata.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model the ydata are fitted to at xdata.<br>
 * residuals  :  bool<br>
-    plot the residuals in a separate panel.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; plot the residuals in a separate panel.<br>
 * confidence  :  bool<br>
-    plot confidence region<br>
+&nbsp;&nbsp;&nbsp;&nbsp; plot confidence region<br>
 * show  :  bool<br>
     display the plot.
 

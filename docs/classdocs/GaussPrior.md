@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="GaussPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 Gauss prior distribution. Use  normalized version
 
-    Pr( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 * ( ( x - c ) / s )^2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 * ( ( x - c ) / s )^2 )<br>
 
 By default: c = center = 0 and s = scale = 1.
 
@@ -32,9 +32,9 @@ unit2domain: d = erfinv( 2 * u - 1 ) * s * &sqrt; 2 + c
 <b>Attributes</b>
 
 * center  :  float<br>
-    center of the Gaussian prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; center of the Gaussian prior<br>
 * scale  :  float<br>
-    scale of the Gaussian prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; scale of the Gaussian prior<br>
 
 <b>Attributes from Prior</b>
 
@@ -53,17 +53,17 @@ Constructor.
 <b>Parameters</b>
 
 * center  :  float<br>
-    of the location of the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the location of the prior<br>
 * scale  :  float<br>
-    of the exponential<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the exponential<br>
 * limits  :  None or [float,float]<br>
-    None    no limits are set<br>
-    2 floats    lowlimit and highlimit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit<br>
 * circular  :  bool or float<br>
-    bool : y|n circular with period from limits[0] to limits[1]<br>
-    float : period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; bool : y|n circular with period from limits[0] to limits[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float : period of circularity<br>
 * prior  :  GaussPrior<br>
-    prior to copy (with new scale if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
 
 
 <a name="copy"></a>
@@ -87,7 +87,7 @@ domain2unit: u = 0.5 * ( erf( ( d - center ) / ( &sqrt; 2 * scale ( ) + 1 )
 <b>Parameters</b>
 
 * dval  :  float or array_like<br>
-    value(s) within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value(s) within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -104,7 +104,7 @@ unit2domain: d = erfinv( 2 * u - 1 ) * scale * &sqrt; 2 + center
 <b>Parameters</b>
 
 * uval  :  float or array_like<br>
-    value(s) within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value(s) within [0,1]<br>
 
 
 <a name="result"></a>
@@ -118,7 +118,7 @@ Return a the result of the distribution function at x.
 <b>Parameters</b>
 
 * x  :  float or array_like<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="logResult"></a>
@@ -132,7 +132,7 @@ Return a the log of the result of the prior.
 <b>Parameters</b>
 
 * x  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="partialLog"></a>
@@ -146,7 +146,7 @@ Return partial derivative of log( Prior ) wrt x.
 <b>Parameters</b>
 
 * x  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="isBound"></a>

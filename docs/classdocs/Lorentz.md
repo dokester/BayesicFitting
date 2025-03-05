@@ -9,7 +9,7 @@
 
 Lorentz is an unbound Kernel function.
 
-    f( x ) = 1 / ( 1 + x * x ).<br>
+ K( x ) = 1 / ( 1 + x * x )
 
 
 <a name="Lorentz"></a>
@@ -20,9 +20,9 @@ Lorentz is an unbound Kernel function.
 
 Constructor.
 
- Using<br>
- integral = &pi;<br>
- fwhm = 2.0<br>
+ Using
+ integral = &pi;
+ fwhm = 2.0
  range = inf
 
 <a name="result"></a>

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="StartOrderEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -29,13 +29,13 @@ Constructor.
 <b>Parameters</b>
 
 * walkers  :  SampleList<br>
-    walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * copy  :  OrderEngine<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * kwargs  :  dict for Engine<br>
-    "phantoms", "slow", "seed", "verbose"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"<br>
 
 
 <a name="copy"></a>
@@ -56,11 +56,11 @@ Execute the engine by a random selection of the parameters.
 <b>Parameters</b>
 
 * kw  :  id<br>
-    id of waker to diffuse<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of waker to diffuse<br>
 * lowLhood  :  float<br>
-    lower limit in logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 * fitIndex  :  array_like<br>
-    list of parameter indices (not active)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices (not active)<br>
 <b>Returns</b>
 
 * int  :  the number of successfull moves<br>

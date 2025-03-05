@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="MaxLikelihoodFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -14,14 +14,14 @@ Author:      Do Kester.
 <b>Attributes</b>
 
 * errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |<br>
-                "uniform" | "exponential"<br>
-    None : Use _ChiSq as function to be minimized<br>
-    name : use -logLikelihood as function to be minimized from the named<br>
-            errordistribution.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized<br>
+&nbsp;&nbsp;&nbsp;&nbsp; name : use -logLikelihood as function to be minimized from the named<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errordistribution.<br>
 * scale  :  float<br>
-    the (fixed) noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) noise scale<br>
 * power  :  float<br>
-    power of errdis (if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; power of errdis (if applicable)<br>
 
 <b>Raises</b>
 
@@ -43,23 +43,23 @@ It does not work by itself.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 
 * errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |<br>
-                "uniform" | "exponential"<br>
-    None : Use _ChiSq as function to be minimized<br>
-    name : use -logLikelihood as function to be minimized from the named<br>
-            errordistribution.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized<br>
+&nbsp;&nbsp;&nbsp;&nbsp; name : use -logLikelihood as function to be minimized from the named<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errordistribution.<br>
 * scale  :  float<br>
-    the (fixed) noise scale of errdis (if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) noise scale of errdis (if applicable)<br>
 * power  :  float (2.0)<br>
-    the power of errdis ( if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the power of errdis ( if applicable)<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
 
 
 <a name="makeFuncs"></a>
@@ -73,11 +73,11 @@ Make connection to the desired func, gradient and hessian.
 <b>Parameters</b>
 
 * data  :  array_like<br>
-    the data to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data to be fitted<br>
 * weights  :  array_like or None<br>
-    weights on the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights on the data<br>
 * index  :  array_like<br>
-    indices of the parameters to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of the parameters to be fitted.<br>
 * ret  :  1 or 2 or 3<br>
     return (func), (func,dfunc) or (func,dfunc,hess)
 

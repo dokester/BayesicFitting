@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ImageAssistant"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,9 +11,9 @@ ImageAssistant contains 2 methods to assist with more dimensional
 fitting.
 
 1. getIndices Generates indices for data arrays of any dimension.
-   To be used as input in the Fitter classes.<br>
+&nbsp;&nbsp;&nbsp; To be used as input in the Fitter classes.<br>
 2. resizeData Resizes the data arrays into a 1-dimensional array.
-   To be used as data in the Fitter.<br>
+&nbsp;&nbsp;&nbsp; To be used as data in the Fitter.<br>
 
 
 
@@ -24,15 +24,15 @@ fitting.
     ias = ImageAssistant()
     ky = ias.getIndices( ymap )
     print( ky.shape )
-    (6,2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (6,2)<br>
     print( ky[4,0], ky[4,1], ymap[ ky[4,0], ky[4,1] ] )
-    1 0 4<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 0 4<br>
     ias = ImageAssistant( order='F')
     ky = ias.getIndices( ymap )
     print( ky.shape )
-    (6,2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (6,2)<br>
     print( ky[4,0], ky[4,1], ymap[ ky[4,1], ky[4,0] ] )
-    0 1 4<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 1 4<br>
 
 ## Suppose y is a 2-dimensional map of something
     aass = ImageAssistant( )
@@ -58,8 +58,8 @@ needed for the Fitters.
 <b>Parameters</b>
 
 * order  :  'C' or 'F'<br>
-    set index view according to character<br>
-    'C' orders from slow to fast<br>
+&nbsp;&nbsp;&nbsp;&nbsp; set index view according to character<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'C' orders from slow to fast<br>
     'F' orders from fast to slow
 
 <a name="getIndices"></a>
@@ -75,9 +75,9 @@ To be used as input in the Fitter classes.
 <b>Parameters</b>
 
 * ya  :  map<br>
-    array of y ( data ) values for which an indexed array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of y ( data ) values for which an indexed array<br>
 * order  :  'C' or 'F'<br>
-    set index view according to character<br>
+&nbsp;&nbsp;&nbsp;&nbsp; set index view according to character<br>
 
 <b>Returns</b>
 
@@ -95,16 +95,16 @@ Return the (x,y) positions of the pixels in the map.
 <b>Parameters</b>
 
 * ya  :  map<br>
-    array of y ( data ) values for which an indexed array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of y ( data ) values for which an indexed array<br>
 * order  :  'C' or 'F'<br>
-    set index view according to character<br>
+&nbsp;&nbsp;&nbsp;&nbsp; set index view according to character<br>
 * center  :  bool<br>
-    if True, return the positions of the center of the pixels.<br>
-    otherwise the (left,lower) corner<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True, return the positions of the center of the pixels.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; otherwise the (left,lower) corner<br>
 * deproject  :  callable<br>
-    Deprojection method: from projected map to sky position,<br>
-    returning (x,y,...) position given the map indices (ix,iy,...)<br>
-    Default: returning the indices as floats (+0.5 if center)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Deprojection method: from projected map to sky position,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returning (x,y,...) position given the map indices (ix,iy,...)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Default: returning the indices as floats (+0.5 if center)<br>
 
 <b>Returns</b>
 
@@ -134,8 +134,8 @@ Reshape the data (res) into the same shape as the map (ya)
 <b>Parameters</b>
 
 * res  :  array_like<br>
-    result of the fit as a 1-dim array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; result of the fit as a 1-dim array<br>
 * shape  :  tuple of int<br>
-    dimensional lengths of the reconstructable map<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dimensional lengths of the reconstructable map<br>
     default remembered from a call to getIndices
 

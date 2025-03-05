@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Sample"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,29 +15,29 @@ Each Sample maintains 5 attributes
 <b>Attributes</b>
 
 * id  :  int<br>
-    identification number<br>
+&nbsp;&nbsp;&nbsp;&nbsp; identification number<br>
 * parent  :  int<br>
-    id of the parent (-1 for Adam/Eve)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of the parent (-1 for Adam/Eve)<br>
 * model  :  Model<br>
-    the model being used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model being used<br>
 * logL  :  float<br>
-    log Likelihood = log Prob( data | params )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood = log Prob( data | params )<br>
 * logW  :  float<br>
-    log Weights of the log of the weight of the sample.<br>
-    The weight is the relative contribution to the evidence integral.<br>
-    logW = logL + log( width )<br>
-    The logZ, the evidence, equals the log of the sum of the contributions.<br>
-    logZ = log( sum( exp( logW ) ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Weights of the log of the weight of the sample.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The weight is the relative contribution to the evidence integral.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logW = logL + log( width )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The logZ, the evidence, equals the log of the sum of the contributions.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logZ = log( sum( exp( logW ) ) )<br>
 * parameters  :  array_like<br>
-    parameters (of the model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters (of the model)<br>
 * nuisance  :  array_like (optional)<br>
-    nuisance parameters (of the problem)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; nuisance parameters (of the problem)<br>
 * hyper  :  array_like (optional)<br>
-    list of hyper parameters (of the error distribution)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of hyper parameters (of the error distribution)<br>
 * fitIndex  :  array_like or None<br>
-    list of allpars to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of allpars to be fitted.<br>
 * allpars  :  array_like (read only)<br>
-    list of parameters, nuisance parameters and hyperparameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameters, nuisance parameters and hyperparameters<br>
 
 Author       Do Kester
 
@@ -53,19 +53,19 @@ Constructor.
 <b>Parameters</b>
 
 * id  :  int<br>
-    id of the sample<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of the sample<br>
 * parent  :  int<br>
-    id of the parent (-1 for Adam/Eve)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of the parent (-1 for Adam/Eve)<br>
 * start  :  int<br>
-    iteration in which the walker was constructed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; iteration in which the walker was constructed<br>
 * model  :  Model<br>
-    the model being used. Parameters are copied from this model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model being used. Parameters are copied from this model.<br>
 * parameters  :  array_like<br>
-    list of model parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of model parameters<br>
 * fitIndex  :  array_like<br>
-    list of indices in allpars that need fitting<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices in allpars that need fitting<br>
 * copy  :  Sample<br>
-    the sample to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the sample to be copied<br>
 
 
 <a name="copy"></a>

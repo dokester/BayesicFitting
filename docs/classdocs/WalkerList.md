@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="WalkerList"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,12 +15,12 @@ It is the working ensemble of NestedSampler.
 <b>Attributes</b>
 
 * logZ  :  float (read-only)<br>
-    Natural log of evidence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Natural log of evidence<br>
 * info  :  float (read-only)<br>
-    The information H. The compression factor ( the ratio of the prior space<br>
-    available to the model parameters over the posterior space ) is equal to the exp( H ).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The information H. The compression factor ( the ratio of the prior space<br>
+&nbsp;&nbsp;&nbsp;&nbsp; available to the model parameters over the posterior space ) is equal to the exp( H ).<br>
 * iteration  :  int<br>
-    Present iteration number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Present iteration number.<br>
 
 Author       Do Kester
 
@@ -39,15 +39,15 @@ To be valid it needs either problem/allpars/fitindex or walker or walkerlist
 <b>Parameters</b>
 
 * problem  :  Problem or None<br>
-    to construct a walker to be added.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to construct a walker to be added.<br>
 * ensemble  :  int<br>
-    number of walkers<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of walkers<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array of int<br>
-    list of parameters to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameters to be fitted.<br>
 * walker  :  Walker or None<br>
-    walker to be added.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walker to be added.<br>
 * walkerlist  :  Walkerlist or None<br>
     walkerlist to be incorporated.
 
@@ -67,7 +67,7 @@ replace/append a Walker to this list
 <b>Parameters</b>
 
 * walker  :  Walker<br>
-    the list to take to copy from<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the list to take to copy from<br>
 * index  :  int<br>
     the index at which to set
 
@@ -82,11 +82,11 @@ Copy one item of the list onto another.
 <b>Parameters</b>
 
 * src  :  int<br>
-    the source item<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the source item<br>
 * des  :  int<br>
-    the destination item<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the destination item<br>
 * wlist  :  WalkerList or None<br>
-    Copy from this WalkerList (None == self)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Copy from this WalkerList (None == self)<br>
 * start  :  int<br>
     iteration where this walker was created
 
@@ -105,8 +105,8 @@ Return the log of sum.
 <p>
 
 Return  index of the first walker with walker.logL > lowL, 
-        None if list is empty<br>
-        len  if no item applies <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None if list is empty<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len  if no item applies <br>
 
 <b>Parameters</b>
 
@@ -152,7 +152,7 @@ Return the logL of the/all walker
 <b>Parameters</b>
 
 * walker  :  None or Walker<br>
-    None return value for all walkers<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None return value for all walkers<br>
     get the logL from
 
 <a name="allPars"></a>
@@ -170,7 +170,7 @@ to get the actual number.
 <b>Parameters</b>
 
 * kpar  :  int or tuple of ints<br>
-    the parameter to be selected. Default: all<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected. Default: all<br>
 
 
 <a name="getParameterEvolution"></a>
@@ -188,7 +188,7 @@ to get the actual number.
 <b>Parameters</b>
 
 * kpar  :  int or tuple of ints<br>
-    the parameter to be selected. Default: all<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected. Default: all<br>
 
 
 <a name="getScaleEvolution"></a>

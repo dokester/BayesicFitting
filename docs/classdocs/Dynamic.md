@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Dynamic"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,16 +13,16 @@ Class adjoint to Model which implements some dynamic behaviour.
 <b>Attributes</b>
 
 * ncomp  :  int<br>
-    the number of components in the dynamic model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the number of components in the dynamic model<br>
 * deltaNpar  :  int<br>
-    the number of parameters in each component<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in each component<br>
 * minComp  :  int<br>
-    minimum number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum number of repetitions<br>
 * maxComp  :  None or int<br>
-    maximum number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of repetitions<br>
 * growPrior  :  None or Prior<br>
-    governing the birth and death.<br>
-    ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
 
 
 <a name="Dynamic"></a>
@@ -54,12 +54,12 @@ Set the growth prior.
 <b>Parameters</b>
 
 * growPrior  :  None or Prior<br>
-    governing the birth and death.<br>
-    ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
 * min  :  int<br>
-    lower limit on growthprior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit on growthprior<br>
 * max  :  None or int<br>
-    upper limit on growthprior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; upper limit on growthprior<br>
 * name  :  str<br>
     name of the component
 
@@ -74,14 +74,14 @@ Set attribute, if it belongs to a Dynamic Models.
 <b>Parameters</b>
 
 * name  :  str<br>
-    name of the attribute<br>
+&nbsp;&nbsp;&nbsp;&nbsp; name of the attribute<br>
 * value  :  anything<br>
-    value of the attribute<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value of the attribute<br>
 
 <b>Return</b>
 
 * bool  :  True if name was a Dynamic name<br>
-       False if not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; False if not<br>
 
 
 <a name="grow"></a>
@@ -95,9 +95,9 @@ Increase the degree by one upto maxComp ( if present ).
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the params of the Dynamic model start<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator<br>
-    to generate a new parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter.<br>
 
 <b>Return</b>
 
@@ -115,9 +115,9 @@ Decrease the degree by one downto minComp ( default 1 ).
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the params of the Dynamic model start<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator<br>
-    Not used in this implementation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Not used in this implementation<br>
 
 <b>Return</b>
 
@@ -148,9 +148,9 @@ Change the number of parameters and self.parameters.
 <b>Parameters</b>
 
 * dnp  :  int<br>
-    change in the number of parameters in the DynamicModel<br>
+&nbsp;&nbsp;&nbsp;&nbsp; change in the number of parameters in the DynamicModel<br>
 * offset  :  int<br>
-    starting index of the DynamicModel<br>
+&nbsp;&nbsp;&nbsp;&nbsp; starting index of the DynamicModel<br>
 * location  :  int<br>
     index in param[offset:] at which to insert/delete the new parameters
 
@@ -182,15 +182,15 @@ dnp:        -2
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    parameters of the parent model (chain)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the parent model (chain)<br>
 * location  :  int<br>
-    index in param[offset:] at which to insert/delete the new parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index in param[offset:] at which to insert/delete the new parameters<br>
 * dnp  :  int<br>
-    number of parameters to insert (dnp>0) or delete (dnp<0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters to insert (dnp>0) or delete (dnp<0)<br>
 * offset  :  int<br>
-    start index of the parameters of the dynamic model in param<br>
+&nbsp;&nbsp;&nbsp;&nbsp; start index of the parameters of the dynamic model in param<br>
 * value  :  float or array_like<br>
-    to be given to the inserted parameters (only when dnp>0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be given to the inserted parameters (only when dnp>0)<br>
 
 
 <a name="alterFitindex"></a>
@@ -204,11 +204,11 @@ change the fit index to comply with the changed model.
 <b>Parameters</b>
 
 * findex  :  array_like<br>
-    fit index of the parent model (chain)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fit index of the parent model (chain)<br>
 * location  :  int<br>
-    index in param[offset:] at which to insert/delete the new parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index in param[offset:] at which to insert/delete the new parameters<br>
 * dnp  :  int<br>
-    number of parameters to insert (dnp>0) or delete (dnp<0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters to insert (dnp>0) or delete (dnp<0)<br>
 * offset  :  int<br>
     start index of the parameters of the dynamic model in param
 
@@ -224,11 +224,11 @@ Default implementation: does nothing.
 <b>Parameters</b>
 
 * param  :  array-like<br>
-    list of all parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters<br>
 * offset  :  int<br>
-    index where the dynamic model starts<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
 * np  :  int<br>
-    length of the parameters of the dynamic model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; length of the parameters of the dynamic model<br>
 * rng  :  RNG<br>
     random number generator
 

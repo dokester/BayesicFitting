@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="UserModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -34,28 +34,28 @@ UserModel( slowchirp )
 <b>Attributes</b>
 
 * userResult  :  callable<br>
-    method to evaluate the result of the F(x:p)<br>
-    defined as method( x, p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; method to evaluate the result of the F(x:p)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; defined as method( x, p )<br>
 * userPartial  :  callable<br>
-    method to evaluate the partial derivatives df/dp<br>
-    defined as method( x, p ). Default: numeric derivative<br>
+&nbsp;&nbsp;&nbsp;&nbsp; method to evaluate the partial derivatives df/dp<br>
+&nbsp;&nbsp;&nbsp;&nbsp; defined as method( x, p ). Default: numeric derivative<br>
 * userDerivative  :  callable<br>
-    method to evaluate the derivative df/dx<br>
-    defined as method( x, p ). Default: numeric derivative<br>
+&nbsp;&nbsp;&nbsp;&nbsp; method to evaluate the derivative df/dx<br>
+&nbsp;&nbsp;&nbsp;&nbsp; defined as method( x, p ). Default: numeric derivative<br>
 * userName  :  str<br>
-    name of the class<br>
+&nbsp;&nbsp;&nbsp;&nbsp; name of the class<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -71,25 +71,25 @@ User provided model.
 <b>Parameters</b>
 
 * npars  :  int<br>
-    number of parameters of this model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters of this model<br>
 * userResult  :  callable<br>
-    method of the form userResult( x, p )<br>
-    where x is the independent variable; array_like<br>
-          p is the parameter vector; array_like <br>
+&nbsp;&nbsp;&nbsp;&nbsp; method of the form userResult( x, p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where x is the independent variable; array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p is the parameter vector; array_like <br>
 * ndim  :  int<br>
-    number of input streams.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of input streams.<br>
 * userPartial  :  callable<br>
-    method of the form userPartial( x, p )<br>
-    where x is the independent variable; array_like<br>
-          p is the parameter vector; array_like <br>
+&nbsp;&nbsp;&nbsp;&nbsp; method of the form userPartial( x, p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where x is the independent variable; array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p is the parameter vector; array_like <br>
 * userDeriv  :  callable<br>
-    method of the form userDeriv( x, p )<br>
-    where x is the independent variable; array_like<br>
-          p is the parameter vector; array_like <br>
+&nbsp;&nbsp;&nbsp;&nbsp; method of the form userDeriv( x, p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where x is the independent variable; array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p is the parameter vector; array_like <br>
 * userName  :  str<br>
-    Name for this model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Name for this model<br>
 * copy  :  UserModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>
@@ -115,9 +115,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -131,11 +131,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -149,9 +149,9 @@ Return the derivative df/dx at each xdata (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>

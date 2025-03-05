@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="IterationPlotter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -23,9 +23,9 @@ Plot the data.
 <b>Parameters</b>
 
 * x  :  array_like<br>
-    x-axis values of the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; x-axis values of the data<br>
 * y  :  array_like<br>
-    y-axis values of the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; y-axis values of the data<br>
 * title  :  string<br>
     the title of the plot
 
@@ -40,9 +40,9 @@ Plot the ( intermediate ) result.
 <b>Parameters</b>
 
 * x  :  array_like<br>
-    x-axis values of the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; x-axis values of the data<br>
 * r  :  array_like<br>
-    model result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model result<br>
 * iter  :  int<br>
     iteration number
 

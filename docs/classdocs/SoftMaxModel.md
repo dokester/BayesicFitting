@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SoftMaxModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,16 +12,16 @@ Otherwise it is generalization of the LogisticModel over multiple outputs
 
 <b>                   exp( sum_k( x_k * p_kn ) + q_n ) )</b>
 
-                 sum_i( exp( sum_k( x_k * p_ki ) + q_i ) ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sum_i( exp( sum_k( x_k * p_ki ) + q_i ) ) )<br>
 
 
-    0       0       0       0       0       0   I inputs<br>
-    |\     /|\     /|\     /|\     /|\     /|<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0       0       0       0       0       0   I inputs<br>
+&nbsp;&nbsp;&nbsp;&nbsp; |\     /|\     /|\     /|\     /|\     /|<br>
 
-      all inputs connect to all outputs        I*N connecting parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all inputs connect to all outputs        I*N connecting parameters<br>
 
-       \|/     \|/     \|/     \|/     \|/      N offset parameters (if offset)<br>
-        0       0       0       0       0       N outputs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \|/     \|/     \|/     \|/     \|/      N offset parameters (if offset)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0       0       0       0       0       N outputs<br>
 
 
 
@@ -33,25 +33,25 @@ They are initialized at 0.0.
 <b>Attributes</b>
 
 * offset  :  bool<br>
-    True : the outputs have offsets<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True : the outputs have offsets<br>
 * ndout  :  int<br>
-    number of output categories<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of output categories<br>
 * in2out  :  int<br>
-    ndim * ndout<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ndim * ndout<br>
 * normed  :  bool<br>
-    the results are normalized (def:True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the results are normalized (def:True)<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SoftMaxModel"></a>
@@ -67,17 +67,17 @@ Number of parameters is npars (see offset)
 <b>Parameters</b>
 
 * ndim  :  int<br>
-    number of inputs<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of inputs<br>
 * ndout  :  int<br>
-    number of classifications<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of classifications<br>
 * offset  :  bool<br>
-    False : no offsets                  npars = ndim * ndout<br>
-    True  : each output has one offset: npars = ndim * ndout + ndout<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False : no offsets                  npars = ndim * ndout<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True  : each output has one offset: npars = ndim * ndout + ndout<br>
 * normed  :  bool<br>
-    True : output is normalized<br>
-    False : not<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True : output is normalized<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False : not<br>
 * copy  :  SoftMaxModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>
@@ -100,9 +100,9 @@ outputs.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -117,11 +117,11 @@ of shape (K,P). N is #outputs; K is #datapoints; P is #parameters.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -138,9 +138,9 @@ N is #outputs; I is #inputs (ndim); K is #datapoints.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -163,7 +163,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

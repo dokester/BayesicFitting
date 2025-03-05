@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="RobustShell"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -50,25 +50,25 @@ within the fwhm.
 A number of weighting schemes are provided.
 
 With bound support and smooth edges
-   Kernel       Name        domain      comment<br>
-   Biweight     Tukey         5.54      Default kernel<br>
-   CosSquare                  6.00<br>
-   Tricube                    5.08<br>
-   Triweight                  6.60<br>
+&nbsp;&nbsp;&nbsp; Kernel       Name        domain      comment<br>
+&nbsp;&nbsp;&nbsp; Biweight     Tukey         5.54      Default kernel<br>
+&nbsp;&nbsp;&nbsp; CosSquare                  6.00<br>
+&nbsp;&nbsp;&nbsp; Tricube                    5.08<br>
+&nbsp;&nbsp;&nbsp; Triweight                  6.60<br>
 
 With bound support and hard edges
-   Uniform      Clip          3.00      Ignore all outside 3 sigma<br>
-   Cosine                     4.50<br>
-   Triangle                   6.00<br>
-   Parabola                   4.50<br>
+&nbsp;&nbsp;&nbsp; Uniform      Clip          3.00      Ignore all outside 3 sigma<br>
+&nbsp;&nbsp;&nbsp; Cosine                     4.50<br>
+&nbsp;&nbsp;&nbsp; Triangle                   6.00<br>
+&nbsp;&nbsp;&nbsp; Parabola                   4.50<br>
 
 with unbound support
-   Huber        Median        1.50      Inside domain mean; outside domain median<br>
-   Gauss                      2.12<br>
-   Lorentz                    3.00<br>
+&nbsp;&nbsp;&nbsp; Huber        Median        1.50      Inside domain mean; outside domain median<br>
+&nbsp;&nbsp;&nbsp; Gauss                      2.12<br>
+&nbsp;&nbsp;&nbsp; Lorentz                    3.00<br>
 
 Other schemes can be written by making another Kernel or writing a function
-    wgts = func( d )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; wgts = func( d )<br>
 where d is the deviant as above.
 
 
@@ -104,19 +104,19 @@ Create a new class, providing the fitter to be used.
 <b>Parameters</b>
 
 * fitter  :  BaseFitter<br>
-     to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to be used<br>
 * kernel  :  Kernel or callable<br>
-    All Kernels have a method `result( d )` which is applied to the deviants.<br>
-    where d = ( data - model ) / ( domain * scale )<br>
-    If kernel is a callable method it is assumed to be a similar result mathod.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.<br>
 * domain  :  None or float<br>
-    Width of the kernel.<br>
-    None : automatic calculation of domain according to table in class doc.<br>
-    float : overrides autocalculation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Width of the kernel.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : automatic calculation of domain according to table in class doc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float : overrides autocalculation.<br>
 * onesided  :  None or "positive" or "p" or "negative" or "n"<br>
-    None : apply robust weights to positive and negative residuals<br>
-    "positive" : apply robust weights to positive residuals only<br>
-    "negative" : apply robust weights to negative residuals only<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only<br>
 
 
 <a name="setKernel"></a>
@@ -130,9 +130,9 @@ Set the robust kernel to be used.
 <b>Parameters</b>
 
 * kernel  :  Kernel or callable<br>
-    All Kernels have a method `result( d )` which is applied to the deviants.<br>
-    where d = ( data - model ) / ( domain * scale )<br>
-    If kernel is a callable method it is assumed to be a similar result mathod.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.<br>
 
 <b>Raises</b>
 
@@ -150,9 +150,9 @@ set self.onesided to either 0 or +1 or -1.
 <b>Parameters</b>
 
 * onesided  :  None or "positive" or "negative"<br>
-    None : apply robust weights to positive and negative residuals<br>
-    "positive" : apply robust weights to positive residuals only<br>
-    "negative" : apply robust weights to negative residuals only<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only<br>
 
 <b>Raises</b>
 
@@ -170,7 +170,7 @@ Perform a robustification step.
 <b>Parameters</b>
 
 * data  :  array_like<br>
-    the data as they go into a fitter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data as they go into a fitter<br>
 * kwargs  :  dict<br>
     keyword args to be passed to fitter.fit()
 

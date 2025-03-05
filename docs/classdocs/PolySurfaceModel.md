@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PolySurfaceModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 General polynomial surface model of arbitrary degree.
 
-    f( x,y:p ) = &sum;_d &sum;_k p_n * x^{d-k} * y^k )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = &sum;_d &sum;_k p_n * x^{d-k} * y^k )<br>
 
 where the first sum is over d running from 0 to degree ( inclusive )
 and the second sum is over k running from 0 to d ( inclusive ).
@@ -27,19 +27,19 @@ Author      Do Kester
 <b>Attributes</b>
 
 * degree  :  int<br>
-    degree of the polynomial<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -52,11 +52,11 @@ Author      Do Kester
 Polynominal surface of a certain degree. Two dimensions.
 
 degree      polysurface
-  0         p_0<br>
-  1         p_0 + p_1 * x + p_2 * y<br>
-  2         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2<br>
-  3         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 +<br>
-                p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3<br>
+&nbsp;&nbsp; 0         p_0<br>
+&nbsp;&nbsp; 1         p_0 + p_1 * x + p_2 * y<br>
+&nbsp;&nbsp; 2         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2<br>
+&nbsp;&nbsp; 3         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3<br>
 etc.
 
 The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
@@ -64,14 +64,14 @@ The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 <b>Parameters</b>
 
 * degree  :  int<br>
-    the degree of the polynomial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
 * copy  :  PolySurfaceModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  dictionary of {int:float|Model}<br>
-    int             list if parameters to fix permanently. Default None.<br>
-    float|Model     list of values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int             list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model     list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -94,9 +94,9 @@ The partials are the powers of x,y ( xdata ) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseDerivative"></a>
@@ -108,24 +108,24 @@ The partials are the powers of x,y ( xdata ) from 0 to degree.
 Return the derivative df/dx at each input (=x).
 
 degree      df/dx
-  0         0<br>
-  1         p_1<br>
-  2         p_1 + 2 * p_3 * x + p_4 * y<br>
-  3         p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2<br>
+&nbsp;&nbsp; 0         0<br>
+&nbsp;&nbsp; 1         p_1<br>
+&nbsp;&nbsp; 2         p_1 + 2 * p_3 * x + p_4 * y<br>
+&nbsp;&nbsp; 3         p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2<br>
 
 degree      df/dy
-  0         0<br>
-  1         p_2<br>
-  2         p_2 + p_4 * x + 2 * p_5 * y<br>
-  3         p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2<br>
+&nbsp;&nbsp; 0         0<br>
+&nbsp;&nbsp; 1         p_2<br>
+&nbsp;&nbsp; 2         p_2 + p_4 * x + 2 * p_5 * y<br>
+&nbsp;&nbsp; 3         p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2<br>
 
 
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters for the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 
 
 <a name="baseName"></a>
@@ -210,7 +210,7 @@ Parameters  k    parameter number.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -219,7 +219,7 @@ Parameters  k    parameter number.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

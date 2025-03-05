@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="StellarOrbitModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -10,8 +10,8 @@
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
 The algorithm was taken from
-    Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
-    http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf<br>
 
 p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
 p_1 : a     semi major axis (>0)
@@ -32,25 +32,25 @@ This class uses [Kepplers](./Kepplers.md)2ndLaw to find the radius and anomaly.
 <b>Attributes</b>
 
 * keppler  :  Kepplers2ndLaw()<br>
-    to calculate the radius and true anomaly<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly<br>
 * ndout  :  int<br>
-    The number of outputs is 2. Use [MultipleOutputProblem](./MultipleOutputProblem.md).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The number of outputs is 2. Use [MultipleOutputProblem](./MultipleOutputProblem.md).<br>
 * spherical  :  bool<br>
-    if True return the results in spherical coordinates.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True return the results in spherical coordinates.<br>
 * cyclic  :  { 1 : 2*pi }<br>
-    Only if spherical, indicating that result[:,1] is cyclic.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Only if spherical, indicating that result[:,1] is cyclic.<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 <b>Examples</b>
 
@@ -73,14 +73,14 @@ Number of parameters is 5
 <b>Parameters</b>
 
 * copy  :  StellarOrbitModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 * spherical  :  bool (True)<br>
-    produce output in sperical coordinates (rho,phi)<br>
-    otherwise in rectilinear coordinates (x,y)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; produce output in sperical coordinates (rho,phi)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; otherwise in rectilinear coordinates (x,y)<br>
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
-    float   list of values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 
 
 <a name="copy"></a>
@@ -101,9 +101,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 * p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)<br>
 * p_1  :  a     semi major axis (>0)<br>
@@ -125,7 +125,7 @@ Return (x,y) coordinates from (rho,phi)
 <b>Parameters</b>
 
 * rp  :  array<br>
-    rp[:,0] : separation of the stars<br>
+&nbsp;&nbsp;&nbsp;&nbsp; rp[:,0] : separation of the stars<br>
     rp[:,1] : angle from north (down) CCW to east (right)
 
 <a name="toSpher"></a>
@@ -139,7 +139,7 @@ Return (rho,phi) coordinates from (x,y)
 <b>Parameters</b>
 
 * xy  :  array<br>
-    xy[:,0] : x position<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xy[:,0] : x position<br>
     xy[:,1] : y position
 
 <a name="baseDerivative"></a>
@@ -153,9 +153,9 @@ Returns the derivative (df/dx) of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 * p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)<br>
 * p_1  :  a     semi major axis (>0)<br>
@@ -179,11 +179,11 @@ The partials are x ( xdata ) to degree-th power.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters. (not used for linear models)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (not used for linear models)<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 * p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)<br>
 * p_1  :  a     semi major axis<br>
@@ -214,7 +214,7 @@ Return the unit of a parameter. (TBC)
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

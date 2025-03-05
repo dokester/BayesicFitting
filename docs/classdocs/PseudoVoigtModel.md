@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PseudoVoigtModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 Approximation of VoigtModel as the sum of a GaussModel and a LorentzModel
 
-    F(x:p) = p_3 * L(x:p) + ( 1 - p_3 ) * G(x:p)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; F(x:p) = p_3 * L(x:p) + ( 1 - p_3 ) * G(x:p)<br>
 
 where L() and G() are the LorentzModel and the GaussModel, resp. and p_3
 is the fractional contribution of them. 0 < p_3 < 1.
@@ -29,21 +29,21 @@ Parameter 2 (width) is always kept positive ( >=0 ).
 <b>Attributes</b>
 
 * gauss  :  GaussModel<br>
-    to construct the gauss parts<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to construct the gauss parts<br>
 * lorentz  :  LorentzModel<br>
-    to construct the lorentz parts<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to construct the lorentz parts<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="PseudoVoigtModel"></a>
@@ -59,12 +59,12 @@ Number of parameters is 4.
 <b>Parameters</b>
 
 * copy  :  PseudoVoigtModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -91,9 +91,9 @@ strictly positive. I.e. they are changed when upon xdata they are negative.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -107,11 +107,11 @@ Returns the partials at the xdata value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -125,9 +125,9 @@ Return the derivative df/dx at each xdata (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the derivative<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -149,7 +149,7 @@ Return the name of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

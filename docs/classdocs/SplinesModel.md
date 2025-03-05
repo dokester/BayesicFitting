@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,11 +11,11 @@ General splines model of arbitrary order and with arbitrary knot settings.
 It is a linear model.
 
 order   behaviour between knots     continuity at knots
-  0     piecewise constant          not continuous at all<br>
-  1     piecewise linear            lines are continuous (connected)<br>
-  2     parabolic pieces            1st derivatives are also continuous<br>
-  3     cubic pieces                2nd derivatives are also continuous<br>
- n>3    n-th order polynomials      (n-1)-th derivatives are also continuous<br>
+&nbsp;&nbsp; 0     piecewise constant          not continuous at all<br>
+&nbsp;&nbsp; 1     piecewise linear            lines are continuous (connected)<br>
+&nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous<br>
+&nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous<br>
+ n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
@@ -51,21 +51,21 @@ This model is NOT for (cubic) spline interpolation.
 <b>Attributes</b>
 
 * knots  :  array_like<br>
-    positions of the spline knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
 * order  :  int<br>
-    order of the spline. default: 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Limitations</b>
@@ -87,29 +87,29 @@ The number of parameters is ( length( knots ) + order - 1 )
 <b>Parameters</b>
 
 * knots  :  array_like<br>
-    a array of arbitrarily positioned knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
-    order of the spline. Default 3 (cubic splines)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. Default 3 (cubic splines)<br>
 * nrknots  :  int<br>
-    number of knots, equidistantly posited over xrange or [min,max]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of knots, equidistantly posited over xrange or [min,max]<br>
 * min  :  float<br>
-    minimum of the knot range<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum of the knot range<br>
 * max  :  float<br>
-    maximum of the knot range<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum of the knot range<br>
 * xrange  :  array_like<br>
-    range of the xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; range of the xdata<br>
 * copy  :  SplinesModel<br>
-    model to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 <b>Raises</b>
 
 * ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or<br>
-        (`nrknots`, `xrange`) must be provided to define a valid model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.<br>
 
 <b>Notes</b>
 
@@ -135,11 +135,11 @@ The partials are the powers of x (input) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -153,9 +153,9 @@ Return the derivative df/dx at each xdata (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model<br>
 
 
 <a name="baseName"></a>
@@ -241,7 +241,7 @@ Return the name of the parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -250,7 +250,7 @@ Return the name of the parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

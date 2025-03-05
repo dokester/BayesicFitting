@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SurfaceSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -35,23 +35,23 @@ Category     mathematics/Fitting
 <b>Attributes</b>
 
 * knots  :  list of array_like<br>
-    positions of the knots in all dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions<br>
 * order  :  list of ints<br>
-    order of the splines in all dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the splines in all dimensions<br>
 * models  :  list of Model<br>
-    SplinesModels in all dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; SplinesModels in all dimensions<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SurfaceSplinesModel"></a>
@@ -67,13 +67,13 @@ The number of parameters is ( length( knots ) + order - 1 )
 <b>Parameters</b>
 
 * knots  :  list of array_like<br>
-    positions of the knots in all dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions<br>
 * order  :  int or list of ints<br>
-    order of the splines in all dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the splines in all dimensions<br>
 * copy  :  SurfaceSplinesModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  dict<br>
-    If not None raise AttributeError.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
 <b>Raises</b>
 
@@ -105,9 +105,9 @@ The partials are the powers of x (input) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
     not used in this model
 
@@ -130,7 +130,7 @@ Return the name of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <a name="baseParameterUnit"></a>
@@ -143,7 +143,7 @@ Return the unit of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -209,7 +209,7 @@ Return the unit of a parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -218,7 +218,7 @@ Return the unit of a parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

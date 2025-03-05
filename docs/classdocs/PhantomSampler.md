@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PhantomSampler"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -23,7 +23,7 @@ pays in exploratory power and precision.
 <b>Attributes</b>
 
 * step  :  int (< 10)<br>
-    percentage of the walkers to replace<br>
+&nbsp;&nbsp;&nbsp;&nbsp; percentage of the walkers to replace<br>
 
 <b>Attributes from NestedSampler</b>
 
@@ -51,90 +51,90 @@ problem.
 <b>Parameters</b>
 
 * step  :  int<br>
-    percentage of walkers to use<br>
+&nbsp;&nbsp;&nbsp;&nbsp; percentage of walkers to use<br>
 
 <b>Parameters from NestedSampler</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
-    the model needs priors for the parameters and (maybe) limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model needs priors for the parameters and (maybe) limits<br>
 * ydata  :  array_like<br>
-    array of dependent (to be fitted) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of dependent (to be fitted) data<br>
 * weights  :  array_like (None)<br>
-    weights pertaining to ydata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to ydata<br>
 * accuracy  :  float or array_like<br>
-    accuracy scale for the datapoints<br>
-    all the same or one for each data point<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy scale for the datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; all the same or one for each data point<br>
 * problem  :  None or string or Problem<br>
-    Defines the kind of problem to be solved.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Defines the kind of problem to be solved.<br>
 
-    None        same as "classic"<br>
-    "classic" 	ClassicProblem<br>
-    "errors"	ErrorsInXandYProblem<br>
-    "multiple"	MultipleOutputProblem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None        same as "classic"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "classic" 	ClassicProblem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "errors"	ErrorsInXandYProblem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "multiple"	MultipleOutputProblem<br>
 
-    Problem     Externally defined Problem. When Problem has been provided,<br>
-                xdata, model, weights and ydata are not used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Problem     Externally defined Problem. When Problem has been provided,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xdata, model, weights and ydata are not used.<br>
 * keep  :  None or dict of {int:float}<br>
-    None of the model parameters are kept fixed.<br>
-    Dictionary of indices (int) to be kept at a fixed value (float).<br>
-    Hyperparameters follow model parameters.<br>
-    The values will override those at initialization.<br>
-    They are used in this instantiation, unless overwritten at the call to sample()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None of the model parameters are kept fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are used in this instantiation, unless overwritten at the call to sample()<br>
 * distribution  :  None or String or ErrorDistribution<br>
-    Defines the ErrorDistribution to be used<br>
-    When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Defines the ErrorDistribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
 
-    None            same as "gauss"<br>
-    "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0<br>
-    "laplace"       LaplaceErrorDistribution with 1 hyperpar scale<br>
-    "poisson"       PoissonErrorDistribution no hyperpar<br>
-    "cauchy"        CauchyErrorDstribution with 1 hyperpar scale<br>
-    "uniform"       UniformErrorDistribution with 1 hyperpar scale<br>
-    "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)<br>
-    "bernoulli"     BernoulliErrorDistribution no hyperpar<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None            same as "gauss"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "laplace"       LaplaceErrorDistribution with 1 hyperpar scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "poisson"       PoissonErrorDistribution no hyperpar<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "cauchy"        CauchyErrorDstribution with 1 hyperpar scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "uniform"       UniformErrorDistribution with 1 hyperpar scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "bernoulli"     BernoulliErrorDistribution no hyperpar<br>
 
-    ErrorDistribution Externally defined ErrorDistribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ErrorDistribution Externally defined ErrorDistribution<br>
 * limits  :  None or [low,high] or [[low],[high]]<br>
-    None    no limits implying fixed hyperparameters of the distribution<br>
-    low     low limit on hyperpars<br>
-    high    high limit on hyperpars<br>
-    When limits are set the hyperpars are not fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None    no limits implying fixed hyperparameters of the distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on hyperpars<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on hyperpars<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When limits are set the hyperpars are not fixed.<br>
 * ensemble  :  int<br>
-    number of walkers<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of walkers<br>
 * seed  :  int<br>
-    seed of random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; seed of random number generator<br>
 * rate  :  float<br>
-    speed of exploration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; speed of exploration<br>
 * engines  :  None or (list of) string or (list of) Engine<br>
-    to randomly move the walkers around, within the likelihood bound.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to randomly move the walkers around, within the likelihood bound.<br>
 
-    None        use a Problem defined selection of engines<br>
-    "galilean"  GalileanEngine	move forward and mirror on edges<br>
-    "chord"     ChordEngine   	select random point on random line<br>
-    "gibbs" 	GibbsEngine 	move one parameter at a time<br>
-    "step"  	StepEngine    	move all parameters in arbitrary direction<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None        use a Problem defined selection of engines<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "galilean"  GalileanEngine	move forward and mirror on edges<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "chord"     ChordEngine   	select random point on random line<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "gibbs" 	GibbsEngine 	move one parameter at a time<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "step"  	StepEngine    	move all parameters in arbitrary direction<br>
 
-    For Dynamic models only:<br>
-    "birth" 	BirthEngine     increase the parameter list of a walker by one<br>
-    "death" 	DeathEngine     decrease the parameter list of a walker by one<br>
+&nbsp;&nbsp;&nbsp;&nbsp; For Dynamic models only:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "birth" 	BirthEngine     increase the parameter list of a walker by one<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "death" 	DeathEngine     decrease the parameter list of a walker by one<br>
 
-    For Modifiable models only:<br>
-    "struct"    StructureEngine change the (internal) structure.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; For Modifiable models only:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "struct"    StructureEngine change the (internal) structure.<br>
 
-    Engine      an externally defined (list of) Engine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Engine      an externally defined (list of) Engine<br>
 * maxsize  :  None or int<br>
-    maximum size of the resulting sample list (None : no limit)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum size of the resulting sample list (None : no limit)<br>
 * threads  :  bool (False)<br>
-    Use Threads to distribute the diffusion of discarded samples over the available cores.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Use Threads to distribute the diffusion of discarded samples over the available cores.<br>
 * verbose  :  int (1)<br>
-    0   silent<br>
-    1   basic information<br>
-    2   more about every 100th iteration<br>
-    3   more about every iteration<br>
-    >4  for debugging<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0   silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1   basic information<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2   more about every 100th iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3   more about every iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; >4  for debugging<br>
 
 
 <a name="initSample"></a>
@@ -153,7 +153,7 @@ Update the walkerlist while appending the new (phantom) walkers to the list
 <b>Parameters</b>
 
 * explorer  :  Explorer<br>
-    Explorer object<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Explorer object<br>
 * worst  :  int<br>
     number of walkers to update
 

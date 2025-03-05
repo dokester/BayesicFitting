@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ModelDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -10,8 +10,8 @@
 To calculate the probability of a model M from a set of models S,
 given some data D, use Bayes rule
 
-    P( M|DS ) = P( M|S ) * P( D|MS ) / P( D|S )<br>
-    posterior = prior   * likelihood / evidence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; P( M|DS ) = P( M|S ) * P( D|MS ) / P( D|S )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; posterior = prior   * likelihood / evidence<br>
 
 This class calculates the likelihood P( D|MS ).
 On another level where we calculate the probability of the
@@ -19,7 +19,7 @@ parameters p, we see this likelhood appear as evidence P( D|M ).
 
 Again using Bayes 
 
-    P( p|DM ) = P( p|M ) * P( D|pM ) / P( D|M )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; P( p|DM ) = P( p|M ) * P( D|pM ) / P( D|M )<br>
 
 The evidence here is calculated as the integral over a Gausian
 approximation of the posterior.
@@ -39,24 +39,24 @@ Default Constructor.
 <b>Parameters</b>
 
 * arbiter  :  None or BaseFitter or str<br>
-    to provide the evidence<br>
-    None    select fitter automatically<br>
-    BaseFiter   Use this fitter<br>
-    str     "fitter", "levenberg", "curve", "amoeba", "NestedSampler"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to provide the evidence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None    select fitter automatically<br>
+&nbsp;&nbsp;&nbsp;&nbsp; BaseFiter   Use this fitter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; str     "fitter", "levenberg", "curve", "amoeba", "NestedSampler"<br>
 
 * scale  :  float<br>
-    noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
-    None : no limits implying fixed scale<br>
-    low     low limit on scale (needs to be >0)<br>
-    high    high limit on scale<br>
-    when limits are set, the scale is *not* fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
 
 * copy  :  ModelDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 * kwargs  :  dict<br>
-    to be applied to arbiter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be applied to arbiter<br>
 
 
 <a name="copy"></a>
@@ -88,10 +88,10 @@ Alternate calculation
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
-    Return optimal parameters of the fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Return optimal parameters of the fit<br>
 
 
 <a name="logLdata"></a>
@@ -101,17 +101,17 @@ Alternate calculation
 <p>
 
 Return the log( likelihood ) for each residual
-   <br>
+&nbsp;&nbsp;&nbsp; <br>
 logL = sum( logLdata )
 
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem   <br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem   <br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -121,7 +121,7 @@ logL = sum( logLdata )
 * [<strong>setLimits(</strong> limits ) ](./ScaledErrorDistribution.md#setLimits)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ErrorsInXandYProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -20,10 +20,10 @@ The target are nuisance parameters which are not part of the modeling
 solution.
 
 Define
-    xd = xdata, yd = ydata, u = target, F(u:P) = model( target )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xd = xdata, yd = ydata, u = target, F(u:P) = model( target )<br>
 And the mismathes in both directions.
-    X = u - xd <br>
-    Y = F(u:p) - yd<br>
+&nbsp;&nbsp;&nbsp;&nbsp; X = u - xd <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Y = F(u:p) - yd<br>
 
 Both distances need to be minimized, possibly in the presence of a correlation 
 between the mismatches X and Y 
@@ -37,13 +37,13 @@ in both X and Y.
 <b>Attributes</b>
 
 * prior  :  Prior<br>
-    Priors for the x-axis nuisance parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Priors for the x-axis nuisance parameters.<br>
 * varxx  :  float or ndarray of shape (ndata,)<br>
-    Variance in the xdata errors<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Variance in the xdata errors<br>
 * varyy  :  float or ndarray of shape (ndata,)<br>
-    Variance in the ydata errors<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Variance in the ydata errors<br>
 * varxy  :  float or ndarray of shape (ndata,)<br>
-    Covariance in the xdata and ydata errors<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Covariance in the xdata and ydata errors<br>
 
 
 
@@ -67,31 +67,31 @@ Problem Constructor.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    the model to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
 * xdata  :  array_like or None<br>
-    independent variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; independent variable<br>
 * ydata  :  array_like or None<br>
-    dependent variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dependent variable<br>
 * weights  :  array_like or None<br>
-    weights associated with data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights associated with data<br>
 * covar  :  ndarray of shape (2,2) or (ndata,2,2)<br>
-    covariance matrix of the errors in x and y<br>
-    (2,2) : valid for all datapoints<br>
-    (ndata,2,2): one for each datpoint<br>
-    Default is [[1,0],[0,1]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; covariance matrix of the errors in x and y<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (2,2) : valid for all datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (ndata,2,2): one for each datpoint<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Default is [[1,0],[0,1]]<br>
 * accuracy  :  ndarray of shape (2,) or (3,) or (ndata,2) or (ndata,3)<br>
-    accuracy scale for the datapoints<br>
-    (2,) scale for resp. y and x, valid for all datapoints<br>
-    (3,) scale for y and y, and correlation coefficient between y and x, valid for all<br>
-    (ndata,2) or (ndata,3) one set of values for each datapoint<br>
-    Alternative for covarince matrix. <br>
-    covar = [[ acc[0]^2, 0], [0, acc[1]^2]] no correlation<br>
-          = [[ acc[0]^2, r], [r, acc[1]^2]] where r = acc[0] * acc[1] * acc[2]<br>
-    accuracy is converted to covar; default is covar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy scale for the datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (2,) scale for resp. y and x, valid for all datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (3,) scale for y and y, and correlation coefficient between y and x, valid for all<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (ndata,2) or (ndata,3) one set of values for each datapoint<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Alternative for covarince matrix. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; covar = [[ acc[0]^2, 0], [0, acc[1]^2]] no correlation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = [[ acc[0]^2, r], [r, acc[1]^2]] where r = acc[0] * acc[1] * acc[2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy is converted to covar; default is covar.<br>
 * prior  :  Prior<br>
-    prior for the x-axis nuisance parameters. All centered on each of the xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior for the x-axis nuisance parameters. All centered on each of the xdata<br>
 * copy  :  Problem<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>
@@ -111,8 +111,8 @@ Copy.
 
 Store 3 items from the covar matrix : 
 
-    | var_yy, var_xy |<br>
-    | var_xy, var_xx |<br>
+&nbsp;&nbsp;&nbsp;&nbsp; | var_yy, var_xy |<br>
+&nbsp;&nbsp;&nbsp;&nbsp; | var_xy, var_xx |<br>
 
 When the accuracy is given, convert it to these items by
 var_yy = acc[0] * acc[0]
@@ -122,9 +122,9 @@ var_xy = acc[0] * acc[1] * acc[2]
 Store also the determinant of the covariance matrix. 
 
 When both accuracy and covar are None
-  var_yy = 0 <br>
-  var_xx = 1<br>
-  var_xy = 0<br>
+&nbsp;&nbsp; var_yy = 0 <br>
+&nbsp;&nbsp; var_xx = 1<br>
+&nbsp;&nbsp; var_xy = 0<br>
 
 <b>Raises</b>
 
@@ -133,17 +133,17 @@ AttributeError. When both accuracy and covar are not None.
 <b>Parameters</b>
 
 * accuracy  :  ndarray of shape (2,) or (3,) or (ndata,2) or (ndata,3)<br>
-    accuracy scale for the datapoints<br>
-    (2,) scale for resp. y and x, valid for all datapoints<br>
-    (3,) scale for y and y, and correlation coefficient between y and x, valid for all<br>
-    (ndata,2) or (ndata,3) one set of values for each datapoint<br>
-    Alternative for covarince matrix. <br>
-    vxy = 0 if no correlation else acc[0] * acc[1] * acc[2]<br>
-    covar = [[ acc[0]^2, vxy      ],<br>
-             [ vxy     , acc[1]^2 ]] <br>
-    accuracy is converted to covar; default is covar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy scale for the datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (2,) scale for resp. y and x, valid for all datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (3,) scale for y and y, and correlation coefficient between y and x, valid for all<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (ndata,2) or (ndata,3) one set of values for each datapoint<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Alternative for covarince matrix. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; vxy = 0 if no correlation else acc[0] * acc[1] * acc[2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; covar = [[ acc[0]^2, vxy      ],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ vxy     , acc[1]^2 ]] <br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy is converted to covar; default is covar.<br>
 * covar  :  ndarray of shape (2,2) or (ndata,2,2) or None<br>
-    covariance matrix of the errors in x and y<br>
+&nbsp;&nbsp;&nbsp;&nbsp; covariance matrix of the errors in x and y<br>
 
 
 <a name="hasWeights"></a>
@@ -164,7 +164,7 @@ Returns the result calculated at the xdatas.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    values for the parameters + nuisance params.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
 
 <a name="splitParam"></a>
@@ -178,7 +178,7 @@ Split the parameters into Model parameters and targets.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    values for the parameters + nuisance params.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
 <b>Return</b>
 
@@ -194,15 +194,15 @@ tuple of ( targets, model parameters )
 Return the partials as a matrix [2*nx,np+nx], where nx is the number of
 datapoints and np the number of parameters in the model.
 
-    The upper left submatrix (nx,np) contains dM/dp<br>
-    the upper right submatrix (nx,nx) contains dM/dx on the diagonal<br>
-    the lower left submatrix (nx,np) contains zeros<br>
-    the lower right submatrix (nx,nx) contains the identity matrix<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The upper left submatrix (nx,np) contains dM/dp<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the upper right submatrix (nx,nx) contains dM/dx on the diagonal<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the lower left submatrix (nx,np) contains zeros<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the lower right submatrix (nx,nx) contains the identity matrix<br>
 
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    values for the parameters + nuisance params.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
 
 <a name="derivative"></a>
@@ -229,7 +229,7 @@ Return value in [0,1] for the selected parameter.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    domain value for the selected parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; domain value for the selected parameter<br>
 * kpar  :  int<br>
     selected parameter index, where kp is index in [parameters, hyperparams]
 
@@ -244,7 +244,7 @@ Return domain value for the selected parameter.
 <b>Parameters</b>
 
 * uval  :  array_like<br>
-    unit value for the selected parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; unit value for the selected parameter<br>
 * kpar  :  int<br>
     selected parameter indices, where kp is index in [parameters, hyperparams]
 
@@ -259,7 +259,7 @@ Return residuals in y-direction and x-direction.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    model parameters and xdata parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model parameters and xdata parameters<br>
 
 <b>Returns</b>
 
@@ -277,11 +277,11 @@ the trial values for xdata and ytry = model.result( xtry, param )
 <b>Parameters</b>
 
 * allpars  :  array_like<br>
-    model parameters, xdata parameters, and noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model parameters, xdata parameters, and noise scale<br>
 * mockdata  :  array_like<br>
-    model fit data model.result( xtry, param )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model fit data model.result( xtry, param )<br>
 * extra  :  bool (False)<br>
-    true  : return ( wgt * res^2, wgt * [yres,xres] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; true  : return ( wgt * res^2, wgt * [yres,xres] )<br>
     false : return wgt * res^2
 
 <a name="myEngines"></a>

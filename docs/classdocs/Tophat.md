@@ -13,7 +13,17 @@ between [-0.5,0.5]; it is 0 elsewhere.
 <b>Attributes</b>
 
 * nconv  :  int<br>
-    successive autoconvolutions of the tophat. max=6.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; successive autoconvolutions of the tophat. max=6.<br>
+
+| Name      | Definition          | Integral  | FWHM | range | comment     |
+* | : ----------|:--------------------|----------:|:----:|:-----:|:------------|<br>
+| Tophat 0  | 1.0                 |      1.0  | 1.00 |  0.5  | like Uniform|
+| Tophat 1  | 1 - \|x\|           |      1.0  | 1.00 |  1.0  | aka Triangle|
+| Tophat 2  | 2nd order polynomial|      1.0  | 1.26 |  1.5  |             |
+| Tophat 3  | 3rd order polynomial|      1.0  | 1.44 |  2.0  |             |
+| Tophat 4  | 4th order polynomial|      1.0  | 1.60 |  2.5  |             |
+| Tophat 5  | 5th order polynomial|      1.0  | 1.73 |  3.0  |             |
+| Tophat 6  | 6th order polynomial|      1.0  | 1.86 |  3.5  |             |
 
 Thanks to Romke Bontekoe and Mathematica for providing the analytic expressions.
 
@@ -27,11 +37,12 @@ Thanks to Romke Bontekoe and Mathematica for providing the analytic expressions.
 Constructor.
 
 Integral, fwhm and range are dependent on the number of convolutions.
+See table above.
 
 <b>Parameters</b>
 
 * nconv  :  int<br>
-    number of auto-convolutions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of auto-convolutions<br>
 
 
 <a name="result"></a>

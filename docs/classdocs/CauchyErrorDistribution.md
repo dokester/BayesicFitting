@@ -9,14 +9,14 @@
 
 To calculate a Cauchy or Lorentz likelihood.
 
-f( x ) = s / ( &pi; * ( s^2 + x^2 ) )
+f( x ) = s / ( &pi; * ( s<sup>2</sup> + x<sup>2</sup> ) )
 
 where x = residual and s = scale
 
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
- logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x^2 + s^2 ) )<br>
+ logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x<sup>2</sup> + s<sup>2</sup> ) )
 
 Weights are not possible in this error distribution. They are silently ignored.
 
@@ -36,14 +36,14 @@ Constructor.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
-    None : no limits implying fixed scale<br>
-    low     low limit on scale (needs to be >0)<br>
-    high    high limit on scale<br>
-    when limits are set, the scale is not fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is not fixed.<br>
 * copy  :  CauchyErrorDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 
 <a name="copy"></a>
@@ -73,9 +73,9 @@ Return the noise scale as calculated from the residuals.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="funct"></a>
@@ -94,7 +94,7 @@ Internal use, only.
 
 Return the log( likelihood ) for a Cauchy distribution.
 
-Cauchy distr : f( x ) = s / ( &pi; * ( s^2 + x^2 ) )
+Cauchy distr : f( x ) = s / ( &pi; * ( s<sup>2</sup> + x<sup>2</sup> ) )
 
 where x = residual and s = scale
 
@@ -103,9 +103,9 @@ Alternate calculation
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 
 
 <a name="logLdata"></a>
@@ -121,11 +121,11 @@ logL = sum( logLdata )
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <a name="partialLogL_alt"></a>
@@ -144,11 +144,11 @@ dL/ds is not implemented for problems with accuracy
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="nextPartialData"></a>
@@ -165,13 +165,13 @@ dL/ds is not implemented for problems with accuracy
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

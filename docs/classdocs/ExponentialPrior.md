@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ExponentialPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 Exponential prior distribution.
 
-    Pr( x ) = exp( -x / scale )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = exp( -x / scale )<br>
 
 By default scale = 1.
 
@@ -27,7 +27,7 @@ LaplacePrior( center=0, scale=scale, limits=[0, hilim] )
 <b>Attributes</b>
 
 * scale  :  float<br>
-    scale of the exponential<br>
+&nbsp;&nbsp;&nbsp;&nbsp; scale of the exponential<br>
 
 <b>Attributes from Prior</b>
 
@@ -45,11 +45,11 @@ Constructor.
 
 Parameters
 scale : float
-    of the exponential<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the exponential<br>
 hilimit : float
-    high limit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high limit<br>
 prior : ExponentialPrior
-    prior to copy (with new scale if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
 
 
 <a name="copy"></a>
@@ -76,7 +76,7 @@ Copy the prior
 * [<strong>isBound(</strong> )](./LaplacePrior.md#isBound)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 
 

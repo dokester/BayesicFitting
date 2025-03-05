@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Brackets"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -31,9 +31,9 @@ Returns the result calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -47,11 +47,11 @@ Returns the partial derivatives calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    Not in use<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Not in use<br>
 
 
 <a name="baseDerivative"></a>
@@ -65,9 +65,9 @@ Returns the derivative (df/dx) calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="XXXsetLimits"></a>
@@ -147,7 +147,7 @@ Return the name of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="baseParameterUnit"></a>
@@ -161,7 +161,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="FootballModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -14,7 +14,7 @@ teams that play a match, the first at home the other away.
 
 For each team the complexity lists parameters
 
-   name                    limits    default    comment<br>
+&nbsp;&nbsp;&nbsp; name                    limits    default    comment<br>
 0. Number of trials      0 < a         n/a     trials on the goal of the opponent
 1. Defensive strength    0 < b < 1      0      fraction of the trials that is stopped
 2. Midfield strength     0 < c < 2      1      relative strength of the team
@@ -22,7 +22,7 @@ For each team the complexity lists parameters
 4. Strategy              0 < e < 2      1      
 
 Note: Computational runtime errors/warnings occur when (some of) the parameters are at 
-      their limits. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; their limits. <br>
 
 The default values are chosen such that they dont have effect on the results.
 I.e. a model with complexity=5 and all parameters at the defaults except for 
@@ -32,9 +32,9 @@ value.
 Let p1 denote the parameters of the home team and p2 those of the away team,
 then the equations for calculating the strengths, S1 and S2, are
 
-    S1 = a1 * sqrt( c1 * d1 / c2 ) * ( 1 - b2 ^ ( c1 * d1 / c2 ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; S1 = a1 * sqrt( c1 * d1 / c2 ) * ( 1 - b2 ^ ( c1 * d1 / c2 ) )<br>
 
-    S2 = a2 * sqrt( c2 / ( c1 * d1 ) ) * ( 1 - b1 ^ ( c2 / ( c1 * d1 ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; S2 = a2 * sqrt( c2 / ( c1 * d1 ) ) * ( 1 - b1 ^ ( c2 / ( c1 * d1 ) )<br>
 
 
 Note
@@ -51,21 +51,21 @@ This is about the game that most of the world calls football.
 <b>Attributes</b>
 
 * nteams  :  int<br>
-    number of teams<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of teams<br>
 * complexity  :  int<br>
-    degree of complexity, default = 5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of complexity, default = 5.<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -82,16 +82,16 @@ The number of parameters is ( nteams * complexity )
 <b>Parameters</b>
 
 * nteams  :  int<br>
-    number of teams<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of teams<br>
 * complexity  :  1 <= int <= 5<br>
-    of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the model<br>
 * copy  :  FootballModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -164,9 +164,9 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like [2:nteams]<br>
-    list of team ids playing against each other.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * params  :  array_like<br>
-    parameters for the model <br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
 
 
 <a name="basePartial"></a>
@@ -182,11 +182,11 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters for the model (ignored for LinearModels).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model (ignored for LinearModels).<br>
 * parlist  :  array_like<br>
-    list of indices of active parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
 
 to a1
 (1-b_2^((c_1*d_1)/(c_2*f_2)))*sqrt((c_1*d_1)/c_2)
@@ -194,13 +194,13 @@ to b2
 -(a_1*c_1*d_1*sqrt((c_1*d_1)/c_2)*b_2^((c_1*d_1)/(c_2*f_2)-1))/(c_2*f_2)
 to c1
 -(a_1*d_1*(2*b_2^((d_1*c_1)/(c_2*f_2))*log(b_2)*d_1*c_1+(b_2^((d_1*c_1)/(c_2*f_2))-1)
-    *c_2*f_2))/(2*c_2^2*f_2*sqrt((d_1*c_1)/c_2))<br>
+&nbsp;&nbsp;&nbsp;&nbsp; *c_2*f_2))/(2*c_2^2*f_2*sqrt((d_1*c_1)/c_2))<br>
 to c2
 (a_1*c_1*d_1*((b_2^((c_1*d_1)/(f_2*c_2))-1)*f_2*c_2+2*b_2^((c_1*d_1)/(f_2*c_2))*
-    log(b_2)*c_1*d_1))/(2*f_2*sqrt((c_1*d_1)/c_2)*c_2^3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log(b_2)*c_1*d_1))/(2*f_2*sqrt((c_1*d_1)/c_2)*c_2^3)<br>
 to d1
 -(a_1*c_1*(2*b_2^((c_1*d_1)/(c_2*f_2))*log(b_2)*c_1*d_1+(b_2^((c_1*d_1)/(c_2*f_2))-1)*
-    c_2*f_2))/(2*c_2^2*f_2*sqrt((c_1*d_1)/c_2))<br>
+&nbsp;&nbsp;&nbsp;&nbsp; c_2*f_2))/(2*c_2^2*f_2*sqrt((c_1*d_1)/c_2))<br>
 to f2
 (a_1*b_2^((c_1*d_1)/(c_2*f_2))*log(b_2)*c_1*d_1*sqrt((c_1*d_1)/c_2))/(c_2*f_2^2)
 
@@ -240,11 +240,11 @@ dFh/da1 = 0
 dFh/db0 = 0
 dFh/db1 = -(a0*c0*d0* sqrt((c0*d0*f0)/c1) *f1* b1**((c0*d0*f1)/c1-1)) / c1
 dFh/dc0 = -(a0*d0*f0*(2*b1**((d0*f1*c0)/c1)*log(b1)*d0*f1*c0+
-            (b1**((d0*f1*c0)/c1)-1)*c1))/(2*c1**2*sqrt((d0*f0*c0)/c1))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b1**((d0*f1*c0)/c1)-1)*c1))/(2*c1**2*sqrt((d0*f0*c0)/c1))<br>
 dFh/dc1 = (a0*c0*d0*f0*((b1**((c0*d0*f1)/c1)-1)*c1+2*b1**((c0*d0*f1)/c1)
-           *log(b1)*c0*d0*f1))/(2*sqrt((c0*d0*f0)/c1)*c1**3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *log(b1)*c0*d0*f1))/(2*sqrt((c0*d0*f0)/c1)*c1**3)<br>
 dFh/dd0 = -(a0*c0*f0*(2*b1**((c0*f1*d0)/c1)*log(b1)*c0*f1*d0+
-            (b1**((c0*f1*d0)/c1)-1)*c1))/(2*c1**2*sqrt((c0*f0*d0)/c1))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b1**((c0*f1*d0)/c1)-1)*c1))/(2*c1**2*sqrt((c0*f0*d0)/c1))<br>
 dFh/dd1 = 0
 dFh/df0 = (a0*(1-b1**((c0*d0*f1)/c1))*c0*d0)/(2*c1*sqrt((c0*d0*f0)/c1))
 dFh/df1 = -(a0*b1**((c0*d0*f1)/c1)*log(b1)*c0*d0*sqrt((c0*d0*f0)/c1))/c1
@@ -252,22 +252,22 @@ dFh/df1 = -(a0*b1**((c0*d0*f1)/c1)*log(b1)*c0*d0*sqrt((c0*d0*f0)/c1))/c1
 dFa/da0 = 0
 dFa/da1 = (1-b0**((c1*f0)/(c0*d0)))*sqrt((c1*f1)/(c0*d0))
 dFa/db0 = -(a1*c1*f0*sqrt((c1*f1)/(c0*d0))*b0**((c1*f0)/
-            (c0*d0)-1))/(c0*d0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (c0*d0)-1))/(c0*d0)<br>
 dFa/db1 = 0
 dFa/dc0 = (a1*c1*f1*((b0**((c1*f0)/(d0*c0))-1)*d0*c0+2*
-            b0**((c1*f0)/(d0*c0))*log(b0)*c1*f0))/(2*d0**2*<br>
-            sqrt((c1*f1)/(d0*c0))*c0**3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b0**((c1*f0)/(d0*c0))*log(b0)*c1*f0))/(2*d0**2*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(d0*c0))*c0**3)<br>
 dFa/dc1 = -(a1*f1*(2*b0**((f0*c1)/(c0*d0))*log(b0)*f0*c1+
-            (b0**((f0*c1)/(c0*d0))-1)*c0*d0))/(2*c0**2*d0**2*<br>
-            sqrt((f1*c1)/(c0*d0)))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b0**((f0*c1)/(c0*d0))-1)*c0*d0))/(2*c0**2*d0**2*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((f1*c1)/(c0*d0)))<br>
 dFa/dd0 = (a1*c1*f1*((b0**((c1*f0)/(c0*d0))-1)*c0*d0+2*
-            b0**((c1*f0)/(c0*d0))*log(b0)*c1*f0))/(2*c0**2*<br>
-            sqrt((c1*f1)/(c0*d0))*d0**3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b0**((c1*f0)/(c0*d0))*log(b0)*c1*f0))/(2*c0**2*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(c0*d0))*d0**3)<br>
 dFa/dd1 = 0
 dFa/df0 = -(a1*b0**((c1*f0)/(c0*d0))*log(b0)*c1*
-            sqrt((c1*f1)/(c0*d0)))/(c0*d0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(c0*d0)))/(c0*d0)<br>
 dFa/df1 = (a1*(1-b0**((c1*f0)/(c0*d0)))*c1)/(2*c0*d0*
-            sqrt((c1*f1)/(c0*d0)))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(c0*d0)))<br>
 
 
 <a name="baseDerivative"></a>
@@ -281,9 +281,9 @@ Return the derivative df/dx at each input (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters for the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 
 
 <a name="baseName"></a>
@@ -305,7 +305,7 @@ Return the name of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="baseParameterUnit"></a>
@@ -319,7 +319,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -332,7 +332,7 @@ Return the unit of the indicated parameter.
 * [<strong>partial(</strong> xdata, param=None, useNum=False )](./NonLinearModel.md#partial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -385,7 +385,7 @@ Return the unit of the indicated parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -394,7 +394,7 @@ Return the unit of the indicated parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

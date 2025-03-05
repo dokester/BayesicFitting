@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="MonteCarlo"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -18,21 +18,21 @@ Author:      Do Kester
 <b>Attributes</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 * mcycles  :  int<br>
-    Sets number of cycles in the MonteCarlo procedure to estimate<br>
-    error bars. Default = 25<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Sets number of cycles in the MonteCarlo procedure to estimate<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error bars. Default = 25<br>
 
 <b>Hidden Attributes</b>
 
 * _eigenvectors  :  array_like (read only)<br>
-    from eigenvalue decomposition of covariance matrix<br>
+&nbsp;&nbsp;&nbsp;&nbsp; from eigenvalue decomposition of covariance matrix<br>
 * _eigenvalues  :  array_like (read only)<br>
-    from eigenvalue decomposition of covariance matrix<br>
+&nbsp;&nbsp;&nbsp;&nbsp; from eigenvalue decomposition of covariance matrix<br>
 * _random  :  random<br>
-    random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 
 
 <a name="MonteCarlo"></a>
@@ -50,17 +50,17 @@ input vector is needed a new object should be created.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 * covariance  :  matrix<br>
-    the covariance matrix of the problem. Default from the Model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the covariance matrix of the problem. Default from the Model.<br>
 * index  :  list of int<br>
-    indices of parameters to fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to fit<br>
 * seed  :  int<br>
-    seed for random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; seed for random number generator<br>
 * mcycles  :  int<br>
-    number of cycles in the MonteCarlo procedure to estimate error bars.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of cycles in the MonteCarlo procedure to estimate error bars.<br>
 
 <b>Raises</b>
 
@@ -89,7 +89,7 @@ The standard deviation of the models is returned as the error bar.
 <b>Parameters</b>
 
 xdata ; array_like
-    input data over which to calculate the error bars. default provided xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars. default provided xdata<br>
 
 
 <a name="randomVariant"></a>
@@ -104,6 +104,6 @@ Taking into account the stdev of the parameters and their covariance.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    input data at these indpendent points<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input data at these indpendent points<br>
 
 

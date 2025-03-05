@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SplinesDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -31,33 +31,33 @@ of knots)
 <b>Attributes</b>
 
 * minKnots  :  int<br>
-    minimum number of knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots<br>
 * maxDegree  :  int or None<br>
-    maximum number of knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of knots<br>
 
 <b>Attributes from Modifiable</b>
 
-    modifiable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; modifiable<br>
 
 <b>Attributes from Dynamic</b>
 
-    dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
 
 <b>Attributes from SplinesModel</b>
 
-    knots, order<br>
+&nbsp;&nbsp;&nbsp;&nbsp; knots, order<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Limitations</b>
@@ -79,21 +79,21 @@ The number of parameters is ( length( knots ) + order - 1 )
 <b>Parameters</b>
 
 * modifiable  :  bool<br>
-    if True allow changement of the knot locations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True allow changement of the knot locations<br>
 * dynamic  :  bool<br>
-    if True allow growth and shrinkage of number of knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True allow growth and shrinkage of number of knots<br>
 * minKnots  :  int<br>
-    minimum number of knots (def=2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots (def=2)<br>
 * maxKnots  :  None or int<br>
-    maximum number of Knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of Knots<br>
 * minDistance  :  float<br>
-    minimum distance between knots, provided as fraction of average knot distance.<br>
-    default is ( 0.01 * ( knots[-1] - knots[0] ) / nrknots )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum distance between knots, provided as fraction of average knot distance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default is ( 0.01 * ( knots[-1] - knots[0] ) / nrknots )<br>
 * growPrior  :  None or Prior<br>
-    governing the birth and death.<br>
-    ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior<br>
 * copy  :  PolynomialDynamicModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
 <b>Parameters for SplinesModel</b>
 
@@ -132,11 +132,11 @@ Increase the degree by one upto maxComp ( if present ).
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the params of the Dynamic model start<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator (obligatory)<br>
-    to generate a new parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter.<br>
 * force  :  bool<br>
-    dont check maxKnots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dont check maxKnots<br>
 
 <b>Return</b>
 
@@ -154,9 +154,9 @@ Decrease the degree by one downto minComp ( default 1 ).
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the params of the Dynamic model start<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator<br>
-    to generate a new parameter (obligatory)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter (obligatory)<br>
 
 <b>Return</b>
 
@@ -180,9 +180,9 @@ Vary the structure of a Modifiable Model
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the params of the Modifiable model start<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Modifiable model start<br>
 * rng  :  RNG<br>
-    random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 * kwargs  :  keyword arguments<br>
     for specific implementations
 
@@ -226,13 +226,13 @@ Vary the structure of a Modifiable Model
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

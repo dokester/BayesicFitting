@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -33,42 +33,42 @@ an overall sense.
 <b>Attributes</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 * ydata  :  array_like<br>
-    array of dependent (to be fitted) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of dependent (to be fitted) data<br>
 * weights  :  array_like (None)<br>
-    weights pertaining to ydata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to ydata<br>
 * distribution  :  ErrorDistribution<br>
-    to calculate the loglikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to calculate the loglikelihood<br>
 * ensemble  :  int (100)<br>
-    number of walkers<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of walkers<br>
 * discard  :  int (1)<br>
-    number of walkers to be replaced each generation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of walkers to be replaced each generation<br>
 * rng  :  RandomState<br>
-    random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 * seed  :  int (80409)<br>
-    seed of rng<br>
+&nbsp;&nbsp;&nbsp;&nbsp; seed of rng<br>
 * rate  :  float (1.0)<br>
-    speed of exploration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; speed of exploration<br>
 * maxsize  :  None or int<br>
-    maximum size of the resulting sample list (None : no limit)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum size of the resulting sample list (None : no limit)<br>
 * end  :  float (2.0)<br>
-    stopping criterion<br>
+&nbsp;&nbsp;&nbsp;&nbsp; stopping criterion<br>
 * verbose  :  int<br>
-    level of blabbering<br>
+&nbsp;&nbsp;&nbsp;&nbsp; level of blabbering<br>
 
 * walkers  :  SampleList<br>
-    ensemble of Samples that explore the likelihood space<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ensemble of Samples that explore the likelihood space<br>
 * samples  :  SampleList<br>
-    Samples resulting from the exploration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Samples resulting from the exploration<br>
 * engines  :  list of Engine<br>
-    Engine that move the walkers around within the given constraint: logL > lowLogL<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Engine that move the walkers around within the given constraint: logL > lowLogL<br>
 * initialEngine  :  Engine<br>
-    Engine that distributes the walkers over the available space<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Engine that distributes the walkers over the available space<br>
 * restart  :  StopStart (TBW)<br>
-    write intermediate results to (optionally) start from.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; write intermediate results to (optionally) start from.<br>
 
 
 Author       Do Kester.
@@ -88,53 +88,53 @@ Create a new class, providing inputs and model.
 <b>Parameters</b>
 
 * problem  :  OrderProblem<br>
-    Problem with integer parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Problem with integer parameters<br>
 * keep  :  None or dict of {int:float}<br>
-    None : none of the model parameters are kept fixed.<br>
-    Dictionary of indices (int) to be kept at a fixed value (float).<br>
-    Hyperparameters follow model parameters.<br>
-    The values will override those at initialization.<br>
-    They are used in this instantiation, unless overwritten at the call to sample()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : none of the model parameters are kept fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are used in this instantiation, unless overwritten at the call to sample()<br>
 * distribution  :  None or String or ErrorDistribution<br>
-    None   : DistanceCostFunction is chosen.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None   : DistanceCostFunction is chosen.<br>
 
-    "distance" : `DistanceCostFunction`      no hyperpar<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "distance" : `DistanceCostFunction`      no hyperpar<br>
 
-    errdis : A class inheriting from ErrorDistribution<br>
-             which implements logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; errdis : A class inheriting from ErrorDistribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; which implements logLikelihood<br>
 
-    When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
 * ensemble  :  int (100)<br>
-    number of walkers<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of walkers<br>
 * discard  :  int (1)<br>
-    number of walkers to be replaced each generation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of walkers to be replaced each generation<br>
 * seed  :  int (80409)<br>
-    seed of rng<br>
+&nbsp;&nbsp;&nbsp;&nbsp; seed of rng<br>
 * rate  :  float (1.0)<br>
-    speed of exploration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; speed of exploration<br>
 * engines  :  None or (list of) string or (list of) Engine<br>
-    to randomly move the walkers around, within the likelihood bound.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to randomly move the walkers around, within the likelihood bound.<br>
 
-    "move"    : insert a snippet of parameters at another location<br>
-    "reverse" : reverse the order of a snippet of parameters<br>
-    "shuffle" : shuffle part of the parameter list<br>
-    "switch"  : switch two elements<br>
-    "loop"    : find two paths that cross, then uncross them<br>
-    "near"    : find the nearest location and go there first. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; "move"    : insert a snippet of parameters at another location<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "reverse" : reverse the order of a snippet of parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "shuffle" : shuffle part of the parameter list<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "switch"  : switch two elements<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "loop"    : find two paths that cross, then uncross them<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "near"    : find the nearest location and go there first. <br>
 
-    None    : take default [all of above].<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None    : take default [all of above].<br>
 
-    engine  : a class inheriting from Engine. At least implementing<br>
-              execute( walker, lowLhood )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; engine  : a class inheriting from Engine. At least implementing<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; execute( walker, lowLhood )<br>
 * maxsize  :  None or int<br>
-    maximum size of the resulting sample list (None : no limit)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum size of the resulting sample list (None : no limit)<br>
 * threads  :  bool (False)<br>
-    Use Threads to distribute the diffusion of discarded samples over the available cores.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Use Threads to distribute the diffusion of discarded samples over the available cores.<br>
 * verbose  :  int (1)<br>
-    0 : silent<br>
-    1 : basic information<br>
-    2 : more about every 100th iteration<br>
-    3 : more about every iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : basic information<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : more about every 100th iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 : more about every iteration<br>
 
 
 <a name="solve"></a>
@@ -152,12 +152,12 @@ The more sammples (with solutions) can be found in the sample list.
 <b>Parameters</b>
 
 * keep  :  None or dict of {int:float}<br>
-    Dictionary of indices (int) to be kept at a fixed value (float)<br>
-    Hyperparameters follow model parameters<br>
-    The values will override those at initialization.<br>
-    They are only used in this call of fit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 * plot  :  bool<br>
-    Show a plot of the results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Show a plot of the results<br>
 
 
 <a name="setErrorDistribution"></a>
@@ -171,11 +171,11 @@ Set the error distribution for calculating the likelihood.
 <b>Parameters</b>
 
 * name  :  string<br>
-    name of distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; name of distribution<br>
 * scale  :  float<br>
-    fixed scale of distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fixed scale of distribution<br>
 * power  :  float<br>
-    fixed power of distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fixed power of distribution<br>
 
 
 <a name="setEngines"></a>
@@ -189,9 +189,9 @@ initialize the engines.
 <b>Parameters</b>
 
 * engines  :  list of string<br>
-    list of engine names<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of engine names<br>
 * enginedict  :  dictionary of { str : Engine }<br>
-    connecting names to Engines<br>
+&nbsp;&nbsp;&nbsp;&nbsp; connecting names to Engines<br>
 
 
 <a name="initWalkers"></a>
@@ -205,11 +205,11 @@ Initialize the walkers at random values of parameters and scale
 <b>Parameters</b>
 
 * ensemble  :  int<br>
-    length od the walkers list<br>
+&nbsp;&nbsp;&nbsp;&nbsp; length od the walkers list<br>
 * allpars  :  array_like<br>
-    array of parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of parameters<br>
 * fitIndex  :  array_like<br>
-    indices of allpars to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of allpars to be fitted<br>
 * startdict  :  dictionary of { str : Engine }<br>
     connecting a name to a StartEngine
 

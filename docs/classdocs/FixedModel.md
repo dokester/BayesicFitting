@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="FixedModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -33,20 +33,20 @@ It is reset to numDerivative.
 <b>Attributes</b>
 
 * npmax  :  int<br>
-    maximum number of parameters of the simple (not-fixed) model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of parameters of the simple (not-fixed) model<br>
 * fixed  :  dictionary of {int:float|Model}<br>
-    int     index of parameter to fix permanently. Default None.<br>
-    float   value for the fixed parameter.<br>
-    Model   model to replace the parameter<br>
-    Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     index of parameter to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   value for the fixed parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Model   model to replace the parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 * parlist  :  array_like or None<br>
-    list of active (not-fixed) indices. None is all.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of active (not-fixed) indices. None is all.<br>
 * mlist  :  list of Model<br>
-    list of parameter indices which are replaced by a Model in fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices which are replaced by a Model in fixed.<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -63,20 +63,20 @@ FixedModel Constructor.
 <b>Parameters</b>
 
 * nparams  :  int<br>
-    Number of parameters in the model (default: 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Number of parameters in the model (default: 0)<br>
 * ndim  :  int<br>
-    Number of dimensions of the input (default: 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Number of dimensions of the input (default: 1)<br>
 * copy  :  BaseModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  dictionary of {int:float|Model}<br>
-    int     index of parameter to fix permanently. Default None.<br>
-    float   value for the fixed parameter.<br>
-    Model   model to replace the parameter<br>
-    Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     index of parameter to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   value for the fixed parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Model   model to replace the parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 * names  :  list of string<br>
-    names for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; names for the parameters<br>
 * kwargs for [BaseModel](./BaseModel.md)  : <br>
-    posIndex, nonZero<br>
+&nbsp;&nbsp;&nbsp;&nbsp; posIndex, nonZero<br>
 
 
 <a name="copy"></a>
@@ -123,9 +123,9 @@ Returns the result calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="expand"></a>
@@ -149,9 +149,9 @@ Returns the partial derivatives calculated at the inputs.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="numPartial"></a>
@@ -165,11 +165,11 @@ Returns numerical partial derivatives of the model to params.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters; default is self.parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters; default is self.parameters<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="basePartial"></a>
@@ -183,11 +183,11 @@ Replacement for models that dont define a partial.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * param  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="derivative"></a>
@@ -207,9 +207,9 @@ from the constituent models. Use `numDerivative` instead.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the derivative<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * param  :  array_like<br>
-    values for the parameters. (default: self.parameters)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (default: self.parameters)<br>
 
 
 <a name="numDerivative"></a>
@@ -223,9 +223,9 @@ Returns the numeric derivative of the model to input
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the derivative<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * param  :  array_like<br>
-    values for the parameters. (default: self.parameters)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (default: self.parameters)<br>
 
 <b>Raises</b>
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="GaussErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,12 +11,7 @@ To calculate a Gauss likelihood.
 
 For one residual, x, it holds
 
-    L( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 ( x / s )^2 )<br>
-
-$$
-L(x) = \frac{ 1 }{ s \sqrt( 2 \pi ) } \exp\left( -0.5 (\frac{x}{s})^2 \right)
-$$
-
+&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 ( x / s )^2 )<br>
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -26,16 +21,11 @@ The scale s is also the square root of the variance of this error distribution.
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log likelihood, logL.
 
-    logL = log( N / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( x / s ) ^ 2<br>
-
-$$
-\log L = \log( \frac{ N } { s \sqrt( 2 \pi ) } ) - 
-          0.5 \sum \left( \frac{ x } { s } \right)^2<br>
-$$
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( x / s ) ^ 2<br>
 
 Using weights this becomes
 
-    logL = log( &sum;( w ) / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s ) ^ 2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s ) ^ 2 )<br>
 
 
 Author       Do Kester.
@@ -52,15 +42,15 @@ Default Constructor.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
-    None : no limits implying fixed scale<br>
-    low     low limit on scale (needs to be >0)<br>
-    high    high limit on scale<br>
-    when limits are set, the scale is *not* fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
 
 * copy  :  GaussErrorDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 
 <a name="copy"></a>
@@ -90,9 +80,9 @@ Return the noise scale.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="logLikelihood_alt"></a>
@@ -108,9 +98,9 @@ Alternate calculation
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 
 
 <a name="logLdata"></a>
@@ -126,11 +116,11 @@ logL = sum( logLdata )
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <a name="partialLogL_alt"></a>
@@ -146,11 +136,11 @@ Alternate calculation
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved.<br>
 * allpars  :  array_like<br>
-    (hyper)parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="nextPartialData"></a>
@@ -165,11 +155,11 @@ to the parameters in fitIndex.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    (hyper)parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
 * fitIndex  :  array_like of int<br>
-    indices of allpars to fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of allpars to fit<br>
 * mockdata  :  array_like<br>
     as calculated for the problem
 
@@ -184,14 +174,14 @@ Return the hessian of log( likelihood ) to the parameters in fitIndex.
 The hessian is a matrix containing the second derivatives to each
 of the parameters.
 
-     hessian = d^2 logL / dp_i dp_k<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d^2 logL / dp_i dp_k<br>
 
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    (hyper)parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
 * fitIndex  :  array_like of int<br>
     indices of allpars to fit
 
@@ -202,7 +192,7 @@ of the parameters.
 * [<strong>setLimits(</strong> limits ) ](./ScaledErrorDistribution.md#setLimits)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

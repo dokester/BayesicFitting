@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PowerLawModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,12 +9,12 @@
 
 General powerlaw model of arbitrary degree.
 
-    f( x:p ) = p_0 * ( x - p_1 )^p_2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * ( x - p_1 )^p_2<br>
 
 with
-    p_0 = amplitide<br>
-    p_1 = x-shift<br>
-    p_2 = power<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitide<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_1 = x-shift<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_2 = power<br>
 
 The parameters are initialized at {1.0, 0.0, 1.0}.
 
@@ -30,19 +30,19 @@ The factor is omitted as it does not contribute in the calculations.
 
 <b>Attributes</b>
 
-    no attributes of its own.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; no attributes of its own.<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -59,11 +59,11 @@ The number of parameters is 3
 <b>Parameters</b>
 
 * copy  :  PowerLawModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
     See: [FixedModel](./FixedModel.md)
 
 <a name="copy"></a>
@@ -84,9 +84,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -100,11 +100,11 @@ Returns the partials at the input (xdata) value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -118,9 +118,9 @@ Returns the derivative (df/dx) at the input (xdata) value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -142,7 +142,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

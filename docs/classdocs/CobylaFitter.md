@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="CobylaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -10,7 +10,7 @@
 Constrained Optimization BY Linear Approximation.
 
 Syntactic sugar for
-    ScipyFitter( ..., method='COBYLA', ... )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='COBYLA', ... )<br>
 
 See [ScipyFitter](./ScipyFitter.md)
 
@@ -27,15 +27,15 @@ Create a class, providing inputs and model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    a model function to be fitted (linear or nonlinear)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        ScipyFitter:            gradient, hessp<br>
-        MaxLikelihoodFitter :   errdis, scale, power<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter:            gradient, hessp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

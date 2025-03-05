@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SampleList"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -17,7 +17,7 @@ Model.
 To make averages one has to take into account the weights. Each Sample has a weight
 and all weights sum to 1.0. So the average of any function, f, of the parameters p is
 
-    E( f(p) ) = &sum; w_k f( p_k )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; E( f(p) ) = &sum; w_k f( p_k )<br>
 
 where the sum is over all samples k.
 
@@ -28,45 +28,45 @@ SampleList.
 <b>Attributes</b>
 
 * parameters  :  numpy.array (read-only)<br>
-    The average over the parameters. Not for dynamic models.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The average over the parameters. Not for dynamic models.<br>
 * stdevs, standardDeviations  :  numpy.array (read-only)<br>
-    The standard deviations for the parameters. Not for dynamic models<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The standard deviations for the parameters. Not for dynamic models<br>
 * scale  :  float<br>
-    The average of the noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The average of the noise scale<br>
 * stdevScale  :  float<br>
-    the standard deviation of the scale.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the standard deviation of the scale.<br>
 
 * logZ  :  float (read-only)<br>
-    Natural log of evidence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Natural log of evidence<br>
 * evidence  :  float (read-only)<br>
-    log10( Z ). Evidence * 10 is interpretable as dB.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log10( Z ). Evidence * 10 is interpretable as dB.<br>
 * info  :  float (read-only)<br>
-    The information H. The compression factor ( the ratio of the prior space<br>
-    available to the model parameters over the posterior space ) is equal to the exp( H ).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The information H. The compression factor ( the ratio of the prior space<br>
+&nbsp;&nbsp;&nbsp;&nbsp; available to the model parameters over the posterior space ) is equal to the exp( H ).<br>
 
 * maxLikelihoodIndex  :  int (read-only)<br>
-    The index at which the max likelihood can be found: always the last in the list<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The index at which the max likelihood can be found: always the last in the list<br>
 * maxLikelihoodParameters  :  numpy.array (read-only)<br>
-    The maximum likelihood parameters at the maxLikelihoodIndex.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The maximum likelihood parameters at the maxLikelihoodIndex.<br>
 * maxLikelihoodScale  :  float (read-only)<br>
-    The maximum likelihood noise scale at the maxLikelihoodIndex.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The maximum likelihood noise scale at the maxLikelihoodIndex.<br>
 * medianIndex  :  int (read-only)<br>
-    The index at which the median can be found: the middle of the cumulative weights.<br>
-    It is calculated once and then kept.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The index at which the median can be found: the middle of the cumulative weights.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; It is calculated once and then kept.<br>
 * medianParameters  :  numpy.array (read-only)<br>
-    The median of the parameters at the medianIndex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The median of the parameters at the medianIndex<br>
 * medianScale  :  float (read-only)<br>
-    The median of the noise scale at the medianIndex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The median of the noise scale at the medianIndex<br>
 * modusIndex  :  int (read-only)<br>
-    The index at which the modus can be found: the largest weight<br>
-    It is calculated once and then kept.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The index at which the modus can be found: the largest weight<br>
+&nbsp;&nbsp;&nbsp;&nbsp; It is calculated once and then kept.<br>
 * modusParameters  :  numpy.array (read-only)<br>
-    The modus of the parameters at the modusIndex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The modus of the parameters at the modusIndex<br>
 * modusScale  :  float (read-only)<br>
-    The modus of the noise scale at the modusIndex.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The modus of the noise scale at the modusIndex.<br>
 
 * normalized  :  bool<br>
-    True when the weights are normalized to SUM( weights ) = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True when the weights are normalized to SUM( weights ) = 1<br>
 
 
 Author       Do Kester
@@ -83,15 +83,15 @@ Constructor.
 <b>Parameters</b>
 
 * nsamples  :  int<br>
-    number of samples created.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of samples created.<br>
 * model  :  Model<br>
-    to be used in the samples<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be used in the samples<br>
 * parameters  :  array_like<br>
-    list of model parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of model parameters<br>
 * fitIndex  :  array of int<br>
-    indicating which parameters need fitting<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indicating which parameters need fitting<br>
 * ndata  :  int<br>
-    length of the data vector; to be used in stdev calculations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; length of the data vector; to be used in stdev calculations<br>
 
 
 <a name="addSamples"></a>
@@ -110,7 +110,7 @@ Set or return the k-th sample from the list.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the index of the sample<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the index of the sample<br>
 * sample  :  Sample<br>
     if present, set the kth sample with sample
 
@@ -135,7 +135,7 @@ Add a Sample to the list
 <b>Parameters</b>
 
 * sample  :  Sample<br>
-    the sample to be added<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the sample to be added<br>
 
 
 <a name="copy"></a>
@@ -149,9 +149,9 @@ Copy one item of the list onto another.
 <b>Parameters</b>
 
 * src  :  int<br>
-    the source item<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the source item<br>
 * des  :  int<br>
-    the destination item<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the destination item<br>
 
 
 <a name="weed"></a>
@@ -186,10 +186,10 @@ Calculate the average of the parameters and the standard deviations.
 
 <b>Return</b>
 
-    The average values of the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The average values of the parameters.<br>
 <b>Raises</b>
 
-    ValueError when using Dynamic Models<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ValueError when using Dynamic Models<br>
 
 
 <a name="getHypars"></a>
@@ -206,11 +206,11 @@ hypar = numpy.zeros( nhp, dtype=float )
 hydev = numpy.zeros( nhp, dtype=float )
 sw = 0.0
 for sample in self 
-    wt = math.exp( sample.logW )<br>
-    sw += wt<br>
-    ws = wt * sample.hyper<br>
-    hypar = hypar + ws<br>
-    hydev = hydev + ws * sample.hyper<br>
+&nbsp;&nbsp;&nbsp;&nbsp; wt = math.exp( sample.logW )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sw += wt<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ws = wt * sample.hyper<br>
+&nbsp;&nbsp;&nbsp;&nbsp; hypar = hypar + ws<br>
+&nbsp;&nbsp;&nbsp;&nbsp; hydev = hydev + ws * sample.hyper<br>
 self.stdevHypars = numpy.sqrt( hydev - hypar * hypar )
 self.hypars = hypar
 return self.hypars
@@ -267,7 +267,7 @@ to get the actual number.
 <b>Parameters</b>
 
 * kpar  :  int or tuple of ints<br>
-    the parameter to be selected. Default: all<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected. Default: all<br>
 
 
 <a name="getParAndWgtEvolution"></a>
@@ -367,7 +367,7 @@ Return the (weighted) average result of the model(s) over the samples.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    the input<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the input<br>
 
 
 <a name="monteCarloError"></a>
@@ -385,12 +385,12 @@ and returned at each input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-   the input vectors.<br>
+&nbsp;&nbsp;&nbsp; the input vectors.<br>
 
 <b>Returns</b>
 
 * error  :  array_like<br>
-    standard deviations at each input point<br>
+&nbsp;&nbsp;&nbsp;&nbsp; standard deviations at each input point<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

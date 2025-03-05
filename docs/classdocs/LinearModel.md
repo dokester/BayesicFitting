@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="LinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,7 +13,7 @@ LinearModel implements the baseResult method needed in all linear models.
 
 For Linear models it holds that
 
-    f( x:p ) = &sum;( p_i * df( x )/dp_i )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum;( p_i * df( x )/dp_i )<br>
 
 which means that only the partial derivatives to p_i need to be given
 as basePartial. The baseResult follows directly from that one.
@@ -25,17 +25,17 @@ None of its own
 
 <b>Attributes from Model</b>
 
-    parameters, stdevs, npchain<br>
-    _next, _head, _operation<br>
-    xUnit, yUnit (relegated to model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain<br>
+&nbsp;&nbsp;&nbsp;&nbsp; _next, _head, _operation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xUnit, yUnit (relegated to model)<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -52,16 +52,16 @@ class for all linear models.
 <b>Parameters</b>
 
 * nparams  :  int<br>
-    the number of parameters in this model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model<br>
 * ndim  :  int<br>
-    the dimensionality of the inputs (default: 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the dimensionality of the inputs (default: 1)<br>
 * copy  :  LinearModel<br>
-    model to be copied (default: None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied (default: None)<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        [Model](./Model.md) :        params<br>
-        [FixedModel](./FixedModel.md) :   fixed, names<br>
-        [BaseModel](./BaseModel.md) :    posIndex, nonZero<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Model](./Model.md) :        params<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [FixedModel](./FixedModel.md) :   fixed, names<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [BaseModel](./BaseModel.md) :    posIndex, nonZero<br>
 
 
 <a name="baseResult"></a>
@@ -78,9 +78,9 @@ and partial derivatives.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -140,7 +140,7 @@ and partial derivatives.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -150,7 +150,7 @@ and partial derivatives.
 * [<strong>basePartial(</strong> xdata, param, parlist=None ) ](./FixedModel.md#basePartial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ScaledErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -29,18 +29,18 @@ Default Constructor.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
-    None : no limits implying fixed scale<br>
-    low     low limit on scale (needs to be >0)<br>
-    high    high limit on scale<br>
-    when limits are set, the scale is to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is to be fitted<br>
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
-    float   list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
 
 * copy  :  ScaledErrorDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 
 <a name="copy"></a>
@@ -61,9 +61,9 @@ Set limits for scale.
 <b>Parameters</b>
 
 * limits  :  [low,high]<br>
-    low : float or array_like<br>
-        low limits<br>
-    high : float or array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low : float or array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; low limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high : float or array_like<br>
         high limits
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

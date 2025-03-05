@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="LevenbergMarquardtFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -62,11 +62,11 @@ only exact for linear models with a fixed scale.
 <b>Attributes</b>
 
 * xdata  :  array_like<br>
-    vector of numbers as input for model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; vector of numbers as input for model<br>
 * model  :  Model<br>
-    the model to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model to be fitted<br>
 * lamda  :  float<br>
-    to balance the curvature matrix (see Numerical Recipes)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to balance the curvature matrix (see Numerical Recipes)<br>
 
 
 <a name="LevenbergMarquardtFitter"></a>
@@ -80,14 +80,14 @@ Create a class, providing xdata and model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    vector of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; vector of independent input values<br>
 * model  :  Model<br>
-    a model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted<br>
 
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
 
 
 
@@ -106,36 +106,36 @@ It will calculate the hessian matrix and chisq.
 <b>Parameters</b>
 
 * data   :  array_like<br>
-    the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 * par0  :  array_like<br>
-    initial values for the parameters of the model<br>
-    default: from model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial values for the parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default: from model<br>
 * keep  :  dict of {int : float}<br>
-    dictionary of indices (int) of parameters to be kept at fixed value (float)<br>
-    The values of `keep` are only valid for *this* fit<br>
-    see also `LevenbergMarquardtFitter( ..., keep=dict )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) of parameters to be kept at fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values of `keep` are only valid for *this* fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; see also `LevenbergMarquardtFitter( ..., keep=dict )<br>
 * limits  :  None or list of 2 floats or list of 2 array_like<br>
-    None : no limits applied<br>
-    [lo,hi] : low and high limits for all values of the parameters<br>
-    [la,ha] :  arrays of low and high limits for all values of the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values of the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] :  arrays of low and high limits for all values of the parameters<br>
 * maxiter  :  int<br>
-    max number of iterations. default=1000,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations. default=1000,<br>
 * tolerance  :  float<br>
-    absolute and relative tolrance. default=0.0001,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; absolute and relative tolrance. default=0.0001,<br>
 * verbose  :  int<br>
-    0 : silent<br>
-    >0 : more output<br>
-    default=1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; >0 : more output<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default=1<br>
 * plot  :  bool<br>
-    plot the results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; plot the results<br>
 * callback  :  callable<br>
-    is called each iteration as<br>
-    `val = callback( val )`<br>
-    where val is the parameter list.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as<br>
+&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where val is the parameter list.<br>
 
 <b>Raises</b>
 

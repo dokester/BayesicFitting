@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="RepeatingModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -28,33 +28,33 @@ same parameters. Use keywords same=.
 <b>Attributes</b>
 
 * ncomp  :  int<br>
-    number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
 * model  :  Model<br>
-    (encapsulated) model to be repeated<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (encapsulated) model to be repeated<br>
 * same  :  None or int or list of int<br>
-    indices of parameters of model that get identical values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters of model that get identical values<br>
 * index  :  list of int<br>
-    list of parameter indices not in same.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices not in same.<br>
 * isDyna  :  bool<br>
-    Whether this is a Dynamic Model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.<br>
 
 <b>Attributes from Dynamic</b>
 
-    ncomp, deltaNpar, minComp, maxComp, growPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ncomp, deltaNpar, minComp, maxComp, growPrior<br>
 
 <b>Attributes from Model</b>
 
-    parameters, stdevs, npchain<br>
-    _next, _head, _operation<br>
-    xUnit, yUnit (relegated to model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain<br>
+&nbsp;&nbsp;&nbsp;&nbsp; _next, _head, _operation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xUnit, yUnit (relegated to model)<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 <b>Example</b>
 
@@ -89,23 +89,23 @@ Repeating the same model several times.
 <b>Parameters</b>
 
 * ncomp  :  int<br>
-    number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
 * model  :  Model<br>
-    model to be repeated<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be repeated<br>
 * minComp  :  int (0)<br>
-    minimum number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum number of repetitions<br>
 * maxComp  :  None or int<br>
-    maximum number of repetitions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of repetitions<br>
 * same  :  None or int or list of int<br>
-    indices of parameters of model that get identical values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters of model that get identical values<br>
 
 * growPrior  :  None or Prior<br>
-    governing the birth and death.<br>
-    ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
 * dynamic  :  bool (True)<br>
-    Whether this is a Dynamic Model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.<br>
 * copy  :  RepeatingModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
 <b>Raises</b>
 
@@ -149,9 +149,9 @@ Increase the the number of components by 1 (if allowed by maxComp)
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the dynamic model starts<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
 * rng  :  RandomState<br>
-    random numbr generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random numbr generator<br>
 
 <b>Return</b>
 
@@ -170,7 +170,7 @@ Remove an arbitrary item.
 <b>Parameters</b>
 
 * offset  :  int<br>
-    index where the dynamic model starts<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
 
 <b>Return</b>
 
@@ -188,11 +188,11 @@ Shuffle the parameters of the components (if they are equivalent)
 <b>Parameters</b>
 
 * param  :  array-like<br>
-    list of all parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters<br>
 * offset  :  int<br>
-    index where the dynamic model starts<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
 * np  :  int<br>
-    length of the parameters of the dynamic model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; length of the parameters of the dynamic model<br>
 * rng  :  RNG<br>
     random number generator
 
@@ -212,9 +212,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-     values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="basePartial"></a>
@@ -228,11 +228,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 * parlist  :  array_like<br>
-    list of indices of active parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameter<br>
 
 
 <a name="baseDerivative"></a>
@@ -246,9 +246,9 @@ Returns the derivative df/dx at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-     values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="xxxsetLimits"></a>
@@ -269,16 +269,16 @@ All repeated parameters have the same Prior.
 <b>Parameters</b>
 
 * kpar  :  int<br>
-    parameter number of the repeated model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number of the repeated model.<br>
 * prior  :  Prior<br>
-    prior for parameter kpar<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior for parameter kpar<br>
 * kwargs  :  keyword arguments<br>
-    attributes to be passed to the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
 
 <b>Raise:</b>
 
 IndexException
-    When more Priors are set than fit inside the repeated model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When more Priors are set than fit inside the repeated model<br>
 
 
 <a name="hasPriors"></a>
@@ -317,7 +317,7 @@ Return the name of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="baseParameterUnit"></a>
@@ -331,7 +331,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="par2model"></a>

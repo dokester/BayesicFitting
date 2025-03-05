@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Modifiable"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -42,9 +42,9 @@ Default implementation: does nothing.
 <b>Parameters</b>
 
 * location  :  int<br>
-    index of the item to be modified; otherwise random<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of the item to be modified; otherwise random<br>
 * rng  :  RNG<br>
-    random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 * kwargs  :  keyword arguments<br>
     for specific implementations
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PhantomCollection"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -25,14 +25,14 @@ od self.pars.
 <b>Attributes</b>
 
 * phantoms  :  WalkerList or dict of { int : WalkerList }<br>
-    int         number of parameters in the model<br>
-    Wlakerlist  list of (phantom) walkers<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         number of parameters in the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Wlakerlist  list of (phantom) walkers<br>
 * paramMin  :  array_like or None<br>
-    minimum values of the parameters at this stage of lowLhood<br>
-    None if too few items of this parameter length is present<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum values of the parameters at this stage of lowLhood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None if too few items of this parameter length is present<br>
 * paramMax  :  array_like or None<br>
-    maximum values of the parameters at this stage of lowLhood<br>
-    None if too few items of this parameter length is present<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum values of the parameters at this stage of lowLhood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None if too few items of this parameter length is present<br>
 
 
 Author       Do Kester.
@@ -101,9 +101,9 @@ Calculate the min and max values of the present parameter values.
 <b>Parameters</b>
 
 * lowLhood  :  float<br>
-    lower boundary of the log Likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
-    number of parameters (not used in this implementation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters (not used in this implementation)<br>
 
 
 <a name="getParamMinmax"></a>
@@ -117,9 +117,9 @@ Obtain the min and max values of the present parameter values.
 <b>Parameters</b>
 
 * lowLhood  :  float<br>
-    lower boundary of the log Likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
-    number of parameters (not used in this implementation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters (not used in this implementation)<br>
 
 
 <a name="lengthDynamic"></a>
@@ -159,7 +159,7 @@ Put both items in the dictionaries with npars as key
 <b>Parameters</b>
 
 * logL  :  float<br>
-    log Likelihood <br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood <br>
 * pars  :  1d array<br>
     parameters
 
@@ -174,9 +174,9 @@ Calculate the min and max values of the present parameters of length np.
 <b>Parameters</b>
 
 * lowLhood  :  float<br>
-    lower boundary of the log Likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
-    number of parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters<br>
 
 
 <a name="getDynamic"></a>
@@ -190,8 +190,8 @@ Return the min and max values of the present parameters of length np.
 <b>Parameters</b>
 
 * lowLhood  :  float<br>
-    lower boundary of the log Likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
-    number of parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters<br>
 
 

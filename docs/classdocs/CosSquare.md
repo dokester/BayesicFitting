@@ -9,7 +9,9 @@
 
 CosSquare (Cosine Squared) is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = cos<sup>2</sup>( 0.5 &pi; x ) if |x| < 1 else 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = cos^2( 0.5 &pi; x )    if |x| < 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0                      elsewhere<br>
+
 
 
 <a name="CosSquare"></a>
@@ -20,52 +22,36 @@ CosSquare (Cosine Squared) is a Kernel function between [-1,1]; it is 0 elsewher
 
 Constructor.
 
- Using<br>
- integral = 1.0<br>
- fwhm = 1.0
+Using
+&nbsp;&nbsp;&nbsp;&nbsp; integral = 1.0<br>
+    fwhm = 1.0
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
 <p>
-
-Return the result for the input values.
-
-<b>Parameters</b>
-
-* x  :  array-like<br>
-    the input values
-
+<a name="resultsq"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>resultsq(</strong> xsq )
+</th></tr></thead></table>
+<p>
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> x )
 </th></tr></thead></table>
 <p>
-
-Return the partial derivative wrt the input values.
-
-<b>Parameters</b>
-
-* x  :  array-like<br>
-    the input values
-
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 <p>
-Return True 
-
 <a name="name"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>name(</strong> )
 </th></tr></thead></table>
 <p>
-Return name of the kernel 
-
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Kernel.html">Kernel</a></th></tr></thead></table>
 
 
-* [<strong>resultsq(</strong> xsq )](./Kernel.md#resultsq)

@@ -9,7 +9,7 @@
 
 Biweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = ( 1-x^2 )^2    if |x| < 1 else 0<br>
+ K( x ) = ( 1-x<sup>2</sup> )<sup>2</sup>    if |x| < 1 else 0
 
 Author:      Do Kester
 
@@ -22,8 +22,8 @@ Author:      Do Kester
 
 Constructor.
 
- Using<br>
- integral = 16.0/15.0<br>
+ Using
+ integral = 16.0/15.0
  fwhm = 1.0823922
 
 <a name="result"></a>

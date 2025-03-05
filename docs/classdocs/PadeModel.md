@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PadeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 General Pade model of arbitrary degrees in numerator and denominator.
 
-    f( x:p ) = &sum; p_n * x^n / ( &sum; p_{num+1+k} * x^k )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p_n * x^n / ( &sum; p_{num+1+k} * x^k )<br>
 
 where the sum in the numerator is over n running from 0 to num ( inclusive )
 and the sum in the denominator is over k running from 0 to den ( inclusive )
@@ -34,21 +34,21 @@ Author:      Do Kester
 <b>Attributes</b>
 
 * num  :  int<br>
-    order of the polynomial in the numerator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the numerator<br>
 * den  :  int<br>
-    order of the polynomial in the denominator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the denominator<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Alternate</b>
@@ -70,17 +70,17 @@ The number of parameters is ( num + den + 1 )
 <b>Parameters</b>
 
 * num  :  int<br>
-    the degree of the polynomial in the numerator.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the numerator.<br>
 * den  :  int<br>
-    the degree of the polynomial in the denominator.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the denominator.<br>
 * copy  :  PadeModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-                Default {num+1 : 1.0}<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Default {num+1 : 1.0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 
@@ -102,9 +102,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters for the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 
 
 <a name="basePartial"></a>
@@ -118,11 +118,11 @@ Returns the partials at the xdata values.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters for the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -136,9 +136,9 @@ Returns the partials at the xdata values.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters for the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 
 
 <a name="baseName"></a>
@@ -160,7 +160,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

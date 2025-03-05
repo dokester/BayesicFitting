@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="StartEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -28,7 +28,7 @@ Constructor.
 <b>Parameters</b>
 
 * copy  :  StartEngine<br>
-    engine to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; engine to be copied<br>
 
 
 <a name="copy"></a>
@@ -49,9 +49,9 @@ Execute the engine by a random selection of the parameters.
 <b>Parameters</b>
 
 * walker  :  Sample<br>
-    sample to diffuse<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sample to diffuse<br>
 * lowLhood  :  float<br>
-    lower limit in logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 
 <b>Returns</b>
 

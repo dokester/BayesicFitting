@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SineModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,24 +13,24 @@ Two variants are implemented.
 
 1. By default it is the weighted sum of sine and cosine of the same frequency
 
-    f( x:p ) = p_1 * cos( 2 * &pi; * p_0 * x ) + p_2 * sin( 2 * &pi; * p_0 * x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_1 * cos( 2 * &pi; * p_0 * x ) + p_2 * sin( 2 * &pi; * p_0 * x )<br>
 
 where
-    p_0 = frequency<br>
-    p_1 = amplitude cosine and<br>
-    p_2 = amplitude sine.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_0 = frequency<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_1 = amplitude cosine and<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_2 = amplitude sine.<br>
 As always x = input.
 
 The parameters are initialized at [1.0, 1.0, 1.0]. It is a non-linear model.
 
 2. If phase == True, the sinusoidal model has an explicit phase
 
-    f( x:p ) = p_0 * sin( 2 * &pi; * p_1 * x + p_2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * sin( 2 * &pi; * p_1 * x + p_2 )<br>
 
 where
-    p_0 = amplitude<br>
-    p_1 = frequency<br>
-    p_2 = phase.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_1 = frequency<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_2 = phase.<br>
 
 The parameters are initialized as [1.0, 1.0, 0.0].
 
@@ -50,20 +50,20 @@ The parameters are initialized as [1.0, 1.0, 0.0].
 <b>Attributes</b>
 
 * phase  :  bool (False)<br>
-    False : original 2 amplitudes model<br>
-    True  : phase model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False : original 2 amplitudes model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True  : phase model<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -80,13 +80,13 @@ Number of parameters is 3.
 <b>Parameters</b>
 
 * phase  :  bool<br>
-    if True, construct phase variant.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True, construct phase variant.<br>
 * copy  :  SineModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
-    float   list of values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 
 
 <a name="copy"></a>
@@ -107,9 +107,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -123,11 +123,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -141,9 +141,9 @@ Returns the derivative of f to x (df/dx) at the input values.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -166,7 +166,7 @@ Return the unit of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <a name="phaseResult"></a>
@@ -180,9 +180,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="phasePartial"></a>
@@ -196,11 +196,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="phaseDerivative"></a>
@@ -214,9 +214,9 @@ Returns the derivative of f to x (df/dx) at the input values.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="phaseName"></a>
@@ -239,7 +239,7 @@ Return the unit of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

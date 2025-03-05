@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SampleMovie"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -34,11 +34,11 @@ The constructor produces the movie.
 <b>Parameters</b>
 
 * samplelist  :  SampleList<br>
-    to make the movie from<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to make the movie from<br>
 * filename  :  str<br>
-    name of the mp4 movie<br>
+&nbsp;&nbsp;&nbsp;&nbsp; name of the mp4 movie<br>
 * problem  :  Problem<br>
-    the problem that produced the samplelist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the problem that produced the samplelist<br>
 * kpar  :  list of 2 ints<br>
     indices of the parameters to plot
 

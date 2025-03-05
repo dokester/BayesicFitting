@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="CircularUniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,7 +11,7 @@ Circular Uniform prior distribution, for location parameters.
 The lowLimit is wrapped onto the highLimit.
 
 A wrapper around
-    UniformPrior( circular=... limits=... )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; UniformPrior( circular=... limits=... )<br>
 
 <b>Examples</b>
 
@@ -34,11 +34,11 @@ Constructor.
 <b>Parameters</b>
 
 * limits  :  array of 2 floats<br>
-    [low,high]  range of the prior. Low is wrapped onto high.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [low,high]  range of the prior. Low is wrapped onto high.<br>
 * circular  :  float<br>
-    period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; period of circularity<br>
 * prior  :  CircularUniformPrior<br>
-    to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied.<br>
 
 
 <a name="copy"></a>
@@ -61,7 +61,7 @@ Return a (deep) copy of itself.
 * [<strong>shortName(</strong> )](./UniformPrior.md#shortName)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 
 

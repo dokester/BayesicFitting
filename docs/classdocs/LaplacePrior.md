@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="LaplacePrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 Laplace prior distribution.
 
-    Pr( x ) = 1 / ( 2 s ) exp( - |x - c| / s )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( 2 s ) exp( - |x - c| / s )<br>
 
 By default: c = center = 0.0 and s = scale = 1.
 
@@ -20,9 +20,9 @@ In computational practice the domain is limited to about [-36,36] scale units
 Equivalent to a double-sided exponential prior
 
 domain2unit: u = 0.5 * exp( ( d - c ) / scale )             if d < c
-                 1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise<br>
 unit2domain: d = c + log( 2 * u ) * scale                   if u < 0.5
-                 c - log( 2 * ( 1 - u ) ) * scale           otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale           otherwise<br>
 
 <b>Examples</b>
 
@@ -34,9 +34,9 @@ unit2domain: d = c + log( 2 * u ) * scale                   if u < 0.5
 <b>Attributes</b>
 
 * center  :  float<br>
-    center of the Laplace prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; center of the Laplace prior<br>
 * scale  :  float<br>
-    scale of the Laplace prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; scale of the Laplace prior<br>
 
 <b>Attributes from Prior</b>
 
@@ -56,17 +56,17 @@ Constructor.
 <b>Parameters</b>
 
 * center  :  float<br>
-    of the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * scale  :  float<br>
-    of the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * limits  :  None or list of 2 float/None<br>
-    None : no limits.<br>
-    2 limits, resp low and high<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 limits, resp low and high<br>
 * circular  :  bool or float<br>
-    bool : y|n circular with period from limits[0] to limits[1]<br>
-    float :period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; bool : y|n circular with period from limits[0] to limits[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float :period of circularity<br>
 * prior  :  LaplacePrior<br>
-    prior to copy (with new scale if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
 
 
 <a name="copy"></a>
@@ -84,12 +84,12 @@ Return a value in [0,1] given a value within the valid domain of
 a parameter for a Laplace distribution.
 
 domain2unit: u = 0.5 * exp( ( d - c ) / s ) if d < c else
-                 1.0 - 0.5 * exp( ( c - d ) / s )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / s )<br>
 
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -102,12 +102,12 @@ Return a value within the valid domain of the parameter given a value
 between [0,1] for a Laplace distribution.
 
 unit2domain: d = c + log( 2 * u ) * scale if u < 0.5 else
-                 c - log( 2 * ( 1 - u ) ) * scale;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale;<br>
 
 <b>Parameters</b>
 
 * uval  :  float<br>
-    value within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
 
 <a name="result"></a>
@@ -121,7 +121,7 @@ Return a the result of the distribution function at x.
 <b>Parameters</b>
 
 * x  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="logResult"></a>
@@ -135,7 +135,7 @@ Return a the log of the result of the distribution function to p.
 <b>Parameters</b>
 
 * x  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="partialLog"></a>
@@ -149,7 +149,7 @@ Return partial derivative of log( Prior ) wrt parameter.
 <b>Parameters</b>
 
 * x  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="isBound"></a>

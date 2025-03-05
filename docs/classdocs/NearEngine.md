@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="NearEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -35,13 +35,13 @@ Constructor.
 <b>Parameters</b>
 
 * walkers  :  SampleList<br>
-    walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * copy  :  NearEngine<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * kwargs  :  dict for Engine<br>
-    "phantoms", "slow", "seed", "verbose"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"<br>
 
 
 <a name="copy"></a>
@@ -64,9 +64,9 @@ TBC: This engine seems to take a lot of CPU.
 <b>Parameters</b>
 
 * kw  :  int<br>
-    id of walker to diffuse<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of walker to diffuse<br>
 * lowLhood  :  float<br>
-    lower limit in logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 * dims  :  list of 2 ints<br>
     dimensions to process over
 
@@ -78,7 +78,7 @@ TBC: This engine seems to take a lot of CPU.
 * [<strong>calculateUnitRange(</strong> ) ](./OrderEngine.md#calculateUnitRange)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 

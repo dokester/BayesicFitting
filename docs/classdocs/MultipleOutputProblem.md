@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="MultipleOutputProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -38,18 +38,18 @@ Problem Constructor.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    the model to be solved. One with multiple outputs: model.ndout > 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved. One with multiple outputs: model.ndout > 1<br>
 * xdata  :  array_like<br>
-    independent variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; independent variable<br>
 * ydata  :  array_like<br>
-    dependent variable. shape = (len(xdata), model.ndout)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dependent variable. shape = (len(xdata), model.ndout)<br>
 * weights  :  array_like or None<br>
-    weights associated with ydata: shape = as xdata or as ydata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights associated with ydata: shape = as xdata or as ydata<br>
 * accuracy  :  float or ndarray of shape (ndata,)<br>
-    accuracy scale for the datapoints<br>
-    all the same or one for each data point<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy scale for the datapoints<br>
+&nbsp;&nbsp;&nbsp;&nbsp; all the same or one for each data point<br>
 * copy  :  Problem<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>
@@ -81,7 +81,7 @@ Returns the result calculated at the xdata.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    values for the parameters + nuisance params.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
 
 <a name="partial"></a>
@@ -95,7 +95,7 @@ Returns the partials (df/dp) calculated at the xdata.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    values for the parameters + nuisance params.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
 
 <a name="derivative"></a>

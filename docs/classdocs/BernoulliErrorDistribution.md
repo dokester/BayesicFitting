@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="BernoulliErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,8 +11,8 @@ To calculate a Bernoulli likelihood for categorical True/False data.
 
 For one residual, x, it holds
 
- f( x ) = x          if d is True<br>
-          1 - x      if d is False<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = x          if d is True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 - x      if d is False<br>
 
 where x needs to be between [0,1]; use the logistic function f(x) = 1/(1+exp(-x)
 if necessary. And d is true if the residual belongs to the intended category.
@@ -20,7 +20,7 @@ if necessary. And d is true if the residual belongs to the intended category.
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
- logL = log( x ) if d else log( 1 - x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( x ) if d else log( 1 - x )<br>
 
 Author       Do Kester.
 
@@ -65,9 +65,9 @@ Return the noise scale
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="toSigma"></a>
@@ -77,7 +77,6 @@ Return the noise scale
 <p>
 
 Return sigma, the squareroot of the variance.
-
 <b>Parameter</b>
 
 * scale  :  float<br>
@@ -99,9 +98,9 @@ However for computational reasons the maximum negative value is returned.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 
 
 <a name="logLdata"></a>
@@ -117,11 +116,11 @@ logL = sum( logLdata )
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <a name="partialLogL_alt"></a>
@@ -135,11 +134,11 @@ Return the partial derivative of log( likelihood ) to the parameters.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="nextPartialData"></a>
@@ -154,13 +153,13 @@ to the parameters.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

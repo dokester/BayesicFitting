@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Explorer"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,23 +15,23 @@ It uses Threads to parallelise the diffusion engines.
 <b>Attributes</b>
 
 * walkers  :  WalkerList<br>
-    walkers to be explored<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be explored<br>
 * engines  :  [engine]<br>
-    list of engines to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of engines to be used<br>
 * errdis  :  ErrorDistribution<br>
-    to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be used<br>
 * rng  :  numpy.random.RandomState<br>
-    random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 * rate  :  float (1.0)<br>
-    governs processing speed (vs precision)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; governs processing speed (vs precision)<br>
 * maxtrials  :  int (5)<br>
-    number of trials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of trials<br>
 * verbose  :  int (0)<br>
-    level of blabbering<br>
+&nbsp;&nbsp;&nbsp;&nbsp; level of blabbering<br>
 * lowLhood  :  float<br>
-    present low likelihood level<br>
+&nbsp;&nbsp;&nbsp;&nbsp; present low likelihood level<br>
 * iteration  :  int<br>
-    counting explorer calls<br>
+&nbsp;&nbsp;&nbsp;&nbsp; counting explorer calls<br>
 
 Author       Do Kester.
 
@@ -47,7 +47,7 @@ Construct Explorer from a NestedSampler object.
 <b>Parameters</b>
 
 * ns  :  NestedSampler<br>
-    the calling NestedSampler. It provides the attributes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the calling NestedSampler. It provides the attributes.<br>
 
 
 <a name="explore"></a>
@@ -61,9 +61,9 @@ Explore the likelihood function, using threads.
 <b>Parameters</b>
 
 * worst  :  [int]<br>
-    list of walkers to be explored/updated<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of walkers to be explored/updated<br>
 * lowLhood  :  float<br>
-    level of the low likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; level of the low likelihood<br>
 
 
 <a name="exploreWalker"></a>
@@ -78,11 +78,11 @@ higher in logL then lowLhood
 <b>Parameters</b>
 
 * kw  :  int<br>
-    index in walkerlist, of the walker to be explored<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index in walkerlist, of the walker to be explored<br>
 * lowLhood  :  float<br>
-    minimum value for the log likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum value for the log likelihood<br>
 * engine  :  list of Engine<br>
-    to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be used<br>
 * rng  :  RandomState<br>
     random number generator
 
@@ -128,7 +128,7 @@ Sanity check when no moves are found, if the LogL is still the same as the store
 <b>Parameters</b>
 
 * walker  :  Walker<br>
-    the one with the stored logL<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the one with the stored logL<br>
 
 <b>Raises</b>
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="BaseModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -34,24 +34,24 @@ itself.
 <b>Attributes</b>
 
 * npbase  :  int<br>
-    number of params in the base model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of params in the base model<br>
 * ndim  :  int<br>
-    number of dimensions (parallel streams) of input. (default : 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions (parallel streams) of input. (default : 1)<br>
 * priors  :  list of Prior<br>
-    pertaining to each of the parameters of the model.<br>
-    If the list is shorter than the number of parameters, the last one is repeated.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pertaining to each of the parameters of the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If the list is shorter than the number of parameters, the last one is repeated.<br>
 * posIndex  :  list of int<br>
-    list of indices indication positive-definite parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices indication positive-definite parameters.<br>
 * nonZero  :  list of int<br>
-    list of parameters that need a warning when they are equal to zero.<br>
-    Warnings will only be issued once. Values are replaced by self.tiny<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameters that need a warning when they are equal to zero.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Warnings will only be issued once. Values are replaced by self.tiny<br>
 * tiny  :  float<br>
-    very small value, replacing zero valued when found on NonZero.<br>
-    (default : 1e-20)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; very small value, replacing zero valued when found on NonZero.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (default : 1e-20)<br>
 * deltaP  :  array_like<br>
-    (list of) width(s) for numerical partial calculation. (default : 0.00001)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (list of) width(s) for numerical partial calculation. (default : 0.00001)<br>
 * parNames  :  list of str<br>
-    list of parameter names. (default : "parameter_k")<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameter names. (default : "parameter_k")<br>
 
 * Author  :          Do Kester<br>
 
@@ -67,16 +67,16 @@ BaseModel Constructor.
 <b>Parameters</b>
 
 * nparams  :  int<br>
-    Number of parameters in the model (default: 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Number of parameters in the model (default: 0)<br>
 * ndim  :  int<br>
-    Number of dimensions of the input (default: 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Number of dimensions of the input (default: 1)<br>
 * copy  :  BaseModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * posIndex  :  list of int<br>
-    indices of parameters that need to be > 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters that need to be > 0<br>
 * nonZero  :  list of int<br>
-    indices of parameters that cannot be zero.<br>
-    they are replaced by self.tiny<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters that cannot be zero.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; they are replaced by self.tiny<br>
 kwargs
     for internal use.
 
@@ -91,9 +91,9 @@ Returns the result calculated at the xdatas.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * param  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="partial"></a>
@@ -107,11 +107,11 @@ Returns the partial derivatives calculated at the inputs.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * param  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  None or array_like<br>
-    indices of active parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of active parameters<br>
 
 
 <a name="checkParameter"></a>
@@ -125,7 +125,7 @@ Return parameters corrected for positivity and Non-zero.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="checkPositive"></a>
@@ -139,7 +139,7 @@ Check parameters for positivity. Silently correct.
 <b>Parameters</b>
 
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="checkZeroParameter"></a>
@@ -153,7 +153,7 @@ Check parameters for Non-zero. Correct after one warning.
 <b>Parameters</b>
 
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="isDynamic"></a>
@@ -195,9 +195,9 @@ in the model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the derivative<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * param  :  array_like<br>
-    values for the parameters. (default: model.parameters)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (default: model.parameters)<br>
 
 
 <a name="setPrior"></a>
@@ -216,16 +216,16 @@ it generates an error when kpar > np
 <b>Parameters</b>
 
 * kpar  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 * prior  :  Prior<br>
-    prior for the parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior for the parameter<br>
 * kwargs  :  dict<br>
-    attributes to be passed to the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
 
 <b>Raises</b>
 
 IndexError
-    when kpar is larger than the length of priors list already present <br>
+&nbsp;&nbsp;&nbsp;&nbsp; when kpar is larger than the length of priors list already present <br>
 
 
 <a name="hasPriors"></a>

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="MixedErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,18 +11,18 @@ To calculate a mixture of two likelihoods.
 
 For one residual, x, it holds
 
-    L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )<br>
 
 where f is the contributing fraction while L, L1 and L2 are likelihoods
 f is a hyperparameter between [0..1]
 
 The likelihood over N datapoints is
 
-    L = &Pi;{ L( x ) } = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi;{ L( x ) } = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
 
 And the log of L is
 
-    logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )<br>
 
 <b>Note</b>
 
@@ -46,20 +46,20 @@ Make a new error distribution as a fraction of errdis1 plus the rest of errdis2.
 <b>Parameters</b>
 
 * errdis1  :  ErrorDistribution<br>
-    First error distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; First error distribution<br>
 * errdis2  :  ErrorDistribution<br>
-    Second error distribution (might be of the same class as errdis1)<br>
-    It *must* have the same xdata, data, weights as errdis1.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Second error distribution (might be of the same class as errdis1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; It *must* have the same xdata, data, weights as errdis1.<br>
 * fraction  :  float<br>
-    contributing fraction<br>
+&nbsp;&nbsp;&nbsp;&nbsp; contributing fraction<br>
 * limits  :  None or list of 2 floats [low,high]<br>
-    None : no limits implying fixed fraction<br>
-    low     low limit on fraction ( >0)<br>
-    high    high limit on fraction ( <1)<br>
-    when limits are set, the scale is *not* fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed fraction<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on fraction ( >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on fraction ( <1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
 
 * copy  :  MixedErrorDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 
 <a name="copy"></a>
@@ -89,11 +89,11 @@ Return the log( likelihood ) for a Mixedian distribution.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated for the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem<br>
 
 
 <a name="nextPartialData"></a>
@@ -107,13 +107,13 @@ Return the partial derivative of log( likelihood ) to the parameters in fitIndex
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 * mockdata  :  array_like<br>
-    as calculated for the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

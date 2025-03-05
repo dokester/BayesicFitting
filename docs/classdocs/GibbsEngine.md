@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="GibbsEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -29,13 +29,13 @@ Constructor.
 <b>Parameters</b>
 
 * walkers  :  WalkerList<br>
-    walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * copy  :  GibbsEngine<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * kwargs  :  for Engine<br>
-    "slow", "seed", "phantoms", "verbose"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "slow", "seed", "phantoms", "verbose"<br>
 
 
 <a name="copy"></a>
@@ -56,13 +56,13 @@ Execute the engine by diffusing the parameters.
 <b>Parameters</b>
 
 * kw  :  int<br>
-    index of walker to diffuse<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse<br>
 * lowLhood  :  float<br>
-    lower limit in logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 * append  :  bool<br>
-    set walker in place or append<br>
+&nbsp;&nbsp;&nbsp;&nbsp; set walker in place or append<br>
 * iteration  :  int<br>
-    iteration number<br>
+&nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
 
 <b>Returns</b>
 

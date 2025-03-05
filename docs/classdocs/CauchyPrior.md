@@ -9,7 +9,7 @@
 
 Cauchy prior distribution.
 
-Pr( x ) =  s / ( &pi; * ( s^2 + ( x - c )^2 )
+Pr( x ) =  s / ( &pi; * ( s<sup>2</sup> + ( x - c )<sup>2</sup> )
 
 By default: c = center = 0 and s = scale = 1.
 
@@ -17,10 +17,10 @@ It can also have a limited domain.
 By default the domain is [-Inf,+Inf].
 In computational practice it is limited to [-1e16, 1e16]
 
-domain2unit: 
-    u = arctan( ( d - c ) / s ) / &pi; + 0.5<br>
-unit2domain: 
-    d = tan( ( u - 0.5 ) * &pi; ) * s + c<br>
+ domain2unit: 
+&nbsp;&nbsp;&nbsp;&nbsp; u = arctan( ( d - c ) / s ) / &pi; + 0.5<br>
+ unit2domain: 
+&nbsp;&nbsp;&nbsp;&nbsp; d = tan( ( u - 0.5 ) * &pi; ) * s + c<br>
 
 <b>Examples</b>
 
@@ -32,9 +32,9 @@ unit2domain:
 <b>Attributes</b>
 
 * center  :  float<br>
-    center of the Cauchy prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; center of the Cauchy prior<br>
 * scale  :  float<br>
-    scale of the Cauchy prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; scale of the Cauchy prior<br>
 
 <b>Attributes from Prior</b>
 
@@ -52,17 +52,17 @@ Constructor.
 <b>Parameters</b>
 
 * center  :  float<br>
-    of the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * scale  :  float<br>
-    of the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * limits  :  None or [float,float]<br>
-    None    no limits are set<br>
-    2 floats    lowlimit and highlimit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit<br>
 * circular  :  bool or float<br>
-    bool : y|n circular with period from limits[0] to limits[1]<br>
-    float : period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; bool : y|n circular with period from limits[0] to limits[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float : period of circularity<br>
 * prior  :  CauchyPrior<br>
-    prior to copy (with new scale if applicable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
 
 
 <a name="copy"></a>
@@ -84,7 +84,7 @@ u = arctan( ( d - c ) / s ) / &pi; + 0.5
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -101,7 +101,7 @@ d = tan( ( u - 0.5 ) * &pi; ) * s + c
 <b>Parameters</b>
 
 * uval  :  float<br>
-    value within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
 
 <a name="result"></a>
@@ -115,7 +115,7 @@ Return a the result of the distribution function at x.
 <b>Parameters</b>
 
 * x  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="partialLog"></a>

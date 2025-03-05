@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="JeffreysPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,8 +12,8 @@ Jeffreys prior is a improper prior ( i.e. its integral is unbound ).
 Because of that it always needs limits, low and high, such that
 0 < low < high < +Inf.
 
-    Pr( x ) = 1.0 / ( x * norm )    if low < x < high<br>
-              0.0                   otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1.0 / ( x * norm )    if low < x < high<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0                   otherwise<br>
 
 where norm = log( high ) - log( low )
 
@@ -31,9 +31,9 @@ unit2domain: d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
 <b>Hidden Attributes</b>
 
 * _logLo  :  float<br>
-    log( lowLimit )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log( lowLimit )<br>
 * _norm  :  float<br>
-    log( highLimit / lowLimit )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log( highLimit / lowLimit )<br>
 
 <b>Attributes from Prior</b>
 
@@ -53,7 +53,7 @@ Default constructor.
 <b>Parameters</b>
 
 * limits  :  list of 2 floats<br>
-    2 limits resp. low and high<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 limits resp. low and high<br>
 * prior  :  JeffreysPrior<br>
     prior to copy (with new limits if applicable)
 
@@ -82,7 +82,7 @@ a parameter for a Jeffreys distribution.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -97,7 +97,7 @@ between [0,1] for a Jeffreys distribution.
 <b>Parameters</b>
 
 * uval  :  float<br>
-    value within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
 
 <a name="result"></a>
@@ -111,7 +111,7 @@ Return a the result of the distribution function at x.
 <b>Parameters</b>
 
 * x  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="partialLog"></a>
@@ -125,7 +125,7 @@ Return partial derivative of log( Prior ) wrt parameter.
 <b>Parameters</b>
 
 * p  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="isBound"></a>

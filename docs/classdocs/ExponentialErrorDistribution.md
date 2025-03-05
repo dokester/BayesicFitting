@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ExponentialErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,25 +13,25 @@ To calculate an Exponential likelihood.
 
 For one residual, x, it holds
 
-    f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s ) ^ p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s ) ^ p )<br>
 
 where s is the scale and p is the power.
 s and p are hyperparameters, which might be estimated from the data.
 
 The variance of this function is
 
-    &sigma; ^ 2 = s ^ 2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &sigma; ^ 2 = s ^ 2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )<br>
 
 See toSigma()
 
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log( L )
 
-    logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s ) ^ p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s ) ^ p )<br>
 
 Using weights this becomes
 
-    logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s ) ^ p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s ) ^ p )<br>
 
 <b>Note</b>
 
@@ -56,16 +56,16 @@ Default Constructor.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * power  :  float<br>
-    power of the distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; power of the distribution<br>
 * limits  :  None or [low,high] or [[low],[high]]<br>
-    None : no limits implying fixed scale<br>
-    low     low limit on scale (needs to be >0)<br>
-    high    high limit on scale<br>
-    [low]   low limit on [scale,power] (need to be >0)<br>
-    [high]  high limit on [scale,power]<br>
-    when limits are set, the scale cq. power are *not* fixed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [low]   low limit on [scale,power] (need to be >0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [high]  high limit on [scale,power]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale cq. power are *not* fixed.<br>
 * copy  :  ExponentialErrorDistribution<br>
     distribution to be copied.
 
@@ -108,9 +108,9 @@ Return the log( likelihood ) for a Gaussian distribution.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 
 
 <a name="logLdata"></a>
@@ -126,11 +126,11 @@ logL = sum( logLdata )
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <a name="getChipow"></a>
@@ -146,10 +146,10 @@ return Sum over the (weighted) powered residuals
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * scale  :  float or array_like<br>
     present scale
 
@@ -164,9 +164,9 @@ Return the noise scale calculated from the residuals.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="partialLogL_alt"></a>
@@ -182,11 +182,11 @@ dL/ds is not implemented for problems with accuracy
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="nextPartialData"></a>
@@ -203,13 +203,13 @@ dL/ds is not implemented for problems with accuracy
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -219,7 +219,7 @@ dL/ds is not implemented for problems with accuracy
 * [<strong>setLimits(</strong> limits ) ](./ScaledErrorDistribution.md#setLimits)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

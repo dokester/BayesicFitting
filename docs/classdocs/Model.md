@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Model"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -73,25 +73,25 @@ whether the partial has been implemented properly.
 <b>Attributes</b>
 
 * parameters  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 * stdevs  :  None or array_like<br>
-    standard deviations after a fit to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; standard deviations after a fit to the data<br>
 * xUnit  :  astropy.units or list of<br>
-    unit of the x-values (list of in case of more dimensions)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; unit of the x-values (list of in case of more dimensions)<br>
 * yUnit  :  astropy.units<br>
-    unit of the y-values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; unit of the y-values<br>
 * npars  :  int (read only)<br>
-    number of parameters in this model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters in this model<br>
 * npchain  :  int (read only)<br>
-    identical to npars<br>
+&nbsp;&nbsp;&nbsp;&nbsp; identical to npars<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -108,18 +108,18 @@ the parammeters which are all initialized to 0.
 <b>Parameters</b>
 
 * nparams  :  int<br>
-    the number of parameters in this model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model<br>
 * ndim  :  int<br>
-    the dimensionality of the xdatas (default: 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the dimensionality of the xdatas (default: 1)<br>
 * copy  :  Model<br>
-    model to be copied (default: None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied (default: None)<br>
 * params  :  array_like<br>
-    initial parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial parameters of the model<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -157,7 +157,7 @@ will be lost in the isolated model.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the model number ( head = 0 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model number ( head = 0 )<br>
 
 <b>Raises</b>
 
@@ -184,7 +184,7 @@ existing chain. For the use of "brackets" in a chain use BracketModel.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to be added to<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be added to<br>
 
 
 <a name="subtractModel"></a>
@@ -200,7 +200,7 @@ The final result is the difference of the models.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to be subtracted from<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be subtracted from<br>
 
 
 <a name="multiplyModel"></a>
@@ -216,7 +216,7 @@ The final result is the product of the models.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to be multiplied by<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be multiplied by<br>
 
 
 <a name="divideModel"></a>
@@ -232,7 +232,7 @@ The final result is the division of the models.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to be divided by<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be divided by<br>
 
 
 <a name="pipeModel"></a>
@@ -246,7 +246,7 @@ Make a compound model by piping the result into the next.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to pipe into<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to pipe into<br>
 
 
 <a name="appendModel"></a>
@@ -260,9 +260,9 @@ Append a model to the present chain using a operation.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    the model to be appended<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model to be appended<br>
 * operation  :  int<br>
-    operation index<br>
+&nbsp;&nbsp;&nbsp;&nbsp; operation index<br>
 
 <b>Raises</b>
 
@@ -279,7 +279,7 @@ Check parameters for non-zero and positivity
 <b>Parameters</b>
 
 * params  :  array_like<br>
-    parameters for the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 
 
 <a name="result"></a>
@@ -293,9 +293,9 @@ Return the result of the model as applied to an array of input data.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    input data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * param  :  array_like<br>
-    parameters for the model. Default parameters from the Model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model. Default parameters from the Model<br>
 
 
 <a name="operate"></a>
@@ -314,11 +314,11 @@ Return the derivatives (df/dx) of the model at the inputs
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    an input vector or array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; an input vector or array<br>
 * param  :  array_like<br>
-    parameters for the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model<br>
 * useNum  :  bool<br>
-    if true, numeric derivatives are used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if true, numeric derivatives are used.<br>
 
 
 <a name="partial"></a>
@@ -332,11 +332,11 @@ Return the partial derivatives of the model at the inputs
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    an input vector or array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; an input vector or array<br>
 * param  :  array_like<br>
-    parameters for the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model<br>
 * useNum  :  bool<br>
-    if true, numeric partials are used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if true, numeric partials are used.<br>
 
 
 <a name="selectPipe"></a>
@@ -356,7 +356,7 @@ Return partial in the form of [N,P]
 <b>Parameters</b>
 
 * dGd :   array of form [N,P]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N]<br>
     Derivative of H to G  
 
@@ -372,7 +372,7 @@ Return partial in the form [O][N,P]
 <b>Parameters</b>
 
 * dGd :   array of form [K][N,P]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [O][N,K]<br>
     Derivative of H to G  
 
@@ -388,7 +388,7 @@ Return partial in the form of [N,P]
 <b>Parameters</b>
 
 * dGd :   array of form [K][N,P]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,K]<br>
     Derivative of H to G  
 
@@ -404,7 +404,7 @@ Return partial in the form of [O][NP]
 <b>Parameters</b>
 
 * dGd :   array of form [N,P]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,0]<br>
     Derivative of H to G  
 
@@ -420,7 +420,7 @@ Return partial in the form of [N]
 <b>Parameters</b>
 
 * dGdx :  array of form [N]<br>
-    Derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Derivative dGdx  <br>
 * dHdG :  array of form [N]<br>
     Derivative of H to G  
 
@@ -436,7 +436,7 @@ Return derivative in the form of [N,O]
 <b>Parameters</b>
 
 * dGdx :   array of form [N,K]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [O][N,K]<br>
     Derivative of H to G  
 
@@ -452,7 +452,7 @@ Return derivative in the form of [N]
 <b>Parameters</b>
 
 * dGdx :   array of form [N,K]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,K]<br>
     Derivative of H to G  
 
@@ -468,7 +468,7 @@ Return derivative in the form of [N,O]
 <b>Parameters</b>
 
 * dGdx :   array of form [N,O]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N]<br>
     Derivative of H to G  
 
@@ -484,7 +484,7 @@ Return derivative in the form of [N,I]
 <b>Parameters</b>
 
 * dGdx :   array of form [K][N,I]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,K]<br>
     Derivative of H to G  
 
@@ -500,7 +500,7 @@ Return derivative in the form of [O][N,I]
 <b>Parameters</b>
 
 * dGdx :   array of form [N,I]<br>
-    Either partial dGdp or derivative dGdx  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,O]<br>
     Derivative of H to G  
 
@@ -530,9 +530,9 @@ Returns numerical derivatives (df/dx) of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    input data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * param  :  array_like<br>
-    a parameters vector<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a parameters vector<br>
 
 
 <a name="numPartial"></a>
@@ -546,9 +546,9 @@ Returns numerical partial derivatives of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    input data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * param  :  array_like<br>
-    a parameters vector<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a parameters vector<br>
 
 
 <a name="isDynamic"></a>
@@ -583,7 +583,7 @@ Return the prior of the indicated parameter.
 <b>Parameters</b>
 
 * kpar  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 <b>Raises</b>
 
@@ -601,11 +601,11 @@ Set the prior for the indicated parameter.
 <b>Parameters</b>
 
 * kpar  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 * prior  :  Prior<br>
-    prior for parameter kpar<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior for parameter kpar<br>
 * kwargs  :  keyword arguments<br>
-    attributes to be passed to the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
 
 <b>Raises</b>
 
@@ -623,7 +623,7 @@ Return the name of the indicated parameter.
 <b>Parameters</b>
 
 * kpsr  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 <b>Raises</b>
 
@@ -641,7 +641,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * kpar  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 <b>Raise</b>
 
@@ -671,9 +671,9 @@ It only works in *Fitter classes which support it.
 <b>Parameters</b>
 
 * lowLimits  :  array_like<br>
-    lower limits on the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limits on the parameters<br>
 * highLimits  :  array_like<br>
-    upper limits on the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; upper limits on the parameters<br>
 
 
 <a name="getLimits"></a>
@@ -687,18 +687,18 @@ Return the limits stored in the priors
 <b>Returns</b>
 
 * limits  :  tuple of 2 array-like or of 2 None (if `self.priors` is None)<br>
-    (lowlimits, highlimits)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; (lowlimits, highlimits)<br>
 
 lolim = []
 hilim = []
 mdl = self
 * while mdl is not None  : <br>
-    if not super( Model, mdl ).hasLimits( ) :<br>
-        return [None,None]<br>
-    lolim += [p.lowLimit for p in mdl.priors]<br>
-    hilim += [p.highLimit for p in mdl.priors]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if not super( Model, mdl ).hasLimits( ) :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return [None,None]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lolim += [p.lowLimit for p in mdl.priors]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; hilim += [p.highLimit for p in mdl.priors]<br>
 
-    mdl = mdl._next<br>
+&nbsp;&nbsp;&nbsp;&nbsp; mdl = mdl._next<br>
 return (lolim, hilim)
 
 <a name="hasLimits"></a>
@@ -725,9 +725,9 @@ Convert a value in [0,1] to one inside the limits of the parameter.
 <b>Parameters</b>
 
 * uvalue  :  (list of) float<br>
-    value in [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value in [0,1]<br>
 * kpar  :  int<br>
-    index of the parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter<br>
 
 
 <a name="domain2Unit"></a>
@@ -741,9 +741,9 @@ Convert a value within the domain of the parameter to one in [0,1].
 <b>Parameters</b>
 
 * dvalue  :  (list of) float<br>
-    value of parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value of parameter<br>
 * kpar  :  int<br>
-    index of the parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter<br>
 
 
 <a name="partialDomain2Unit"></a>
@@ -757,7 +757,7 @@ Return a the derivate of the domain2Unit function to dval.
 <b>Parameters</b>
 
 * dvalue  :  (list of) float<br>
-   parameter array<br>
+&nbsp;&nbsp;&nbsp; parameter array<br>
 
 
 <a name="nextPrior"></a>
@@ -792,11 +792,11 @@ It is compared to a numerical calculation.
 <b>Parameters</b>
 
 * xdata  :  (list of) float<br>
-    values of the independent variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values of the independent variable<br>
 * params  :  list of floats<br>
-    parameters for the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model<br>
 * silent  :  bool<br>
-    if false print outputs<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if false print outputs<br>
 
 <b>Return</b>
 
@@ -816,9 +816,9 @@ For compound models it is different from numPartial and numDerivative.
 <b>Parameters</b>
 
 * xdata  :  float<br>
-    single xdata point (possibly multidimensional)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; single xdata point (possibly multidimensional)<br>
 * params  :  array-like<br>
-    parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters<br>
 * kpar  :  None or int or list of int<br>
     int  : return derivative to parameter kpar.
 
@@ -842,12 +842,12 @@ Strictly numeric calculation of derivative.
 
 For compound models it is different from numPartial and numDerivative.
 
-    ## More dimensions in x<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ## More dimensions in x<br>
 
 <b>Parameters</b>
 
 * xdata  :  float<br>
-    single xdata point (possibly multidimensional)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; single xdata point (possibly multidimensional)<br>
 * param  :  array-like<br>
     parameters
 

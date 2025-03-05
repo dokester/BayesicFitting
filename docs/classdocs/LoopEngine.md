@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="LoopEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,20 +12,20 @@ The LoopEngine tries to unloop a crossing loop.
 Only for 2 dimensional TS problems.
 
 Input order 
-     0  1  2  3<br>
-    15 14  5  4<br>
-     7  6 13 12<br>
-     8  9 10 11<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0  1  2  3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 15 14  5  4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7  6 13 12<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8  9 10 11<br>
 
 The loop crosses between (5,6) and (13,14). By switching the positions
 of 6 and 13, and reversing the loop in between, a better solution is
 reached (triangle inequality)
 
 output order
-     0  1  2  3<br>
-    15 14  5  4<br>
-    12 13  6  7<br>
-    11 10  9  8<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0  1  2  3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 15 14  5  4<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 12 13  6  7<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 11 10  9  8<br>
 
 This is NOT a random engine as it only steps in the uphill direction.
 
@@ -52,13 +52,13 @@ Constructor.
 <b>Parameters</b>
 
 * walkers  :  SampleList<br>
-    walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * copy  :  LoopEngine<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * kwargs  :  dict for Engine<br>
-    "phantoms", "slow", "seed", "verbose"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"<br>
 
 
 <a name="copy"></a>
@@ -79,9 +79,9 @@ Execute the LoopEngine one time.
 <b>Parameters</b>
 
 * kw  :  int<br>
-    walker to diffuse<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walker to diffuse<br>
 * lowLhood  :  float<br>
-    lower limit in logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 * dims  :  list of 2 ints<br>
     dimensions to process over
 
@@ -93,7 +93,7 @@ Execute the LoopEngine one time.
 * [<strong>calculateUnitRange(</strong> ) ](./OrderEngine.md#calculateUnitRange)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Kepplers2ndLaw"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,9 +12,9 @@ Class for calculating Kepplers second law for planetary motion.
 The projection of the orbit on the sky is not included in this class.
 
 The algorithm was taken from
-    Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
 
-    http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf<br>
+&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf<br>
 
 p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
 p_1 : a     semi major axis (>0)
@@ -40,7 +40,7 @@ M = 2 * pi * xdata / P - p
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    times in the orbit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
     parameters: eccentr, semimajor, period, ppass
 
@@ -68,7 +68,7 @@ Return derivatives of M (mean anomaly) to relevant parameters.
 <b>Returns</b>
 
 * dMdP  :  array_like<br>
-    derivatives of M to P (period)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of M to P (period)<br>
 * dMdp  :  array_like<br>
     derivatives of M to p (phase of periastron)
 
@@ -91,8 +91,8 @@ It converges in a few iterations for e <= 0.999999999
 Return the eccentric anomaly, i.e. the solution for E of
 
 Standard method by Jean Meuss 
-    Astronomical Algorithms, 2nd ed.,<br>
-    Willmann-Bell, Inc, Virginia, 193-196, 397-399<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Astronomical Algorithms, 2nd ed.,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Willmann-Bell, Inc, Virginia, 193-196, 397-399<br>
 
 e = params[0] = eccentricity
 M = mean anomaly
@@ -102,7 +102,7 @@ E = M + e * sin( E )
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    times in the orbit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
     parameters: eccentr, semimajor, period, ppass
 
@@ -124,7 +124,7 @@ E = M + e * sin( E )
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    times in the orbit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
     parameters: eccentr, semimajor, period, ppass
 
@@ -146,9 +146,9 @@ E = M + e * sin( E )
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    times in the orbit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
-    parameters: eccentr, semimajor, period, phase<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters: eccentr, semimajor, period, phase<br>
 * Estart  :  array_like<br>
     starting values for E
 
@@ -189,9 +189,9 @@ Return derivatives of E (eccentric anomaly) to relevant parameters.
 <b>Returns</b>
 
 * dEde  :  array_like<br>
-    derivatives of E to e (eccentricity)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of E to e (eccentricity)<br>
 * dEdP  :  array_like<br>
-    derivatives of E to P (period)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of E to P (period)<br>
 * dEdp  :  array_like<br>
     derivatives of E to p (phase of periastron)
 
@@ -213,25 +213,25 @@ v = 2 * arctan( sqrt( (1+e)/(1-e) ) * tan( E / 2 ) )
 
 from Wikepedia => Trigoniometic Identities 
 tan( E / 2 ) = sqrt( ( 1 - cos( E ) ) / ( 1 + cos( E ) ) )
-             = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )^2 )<br>
-             = sqrt( s^2 / ( 1 + c )^2 )<br>
-             = s / ( 1 + c )<br>
-             = sin( E ) / ( 1 + cos( E ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )^2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( s^2 / ( 1 + c )^2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = s / ( 1 + c )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sin( E ) / ( 1 + cos( E ) )<br>
 Avoid cases where cos( E ) is too close to -1
 
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    times in the orbit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
-    parameters: eccentr, semimajor, inclin, ascpos, asclon, period, ppass<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters: eccentr, semimajor, inclin, ascpos, asclon, period, ppass<br>
 
 <b>Returns</b>
 
 * r  :  array_like<br>
-    radius<br>
+&nbsp;&nbsp;&nbsp;&nbsp; radius<br>
 * v  :  array_like<br>
-    true anomaly<br>
+&nbsp;&nbsp;&nbsp;&nbsp; true anomaly<br>
 
 
 <a name="drvdE"></a>
@@ -245,18 +245,18 @@ Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    times in the orbit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
-    parameters: eccentr, semimajor, period, ppass<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters: eccentr, semimajor, period, ppass<br>
 * cosE  :  array_like<br>
-    cosine of E<br>
+&nbsp;&nbsp;&nbsp;&nbsp; cosine of E<br>
 * sinE  :  array_like<br>
-    sine of E<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sine of E<br>
 
 <b>Returns</b>
 
 * drdE  :  array_like<br>
-    derivatives of r to E (eccentric anomaly)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to E (eccentric anomaly)<br>
 * dvdE  :  array_like<br>
     derivatives of v to E (eccentric anomaly)
 
@@ -271,7 +271,7 @@ Return derivatives of r (radius) and v (true anomaly) to xdata
 <b>Returns</b>
 
 * drdx  :  array_like<br>
-    derivatives of r to x (xdata)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to x (xdata)<br>
 * dvdx  :  array_like<br>
     derivatives of v to x (xdata)
 
@@ -286,17 +286,17 @@ Return derivatives of r (radius) and v (true anomaly) to relevant parameters.
 <b>Returns</b>
 
 * drde  :  array_like<br>
-    derivatives of r to e (eccentricity)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to e (eccentricity)<br>
 * drda  :  array_like<br>
-    derivatives of r to a (semimajor axis)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to a (semimajor axis)<br>
 * drdP  :  array_like<br>
-    derivatives of r to P (period)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to P (period)<br>
 * drdp  :  array_like<br>
-    derivatives of r to p (phase of periastron)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to p (phase of periastron)<br>
 * dvde  :  array_like<br>
-    derivatives of v to e (eccentricity)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of v to e (eccentricity)<br>
 * dvdP  :  array_like<br>
-    derivatives of v to P (period)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; derivatives of v to P (period)<br>
 * dvdp  :  array_like<br>
     derivatives of v to p (phase of periastron)
 

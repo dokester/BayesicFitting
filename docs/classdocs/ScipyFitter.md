@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ScipyFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -41,38 +41,38 @@ scipy.optimize.minimize
 <b>Attributes</b>
 
 * gradient  :  callable gradient( par )<br>
-    User provided method to calculate the gradient of chisq.<br>
-    It can be used to speed up the dotproduct calculation, maybe<br>
-    because of the sparseness of the partial.<br>
-    default  dotproduct of the partial with the residuals<br>
+&nbsp;&nbsp;&nbsp;&nbsp; User provided method to calculate the gradient of chisq.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; It can be used to speed up the dotproduct calculation, maybe<br>
+&nbsp;&nbsp;&nbsp;&nbsp; because of the sparseness of the partial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default  dotproduct of the partial with the residuals<br>
 * tol  :  float (1.0e-5)<br>
-    Stop when the norm of the gradient is less than tol.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Stop when the norm of the gradient is less than tol.<br>
 * norm  :  float (inf)<br>
-    Order to use for the norm of the gradient (-np.Inf is min, np.Inf is max).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Order to use for the norm of the gradient (-np.Inf is min, np.Inf is max).<br>
 * maxIter  :  int (200*len(par))<br>
-    Maximum number of iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Maximum number of iterations<br>
 * verbose  :  bool (False)<br>
-    if True print status at convergence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True print status at convergence<br>
 * debug  :  bool (False)<br>
-    return the result of each iteration in `vectors`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; return the result of each iteration in `vectors`<br>
 * yfit  :  ndarray (read only)<br>
-    the result of the model at the optimal parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the result of the model at the optimal parameters<br>
 * ntrans  :  int (read only)<br>
-    number of function calls<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of function calls<br>
 * ngrad  :  int (read only)<br>
-    number of gradient calls<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of gradient calls<br>
 * vectors  :  list of ndarray (read only when debug=True)<br>
-    list of intermediate vectors<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of intermediate vectors<br>
 
 <b>Hidden Attributes</b>
 
 * _Chisq  :  class<br>
-    to calculate chisq in the method Chisq.func() and Chisq.dfunc()<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to calculate chisq in the method Chisq.func() and Chisq.dfunc()<br>
 
 <b>Returns</b>
 
 * pars  :  array_like<br>
-    the parameters at the minimum of the function (chisq).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameters at the minimum of the function (chisq).<br>
 
 
 <a name="ScipyFitter"></a>
@@ -88,51 +88,51 @@ Create a class, providing inputs and model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    a model function to be fitted (linear or nonlinear)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)<br>
 * method  :  None | 'CG' | 'NELDER-MEAD' | 'POWELL' | 'BFGS' | 'NEWTON-CG' | 'L-BFGS-B' |<br>
-          'TNC' | 'COBYLA' | 'SLSQP' | 'DOGLEG' | 'TRUST-NCG'<br>
-    the method name is case invariant.<br>
-    None            Automatic selection of the method.<br>
-                    'SLSQP' when the problem has constraints<br>
-                    'L-BFGS-B' when the problem has limits<br>
-                    'BFGS' otherwise<br>
-    'CG'            Conjugate Gradient Method of Polak and Ribiere<br>
-                    :ref:`(see here) <optimize.minimize-cg>`<br>
-    'NELDER-MEAD'   Nelder Mead downhill simplex<br>
-                    :ref:`(see here) <optimize.minimize-neldermead>`<br>
-    'POWELL'        Powell's conjugate direction method<br>
-                    :ref:`(see here) <optimize.minimize-powell>`<br>
-    'BFGS'          Quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shannon<br>
-                    :ref:`(see here) <optimize.minimize-bfgs>`<br>
-    'NEWTON-CG'     Truncated Newton method<br>
-                    :ref:`(see here) <optimize.minimize-newtoncg>`<br>
-    'L-BFGS-B'      Limited Memory Algorithm for Bound Constrained Optimization<br>
-                    :ref:`(see here) <optimize.minimize-lbfgsb>`<br>
-    'TNC'           Truncated Newton method with limits<br>
-                    :ref:`(see here) <optimize.minimize-tnc>`<br>
-    'COBYLA'        Constrained Optimization BY Linear Approximation<br>
-                    :ref:`(see here) <optimize.minimize-cobyla>`<br>
-    'SLSQP'         Sequential Least Squares<br>
-                    :ref:`(see here) <optimize.minimize-slsqp>`<br>
-    'DOGLEG'        Dog-leg trust-region algorithm<br>
-                    :ref:`(see here) <optimize.minimize-dogleg>`<br>
-    'TRUST-NCG'     Newton conjugate gradient trust-region algorithm<br>
-                    :ref:`(see here) <optimize.minimize-trustncg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'TNC' | 'COBYLA' | 'SLSQP' | 'DOGLEG' | 'TRUST-NCG'<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the method name is case invariant.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None            Automatic selection of the method.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'SLSQP' when the problem has constraints<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'L-BFGS-B' when the problem has limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'BFGS' otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'CG'            Conjugate Gradient Method of Polak and Ribiere<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-cg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'NELDER-MEAD'   Nelder Mead downhill simplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-neldermead>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'POWELL'        Powell's conjugate direction method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-powell>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'BFGS'          Quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shannon<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-bfgs>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'NEWTON-CG'     Truncated Newton method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-newtoncg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'L-BFGS-B'      Limited Memory Algorithm for Bound Constrained Optimization<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-lbfgsb>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'TNC'           Truncated Newton method with limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-tnc>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'COBYLA'        Constrained Optimization BY Linear Approximation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-cobyla>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'SLSQP'         Sequential Least Squares<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-slsqp>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'DOGLEG'        Dog-leg trust-region algorithm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-dogleg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 'TRUST-NCG'     Newton conjugate gradient trust-region algorithm<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-trustncg>`<br>
 
 * gradient  :  bool or None or callable gradient( par )<br>
-    if True use gradient calculated from model. It is the default.<br>
-    if False/None dont use gradient (use numeric approximation in stead)<br>
-    if callable use the method as gradient<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True use gradient calculated from model. It is the default.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if False/None dont use gradient (use numeric approximation in stead)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if callable use the method as gradient<br>
 * hessp  :  callable hessp(x, p, *args) or None<br>
-    Function which computes the Hessian times an arbitrary vector, p.<br>
-    The hessian itself is always provided.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Function which computes the Hessian times an arbitrary vector, p.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The hessian itself is always provided.<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        MaxLikelihoodFitter :   errdis, scale, power<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
 
 
 <a name="fit"></a>
@@ -148,43 +148,43 @@ Return      parameters for the model fitted to the data array.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 * par0  :  array_like<br>
-    initial values of the function. Default from Model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial values of the function. Default from Model.<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values of keep are only valid for *this* fit<br>
-    See also `ScipyFitter( ..., keep=dict )`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values of keep are only valid for *this* fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See also `ScipyFitter( ..., keep=dict )`<br>
 * limits  :  None or list of 2 floats or list of 2 array_like<br>
-    None : no limits applied<br>
-    [lo,hi] : low and high limits for all values<br>
-    [la,ha] : low array and high array limits for the values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] : low array and high array limits for the values<br>
 * constraints  :  list of callables<br>
-    constraint functions cf. All are subject to cf(par) > 0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; constraint functions cf. All are subject to cf(par) > 0.<br>
 
 * maxiter  :  int<br>
-    max number of iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations<br>
 * tolerance  :  float<br>
-    stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance<br>
+&nbsp;&nbsp;&nbsp;&nbsp; stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance<br>
 * verbose  :  int<br>
-    0 : silent<br>
-    >0 : print output if iter % verbose == 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; >0 : print output if iter % verbose == 0<br>
 * plot  :  bool<br>
-    Plot the results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Plot the results<br>
 * callback  :  callable<br>
-    is called each iteration as<br>
-    `val = callback( val )`<br>
-    where `val` is the minimizable array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as<br>
+&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where `val` is the minimizable array<br>
 * options  :  dict<br>
-    options to be passed to the method<br>
+&nbsp;&nbsp;&nbsp;&nbsp; options to be passed to the method<br>
 
 <b>Raises</b>
 
-    ConvergenceError if it stops when the tolerance has not yet been reached.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ConvergenceError if it stops when the tolerance has not yet been reached.<br>
 
 
 <a name="collectVectors"></a>

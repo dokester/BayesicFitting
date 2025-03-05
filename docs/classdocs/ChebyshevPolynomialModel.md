@@ -9,43 +9,43 @@
 
 Chebyshev polynomial model of arbitrary degree.
 
- f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p_k * T_k( x )<br>
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
 The T( x ) are Chebyshev polynomials of the first kind which are defined
 recursively as
 
- T<sub>0</sub>( x ) = 1<br>
- T<sub>1</sub>( x ) = x<br>
- T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; T_0( x ) = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; T_1( x ) = x<br>
+&nbsp;&nbsp;&nbsp;&nbsp; T_n( x ) = 2 x T_{n-1}( x ) - T_{n-2}( x ) for n >= 2<br>
 
-These polynomials are orthogonal, when integrated over x in [-1,+1].
+These polynomials are orthogonal, only when x is in [-1,+1].
 
 It is a linear model.
 
 <b>Attributes</b>
 
 * degree  :  int<br>
-    degree of the polynomial<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
 
 <b>Attributes from Model</b>
 
-npchain, parameters, stdevs, xUnit, yUnit
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-npmax, fixed, parlist, mlist
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 <b>Examples</b>
 
     poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )
-    4
+4
 
 
 <a name="ChebyshevPolynomialModel"></a>
@@ -61,14 +61,14 @@ The number of parameters is ( degree + 1 )
 <b>Parameters</b>
 
 * degree  :  int<br>
-    the degree of the polynomial.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
 * copy  :  ChebyshevPolynomialModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -88,16 +88,16 @@ Returns the partials at the xdata value.
 
 The partials are calculated using the recurrence formula
 
- f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f_n( x ) = 2 * x * f_{n-1}( x ) - f_{n-2}( x )<br>
 
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model (ignored for linear models)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored for linear models)<br>
 * parlist  :  array_like<br>
-    list of indices of active parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
 
 
 <a name="baseDerivative"></a>
@@ -108,19 +108,19 @@ The partials are calculated using the recurrence formula
 
 Returns the derivative df/dx at the xdata value.
 
- df<sub>n</sub> = n * U<sub>n-1</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp; df_n = n * U_{n-1}<br>
 
 where
- U<sub>0</sub> = 1<br>
- U<sub>1</sub> = 2x<br>
- U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp; U_0 = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; U_1 = 2x<br>
+&nbsp;&nbsp;&nbsp;&nbsp; U_{n+1} = 2 * x * U_n - U_{n-1}<br>
 
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 
 
 <a name="baseName"></a>
@@ -145,7 +145,7 @@ The xUnit must be dimensionless.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

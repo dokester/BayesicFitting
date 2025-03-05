@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="RadialVelocityModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -26,7 +26,7 @@ It is a non-linear model.
 <b>Attributes</b>
 
 * keppler  :  Kepplers2ndLaw()<br>
-    to calculate the radius and true anomaly<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly<br>
 
 <b>Examples</b>
 
@@ -49,11 +49,11 @@ Number of parameters is 5
 <b>Parameters</b>
 
 * copy  :  RadialVelocityModel<br>
-    model to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
-    float   list of values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 
 
 <a name="copy"></a>
@@ -91,9 +91,9 @@ where v is the true anomaly
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -115,11 +115,11 @@ df/dp_4 = - p_1 * ( sin( v + p_4 ) + p_0 * sin( p_4 ) )
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -135,9 +135,9 @@ dfdx = - p_1 * sin( v + p_4 ) * dvdx
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="baseName"></a>
@@ -160,7 +160,7 @@ Return the unit of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

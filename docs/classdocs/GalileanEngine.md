@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="GalileanEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,7 +15,7 @@ on the gradient of the logLikelihood when the parameters enter the zone of logLl
 <b>Attributes</b>
 
 * size  :  0.5<br>
-    of the step<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the step<br>
 
 <b>Attributes from Engine</b>
 
@@ -35,13 +35,13 @@ Default Constructor.
 <b>Parameters</b>
 
 * walkers  :  WalkerList<br>
-    walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * copy  :  GalileanEngine<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * kwargs  :  for Engine<br>
-    "phantoms", "slow", "seed", "verbose"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"<br>
 
 
 <a name="copy"></a>
@@ -62,11 +62,11 @@ Execute the engine by diffusing the parameters.
 <b>Parameters</b>
 
 * kw  :  int<br>
-    index in walkerlist, of the walker<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index in walkerlist, of the walker<br>
 * lowLhood  :  float<br>
-    lower limit in logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 * append  :  bool<br>
-    set walker in place of append<br>
+&nbsp;&nbsp;&nbsp;&nbsp; set walker in place of append<br>
 
 <b>Returns</b>
 

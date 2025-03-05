@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Engine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,38 +12,37 @@ Engine defines common properties of all Engines.
 An Engine moves around a walker in a random way such that its likelood
 remain above the low-likelihood-limit.
 
-Author:    Do Kester.
-
 <b>Attributes</b>
 
 * walkers  :  WalkerList<br>
-    <br>list of walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    <br>error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * slow  :  int<br>
-    <br>If slow > 0, run this engine every slow-th iteration.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If slow > 0, run this engine every slow-th iteration.<br>
 * phantoms  :  PhantomCollection<br>
-    <br>Collection of valid walker positions collected during engine execution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Collection of valid walker positions collected during engine execution<br>
 * maxtrials  :  int<br>
-    <br>maximum number of trials for various operations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of trials for various operations<br>
 * rng  :  numpy.random.RandomState<br>
-    <br>random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 * verbose  :  int<br>
-    <br>if verbose > 4 report about the engines. (mostly for debugging)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if verbose > 4 report about the engines. (mostly for debugging)<br>
 
 * report  :  list of int (read only)<br>
-    <br>reports number of succes, accepted, rejected, failed calls. Plus the total.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; reports number of succes, accepted, rejected, failed calls. Plus the total.<br>
 * unitRange  :  array_like (read only)<br>
-    <br>present max size of the parameter cloud (in unitspace: [0,1])<br>
+&nbsp;&nbsp;&nbsp;&nbsp; present max size of the parameter cloud (in unitspace: [0,1])<br>
 * unitMin  :  array_like (read only)<br>
-    <br>present minimum values of the parameter cloud (in unitspace: [0,1])<br>
+&nbsp;&nbsp;&nbsp;&nbsp; present minimum values of the parameter cloud (in unitspace: [0,1])<br>
 
+Author       Do Kester.
 
 
 <a name="Engine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>Engine(</strong> walkers, errdis, slow=None, phantoms=None,
- seed=4213, verbose=0, copy=None )
+<strong>Engine(</strong> walkers, errdis, slow=None, phantoms=None, copy=None,
+ seed=4213, verbose=0 )
 </th></tr></thead></table>
 <p>
 
@@ -54,20 +53,20 @@ Only one PhantomCollection should be present for all Engines.
 <b>Parameters</b>
 
 * walkers  :  list of Walker<br>
-    <br>walkers to be diffused<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
-    <br>error distribution to be used<br>
+&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
 * slow  :  None or int > 0<br>
-    <br>Run this engine every slow-th iteration. None for all.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Run this engine every slow-th iteration. None for all.<br>
 * phantoms  :  None or PhantomCollection<br>
-    <br>Container for all valid walkers, that have been tried. But were not kept.<br>
-    <br>To calculate the spread of the parameters vs likelihood.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Container for all valid walkers, that have been tried. But were not kept.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; To calculate the spread of the parameters vs likelihood.<br>
 * seed  :  int<br>
-    <br>for random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; for random number generator<br>
 * verbose  :  int<br>
-    <br>report about the engines when verbose > 4<br>
+&nbsp;&nbsp;&nbsp;&nbsp; report about the engines when verbose > 4<br>
 * copy  :  Engine<br>
-    <br>engine to be copied 
+    engine to be copied 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -85,12 +84,11 @@ Return a copy of this engine.
 When a logL is found better that all the rest, try to update
 it using a fitter.
 
-<b>Parameters</b>
-
-* problem  :  Problem<br>
-    the problem at hand<br>
-* myFitter  :  None or Fitter<br>
-    None fetches LevenbergMarquardtFitter<br>
+Parameters
+problem : Problem
+&nbsp;&nbsp;&nbsp;&nbsp; the problem at hand<br>
+myFitter : None or Fitter
+&nbsp;&nbsp;&nbsp;&nbsp; None fetches LevenbergMarquardtFitter<br>
     a (non-linear) fitter
 
 <a name="setWalker"></a>
@@ -104,18 +102,18 @@ Update the walker with problem, allpars, LogL and logW.
 <b>Parameters</b>
 
 * walker  :  Sample<br>
-    sample to be updated<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sample to be updated<br>
 
 * kw  :  int<br>
-    index in walkerlist, of the walker to be replaced<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index in walkerlist, of the walker to be replaced<br>
 * problem  :  Problem<br>
-    the problem in the walker<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the problem in the walker<br>
 * allpars  :  array_like<br>
-    list of all parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters<br>
 * logL  :  float<br>
-    log Likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood<br>
 * walker  :  Walker or None<br>
-    Copy this walker or create new one<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Copy this walker or create new one<br>
 * fitIndex  :  array_like<br>
     (new) fitIndex
 
@@ -148,11 +146,11 @@ Return value in [0,1] for the selected parameter.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    the problem involved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the problem involved<br>
 * dval  :  float<br>
-    domain value for the selected parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; domain value for the selected parameter<br>
 * kpar  :  None or array_like<br>
-    selected parameter index, where kp is index in [parameters, hyperparams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; selected parameter index, where kp is index in [parameters, hyperparams]<br>
     None means all
 
 <a name="unit2Domain"></a>
@@ -166,11 +164,11 @@ Return domain value for the selected parameter.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    the problem involved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the problem involved<br>
 * uval  :  array_like<br>
-    unit value for the selected parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; unit value for the selected parameter<br>
 * kpar  :  None or array_like<br>
-    selected parameter indices, where kp is index in [parameters, hyperparams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; selected parameter indices, where kp is index in [parameters, hyperparams]<br>
     None means all.
 
 <a name="startJourney"></a>
@@ -272,7 +270,7 @@ Calculate unit minimum and maximum from the Phantoms
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    To extract the unit range for<br>
+&nbsp;&nbsp;&nbsp;&nbsp; To extract the unit range for<br>
 * lowLhood  :  float<br>
     low likelihood boundary
 
@@ -287,7 +285,7 @@ Calculate unit range and minimum from PhantomCollection
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    To extract the unit range for<br>
+&nbsp;&nbsp;&nbsp;&nbsp; To extract the unit range for<br>
 * lowLhood  :  float<br>
     low likelihood boundary
 
@@ -302,9 +300,9 @@ Execute the engine for difusing the parameters
 <b>Parameters</b>
 
 * kw  :  walker-id<br>
-    walker to diffuse<br>
+&nbsp;&nbsp;&nbsp;&nbsp; walker to diffuse<br>
 * lowLhood  :  float<br>
-    low limit on the loglikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low limit on the loglikelihood<br>
 
 <b>Returns</b>
 

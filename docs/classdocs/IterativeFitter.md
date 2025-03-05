@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="IterativeFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -14,30 +14,30 @@ Author:      Do Kester.
 <b>Attributes</b>
 
 * tolerance  :  float<br>
-    When absolute and relative steps in subsequent chisq steps are less than<br>
-    tolerance, the fitter stops. Default = 0.0001<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than<br>
+&nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.0001<br>
 * maxIter  :  int<br>
-    When the number of iterations gets larger than maxiter the fitter<br>
-    stops with a ConvergenceError Default = 1000 * nparams<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When the number of iterations gets larger than maxiter the fitter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; stops with a ConvergenceError Default = 1000 * nparams<br>
 * iter  :  int (read only)<br>
-    iteration counter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; iteration counter<br>
 * ntrans  :  int (read only)<br>
-    number of transforms<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of transforms<br>
 * verbose  :  int<br>
-    information per iteration.<br>
-    0 : silent<br>
-    1 : base information (default)<br>
-    2 : report about every 100th iteration<br>
-    3 : report about every ietration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; information per iteration.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : base information (default)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : report about every 100th iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 : report about every ietration<br>
 * tooLarge  :  int<br>
-    When the length parameter array is too large to make a Hessian.<br>
-    To avert OutOfMemory. Default = 100<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When the length parameter array is too large to make a Hessian.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; To avert OutOfMemory. Default = 100<br>
 
 * plotter  :  Plotter<br>
-    Iteration plotter class. Default = IterationPlotter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Iteration plotter class. Default = IterationPlotter<br>
 * plotIter  :  int<br>
-    Produce a plot for every plotIter-th iteration.<br>
-    Default = 0 (no plotting)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Produce a plot for every plotIter-th iteration.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Default = 0 (no plotting)<br>
 
 <b>Raises</b>
 
@@ -58,23 +58,23 @@ It does not work by itself.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 
 * tolerance  :  float<br>
-    When absolute and relative steps in subsequent chisq steps are less than<br>
-    tolerance, the fitter stops. Default = 0.01<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than<br>
+&nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.01<br>
 * maxIter  :  None or int<br>
-    When the number of iterations gets larger than maxiter the fitter<br>
-    stops with a ConvergenceError Default = 1000 * nparams<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When the number of iterations gets larger than maxiter the fitter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; stops with a ConvergenceError Default = 1000 * nparams<br>
 * verbose  :  int<br>
-    0 : silent<br>
-    1 : report result<br>
-    2 : report every 100th iteration<br>
-    3 : report every iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : report result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : report every 100th iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 : report every iteration<br>
 kwargs for [BaseFitter](./BaseFitter.md)
-    map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; map, keep, fixedScale<br>
 
 
 <a name="setParameters"></a>
@@ -89,7 +89,7 @@ A little superfluous: see {[link](./link.md) Model#setParameters}
 <b>Parameters</b>
 
 * params  :  array_like<br>
-    initial parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial parameters<br>
 
 
 <a name="doPlot"></a>
@@ -103,9 +103,9 @@ Plot intermediate result.
 <b>Parameters</b>
 
 * param  :  array_like<br>
-    of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the model<br>
 * force  :  bool<br>
-    do the plot<br>
+&nbsp;&nbsp;&nbsp;&nbsp; do the plot<br>
 
 
 <a name="fitprolog"></a>
@@ -124,18 +124,18 @@ Prolog for all iterative Fitters.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 
 <b>Returns</b>
 
 * fitIndex  :  ndarray of int<br>
-    Indices of the parameters that need fitting<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Indices of the parameters that need fitting<br>
 
 
 <a name="fit"></a>
@@ -151,13 +151,13 @@ It will calculate the hessian matrix and chisq.
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 * kwargs  : <br>
-    passed to the fitter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; passed to the fitter<br>
 
 <b>Raises</b>
 

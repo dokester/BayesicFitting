@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="NoiseScale"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -22,16 +22,16 @@ in NestedSampler
 <b>Attributes</b>
 
 * scale  :  float<br>
-    the value of the noiseScale.  Default: 1.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value of the noiseScale.  Default: 1.0<br>
 * stdev  :  float<br>
-    the standard deviation of the noise scale.  Default: None<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the standard deviation of the noise scale.  Default: None<br>
 * prior  :  Prior<br>
-    the prior for the noiseScale.  Default: JeffreysPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the prior for the noiseScale.  Default: JeffreysPrior<br>
 * fixed  :  boolean<br>
-    keep the noise scale fixed at the value given by scale.<br>
-    default: True<br>
+&nbsp;&nbsp;&nbsp;&nbsp; keep the noise scale fixed at the value given by scale.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default: True<br>
 * minimum  :  boolean<br>
-    automatic noise scaling with a minimum. default: False<br>
+&nbsp;&nbsp;&nbsp;&nbsp; automatic noise scaling with a minimum. default: False<br>
 
 
 <a name="NoiseScale"></a>
@@ -46,21 +46,21 @@ Constructor.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    float   value of the noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   value of the noise scale<br>
 * isFixed  :  bool<br>
-    True:   Consider the hyperparameter as fixed<br>
-    False:  Optimize the parameter too (when relevant)<br>
-            It might need a prior and/or limits to be set<br>
-            The default prior is JeffreysPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True:   Consider the hyperparameter as fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False:  Optimize the parameter too (when relevant)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It might need a prior and/or limits to be set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The default prior is JeffreysPrior<br>
 * prior  :  None or Prior<br>
-    None : no prior set<br>
-    Prior : the prior probability on scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no prior set<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Prior : the prior probability on scale<br>
 * limits  :  None or list of 2 floats<br>
-    None : no limits set<br>
-    [lo,hi] : limits to be passed to the Prior.<br>
-    If limits are set, the default for Prior is JeffreysPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits set<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : limits to be passed to the Prior.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If limits are set, the default for Prior is JeffreysPrior<br>
 * copy  :  NoiseScale<br>
-    NoiseScale to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; NoiseScale to copy<br>
 
 
 <a name="copy"></a>
@@ -81,7 +81,7 @@ Fit the noise scale with a minimum value.
 <b>Parameters</b>
 
 * scale  :  float<br>
-    the value of the noise scale. Default: noiseScale.scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value of the noise scale. Default: noiseScale.scale<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

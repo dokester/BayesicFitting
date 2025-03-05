@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -15,7 +15,7 @@ Author       Do Kester
 
 <b>Examples</b>
 
-    # assume x and y are Double1d data arrays.
+# assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = 3.5 * SIN( x + 0.4 )                    # make sine
     numpy.random.seed( 12345L )                 # Gaussian random number generator
@@ -32,7 +32,7 @@ Author       Do Kester
     yfit  = amfit.getResult( )                # fitted values
     yfit  = sine( x )                         # fitted values ( same as previous )
     yband = amfit.monteCarloError( )               # 1 sigma confidence region
-    # for diagnostics ( or just for fun )
+# for diagnostics ( or just for fun )
     amfit = AmoebaFitter( x, sine )
     amfit.setTemperature( 10 )                # set a temperature to escape local minima
     amfit.setVerbose( 10 )                    # report every 10th iteration
@@ -61,14 +61,14 @@ Create a new Amoeba class, providing inputs and model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        MaxLikelihoodFitter :   errdis, scale, power<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
 
 
 <a name="fit"></a>
@@ -87,48 +87,48 @@ When done, it also calculates the hessian matrix and chisq.
 <b>Parameters</b>
 
 * data  :  array_like<br>
-     the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data<br>
-    The weights are relative weights unless `scale` is set.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The weights are relative weights unless `scale` is set.<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 * par0  :  array_like<br>
-    initial values of teh parameters of the model<br>
-    default: from model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial values of teh parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default: from model<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values of keep are only valid for *this* fit<br>
-    See also `AmoebaFitter( ..., keep=dict )`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values of keep are only valid for *this* fit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See also `AmoebaFitter( ..., keep=dict )`<br>
 * size  :  float or array_like<br>
-    step size of the simplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; step size of the simplex<br>
 * seed  :  int<br>
-    for random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; for random number generator<br>
 * temp  :  float<br>
-    temperature of annealing (0 is no annealing)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; temperature of annealing (0 is no annealing)<br>
 * limits  :  None or list of 2 floats or list of 2 array_like<br>
-    None : no limits applied<br>
-    [lo,hi] : low and high limits for all values<br>
-    [la,ha] : low array and high array limits for the values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] : low array and high array limits for the values<br>
 * maxiter  :  int<br>
-    max number of iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations<br>
 * tolerance  :  float<br>
-    stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance<br>
+&nbsp;&nbsp;&nbsp;&nbsp; stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance<br>
 * cooling  :  float<br>
-    cooling factor when annealing<br>
+&nbsp;&nbsp;&nbsp;&nbsp; cooling factor when annealing<br>
 * steps  :  int<br>
-    number of cycles in each cooling step.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of cycles in each cooling step.<br>
 * verbose  :  int<br>
-    0 : silent<br>
-    1 : print results to output<br>
-    2 : print some info every 100 iterations<br>
-    3 : print some info all iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : print results to output<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : print some info every 100 iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 : print some info all iterations<br>
 * plot  :  bool<br>
-    plot the results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; plot the results.<br>
 * callback  :  callable<br>
-    is called each iteration as<br>
-    `val = callback( val )`<br>
-    where `val` is the minimizable array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as<br>
+&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where `val` is the minimizable array<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -142,7 +142,7 @@ When done, it also calculates the hessian matrix and chisq.
 * [<strong>testGradient(</strong> par, at, data, weights=None )](./MaxLikelihoodFitter.md#testGradient)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
@@ -152,7 +152,7 @@ When done, it also calculates the hessian matrix and chisq.
 * [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
 

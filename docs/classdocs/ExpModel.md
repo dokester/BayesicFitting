@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ExpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,10 +9,10 @@
 
 Exponential Model.
 
-    f( x:p ) = p_0 * exp( p_1 * x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * exp( p_1 * x )<br>
 
 where p_0 = amplitude
-      p_1 = slope<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_1 = slope<br>
 As always x = input.
 
 The parameters are initialized at {1.0, -1.0}. It is a non-linear model.
@@ -22,26 +22,26 @@ to Infinity very quickly.
 
 When decay is True the model changes into a decay model
 
-    f( x:p ) = p_0 * exp( - p_1 * x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * exp( - p_1 * x )<br>
 
 The parameters are initialized at {1.0, 1.0}.
 
 <b>Attributes</b>
 
-    sign : [-1,1]<br>
-    Whether decay is True or False.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sign : [-1,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Whether decay is True or False.<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 <b>Examples</b>
 
@@ -65,14 +65,14 @@ Number of parameters is 2.
 <b>Parameters</b>
 
 * decay  :  boolean<br>
-    changes sign of parameter[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; changes sign of parameter[1]<br>
 * copy  :  ExpModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -93,9 +93,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="basePartial"></a>
@@ -109,11 +109,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -127,9 +127,9 @@ Returns the derivative df/dx at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="baseName"></a>
@@ -161,7 +161,7 @@ Parameters: k    parameter number.
 * [<strong>partial(</strong> xdata, param=None, useNum=False )](./NonLinearModel.md#partial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -215,7 +215,7 @@ Parameters: k    parameter number.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -224,7 +224,7 @@ Parameters: k    parameter number.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

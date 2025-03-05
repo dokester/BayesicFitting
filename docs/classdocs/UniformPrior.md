@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="UniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,8 +13,8 @@ A uniform prior is a improper prior ( i.e. its integral is unbound ).
 Because of that it always needs limits, low and high, such that
 -Inf < low < high < +Inf.
 
-    Pr( x ) = 1 / ( high - low )    if low < x < high<br>
-              0                     elsewhere<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( high - low )    if low < x < high<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0                     elsewhere<br>
 
 domain2Unit: u = ( d - lo ) / range
 unit2Domain: d = u * range + lo
@@ -29,7 +29,7 @@ unit2Domain: d = u * range + lo
 <b>Attributes</b>
 
 * _range  :  float<br>
-    highlimit - lowlimit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; highlimit - lowlimit<br>
 
 <b>Attributes from Prior</b>
 
@@ -48,11 +48,11 @@ Constructor.
 <b>Parameters</b>
 
 * limits  :  None or [float,float]<br>
-    None    no limits are set<br>
-    2 floats    lowlimit and highlimit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit<br>
 * circular  :  bool or float<br>
-    True : circular with period from limits[0] to limits[1]<br>
-    float : period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True : circular with period from limits[0] to limits[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float : period of circularity<br>
 * prior  :  UniformPrior<br>
     to be copied
 
@@ -84,7 +84,7 @@ In Prior.limitedDomain2Unit the dval is transformed into a uval
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -100,7 +100,7 @@ In Prior.limitedUnit2Domain the uval is transformed into a dval
 <b>Parameters</b>
 
 * uval  :  float<br>
-    value within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
 
 <a name="result"></a>
@@ -114,7 +114,7 @@ Return a the result of the distribution function at x.
 <b>Parameters</b>
 
 * x  :  float or array_like<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="partialLog"></a>
@@ -128,7 +128,7 @@ Return partial derivative of log( Prior ) wrt parameter.
 <b>Parameters</b>
 
 * p  :  float or array_like<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="isBound"></a>

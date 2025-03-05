@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SineSplineDriftModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,12 +9,12 @@
 
 Sine with drifting frequency and splineslike amplitudes/phases.
 
-    nd = degree + 1<br>
-    nh = len( knots ) + order - 1<br>
-    xx = 2 &pi; x PM( x:p[:nd] )<br>
-    A  = SM( x:p[nd:nd+nh] )<br>
-    B  = SM( x:p[nd+nh:] )<br>
-    f( x:p ) = A cos( xx ) + B sin( xx )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; nd = degree + 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; nh = len( knots ) + order - 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xx = 2 &pi; x PM( x:p[:nd] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; A  = SM( x:p[nd:nd+nh] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; B  = SM( x:p[nd+nh:] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = A cos( xx ) + B sin( xx )<br>
 
 Where PM is a PolynomialModel and SM a SplinesModel
 
@@ -30,27 +30,27 @@ It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 <b>Attributes</b>
 
 * degree  :  int<br>
-    degree of the polynomial governing the frequency of the sine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial governing the frequency of the sine<br>
 * knots  :  array_like<br>
-    positions of the spline knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
 * order  :  int<br>
-    order of the spline. default: 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
 * cm  :  SplinesModel<br>
-    amplitude of the cosine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the cosine<br>
 * sm  :  SplinesModel<br>
-    amplitude of the sine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the sine<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SineSplineDriftModel"></a>
@@ -67,15 +67,15 @@ Number of parameters is 2 * ( len(knots) + order - 1 ) + degree + 1.
 <b>Parameters</b>
 
 * knots  :  array of float<br>
-    the knot positions of the amplitude splines<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the knot positions of the amplitude splines<br>
 * order  :  int<br>
-    order of the splines<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the splines<br>
 * degree  :  int<br>
-    degree of the drifting polynomial<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree of the drifting polynomial<br>
 * copy  :  SineSplineDriftModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  dict<br>
-    If not None raise AttributeError.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
 <b>Raises</b>
 
@@ -100,9 +100,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
 <a name="basePartial"></a>
@@ -116,11 +116,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 
 <a name="baseDerivative"></a>
@@ -134,9 +134,9 @@ Returns the derivative of f to x (df/dx) at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 
 
 <a name="getAmplitudes"></a>
@@ -150,9 +150,9 @@ Return the amplitudes if cosine and sine, resp.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 
 
 <a name="baseName"></a>
@@ -174,7 +174,7 @@ Return the name of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

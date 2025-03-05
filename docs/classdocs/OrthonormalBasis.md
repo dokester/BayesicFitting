@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="OrthonormalBasis"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,7 +12,7 @@ Helper class to construct a orthonormal basis from (random) vectors
 <b>Attributes</b>
 
 * basis  :  2darray<br>
-    array of orthonormal vectors<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of orthonormal vectors<br>
 
 Author       Do Kester.
 
@@ -38,7 +38,7 @@ from http://www.ecs.umass.edu/ece/ece313/Online_help/gram.pdf
 <b>Parameters</b>
 
 * vec  :  array_like<br>
-    vector to be orthonomalised to self.basis<br>
+&nbsp;&nbsp;&nbsp;&nbsp; vector to be orthonomalised to self.basis<br>
 * reset  :  bool<br>
     start a new basis.
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="HarmonicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -10,11 +10,11 @@
 Harmonic oscillator Model.
 
 For order = N and period = 1 
-    f( x:p ) = SUM_j ( p_k * cos( 2*pi*j*x ) + p_k+1 * sin( 2*pi*j*x ) )<br>
-                    j = 1:N; k = 0:2N:2.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = SUM_j ( p_k * cos( 2*pi*j*x ) + p_k+1 * sin( 2*pi*j*x ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j = 1:N; k = 0:2N:2.<br>
 
 Otherwise scale with period 
-    x /= period<br>
+&nbsp;&nbsp;&nbsp;&nbsp; x /= period<br>
 
 
 The number of parameters is 2 * order.
@@ -32,21 +32,21 @@ Author:      Do Kester
 <b>Attributes</b>
 
 * order  :  int<br>
-    the order of the harmonic<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the order of the harmonic<br>
 * period  :  float<br>
-    the length of the period of the fundamental<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the length of the period of the fundamental<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="HarmonicModel"></a>
@@ -62,16 +62,16 @@ Number of parameters is 2 * order.
 <b>Parameters</b>
 
 * order  :  int (>0)<br>
-    the number of overtones<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the number of overtones<br>
 * period  :  float<br>
-    length of the period of the fundamental. default 1.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; length of the period of the fundamental. default 1.0<br>
 * copy  :  HarmonicModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -92,11 +92,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    x values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; x values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model. (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model. (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices of active parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
 
 
 <a name="baseDerivative"></a>
@@ -110,9 +110,9 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model.<br>
 
 
 <a name="baseName"></a>
@@ -132,7 +132,7 @@ Return the name of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <a name="baseParameterUnit"></a>
@@ -146,7 +146,7 @@ Always : YUnit.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -156,7 +156,7 @@ Always : YUnit.
 * [<strong>baseResult(</strong> xdata, params )](./LinearModel.md#baseResult)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

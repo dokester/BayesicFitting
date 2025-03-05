@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="BSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -20,13 +20,12 @@ spanned by the knots.
 
 It is a linear model.
 
-| order | behaviour between knots | continuity at knots |
-|:-----:|:------------------------|:--------------------|
-|  0    | piecewise constant      | not continuous at all |
-|  1    | piecewise linear        | lines are continuous |
-|  2    | parabolic pieces        | 1st derivatives are also continuous |
-|  3    | cubic pieces            | 2nd derivatives are also continuous |
-| n>3   | n-th order polynomials  | (n-1)-th derivatives are also continuous |
+order   behaviour between knots     continuity at knots
+&nbsp;&nbsp; 0     piecewise constant          not continuous at all<br>
+&nbsp;&nbsp; 1     piecewise linear            lines are continuous<br>
+&nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous<br>
+&nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous<br>
+ n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
@@ -47,39 +46,39 @@ This model is NOT for (cubic) spline interpolation.
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
-    18
-    # or alternatively
+18
+* # or alternatively : <br>
     csm = BSplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
-    18
-    # or alternatively
+18
+* # or alternatively : <br>
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = BSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
-    18
+18
 
 <b>Attributes</b>
 
 * knots  :  array_like<br>
-    a array of arbitrarily positioned knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
-    order of the spline. Default 3 (cubic splines)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. Default 3 (cubic splines)<br>
 * eps  :  float<br>
-    small number to enable inclusion of endpoints. Default 0.0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; small number to enable inclusion of endpoints. Default 0.0.<br>
 
 
 <b>Attributes from Model</b>
 
-    parameters, stdevs, xUnit, yUnit, npchain<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, xUnit, yUnit, npchain<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -102,27 +101,27 @@ The number of parameters is ( length( knots ) + order - 1 )
 <b>Parameters</b>
 
 * knots  :  array_like<br>
-    a array of arbitrarily positioned knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
-    order of the spline. Default 3 (cubic splines)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. Default 3 (cubic splines)<br>
 * nrknots  :  int<br>
-    number of knots, equidistantly posited over xrange or [min,max]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of knots, equidistantly posited over xrange or [min,max]<br>
 * min  :  float<br>
-    minimum of the knot range<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum of the knot range<br>
 * max  :  float<br>
-    maximum of the knot range<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum of the knot range<br>
 * xrange  :  array_like<br>
-    range of the xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; range of the xdata<br>
 * copy  :  BSplinesModel<br>
-    model to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.<br>
 * fixed  :  dict<br>
-    If not None, raise AttributeError.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; If not None, raise AttributeError.<br>
 
 
 <b>Raises</b>
 
 * ValueError  :  At least either ('knots') or ('nrnkots', 'min', 'max') or<br>
-        ('nrknots', 'xrange') must be provided to define a valid model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ('nrknots', 'xrange') must be provided to define a valid model.<br>
 * AttributeErrr  :  When fixed is not None<br>
 
 <b>Notes</b>
@@ -149,11 +148,11 @@ The partials are the powers of x (input) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
 <b>Raises</b>
 
@@ -171,9 +170,9 @@ Return the derivative df/dx at each xdata (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model<br>
 
 
 <a name="baseName"></a>
@@ -203,7 +202,7 @@ Return the units of the parameter.
 * [<strong>baseResult(</strong> xdata, params )](./LinearModel.md#baseResult)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="BasicSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,14 +13,12 @@ The blobs have limited support. Each blob is a segment of polynomial order,
 between 2 knots. At the knots they are continuous (differentiable) upto order - 1.
 Similarly the edges of the blobs are smoothly connected to 0.
 
-| order | support | behaviour between knots | continuity at knots |
-|:-----:|:-------:|:------------------------|:--------------------|
-|  0  |  1  | piecewise constant     | not continuous at all |
-|  1  |  2  | piecewise linear       | lines are continuous (connected) |
-|  2  |  3  |  parabolic pieces      | 1st derivatives are also continuous |
-|  3  |  4  | cubic pieces           | 2nd derivatives are also continuous |
-| n>3 | n+1 | n-th order polynomials | (n-1)-th derivatives are also continuous |
-
+order   support behaviour between knots     continuity at knots
+&nbsp;&nbsp; 0        1    piecewise constant          not continuous at all<br>
+&nbsp;&nbsp; 1        2    piecewise linear            lines are continuous (connected)<br>
+&nbsp;&nbsp; 2        3    parabolic pieces            1st derivatives are also continuous<br>
+&nbsp;&nbsp; 3        4    cubic pieces                2nd derivatives are also continuous<br>
+ n>3      n+1   n-th order polynomials      (n-1)-th derivatives are also continuous
 
 The function result is the sum over all spline blobs, multiplied with
 the parameters, the amplitudes of the spline blobs.
@@ -48,36 +46,36 @@ This model is NOT for (cubic) spline interpolation.
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BasicSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
-    18
-    # or alternatively
+18
+* # or alternatively : <br>
     csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
-    18
-    # or alternatively
+18
+* # or alternatively : <br>
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
-    18
+18
 
 <b>Attributes</b>
 
 * knots  :  array_like<br>
-    positions of the spline knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
 * order  :  int<br>
-    order of the spline. default: 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
 
 <b>Attributes from Model</b>
 
-npchain, parameters, stdevs, xUnit, yUnit
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-npmax, fixed, parlist, mlist
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Limitations</b>
@@ -99,35 +97,35 @@ The number of parameters is ( length( knots ) + order - 1 )
 <b>Parameters</b>
 
 * knots  :  array_like<br>
-    a array of arbitrarily positioned knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
-    order of the spline. Default 3 (cubic splines)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. Default 3 (cubic splines)<br>
 * nrknots  :  int<br>
-    number of knots, equidistantly posited over xrange or [min,max]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of knots, equidistantly posited over xrange or [min,max]<br>
 * border  :  [0, 1, 2]<br>
-    defines what happens at the borders of the knot range.<br>
-    0 : Just like de Boors b-splines.<br>
-        the model is NOT defined outside the knot range.<br>
-    1 : periodic, make knot[0] the same as knot[-1]<br>
-    2 : easy borders. the model is slightly extensable.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; defines what happens at the borders of the knot range.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : Just like de Boors b-splines.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the model is NOT defined outside the knot range.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : periodic, make knot[0] the same as knot[-1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : easy borders. the model is slightly extensable.<br>
 * min  :  float<br>
-    minimum of the knot range<br>
+&nbsp;&nbsp;&nbsp;&nbsp; minimum of the knot range<br>
 * max  :  float<br>
-    maximum of the knot range<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum of the knot range<br>
 * xrange  :  array_like<br>
-    range of the xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; range of the xdata<br>
 * copy  :  BasicSplinesModel<br>
-    model to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 <b>Raises</b>
 
 * ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or<br>
-        (`nrknots`, `xrange`) must be provided to define a valid model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.<br>
 
 <b>Notes</b>
 
@@ -151,7 +149,7 @@ Make a sets of polynomial bases for each of the parameters
 <b>Return</b>
 
 * basis  :  3-d array-like<br>
-    parameters to the polynomials that make up the spline blobs<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs<br>
 
 
 <a name="makeDist"></a>
@@ -170,7 +168,7 @@ Make a sets of polynomial bases for each of the parameters
 <b>Return</b>
 
 * basis  :  3-d array-like<br>
-    parameters to the polynomials that make up the spline blobs<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs<br>
 
 
 <a name="normalizeBasis"></a>
@@ -200,16 +198,22 @@ At the edges it is less. Normalized to 1.0
 <b>Parameters</b>
 
 * knotix  :  int array<br>
-    knot indices involved in this spline blob<br>
+&nbsp;&nbsp;&nbsp;&nbsp; knot indices involved in this spline blob<br>
 * dist  :  array_like<br>
-    distances between knots<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distances between knots<br>
 * kpar  :  int<br>
-    index of parameter for which the spline-blob is constructed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of parameter for which the spline-blob is constructed<br>
 
 <b>Returns</b>
 
 * par  :  2-d array<br>
     sets of poly parameters.
+
+
+## more normalization
+if kpar > 0 
+&nbsp;&nbsp;&nbsp;&nbsp; mat[-1,-1] = 1.0             ## at right normalize to 1.0<br>
+
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -222,9 +226,9 @@ Returns the functional result at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
 
 
 <a name="basePartial"></a>
@@ -240,12 +244,19 @@ The partials are the powers of x (input) from 0 to degree.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices active parameters (or None for all)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
+
+
+for kb in range( np ) 
+&nbsp;&nbsp;&nbsp;&nbsp; bss = self.basis[:,:,kb]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; partial[:,kb] = self.basicBlob( xdata, bss, x2k, self.poly )<br>
+
+return partial
 
 <a name="makeKnotIndices"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -271,11 +282,11 @@ Calculates a spline blob for all of xdata
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the spline<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the spline<br>
 * basis  :  array_like<br>
-    splineParameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; splineParameters<br>
 * x2k  :  int_array<br>
-    pointing to the knot preceeding each xdata point<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pointing to the knot preceeding each xdata point<br>
 * poly  :  PolynomialModel<br>
     model to calculate the splines
 
@@ -290,9 +301,9 @@ Return the derivative df/dx at each xdata (=x).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters to the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model<br>
 
 
 <a name="baseName"></a>
@@ -321,13 +332,13 @@ Return the name of the parameter.
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

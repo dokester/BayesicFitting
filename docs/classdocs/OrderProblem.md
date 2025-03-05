@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="OrderProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -19,11 +19,11 @@ result method.
 <b>Attributes</b>
 
 * parameters  :  array_like<br>
-    to be optimized in TBD ways<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be optimized in TBD ways<br>
 * npbase  :  int<br>
-    number of params in the base model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of params in the base model<br>
 * ndim  :  int<br>
-    number of dimensions of input. (default : 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions of input. (default : 1)<br>
 
 * Author  :          Do Kester<br>
 
@@ -39,11 +39,11 @@ OrderProblem Constructor.
 <b>Parameters</b>
 
 * xdata  :  array_like of shape [np,ndim]<br>
-    the nodes to be visited<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the nodes to be visited<br>
 * weights  :  array_like<br>
-    weights on the arrival nodes<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights on the arrival nodes<br>
 * copy  :  BaseProblem<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>

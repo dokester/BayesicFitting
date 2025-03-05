@@ -9,7 +9,7 @@
 
 Tricube is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = ( 1 - |x|^3 )^3  if |x| < 1 else 0<br>
+ K( x ) = ( 1 - |x|<sup>3</sup> )<sup>3</sup>  if |x| < 1 else 0
 
 
 <a name="Tricube"></a>
@@ -21,7 +21,7 @@ Tricube is a Kernel function between [-1,1]; it is 0 elsewhere.
 Constructor.
 
 Using
-    integral = 81.0/70.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; integral = 81.0/70.0<br>
     fwhm = 1.18176021
 
 <a name="result"></a>

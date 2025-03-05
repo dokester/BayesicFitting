@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="HyperParameter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -21,14 +21,14 @@ in NestedSampler
 <b>Attributes</b>
 
 * hypar  :  float<br>
-    the value of the hyperparameter.  Default: 1.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value of the hyperparameter.  Default: 1.0<br>
 * stdev  :  float<br>
-    the standard deviation of the hyperparameter.  Default: None<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the standard deviation of the hyperparameter.  Default: None<br>
 * prior  :  Prior<br>
-    the prior for the hyperparameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the prior for the hyperparameter.<br>
 * isFixed  :  boolean<br>
-    keep the hyperparameter fixed at the value given by hypar.<br>
-    default: True<br>
+&nbsp;&nbsp;&nbsp;&nbsp; keep the hyperparameter fixed at the value given by hypar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default: True<br>
 
 
 <a name="HyperParameter"></a>
@@ -43,18 +43,18 @@ Constructor.
 <b>Parameters</b>
 
 * hypar  :  float<br>
-    value of the hyperparameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value of the hyperparameter<br>
 * isFixed  :  bool<br>
-    True:   Consider the hyperparameter as fixed<br>
-    False:  Optimize the parameter too (when relevant)<br>
-            It might need a prior and/or limits to be set<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True:   Consider the hyperparameter as fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False:  Optimize the parameter too (when relevant)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It might need a prior and/or limits to be set<br>
 * prior  :  None or Prior<br>
-    None : no prior is set if no limits are given else JeffreysPrior<br>
-    prior probability on the hyperparameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no prior is set if no limits are given else JeffreysPrior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; prior probability on the hyperparameter<br>
 * limits  :  None or list of 2 floats [lo,hi]<br>
-    low limit and high limit on hypar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low limit and high limit on hypar.<br>
 * copy  :  HyperParameter<br>
-    HyperParameter to copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; HyperParameter to copy<br>
 
 
 <a name="copy"></a>
@@ -85,7 +85,7 @@ Set the limits on the scale within the prior.
 <b>Parameters</b>
 
 * limits  :  list of 2 float<br>
-    the [low,high] limits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the [low,high] limits.<br>
 
 
 <a name="getLimits"></a>
@@ -114,7 +114,7 @@ a parameter for the prior distribution.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -129,7 +129,7 @@ between [0,1] for the prior distribution.
 <b>Parameters</b>
 
 * uval  :  float<br>
-    value within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
 
 <a name="partialDomain2Unit"></a>
@@ -143,6 +143,6 @@ Return a the derivate of the domain2Unit function to dval.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 

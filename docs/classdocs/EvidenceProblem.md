@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="EvidenceProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -36,15 +36,15 @@ Constructor for classic problems.
 <b>Parameters</b>
 
 * model  :  Model<br>
-    the model to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
 * xdata  :  array_like or None<br>
-    independent variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; independent variable<br>
 * ydata  :  array_like or None<br>
-    dependent variable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dependent variable<br>
 * weights  :  array_like or None<br>
-    weights associated with ydata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights associated with ydata<br>
 * copy  :  Problem<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>

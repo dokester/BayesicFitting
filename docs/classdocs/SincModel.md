@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -10,19 +10,19 @@
 Sinc Model.
 Also known as Cardinal Sine.
 
-    f( x:p ) = p_0 * sin( ( x - p_1 ) / p_2 ) / ( ( x - p_1 ) / p_2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * sin( ( x - p_1 ) / p_2 ) / ( ( x - p_1 ) / p_2 )<br>
 
 where
-    p_0 = amplitude<br>
-    p_1 = offset<br>
-    p_2 = width ( =Distance between first zero-crossings divided by 2 Pi. )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_1 = offset<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_2 = width ( =Distance between first zero-crossings divided by 2 Pi. )<br>
 As always x = input.
 
 The parameters are initialized at {1.0, 0.0, 1.0}.
 Parameter 2 ( width ) is always kept positive ( >=0 ).
 
 SincModel() is syntactic sugar for
-    KernelModel( kernel=Sinc() )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; KernelModel( kernel=Sinc() )<br>
 See [KernelModel](./KernelModel.md)
 
 <b>Examples</b>
@@ -40,15 +40,15 @@ none of its own
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SincModel"></a>
@@ -64,10 +64,10 @@ Number of parameters is 3.
 <b>Parameters</b>
 
 * copy  :  ArctanModel<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
-    float   list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
     Attribute fixed can only be set in the constructor.
 
 <a name="copy"></a>
@@ -99,7 +99,7 @@ Copy method.
 * [<strong>partial(</strong> xdata, param=None, useNum=False )](./NonLinearModel.md#partial)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 
@@ -153,7 +153,7 @@ Copy method.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -162,7 +162,7 @@ Copy method.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

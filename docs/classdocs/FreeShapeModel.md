@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="FreeShapeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -29,29 +29,29 @@ parameters are kept positive.
 <b>Attributes</b>
 
 * npix  :  int<br>
-    Number of pixels in result. Is also npar.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Number of pixels in result. Is also npar.<br>
 * xlo  :  float ( default 0 )<br>
-    Lowest value in xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Lowest value in xdata<br>
 * xhi  :  float ( default npix )<br>
-    Highest value in xdata<br>
-    xlo and xhi define the valid domain of the model.<br>
-    All input data must be: xlo <= xdata <= xhi<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Highest value in xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xlo and xhi define the valid domain of the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; All input data must be: xlo <= xdata <= xhi<br>
 * shape  :  Kernel<br>
-    shape of convolving function<br>
+&nbsp;&nbsp;&nbsp;&nbsp; shape of convolving function<br>
 * center  :  float (between 0..1)<br>
-    position of the center of shape with respect to the pixels<br>
+&nbsp;&nbsp;&nbsp;&nbsp; position of the center of shape with respect to the pixels<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 <b>Examples</b>
 
@@ -76,21 +76,21 @@ The number of parameters equals the number of pixels
 <b>Parameters</b>
 
 * npix  :  int<br>
-    number of pixels = npar<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of pixels = npar<br>
 * copy  :  FreeShapeModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * shape  :  None or Kernel<br>
-    None : Use Tophat(), convolved nconvolve times.<br>
-    Kernel : use the kernel as shape; nconvolve does not apply.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : Use Tophat(), convolved nconvolve times.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Kernel : use the kernel as shape; nconvolve does not apply.<br>
 * nconvolve  :  int<br>
-    number of (auto)convolutions on Tophat<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of (auto)convolutions on Tophat<br>
 * center  :  float (between 0..1)<br>
-    positions where the pixels are centered.<br>
-    default: 0.5 -> pixels run from k to k+1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positions where the pixels are centered.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; default: 0.5 -> pixels run from k to k+1<br>
 * xlo  :  float ( default 0.0 )<br>
-    lowest value in xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lowest value in xdata<br>
 * xhi  :  float ( default np )<br>
-    highest value in xdata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; highest value in xdata<br>
 
 
 <a name="copy"></a>
@@ -112,7 +112,7 @@ range = self.shape.range
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 
 <b>Raises</b>
 
@@ -129,9 +129,9 @@ Returns the result of the model function.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="basePartial"></a>
@@ -146,9 +146,9 @@ each of the parameters.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-     values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="TBCbaseDerivative"></a>
@@ -162,9 +162,9 @@ Returns the derivative of the model function df/dx.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    value at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
-     values for the parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
 
 <a name="baseName"></a>
@@ -183,7 +183,7 @@ Return the unit of the indicated parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    parameter number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -192,7 +192,7 @@ Return the unit of the indicated parameter.
 
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="PoissonErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,14 +11,14 @@ To calculate a Poisson likelihood.
 
 For one observation with n counts it holds
 
-    f( n,x ) = x^n / ( e^x * n! )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( n,x ) = x^n / ( e^x * n! )<br>
 
 where x is the expected counts
 
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
-    logL = &sum;( n * log( x ) - x - log( n! ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum;( n * log( x ) - x - log( n! ) )<br>
 
 Weights are not accepted in this ErrorDistribution; they are silently ignored.
 
@@ -37,7 +37,7 @@ Constructor.
 <b>Parameters</b>
 
 * copy  :  PoissonErrorDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 
 <a name="copy"></a>
@@ -69,9 +69,9 @@ Return the noise scale.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="logLikelihood_alt"></a>
@@ -85,9 +85,9 @@ Return the log( likelihood ) for a Poisson distribution.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 
 
 <a name="logLdata"></a>
@@ -103,11 +103,11 @@ logL = sum( logLdata )
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * mockdata  :  array_like<br>
-    as calculated by the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
 
 
 <a name="partialLogL_alt"></a>
@@ -121,9 +121,9 @@ Return the partial derivative of log( likelihood ) to the parameters.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * fitIndex  :  array_like<br>
     indices of parameters to be fitted
 
@@ -138,11 +138,11 @@ Return the partial derivative of log( likelihood ) to the parameters.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 * mockdata  :  array_like<br>
     as calculated by the model
 

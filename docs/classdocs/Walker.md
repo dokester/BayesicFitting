@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Walker"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -12,27 +12,27 @@ Walker is member of the cloud of points used in NestedSampler.
 <b>Attributes</b>
 
 * id  :  int<br>
-    identification number<br>
+&nbsp;&nbsp;&nbsp;&nbsp; identification number<br>
 * parent  :  int<br>
-    id of the parent (-1 for Adam/Eve)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of the parent (-1 for Adam/Eve)<br>
 * start  :  int<br>
-    iteration in which the walker is constructed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; iteration in which the walker is constructed<br>
 * step  :  int<br>
-    number of randomization steps since copy<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of randomization steps since copy<br>
 * problem  :  Problem<br>
-    the problem being addressed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the problem being addressed<br>
 * logL  :  float<br>
-    log Likelihood = log Prob( data | params )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood = log Prob( data | params )<br>
 * logPrior  :  float<br>
-    log Prior for the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Prior for the model<br>
 * allpars  :  array_like<br>
-    list of parameters and hyperparameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of parameters and hyperparameters<br>
 * fitIndex  :  array_like<br>
-    list of (super)parameters to be fitted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of (super)parameters to be fitted.<br>
 * parameters  :  array_like (read only)<br>
-    parameters (of the model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters (of the model)<br>
 * hypars  :  array_like (read only)<br>
-    list of hyper parameters (of the error distribution)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of hyper parameters (of the error distribution)<br>
 
 Author       Do Kester
 
@@ -50,22 +50,22 @@ Either errdis or copy is obligatory.
 <b>Parameters</b>
 
 * wid  :  int<br>
-    id of the walker<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of the walker<br>
 * problem  :  Problem<br>
-    the problem being used. Parameters are copied from its model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the problem being used. Parameters are copied from its model.<br>
 * allpars  :  array_like<br>
-    array of parameters and hyperparameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of parameters and hyperparameters<br>
 * fitIndex  :  None or array_like<br>
-    indices of allpars to be fitted<br>
-    None is all<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of allpars to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None is all<br>
 * logL  :  float<br>
-    log Likelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood<br>
 * parent  :  int<br>
-    id of the parent (-1 for Adam/Eve)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; id of the parent (-1 for Adam/Eve)<br>
 * start  :  int<br>
-    iteration in which the walker is constructed<br>
+&nbsp;&nbsp;&nbsp;&nbsp; iteration in which the walker is constructed<br>
 * copy  :  Walker<br>
-    the walker to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the walker to be copied<br>
 
 
 <a name="copy"></a>

@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SalesmanProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,7 +13,7 @@ The parameters give the order in which the nodes are visited.
 
 The result is a list of distances.
 
-    [dist( x[p[k-1]], x[p[k]] ) for k in range( len( p ) )]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [dist( x[p[k-1]], x[p[k]] ) for k in range( len( p ) )]<br>
 
 The number of parameters is equal to the length of the xdata array
 The parameters are initialized at [k for k in range( npars )]
@@ -41,25 +41,25 @@ Traveling Salesman problem.
 <b>Parameters</b>
 
 * xdata  :  array_like of shape [np,ndim]<br>
-    the nodes to be visited<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the nodes to be visited<br>
 * weights  :  array_like<br>
-    weights on the arrival nodes<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights on the arrival nodes<br>
 * distance  :  str or callable<br>
-    to calculate the distance between point1 and point2<br>
-    "manh"   : Manhattan distance (1 norm) (2 or more dimensions)<br>
-    "euclid" : Euclidic (2 norm) (2 or more dimensions) <br>
-    "spher"  : spherical, distance over sphere (2 dimensions only) <br>
-    "table"  : tabulated distance values<br>
-    callable of the form callable( xdata, pars )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to calculate the distance between point1 and point2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "manh"   : Manhattan distance (1 norm) (2 or more dimensions)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; "euclid" : Euclidic (2 norm) (2 or more dimensions) <br>
+&nbsp;&nbsp;&nbsp;&nbsp; "spher"  : spherical, distance over sphere (2 dimensions only) <br>
+&nbsp;&nbsp;&nbsp;&nbsp; "table"  : tabulated distance values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; callable of the form callable( xdata, pars )<br>
 * scale  :  None or float<br>
-    scale all distances by this number.<br>
-    None : take minimum distance as scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; scale all distances by this number.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : take minimum distance as scale<br>
 * table  :  arraylike or None<br>
-    table of all distances, Only when distance is "tabulated"<br>
+&nbsp;&nbsp;&nbsp;&nbsp; table of all distances, Only when distance is "tabulated"<br>
 * oneway  :  bool<br>
-    Don't close the loop; cut at position 0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Don't close the loop; cut at position 0.<br>
 * copy  :  SalesmanProblem<br>
-    to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
 
 <a name="copy"></a>
@@ -89,12 +89,12 @@ given by the parameters (params), multiplied by the weight at the
 starting node (if present), divided by the scale
 
 Each result is 
-    res[k] = dis[k] * weight[params[k]] / scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; res[k] = dis[k] * weight[params[k]] / scale<br>
 
 <b>Parameters</b>
 
 * params  :  array_like<br>
-    values for the parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 <b>Returns</b>
 
@@ -110,14 +110,14 @@ An array of distances
 Use Manhattan distances (1-norm)
 
 Each distance is 
-    dis[k] = SUM_i ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = SUM_i ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )<br>
 
 <b>Parameters</b>
 
 * xdata  :  array-like of shape (ndata,ndim) <br>
-    positional info in several dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positional info in several dimensions<br>
 * pars  :  list of indices<br>
-    designating the order of the nodess<br>
+&nbsp;&nbsp;&nbsp;&nbsp; designating the order of the nodess<br>
 * roll  :  int<br>
     number of positions to roll 
 
@@ -130,14 +130,14 @@ Each distance is
 Use Euclidic distances (2-norm)
 
 Each distance is 
-    dis[k] = sqrt( SUM_i ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )^2 ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = sqrt( SUM_i ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )^2 ) )<br>
 
 <b>Parameters</b>
 
 * xdata  :  array-like of shape (ndata,ndim) <br>
-    positional info in several dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positional info in several dimensions<br>
 * pars  :  list of indices<br>
-    designating the order of the nodes<br>
+&nbsp;&nbsp;&nbsp;&nbsp; designating the order of the nodes<br>
 * roll  :  int<br>
     number of positions to roll 
 
@@ -158,9 +158,9 @@ The results are in radian.
 <b>Parameters</b>
 
 * xdata  :  array-like of shape (ndata,2) <br>
-    longitude, latitude info<br>
+&nbsp;&nbsp;&nbsp;&nbsp; longitude, latitude info<br>
 * pars  :  list of indices<br>
-    designating the order of the nodes<br>
+&nbsp;&nbsp;&nbsp;&nbsp; designating the order of the nodes<br>
 * roll  :  int<br>
     number of positions to roll 
 
@@ -173,14 +173,14 @@ The results are in radian.
 Use tabulated distances from self.table
 
 Each distance is 
-    dis[k] = table[ pars[k], pars[k+roll] ]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = table[ pars[k], pars[k+roll] ]<br>
 
 <b>Parameters</b>
 
 * xdata  :  array-like of shape (ndata,ndim) <br>
-    positional info in several dimensions<br>
+&nbsp;&nbsp;&nbsp;&nbsp; positional info in several dimensions<br>
 * pars  :  list of indices<br>
-    designating the order of the nodess<br>
+&nbsp;&nbsp;&nbsp;&nbsp; designating the order of the nodess<br>
 * roll  :  int<br>
     number of positions to roll 
 
@@ -198,7 +198,7 @@ ndata = len( self.xdata[:,0] )
 pars = numpy.arange( ndata, dtype=int )
 md = self.distance( self.xdata, pars ).min()
 for roll in range( 2, ndata ) 
-    md = self.distance( self.xdata, pars, roll=roll ).min( initial=md )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; md = self.distance( self.xdata, pars, roll=roll ).min( initial=md )<br>
 
 return md
 
@@ -211,7 +211,7 @@ baseName( self )
 
 
 return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
-            ( self.ndim, self.npars, self.disname ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( self.ndim, self.npars, self.disname ) )<br>
 
 
 

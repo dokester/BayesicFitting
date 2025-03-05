@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,12 +11,12 @@ Sine with fixed frequency.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-    f( x:p ) = p_0 cos( 2 &pi; &omega; x ) + p_1 sin( 2 &pi; &omega; x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 cos( 2 &pi; &omega; x ) + p_1 sin( 2 &pi; &omega; x )<br>
 
 where
-    p_0 = amplitude of cosine<br>
-    p_1 = amplitude of sine<br>
-    &omega; is the fixed frequency of the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude of cosine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p_1 = amplitude of sine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &omega; is the fixed frequency of the model.<br>
 
 It is a linear model with 2 parameters.
 
@@ -27,24 +27,24 @@ It is a linear model with 2 parameters.
 <b>Attributes</b>
 
 * frequency  :  float<br>
-    the (fixed) frequency of the sinusoidal.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) frequency of the sinusoidal.<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 <b>Alternate</b>
 
 This model is equivalent to
-    SineModel( fixed={0:frequency} )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; SineModel( fixed={0:frequency} )<br>
 
 
 <a name="SineAmpModel"></a>
@@ -60,14 +60,14 @@ Number of parameters is 2.
 <b>Parameters</b>
 
 * frequency  :  float<br>
-    the frequency<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the frequency<br>
 * copy  :  SineAmpModel<br>
-    model to be copied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
-    int         index of parameter to fix permanently.<br>
-    float|Model values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.<br>
-    See: [FixedModel](./FixedModel.md)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
 
 <a name="copy"></a>
@@ -88,11 +88,11 @@ Returns the partials at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model (ignored in LinearModels)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)<br>
 * parlist  :  array_like<br>
-    list of indices of active parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
 
 
 <a name="baseDerivative"></a>
@@ -106,9 +106,9 @@ Returns the derivative of f to x (df/dx) at the input value.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 
 
 <a name="baseName"></a>
@@ -130,7 +130,7 @@ Return the name of a parameter.
 <b>Parameters</b>
 
 * k  :  int<br>
-    the kth parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -196,7 +196,7 @@ Return the name of a parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -205,7 +205,7 @@ Return the name of a parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

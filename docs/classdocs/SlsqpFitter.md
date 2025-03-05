@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="SlsqpFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -10,7 +10,7 @@
 Sequential Least Squares
 
 Syntactic sugar for
-    ScipyFitter( ..., method='SLSQP', ... )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='SLSQP', ... )<br>
 
 See [ScipyFitter](./ScipyFitter.md)
 
@@ -27,19 +27,19 @@ Create a class, providing inputs and model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    a model function to be fitted (linear or nonlinear)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)<br>
 * gradient  :  bool or None or callable gradient( par )<br>
-    if True use gradient calculated from model. It is the default.<br>
-    if False/None dont use gradient (use numeric approximation in stead)<br>
-    if callable use the method as gradient<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True use gradient calculated from model. It is the default.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if False/None dont use gradient (use numeric approximation in stead)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if callable use the method as gradient<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        ScipyFitter:            gradient, hessp<br>
-        MaxLikelihoodFitter :   errdis, scale, power<br>
-        IterativeFitter :       maxIter, tolerance, verbose<br>
-        BaseFitter :            map, keep, fixedScale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter:            gradient, hessp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

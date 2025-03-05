@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="DistanceCostFunction"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -11,7 +11,7 @@ To calculate a distance based cost function
 
 For one observation with n counts it holds
 
-    f( d ) = exp( -SUM( d / s ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( d ) = exp( -SUM( d / s ) )<br>
 
 where d are the distances and s is the scale
 
@@ -32,7 +32,7 @@ Constructor.
 <b>Parameters</b>
 
 * copy  :  DistanceCostFunction<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 
 <a name="copy"></a>
@@ -62,9 +62,9 @@ Return the negative sum of the distances.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 
 
 <a name="logLdata"></a>
@@ -78,9 +78,9 @@ Return the individual distances (multiplied by the weights).
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    list of all parameters in the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
 
 
 <a name="partialLogL"></a>
@@ -94,9 +94,9 @@ Does not work for this class
 <b>Parameters</b>
 
 * model  :  Model<br>
-    model to calculate mock data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to calculate mock data<br>
 * param  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 * fitIndex  :  array_like<br>
     indices of the params to be fitted
 

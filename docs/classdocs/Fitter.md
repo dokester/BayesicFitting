@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Fitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -34,7 +34,7 @@ is the variant for linear models, ie. models linear in its parameters.
 
 1. The Fitter does not work with limits.
 2. The calculation of the evidence is an Gaussian approximation which is
-   only exact for linear models with a fixed scale.<br>
+&nbsp;&nbsp;&nbsp; only exact for linear models with a fixed scale.<br>
 
 Author  Do Kester
 
@@ -54,19 +54,19 @@ input vector is needed a new object should be created.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    array of independent input values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
-    the model function to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
 * map  :  bool (False)<br>
-    When true, the xdata should be interpreted as a map.<br>
-    The fitting is done on the pixel indices of the map,<br>
-    using ImageAssistant<br>
+&nbsp;&nbsp;&nbsp;&nbsp; When true, the xdata should be interpreted as a map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The fitting is done on the pixel indices of the map,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; using ImageAssistant<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values of keep will be used by the Fitter as long as the Fitter exists.<br>
-    See also `fit( ..., keep=dict )`<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values of keep will be used by the Fitter as long as the Fitter exists.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; See also `fit( ..., keep=dict )`<br>
 * fixedScale  :  float<br>
-    the fixed noise scale<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the fixed noise scale<br>
 
 
 <a name="fit"></a>
@@ -79,31 +79,31 @@ Return model parameters fitted to the data, including weights.
 
 For Linear models the matrix equation
 
-    H * p = &beta;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; H * p = &beta;<br>
 
 is solved for p. H is the Hessian matrix ( D * w * D^T )
 and &beta; is the inproduct of the data with the D, design matrix.
 
-    &beta; = y * w * D^T<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D^T<br>
 
 <b>Parameters</b>
 
 * ydata  :  array_like<br>
-    the data vector to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
-    weights pertaining to the data ( = 1.0 / sigma^2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data ( = 1.0 / sigma^2 )<br>
 * accuracy  :  float or array_like<br>
-    accuracy of (individual) data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 * keep  :  dict of {int:float}<br>
-    dictionary of indices (int) to be kept at a fixed value (float)<br>
-    The values will override those at initialization.<br>
-    They are only used in this call of fit.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 * plot  :  bool<br>
-    Plot the results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Plot the results<br>
 
 <b>Raises</b>
 
-    ValueError when ydata or weights contain a NaN<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ValueError when ydata or weights contain a NaN<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

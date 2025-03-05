@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -16,24 +16,24 @@ Author       Do Kester.
 <b>Attributes</b>
 
 * hyperpar  :  HyperParameter<br>
-    hyperparameter for the error distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; hyperparameter for the error distribution<br>
 * deltaP  :  float<br>
-    delta for calculating numerical derivatives<br>
+&nbsp;&nbsp;&nbsp;&nbsp; delta for calculating numerical derivatives<br>
 * ncalls  :  int<br>
-    number of calls to the logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of calls to the logLikelihood<br>
 * nparts  :  int<br>
-    number of calls to the partial of the logLikelihood<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of calls to the partial of the logLikelihood<br>
 * sumweight  :  float<br>
-    sum over the weights or ndata<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sum over the weights or ndata<br>
 * ndata  :  int<br>
-    number of points in data<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of points in data<br>
 * hypar  :  [float]<br>
-    list of values for the hyperparameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of values for the hyperparameters<br>
 * nphypar  :  int<br>
-    number of hyper parameters in this error distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of hyper parameters in this error distribution<br>
 * constrain  :  None or callable<br>
-    None:     Use logLikelihood as is<br>
-    callable: logL = func( logL, problem, allpars, lowLhood )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None:     Use logLikelihood as is<br>
+&nbsp;&nbsp;&nbsp;&nbsp; callable: logL = func( logL, problem, allpars, lowLhood )<br>
               returning a (modified) value of the logLikelihood.
 
 <a name="ErrorDistribution"></a>
@@ -47,13 +47,13 @@ Constructor.
 <b>Parameters</b>
 
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
-    float   list of values for the fixed parameters.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
 * constrain  :  None or callable<br>
-    function as: func( logL, problem, allpars )<br>
-    returning a (modified) value of the logLikelihood.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; function as: func( logL, problem, allpars )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; returning a (modified) value of the logLikelihood.<br>
 * copy  :  ErrorDistribution<br>
-    distribution to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
 <b>Raise</b>
 
@@ -80,9 +80,9 @@ Return the noise scale.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="getResiduals"></a>
@@ -96,9 +96,9 @@ Return residuals: ydata - model.result
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="getChisq"></a>
@@ -116,9 +116,9 @@ Sum over the (weighted) squared residuals
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    None take parameters from problem.model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
     list of all parameters in the problem
 
 <a name="toSigma"></a>
@@ -132,7 +132,7 @@ Return sigma, the squareroot of the variance.
 <b>Parameter</b>
 
 * scale  :  float<br>
-    the scale of this distribution.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the scale of this distribution.<br>
 
 Return default value : scale
 
@@ -165,7 +165,7 @@ Keeps (hyper)parameters fixed at the provided values.
 <b>Parameters</b>
 
 * fixed  :  dictionary of {int:float}<br>
-    int     list if parameters to fix permanently. Default None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
     float   list of values for the fixed parameters.
 
 <a name="setPriors"></a>
@@ -192,9 +192,9 @@ Set limits on the hyper parameter(s).
 <b>Parameters</b>
 
 * limits  :  [low,high]<br>
-    low : float or array_like<br>
-        low limits<br>
-    high : float or array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low : float or array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; low limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high : float or array_like<br>
         high limits
 
 <a name="domain2Unit"></a>
@@ -207,7 +207,7 @@ Return value in [0,1] for the selected parameter.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    hyper parameter value in domain<br>
+&nbsp;&nbsp;&nbsp;&nbsp; hyper parameter value in domain<br>
 * ks  :  int<br>
     selecting index
 
@@ -221,7 +221,7 @@ Return domain value for the selected parameter.
 <b>Parameters</b>
 
 * uval  :  float<br>
-    unit value of hyper parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; unit value of hyper parameter<br>
 * ks  :  int<br>
     selecting index
 
@@ -236,7 +236,7 @@ Return the constrained log( likelihood ).
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
     parameters of the problem
 
@@ -251,7 +251,7 @@ Return the log( likelihood ).
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
     parameters of the problem
 
@@ -266,11 +266,11 @@ Return the partial derivative of log( likelihood ) to the parameters.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="partialLogL_alt"></a>
@@ -286,11 +286,11 @@ Alternative calculation.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="numPartialLogL"></a>
@@ -304,11 +304,11 @@ Return d log( likelihood ) / dp, numerically calculated.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
-    parameters of the problem<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
 * fitIndex  :  array_like<br>
-    indices of parameters to be fitted<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
 
 
 <a name="updateLogL"></a>
@@ -326,11 +326,11 @@ For now it just refers to logLikelihood() itself.
 <b>Parameters</b>
 
 * problem  :  Problem<br>
-    to be solved<br>
+&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * param  :  array_like<br>
-    parameters of the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 * parval  :  dict of {int : float}<br>
-    int index of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int index of a parameter<br>
     float (old) value of the parameter
 
 <a name="setResult"></a>

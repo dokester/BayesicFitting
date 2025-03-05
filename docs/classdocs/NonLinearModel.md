@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="NonLinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -16,21 +16,21 @@ It contains provisions for mixed models. (TBC)
 <b>Attributes</b>
 
 * _linear  :  list of int<br>
-     list of indices for the linear parameters (in case of a mixed model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list of indices for the linear parameters (in case of a mixed model)<br>
 
 <b>Attributes from Model</b>
 
-    parameters, stdevs, npchain<br>
-    _next, _head, _operation<br>
-    xUnit, yUnit (relegated to model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain<br>
+&nbsp;&nbsp;&nbsp;&nbsp; _next, _head, _operation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xUnit, yUnit (relegated to model)<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -46,15 +46,15 @@ Parent class for all non linear models.
 <b>Parameters</b>
 
 * nparams  :  int<br>
-    number of parameters in the model<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of parameters in the model<br>
 * ndim  :  int<br>
-    dimensionality of the input. Default 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dimensionality of the input. Default 1<br>
 * copy  :  NonLinearModel<br>
-    model to be copied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.<br>
 * kwargs  :  dict<br>
-    Possibly includes keywords from<br>
-        [FixedModel](./FixedModel.md) :   fixed, names<br>
-        [BaseModel](./BaseModel.md) :    posIndex, nonZero<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [FixedModel](./FixedModel.md) :   fixed, names<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [BaseModel](./BaseModel.md) :    posIndex, nonZero<br>
 
 
 <a name="setMixedModel"></a>
@@ -71,7 +71,7 @@ Reset with SetMixedModel( null );
 <b>Parameters</b>
 
 * lindex  :  list of int<br>
-    indices of the linear parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; indices of the linear parameters<br>
 
 
 <a name="isMixed"></a>
@@ -99,11 +99,11 @@ Return the partial derivatives for the model.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    the value at which to calculate the partials<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value at which to calculate the partials<br>
 * param  :  array_like<br>
-    the parameters of the model. Default the self.parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameters of the model. Default the self.parameters<br>
 * useNum  :  boolean<br>
-    if True use numeric partial derivatives. Default False<br>
+&nbsp;&nbsp;&nbsp;&nbsp; if True use numeric partial derivatives. Default False<br>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

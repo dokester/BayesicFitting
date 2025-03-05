@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="AnnealingAmoeba"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -37,9 +37,9 @@ with a factor set by cooling=0.95, by default.
 
 Iteration continues until the relative difference between the low and high
 points within the simplex is less than reltol
-    |yhi - ylo| / ( |yhi| + |ylo| ) < reltol<br>
+&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| / ( |yhi| + |ylo| ) < reltol<br>
 and/or the absolute difference is less than abstol
-    |yhi - ylo| < abstol.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| < abstol.<br>
 
 AnnealingAmoeba can be used with limits set to one or more of the input values.
 
@@ -50,54 +50,54 @@ Author       Do Kester
 <b>Attributes</b>
 
 * func  :  callable<br>
-    function to be minimized of form : y = func( x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; function to be minimized of form : y = func( x )<br>
 * lolimits  :  array_like<br>
-    lower limits on x. -inf is allowed to indicate no lower limit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limits on x. -inf is allowed to indicate no lower limit<br>
 * hilimits  :  array_like<br>
-    upper limits on x. +inf is allowed to indicate no upper limit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; upper limits on x. +inf is allowed to indicate no upper limit<br>
 * fopt  :  float<br>
-    the best of the above values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the best of the above values<br>
 * xopt  :  ndarray<br>
-    copy of the simplex point that has the best value (nx)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; copy of the simplex point that has the best value (nx)<br>
 
 * rng  :  RandomState<br>
-    random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
 * seed  :  int<br>
-    seed of rng<br>
+&nbsp;&nbsp;&nbsp;&nbsp; seed of rng<br>
 
 * reltol  :  float<br>
-    Relative tolerance. Program stops when ( |yhi-ylo| / (|yhi|+|ylo|) ) < reltol<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Relative tolerance. Program stops when ( |yhi-ylo| / (|yhi|+|ylo|) ) < reltol<br>
 * abstol  :  float<br>
-    Absolute tolerance. Program stops when |yhi-ylo| < abstol<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Absolute tolerance. Program stops when |yhi-ylo| < abstol<br>
 * maxiter  :  int<br>
-    maximum number of iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; maximum number of iterations<br>
 * iter  :  int (read only)<br>
-    iteration counter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; iteration counter<br>
 * ncalls  :  int (read only)<br>
-    numbers of calls to func<br>
+&nbsp;&nbsp;&nbsp;&nbsp; numbers of calls to func<br>
 
 * temp  :  float<br>
-    annealing temperature (default: 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; annealing temperature (default: 0)<br>
 * cooling  :  float (non existent when temp=0)<br>
-    cooling factor (default: 0.95)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; cooling factor (default: 0.95)<br>
 * steps  :  int (non existent when temp=0)<br>
-    number of steps per cooling cycle (default: 10)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of steps per cooling cycle (default: 10)<br>
 
 * verbose  :  int<br>
-    0  : silent<br>
-    1 : print results to output<br>
-    2 : print some info every 100 iterations and plot results<br>
-    3 : print some info every iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0  : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : print results to output<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : print some info every 100 iterations and plot results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 : print some info every iteration<br>
 * callback  :  callable<br>
-    function to be called every iteration of form :<br>
-    xopt = callback( xopt )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; function to be called every iteration of form :<br>
+&nbsp;&nbsp;&nbsp;&nbsp; xopt = callback( xopt )<br>
 
 * simplex  :  ndarray<br>
-    the simplex has shape = (nx+1, nx); nx is the size of x<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the simplex has shape = (nx+1, nx); nx is the size of x<br>
 * values  :  ndarray<br>
-    the values of the function attained at the simplex points (nx+1).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the values of the function attained at the simplex points (nx+1).<br>
 * sum  :  ndarray<br>
-    sum over the corners of the simplex (nx)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; sum over the corners of the simplex (nx)<br>
 
 
 <a name="AnnealingAmoeba"></a>
@@ -113,46 +113,46 @@ Create a new AnnealingAmoeba class to minimize the function
 <b>Parameters</b>
 
 * func  :  callable<br>
-    the function to be minimized<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the function to be minimized<br>
 * xini  :  array_like<br>
-    initial values of the function<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial values of the function<br>
 * size  :  float or array_like<br>
-    step size of the simplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; step size of the simplex<br>
 * seed  :  int<br>
-    for random number generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp; for random number generator<br>
 * temp  :  float<br>
-    temperature of annealing (0 is no annealing)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; temperature of annealing (0 is no annealing)<br>
 * limits  :  None or list of 2 floats or list of 2 array_like<br>
-    None : no limits applied<br>
-    [lo,hi] : low and high limits for all values<br>
-    [la,ha] : low array and high array limits for the values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] : low array and high array limits for the values<br>
 * maxiter  :  int<br>
-    max number of iterations<br>
+&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations<br>
 * reltol  :  float, None<br>
-    Relative tolerance. Program stops when ( |hi-lo| / (|hi|+|lo|) ) < reltol<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Relative tolerance. Program stops when ( |hi-lo| / (|hi|+|lo|) ) < reltol<br>
 * abstol  :  float, None<br>
-    Absolute tolerance. Program stops when |hi-lo| < abstol<br>
-    when abstol has a (float) value, reltol might be None.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Absolute tolerance. Program stops when |hi-lo| < abstol<br>
+&nbsp;&nbsp;&nbsp;&nbsp; when abstol has a (float) value, reltol might be None.<br>
 * cooling  :  float<br>
-    cooling factor when annealing<br>
+&nbsp;&nbsp;&nbsp;&nbsp; cooling factor when annealing<br>
 * steps  :  int<br>
-    number of cycles in each cooling step.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of cycles in each cooling step.<br>
 * verbose  :  int<br>
-    0 : silent<br>
-    1 : print results to output<br>
-    2 : print some info every 100 iterations and plot results<br>
-    3 : print some info every iteration<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1 : print results to output<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 : print some info every 100 iterations and plot results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3 : print some info every iteration<br>
 * callback  :  callable<br>
-    is called each iteration as<br>
-    val = callback( val )<br>
-    where val is the minimizable array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as<br>
+&nbsp;&nbsp;&nbsp;&nbsp; val = callback( val )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; where val is the minimizable array<br>
 
 <b>Raises</b>
 
 ValueError
-    1. When func is not callable<br>
-    2. When both tolerances are None<br>
-    3. When callback is not callable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 1. When func is not callable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2. When both tolerances are None<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 3. When callback is not callable<br>
 
 
 <a name="makeSimplex"></a>
@@ -166,9 +166,9 @@ Make a simplex for the given set of parameters.
 <b>Parameters</b>
 
 * xini  :  array_like<br>
-    initial (parameter) array<br>
+&nbsp;&nbsp;&nbsp;&nbsp; initial (parameter) array<br>
 * step  :  float<br>
-    size of the simplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; size of the simplex<br>
 
 
 <a name="hasLowLimits"></a>
@@ -198,9 +198,9 @@ Keep the parameters within the limits.
 <b>Parameters</b>
 
 * oldpar  :  array_like<br>
-    previous set of parameters (assumed to be within limits)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; previous set of parameters (assumed to be within limits)<br>
 * trypar  :  array_like<br>
-    new parameters, possibly out of limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp; new parameters, possibly out of limits<br>
 
 <b>Returns</b>
 
@@ -283,9 +283,9 @@ mirror  if factor < 0
 <b>Parameters</b>
 
 * ilo  :  int<br>
-    lowest point in the simplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lowest point in the simplex<br>
 * factor  :  float<br>
-    inflation factor<br>
+&nbsp;&nbsp;&nbsp;&nbsp; inflation factor<br>
 
 
 <a name="trialStep"></a>
@@ -299,9 +299,9 @@ Do a trial step to improve the worst (highest) point.
 <b>Parameters</b>
 
 * ihi  :  int<br>
-    index of the high point<br>
+&nbsp;&nbsp;&nbsp;&nbsp; index of the high point<br>
 * yhi  :   int<br>
-    value at the high point<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value at the high point<br>
 * factor  :  int<br>
     step size
 

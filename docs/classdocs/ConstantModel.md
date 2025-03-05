@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="ConstantModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -9,7 +9,7 @@
 
 ConstantModel is a Model which does not have any parameters.
 
-    f( x:p ) = f( x )<br>
+ f( x:p ) = f( x )
 
 As such it is irrelevant whether it is linear or not.
 It has 0 params and returns a 0 for its partials.
@@ -29,21 +29,21 @@ or a family of similar shapes.
 <b>Attributes</b>
 
 * fixedModel  :  Model<br>
-    a model which is calculated. (default: 0, everywhere)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a model which is calculated. (default: 0, everywhere)<br>
 * table  :  array_like<br>
-    array of tabulated results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results<br>
 
 <b>Attributes from Model</b>
 
-    npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
-    npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
-    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Examples</b>
@@ -52,9 +52,7 @@ To make a model that decays to 1.0
 
     model = ConstantModel( values=1.0 )
     model.addModel( ExpModel( ) )
-
-To make a model that returns a fixed cosine of frequency 5
-
+    ## To make a model that returns a fixed cosine of frequency 5
     model = ConstantModel( fixedModel=SineModel(), values=[1.0,0.0,5.0] )
 
 
@@ -72,15 +70,15 @@ Number of parameters = 0.
 <b>Parameters</b>
 
 * ndim  :  int<br>
-    number of dimensions for the model. (default: 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions for the model. (default: 1)<br>
 * copy  :  ConstantModel<br>
-    model to be copied. (default: None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; model to be copied. (default: None)<br>
 * fixedModel  :  Model<br>
-    a fixed model to be returned. (default: 0 everywhere)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; a fixed model to be returned. (default: 0 everywhere)<br>
 * values  :  array_like<br>
-    parameters to be used in the fixedModel. (default: None)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters to be used in the fixedModel. (default: None)<br>
 * table  :  array_like<br>
-    array of tabulated results<br>
+&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results<br>
 
 <b>Notes</b>
 
@@ -106,9 +104,9 @@ Returns a constant form.
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters. (irrelevant)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)<br>
 
 
 <a name="basePartial"></a>
@@ -122,11 +120,11 @@ Returns the partials at the xdata value. (=empty array)
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters. (irrelevant)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)<br>
 * parlist  :  None<br>
-    only to complete the necessary argument list<br>
+&nbsp;&nbsp;&nbsp;&nbsp; only to complete the necessary argument list<br>
 
 
 <a name="baseDerivative"></a>
@@ -140,9 +138,9 @@ Return the derivative df/dx at each point x (== 0).
 <b>Parameters</b>
 
 * xdata  :  array_like<br>
-    values at which to calculate the result<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
-    values for the parameters. (irrelevant)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)<br>
 
 
 <a name="baseName"></a>
@@ -210,7 +208,7 @@ Returns a string representation of the model.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -219,7 +217,7 @@ Returns a string representation of the model.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

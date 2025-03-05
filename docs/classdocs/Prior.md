@@ -1,6 +1,6 @@
 ---
 ---
-<br><br><br>
+<br><br>
 
 <a name="Prior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
@@ -13,46 +13,46 @@ Two methods need to be defined in specific priors which map
 the values between [0,1] on to the domain, and vice versa
 unit2Domain and domain2Unit.
 
-    u = domain2Unit( d )<br>
-    d = unit2Domain( u )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; u = domain2Unit( d )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; d = unit2Domain( u )<br>
 
 d is a value in the domain of the prior and u is a vlue in [0,1]
 
 The handling of limits is relegated to this Prior class. Define
-    _umin = domain2Unit( lowLimit )<br>
-    _urng = domain2Unit( highLimit ) - umin<br>
+&nbsp;&nbsp;&nbsp;&nbsp; _umin = domain2Unit( lowLimit )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; _urng = domain2Unit( highLimit ) - umin<br>
 
-    u = ( domain2Unit( d ) - umin ) / urange<br>
-    d = unit2Domain( u * urange + umin )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; u = ( domain2Unit( d ) - umin ) / urange<br>
+&nbsp;&nbsp;&nbsp;&nbsp; d = unit2Domain( u * urange + umin )<br>
 
 Symmetric priors can be used in a circular variant; i.e.
 the low and high limits are folded on each other, provided
 that the limit values are the same (hence symmetric)
 
-    u = limitedDomain2Unit( d ) + 1 ) / 3<br>
-    d = limitedUnit2Domain( ( u * 3 ) % 1 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; u = limitedDomain2Unit( d ) + 1 ) / 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; d = limitedUnit2Domain( ( u * 3 ) % 1 )<br>
 
 The copy method is also necessary.
 
 <b>Attributes</b>
 
 * lowLimit  :  float<br>
-    low limit on the Prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; low limit on the Prior<br>
 * highLimit  :  float<br>
-    high limit on the Prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; high limit on the Prior<br>
 * deltaP  :  float<br>
-    width of numerical partial derivative calculation<br>
+&nbsp;&nbsp;&nbsp;&nbsp; width of numerical partial derivative calculation<br>
 * circular  :  bool or float<br>
-    whether circular<br>
+&nbsp;&nbsp;&nbsp;&nbsp; whether circular<br>
 
 <b>Hidden Attributes</b>
 
 * _lowDomain  :  float<br>
-    lower limit of the Priors possible values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; lower limit of the Priors possible values<br>
 * _highDomain  :  float<br>
-    upper limit of the Priors possible values<br>
+&nbsp;&nbsp;&nbsp;&nbsp; upper limit of the Priors possible values<br>
 * _umin  :  float<br>
-    umin lowLimit in unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; umin lowLimit in unit<br>
 * _urng  :  float<br>
     urange (hi-lo) in unit
 
@@ -68,13 +68,13 @@ Default constructor.
 <b>Parameters</b>
 
 * limits  :  None or list of 2 floats<br>
-    2 limits resp. low and high<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 2 limits resp. low and high<br>
 * circular  :  bool or float<br>
-    False not circular<br>
-    True  circular with period from limits[0] to limits[1]<br>
-    period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False not circular<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True  circular with period from limits[0] to limits[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; period of circularity<br>
 * domain  :  2 floats<br>
-    over which the prior is defined<br>
+&nbsp;&nbsp;&nbsp;&nbsp; over which the prior is defined<br>
 * prior  :  Prior<br>
     prior to copy (with new limits if applicable)
 
@@ -97,12 +97,12 @@ due to limits or circularity.
 <b>Parameters</b>
 
 * center  :  float<br>
-    of the prior<br>
+&nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * circular  :  bool or float<br>
-    bool : y|n circular with period from limits[0] to limits[1]<br>
-    float :period of circularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp; bool : y|n circular with period from limits[0] to limits[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float :period of circularity<br>
 * limits  :  None or list of 2 float/None<br>
-    None : no limits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limits.<br>
     2 limits, resp low and high
 
 <a name="setLimits"></a>
@@ -117,8 +117,8 @@ It is asserted that lowLimit is smaller than highLimit.
 <b>Parameters</b>
 
 * limits  :  None or list of any combination of [None, float]<br>
-    None : no limit (for both or one)<br>
-    float : [low,high] limit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; None : no limit (for both or one)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; float : [low,high] limit<br>
 
 <b>Raises</b>
 
@@ -136,10 +136,10 @@ Set circular attributes.
 <b>Parameters</b>
 
 * limits  :  None or array of 2 floats<br>
-    defining the period<br>
+&nbsp;&nbsp;&nbsp;&nbsp; defining the period<br>
 * circular  :  bool or float<br>
-    False   pass<br>
-    True    Calculate period and center from limits<br>
+&nbsp;&nbsp;&nbsp;&nbsp; False   pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp; True    Calculate period and center from limits<br>
     float   period
 
 <a name="isCircular"></a>
@@ -200,7 +200,7 @@ Set possible attributes for a Prior.
 <b>Parameters</b>
 
 * limits  :  float or None<br>
-    [low,high] limit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; [low,high] limit<br>
 * scale  :  float or None<br>
     scale factor
 
@@ -215,7 +215,7 @@ True if the parameter is out of limits
 <b>Parameters</b>
 
 * par  :  float or array_like<br>
-    the parameter to check<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameter to check<br>
 
 
 <a name="checkLimit"></a>
@@ -229,11 +229,11 @@ Check whether the parameter is within limits.
 <b>Parameters</b>
 
 * par  :  float<br>
-    the parameter to check<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameter to check<br>
 
 <b>Raises</b>
 
-    ValueError when outside limits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ValueError when outside limits.<br>
 
 
 <a name="stayInLimits"></a>
@@ -247,7 +247,7 @@ Return lower limit or upper limit when parameter is outside.
 <b>Parameters</b>
 
 * par  :  float<br>
-    the parameter to check<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the parameter to check<br>
 
 
 <a name="hasLowLimit"></a>
@@ -307,7 +307,7 @@ a parameter for a distribution.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="unit2Domain"></a>
@@ -322,7 +322,7 @@ between [0,1] for a distribution.
 <b>Parameters</b>
 
 * uval  :  float<br>
-    value within [0,1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
 
 <a name="result"></a>
@@ -338,7 +338,7 @@ If result is not defined, fall back to numerical derivative of Domain2Unit.
 <b>Parameters</b>
 
 * p  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="partialDomain2Unit"></a>
@@ -352,7 +352,7 @@ Return the derivative of Domain2Unit, aka the result of the distribution at p
 <b>Parameters</b>
 
 * p  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="logResult"></a>
@@ -366,7 +366,7 @@ Return the log of the result; -inf when p == 0.
 <b>Parameters</b>
 
 * p  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="numPartialDomain2Unit"></a>
@@ -380,7 +380,7 @@ Return a the numeric derivate of the domain2Unit function to dval.
 <b>Parameters</b>
 
 * dval  :  float<br>
-    value within the domain of a parameter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
 
 <a name="partialLog"></a>
@@ -395,7 +395,7 @@ default numPartialLog
 <b>Parameters</b>
 
 * p  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="numPartialLog"></a>
@@ -408,7 +408,7 @@ Return the numeric partial derivative of log( Prior ) wrt parameter.
 <b>Parameters</b>
 
 * p  :  float<br>
-    the value<br>
+&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
 
 <a name="isBound"></a>
