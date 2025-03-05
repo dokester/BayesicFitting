@@ -39,7 +39,7 @@ If the condition is not given, it returns 0
 
 <b>Raises</b>
 
-    StopIteration: if no item satysfing the condition is found.<br>
+ StopIteration: if no item satysfing the condition is found.<br>
 
 <b>Examples</b>
 
@@ -135,11 +135,11 @@ if values is a singular item of the proper type it will be inserted as [value].
 
 <b>Returns</b>
 
-    True on succesful insertion. False otherwise.<br>
+ True on succesful insertion. False otherwise.<br>
 
 <b>Raises</b>
 
-    TypeError   if the type is not as in the dictionary
+ TypeError   if the type is not as in the dictionary
 
 <a name="setListOfAttributes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -164,11 +164,11 @@ if values is a singular item of the proper type it will be inserted as [value].
 
 <b>Returns</b>
 
-    True on succesful insertion. False otherwise.<br>
+ True on succesful insertion. False otherwise.<br>
 
 <b>Raises</b>
 
-    TypeError   if the type is not as in the dictionary<br>
+ TypeError   if the type is not as in the dictionary<br>
 
 
 <a name="setSingleAttributes"></a>
@@ -193,11 +193,11 @@ It also checks the type.
 
 <b>Returns</b>
 
-    True on succesful insertion. False otherwise.<br>
+ True on succesful insertion. False otherwise.<br>
 
 <b>Raises</b>
 
-    TypeError   if the type is not as in the dictionary
+ TypeError   if the type is not as in the dictionary
 
 <a name="makeNext"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -332,6 +332,7 @@ Return a nice number close to (but below) |x|.
 <p>
 
 Return integer array with values as in x
+
 <b>Parameters</b>
 
 * x  :  array_like<br>
