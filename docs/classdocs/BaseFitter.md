@@ -23,7 +23,7 @@ Other Fitter classes relegate their calculation in these issues to this one.
 
 <b>Examples</b>
 
-# It is not possible to use this class. User Fitter, CurveFitter etc. in stead
+It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 
 <b>Note Also</b>
 

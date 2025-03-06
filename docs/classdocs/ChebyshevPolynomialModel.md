@@ -9,18 +9,18 @@
 
 Chebyshev polynomial model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p_k * T_k( x )<br>
+ f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
 The T( x ) are Chebyshev polynomials of the first kind which are defined
 recursively as
 
-&nbsp;&nbsp;&nbsp;&nbsp; T_0( x ) = 1<br>
-&nbsp;&nbsp;&nbsp;&nbsp; T_1( x ) = x<br>
-&nbsp;&nbsp;&nbsp;&nbsp; T_n( x ) = 2 x T_{n-1}( x ) - T_{n-2}( x ) for n >= 2<br>
+ T<sub>0</sub>( x ) = 1
+ T<sub>1</sub>( x ) = x
+ T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2
 
-These polynomials are orthogonal, only when x is in [-1,+1].
+These polynomials are orthogonal, when integrated over x in [-1,+1].
 
 It is a linear model.
 
@@ -31,21 +31,21 @@ It is a linear model.
 
 <b>Attributes from Model</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+npchain, parameters, stdevs, xUnit, yUnit
 
 <b>Attributes from FixedModel</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+npmax, fixed, parlist, mlist
 
 <b>Attributes from BaseModel</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 <b>Examples</b>
 
     poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )
-4
+    4
 
 
 <a name="ChebyshevPolynomialModel"></a>
@@ -88,7 +88,7 @@ Returns the partials at the xdata value.
 
 The partials are calculated using the recurrence formula
 
-&nbsp;&nbsp;&nbsp;&nbsp; f_n( x ) = 2 * x * f_{n-1}( x ) - f_{n-2}( x )<br>
+ f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )
 
 <b>Parameters</b>
 
@@ -108,12 +108,11 @@ The partials are calculated using the recurrence formula
 
 Returns the derivative df/dx at the xdata value.
 
-&nbsp;&nbsp;&nbsp;&nbsp; df_n = n * U_{n-1}<br>
-
-where
-&nbsp;&nbsp;&nbsp;&nbsp; U_0 = 1<br>
-&nbsp;&nbsp;&nbsp;&nbsp; U_1 = 2x<br>
-&nbsp;&nbsp;&nbsp;&nbsp; U_{n+1} = 2 * x * U_n - U_{n-1}<br>
+ df<sub>n</sub> = n * U<sub>n-1</sub>
+ where
+ U<sub>0</sub> = 1
+ U<sub>1</sub> = 2x
+ U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub>
 
 <b>Parameters</b>
 
@@ -211,7 +210,7 @@ The xUnit must be dimensionless.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -220,7 +219,7 @@ The xUnit must be dimensionless.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

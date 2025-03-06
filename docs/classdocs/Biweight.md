@@ -22,9 +22,9 @@ Author:      Do Kester
 
 Constructor.
 
- Using
- integral = 16.0/15.0
- fwhm = 1.0823922
+Using
+&nbsp;&nbsp;&nbsp;&nbsp; integral = 16.0/15.0<br>
+    fwhm = 1.0823922
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">

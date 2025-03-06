@@ -146,7 +146,7 @@ Return a string representation of the model.
 * [<strong>baseResult(</strong> xdata, params )](./LinearModel.md#baseResult)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 
 

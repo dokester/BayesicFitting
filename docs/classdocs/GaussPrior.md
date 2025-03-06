@@ -9,18 +9,24 @@
 
 Gauss prior distribution. Use  normalized version
 
-&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 * ( ( x - c ) / s )^2 )<br>
+ Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )
 
-By default: c = center = 0 and s = scale = 1.
+ By default: 
+&nbsp;&nbsp;&nbsp;&nbsp; c = center = 0 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; s = scale = 1.<br>
 
-It can also have a limited domain. (To be done)
 By default the domain is [-Inf,+Inf].
 In computational practice the domain is limited to about [-8.5, 8.5] scale units.
+Outside that range the Gaussian is indistinguishable from 0, computationally.
+
+It can also have a limited domain.
 
 According to integral-calculator.com we have
 
-domain2unit: u = 0.5 * ( erf( ( d - c ) / ( s * &sqrt; 2 ) ) + 1 )
-unit2domain: d = erfinv( 2 * u - 1 ) * s * &sqrt; 2 + c
+domain2unit: 
+&nbsp;&nbsp;&nbsp;&nbsp; u = 0.5 * ( erf( ( d - c ) / ( s * &radic;2 ) ) + 1 )<br>
+unit2domain: 
+&nbsp;&nbsp;&nbsp;&nbsp; d = erfinv( 2 * u - 1 ) * s * &radic;2 + c<br>
 
 <b>Examples</b>
 
@@ -82,7 +88,7 @@ Copy the prior
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Gauss distribution.
 
-domain2unit: u = 0.5 * ( erf( ( d - center ) / ( &sqrt; 2 * scale ( ) + 1 )
+ u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )
 
 <b>Parameters</b>
 
@@ -99,7 +105,7 @@ domain2unit: u = 0.5 * ( erf( ( d - center ) / ( &sqrt; 2 * scale ( ) + 1 )
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Gauss distribution.
 
-unit2domain: d = erfinv( 2 * u - 1 ) * scale * &sqrt; 2 + center
+ d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center
 
 <b>Parameters</b>
 

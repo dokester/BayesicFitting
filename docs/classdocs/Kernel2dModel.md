@@ -11,26 +11,26 @@ Two dimensional Kernel Model.
 
 The Kernel2dModel is defined as
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * K( r )<br>
+ f( x:p ) = p_0 * K( r )
 
 where K( r ) is a selectable kernel function and r is the distance to the center.
 
-&nbsp;&nbsp;&nbsp;&nbsp; r = sqrt( u^2 + v^2 ).<br>
+ r = sqrt( u^2 + v^2 ).
 
 There are 3 options for u and v
 
-1. CIRCULAR has 4 parameters
+1. CIRCULAR has 4 parameters<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Circular shape with only one width.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p_1 ) / p_3<br>
-&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p_2 ) / p_3<br>
-2. ELLIPTIC has 5 parameters
+&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>3</sub><br>
+2. ELLIPTIC has 5 parameters<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Elliptic shape aligned along the axes; 2 widths.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p_1 ) / p_3<br>
-&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p_2 ) / p_4<br>
-3. ROTATED has 6 parameters
+&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>4</sub><br>
+3. ROTATED has 6 parameters<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Rotated elliptical shape with 2 width and a rotational angle.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( ( x - p_1 )*cos( p_5 ) - ( y - p_2 )*sin( p_5) ) / p_3<br>
-&nbsp;&nbsp;&nbsp;&nbsp; v = ( ( x - p_1 )*sin( p_5 ) + ( y - p_2 )*cos( p_5) ) / p_4<br>
+&nbsp;&nbsp;&nbsp;&nbsp; u = ( ( x - p<sub>1</sub> )*cos( p<sub>5</sub> ) - ( y - p<sub>2</sub> )*sin( p<sub>5</sub>) ) / p<sub>3</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp; v = ( ( x - p<sub>1</sub> )*sin( p<sub>5</sub> ) + ( y - p<sub>2</sub> )*cos( p<sub>5</sub>) ) / p<sub>4</sub><br>
 
 The "center" parameters ( 1&2 ) and the "angle" parameter ( 5 ) are initilized as 0.
 The rotational angle is measured counterclockwise from the x-axis.

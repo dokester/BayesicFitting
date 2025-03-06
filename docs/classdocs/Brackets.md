@@ -70,16 +70,6 @@ Returns the derivative (df/dx) calculated at the xdatas.
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
 
-<a name="XXXsetLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>XXXsetLimits(</strong> lowLimits=None, highLimits=None ) 
-</th></tr></thead></table>
-<p>
-<a name="XXXgetLimits"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>XXXgetLimits(</strong> ) 
-</th></tr></thead></table>
-<p>
 <a name="setPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs )

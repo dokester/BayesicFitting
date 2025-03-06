@@ -13,12 +13,13 @@ The blobs have limited support. Each blob is a segment of polynomial order,
 between 2 knots. At the knots they are continuous (differentiable) upto order - 1.
 Similarly the edges of the blobs are smoothly connected to 0.
 
-order   support behaviour between knots     continuity at knots
-&nbsp;&nbsp; 0        1    piecewise constant          not continuous at all<br>
-&nbsp;&nbsp; 1        2    piecewise linear            lines are continuous (connected)<br>
-&nbsp;&nbsp; 2        3    parabolic pieces            1st derivatives are also continuous<br>
-&nbsp;&nbsp; 3        4    cubic pieces                2nd derivatives are also continuous<br>
- n>3      n+1   n-th order polynomials      (n-1)-th derivatives are also continuous
+|order |support| behaviour between knots | continuity at knots                |
+|:----:|:-----:|:------------------------|:-----------------------------------|
+|  0   |   1   | piecewise constant      | not continuous at all              |
+|  1   |   2   | piecewise linear        | lines are continuous (connected)   |
+|  2   |   3   | parabolic pieces        | 1st derivatives are also continuous|
+|  3   |   4   | cubic pieces            | 2nd derivatives are also continuous|
+| n>3  |  n+1  | n-th order polynomials  | (n-1)-th derivatives are continuous|
 
 The function result is the sum over all spline blobs, multiplied with
 the parameters, the amplitudes of the spline blobs.
@@ -46,17 +47,17 @@ This model is NOT for (cubic) spline interpolation.
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BasicSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : <br>
+    18
+    # or alternatively
     csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : <br>
+    18
+    # or alternatively
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
+    18
 
 <b>Attributes</b>
 
@@ -208,12 +209,6 @@ At the edges it is less. Normalized to 1.0
 
 * par  :  2-d array<br>
     sets of poly parameters.
-
-
-## more normalization
-if kpar > 0 
-&nbsp;&nbsp;&nbsp;&nbsp; mat[-1,-1] = 1.0             ## at right normalize to 1.0<br>
-
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -394,7 +389,7 @@ Return the name of the parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -403,7 +398,7 @@ Return the name of the parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

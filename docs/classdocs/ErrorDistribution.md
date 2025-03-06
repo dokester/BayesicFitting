@@ -204,6 +204,7 @@ Set limits on the hyper parameter(s).
 <p>
 
 Return value in [0,1] for the selected parameter.
+
 <b>Parameters</b>
 
 * dval  :  float<br>
@@ -218,6 +219,7 @@ Return value in [0,1] for the selected parameter.
 <p>
 
 Return domain value for the selected parameter.
+
 <b>Parameters</b>
 
 * uval  :  float<br>

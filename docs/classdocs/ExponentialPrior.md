@@ -9,7 +9,7 @@
 
 Exponential prior distribution.
 
-&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = exp( -x / scale )<br>
+ Pr( x ) = exp( -x / scale )
 
 By default scale = 1.
 
@@ -43,12 +43,13 @@ Author: Do Kester.
 
 Constructor.
 
-Parameters
-scale : float
+<b>Parameters</b>
+
+* scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the exponential<br>
-hilimit : float
+* hilimit  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; high limit<br>
-prior : ExponentialPrior
+* prior  :  ExponentialPrior<br>
 &nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
 
 
@@ -64,6 +65,8 @@ Copy the prior
 <strong>shortName(</strong> ) 
 </th></tr></thead></table>
 <p>
+Return a short name 
+
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LaplacePrior.html">LaplacePrior</a></th></tr></thead></table>
 

@@ -11,14 +11,14 @@ Kernel Model, a Model build around an [Kernel](./Kernel.md).
 
 The KernelModel is defined as
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * K( ( x - p_1 ) / p_2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * K( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
 
 where K( u ) is a selectable kernel function on the rescaled input u
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p_1 ) / p_2.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>2</sub>.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 is the amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 is the center<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 is the range.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> is the amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> is the center<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> is the range.<br>
 
 The parameters are initialized at {amp,0,1}. the amplitude is such that the
 function integrates to 1.0. They are listed in the table.

@@ -87,7 +87,7 @@ Return      parameters for the model fitted to the data array.
 
 <b>Raises</b>
 
-    ValueError when ydata or weights contain a NaN
+ValueError when ydata or weights contain a NaN
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">

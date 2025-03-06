@@ -12,14 +12,16 @@ Class for calculating Kepplers second law for planetary motion.
 The projection of the orbit on the sky is not included in this class.
 
 The algorithm was taken from
-&nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
+ Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
 
-&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf<br>
+http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
 
-p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-p_1 : a     semi major axis (>0)
-p_2 : P     period of the orbit (>0)
-p_3 : T     phase since periastron passage (0<p_3<2 pi)
+| param | abbr | name                   | limits    | comment     |
+|:-----:|:----:|:-----------------------|:---------:|:------------| 
+|   0   |  e   | eccentricity of orbit  | 0<e<1     | 0: circular |
+|   1   |  a   | semi major axis        |   a>0     |             |
+|   2   |  P   | period of the orbit    |   P>0     |             |
+|   3   |  T   | phase since periastron | 0<T<2&pi; |             |
 
 The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 
@@ -33,9 +35,9 @@ The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 Return the mean anomaly.
 
 P = params[2] = period
-p = params[3] = periastron passage
+T = params[3] = periastron passage
 
-M = 2 * pi * xdata / P - p
+M = 2 * pi * xdata / P - T
 
 <b>Parameters</b>
 
@@ -91,8 +93,8 @@ It converges in a few iterations for e <= 0.999999999
 Return the eccentric anomaly, i.e. the solution for E of
 
 Standard method by Jean Meuss 
-&nbsp;&nbsp;&nbsp;&nbsp; Astronomical Algorithms, 2nd ed.,<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Willmann-Bell, Inc, Virginia, 193-196, 397-399<br>
+ Astronomical Algorithms, 2nd ed.,
+ Willmann-Bell, Inc, Virginia, 193-196, 397-399
 
 e = params[0] = eccentricity
 M = mean anomaly

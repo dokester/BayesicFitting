@@ -23,11 +23,11 @@ It is reset to numDerivative.
     m1 = PolynomialModel( 1 )
     m1 += SineModel()
     print( m1.npchain )         # number of params: 2 + 3
-5
+    5
     fixed = { 0: 1.0, 1: m1 }
     em = EtalonModel( fixed=fixed )
     print( em.npbase, em.npmax, em.npchain )          # ( 4 - 2 ) + 5
-7 9 7
+    7 9 7
     print( em )
 
 <b>Attributes</b>

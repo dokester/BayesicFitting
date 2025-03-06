@@ -13,25 +13,25 @@ To calculate an Exponential likelihood.
 
 For one residual, x, it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s ) ^ p )<br>
+ f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )<sup>p</sup> )
 
 where s is the scale and p is the power.
 s and p are hyperparameters, which might be estimated from the data.
 
 The variance of this function is
 
-&nbsp;&nbsp;&nbsp;&nbsp; &sigma; ^ 2 = s ^ 2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )<br>
+ &sigma;<sup>2</sup> = s<sup>2</sup> &Gamma;( 3 / p ) / &Gamma;( 1 / p )
 
 See toSigma()
 
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log( L )
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s ) ^ p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s )<sup>p</sup> )<br>
 
 Using weights this becomes
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s ) ^ p )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s )<sup>p</sup> )<br>
 
 <b>Note</b>
 

@@ -20,12 +20,13 @@ spanned by the knots.
 
 It is a linear model.
 
-order   behaviour between knots     continuity at knots
-&nbsp;&nbsp; 0     piecewise constant          not continuous at all<br>
-&nbsp;&nbsp; 1     piecewise linear            lines are continuous<br>
-&nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous<br>
-&nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous<br>
- n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
+| order |behaviour between knots | continuity at knots                |
+|:-----:|:-----------------------|:-----------------------------------|
+|   0   | piecewise constant     | not continuous at all              |
+|   1   | piecewise linear       | lines are continuous               |
+|   2   | parabolic pieces       | 1st derivatives are also continuous|
+|   3   | cubic pieces           | 2nd derivatives are also continuous|
+|  n>3  | n-th order polynomials | (n-1)th derivatives are continuous |
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
@@ -46,17 +47,17 @@ This model is NOT for (cubic) spline interpolation.
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : <br>
+    18
+    # or alternatively
     csm = BSplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : <br>
+    18
+    # or alternatively
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = BSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
+    18
 
 <b>Attributes</b>
 
@@ -258,7 +259,7 @@ Return the units of the parameter.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -267,7 +268,7 @@ Return the units of the parameter.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

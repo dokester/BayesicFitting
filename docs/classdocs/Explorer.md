@@ -117,6 +117,8 @@ Always use all engines.
 <strong>checkWalkers(</strong> ) 
 </th></tr></thead></table>
 <p>
+Perform logLcheck() on all walkers. 
+
 <a name="logLcheck"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLcheck(</strong> walker ) 

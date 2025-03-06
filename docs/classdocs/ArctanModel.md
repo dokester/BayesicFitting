@@ -9,8 +9,10 @@
 
 Arctangus Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * arctan( p_2 * ( x - p_1 ) )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude;  p_1 = center; p_2 = slope.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * arctan( p<sub>2</sub> * ( x - p<sub>1</sub> ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = center <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = slope.<br>
 
 As always x = input.
 
@@ -32,7 +34,7 @@ The parameters are initialized at {2/pi, 0.0, 1.0}. It is a non-linear model.
 
     arct = ArctanModel( )
     print( arct.getNumberOfParameters( ) )
-3
+    3
 
 
 * Author :       Do Kester<br>

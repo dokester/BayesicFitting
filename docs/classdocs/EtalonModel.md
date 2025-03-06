@@ -9,22 +9,23 @@
 
 Etalon Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 / ( 1.0 + p_1 * sin^2( &pi; p_2 x + p_3 ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> / ( 1.0 + p<sub>1</sub> * sin<sup>2</sup>( &pi; p,sub>2</sub< x + p<sub>3</sub> ) )<br>
 
-where
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = finesse,<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = frequency in 1/wavenumber<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_3 = phase,<br>
+ where
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = finesse,<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = frequency in 1/wavenumber<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>3</sub> = phase,<br>
 As always x = input; it is in wavenumbers
 
 The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model.
 
 The finesse should be positive. However, solutions where -1 < p_1 < 0 are equivalent
 to a solution with parameters set as
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 /= ( 1 + p_1 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 /= -( 1 + p_1 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_3 += pi/2             # 90 degree phase shift<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> /= ( 1 + p<sub>1</sub> )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> /= -( 1 + p<sub>1</sub> )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>3</sub> += pi/2             # 90 degree phase shift<br>
 
 A finesse below -1 causes infinities.
 
@@ -44,7 +45,7 @@ A finesse below -1 causes infinities.
 
     fpm = EtalonModel( )
     print( fpm.npchain )
-4
+    4
     pars = [1.0, 30.0, 1.0, 0.0]
     fpm.parameters = pars
     print( fpm( numpy.arange( 101, dtype=float ) ) )     # etalon with 10 periods

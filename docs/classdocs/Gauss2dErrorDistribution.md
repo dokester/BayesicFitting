@@ -11,7 +11,7 @@ To calculate a Gauss likelihood in case of errors in X and Y
 
 For one residual in x and y it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; L = 1 / ( 2 &pi; &sqrt; det ) exp( - 0.5 ( x / s )^2 )<br>
+ L = 1 / ( 2 &pi; &radic; det ) exp( - 0.5 ( x / s )<sup>2</sup> )
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -21,11 +21,11 @@ The scale s is also the square root of the variance of this error distribution.
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log likelihood, logL.
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( x / s ) ^ 2<br>
+ logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup>
 
 Using weights this becomes
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s ) ^ 2 )<br>
+ logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )
 
 
 Author       Do Kester.
@@ -169,28 +169,6 @@ to the parameters in fitIndex.
 * mockdata  :  array_like<br>
     as calculated for the problem
 
-<a name="TBDhessianLogL"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>TBDhessianLogL(</strong> problem, allpars, fitIndex ) 
-</th></tr></thead></table>
-<p>
-
-Return the hessian of log( likelihood ) to the parameters in fitIndex.
-
-The hessian is a matrix containing the second derivatives to each
-of the parameters.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d^2 logL / dp_i dp_k<br>
-
-<b>Parameters</b>
-
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
-* fitIndex  :  array_like of int<br>
-    indices of allpars to fit
-
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a></th></tr></thead></table>
 
@@ -207,7 +185,7 @@ of the parameters.
 * [<strong>setLimits(</strong> limits ) ](./ScaledErrorDistribution.md#setLimits)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
 

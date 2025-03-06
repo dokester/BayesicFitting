@@ -8,19 +8,22 @@
 <p>
 
 Jeffreys prior distribution, for scale-like parameters.
+
 Jeffreys prior is a improper prior ( i.e. its integral is unbound ).
+
 Because of that it always needs limits, low and high, such that
 0 < low < high < +Inf.
 
-&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1.0 / ( x * norm )    if low < x < high<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0                   otherwise<br>
+ Pr( x ) = 1.0 / ( x * norm ) if ( low < x < high ) else 0
 
 where norm = log( high ) - log( low )
 
 No limits are set by default.
 
-domain2unit: u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );
-unit2domain: d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
+domain2unit: 
+&nbsp;&nbsp;&nbsp;&nbsp; u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );<br>
+unit2domain: 
+&nbsp;&nbsp;&nbsp;&nbsp; d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );<br>
 
 <b>Examples</b>
 

@@ -143,7 +143,6 @@ Returns a string representation of the model.
 * [<strong>cycor1(</strong> res )](./Problem.md#cycor1)
 * [<strong>cycor2(</strong> res )](./Problem.md#cycor2)
 * [<strong>cyclize(</strong> res, period ) ](./Problem.md#cyclize)
-* [<strong>XXXweightedResiduals(</strong> param, mockdata=None, extra=False ) ](./Problem.md#XXXweightedResiduals)
 * [<strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) ](./Problem.md#weightedResSq)
 * [<strong>isDynamic(</strong> ) ](./Problem.md#isDynamic)
 * [<strong>domain2Unit(</strong> dval, kpar ) ](./Problem.md#domain2Unit)

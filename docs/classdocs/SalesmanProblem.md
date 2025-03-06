@@ -236,7 +236,6 @@ return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
 * [<strong>cycor1(</strong> res )](./Problem.md#cycor1)
 * [<strong>cycor2(</strong> res )](./Problem.md#cycor2)
 * [<strong>cyclize(</strong> res, period ) ](./Problem.md#cyclize)
-* [<strong>XXXweightedResiduals(</strong> param, mockdata=None, extra=False ) ](./Problem.md#XXXweightedResiduals)
 * [<strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) ](./Problem.md#weightedResSq)
 * [<strong>domain2Unit(</strong> dval, kpar ) ](./Problem.md#domain2Unit)
 * [<strong>unit2Domain(</strong> uval, kpar ) ](./Problem.md#unit2Domain)

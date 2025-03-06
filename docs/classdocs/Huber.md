@@ -8,8 +8,8 @@
 <p>
 
 Huber is an improper Kernel function
-&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = 1.0            if |x| < 1<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 / |x|      elsewhere<br>
+
+ K( x ) = 1.0 if |x| < 1 else 1.0 / |x|
 
 It is improper because the integral equals +inf.
 
@@ -26,37 +26,53 @@ Constructor.
 
 Improper Kernel.
 
-Using
-&nbsp;&nbsp;&nbsp;&nbsp; integral = inf<br>
-&nbsp;&nbsp;&nbsp;&nbsp; fwhm = 4<br>
-    range = inf
+ Using
+ integral = inf
+ fwhm = 4
+ range = inf
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
 <p>
-<a name="resultsq"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>resultsq(</strong> xsq )
-</th></tr></thead></table>
-<p>
+
+Return the result for input values.
+
+<b>Parameters</b>
+
+* x  :  array-like<br>
+    input values
+
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> x )
 </th></tr></thead></table>
 <p>
+
+Return the partial derivative wrt the input values.
+
+<b>Parameters</b>
+
+* x  :  array-like<br>
+    the input values
+
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 <p>
+Return False 
+
 <a name="name"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>name(</strong> )
 </th></tr></thead></table>
 <p>
+Return the name of the kernel 
+
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Kernel.html">Kernel</a></th></tr></thead></table>
 
 
+* [<strong>resultsq(</strong> xsq )](./Kernel.md#resultsq)

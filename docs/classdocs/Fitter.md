@@ -16,7 +16,7 @@ is the variant for linear models, ie. models linear in its parameters.
 
 <b>Examples</b>
 
-* # assume x and y are numpy.asarray data arrays : <br>
+    # assume x and y are numpy.asarray data arrays
     x = numpy.arange( 100 )
     y = numpy.arange( 100 ) // 4        # digitization noise
     poly = PolynomialModel( 1 )         # line
@@ -81,10 +81,10 @@ For Linear models the matrix equation
 
 &nbsp;&nbsp;&nbsp;&nbsp; H * p = &beta;<br>
 
-is solved for p. H is the Hessian matrix ( D * w * D^T )
+is solved for p. H is the Hessian matrix ( D * w * D<sup>T</sup> )
 and &beta; is the inproduct of the data with the D, design matrix.
 
-&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D^T<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D<sup>T</sup><br>
 
 <b>Parameters</b>
 

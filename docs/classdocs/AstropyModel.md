@@ -16,13 +16,13 @@ Wrapper for Astropy Models, so they can be used in BayesicFitting.
    
     gauss = AstropyModel( gm )
     print( gauss )
-AstropyModel( Gauss1D )
+    AstropyModel( Gauss1D )
     print( gauss.getNumberOfParameters( ) )
-3
+    3
     print( gauss( numpy.linspace( -5, 5, 11 ) ) )
-[  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-&nbsp;&nbsp;&nbsp; 6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01<br>
-&nbsp;&nbsp;&nbsp; 1.11089965e-02   3.35462628e-04   3.72665317e-06]<br>
+    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+       1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
 <b>Attributes</b>
 

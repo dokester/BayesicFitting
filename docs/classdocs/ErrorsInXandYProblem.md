@@ -19,9 +19,12 @@ between data (xdata,ydata) and (target, model(target)) is minimised.
 The target are nuisance parameters which are not part of the modeling
 solution.
 
-Define
-&nbsp;&nbsp;&nbsp;&nbsp; xd = xdata, yd = ydata, u = target, F(u:P) = model( target )<br>
-And the mismathes in both directions.
+ Define
+&nbsp;&nbsp;&nbsp;&nbsp; xd = xdata <br>
+&nbsp;&nbsp;&nbsp;&nbsp; yd = ydata <br>
+&nbsp;&nbsp;&nbsp;&nbsp; u = target <br>
+&nbsp;&nbsp;&nbsp;&nbsp; F(u:P) = model( target )<br>
+ Then the mismathes in both directions are
 &nbsp;&nbsp;&nbsp;&nbsp; X = u - xd <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Y = F(u:p) - yd<br>
 
@@ -324,6 +327,5 @@ Returns a string representation of the model.
 * [<strong>cycor1(</strong> res )](./Problem.md#cycor1)
 * [<strong>cycor2(</strong> res )](./Problem.md#cycor2)
 * [<strong>cyclize(</strong> res, period ) ](./Problem.md#cyclize)
-* [<strong>XXXweightedResiduals(</strong> param, mockdata=None, extra=False ) ](./Problem.md#XXXweightedResiduals)
 * [<strong>isDynamic(</strong> ) ](./Problem.md#isDynamic)
 * [<strong>shortName(</strong> ) ](./Problem.md#shortName)

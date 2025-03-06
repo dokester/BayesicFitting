@@ -14,12 +14,13 @@ teams that play a match, the first at home the other away.
 
 For each team the complexity lists parameters
 
-&nbsp;&nbsp;&nbsp; name                    limits    default    comment<br>
-0. Number of trials      0 < a         n/a     trials on the goal of the opponent
-1. Defensive strength    0 < b < 1      0      fraction of the trials that is stopped
-2. Midfield strength     0 < c < 2      1      relative strength of the team
-3. Home advantage        0 < d < 2      1      advantage of playing at home
-4. Strategy              0 < e < 2      1      
+| name              |complexity| limits |default| comment                      |
+|:------------------|:--------:|:------:|:-----:|:-----------------------------|
+| Attack            |    1     |  0<a   |  n/a  | trials on the goal           |
+| Defensive strength|    2     |  0<b<1 |   0   | fraction of trials stopped   |
+| Midfield strength |    3     |  0<c<2 |   1   | relative strength of the team|
+| Home advantage    |    4     |  0<d<2 |   1   | advantage of playing at home |
+| Strategy          |    5     |  0<e<2 |   1   | defensive <-> offensive      |
 
 Note: Computational runtime errors/warnings occur when (some of) the parameters are at 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; their limits. <br>
@@ -29,13 +30,8 @@ I.e. a model with complexity=5 and all parameters at the defaults except for
 "trials", has the same result as a model with complexity 1 with the same "trials"
 value.
 
-Let p1 denote the parameters of the home team and p2 those of the away team,
-then the equations for calculating the strengths, S1 and S2, are
-
-&nbsp;&nbsp;&nbsp;&nbsp; S1 = a1 * sqrt( c1 * d1 / c2 ) * ( 1 - b2 ^ ( c1 * d1 / c2 ) )<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp; S2 = a2 * sqrt( c2 / ( c1 * d1 ) ) * ( 1 - b1 ^ ( c2 / ( c1 * d1 ) )<br>
-
+For information what is calculated at each level of complexity, see info at 
+the methods goals[1-5](), below.
 
 Note
 This is about the game that most of the world calls football.
@@ -44,7 +40,7 @@ This is about the game that most of the world calls football.
 
     fm = FootballModel( 18 ) 
     print( fm.npars )
-90
+    90
 
 * Author  :  Do Kester<br>
 
@@ -119,28 +115,81 @@ Return the prior of the parameter, indicated by k modulo the complexity
 <strong>goals1(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
-attack 
+
+Consider attack (a) only.
+
+ S1 = a1
+ S2 = a2
+
+<b>Parameters</b>
+
+* xdata  :  array of int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; attack values<br>
+
 
 <a name="goals2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals2(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
-attack, defense 
+
+Consider attack (a) and defense (d).
+
+ S1 = a1 * ( 1 - d2 )
+ S2 = a2 * ( 1 - d1 )
+
+<b>Parameters</b>
+
+* xdata  :  array of int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+
 
 <a name="goals3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals3(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
-attack, defense, midfield 
+
+Consider attack (a), defense (d) and midfield (m).
+
+The ratio of the midfield strength modifies attack and defense
+
+ S1 = a1 * &radic;(m1/m2) * ( 1 - d2 ^ (m2/m1) )
+ S2 = a2 * &radic;(m2/m1) * ( 1 - d1 ^ (m1/m2) )
+
+<b>Parameters</b>
+
+* xdata  :  array of int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+
 
 <a name="goals4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals4(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
-attack, defense, midfield, home 
+
+Consider attack (a), defense (d), midfield (m) and home advantage (h).
+
+The strategy modifies the midfield strangth of the home team.
+
+ mh = m1 * h1
+ S1 = a1 * &radic;(mh/m2) * ( 1 - d2 ^ (m2/mh) )
+ S2 = a2 * &radic;(m2/mh) * ( 1 - d1 ^ (mh/m2) )
+
+<b>Parameters</b>
+
+* xdata  :  array of int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+
 
 <a name="goals5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -148,7 +197,22 @@ attack, defense, midfield, home
 </th></tr></thead></table>
 <p>
 
-attack, defense, midfield, home, strategy 
+Consider attack (a), defense (d), midfield (m), home advantage (h),
+and strategy (s)
+
+ A offensive strategy (s>1) strenghtens the attach and weakens the defense. 
+ A defensive strategy (s<1) strenghtens the defense and weakens the attack. 
+
+ mh = m1 * h1
+ S1 = a1 * &radic;(s1*mh/m2) * ( 1 - d2 ^ (s2*m2/mh) )
+ S2 = a2 * &radic;(s2*m2/mh) * ( 1 - d1 ^ (s1*mh/m2) )
+
+<b>Parameters</b>
+
+* xdata  :  array of int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
 
 
 <a name="baseResult"></a>
@@ -186,44 +250,72 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters for the model (ignored for LinearModels).<br>
 * parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
-
-to a1
-(1-b_2^((c_1*d_1)/(c_2*f_2)))*sqrt((c_1*d_1)/c_2)
-to b2
--(a_1*c_1*d_1*sqrt((c_1*d_1)/c_2)*b_2^((c_1*d_1)/(c_2*f_2)-1))/(c_2*f_2)
-to c1
--(a_1*d_1*(2*b_2^((d_1*c_1)/(c_2*f_2))*log(b_2)*d_1*c_1+(b_2^((d_1*c_1)/(c_2*f_2))-1)
-&nbsp;&nbsp;&nbsp;&nbsp; *c_2*f_2))/(2*c_2^2*f_2*sqrt((d_1*c_1)/c_2))<br>
-to c2
-(a_1*c_1*d_1*((b_2^((c_1*d_1)/(f_2*c_2))-1)*f_2*c_2+2*b_2^((c_1*d_1)/(f_2*c_2))*
-&nbsp;&nbsp;&nbsp;&nbsp; log(b_2)*c_1*d_1))/(2*f_2*sqrt((c_1*d_1)/c_2)*c_2^3)<br>
-to d1
--(a_1*c_1*(2*b_2^((c_1*d_1)/(c_2*f_2))*log(b_2)*c_1*d_1+(b_2^((c_1*d_1)/(c_2*f_2))-1)*
-&nbsp;&nbsp;&nbsp;&nbsp; c_2*f_2))/(2*c_2^2*f_2*sqrt((c_1*d_1)/c_2))<br>
-to f2
-(a_1*b_2^((c_1*d_1)/(c_2*f_2))*log(b_2)*c_1*d_1*sqrt((c_1*d_1)/c_2))/(c_2*f_2^2)
+    list of indices of active parameters
 
 <a name="part1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part1(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
+
+Derivatives copies from https://www.derivative-calculator.net
+
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+
+
 <a name="part2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part2(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
+
+Derivatives copies from https://www.derivative-calculator.net
+
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+
+
 <a name="part3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part3(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
+
+Derivatives copies from https://www.derivative-calculator.net
+
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+
+
 <a name="part4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part4(</strong> xdata, par ) 
 </th></tr></thead></table>
 <p>
+
+Derivatives copies from https://www.derivative-calculator.net
+
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+
+
 <a name="part5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part5(</strong> xdata, par ) 
@@ -232,42 +324,12 @@ to f2
 
 Derivatives copies from https://www.derivative-calculator.net
 
-Fh = a0*sqrt((d0*f0*c0)/c1) * (1-b1**((d0*f1*c0)/c1))
-Fa = a1*sqrt((c1*f1)/(c0*d0)) * (1-b0**((c1*f0)/(c0*d0)))
+<b>Parameters</b>
 
-dFh/da0 = (1-b1**((d0*f1*c0)/c1))*sqrt((d0*f0*c0)/c1)
-dFh/da1 = 0
-dFh/db0 = 0
-dFh/db1 = -(a0*c0*d0* sqrt((c0*d0*f0)/c1) *f1* b1**((c0*d0*f1)/c1-1)) / c1
-dFh/dc0 = -(a0*d0*f0*(2*b1**((d0*f1*c0)/c1)*log(b1)*d0*f1*c0+
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b1**((d0*f1*c0)/c1)-1)*c1))/(2*c1**2*sqrt((d0*f0*c0)/c1))<br>
-dFh/dc1 = (a0*c0*d0*f0*((b1**((c0*d0*f1)/c1)-1)*c1+2*b1**((c0*d0*f1)/c1)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *log(b1)*c0*d0*f1))/(2*sqrt((c0*d0*f0)/c1)*c1**3)<br>
-dFh/dd0 = -(a0*c0*f0*(2*b1**((c0*f1*d0)/c1)*log(b1)*c0*f1*d0+
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b1**((c0*f1*d0)/c1)-1)*c1))/(2*c1**2*sqrt((c0*f0*d0)/c1))<br>
-dFh/dd1 = 0
-dFh/df0 = (a0*(1-b1**((c0*d0*f1)/c1))*c0*d0)/(2*c1*sqrt((c0*d0*f0)/c1))
-dFh/df1 = -(a0*b1**((c0*d0*f1)/c1)*log(b1)*c0*d0*sqrt((c0*d0*f0)/c1))/c1
-
-dFa/da0 = 0
-dFa/da1 = (1-b0**((c1*f0)/(c0*d0)))*sqrt((c1*f1)/(c0*d0))
-dFa/db0 = -(a1*c1*f0*sqrt((c1*f1)/(c0*d0))*b0**((c1*f0)/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (c0*d0)-1))/(c0*d0)<br>
-dFa/db1 = 0
-dFa/dc0 = (a1*c1*f1*((b0**((c1*f0)/(d0*c0))-1)*d0*c0+2*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b0**((c1*f0)/(d0*c0))*log(b0)*c1*f0))/(2*d0**2*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(d0*c0))*c0**3)<br>
-dFa/dc1 = -(a1*f1*(2*b0**((f0*c1)/(c0*d0))*log(b0)*f0*c1+
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b0**((f0*c1)/(c0*d0))-1)*c0*d0))/(2*c0**2*d0**2*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((f1*c1)/(c0*d0)))<br>
-dFa/dd0 = (a1*c1*f1*((b0**((c1*f0)/(c0*d0))-1)*c0*d0+2*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b0**((c1*f0)/(c0*d0))*log(b0)*c1*f0))/(2*c0**2*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(c0*d0))*d0**3)<br>
-dFa/dd1 = 0
-dFa/df0 = -(a1*b0**((c1*f0)/(c0*d0))*log(b0)*c1*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(c0*d0)))/(c0*d0)<br>
-dFa/df1 = (a1*(1-b0**((c1*f0)/(c0*d0)))*c1)/(2*c0*d0*
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqrt((c1*f1)/(c0*d0)))<br>
+* xdata  :  array_like [2:nteams]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
+* par  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
 
 
 <a name="baseDerivative"></a>

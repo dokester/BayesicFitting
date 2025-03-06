@@ -10,12 +10,11 @@
 Harmonic oscillator Model.
 
 For order = N and period = 1 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = SUM_j ( p_k * cos( 2*pi*j*x ) + p_k+1 * sin( 2*pi*j*x ) )<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j = 1:N; k = 0:2N:2.<br>
+ f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> * cos( 2*&pi;*j*x ) + p<sub>k+1</sub> * sin( 2*&pi;*j*x ) )
+ for j = 1:N; and k = 0:2N:2.
 
 Otherwise scale with period 
-&nbsp;&nbsp;&nbsp;&nbsp; x /= period<br>
-
+ x = x / period
 
 The number of parameters is 2 * order.
 The parameters are initialized at 1.0. It is a linear model.
@@ -26,7 +25,7 @@ Author:      Do Kester
 
     harm = HarmonicModel( 3 )            # period = 1
     print( harm.npbase )
-6
+    6
     harm = HarmonicModel( 4, 2.7 )        # period = 2.7
 
 <b>Attributes</b>
@@ -212,7 +211,7 @@ Always : YUnit.
 * [<strong>strictNumericDerivative(</strong> xdata, param ) ](./Model.md#strictNumericDerivative)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 
 
@@ -221,7 +220,7 @@ Always : YUnit.
 * [<strong>expand(</strong> xdata, param ) ](./FixedModel.md#expand)
 
 
-<table><thead style="background-color:#FFD0D0; width:100%"><tr><th style="text-align:left">
+<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 
 

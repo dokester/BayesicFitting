@@ -15,7 +15,7 @@ Author       Do Kester
 
 <b>Examples</b>
 
-# assume x and y are Double1d data arrays.
+    # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = 3.5 * SIN( x + 0.4 )                    # make sine
     numpy.random.seed( 12345L )                 # Gaussian random number generator
@@ -32,7 +32,7 @@ Author       Do Kester
     yfit  = amfit.getResult( )                # fitted values
     yfit  = sine( x )                         # fitted values ( same as previous )
     yband = amfit.monteCarloError( )               # 1 sigma confidence region
-# for diagnostics ( or just for fun )
+    # for diagnostics ( or just for fun )
     amfit = AmoebaFitter( x, sine )
     amfit.setTemperature( 10 )                # set a temperature to escape local minima
     amfit.setVerbose( 10 )                    # report every 10th iteration

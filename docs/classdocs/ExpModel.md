@@ -9,11 +9,13 @@
 
 Exponential Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * exp( p_1 * x )<br>
+ f( x:p ) = p<sub>0</sub> * exp( p<sub>1</sub> * x )
 
-where p_0 = amplitude
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_1 = slope<br>
-As always x = input.
+ where 
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = slope<br>
+ As always 
+&nbsp;&nbsp;&nbsp;&nbsp; x = input.<br>
 
 The parameters are initialized at {1.0, -1.0}. It is a non-linear model.
 
@@ -22,13 +24,13 @@ to Infinity very quickly.
 
 When decay is True the model changes into a decay model
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * exp( - p_1 * x )<br>
+ f( x:p ) = p<sub>0</sub> * exp( - p<sub>1</sub> * x )
 
 The parameters are initialized at {1.0, 1.0}.
 
 <b>Attributes</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; sign : [-1,1]<br>
+* sign  :  [-1,1]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Whether decay is True or False.<br>
 
 <b>Attributes from Model</b>
@@ -47,7 +49,7 @@ The parameters are initialized at {1.0, 1.0}.
 
     em = ExpModel( )
     print( em.getNumberOfParameters( ) )
-2
+    2
 
 Author  Do Kester
 

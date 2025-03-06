@@ -9,26 +9,27 @@
 
 Gaussian Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )<br>
+ f( x:p ) = p<sub>0</sub> * exp( -0.5 * ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<sup>2</sup> )
 
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = center<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = width<br>
+ p<sub>0</sub> = amplitude
+ p<sub>1</sub> = center
+ p<sub>2</sub> = width
 
 The parameters are initialized at {1.0, 0.0, 1.0}.
-Parameter 2 (width) is always kept stricktly positive ( >0 ).
+
+Parameter 2 (width) is always kept stricktly positive (>0).
 
 <b>Examples</b>
 
     gauss = GaussModel( )
     print( gauss )
-* Gauss :  f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )<br>
+    Gauss: f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
     print( gauss.getNumberOfParameters( ) )
-3
+    3
     print( gauss( numpy.arange( 11 ) - 5 ) )
-[  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-&nbsp;&nbsp;&nbsp; 6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01<br>
-&nbsp;&nbsp;&nbsp; 1.11089965e-02   3.35462628e-04   3.72665317e-06]<br>
+    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+       1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
 <b>Attributes from Model</b>
 
