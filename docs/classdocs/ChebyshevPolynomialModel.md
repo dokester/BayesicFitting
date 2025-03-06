@@ -9,16 +9,16 @@
 
 Chebyshev polynomial model of arbitrary degree.
 
- f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )
+&nbsp; f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )<br>
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
 The T( x ) are Chebyshev polynomials of the first kind which are defined
 recursively as
 
- T<sub>0</sub>( x ) = 1
- T<sub>1</sub>( x ) = x
- T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2
+&nbsp; T<sub>0</sub>( x ) = 1<br>
+&nbsp; T<sub>1</sub>( x ) = x<br>
+&nbsp; T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2<br>
 
 These polynomials are orthogonal, when integrated over x in [-1,+1].
 
@@ -88,7 +88,7 @@ Returns the partials at the xdata value.
 
 The partials are calculated using the recurrence formula
 
- f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )
+&nbsp; f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )<br>
 
 <b>Parameters</b>
 
@@ -108,11 +108,11 @@ The partials are calculated using the recurrence formula
 
 Returns the derivative df/dx at the xdata value.
 
- df<sub>n</sub> = n * U<sub>n-1</sub>
- where
- U<sub>0</sub> = 1
- U<sub>1</sub> = 2x
- U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub>
+&nbsp; df<sub>n</sub> = n * U<sub>n-1</sub><br>
+&nbsp; where<br>
+&nbsp; U<sub>0</sub> = 1<br>
+&nbsp; U<sub>1</sub> = 2x<br>
+&nbsp; U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub><br>
 
 <b>Parameters</b>
 

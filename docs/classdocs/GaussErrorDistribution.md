@@ -11,7 +11,7 @@ To calculate a Gauss likelihood.
 
 For one residual, x, it holds
 
- L( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 ( x / s )<sup>2</sup> )
+&nbsp; L( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 ( x / s )<sup>2</sup> )<br>
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -21,11 +21,11 @@ The scale s is also the square root of the variance of this error distribution.
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log likelihood, logL.
 
- logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup>
+&nbsp; logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup><br>
 
 Using weights this becomes
 
- logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )
+&nbsp; logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )<br>
 
 
 Author       Do Kester.

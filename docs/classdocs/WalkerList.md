@@ -213,7 +213,3 @@ Return the evolution of the log( Likelihood ).
 
 Return the lowest value of logL in the walkerlist, plus its index.
 
-<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>Methods inherited from</strong> <a href="./list.html">list</a></th></tr></thead></table>
-
-

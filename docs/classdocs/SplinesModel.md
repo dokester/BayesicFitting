@@ -15,7 +15,7 @@ order   behaviour between knots     continuity at knots
 &nbsp;&nbsp; 1     piecewise linear            lines are continuous (connected)<br>
 &nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous<br>
 &nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous<br>
- n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
+&nbsp; n>3    n-th order polynomials      (n-1)-th derivatives are also continuous<br>
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.

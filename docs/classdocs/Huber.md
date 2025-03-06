@@ -9,7 +9,7 @@
 
 Huber is an improper Kernel function
 
- K( x ) = 1.0 if |x| < 1 else 1.0 / |x|
+&nbsp; K( x ) = 1.0 if |x| < 1 else 1.0 / |x|<br>
 
 It is improper because the integral equals +inf.
 
@@ -26,9 +26,9 @@ Constructor.
 
 Improper Kernel.
 
- Using
- integral = inf
- fwhm = 4
+&nbsp; Using<br>
+&nbsp; integral = inf<br>
+&nbsp; fwhm = 4<br>
  range = inf
 
 <a name="result"></a>

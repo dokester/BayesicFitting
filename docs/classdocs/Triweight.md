@@ -9,7 +9,7 @@
 
 Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = ( 1 - x<sup>2</sup> )<sup>3</sup> if |x| < 1 else 0
+&nbsp; K( x ) = ( 1 - x<sup>2</sup> )<sup>3</sup> if |x| < 1 else 0<br>
 
 
 <a name="Triweight"></a>
@@ -20,8 +20,8 @@ Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
 Constructor.
 
- Using
- integral = 32.0/35.0
+&nbsp; Using<br>
+&nbsp; integral = 32.0/35.0<br>
  fwhm = 0.908404
 
 <a name="result"></a>

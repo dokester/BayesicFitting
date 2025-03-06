@@ -393,7 +393,3 @@ and returned at each input value.
 &nbsp;&nbsp;&nbsp;&nbsp; standard deviations at each input point<br>
 
 
-<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>Methods inherited from</strong> <a href="./list.html">list</a></th></tr></thead></table>
-
-

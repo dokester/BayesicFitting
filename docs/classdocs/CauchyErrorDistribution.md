@@ -16,7 +16,7 @@ where x = residual and s = scale
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
- logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x<sup>2</sup> + s<sup>2</sup> ) )
+&nbsp; logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x<sup>2</sup> + s<sup>2</sup> ) )<br>
 
 Weights are not possible in this error distribution. They are silently ignored.
 

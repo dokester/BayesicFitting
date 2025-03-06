@@ -9,9 +9,9 @@
 
 Gauss prior distribution. Use  normalized version
 
- Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )
+&nbsp; Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )<br>
 
- By default: 
+&nbsp; By default: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; c = center = 0 <br>
 &nbsp;&nbsp;&nbsp;&nbsp; s = scale = 1.<br>
 
@@ -88,7 +88,7 @@ Copy the prior
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Gauss distribution.
 
- u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )
+&nbsp; u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )<br>
 
 <b>Parameters</b>
 
@@ -105,7 +105,7 @@ a parameter for a Gauss distribution.
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Gauss distribution.
 
- d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center
+&nbsp; d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center<br>
 
 <b>Parameters</b>
 

@@ -9,7 +9,7 @@
 
 Exponential prior distribution.
 
- Pr( x ) = exp( -x / scale )
+&nbsp; Pr( x ) = exp( -x / scale )<br>
 
 By default scale = 1.
 

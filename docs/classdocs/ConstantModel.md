@@ -9,7 +9,7 @@
 
 ConstantModel is a Model which does not have any parameters.
 
- f( x:p ) = f( x )
+&nbsp; f( x:p ) = f( x )<br>
 
 As such it is irrelevant whether it is linear or not.
 It has 0 params and returns a 0 for its partials.

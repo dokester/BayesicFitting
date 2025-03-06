@@ -9,7 +9,7 @@
 
 Tricube is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = ( 1 - |x|<sup>3</sup> )<sup>3</sup>  if |x| < 1 else 0
+&nbsp; K( x ) = ( 1 - |x|<sup>3</sup> )<sup>3</sup>  if |x| < 1 else 0<br>
 
 
 <a name="Tricube"></a>

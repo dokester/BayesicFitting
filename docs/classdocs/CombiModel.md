@@ -13,7 +13,7 @@ Fixed relations can be set between similar parameters.
 The relations can be either multiplicative or additive.
 When these relations are set, they must be set for all models.
 
- f( x:p ) = &sum; g( x:p )
+&nbsp; f( x:p ) = &sum; g( x:p )<br>
 
 where g( x:p ) is a model ( e.g. GaussModel )
 
@@ -47,19 +47,19 @@ As we have copies of the same model, each model can have its own priors.
 
 <b>Attributes from BracketModel</b>
 
- model, deep
+&nbsp; model, deep<br>
 
 <b>Attributes from Model</b>
 
- npchain, parameters, stdevs, xUnit, yUnit
+&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
 <b>Attributes from FixedModel</b>
 
- npmax, fixed, parlist, mlist
+&nbsp; npmax, fixed, parlist, mlist<br>
 
 <b>Attributes from BaseModel</b>
 
- npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <b>Examples</b>
@@ -293,8 +293,6 @@ Upon failure try at the equivalent position in the head model
 <strong>Methods inherited from</strong> <a href="./Brackets.html">Brackets</a></th></tr></thead></table>
 
 
-* [<strong>XXXsetLimits(</strong> lowLimits=None, highLimits=None ) ](./Brackets.md#XXXsetLimits)
-* [<strong>XXXgetLimits(</strong> ) ](./Brackets.md#XXXgetLimits)
 * [<strong>setPrior(</strong> kpar, prior=None, **kwargs )](./Brackets.md#setPrior)
 * [<strong>nextPrior(</strong> ) ](./Brackets.md#nextPrior)
 * [<strong>basePrior(</strong> k ) ](./Brackets.md#basePrior)

@@ -117,8 +117,6 @@ Copy a Bracket Model.
 * [<strong>baseResult(</strong> xdata, param )](./Brackets.md#baseResult)
 * [<strong>basePartial(</strong> xdata, param, parlist=None )](./Brackets.md#basePartial)
 * [<strong>baseDerivative(</strong> xdata, param )](./Brackets.md#baseDerivative)
-* [<strong>XXXsetLimits(</strong> lowLimits=None, highLimits=None ) ](./Brackets.md#XXXsetLimits)
-* [<strong>XXXgetLimits(</strong> ) ](./Brackets.md#XXXgetLimits)
 * [<strong>setPrior(</strong> kpar, prior=None, **kwargs )](./Brackets.md#setPrior)
 * [<strong>getPrior(</strong> kpar ) ](./Brackets.md#getPrior)
 * [<strong>nextPrior(</strong> ) ](./Brackets.md#nextPrior)

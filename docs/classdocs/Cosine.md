@@ -9,7 +9,7 @@
 
 Cosine is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = cos( 0.5 &pi; x )  if |x| < 1 else 0
+&nbsp; K( x ) = cos( 0.5 &pi; x )  if |x| < 1 else 0<br>
 
 
 <a name="Cosine"></a>
@@ -20,7 +20,7 @@ Cosine is a Kernel function between [-1,1]; it is 0 elsewhere.
 
 Constructor.
 
- Using
+&nbsp; Using<br>
 &nbsp;&nbsp;&nbsp;&nbsp; integral = 4 / &pi;<br>
 &nbsp;&nbsp;&nbsp;&nbsp; fwhm = 4.0 / 3.0<br>
 

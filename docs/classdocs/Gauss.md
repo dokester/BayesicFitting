@@ -9,7 +9,7 @@
 
 Gauss is an unbound Kernel function
 
- f( x ) = exp( -0.5 * x * x ).
+&nbsp; f( x ) = exp( -0.5 * x * x ).<br>
 
 
 <a name="Gauss"></a>
@@ -20,9 +20,9 @@ Gauss is an unbound Kernel function
 
 Constructor.
 
- Using
- integral = sqrt( 2 &pi; )
- fwhm = sqrt( 2 log( 2 ) )
+&nbsp; Using<br>
+&nbsp; integral = sqrt( 2 &pi; )<br>
+&nbsp; fwhm = sqrt( 2 log( 2 ) )<br>
  range = inf
 
 <a name="result"></a>

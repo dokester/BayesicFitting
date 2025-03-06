@@ -9,7 +9,7 @@
 
 Sinc is an unbound Kernel function.
 
- K( x ) = sin( &pi; x ) / ( &pi; x )
+&nbsp; K( x ) = sin( &pi; x ) / ( &pi; x )<br>
 
 Sinc is not strictly positive.
 
@@ -22,9 +22,9 @@ Sinc is not strictly positive.
 
 Constructor.
 
- Using
- integral = 1.0
- fwhm = 2 * 1.8954942670 / &pi;
+&nbsp; Using<br>
+&nbsp; integral = 1.0<br>
+&nbsp; fwhm = 2 * 1.8954942670 / &pi;<br>
  range = inf
 
 <a name="result"></a>

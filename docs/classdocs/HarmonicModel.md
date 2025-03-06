@@ -10,11 +10,11 @@
 Harmonic oscillator Model.
 
 For order = N and period = 1 
- f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> * cos( 2*&pi;*j*x ) + p<sub>k+1</sub> * sin( 2*&pi;*j*x ) )
- for j = 1:N; and k = 0:2N:2.
+&nbsp; f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> * cos( 2*&pi;*j*x ) + p<sub>k+1</sub> * sin( 2*&pi;*j*x ) )<br>
+&nbsp; for j = 1:N; and k = 0:2N:2.<br>
 
 Otherwise scale with period 
- x = x / period
+&nbsp; x = x / period<br>
 
 The number of parameters is 2 * order.
 The parameters are initialized at 1.0. It is a linear model.

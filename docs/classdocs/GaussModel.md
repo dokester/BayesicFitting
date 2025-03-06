@@ -9,11 +9,11 @@
 
 Gaussian Model.
 
- f( x:p ) = p<sub>0</sub> * exp( -0.5 * ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<sup>2</sup> )
+&nbsp; f( x:p ) = p<sub>0</sub> * exp( -0.5 * ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<sup>2</sup> )<br>
 
- p<sub>0</sub> = amplitude
- p<sub>1</sub> = center
- p<sub>2</sub> = width
+&nbsp; p<sub>0</sub> = amplitude<br>
+&nbsp; p<sub>1</sub> = center<br>
+&nbsp; p<sub>2</sub> = width<br>
 
 The parameters are initialized at {1.0, 0.0, 1.0}.
 

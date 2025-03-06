@@ -12,7 +12,3 @@ Thrown when an iterative fitter stops while the minimum has not been found.
 Author:       Do Kester
 
 
-<table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>Methods inherited from</strong> <a href="./Exception.html">Exception</a></th></tr></thead></table>
-
-

@@ -9,12 +9,12 @@
 
 Exponential Model.
 
- f( x:p ) = p<sub>0</sub> * exp( p<sub>1</sub> * x )
+&nbsp; f( x:p ) = p<sub>0</sub> * exp( p<sub>1</sub> * x )<br>
 
- where 
+&nbsp; where <br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = slope<br>
- As always 
+&nbsp; As always <br>
 &nbsp;&nbsp;&nbsp;&nbsp; x = input.<br>
 
 The parameters are initialized at {1.0, -1.0}. It is a non-linear model.
@@ -24,7 +24,7 @@ to Infinity very quickly.
 
 When decay is True the model changes into a decay model
 
- f( x:p ) = p<sub>0</sub> * exp( - p<sub>1</sub> * x )
+&nbsp; f( x:p ) = p<sub>0</sub> * exp( - p<sub>1</sub> * x )<br>
 
 The parameters are initialized at {1.0, 1.0}.
 

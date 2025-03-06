@@ -22,8 +22,9 @@ For each team the complexity lists parameters
 | Home advantage    |    4     |  0<d<2 |   1   | advantage of playing at home |
 | Strategy          |    5     |  0<e<2 |   1   | defensive <-> offensive      |
 
+
 Note: Computational runtime errors/warnings occur when (some of) the parameters are at 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; their limits. <br>
+their limits. 
 
 The default values are chosen such that they dont have effect on the results.
 I.e. a model with complexity=5 and all parameters at the defaults except for 
@@ -31,7 +32,7 @@ I.e. a model with complexity=5 and all parameters at the defaults except for
 value.
 
 For information what is calculated at each level of complexity, see info at 
-the methods goals[1-5](), below.
+the methods goals1(), goals2(), ... goals5(), below.
 
 Note
 This is about the game that most of the world calls football.
@@ -118,8 +119,8 @@ Return the prior of the parameter, indicated by k modulo the complexity
 
 Consider attack (a) only.
 
- S1 = a1
- S2 = a2
+&nbsp; S1 = a1<br>
+&nbsp; S2 = a2<br>
 
 <b>Parameters</b>
 
@@ -137,8 +138,8 @@ Consider attack (a) only.
 
 Consider attack (a) and defense (d).
 
- S1 = a1 * ( 1 - d2 )
- S2 = a2 * ( 1 - d1 )
+&nbsp; S1 = a1 * ( 1 - d2 )<br>
+&nbsp; S2 = a2 * ( 1 - d1 )<br>
 
 <b>Parameters</b>
 
@@ -158,8 +159,8 @@ Consider attack (a), defense (d) and midfield (m).
 
 The ratio of the midfield strength modifies attack and defense
 
- S1 = a1 * &radic;(m1/m2) * ( 1 - d2 ^ (m2/m1) )
- S2 = a2 * &radic;(m2/m1) * ( 1 - d1 ^ (m1/m2) )
+&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2 ^ (m2/m1) )<br>
+&nbsp; S2 = a2 * &radic;(m2/m1) * ( 1 - d1 ^ (m1/m2) )<br>
 
 <b>Parameters</b>
 
@@ -179,9 +180,9 @@ Consider attack (a), defense (d), midfield (m) and home advantage (h).
 
 The strategy modifies the midfield strangth of the home team.
 
- mh = m1 * h1
- S1 = a1 * &radic;(mh/m2) * ( 1 - d2 ^ (m2/mh) )
- S2 = a2 * &radic;(m2/mh) * ( 1 - d1 ^ (mh/m2) )
+&nbsp; mh = m1 * h1<br>
+&nbsp; S1 = a1 * &radic;(mh/m2) * ( 1 - d2 ^ (m2/mh) )<br>
+&nbsp; S2 = a2 * &radic;(m2/mh) * ( 1 - d1 ^ (mh/m2) )<br>
 
 <b>Parameters</b>
 
@@ -200,12 +201,12 @@ The strategy modifies the midfield strangth of the home team.
 Consider attack (a), defense (d), midfield (m), home advantage (h),
 and strategy (s)
 
- A offensive strategy (s>1) strenghtens the attach and weakens the defense. 
- A defensive strategy (s<1) strenghtens the defense and weakens the attack. 
+&nbsp; A offensive strategy (s>1) strenghtens the attach and weakens the defense. <br>
+&nbsp; A defensive strategy (s<1) strenghtens the defense and weakens the attack. <br>
 
- mh = m1 * h1
- S1 = a1 * &radic;(s1*mh/m2) * ( 1 - d2 ^ (s2*m2/mh) )
- S2 = a2 * &radic;(s2*m2/mh) * ( 1 - d1 ^ (s1*mh/m2) )
+&nbsp; mh = m1 * h1<br>
+&nbsp; S1 = a1 * &radic;(s1*mh/m2) * ( 1 - d2 ^ (s2*m2/mh) )<br>
+&nbsp; S2 = a2 * &radic;(s2*m2/mh) * ( 1 - d1 ^ (s1*mh/m2) )<br>
 
 <b>Parameters</b>
 

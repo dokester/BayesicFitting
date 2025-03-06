@@ -21,7 +21,7 @@ CosSquare (Cosine Squared) is a Kernel function between [-1,1]; it is 0 elsewher
 
 Constructor.
 
- Using
+&nbsp; Using<br>
 &nbsp;&nbsp;&nbsp;&nbsp; integral = 1.0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; fwhm = 1.0<br>
 

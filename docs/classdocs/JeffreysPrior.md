@@ -14,7 +14,7 @@ Jeffreys prior is a improper prior ( i.e. its integral is unbound ).
 Because of that it always needs limits, low and high, such that
 0 < low < high < +Inf.
 
- Pr( x ) = 1.0 / ( x * norm ) if ( low < x < high ) else 0
+&nbsp; Pr( x ) = 1.0 / ( x * norm ) if ( low < x < high ) else 0<br>
 
 where norm = log( high ) - log( low )
 

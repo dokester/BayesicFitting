@@ -275,7 +275,7 @@ if ( self.problem.hasAccuracy and self.walkers[0].fitIndex[-1] < 0 and
 &nbsp;&nbsp;&nbsp;&nbsp; raise AttributeError( "%s cannot be combined with accuracies and variable scale" %<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.distribution ) <br>
 
- if self.minimumIterations is None 
+&nbsp; if self.minimumIterations is None :<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.minimumIterations = 10 * self.ensemble / self.discard<br>
 
 tail = self.initReport( keep=keep )
@@ -295,13 +295,13 @@ self.logdZ = 0
 self.info = 0
 self.logWidth = math.log( 1.0 - math.exp( -1.0 / self.ensemble ) )
 
- TBD put self.logWidth in the saved file too
- if self.optionalRestart() 
+&nbsp; TBD put self.logWidth in the saved file too<br>
+&nbsp; if self.optionalRestart() :<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble<br>
 
 self.histinsert = []
 ## iterate until done
- while self.iteration < self.getMaxIter( )
+&nbsp; while self.iteration < self.getMaxIter( ):<br>
 while self.nextIteration() 
 
 &nbsp;&nbsp;&nbsp;&nbsp; self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL<br>
@@ -368,8 +368,8 @@ self.distribution.ncalls = 0                      #  reset number of calls
 return keep
 
 in Use
- sortLogL( self, walkers ) 
- return numpy.argsort( [w.logL for w in walkers] )
+&nbsp; sortLogL( self, walkers ) :<br>
+&nbsp; return numpy.argsort( [w.logL for w in walkers] )<br>
 
 <a name="walkerLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -817,7 +817,7 @@ if not isinstance( name, str )
 &nbsp;&nbsp;&nbsp;&nbsp; raise ValueError( "Cannot interpret ", name, " as string or ErrorDistribution" )<br>
 
 name = str.lower( name )
- print( name )
+&nbsp; print( name )<br>
 if name == "gauss" 
 &nbsp;&nbsp;&nbsp;&nbsp; self.distribution = GaussErrorDistribution( scale=scale, limits=limits )<br>
 elif name == "laplace" 
@@ -904,8 +904,8 @@ if startdict is None
 &nbsp;&nbsp;&nbsp;&nbsp; startdict = { "start" : StartEngine }<br>
 
 # Make the walkers list
- walker = Walker( 0, self.problem, numpy.asarray( allpars ), fitIndex )
- self.walkers = WalkerList( walker=walker, ensemble=ensemble )
+&nbsp; walker = Walker( 0, self.problem, numpy.asarray( allpars ), fitIndex )<br>
+&nbsp; self.walkers = WalkerList( walker=walker, ensemble=ensemble )<br>
 
 if self.initialEngine is not None
 &nbsp;&nbsp;&nbsp;&nbsp; # decorate with proper information<br>
@@ -945,7 +945,7 @@ self.setInitialEngine( ensemble, allpars, fitIndex, startdict=startdict )
 for walker in self.walkers 
 &nbsp;&nbsp;&nbsp;&nbsp; self.initialEngine.execute( walker.id, -math.inf )<br>
 
- for w in self.walkers 
+&nbsp; for w in self.walkers :<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; w.check( nhyp=self.distribution.nphypar )<br>
 
@@ -994,7 +994,7 @@ plt.ylim( dmin - dd, dmax + dd )
 report( self )
 
 
- print( "Rate        %f" % self.rate )
+&nbsp; print( "Rate        %f" % self.rate )<br>
 print( "Engines              success     reject     failed", end="" )
 if self.bestBoost 
 &nbsp;&nbsp;&nbsp;&nbsp; print( "       best", end="" )<br>

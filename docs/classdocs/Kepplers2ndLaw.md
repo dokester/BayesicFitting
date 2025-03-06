@@ -12,7 +12,7 @@ Class for calculating Kepplers second law for planetary motion.
 The projection of the orbit on the sky is not included in this class.
 
 The algorithm was taken from
- Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
+&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
 
 http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
 
@@ -93,8 +93,8 @@ It converges in a few iterations for e <= 0.999999999
 Return the eccentric anomaly, i.e. the solution for E of
 
 Standard method by Jean Meuss 
- Astronomical Algorithms, 2nd ed.,
- Willmann-Bell, Inc, Virginia, 193-196, 397-399
+&nbsp; Astronomical Algorithms, 2nd ed.,<br>
+&nbsp; Willmann-Bell, Inc, Virginia, 193-196, 397-399<br>
 
 e = params[0] = eccentricity
 M = mean anomaly

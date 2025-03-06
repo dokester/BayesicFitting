@@ -13,14 +13,14 @@ To calculate an Exponential likelihood.
 
 For one residual, x, it holds
 
- f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )<sup>p</sup> )
+&nbsp; f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )<sup>p</sup> )<br>
 
 where s is the scale and p is the power.
 s and p are hyperparameters, which might be estimated from the data.
 
 The variance of this function is
 
- &sigma;<sup>2</sup> = s<sup>2</sup> &Gamma;( 3 / p ) / &Gamma;( 1 / p )
+&nbsp; &sigma;<sup>2</sup> = s<sup>2</sup> &Gamma;( 3 / p ) / &Gamma;( 1 / p )<br>
 
 See toSigma()
 

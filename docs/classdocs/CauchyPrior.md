@@ -17,9 +17,9 @@ It can also have a limited domain.
 By default the domain is [-Inf,+Inf].
 In computational practice it is limited to [-1e16, 1e16]
 
- domain2unit: 
+&nbsp; domain2unit: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = arctan( ( d - c ) / s ) / &pi; + 0.5<br>
- unit2domain: 
+&nbsp; unit2domain: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; d = tan( ( u - 0.5 ) * &pi; ) * s + c<br>
 
 <b>Examples</b>

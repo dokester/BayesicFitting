@@ -9,7 +9,7 @@
 
 Biweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
- K( x ) = ( 1-x<sup>2</sup> )<sup>2</sup>    if |x| < 1 else 0
+&nbsp; K( x ) = ( 1-x<sup>2</sup> )<sup>2</sup>    if |x| < 1 else 0<br>
 
 Author:      Do Kester
 

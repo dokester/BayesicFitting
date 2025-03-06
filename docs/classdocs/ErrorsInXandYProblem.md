@@ -19,12 +19,12 @@ between data (xdata,ydata) and (target, model(target)) is minimised.
 The target are nuisance parameters which are not part of the modeling
 solution.
 
- Define
+&nbsp; Define<br>
 &nbsp;&nbsp;&nbsp;&nbsp; xd = xdata <br>
 &nbsp;&nbsp;&nbsp;&nbsp; yd = ydata <br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = target <br>
 &nbsp;&nbsp;&nbsp;&nbsp; F(u:P) = model( target )<br>
- Then the mismathes in both directions are
+&nbsp; Then the mismathes in both directions are<br>
 &nbsp;&nbsp;&nbsp;&nbsp; X = u - xd <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Y = F(u:p) - yd<br>
 
