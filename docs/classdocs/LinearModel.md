@@ -13,7 +13,7 @@ LinearModel implements the baseResult method needed in all linear models.
 
 For Linear models it holds that
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum;( p_i * df( x )/dp_i )<br>
+&nbsp; f( x:p ) = &sum;( p<sub>i</sub> * df( x )/dp<sub>i</sub> )<br>
 
 which means that only the partial derivatives to p_i need to be given
 as basePartial. The baseResult follows directly from that one.
@@ -25,9 +25,7 @@ None of its own
 
 <b>Attributes from Model</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain<br>
-&nbsp;&nbsp;&nbsp;&nbsp; _next, _head, _operation<br>
-&nbsp;&nbsp;&nbsp;&nbsp; xUnit, yUnit (relegated to model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)<br>
 
 <b>Attributes from FixedModel</b>
 

@@ -19,10 +19,12 @@ In computational practice the domain is limited to about [-36,36] scale units
 
 Equivalent to a double-sided exponential prior
 
-domain2unit: u = 0.5 * exp( ( d - c ) / scale )             if d < c
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise<br>
-unit2domain: d = c + log( 2 * u ) * scale                   if u < 0.5
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale           otherwise<br>
+domain2unit: 
+&nbsp; u = 0.5 * exp( ( d - c ) / scale )             if d < c<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise<br>
+unit2domain: 
+&nbsp; d = c + log( 2 * u ) * scale                   if u < 0.5<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale           otherwise<br>
 
 <b>Examples</b>
 
@@ -83,8 +85,8 @@ Constructor.
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Laplace distribution.
 
-domain2unit: u = 0.5 * exp( ( d - c ) / s ) if d < c else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / s )<br>
+&nbsp; u = 0.5 * exp( ( d - c ) / s )       if d < c else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / s )<br>
 
 <b>Parameters</b>
 
@@ -101,8 +103,8 @@ domain2unit: u = 0.5 * exp( ( d - c ) / s ) if d < c else
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Laplace distribution.
 
-unit2domain: d = c + log( 2 * u ) * scale if u < 0.5 else
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale;<br>
+&nbsp; d = c + log( 2 * u ) * scale           if u < 0.5 else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale<br>
 
 <b>Parameters</b>
 

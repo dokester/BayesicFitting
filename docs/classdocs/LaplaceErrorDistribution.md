@@ -11,12 +11,12 @@ To calculate a Laplace likelihood.
 
 For one residual, x, it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = 1 / ( 2 s ) exp( - |x| / s )<br>
+&nbsp; f( x ) = 1 / ( 2 s ) exp( - |x| / s )<br>
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
 
-The variance of this function is &sigma;^2 = 2 s ^ 2.
+The variance of this function is &sigma;<sup>2</sup> = 2 s<sup>2</sup>.
 See: toSigma()
 
 The function is mostly used to calculate the likelihood L over N

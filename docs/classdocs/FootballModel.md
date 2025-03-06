@@ -205,8 +205,8 @@ and strategy (s)
 &nbsp; A defensive strategy (s<1) strenghtens the defense and weakens the attack. <br>
 
 &nbsp; mh = m1 * h1<br>
-&nbsp; S1 = a1 * &radic;(s1*mh/m2) * ( 1 - d2 ^ (s2*m2/mh) )<br>
-&nbsp; S2 = a2 * &radic;(s2*m2/mh) * ( 1 - d1 ^ (s1*mh/m2) )<br>
+&nbsp; S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2 ^ (s2 * m2/mh) )<br>
+&nbsp; S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1 ^ (s1 * mh/m2) )<br>
 
 <b>Parameters</b>
 

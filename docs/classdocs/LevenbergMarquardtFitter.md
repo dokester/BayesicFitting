@@ -21,13 +21,13 @@ Author       Do Kester.
 
 <b>Examples</b>
 
-* # assume x and y are Double1d data arrays : <br>
+    # assume x and y are Double1d data arrays
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122            # make slope
     rg = RandomGauss( seed=12345L )            # Gaussian random number generator
     y += rg( numpy.asarray( 100, dtype=float ) ) * 0.2            # add noise
     y[Range( 9,12 )] += numpy.asarray( [5,10,7], dtype=float )         # make some peak
-* # define a model :  GaussModel + background polynomial<br>
+    # define a model: GaussModel + background polynomial
     gauss = GaussModel( )                            # Gaussian
     gauss += PolynomialModel( 1 )                    # add linear background
     gauss.setParameters( numpy.asarray( [1,1,0.1,0,0], dtype=float ) )    # initial parameter guess
@@ -41,7 +41,7 @@ Author       Do Kester.
     scale = lmfit.getScale( )                         # noise scale
     yfit  = lmfit.getResult( )                        # fitted values
     yband = lmfit.monteCarloError( )                       # 1 sigma confidence region
-# for diagnostics ( or just for fun )
+    # for diagnostics ( or just for fun )
     lmfit = LevenbergMarquardtFitter( x, gauss )
     lmfit.setVerbose( 2 )                             # report every 100th iteration
     plotter = IterationPlotter( )                     # from BayesicFitting
