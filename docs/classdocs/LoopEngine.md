@@ -11,7 +11,7 @@ The LoopEngine tries to unloop a crossing loop.
 
 Only for 2 dimensional TS problems.
 
-Input order 
+&nbsp; Input order :<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0  1  2  3<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 15 14  5  4<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7  6 13 12<br>
@@ -21,7 +21,7 @@ The loop crosses between (5,6) and (13,14). By switching the positions
 of 6 and 13, and reversing the loop in between, a better solution is
 reached (triangle inequality)
 
-output order
+&nbsp; Output order:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0  1  2  3<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 15 14  5  4<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 12 13  6  7<br>

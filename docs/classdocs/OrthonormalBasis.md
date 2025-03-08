@@ -40,5 +40,11 @@ from http://www.ecs.umass.edu/ece/ece313/Online_help/gram.pdf
 * vec  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; vector to be orthonomalised to self.basis<br>
 * reset  :  bool<br>
-    start a new basis.
+&nbsp;&nbsp;&nbsp;&nbsp; start a new basis.<br>
+
+<b>Return</b>
+
+* uvec  :  array_like<br>
+&nbsp;&nbsp;&nbsp;&nbsp; unit vector normal to the basis<br>
+
 

@@ -9,7 +9,7 @@
 
 Etalon Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> / ( 1.0 + p<sub>1</sub> * sin<sup>2</sup>( &pi; p,sub>2</sub< x + p<sub>3</sub> ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> / ( 1.0 + p<sub>1</sub> * sin<sup>2</sup>( &pi; p<sub>2</sub< x + p<sub>3</sub> ) )<br>
 
 &nbsp; where<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>

@@ -88,7 +88,7 @@ The standard deviation of the models is returned as the error bar.
 
 <b>Parameters</b>
 
-xdata ; array_like
+* xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars. default provided xdata<br>
 
 

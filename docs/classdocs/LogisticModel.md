@@ -9,13 +9,12 @@
 
 Logistic Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 / ( 1 + exp( ( x - p_1 ) / p_2 ) )<br>
+&nbsp; f( x:p ) = p<sub>0</sub> / ( 1 + exp( ( x - p<sub>1</sub> ) / p<sub>2</sub> ) )<br>
 
 where
-
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 : amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 : center<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 : slope<br>
+&nbsp; p<sub>0</sub> : amplitude<br>
+&nbsp; p<sub>1</sub> : center<br>
+&nbsp; p<sub>2</sub> : slope<br>
 
 The parameters are initialized at {1.0, 0.0, 1.0}.
 
@@ -23,13 +22,13 @@ The parameters are initialized at {1.0, 0.0, 1.0}.
 
     lm = LogisticModel( )
     print( lm )
-* Logistic :  f( x:p ) = p_0 / ( 1 + exp( ( p_1 - x ) / p_2 ) )<br>
+    Logistic: f( x:p ) = p_0 / ( 1 + exp( ( p_1 - x ) / p_2 ) )
     print( lm.npars )
-3
+    3
     print( lm( numpy.arange( 11 ) - 5 ) )
-[  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-&nbsp;&nbsp;&nbsp; 6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01<br>
-&nbsp;&nbsp;&nbsp; 1.11089965e-02   3.35462628e-04   3.72665317e-06]<br>
+    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+       1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
 <b>Attributes from Model</b>
 

@@ -9,7 +9,7 @@
 
 General polynomial surface model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = &sum;_d &sum;_k p_n * x^{d-k} * y^k )<br>
+&nbsp; f( x,y:p ) = &sum;<sub>d</sub> &sum;<sub>k</sub> p<sub>n</sub> * x<sup>d-k</sup> * y<sup>k</sup> )<br>
 
 where the first sum is over d running from 0 to degree ( inclusive )
 and the second sum is over k running from 0 to d ( inclusive ).
@@ -19,8 +19,8 @@ It is a 2-dimensional linear model.
 
 <b>Examples</b>
 
-poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
-print poly.getNumberOfParameters( )        # 10
+    poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
+    print poly.getNumberOfParameters( )        # 10
 
 Author      Do Kester
 
@@ -51,13 +51,14 @@ Author      Do Kester
 
 Polynominal surface of a certain degree. Two dimensions.
 
-degree      polysurface
-&nbsp;&nbsp; 0         p_0<br>
-&nbsp;&nbsp; 1         p_0 + p_1 * x + p_2 * y<br>
-&nbsp;&nbsp; 2         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2<br>
-&nbsp;&nbsp; 3         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 +<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3<br>
-etc.
+| degree |  polysurface                                               |
+|:------:|:-----------------------------------------------------------|
+| 0 | p_0                                                             |
+| 1 | p_0 + p_1 * x + p_2 * y                                         |
+| 2 | p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2   |
+| 3 | p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 + |
+|   |        p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3    |
+|etc|                                                                 |
 
 The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 
@@ -107,17 +108,19 @@ The partials are the powers of x,y ( xdata ) from 0 to degree.
 
 Return the derivative df/dx at each input (=x).
 
-degree      df/dx
-&nbsp;&nbsp; 0         0<br>
-&nbsp;&nbsp; 1         p_1<br>
-&nbsp;&nbsp; 2         p_1 + 2 * p_3 * x + p_4 * y<br>
-&nbsp;&nbsp; 3         p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2<br>
+| degree | df/dx |
+|:------:|:------|
+| 0 | 0          |
+| 1 | p_1        |
+| 2 | p_1 + 2 * p_3 * x + p_4 * y |
+| 3 | p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2 |
 
-degree      df/dy
-&nbsp;&nbsp; 0         0<br>
-&nbsp;&nbsp; 1         p_2<br>
-&nbsp;&nbsp; 2         p_2 + p_4 * x + 2 * p_5 * y<br>
-&nbsp;&nbsp; 3         p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2<br>
+| degree | df/dy |
+|:------:|:------|
+| 0 | 0          |
+| 1 | p_2        | 
+| 2 | p_2 + p_4 * x + 2 * p_5 * y |
+| 3 | p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2 |
 
 
 <b>Parameters</b>

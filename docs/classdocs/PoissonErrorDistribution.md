@@ -11,7 +11,7 @@ To calculate a Poisson likelihood.
 
 For one observation with n counts it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( n,x ) = x^n / ( e^x * n! )<br>
+&nbsp; f( n,x ) = x<sup>n</sup> / ( e<sup>x</sup> * n! )<br>
 
 where x is the expected counts
 

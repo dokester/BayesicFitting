@@ -20,9 +20,7 @@ It contains provisions for mixed models. (TBC)
 
 <b>Attributes from Model</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain<br>
-&nbsp;&nbsp;&nbsp;&nbsp; _next, _head, _operation<br>
-&nbsp;&nbsp;&nbsp;&nbsp; xUnit, yUnit (relegated to model)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit <br>
 
 <b>Attributes from FixedModel</b>
 

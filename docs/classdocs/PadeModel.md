@@ -9,7 +9,7 @@
 
 General Pade model of arbitrary degrees in numerator and denominator.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p_n * x^n / ( &sum; p_{num+1+k} * x^k )<br>
+&nbsp; f( x:p ) = &sum; p<sub>n</sub> * x<sup>n</sup> / ( &sum; p<sub>num+1+k</sub> * x<sup>k</sup> )<br>
 
 where the sum in the numerator is over n running from 0 to num ( inclusive )
 and the sum in the denominator is over k running from 0 to den ( inclusive )
@@ -29,7 +29,7 @@ Author:      Do Kester
 
     pade = PadeModel( 3, 1 )                # 3rd degree polynomial
     print pade.getNumberOfParameters( )     # 5
-5
+    5
 
 <b>Attributes</b>
 

@@ -22,7 +22,7 @@ All kernels are scaled such that its value at x=0 is 1.0.
 Several kernel functions, K( x ) are defined in this package
 
 | Name      | Definition        | Integral  | FWHM | range | comment     |
-|:----------|:------------------|----------:|:----:|:-----:|:------------|
+|-----------|-------------------|:---------:|:----:|:-----:|-------------|
 | Biweight  | ( 1-x^2 )^2       |     16/15 | 1.08 |  1.0  | aka Tukey   |
 | CosSquare | cos^2( 0.5*pi*x ) |       1.0 | 1.00 |  1.0  |             |
 | Cosine    | cos( 0.5*pi*x )   |      4/pi | 1.33 |  1.0  |             |

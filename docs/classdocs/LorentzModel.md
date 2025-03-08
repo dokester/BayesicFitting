@@ -9,12 +9,12 @@
 
 Lorentzian Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * ( p_2^2 / ( ( x - p_1 )^2 + p_2^2 )<br>
+&nbsp; f( x:p ) = p<sub>0</sub> * ( p<sub>2</sub><sup>2</sup> / ( ( x - p<sub>1</sub> )<sup>2</sup> + p<sub>2</sub><sup>2</sup> )<br>
 
-where
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = x-shift<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = gamma ( width )<br>
+&nbsp; where<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = x-shift<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = gamma ( width )<br>
 
 The parameters are initialized at [1/PI, 0.0, 1.0] where the integral
 over the function equals 1.
@@ -25,29 +25,26 @@ This model is also known as Cauchy or Cauchy-Lorentz.
 <b>Notes</b>
 
 There are other possible definitions of this model, where the integral equals 1.0.
-* http : //en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function<br>
+* [http](./http.md) : //en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function<br>
 
 Definitions that integrate to 1.0 are more fit as a distribution function.
 See sample/CauchyErrorDistribution.
 
 We choose our definition for 2 reasons.
 1. to be in line with the definitions of the GaussModel, SincModel,
-&nbsp;&nbsp;&nbsp;&nbsp; VoigtModel, all KernelModels etc. In all of them the amplitude parameter,<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_0, equals the maximum of the function. I.e. p_0 is indeed the amplitude.<br>
+VoigtModel, all KernelModels etc. In all of them the amplitude parameter,
+p<sub>0</sub>, equals the maximum of the function. 
+I.e. p<sub>0</sub> is indeed the amplitude.
 2. to have maximally independent parameters, meaning that if you change one
-&nbsp;&nbsp;&nbsp;&nbsp; parameter, only that aspect changes. In the present definition this is the case.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; In the alternative definition if you change p_2, not only the width<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of the function changes, but also the amplitude.<br>
+parameter, only that aspect changes. In the present definition this is the case.
+In the alternative definition if you change p<sub>2</sub>, not only the width
+of the function changes, but also the amplitude.
 
 <b>Examples</b>
 
     lorentz = LorentzModel( )
     lorentz.setParameters( [5, 4, 1] )
     print( lorentz( numpy.arange(  41 , dtype=float ) / 5 ) )
-
-<b>Attributes</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; none in this model<br>
 
 <b>Attributes from Model</b>
 

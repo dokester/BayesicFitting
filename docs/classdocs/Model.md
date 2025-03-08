@@ -344,6 +344,29 @@ Return the partial derivatives of the model at the inputs
 <strong>selectPipe(</strong> ndim, ninter, ndout ) 
 </th></tr></thead></table>
 <p>
+
+Select one of 9 pipe operations, depending on the dimensionality
+of the inputs and outputs of the model G and H
+
+Model G has pars p and model H has pars q.
+
+&nbsp; F(x:pq) ==>  H(G(x:p):q)            G(x:p) | H(*:q)   <br>
+&nbsp; dF/dp   ==>  dH/dG * dG/dp          H.derivative(G,p) * G.partial(x,q)<br>
+&nbsp; dF/dq   ==>  dH(G(x:p):q) / dq      G.partial(H,q)<br>
+
+&nbsp; G.ndout mustbe H.ndim<br>
+&nbsp; partial <== G<br>
+&nbsp; dfdx    <== H<br>
+
+<b>Parameters</b>
+
+* ndim  :  int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; input dimensions to G and thus to F<br>
+* ninter  :  int<br>
+&nbsp;&nbsp;&nbsp;&nbsp; output dim of G and input dim to H (must be same)<br>
+* ndout  :  int<br>
+    output dimensions of H and thus of F
+
 <a name="pipe_0"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_0(</strong> dGd, dHdG ) 
@@ -351,6 +374,7 @@ Return the partial derivatives of the model at the inputs
 <p>
 
 ninter == 1 and ndout == 1
+
 Return partial in the form of [N,P]
 
 <b>Parameters</b>
@@ -367,6 +391,7 @@ Return partial in the form of [N,P]
 <p>
 
 ninter > 1 and ndout > 1
+
 Return partial in the form [O][N,P]
 
 <b>Parameters</b>
@@ -383,6 +408,7 @@ Return partial in the form [O][N,P]
 <p>
 
 ndim == 1 and ninter > 1 and ndout == 1
+
 Return partial in the form of [N,P]
 
 <b>Parameters</b>
@@ -399,6 +425,7 @@ Return partial in the form of [N,P]
 <p>
 
 ndim == 1 and ninter = 1 and ndout > 1
+
 Return partial in the form of [O][NP]
 
 <b>Parameters</b>
@@ -415,6 +442,7 @@ Return partial in the form of [O][NP]
 <p>
 
 ndim == 0 and ninter == 1 and ndout == 1
+
 Return partial in the form of [N]
 
 <b>Parameters</b>
@@ -431,6 +459,7 @@ Return partial in the form of [N]
 <p>
 
 ndim == 1 and ninter > 1 and ndout > 1
+
 Return derivative in the form of [N,O]
 
 <b>Parameters</b>
@@ -447,6 +476,7 @@ Return derivative in the form of [N,O]
 <p>
 
 ndim == 1 and ninter > 1 and ndout == 1
+
 Return derivative in the form of [N]
 
 <b>Parameters</b>
@@ -463,6 +493,7 @@ Return derivative in the form of [N]
 <p>
 
 ndim == 1 and ninter = 1 and ndout > 1
+
 Return derivative in the form of [N,O]
 
 <b>Parameters</b>
@@ -479,6 +510,7 @@ Return derivative in the form of [N,O]
 <p>
 
 ndim > 1 and ninter > 1 and ndout == 1
+
 Return derivative in the form of [N,I]
 
 <b>Parameters</b>
@@ -495,6 +527,7 @@ Return derivative in the form of [N,I]
 <p>
 
 ndim > 1 and ninter == 1 and ndout > 1
+
 Return derivative in the form of [O][N,I]
 
 <b>Parameters</b>
