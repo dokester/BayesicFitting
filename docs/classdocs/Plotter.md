@@ -1,5 +1,17 @@
 ---
 ---
+<br><br>
+
+<a name="FitPlotter"></a>
+<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
+<strong>Module FitPlotter</strong>  )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py target=_blank>Source</a></th></tr></thead></table>
+<p>
+
+This module contains 2 methods to plot the results of a fit by a Fitter resp. 
+a Sampler.
+
+They are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
+
 
 <a name="plotFit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -55,35 +67,35 @@ Plot the data of a fit.
 
 Plot the posterior as npt points from the SampleList.
 
-Parameters
-==========
-sl : SampleList
+<b>Parameters</b>
+
+* sl  :  SampleList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the samplelist containing samples from the posterior<br>
-xdata : arraylike
+* xdata  :  arraylike<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the xdata values; plotted for comparison<br>
-ydata : arraylike
+* ydata  :  arraylike<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the ydata values; plotted for comparison<br>
-errors : None of arraylike
+* errors  :  None of arraylike<br>
 &nbsp;&nbsp;&nbsp;&nbsp; (No) errors on the ydata are displayed<br>
-npt : int
+* npt  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of points from the sample (10000)<br>
-residuals : bool
+* residuals  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; plot the residuals in a lower panel (False)<br>
-xlabel : None or str
+* xlabel  :  None or str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; use as xlabel<br>
-ylabel : None or str
+* ylabel  :  None or str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; use as ylabel<br>
-title  : None or str
+* title   :  None or str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; use as title<br>
-xlim : None or list of 2 floats
+* xlim  :  None or list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; limits on x-axis<br>
-ylim : None or list of 2 floats
+* ylim  :  None or list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; limits on y-axis<br>
-figsize : list of 2 floats
+* figsize  :  list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; size of the figure<br>
-filename  : None or str
+* filename   :  None or str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; name of png file; otherwise show<br>
-transparent : bool
+* transparent  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; make the png file transparent<br>
 
 
