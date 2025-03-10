@@ -23,8 +23,8 @@ Several kernel functions, K( x ) are defined in this package
 
 | Name      | Definition        | Integral  | FWHM | range | comment     |
 |-----------|-------------------|:---------:|:----:|:-----:|-------------|
-| Biweight  | ( 1-x^2 )^2       |     16/15 | 1.08 |  1.0  | aka Tukey   |
-| CosSquare | cos^2( 0.5*pi*x ) |       1.0 | 1.00 |  1.0  |             |
+| Biweight  | ( 1-x<sup>2</sup> )<sup>2</sup>       |     16/15 | 1.08 |  1.0  | aka Tukey   |
+| CosSquare | cos<sup>2</sup>( 0.5*pi*x ) |       1.0 | 1.00 |  1.0  |             |
 | Cosine    | cos( 0.5*pi*x )   |      4/pi | 1.33 |  1.0  |             |
 | Gauss     | exp( -0.5*x*x )   | sqrt(2*pi)| 1.22 |  inf  |             |
 | Huber     | min( 1, 1/\|x\| ) |       inf | 4.00 |  inf  | improper    |
@@ -33,8 +33,8 @@ Several kernel functions, K( x ) are defined in this package
 | Parabola  | 1 - x*x           |       4/3 | 1.41 |  1.0  |             |
 | Sinc      | sin(pi*x)/(pi*x)  |       1.0 | 1.21 |  inf  |             |
 | Triangle  | 1 - \|x\|         |       1.0 | 1.00 |  1.0  |             |
-| Tricube   | ( 1 - \|x\|^3 )^3 |     81/70 | 1.18 |  1.0  |             |
-| Triweight | ( 1 - x^2 )^3     |     32/35 | 0.91 |  1.0  |             |
+| Tricube   | ( 1 - \|x\|<sup>3</sup> )<sup>3</sup> |     81/70 | 1.18 |  1.0  |             |
+| Triweight | ( 1 - x<sup>2</sup> )<sup>3</sup>     |     32/35 | 0.91 |  1.0  |             |
 | Uniform   | 1.0               |       2.0 | 2.00 |  1.0  | aka Clip    |
 | Tophat 0  | 1.0               |       1.0 | 1.00 |  0.5  | like Uniform|
 | Tophat 1  | 1 - \|x\|         |       1.0 | 1.00 |  1.0  | aka Triangle|

@@ -9,18 +9,18 @@
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
-p_0 : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-p_1 : amplitude    of the velocity variation (>0)
-p_2 : period       of the velocity variation (>0)
-p_3 : phase        phase of periastron (0<p<2pi)
-p_4 : periastron   longitude of periastron (0<p<2pi)
+p<sub>0</sub> : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
+p<sub>1</sub> : amplitude    of the velocity variation (>0)
+p<sub>2</sub> : period       of the velocity variation (>0)
+p<sub>3</sub> : phase        phase of periastron (0<p<2pi)
+p<sub>4</sub> : periastron   longitude of periastron (0<p<2pi)
 
 This class uses [Kepplers](./Kepplers.md)2ndLaw to find radius and true anomaly.
 
 Note
 The velocity of the star system is not included in this model. See example.
 
-The parameters are initialized at {0.0, 1.0, 1.0, 0.0, 0.0}.
+The parameters are initialized at 0.0, 1.0, 1.0, 0.0, 0.0.
 It is a non-linear model.
 
 <b>Attributes</b>
@@ -84,7 +84,7 @@ Return the mass of the exoplanet in Jupiter masses.
 
 Returns the result of the model function.
 
-f(x:p) = p_1 * ( cos( v + p_4 ) + p_0 * cos( p_4 ) )
+f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
 
 where v is the true anomaly
 
@@ -104,13 +104,13 @@ where v is the true anomaly
 
 Returns the partials at the input value.
 
-f(x:p) = p_1 * ( cos( v + p_4 ) + p_0 * cos( p_4 ) )
+f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
 
-df/dp_0 = p_1 * ( - sin( v + p_4 ) dv/dp_0 + cos( p_4 ) )
-df/dp_1 = cos( v + p_4 ) + p_0 * cos( p_4 )
-df/dp_2 = - p_1 * sin( v + p_4 ) dv/dp_2
-df/dp_3 = - p_1 * sin( v + p_4 ) dv/dp_3
-df/dp_4 = - p_1 * ( sin( v + p_4 ) + p_0 * sin( p_4 ) )
+df/dp<sub>0</sub> = p<sub>1</sub> * ( - sin( v + p<sub>4</sub> ) dv/dp<sub>0</sub> + cos( p<sub>4</sub> ) )
+df/dp<sub>1</sub> = cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> )
+df/dp<sub>2</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>2</sub>
+df/dp<sub>3</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>3</sub>
+df/dp<sub>4</sub> = - p<sub>1</sub> * ( sin( v + p<sub>4</sub> ) + p<sub>0</sub> * sin( p<sub>4</sub> ) )
 
 <b>Parameters</b>
 
@@ -130,7 +130,7 @@ df/dp_4 = - p_1 * ( sin( v + p_4 ) + p_0 * sin( p_4 ) )
 
 Returns the derivative of f to x (df/dx) at the input values.
 
-dfdx = - p_1 * sin( v + p_4 ) * dvdx
+dfdx = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) * dvdx
 
 <b>Parameters</b>
 

@@ -9,7 +9,7 @@
 
 Parabola is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp; K( x ) = ( 1-x^2 )      if |x| < 1 else 0<br>
+&nbsp; K( x ) = ( 1-x<sup>2</sup> )      if |x| < 1 else 0<br>
 
 
 <a name="Parabola"></a>

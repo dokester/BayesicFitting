@@ -33,11 +33,11 @@ See sample/CauchyErrorDistribution.
 We choose our definition for 2 reasons.
 1. to be in line with the definitions of the GaussModel, SincModel,
 VoigtModel, all KernelModels etc. In all of them the amplitude parameter,
-p<sub>0</sub>, equals the maximum of the function. 
-I.e. p<sub>0</sub> is indeed the amplitude.
+p_0, equals the maximum of the function. 
+I.e. p_0 is indeed the amplitude.
 2. to have maximally independent parameters, meaning that if you change one
 parameter, only that aspect changes. In the present definition this is the case.
-In the alternative definition if you change p<sub>2</sub>, not only the width
+In the alternative definition if you change p_2, not only the width
 of the function changes, but also the amplitude.
 
 <b>Examples</b>

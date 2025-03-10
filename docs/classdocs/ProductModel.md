@@ -136,7 +136,7 @@ Returns a string representation of the model.
 </th></tr></thead></table>
 <p>
 
-Return the name of a parameter as "param<dim>_<seq>.
+Return the name of a parameter as "param<dim><seq>.
 <b>Parameters</b>
 
 * k  :  int<br>

@@ -148,7 +148,7 @@ ValueError when one of the following is true
 <p>
 
 Introduce a minimum in scale calculation and consequently in chisq.
-&nbsp;&nbsp;&nbsp;&nbsp; chi^2 >= sumwgt * scale^2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; chi<sup>2</sup> >= sumwgt * scale<sup>2</sup><br>
 
 <b>Parameters</b>
 
@@ -412,7 +412,7 @@ Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 Return the (calculated) variance of the remaining noise. I.e.
 &nbsp;&nbsp;&nbsp;&nbsp; var = chisq / dof<br>
 when automatic noise scaling is requested or
-&nbsp;&nbsp;&nbsp;&nbsp; var = scale^2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; var = scale<sup>2</sup><br>
 when we have a fixed scale.
 
 <b>Parameters</b>
@@ -491,7 +491,7 @@ ValueError when chisq <= 0.
 
 Calculates of standard deviations pertaining to the parameters.
 
-&nbsp;&nbsp;&nbsp;&nbsp; &sigma;_i = s * sqrt( C[i,i] )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &sigma;<sub>i</sub> = s * sqrt( C[i,i] )<br>
 
 where C is the Covariance matrix, the inverse of the Hessian Matrix and
 s is the noiseScale.

@@ -20,7 +20,7 @@ where K( u ) is a selectable kernel function on the rescaled input u
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> is the center<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> is the range.<br>
 
-The parameters are initialized at {amp,0,1}. the amplitude is such that the
+The parameters are initialized at amp,0,1. the amplitude is such that the
 function integrates to 1.0. They are listed in the table.
 
 Several kernel functions predefined.

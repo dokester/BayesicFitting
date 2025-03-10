@@ -18,7 +18,7 @@ which can be autoconvolved.
 
 By default ppb = 5.
 
-The parameters are initialized at {0}.
+The parameters are initialized at 0.
 
 Although this is a LinearModel it will not work very well with the ( linear )
 Fitter. It will be a very ill-posed problem.

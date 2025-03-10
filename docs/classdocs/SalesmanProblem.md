@@ -110,7 +110,7 @@ An array of distances
 Use Manhattan distances (1-norm)
 
 Each distance is 
-&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = SUM_i ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = SUM<sub>i</sub> ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )<br>
 
 <b>Parameters</b>
 
@@ -130,7 +130,7 @@ Each distance is
 Use Euclidic distances (2-norm)
 
 Each distance is 
-&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = sqrt( SUM_i ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )^2 ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = sqrt( SUM<sub>i</sub> ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )<sup>2</sup> ) )<br>
 
 <b>Parameters</b>
 

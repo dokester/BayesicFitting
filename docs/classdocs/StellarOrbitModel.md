@@ -11,17 +11,17 @@ Model for the radial velocity variations of a star caused by a orbiting planet.
 
 The algorithm was taken from
 &nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf<br>
+&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist<sub>1</sub>89-199.pdf<br>
 
-p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-p_1 : a     semi major axis (>0)
-p_2 : P     period of the orbit (>0)
-p_3 : T     phase since periastron passage (0<p_3<2pi)
-p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = pi = in sky plane)
-p_5 : Omega position angle from North to the line of nodes (0<Omega<pi; 0 = north )
-p_6 : omega longitude from the node (in p_5) to the periastron (0<omega<2pi; 0 = periastron in node )
+p<sub>0</sub> : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
+p<sub>1</sub> : a     semi major axis (>0)
+p<sub>2</sub> : P     period of the orbit (>0)
+p<sub>3</sub> : T     phase since periastron passage (0<p<sub>3</sub><2pi)
+p<sub>4</sub> : i     inclination of the orbit wrt sky (0<i<pi; 0 = pi = in sky plane)
+p<sub>5</sub> : Omega position angle from North to the line of nodes (0<Omega<pi; 0 = north )
+p<sub>6</sub> : omega longitude from the node (in p<sub>5</sub>) to the periastron (0<omega<2pi; 0 = periastron in node )
 
-Due to the fact that the orbit can be mirrored in the sky plane, one of p_5 or p_6
+Due to the fact that the orbit can be mirrored in the sky plane, one of p<sub>5</sub> or p<sub>6</sub>
 has to be limited to [0,pi] and the other to [0,2pi].
 
 The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0].

@@ -16,7 +16,7 @@ Arctangus Model.
 
 As always x = input.
 
-The parameters are initialized at {2/pi, 0.0, 1.0}. It is a non-linear model.
+The parameters are initialized at 2/pi, 0.0, 1.0. It is a non-linear model.
 
 <b>Attributes from Model</b>
 

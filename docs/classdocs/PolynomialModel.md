@@ -9,7 +9,7 @@
 
 General polynomial model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p_k * x^k<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p<sub>k</sub> * x<sup>k</sup><br>
 
 where the sum is over k running from 0 to degree ( inclusive ).
 

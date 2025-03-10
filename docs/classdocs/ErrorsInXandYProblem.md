@@ -114,20 +114,20 @@ Copy.
 
 Store 3 items from the covar matrix : 
 
-&nbsp;&nbsp;&nbsp;&nbsp; | var_yy, var_xy |<br>
-&nbsp;&nbsp;&nbsp;&nbsp; | var_xy, var_xx |<br>
+&nbsp;&nbsp;&nbsp;&nbsp; | var<sub>y</sub>y, var<sub>x</sub>y |<br>
+&nbsp;&nbsp;&nbsp;&nbsp; | var<sub>x</sub>y, var<sub>x</sub>x |<br>
 
 When the accuracy is given, convert it to these items by
-var_yy = acc[0] * acc[0]
-var_xx = acc[1] * acc[1]
-var_xy = acc[0] * acc[1] * acc[2]
+var<sub>y</sub>y = acc[0] * acc[0]
+var<sub>x</sub>x = acc[1] * acc[1]
+var<sub>x</sub>y = acc[0] * acc[1] * acc[2]
 
 Store also the determinant of the covariance matrix. 
 
 When both accuracy and covar are None
-&nbsp;&nbsp; var_yy = 0 <br>
-&nbsp;&nbsp; var_xx = 1<br>
-&nbsp;&nbsp; var_xy = 0<br>
+&nbsp;&nbsp; var<sub>y</sub>y = 0 <br>
+&nbsp;&nbsp; var<sub>x</sub>x = 1<br>
+&nbsp;&nbsp; var<sub>x</sub>y = 0<br>
 
 <b>Raises</b>
 

@@ -4,7 +4,7 @@
 
 <a name="LogFactorial"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>Module LogFactorial</strong>  )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py target=_blank>Source</a></th></tr></thead></table>
+<strong>Module LogFactorial</strong> <a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 One method that returns the log of the factorial of a number.

@@ -15,7 +15,7 @@ For Linear models it holds that
 
 &nbsp; f( x:p ) = &sum;( p<sub>i</sub> * df( x )/dp<sub>i</sub> )<br>
 
-which means that only the partial derivatives to p_i need to be given
+which means that only the partial derivatives to p<sub>i</sub> need to be given
 as basePartial. The baseResult follows directly from that one.
 It is implemented here.
 

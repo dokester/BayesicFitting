@@ -174,7 +174,7 @@ Return the hessian of log( likelihood ) to the parameters in fitIndex.
 The hessian is a matrix containing the second derivatives to each
 of the parameters.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp_i dp_k<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp<sub>i</sub> dp<sub>k</sub><br>
 
 <b>Parameters</b>
 

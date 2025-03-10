@@ -93,7 +93,7 @@ Copy method.
 </th></tr></thead></table>
 <p>
 
-Returns the result of the model function: F_n( x_k ) as array of
+Returns the result of the model function: F<sub>n</sub>( x<sub>k</sub> ) as array of
 shape [nx,ndout], where nx number of data points and ndout is the number of
 outputs.
 
@@ -130,7 +130,7 @@ of shape (K,P). N is #outputs; K is #datapoints; P is #parameters.
 </th></tr></thead></table>
 <p>
 
-Return the derivative df_i/dx_n of each output f_i to the data x_n
+Return the derivative df<sub>i</sub>/dx<sub>n</sub> of each output f<sub>i</sub> to the data x<sub>n</sub>
 at each xdata (=x).
 It is returned as an array of shape (N,I) of an array of length K.
 N is #outputs; I is #inputs (ndim); K is #datapoints.

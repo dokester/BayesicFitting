@@ -14,7 +14,7 @@ The projection of the orbit on the sky is not included in this class.
 The algorithm was taken from
 &nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
 
-http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
+http://www.jdso.org/volume13/number2/Harfenist<sub>1</sub>89-199.pdf
 
 | param | abbr | name                   | limits    | comment     |
 |:-----:|:----:|:-----------------------|:---------:|:------------| 
@@ -215,8 +215,8 @@ v = 2 * arctan( sqrt( (1+e)/(1-e) ) * tan( E / 2 ) )
 
 from Wikepedia => Trigoniometic Identities 
 tan( E / 2 ) = sqrt( ( 1 - cos( E ) ) / ( 1 + cos( E ) ) )
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )^2 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( s^2 / ( 1 + c )^2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )<sup>2</sup> )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( s<sup>2</sup> / ( 1 + c )<sup>2</sup> )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = s / ( 1 + c )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sin( E ) / ( 1 + cos( E ) )<br>
 Avoid cases where cos( E ) is too close to -1

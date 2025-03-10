@@ -159,8 +159,8 @@ Consider attack (a), defense (d) and midfield (m).
 
 The ratio of the midfield strength modifies attack and defense
 
-&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2 ^ (m2/m1) )<br>
-&nbsp; S2 = a2 * &radic;(m2/m1) * ( 1 - d1 ^ (m1/m2) )<br>
+&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2  (m2/m1) )<br>
+&nbsp; S2 = a2 * &radic;(m2/m1) * ( 1 - d1  (m1/m2) )<br>
 
 <b>Parameters</b>
 
@@ -181,8 +181,8 @@ Consider attack (a), defense (d), midfield (m) and home advantage (h).
 The strategy modifies the midfield strangth of the home team.
 
 &nbsp; mh = m1 * h1<br>
-&nbsp; S1 = a1 * &radic;(mh/m2) * ( 1 - d2 ^ (m2/mh) )<br>
-&nbsp; S2 = a2 * &radic;(m2/mh) * ( 1 - d1 ^ (mh/m2) )<br>
+&nbsp; S1 = a1 * &radic;(mh/m2) * ( 1 - d2  (m2/mh) )<br>
+&nbsp; S2 = a2 * &radic;(m2/mh) * ( 1 - d1  (mh/m2) )<br>
 
 <b>Parameters</b>
 
@@ -205,8 +205,8 @@ and strategy (s)
 &nbsp; A defensive strategy (s<1) strenghtens the defense and weakens the attack. <br>
 
 &nbsp; mh = m1 * h1<br>
-&nbsp; S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2 ^ (s2 * m2/mh) )<br>
-&nbsp; S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1 ^ (s1 * mh/m2) )<br>
+&nbsp; S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2  (s2 * m2/mh) )<br>
+&nbsp; S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1  (s1 * mh/m2) )<br>
 
 <b>Parameters</b>
 

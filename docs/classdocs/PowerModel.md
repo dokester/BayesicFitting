@@ -9,7 +9,7 @@
 
 General power model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p * x^a<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p * x<sup>a</sup><br>
 
 a is an float ( positive or negative ).
 

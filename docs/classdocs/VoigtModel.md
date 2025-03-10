@@ -102,8 +102,8 @@ Returns the partials at the input value.
 
 &nbsp;&nbsp;&nbsp;&nbsp; dvdp = dvdz * dzdp<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 * ( R(dwdz) * R(wofz0) - R(dwd0) * R(wofzz) ) / R(wofz0)^2<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dvdp = p0 * ( R(dwdz * dzdp) * R(wofz0) - R(dwd0 * d0dp) * R(wofzz) ) / R(wofz0)^2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 * ( R(dwdz) * R(wofz0) - R(dwd0) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
+&nbsp;&nbsp;&nbsp;&nbsp; dvdp = p0 * ( R(dwdz * dzdp) * R(wofz0) - R(dwd0 * d0dp) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
 
 &nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z  * wofzz<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dwd0 = 2j / sqrt(pi) - 2 * z0 * wofz0<br>
@@ -111,8 +111,8 @@ Returns the partials at the input value.
 &nbsp;&nbsp;&nbsp;&nbsp; ## p0 and p1 have no influence in wofz0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp0 = 0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp1 = -1 / ( p2 * sqrt2 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; d0dp2 = - ( 1j * p3 / ( p2^2 * sqrt2 )              = -z0 / p2<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dzdp2 = - ( ( x - p1 + 1j * p3 ) / ( p2^2 * sqrt2 ) = -z  / p2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; d0dp2 = - ( 1j * p3 / ( p2<sup>2</sup> * sqrt2 )              = -z0 / p2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dzdp2 = - ( ( x - p1 + 1j * p3 ) / ( p2<sup>2</sup> * sqrt2 ) = -z  / p2<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp3 = d0dp3 = 1j / ( p2 * sqrt2 )<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp; dvdp0 = R(wofzz) / R(wofz0)<br>

@@ -17,7 +17,7 @@ For one residual, x, it holds
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
 
-The variance of this function is &sigma;^2 = s / 6.
+The variance of this function is &sigma;<sup>2</sup> = s / 6.
 See: toSigma()
 
 The function is mostly used to calculate the likelihood L over N residuals,

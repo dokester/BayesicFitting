@@ -7,7 +7,7 @@
 <strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
-CurveFitter implements scipy.optimize.curve_fit.
+CurveFitter implements scipy.optimize.curve<sub>f</sub>it.
 
 Author:      Do Kester.
 

@@ -13,24 +13,24 @@ Two variants are implemented.
 
 1. By default it is the weighted sum of sine and cosine of the same frequency
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_1 * cos( 2 * &pi; * p_0 * x ) + p_2 * sin( 2 * &pi; * p_0 * x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( 2 * &pi; * p<sub>0</sub> * x ) + p<sub>2</sub> * sin( 2 * &pi; * p<sub>0</sub> * x )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = frequency<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = amplitude cosine and<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = amplitude sine.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = frequency<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = amplitude sine.<br>
 As always x = input.
 
 The parameters are initialized at [1.0, 1.0, 1.0]. It is a non-linear model.
 
 2. If phase == True, the sinusoidal model has an explicit phase
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * sin( 2 * &pi; * p_1 * x + p_2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( 2 * &pi; * p<sub>1</sub> * x + p<sub>2</sub> )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = frequency<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = phase.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = frequency<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = phase.<br>
 
 The parameters are initialized as [1.0, 1.0, 0.0].
 

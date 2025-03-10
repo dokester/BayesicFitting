@@ -17,7 +17,7 @@ It does it by manipulating the weights: outliers are
 downweighted. "Normal" points keep their weights, more or less.
 
 Apart from methods specific to the robustification, RobustShell has a fit method
-and little else from the Fitter family. Methods to get chi^2,
+and little else from the Fitter family. Methods to get chi<sup>2</sup>,
 the covariance matrix, the evidence, the noise scale etc. should be taken from
 the embedded fitter.
 

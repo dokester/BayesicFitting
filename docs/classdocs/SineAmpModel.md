@@ -11,11 +11,11 @@ Sine with fixed frequency.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 cos( 2 &pi; &omega; x ) + p_1 sin( 2 &pi; &omega; x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> cos( 2 &pi; &omega; x ) + p<sub>1</sub> sin( 2 &pi; &omega; x )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude of cosine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = amplitude of sine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude of cosine<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude of sine<br>
 &nbsp;&nbsp;&nbsp;&nbsp; &omega; is the fixed frequency of the model.<br>
 
 It is a linear model with 2 parameters.

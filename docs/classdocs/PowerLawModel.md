@@ -9,16 +9,16 @@
 
 General powerlaw model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * ( x - p_1 )^p_2<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * ( x - p<sub>1</sub> )<sup>p</sup><sub>2</sub><br>
 
 with
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitide<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = x-shift<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = power<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitide<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = x-shift<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = power<br>
 
-The parameters are initialized at {1.0, 0.0, 1.0}.
+The parameters are initialized at 1.0, 0.0, 1.0.
 
-Note that the term ( x - p_1 ) needs to be divided by a factor 1.0
+Note that the term ( x - p<sub>1</sub> ) needs to be divided by a factor 1.0
 in the same units as the x, to get the overall units of f( x:p ) right.
 The factor is omitted as it does not contribute in the calculations.
 

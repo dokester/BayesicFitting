@@ -17,7 +17,7 @@ Model.
 To make averages one has to take into account the weights. Each Sample has a weight
 and all weights sum to 1.0. So the average of any function, f, of the parameters p is
 
-&nbsp;&nbsp;&nbsp;&nbsp; E( f(p) ) = &sum; w_k f( p_k )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; E( f(p) ) = &sum; w<sub>k</sub> f( p<sub>k</sub> )<br>
 
 where the sum is over all samples k.
 

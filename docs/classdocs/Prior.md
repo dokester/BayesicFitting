@@ -19,8 +19,8 @@ unit2Domain and domain2Unit.
 d is a value in the domain of the prior and u is a vlue in [0,1]
 
 The handling of limits is relegated to this Prior class. Define
-&nbsp;&nbsp;&nbsp;&nbsp; _umin = domain2Unit( lowLimit )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; _urng = domain2Unit( highLimit ) - umin<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <sub>u</sub>min = domain2Unit( lowLimit )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <sub>u</sub>rng = domain2Unit( highLimit ) - umin<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp; u = ( domain2Unit( d ) - umin ) / urange<br>
 &nbsp;&nbsp;&nbsp;&nbsp; d = unit2Domain( u * urange + umin )<br>

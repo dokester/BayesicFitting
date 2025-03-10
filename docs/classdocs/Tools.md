@@ -4,7 +4,7 @@
 
 <a name="Tools"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>Module Tools</strong>  )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py target=_blank>Source</a></th></tr></thead></table>
+<strong>Module Tools</strong> <a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 This module contains a mixed bag of "usefull" methods.

@@ -53,11 +53,11 @@ Polynominal surface of a certain degree. Two dimensions.
 
 | degree |  polysurface                                               |
 |:------:|:-----------------------------------------------------------|
-| 0 | p_0                                                             |
-| 1 | p_0 + p_1 * x + p_2 * y                                         |
-| 2 | p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2   |
-| 3 | p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 + |
-|   |        p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3    |
+| 0 | p<sub>0</sub>                                                             |
+| 1 | p<sub>0</sub> + p<sub>1</sub> * x + p<sub>2</sub> * y                                         |
+| 2 | p<sub>0</sub> + p<sub>1</sub> * x + p<sub>2</sub> * y + p<sub>3</sub> * x<sup>2</sup> + p<sub>4</sub> * x * y + p<sub>5</sub> * y<sup>2</sup>   |
+| 3 | p<sub>0</sub> + p<sub>1</sub> * x + p<sub>2</sub> * y + p<sub>3</sub> * x<sup>2</sup> + p<sub>4</sub> * x * y + p<sub>5</sub> * y<sup>2</sup> + |
+|   |        p<sub>6</sub> * x<sup>3</sup> + p<sub>7</sub> * x<sup>2</sup> * y + p<sub>8</sub> * x * y<sup>2</sup> + p<sub>9</sub> * y<sup>3</sup>    |
 |etc|                                                                 |
 
 The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
@@ -111,16 +111,16 @@ Return the derivative df/dx at each input (=x).
 | degree | df/dx |
 |:------:|:------|
 | 0 | 0          |
-| 1 | p_1        |
-| 2 | p_1 + 2 * p_3 * x + p_4 * y |
-| 3 | p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2 |
+| 1 | p<sub>1</sub>        |
+| 2 | p<sub>1</sub> + 2 * p<sub>3</sub> * x + p<sub>4</sub> * y |
+| 3 | p<sub>1</sub> + 2 * p<sub>3</sub> * x + p<sub>4</sub> * y + 3 * p<sub>6</sub> * x<sup>2</sup> + 2 * p<sub>7</sub> * x * y + p<sub>8</sub> * y<sup>2</sup> |
 
 | degree | df/dy |
 |:------:|:------|
 | 0 | 0          |
-| 1 | p_2        | 
-| 2 | p_2 + p_4 * x + 2 * p_5 * y |
-| 3 | p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2 |
+| 1 | p<sub>2</sub>        | 
+| 2 | p<sub>2</sub> + p<sub>4</sub> * x + 2 * p<sub>5</sub> * y |
+| 3 | p<sub>2</sub> + p<sub>4</sub> * x + 2 * p<sub>5</sub> * y + p<sub>7</sub> * x<sup>2</sup> + 2 * p<sub>8</sub> * x * y + 3 * p<sub>9</sub> * y<sup>2</sup> |
 
 
 <b>Parameters</b>

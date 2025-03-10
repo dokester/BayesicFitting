@@ -9,16 +9,16 @@
 
 Sinusoidal Model with drifting frequency.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = p_0 / ( 1.0 + p_1^2 * sin^2( &pi; ( p_2 x + p_3 + p_4 y ) ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = p<sub>0</sub> / ( 1.0 + p<sub>1</sub><sup>2</sup> * sin<sup>2</sup>( &pi; ( p<sub>2</sub> x + p<sub>3</sub> + p<sub>4</sub> y ) ) )<br>
 
-where p_0 = amplitude
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_1 = finesse<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_2 = periods per wavenumber<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_3 = phase<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_4 = phase drift<br>
+where p<sub>0</sub> = amplitude
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = finesse<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = periods per wavenumber<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>3</sub> = phase<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>4</sub> = phase drift<br>
 As always (x,y) = input; it is in (wavenumbers,alpha)
 
-The parameters are initialized at {1.0, 1.0, 1.0, 0.0, 0.0}. It is a non-linear model.
+The parameters are initialized at 1.0, 1.0, 1.0, 0.0, 0.0. It is a non-linear model.
 
 This model is specificly made for the MIRI instrumnet aboard JWST.
 Its usefullness elsewhere is doubtfull.

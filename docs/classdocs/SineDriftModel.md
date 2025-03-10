@@ -9,14 +9,14 @@
 
 Sinusoidal Model with drifting frequency.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_1 * cos( phi ) + p_2 * sin( phi )<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; phi = 2 * pi * x * ( p_0 + x * p_3 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( phi ) + p<sub>2</sub> * sin( phi )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; phi = 2 * pi * x * ( p<sub>0</sub> + x * p<sub>3</sub> )<br>
 
-where p_0 = frequency, p_3 = is the drift in frequency,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p_1 = amplitude cosine and p_2 = amplitude sine.<br>
+where p<sub>0</sub> = frequency, p<sub>3</sub> = is the drift in frequency,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and p<sub>2</sub> = amplitude sine.<br>
 As always x = input.
 
-The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model.
+The parameters are initialized at 1.0, 1.0, 1.0, 0.0. It is a non-linear model.
 
 <b>Examples</b>
 

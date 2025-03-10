@@ -15,7 +15,7 @@ Gaussian Model.
 &nbsp; p<sub>1</sub> = center<br>
 &nbsp; p<sub>2</sub> = width<br>
 
-The parameters are initialized at {1.0, 0.0, 1.0}.
+The parameters are initialized at 1.0, 0.0, 1.0.
 
 Parameter 2 (width) is always kept stricktly positive (>0).
 

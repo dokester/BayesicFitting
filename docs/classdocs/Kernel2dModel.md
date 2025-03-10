@@ -11,11 +11,11 @@ Two dimensional Kernel Model.
 
 The Kernel2dModel is defined as
 
-&nbsp; f( x:p ) = p_0 * K( r )<br>
+&nbsp; f( x:p ) = p<sub>0</sub> * K( r )<br>
 
 where K( r ) is a selectable kernel function and r is the distance to the center.
 
-&nbsp; r = sqrt( u^2 + v^2 ).<br>
+&nbsp; r = sqrt( u<sup>2</sup> + v<sup>2</sup> ).<br>
 
 There are 3 options for u and v
 

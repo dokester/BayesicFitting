@@ -17,7 +17,7 @@ Exponential Model.
 &nbsp; As always <br>
 &nbsp;&nbsp;&nbsp;&nbsp; x = input.<br>
 
-The parameters are initialized at {1.0, -1.0}. It is a non-linear model.
+The parameters are initialized at 1.0, -1.0. It is a non-linear model.
 
 Beware of a positive 2nd parameter; when positive the model is going off
 to Infinity very quickly.
@@ -26,7 +26,7 @@ When decay is True the model changes into a decay model
 
 &nbsp; f( x:p ) = p<sub>0</sub> * exp( - p<sub>1</sub> * x )<br>
 
-The parameters are initialized at {1.0, 1.0}.
+The parameters are initialized at 1.0, 1.0.
 
 <b>Attributes</b>
 

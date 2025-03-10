@@ -16,7 +16,7 @@ and the sum in the denominator is over k running from 0 to den ( inclusive )
 
 At least one parameter needs to be fixed, otherwise the model is
 degenerate in its parameters.
-By default the first parameter of the denominator (p_{num+1})
+By default the first parameter of the denominator (p<sub>num+1</sub>)
 is fixed to 1.0.
 
 All parameters are initialized at 0. It is a non-linear model.

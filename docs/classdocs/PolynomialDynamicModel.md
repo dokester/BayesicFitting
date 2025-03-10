@@ -9,7 +9,7 @@
 
 General polynomial model of an adaptable degree.
 
-f( x:p ) = &sum; p_k * x^k
+f( x:p ) = &sum; p<sub>k</sub> * x<sup>k</sup>
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
@@ -25,10 +25,10 @@ Author       Do Kester
     poly.grow( )
     poly.grow( )
     print poly.npchain
-5
+    5
     poly.shrink( )                        # shrink( ) deletes 1 degree
     print poly.npbase
-4
+    4
 
 <b>Attributes</b>
 

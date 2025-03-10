@@ -81,10 +81,10 @@ For Linear models the matrix equation
 
 &nbsp;&nbsp;&nbsp;&nbsp; H * p = &beta;<br>
 
-is solved for p. H is the Hessian matrix ( D * w * D<sup>T</sup> )
+is solved for p. H is the Hessian matrix ( D * w * DT )
 and &beta; is the inproduct of the data with the D, design matrix.
 
-&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D<sup>T</sup><br>
+&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * DT<br>
 
 <b>Parameters</b>
 

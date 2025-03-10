@@ -4,7 +4,7 @@
 
 <a name="Formatter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>Module Formatter</strong>  )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Formatter.py target=_blank>Source</a></th></tr></thead></table>
+<strong>Module Formatter</strong> <a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Formatter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 This module contains methods to format numbers, especially in arrays.

@@ -9,10 +9,10 @@
 
 Approximation of VoigtModel as the sum of a GaussModel and a LorentzModel
 
-&nbsp;&nbsp;&nbsp;&nbsp; F(x:p) = p_3 * L(x:p) + ( 1 - p_3 ) * G(x:p)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; F(x:p) = p<sub>3</sub> * L(x:p) + ( 1 - p<sub>3</sub> ) * G(x:p)<br>
 
-where L() and G() are the LorentzModel and the GaussModel, resp. and p_3
-is the fractional contribution of them. 0 < p_3 < 1.
+where L() and G() are the LorentzModel and the GaussModel, resp. and p<sub>3</sub>
+is the fractional contribution of them. 0 < p<sub>3</sub> < 1.
 
 The models takes 4 parameters: amplitude, center frequency, half-width and
 the balance between the models

@@ -33,7 +33,7 @@ Constructor.
 
 Construct from vec a unit vector orthogonal to self.basis
 
-from http://www.ecs.umass.edu/ece/ece313/Online_help/gram.pdf
+from http://www.ecs.umass.edu/ece/ece313/Online<sub>h</sub>elp/gram.pdf
 
 <b>Parameters</b>
 

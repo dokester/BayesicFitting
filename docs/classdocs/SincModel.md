@@ -10,15 +10,15 @@
 Sinc Model.
 Also known as Cardinal Sine.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p_0 * sin( ( x - p_1 ) / p_2 ) / ( ( x - p_1 ) / p_2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( ( x - p<sub>1</sub> ) / p<sub>2</sub> ) / ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p_0 = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_1 = offset<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p_2 = width ( =Distance between first zero-crossings divided by 2 Pi. )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = offset<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = width ( =Distance between first zero-crossings divided by 2 Pi. )<br>
 As always x = input.
 
-The parameters are initialized at {1.0, 0.0, 1.0}.
+The parameters are initialized at 1.0, 0.0, 1.0.
 Parameter 2 ( width ) is always kept positive ( >=0 ).
 
 SincModel() is syntactic sugar for

@@ -4,7 +4,7 @@
 
 <a name="FitPlotter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>Module FitPlotter</strong>  )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py target=_blank>Source</a></th></tr></thead></table>
+<strong>Module FitPlotter</strong> <a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
 This module contains 2 methods to plot the results of a fit by a Fitter resp. 

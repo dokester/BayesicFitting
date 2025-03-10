@@ -18,7 +18,7 @@ f is a hyperparameter between [0..1]
 
 The likelihood over N datapoints is
 
-&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi;{ L( x ) } = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi; L( x )  = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
 
 And the log of L is
 

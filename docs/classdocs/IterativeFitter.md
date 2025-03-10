@@ -84,7 +84,7 @@ kwargs for [BaseFitter](./BaseFitter.md)
 <p>
 
 Initialize the parameters of the model
-A little superfluous: see {[link](./link.md) Model#setParameters}
+A little superfluous: see [link](./link.md) Model#setParameters
 
 <b>Parameters</b>
 

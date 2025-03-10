@@ -15,10 +15,10 @@ For Linear models the matrix equation
 
 &nbsp;&nbsp;&nbsp;&nbsp; H * p = &beta;<br>
 
-is solved for p. H is the Hessian matrix ( D * w * D^T )
+is solved for p. H is the Hessian matrix ( D * w * DT )
 and &beta; is the inproduct of the data with the D, design matrix.
 
-&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D^T<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * DT<br>
 
 The QRFitter class use QR decomposition which effectively is an inversion
 of the hessian matrix such that
