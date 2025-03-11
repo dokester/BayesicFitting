@@ -5,7 +5,6 @@
 <a name="HarmonicDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class HarmonicDynamicModel(</strong> <a href="./HarmonicModel.html">HarmonicModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Harmonic oscillator Model of adaptable order.
 
@@ -17,31 +16,38 @@ The parameters are initialized at 1.0. It is a linear model.
 
 Author       Do Kester
 
-<b>Attributes</b><br>
-* minOrder  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as minComp<br>
-* maxOrder  :  None or int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as maxComp<br>
+<b>Attributes</b>
 
-<b>Attributes from Dynamic</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior<br>
+* minOrder  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as minComp
+* maxOrder  :  None or int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as maxComp
 
-<b>Attributes from HarmonicModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; order, period<br>
+<b>Attributes from Dynamic</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from HarmonicModel</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; order, period
+
+<b>Attributes from Model</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     harm = HarmonicDynamicModel( 3 )            # period = 1
     print harm.getNumberOfParameters( )         # 6
     harm = HarmonicModel( 4, period=2.7 )       # period = 2.7
@@ -54,31 +60,32 @@ Category     mathematics/Fitting
 <strong>HarmonicDynamicModel(</strong> order, minOrder=1, maxOrder=None, period=1.0, fixed=None,
  growPrior=None, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Harmonic of a adaptable order.
 
 The model starts as a HarmonicModel of order = 1
 Growth of the model is governed by a prior.
 
-<b>Parameters</b><br>
-* order  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order to start with. It should be minOrder <= order <= maxOrder<br>
-* minOrder  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)<br>
-* maxOrder  :  None or int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
-* period  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; period of the oscilation<br>
-* fixed  :  None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; If fixed is not None an AttributeError is raised<br>
-* growPrior  :  None or Prior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
-* copy  :  HarmonicDynamicModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* order  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order to start with. It should be minOrder <= order <= maxOrder
+* minOrder  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)
+* maxOrder  :  None or int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)
+* period  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; period of the oscilation
+* fixed  :  None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; If fixed is not None an AttributeError is raised
+* growPrior  :  None or Prior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+* copy  :  HarmonicDynamicModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+
+<b>Raises</b>
+
 AttributeError when fixed parameters are requested
 ValueError when order is outside [min..max] range
 
@@ -87,38 +94,35 @@ ValueError when order is outside [min..max] range
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
-<p>
+
 <a name="basePrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the prior for parameter k.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-    the parameter to be selected.
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected.
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Return a string representation of the model. 
 
+Return a string representation of the model. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./HarmonicModel.html">HarmonicModel,</a></th></tr></thead></table>
 

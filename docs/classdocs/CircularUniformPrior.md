@@ -5,19 +5,20 @@
 <a name="CircularUniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class CircularUniformPrior(</strong> <a href="./UniformPrior.html">UniformPrior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CircularUniformPrior.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Circular Uniform prior distribution, for location parameters.
 The lowLimit is wrapped onto the highLimit.
 
 A wrapper around
-<br>&nbsp;&nbsp;&nbsp;&nbsp; UniformPrior( circular=... limits=... )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; UniformPrior( circular=... limits=... )
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = CircularUniformPrior( circular=math.pi )       # circular between [0,pi]
     pr = CircularUniformPrior( limits=[3,10] )          # circular between [3,10]
 
-<b>Attributes from Prior</b><br>
+<b>Attributes from Prior</b>
+
 lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 
 
@@ -25,26 +26,25 @@ lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CircularUniformPrior(</strong> circular=None, limits=None, prior=None )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* limits  :  array of 2 floats<br>
-&nbsp;&nbsp;&nbsp;&nbsp; [low,high]  range of the prior. Low is wrapped onto high.<br>
-* circular  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; period of circularity<br>
-* prior  :  CircularUniformPrior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied.<br>
+<b>Parameters</b>
+
+* limits  :  array of 2 floats
+<br>&nbsp;&nbsp;&nbsp;&nbsp; [low,high]  range of the prior. Low is wrapped onto high.
+* circular  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; period of circularity
+* prior  :  CircularUniformPrior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return a (deep) copy of itself. 
 
+Return a (deep) copy of itself. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./UniformPrior.html">UniformPrior</a></th></tr></thead></table>
 

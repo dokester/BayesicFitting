@@ -5,7 +5,6 @@
 <a name="LinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class LinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LinearModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Anchestor of all linear models.
 
@@ -13,23 +12,27 @@ LinearModel implements the baseResult method needed in all linear models.
 
 For Linear models it holds that
 
-<br>&nbsp; f( x:p ) = &sum;( p<sub>i</sub> * df( x )/dp<sub>i</sub> )<br>
+&nbsp; f( x:p ) = &sum;( p<sub>i</sub> * df( x )/dp<sub>i</sub> )
 
 which means that only the partial derivatives to p<sub>i</sub> need to be given
 as basePartial. The baseResult follows directly from that one.
 It is implemented here.
 
-<b>Attributes</b><br>
+<b>Attributes</b>
+
 None of its own
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 Author       Do Kester
 
@@ -39,40 +42,39 @@ Author       Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LinearModel(</strong> nparams, ndim=1, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 class for all linear models.
 
-<b>Parameters</b><br>
-* nparams  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model<br>
-* ndim  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the dimensionality of the inputs (default: 1)<br>
-* copy  :  LinearModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied (default: None)<br>
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Model](./Model.md) :        params<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [FixedModel](./FixedModel.md) :   fixed, names<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [BaseModel](./BaseModel.md) :    posIndex, nonZero<br>
+<b>Parameters</b>
+
+* nparams  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model
+* ndim  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the dimensionality of the inputs (default: 1)
+* copy  :  LinearModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied (default: None)
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Model](./Model.md) :        params
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [FixedModel](./FixedModel.md) :   fixed, names
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [BaseModel](./BaseModel.md) :    posIndex, nonZero
 
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the base result of linear models.
 
 for linear models the result is the inner product of parameters
 and partial derivatives.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

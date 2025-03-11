@@ -5,7 +5,6 @@
 <a name="RepeatingModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class RepeatingModel(</strong> <a href="./Model.html">Model,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 RepeatingModel is a dynamic model, that calls the same model zero or more 
 times, each time with the next set of parameters.
@@ -25,31 +24,37 @@ of the model call.
 It can be arranged that all similar parameters are the same, represented by the
 same parameters. Use keywords same=.
 
-<b>Attributes</b><br>
-* ncomp  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; (encapsulated) model to be repeated<br>
-* same  :  None or int or list of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters of model that get identical values<br>
-* index  :  list of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices not in same.<br>
-* isDyna  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.<br>
+<b>Attributes</b>
 
-<b>Attributes from Dynamic</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; ncomp, deltaNpar, minComp, maxComp, growPrior<br>
+* ncomp  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; (encapsulated) model to be repeated
+* same  :  None or int or list of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters of model that get identical values
+* index  :  list of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices not in same.
+* isDyna  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit<br>
+<b>Attributes from Dynamic</b>
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ncomp, deltaNpar, minComp, maxComp, growPrior
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from Model</b>
 
-<b>Example</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+<b>Example</b>
+
     # Define a model containing between 1 and 6 VoigtModels, starting with 3
     # and all with the same widths (for Gauss and Cauchy)
     vgt = VoigtModel()
@@ -74,31 +79,32 @@ Author       Do Kester
 <strong>RepeatingModel(</strong> ncomp, model, minComp=0, maxComp=None, fixed=None,
  same=None, growPrior=None, dynamic=True, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Repeating the same model several times.
 
-<b>Parameters</b><br>
-* ncomp  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be repeated<br>
-* minComp  :  int (0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum number of repetitions<br>
-* maxComp  :  None or int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum number of repetitions<br>
-* same  :  None or int or list of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters of model that get identical values<br>
+<b>Parameters</b>
 
-* growPrior  :  None or Prior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
-* dynamic  :  bool (True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.<br>
-* copy  :  RepeatingModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
+* ncomp  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be repeated
+* minComp  :  int (0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of repetitions
+* maxComp  :  None or int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum number of repetitions
+* same  :  None or int or list of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters of model that get identical values
 
-<b>Raises</b><br>
+* growPrior  :  None or Prior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior
+* dynamic  :  bool (True)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.
+* copy  :  RepeatingModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+
+<b>Raises</b>
+
 AttributeError when fixed parameters are requested
 ValueError when order is outside [min..max] range
 
@@ -107,215 +113,203 @@ ValueError when order is outside [min..max] range
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
-<p>
+
 <a name="setSame"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setSame(</strong> same ) 
 </th></tr></thead></table>
-<p>
-
 Assign similar parameters the same value.
 
-<b>Parameters</b><br>
-* same  :  None or int or [int]<br>
-    similar parameters indicated as an index in encapsulated model.
+<b>Parameters</b>
+
+* same  :  None or int or [int]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; similar parameters indicated as an index in encapsulated model.
 
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, **kwargs )
 </th></tr></thead></table>
-<p>
-
 Increase the the number of components by 1 (if allowed by maxComp)
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
-* rng  :  RandomState<br>
-&nbsp;&nbsp;&nbsp;&nbsp; random numbr generator<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :   succes<br>
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts
+* rng  :  RandomState
+<br>&nbsp;&nbsp;&nbsp;&nbsp; random numbr generator
+
+<b>Return</b>
+
+* bool  :   succes
 
 
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, **kwargs )
 </th></tr></thead></table>
-<p>
-
 Decrease the the number of componenets by 1 (if allowed by minComp)
 Remove an arbitrary item.
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :  succes<br>
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts
+
+<b>Return</b>
+
+* bool  :  succes
 
 
 <a name="shuffle"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shuffle(</strong> param, offset, np, rng ) 
 </th></tr></thead></table>
-<p>
-
 Shuffle the parameters of the components (if they are equivalent)
 
-<b>Parameters</b><br>
-* param  :  array-like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters<br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
-* np  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; length of the parameters of the dynamic model<br>
-* rng  :  RNG<br>
-    random number generator
+<b>Parameters</b>
+
+* param  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts
+* np  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; length of the parameters of the dynamic model
+* rng  :  RNG
+<br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameter<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameter
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative df/dx at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="xxxsetLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>xxxsetLimits(</strong> lowLimits=None, highLimits=None ) 
 </th></tr></thead></table>
-<p>
+
 <a name="setPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs ) 
 </th></tr></thead></table>
-<p>
-
 Set the prior for the indicated parameter of the repeated model.
 
 All repeated parameters have the same Prior.
 
-<b>Parameters</b><br>
-* kpar  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number of the repeated model.<br>
-* prior  :  Prior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; prior for parameter kpar<br>
-* kwargs  :  keyword arguments<br>
-&nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
+<b>Parameters</b>
 
-<b>Raise:</b><br>
+* kpar  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number of the repeated model.
+* prior  :  Prior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; prior for parameter kpar
+* kwargs  :  keyword arguments
+<br>&nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior
+
+<b>Raise:</b>
+
 IndexException
-<br>&nbsp;&nbsp;&nbsp;&nbsp; When more Priors are set than fit inside the repeated model<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When more Priors are set than fit inside the repeated model
 
 
 <a name="hasPriors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="basePrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> kpar )
 </th></tr></thead></table>
-<p>
-
 Return the prior for parameter with index kpar.
 
-<b>Parameters</b><br>
-* kpar  :  int<br>
-    index of the parameter to be selected.
+<b>Parameters</b>
+
+* kpar  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter to be selected.
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Return a string representation of the model. 
 
+Return a string representation of the model. 
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of the indicated parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <a name="par2model"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>par2model(</strong> k ) 
 </th></tr></thead></table>
-<p>
-
 Return index in model and repetition nr for param k
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

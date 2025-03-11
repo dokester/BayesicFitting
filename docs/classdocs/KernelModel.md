@@ -5,20 +5,19 @@
 <a name="KernelModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class KernelModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/KernelModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Kernel Model, a Model build around an [Kernel](./Kernel.md).
 
 The KernelModel is defined as
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * K( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * K( ( x - p<sub>1</sub> ) / p<sub>2</sub> )
 
 where K( u ) is a selectable kernel function on the rescaled input u
-<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>2</sub>.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>2</sub>.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> is the amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> is the center<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> is the range.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> is the amplitude
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> is the center
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> is the range.
 
 The parameters are initialized at amp,0,1. the amplitude is such that the
 function integrates to 1.0. They are listed in the table.
@@ -29,22 +28,27 @@ Beware: The "bound" models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     model = KernelModel( )
     model.kernel = Triweight()
 
-<b>Attributes</b><br>
-* kernel  :  Kernel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kernel of this model<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* kernel  :  Kernel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kernel of this model
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 
@@ -53,90 +57,82 @@ Author:      Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>KernelModel(</strong> copy=None, kernel=Biweight(), **kwargs )
 </th></tr></thead></table>
-<p>
 
 Kernel Model.
 
-<b>Parameters</b><br>
-* copy  :  KernelModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* kernel  :  Kernel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; kernel class (default = Biweight)<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* copy  :  KernelModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* kernel  :  Kernel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; kernel class (default = Biweight)
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-
 Copy method.
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative at the xdata value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Returns a string representation of the model. 
 
+Returns a string representation of the model. 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
-<p>
-
 Return true when the kernel is bound.
 All non-zero values are between -1 and +1
 
@@ -145,12 +141,11 @@ All non-zero values are between -1 and +1
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

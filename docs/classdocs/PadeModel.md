@@ -5,11 +5,10 @@
 <a name="PadeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class PadeModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 General Pade model of arbitrary degrees in numerator and denominator.
 
-<br>&nbsp; f( x:p ) = &sum; p<sub>n</sub> * x<sup>n</sup> / ( &sum; p<sub>num+1+k</sub> * x<sup>k</sup> )<br>
+&nbsp; f( x:p ) = &sum; p<sub>n</sub> * x<sup>n</sup> / ( &sum; p<sub>num+1+k</sub> * x<sup>k</sup> )
 
 where the sum in the numerator is over n running from 0 to num ( inclusive )
 and the sum in the denominator is over k running from 0 to den ( inclusive )
@@ -25,55 +24,61 @@ Beware of the poles where the denominator equals zero.
 
 Author:      Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pade = PadeModel( 3, 1 )                # 3rd degree polynomial
     print pade.getNumberOfParameters( )     # 5
     5
 
-<b>Attributes</b><br>
-* num  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the numerator<br>
-* den  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the denominator<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* num  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the numerator
+* den  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the denominator
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Alternate</b><br>
+<b>Alternate</b>
+
 PadeModel( 2, 3 ) is equivalent to
-* PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0 : 1.0} )<br>
+* PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0 : 1.0} )
 
 
 <a name="PadeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PadeModel(</strong> num, den, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Pade of a certain degree in numerator and denominator.
 
 The number of parameters is ( num + den + 1 )
 
-<b>Parameters</b><br>
-* num  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the numerator.<br>
-* den  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the denominator.<br>
-* copy  :  PadeModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Default {num+1 : 1.0}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* num  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the numerator.
+* den  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the denominator.
+* copy  :  PadeModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Default {num+1 : 1.0}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 
@@ -81,62 +86,56 @@ The number of parameters is ( num + den + 1 )
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata values.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata values.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -144,12 +143,11 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

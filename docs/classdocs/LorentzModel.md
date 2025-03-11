@@ -5,16 +5,15 @@
 <a name="LorentzModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class LorentzModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LorentzModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Lorentzian Model.
 
-<br>&nbsp; f( x:p ) = p<sub>0</sub> * ( p<sub>2</sub><sup>2</sup> / ( ( x - p<sub>1</sub> )<sup>2</sup> + p<sub>2</sub><sup>2</sup> )<br>
+&nbsp; f( x:p ) = p<sub>0</sub> * ( p<sub>2</sub><sup>2</sup> / ( ( x - p<sub>1</sub> )<sup>2</sup> + p<sub>2</sub><sup>2</sup> )
 
-<br>&nbsp; where<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = x-shift<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = gamma ( width )<br>
+&nbsp; where
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = x-shift
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = gamma ( width )
 
 The parameters are initialized at [1/PI, 0.0, 1.0] where the integral
 over the function equals 1.
@@ -22,9 +21,10 @@ Parameter 2 ( gamma ) is always kept stricktly positive ( >0 ).
 
 This model is also known as Cauchy or Cauchy-Lorentz.
 
-<b>Notes</b><br>
+<b>Notes</b>
+
 There are other possible definitions of this model, where the integral equals 1.0.
-* [http](./http.md) : //en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function<br>
+* [http](./http.md) : //en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function
 
 Definitions that integrate to 1.0 are more fit as a distribution function.
 See sample/CauchyErrorDistribution.
@@ -39,22 +39,27 @@ parameter, only that aspect changes. In the present definition this is the case.
 In the alternative definition if you change p_2, not only the width
 of the function changes, but also the amplitude.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     lorentz = LorentzModel( )
     lorentz.setParameters( [5, 4, 1] )
     print( lorentz( numpy.arange(  41 , dtype=float ) / 5 ) )
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Alternate</b><br>
+<b>Alternate</b>
+
 LorentzModel() is equivalent to KernelModel( kernel=Lorentz() ).
 
 
@@ -63,82 +68,76 @@ LorentzModel() is equivalent to KernelModel( kernel=Lorentz() ).
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LorentzModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Lorentzian model.
 
 Number of parameters is 3.
 
-<b>Parameters</b><br>
-* copy  :  LorentzModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* copy  :  LorentzModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -146,13 +145,12 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

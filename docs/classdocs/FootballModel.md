@@ -5,7 +5,6 @@
 <a name="FootballModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class FootballModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 More or less complex model for the outcome of football marches.
 
@@ -37,27 +36,32 @@ the methods goals1(), goals2(), ... goals5(), below.
 Note
 This is about the game that most of the world calls football.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     fm = FootballModel( 18 ) 
     print( fm.npars )
     90
 
-* Author  :  Do Kester<br>
+* Author  :  Do Kester
 
-<b>Attributes</b><br>
-* nteams  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of teams<br>
-* complexity  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; degree of complexity, default = 5.<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* nteams  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of teams
+* complexity  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree of complexity, default = 5.
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 
@@ -65,276 +69,259 @@ This is about the game that most of the world calls football.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>FootballModel(</strong> nteams, complexity=5, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Calculate the score of football matches
 
 The number of parameters is ( nteams * complexity )
 
-<b>Parameters</b><br>
-* nteams  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of teams<br>
-* complexity  :  1 <= int <= 5<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of the model<br>
-* copy  :  FootballModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* nteams  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of teams
+* complexity  :  1 <= int <= 5
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of the model
+* copy  :  FootballModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="getPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> k ) 
 </th></tr></thead></table>
-<p>
-
 Return the prior of the parameter, indicated by k modulo the complexity
 
-<b>Parameters</b><br>
-* k  :  int<br>
-    parameter number.
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 <a name="goals1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals1(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Consider attack (a) only.
 
-<br>&nbsp; S1 = a1<br>
-&nbsp; S2 = a2<br>
+&nbsp; S1 = a1
+<br>&nbsp; S2 = a2
 
-<b>Parameters</b><br>
-* xdata  :  array of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; attack values<br>
+<b>Parameters</b>
+
+* xdata  :  array of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; attack values
 
 
 <a name="goals2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals2(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Consider attack (a) and defense (d).
 
-<br>&nbsp; S1 = a1 * ( 1 - d2 )<br>
-&nbsp; S2 = a2 * ( 1 - d1 )<br>
+&nbsp; S1 = a1 * ( 1 - d2 )
+<br>&nbsp; S2 = a2 * ( 1 - d1 )
 
-<b>Parameters</b><br>
-* xdata  :  array of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+<b>Parameters</b>
+
+* xdata  :  array of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; team values
 
 
 <a name="goals3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals3(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Consider attack (a), defense (d) and midfield (m).
 
 The ratio of the midfield strength modifies attack and defense
 
-<br>&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2  (m2/m1) )<br>
-&nbsp; S2 = a2 * &radic;(m2/m1) * ( 1 - d1  (m1/m2) )<br>
+&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2  (m2/m1) )
+<br>&nbsp; S2 = a2 * &radic;(m2/m1) * ( 1 - d1  (m1/m2) )
 
-<b>Parameters</b><br>
-* xdata  :  array of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+<b>Parameters</b>
+
+* xdata  :  array of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; team values
 
 
 <a name="goals4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals4(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Consider attack (a), defense (d), midfield (m) and home advantage (h).
 
 The strategy modifies the midfield strangth of the home team.
 
-<br>&nbsp; mh = m1 * h1<br>
-&nbsp; S1 = a1 * &radic;(mh/m2) * ( 1 - d2  (m2/mh) )<br>
-&nbsp; S2 = a2 * &radic;(m2/mh) * ( 1 - d1  (mh/m2) )<br>
+&nbsp; mh = m1 * h1
+<br>&nbsp; S1 = a1 * &radic;(mh/m2) * ( 1 - d2  (m2/mh) )
+<br>&nbsp; S2 = a2 * &radic;(m2/mh) * ( 1 - d1  (mh/m2) )
 
-<b>Parameters</b><br>
-* xdata  :  array of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+<b>Parameters</b>
+
+* xdata  :  array of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; team values
 
 
 <a name="goals5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals5(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Consider attack (a), defense (d), midfield (m), home advantage (h),
 and strategy (s)
 
-<br>&nbsp; A offensive strategy (s>1) strenghtens the attach and weakens the defense. <br>
-&nbsp; A defensive strategy (s<1) strenghtens the defense and weakens the attack. <br>
+&nbsp; A offensive strategy (s>1) strenghtens the attach and weakens the defense. 
+<br>&nbsp; A defensive strategy (s<1) strenghtens the defense and weakens the attack. 
 
-<br>&nbsp; mh = m1 * h1<br>
-&nbsp; S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2  (s2 * m2/mh) )<br>
-&nbsp; S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1  (s1 * mh/m2) )<br>
+&nbsp; mh = m1 * h1
+<br>&nbsp; S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2  (s2 * m2/mh) )
+<br>&nbsp; S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1  (s1 * mh/m2) )
 
-<b>Parameters</b><br>
-* xdata  :  array of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; team values<br>
+<b>Parameters</b>
+
+* xdata  :  array of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; team values
 
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2:nteams]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model 
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model (ignored for LinearModels).<br>
-* parlist  :  array_like<br>
-    list of indices of active parameters
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model (ignored for LinearModels).
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters
 
 <a name="part1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part1(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2:nteams]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model 
 
 
 <a name="part2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part2(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2:nteams]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model 
 
 
 <a name="part3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part3(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2:nteams]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model 
 
 
 <a name="part4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part4(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2:nteams]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model 
 
 
 <a name="part5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part5(</strong> xdata, par ) 
 </th></tr></thead></table>
-<p>
-
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2:nteams]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
-* par  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model <br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2:nteams]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.
+* par  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model 
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each input (=x).
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -342,25 +329,23 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of the indicated parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

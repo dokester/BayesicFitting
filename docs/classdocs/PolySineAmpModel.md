@@ -5,37 +5,41 @@
 <a name="PolySineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class PolySineAmpModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Sine of fixed frequency with polynomials as amplitudes.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )
 
 P(y), Q(y) are Polynomials of a certain order, n.
 
 It is a linear model in 2 dimensions, with 2n+2 papameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = PolySineAmpModel( 2, 150.0 )        # fixed frequency of 150 Hz
 
-<b>Attributes</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials<br>
-* frequency  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; frequency of the sine.<br>
-* pm  :  PolynomialModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; polynomial to be multiplied with the (co)sine<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials
+* frequency  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; frequency of the sine.
+* pm  :  PolynomialModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; polynomial to be multiplied with the (co)sine
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 
@@ -43,71 +47,67 @@ It is a linear model in 2 dimensions, with 2n+2 papameters.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolySineAmpModel(</strong> degree, frequency, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Sine model of a fixed frequency and polynomials as coefficients.
 
 Number of parameters is 2n+2.
 
-<b>Parameters</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials<br>
-* frequency  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the frequency, &omega;<br>
-* copy  :  PolySineAmpModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
-* AttributeError  :  When fixed is not None<br>
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials
+* frequency  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the frequency, &omega;
+* copy  :  PolySineAmpModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.
+
+<b>Raises</b>
+
+* AttributeError  :  When fixed is not None
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2,ndata]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2,ndata]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of f to (x,y) (df/dx,df/dy) at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like [2,ndata]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
+<b>Parameters</b>
+
+* xdata  :  array_like [2,ndata]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -115,12 +115,11 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

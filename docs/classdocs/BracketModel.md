@@ -5,7 +5,6 @@
 <a name="BracketModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 BracketModel provides brackets to a chain of Models.
 
@@ -22,23 +21,28 @@ is actually a chain of models.
 
 Model.Brackets is an internal class inside Model.
 
-<b>Attributes</b><br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be put inside of brackets<br>
-* deep  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; container depth (only for nice printing).<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be put inside of brackets
+* deep  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; container depth (only for nice printing).
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
 Explicit use of BrackeModel
 
     m1 = GaussModel( )
@@ -57,14 +61,16 @@ Implicit use of BrackeModel, automatically invoked when m2 is a chain
     print( m3 )                             # exactly the same
 
 
-<b>Warning</b><br>
+<b>Warning</b>
+
 BracketModel is about rather advanced model building.
 
-<b>Notes</b><br>
+<b>Notes</b>
+
 1. You have to complete the BracketModel, including parameter reduction,
-<br>&nbsp;&nbsp;&nbsp; BEFORE you put it into a model chain.<br>
+<br>&nbsp;&nbsp;&nbsp; BEFORE you put it into a model chain.
 2. If you change a BracketModel which is part of a model chain, unexpected result
-<br>&nbsp;&nbsp;&nbsp; might happen.<br>
+<br>&nbsp;&nbsp;&nbsp; might happen.
 
 
 
@@ -72,32 +78,31 @@ BracketModel is about rather advanced model building.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BracketModel(</strong> model, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 BracketModel
 
 When constructing a BracketModel existing attributes are lost, except
 parameters that were 'fixed' in the constituent Models. They stay fixed.
 
-<b>Parameters</b><br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be put in the container.<br>
-* copy  :  BracketModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if fixed is not None raise AttributeError<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Use fixed on the constituent models.<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
-* AttributeErrr  :  When fixed is not None<br>
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be put in the container.
+* copy  :  BracketModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if fixed is not None raise AttributeError
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Use fixed on the constituent models.
+
+<b>Raises</b>
+
+* AttributeErrr  :  When fixed is not None
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-
 Copy a Bracket Model.
 
 

@@ -5,7 +5,6 @@
 <a name="RadialVelocityModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class RadialVelocityModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
@@ -25,11 +24,13 @@ The velocity of the star system is not included in this model. See example.
 The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0].
 It is a non-linear model.
 
-<b>Attributes</b><br>
-* keppler  :  Kepplers2ndLaw()<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly<br>
+<b>Attributes</b>
 
-<b>Examples</b><br>
+* keppler  :  Kepplers2ndLaw()
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly
+
+<b>Examples</b>
+
     rv = RadialVelocityModel( )
     print( rv.npars )
     5
@@ -40,107 +41,100 @@ It is a non-linear model.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RadialVelocityModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Radial velocity model.
 
 Number of parameters is 5
 
-<b>Parameters</b><br>
-* copy  :  RadialVelocityModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
-* fixed  :  dictionary of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+<b>Parameters</b>
+
+* copy  :  RadialVelocityModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+* fixed  :  dictionary of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="getMsini"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMsini(</strong> stellarmass ) 
 </th></tr></thead></table>
-<p>
-
 Return the mass of the exoplanet in Jupiter masses.
 
-<b>Parameters</b><br>
-* stellarmass  :  float<br>
-    mass of the host star in solar masses.
+<b>Parameters</b>
+
+* stellarmass  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; mass of the host star in solar masses.
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
 f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
 
 where v is the true anomaly
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
 f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
 
-<br>&nbsp; df/dp<sub>0</sub> = p<sub>1</sub> * ( - sin( v + p<sub>4</sub> ) dv/dp<sub>0</sub> + cos( p<sub>4</sub> ) )<br>
-&nbsp; df/dp<sub>1</sub> = cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> )<br>
-&nbsp; df/dp<sub>2</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>2</sub><br>
-&nbsp; df/dp<sub>3</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>3</sub><br>
-&nbsp; df/dp<sub>4</sub> = - p<sub>1</sub> * ( sin( v + p<sub>4</sub> ) + p<sub>0</sub> * sin( p<sub>4</sub> ) )<br>
+&nbsp; df/dp<sub>0</sub> = p<sub>1</sub> * ( - sin( v + p<sub>4</sub> ) dv/dp<sub>0</sub> + cos( p<sub>4</sub> ) )
+<br>&nbsp; df/dp<sub>1</sub> = cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> )
+<br>&nbsp; df/dp<sub>2</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>2</sub>
+<br>&nbsp; df/dp<sub>3</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>3</sub>
+<br>&nbsp; df/dp<sub>4</sub> = - p<sub>1</sub> * ( sin( v + p<sub>4</sub> ) + p<sub>0</sub> * sin( p<sub>4</sub> ) )
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of f to x (df/dx) at the input values.
 
 dfdx = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) * dvdx
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -148,13 +142,12 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of a parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

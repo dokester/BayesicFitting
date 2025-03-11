@@ -5,50 +5,55 @@
 <a name="SineSplineModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SineSplineModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Sine of fixed frequency with splineslike amplitudes/phases.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = SM0 cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = SM0 cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )
 
 Where SM0 and SM1 are splines models with defined knots and order.
 
 It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = [3.0*k for k in range( 11 )]
     sine = SineSplineModel( 150, knots )        # fixed frequency of 150 Hz
     print( sine.npbase )                        # number of parameters
 26
 
-<b>Attributes</b><br>
-* frequency  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; (fixed) frequency of the sine<br>
-* knots  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
-* order  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
-* cm  :  SplinesModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the cosine<br>
-* sm  :  SplinesModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the sine<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* frequency  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; (fixed) frequency of the sine
+* knots  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots
+* order  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3
+* cm  :  SplinesModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the cosine
+* sm  :  SplinesModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the sine
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Alternate</b><br>
+<b>Alternate</b>
+
 The model
 
     model = SineSplineModel( frequency, knots )
 
-* is equivalent to  : <br>
+* is equivalent to  : 
 
     cm = SplinesModel( knots )
     sm = SplinesModel( knots )
@@ -61,85 +66,80 @@ The model
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SineSplineModel(</strong> frequency, knots, order=3, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Sine model of a fixed frequency with a splineslike changing amplitude/phase.
 
 Number of parameters is 2 * ( len(knots) + order - 1 ).
 
-<b>Parameters</b><br>
-* frequency  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the frequency<br>
-* copy  :  SineSplineModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* frequency  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the frequency
+* copy  :  SineSplineModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.
+
+<b>Raises</b>
+
 AttributeError
-<br>&nbsp;&nbsp;&nbsp;&nbsp; when fixed is not None<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when fixed is not None
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of f to x (df/dx) at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
 
 
 <a name="getAmplitudes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getAmplitudes(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the amplitudes if cosine and sine, resp.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -147,12 +147,11 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

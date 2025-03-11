@@ -5,11 +5,10 @@
 <a name="PolySurfaceModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class PolySurfaceModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 General polynomial surface model of arbitrary degree.
 
-<br>&nbsp; f( x,y:p ) = &sum;<sub>d</sub> &sum;<sub>k</sub> p<sub>n</sub> * x<sup>d-k</sup> * y<sup>k</sup> )<br>
+&nbsp; f( x,y:p ) = &sum;<sub>d</sub> &sum;<sub>k</sub> p<sub>n</sub> * x<sup>d-k</sup> * y<sup>k</sup> )
 
 where the first sum is over d running from 0 to degree ( inclusive )
 and the second sum is over k running from 0 to d ( inclusive ).
@@ -17,24 +16,29 @@ The index n is just incrementing, making all p's different.
 
 It is a 2-dimensional linear model.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )        # 10
 
 Author      Do Kester
 
-<b>Attributes</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 
@@ -42,7 +46,6 @@ Author      Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolySurfaceModel(</strong> degree, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Polynominal surface of a certain degree. Two dimensions.
 
@@ -57,48 +60,45 @@ Polynominal surface of a certain degree. Two dimensions.
 
 The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 
-<b>Parameters</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
-* copy  :  PolySurfaceModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int             list if parameters to fix permanently. Default None.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model     list of values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.
+* copy  :  PolySurfaceModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int             list if parameters to fix permanently. Default None.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model     list of values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input values.
 
 The partials are the powers of x,y ( xdata ) from 0 to degree.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each input (=x).
 
 | degree | df/dx |
@@ -116,19 +116,18 @@ Return the derivative df/dx at each input (=x).
 | 3 | p<sub>2</sub> + p<sub>4</sub> * x + 2 * p<sub>5</sub> * y + p<sub>7</sub> * x<sup>2</sup> + 2 * p<sub>8</sub> * x * y + 3 * p<sub>9</sub> * y<sup>2</sup> |
 
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -136,8 +135,6 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 Parameters  k    parameter number.
 

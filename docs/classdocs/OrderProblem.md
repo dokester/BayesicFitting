@@ -5,7 +5,6 @@
 <a name="OrderProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class OrderProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/OrderProblem.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 An OrderProblem needs to optimize the order of a set of nodes.
 the nodes are given by the x variable; the order by the parameters p.
@@ -16,66 +15,66 @@ The result of the function for certain x and p is given by
 This class is a base class. Further specializations will define the
 result method.
 
-<b>Attributes</b><br>
-* parameters  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be optimized in TBD ways<br>
-* npbase  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of params in the base model<br>
-* ndim  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions of input. (default : 1)<br>
+<b>Attributes</b>
 
-* Author  :          Do Kester<br>
+* parameters  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be optimized in TBD ways
+* npbase  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of params in the base model
+* ndim  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions of input. (default : 1)
+
+* Author  :          Do Kester
 
 
 <a name="OrderProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>OrderProblem(</strong> xdata=None, weights=None, copy=None )
 </th></tr></thead></table>
-<p>
 
 OrderProblem Constructor.
 <br>
-<b>Parameters</b><br>
-* xdata  :  array_like of shape [np,ndim]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the nodes to be visited<br>
-* weights  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights on the arrival nodes<br>
-* copy  :  BaseProblem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
+<b>Parameters</b>
+
+* xdata  :  array_like of shape [np,ndim]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the nodes to be visited
+* weights  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights on the arrival nodes
+* copy  :  BaseProblem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> ) 
 </th></tr></thead></table>
-<p>
-Return a copy. 
 
+Return a copy. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="myEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="myStartEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="myDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 

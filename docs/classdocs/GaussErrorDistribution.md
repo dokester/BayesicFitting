@@ -5,13 +5,12 @@
 <a name="GaussErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class GaussErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 To calculate a Gauss likelihood.
 
 For one residual, x, it holds
 
-<br>&nbsp; L( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 ( x / s )<sup>2</sup> )<br>
+&nbsp; L( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 ( x / s )<sup>2</sup> )
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -21,11 +20,11 @@ The scale s is also the square root of the variance of this error distribution.
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log likelihood, logL.
 
-<br>&nbsp; logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup><br>
+&nbsp; logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup>
 
 Using weights this becomes
 
-<br>&nbsp; logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )<br>
+&nbsp; logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )
 
 
 Author       Do Kester.
@@ -35,36 +34,33 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GaussErrorDistribution(</strong> scale=1.0, limits=None, copy=None )
 </th></tr></thead></table>
-<p>
 
 Default Constructor.
 
-<b>Parameters</b><br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
-* limits  :  None or list of 2 floats [low,high]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
-&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
-&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
+<b>Parameters</b>
 
-* copy  :  GaussErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; noise scale
+* limits  :  None or list of 2 floats [low,high]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale
+<br>&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.
+
+* copy  :  GaussErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
-<p>
-
 True if the distribution accepts weights.
 Always true for this distribution.
 
@@ -72,111 +68,105 @@ Always true for this distribution.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the noise scale.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
-    list of all parameters in the problem
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
 
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for a Gaussian distribution.
 
 Alternate calculation
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
 
 
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
-* mockdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model
 
 
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
 </th></tr></thead></table>
-<p>
-
 Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
 Alternate calculation
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved.<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
-* fitIndex  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved.
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem
+* fitIndex  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted
 
 
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the partial derivative all elements of the log( likelihood )
 to the parameters in fitIndex.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
-* fitIndex  :  array_like of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of allpars to fit<br>
-* mockdata  :  array_like<br>
-    as calculated for the problem
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem
+* fitIndex  :  array_like of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of allpars to fit
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem
 
 <a name="hessianLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hessianLogL(</strong> problem, allpars, fitIndex ) 
 </th></tr></thead></table>
-<p>
-
 Return the hessian of log( likelihood ) to the parameters in fitIndex.
 
 The hessian is a matrix containing the second derivatives to each
 of the parameters.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp<sub>i</sub> dp<sub>k</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp<sub>i</sub> dp<sub>k</sub>
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem<br>
-* fitIndex  :  array_like of int<br>
-    indices of allpars to fit
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; (hyper)parameters of the problem
+* fitIndex  :  array_like of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of allpars to fit
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a></th></tr></thead></table>

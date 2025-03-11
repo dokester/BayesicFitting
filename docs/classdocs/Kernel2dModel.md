@@ -5,32 +5,31 @@
 <a name="Kernel2dModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class Kernel2dModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Two dimensional Kernel Model.
 
 The Kernel2dModel is defined as
 
-<br>&nbsp; f( x:p ) = p<sub>0</sub> * K( r )<br>
+&nbsp; f( x:p ) = p<sub>0</sub> * K( r )
 
 where K( r ) is a selectable kernel function and r is the distance to the center.
 
-<br>&nbsp; r = sqrt( u<sup>2</sup> + v<sup>2</sup> ).<br>
+&nbsp; r = sqrt( u<sup>2</sup> + v<sup>2</sup> ).
 
 There are 3 options for u and v
 
 1. CIRCULAR has 4 parameters<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; Circular shape with only one width.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub><br>
-&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>3</sub><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Circular shape with only one width.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>3</sub>
 2. ELLIPTIC has 5 parameters<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; Elliptic shape aligned along the axes; 2 widths.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub><br>
-&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>4</sub><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Elliptic shape aligned along the axes; 2 widths.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>4</sub>
 3. ROTATED has 6 parameters<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; Rotated elliptical shape with 2 width and a rotational angle.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( ( x - p<sub>1</sub> )*cos( p<sub>5</sub> ) - ( y - p<sub>2</sub> )*sin( p<sub>5</sub>) ) / p<sub>3</sub><br>
-&nbsp;&nbsp;&nbsp;&nbsp; v = ( ( x - p<sub>1</sub> )*sin( p<sub>5</sub> ) + ( y - p<sub>2</sub> )*cos( p<sub>5</sub>) ) / p<sub>4</sub><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Rotated elliptical shape with 2 width and a rotational angle.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( ( x - p<sub>1</sub> )*cos( p<sub>5</sub> ) - ( y - p<sub>2</sub> )*sin( p<sub>5</sub>) ) / p<sub>3</sub>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; v = ( ( x - p<sub>1</sub> )*sin( p<sub>5</sub> ) + ( y - p<sub>2</sub> )*cos( p<sub>5</sub>) ) / p<sub>4</sub>
 
 The "center" parameters ( 1&2 ) and the "angle" parameter ( 5 ) are initilized as 0.
 The rotational angle is measured counterclockwise from the x-axis.
@@ -45,128 +44,123 @@ Beware: These models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Example</b><br>
+<b>Example</b>
+
     model = Kernel2dModel( )                                 # default: circular Gauss
     model.setKernelShape( Lorentz(), 'Elliptic'  )             # elliptic Lorentz model.
     model = Kernel2dModel( shape=3 )                         # rotated Gauss
 
-* Category :     mathematics/Fitting<br>
+* Category :     mathematics/Fitting
 
 
 <a name="Kernel2dModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Kernel2dModel(</strong> kernel=Gauss(), shape=1, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Kernel Model.
 
 Default model: Gauss with Circular shape.
 
-<b>Parameters</b><br>
-* kernel  :  Kernel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kernel to be used<br>
-* shape  :  1 | 2 | 3 | 'circular' | 'elliptic' | 'rotated'<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int : resp.: circular elliptic, rotated<br>
-&nbsp;&nbsp;&nbsp;&nbsp; str : case insensitive; only the first letter matters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; shape defaults to 'circular' when misunderstood<br>
-* copy  :  Kernel2dModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* kernel  :  Kernel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kernel to be used
+* shape  :  1 | 2 | 3 | 'circular' | 'elliptic' | 'rotated'
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int : resp.: circular elliptic, rotated
+<br>&nbsp;&nbsp;&nbsp;&nbsp; str : case insensitive; only the first letter matters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; shape defaults to 'circular' when misunderstood
+* copy  :  Kernel2dModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="parseShape"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>parseShape(</strong> shape ) 
 </th></tr></thead></table>
-<p>
+
 <a name="setKernelShape"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setKernelShape(</strong> kernel, shape ) 
 </th></tr></thead></table>
-<p>
+
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Returns a string representation of the model. 
 
+Returns a string representation of the model. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns df/dx of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
-<p>
+
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 

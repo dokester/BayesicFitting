@@ -5,7 +5,6 @@
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Fitter using the simulated annealing simplex minimum finding algorithm,
 
@@ -13,7 +12,8 @@ See also: [AnnealingAmoeba](./AnnealingAmoeba.md)
 
 Author       Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = 3.5 * SIN( x + 0.4 )                    # make sine
@@ -40,32 +40,33 @@ Author       Do Kester
     param = amfit.fit( y )
 
 
-<b>Notes</b><br>
+<b>Notes</b>
+
 1. AmoebaFitter is not guaranteed to find the global minimum.
 2. The calculation of the evidence is an Gaussian approximation which is
 only exact for linear models with a fixed scale.
 
-* Author  :  Do Kester.<br>
+* Author  :  Do Kester.
 
 
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>AmoebaFitter(</strong> xdata, model, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Create a new Amoeba class, providing inputs and model.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; independent input values<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; independent input values
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale
 
 
 <a name="fit"></a>
@@ -75,56 +76,55 @@ Create a new Amoeba class, providing inputs and model.
  tolerance=0.0001, cooling=0.95, steps=10,
  verbose=0, plot=False, accuracy=None, callback=None )
 </th></tr></thead></table>
-<p>
-
 Return Model fitted to the data array.
 
 When done, it also calculates the hessian matrix and chisq.
 
-<b>Parameters</b><br>
-* data  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
-* weights  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
-&nbsp;&nbsp;&nbsp;&nbsp; The weights are relative weights unless `scale` is set.<br>
-* accuracy  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
-* par0  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; initial values of teh parameters of the model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; default: from model<br>
-* keep  :  dict of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; The values of keep are only valid for *this* fit<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See also `AmoebaFitter( ..., keep=dict )`<br>
-* size  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; step size of the simplex<br>
-* seed  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; for random number generator<br>
-* temp  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; temperature of annealing (0 is no annealing)<br>
-* limits  :  None or list of 2 floats or list of 2 array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied<br>
-&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values<br>
-&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] : low array and high array limits for the values<br>
-* maxiter  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations<br>
-* tolerance  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance<br>
-* cooling  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; cooling factor when annealing<br>
-* steps  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of cycles in each cooling step.<br>
-* verbose  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 1 : print results to output<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 2 : print some info every 100 iterations<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 3 : print some info all iterations<br>
-* plot  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; plot the results.<br>
-* callback  :  callable<br>
-&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as<br>
-&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`<br>
-&nbsp;&nbsp;&nbsp;&nbsp; where `val` is the minimizable array<br>
+<b>Parameters</b>
+
+* data  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
+* weights  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The weights are relative weights unless `scale` is set.
+* accuracy  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data
+* par0  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; initial values of teh parameters of the model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; default: from model
+* keep  :  dict of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The values of keep are only valid for *this* fit
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See also `AmoebaFitter( ..., keep=dict )`
+* size  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; step size of the simplex
+* seed  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; for random number generator
+* temp  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; temperature of annealing (0 is no annealing)
+* limits  :  None or list of 2 floats or list of 2 array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied
+<br>&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values
+<br>&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] : low array and high array limits for the values
+* maxiter  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations
+* tolerance  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; stops when ( |hi-lo| / (|hi|+|lo|) ) < tolerance
+* cooling  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; cooling factor when annealing
+* steps  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of cycles in each cooling step.
+* verbose  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 1 : print results to output
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 2 : print some info every 100 iterations
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 3 : print some info all iterations
+* plot  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; plot the results.
+* callback  :  callable
+<br>&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as
+<br>&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`
+<br>&nbsp;&nbsp;&nbsp;&nbsp; where `val` is the minimizable array
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

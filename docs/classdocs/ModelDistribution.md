@@ -5,13 +5,12 @@
 <a name="ModelDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ModelDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ModelDistribution.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 To calculate the probability of a model M from a set of models S,
 given some data D, use Bayes rule
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; P( M|DS ) = P( M|S ) * P( D|MS ) / P( D|S )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; posterior = prior   * likelihood / evidence<br>
+&nbsp;&nbsp;&nbsp;&nbsp; P( M|DS ) = P( M|S ) * P( D|MS ) / P( D|S )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; posterior = prior   * likelihood / evidence
 
 This class calculates the likelihood P( D|MS ).
 On another level where we calculate the probability of the
@@ -19,7 +18,7 @@ parameters p, we see this likelhood appear as evidence P( D|M ).
 
 Again using Bayes 
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; P( p|DM ) = P( p|M ) * P( D|pM ) / P( D|M )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; P( p|DM ) = P( p|M ) * P( D|pM ) / P( D|M )
 
 The evidence here is calculated as the integral over a Gausian
 approximation of the posterior.
@@ -32,45 +31,42 @@ Author       Do Kester.
 <strong>ModelDistribution(</strong> arbiter=None, scale=1.0, limits=None,
  copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Default Constructor.
 
-<b>Parameters</b><br>
-* arbiter  :  None or BaseFitter or str<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to provide the evidence<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None    select fitter automatically<br>
-&nbsp;&nbsp;&nbsp;&nbsp; BaseFiter   Use this fitter<br>
-&nbsp;&nbsp;&nbsp;&nbsp; str     "fitter", "levenberg", "curve", "amoeba", "NestedSampler"<br>
+<b>Parameters</b>
 
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
-* limits  :  None or list of 2 floats [low,high]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
-&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
-&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
+* arbiter  :  None or BaseFitter or str
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to provide the evidence
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None    select fitter automatically
+<br>&nbsp;&nbsp;&nbsp;&nbsp; BaseFiter   Use this fitter
+<br>&nbsp;&nbsp;&nbsp;&nbsp; str     "fitter", "levenberg", "curve", "amoeba", "NestedSampler"
 
-* copy  :  ModelDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; noise scale
+* limits  :  None or list of 2 floats [low,high]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale
+<br>&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.
 
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be applied to arbiter<br>
+* copy  :  ModelDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
+
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be applied to arbiter
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
-<p>
-
 True if the distribution accepts weights.
 Always true for this distribution.
 
@@ -78,37 +74,35 @@ Always true for this distribution.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for a Gaussian distribution.
 
 Alternate calculation
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Return optimal parameters of the fit<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Return optimal parameters of the fit
 
 
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for each residual
-<br>&nbsp;&nbsp;&nbsp; <br>
+<br>&nbsp;&nbsp;&nbsp; 
 logL = sum( logLdata )
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem   <br>
-* mockdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem   
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

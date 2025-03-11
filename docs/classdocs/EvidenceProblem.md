@@ -5,7 +5,6 @@
 <a name="EvidenceProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class EvidenceProblem(</strong> <a href="./ClassicProblem.html">ClassicProblem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 An EvidenceProblem is a ClassicProblem containing a Dynamic and/or Modifiable
 model, where the (Gauss-approximated) evidence is used as likelihood
@@ -18,39 +17,38 @@ problem.result( x, p )
 The parameters, p, are to be optimized while the x provide additional
 information.
 
-<b>Attributes from Problem</b><br>
+<b>Attributes from Problem</b>
+
 model, xdata, ydata, weights
 
-* Author  :          Do Kester<br>
+* Author  :          Do Kester
 
 
 <a name="EvidenceProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>EvidenceProblem(</strong> model=None, xdata=None, ydata=None, weights=None, copy=None )
 </th></tr></thead></table>
-<p>
 
 Constructor for classic problems.
 
-<b>Parameters</b><br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
-* xdata  :  array_like or None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; independent variable<br>
-* ydata  :  array_like or None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dependent variable<br>
-* weights  :  array_like or None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights associated with ydata<br>
-* copy  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
+<b>Parameters</b>
+
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved
+* xdata  :  array_like or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; independent variable
+* ydata  :  array_like or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dependent variable
+* weights  :  array_like or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights associated with ydata
+* copy  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-
 Copy.
 
 The copy points to the same instance of model.
@@ -59,25 +57,20 @@ The copy points to the same instance of model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return a default list of preferred engines
 
 <a name="myDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return the default preferred ModelDistribution: "model"
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Returns a string representation of the model. 
 
+Returns a string representation of the model. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ClassicProblem.html">ClassicProblem</a></th></tr></thead></table>
 

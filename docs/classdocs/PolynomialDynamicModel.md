@@ -5,7 +5,6 @@
 <a name="PolynomialDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 General polynomial model of an adaptable degree.
 
@@ -17,7 +16,8 @@ It is a linear model.
 
 Author       Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = PolynomialDynamicModel( )         # polynomial with unknown degree
     poly.grow( )                         # starts at degree = 0, npar = 1
     poly.grow( )                         # each grow( ) adds 1
@@ -29,26 +29,32 @@ Author       Do Kester
     print poly.npbase
     4
 
-<b>Attributes</b><br>
-* minDegree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of the polynomial<br>
-* maxDegree  :  int or None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of the polynomial<br>
+<b>Attributes</b>
 
-<b>Attributes from Dynamic</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
+* minDegree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of the polynomial
+* maxDegree  :  int or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of the polynomial
 
-<b>Attributes from PolynomialModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; degree<br>
+<b>Attributes from Dynamic</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from PolynomialModel</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; degree
+
+<b>Attributes from Model</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 Category     mathematics/Fitting
@@ -59,27 +65,28 @@ Category     mathematics/Fitting
 <strong>PolynomialDynamicModel(</strong> degree, minDegree=0, maxDegree=None, fixed=None,
  growPrior=None, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Polynomial of a adaptable degree.
 
 The model starts as a PolynomialModel of degree = 0.
 Growth of the model is governed by a exponential prior ( scale=1 ).
 
-<b>Parameters</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; degree to start with; it should be minDegree <= degree <= maxDegree<br>
-* minDegree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=0)<br>
-* maxDegree  :  None or int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
-* growPrior  :  None or Prior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior<br>
-* copy  :  PolynomialDynamicModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree to start with; it should be minDegree <= degree <= maxDegree
+* minDegree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=0)
+* maxDegree  :  None or int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)
+* growPrior  :  None or Prior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior
+* copy  :  PolynomialDynamicModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+
+<b>Raises</b>
+
 AttributeError when fixed parameters are requested
 ValueError when degree is outside [min..max] range
 
@@ -87,26 +94,24 @@ ValueError when degree is outside [min..max] range
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
 </th></tr></thead></table>
-<p>
+
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
-<p>
+
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Return a string representation of the model. 
 
+Return a string representation of the model. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./PolynomialModel.html">PolynomialModel,</a></th></tr></thead></table>
 

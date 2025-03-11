@@ -5,12 +5,11 @@
 <a name="NelderMeadFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class NelderMeadFitter(</strong> <a href="./ScipyFitter.html">ScipyFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Nelder Mead downhill simplex.
 
 Syntactic sugar for
-<br>&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='NELDER-MEAD', ... )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='NELDER-MEAD', ... )
 
 See [ScipyFitter](./ScipyFitter.md)
 
@@ -19,22 +18,22 @@ See [ScipyFitter](./ScipyFitter.md)
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NelderMeadFitter(</strong> xdata, model, **kwargs ) 
 </th></tr></thead></table>
-<p>
 
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)<br>
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter:            gradient, hessp<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter:            gradient, hessp
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

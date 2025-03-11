@@ -5,7 +5,6 @@
 <a name="FreeShapeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class FreeShapeModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Pixelated Model.
 
@@ -26,30 +25,35 @@ Fitter. It will be a very ill-posed problem.
 Using NestedSampler its exponential prior will ensure that all
 parameters are kept positive.
 
-<b>Attributes</b><br>
-* npix  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Number of pixels in result. Is also npar.<br>
-* xlo  :  float ( default 0 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Lowest value in xdata<br>
-* xhi  :  float ( default npix )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Highest value in xdata<br>
-&nbsp;&nbsp;&nbsp;&nbsp; xlo and xhi define the valid domain of the model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; All input data must be: xlo <= xdata <= xhi<br>
-* shape  :  Kernel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; shape of convolving function<br>
-* center  :  float (between 0..1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; position of the center of shape with respect to the pixels<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* npix  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Number of pixels in result. Is also npar.
+* xlo  :  float ( default 0 )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Lowest value in xdata
+* xhi  :  float ( default npix )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Highest value in xdata
+<br>&nbsp;&nbsp;&nbsp;&nbsp; xlo and xhi define the valid domain of the model.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; All input data must be: xlo <= xdata <= xhi
+* shape  :  Kernel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; shape of convolving function
+* center  :  float (between 0..1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; position of the center of shape with respect to the pixels
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Examples</b><br>
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+<b>Examples</b>
+
     nn = 100
     fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
     print( fsm.shape )
@@ -62,116 +66,111 @@ Author       Do Kester
 <strong>FreeShapeModel(</strong> npix, copy=None, shape=None, nconvolve=0,
  center=0.5, xlo=0.0, xhi=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Free Shape model with npix pixels.
 
 The number of parameters equals the number of pixels
 
-<b>Parameters</b><br>
-* npix  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of pixels = npar<br>
-* copy  :  FreeShapeModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* shape  :  None or Kernel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : Use Tophat(), convolved nconvolve times.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Kernel : use the kernel as shape; nconvolve does not apply.<br>
-* nconvolve  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of (auto)convolutions on Tophat<br>
-* center  :  float (between 0..1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; positions where the pixels are centered.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; default: 0.5 -> pixels run from k to k+1<br>
-* xlo  :  float ( default 0.0 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; lowest value in xdata<br>
-* xhi  :  float ( default np )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; highest value in xdata<br>
+<b>Parameters</b>
+
+* npix  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of pixels = npar
+* copy  :  FreeShapeModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* shape  :  None or Kernel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : Use Tophat(), convolved nconvolve times.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Kernel : use the kernel as shape; nconvolve does not apply.
+* nconvolve  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of (auto)convolutions on Tophat
+* center  :  float (between 0..1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; positions where the pixels are centered.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; default: 0.5 -> pixels run from k to k+1
+* xlo  :  float ( default 0.0 )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; lowest value in xdata
+* xhi  :  float ( default np )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; highest value in xdata
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="checkDomain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkDomain(</strong> xdata ) 
 </th></tr></thead></table>
-<p>
-
 Check for all data inside domain defined by (xlo - range, xhi + range).
 range = self.shape.range
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+
+<b>Raises</b>
+
 ValueError when outside domain.
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
-<p>
-
 Returns the partial derivative of the model function to
 each of the parameters.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="TBCbaseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TBCbaseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of the model function df/dx.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
+
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

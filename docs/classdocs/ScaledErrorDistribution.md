@@ -5,15 +5,14 @@
 <a name="ScaledErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ScaledErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScaledErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Base class that defines methods common to error distributions with a scale.
 
-<br>&nbsp; GaussErrorDistribution<br>
-&nbsp; LaplaceErrorDistribution<br>
-&nbsp; CauchyErrorDistribution<br>
-&nbsp; ExponentialErrorDistribution<br>
-&nbsp; UniformErrorDistribution<br>
+&nbsp; GaussErrorDistribution
+<br>&nbsp; LaplaceErrorDistribution
+<br>&nbsp; CauchyErrorDistribution
+<br>&nbsp; ExponentialErrorDistribution
+<br>&nbsp; UniformErrorDistribution
 
 Author       Do Kester.
 
@@ -22,47 +21,45 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ScaledErrorDistribution(</strong> scale=1.0, limits=None, fixed=None, copy=None )
 </th></tr></thead></table>
-<p>
 
 Default Constructor.
 
-<b>Parameters</b><br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
-* limits  :  None or list of 2 floats [low,high]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale<br>
-&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale<br>
-&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is to be fitted<br>
-* fixed  :  dictionary of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
+<b>Parameters</b>
 
-* copy  :  ScaledErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; noise scale
+* limits  :  None or list of 2 floats [low,high]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed scale
+<br>&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on scale (needs to be >0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on scale
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is to be fitted
+* fixed  :  dictionary of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.
+
+* copy  :  ScaledErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="setLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits ) 
 </th></tr></thead></table>
-<p>
-
 Set limits for scale.
 
-<b>Parameters</b><br>
-* limits  :  [low,high]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; low : float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; low limits<br>
-&nbsp;&nbsp;&nbsp;&nbsp; high : float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; high limits<br>
+<b>Parameters</b>
+
+* limits  :  [low,high]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; low : float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; low limits
+<br>&nbsp;&nbsp;&nbsp;&nbsp; high : float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; high limits
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

@@ -5,7 +5,6 @@
 <a name="Kernel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class Kernel(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 A kernel is an even real-valued integrable function.
 
@@ -50,13 +49,14 @@ elsewhere it is 0.
 Huber is not a proper Kernel as the integral is inf. However it is important
 in robust fitting (RobustShell) to get a madian-like solution for the outliers.
 
-<b>Attributes</b><br>
-* integral  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the integral over the valid range<br>
-* fwhm  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the full width at half maximum<br>
-* range  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the region [-range..+range] where the kernel is non-zero.<br>
+<b>Attributes</b>
+
+* integral  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the integral over the valid range
+* fwhm  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the full width at half maximum
+* range  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the region [-range..+range] where the kernel is non-zero.
 
 Author      Do Kester
 
@@ -67,60 +67,55 @@ Category    mathematics/Fitting
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Kernel(</strong> integral=1.0, fwhm=1.0, range=1.0 ) 
 </th></tr></thead></table>
-<p>
 
 Constructor
 
-<b>Parameters</b><br>
-* integral  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; over [-inf, +inf]<br>
-* fwhm  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; full width at half maximum<br>
-* range  :  float<br>
-    the region [-range,+range] where the kernel is nonzero
+<b>Parameters</b>
+
+* integral  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; over [-inf, +inf]
+* fwhm  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; full width at half maximum
+* range  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the region [-range,+range] where the kernel is nonzero
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
-<p>
-
 Return the result for input values.
 
-<b>Parameters</b><br>
-* x  :  array-like<br>
-    input values
+<b>Parameters</b>
+
+* x  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; input values
 
 <a name="resultsq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>resultsq(</strong> xsq )
 </th></tr></thead></table>
-<p>
-
 Return the result for squared input values.
 
-<b>Parameters</b><br>
-* x  :  array-like<br>
-    the squares of the input values
+<b>Parameters</b>
+
+* x  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the squares of the input values
 
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> x )
 </th></tr></thead></table>
-<p>
-
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b><br>
-* x  :  array-like<br>
-    the input values
+<b>Parameters</b>
+
+* x  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the input values
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
-<p>
-
 Return true when the kernel is bound, i.e.
 all non-zero values are between -1 and +1
 
@@ -128,7 +123,5 @@ all non-zero values are between -1 and +1
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>name(</strong> )
 </th></tr></thead></table>
-<p>
-
 Return the name of the kernel.
 

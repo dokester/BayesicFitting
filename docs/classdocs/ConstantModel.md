@@ -5,11 +5,10 @@
 <a name="ConstantModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 ConstantModel is a Model which does not have any parameters.
 
-<br>&nbsp; f( x:p ) = f( x )<br>
+&nbsp; f( x:p ) = f( x )
 
 As such it is irrelevant whether it is linear or not.
 It has 0 params and returns a 0 for its partials.
@@ -26,23 +25,28 @@ some structure at all.
 It can also be used when some constant is needed in a compound model,
 or a family of similar shapes.
 
-<b>Attributes</b><br>
-* fixedModel  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a model which is calculated. (default: 0, everywhere)<br>
-* table  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* fixedModel  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a model which is calculated. (default: 0, everywhere)
+* table  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
 To make a model that decays to 1.0
 
     model = ConstantModel( values=1.0 )
@@ -56,25 +60,26 @@ To make a model that decays to 1.0
 <strong>ConstantModel(</strong> ndim=1, copy=None, fixedModel=None, values=None,
  table=None )
 </th></tr></thead></table>
-<p>
 
 The ConstantModel implementation.
 
 Number of parameters = 0.
 
-<b>Parameters</b><br>
-* ndim  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions for the model. (default: 1)<br>
-* copy  :  ConstantModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied. (default: None)<br>
-* fixedModel  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a fixed model to be returned. (default: 0 everywhere)<br>
-* values  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters to be used in the fixedModel. (default: None)<br>
-* table  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results<br>
+<b>Parameters</b>
 
-<b>Notes</b><br>
+* ndim  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions for the model. (default: 1)
+* copy  :  ConstantModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied. (default: None)
+* fixedModel  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a fixed model to be returned. (default: 0 everywhere)
+* values  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to be used in the fixedModel. (default: None)
+* table  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results
+
+<b>Notes</b>
+
 A table provided to the constructor has only values at the xdata.
 At other vales than xdata, the model does not work.
 
@@ -83,62 +88,56 @@ At other vales than xdata, the model does not work.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns a constant form.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata value. (=empty array)
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)<br>
-* parlist  :  None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; only to complete the necessary argument list<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)
+* parlist  :  None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; only to complete the necessary argument list
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each point x (== 0).
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (irrelevant)
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 

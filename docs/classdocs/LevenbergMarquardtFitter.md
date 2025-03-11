@@ -5,7 +5,6 @@
 <a name="LevenbergMarquardtFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Non-linear fitter using the Levenberg-Marquardt method.
 
@@ -19,7 +18,8 @@ This might be the third or fourth transcription of it.
 
 Author       Do Kester.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # assume x and y are Double1d data arrays
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122            # make slope
@@ -47,42 +47,45 @@ Author       Do Kester.
     lmfit.setPlotter( plotter, 20 )                   # make a plot every 20th iteration
     param = lmfit.fit( y )
 
-<b>Notes</b><br>
+<b>Notes</b>
+
 In case of problems look at the "Troubles" page in the documentation area.
 
 
-<b>Limitations</b><br>
+<b>Limitations</b>
+
 1. LMF is <b>not</b> guaranteed to find the global minimum.
 2. The calculation of the evidence is an Gaussian approximation which is
 only exact for linear models with a fixed scale.
 
-<b>Attributes</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; vector of numbers as input for model<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the model to be fitted<br>
-* lamda  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to balance the curvature matrix (see Numerical Recipes)<br>
+<b>Attributes</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; vector of numbers as input for model
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the model to be fitted
+* lamda  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to balance the curvature matrix (see Numerical Recipes)
 
 
 <a name="LevenbergMarquardtFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LevenbergMarquardtFitter(</strong> xdata, model, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Create a class, providing xdata and model.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; vector of independent input values<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted<br>
+<b>Parameters</b>
 
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; vector of independent input values
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted
+
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale
 
 
 
@@ -92,46 +95,46 @@ Create a class, providing xdata and model.
  maxiter=None, tolerance=None, verbose=None, plot=False,
  accuracy=None, callback=None )
 </th></tr></thead></table>
-<p>
-
 Return Model fitted to the data arrays.
 
 It will calculate the hessian matrix and chisq.
 
-<b>Parameters</b><br>
-* data   :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
-* weights  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
-* accuracy  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
-* par0  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; initial values for the parameters of the model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; default: from model<br>
-* keep  :  dict of {int : float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) of parameters to be kept at fixed value (float)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; The values of `keep` are only valid for *this* fit<br>
-&nbsp;&nbsp;&nbsp;&nbsp; see also `LevenbergMarquardtFitter( ..., keep=dict )<br>
-* limits  :  None or list of 2 floats or list of 2 array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied<br>
-&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values of the parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] :  arrays of low and high limits for all values of the parameters<br>
-* maxiter  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations. default=1000,<br>
-* tolerance  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; absolute and relative tolrance. default=0.0001,<br>
-* verbose  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
-&nbsp;&nbsp;&nbsp;&nbsp; >0 : more output<br>
-&nbsp;&nbsp;&nbsp;&nbsp; default=1<br>
-* plot  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; plot the results<br>
-* callback  :  callable<br>
-&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as<br>
-&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`<br>
-&nbsp;&nbsp;&nbsp;&nbsp; where val is the parameter list.<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* data   :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
+* weights  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data
+* accuracy  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data
+* par0  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; initial values for the parameters of the model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; default: from model
+* keep  :  dict of {int : float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) of parameters to be kept at fixed value (float)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The values of `keep` are only valid for *this* fit
+<br>&nbsp;&nbsp;&nbsp;&nbsp; see also `LevenbergMarquardtFitter( ..., keep=dict )
+* limits  :  None or list of 2 floats or list of 2 array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : no limits applied
+<br>&nbsp;&nbsp;&nbsp;&nbsp; [lo,hi] : low and high limits for all values of the parameters
+<br>&nbsp;&nbsp;&nbsp;&nbsp; [la,ha] :  arrays of low and high limits for all values of the parameters
+* maxiter  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; max number of iterations. default=1000,
+* tolerance  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; absolute and relative tolrance. default=0.0001,
+* verbose  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent
+<br>&nbsp;&nbsp;&nbsp;&nbsp; >0 : more output
+<br>&nbsp;&nbsp;&nbsp;&nbsp; default=1
+* plot  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; plot the results
+* callback  :  callable
+<br>&nbsp;&nbsp;&nbsp;&nbsp; is called each iteration as
+<br>&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`
+<br>&nbsp;&nbsp;&nbsp;&nbsp; where val is the parameter list.
+
+<b>Raises</b>
+
 ConvergenceError if it stops when the tolerance has not yet been reached.
 
 
@@ -139,21 +142,17 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chiSquaredExtra(</strong> data, params, weights=None ) 
 </th></tr></thead></table>
-<p>
-
 Add normalizing data to chisq.
 
 <a name="trialfit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>trialfit(</strong> params, fi, data, weights, verbose, maxiter )
 </th></tr></thead></table>
-<p>
+
 <a name="getParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameters(</strong> )
 </th></tr></thead></table>
-<p>
-
 Return status of the fitter: parameters ( for debugging ).
 
 Only for debugging; use Model.getParameters( ) otherwise
@@ -163,8 +162,6 @@ Only for debugging; use Model.getParameters( ) otherwise
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkLimits(</strong> fitpar, fitindex )
 </th></tr></thead></table>
-<p>
-
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

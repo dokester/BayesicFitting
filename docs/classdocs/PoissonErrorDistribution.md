@@ -5,20 +5,19 @@
 <a name="PoissonErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class PoissonErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 To calculate a Poisson likelihood.
 
 For one observation with n counts it holds
 
-<br>&nbsp; f( n,x ) = x<sup>n</sup> / ( e<sup>x</sup> * n! )<br>
+&nbsp; f( n,x ) = x<sup>n</sup> / ( e<sup>x</sup> * n! )
 
 where x is the expected counts
 
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum;( n * log( x ) - x - log( n! ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum;( n * log( x ) - x - log( n! ) )
 
 Weights are not accepted in this ErrorDistribution; they are silently ignored.
 
@@ -30,28 +29,25 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PoissonErrorDistribution(</strong> copy=None )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* copy  :  PoissonErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
+<b>Parameters</b>
+
+* copy  :  PoissonErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
-<p>
-
 True if the distribution accepts weights.
 Always false for this distribution.
 
@@ -59,86 +55,81 @@ Always false for this distribution.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the noise scale.
 
 *** Gaussian approximation ***
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model<br>
-    list of all parameters in the problem
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
 
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars )
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for a Poisson distribution.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
 
 
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
-* mockdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model
 
 
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex )
 </th></tr></thead></table>
-<p>
-
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
-* fitIndex  :  array_like<br>
-    indices of parameters to be fitted
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
+* fitIndex  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted
 
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None )
 </th></tr></thead></table>
-<p>
-
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
-* fitIndex  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
-* mockdata  :  array_like<br>
-    as calculated by the model
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
+* fitIndex  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>

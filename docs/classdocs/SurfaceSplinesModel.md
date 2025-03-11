@@ -5,7 +5,6 @@
 <a name="SurfaceSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SurfaceSplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SurfaceSplinesModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Surface splines model of arbitrary order and knot settings.
 
@@ -19,7 +18,8 @@ The number of parameters is
 
 The SplinesModel has more information about order and knots.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     nxk = 17
     nyk = 11
     xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160
@@ -31,84 +31,85 @@ The SplinesModel has more information about order and knots.
 
 Category     mathematics/Fitting
 
-<b>Attributes</b><br>
-* knots  :  list of array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions<br>
-* order  :  list of ints<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the splines in all dimensions<br>
-* models  :  list of Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; SplinesModels in all dimensions<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* knots  :  list of array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions
+* order  :  list of ints
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the splines in all dimensions
+* models  :  list of Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; SplinesModels in all dimensions
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="SurfaceSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SurfaceSplinesModel(</strong> knots, order=3, copy=None, fixed=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b><br>
-* knots  :  list of array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions<br>
-* order  :  int or list of ints<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the splines in all dimensions<br>
-* copy  :  SurfaceSplinesModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
-* AttributeError  :  When fixed is not None<br>
+* knots  :  list of array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions
+* order  :  int or list of ints
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the splines in all dimensions
+* copy  :  SurfaceSplinesModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.
+
+<b>Raises</b>
+
+* AttributeError  :  When fixed is not None
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="calcNp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calcNp(</strong> knots, order ) 
 </th></tr></thead></table>
-<p>
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
-* parlist  :  array_like<br>
-    not used in this model
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; not used in this model
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -116,24 +117,22 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

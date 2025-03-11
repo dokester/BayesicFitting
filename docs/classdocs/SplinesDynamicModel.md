@@ -5,54 +5,62 @@
 <a name="SplinesDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 BasicSplinesModel that is modifiable (knot locations) and dynamic (in number
 of knots)
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = SplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
 18
-* # or alternatively : <br>
+* # or alternatively : 
     csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
 18
-* # or alternatively : <br>
+* # or alternatively : 
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
 18
 
-<b>Attributes</b><br>
-* minKnots  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots<br>
-* maxDegree  :  int or None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum number of knots<br>
+<b>Attributes</b>
 
-<b>Attributes from Modifiable</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; modifiable<br>
+* minKnots  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots
+* maxDegree  :  int or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum number of knots
 
-<b>Attributes from Dynamic</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
+<b>Attributes from Modifiable</b>
 
-<b>Attributes from SplinesModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; knots, order<br>
+&nbsp;&nbsp;&nbsp;&nbsp; modifiable
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from Dynamic</b>
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from SplinesModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; knots, order
+
+<b>Attributes from Model</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Limitations</b><br>
+<b>Limitations</b>
+
 Dont construct the knots so closely spaced, that there are no datapoints in between.
 
 
@@ -61,34 +69,36 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 <strong>SplinesDynamicModel(</strong> modifiable=True, dynamic=True, growPrior=None, minKnots=2, maxKnots=None,
  minDistance=0.01, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b><br>
-* modifiable  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True allow changement of the knot locations<br>
-* dynamic  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True allow growth and shrinkage of number of knots<br>
-* minKnots  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots (def=2)<br>
-* maxKnots  :  None or int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum number of Knots<br>
-* minDistance  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum distance between knots, provided as fraction of average knot distance.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; default is ( 0.01 * ( knots[-1] - knots[0] ) / nrknots )<br>
-* growPrior  :  None or Prior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior<br>
-* copy  :  PolynomialDynamicModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
+<b>Parameters</b>
 
-<b>Parameters for SplinesModel</b><br>
+* modifiable  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True allow changement of the knot locations
+* dynamic  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True allow growth and shrinkage of number of knots
+* minKnots  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots (def=2)
+* maxKnots  :  None or int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum number of Knots
+* minDistance  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum distance between knots, provided as fraction of average knot distance.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; default is ( 0.01 * ( knots[-1] - knots[0] ) / nrknots )
+* growPrior  :  None or Prior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior
+* copy  :  PolynomialDynamicModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+
+<b>Parameters for SplinesModel</b>
+
 knots, order, nrknots, min, max, xrange
 
-<b>Raises</b><br>
+<b>Raises</b>
+
 ValueError if not minKnots <= nrknots <= maxKnots
 
 
@@ -96,78 +106,76 @@ ValueError if not minKnots <= nrknots <= maxKnots
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> modifiable=None, dynamic=None )
 </th></tr></thead></table>
-<p>
+
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Returns a string representation of the model. 
 
+Returns a string representation of the model. 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
 </th></tr></thead></table>
-<p>
+
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, force=False, **kwargs )
 </th></tr></thead></table>
-<p>
-
 Increase the degree by one upto maxComp ( if present ).
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
-* rng  :  random number generator (obligatory)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter.<br>
-* force  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dont check maxKnots<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :   succes<br>
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start
+* rng  :  random number generator (obligatory)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter.
+* force  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dont check maxKnots
+
+<b>Return</b>
+
+* bool  :   succes
 
 
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, **kwargs )
 </th></tr></thead></table>
-<p>
-
 Decrease the degree by one downto minComp ( default 1 ).
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
-* rng  :  random number generator<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter (obligatory)<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :  succes<br>
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start
+* rng  :  random number generator
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter (obligatory)
+
+<b>Return</b>
+
+* bool  :  succes
 
 
 <a name="vary"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=None ) 
 </th></tr></thead></table>
-<p>
+
 <a name="varyAlt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>varyAlt(</strong> offset=0, rng=None, **kwargs ) 
 </th></tr></thead></table>
-<p>
-
 Vary the structure of a Modifiable Model
 
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Modifiable model start<br>
-* rng  :  RNG<br>
-&nbsp;&nbsp;&nbsp;&nbsp; random number generator<br>
-* kwargs  :  keyword arguments<br>
-    for specific implementations
+<b>Parameters</b>
+
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Modifiable model start
+* rng  :  RNG
+<br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
+* kwargs  :  keyword arguments
+<br>&nbsp;&nbsp;&nbsp;&nbsp; for specific implementations
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Modifiable.html">Modifiable,</a></th></tr></thead></table>

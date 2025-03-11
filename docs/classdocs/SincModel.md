@@ -5,28 +5,28 @@
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Sinc Model.
 Also known as Cardinal Sine.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( ( x - p<sub>1</sub> ) / p<sub>2</sub> ) / ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( ( x - p<sub>1</sub> ) / p<sub>2</sub> ) / ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )
 
-<br>&nbsp; where<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = offset<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = width ( =Distance between first zero-crossings divided by 2 Pi. )<br>
+&nbsp; where
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = offset
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = width ( =Distance between first zero-crossings divided by 2 Pi. )
 As always x = input.
 
 The parameters are initialized at [1.0, 0.0, 1.0].
 
 Parameter 2 ( width ) is always kept positive ( >=0 ).
 
-<br>&nbsp; SincModel() is syntactic sugar for<br>
-&nbsp;&nbsp;&nbsp;&nbsp; KernelModel( kernel=Sinc() )<br>
+&nbsp; SincModel() is syntactic sugar for
+<br>&nbsp;&nbsp;&nbsp;&nbsp; KernelModel( kernel=Sinc() )
 See [KernelModel](./KernelModel.md)
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sinc = SincModel( )
     print sinc.npchain
     3
@@ -34,41 +34,43 @@ See [KernelModel](./KernelModel.md)
     [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
 
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SincModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Sinc model.
 
 Number of parameters is 3.
 
-<b>Parameters</b><br>
-* copy  :  ArctanModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* fixed  :  dictionary of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
-    Attribute fixed can only be set in the constructor.
+<b>Parameters</b>
+
+* copy  :  ArctanModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* fixed  :  dictionary of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./KernelModel.html">KernelModel</a></th></tr></thead></table>
 

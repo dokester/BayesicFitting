@@ -5,24 +5,25 @@
 <a name="MaxLikelihoodFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class MaxLikelihoodFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Base class with methods common to fitters handling ErrorDistributions.
 
 Author:      Do Kester.
 
-<b>Attributes</b><br>
-* errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized<br>
-&nbsp;&nbsp;&nbsp;&nbsp; name : use -logLikelihood as function to be minimized from the named<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errordistribution.<br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) noise scale<br>
-* power  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; power of errdis (if applicable)<br>
+<b>Attributes</b>
 
-<b>Raises</b><br>
+* errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized
+<br>&nbsp;&nbsp;&nbsp;&nbsp; name : use -logLikelihood as function to be minimized from the named
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errordistribution.
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) noise scale
+* power  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; power of errdis (if applicable)
+
+<b>Raises</b>
+
 ConvergenceError    Something went wrong during the convergence if the fit.
 
 
@@ -31,74 +32,70 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 <strong>MaxLikelihoodFitter(</strong> xdata, model, errdis=None, scale=None, power=2.0,
  **kwargs )
 </th></tr></thead></table>
-<p>
 
 Create a new iterative fitter, providing xdatas and model.
 
 This is a base class. It collects stuff common to all iterative fitters.
 It does not work by itself.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
+<b>Parameters</b>
 
-* errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized<br>
-&nbsp;&nbsp;&nbsp;&nbsp; name : use -logLikelihood as function to be minimized from the named<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errordistribution.<br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) noise scale of errdis (if applicable)<br>
-* power  :  float (2.0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the power of errdis ( if applicable)<br>
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted
+
+* errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized
+<br>&nbsp;&nbsp;&nbsp;&nbsp; name : use -logLikelihood as function to be minimized from the named
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errordistribution.
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) noise scale of errdis (if applicable)
+* power  :  float (2.0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the power of errdis ( if applicable)
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale
 
 
 <a name="makeFuncs"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeFuncs(</strong> data, weights=None, index=None, ret=3 ) 
 </th></tr></thead></table>
-<p>
-
 Make connection to the desired func, gradient and hessian.
 
-<b>Parameters</b><br>
-* data  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the data to be fitted<br>
-* weights  :  array_like or None<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights on the data<br>
-* index  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of the parameters to be fitted.<br>
-* ret  :  1 or 2 or 3<br>
-    return (func), (func,dfunc) or (func,dfunc,hess)
+<b>Parameters</b>
+
+* data  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the data to be fitted
+* weights  :  array_like or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights on the data
+* index  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of the parameters to be fitted.
+* ret  :  1 or 2 or 3
+<br>&nbsp;&nbsp;&nbsp;&nbsp; return (func), (func,dfunc) or (func,dfunc,hess)
 
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return the stdev of the noise.
 
 <a name="getLogLikelihood"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) 
 </th></tr></thead></table>
-<p>
+
 <a name="normalize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalize(</strong> normdfdp, normdata, weight=1.0 ) 
 </th></tr></thead></table>
-<p>
-
 Not Implemented.
 
-<b>Raises</b><br>
+<b>Raises</b>
+
 NotImplementedError.
 the method is not implemented for MaxLikelihoodFitters
 
@@ -107,8 +104,6 @@ the method is not implemented for MaxLikelihoodFitters
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>testGradient(</strong> par, at, data, weights=None )
 </th></tr></thead></table>
-<p>
-
 returns true if the test fails.
 
 

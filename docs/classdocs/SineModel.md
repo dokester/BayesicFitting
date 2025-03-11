@@ -5,7 +5,6 @@
 <a name="SineModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SineModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Sinusoidal Model.
 
@@ -13,29 +12,30 @@ Two variants are implemented.
 
 1. By default it is the weighted sum of sine and cosine of the same frequency
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( 2 * &pi; * p<sub>0</sub> * x ) + p<sub>2</sub> * sin( 2 * &pi; * p<sub>0</sub> * x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( 2 * &pi; * p<sub>0</sub> * x ) + p<sub>2</sub> * sin( 2 * &pi; * p<sub>0</sub> * x )
 
 where
-<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = frequency<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = amplitude sine.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = frequency
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = amplitude sine.
 As always x = input.
 
 The parameters are initialized at [1.0, 1.0, 1.0]. It is a non-linear model.
 
 2. If phase == True, the sinusoidal model has an explicit phase
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( 2 * &pi; * p<sub>1</sub> * x + p<sub>2</sub> )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( 2 * &pi; * p<sub>1</sub> * x + p<sub>2</sub> )
 
 where
-<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = frequency<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = phase.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = frequency
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = phase.
 
 The parameters are initialized as [1.0, 1.0, 0.0].
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = SineModel( )
     print( sine.npchain )
 3
@@ -46,19 +46,23 @@ The parameters are initialized as [1.0, 1.0, 0.0].
     sine.parameters = pars
     print( sine( numpy.arange( 11, dtype=float ) ) )     # One cosine period
 
-<b>Attributes</b><br>
-* phase  :  bool (False)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; False : original 2 amplitudes model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; True  : phase model<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* phase  :  bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; False : original 2 amplitudes model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; True  : phase model
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 
@@ -66,83 +70,77 @@ The parameters are initialized as [1.0, 1.0, 0.0].
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SineModel(</strong> copy=None, phase=False, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Sinusiodal model.
 
 Number of parameters is 3.
 
-<b>Parameters</b><br>
-* phase  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True, construct phase variant.<br>
-* copy  :  SineModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
-* fixed  :  dictionary of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+<b>Parameters</b>
+
+* phase  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True, construct phase variant.
+* copy  :  SineModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+* fixed  :  dictionary of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of f to x (df/dx) at the input values.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -150,68 +148,62 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of a parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <a name="phaseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>phaseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="phasePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>phasePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="phaseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>phaseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of f to x (df/dx) at the input values.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="phaseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>phaseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -219,13 +211,12 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>phaseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of a parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

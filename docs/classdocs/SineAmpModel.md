@@ -5,109 +5,109 @@
 <a name="SineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SineAmpModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineAmpModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Sine with fixed frequency.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> cos( 2 &pi; &omega; x ) + p<sub>1</sub> sin( 2 &pi; &omega; x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> cos( 2 &pi; &omega; x ) + p<sub>1</sub> sin( 2 &pi; &omega; x )
 
 where
-<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude of cosine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude of sine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; P<sub>3</sub> = &omega; is the fixed frequency of the model.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude of cosine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude of sine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; P<sub>3</sub> = &omega; is the fixed frequency of the model.
 
 It is a linear model with 2 parameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = SineAmpModel( 150 )        # fixed frequency of 150 Hz
 
-<b>Attributes</b><br>
-* frequency  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) frequency of the sinusoidal.<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* frequency  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the (fixed) frequency of the sinusoidal.
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Alternate</b><br>
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+<b>Alternate</b>
+
 This model is equivalent to
-<br>&nbsp;&nbsp;&nbsp;&nbsp; SineModel( fixed={0:frequency} )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; SineModel( fixed={0:frequency} )
 
 
 <a name="SineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SineAmpModel(</strong> frequency, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Sine model of a fixed frequency.
 
 Number of parameters is 2.
 
-<b>Parameters</b><br>
-* frequency  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the frequency<br>
-* copy  :  SineAmpModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* frequency  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the frequency
+* copy  :  SineAmpModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored in LinearModels)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative of f to x (df/dx) at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -115,12 +115,12 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of a parameter.
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

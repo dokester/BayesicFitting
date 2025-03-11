@@ -5,7 +5,6 @@
 <a name="DecisionTreeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class DecisionTreeModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 A DecisionTree Model (DTM) is mostly defined on multiple input dimensions (axes).
 It splits the data in 2 parts, according low and high values on a certain input axis.
@@ -17,53 +16,60 @@ Each category set one bit in an integer. The unknown category is a category
 by itself.
 Booleans that contain unknowns should be coded as categorial.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = DTM<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> left => DTM (or None)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> rite => DTM (or None)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> dimension<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> split or mask<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = DTM
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> left => DTM (or None)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> rite => DTM (or None)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> dimension
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |-> split or mask
 
 The tree is searched left to right.
 
 The parameters are all initialized at 0.0
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     dtm = DecisionTreeModel( )
     print( dtm )
     DecisionTree: with 0 components and 1 parameters
 
-<b>Attributes</b><br>
-* left  :  None or DTM<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a None the tree stops otherwise there is a new split.<br>
-* rite  :  None or DTM<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a None the tree stops otherwise there is a new split.<br>
-* dimension  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; split according to data values on this axes<br>
-* itype  :  char. Either 'f' (float), 'i' (integer), or 'b' (boolean)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; characterizes the input dimension as float, integer or boolean<br>
-* split  :  float between 0 and 1 (for float dimension)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to the left normalized values < split; to the rite normvalues > split.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Unknown values (NaNs to to the smallest faction).<br>
-* nsplit  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of calls to random.rand() to be averaged. Prior on "split"<br>
-* mask  :  float between 0 and 1 (for float dimension)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to the left normalized values < split; to the rite normvalues > split.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Unknown values (NaNs to to the smallest faction.<br>
+<b>Attributes</b>
 
-<b>Attributes from Modifiable</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; modifiable<br>
+* left  :  None or DTM
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a None the tree stops otherwise there is a new split.
+* rite  :  None or DTM
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a None the tree stops otherwise there is a new split.
+* dimension  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; split according to data values on this axes
+* itype  :  char. Either 'f' (float), 'i' (integer), or 'b' (boolean)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; characterizes the input dimension as float, integer or boolean
+* split  :  float between 0 and 1 (for float dimension)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to the left normalized values < split; to the rite normvalues > split.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Unknown values (NaNs to to the smallest faction).
+* nsplit  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of calls to random.rand() to be averaged. Prior on "split"
+* mask  :  float between 0 and 1 (for float dimension)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to the left normalized values < split; to the rite normvalues > split.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Unknown values (NaNs to to the smallest faction.
 
-<b>Attributes from Dynamic</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dynamic<br>
+<b>Attributes from Modifiable</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; modifiable
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Dynamic</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dynamic
+
+<b>Attributes from Model</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="DecisionTreeModel"></a>
@@ -71,159 +77,146 @@ The parameters are all initialized at 0.0
 <strong>DecisionTreeModel(</strong> ndim=1, depth=0, split=0.5, kdim=0, itypes=[0], modifiable=True,
  dynamic=True, code=None, growPrior=None, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 DecisionTree model.
 
 The DTM standardly has a UniformPrior for all parameters, with limits [0,1]
 
-<b>Parameters</b><br>
-* ndim  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of input dimensions<br>
-* depth  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; depth of the tree<br>
-* kdim  :  None or list of ints<br>
-&nbsp;&nbsp;&nbsp;&nbsp; input channel to be splitted.<br>
-* itypes  :  [list of] int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indicating the type of input: 0 for float, 1 for boolean, >1 for categorial<br>
-&nbsp;&nbsp;&nbsp;&nbsp; The last number is repeated for remaining inputs<br>
-* split  :  None or float or list of floats<br>
-&nbsp;&nbsp;&nbsp;&nbsp; fraction (0<s<1) of the input kdim that falls on either side.<br>
-* growPrior  :  None or Prior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Governing the growth<br>
-* modifiable  :  bool (True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Will the model modify dimension and/or split/mask<br>
-* dynamic  :  bool (True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Will the model grow/shrink<br>
+<b>Parameters</b>
+
+* ndim  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of input dimensions
+* depth  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; depth of the tree
+* kdim  :  None or list of ints
+<br>&nbsp;&nbsp;&nbsp;&nbsp; input channel to be splitted.
+* itypes  :  [list of] int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indicating the type of input: 0 for float, 1 for boolean, >1 for categorial
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The last number is repeated for remaining inputs
+* split  :  None or float or list of floats
+<br>&nbsp;&nbsp;&nbsp;&nbsp; fraction (0<s<1) of the input kdim that falls on either side.
+* growPrior  :  None or Prior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Governing the growth
+* modifiable  :  bool (True)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Will the model modify dimension and/or split/mask
+* dynamic  :  bool (True)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Will the model grow/shrink
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="setSplitOrMask"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setSplitOrMask(</strong> itype, split ) 
 </th></tr></thead></table>
-<p>
-For internal use only 
 
+For internal use only 
 <a name="isLeaf"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isLeaf(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return true if self is a leaf
 
 <a name="partitionList"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partitionList(</strong> xdata, plist ) 
 </th></tr></thead></table>
-<p>
-
 Partition the xdata in plist over 2 new lists according to the DTM-branch.
 
-<b>Paramaters</b><br>
-* xdata  :  array-like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the xdata<br>
-* plist  :  array of ints<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices in xdata<br>
+<b>Paramaters</b>
 
-<b>Return</b><br>
-* pl1, pl2  :  2 lists<br>
-    together containing all indices in plist
+* xdata  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the xdata
+* plist  :  array of ints
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices in xdata
+
+<b>Return</b>
+
+* pl1, pl2  :  2 lists
+<br>&nbsp;&nbsp;&nbsp;&nbsp; together containing all indices in plist
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="recursiveResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveResult(</strong> xdata, params, kpar, plist, res ) 
 </th></tr></thead></table>
-<p>
-For internal use only 
 
+For internal use only 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="recursivePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursivePartial(</strong> xdata, kpar, plist, part ) 
 </th></tr></thead></table>
-<p>
-For internal use only 
 
+For internal use only 
 <a name="sortXdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sortXdata(</strong> xdata )
 </th></tr></thead></table>
-<p>
-
 Reorder the xdata according to the parameter ordering
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 
 
 <a name="recursiveOrder"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveOrder(</strong> xdata, plist ) 
 </th></tr></thead></table>
-<p>
-For internal use only 
 
+For internal use only 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -231,41 +224,36 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fullName(</strong> ids=False )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
-<b>Parameters</b><br>
-* ids  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True give the pointers of the links too.<br>
+<b>Parameters</b>
+
+* ids  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True give the pointers of the links too.
 
 
 <a name="recursiveName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveName(</strong> name, indent, kpar, ids=False ) 
 </th></tr></thead></table>
-<p>
-For internal use only 
 
+For internal use only 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <a name="walk"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>walk(</strong> )
 </th></tr></thead></table>
-<p>
-
 Iterate tree in pre-order depth-first search order
 
 Found this piece of code on the internet. Fairly obscure.
@@ -274,8 +262,6 @@ Found this piece of code on the internet. Fairly obscure.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>encode(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Make a code tuple to be used by the constructor to resurrect the DTM
 The tuple consists of
 code : list of (list or 1 or 2), encoding the structure of DTM
@@ -287,63 +273,57 @@ splim : list of split/mask values at the branches
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decode(</strong> code, kdim, splim, kbr ) 
 </th></tr></thead></table>
-<p>
-
 Resurrect the DTM from the code generated by encode().
 For internal use in the Constructor.
 
-<b>Parameters</b><br>
-* code  :  list<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of (list or 1 or 2), encoding the structure of DTM<br>
-* dims  :  list<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of dimensions at the branches<br>
-* splim  :  list<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of split/mask values at the branches<br>
-* kbr  :  int<br>
-    counter (start at 0)
+<b>Parameters</b>
+
+* code  :  list
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of (list or 1 or 2), encoding the structure of DTM
+* dims  :  list
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of dimensions at the branches
+* splim  :  list
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of split/mask values at the branches
+* kbr  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; counter (start at 0)
 
 <a name="findLeaf"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findLeaf(</strong> kleaf ) 
 </th></tr></thead></table>
-<p>
-
 Find a leaf in the tree, returning the leaf.
 
-<b>Parameter</b><br>
-* kleaf  :  int<br>
-    index of the leaf to be found
+<b>Parameter</b>
+
+* kleaf  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of the leaf to be found
 
 <a name="findBranch"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findBranch(</strong> kbranch ) 
 </th></tr></thead></table>
-<p>
-
 Find a branch in the tree, returning the branch.
 
-<b>Parameter</b><br>
-* kbranch  :  int<br>
-    index of the branch to be found
+<b>Parameter</b>
+
+* kbranch  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of the branch to be found
 
 <a name="check"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>check(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Find a branch in the tree, returning the branch.
 
-<b>Parameter</b><br>
-* kbranch  :  int<br>
-    index of the branch to be found
+<b>Parameter</b>
+
+* kbranch  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of the branch to be found
 
 <a name="findRoot"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findRoot(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return the root of the tree.
 
 
@@ -351,87 +331,81 @@ Return the root of the tree.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>count(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return number of leafs and branches.
 
 <a name="countLeaf"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>countLeaf(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return number of leafs.
 
 <a name="countBranch"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>countBranch(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Return number of leafs.
 
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, location=0, split=0.5, kdim=0 )
 </th></tr></thead></table>
-<p>
-
 Increase the the number of components by 1 (if allowed by maxComp)
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; offset in the parameter list (pertaining to earlier models in the chain)<br>
-* rng  :  Random Number Generator<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to obtain random values for items below.<br>
-* location  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; location where the new dtm-leaf should be inserted<br>
-* kdim  :  int (<self.ndim)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dimension to split<br>
-* split  :  float (0<split<1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; relative cut on this dimension<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :   succes<br>
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; offset in the parameter list (pertaining to earlier models in the chain)
+* rng  :  Random Number Generator
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to obtain random values for items below.
+* location  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; location where the new dtm-leaf should be inserted
+* kdim  :  int (<self.ndim)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dimension to split
+* split  :  float (0<split<1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; relative cut on this dimension
+
+<b>Return</b>
+
+* bool  :   succes
 
 
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, location=0 )
 </th></tr></thead></table>
-<p>
-
 Decrease the the number of componenets by 1 (if allowed by minComp)
 Remove an arbitrary item.
 
-<b>Parameters</b><br>
-* offset  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; location where the new params should be inserted<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :  succes<br>
+* offset  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; location where the new params should be inserted
+
+<b>Return</b>
+
+* bool  :  succes
 
 
 <a name="vary"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=0, split=0.5, kdim=0 )
 </th></tr></thead></table>
-<p>
-
 Vary the model structure by changing kdim and/or split at location
 
-<b>Parameters</b><br>
-* rng  :  Random Number Generator<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to obtain random values for items below.<br>
-* location  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; location where the dtm-branch should be changed<br>
-* kdim  :  int (<self.ndim)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dimension to split<br>
-* split  :  float (0<split<1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; relative cut on this dimension<br>
+<b>Parameters</b>
 
-<b>Return</b><br>
-* bool  :   succes<br>
+* rng  :  Random Number Generator
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to obtain random values for items below.
+* location  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; location where the dtm-branch should be changed
+* kdim  :  int (<self.ndim)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dimension to split
+* split  :  float (0<split<1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; relative cut on this dimension
+
+<b>Return</b>
+
+* bool  :   succes
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

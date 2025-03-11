@@ -5,7 +5,6 @@
 <a name="ChordEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ChordEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Move a a walker in a random direction.
 
@@ -28,11 +27,13 @@ described in
 WJ Handley, MP Hobson and AN Lasenby.
 MNRAS (2015) Volume 453, Issue 4, p 4384–4398
 
-<b>Attributes</b><br>
-* debug  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; perform the step-out action too<br>
+<b>Attributes</b>
 
-<b>Attributes from Engine</b><br>
+* debug  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; perform the step-out action too
+
+<b>Attributes from Engine</b>
+
 walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMin
 
 Author       Do Kester.
@@ -42,55 +43,52 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* walkers  :  WalkerList<br>
-&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
-* errdis  :  ErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
-* copy  :  ChordEngine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* kwargs  :  for Engine<br>
-    "slow", "seed", "verbose"
+<b>Parameters</b>
+
+* walkers  :  WalkerList
+<br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
+* errdis  :  ErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used
+* copy  :  ChordEngine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* kwargs  :  for Engine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "slow", "seed", "verbose"
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )
 </th></tr></thead></table>
-<p>
-
 Execute the engine by diffusing the parameters.
 
-<b>Parameters</b><br>
-* kw  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse<br>
-* lowLhood  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
-* append  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; set walker in place or append<br>
-* iteration  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
+<b>Parameters</b>
 
-<b>Returns</b><br>
-* int  :  the number of successfull moves<br>
+* kw  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
+* lowLhood  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood
+* append  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; set walker in place or append
+* iteration  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
+
+<b>Returns</b>
+
+* int  :  the number of successfull moves
 
 
 <a name="stepOut"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
 </th></tr></thead></table>
-<p>
-
 Check if endpoints are indeed outside the lowLhood domain.
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

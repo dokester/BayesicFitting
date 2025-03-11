@@ -5,7 +5,6 @@
 <a name="NonLinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class NonLinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Anchestor of all non-linear models.
 
@@ -13,18 +12,22 @@ The general non-linear model needs both the function value and the partials.
 
 It contains provisions for mixed models. (TBC)
 
-<b>Attributes</b><br>
-* _linear  :  list of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list of indices for the linear parameters (in case of a mixed model)<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit <br>
+* _linear  :  list of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list of indices for the linear parameters (in case of a mixed model)
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit 
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 Author       Do Kester
 
@@ -33,68 +36,64 @@ Author       Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NonLinearModel(</strong> nparams, ndim=1, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Parent class for all non linear models.
 
-<b>Parameters</b><br>
-* nparams  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of parameters in the model<br>
-* ndim  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dimensionality of the input. Default 1<br>
-* copy  :  NonLinearModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.<br>
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [FixedModel](./FixedModel.md) :   fixed, names<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [BaseModel](./BaseModel.md) :    posIndex, nonZero<br>
+<b>Parameters</b>
+
+* nparams  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters in the model
+* ndim  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dimensionality of the input. Default 1
+* copy  :  NonLinearModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [FixedModel](./FixedModel.md) :   fixed, names
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [BaseModel](./BaseModel.md) :    posIndex, nonZero
 
 
 <a name="setMixedModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setMixedModel(</strong> lindex )
 </th></tr></thead></table>
-<p>
-
 Convert a NonLinear model into a Mixed model with linear and
 non-linear parameters.
 
 Reset with SetMixedModel( null );
 
-<b>Parameters</b><br>
-* lindex  :  list of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of the linear parameters<br>
+<b>Parameters</b>
+
+* lindex  :  list of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of the linear parameters
 
 
 <a name="isMixed"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isMixed(</strong> )
 </th></tr></thead></table>
-<p>
-Returns true when linear indices have been set 
 
+Returns true when linear indices have been set 
 <a name="getNonLinearIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNonLinearIndex(</strong> )
 </th></tr></thead></table>
-<p>
-Returns the index of the non-linear parameters. 
 
+Returns the index of the non-linear parameters. 
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param=None, useNum=False )
 </th></tr></thead></table>
-<p>
-
 Return the partial derivatives for the model.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the value at which to calculate the partials<br>
-* param  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the parameters of the model. Default the self.parameters<br>
-* useNum  :  boolean<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True use numeric partial derivatives. Default False<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the value at which to calculate the partials
+* param  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the parameters of the model. Default the self.parameters
+* useNum  :  boolean
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True use numeric partial derivatives. Default False
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

@@ -5,7 +5,6 @@
 <a name="VoigtModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class VoigtModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Voigt's Gauss Lorentz convoluted model for line profiles.
 
@@ -20,23 +19,28 @@ Parameters 2 & 3 ( widths ) is always kept positive ( >=0 ).
 
 The implementation uses the Faddeeva function from scipy.special.wofz.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     voigt = VoigtModel( )
     voigt.setParameters( [5, 4, 1, 2] )
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
 
-<b>Attributes</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; none of its own<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+&nbsp;&nbsp;&nbsp;&nbsp; none of its own
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 
@@ -44,127 +48,120 @@ The implementation uses the Faddeeva function from scipy.special.wofz.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>VoigtModel(</strong> copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Voigt model.
 
 Number of parameters is 4.
 
-<b>Parameters</b><br>
-* copy  :  VoigtModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
+<b>Parameters</b>
+
+* copy  :  VoigtModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
 Note: both width in the parameter array ( items 2 & 3 ) are kept
 strictly positive. I.e. they are changed when upon input they are negative.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; z0 = 1j * p3 / ( p2 * sqrt2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; z0 = 1j * p3 / ( p2 * sqrt2 )
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 * R( wofzz ) / R( wofz0 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 * R( wofzz ) / R( wofz0 )
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdp = dvdz * dzdp<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dvdp = dvdz * dzdp
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 * ( R(dwdz) * R(wofz0) - R(dwd0) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
-&nbsp;&nbsp;&nbsp;&nbsp; dvdp = p0 * ( R(dwdz * dzdp) * R(wofz0) - R(dwd0 * d0dp) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
+&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 * ( R(dwdz) * R(wofz0) - R(dwd0) * R(wofzz) ) / R(wofz0)<sup>2</sup>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdp = p0 * ( R(dwdz * dzdp) * R(wofz0) - R(dwd0 * d0dp) * R(wofzz) ) / R(wofz0)<sup>2</sup>
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z  * wofzz<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dwd0 = 2j / sqrt(pi) - 2 * z0 * wofz0<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z  * wofzz
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dwd0 = 2j / sqrt(pi) - 2 * z0 * wofz0
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; ## p0 and p1 have no influence in wofz0<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dzdp0 = 0<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dzdp1 = -1 / ( p2 * sqrt2 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; d0dp2 = - ( 1j * p3 / ( p2<sup>2</sup> * sqrt2 )              = -z0 / p2<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dzdp2 = - ( ( x - p1 + 1j * p3 ) / ( p2<sup>2</sup> * sqrt2 ) = -z  / p2<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dzdp3 = d0dp3 = 1j / ( p2 * sqrt2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ## p0 and p1 have no influence in wofz0
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dzdp0 = 0
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dzdp1 = -1 / ( p2 * sqrt2 )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; d0dp2 = - ( 1j * p3 / ( p2<sup>2</sup> * sqrt2 )              = -z0 / p2
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dzdp2 = - ( ( x - p1 + 1j * p3 ) / ( p2<sup>2</sup> * sqrt2 ) = -z  / p2
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dzdp3 = d0dp3 = 1j / ( p2 * sqrt2 )
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdp0 = R(wofzz) / R(wofz0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; ## The other partial follow from calculating dvdp for the parameters 1..3<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dvdp0 = R(wofzz) / R(wofz0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ## The other partial follow from calculating dvdp for the parameters 1..3
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each xdata (=x).
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; z0 = 1j * p3 / ( p2 * sqrt2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; z0 = 1j * p3 / ( p2 * sqrt2 )
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 / wofz0 * re( wofzz )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dvdx = dvdz * dzdx<br>
+&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 / wofz0 * re( wofzz )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdx = dvdz * dzdx
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 / wofz0 * dwdz<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z * wofzz<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 / wofz0 * dwdz
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z * wofzz
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dzdx = 1 / ( p2 * sqrt2 )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; dzdx = 1 / ( p2 * sqrt2 )
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of a parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

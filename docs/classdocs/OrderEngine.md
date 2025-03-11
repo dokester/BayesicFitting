@@ -5,11 +5,11 @@
 <a name="OrderEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class OrderEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/OrderEngine.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 The OrderEngine is the base engine for all order problems
 
-<b>Attributes from Engine</b><br>
+<b>Attributes from Engine</b>
+
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -19,56 +19,53 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>OrderEngine(</strong> walkers, errdis, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* walkers  :  SampleList<br>
-&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
-* errdis  :  ErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
-* copy  :  OrderEngine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* kwargs  :  dict for Engine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"<br>
+<b>Parameters</b>
+
+* walkers  :  SampleList
+<br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
+* errdis  :  ErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used
+* copy  :  OrderEngine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* kwargs  :  dict for Engine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )
 </th></tr></thead></table>
-<p>
-
 Execute the engine by diffusing the parameters.
 
-<b>Parameters</b><br>
-* kw  :  walker-id<br>
-&nbsp;&nbsp;&nbsp;&nbsp; walker to diffuse<br>
-* lowLhood  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
-* append  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; not used here<br>
-* iteration  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; iteration number        <br>
+<b>Parameters</b>
 
-<b>Returns</b><br>
-* int  :  the number of successfull moves<br>
-   
+* kw  :  walker-id
+<br>&nbsp;&nbsp;&nbsp;&nbsp; walker to diffuse
+* lowLhood  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood
+* append  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; not used here
+* iteration  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number        
+
+<b>Returns</b>
+
+* int  :  the number of successfull moves
+<br>&nbsp;&nbsp;&nbsp; 
 
 <a name="calculateUnitRange"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calculateUnitRange(</strong> ) 
 </th></tr></thead></table>
-<p>
-
 Irrelevant for OrderProblems
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

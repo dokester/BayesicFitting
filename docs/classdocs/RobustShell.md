@@ -5,7 +5,6 @@
 <a name="RobustShell"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 RobustShell tries to make a fit more robust in the presence of outliers.
 
@@ -65,28 +64,31 @@ A number of weighting schemes are provided.
 
 
 Other schemes can be written by making another Kernel or writing a function
-<br>&nbsp;&nbsp;&nbsp;&nbsp; wgts = func( d )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; wgts = func( d )
 where d is the deviant as above.
 
-<b>Attributes</b><br>
-* fitter  :  BaseFitter<br>
-&nbsp;&nbsp;&nbsp;&nbsp; The fitter to be used<br>
-* kernel  :  Kernel or callable<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Kernel take function from this kernel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; callable in the form f(d), where d = ( data - mock ) / ( domain * scale )<br>
-* domain  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; domain of the kernel function<br>
-* onesided  :  [-1,0,+1]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; -1 apply to negative residuals<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 aplly to both sided (not onesided)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; +1 apply to positive residuals.<br>
+<b>Attributes</b>
+
+* fitter  :  BaseFitter
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The fitter to be used
+* kernel  :  Kernel or callable
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Kernel take function from this kernel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; callable in the form f(d), where d = ( data - mock ) / ( domain * scale )
+* domain  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; domain of the kernel function
+* onesided  :  [-1,0,+1]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; -1 apply to negative residuals
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 aplly to both sided (not onesided)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; +1 apply to positive residuals.
 
 
-<b>Notes</b><br>
+<b>Notes</b>
+
 Robust fitting is even more dangerous than ordinary fitting.
 *Never trust what you get without thorough checking.*
 
-<b>Example</b><br>
+<b>Example</b>
+
     model = PolynomialModel( 1 )                # some model
     x = numpy.arange( 100, dtype=float ) / 100  # some x values
     y = numpy.arange( 100, dtype=float ) / 4    # digitization noise
@@ -105,42 +107,42 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RobustShell(</strong> fitter, kernel=Biweight, domain=None, onesided=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Create a new class, providing the fitter to be used.
 
-<b>Parameters</b><br>
-* fitter  :  BaseFitter<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to be used<br>
-* kernel  :  Kernel or callable<br>
-&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.<br>
-* domain  :  None or float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Width of the kernel.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : automatic calculation of domain according to table in class doc.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float : overrides autocalculation.<br>
-* onesided  :  None or "positive" or "p" or "negative" or "n"<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals<br>
-&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only<br>
-&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only<br>
+<b>Parameters</b>
+
+* fitter  :  BaseFitter
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to be used
+* kernel  :  Kernel or callable
+<br>&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.
+* domain  :  None or float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Width of the kernel.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : automatic calculation of domain according to table in class doc.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float : overrides autocalculation.
+* onesided  :  None or "positive" or "p" or "negative" or "n"
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only
 
 
 <a name="setKernel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setKernel(</strong> kernel ) 
 </th></tr></thead></table>
-<p>
-
 Set the robust kernel to be used.
 
-<b>Parameters</b><br>
-* kernel  :  Kernel or callable<br>
-&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* kernel  :  Kernel or callable
+<br>&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.
+
+<b>Raises</b>
+
 ValueError when kernel is not recognized.
 
 
@@ -148,17 +150,17 @@ ValueError when kernel is not recognized.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setOneSided(</strong> onesided ) 
 </th></tr></thead></table>
-<p>
-
 set self.onesided to either 0 or +1 or -1.
 
-<b>Parameters</b><br>
-* onesided  :  None or "positive" or "negative"<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals<br>
-&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only<br>
-&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* onesided  :  None or "positive" or "negative"
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only
+
+<b>Raises</b>
+
 ValueError when onesided could not be interpreted.
 
 
@@ -166,15 +168,14 @@ ValueError when onesided could not be interpreted.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, kernel=None, domain=None, onesided=None, **kwargs ) 
 </th></tr></thead></table>
-<p>
-
 Perform a robustification step.
 
-<b>Parameters</b><br>
-* data  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the data as they go into a fitter<br>
-* kwargs  :  dict<br>
-    keyword args to be passed to fitter.fit()
+<b>Parameters</b>
+
+* data  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the data as they go into a fitter
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; keyword args to be passed to fitter.fit()
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>

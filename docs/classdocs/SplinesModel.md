@@ -5,17 +5,16 @@
 <a name="SplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class SplinesModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 General splines model of arbitrary order and with arbitrary knot settings.
 It is a linear model.
 
 order   behaviour between knots     continuity at knots
-<br>&nbsp;&nbsp; 0     piecewise constant          not continuous at all<br>
-&nbsp;&nbsp; 1     piecewise linear            lines are continuous (connected)<br>
-&nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous<br>
-&nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous<br>
-&nbsp; n>3    n-th order polynomials      (n-1)-th derivatives are also continuous<br>
+<br>&nbsp;&nbsp; 0     piecewise constant          not continuous at all
+<br>&nbsp;&nbsp; 1     piecewise linear            lines are continuous (connected)
+<br>&nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous
+<br>&nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous
+<br>&nbsp; n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
 
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
@@ -31,39 +30,45 @@ extrapoling spline is obtained. It still works more or less. Dont push it.
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = SplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
 18
-* # or alternatively : <br>
+* # or alternatively : 
     csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
 18
-* # or alternatively : <br>
+* # or alternatively : 
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
 18
 
-<b>Attributes</b><br>
-* knots  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
-* order  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* knots  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots
+* order  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
+
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Limitations</b><br>
+<b>Limitations</b>
+
 Dont construct the knots so closely spaced, that there are no datapoints in between.
 
 
@@ -72,38 +77,40 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 <strong>SplinesModel(</strong> knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
  copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b><br>
-* knots  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
-* order  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. Default 3 (cubic splines)<br>
-* nrknots  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of knots, equidistantly posited over xrange or [min,max]<br>
-* min  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; minimum of the knot range<br>
-* max  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; maximum of the knot range<br>
-* xrange  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; range of the xdata<br>
-* copy  :  SplinesModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
-* ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.<br>
+* knots  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots
+* order  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order of the spline. Default 3 (cubic splines)
+* nrknots  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of knots, equidistantly posited over xrange or [min,max]
+* min  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum of the knot range
+* max  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum of the knot range
+* xrange  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; range of the xdata
+* copy  :  SplinesModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to be copied.
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
-<b>Notes</b><br>
+<b>Raises</b>
+
+* ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.
+
+<b>Notes</b>
+
 The SplinesModel is only strictly valid inside the domain defined by the
 minmax of knots. It deteriorates fastly going outside the domain.
 
@@ -112,59 +119,55 @@ minmax of knots. It deteriorates fastly going outside the domain.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model (ignored in LinearModels)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
 </th></tr></thead></table>
-<p>
-
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the model
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-Returns a string representation of the model. 
 
+Returns a string representation of the model. 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the name of the parameter.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-    index of the parameter.
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter.
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>

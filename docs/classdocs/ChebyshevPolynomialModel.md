@@ -5,39 +5,43 @@
 <a name="ChebyshevPolynomialModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ChebyshevPolynomialModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Chebyshev polynomial model of arbitrary degree.
 
-<br>&nbsp; f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )<br>
+&nbsp; f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
 The T( x ) are Chebyshev polynomials of the first kind which are defined
 recursively as
 
-<br>&nbsp; T<sub>0</sub>( x ) = 1<br>
-&nbsp; T<sub>1</sub>( x ) = x<br>
-&nbsp; T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2<br>
+&nbsp; T<sub>0</sub>( x ) = 1
+<br>&nbsp; T<sub>1</sub>( x ) = x
+<br>&nbsp; T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2
 
 These polynomials are orthogonal, when integrated over x in [-1,+1].
 
 It is a linear model.
 
-<b>Attributes</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial
+
+<b>Attributes from Model</b>
+
 npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b><br>
+<b>Attributes from FixedModel</b>
+
 npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b><br>
+<b>Attributes from BaseModel</b>
+
 npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )
     4
@@ -47,79 +51,74 @@ npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ChebyshevPolynomialModel(</strong> degree, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Chebyshev Polynomial of a certain degree.
 
 The number of parameters is ( degree + 1 )
 
-<b>Parameters</b><br>
-* degree  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
-* copy  :  ChebyshevPolynomialModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* fixed  :  None or dictionary of {int:float|Model}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
+<b>Parameters</b>
+
+* degree  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.
+* copy  :  ChebyshevPolynomialModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* fixed  :  None or dictionary of {int:float|Model}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int         index of parameter to fix permanently.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float|Model values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata value.
 
 The partials are calculated using the recurrence formula
 
-<br>&nbsp; f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )<br>
+&nbsp; f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored for linear models)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model (ignored for linear models)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices of active parameters
 
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative df/dx at the xdata value.
 
-<br>&nbsp; df<sub>n</sub> = n * U<sub>n-1</sub><br>
-&nbsp; where<br>
-&nbsp; U<sub>0</sub> = 1<br>
-&nbsp; U<sub>1</sub> = 2x<br>
-&nbsp; U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub><br>
+&nbsp; df<sub>n</sub> = n * U<sub>n-1</sub>
+<br>&nbsp; where
+<br>&nbsp; U<sub>0</sub> = 1
+<br>&nbsp; U<sub>1</sub> = 2x
+<br>&nbsp; U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub>
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -127,15 +126,14 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of the indicated parameter.
 It is always yUnit, as it cannot be otherwise.
 The xUnit must be dimensionless.
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

@@ -5,13 +5,12 @@
 <a name="StellarOrbitModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class StellarOrbitModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
-<br>&nbsp; The algorithm was taken from<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist<sub>189</sub>-199.pdf<br>
+&nbsp; The algorithm was taken from
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist<sub>189</sub>-199.pdf
 
 | par |symbol | description                        | limits- | comment |
 |-----|-------|------------------------------------|---------|---------|
@@ -33,26 +32,31 @@ It is a non-linear model.
 
 This class uses [Kepplers2ndLaw](./Kepplers2ndLaw.md) to find the radius and anomaly.
 
-<b>Attributes</b><br>
-* keppler  :  Kepplers2ndLaw()<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly<br>
-* ndout  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; The number of outputs is 2. Use [MultipleOutputProblem](./MultipleOutputProblem.md).<br>
-* spherical  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True return the results in spherical coordinates.<br>
-* cyclic  :  { 1 : 2*pi }<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Only if spherical, indicating that result[:,1] is cyclic.<br>
+<b>Attributes</b>
 
-<b>Attributes from Model</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+* keppler  :  Kepplers2ndLaw()
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly
+* ndout  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The number of outputs is 2. Use [MultipleOutputProblem](./MultipleOutputProblem.md).
+* spherical  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True return the results in spherical coordinates.
+* cyclic  :  { 1 : 2*pi }
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Only if spherical, indicating that result[:,1] is cyclic.
 
-<b>Attributes from FixedModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
+<b>Attributes from Model</b>
 
-<b>Attributes from BaseModel</b><br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Examples</b><br>
+<b>Attributes from FixedModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
+
+<b>Attributes from BaseModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+
+<b>Examples</b>
+
     sm = StellarOrbitModel( )
     print( sm.npars )
     7
@@ -63,44 +67,42 @@ This class uses [Kepplers2ndLaw](./Kepplers2ndLaw.md) to find the radius and ano
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>StellarOrbitModel(</strong> copy=None, spherical=True, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Radial velocity model.
 
 Number of parameters is 5
 
-<b>Parameters</b><br>
-* copy  :  StellarOrbitModel<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
-* spherical  :  bool (True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; produce output in sperical coordinates (rho,phi)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; otherwise in rectilinear coordinates (x,y)<br>
-* fixed  :  dictionary of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
+<b>Parameters</b>
+
+* copy  :  StellarOrbitModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
+* spherical  :  bool (True)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; produce output in sperical coordinates (rho,phi)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; otherwise in rectilinear coordinates (x,y)
+* fixed  :  dictionary of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy method. 
 
+Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the result of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
 
@@ -109,41 +111,38 @@ The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toRect(</strong> rp )
 </th></tr></thead></table>
-<p>
-
 Return (x,y) coordinates from (rho,phi)
 
-<b>Parameters</b><br>
-* rp  :  array<br>
-&nbsp;&nbsp;&nbsp;&nbsp; rp[:,0] : separation of the stars<br>
-    rp[:,1] : angle from north (down) CCW to east (right)
+<b>Parameters</b>
+
+* rp  :  array
+<br>&nbsp;&nbsp;&nbsp;&nbsp; rp[:,0] : separation of the stars
+<br>&nbsp;&nbsp;&nbsp;&nbsp; rp[:,1] : angle from north (down) CCW to east (right)
 
 <a name="toSpher"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSpher(</strong> xy ) 
 </th></tr></thead></table>
-<p>
-
 Return (rho,phi) coordinates from (x,y)
 
-<b>Parameters</b><br>
-* xy  :  array<br>
-&nbsp;&nbsp;&nbsp;&nbsp; xy[:,0] : x position<br>
-    xy[:,1] : y position
+<b>Parameters</b>
+
+* xy  :  array
+<br>&nbsp;&nbsp;&nbsp;&nbsp; xy[:,0] : x position
+<br>&nbsp;&nbsp;&nbsp;&nbsp; xy[:,1] : y position
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
 </th></tr></thead></table>
-<p>
-
 Returns the derivative (df/dx) of the model function.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
 The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
 
@@ -152,35 +151,32 @@ The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
 </th></tr></thead></table>
-<p>
-
 Returns the partials at the xdata value.
 <br>
 The partials are x ( xdata ) to degree-th power.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (not used for linear models)<br>
-* parlist  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
+<b>Parameters</b>
 
-* p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)<br>
-* p_1  :  a     semi major axis<br>
-* p_2  :  P     period of the orbit (>0)<br>
-* p_3  :  p     phase since periastron passage (0<p<2pi)<br>
-* p_4  :  i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)<br>
-* p_5  :  O     position angle of the line of nodes<br>
-* p_6  :  o     longitude of periastron<br>
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (not used for linear models)
+* parlist  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
+
+* p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
+* p_1  :  a     semi major axis
+* p_2  :  P     period of the orbit (>0)
+* p_3  :  p     phase since periastron passage (0<p<2pi)
+* p_4  :  i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
+* p_5  :  O     position angle of the line of nodes
+* p_6  :  o     longitude of periastron
 
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
 </th></tr></thead></table>
-<p>
-
 Returns a string representation of the model.
 
 
@@ -188,13 +184,12 @@ Returns a string representation of the model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
 </th></tr></thead></table>
-<p>
-
 Return the unit of a parameter. (TBC)
 
-<b>Parameters</b><br>
-* k  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
+<b>Parameters</b>
+
+* k  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

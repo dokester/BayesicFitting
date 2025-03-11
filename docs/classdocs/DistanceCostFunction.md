@@ -5,13 +5,12 @@
 <a name="DistanceCostFunction"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class DistanceCostFunction(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DistanceCostFunction.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 To calculate a distance based cost function
 
 For one observation with n counts it holds
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; f( d ) = exp( -SUM( d / s ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; f( d ) = exp( -SUM( d / s ) )
 
 where d are the distances and s is the scale
 
@@ -25,28 +24,25 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DistanceCostFunction(</strong> copy=None )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* copy  :  DistanceCostFunction<br>
-&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
+<b>Parameters</b>
+
+* copy  :  DistanceCostFunction
+<br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
-<p>
-
 True if the distribution accepts weights.
 Always false for this distribution.
 
@@ -54,47 +50,44 @@ Always false for this distribution.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars )
 </th></tr></thead></table>
-<p>
-
 Return the negative sum of the distances.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
 
 
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars )
 </th></tr></thead></table>
-<p>
-
 Return the individual distances (multiplied by the weights).
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
 
 
 <a name="partialLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL(</strong> model, param, fitIndex )
 </th></tr></thead></table>
-<p>
-
 Does not work for this class
 
-<b>Parameters</b><br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; model to calculate mock data<br>
-* param  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
-* fitIndex  :  array_like<br>
-    indices of the params to be fitted
+<b>Parameters</b>
+
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; model to calculate mock data
+* param  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
+* fitIndex  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of the params to be fitted
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>

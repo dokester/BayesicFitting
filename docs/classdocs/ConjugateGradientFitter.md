@@ -5,12 +5,11 @@
 <a name="ConjugateGradientFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ConjugateGradientFitter(</strong> <a href="./ScipyFitter.html">ScipyFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Conjugate Gradient Method of Polak and Ribiere.
 
 Syntactic sugar for
-<br>&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='CG', ... )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='CG', ... )
 
 See [ScipyFitter](./ScipyFitter.md)
 
@@ -19,26 +18,26 @@ See [ScipyFitter](./ScipyFitter.md)
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ConjugateGradientFitter(</strong> xdata, model, gradient=True, **kwargs ) 
 </th></tr></thead></table>
-<p>
 
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)<br>
-* gradient  :  bool or None or callable gradient( par )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if True use gradient calculated from model. It is the default.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if False/None dont use gradient (use numeric approximation in stead)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; if callable use the method as gradient<br>
-* kwargs  :  dict<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter:            gradient, hessp<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale<br>
+<b>Parameters</b>
+
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; a model function to be fitted (linear or nonlinear)
+* gradient  :  bool or None or callable gradient( par )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if True use gradient calculated from model. It is the default.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if False/None dont use gradient (use numeric approximation in stead)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if callable use the method as gradient
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Possibly includes keywords from
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter:            gradient, hessp
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MaxLikelihoodFitter :   errdis, scale, power
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IterativeFitter :       maxIter, tolerance, verbose
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BaseFitter :            map, keep, fixedScale
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

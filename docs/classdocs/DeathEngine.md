@@ -5,7 +5,6 @@
 <a name="DeathEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class DeathEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 The DeathEngine deletes a component from the model.
 
@@ -14,7 +13,8 @@ The death rate is governed by the growth-prior in the dynamic model.
 
 The member is kept when the logLikelihood > lowLhood.
 
-<b>Attributes from Engine</b><br>
+<b>Attributes from Engine</b>
+
 walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -24,47 +24,46 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DeathEngine(</strong> walkers, errdis, copy=None, **kwargs )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* walkers  :  WalkerList<br>
-&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
-* errdis  :  ErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used<br>
-* copy  :  GalileanEngine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
-* kwargs  :  for Engine<br>
-    "phantoms", "slow", "seed", "verbose"
+<b>Parameters</b>
+
+* walkers  :  WalkerList
+<br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
+* errdis  :  ErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used
+* copy  :  GalileanEngine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
+* kwargs  :  for Engine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "phantoms", "slow", "seed", "verbose"
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )
 </th></tr></thead></table>
-<p>
-
 Execute the engine by removins a component.
 
-<b>Parameters</b><br>
-* kw  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse<br>
-* lowLhood  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
-* append  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; set walker in place or append<br>
-* iteration  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
+<b>Parameters</b>
 
-<b>Returns</b><br>
-* int  :  the number of successfull moves<br>
+* kw  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
+* lowLhood  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood
+* append  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; set walker in place or append
+* iteration  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
+
+<b>Returns</b>
+
+* int  :  the number of successfull moves
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

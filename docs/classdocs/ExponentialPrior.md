@@ -5,11 +5,10 @@
 <a name="ExponentialPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class ExponentialPrior(</strong> <a href="./LaplacePrior.html">LaplacePrior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Exponential prior distribution.
 
-<br>&nbsp; Pr( x ) = exp( -x / scale )<br>
+&nbsp; Pr( x ) = exp( -x / scale )
 
 By default scale = 1.
 
@@ -19,15 +18,18 @@ In computational practice the domain is limited to about [0,36] scale units
 Wrapper for
 LaplacePrior( center=0, scale=scale, limits=[0, hilim] )
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = ExponentialPrior()                     # scale=1.0
     pr = ExponentialPrior( scale=5.0 )          # scale=5
 
-<b>Attributes</b><br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; scale of the exponential<br>
+<b>Attributes</b>
 
-<b>Attributes from Prior</b><br>
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; scale of the exponential
+
+<b>Attributes from Prior</b>
+
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 Author: Do Kester.
@@ -36,33 +38,31 @@ Author: Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ExponentialPrior(</strong> scale=1.0, hilimit=math.inf, prior=None )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of the exponential<br>
-* hilimit  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; high limit<br>
-* prior  :  ExponentialPrior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
+<b>Parameters</b>
+
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of the exponential
+* hilimit  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; high limit
+* prior  :  ExponentialPrior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy the prior 
 
+Copy the prior 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
 </th></tr></thead></table>
-<p>
-Return a short name 
 
+Return a short name 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LaplacePrior.html">LaplacePrior</a></th></tr></thead></table>
 

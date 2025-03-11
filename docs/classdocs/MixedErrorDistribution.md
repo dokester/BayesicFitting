@@ -5,26 +5,26 @@
 <a name="MixedErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class MixedErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 To calculate a mixture of two likelihoods.
 
 For one residual, x, it holds
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )
 
 where f is the contributing fraction while L, L1 and L2 are likelihoods
 f is a hyperparameter between [0..1]
 
 The likelihood over N datapoints is
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi; L( x )  = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi; L( x )  = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )
 
 And the log of L is
 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )
 
-<b>Note</b><br>
+<b>Note</b>
+
 The mixture, i.e. the weighted sum of 2 distributions for each residual, is
 the raison-d'etre for the methods logLdata and nextPartialData, so individual
 contributions can be weighted, added, log-ged and summed.
@@ -36,43 +36,40 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MixedErrorDistribution(</strong> errdis1, errdis2, fraction=0.5, limits=None, copy=None )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
 Make a new error distribution as a fraction of errdis1 plus the rest of errdis2.
 
-<b>Parameters</b><br>
-* errdis1  :  ErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; First error distribution<br>
-* errdis2  :  ErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Second error distribution (might be of the same class as errdis1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; It *must* have the same xdata, data, weights as errdis1.<br>
-* fraction  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; contributing fraction<br>
-* limits  :  None or list of 2 floats [low,high]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed fraction<br>
-&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on fraction ( >0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on fraction ( <1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.<br>
+<b>Parameters</b>
 
-* copy  :  MixedErrorDistribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
+* errdis1  :  ErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; First error distribution
+* errdis2  :  ErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Second error distribution (might be of the same class as errdis1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It *must* have the same xdata, data, weights as errdis1.
+* fraction  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; contributing fraction
+* limits  :  None or list of 2 floats [low,high]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None : no limits implying fixed fraction
+<br>&nbsp;&nbsp;&nbsp;&nbsp; low     low limit on fraction ( >0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on fraction ( <1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when limits are set, the scale is *not* fixed.
+
+* copy  :  MixedErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Return copy of this. 
 
+Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
 </th></tr></thead></table>
-<p>
-
 True if the distribution accepts weights.
 Always true for this distribution.
 
@@ -80,36 +77,34 @@ Always true for this distribution.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the log( likelihood ) for a Mixedian distribution.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem<br>
-* mockdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem
 
 
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
 </th></tr></thead></table>
-<p>
-
 Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
-<b>Parameters</b><br>
-* problem  :  Problem<br>
-&nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
-* allpars  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem<br>
-* fitIndex  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted<br>
-* mockdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem<br>
+<b>Parameters</b>
+
+* problem  :  Problem
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
+* allpars  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the problem
+* fitIndex  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted
+* mockdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

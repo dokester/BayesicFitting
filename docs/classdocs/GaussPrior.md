@@ -5,15 +5,14 @@
 <a name="GaussPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class GaussPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Gauss prior distribution. Use  normalized version
 
-<br>&nbsp; Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )<br>
+&nbsp; Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )
 
-<br>&nbsp; By default: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; c = center = 0 <br>
-&nbsp;&nbsp;&nbsp;&nbsp; s = scale = 1.<br>
+&nbsp; By default: 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; c = center = 0 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; s = scale = 1.
 
 By default the domain is [-Inf,+Inf].
 In computational practice the domain is limited to about [-8.5, 8.5] scale units.
@@ -24,23 +23,26 @@ It can also have a limited domain.
 According to integral-calculator.com we have
 
 domain2unit: 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; u = 0.5 * ( erf( ( d - c ) / ( s * &radic;2 ) ) + 1 )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = 0.5 * ( erf( ( d - c ) / ( s * &radic;2 ) ) + 1 )
 unit2domain: 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; d = erfinv( 2 * u - 1 ) * s * &radic;2 + c<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; d = erfinv( 2 * u - 1 ) * s * &radic;2 + c
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = GaussPrior()                         # center=0, scale=1
     pr = GaussPrior( center=1.0, scale=0.5 )
     pr = GaussPrior( limits=[0,None] )        # limited to values >= 0
     pr = GaussPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
 
-<b>Attributes</b><br>
-* center  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; center of the Gaussian prior<br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; scale of the Gaussian prior<br>
+<b>Attributes</b>
 
-<b>Attributes from Prior</b><br>
+* center  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; center of the Gaussian prior
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; scale of the Gaussian prior
+
+<b>Attributes from Prior</b>
+
 lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 
 
@@ -49,117 +51,109 @@ lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GaussPrior(</strong> center=0.0, scale=1.0, limits=None, circular=False, prior=None )
 </th></tr></thead></table>
-<p>
 
 Constructor.
 
-<b>Parameters</b><br>
-* center  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of the location of the prior<br>
-* scale  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of the exponential<br>
-* limits  :  None or [float,float]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit<br>
-* circular  :  bool or float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; bool : y|n circular with period from limits[0] to limits[1]<br>
-&nbsp;&nbsp;&nbsp;&nbsp; float : period of circularity<br>
-* prior  :  GaussPrior<br>
-&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)<br>
+<b>Parameters</b>
+
+* center  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of the location of the prior
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of the exponential
+* limits  :  None or [float,float]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit
+* circular  :  bool or float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; bool : y|n circular with period from limits[0] to limits[1]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; float : period of circularity
+* prior  :  GaussPrior
+<br>&nbsp;&nbsp;&nbsp;&nbsp; prior to copy (with new scale if applicable)
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
 </th></tr></thead></table>
-<p>
-Copy the prior 
 
+Copy the prior 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
 </th></tr></thead></table>
-<p>
-
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Gauss distribution.
 
-<br>&nbsp; u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )<br>
+&nbsp; u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )
 
-<b>Parameters</b><br>
-* dval  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value(s) within the domain of a parameter<br>
+<b>Parameters</b>
+
+* dval  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value(s) within the domain of a parameter
 
 
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
 </th></tr></thead></table>
-<p>
-
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Gauss distribution.
 
-<br>&nbsp; d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center<br>
+&nbsp; d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center
 
-<b>Parameters</b><br>
-* uval  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value(s) within [0,1]<br>
+<b>Parameters</b>
+
+* uval  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value(s) within [0,1]
 
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
-<p>
-
 Return a the result of the distribution function at x.
 
-<b>Parameters</b><br>
-* x  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
+<b>Parameters</b>
+
+* x  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
 
 <a name="logResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logResult(</strong> x )
 </th></tr></thead></table>
-<p>
-
 Return a the log of the result of the prior.
 
-<b>Parameters</b><br>
-* x  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
+<b>Parameters</b>
+
+* x  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
 
 <a name="partialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> x )
 </th></tr></thead></table>
-<p>
-
 Return partial derivative of log( Prior ) wrt x.
 
-<b>Parameters</b><br>
-* x  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the value<br>
+<b>Parameters</b>
+
+* x  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the value
 
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
-<p>
-Return true if the integral over the prior is bound. 
 
+Return true if the integral over the prior is bound. 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
 </th></tr></thead></table>
-<p>
-Return a string representation of the prior. 
 
+Return a string representation of the prior. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 

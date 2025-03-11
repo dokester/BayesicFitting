@@ -5,40 +5,41 @@
 <a name="IterativeFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>class IterativeFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py target=_blank>Source</a></th></tr></thead></table>
-<p>
 
 Base class with methods common to all iterative fitters.
 
 Author:      Do Kester.
 
-<b>Attributes</b><br>
-* tolerance  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than<br>
-&nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.0001<br>
-* maxIter  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; When the number of iterations gets larger than maxiter the fitter<br>
-&nbsp;&nbsp;&nbsp;&nbsp; stops with a ConvergenceError Default = 1000 * nparams<br>
-* iter  :  int (read only)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; iteration counter<br>
-* ntrans  :  int (read only)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; number of transforms<br>
-* verbose  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; information per iteration.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 1 : base information (default)<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 2 : report about every 100th iteration<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 3 : report about every ietration<br>
-* tooLarge  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; When the length parameter array is too large to make a Hessian.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; To avert OutOfMemory. Default = 100<br>
+<b>Attributes</b>
 
-* plotter  :  Plotter<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Iteration plotter class. Default = IterationPlotter<br>
-* plotIter  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Produce a plot for every plotIter-th iteration.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Default = 0 (no plotting)<br>
+* tolerance  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than
+<br>&nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.0001
+* maxIter  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When the number of iterations gets larger than maxiter the fitter
+<br>&nbsp;&nbsp;&nbsp;&nbsp; stops with a ConvergenceError Default = 1000 * nparams
+* iter  :  int (read only)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; iteration counter
+* ntrans  :  int (read only)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of transforms
+* verbose  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; information per iteration.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 1 : base information (default)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 2 : report about every 100th iteration
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 3 : report about every ietration
+* tooLarge  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When the length parameter array is too large to make a Hessian.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; To avert OutOfMemory. Default = 100
 
-<b>Raises</b><br>
+* plotter  :  Plotter
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Iteration plotter class. Default = IterationPlotter
+* plotIter  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Produce a plot for every plotIter-th iteration.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Default = 0 (no plotting)
+
+<b>Raises</b>
+
 ConvergenceError    Something went wrong during the convergence if the fit.
 
 
@@ -46,69 +47,65 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>IterativeFitter(</strong> xdata, model, maxIter=None, tolerance=0.0001, verbose=1, **kwargs ) 
 </th></tr></thead></table>
-<p>
 
 Create a new iterative fitter, providing xdatas and model.
 
 This is a base class. It collects stuff common to all iterative fitters.
 It does not work by itself.
 
-<b>Parameters</b><br>
-* xdata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
-* model  :  Model<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted<br>
+<b>Parameters</b>
 
-* tolerance  :  float<br>
-&nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than<br>
-&nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.01<br>
-* maxIter  :  None or int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; When the number of iterations gets larger than maxiter the fitter<br>
-&nbsp;&nbsp;&nbsp;&nbsp; stops with a ConvergenceError Default = 1000 * nparams<br>
-* verbose  :  int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 1 : report result<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 2 : report every 100th iteration<br>
-&nbsp;&nbsp;&nbsp;&nbsp; 3 : report every iteration<br>
+* xdata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
+* model  :  Model
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the model function to be fitted
+
+* tolerance  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than
+<br>&nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.01
+* maxIter  :  None or int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When the number of iterations gets larger than maxiter the fitter
+<br>&nbsp;&nbsp;&nbsp;&nbsp; stops with a ConvergenceError Default = 1000 * nparams
+* verbose  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0 : silent
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 1 : report result
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 2 : report every 100th iteration
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 3 : report every iteration
 kwargs for [BaseFitter](./BaseFitter.md)
-<br>&nbsp;&nbsp;&nbsp;&nbsp; map, keep, fixedScale<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; map, keep, fixedScale
 
 
 <a name="setParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setParameters(</strong> params )
 </th></tr></thead></table>
-<p>
-
 Initialize the parameters of the model
 A little superfluous: see [link](./link.md) Model#setParameters
 
-<b>Parameters</b><br>
-* params  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; initial parameters<br>
+<b>Parameters</b>
+
+* params  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; initial parameters
 
 
 <a name="doPlot"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>doPlot(</strong> param, force=False )
 </th></tr></thead></table>
-<p>
-
 Plot intermediate result.
 
-<b>Parameters</b><br>
-* param  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; of the model<br>
-* force  :  bool<br>
-&nbsp;&nbsp;&nbsp;&nbsp; do the plot<br>
+<b>Parameters</b>
+
+* param  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; of the model
+* force  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; do the plot
 
 
 <a name="fitprolog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) 
 </th></tr></thead></table>
-<p>
-
 Prolog for all iterative Fitters.
 
 1. Sets up plotting (if requested)
@@ -116,42 +113,44 @@ Prolog for all iterative Fitters.
 3. Checks data/weighs for Nans
 4. Makes fitIndex.
 
-<b>Parameters</b><br>
-* ydata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
-* weights  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
-* accuracy  :  float or array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
-* keep  :  dict of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
+<b>Parameters</b>
 
-<b>Returns</b><br>
-* fitIndex  :  ndarray of int<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Indices of the parameters that need fitting<br>
+* ydata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
+* weights  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data
+* accuracy  :  float or array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data
+* keep  :  dict of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)
+
+<b>Returns</b>
+
+* fitIndex  :  ndarray of int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Indices of the parameters that need fitting
 
 
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, keep=None, **kwargs )
 </th></tr></thead></table>
-<p>
-
 Return model parameters fitted to the data.
 
 It will calculate the hessian matrix and chisq.
 
-<b>Parameters</b><br>
-* ydata  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
-* weights  :  array_like<br>
-&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data<br>
-* keep  :  dict of {int:float}<br>
-&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
-* kwargs  : <br>
-&nbsp;&nbsp;&nbsp;&nbsp; passed to the fitter<br>
+<b>Parameters</b>
 
-<b>Raises</b><br>
+* ydata  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
+* weights  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data
+* keep  :  dict of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)
+* kwargs  : 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; passed to the fitter
+
+<b>Raises</b>
+
 ConvergenceError if it stops when the tolerance has not yet been reached.
 
 
@@ -159,8 +158,6 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>report(</strong> verbose, param, chi, more=None, force=False ) 
 </th></tr></thead></table>
-<p>
-
 Report on intermediate results.
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
