@@ -9,7 +9,7 @@
 
 General polynomial surface model of arbitrary degree.
 
-&nbsp; f( x,y:p ) = &sum;<sub>d</sub> &sum;<sub>k</sub> p<sub>n</sub> * x<sup>d-k</sup> * y<sup>k</sup> )<br>
+<br>&nbsp; f( x,y:p ) = &sum;<sub>d</sub> &sum;<sub>k</sub> p<sub>n</sub> * x<sup>d-k</sup> * y<sup>k</sup> )<br>
 
 where the first sum is over d running from 0 to degree ( inclusive )
 and the second sum is over k running from 0 to d ( inclusive ).
@@ -17,29 +17,24 @@ The index n is just incrementing, making all p's different.
 
 It is a 2-dimensional linear model.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )        # 10
 
 Author      Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -62,8 +57,7 @@ Polynominal surface of a certain degree. Two dimensions.
 
 The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
 * copy  :  PolySurfaceModel<br>
@@ -92,8 +86,7 @@ Returns the partials at the input values.
 
 The partials are the powers of x,y ( xdata ) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -123,8 +116,7 @@ Return the derivative df/dx at each input (=x).
 | 3 | p<sub>2</sub> + p<sub>4</sub> * x + 2 * p<sub>5</sub> * y + p<sub>7</sub> * x<sup>2</sup> + 2 * p<sub>8</sub> * x * y + 3 * p<sub>9</sub> * y<sup>2</sup> |
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>

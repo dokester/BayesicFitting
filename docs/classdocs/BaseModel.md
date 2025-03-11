@@ -31,8 +31,7 @@ BaseModel also implements the numerical calculation of the (partial)
 derivatives to be used when they are not given in the model definition
 itself.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * npbase  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of params in the base model<br>
 * ndim  :  int<br>
@@ -64,8 +63,7 @@ itself.
 
 BaseModel Constructor.
 <br>
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nparams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Number of parameters in the model (default: 0)<br>
 * ndim  :  int<br>
@@ -88,8 +86,7 @@ kwargs
 
 Returns the result calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * param  :  array_like<br>
@@ -104,8 +101,7 @@ Returns the result calculated at the xdatas.
 
 Returns the partial derivatives calculated at the inputs.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * param  :  array_like<br>
@@ -122,8 +118,7 @@ Returns the partial derivatives calculated at the inputs.
 
 Return parameters corrected for positivity and Non-zero.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
@@ -136,8 +131,7 @@ Return parameters corrected for positivity and Non-zero.
 
 Check parameters for positivity. Silently correct.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
@@ -150,8 +144,7 @@ Check parameters for positivity. Silently correct.
 
 Check parameters for Non-zero. Correct after one warning.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters<br>
 
@@ -192,8 +185,7 @@ Returns the derivative of the model to xdata.
 It is a numeric derivative as the analytic derivative is not present
 in the model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * param  :  array_like<br>
@@ -213,8 +205,7 @@ the length of the existing list of priors.
 It replaces the prior when kpar < np and 
 it generates an error when kpar > np
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 * prior  :  Prior<br>
@@ -222,10 +213,9 @@ it generates an error when kpar > np
 * kwargs  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 IndexError
-&nbsp;&nbsp;&nbsp;&nbsp; when kpar is larger than the length of priors list already present <br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when kpar is larger than the length of priors list already present <br>
 
 
 <a name="hasPriors"></a>
@@ -236,8 +226,7 @@ IndexError
 
 Return True when the model has priors for all its parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * isBound  :  bool<br>
     Also check if the prior is bound.
 
@@ -249,8 +238,7 @@ Return True when the model has priors for all its parameters.
 
 Return the prior of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     parameter number.
 
@@ -262,8 +250,7 @@ Return the prior of the indicated parameter.
 
 Return the prior of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     parameter number.
 
@@ -275,8 +262,7 @@ Return the prior of the indicated parameter.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     parameter number.
 
@@ -288,8 +274,7 @@ Return the name of the indicated parameter.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     parameter number.
 
@@ -301,8 +286,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     parameter number.
 
@@ -314,8 +298,7 @@ Return the unit of the indicated parameter.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     parameter number.
 

@@ -29,8 +29,7 @@ used when partial is not given in the model definition itself. This same
 numerical derivation of partial is used in testPartial to indeed test
 whether the partial has been implemented properly.
 
-<b>Example:</b>
-
+<b>Example:</b><br>
     x = numpy.arange( 10 )
     poly = PolynomialModel( 2 )             # quadratic model
     poly.parameters = [3,2,1]               # set the parameters for the model
@@ -70,8 +69,7 @@ whether the partial has been implemented properly.
     m5 = m1 | m4                            # m2( m1( x, p ), q ) + m3( m1( x, p ), r )
     print( m5.parameters )                  # [p, q, r]
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * parameters  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters of the model<br>
 * stdevs  :  None or array_like<br>
@@ -85,13 +83,11 @@ whether the partial has been implemented properly.
 * npchain  :  int (read only)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; identical to npars<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -105,8 +101,7 @@ Author       Do Kester
 Initializes the Model with all attributes set to None, except for
 the parammeters which are all initialized to 0.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nparams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model<br>
 * ndim  :  int<br>
@@ -154,13 +149,11 @@ Return a ( isolated ) copy of the k-th model in the chain.
 Fixed parameters and priors which might be present in the compound model
 will be lost in the isolated model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model number ( head = 0 )<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 IndexError when the chain is shorter than k.
 
 
@@ -181,8 +174,7 @@ and when needed these attributes are taken from there, or stored there.
 The operation (addition in this case) is always with the total result of the
 existing chain. For the use of "brackets" in a chain use BracketModel.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to be added to<br>
 
@@ -197,8 +189,7 @@ Make a compound model by concatinating/subtracting a model from this.
 
 The final result is the difference of the models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to be subtracted from<br>
 
@@ -213,8 +204,7 @@ Make a compound model by concatinating/multiplying a model with this.
 
 The final result is the product of the models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to be multiplied by<br>
 
@@ -229,8 +219,7 @@ Make a compound model by concatinating/dividing by a model.
 
 The final result is the division of the models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to be divided by<br>
 
@@ -243,8 +232,7 @@ The final result is the division of the models.
 
 Make a compound model by piping the result into the next.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to pipe into<br>
 
@@ -257,15 +245,13 @@ Make a compound model by piping the result into the next.
 
 Append a model to the present chain using a operation.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be appended<br>
 * operation  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; operation index<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when a model of a different dimensionality is offered.
 
 <a name="correctParameters"></a>
@@ -276,8 +262,7 @@ ValueError when a model of a different dimensionality is offered.
 
 Check parameters for non-zero and positivity
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters for the model.<br>
 
@@ -290,8 +275,7 @@ Check parameters for non-zero and positivity
 
 Return the result of the model as applied to an array of input data.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * param  :  array_like<br>
@@ -311,8 +295,7 @@ Return the result of the model as applied to an array of input data.
 
 Return the derivatives (df/dx) of the model at the inputs
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; an input vector or array<br>
 * param  :  array_like<br>
@@ -329,8 +312,7 @@ Return the derivatives (df/dx) of the model at the inputs
 
 Return the partial derivatives of the model at the inputs
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; an input vector or array<br>
 * param  :  array_like<br>
@@ -350,16 +332,15 @@ of the inputs and outputs of the model G and H
 
 Model G has pars p and model H has pars q.
 
-&nbsp; F(x:pq) ==>  H(G(x:p):q)            G(x:p) | H(*:q)   <br>
+<br>&nbsp; F(x:pq) ==>  H(G(x:p):q)            G(x:p) | H(*:q)   <br>
 &nbsp; dF/dp   ==>  dH/dG * dG/dp          H.derivative(G,p) * G.partial(x,q)<br>
 &nbsp; dF/dq   ==>  dH(G(x:p):q) / dq      G.partial(H,q)<br>
 
-&nbsp; G.ndout mustbe H.ndim<br>
+<br>&nbsp; G.ndout mustbe H.ndim<br>
 &nbsp; partial <== G<br>
 &nbsp; dfdx    <== H<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ndim  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input dimensions to G and thus to F<br>
 * ninter  :  int<br>
@@ -377,8 +358,7 @@ ninter == 1 and ndout == 1
 
 Return partial in the form of [N,P]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGd :   array of form [N,P]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N]<br>
@@ -394,8 +374,7 @@ ninter > 1 and ndout > 1
 
 Return partial in the form [O][N,P]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGd :   array of form [K][N,P]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [O][N,K]<br>
@@ -411,8 +390,7 @@ ndim == 1 and ninter > 1 and ndout == 1
 
 Return partial in the form of [N,P]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGd :   array of form [K][N,P]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,K]<br>
@@ -428,8 +406,7 @@ ndim == 1 and ninter = 1 and ndout > 1
 
 Return partial in the form of [O][NP]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGd :   array of form [N,P]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,0]<br>
@@ -445,8 +422,7 @@ ndim == 0 and ninter == 1 and ndout == 1
 
 Return partial in the form of [N]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGdx :  array of form [N]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Derivative dGdx  <br>
 * dHdG :  array of form [N]<br>
@@ -462,8 +438,7 @@ ndim == 1 and ninter > 1 and ndout > 1
 
 Return derivative in the form of [N,O]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGdx :   array of form [N,K]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [O][N,K]<br>
@@ -479,8 +454,7 @@ ndim == 1 and ninter > 1 and ndout == 1
 
 Return derivative in the form of [N]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGdx :   array of form [N,K]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,K]<br>
@@ -496,8 +470,7 @@ ndim == 1 and ninter = 1 and ndout > 1
 
 Return derivative in the form of [N,O]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGdx :   array of form [N,O]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N]<br>
@@ -513,8 +486,7 @@ ndim > 1 and ninter > 1 and ndout == 1
 
 Return derivative in the form of [N,I]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGdx :   array of form [K][N,I]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,K]<br>
@@ -530,8 +502,7 @@ ndim > 1 and ninter == 1 and ndout > 1
 
 Return derivative in the form of [O][N,I]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dGdx :   array of form [N,I]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either partial dGdp or derivative dGdx  <br>
 * dHdG :  array of form [N,O]<br>
@@ -560,8 +531,7 @@ Returns the number of parameters of the ( compound ) model.
 
 Returns numerical derivatives (df/dx) of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * param  :  array_like<br>
@@ -576,8 +546,7 @@ Returns numerical derivatives (df/dx) of the model function.
 
 Returns numerical partial derivatives of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * param  :  array_like<br>
@@ -600,8 +569,7 @@ Return whether the model can change the number of parameters dynamically.
 
 Return True when the model has priors for all its parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * isBound  :  bool<br>
     Also check if the prior is bound.
 
@@ -613,13 +581,11 @@ Return True when the model has priors for all its parameters.
 
 Return the prior of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 IndexError when kpar is larger than the number of parameters.
 
 
@@ -631,8 +597,7 @@ IndexError when kpar is larger than the number of parameters.
 
 Set the prior for the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 * prior  :  Prior<br>
@@ -640,8 +605,7 @@ Set the prior for the indicated parameter.
 * kwargs  :  keyword arguments<br>
 &nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 IndexError when kpar is larger than the number of parameters.
 
 
@@ -653,13 +617,11 @@ IndexError when kpar is larger than the number of parameters.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpsr  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 IndexError when kpar is larger than the number of parameters.
 
 
@@ -671,13 +633,11 @@ IndexError when kpar is larger than the number of parameters.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
-<b>Raise</b>
-
+<b>Raise</b><br>
 IndexError when kpar is > number of parameters
 
 
@@ -701,8 +661,7 @@ indicating no lower/upper limits.
 2. When a lowerlimit >= upperlimit no limits are enforced.
 It only works in *Fitter classes which support it.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowLimits  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower limits on the parameters<br>
 * highLimits  :  array_like<br>
@@ -717,8 +676,7 @@ It only works in *Fitter classes which support it.
 
 Return the limits stored in the priors
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * limits  :  tuple of 2 array-like or of 2 None (if `self.priors` is None)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; (lowlimits, highlimits)<br>
 
@@ -731,7 +689,7 @@ mdl = self
 &nbsp;&nbsp;&nbsp;&nbsp; lolim += [p.lowLimit for p in mdl.priors]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; hilim += [p.highLimit for p in mdl.priors]<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; mdl = mdl._next<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; mdl = mdl._next<br>
 return (lolim, hilim)
 
 <a name="hasLimits"></a>
@@ -742,8 +700,7 @@ return (lolim, hilim)
 
 Return true if limits has been set for this model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 fitindex    list of indices to be fitted.
 
 
@@ -755,8 +712,7 @@ fitindex    list of indices to be fitted.
 
 Convert a value in [0,1] to one inside the limits of the parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uvalue  :  (list of) float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value in [0,1]<br>
 * kpar  :  int<br>
@@ -771,8 +727,7 @@ Convert a value in [0,1] to one inside the limits of the parameter.
 
 Convert a value within the domain of the parameter to one in [0,1].
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dvalue  :  (list of) float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value of parameter<br>
 * kpar  :  int<br>
@@ -787,8 +742,7 @@ Convert a value within the domain of the parameter to one in [0,1].
 
 Return a the derivate of the domain2Unit function to dval.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dvalue  :  (list of) float<br>
 &nbsp;&nbsp;&nbsp; parameter array<br>
 
@@ -822,8 +776,7 @@ A test routine to check the calculation of the partial derivatives.
 
 It is compared to a numerical calculation.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  (list of) float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values of the independent variable<br>
 * params  :  list of floats<br>
@@ -831,8 +784,7 @@ It is compared to a numerical calculation.
 * silent  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; if false print outputs<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 The number of large deviations.
 
 
@@ -846,8 +798,7 @@ Strictly numeric calculation of partials to params.
 
 For compound models it is different from numPartial and numDerivative.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; single xdata point (possibly multidimensional)<br>
 * params  :  array-like<br>
@@ -875,10 +826,9 @@ Strictly numeric calculation of derivative.
 
 For compound models it is different from numPartial and numDerivative.
 
-&nbsp;&nbsp;&nbsp;&nbsp; ## More dimensions in x<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ## More dimensions in x<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; single xdata point (possibly multidimensional)<br>
 * param  :  array-like<br>

@@ -12,13 +12,11 @@ Move all parameters in forward steps, with optional mirroring on the edge.
 Move the parameters in a random direction for N iterations; mirror the direction
 on the gradient of the logLikelihood when the parameters enter the zone of logLlow.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * size  :  0.5<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the step<br>
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -32,8 +30,7 @@ Author       Do Kester.
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  WalkerList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -59,8 +56,7 @@ Return copy of this.
 
 Execute the engine by diffusing the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index in walkerlist, of the walker<br>
 * lowLhood  :  float<br>
@@ -68,8 +64,7 @@ Execute the engine by diffusing the parameters.
 * append  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; set walker in place of append<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 
@@ -84,8 +79,7 @@ x = [0.0, 0.5, 1.0]
 y = [L0, Lm, L1]  where L0 > Lm > L1    
 interpolation at y = lowL.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * xvalue  :  float<br>
     largest of the two inside [0,1]
 

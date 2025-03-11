@@ -58,41 +58,40 @@ so-called engines are written.
 By default only engines 1 and 2 is switched on.
 
 1. GalileanEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It walks all (super)parameters in a fixed direction for about 5 steps.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It walks all (super)parameters in a fixed direction for about 5 steps.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; When a step ends outside the high likelihood region the direction is<br>
 &nbsp;&nbsp;&nbsp;&nbsp; mirrored on the lowLikelihood edge and continued.<br>
 
 2. ChordEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It draws a randomly oriented line through a point inside the region,<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It draws a randomly oriented line through a point inside the region,<br>
 &nbsp;&nbsp;&nbsp;&nbsp; until it reaches outside the restricted likelihood region on both sides.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; A random point is selected on the line until it is inside the likelihood region.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; This process runs several times<br>
 
 3. GibbsEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It moves each of the parameters by a random step, one at a time.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It moves each of the parameters by a random step, one at a time.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; It is a randomwalk.<br>
 
 4. StepEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It moves all parameters in a random direction. It is a randomwalk.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It moves all parameters in a random direction. It is a randomwalk.<br>
 
 For dynamic models 2 extra engines are defined
 
 6. BirthEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It tries to increase the number of parameters.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It tries to increase the number of parameters.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; It can only be switched on for Dynamic Models.<br>
 
 7. DeathEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It tries to decrease the number of parameters.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It tries to decrease the number of parameters.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; It can only be switched on for Dynamic Models.<br>
 
 For modifiable models 1 engine is defined.
 
 8. StructureEngine.
-&nbsp;&nbsp;&nbsp;&nbsp; It alters the internal structure of the model.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; It alters the internal structure of the model.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; It can only be switched on for Modifiable Models.<br>
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -154,8 +153,7 @@ Create a new class, providing inputs and model.
 Either (model,xdata,ydata) needs to be provided or a completely filled
 problem.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -247,8 +245,7 @@ Sample the posterior and return the 10log( evidence )
 A additional result of this method is a SampleList which contains
 samples taken from the posterior distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * keep  :  None or dict of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters<br>
@@ -279,8 +276,7 @@ samples taken from the posterior distribution.
 
 Make list of indices of (hyper)parameters that need fitting.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * keep  :  None or dict of {int : float}<br>
     dictionary of indices that need to be kept at the float value.
 
@@ -290,10 +286,9 @@ Make list of indices of (hyper)parameters that need fitting.
 </th></tr></thead></table>
 <p>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 int 0   no plot
-&nbsp;&nbsp;&nbsp;&nbsp; 1   plot<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 1   plot<br>
     2   plot but dont show (for testing)
 
 <a name="doLastPlot"></a>
@@ -302,8 +297,7 @@ int 0   no plot
 </th></tr></thead></table>
 <p>
 
-<b>Return</b>
-
+<b>Return</b><br>
 True when the last plot is requested (plot equals 'last' or 'all' or True)
 False otherwise
 
@@ -324,7 +318,7 @@ False otherwise
 <p>
 
 if self.iteration % 1000 == 0 
-&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( pl, max=None ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( pl, max=None ) )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; npars = self.walkers[kw].problem.npars<br>
 &nbsp;&nbsp;&nbsp;&nbsp; pmn, pmx = self.phantoms.getParamMinmax( self.lowLhood, npars )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; print( fmt( pmn, max=None ) )<br>
@@ -386,8 +380,7 @@ Updates the evidence (logZ) and the information (H)
 
 The walkers need to be sorted to logL
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Number of walkers used in the update<br>
 
@@ -400,8 +393,7 @@ The walkers need to be sorted to logL
 
 Kill worst walker( s ) in favour of one of the others
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  int<br>
     number of Walkers to copy
 
@@ -413,8 +405,7 @@ Kill worst walker( s ) in favour of one of the others
 
 Kill worst walker( s ) in favour of one of the others
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  int<br>
     number of Walkers to copy
 
@@ -426,8 +417,7 @@ Kill worst walker( s ) in favour of one of the others
 
 Kill worst walker( s ) in favour of one of the others
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  int<br>
     number of Walkers to copy
 
@@ -439,8 +429,7 @@ Kill worst walker( s ) in favour of one of the others
 
 Update the walkerlist in place.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * explorer  :  Explorer<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Explorer object<br>
 * worst  :  int<br>
@@ -458,8 +447,7 @@ Set the problem for this run.
 If name is a Problem, then the keyword arguments (xdata,model,ydata,weights)
 are overwritten provided they are not None
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * name  :  string or Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; name of problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Problem Use this one<br>
@@ -483,8 +471,7 @@ are overwritten provided they are not None
 
 Set the error distribution for calculating the likelihood.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * name  :  None or string or ErrorDistribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None    distribution is Problem dependent.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; string  name of distribution; one of<br>
@@ -510,8 +497,7 @@ Set the error distribution for calculating the likelihood.
 
 initialize the engines.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * engines  :  None or [Engine] or [string]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None       engines is Problem dependent<br>
 &nbsp;&nbsp;&nbsp;&nbsp; [Engines]  list of Engines to use<br>
@@ -527,8 +513,7 @@ initialize the engines.
 
 Initialize the walkers at random values of parameters and scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ensemble  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; length of the walkers list<br>
 
@@ -550,8 +535,7 @@ Initialize the walkers at random values of parameters and scale
 
 Initialize the walkers at random values of parameters and scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ensemble  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; length of the walkers list<br>
 * allpars  :  array_like<br>
@@ -569,8 +553,7 @@ Initialize the walkers at random values of parameters and scale
 
 Plot the results for a walker.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the walker to plot<br>
 * iter  :  int<br>

@@ -9,9 +9,9 @@
 
 Gaussian Model.
 
-&nbsp; f( x:p ) = p<sub>0</sub> * exp( -0.5 * ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<sup>2</sup> )<br>
+<br>&nbsp; f( x:p ) = p<sub>0</sub> * exp( -0.5 * ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<sup>2</sup> )<br>
 
-&nbsp; p<sub>0</sub> = amplitude<br>
+<br>&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp; p<sub>1</sub> = center<br>
 &nbsp; p<sub>2</sub> = width<br>
 
@@ -19,8 +19,7 @@ The parameters are initialized at 1.0, 0.0, 1.0.
 
 Parameter 2 (width) is always kept stricktly positive (>0).
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     gauss = GaussModel( )
     print( gauss )
     Gauss: f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
@@ -31,20 +30,16 @@ Parameter 2 (width) is always kept stricktly positive (>0).
        6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
        1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 `GaussModel()` is equivalent to `KernelModel( kernel=Gauss() )`.
 
 
@@ -59,8 +54,7 @@ Gaussian model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  GaussModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
@@ -85,8 +79,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -101,8 +94,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -119,8 +111,7 @@ Returns the partials at the input value.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -144,8 +135,7 @@ Returns a string representation of the model.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

@@ -11,7 +11,7 @@ The LoopEngine tries to unloop a crossing loop.
 
 Only for 2 dimensional TS problems.
 
-&nbsp; Input order :<br>
+<br>&nbsp; Input order :<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0  1  2  3<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 15 14  5  4<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7  6 13 12<br>
@@ -21,7 +21,7 @@ The loop crosses between (5,6) and (13,14). By switching the positions
 of 6 and 13, and reversing the loop in between, a better solution is
 reached (triangle inequality)
 
-&nbsp; Output order:<br>
+<br>&nbsp; Output order:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0  1  2  3<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 15 14  5  4<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 12 13  6  7<br>
@@ -34,8 +34,7 @@ where the parameters of the problem is an ordered list.
 
 The walker is kept when the logLikelihood > lowLhood
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -49,8 +48,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  SampleList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -76,8 +74,7 @@ Return copy of this.
 
 Execute the LoopEngine one time.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walker to diffuse<br>
 * lowLhood  :  float<br>

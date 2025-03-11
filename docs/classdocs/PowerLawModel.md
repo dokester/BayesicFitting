@@ -9,40 +9,35 @@
 
 General powerlaw model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * ( x - p<sub>1</sub> )<sup>p</sup><sub>2</sub><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * ( x - p<sub>1</sub> )p<sub>2</sub><br>
 
 with
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitide<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitide<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = x-shift<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = power<br>
 
-The parameters are initialized at 1.0, 0.0, 1.0.
+The parameters are initialized at [1.0, 0.0, 1.0].
 
 Note that the term ( x - p<sub>1</sub> ) needs to be divided by a factor 1.0
 in the same units as the x, to get the overall units of f( x:p ) right.
 The factor is omitted as it does not contribute in the calculations.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pl = PowerLawModel( )
     print( pl.npchain )
-4
+    4
 
-<b>Attributes</b>
+<b>Attributes</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; no attributes of its own.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; no attributes of its own.<br>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -56,8 +51,7 @@ Powerlaw of an unknown degree.
 
 The number of parameters is 3
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  PowerLawModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
@@ -81,8 +75,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -97,8 +90,7 @@ Returns the result of the model function.
 
 Returns the partials at the input (xdata) value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -115,8 +107,7 @@ Returns the partials at the input (xdata) value.
 
 Returns the derivative (df/dx) at the input (xdata) value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -139,8 +130,7 @@ Returns a string representation of the model.
 <p>
 
 Return the unit of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

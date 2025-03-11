@@ -19,7 +19,7 @@ between data (xdata,ydata) and (target, model(target)) is minimised.
 The target are nuisance parameters which are not part of the modeling
 solution.
 
-&nbsp; Define<br>
+<br>&nbsp; Define<br>
 &nbsp;&nbsp;&nbsp;&nbsp; xd = xdata <br>
 &nbsp;&nbsp;&nbsp;&nbsp; yd = ydata <br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = target <br>
@@ -37,8 +37,7 @@ each of the xdata values.
 S.Gull (1989) argues to use a GaussPrior with a scale similar to the errors
 in both X and Y.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * prior  :  Prior<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Priors for the x-axis nuisance parameters.<br>
 * varxx  :  float or ndarray of shape (ndata,)<br>
@@ -50,8 +49,7 @@ in both X and Y.
 
 
 
-<b>Attributes from Problem</b>
-
+<b>Attributes from Problem</b><br>
 model, xdata, ydata, weights, partype
 
 
@@ -67,8 +65,7 @@ model, xdata, ydata, weights, partype
 
 Problem Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
 * xdata  :  array_like or None<br>
@@ -114,27 +111,25 @@ Copy.
 
 Store 3 items from the covar matrix : 
 
-&nbsp;&nbsp;&nbsp;&nbsp; | var<sub>y</sub>y, var<sub>x</sub>y |<br>
-&nbsp;&nbsp;&nbsp;&nbsp; | var<sub>x</sub>y, var<sub>x</sub>x |<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; | var<sub>yy</sub>, var<sub>xy</sub> |<br>
+&nbsp;&nbsp;&nbsp;&nbsp; | var<sub>xy</sub>, var<sub>xx</sub> |<br>
 
-When the accuracy is given, convert it to these items by
-var<sub>y</sub>y = acc[0] * acc[0]
-var<sub>x</sub>x = acc[1] * acc[1]
-var<sub>x</sub>y = acc[0] * acc[1] * acc[2]
+<br>&nbsp; When the accuracy is given, convert it to these items by<br>
+&nbsp;&nbsp; var<sub>yy</sub> = acc[0] * acc[0]<br>
+&nbsp;&nbsp; var<sub>xx</sub> = acc[1] * acc[1]<br>
+&nbsp;&nbsp; var<sub>xy</sub> = acc[0] * acc[1] * acc[2]<br>
 
 Store also the determinant of the covariance matrix. 
 
-When both accuracy and covar are None
-&nbsp;&nbsp; var<sub>y</sub>y = 0 <br>
-&nbsp;&nbsp; var<sub>x</sub>x = 1<br>
-&nbsp;&nbsp; var<sub>x</sub>y = 0<br>
+<br>&nbsp; When both accuracy and covar are None<br>
+&nbsp;&nbsp; var<sub>yy</sub> = 0 <br>
+&nbsp;&nbsp; var<sub>xx</sub> = 1<br>
+&nbsp;&nbsp; var<sub>xy</sub> = 0<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError. When both accuracy and covar are not None.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * accuracy  :  ndarray of shape (2,) or (3,) or (ndata,2) or (ndata,3)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; accuracy scale for the datapoints<br>
 &nbsp;&nbsp;&nbsp;&nbsp; (2,) scale for resp. y and x, valid for all datapoints<br>
@@ -164,8 +159,7 @@ Return whether it has weights.
 
 Returns the result calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
@@ -178,13 +172,11 @@ Returns the result calculated at the xdatas.
 
 Split the parameters into Model parameters and targets.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 tuple of ( targets, model parameters )
 
 
@@ -197,13 +189,12 @@ tuple of ( targets, model parameters )
 Return the partials as a matrix [2*nx,np+nx], where nx is the number of
 datapoints and np the number of parameters in the model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; The upper left submatrix (nx,np) contains dM/dp<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The upper left submatrix (nx,np) contains dM/dp<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the upper right submatrix (nx,nx) contains dM/dx on the diagonal<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the lower left submatrix (nx,np) contains zeros<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the lower right submatrix (nx,nx) contains the identity matrix<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
@@ -216,8 +207,7 @@ datapoints and np the number of parameters in the model.
 
 Return the derivative to the Model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array_like<br>
     list of problem parameters
 
@@ -229,8 +219,7 @@ Return the derivative to the Model.
 
 Return value in [0,1] for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; domain value for the selected parameter<br>
 * kpar  :  int<br>
@@ -244,8 +233,7 @@ Return value in [0,1] for the selected parameter.
 
 Return domain value for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; unit value for the selected parameter<br>
 * kpar  :  int<br>
@@ -259,13 +247,11 @@ Return domain value for the selected parameter.
 
 Return residuals in y-direction and x-direction.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model parameters and xdata parameters<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 tuple of (y residuals, x residuals)
 
 <a name="weightedResSq"></a>
@@ -277,8 +263,7 @@ tuple of (y residuals, x residuals)
 Return the (weighted) squared distance between (xdata,ydata) and (xtry,ytry) where xtry are
 the trial values for xdata and ytry = model.result( xtry, param )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * allpars  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model parameters, xdata parameters, and noise scale<br>
 * mockdata  :  array_like<br>

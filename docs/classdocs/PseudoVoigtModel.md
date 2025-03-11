@@ -9,7 +9,7 @@
 
 Approximation of VoigtModel as the sum of a GaussModel and a LorentzModel
 
-&nbsp;&nbsp;&nbsp;&nbsp; F(x:p) = p<sub>3</sub> * L(x:p) + ( 1 - p<sub>3</sub> ) * G(x:p)<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; F(x:p) = p<sub>3</sub> * L(x:p) + ( 1 - p<sub>3</sub> ) * G(x:p)<br>
 
 where L() and G() are the LorentzModel and the GaussModel, resp. and p<sub>3</sub>
 is the fractional contribution of them. 0 < p<sub>3</sub> < 1.
@@ -20,30 +20,25 @@ the balance between the models
 These are initialised to [1, 0, 1, 0.5].
 Parameter 2 (width) is always kept positive ( >=0 ).
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     voigt = PseudoVoigtModel( )
     voigt.setParameters( [5, 4, 1, 0.7] )
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * gauss  :  GaussModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to construct the gauss parts<br>
 * lorentz  :  LorentzModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to construct the lorentz parts<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="PseudoVoigtModel"></a>
@@ -56,8 +51,7 @@ PseudoVoigt model.
 <br>
 Number of parameters is 4.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  PseudoVoigtModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
@@ -88,8 +82,7 @@ Note
 the width in the parameter array ( items 2 & 3 ) are kept
 strictly positive. I.e. they are changed when upon xdata they are negative.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -104,8 +97,7 @@ strictly positive. I.e. they are changed when upon xdata they are negative.
 
 Returns the partials at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -122,8 +114,7 @@ Returns the partials at the xdata value.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * params  :  array_like<br>
@@ -146,8 +137,7 @@ Returns a string representation of the model.
 
 Return the name of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

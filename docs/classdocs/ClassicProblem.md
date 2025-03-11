@@ -18,8 +18,7 @@ problem.result( x, p )
 The parameters, p, are to be optimized while the x provide additional
 information.
 
-<b>Attributes from Problem</b>
-
+<b>Attributes from Problem</b><br>
 model, xdata, ydata, weights, accuracy, varyy
 
 * Author  :          Do Kester<br>
@@ -34,8 +33,7 @@ model, xdata, ydata, weights, accuracy, varyy
 
 Constructor for classic problems.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
 * xdata  :  array_like or None<br>
@@ -69,8 +67,7 @@ The copy points to the same instance of model.
 
 Returns the result calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
@@ -83,8 +80,7 @@ Returns the result calculated at the xdatas.
 
 Return the partials of the internal model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
     list of model parameters
 
@@ -96,8 +92,7 @@ Return the partials of the internal model.
 
 Return the derivative of the internal model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
     list of model parameters
 

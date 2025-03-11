@@ -13,8 +13,7 @@ See also: [AnnealingAmoeba](./AnnealingAmoeba.md)
 
 Author       Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = 3.5 * SIN( x + 0.4 )                    # make sine
@@ -41,8 +40,7 @@ Author       Do Kester
     param = amfit.fit( y )
 
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. AmoebaFitter is not guaranteed to find the global minimum.
 2. The calculation of the evidence is an Gaussian approximation which is
 only exact for linear models with a fixed scale.
@@ -58,8 +56,7 @@ only exact for linear models with a fixed scale.
 
 Create a new Amoeba class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; independent input values<br>
 * model  :  Model<br>
@@ -84,8 +81,7 @@ Return Model fitted to the data array.
 
 When done, it also calculates the hessian matrix and chisq.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>

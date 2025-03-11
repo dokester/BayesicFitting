@@ -9,7 +9,7 @@
 
 ConstantModel is a Model which does not have any parameters.
 
-&nbsp; f( x:p ) = f( x )<br>
+<br>&nbsp; f( x:p ) = f( x )<br>
 
 As such it is irrelevant whether it is linear or not.
 It has 0 params and returns a 0 for its partials.
@@ -26,28 +26,23 @@ some structure at all.
 It can also be used when some constant is needed in a compound model,
 or a family of similar shapes.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * fixedModel  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; a model which is calculated. (default: 0, everywhere)<br>
 * table  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
 To make a model that decays to 1.0
 
     model = ConstantModel( values=1.0 )
@@ -67,8 +62,7 @@ The ConstantModel implementation.
 
 Number of parameters = 0.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ndim  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of dimensions for the model. (default: 1)<br>
 * copy  :  ConstantModel<br>
@@ -80,8 +74,7 @@ Number of parameters = 0.
 * table  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results<br>
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 A table provided to the constructor has only values at the xdata.
 At other vales than xdata, the model does not work.
 
@@ -101,8 +94,7 @@ Copy method.
 
 Returns a constant form.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -117,8 +109,7 @@ Returns a constant form.
 
 Returns the partials at the xdata value. (=empty array)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -135,8 +126,7 @@ Returns the partials at the xdata value. (=empty array)
 
 Return the derivative df/dx at each point x (== 0).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>

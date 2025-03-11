@@ -13,29 +13,30 @@ Two methods need to be defined in specific priors which map
 the values between [0,1] on to the domain, and vice versa
 unit2Domain and domain2Unit.
 
-&nbsp;&nbsp;&nbsp;&nbsp; u = domain2Unit( d )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = domain2Unit( d )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; d = unit2Domain( u )<br>
 
 d is a value in the domain of the prior and u is a vlue in [0,1]
 
-The handling of limits is relegated to this Prior class. Define
-&nbsp;&nbsp;&nbsp;&nbsp; <sub>u</sub>min = domain2Unit( lowLimit )<br>
-&nbsp;&nbsp;&nbsp;&nbsp; <sub>u</sub>rng = domain2Unit( highLimit ) - umin<br>
+The handling of limits is relegated to this Prior class. 
 
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( domain2Unit( d ) - umin ) / urange<br>
+<br>&nbsp; Define<br>
+&nbsp;&nbsp;&nbsp;&nbsp; umin = domain2Unit( lowLimit )<br>
+&nbsp;&nbsp;&nbsp;&nbsp; urange = domain2Unit( highLimit ) - umin<br>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( domain2Unit( d ) - umin ) / urange<br>
 &nbsp;&nbsp;&nbsp;&nbsp; d = unit2Domain( u * urange + umin )<br>
 
 Symmetric priors can be used in a circular variant; i.e.
 the low and high limits are folded on each other, provided
 that the limit values are the same (hence symmetric)
 
-&nbsp;&nbsp;&nbsp;&nbsp; u = limitedDomain2Unit( d ) + 1 ) / 3<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = limitedDomain2Unit( d ) + 1 ) / 3<br>
 &nbsp;&nbsp;&nbsp;&nbsp; d = limitedUnit2Domain( ( u * 3 ) % 1 )<br>
 
 The copy method is also necessary.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * lowLimit  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; low limit on the Prior<br>
 * highLimit  :  float<br>
@@ -45,8 +46,7 @@ The copy method is also necessary.
 * circular  :  bool or float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; whether circular<br>
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _lowDomain  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower limit of the Priors possible values<br>
 * _highDomain  :  float<br>
@@ -65,8 +65,7 @@ The copy method is also necessary.
 
 Default constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  None or list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 2 limits resp. low and high<br>
 * circular  :  bool or float<br>
@@ -94,8 +93,7 @@ Return a copy
 Calculate the Integral of the prior where tails are cut off
 due to limits or circularity.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * circular  :  bool or float<br>
@@ -114,14 +112,12 @@ due to limits or circularity.
 Set limits.
 It is asserted that lowLimit is smaller than highLimit.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  None or list of any combination of [None, float]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None : no limit (for both or one)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; float : [low,high] limit<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when low limit is larger than high limit or out of Domain
 
 
@@ -133,8 +129,7 @@ ValueError when low limit is larger than high limit or out of Domain
 
 Set circular attributes.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  None or array of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; defining the period<br>
 * circular  :  bool or float<br>
@@ -197,8 +192,7 @@ Remove all limits.
 
 Set possible attributes for a Prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  float or None<br>
 &nbsp;&nbsp;&nbsp;&nbsp; [low,high] limit<br>
 * scale  :  float or None<br>
@@ -212,8 +206,7 @@ Set possible attributes for a Prior.
 
 True if the parameter is out of limits
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * par  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameter to check<br>
 
@@ -226,14 +219,12 @@ True if the parameter is out of limits
 
 Check whether the parameter is within limits.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * par  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameter to check<br>
 
-<b>Raises</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; ValueError when outside limits.<br>
+<b>Raises</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ValueError when outside limits.<br>
 
 
 <a name="stayInLimits"></a>
@@ -244,8 +235,7 @@ Check whether the parameter is within limits.
 
 Return lower limit or upper limit when parameter is outside.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * par  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameter to check<br>
 
@@ -304,8 +294,7 @@ Return the range.
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -319,8 +308,7 @@ a parameter for a distribution.
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
@@ -335,8 +323,7 @@ Return value of the Prior at a given value.
 
 If result is not defined, fall back to numerical derivative of Domain2Unit.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
@@ -349,8 +336,7 @@ If result is not defined, fall back to numerical derivative of Domain2Unit.
 
 Return the derivative of Domain2Unit, aka the result of the distribution at p
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
@@ -363,8 +349,7 @@ Return the derivative of Domain2Unit, aka the result of the distribution at p
 
 Return the log of the result; -inf when p == 0.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
@@ -377,8 +362,7 @@ Return the log of the result; -inf when p == 0.
 
 Return a the numeric derivate of the domain2Unit function to dval.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -392,8 +376,7 @@ Return a the numeric derivate of the domain2Unit function to dval.
 Return partial derivative of log( Prior ) wrt parameter.
 default numPartialLog
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 
@@ -405,8 +388,7 @@ default numPartialLog
 <p>
 
 Return the numeric partial derivative of log( Prior ) wrt parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 

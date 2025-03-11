@@ -9,21 +9,19 @@
 
 Sine of fixed frequency with splineslike amplitudes/phases.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = SM0 cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = SM0 cos( 2 &pi; &omega; x ) + SM1 sin( 2 &pi; &omega; x )<br>
 
 Where SM0 and SM1 are splines models with defined knots and order.
 
 It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = [3.0*k for k in range( 11 )]
     sine = SineSplineModel( 150, knots )        # fixed frequency of 150 Hz
     print( sine.npbase )                        # number of parameters
 26
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * frequency  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; (fixed) frequency of the sine<br>
 * knots  :  array_like<br>
@@ -35,21 +33,17 @@ It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 * sm  :  SplinesModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; amplitude of the sine<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 The model
 
     model = SineSplineModel( frequency, knots )
@@ -73,8 +67,7 @@ Sine model of a fixed frequency with a splineslike changing amplitude/phase.
 
 Number of parameters is 2 * ( len(knots) + order - 1 ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * frequency  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the frequency<br>
 * copy  :  SineSplineModel<br>
@@ -82,10 +75,9 @@ Number of parameters is 2 * ( len(knots) + order - 1 ).
 * fixed  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError
-&nbsp;&nbsp;&nbsp;&nbsp; when fixed is not None<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when fixed is not None<br>
 
 
 <a name="copy"></a>
@@ -103,8 +95,7 @@ Copy method.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -121,8 +112,7 @@ Returns the partials at the input value.
 
 Returns the derivative of f to x (df/dx) at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -137,8 +127,7 @@ Returns the derivative of f to x (df/dx) at the input value.
 
 Return the amplitudes if cosine and sine, resp.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -161,8 +150,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

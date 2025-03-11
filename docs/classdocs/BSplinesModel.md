@@ -42,8 +42,7 @@ spanned by the knots: knots[0] <= xdata < knots[-1]
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
@@ -59,8 +58,7 @@ This model is NOT for (cubic) spline interpolation.
     print csm.getNumberOfParameters( )
     18
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * knots  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
@@ -69,22 +67,18 @@ This model is NOT for (cubic) spline interpolation.
 &nbsp;&nbsp;&nbsp;&nbsp; small number to enable inclusion of endpoints. Default 0.0.<br>
 
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, xUnit, yUnit, npchain<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, xUnit, yUnit, npchain<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 Dont put the knots too closely so that there are no datapoints in between.
 
 
@@ -99,8 +93,7 @@ Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knots  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
@@ -119,14 +112,12 @@ The number of parameters is ( length( knots ) + order - 1 )
 &nbsp;&nbsp;&nbsp;&nbsp; If not None, raise AttributeError.<br>
 
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * ValueError  :  At least either ('knots') or ('nrnkots', 'min', 'max') or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ('nrknots', 'xrange') must be provided to define a valid model.<br>
 * AttributeErrr  :  When fixed is not None<br>
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 The BSplinesModel is only strictly valid inside the domain defined by the
 minmax of knots. It does not exist outside that domain.
 
@@ -146,8 +137,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -155,8 +145,7 @@ The partials are the powers of x (input) from 0 to degree.
 * parlist  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when xdata < knots[0] or xdata > knots[1]
 
 
@@ -168,8 +157,7 @@ ValueError when xdata < knots[0] or xdata > knots[1]
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -191,8 +179,7 @@ Returns a string representation of the model.
 
 Return the units of the parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     index of the parameter.
 

@@ -9,7 +9,7 @@
 
 Lorentz is an unbound Kernel function.
 
-&nbsp; K( x ) = 1 / ( 1 + x * x )<br>
+<br>&nbsp; K( x ) = 1 / ( 1 + x<sup>2</sup> )<br>
 
 
 <a name="Lorentz"></a>
@@ -20,7 +20,7 @@ Lorentz is an unbound Kernel function.
 
 Constructor.
 
-&nbsp; Using<br>
+<br>&nbsp; Using<br>
 &nbsp; integral = &pi;<br>
 &nbsp; fwhm = 2.0<br>
  range = inf
@@ -33,8 +33,7 @@ Constructor.
 
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -46,8 +45,7 @@ Return the result for input values.
 
 Return the result for squared input values.   
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the squares of the input values
 
@@ -59,8 +57,7 @@ Return the result for squared input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

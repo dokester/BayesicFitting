@@ -49,36 +49,44 @@ within the fwhm.
 
 A number of weighting schemes are provided.
 
-With bound support and smooth edges
-&nbsp;&nbsp;&nbsp; Kernel       Name        domain      comment<br>
-&nbsp;&nbsp;&nbsp; Biweight     Tukey         5.54      Default kernel<br>
-&nbsp;&nbsp;&nbsp; CosSquare                  6.00<br>
-&nbsp;&nbsp;&nbsp; Tricube                    5.08<br>
-&nbsp;&nbsp;&nbsp; Triweight                  6.60<br>
+| Kernel    | domain | support | edges | comment                |
+|-----------|--------|---------|-------|------------------------|
+| Biweight  |   5.54 |  bound  | smooth| Tukey: Default kernel  |
+| CosSquare |   6.00 |  bound  | smooth|                        |
+| Tricube   |   5.08 |  bound  | smooth|                        |
+| Triweight |   6.60 |  bound  | smooth|                        |
+| Uniform   |   3.00 |  bound  | hard  | clip outside domain    |
+| Cosine    |   4.50 |  bound  | hard  |                        |
+| Triangle  |   6.00 |  bound  | hard  |                        |
+| Parabola  |   4.50 |  bound  | hard  |                        |
+| Huber     |   1.50 | unbound | smooth| In domain mean; out domain median |
+| Gauss     |   2.12 | unbound | smooth|                        |
+| Lorentz   |   3.00 | unbound | smooth|                        |
 
-With bound support and hard edges
-&nbsp;&nbsp;&nbsp; Uniform      Clip          3.00      Ignore all outside 3 sigma<br>
-&nbsp;&nbsp;&nbsp; Cosine                     4.50<br>
-&nbsp;&nbsp;&nbsp; Triangle                   6.00<br>
-&nbsp;&nbsp;&nbsp; Parabola                   4.50<br>
-
-with unbound support
-&nbsp;&nbsp;&nbsp; Huber        Median        1.50      Inside domain mean; outside domain median<br>
-&nbsp;&nbsp;&nbsp; Gauss                      2.12<br>
-&nbsp;&nbsp;&nbsp; Lorentz                    3.00<br>
 
 Other schemes can be written by making another Kernel or writing a function
-&nbsp;&nbsp;&nbsp;&nbsp; wgts = func( d )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; wgts = func( d )<br>
 where d is the deviant as above.
 
+<b>Attributes</b><br>
+* fitter  :  BaseFitter<br>
+&nbsp;&nbsp;&nbsp;&nbsp; The fitter to be used<br>
+* kernel  :  Kernel or callable<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Kernel take function from this kernel<br>
+&nbsp;&nbsp;&nbsp;&nbsp; callable in the form f(d), where d = ( data - mock ) / ( domain * scale )<br>
+* domain  :  float<br>
+&nbsp;&nbsp;&nbsp;&nbsp; domain of the kernel function<br>
+* onesided  :  [-1,0,+1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp; -1 apply to negative residuals<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 aplly to both sided (not onesided)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; +1 apply to positive residuals.<br>
 
-<b>Notes</b>
 
+<b>Notes</b><br>
 Robust fitting is even more dangerous than ordinary fitting.
 *Never trust what you get without thorough checking.*
 
-<b>Example</b>
-
+<b>Example</b><br>
     model = PolynomialModel( 1 )                # some model
     x = numpy.arange( 100, dtype=float ) / 100  # some x values
     y = numpy.arange( 100, dtype=float ) / 4    # digitization noise
@@ -101,8 +109,7 @@ Author       Do Kester.
 
 Create a new class, providing the fitter to be used.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fitter  :  BaseFitter<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to be used<br>
 * kernel  :  Kernel or callable<br>
@@ -127,15 +134,13 @@ Create a new class, providing the fitter to be used.
 
 Set the robust kernel to be used.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kernel  :  Kernel or callable<br>
 &nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when kernel is not recognized.
 
 
@@ -147,15 +152,13 @@ ValueError when kernel is not recognized.
 
 set self.onesided to either 0 or +1 or -1.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * onesided  :  None or "positive" or "negative"<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when onesided could not be interpreted.
 
 
@@ -167,18 +170,12 @@ ValueError when onesided could not be interpreted.
 
 Perform a robustification step.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data as they go into a fitter<br>
 * kwargs  :  dict<br>
     keyword args to be passed to fitter.fit()
 
-<a name="getOneSidedWeights"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>getOneSidedWeights(</strong> wgt, res, onesided ) 
-</th></tr></thead></table>
-<p>
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 

@@ -20,13 +20,11 @@ In principle it speeds up the calculations by a factor step, of course it
 pays in exploratory power and precision.
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * step  :  int (< 10)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; percentage of the walkers to replace<br>
 
-<b>Attributes from NestedSampler</b>
-
+<b>Attributes from NestedSampler</b><br>
 xdata, model, ydata, weights, problem, distribution, ensemble, discard, rng, seed,
 rate, maxsize, minimumIterations, end, verbose, walkers, samples, engines,
 initialEngine
@@ -48,13 +46,11 @@ Create a new class, providing inputs and model.
 Either (model,xdata,ydata) needs to be provided or a completely filled
 problem.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * step  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; percentage of walkers to use<br>
 
-<b>Parameters from NestedSampler</b>
-
+<b>Parameters from NestedSampler</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -70,12 +66,12 @@ problem.
 * problem  :  None or string or Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Defines the kind of problem to be solved.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; None        same as "classic"<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None        same as "classic"<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "classic" 	ClassicProblem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "errors"	ErrorsInXandYProblem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "multiple"	MultipleOutputProblem<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; Problem     Externally defined Problem. When Problem has been provided,<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Problem     Externally defined Problem. When Problem has been provided,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xdata, model, weights and ydata are not used.<br>
 * keep  :  None or dict of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None of the model parameters are kept fixed.<br>
@@ -87,7 +83,7 @@ problem.
 &nbsp;&nbsp;&nbsp;&nbsp; Defines the ErrorDistribution to be used<br>
 &nbsp;&nbsp;&nbsp;&nbsp; When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; None            same as "gauss"<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None            same as "gauss"<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "laplace"       LaplaceErrorDistribution with 1 hyperpar scale<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "poisson"       PoissonErrorDistribution no hyperpar<br>
@@ -96,7 +92,7 @@ problem.
 &nbsp;&nbsp;&nbsp;&nbsp; "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "bernoulli"     BernoulliErrorDistribution no hyperpar<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; ErrorDistribution Externally defined ErrorDistribution<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ErrorDistribution Externally defined ErrorDistribution<br>
 * limits  :  None or [low,high] or [[low],[high]]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None    no limits implying fixed hyperparameters of the distribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp; low     low limit on hyperpars<br>
@@ -111,20 +107,20 @@ problem.
 * engines  :  None or (list of) string or (list of) Engine<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to randomly move the walkers around, within the likelihood bound.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; None        use a Problem defined selection of engines<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None        use a Problem defined selection of engines<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "galilean"  GalileanEngine	move forward and mirror on edges<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "chord"     ChordEngine   	select random point on random line<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "gibbs" 	GibbsEngine 	move one parameter at a time<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "step"  	StepEngine    	move all parameters in arbitrary direction<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; For Dynamic models only:<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; For Dynamic models only:<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "birth" 	BirthEngine     increase the parameter list of a walker by one<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "death" 	DeathEngine     decrease the parameter list of a walker by one<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; For Modifiable models only:<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; For Modifiable models only:<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "struct"    StructureEngine change the (internal) structure.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; Engine      an externally defined (list of) Engine<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Engine      an externally defined (list of) Engine<br>
 * maxsize  :  None or int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; maximum size of the resulting sample list (None : no limit)<br>
 * threads  :  bool (False)<br>
@@ -150,8 +146,7 @@ problem.
 
 Update the walkerlist while appending the new (phantom) walkers to the list
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * explorer  :  Explorer<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Explorer object<br>
 * worst  :  int<br>

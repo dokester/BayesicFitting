@@ -11,8 +11,7 @@ Base class with methods common to fitters handling ErrorDistributions.
 
 Author:      Do Kester.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * errdis  :  None | "gauss" | "laplace" | "cauchy" | "poisson" |<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "uniform" | "exponential"<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None : Use _ChiSq as function to be minimized<br>
@@ -23,8 +22,7 @@ Author:      Do Kester.
 * power  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; power of errdis (if applicable)<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError    Something went wrong during the convergence if the fit.
 
 
@@ -40,8 +38,7 @@ Create a new iterative fitter, providing xdatas and model.
 This is a base class. It collects stuff common to all iterative fitters.
 It does not work by itself.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -70,8 +67,7 @@ It does not work by itself.
 
 Make connection to the desired func, gradient and hessian.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data to be fitted<br>
 * weights  :  array_like or None<br>
@@ -102,8 +98,7 @@ Return the stdev of the noise.
 
 Not Implemented.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 NotImplementedError.
 the method is not implemented for MaxLikelihoodFitters
 

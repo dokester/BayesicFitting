@@ -9,7 +9,7 @@
 
 Uniform is a Kernel function which is constant between [-1,1].
 
-&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = 1.0        if |x| < 1<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = 1.0        if |x| < 1<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0        elsewhere<br>
 
 
@@ -22,7 +22,7 @@ Uniform is a Kernel function which is constant between [-1,1].
 Constructor.
 
 Using
-&nbsp;&nbsp;&nbsp;&nbsp; integral = 2.0<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; integral = 2.0<br>
     fwhm = 2.0
 
 <a name="result"></a>

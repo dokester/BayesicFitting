@@ -37,9 +37,9 @@ with a factor set by cooling=0.95, by default.
 
 Iteration continues until the relative difference between the low and high
 points within the simplex is less than reltol
-&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| / ( |yhi| + |ylo| ) < reltol<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| / ( |yhi| + |ylo| ) < reltol<br>
 and/or the absolute difference is less than abstol
-&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| < abstol.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| < abstol.<br>
 
 AnnealingAmoeba can be used with limits set to one or more of the input values.
 
@@ -47,8 +47,7 @@ The original version stems from Numerical Recipes with some additions of my own.
 
 Author       Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * func  :  callable<br>
 &nbsp;&nbsp;&nbsp;&nbsp; function to be minimized of form : y = func( x )<br>
 * lolimits  :  array_like<br>
@@ -110,8 +109,7 @@ Author       Do Kester
 
 Create a new AnnealingAmoeba class to minimize the function
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * func  :  callable<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the function to be minimized<br>
 * xini  :  array_like<br>
@@ -147,10 +145,9 @@ Create a new AnnealingAmoeba class to minimize the function
 &nbsp;&nbsp;&nbsp;&nbsp; val = callback( val )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; where val is the minimizable array<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError
-&nbsp;&nbsp;&nbsp;&nbsp; 1. When func is not callable<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 1. When func is not callable<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 2. When both tolerances are None<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 3. When callback is not callable<br>
 
@@ -163,8 +160,7 @@ ValueError
 
 Make a simplex for the given set of parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xini  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; initial (parameter) array<br>
 * step  :  float<br>
@@ -195,15 +191,13 @@ Return True if it has high limits < inf.
 
 Keep the parameters within the limits.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * oldpar  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; previous set of parameters (assumed to be within limits)<br>
 * trypar  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; new parameters, possibly out of limits<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * newpar  :  array_like<br>
     new parameters, within limits
 
@@ -215,8 +209,7 @@ Keep the parameters within the limits.
 
 Check for degeneracy: all points on same location.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * simplex  :  matrix<br>
     the simplex of amoeba
 
@@ -237,12 +230,10 @@ Calculate the function values a simplex's corners
 
 Converge the simplex.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * ndarray  :  the optimal x values.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError when too many iterations are needed.
 
 <a name="temperatureStep"></a>
@@ -253,8 +244,7 @@ ConvergenceError when too many iterations are needed.
 
 Perform simplex moves in the right direction.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  number of transforms.<br>
 
 
@@ -280,8 +270,7 @@ inflate if factor > 1
 deflate if factor < 1
 mirror  if factor < 0
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ilo  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lowest point in the simplex<br>
 * factor  :  float<br>
@@ -296,8 +285,7 @@ mirror  if factor < 0
 
 Do a trial step to improve the worst (highest) point.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ihi  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of the high point<br>
 * yhi  :   int<br>

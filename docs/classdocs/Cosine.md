@@ -9,7 +9,7 @@
 
 Cosine is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp; K( x ) = cos( 0.5 &pi; x )  if |x| < 1 else 0<br>
+<br>&nbsp; K( x ) = cos( 0.5 &pi; x )  if |x| < 1 else 0<br>
 
 
 <a name="Cosine"></a>
@@ -20,7 +20,7 @@ Cosine is a Kernel function between [-1,1]; it is 0 elsewhere.
 
 Constructor.
 
-&nbsp; Using<br>
+<br>&nbsp; Using<br>
 &nbsp;&nbsp;&nbsp;&nbsp; integral = 4 / &pi;<br>
 &nbsp;&nbsp;&nbsp;&nbsp; fwhm = 4.0 / 3.0<br>
 
@@ -33,8 +33,7 @@ Constructor.
 
 Calculate the function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array_like<br>
     at which to do the calculation
 
@@ -46,8 +45,7 @@ Calculate the function.
 
 Return the partial derivative wrt input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

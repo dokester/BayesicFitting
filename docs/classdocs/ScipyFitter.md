@@ -13,9 +13,8 @@ For documentation see scipy.org->Docs->Reference Guide->optimization and root fi
 scipy.optimize.minimize
 
 
-<b>Examples</b>
-
-# assume x and y are Double1d data arrays.
+<b>Examples</b><br>
+    # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122          # make slope
     y += 0.3 * numpy.random.randn( 100 )                # add noise
@@ -26,20 +25,18 @@ scipy.optimize.minimize
     cgfit = ConjugateGradientFitter( x, gauss )
     param = cgfit.fit( y )
     print( len( param ) )
-5
+    5
     stdev = cgfit.stdevs
     chisq = cgfit.chisq
     scale = cgfit.scale                                 # noise scale
     yfit  = cgfit.getResult( )                          # fitted values
     yband = cgfit.monteCarloEoor( )                         # 1 sigma confidence region
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. CGF is <b>not</b> guaranteed to find the global minimum.
 2. CGF does <b>not</b> work with fixed parameters or limits
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * gradient  :  callable gradient( par )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; User provided method to calculate the gradient of chisq.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; It can be used to speed up the dotproduct calculation, maybe<br>
@@ -64,13 +61,11 @@ scipy.optimize.minimize
 * vectors  :  list of ndarray (read only when debug=True)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of intermediate vectors<br>
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _Chisq  :  class<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to calculate chisq in the method Chisq.func() and Chisq.dfunc()<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * pars  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameters at the minimum of the function (chisq).<br>
 
@@ -85,8 +80,7 @@ scipy.optimize.minimize
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -99,27 +93,27 @@ Create a class, providing inputs and model.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'L-BFGS-B' when the problem has limits<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'BFGS' otherwise<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'CG'            Conjugate Gradient Method of Polak and Ribiere<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-cg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-cg`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'NELDER-MEAD'   Nelder Mead downhill simplex<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-neldermead>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-neldermead`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'POWELL'        Powell's conjugate direction method<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-powell>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-powell`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'BFGS'          Quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shannon<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-bfgs>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-bfgs`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'NEWTON-CG'     Truncated Newton method<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-newtoncg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-newtoncg`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'L-BFGS-B'      Limited Memory Algorithm for Bound Constrained Optimization<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-lbfgsb>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-lbfgsb`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'TNC'           Truncated Newton method with limits<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-tnc>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-tnc`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'COBYLA'        Constrained Optimization BY Linear Approximation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-cobyla>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-cobyla`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'SLSQP'         Sequential Least Squares<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-slsqp>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-slsqp`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'DOGLEG'        Dog-leg trust-region algorithm<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-dogleg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-dogleg`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'TRUST-NCG'     Newton conjugate gradient trust-region algorithm<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :ref:`(see here) <optimize.minimize-trustncg>`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encapsulates `scipy.optimize.minimize-trustncg`<br>
 
 * gradient  :  bool or None or callable gradient( par )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; if True use gradient calculated from model. It is the default.<br>
@@ -145,8 +139,7 @@ Create a class, providing inputs and model.
 
 Return      parameters for the model fitted to the data array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -182,9 +175,8 @@ Return      parameters for the model fitted to the data array.
 * options  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; options to be passed to the method<br>
 
-<b>Raises</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; ConvergenceError if it stops when the tolerance has not yet been reached.<br>
+<b>Raises</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ConvergenceError if it stops when the tolerance has not yet been reached.<br>
 
 
 <a name="collectVectors"></a>

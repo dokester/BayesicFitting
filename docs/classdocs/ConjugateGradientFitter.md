@@ -10,7 +10,7 @@
 Conjugate Gradient Method of Polak and Ribiere.
 
 Syntactic sugar for
-&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='CG', ... )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='CG', ... )<br>
 
 See [ScipyFitter](./ScipyFitter.md)
 
@@ -24,8 +24,7 @@ See [ScipyFitter](./ScipyFitter.md)
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>

@@ -11,18 +11,16 @@ Sine of fixed frequency with polynomials as amplitudes.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x,y:p ) = P(y) cos( 2 &pi; &omega; x ) + Q(y) sin( 2 &pi; &omega; x )<br>
 
 P(y), Q(y) are Polynomials of a certain order, n.
 
 It is a linear model in 2 dimensions, with 2n+2 papameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sine = PolySineAmpModel( 2, 150.0 )        # fixed frequency of 150 Hz
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials<br>
 * frequency  :  float<br>
@@ -30,17 +28,14 @@ It is a linear model in 2 dimensions, with 2n+2 papameters.
 * pm  :  PolynomialModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; polynomial to be multiplied with the (co)sine<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -54,8 +49,7 @@ Sine model of a fixed frequency and polynomials as coefficients.
 
 Number of parameters is 2n+2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials<br>
 * frequency  :  float<br>
@@ -65,8 +59,7 @@ Number of parameters is 2n+2.
 * fixed  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * AttributeError  :  When fixed is not None<br>
 
 
@@ -85,8 +78,7 @@ Copy method.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2,ndata]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -103,8 +95,7 @@ Returns the partials at the input value.
 
 Returns the derivative of f to (x,y) (df/dx,df/dy) at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2,ndata]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -127,8 +118,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

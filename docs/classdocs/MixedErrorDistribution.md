@@ -11,21 +11,20 @@ To calculate a mixture of two likelihoods.
 
 For one residual, x, it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = f * L1( x ) + ( 1 - f ) * L2( x )<br>
 
 where f is the contributing fraction while L, L1 and L2 are likelihoods
 f is a hyperparameter between [0..1]
 
 The likelihood over N datapoints is
 
-&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi; L( x )  = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; L = &Pi; L( x )  = &Pi;( f * L1( x ) + ( 1 - f ) * L2( x ) )<br>
 
 And the log of L is
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )<br>
 
-<b>Note</b>
-
+<b>Note</b><br>
 The mixture, i.e. the weighted sum of 2 distributions for each residual, is
 the raison-d'etre for the methods logLdata and nextPartialData, so individual
 contributions can be weighted, added, log-ged and summed.
@@ -43,8 +42,7 @@ Constructor.
 
 Make a new error distribution as a fraction of errdis1 plus the rest of errdis2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * errdis1  :  ErrorDistribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp; First error distribution<br>
 * errdis2  :  ErrorDistribution<br>
@@ -86,8 +84,7 @@ Always true for this distribution.
 
 Return the log( likelihood ) for a Mixedian distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -104,8 +101,7 @@ Return the log( likelihood ) for a Mixedian distribution.
 
 Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

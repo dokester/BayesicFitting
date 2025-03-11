@@ -11,7 +11,7 @@ To calculate a distance based cost function
 
 For one observation with n counts it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( d ) = exp( -SUM( d / s ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( d ) = exp( -SUM( d / s ) )<br>
 
 where d are the distances and s is the scale
 
@@ -29,8 +29,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  DistanceCostFunction<br>
 &nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
@@ -59,8 +58,7 @@ Always false for this distribution.
 
 Return the negative sum of the distances.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -75,8 +73,7 @@ Return the negative sum of the distances.
 
 Return the individual distances (multiplied by the weights).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -91,8 +88,7 @@ Return the individual distances (multiplied by the weights).
 
 Does not work for this class
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to calculate mock data<br>
 * param  :  array_like<br>

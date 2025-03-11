@@ -12,8 +12,7 @@ WalkerList is a list of Walker.
 It is the working ensemble of NestedSampler.
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * logZ  :  float (read-only)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Natural log of evidence<br>
 * info  :  float (read-only)<br>
@@ -36,8 +35,7 @@ Constructor.
 
 To be valid it needs either problem/allpars/fitindex or walker or walkerlist
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem or None<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to construct a walker to be added.<br>
 * ensemble  :  int<br>
@@ -64,8 +62,7 @@ To be valid it needs either problem/allpars/fitindex or walker or walkerlist
 
 replace/append a Walker to this list
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the list to take to copy from<br>
 * index  :  int<br>
@@ -79,8 +76,7 @@ replace/append a Walker to this list
 
 Copy one item of the list onto another.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * src  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the source item<br>
 * des  :  int<br>
@@ -105,11 +101,10 @@ Return the log of sum.
 <p>
 
 Return  index of the first walker with walker.logL > lowL, 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None if list is empty<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None if list is empty<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len  if no item applies <br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowL  :  float<br>
     low Likelihood
 
@@ -121,8 +116,7 @@ Return  index of the first walker with walker.logL > lowL,
 
 Insert walker to this list keeping it sorted in logL
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
     the list to take to copy from
 
@@ -136,8 +130,7 @@ Return WalkerList with all LogL > lowL
 
 Precondition: self is ordered on logL
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowL  :  float<br>
     low Likelihood
 
@@ -149,8 +142,7 @@ Precondition: self is ordered on logL
 
 Return the logL of the/all walker
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  None or Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None return value for all walkers<br>
     get the logL from
@@ -167,8 +159,7 @@ In case of dynamic models the number of parameters may vary.
 They are zero-padded. Use `getNumberOfParametersEvolution`
 to get the actual number.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int or tuple of ints<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected. Default: all<br>
 
@@ -185,8 +176,7 @@ In case of dynamic models the number of parameters may vary.
 They are zero-padded. Use `getNumberOfParametersEvolution`
 to get the actual number.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int or tuple of ints<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected. Default: all<br>
 

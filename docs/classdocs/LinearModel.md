@@ -13,27 +13,23 @@ LinearModel implements the baseResult method needed in all linear models.
 
 For Linear models it holds that
 
-&nbsp; f( x:p ) = &sum;( p<sub>i</sub> * df( x )/dp<sub>i</sub> )<br>
+<br>&nbsp; f( x:p ) = &sum;( p<sub>i</sub> * df( x )/dp<sub>i</sub> )<br>
 
 which means that only the partial derivatives to p<sub>i</sub> need to be given
 as basePartial. The baseResult follows directly from that one.
 It is implemented here.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 None of its own
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -47,8 +43,7 @@ Author       Do Kester
 
 class for all linear models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nparams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model<br>
 * ndim  :  int<br>
@@ -73,8 +68,7 @@ Returns the base result of linear models.
 for linear models the result is the inner product of parameters
 and partial derivatives.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>

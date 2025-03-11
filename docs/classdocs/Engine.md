@@ -12,8 +12,7 @@ Engine defines common properties of all Engines.
 An Engine moves around a walker in a random way such that its likelood
 remain above the low-likelihood-limit.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * walkers  :  WalkerList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -50,8 +49,7 @@ Constructor.
 
 Only one PhantomCollection should be present for all Engines.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  list of Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -86,9 +84,9 @@ it using a fitter.
 
 Parameters
 problem : Problem
-&nbsp;&nbsp;&nbsp;&nbsp; the problem at hand<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the problem at hand<br>
 myFitter : None or Fitter
-&nbsp;&nbsp;&nbsp;&nbsp; None fetches LevenbergMarquardtFitter<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None fetches LevenbergMarquardtFitter<br>
     a (non-linear) fitter
 
 <a name="setWalker"></a>
@@ -99,8 +97,7 @@ myFitter : None or Fitter
 
 Update the walker with problem, allpars, LogL and logW.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Sample<br>
 &nbsp;&nbsp;&nbsp;&nbsp; sample to be updated<br>
 
@@ -130,8 +127,7 @@ Update the walker with problem, allpars, LogL and logW.
 
 Check if walker is best in phantoms and try to optimize.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
     new walker to be checked
 
@@ -143,8 +139,7 @@ Check if walker is best in phantoms and try to optimize.
 
 Return value in [0,1] for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the problem involved<br>
 * dval  :  float<br>
@@ -161,8 +156,7 @@ Return value in [0,1] for the selected parameter.
 
 Return domain value for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the problem involved<br>
 * uval  :  array_like<br>
@@ -179,8 +173,7 @@ Return domain value for the selected parameter.
 
 Calculate the starting position and reset
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * unitStart  :  array_like<br>
     start position in npars-dimensions in unit space
 
@@ -192,8 +185,7 @@ Calculate the starting position and reset
 
 Calculate the distance travelled since reset
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * unitDistance  :  array_like<br>
     step size in npars-dimensions in unit space
 
@@ -267,8 +259,7 @@ Return percentage of success.
 
 Calculate unit minimum and maximum from the Phantoms
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; To extract the unit range for<br>
 * lowLhood  :  float<br>
@@ -282,8 +273,7 @@ Calculate unit minimum and maximum from the Phantoms
 
 Calculate unit range and minimum from PhantomCollection
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; To extract the unit range for<br>
 * lowLhood  :  float<br>
@@ -297,15 +287,13 @@ Calculate unit range and minimum from PhantomCollection
 
 Execute the engine for difusing the parameters
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  walker-id<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walker to diffuse<br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; low limit on the loglikelihood<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  number of succesfull moves<br>
 
 

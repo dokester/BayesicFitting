@@ -9,9 +9,9 @@
 
 Lorentzian Model.
 
-&nbsp; f( x:p ) = p<sub>0</sub> * ( p<sub>2</sub><sup>2</sup> / ( ( x - p<sub>1</sub> )<sup>2</sup> + p<sub>2</sub><sup>2</sup> )<br>
+<br>&nbsp; f( x:p ) = p<sub>0</sub> * ( p<sub>2</sub><sup>2</sup> / ( ( x - p<sub>1</sub> )<sup>2</sup> + p<sub>2</sub><sup>2</sup> )<br>
 
-&nbsp; where<br>
+<br>&nbsp; where<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = x-shift<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = gamma ( width )<br>
@@ -22,8 +22,7 @@ Parameter 2 ( gamma ) is always kept stricktly positive ( >0 ).
 
 This model is also known as Cauchy or Cauchy-Lorentz.
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 There are other possible definitions of this model, where the integral equals 1.0.
 * [http](./http.md) : //en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function<br>
 
@@ -40,27 +39,22 @@ parameter, only that aspect changes. In the present definition this is the case.
 In the alternative definition if you change p_2, not only the width
 of the function changes, but also the amplitude.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     lorentz = LorentzModel( )
     lorentz.setParameters( [5, 4, 1] )
     print( lorentz( numpy.arange(  41 , dtype=float ) / 5 ) )
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 LorentzModel() is equivalent to KernelModel( kernel=Lorentz() ).
 
 
@@ -75,8 +69,7 @@ Lorentzian model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  LorentzModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
@@ -101,8 +94,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -117,8 +109,7 @@ Returns the result of the model function.
 
 Returns the partials at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -135,8 +126,7 @@ Returns the partials at the xdata value.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * params  :  array_like<br>
@@ -160,8 +150,7 @@ Returns a string representation of the model.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

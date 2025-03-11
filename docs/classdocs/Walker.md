@@ -9,8 +9,7 @@
 
 Walker is member of the cloud of points used in NestedSampler.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * id  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; identification number<br>
 * parent  :  int<br>
@@ -47,8 +46,7 @@ Constructor.
 
 Either errdis or copy is obligatory.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * wid  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; id of the walker<br>
 * problem  :  Problem<br>

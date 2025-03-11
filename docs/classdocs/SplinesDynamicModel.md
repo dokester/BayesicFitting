@@ -11,8 +11,7 @@ BasicSplinesModel that is modifiable (knot locations) and dynamic (in number
 of knots)
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = SplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
@@ -28,40 +27,32 @@ of knots)
     print csm.getNumberOfParameters( )
 18
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * minKnots  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots<br>
 * maxDegree  :  int or None<br>
 &nbsp;&nbsp;&nbsp;&nbsp; maximum number of knots<br>
 
-<b>Attributes from Modifiable</b>
+<b>Attributes from Modifiable</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; modifiable<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; modifiable<br>
+<b>Attributes from Dynamic</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
 
-<b>Attributes from Dynamic</b>
+<b>Attributes from SplinesModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; knots, order<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-<b>Attributes from SplinesModel</b>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; knots, order<br>
-
-<b>Attributes from Model</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 Dont construct the knots so closely spaced, that there are no datapoints in between.
 
 
@@ -76,8 +67,7 @@ Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * modifiable  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; if True allow changement of the knot locations<br>
 * dynamic  :  bool<br>
@@ -95,12 +85,10 @@ The number of parameters is ( length( knots ) + order - 1 )
 * copy  :  PolynomialDynamicModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
-<b>Parameters for SplinesModel</b>
-
+<b>Parameters for SplinesModel</b><br>
 knots, order, nrknots, min, max, xrange
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError if not minKnots <= nrknots <= maxKnots
 
 
@@ -129,8 +117,7 @@ Returns a string representation of the model.
 
 Increase the degree by one upto maxComp ( if present ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator (obligatory)<br>
@@ -138,8 +125,7 @@ Increase the degree by one upto maxComp ( if present ).
 * force  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dont check maxKnots<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :   succes<br>
 
 
@@ -151,15 +137,13 @@ Increase the degree by one upto maxComp ( if present ).
 
 Decrease the degree by one downto minComp ( default 1 ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter (obligatory)<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :  succes<br>
 
 
@@ -177,8 +161,7 @@ Decrease the degree by one downto minComp ( default 1 ).
 Vary the structure of a Modifiable Model
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Modifiable model start<br>
 * rng  :  RNG<br>

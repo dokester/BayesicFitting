@@ -9,17 +9,16 @@
 
 Sinusoidal Model with drifting frequency.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( phi ) + p<sub>2</sub> * sin( phi )<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; phi = 2 * pi * x * ( p<sub>0</sub> + x * p<sub>3</sub> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( &phi; ) + p<sub>2</sub> * sin( &phi; )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &phi; = 2 * &pi; * x * ( p<sub>0</sub> + x * p<sub>3</sub> )<br>
 
 where p<sub>0</sub> = frequency, p<sub>3</sub> = is the drift in frequency,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and p<sub>2</sub> = amplitude sine.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and p<sub>2</sub> = amplitude sine.<br>
 As always x = input.
 
-The parameters are initialized at 1.0, 1.0, 1.0, 0.0. It is a non-linear model.
+The parameters are initialized at [1.0, 1.0, 1.0, 0.0]. It is a non-linear model.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sine = SineDriftModel( )
     print( sine.npchain )
     pars = [0.1,0,1,0.0]
@@ -30,21 +29,14 @@ The parameters are initialized at 1.0, 1.0, 1.0, 0.0. It is a non-linear model.
     print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, drifting
 
 
-<b>Attributes</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; No attributes of its own.<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from Model</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SineDriftModel"></a>
@@ -57,8 +49,7 @@ Sinusiodal model with drifting frequency.
 
 Number of parameters is 4.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  SineDriftModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  dictionary of {int:float}<br>
@@ -82,8 +73,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -98,8 +88,7 @@ Returns the result of the model function.
 
 Returns the derivative of f to x (df/dx) at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -114,8 +103,7 @@ Returns the derivative of f to x (df/dx) at the input values.
 
 Returns the partials at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -141,8 +129,7 @@ Returns a string representation of the model.
 
 Return the name of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

@@ -22,28 +22,23 @@ is actually a chain of models.
 
 Model.Brackets is an internal class inside Model.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be put inside of brackets<br>
 * deep  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; container depth (only for nice printing).<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
 Explicit use of BrackeModel
 
     m1 = GaussModel( )
@@ -62,16 +57,14 @@ Implicit use of BrackeModel, automatically invoked when m2 is a chain
     print( m3 )                             # exactly the same
 
 
-<b>Warning</b>
-
+<b>Warning</b><br>
 BracketModel is about rather advanced model building.
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. You have to complete the BracketModel, including parameter reduction,
-&nbsp;&nbsp;&nbsp; BEFORE you put it into a model chain.<br>
+<br>&nbsp;&nbsp;&nbsp; BEFORE you put it into a model chain.<br>
 2. If you change a BracketModel which is part of a model chain, unexpected result
-&nbsp;&nbsp;&nbsp; might happen.<br>
+<br>&nbsp;&nbsp;&nbsp; might happen.<br>
 
 
 
@@ -86,8 +79,7 @@ BracketModel
 When constructing a BracketModel existing attributes are lost, except
 parameters that were 'fixed' in the constituent Models. They stay fixed.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be put in the container.<br>
 * copy  :  BracketModel<br>
@@ -96,8 +88,7 @@ parameters that were 'fixed' in the constituent Models. They stay fixed.
 &nbsp;&nbsp;&nbsp;&nbsp; if fixed is not None raise AttributeError<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Use fixed on the constituent models.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * AttributeErrr  :  When fixed is not None<br>
 
 

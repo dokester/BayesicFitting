@@ -20,8 +20,7 @@ In the inhertance list is should be *before* Model as it changes the behaviour o
 
 Constructor for Modifiable
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * modifiable :  bool<br>
     True if the Model is to be considered modifiable.
 
@@ -39,8 +38,7 @@ Constructor for Modifiable
 Vary the structure of a Modifiable Model
 Default implementation: does nothing.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * location  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of the item to be modified; otherwise random<br>
 * rng  :  RNG<br>

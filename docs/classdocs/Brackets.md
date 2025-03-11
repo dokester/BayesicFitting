@@ -28,8 +28,7 @@ Brackets is only for use in Model. Use BracketModel for independent uses.
 
 Returns the result calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -44,8 +43,7 @@ Returns the result calculated at the xdatas.
 
 Returns the partial derivatives calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -62,8 +60,7 @@ Returns the partial derivatives calculated at the xdatas.
 
 Returns the derivative (df/dx) calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -108,8 +105,7 @@ return self.model.getPrior( kpar )
 
 Return the prior of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     parameter number.
 
@@ -121,8 +117,7 @@ Return the prior of the indicated parameter.
 
 Return True when the model has priors for all its parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * isBound  :  bool<br>
     Also check if the prior is bound.
 
@@ -134,8 +129,7 @@ Return True when the model has priors for all its parameters.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -148,8 +142,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

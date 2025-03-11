@@ -14,32 +14,29 @@ Jeffreys prior is a improper prior ( i.e. its integral is unbound ).
 Because of that it always needs limits, low and high, such that
 0 < low < high < +Inf.
 
-&nbsp; Pr( x ) = 1.0 / ( x * norm ) if ( low < x < high ) else 0<br>
+<br>&nbsp; Pr( x ) = 1.0 / ( x * norm ) if ( low < x < high ) else 0<br>
 
 where norm = log( high ) - log( low )
 
 No limits are set by default.
 
 domain2unit: 
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );<br>
 unit2domain: 
-&nbsp;&nbsp;&nbsp;&nbsp; d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );<br>
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = JeffreysPrior()                       # unbound prior
     pr = JeffreysPrior( limits=[0.1,1.0] )     # limited to the range [0.1,1.0]
 
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _logLo  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; log( lowLimit )<br>
 * _norm  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; log( highLimit / lowLimit )<br>
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 The default of lowLimit and _lowDomain is zero.
@@ -53,8 +50,7 @@ The default of lowLimit and _lowDomain is zero.
 
 Default constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 2 limits resp. low and high<br>
 * prior  :  JeffreysPrior<br>
@@ -82,8 +78,7 @@ Return the integral of JeffreysPrior from lowLimit to highLimit.
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Jeffreys distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -97,8 +92,7 @@ a parameter for a Jeffreys distribution.
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Jeffreys distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
@@ -111,8 +105,7 @@ between [0,1] for a Jeffreys distribution.
 
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -125,8 +118,7 @@ Return a the result of the distribution function at x.
 
 Return partial derivative of log( Prior ) wrt parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 

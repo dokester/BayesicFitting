@@ -17,8 +17,7 @@ The parameters are initialized at 1.0. It is a linear model.
 
 Author       Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * minOrder  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Can also be read as minComp<br>
@@ -26,29 +25,23 @@ Author       Do Kester
 &nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Can also be read as maxComp<br>
 
-<b>Attributes from Dynamic</b>
+<b>Attributes from Dynamic</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior<br>
+<b>Attributes from HarmonicModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; order, period<br>
 
-<b>Attributes from HarmonicModel</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; order, period<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from Model</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     harm = HarmonicDynamicModel( 3 )            # period = 1
     print harm.getNumberOfParameters( )         # 6
     harm = HarmonicModel( 4, period=2.7 )       # period = 2.7
@@ -68,8 +61,7 @@ Harmonic of a adaptable order.
 The model starts as a HarmonicModel of order = 1
 Growth of the model is governed by a prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * order  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; order to start with. It should be minOrder <= order <= maxOrder<br>
 * minOrder  :  int<br>
@@ -86,8 +78,7 @@ Growth of the model is governed by a prior.
 * copy  :  HarmonicDynamicModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError when fixed parameters are requested
 ValueError when order is outside [min..max] range
 
@@ -117,8 +108,7 @@ Copy method.
 
 Return the prior for parameter k.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     the parameter to be selected.
 

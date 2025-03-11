@@ -9,7 +9,7 @@
 
 Exponential prior distribution.
 
-&nbsp; Pr( x ) = exp( -x / scale )<br>
+<br>&nbsp; Pr( x ) = exp( -x / scale )<br>
 
 By default scale = 1.
 
@@ -19,18 +19,15 @@ In computational practice the domain is limited to about [0,36] scale units
 Wrapper for
 LaplacePrior( center=0, scale=scale, limits=[0, hilim] )
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = ExponentialPrior()                     # scale=1.0
     pr = ExponentialPrior( scale=5.0 )          # scale=5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; scale of the exponential<br>
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 Author: Do Kester.
@@ -43,8 +40,7 @@ Author: Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the exponential<br>
 * hilimit  :  float<br>

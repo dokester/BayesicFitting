@@ -10,7 +10,7 @@
 To calculate the probability of a model M from a set of models S,
 given some data D, use Bayes rule
 
-&nbsp;&nbsp;&nbsp;&nbsp; P( M|DS ) = P( M|S ) * P( D|MS ) / P( D|S )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; P( M|DS ) = P( M|S ) * P( D|MS ) / P( D|S )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; posterior = prior   * likelihood / evidence<br>
 
 This class calculates the likelihood P( D|MS ).
@@ -19,7 +19,7 @@ parameters p, we see this likelhood appear as evidence P( D|M ).
 
 Again using Bayes 
 
-&nbsp;&nbsp;&nbsp;&nbsp; P( p|DM ) = P( p|M ) * P( D|pM ) / P( D|M )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; P( p|DM ) = P( p|M ) * P( D|pM ) / P( D|M )<br>
 
 The evidence here is calculated as the integral over a Gausian
 approximation of the posterior.
@@ -36,8 +36,7 @@ Author       Do Kester.
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * arbiter  :  None or BaseFitter or str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to provide the evidence<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None    select fitter automatically<br>
@@ -85,8 +84,7 @@ Return the log( likelihood ) for a Gaussian distribution.
 
 Alternate calculation
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -101,11 +99,10 @@ Alternate calculation
 <p>
 
 Return the log( likelihood ) for each residual
-&nbsp;&nbsp;&nbsp; <br>
+<br>&nbsp;&nbsp;&nbsp; <br>
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

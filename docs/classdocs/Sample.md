@@ -12,8 +12,7 @@ provided by a Sampler
 
 Each Sample maintains 5 attributes
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * id  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; identification number<br>
 * parent  :  int<br>
@@ -50,8 +49,7 @@ Author       Do Kester
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * id  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; id of the sample<br>
 * parent  :  int<br>
@@ -76,10 +74,4 @@ Constructor.
 
 Copy.
 
-
-<a name="check"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>check(</strong> nhyp=0 ) 
-</th></tr></thead></table>
-<p>
 

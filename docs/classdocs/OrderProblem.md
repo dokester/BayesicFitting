@@ -16,8 +16,7 @@ The result of the function for certain x and p is given by
 This class is a base class. Further specializations will define the
 result method.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * parameters  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be optimized in TBD ways<br>
 * npbase  :  int<br>
@@ -36,8 +35,7 @@ result method.
 
 OrderProblem Constructor.
 <br>
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like of shape [np,ndim]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the nodes to be visited<br>
 * weights  :  array_like<br>

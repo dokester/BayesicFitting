@@ -11,14 +11,14 @@ To calculate a Poisson likelihood.
 
 For one observation with n counts it holds
 
-&nbsp; f( n,x ) = x<sup>n</sup> / ( e<sup>x</sup> * n! )<br>
+<br>&nbsp; f( n,x ) = x<sup>n</sup> / ( e<sup>x</sup> * n! )<br>
 
 where x is the expected counts
 
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum;( n * log( x ) - x - log( n! ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = &sum;( n * log( x ) - x - log( n! ) )<br>
 
 Weights are not accepted in this ErrorDistribution; they are silently ignored.
 
@@ -34,8 +34,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  PoissonErrorDistribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
@@ -66,8 +65,7 @@ Return the noise scale.
 
 *** Gaussian approximation ***
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -82,8 +80,7 @@ Return the noise scale.
 
 Return the log( likelihood ) for a Poisson distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -100,8 +97,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -118,8 +114,7 @@ logL = sum( logLdata )
 
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -135,8 +130,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

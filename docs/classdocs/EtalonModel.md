@@ -9,9 +9,9 @@
 
 Etalon Model.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> / ( 1.0 + p<sub>1</sub> * sin<sup>2</sup>( &pi; p2</sub< x + p<sub>3</sub> ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> / ( 1.0 + p<sub>1</sub> * sin<sup>2</sup>( &pi; p2</sub< x + p<sub>3</sub> ) )<br>
 
-&nbsp; where<br>
+<br>&nbsp; where<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = finesse,<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = frequency in 1/wavenumber<br>
@@ -23,26 +23,22 @@ The parameters are initialized at 1.0, 1.0, 1.0, 0.0. It is a non-linear model.
 The finesse should be positive. However, solutions where -1 < p<sub>1</sub> < 0 are equivalent
 to a solution with parameters set as
 
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> /= ( 1 + p<sub>1</sub> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> /= ( 1 + p<sub>1</sub> )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> /= -( 1 + p<sub>1</sub> )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>3</sub> += pi/2             # 90 degree phase shift<br>
 
 A finesse below -1 causes infinities.
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Examples</b>
-
+<b>Examples</b><br>
     fpm = EtalonModel( )
     print( fpm.npchain )
     4
@@ -61,8 +57,7 @@ Etalon model.
 
 Number of parameters is 4.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  EtalonModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  None or dictionary of {int:float|Model}<br>
@@ -87,8 +82,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -103,8 +97,7 @@ Returns the result of the model function.
 
 Returns the derivative of f to x (df/dx) at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -119,8 +112,7 @@ Returns the derivative of f to x (df/dx) at the input values.
 
 Returns the partials at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -146,8 +138,7 @@ Returns a string representation of the model.
 
 Return the name of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

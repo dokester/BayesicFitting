@@ -9,30 +9,30 @@
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
-p<sub>0</sub> : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-p<sub>1</sub> : amplitude    of the velocity variation (>0)
-p<sub>2</sub> : period       of the velocity variation (>0)
-p<sub>3</sub> : phase        phase of periastron (0<p<2pi)
-p<sub>4</sub> : periastron   longitude of periastron (0<p<2pi)
+| par | symbol | name         | description               | limits    | comment      |
+|-----|--------|--------------|---------------------------|-----------|--------------|
+| p<sub>0</sub> |   e    | eccentricity | of the elliptic orbit     | 0<e<1     | 0 = circular |
+| p<sub>1</sub> |   a    | amplitude    | of the velocity variation |   a>0     |  | 
+| p<sub>2</sub> |   P    | period       | of the velocity variation |   P>0     |  |
+| p<sub>3</sub> |   T    | phase        | phase since periastron    | 0<T<2&pi; |  |
+| p<sub>4</sub> | &omega;| periastron   | longitude of periastron   | 0<&omega;<2&pi; |  |
 
-This class uses [Kepplers](./Kepplers.md)2ndLaw to find radius and true anomaly.
+This class uses [Kepplers2ndLaw](./Kepplers2ndLaw.md) to find radius and true anomaly.
 
 Note
 The velocity of the star system is not included in this model. See example.
 
-The parameters are initialized at 0.0, 1.0, 1.0, 0.0, 0.0.
+The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0].
 It is a non-linear model.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * keppler  :  Kepplers2ndLaw()<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly<br>
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     rv = RadialVelocityModel( )
     print( rv.npars )
-5
+    5
     rv += PolynomialModel( 0 )          # add a constant system velocity
 
 
@@ -46,8 +46,7 @@ Radial velocity model.
 
 Number of parameters is 5
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  RadialVelocityModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 * fixed  :  dictionary of {int:float}<br>
@@ -71,8 +70,7 @@ Copy method.
 
 Return the mass of the exoplanet in Jupiter masses.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * stellarmass  :  float<br>
     mass of the host star in solar masses.
 
@@ -88,8 +86,7 @@ f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub
 
 where v is the true anomaly
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -106,14 +103,13 @@ Returns the partials at the input value.
 
 f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
 
-df/dp<sub>0</sub> = p<sub>1</sub> * ( - sin( v + p<sub>4</sub> ) dv/dp<sub>0</sub> + cos( p<sub>4</sub> ) )
-df/dp<sub>1</sub> = cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> )
-df/dp<sub>2</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>2</sub>
-df/dp<sub>3</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>3</sub>
-df/dp<sub>4</sub> = - p<sub>1</sub> * ( sin( v + p<sub>4</sub> ) + p<sub>0</sub> * sin( p<sub>4</sub> ) )
+<br>&nbsp; df/dp<sub>0</sub> = p<sub>1</sub> * ( - sin( v + p<sub>4</sub> ) dv/dp<sub>0</sub> + cos( p<sub>4</sub> ) )<br>
+&nbsp; df/dp<sub>1</sub> = cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> )<br>
+&nbsp; df/dp<sub>2</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>2</sub><br>
+&nbsp; df/dp<sub>3</sub> = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) dv/dp<sub>3</sub><br>
+&nbsp; df/dp<sub>4</sub> = - p<sub>1</sub> * ( sin( v + p<sub>4</sub> ) + p<sub>0</sub> * sin( p<sub>4</sub> ) )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -132,8 +128,7 @@ Returns the derivative of f to x (df/dx) at the input values.
 
 dfdx = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) * dvdx
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -157,8 +152,7 @@ Returns a string representation of the model.
 
 Return the unit of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

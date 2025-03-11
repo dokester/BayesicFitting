@@ -28,13 +28,11 @@ described in
 WJ Handley, MP Hobson and AN Lasenby.
 MNRAS (2015) Volume 453, Issue 4, p 4384–4398
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * debug  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; perform the step-out action too<br>
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, slow, maxtrials, nstep, rng, verbose, report, unitRange, unitMin
 
 Author       Do Kester.
@@ -48,8 +46,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  WalkerList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -74,8 +71,7 @@ Return copy of this.
 
 Execute the engine by diffusing the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse<br>
 * lowLhood  :  float<br>
@@ -85,8 +81,7 @@ Execute the engine by diffusing the parameters.
 * iteration  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 

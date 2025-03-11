@@ -26,8 +26,7 @@ Fitter. It will be a very ill-posed problem.
 Using NestedSampler its exponential prior will ensure that all
 parameters are kept positive.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * npix  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Number of pixels in result. Is also npar.<br>
 * xlo  :  float ( default 0 )<br>
@@ -41,20 +40,16 @@ parameters are kept positive.
 * center  :  float (between 0..1)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; position of the center of shape with respect to the pixels<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Examples</b>
-
+<b>Examples</b><br>
     nn = 100
     fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
     print( fsm.shape )
@@ -73,8 +68,7 @@ Free Shape model with npix pixels.
 
 The number of parameters equals the number of pixels
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * npix  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of pixels = npar<br>
 * copy  :  FreeShapeModel<br>
@@ -109,13 +103,11 @@ Copy method.
 Check for all data inside domain defined by (xlo - range, xhi + range).
 range = self.shape.range
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when outside domain.
 
 <a name="baseResult"></a>
@@ -126,8 +118,7 @@ ValueError when outside domain.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -143,8 +134,7 @@ Returns the result of the model function.
 Returns the partial derivative of the model function to
 each of the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -159,8 +149,7 @@ each of the parameters.
 
 Returns the derivative of the model function df/dx.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -180,8 +169,7 @@ Returns the derivative of the model function df/dx.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

@@ -13,7 +13,7 @@ Fixed relations can be set between similar parameters.
 The relations can be either multiplicative or additive.
 When these relations are set, they must be set for all models.
 
-&nbsp; f( x:p ) = &sum; g( x:p )<br>
+<br>&nbsp; f( x:p ) = &sum; g( x:p )<br>
 
 where g( x:p ) is a model ( e.g. GaussModel )
 
@@ -22,8 +22,7 @@ CombiModel. It is better to make a new one with the required settings.
 
 As we have copies of the same model, each model can have its own priors.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * nrepeat  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of Models in this CombiModel<br>
 * nmp  :  int<br>
@@ -45,25 +44,20 @@ As we have copies of the same model, each model can have its own priors.
 * select  :  array of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; indices of expandpar to get parameters<br>
 
-<b>Attributes from BracketModel</b>
+<b>Attributes from BracketModel</b><br>
+<br>&nbsp; model, deep<br>
 
-&nbsp; model, deep<br>
+<b>Attributes from Model</b><br>
+<br>&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp; npmax, fixed, parlist, mlist<br>
 
-&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     gauss = GaussModel( )
     combi = CombiModel( gauss, 3, addCombi={1:[0,0.1,0.3]}, mulCombi={2,[0]*3} )
     print( combi )
@@ -83,8 +77,7 @@ As we have copies of the same model, each model can have its own priors.
 
 Category     mathematics/Fitting
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. When all parameters are left free, precise initial parameters are
 needed to converge to the global optimum.
 2. The model seems to be especially unstable when the basic models
@@ -102,8 +95,7 @@ to work.
 
 CombiModel combines several copies of the same model int one.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to be repeated<br>
 * nrepeat  :  int<br>
@@ -144,8 +136,7 @@ Copy method.
 (re)sets the value of attributes "addindex", "addvalue", "mulindex", "mulvalue",
 "select" and "expandindex".
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * addCombi  :  None or dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; make additive connections between parameters<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None : no additive connection<br>
@@ -190,8 +181,7 @@ Make an expanded index enumerating the parameters for the full model
 
 Returns the result calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -206,8 +196,7 @@ Returns the result calculated at the xdatas.
 
 Returns the partial derivatives calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -224,8 +213,7 @@ Returns the partial derivatives calculated at the xdatas.
 
 Returns the derivative (df/dx) calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -247,8 +235,7 @@ Returns a string representation of the model.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -261,8 +248,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -278,8 +264,7 @@ Return the prior for parameter kpar.
 First try at the kpar location, possibly further in the chain;
 Upon failure try at the equivalent position in the head model
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     index of the parameter to be selected.
 

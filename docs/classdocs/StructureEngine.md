@@ -13,12 +13,10 @@ Only for Models that are Modifiable.
 
 The member is kept when the logLikelihood > lowLhood.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 None of its own
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, slow, maxtrials, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -32,8 +30,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  list of Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -59,8 +56,7 @@ Return copy of this.
 
 Execute the engine by changing a component.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse<br>
 * lowLhood  :  float<br>
@@ -70,8 +66,7 @@ Execute the engine by changing a component.
 * iteration  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 

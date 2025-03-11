@@ -12,8 +12,7 @@ diffusion engines.
 
 It uses Threads to parallelise the diffusion engines.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * walkers  :  WalkerList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be explored<br>
 * engines  :  [engine]<br>
@@ -44,8 +43,7 @@ Author       Do Kester.
 
 Construct Explorer from a NestedSampler object.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ns  :  NestedSampler<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the calling NestedSampler. It provides the attributes.<br>
 
@@ -58,8 +56,7 @@ Construct Explorer from a NestedSampler object.
 
 Explore the likelihood function, using threads.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  [int]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of walkers to be explored/updated<br>
 * lowLhood  :  float<br>
@@ -75,8 +72,7 @@ Explore the likelihood function, using threads.
 Move the walker around until it is randomly distributed over the prior and
 higher in logL then lowLhood
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index in walkerlist, of the walker to be explored<br>
 * lowLhood  :  float<br>
@@ -94,8 +90,7 @@ higher in logL then lowLhood
 
 Select engines with slowly changing parameters once per so many iterations.
 
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * iteration  :  int<br>
     iteration number
 
@@ -107,8 +102,7 @@ Select engines with slowly changing parameters once per so many iterations.
 
 Always use all engines.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * iteration  :  int<br>
     iteration number
 
@@ -127,13 +121,11 @@ Perform logLcheck() on all walkers.
 
 Sanity check when no moves are found, if the LogL is still the same as the stored logL.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the one with the stored logL<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError at inconsistency.
 
 

@@ -18,8 +18,7 @@ problem.result( x, p )
 The parameters, p, are to be optimized while the x provide additional
 information.
 
-<b>Attributes from Problem</b>
-
+<b>Attributes from Problem</b><br>
 model, xdata, ydata, weights
 
 * Author  :          Do Kester<br>
@@ -33,8 +32,7 @@ model, xdata, ydata, weights
 
 Constructor for classic problems.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
 * xdata  :  array_like or None<br>

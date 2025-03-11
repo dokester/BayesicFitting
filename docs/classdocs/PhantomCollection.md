@@ -22,8 +22,7 @@ self.pars[np][k,:] which has np items
 For static models there is only one array of self.logL and one 2-d array 
 od self.pars.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * phantoms  :  WalkerList or dict of { int : WalkerList }<br>
 &nbsp;&nbsp;&nbsp;&nbsp; int         number of parameters in the model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Wlakerlist  list of (phantom) walkers<br>
@@ -46,8 +45,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dynamic  :  bool<br>
     whether it is a dynamic model
 
@@ -59,8 +57,7 @@ Constructor.
 
 Return length of internal walkerlist
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * np  :  int<br>
     number of parameters (in case of dynamic only)
 
@@ -72,8 +69,7 @@ Return length of internal walkerlist
 
 Return the applicable WalkerList
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
     return list pertaining to this walker (not used here)
 
@@ -85,8 +81,7 @@ Return the applicable WalkerList
 
 Store both items as arrays.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
     to be added to the PhantomCollection
 
@@ -98,8 +93,7 @@ Store both items as arrays.
 
 Calculate the min and max values of the present parameter values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
@@ -114,8 +108,7 @@ Calculate the min and max values of the present parameter values.
 
 Obtain the min and max values of the present parameter values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
@@ -130,8 +123,7 @@ Obtain the min and max values of the present parameter values.
 
 Return length of internal walkerlist
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * np  :  int<br>
     number of parameters (in case of dynamic only)
 
@@ -143,8 +135,7 @@ Return length of internal walkerlist
 
 Return the applicable WalkerList or None if not present.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker<br>
     return list pertaining to this walker
 
@@ -156,8 +147,7 @@ Return the applicable WalkerList or None if not present.
 
 Put both items in the dictionaries with npars as key
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * logL  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; log Likelihood <br>
 * pars  :  1d array<br>
@@ -171,8 +161,7 @@ Put both items in the dictionaries with npars as key
 
 Calculate the min and max values of the present parameters of length np.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>
@@ -187,8 +176,7 @@ Calculate the min and max values of the present parameters of length np.
 
 Return the min and max values of the present parameters of length np.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood<br>
 * np  :  int<br>

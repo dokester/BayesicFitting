@@ -18,8 +18,7 @@ noiseScale.
 The full use of priors is reserved for Bayesian calculations as
 in NestedSampler
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * hypar  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value of the hyperparameter.  Default: 1.0<br>
 * stdev  :  float<br>
@@ -40,8 +39,7 @@ in NestedSampler
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * hypar  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value of the hyperparameter<br>
 * isFixed  :  bool<br>
@@ -70,8 +68,7 @@ Return a copy.
 </th></tr></thead></table>
 <p>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when no prior has been set.
 
 <a name="setLimits"></a>
@@ -82,8 +79,7 @@ ValueError when no prior has been set.
 
 Set the limits on the scale within the prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  list of 2 float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the [low,high] limits.<br>
 
@@ -111,8 +107,7 @@ Return true is the itergral over the prior is bound.
 Return a value in [0,1] given a value within the valid domain of
 a parameter for the prior distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -126,8 +121,7 @@ a parameter for the prior distribution.
 Return a value within the valid domain of the parameter given a value
 between [0,1] for the prior distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
@@ -140,8 +134,7 @@ between [0,1] for the prior distribution.
 
 Return a the derivate of the domain2Unit function to dval.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 

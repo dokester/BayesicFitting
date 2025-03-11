@@ -10,8 +10,7 @@
 Class adjoint to Model which implements some dynamic behaviour.
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * ncomp  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the number of components in the dynamic model<br>
 * deltaNpar  :  int<br>
@@ -33,8 +32,7 @@ Class adjoint to Model which implements some dynamic behaviour.
 
 Constructor for Dynamic
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dynamic :  bool<br>
     True if the Model is to be considered dynamic.
 
@@ -51,8 +49,7 @@ Constructor for Dynamic
 
 Set the growth prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * growPrior  :  None or Prior<br>
 &nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxOrder is None else UniformPrior<br>
@@ -71,15 +68,13 @@ Set the growth prior.
 
 Set attribute, if it belongs to a Dynamic Models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * name  :  str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; name of the attribute<br>
 * value  :  anything<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value of the attribute<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :  True if name was a Dynamic name<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; False if not<br>
 
@@ -92,15 +87,13 @@ Set attribute, if it belongs to a Dynamic Models.
 
 Increase the degree by one upto maxComp ( if present ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter.<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :   succes<br>
 
 
@@ -112,15 +105,13 @@ Increase the degree by one upto maxComp ( if present ).
 
 Decrease the degree by one downto minComp ( default 1 ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the params of the Dynamic model start<br>
 * rng  :  random number generator<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Not used in this implementation<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :  succes<br>
 
 
@@ -132,8 +123,7 @@ Decrease the degree by one downto minComp ( default 1 ).
 
 Renumber the parameter names.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dnp  :  int<br>
     change in the number of parameters
 
@@ -145,8 +135,7 @@ Renumber the parameter names.
 
 Change the number of parameters and self.parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dnp  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; change in the number of parameters in the DynamicModel<br>
 * offset  :  int<br>
@@ -179,8 +168,7 @@ dnp:        -1
 dnp:        -2
 ==> ERROR: not enough space in param before location
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters of the parent model (chain)<br>
 * location  :  int<br>
@@ -201,8 +189,7 @@ dnp:        -2
 
 change the fit index to comply with the changed model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * findex  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; fit index of the parent model (chain)<br>
 * location  :  int<br>
@@ -221,8 +208,7 @@ change the fit index to comply with the changed model.
 Shuffle the parameters of the components (if they are equivalent)
 Default implementation: does nothing.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array-like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of all parameters<br>
 * offset  :  int<br>

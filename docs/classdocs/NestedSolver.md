@@ -30,8 +30,7 @@ uphill. Mixing them with other engines maintain detailed balance in
 an overall sense. 
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -85,8 +84,7 @@ Author       Do Kester.
 
 Create a new class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  OrderProblem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Problem with integer parameters<br>
 * keep  :  None or dict of {int:float}<br>
@@ -98,12 +96,12 @@ Create a new class, providing inputs and model.
 * distribution  :  None or String or ErrorDistribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None   : DistanceCostFunction is chosen.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; "distance" : `DistanceCostFunction`      no hyperpar<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "distance" : `DistanceCostFunction`      no hyperpar<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; errdis : A class inheriting from ErrorDistribution<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; errdis : A class inheriting from ErrorDistribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; which implements logLikelihood<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.<br>
 * ensemble  :  int (100)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of walkers<br>
 * discard  :  int (1)<br>
@@ -115,16 +113,16 @@ Create a new class, providing inputs and model.
 * engines  :  None or (list of) string or (list of) Engine<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to randomly move the walkers around, within the likelihood bound.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; "move"    : insert a snippet of parameters at another location<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; "move"    : insert a snippet of parameters at another location<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "reverse" : reverse the order of a snippet of parameters<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "shuffle" : shuffle part of the parameter list<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "switch"  : switch two elements<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "loop"    : find two paths that cross, then uncross them<br>
 &nbsp;&nbsp;&nbsp;&nbsp; "near"    : find the nearest location and go there first. <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; None    : take default [all of above].<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None    : take default [all of above].<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; engine  : a class inheriting from Engine. At least implementing<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; engine  : a class inheriting from Engine. At least implementing<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; execute( walker, lowLhood )<br>
 * maxsize  :  None or int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; maximum size of the resulting sample list (None : no limit)<br>
@@ -149,8 +147,7 @@ Return the last sample, representing the best solution.
 
 The more sammples (with solutions) can be found in the sample list.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * keep  :  None or dict of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters<br>
@@ -168,8 +165,7 @@ The more sammples (with solutions) can be found in the sample list.
 
 Set the error distribution for calculating the likelihood.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * name  :  string<br>
 &nbsp;&nbsp;&nbsp;&nbsp; name of distribution<br>
 * scale  :  float<br>
@@ -186,8 +182,7 @@ Set the error distribution for calculating the likelihood.
 
 initialize the engines.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * engines  :  list of string<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of engine names<br>
 * enginedict  :  dictionary of { str : Engine }<br>
@@ -202,8 +197,7 @@ initialize the engines.
 
 Initialize the walkers at random values of parameters and scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ensemble  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; length od the walkers list<br>
 * allpars  :  array_like<br>

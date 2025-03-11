@@ -9,8 +9,7 @@
 
 Wrapper for Astropy Models, so they can be used in BayesicFitting.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     from astropy.modelling.models import Gaussian1D
     gm = Gaussian1D( mean=0, stddev=1, amplitude=1 )
    
@@ -24,22 +23,18 @@ Wrapper for Astropy Models, so they can be used in BayesicFitting.
        6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
        1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * astromodel  :  astropy.modeling.FittableModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; The astropy model to be wrapped<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="AstropyModel"></a>
@@ -52,8 +47,7 @@ Gaussian model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fitmodel  :  FittableModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; FittableModel from astropy.modeling  <br>
 * copy  :  GaussModel<br>
@@ -80,8 +74,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -96,8 +89,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -114,8 +106,7 @@ Returns the partials at the input value.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>

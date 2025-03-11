@@ -11,24 +11,24 @@ Two dimensional Kernel Model.
 
 The Kernel2dModel is defined as
 
-&nbsp; f( x:p ) = p<sub>0</sub> * K( r )<br>
+<br>&nbsp; f( x:p ) = p<sub>0</sub> * K( r )<br>
 
 where K( r ) is a selectable kernel function and r is the distance to the center.
 
-&nbsp; r = sqrt( u<sup>2</sup> + v<sup>2</sup> ).<br>
+<br>&nbsp; r = sqrt( u<sup>2</sup> + v<sup>2</sup> ).<br>
 
 There are 3 options for u and v
 
 1. CIRCULAR has 4 parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Circular shape with only one width.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Circular shape with only one width.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub><br>
 &nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>3</sub><br>
 2. ELLIPTIC has 5 parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Elliptic shape aligned along the axes; 2 widths.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Elliptic shape aligned along the axes; 2 widths.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>3</sub><br>
 &nbsp;&nbsp;&nbsp;&nbsp; v = ( x - p<sub>2</sub> ) / p<sub>4</sub><br>
 3. ROTATED has 6 parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp; Rotated elliptical shape with 2 width and a rotational angle.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Rotated elliptical shape with 2 width and a rotational angle.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = ( ( x - p<sub>1</sub> )*cos( p<sub>5</sub> ) - ( y - p<sub>2</sub> )*sin( p<sub>5</sub>) ) / p<sub>3</sub><br>
 &nbsp;&nbsp;&nbsp;&nbsp; v = ( ( x - p<sub>1</sub> )*sin( p<sub>5</sub> ) + ( y - p<sub>2</sub> )*cos( p<sub>5</sub>) ) / p<sub>4</sub><br>
 
@@ -45,8 +45,7 @@ Beware: These models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Example</b>
-
+<b>Example</b><br>
     model = Kernel2dModel( )                                 # default: circular Gauss
     model.setKernelShape( Lorentz(), 'Elliptic'  )             # elliptic Lorentz model.
     model = Kernel2dModel( shape=3 )                         # rotated Gauss
@@ -64,8 +63,7 @@ Kernel Model.
 
 Default model: Gauss with Circular shape.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kernel  :  Kernel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kernel to be used<br>
 * shape  :  1 | 2 | 3 | 'circular' | 'elliptic' | 'rotated'<br>
@@ -113,8 +111,7 @@ Returns a string representation of the model.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -129,8 +126,7 @@ Returns the result of the model function.
 
 Returns df/dx of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -145,8 +141,7 @@ Returns df/dx of the model function.
 
 Returns the partials at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -162,8 +157,7 @@ Returns the partials at the xdata value.
 <p>
 
 Return the unit of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

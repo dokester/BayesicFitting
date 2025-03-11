@@ -11,7 +11,7 @@ To calculate a Laplace likelihood.
 
 For one residual, x, it holds
 
-&nbsp; f( x ) = 1 / ( 2 s ) exp( - |x| / s )<br>
+<br>&nbsp; f( x ) = 1 / ( 2 s ) exp( - |x| / s )<br>
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -22,11 +22,11 @@ See: toSigma()
 The function is mostly used to calculate the likelihood L over N
 residuals, or easier using log likelihood, logL.
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N / ( 2 s ) ) - &sum;( |x| / s  )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N / ( 2 s ) ) - &sum;( |x| / s  )<br>
 
 Using weights this becomes
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) / ( 2 s ) ) - &sum;( w |x| / s  )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) / ( 2 s ) ) - &sum;( w |x| / s  )<br>
 
 Using this error distribution results in median-like solutions.
 
@@ -41,8 +41,7 @@ Author       Do Kester.
 
 Constructor of Laplace Distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
@@ -77,8 +76,7 @@ Always true for this distribution.
 <p>
 
 Return sigma, the squareroot of the variance.
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * scale  :  float<br>
     the scale of this Laplace distribution.
 
@@ -90,8 +88,7 @@ Return sigma, the squareroot of the variance.
 
 Return the noise scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -106,10 +103,9 @@ Return the noise scale
 
 Return the sum of the absolute values of the residuals.
 
-&nbsp;&nbsp;&nbsp;&nbsp; sum ( | res | )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; sum ( | res | )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -126,8 +122,7 @@ Return the sum of the absolute values of the residuals.
 
 Return the log( likelihood ) for a Gaussian distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -144,8 +139,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -164,8 +158,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -185,8 +178,7 @@ to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

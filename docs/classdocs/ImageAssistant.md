@@ -11,12 +11,11 @@ ImageAssistant contains 2 methods to assist with more dimensional
 fitting.
 
 1. getIndices Generates indices for data arrays of any dimension.
-&nbsp;&nbsp;&nbsp; To be used as input in the Fitter classes.<br>
+<br>&nbsp;&nbsp;&nbsp; To be used as input in the Fitter classes.<br>
 2. resizeData Resizes the data arrays into a 1-dimensional array.
-&nbsp;&nbsp;&nbsp; To be used as data in the Fitter.<br>
+<br>&nbsp;&nbsp;&nbsp; To be used as data in the Fitter.<br>
 
-<b>Example</b>
-
+<b>Example</b><br>
     ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
     ias = ImageAssistant()
     ky = ias.getIndices( ymap )
@@ -51,8 +50,7 @@ Author       Do Kester
 Helper class to construct from an image, the input arrays
 needed for the Fitters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * order  :  'C' or 'F'<br>
 &nbsp;&nbsp;&nbsp;&nbsp; set index view according to character<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'C' orders from slow to fast<br>
@@ -68,15 +66,13 @@ Generates indices for data arrays of any dimension.
 
 To be used as input in the Fitter classes.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ya  :  map<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of y ( data ) values for which an indexed array<br>
 * order  :  'C' or 'F'<br>
 &nbsp;&nbsp;&nbsp;&nbsp; set index view according to character<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * numpy.array of ints  :  the indices of the pixels<br>
 
 
@@ -88,8 +84,7 @@ To be used as input in the Fitter classes.
 
 Return the (x,y) positions of the pixels in the map.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ya  :  map<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of y ( data ) values for which an indexed array<br>
 * order  :  'C' or 'F'<br>
@@ -102,8 +97,7 @@ Return the (x,y) positions of the pixels in the map.
 &nbsp;&nbsp;&nbsp;&nbsp; returning (x,y,...) position given the map indices (ix,iy,...)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Default: returning the indices as floats (+0.5 if center)<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 numpy.array of floats : the positions of the pixels
 
 <a name="getydata"></a>
@@ -114,8 +108,7 @@ numpy.array of floats : the positions of the pixels
 
 Return a copy of ya as a 1 dim array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ya  :  array_like<br>
     map to be reshaped
 
@@ -127,8 +120,7 @@ Return a copy of ya as a 1 dim array.
 
 Reshape the data (res) into the same shape as the map (ya)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; result of the fit as a 1-dim array<br>
 * shape  :  tuple of int<br>

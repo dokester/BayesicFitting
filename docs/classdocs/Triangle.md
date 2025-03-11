@@ -9,7 +9,7 @@
 
 Triangle is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = ( 1 - |x| )        if |x| < 1<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = ( 1 - |x| )        if |x| < 1<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0                  elsewhere<br>
 
 
@@ -22,7 +22,7 @@ Triangle is a Kernel function between [-1,1]; it is 0 elsewhere.
 Constructor.
 
 Using
-&nbsp;&nbsp;&nbsp;&nbsp; integral = 1.0K6.0/15.0<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; integral = 1.0K6.0/15.0<br>
     fwhm = 1.0
 
 <a name="result"></a>

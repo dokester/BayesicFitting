@@ -19,8 +19,7 @@ This might be the third or fourth transcription of it.
 
 Author       Do Kester.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are Double1d data arrays
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122            # make slope
@@ -48,19 +47,16 @@ Author       Do Kester.
     lmfit.setPlotter( plotter, 20 )                   # make a plot every 20th iteration
     param = lmfit.fit( y )
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 In case of problems look at the "Troubles" page in the documentation area.
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 1. LMF is <b>not</b> guaranteed to find the global minimum.
 2. The calculation of the evidence is an Gaussian approximation which is
 only exact for linear models with a fixed scale.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; vector of numbers as input for model<br>
 * model  :  Model<br>
@@ -77,8 +73,7 @@ only exact for linear models with a fixed scale.
 
 Create a class, providing xdata and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; vector of independent input values<br>
 * model  :  Model<br>
@@ -103,8 +98,7 @@ Return Model fitted to the data arrays.
 
 It will calculate the hessian matrix and chisq.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data   :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -137,8 +131,7 @@ It will calculate the hessian matrix and chisq.
 &nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`<br>
 &nbsp;&nbsp;&nbsp;&nbsp; where val is the parameter list.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError if it stops when the tolerance has not yet been reached.
 
 

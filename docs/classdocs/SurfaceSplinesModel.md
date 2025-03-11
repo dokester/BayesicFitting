@@ -19,8 +19,7 @@ The number of parameters is
 
 The SplinesModel has more information about order and knots.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     nxk = 17
     nyk = 11
     xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160
@@ -32,8 +31,7 @@ The SplinesModel has more information about order and knots.
 
 Category     mathematics/Fitting
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * knots  :  list of array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions<br>
 * order  :  list of ints<br>
@@ -41,17 +39,14 @@ Category     mathematics/Fitting
 * models  :  list of Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; SplinesModels in all dimensions<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SurfaceSplinesModel"></a>
@@ -64,8 +59,7 @@ Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knots  :  list of array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; positions of the knots in all dimensions<br>
 * order  :  int or list of ints<br>
@@ -75,8 +69,7 @@ The number of parameters is ( length( knots ) + order - 1 )
 * fixed  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * AttributeError  :  When fixed is not None<br>
 
 
@@ -102,8 +95,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -127,8 +119,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
@@ -140,8 +131,7 @@ Return the name of a parameter.
 <p>
 
 Return the unit of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

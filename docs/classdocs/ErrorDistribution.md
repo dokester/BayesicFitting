@@ -13,8 +13,7 @@ Error distributions are used to calculate the likelihoods.
 
 Author       Do Kester.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * hyperpar  :  HyperParameter<br>
 &nbsp;&nbsp;&nbsp;&nbsp; hyperparameter for the error distribution<br>
 * deltaP  :  float<br>
@@ -44,8 +43,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fixed  :  dictionary of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.<br>
@@ -55,8 +53,7 @@ Constructor.
 * copy  :  ErrorDistribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.<br>
 
-<b>Raise</b>
-
+<b>Raise</b><br>
 ValueError when constrain is not a callable method.
 
 
@@ -77,8 +74,7 @@ Return the noise scale.
 
 *** Gaussian approximation ***
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -93,8 +89,7 @@ Return the noise scale.
 
 Return residuals: ydata - model.result
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -113,8 +108,7 @@ Return chisq
 
 Sum over the (weighted) squared residuals
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -129,8 +123,7 @@ Sum over the (weighted) squared residuals
 
 Return sigma, the squareroot of the variance.
 
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the scale of this distribution.<br>
 
@@ -162,8 +155,7 @@ Keeps (hyper)parameters fixed at the provided values.
 1. Repeated calls start from scratch.<br>
 2. Reset with keepFixed( fixed=None )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fixed  :  dictionary of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.<br>
     float   list of values for the fixed parameters.
@@ -176,8 +168,7 @@ Keeps (hyper)parameters fixed at the provided values.
 
 Set priors on the hyper parameter(s).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * priors   :  (list of) Prior<br>
     prior distribution for the hyperparameters
 
@@ -189,8 +180,7 @@ Set priors on the hyper parameter(s).
 
 Set limits on the hyper parameter(s).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  [low,high]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; low : float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; low limits<br>
@@ -205,8 +195,7 @@ Set limits on the hyper parameter(s).
 
 Return value in [0,1] for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; hyper parameter value in domain<br>
 * ks  :  int<br>
@@ -220,8 +209,7 @@ Return value in [0,1] for the selected parameter.
 
 Return domain value for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; unit value of hyper parameter<br>
 * ks  :  int<br>
@@ -235,8 +223,7 @@ Return domain value for the selected parameter.
 
 Return the constrained log( likelihood ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -250,8 +237,7 @@ Return the constrained log( likelihood ).
 
 Return the log( likelihood ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -265,8 +251,7 @@ Return the log( likelihood ).
 
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -285,8 +270,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 
 Alternative calculation.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -303,8 +287,7 @@ Alternative calculation.
 
 Return d log( likelihood ) / dp, numerically calculated.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -325,8 +308,7 @@ This method provides the opportunity to optimize the logL calculation.
 Providing this one, automatically provides the previous one.
 For now it just refers to logLikelihood() itself.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * param  :  array_like<br>
@@ -348,8 +330,7 @@ For now it just refers to logLikelihood() itself.
 
 Return name of the hyperparameter
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     index of the hyperparameter
 

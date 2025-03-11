@@ -9,7 +9,7 @@
 
 Biweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp; K( x ) = ( 1-x<sup>2</sup> )<sup>2</sup>    if |x| < 1 else 0<br>
+<br>&nbsp; K( x ) = ( 1-x<sup>2</sup> )<sup>2</sup>    if |x| < 1 else 0<br>
 
 Author:      Do Kester
 
@@ -23,7 +23,7 @@ Author:      Do Kester
 Constructor.
 
 Using
-&nbsp;&nbsp;&nbsp;&nbsp; integral = 16.0/15.0<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; integral = 16.0/15.0<br>
     fwhm = 1.0823922
 
 <a name="result"></a>
@@ -34,8 +34,7 @@ Using
 
 Return the result one input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -47,8 +46,7 @@ Return the result one input values.
 
 Return the result for squared input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     squared input values
 
@@ -60,8 +58,7 @@ Return the result for squared input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

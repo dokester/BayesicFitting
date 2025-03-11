@@ -23,8 +23,7 @@ information.
 This class is a base class. Further specializations will define the
 result method.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be optimized<br>
 * xdata  :  array_like<br>
@@ -53,8 +52,7 @@ result method.
 
 Problem Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be solved<br>
 * xdata  :  array_like or None<br>
@@ -87,8 +85,7 @@ Copy.
 
 set the value for accuracy.
 
-<b>Paramaters</b>
-
+<b>Paramaters</b><br>
 * accuracy  :  float or array of NDATA floats or None<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Either one value for all or one for each data point<br>
     When None the value is set to 0 (for easy computational reasons)
@@ -110,8 +107,7 @@ Returns the result using the parameters.
 
 In this (base)class it is a placeholder.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
@@ -124,8 +120,7 @@ In this (base)class it is a placeholder.
 
 Returns the residuals, calculated at the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * mockdata  :  array_like<br>
@@ -140,12 +135,10 @@ Returns the residuals, calculated at the xdata.
 
 No correction.
 
-<b>Returns </b>
+<b>Returns </b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the residuals, unadultered<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; the residuals, unadultered<br>
-
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; residuals<br>
 
@@ -158,8 +151,7 @@ No correction.
 
 Returns the residuals, all corrected for periodicity in residuals
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; residuals<br>
 
@@ -173,8 +165,7 @@ Returns the residuals, all corrected for periodicity in residuals
 Returns the residuals corrected for periodicity in residuals, only
 the result dimensions listed in the model.cyclic dictionary.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; residuals<br>
 
@@ -195,15 +186,13 @@ would be (p - 2 &epsilon;) while the actual distance should
 be measured the other way around as (2 &epsilon;).
 Here p = period and &epsilon; = small deviation.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; original residuals<br>
 * period  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the phase space<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 corrected residuals.
 
 <a name="weightedResSq"></a>
@@ -216,8 +205,7 @@ Returns the (weighted) squared residuals, calculated at the xdata.
 
 Optionally (extra=True) the weighted residuals themselves are returned too.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * allpars  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 * mockdata  :  array_like<br>
@@ -239,8 +227,7 @@ Optionally (extra=True) the weighted residuals themselves are returned too.
 
 Return value in [0,1] for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; domain value for the selected parameter<br>
 * kpar  :  array_like<br>
@@ -254,8 +241,7 @@ Return value in [0,1] for the selected parameter.
 
 Return domain value for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; unit value for the selected parameter<br>
 * kpar  :  array_like<br>

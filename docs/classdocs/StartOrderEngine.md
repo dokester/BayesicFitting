@@ -11,8 +11,7 @@ StartEngine generates a parameter list in random order.
 
 It is used to initialize the set of trial samples.
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -26,8 +25,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  SampleList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -53,16 +51,14 @@ Return copy of this.
 
 Execute the engine by a random selection of the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  id<br>
 &nbsp;&nbsp;&nbsp;&nbsp; id of waker to diffuse<br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 * fitIndex  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices (not active)<br>
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 

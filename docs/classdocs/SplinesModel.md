@@ -11,7 +11,7 @@ General splines model of arbitrary order and with arbitrary knot settings.
 It is a linear model.
 
 order   behaviour between knots     continuity at knots
-&nbsp;&nbsp; 0     piecewise constant          not continuous at all<br>
+<br>&nbsp;&nbsp; 0     piecewise constant          not continuous at all<br>
 &nbsp;&nbsp; 1     piecewise linear            lines are continuous (connected)<br>
 &nbsp;&nbsp; 2     parabolic pieces            1st derivatives are also continuous<br>
 &nbsp;&nbsp; 3     cubic pieces                2nd derivatives are also continuous<br>
@@ -31,8 +31,7 @@ extrapoling spline is obtained. It still works more or less. Dont push it.
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = SplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
@@ -48,28 +47,23 @@ This model is NOT for (cubic) spline interpolation.
     print csm.getNumberOfParameters( )
 18
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * knots  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
 * order  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 Dont construct the knots so closely spaced, that there are no datapoints in between.
 
 
@@ -84,8 +78,7 @@ Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knots  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
@@ -106,13 +99,11 @@ The number of parameters is ( length( knots ) + order - 1 )
 &nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.<br>
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 The SplinesModel is only strictly valid inside the domain defined by the
 minmax of knots. It deteriorates fastly going outside the domain.
 
@@ -132,8 +123,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -150,8 +140,7 @@ The partials are the powers of x (input) from 0 to degree.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -173,8 +162,7 @@ Returns a string representation of the model.
 
 Return the name of the parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     index of the parameter.
 

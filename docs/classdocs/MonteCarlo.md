@@ -15,8 +15,7 @@ The MonteCarlo class is to be used in conjunction with Model classes.
 
 Author:      Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -25,8 +24,7 @@ Author:      Do Kester
 &nbsp;&nbsp;&nbsp;&nbsp; Sets number of cycles in the MonteCarlo procedure to estimate<br>
 &nbsp;&nbsp;&nbsp;&nbsp; error bars. Default = 25<br>
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _eigenvectors  :  array_like (read only)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; from eigenvalue decomposition of covariance matrix<br>
 * _eigenvalues  :  array_like (read only)<br>
@@ -47,8 +45,7 @@ A MonteCarlo object is defined by its model and the input vector (the
 independent variable). When a fit to another model and/or another
 input vector is needed a new object should be created.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -62,8 +59,7 @@ input vector is needed a new object should be created.
 * mcycles  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of cycles in the MonteCarlo procedure to estimate error bars.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when model and input have different dimensions
 
 
@@ -86,8 +82,7 @@ set of parameters the model is calculated. This procedure is done
 by default, 25 times.
 The standard deviation of the models is returned as the error bar.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars. default provided xdata<br>
 
@@ -101,8 +96,7 @@ The standard deviation of the models is returned as the error bar.
 Return a random variant of the model result.
 Taking into account the stdev of the parameters and their covariance.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data at these indpendent points<br>
 

@@ -9,7 +9,7 @@
 
 Laplace prior distribution.
 
-&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( 2 s ) exp( - |x - c| / s )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( 2 s ) exp( - |x - c| / s )<br>
 
 By default: c = center = 0.0 and s = scale = 1.
 
@@ -20,28 +20,25 @@ In computational practice the domain is limited to about [-36,36] scale units
 Equivalent to a double-sided exponential prior
 
 domain2unit: 
-&nbsp; u = 0.5 * exp( ( d - c ) / scale )             if d < c<br>
+<br>&nbsp; u = 0.5 * exp( ( d - c ) / scale )             if d < c<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise<br>
 unit2domain: 
-&nbsp; d = c + log( 2 * u ) * scale                   if u < 0.5<br>
+<br>&nbsp; d = c + log( 2 * u ) * scale                   if u < 0.5<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale           otherwise<br>
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = LaplacePrior()                         # center=0, scale=1
     pr = LaplacePrior( center=1.0, scale=0.5 )
     pr = LaplacePrior( limits=[0,None] )        # limites to values >= 0
     pr = LaplacePrior( center=1, circular=3 )   # circular between 0.5 and 2.5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; center of the Laplace prior<br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; scale of the Laplace prior<br>
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 lowLimit and highLimit cannot be used in this implementation.
@@ -55,8 +52,7 @@ lowLimit and highLimit cannot be used in this implementation.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * scale  :  float<br>
@@ -85,11 +81,10 @@ Constructor.
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Laplace distribution.
 
-&nbsp; u = 0.5 * exp( ( d - c ) / s )       if d < c else<br>
+<br>&nbsp; u = 0.5 * exp( ( d - c ) / s )       if d < c else<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.0 - 0.5 * exp( ( c - d ) / s )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -103,11 +98,10 @@ a parameter for a Laplace distribution.
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Laplace distribution.
 
-&nbsp; d = c + log( 2 * u ) * scale           if u < 0.5 else<br>
+<br>&nbsp; d = c + log( 2 * u ) * scale           if u < 0.5 else<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
@@ -120,8 +114,7 @@ between [0,1] for a Laplace distribution.
 
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -134,8 +127,7 @@ Return a the result of the distribution function at x.
 
 Return a the log of the result of the distribution function to p.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -148,8 +140,7 @@ Return a the log of the result of the distribution function to p.
 
 Return partial derivative of log( Prior ) wrt parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 

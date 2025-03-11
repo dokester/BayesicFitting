@@ -11,12 +11,12 @@ Kernel Model, a Model build around an [Kernel](./Kernel.md).
 
 The KernelModel is defined as
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * K( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * K( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
 
 where K( u ) is a selectable kernel function on the rescaled input u
-&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>2</sub>.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( x - p<sub>1</sub> ) / p<sub>2</sub>.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> is the amplitude<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> is the amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> is the center<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> is the range.<br>
 
@@ -29,27 +29,22 @@ Beware: The "bound" models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     model = KernelModel( )
     model.kernel = Triweight()
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * kernel  :  Kernel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kernel of this model<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -62,8 +57,7 @@ Author:      Do Kester
 
 Kernel Model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  KernelModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to be copied<br>
 * kernel  :  Kernel<br>
@@ -91,8 +85,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -107,8 +100,7 @@ Returns the result of the model function.
 
 Returns the partials at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -125,8 +117,7 @@ Returns the partials at the xdata value.
 
 Returns the derivative at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -157,8 +148,7 @@ All non-zero values are between -1 and +1
 <p>
 
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

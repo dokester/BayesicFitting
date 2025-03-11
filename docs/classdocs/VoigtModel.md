@@ -20,28 +20,23 @@ Parameters 2 & 3 ( widths ) is always kept positive ( >=0 ).
 
 The implementation uses the Faddeeva function from scipy.special.wofz.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     voigt = VoigtModel( )
     voigt.setParameters( [5, 4, 1, 2] )
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
 
-<b>Attributes</b>
+<b>Attributes</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; none of its own<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; none of its own<br>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -55,8 +50,7 @@ Voigt model.
 
 Number of parameters is 4.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  VoigtModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 
@@ -79,8 +73,7 @@ Returns the result of the model function.
 Note: both width in the parameter array ( items 2 & 3 ) are kept
 strictly positive. I.e. they are changed when upon input they are negative.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -95,31 +88,30 @@ strictly positive. I.e. they are changed when upon input they are negative.
 
 Returns the partials at the input value.
 
-&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; z0 = 1j * p3 / ( p2 * sqrt2 )<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 * R( wofzz ) / R( wofz0 )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 * R( wofzz ) / R( wofz0 )<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dvdp = dvdz * dzdp<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdp = dvdz * dzdp<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 * ( R(dwdz) * R(wofz0) - R(dwd0) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 * ( R(dwdz) * R(wofz0) - R(dwd0) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
 &nbsp;&nbsp;&nbsp;&nbsp; dvdp = p0 * ( R(dwdz * dzdp) * R(wofz0) - R(dwd0 * d0dp) * R(wofzz) ) / R(wofz0)<sup>2</sup><br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z  * wofzz<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z  * wofzz<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dwd0 = 2j / sqrt(pi) - 2 * z0 * wofz0<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; ## p0 and p1 have no influence in wofz0<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ## p0 and p1 have no influence in wofz0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp0 = 0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp1 = -1 / ( p2 * sqrt2 )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; d0dp2 = - ( 1j * p3 / ( p2<sup>2</sup> * sqrt2 )              = -z0 / p2<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp2 = - ( ( x - p1 + 1j * p3 ) / ( p2<sup>2</sup> * sqrt2 ) = -z  / p2<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dzdp3 = d0dp3 = 1j / ( p2 * sqrt2 )<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dvdp0 = R(wofzz) / R(wofz0)<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdp0 = R(wofzz) / R(wofz0)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; ## The other partial follow from calculating dvdp for the parameters 1..3<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -136,19 +128,18 @@ Returns the partials at the input value.
 
 Return the derivative df/dx at each xdata (=x).
 
-&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; z0 = 1j * p3 / ( p2 * sqrt2 )<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 / wofz0 * re( wofzz )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; vgt = p0 / wofz0 * re( wofzz )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dvdx = dvdz * dzdx<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 / wofz0 * dwdz<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dvdz = p0 / wofz0 * dwdz<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dwdz = 2j / sqrt(pi) - 2 * z * wofzz<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dzdx = 1 / ( p2 * sqrt2 )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dzdx = 1 / ( p2 * sqrt2 )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -171,8 +162,7 @@ Returns a string representation of the model.
 
 Return the name of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

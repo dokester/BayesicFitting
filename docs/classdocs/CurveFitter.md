@@ -7,19 +7,17 @@
 <strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py target=_blank>Source</a></th></tr></thead></table>
 <p>
 
-CurveFitter implements scipy.optimize.curve<sub>f</sub>it.
+CurveFitter implements scipy.optimize.curve<sub>fit</sub>.
 
 Author:      Do Kester.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * method  :  {'lm', 'trf', 'dogbox'}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'lm'        LevenbergMarquardt (default for no limits)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'trf'       Trust Region Reflective (default for limits)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 'dogbox'    for small problems with limits<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError    Something went wrong during the convergence if the fit.
 
 
@@ -31,8 +29,7 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 
 Create a new class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -60,8 +57,7 @@ Create a new class, providing inputs and model.
 
 Return      parameters for the model fitted to the data array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -85,8 +81,7 @@ Return      parameters for the model fitted to the data array.
 * kwargs  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; keywords arguments to be passed to :ref:`curve_fit<scipy.optimize.curve_fit>`<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when ydata or weights contain a NaN
 
 <a name="result"></a>
@@ -97,8 +92,7 @@ ValueError when ydata or weights contain a NaN
 
 Result method to make connection to the scipy optimizers
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * fitpar  :  tuple of float<br>
@@ -112,8 +106,7 @@ Result method to make connection to the scipy optimizers
 
 Method to make connection to the scipy optimizers
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data<br>
 * fitpar  :  (tuple of) float<br>

@@ -11,8 +11,7 @@ Base class with methods common to all iterative fitters.
 
 Author:      Do Kester.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * tolerance  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; When absolute and relative steps in subsequent chisq steps are less than<br>
 &nbsp;&nbsp;&nbsp;&nbsp; tolerance, the fitter stops. Default = 0.0001<br>
@@ -39,8 +38,7 @@ Author:      Do Kester.
 &nbsp;&nbsp;&nbsp;&nbsp; Produce a plot for every plotIter-th iteration.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Default = 0 (no plotting)<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError    Something went wrong during the convergence if the fit.
 
 
@@ -55,8 +53,7 @@ Create a new iterative fitter, providing xdatas and model.
 This is a base class. It collects stuff common to all iterative fitters.
 It does not work by itself.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -74,7 +71,7 @@ It does not work by itself.
 &nbsp;&nbsp;&nbsp;&nbsp; 2 : report every 100th iteration<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 3 : report every iteration<br>
 kwargs for [BaseFitter](./BaseFitter.md)
-&nbsp;&nbsp;&nbsp;&nbsp; map, keep, fixedScale<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; map, keep, fixedScale<br>
 
 
 <a name="setParameters"></a>
@@ -86,8 +83,7 @@ kwargs for [BaseFitter](./BaseFitter.md)
 Initialize the parameters of the model
 A little superfluous: see [link](./link.md) Model#setParameters
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; initial parameters<br>
 
@@ -100,8 +96,7 @@ A little superfluous: see [link](./link.md) Model#setParameters
 
 Plot intermediate result.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the model<br>
 * force  :  bool<br>
@@ -121,8 +116,7 @@ Prolog for all iterative Fitters.
 3. Checks data/weighs for Nans
 4. Makes fitIndex.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -132,8 +126,7 @@ Prolog for all iterative Fitters.
 * keep  :  dict of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * fitIndex  :  ndarray of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Indices of the parameters that need fitting<br>
 
@@ -148,8 +141,7 @@ Return model parameters fitted to the data.
 
 It will calculate the hessian matrix and chisq.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -159,8 +151,7 @@ It will calculate the hessian matrix and chisq.
 * kwargs  : <br>
 &nbsp;&nbsp;&nbsp;&nbsp; passed to the fitter<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError if it stops when the tolerance has not yet been reached.
 
 

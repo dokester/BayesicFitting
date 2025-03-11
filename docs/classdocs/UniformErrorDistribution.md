@@ -11,7 +11,7 @@ To calculate a Uniform likelihood, eg. for digitization noise.
 
 For one residual, x, it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = 1 / ( 2 * s )    if |x| < s<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; L( x ) = 1 / ( 2 * s )    if |x| < s<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0                otherwise<br>
 
 where s is the scale.
@@ -23,14 +23,14 @@ See: toSigma()
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier using log likelihood, logL.
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = -log( 2 * s ) * N<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = -log( 2 * s ) * N<br>
 
 Note that it is required that <b>all</b> residuals are smaller than s,
 otherwise the logL becomes -inf.
 
 Using weights this becomes
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = -log( 2 * s ) * &sum; w<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = -log( 2 * s ) * &sum; w<br>
 
 
 Author       Do Kester.
@@ -44,8 +44,7 @@ Author       Do Kester.
 
 Constructor of Uniform Distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
@@ -81,8 +80,7 @@ Always true for this distribution.
 
 Return the noise scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -96,8 +94,7 @@ Return the noise scale
 <p>
 
 Return sigma, the squareroot of the variance.
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * scale  :  float<br>
     the scale of this Uniform distribution.
 
@@ -114,8 +111,7 @@ Alternate calculation.
 Outside the range the likelihood is zero, so the logL should be -inf.
 However for computational reasons the maximum negative value is returned.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -132,8 +128,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -152,8 +147,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -173,8 +167,7 @@ to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

@@ -9,8 +9,7 @@
 
 Helper class to construct a orthonormal basis from (random) vectors
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * basis  :  2darray<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of orthonormal vectors<br>
 
@@ -33,17 +32,15 @@ Constructor.
 
 Construct from vec a unit vector orthogonal to self.basis
 
-from http://www.ecs.umass.edu/ece/ece313/Online<sub>h</sub>elp/gram.pdf
+from http://www.ecs.umass.edu/ece/ece313/Online<sub>help</sub>/gram.pdf
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * vec  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; vector to be orthonomalised to self.basis<br>
 * reset  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; start a new basis.<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * uvec  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; unit vector normal to the basis<br>
 

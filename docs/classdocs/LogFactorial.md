@@ -20,25 +20,21 @@ logFactorial.  It provides the natural log of k!
 
 if k is float, it will be truncated to int
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int or array_like of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the number(s) the factorial is wanted for.<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * float  :  the ( natural ) log( k! ).<br>
 
 
-<b>Example</b>
-
+<b>Example</b><br>
     print( logFactorial( 0 ) )
     0
     print( logFactorial( [3, 5, 10] ) )
     [1.7917594692280550, 4.7874917427820458, 15.1044125730755159]
 
-<b>Author</b>
-
+<b>Author</b><br>
 Do Kester, shamelessly copied from J.Skilling
 
 

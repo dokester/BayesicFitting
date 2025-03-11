@@ -11,40 +11,34 @@ Sine with fixed frequency.
 
 Find amplitudes/phases for sinusoidal of a given frequency.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> cos( 2 &pi; &omega; x ) + p<sub>1</sub> sin( 2 &pi; &omega; x )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> cos( 2 &pi; &omega; x ) + p<sub>1</sub> sin( 2 &pi; &omega; x )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude of cosine<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude of cosine<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude of sine<br>
-&nbsp;&nbsp;&nbsp;&nbsp; &omega; is the fixed frequency of the model.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; P<sub>3</sub> = &omega; is the fixed frequency of the model.<br>
 
 It is a linear model with 2 parameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sine = SineAmpModel( 150 )        # fixed frequency of 150 Hz
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * frequency  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the (fixed) frequency of the sinusoidal.<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 This model is equivalent to
-&nbsp;&nbsp;&nbsp;&nbsp; SineModel( fixed={0:frequency} )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; SineModel( fixed={0:frequency} )<br>
 
 
 <a name="SineAmpModel"></a>
@@ -57,8 +51,7 @@ Sine model of a fixed frequency.
 
 Number of parameters is 2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * frequency  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the frequency<br>
 * copy  :  SineAmpModel<br>
@@ -85,8 +78,7 @@ Copy method.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -103,8 +95,7 @@ Returns the partials at the input value.
 
 Returns the derivative of f to x (df/dx) at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -127,8 +118,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

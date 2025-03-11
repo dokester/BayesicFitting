@@ -20,8 +20,7 @@ Author:      Do Kester
 
 Plot the data.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; x-axis values of the data<br>
 * y  :  array_like<br>
@@ -37,8 +36,7 @@ Plot the data.
 
 Plot the ( intermediate ) result.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; x-axis values of the data<br>
 * r  :  array_like<br>

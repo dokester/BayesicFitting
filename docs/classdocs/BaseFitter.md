@@ -21,20 +21,17 @@ They all derive more or less from the inverse Hessian matrix ( aka the
 covariance matrix ). All these calculations are in this Fitter class.
 Other Fitter classes relegate their calculation in these issues to this one.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
 It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 
-<b>Note Also</b>
-
+<b>Note Also</b><br>
 1. The calculation of the evidence is an Gaussian approximation which is
-&nbsp;&nbsp;&nbsp; only exact for linear models with a fixed scale.<br>
+<br>&nbsp;&nbsp;&nbsp; only exact for linear models with a fixed scale.<br>
 2. Attributes labelled as read only should not be set by a user.
 
 * Author :  Do Kester<br>
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be fitted<br>
 * xdata  :  array_like<br>
@@ -64,8 +61,7 @@ It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 &nbsp;&nbsp;&nbsp;&nbsp; the design matrix (partial of model to parameters)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; returns self.getDesign()<br>
 
-<b>Attributes (available after a call to fit())</b>
-
+<b>Attributes (available after a call to fit())</b><br>
 * yfit  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; The model result at the optimal value for the parameters.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If map is true, a map is returned.<br>
@@ -94,8 +90,7 @@ It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 &nbsp;&nbsp;&nbsp;&nbsp; the 10log of the evidence (logZ / log(10))<br>
 &nbsp;&nbsp;&nbsp;&nbsp; returns self.getEvidence()<br>
 
-<b>Attributes (available after a call to getLogZ() or getEvidence())</b>
-
+<b>Attributes (available after a call to getLogZ() or getEvidence())</b><br>
 * logOccam  :  float (read only)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Occam factor<br>
 * logLikelihood  :  float (read only)<br>
@@ -114,8 +109,7 @@ A Fitter class is defined by its model and the input vectors ( the
 independent variable ). When a fit to another model and/or another
 input vector is needed a new object should be created.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; independent input variable(s)<br>
 * model  :  Model<br>
@@ -133,10 +127,9 @@ input vector is needed a new object should be created.
 &nbsp;&nbsp;&nbsp;&nbsp; float: value of the fixed noise scale<br>
 &nbsp;&nbsp;&nbsp;&nbsp; The value of fixedScale only influences the evidence calculation<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when one of the following is true
-&nbsp;&nbsp;&nbsp;&nbsp; 1. Dimensionality of model and input does not match.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 1. Dimensionality of model and input does not match.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 2. Nans in input stream.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 3. Model is not the head of a compound model chain.<br>
 
@@ -148,10 +141,9 @@ ValueError when one of the following is true
 <p>
 
 Introduce a minimum in scale calculation and consequently in chisq.
-&nbsp;&nbsp;&nbsp;&nbsp; chi<sup>2</sup> >= sumwgt * scale<sup>2</sup><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; chi<sup>2</sup> >= sumwgt * scale<sup>2</sup><br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
     minimum scale
 
@@ -166,8 +158,7 @@ Prolog for all Fitters.
 1. Checks data/weighs/accuracy for Nans
 2. Makes fitIndex.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -177,8 +168,7 @@ Prolog for all Fitters.
 * keep  :  dict of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * fitIndex  :  ndarray of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Indices of the parameters that need fitting<br>
 * ydata  :  ndarray<br>
@@ -204,17 +194,15 @@ Produce a plot of the results.
 Keeps parameters fixed at the provided values.
 
 1. The model will act exactly as if it were a model with less
-&nbsp;&nbsp;&nbsp; parameters, although slightly less efficient.<br>
+<br>&nbsp;&nbsp;&nbsp; parameters, although slightly less efficient.<br>
 2. Repeated calls start from scratch.
 3. Reset with keepFixed( None )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * keep  :  dict of {int:float}<br>
 &nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * fitIndex  :  list of int (or None)<br>
     list of parameter indices to be kept
 
@@ -226,8 +214,7 @@ Keeps parameters fixed at the provided values.
 
 Insert fitparameters into the parameters when fitIndex is present.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fitpar  :  list of float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; (fitted) parameters<br>
 * index  :  list of int<br>
@@ -244,8 +231,7 @@ Insert fitparameters into the parameters when fitIndex is present.
 
 Return model fitted to the data.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * weights  :  None or array_like<br>
@@ -267,8 +253,7 @@ When a parameter(s) transgresses the limits, it set and fixed at that limit
 and the fit is done again, excluding the parameter(s)
 When the chisq landscape is largely monomodal (no local minima) this is OK.
 
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; data that the model needs to be fit to<br>
 * weights  :  array_like<br>
@@ -278,13 +263,11 @@ When the chisq landscape is largely monomodal (no local minima) this is OK.
 &nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * pars  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameters of the fit<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 Warning when parameters have been reset at the limits.
 
 
@@ -296,8 +279,7 @@ Warning when parameters have been reset at the limits.
 
 Return model parameters fitted to the data.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * weights  :  array_like<br>
@@ -307,8 +289,7 @@ Return model parameters fitted to the data.
 &nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 NotImplementedError. BaseFitter cannot perform fits by itself.
 
 
@@ -321,8 +302,7 @@ NotImplementedError. BaseFitter cannot perform fits by itself.
 Check there are no Nans or Infs in ydata or weights or accuracy.
 Check also for zeros or negatives in accuracy.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; data to be fitted.<br>
 * weights  :  array_like<br>
@@ -330,8 +310,7 @@ Check also for zeros or negatives in accuracy.
 * accuracy  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; accuracy of (individual) data<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError.
 
 <a name="getVector"></a>
@@ -344,8 +323,7 @@ Return the &beta;-vector.
 
 It includes "normalized" data if present. See normalize().
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted. When such is appliccable, it should be<br>
 &nbsp;&nbsp;&nbsp;&nbsp; multiplied by weights and/or appended by normdata.<br>
@@ -363,8 +341,7 @@ Calculates the hessian matrix for a given set of model parameters.
 
 It includes "normalized" data if present. See normalize()
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model parameters to be considered<br>
 * weights  :  array_like<br>
@@ -381,8 +358,7 @@ It includes "normalized" data if present. See normalize()
 
 Return the inverse of the Hessian Matrix, H.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * weights  :  array_like<br>
@@ -398,7 +374,7 @@ Return the inverse of the Hessian Matrix, H.
 <p>
 
 Returns the inverse hessian matrix over the fitted parameters,
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; multiplied by the variance.<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; multiplied by the variance.<br>
 
 Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 
@@ -410,13 +386,12 @@ Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 <p>
 
 Return the (calculated) variance of the remaining noise. I.e.
-&nbsp;&nbsp;&nbsp;&nbsp; var = chisq / dof<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; var = chisq / dof<br>
 when automatic noise scaling is requested or
-&nbsp;&nbsp;&nbsp;&nbsp; var = scale<sup>2</sup><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; var = scale<sup>2</sup><br>
 when we have a fixed scale.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
     noise scale to be used
 
@@ -431,8 +406,7 @@ essentially the same thing, This method can disambiguate these parameters.
 
 It is like adding a dummy measurement of one (or more) parameter to the data.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * normdfdp  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; for each parameter to sum to value (same length as self.parameters)<br>
 * normdata  :  float<br>
@@ -449,8 +423,7 @@ It is like adding a dummy measurement of one (or more) parameter to the data.
 Return the design matrix, D.
 The design matrix is also known as the Jacobian Matrix.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the independent input data<br>
 * params  :  array_like<br>
@@ -469,8 +442,7 @@ Calculates Chi-Squared for data and weights.
 
 It is the (weighted) sum of the squared residuals.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted.<br>
 * params  :  array_like<br>
@@ -478,8 +450,7 @@ It is the (weighted) sum of the squared residuals.
 * weights  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; weights to be used<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when chisq <= 0.
 
 
@@ -491,7 +462,7 @@ ValueError when chisq <= 0.
 
 Calculates of standard deviations pertaining to the parameters.
 
-&nbsp;&nbsp;&nbsp;&nbsp; &sigma;<sub>i</sub> = s * sqrt( C[i,i] )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; &sigma;<sub>i</sub> = s * sqrt( C[i,i] )<br>
 
 where C is the Covariance matrix, the inverse of the Hessian Matrix and
 s is the noiseScale.
@@ -519,8 +490,7 @@ The standard deviation of the models is returned as the error bar.
 The calculation of the confidence region is delegated to the class
 MonteCarlo. For tweaking of that class can be done outside BaseFitter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars.<br>
 * monteCarlo  :  MonteCarlo<br>
@@ -533,13 +503,11 @@ MonteCarlo. For tweaking of that class can be done outside BaseFitter.
 </th></tr></thead></table>
 <p>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * float  :  the noise scale<br>
 &nbsp;&nbsp;&nbsp;&nbsp; scale = sqrt( chisq / DOF )<br>
 
-<b>Raise</b>
-
+<b>Raise</b><br>
 RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
 
@@ -551,7 +519,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
 Calculation of the evidence, log10( Z ), for the model given the data.
 
-&nbsp;&nbsp;&nbsp;&nbsp; E = log10( P( Model | data ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; E = log10( P( Model | data ) )<br>
 
 The calculation of the evidence uses a Gaussion approximation of the Posterior
 probability.
@@ -559,15 +527,13 @@ It needs to know the limits of the parameters (and the noise scale if applicable
 either from the priors in the model or from keywords "limits/noiseLimits".
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  list of 2 floats/array_likes<br>
 &nbsp;&nbsp;&nbsp;&nbsp; possible range of the parameters. ( [low,high] )<br>
 * noiseLimits  :  list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; possible range on noise scale ( [low,high] )<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when no Prior is available
 
 
@@ -581,8 +547,7 @@ Return the log likelihood.
 
 It is implementing eq 19/20 last parts (Kester 2002) term by term
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * autoscale  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; whether the noise scale is optimized too<br>
 * var  :  float<br>
@@ -596,7 +561,7 @@ It is implementing eq 19/20 last parts (Kester 2002) term by term
 
 Calculation of the evidence, log( Z ), for the model given the data.
 
-&nbsp;&nbsp;&nbsp;&nbsp; logZ = log( P( Model | data ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logZ = log( P( Model | data ) )<br>
 
 The calculation of the evidence uses a Gaussion approximation of the Posterior
 probability.
@@ -604,15 +569,13 @@ It needs to know the limits of the parameters (and the noise scale if applicable
 either from the priors in the model or from keywords "limits/noiseLimits".
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  list of 2 floats/array_likes<br>
 &nbsp;&nbsp;&nbsp;&nbsp; possible range of the parameters. ( [low,high] )<br>
 * noiseLimits  :  list of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; possible range on noise scale ( [low,high] )<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when no Prior is available
 
 RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
@@ -627,8 +590,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 
 Plot the results of the fit.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; xdata of the problem<br>
 * ydata  :  array_like<br>

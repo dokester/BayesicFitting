@@ -17,11 +17,10 @@ This module contains a mixed bag of "usefull" methods.
 <p>
 
 Return the k-th item of the ilist
-&nbsp;&nbsp;&nbsp;&nbsp; or the last when not enough<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; or the last when not enough<br>
 &nbsp;&nbsp;&nbsp;&nbsp; or the ilist itself when it is not a list<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ilist  :  an item or a list of items<br>
 &nbsp;&nbsp;&nbsp;&nbsp; List to obtain an item from<br>
 * k  :  int<br>
@@ -39,19 +38,16 @@ satisfies the `condition`.
 
 If the condition is not given, it returns 0
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * iterable  :  iterable<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to find the first item in<br>
 * condition  :  lambda function<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the condition<br>
 
-<b>Raises</b>
+<b>Raises</b><br>
+<br>&nbsp; StopIteration: if no item satysfing the condition is found.<br>
 
-&nbsp; StopIteration: if no item satysfing the condition is found.<br>
-
-<b>Examples</b>
-
+<b>Examples</b><br>
     firstIndex( (1,2,3), condition=lambda x: x % 2 == 0)
     2
     firstIndex( range( 3, 100 ) )
@@ -70,10 +66,9 @@ If the condition is not given, it returns 0
 
 Return the kcol-th column from xdata
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 xdata   2D array_like or Table
-&nbsp;&nbsp;&nbsp;&nbsp; the data array<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the data array<br>
 kcol    int
     column index
 
@@ -102,8 +97,7 @@ Return kwargs as dictionary
 
 Set an attribute to an object.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * obj  :  object<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to set the attribute to<br>
 * name  :  str<br>
@@ -117,8 +111,7 @@ Set an attribute to an object.
 * isnone  :  boolean<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value could be a None<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 TypeError : if any  checks fails
 
 <a name="setNoneAttributes"></a>
@@ -131,8 +124,7 @@ Set attribute contained in dictionary dictList into the attr-list.
 A list is a native list or a numpy.ndarray. It also checks the type.
 if values is a singular item of the proper type it will be inserted as [value].
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * obj  :  object<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to place the attribute in<br>
 * name  :  str<br>
@@ -142,12 +134,10 @@ if values is a singular item of the proper type it will be inserted as [value].
 * listNone  :  list of names<br>
 &nbsp;&nbsp;&nbsp;&nbsp; that could have a None value<br>
 
-<b>Returns</b>
+<b>Returns</b><br>
+<br>&nbsp; True on succesful insertion. False otherwise.<br>
 
-&nbsp; True on succesful insertion. False otherwise.<br>
-
-<b>Raises</b>
-
+<b>Raises</b><br>
  TypeError   if the type is not as in the dictionary
 
 <a name="setListOfAttributes"></a>
@@ -160,8 +150,7 @@ Set attribute contained in dictionary dictList into the attr-list.
 A list is a native list or a numpy.ndarray. It also checks the type.
 if values is a singular item of the proper type it will be inserted as [value].
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * obj  :  object<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to place the attribute in<br>
 * name  :  str<br>
@@ -171,13 +160,11 @@ if values is a singular item of the proper type it will be inserted as [value].
 * dictList  :  dictionary<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of possible attributes {"name": type}<br>
 
-<b>Returns</b>
+<b>Returns</b><br>
+<br>&nbsp; True on succesful insertion. False otherwise.<br>
 
-&nbsp; True on succesful insertion. False otherwise.<br>
-
-<b>Raises</b>
-
-&nbsp; TypeError   if the type is not as in the dictionary<br>
+<b>Raises</b><br>
+<br>&nbsp; TypeError   if the type is not as in the dictionary<br>
 
 
 <a name="setSingleAttributes"></a>
@@ -189,8 +176,7 @@ if values is a singular item of the proper type it will be inserted as [value].
 Set a singular attribute contained in dictionary dictSingle into the attr-list.
 It also checks the type.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * obj  :  object<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to place the attribute in<br>
 * name  :  str<br>
@@ -200,12 +186,10 @@ It also checks the type.
 * dictSingle  :  dictionary<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of possible attributes {"name": type}<br>
 
-<b>Returns</b>
+<b>Returns</b><br>
+<br>&nbsp; True on succesful insertion. False otherwise.<br>
 
-&nbsp; True on succesful insertion. False otherwise.<br>
-
-<b>Raises</b>
-
+<b>Raises</b><br>
  TypeError   if the type is not as in the dictionary
 
 <a name="makeNext"></a>
@@ -233,8 +217,7 @@ Return the length of any item. Singletons have length 1; None has length 0..
 
 Return a array of x when x is a number
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  any number, list/array of numbers or []<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be converted to numpy.ndarray<br>
 * ndim  :  int<br>
@@ -250,7 +233,7 @@ Return a array of x when x is a number
 <p>
 
 Return (True,False) if item is a instance of cls
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (True,True)  if item is a (list|ndarray) of instances of cls<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (True,True)  if item is a (list|ndarray) of instances of cls<br>
        (False,False) if not
 
 <a name="isInstance"></a>
@@ -281,8 +264,7 @@ Print a ndarray, formatted.
 Transfer attributes from src to des.
 If copy is True try to copy the attributes, otherwise link it.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * src  :  object<br>
 &nbsp;&nbsp;&nbsp;&nbsp; source of the attributes<br>
 * des  :  object<br>
@@ -298,8 +280,7 @@ If copy is True try to copy the attributes, otherwise link it.
 
 Determine if sub inherits from the class cls
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * sub  :  class object<br>
 &nbsp;&nbsp;&nbsp;&nbsp; supposed sub class<br>
 * cls  :  class object<br>
@@ -342,8 +323,7 @@ Return a nice number close to (but below) |x|.
 
 Return integer array with values as in x
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array_like<br>
     array of integer floats
 
@@ -354,8 +334,7 @@ Return integer array with values as in x
 <p>
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * statement  :  str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; statement to be traced<br>
 
@@ -368,8 +347,7 @@ Return integer array with values as in x
 
 Return (weighted) average and standard deviation of input array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xx  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; input to be averaged<br>
 * weights  :  array_like<br>

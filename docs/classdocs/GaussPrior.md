@@ -9,9 +9,9 @@
 
 Gauss prior distribution. Use  normalized version
 
-&nbsp; Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )<br>
+<br>&nbsp; Pr( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 * ( ( x - c ) / s )<sup>2</sup> )<br>
 
-&nbsp; By default: <br>
+<br>&nbsp; By default: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; c = center = 0 <br>
 &nbsp;&nbsp;&nbsp;&nbsp; s = scale = 1.<br>
 
@@ -24,26 +24,23 @@ It can also have a limited domain.
 According to integral-calculator.com we have
 
 domain2unit: 
-&nbsp;&nbsp;&nbsp;&nbsp; u = 0.5 * ( erf( ( d - c ) / ( s * &radic;2 ) ) + 1 )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = 0.5 * ( erf( ( d - c ) / ( s * &radic;2 ) ) + 1 )<br>
 unit2domain: 
-&nbsp;&nbsp;&nbsp;&nbsp; d = erfinv( 2 * u - 1 ) * s * &radic;2 + c<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; d = erfinv( 2 * u - 1 ) * s * &radic;2 + c<br>
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = GaussPrior()                         # center=0, scale=1
     pr = GaussPrior( center=1.0, scale=0.5 )
     pr = GaussPrior( limits=[0,None] )        # limited to values >= 0
     pr = GaussPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; center of the Gaussian prior<br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; scale of the Gaussian prior<br>
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 
 
@@ -56,8 +53,7 @@ lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the location of the prior<br>
 * scale  :  float<br>
@@ -88,10 +84,9 @@ Copy the prior
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Gauss distribution.
 
-&nbsp; u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )<br>
+<br>&nbsp; u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value(s) within the domain of a parameter<br>
 
@@ -105,10 +100,9 @@ a parameter for a Gauss distribution.
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Gauss distribution.
 
-&nbsp; d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center<br>
+<br>&nbsp; d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value(s) within [0,1]<br>
 
@@ -121,8 +115,7 @@ between [0,1] for a Gauss distribution.
 
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -135,8 +128,7 @@ Return a the result of the distribution function at x.
 
 Return a the log of the result of the prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -149,8 +141,7 @@ Return a the log of the result of the prior.
 
 Return partial derivative of log( Prior ) wrt x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 

@@ -10,42 +10,37 @@
 Harmonic oscillator Model.
 
 For order = N and period = 1 
-&nbsp; f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> * cos( 2*&pi;*j*x ) + p<sub>k+1</sub> * sin( 2*&pi;*j*x ) )<br>
+<br>&nbsp; f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> * cos( 2*&pi;*j*x ) + p<sub>k+1</sub> * sin( 2*&pi;*j*x ) )<br>
 &nbsp; for j = 1:N; and k = 0:2N:2.<br>
 
 Otherwise scale with period 
-&nbsp; x = x / period<br>
+<br>&nbsp; x = x / period<br>
 
 The number of parameters is 2 * order.
 The parameters are initialized at 1.0. It is a linear model.
 
 Author:      Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     harm = HarmonicModel( 3 )            # period = 1
     print( harm.npbase )
     6
     harm = HarmonicModel( 4, 2.7 )        # period = 2.7
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * order  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the order of the harmonic<br>
 * period  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the length of the period of the fundamental<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="HarmonicModel"></a>
@@ -58,8 +53,7 @@ Harmonic oscillator model.
 
 Number of parameters is 2 * order.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * order  :  int (>0)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the number of overtones<br>
 * period  :  float<br>
@@ -88,8 +82,7 @@ Copy method.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; x values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -106,8 +99,7 @@ Returns the partials at the input value.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -128,8 +120,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -142,8 +133,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 Always : YUnit.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

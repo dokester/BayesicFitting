@@ -9,7 +9,7 @@
 
 Tricube is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp; K( x ) = ( 1 - |x|<sup>3</sup> )<sup>3</sup>  if |x| < 1 else 0<br>
+<br>&nbsp; K( x ) = ( 1 - |x|<sup>3</sup> )<sup>3</sup>  if |x| < 1 else 0<br>
 
 
 <a name="Tricube"></a>
@@ -21,7 +21,7 @@ Tricube is a Kernel function between [-1,1]; it is 0 elsewhere.
 Constructor.
 
 Using
-&nbsp;&nbsp;&nbsp;&nbsp; integral = 81.0/70.0<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; integral = 81.0/70.0<br>
     fwhm = 1.18176021
 
 <a name="result"></a>
@@ -32,8 +32,7 @@ Using
 
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -45,8 +44,7 @@ Return the result for input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

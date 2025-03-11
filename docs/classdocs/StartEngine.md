@@ -11,8 +11,7 @@ StartEngine generates a random trial sample.
 
 It is used to initialize the set of trial samples.
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -25,8 +24,7 @@ Author       Do Kester.
 <p>
 
 Constructor.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  StartEngine<br>
 &nbsp;&nbsp;&nbsp;&nbsp; engine to be copied<br>
 
@@ -46,15 +44,13 @@ Return copy of this.
 
 Execute the engine by a random selection of the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Sample<br>
 &nbsp;&nbsp;&nbsp;&nbsp; sample to diffuse<br>
 * lowLhood  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 

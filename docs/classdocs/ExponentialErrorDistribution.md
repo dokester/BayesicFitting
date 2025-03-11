@@ -13,32 +13,30 @@ To calculate an Exponential likelihood.
 
 For one residual, x, it holds
 
-&nbsp; f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )<sup>p</sup> )<br>
+<br>&nbsp; f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )<sup>p</sup> )<br>
 
 where s is the scale and p is the power.
 s and p are hyperparameters, which might be estimated from the data.
 
 The variance of this function is
 
-&nbsp; &sigma;<sup>2</sup> = s<sup>2</sup> &Gamma;( 3 / p ) / &Gamma;( 1 / p )<br>
+<br>&nbsp; &sigma;<sup>2</sup> = s<sup>2</sup> &Gamma;( 3 / p ) / &Gamma;( 1 / p )<br>
 
 See toSigma()
 
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log( L )
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s )<sup>p</sup> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s )<sup>p</sup> )<br>
 
 Using weights this becomes
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s )<sup>p</sup> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s )<sup>p</sup> )<br>
 
-<b>Note</b>
-
+<b>Note</b><br>
 The scale s in Exponential is NOT the same as the scale in Gaussian or in Laplace.
 
-<b>Attributes from ErrorDistibution</b>
-
+<b>Attributes from ErrorDistibution</b><br>
 hyperpar, deltaP, ncalls, nparts, sumweight, ndata, hypar, nphypar
 
 
@@ -53,8 +51,7 @@ Author       Do Kester.
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * power  :  float<br>
@@ -92,8 +89,7 @@ Always true for this distribution.
 <p>
 
 Return sigma, the squareroot of the variance.
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * hypar  :  array_like (2 floats)<br>
     the [scale,power] of this Exponential distribution.
 
@@ -105,8 +101,7 @@ Return sigma, the squareroot of the variance.
 
 Return the log( likelihood ) for a Gaussian distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -123,8 +118,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -143,8 +137,7 @@ Return chisq.
 
 return Sum over the (weighted) powered residuals
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -161,8 +154,7 @@ return Sum over the (weighted) powered residuals
 
 Return the noise scale calculated from the residuals.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -179,8 +171,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -200,8 +191,7 @@ to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

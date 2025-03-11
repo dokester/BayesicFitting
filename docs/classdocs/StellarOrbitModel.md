@@ -9,17 +9,21 @@
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
-The algorithm was taken from
+<br>&nbsp; The algorithm was taken from<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist<sub>1</sub>89-199.pdf<br>
+&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist<sub>189</sub>-199.pdf<br>
 
-p<sub>0</sub> : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-p<sub>1</sub> : a     semi major axis (>0)
-p<sub>2</sub> : P     period of the orbit (>0)
-p<sub>3</sub> : T     phase since periastron passage (0<p<sub>3</sub><2pi)
-p<sub>4</sub> : i     inclination of the orbit wrt sky (0<i<pi; 0 = pi = in sky plane)
-p<sub>5</sub> : Omega position angle from North to the line of nodes (0<Omega<pi; 0 = north )
-p<sub>6</sub> : omega longitude from the node (in p<sub>5</sub>) to the periastron (0<omega<2pi; 0 = periastron in node )
+| par |symbol | description                        | limits- | comment |
+|-----|-------|------------------------------------|---------|---------|
+| p<sub>0</sub> |   e   | eccentricity of the elliptic orbit | 0<e<1   | 0 = circular orbit |
+| p<sub>1</sub> |   a   | semi major axis                    |   a>0   |                      |
+| p<sub>2</sub> |   P   | period of the orbit                |   P>0   |                      |
+| p<sub>3</sub> |   T   | phase since periastron passage     |0<T<2&pi;|                      |
+| p<sub>4</sub> |   i   | inclination of the orbit wrt sky   |0<i<&pi; | 0 = pi = in sky plane|
+| p<sub>5</sub> |&Omega;| position angle from North          |         |                      |
+|     |       |     to the line of nodes         |0<&Omega;<&pi;| 0 = north         |
+| p<sub>6</sub> |&omega;| longitude from the node (in p<sub>5</sub>) |              |                   |
+|     |       |     to the periastron         |0<&omega;<2&pi;| 0 = periastron in node|
 
 Due to the fact that the orbit can be mirrored in the sky plane, one of p<sub>5</sub> or p<sub>6</sub>
 has to be limited to [0,pi] and the other to [0,2pi].
@@ -27,10 +31,9 @@ has to be limited to [0,pi] and the other to [0,2pi].
 The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0].
 It is a non-linear model.
 
-This class uses [Kepplers](./Kepplers.md)2ndLaw to find the radius and anomaly.
+This class uses [Kepplers2ndLaw](./Kepplers2ndLaw.md) to find the radius and anomaly.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * keppler  :  Kepplers2ndLaw()<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly<br>
 * ndout  :  int<br>
@@ -40,23 +43,19 @@ This class uses [Kepplers](./Kepplers.md)2ndLaw to find the radius and anomaly.
 * cyclic  :  { 1 : 2*pi }<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Only if spherical, indicating that result[:,1] is cyclic.<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Examples</b>
-
+<b>Examples</b><br>
     sm = StellarOrbitModel( )
     print( sm.npars )
-7
+    7
 
 
 
@@ -70,8 +69,7 @@ Radial velocity model.
 
 Number of parameters is 5
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  StellarOrbitModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 * spherical  :  bool (True)<br>
@@ -98,20 +96,13 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
-* p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)<br>
-* p_1  :  a     semi major axis (>0)<br>
-* p_2  :  P     period of the orbit (>0)<br>
-* p_3  :  p     phase since periastron passage (0<p<2pi)<br>
-* p_4  :  i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)<br>
-* p_5  :  Omega position angle of the line of nodes<br>
-* p_6  :  omega longitude of periastron from lines of nodes<br>
+The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
 
 
 <a name="toRect"></a>
@@ -122,8 +113,7 @@ Returns the result of the model function.
 
 Return (x,y) coordinates from (rho,phi)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * rp  :  array<br>
 &nbsp;&nbsp;&nbsp;&nbsp; rp[:,0] : separation of the stars<br>
     rp[:,1] : angle from north (down) CCW to east (right)
@@ -136,8 +126,7 @@ Return (x,y) coordinates from (rho,phi)
 
 Return (rho,phi) coordinates from (x,y)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array<br>
 &nbsp;&nbsp;&nbsp;&nbsp; xy[:,0] : x position<br>
     xy[:,1] : y position
@@ -150,20 +139,13 @@ Return (rho,phi) coordinates from (x,y)
 
 Returns the derivative (df/dx) of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
-* p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)<br>
-* p_1  :  a     semi major axis (>0)<br>
-* p_2  :  P     period of the orbit (>0)<br>
-* p_3  :  p     phase since periastron passage (0<p<2pi)<br>
-* p_4  :  i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)<br>
-* p_5  :  O(mega) position angle of the line of nodes (0<Omega<pi)<br>
-* p_6  :  o(mega) longitude of periastron (0<omega<2pi)<br>
+The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
 
 
 <a name="basePartial"></a>
@@ -176,8 +158,7 @@ Returns the partials at the xdata value.
 <br>
 The partials are x ( xdata ) to degree-th power.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -211,8 +192,7 @@ Returns a string representation of the model.
 
 Return the unit of a parameter. (TBC)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

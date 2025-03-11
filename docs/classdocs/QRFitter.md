@@ -13,25 +13,24 @@ in its parameters.
 
 For Linear models the matrix equation
 
-&nbsp;&nbsp;&nbsp;&nbsp; H * p = &beta;<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; H * p = &beta;<br>
 
-is solved for p. H is the Hessian matrix ( D * w * DT )
+is solved for p. H is the Hessian matrix ( D * w * D<sup>T</sup> )
 and &beta; is the inproduct of the data with the D, design matrix.
 
-&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * DT<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D<sup>T</sup><br>
 
 The QRFitter class use QR decomposition which effectively is an inversion
 of the hessian matrix such that
 
-&nbsp;&nbsp;&nbsp;&nbsp; p = &beta; * inverse( H )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p = &beta; * inverse( H )<br>
 
 It can be more efficient if
 similar ydata needs to be fitter to the same model and xdata.
 In that case it uses the same decomposition for all fits.
 
-<b>Examples</b>
-
-* # assume x and y are numpy.asarray data arrays : <br>
+<b>Examples</b><br>
+    # assume x and y are numpy.asarray data arrays
     x = numpy.asarray.range( 100 )
     poly = PolynomialModel( 1 )                             # line
     fitter = QRFitter( x, poly )
@@ -44,8 +43,7 @@ In that case it uses the same decomposition for all fits.
 
 * Category :     Mathematics/Fitting<br>
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * needsNewDecomposition  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; True when starting. Thereafter False,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.e. the previous QR-decomposition is used, unless weights are used.<br>
@@ -72,8 +70,7 @@ A Fitter class is defined by its model and the input vector (the
 independent variable). When a fit to another model and/or another
 input vector is needed a new object should be created.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>
@@ -96,8 +93,7 @@ input vector is needed a new object should be created.
 
 Return model parameters fitted to the data, including weights.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted<br>
 * weights  :  array_like<br>
@@ -108,8 +104,7 @@ Return model parameters fitted to the data, including weights.
 &nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.<br>
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when ydata or weights contain a NaN
 
 

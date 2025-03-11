@@ -16,7 +16,7 @@ where x = residual and s = scale
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
-&nbsp; logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x<sup>2</sup> + s<sup>2</sup> ) )<br>
+<br>&nbsp; logL = N ( log( s ) - log( &pi; ) ) - &sum;( log( x<sup>2</sup> + s<sup>2</sup> ) )<br>
 
 Weights are not possible in this error distribution. They are silently ignored.
 
@@ -33,8 +33,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
@@ -70,8 +69,7 @@ False for this distribution.
 
 Return the noise scale as calculated from the residuals.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -100,8 +98,7 @@ where x = residual and s = scale
 
 Alternate calculation
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -118,8 +115,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -141,8 +137,7 @@ Alternate calculation
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -162,8 +157,7 @@ in fitIndex.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

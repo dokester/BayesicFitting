@@ -13,18 +13,17 @@ The parameters give the order in which the nodes are visited.
 
 The result is a list of distances.
 
-&nbsp;&nbsp;&nbsp;&nbsp; [dist( x[p[k-1]], x[p[k]] ) for k in range( len( p ) )]<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; [dist( x[p[k-1]], x[p[k]] ) for k in range( len( p ) )]<br>
 
 The number of parameters is equal to the length of the xdata array
 The parameters are initialized at [k for k in range( npars )]
 
-<b>Examples</b>
-
-     tsm = SalesmanProblem( 100 )
+<b>Examples</b><br>
+    tsm = SalesmanProblem( 100 )
     print( tsm )
-TravelingSalesman in 2 dimensions with 100 nodes.
+    TravelingSalesman in 2 dimensions with 100 nodes.
     print( tsm.npars )
-100
+    100
 
 
 
@@ -38,8 +37,7 @@ TravelingSalesman in 2 dimensions with 100 nodes.
 Traveling Salesman problem.
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like of shape [np,ndim]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the nodes to be visited<br>
 * weights  :  array_like<br>
@@ -89,15 +87,14 @@ given by the parameters (params), multiplied by the weight at the
 starting node (if present), divided by the scale
 
 Each result is 
-&nbsp;&nbsp;&nbsp;&nbsp; res[k] = dis[k] * weight[params[k]] / scale<br>
 
-<b>Parameters</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; res[k] = dis[k] * weight[params[k]] / scale<br>
 
+<b>Parameters</b><br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 An array of distances
 
 
@@ -110,10 +107,10 @@ An array of distances
 Use Manhattan distances (1-norm)
 
 Each distance is 
-&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = SUM<sub>i</sub> ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )<br>
 
-<b>Parameters</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = SUM<sub>i</sub> ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )<br>
 
+<b>Parameters</b><br>
 * xdata  :  array-like of shape (ndata,ndim) <br>
 &nbsp;&nbsp;&nbsp;&nbsp; positional info in several dimensions<br>
 * pars  :  list of indices<br>
@@ -130,10 +127,10 @@ Each distance is
 Use Euclidic distances (2-norm)
 
 Each distance is 
-&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = sqrt( SUM<sub>i</sub> ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )<sup>2</sup> ) )<br>
 
-<b>Parameters</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = sqrt( SUM<sub>i</sub> ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )<sup>2</sup> ) )<br>
 
+<b>Parameters</b><br>
 * xdata  :  array-like of shape (ndata,ndim) <br>
 &nbsp;&nbsp;&nbsp;&nbsp; positional info in several dimensions<br>
 * pars  :  list of indices<br>
@@ -155,8 +152,7 @@ It is assumed that the xdata is in decimal degrees: [longitude, latitude]
 
 The results are in radian.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array-like of shape (ndata,2) <br>
 &nbsp;&nbsp;&nbsp;&nbsp; longitude, latitude info<br>
 * pars  :  list of indices<br>
@@ -173,10 +169,10 @@ The results are in radian.
 Use tabulated distances from self.table
 
 Each distance is 
-&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = table[ pars[k], pars[k+roll] ]<br>
 
-<b>Parameters</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dis[k] = table[ pars[k], pars[k+roll] ]<br>
 
+<b>Parameters</b><br>
 * xdata  :  array-like of shape (ndata,ndim) <br>
 &nbsp;&nbsp;&nbsp;&nbsp; positional info in several dimensions<br>
 * pars  :  list of indices<br>
@@ -198,7 +194,7 @@ ndata = len( self.xdata[:,0] )
 pars = numpy.arange( ndata, dtype=int )
 md = self.distance( self.xdata, pars ).min()
 for roll in range( 2, ndata ) 
-&nbsp;&nbsp;&nbsp;&nbsp; md = self.distance( self.xdata, pars, roll=roll ).min( initial=md )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; md = self.distance( self.xdata, pars, roll=roll ).min( initial=md )<br>
 
 return md
 
@@ -211,7 +207,7 @@ baseName( self )
 
 
 return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( self.ndim, self.npars, self.disname ) )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( self.ndim, self.npars, self.disname ) )<br>
 
 
 

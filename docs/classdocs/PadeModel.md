@@ -9,7 +9,7 @@
 
 General Pade model of arbitrary degrees in numerator and denominator.
 
-&nbsp; f( x:p ) = &sum; p<sub>n</sub> * x<sup>n</sup> / ( &sum; p<sub>num+1+k</sub> * x<sup>k</sup> )<br>
+<br>&nbsp; f( x:p ) = &sum; p<sub>n</sub> * x<sup>n</sup> / ( &sum; p<sub>num+1+k</sub> * x<sup>k</sup> )<br>
 
 where the sum in the numerator is over n running from 0 to num ( inclusive )
 and the sum in the denominator is over k running from 0 to den ( inclusive )
@@ -25,34 +25,28 @@ Beware of the poles where the denominator equals zero.
 
 Author:      Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pade = PadeModel( 3, 1 )                # 3rd degree polynomial
     print pade.getNumberOfParameters( )     # 5
     5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * num  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the numerator<br>
 * den  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the denominator<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 PadeModel( 2, 3 ) is equivalent to
 * PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0 : 1.0} )<br>
 
@@ -67,8 +61,7 @@ Pade of a certain degree in numerator and denominator.
 
 The number of parameters is ( num + den + 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * num  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the numerator.<br>
 * den  :  int<br>
@@ -99,8 +92,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -115,8 +107,7 @@ Returns the result of the model function.
 
 Returns the partials at the xdata values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -133,8 +124,7 @@ Returns the partials at the xdata values.
 
 Returns the partials at the xdata values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -157,8 +147,7 @@ Returns a string representation of the model.
 <p>
 
 Return the unit of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

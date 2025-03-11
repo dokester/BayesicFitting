@@ -18,8 +18,7 @@ in here.
 Unfortunately the methods derivative (df/dx) is model dependent.
 It is reset to numDerivative.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     m1 = PolynomialModel( 1 )
     m1 += SineModel()
     print( m1.npchain )         # number of params: 2 + 3
@@ -30,8 +29,7 @@ It is reset to numDerivative.
     7 9 7
     print( em )
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * npmax  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; maximum number of parameters of the simple (not-fixed) model<br>
 * fixed  :  dictionary of {int:float|Model}<br>
@@ -44,9 +42,8 @@ It is reset to numDerivative.
 * mlist  :  list of Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of parameter indices which are replaced by a Model in fixed.<br>
 
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -60,8 +57,7 @@ Author       Do Kester
 
 FixedModel Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nparams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Number of parameters in the model (default: 0)<br>
 * ndim  :  int<br>
@@ -94,8 +90,7 @@ Return a copy.
 
 Select the relevant parameters and store them.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * params  :  array of float<br>
     parameters of the head model
 
@@ -107,8 +102,7 @@ Select the relevant parameters and store them.
 
 Select the relevant parameter names and store them.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * names  :  list of string<br>
     parameter names of the head model
 
@@ -120,8 +114,7 @@ Select the relevant parameter names and store them.
 
 Returns the result calculated at the xdatas.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -146,8 +139,7 @@ the fixed function.
 
 Returns the partial derivatives calculated at the inputs.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -162,8 +154,7 @@ Returns the partial derivatives calculated at the inputs.
 
 Returns numerical partial derivatives of the model to params.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -180,8 +171,7 @@ Returns numerical partial derivatives of the model to params.
 
 Replacement for models that dont define a partial.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * param  :  array_like<br>
@@ -204,8 +194,7 @@ in the model.
 If `fixed` contains a Model, the derivative cannot be constructed
 from the constituent models. Use `numDerivative` instead.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * param  :  array_like<br>
@@ -220,15 +209,13 @@ from the constituent models. Use `numDerivative` instead.
 
 Returns the numeric derivative of the model to input
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the derivative<br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters. (default: self.parameters)<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when the number of xdata dimensions > 1.
 
 

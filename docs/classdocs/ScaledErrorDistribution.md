@@ -9,11 +9,11 @@
 
 Base class that defines methods common to error distributions with a scale.
 
-GaussErrorDistribution
-LaplaceErrorDistribution
-CauchyErrorDistribution
-ExponentialErrorDistribution
-UniformErrorDistribution
+<br>&nbsp; GaussErrorDistribution<br>
+&nbsp; LaplaceErrorDistribution<br>
+&nbsp; CauchyErrorDistribution<br>
+&nbsp; ExponentialErrorDistribution<br>
+&nbsp; UniformErrorDistribution<br>
 
 Author       Do Kester.
 
@@ -26,8 +26,7 @@ Author       Do Kester.
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
@@ -58,13 +57,13 @@ Return copy of this.
 
 Set limits for scale.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  [low,high]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; low : float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; low limits<br>
 &nbsp;&nbsp;&nbsp;&nbsp; high : float or array_like<br>
-        high limits
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; high limits<br>
+
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>

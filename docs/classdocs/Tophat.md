@@ -10,8 +10,7 @@
 Tophat (without convolutions) is a Kernel function which is 1.0 
 between [-0.5,0.5]; it is 0 elsewhere.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * nconv  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; successive autoconvolutions of the tophat. max=6.<br>
 
@@ -39,8 +38,7 @@ Constructor.
 Integral, fwhm and range are dependent on the number of convolutions.
 See table above.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nconv  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of auto-convolutions<br>
 
@@ -53,8 +51,7 @@ See table above.
 
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -66,8 +63,7 @@ Return the result for input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

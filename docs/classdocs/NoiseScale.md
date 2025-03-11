@@ -19,8 +19,7 @@ By default this prior is a JeffreysPrior..
 The full use of priors is reserved for Bayesian calculations as
 in NestedSampler
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value of the noiseScale.  Default: 1.0<br>
 * stdev  :  float<br>
@@ -43,8 +42,7 @@ in NestedSampler
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; float   value of the noise scale<br>
 * isFixed  :  bool<br>
@@ -78,8 +76,7 @@ Return a copy.
 
 Fit the noise scale with a minimum value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value of the noise scale. Default: noiseScale.scale<br>
 

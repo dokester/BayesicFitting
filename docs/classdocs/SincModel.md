@@ -10,45 +10,38 @@
 Sinc Model.
 Also known as Cardinal Sine.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( ( x - p<sub>1</sub> ) / p<sub>2</sub> ) / ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( ( x - p<sub>1</sub> ) / p<sub>2</sub> ) / ( ( x - p<sub>1</sub> ) / p<sub>2</sub> )<br>
 
-where
+<br>&nbsp; where<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = offset<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = width ( =Distance between first zero-crossings divided by 2 Pi. )<br>
 As always x = input.
 
-The parameters are initialized at 1.0, 0.0, 1.0.
+The parameters are initialized at [1.0, 0.0, 1.0].
+
 Parameter 2 ( width ) is always kept positive ( >=0 ).
 
-SincModel() is syntactic sugar for
+<br>&nbsp; SincModel() is syntactic sugar for<br>
 &nbsp;&nbsp;&nbsp;&nbsp; KernelModel( kernel=Sinc() )<br>
 See [KernelModel](./KernelModel.md)
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sinc = SincModel( )
     print sinc.npchain
-3
+    3
     print( sinc( numpy.arange( 15, dtype=float )-7 ) )        # sinc function between [-7,+7]
-[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+    [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
 
 
-<b>Attributes</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-none of its own
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from Model</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SincModel"></a>
@@ -61,8 +54,7 @@ Sinc model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  ArctanModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be copied<br>
 * fixed  :  dictionary of {int:float}<br>

@@ -11,7 +11,7 @@ To calculate a Bernoulli likelihood for categorical True/False data.
 
 For one residual, x, it holds
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = x          if d is True<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x ) = x          if d is True<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 - x      if d is False<br>
 
 where x needs to be between [0,1]; use the logistic function f(x) = 1/(1+exp(-x)
@@ -20,7 +20,7 @@ if necessary. And d is true if the residual belongs to the intended category.
 The function is mostly used to calculate the likelihood L, or easier
 to use log likelihood, logL.
 
-&nbsp;&nbsp;&nbsp;&nbsp; logL = log( x ) if d else log( 1 - x )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logL = log( x ) if d else log( 1 - x )<br>
 
 Author       Do Kester.
 
@@ -33,8 +33,7 @@ Author       Do Kester.
 
 Constructor of Bernoulli Distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  BernoulliErrorDistribution<br>
     distribution to be copied.
 
@@ -62,8 +61,7 @@ Always true for this distribution.
 
 Return the noise scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -77,8 +75,7 @@ Return the noise scale
 <p>
 
 Return sigma, the squareroot of the variance.
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * scale  :  float<br>
     the scale of this Bernoulli distribution.
 
@@ -95,8 +92,7 @@ Alternate calculation.
 Outside the range the likelihood is zero, so the logL should be -inf.
 However for computational reasons the maximum negative value is returned.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -113,8 +109,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -131,8 +126,7 @@ logL = sum( logLdata )
 
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -150,8 +144,7 @@ Return the partial derivative of log( likelihood ) to the parameters.
 Return the partial derivative of elements of the log( likelihood )
 to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

@@ -14,8 +14,7 @@ The birth rate is governed by the growth-prior in the Dynamic.
 
 The member is kept when the logLikelihood > lowLhood.
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -29,8 +28,7 @@ Author       Do Kester.
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  list of Walker<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -56,8 +54,7 @@ Return copy of this.
 
 Execute the engine by adding a component and diffusing the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse<br>
 * lowLhood  :  float<br>
@@ -67,8 +64,7 @@ Execute the engine by adding a component and diffusing the parameters.
 * iteration  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 

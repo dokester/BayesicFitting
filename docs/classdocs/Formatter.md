@@ -18,8 +18,7 @@ This module contains methods to format numbers, especially in arrays.
 
 Initialize the formatter with new default values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * format  :  dict {namestring : formatstring }<br>
 &nbsp;&nbsp;&nbsp;&nbsp; name : "float64" or "int64"<br>
 &nbsp;&nbsp;&nbsp;&nbsp; fmt  : " %fmt"<br>
@@ -53,8 +52,7 @@ Format a number or an array nicely into a string
 
 Parameters override defaults given earlier with init().
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * array  :  array_like or number<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number or list of numbers or n-dim array of numbers<br>
 * format  :  None or string<br>
@@ -75,8 +73,7 @@ Parameters override defaults given earlier with init().
 &nbsp;&nbsp;&nbsp;&nbsp; Only if the number of items is larger than max.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Default is 0<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * string  :  containing the formatted array<br>
 
 

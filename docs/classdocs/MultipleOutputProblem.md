@@ -19,8 +19,7 @@ problem.result( p )
 The parameters, p, are to be optimized while the x provide additional
 information.
 
-<b>Attributes from Problem</b>
-
+<b>Attributes from Problem</b><br>
 model, xdata, ydata, weights, partype
 
 * Author  :          Do Kester<br>
@@ -35,8 +34,7 @@ model, xdata, ydata, weights, partype
 
 Problem Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the model to be solved. One with multiple outputs: model.ndout > 1<br>
 * xdata  :  array_like<br>
@@ -78,8 +76,7 @@ Expand and flatten the arrays.
 
 Returns the result calculated at the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
@@ -92,8 +89,7 @@ Returns the result calculated at the xdata.
 
 Returns the partials (df/dp) calculated at the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.<br>
 
@@ -106,8 +102,7 @@ Returns the partials (df/dp) calculated at the xdata.
 
 Return the derivative of the internal model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like<br>
     list of model parameters
 

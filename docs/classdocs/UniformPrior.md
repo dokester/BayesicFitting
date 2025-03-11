@@ -13,26 +13,23 @@ A uniform prior is a improper prior ( i.e. its integral is unbound ).
 Because of that it always needs limits, low and high, such that
 -Inf < low < high < +Inf.
 
-&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( high - low )    if low < x < high<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( high - low )    if low < x < high<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0                     elsewhere<br>
 
 domain2Unit: u = ( d - lo ) / range
 unit2Domain: d = u * range + lo
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = UniformPrior()                                 # unbound prior
     pr = UniformPrior( limits=[0,10] )                  # limited to the range [0,10]
     pr = UniformPrior( circular=math.pi )               # circular between 0 and pi
     pr = UniformPrior( limits=[2,4], circular=True )    # circular between 2 and 4
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * _range  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; highlimit - lowlimit<br>
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 
@@ -45,8 +42,7 @@ lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  None or [float,float]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set<br>
 &nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit<br>
@@ -81,8 +77,7 @@ Return the dval as uval
 
 In Prior.limitedDomain2Unit the dval is transformed into a uval
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -97,8 +92,7 @@ Return the uval as dval
 
 In Prior.limitedUnit2Domain the uval is transformed into a dval
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
@@ -111,8 +105,7 @@ In Prior.limitedUnit2Domain the uval is transformed into a dval
 
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -125,8 +118,7 @@ Return a the result of the distribution function at x.
 
 Return partial derivative of log( Prior ) wrt parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float or array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value<br>
 

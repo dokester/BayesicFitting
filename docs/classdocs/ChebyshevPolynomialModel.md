@@ -9,14 +9,14 @@
 
 Chebyshev polynomial model of arbitrary degree.
 
-&nbsp; f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )<br>
+<br>&nbsp; f( x:p ) = &sum; p<sub>k</sub> * T<sub>k</sub>( x )<br>
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
 The T( x ) are Chebyshev polynomials of the first kind which are defined
 recursively as
 
-&nbsp; T<sub>0</sub>( x ) = 1<br>
+<br>&nbsp; T<sub>0</sub>( x ) = 1<br>
 &nbsp; T<sub>1</sub>( x ) = x<br>
 &nbsp; T<sub>n</sub>( x ) = 2 x T<sub>n-1</sub>( x ) - T<sub>n-2</sub>( x ) for n >= 2<br>
 
@@ -24,25 +24,20 @@ These polynomials are orthogonal, when integrated over x in [-1,+1].
 
 It is a linear model.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )
     4
@@ -58,8 +53,7 @@ Chebyshev Polynomial of a certain degree.
 
 The number of parameters is ( degree + 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
 * copy  :  ChebyshevPolynomialModel<br>
@@ -88,10 +82,9 @@ Returns the partials at the xdata value.
 
 The partials are calculated using the recurrence formula
 
-&nbsp; f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )<br>
+<br>&nbsp; f<sub>n</sub>( x ) = 2 * x * f<sub>n-1</sub>( x ) - f<sub>n-2</sub>( x )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -108,14 +101,13 @@ The partials are calculated using the recurrence formula
 
 Returns the derivative df/dx at the xdata value.
 
-&nbsp; df<sub>n</sub> = n * U<sub>n-1</sub><br>
+<br>&nbsp; df<sub>n</sub> = n * U<sub>n-1</sub><br>
 &nbsp; where<br>
 &nbsp; U<sub>0</sub> = 1<br>
 &nbsp; U<sub>1</sub> = 2x<br>
 &nbsp; U<sub>n+1</sub> = 2 * x * U<sub>n</sub> - U<sub>n-1</sub><br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -141,8 +133,7 @@ Return the unit of the indicated parameter.
 It is always yUnit, as it cannot be otherwise.
 The xUnit must be dimensionless.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

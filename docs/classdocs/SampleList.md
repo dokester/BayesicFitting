@@ -17,7 +17,7 @@ Model.
 To make averages one has to take into account the weights. Each Sample has a weight
 and all weights sum to 1.0. So the average of any function, f, of the parameters p is
 
-&nbsp;&nbsp;&nbsp;&nbsp; E( f(p) ) = &sum; w<sub>k</sub> f( p<sub>k</sub> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; E( f(p) ) = &sum; w<sub>k</sub> f( p<sub>k</sub> )<br>
 
 where the sum is over all samples k.
 
@@ -25,8 +25,7 @@ A large set of utility functions is provided to extract the information from the
 SampleList.
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * parameters  :  numpy.array (read-only)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; The average over the parameters. Not for dynamic models.<br>
 * stdevs, standardDeviations  :  numpy.array (read-only)<br>
@@ -80,8 +79,7 @@ Author       Do Kester
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nsamples  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of samples created.<br>
 * model  :  Model<br>
@@ -94,11 +92,6 @@ Constructor.
 &nbsp;&nbsp;&nbsp;&nbsp; length of the data vector; to be used in stdev calculations<br>
 
 
-<a name="addSamples"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>addSamples(</strong> model, nSamples, parameters, fitIndex=None )
-</th></tr></thead></table>
-<p>
 <a name="sample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sample(</strong> k, sample=None ) 
@@ -107,8 +100,7 @@ Constructor.
 
 Set or return the k-th sample from the list.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the index of the sample<br>
 * sample  :  Sample<br>
@@ -132,8 +124,7 @@ make Sum( weight ) = 1
 
 Add a Sample to the list
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * sample  :  Sample<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the sample to be added<br>
 
@@ -146,8 +137,7 @@ Add a Sample to the list
 
 Copy one item of the list onto another.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * src  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the source item<br>
 * des  :  int<br>
@@ -184,12 +174,10 @@ Return  log( exp(x) + exp(y) )
 
 Calculate the average of the parameters and the standard deviations.
 
-<b>Return</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; The average values of the parameters.<br>
-<b>Raises</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; ValueError when using Dynamic Models<br>
+<b>Return</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The average values of the parameters.<br>
+<b>Raises</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ValueError when using Dynamic Models<br>
 
 
 <a name="getHypars"></a>
@@ -206,7 +194,7 @@ hypar = numpy.zeros( nhp, dtype=float )
 hydev = numpy.zeros( nhp, dtype=float )
 sw = 0.0
 for sample in self 
-&nbsp;&nbsp;&nbsp;&nbsp; wt = math.exp( sample.logW )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; wt = math.exp( sample.logW )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; sw += wt<br>
 &nbsp;&nbsp;&nbsp;&nbsp; ws = wt * sample.hyper<br>
 &nbsp;&nbsp;&nbsp;&nbsp; hypar = hypar + ws<br>
@@ -231,8 +219,7 @@ Return the average of the nuisance parameters (if present)
 
 Return the average and the stddevs of the named attribute from Sample
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * name  :  str<br>
     name of an attribute from Sample
 
@@ -264,8 +251,7 @@ In case of dynamic models the number of parameters may vary.
 They are zero-padded. Use `getNumberOfParametersEvolution`
 to get the actual number.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int or tuple of ints<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected. Default: all<br>
 
@@ -364,8 +350,7 @@ Return the lowest value of logL in the samplelist, plus its index.
 
 Return the (weighted) average result of the model(s) over the samples.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the input<br>
 
@@ -382,13 +367,11 @@ The model is run with the input for the parameters in each of the
 samples. Appropiately weighted standard deviations are calculated
 and returned at each input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp; the input vectors.<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * error  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; standard deviations at each input point<br>
 

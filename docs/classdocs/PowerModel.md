@@ -9,7 +9,7 @@
 
 General power model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p * x<sup>a</sup><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p * x<sup>a</sup><br>
 
 a is an float ( positive or negative ).
 
@@ -18,28 +18,23 @@ needs to be divided by a factor 1.0 in the same units as the x.
 Otherwise possibly fractional dimensions are created.
 The factor is omitted as it does not contribute in the calculations.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pwr = PowerModel( -1 )
     print pwr.getNumberOfParameters( )       # 1
-1
+    1
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * exponent  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; exponent (a) of the power function.<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -53,8 +48,7 @@ Power of a certain degree.
 
 The number of parameters is 1
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * exponent  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; power to which the xdata is to be raised.<br>
 * copy  :  PowerModel<br>
@@ -83,8 +77,7 @@ Returns the partials at the xdata value.
 <br>
 The partials are x ( xdata ) to degree-th power.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -101,8 +94,7 @@ The partials are x ( xdata ) to degree-th power.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -126,8 +118,7 @@ Returns a string representation of the model.
 
 Return the name of a parameter.
 Not strictly OK. See Class documentation.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

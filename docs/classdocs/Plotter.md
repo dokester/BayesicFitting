@@ -23,8 +23,7 @@ They are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
 
 Plot the data of a fit.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; xdata of the problem<br>
 * data  :  array_like<br>
@@ -67,8 +66,7 @@ Plot the data of a fit.
 
 Plot the posterior as npt points from the SampleList.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * sl  :  SampleList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the samplelist containing samples from the posterior<br>
 * xdata  :  arraylike<br>

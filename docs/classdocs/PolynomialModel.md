@@ -9,35 +9,30 @@
 
 General polynomial model of arbitrary degree.
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p<sub>k</sub> * x<sup>k</sup><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = &sum; p<sub>k</sub> * x<sup>k</sup><br>
 
 where the sum is over k running from 0 to degree ( inclusive ).
 
 It is a linear model.
-<b>Examples</b>
-
+<b>Examples</b><br>
     poly = PolynomialModel( 3 )            # 3rd degree polynomial
     print( poly.getNumberOfParameters() )
-4
+    4
 
 * Author  :  Do Kester<br>
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -51,8 +46,7 @@ Polynomial of a certain degree.
 
 The number of parameters is ( degree + 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.<br>
 * copy  :  PolynomialModel<br>
@@ -81,8 +75,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -99,8 +92,7 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 
 Return the derivative df/dx at each input (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -123,8 +115,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -137,8 +128,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

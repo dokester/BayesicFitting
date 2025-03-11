@@ -17,27 +17,24 @@ It can also have a limited domain.
 By default the domain is [-Inf,+Inf].
 In computational practice it is limited to [-1e16, 1e16]
 
-&nbsp; domain2unit: <br>
+<br>&nbsp; domain2unit: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; u = arctan( ( d - c ) / s ) / &pi; + 0.5<br>
 &nbsp; unit2domain: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; d = tan( ( u - 0.5 ) * &pi; ) * s + c<br>
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = CauchyPrior()                         # center=0, scale=1
     pr = CauchyPrior( center=1.0, scale=0.5 )
     pr = CauchyPrior( limits=[0,None] )        # lowlimit=0, highlimit=inf
     pr = CauchyPrior( center=1, circular=3 )   # circular between 0.5 and 2.5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; center of the Cauchy prior<br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; scale of the Cauchy prior<br>
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 
@@ -49,8 +46,7 @@ lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * center  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; of the prior<br>
 * scale  :  float<br>
@@ -81,8 +77,7 @@ a parameter for a Cauchy distribution.
 
 u = arctan( ( d - c ) / s ) / &pi; + 0.5
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -98,8 +93,7 @@ between [0,1] for a Cauchy distribution.
 
 d = tan( ( u - 0.5 ) * &pi; ) * s + c
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]<br>
 
@@ -112,8 +106,7 @@ d = tan( ( u - 0.5 ) * &pi; ) * s + c
 
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter<br>
 
@@ -126,8 +119,7 @@ Return a the result of the distribution function at x.
 
 Return partial derivative of log( Prior ) wrt parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float<br>
     the value
 

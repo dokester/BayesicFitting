@@ -11,10 +11,6 @@ SampleMovie produces a movie (mp4) from a SampleList
 
 This class is provided as an example to vary upon.
 
-===========
-MovieWriter
-===========
-
 This example uses a MovieWriter directly to grab individual frames and write
 them to a file. This avoids any event loop integration, but has the advantage
 of working with even the Agg backend. This is not recommended for use in an
@@ -31,8 +27,7 @@ Constructor.
 
 The constructor produces the movie.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * samplelist  :  SampleList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to make the movie from<br>
 * filename  :  str<br>

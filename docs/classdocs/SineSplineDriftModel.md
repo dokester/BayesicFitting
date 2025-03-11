@@ -9,7 +9,7 @@
 
 Sine with drifting frequency and splineslike amplitudes/phases.
 
-&nbsp;&nbsp;&nbsp;&nbsp; nd = degree + 1<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; nd = degree + 1<br>
 &nbsp;&nbsp;&nbsp;&nbsp; nh = len( knots ) + order - 1<br>
 &nbsp;&nbsp;&nbsp;&nbsp; xx = 2 &pi; x PM( x:p[:nd] )<br>
 &nbsp;&nbsp;&nbsp;&nbsp; A  = SM( x:p[nd:nd+nh] )<br>
@@ -20,15 +20,13 @@ Where PM is a PolynomialModel and SM a SplinesModel
 
 It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = [3.0*k for k in range( 11 )]
     sine = SineSplineDriftModel( 150, knots )        # fixed frequency of 150 Hz
     print( sine.npbase )                        # number of parameters
 26
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial governing the frequency of the sine<br>
 * knots  :  array_like<br>
@@ -40,17 +38,14 @@ It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 * sm  :  SplinesModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; amplitude of the sine<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SineSplineDriftModel"></a>
@@ -64,8 +59,7 @@ amplitude/phase
 
 Number of parameters is 2 * ( len(knots) + order - 1 ) + degree + 1.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knots  :  array of float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the knot positions of the amplitude splines<br>
 * order  :  int<br>
@@ -77,8 +71,7 @@ Number of parameters is 2 * ( len(knots) + order - 1 ) + degree + 1.
 * fixed  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * AttributeError  :  When fixed is not None<br>
 
 
@@ -97,8 +90,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -113,8 +105,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -131,8 +122,7 @@ Returns the partials at the input value.
 
 Returns the derivative of f to x (df/dx) at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -147,8 +137,7 @@ Returns the derivative of f to x (df/dx) at the input value.
 
 Return the amplitudes if cosine and sine, resp.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -171,8 +160,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

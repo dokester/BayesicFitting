@@ -9,7 +9,7 @@
 
 CosSquare (Cosine Squared) is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = cos<sup>2</sup>( 0.5 &pi; x )  if |x| < 1 else 0<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; K( x ) = cos<sup>2</sup>( 0.5 &pi; x )  if |x| < 1 else 0<br>
 
 
 
@@ -21,7 +21,7 @@ CosSquare (Cosine Squared) is a Kernel function between [-1,1]; it is 0 elsewher
 
 Constructor.
 
-&nbsp; Using<br>
+<br>&nbsp; Using<br>
 &nbsp;&nbsp;&nbsp;&nbsp; integral = 1.0<br>
 &nbsp;&nbsp;&nbsp;&nbsp; fwhm = 1.0<br>
 

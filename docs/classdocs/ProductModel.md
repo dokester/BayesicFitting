@@ -13,8 +13,7 @@ The dimensionality of this model is equal to the number of constituent models.
 
 The number of parameters is the sum of the parameters of the models.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     nxk = 17
     nyk = 11
     xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160
@@ -23,27 +22,23 @@ The number of parameters is the sum of the parameters of the models.
     smy = SplinesModel( yknots )
     csm = ProductModel( [smx,smy] )
     print csm.getNumberOfParameters( )      # ( nxk + order - 1 ) + ( nyk + order - 1 )
-32
-# ... fitter etc. see Fitter
+    32
+    # ... fitter etc. see Fitter
 
 Category     mathematics/Fitting
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * models  :  list of Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; models to be multiplied, one for each dimension.<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="ProductModel"></a>
@@ -60,8 +55,7 @@ The models are given as input, the consecutive colums in xdata.
 The number of parameters is the sum of the parameters of the
 constituent models
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * models  :  list of Model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the constituent models<br>
 * copy  :  ProductModel<br>
@@ -69,10 +63,9 @@ constituent models
 * fixed  :  dict<br>
 &nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError
-&nbsp;&nbsp;&nbsp;&nbsp; When one of the models is 2 (ore more) dimensional<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When one of the models is 2 (ore more) dimensional<br>
 * AttributeErrr  :  When fixed is not None<br>
 
 
@@ -93,8 +86,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -111,8 +103,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -137,8 +128,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of a parameter as "param<dim><seq>.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
@@ -150,8 +140,7 @@ Return the name of a parameter as "param<dim><seq>.
 <p>
 
 Return the unit of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

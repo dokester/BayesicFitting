@@ -10,7 +10,7 @@
 Dog-leg trust-region algorithm.
 
 Syntactic sugar for
-&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='DOGLEG', ... )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ScipyFitter( ..., method='DOGLEG', ... )<br>
 
 See [ScipyFitter](./ScipyFitter.md)
 
@@ -24,8 +24,7 @@ See [ScipyFitter](./ScipyFitter.md)
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; array of independent input values<br>
 * model  :  Model<br>

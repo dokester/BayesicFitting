@@ -17,8 +17,7 @@ df/dx as  userDeriv( x. param )
 name  as  string
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
 import numpy as np
     def ur( x, p ) 
         return p[0] * np.sin( p[1] * x + p[2] * np.log( x + p[3] ) ) 
@@ -31,8 +30,7 @@ UserModel( slowchirp )
 4
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * userResult  :  callable<br>
 &nbsp;&nbsp;&nbsp;&nbsp; method to evaluate the result of the F(x:p)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; defined as method( x, p )<br>
@@ -45,17 +43,14 @@ UserModel( slowchirp )
 * userName  :  str<br>
 &nbsp;&nbsp;&nbsp;&nbsp; name of the class<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -68,8 +63,7 @@ UserModel( slowchirp )
 
 User provided model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * npars  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of parameters of this model<br>
 * userResult  :  callable<br>
@@ -112,8 +106,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -128,8 +121,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -146,8 +138,7 @@ Returns the partials at the input value.
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>

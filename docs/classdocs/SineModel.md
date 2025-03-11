@@ -13,10 +13,10 @@ Two variants are implemented.
 
 1. By default it is the weighted sum of sine and cosine of the same frequency
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( 2 * &pi; * p<sub>0</sub> * x ) + p<sub>2</sub> * sin( 2 * &pi; * p<sub>0</sub> * x )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>1</sub> * cos( 2 * &pi; * p<sub>0</sub> * x ) + p<sub>2</sub> * sin( 2 * &pi; * p<sub>0</sub> * x )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = frequency<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = frequency<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = amplitude cosine and<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = amplitude sine.<br>
 As always x = input.
@@ -25,18 +25,17 @@ The parameters are initialized at [1.0, 1.0, 1.0]. It is a non-linear model.
 
 2. If phase == True, the sinusoidal model has an explicit phase
 
-&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( 2 * &pi; * p<sub>1</sub> * x + p<sub>2</sub> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f( x:p ) = p<sub>0</sub> * sin( 2 * &pi; * p<sub>1</sub> * x + p<sub>2</sub> )<br>
 
 where
-&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = frequency<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>2</sub> = phase.<br>
 
 The parameters are initialized as [1.0, 1.0, 0.0].
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sine = SineModel( )
     print( sine.npchain )
 3
@@ -47,23 +46,19 @@ The parameters are initialized as [1.0, 1.0, 0.0].
     sine.parameters = pars
     print( sine( numpy.arange( 11, dtype=float ) ) )     # One cosine period
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * phase  :  bool (False)<br>
 &nbsp;&nbsp;&nbsp;&nbsp; False : original 2 amplitudes model<br>
 &nbsp;&nbsp;&nbsp;&nbsp; True  : phase model<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -77,8 +72,7 @@ Sinusiodal model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * phase  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; if True, construct phase variant.<br>
 * copy  :  SineModel<br>
@@ -104,8 +98,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -120,8 +113,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -138,8 +130,7 @@ Returns the partials at the input value.
 
 Returns the derivative of f to x (df/dx) at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -163,8 +154,7 @@ Returns a string representation of the model.
 
 Return the unit of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 
@@ -177,8 +167,7 @@ Return the unit of a parameter.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -193,8 +182,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -211,8 +199,7 @@ Returns the partials at the input value.
 
 Returns the derivative of f to x (df/dx) at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -236,8 +223,7 @@ Returns a string representation of the model.
 
 Return the unit of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.<br>
 

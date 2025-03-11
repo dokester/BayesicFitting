@@ -13,22 +13,18 @@ The general non-linear model needs both the function value and the partials.
 
 It contains provisions for mixed models. (TBC)
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * _linear  :  list of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list of indices for the linear parameters (in case of a mixed model)<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit <br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 Author       Do Kester
 
@@ -41,8 +37,7 @@ Author       Do Kester
 
 Parent class for all non linear models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nparams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of parameters in the model<br>
 * ndim  :  int<br>
@@ -66,8 +61,7 @@ non-linear parameters.
 
 Reset with SetMixedModel( null );
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * lindex  :  list of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; indices of the linear parameters<br>
 
@@ -94,8 +88,7 @@ Returns the index of the non-linear parameters.
 
 Return the partial derivatives for the model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the value at which to calculate the partials<br>
 * param  :  array_like<br>

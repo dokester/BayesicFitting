@@ -17,8 +17,7 @@ It is a linear model.
 
 Author       Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     poly = PolynomialDynamicModel( )         # polynomial with unknown degree
     poly.grow( )                         # starts at degree = 0, npar = 1
     poly.grow( )                         # each grow( ) adds 1
@@ -30,32 +29,26 @@ Author       Do Kester
     print poly.npbase
     4
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * minDegree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; minimum degree of the polynomial<br>
 * maxDegree  :  int or None<br>
 &nbsp;&nbsp;&nbsp;&nbsp; maximum degree of the polynomial<br>
 
-<b>Attributes from Dynamic</b>
+<b>Attributes from Dynamic</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior<br>
+<b>Attributes from PolynomialModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; degree<br>
 
-<b>Attributes from PolynomialModel</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; degree<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from Model</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
-
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 Category     mathematics/Fitting
@@ -73,8 +66,7 @@ Polynomial of a adaptable degree.
 The model starts as a PolynomialModel of degree = 0.
 Growth of the model is governed by a exponential prior ( scale=1 ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree to start with; it should be minDegree <= degree <= maxDegree<br>
 * minDegree  :  int<br>
@@ -87,8 +79,7 @@ Growth of the model is governed by a exponential prior ( scale=1 ).
 * copy  :  PolynomialDynamicModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError when fixed parameters are requested
 ValueError when degree is outside [min..max] range
 

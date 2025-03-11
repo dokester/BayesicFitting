@@ -9,7 +9,7 @@
 
 Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-&nbsp; K( x ) = ( 1 - x<sup>2</sup> )<sup>3</sup> if |x| < 1 else 0<br>
+<br>&nbsp; K( x ) = ( 1 - x<sup>2</sup> )<sup>3</sup> if |x| < 1 else 0<br>
 
 
 <a name="Triweight"></a>
@@ -20,7 +20,7 @@ Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
 Constructor.
 
-&nbsp; Using<br>
+<br>&nbsp; Using<br>
 &nbsp; integral = 32.0/35.0<br>
  fwhm = 0.908404
 
@@ -32,8 +32,7 @@ Constructor.
 
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -45,8 +44,7 @@ Return the result for input values.
 
 Return the result for squared input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the squares of the input values
 
@@ -58,8 +56,7 @@ Return the result for squared input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

@@ -9,7 +9,7 @@
 
 Gauss is an unbound Kernel function
 
-&nbsp; f( x ) = exp( -0.5 * x * x ).<br>
+<br>&nbsp; f( x ) = exp( -0.5 * x * x ).<br>
 
 
 <a name="Gauss"></a>
@@ -20,7 +20,7 @@ Gauss is an unbound Kernel function
 
 Constructor.
 
-&nbsp; Using<br>
+<br>&nbsp; Using<br>
 &nbsp; integral = sqrt( 2 &pi; )<br>
 &nbsp; fwhm = sqrt( 2 log( 2 ) )<br>
  range = inf
@@ -33,8 +33,7 @@ Constructor.
 
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -46,8 +45,7 @@ Return the result for input values.
 
 Return the result for squared input values.   
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the squares of the input values                                     
 
@@ -59,8 +57,7 @@ Return the result for squared input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 

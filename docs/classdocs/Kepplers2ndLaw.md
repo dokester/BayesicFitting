@@ -12,9 +12,9 @@ Class for calculating Kepplers second law for planetary motion.
 The projection of the orbit on the sky is not included in this class.
 
 The algorithm was taken from
-&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
+<br>&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.<br>
 
-http://www.jdso.org/volume13/number2/Harfenist<sub>1</sub>89-199.pdf
+http://www.jdso.org/volume13/number2/Harfenist<sub>189</sub>-199.pdf
 
 | param | abbr | name                   | limits    | comment     |
 |:-----:|:----:|:-----------------------|:---------:|:------------| 
@@ -39,8 +39,7 @@ T = params[3] = periastron passage
 
 M = 2 * pi * xdata / P - T
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
@@ -54,8 +53,7 @@ M = 2 * pi * xdata / P - T
 
 Return derivatives of M (mean anomaly) to xdata
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dMdx  :  array_like<br>
     derivatives of M to x (xdata)
 
@@ -67,8 +65,7 @@ Return derivatives of M (mean anomaly) to xdata
 
 Return derivatives of M (mean anomaly) to relevant parameters.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dMdP  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; derivatives of M to P (period)<br>
 * dMdp  :  array_like<br>
@@ -93,7 +90,7 @@ It converges in a few iterations for e <= 0.999999999
 Return the eccentric anomaly, i.e. the solution for E of
 
 Standard method by Jean Meuss 
-&nbsp; Astronomical Algorithms, 2nd ed.,<br>
+<br>&nbsp; Astronomical Algorithms, 2nd ed.,<br>
 &nbsp; Willmann-Bell, Inc, Virginia, 193-196, 397-399<br>
 
 e = params[0] = eccentricity
@@ -101,8 +98,7 @@ M = mean anomaly
 
 E = M + e * sin( E )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
@@ -123,8 +119,7 @@ M = mean anomaly
 
 E = M + e * sin( E )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
@@ -145,8 +140,7 @@ M = mean anomaly
 
 E = M + e * sin( E )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
@@ -162,8 +156,7 @@ E = M + e * sin( E )
 
 Return derivatives of E (eccentric anomaly) to mean anomaly
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dEdM  :  array_like<br>
     derivatives of E to M (mean anomaly)
 
@@ -175,8 +168,7 @@ Return derivatives of E (eccentric anomaly) to mean anomaly
 
 Return derivatives of E (eccentric anomaly) to xdata
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dEdx  :  array_like<br>
     derivatives of E to x (xdata)
 
@@ -188,8 +180,7 @@ Return derivatives of E (eccentric anomaly) to xdata
 
 Return derivatives of E (eccentric anomaly) to relevant parameters.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dEde  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; derivatives of E to e (eccentricity)<br>
 * dEdP  :  array_like<br>
@@ -215,21 +206,19 @@ v = 2 * arctan( sqrt( (1+e)/(1-e) ) * tan( E / 2 ) )
 
 from Wikepedia => Trigoniometic Identities 
 tan( E / 2 ) = sqrt( ( 1 - cos( E ) ) / ( 1 + cos( E ) ) )
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )<sup>2</sup> )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( ( 1 - c ) * ( 1 + c ) / ( 1 + c )<sup>2</sup> )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sqrt( s<sup>2</sup> / ( 1 + c )<sup>2</sup> )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = s / ( 1 + c )<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sin( E ) / ( 1 + cos( E ) )<br>
 Avoid cases where cos( E ) is too close to -1
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters: eccentr, semimajor, inclin, ascpos, asclon, period, ppass<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * r  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; radius<br>
 * v  :  array_like<br>
@@ -244,8 +233,7 @@ Avoid cases where cos( E ) is too close to -1
 
 Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; times in the orbit<br>
 * params  :  array_like<br>
@@ -255,8 +243,7 @@ Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 * sinE  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; sine of E<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * drdE  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to E (eccentric anomaly)<br>
 * dvdE  :  array_like<br>
@@ -270,8 +257,7 @@ Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 
 Return derivatives of r (radius) and v (true anomaly) to xdata
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * drdx  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to x (xdata)<br>
 * dvdx  :  array_like<br>
@@ -285,8 +271,7 @@ Return derivatives of r (radius) and v (true anomaly) to xdata
 
 Return derivatives of r (radius) and v (true anomaly) to relevant parameters.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * drde  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to e (eccentricity)<br>
 * drda  :  array_like<br>
@@ -310,8 +295,7 @@ Return derivatives of r (radius) and v (true anomaly) to relevant parameters.
 
 Return the mass of the exoplanet in Jupiter masses.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * stellarmass  :  float<br>
     mass of the host star in solar masses.
 

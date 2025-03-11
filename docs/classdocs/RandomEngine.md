@@ -22,8 +22,7 @@ the execution again starting from the new point.
 The restart is repeated a few times after which he new point is deemed
 sufficiently independent. 
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -36,8 +35,7 @@ Author       Do Kester.
 <p>
 
 Constructor.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  WalkerList<br>
 &nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused<br>
 * errdis  :  ErrorDistribution<br>
@@ -62,8 +60,7 @@ Return copy of this.
 
 Execute the engine by a random selection of the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of Walker to diffuse<br>
 * lowLhood  :  float<br>
@@ -73,8 +70,7 @@ Execute the engine by a random selection of the parameters.
 * iteration  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; iteration number<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves<br>
 
 

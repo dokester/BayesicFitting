@@ -25,8 +25,7 @@ of the model call.
 It can be arranged that all similar parameters are the same, represented by the
 same parameters. Use keywords same=.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * ncomp  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
 * model  :  Model<br>
@@ -38,26 +37,19 @@ same parameters. Use keywords same=.
 * isDyna  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.<br>
 
-<b>Attributes from Dynamic</b>
+<b>Attributes from Dynamic</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; ncomp, deltaNpar, minComp, maxComp, growPrior<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; ncomp, deltaNpar, minComp, maxComp, growPrior<br>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain<br>
-&nbsp;&nbsp;&nbsp;&nbsp; _next, _head, _operation<br>
-&nbsp;&nbsp;&nbsp;&nbsp; xUnit, yUnit (relegated to model)<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Example</b>
-
+<b>Example</b><br>
     # Define a model containing between 1 and 6 VoigtModels, starting with 3
     # and all with the same widths (for Gauss and Cauchy)
     vgt = VoigtModel()
@@ -86,8 +78,7 @@ Author       Do Kester
 
 Repeating the same model several times.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ncomp  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of repetitions<br>
 * model  :  Model<br>
@@ -107,8 +98,7 @@ Repeating the same model several times.
 * copy  :  RepeatingModel<br>
 &nbsp;&nbsp;&nbsp;&nbsp; model to copy<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError when fixed parameters are requested
 ValueError when order is outside [min..max] range
 
@@ -133,8 +123,7 @@ Copy method.
 
 Assign similar parameters the same value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * same  :  None or int or [int]<br>
     similar parameters indicated as an index in encapsulated model.
 
@@ -146,15 +135,13 @@ Assign similar parameters the same value.
 
 Increase the the number of components by 1 (if allowed by maxComp)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
 * rng  :  RandomState<br>
 &nbsp;&nbsp;&nbsp;&nbsp; random numbr generator<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :   succes<br>
 
 
@@ -167,13 +154,11 @@ Increase the the number of components by 1 (if allowed by maxComp)
 Decrease the the number of componenets by 1 (if allowed by minComp)
 Remove an arbitrary item.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts<br>
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :  succes<br>
 
 
@@ -185,8 +170,7 @@ Remove an arbitrary item.
 
 Shuffle the parameters of the components (if they are equivalent)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array-like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of all parameters<br>
 * offset  :  int<br>
@@ -209,8 +193,7 @@ Shuffle the parameters of the components (if they are equivalent)
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -225,8 +208,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -243,8 +225,7 @@ Returns the partials at the input value.
 
 Returns the derivative df/dx at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -266,8 +247,7 @@ Set the prior for the indicated parameter of the repeated model.
 
 All repeated parameters have the same Prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number of the repeated model.<br>
 * prior  :  Prior<br>
@@ -275,10 +255,9 @@ All repeated parameters have the same Prior.
 * kwargs  :  keyword arguments<br>
 &nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior<br>
 
-<b>Raise:</b>
-
+<b>Raise:</b><br>
 IndexException
-&nbsp;&nbsp;&nbsp;&nbsp; When more Priors are set than fit inside the repeated model<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When more Priors are set than fit inside the repeated model<br>
 
 
 <a name="hasPriors"></a>
@@ -294,8 +273,7 @@ IndexException
 
 Return the prior for parameter with index kpar.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int<br>
     index of the parameter to be selected.
 
@@ -314,8 +292,7 @@ Return a string representation of the model.
 
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -328,8 +305,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

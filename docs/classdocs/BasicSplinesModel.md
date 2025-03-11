@@ -29,8 +29,7 @@ hard edges. Consequently the function is not continuous or differentiable at the
 The spline blobs at the edges may be different from the ones in the middle.
 
 
-<b>From SplinesModel</b>
-
+<b>From SplinesModel</b><br>
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
 The knots need to be monotonuously increasing in x.
@@ -42,8 +41,7 @@ larger than the x-values in the dataset.
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BasicSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
@@ -59,28 +57,23 @@ This model is NOT for (cubic) spline interpolation.
     print csm.getNumberOfParameters( )
     18
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * knots  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; positions of the spline knots<br>
 * order  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; order of the spline. default: 3<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 Dont construct the knots so closely spaced, that there are no datapoints in between.
 
 
@@ -95,8 +88,7 @@ Splines on a given set of knots and a given order.
 
 The number of parameters is ( length( knots ) + order - 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knots  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots<br>
 * order  :  int<br>
@@ -123,13 +115,11 @@ The number of parameters is ( length( knots ) + order - 1 )
 &nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)<br>
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.<br>
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 The SplinesModel is only strictly valid inside the domain defined by the
 minmax of knots. It deteriorates fastly going outside the domain.
 
@@ -147,8 +137,7 @@ minmax of knots. It deteriorates fastly going outside the domain.
 
 Make a sets of polynomial bases for each of the parameters
 
-<b>Return</b>
-
+<b>Return</b><br>
 * basis  :  3-d array-like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs<br>
 
@@ -166,8 +155,7 @@ Make a sets of polynomial bases for each of the parameters
 
 Make a sets of polynomial bases for each of the parameters
 
-<b>Return</b>
-
+<b>Return</b><br>
 * basis  :  3-d array-like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs<br>
 
@@ -181,8 +169,7 @@ Make a sets of polynomial bases for each of the parameters
 Normalize the base splines such that a constant value of 1.0
 is returned when all model parameters are 1.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * basis  :  array_like<br>
     parameters to the polynomials that make up the spline blobs
 
@@ -196,8 +183,7 @@ Find the parameters by assuming (order-1) continuous differentials.
 At the edges it is less. Normalized to 1.0
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knotix  :  int array<br>
 &nbsp;&nbsp;&nbsp;&nbsp; knot indices involved in this spline blob<br>
 * dist  :  array_like<br>
@@ -205,8 +191,7 @@ At the edges it is less. Normalized to 1.0
 * kpar  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; index of parameter for which the spline-blob is constructed<br>
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * par  :  2-d array<br>
     sets of poly parameters.
 
@@ -218,8 +203,7 @@ At the edges it is less. Normalized to 1.0
 
 Returns the functional result at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -236,8 +220,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -248,7 +231,7 @@ The partials are the powers of x (input) from 0 to degree.
 
 
 for kb in range( np ) 
-&nbsp;&nbsp;&nbsp;&nbsp; bss = self.basis[:,:,kb]<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; bss = self.basis[:,:,kb]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; partial[:,kb] = self.basicBlob( xdata, bss, x2k, self.poly )<br>
 
 return partial
@@ -261,8 +244,7 @@ return partial
 
 Return a list of indices of the knots immediately preceeding the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
     values at which to calculate the indices
 
@@ -274,8 +256,7 @@ Return a list of indices of the knots immediately preceeding the xdata.
 
 Calculates a spline blob for all of xdata
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the spline<br>
 * basis  :  array_like<br>
@@ -293,8 +274,7 @@ Calculates a spline blob for all of xdata
 
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -316,8 +296,7 @@ Returns a string representation of the model.
 
 Return the name of the parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     index of the parameter.
 

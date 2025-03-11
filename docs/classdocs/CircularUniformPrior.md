@@ -11,15 +11,13 @@ Circular Uniform prior distribution, for location parameters.
 The lowLimit is wrapped onto the highLimit.
 
 A wrapper around
-&nbsp;&nbsp;&nbsp;&nbsp; UniformPrior( circular=... limits=... )<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; UniformPrior( circular=... limits=... )<br>
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = CircularUniformPrior( circular=math.pi )       # circular between [0,pi]
     pr = CircularUniformPrior( limits=[3,10] )          # circular between [3,10]
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 
 
@@ -31,8 +29,7 @@ lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  array of 2 floats<br>
 &nbsp;&nbsp;&nbsp;&nbsp; [low,high]  range of the prior. Low is wrapped onto high.<br>
 * circular  :  float<br>

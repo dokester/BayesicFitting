@@ -10,17 +10,17 @@
 Softmax Model is a Logistic model if the number of outputs is 1.
 Otherwise it is generalization of the LogisticModel over multiple outputs
 
-<b>                   exp( sum_k( x_k * p_kn ) + q_n ) )</b>
-
+<b>                   exp( sum_k( x_k * p_kn ) + q_n ) )</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; f_n( x:p ) = -------------------------------------------<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sum_i( exp( sum_k( x_k * p_ki ) + q_i ) ) )<br>
 
 
-&nbsp;&nbsp;&nbsp;&nbsp; 0       0       0       0       0       0   I inputs<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0       0       0       0       0       0   I inputs<br>
 &nbsp;&nbsp;&nbsp;&nbsp; |\     /|\     /|\     /|\     /|\     /|<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all inputs connect to all outputs        I*N connecting parameters<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all inputs connect to all outputs        I*N connecting parameters<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \|/     \|/     \|/     \|/     \|/      N offset parameters (if offset)<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \|/     \|/     \|/     \|/     \|/      N offset parameters (if offset)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0       0       0       0       0       N outputs<br>
 
 
@@ -30,8 +30,7 @@ They are initialized at 0.0.
 
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * offset  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; True : the outputs have offsets<br>
 * ndout  :  int<br>
@@ -41,17 +40,14 @@ They are initialized at 0.0.
 * normed  :  bool<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the results are normalized (def:True)<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 <a name="SoftMaxModel"></a>
@@ -64,8 +60,7 @@ Logistic response model.
 
 Number of parameters is npars (see offset)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ndim  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of inputs<br>
 * ndout  :  int<br>
@@ -97,8 +92,7 @@ Returns the result of the model function: F<sub>n</sub>( x<sub>k</sub> ) as arra
 shape [nx,ndout], where nx number of data points and ndout is the number of
 outputs.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -114,8 +108,7 @@ outputs.
 Returns the partials at the input value as a list (size N) of arrays
 of shape (K,P). N is #outputs; K is #datapoints; P is #parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -135,8 +128,7 @@ at each xdata (=x).
 It is returned as an array of shape (N,I) of an array of length K.
 N is #outputs; I is #inputs (ndim); K is #datapoints.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result<br>
 * params  :  array_like<br>
@@ -160,8 +152,7 @@ Returns a string representation of the model.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

@@ -11,7 +11,7 @@ To calculate a Gauss likelihood.
 
 For one residual, x, it holds
 
-&nbsp; L( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 ( x / s )<sup>2</sup> )<br>
+<br>&nbsp; L( x ) = 1 / &radic;( 2 &pi; s<sup>2</sup> ) exp( - 0.5 ( x / s )<sup>2</sup> )<br>
 
 where s is the scale.
 s is a hyperparameter, which might be estimated from the data.
@@ -21,11 +21,11 @@ The scale s is also the square root of the variance of this error distribution.
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log likelihood, logL.
 
-&nbsp; logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup><br>
+<br>&nbsp; logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )<sup>2</sup><br>
 
 Using weights this becomes
 
-&nbsp; logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )<br>
+<br>&nbsp; logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )<sup>2</sup> )<br>
 
 
 Author       Do Kester.
@@ -39,8 +39,7 @@ Author       Do Kester.
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; noise scale<br>
 * limits  :  None or list of 2 floats [low,high]<br>
@@ -77,8 +76,7 @@ Always true for this distribution.
 
 Return the noise scale.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -95,8 +93,7 @@ Return the log( likelihood ) for a Gaussian distribution.
 
 Alternate calculation
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -113,8 +110,7 @@ Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -133,8 +129,7 @@ Return the partial derivative of log( likelihood ) to the parameters in fitIndex
 
 Alternate calculation
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved.<br>
 * allpars  :  array_like<br>
@@ -152,8 +147,7 @@ Alternate calculation
 Return the partial derivative all elements of the log( likelihood )
 to the parameters in fitIndex.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>
@@ -174,10 +168,9 @@ Return the hessian of log( likelihood ) to the parameters in fitIndex.
 The hessian is a matrix containing the second derivatives to each
 of the parameters.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp<sub>i</sub> dp<sub>k</sub><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp<sub>i</sub> dp<sub>k</sub><br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem<br>
 &nbsp;&nbsp;&nbsp;&nbsp; to be solved<br>
 * allpars  :  array_like<br>

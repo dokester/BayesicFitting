@@ -37,32 +37,27 @@ the methods goals1(), goals2(), ... goals5(), below.
 Note
 This is about the game that most of the world calls football.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     fm = FootballModel( 18 ) 
     print( fm.npars )
     90
 
 * Author  :  Do Kester<br>
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * nteams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of teams<br>
 * complexity  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree of complexity, default = 5.<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
 
 
@@ -76,8 +71,7 @@ Calculate the score of football matches
 
 The number of parameters is ( nteams * complexity )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nteams  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; number of teams<br>
 * complexity  :  1 <= int <= 5<br>
@@ -106,8 +100,7 @@ Copy method.
 
 Return the prior of the parameter, indicated by k modulo the complexity
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
     parameter number.
 
@@ -119,11 +112,10 @@ Return the prior of the parameter, indicated by k modulo the complexity
 
 Consider attack (a) only.
 
-&nbsp; S1 = a1<br>
+<br>&nbsp; S1 = a1<br>
 &nbsp; S2 = a2<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
 * par  :  array_like<br>
@@ -138,11 +130,10 @@ Consider attack (a) only.
 
 Consider attack (a) and defense (d).
 
-&nbsp; S1 = a1 * ( 1 - d2 )<br>
+<br>&nbsp; S1 = a1 * ( 1 - d2 )<br>
 &nbsp; S2 = a2 * ( 1 - d1 )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
 * par  :  array_like<br>
@@ -159,11 +150,10 @@ Consider attack (a), defense (d) and midfield (m).
 
 The ratio of the midfield strength modifies attack and defense
 
-&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2  (m2/m1) )<br>
+<br>&nbsp; S1 = a1 * &radic;(m1/m2) * ( 1 - d2  (m2/m1) )<br>
 &nbsp; S2 = a2 * &radic;(m2/m1) * ( 1 - d1  (m1/m2) )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
 * par  :  array_like<br>
@@ -180,12 +170,11 @@ Consider attack (a), defense (d), midfield (m) and home advantage (h).
 
 The strategy modifies the midfield strangth of the home team.
 
-&nbsp; mh = m1 * h1<br>
+<br>&nbsp; mh = m1 * h1<br>
 &nbsp; S1 = a1 * &radic;(mh/m2) * ( 1 - d2  (m2/mh) )<br>
 &nbsp; S2 = a2 * &radic;(m2/mh) * ( 1 - d1  (mh/m2) )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
 * par  :  array_like<br>
@@ -201,15 +190,14 @@ The strategy modifies the midfield strangth of the home team.
 Consider attack (a), defense (d), midfield (m), home advantage (h),
 and strategy (s)
 
-&nbsp; A offensive strategy (s>1) strenghtens the attach and weakens the defense. <br>
+<br>&nbsp; A offensive strategy (s>1) strenghtens the attach and weakens the defense. <br>
 &nbsp; A defensive strategy (s<1) strenghtens the defense and weakens the attack. <br>
 
-&nbsp; mh = m1 * h1<br>
+<br>&nbsp; mh = m1 * h1<br>
 &nbsp; S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2  (s2 * m2/mh) )<br>
 &nbsp; S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1  (s1 * mh/m2) )<br>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array of int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of matches team 1 vs team 2<br>
 * par  :  array_like<br>
@@ -226,8 +214,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2:nteams]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * params  :  array_like<br>
@@ -244,8 +231,7 @@ Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -261,8 +247,7 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2:nteams]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * par  :  array_like<br>
@@ -277,8 +262,7 @@ Derivatives copies from https://www.derivative-calculator.net
 
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2:nteams]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * par  :  array_like<br>
@@ -293,8 +277,7 @@ Derivatives copies from https://www.derivative-calculator.net
 
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2:nteams]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * par  :  array_like<br>
@@ -309,8 +292,7 @@ Derivatives copies from https://www.derivative-calculator.net
 
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2:nteams]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * par  :  array_like<br>
@@ -325,8 +307,7 @@ Derivatives copies from https://www.derivative-calculator.net
 
 Derivatives copies from https://www.derivative-calculator.net
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2:nteams]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; list of team ids playing against each other.<br>
 * par  :  array_like<br>
@@ -341,8 +322,7 @@ Derivatives copies from https://www.derivative-calculator.net
 
 Return the derivative df/dx at each input (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials<br>
 * params  :  array_like<br>
@@ -365,8 +345,7 @@ Returns a string representation of the model.
 <p>
 
 Return the name of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 
@@ -379,8 +358,7 @@ Return the name of the indicated parameter.
 
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int<br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameter number.<br>
 

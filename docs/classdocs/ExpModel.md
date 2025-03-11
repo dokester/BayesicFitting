@@ -9,44 +9,39 @@
 
 Exponential Model.
 
-&nbsp; f( x:p ) = p<sub>0</sub> * exp( p<sub>1</sub> * x )<br>
+<br>&nbsp; f( x:p ) = p<sub>0</sub> * exp( p<sub>1</sub> * x )<br>
 
-&nbsp; where <br>
+<br>&nbsp; where <br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>0</sub> = amplitude<br>
 &nbsp;&nbsp;&nbsp;&nbsp; p<sub>1</sub> = slope<br>
 &nbsp; As always <br>
 &nbsp;&nbsp;&nbsp;&nbsp; x = input.<br>
 
-The parameters are initialized at 1.0, -1.0. It is a non-linear model.
+The parameters are initialized at [1.0, -1.0]. It is a non-linear model.
 
 Beware of a positive 2nd parameter; when positive the model is going off
 to Infinity very quickly.
 
 When decay is True the model changes into a decay model
 
-&nbsp; f( x:p ) = p<sub>0</sub> * exp( - p<sub>1</sub> * x )<br>
+<br>&nbsp; f( x:p ) = p<sub>0</sub> * exp( - p<sub>1</sub> * x )<br>
 
 The parameters are initialized at 1.0, 1.0.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * sign  :  [-1,1]<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Whether decay is True or False.<br>
 
-<b>Attributes from Model</b>
+<b>Attributes from Model</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit<br>
+<b>Attributes from FixedModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
 
-<b>Attributes from FixedModel</b>
+<b>Attributes from BaseModel</b><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist<br>
-
-<b>Attributes from BaseModel</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames<br>
-
-<b>Examples</b>
-
+<b>Examples</b><br>
     em = ExpModel( )
     print( em.getNumberOfParameters( ) )
     2
@@ -64,8 +59,7 @@ Exponential model.
 <br>
 Number of parameters is 2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * decay  :  boolean<br>
 &nbsp;&nbsp;&nbsp;&nbsp; changes sign of parameter[1]<br>
 * copy  :  ExpModel<br>
@@ -92,8 +86,7 @@ Copy method.
 
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -108,8 +101,7 @@ Returns the result of the model function.
 
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>
@@ -126,8 +118,7 @@ Returns the partials at the input value.
 
 Returns the derivative df/dx at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like<br>
 &nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result<br>
 * params  :  array_like<br>

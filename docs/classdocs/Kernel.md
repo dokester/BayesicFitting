@@ -24,14 +24,14 @@ Several kernel functions, K( x ) are defined in this package
 | Name      | Definition        | Integral  | FWHM | range | comment     |
 |-----------|-------------------|:---------:|:----:|:-----:|-------------|
 | Biweight  | ( 1-x<sup>2</sup> )<sup>2</sup>       |     16/15 | 1.08 |  1.0  | aka Tukey   |
-| CosSquare | cos<sup>2</sup>( 0.5*pi*x ) |       1.0 | 1.00 |  1.0  |             |
-| Cosine    | cos( 0.5*pi*x )   |      4/pi | 1.33 |  1.0  |             |
-| Gauss     | exp( -0.5*x*x )   | sqrt(2*pi)| 1.22 |  inf  |             |
+| CosSquare | cos<sup>2</sup>(0.5*&pi;*x) |       1.0 | 1.00 |  1.0  |             |
+| Cosine    | cos( 0.5*&pi;*x ) |    4/&pi; | 1.33 |  1.0  |             |
+| Gauss     | exp( -0.5*x<sup>2</sup> ) |&radic;(2*&pi;)|1.22|  inf  |             |
 | Huber     | min( 1, 1/\|x\| ) |       inf | 4.00 |  inf  | improper    |
 |           |                   |           |      |       | aka Median  |
-| Lorentz   | 1 / ( 1 + x*x )   |        pi | 2.00 |  inf  |             |
-| Parabola  | 1 - x*x           |       4/3 | 1.41 |  1.0  |             |
-| Sinc      | sin(pi*x)/(pi*x)  |       1.0 | 1.21 |  inf  |             |
+| Lorentz   | 1 / ( 1 + x<sup>2</sup> )   |      &pi; | 2.00 |  inf  |             |
+| Parabola  | 1 - x<sup>2</sup>           |       4/3 | 1.41 |  1.0  |             |
+| Sinc      | sin(&pi;*x)/(&pi;*x)|     1.0 | 1.21 |  inf  |             |
 | Triangle  | 1 - \|x\|         |       1.0 | 1.00 |  1.0  |             |
 | Tricube   | ( 1 - \|x\|<sup>3</sup> )<sup>3</sup> |     81/70 | 1.18 |  1.0  |             |
 | Triweight | ( 1 - x<sup>2</sup> )<sup>3</sup>     |     32/35 | 0.91 |  1.0  |             |
@@ -50,8 +50,7 @@ elsewhere it is 0.
 Huber is not a proper Kernel as the integral is inf. However it is important
 in robust fitting (RobustShell) to get a madian-like solution for the outliers.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * integral  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; the integral over the valid range<br>
 * fwhm  :  float<br>
@@ -72,8 +71,7 @@ Category    mathematics/Fitting
 
 Constructor
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * integral  :  float<br>
 &nbsp;&nbsp;&nbsp;&nbsp; over [-inf, +inf]<br>
 * fwhm  :  float<br>
@@ -89,8 +87,7 @@ Constructor
 
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     input values
 
@@ -102,8 +99,7 @@ Return the result for input values.
 
 Return the result for squared input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the squares of the input values
 
@@ -115,8 +111,7 @@ Return the result for squared input values.
 
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like<br>
     the input values
 
