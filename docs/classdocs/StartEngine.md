@@ -23,8 +23,13 @@ Author       Do Kester.
 </th></tr></thead></table>
 
 Constructor.
+
 <b>Parameters</b>
 
+* walkers  :  WalkerList
+<br>&nbsp;&nbsp;&nbsp;&nbsp; list of walkers to be initiated
+* errdis  :  ErrorDistribution
+<br>&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used
 * copy  :  StartEngine
 <br>&nbsp;&nbsp;&nbsp;&nbsp; engine to be copied
 
@@ -43,8 +48,8 @@ Execute the engine by a random selection of the parameters.
 
 <b>Parameters</b>
 
-* walker  :  Sample
-<br>&nbsp;&nbsp;&nbsp;&nbsp; sample to diffuse
+* kw  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index in the WalkerList
 * lowLhood  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood
 

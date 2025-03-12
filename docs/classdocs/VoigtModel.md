@@ -26,10 +26,6 @@ The implementation uses the Faddeeva function from scipy.special.wofz.
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
 
-<b>Attributes</b>
-
-&nbsp;&nbsp;&nbsp;&nbsp; none of its own
-
 <b>Attributes from Model</b>
 
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit

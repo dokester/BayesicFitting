@@ -15,8 +15,10 @@ Because of that it always needs limits, low and high, such that
 &nbsp;&nbsp;&nbsp;&nbsp; Pr( x ) = 1 / ( high - low )    if low < x < high
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0                     elsewhere
 
-domain2Unit: u = ( d - lo ) / range
-unit2Domain: d = u * range + lo
+domain2Unit: 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; u = ( d - lo ) / range
+unit2Domain: 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; d = u * range + lo
 
 <b>Examples</b>
 

@@ -5,6 +5,7 @@
 + C. Boule, K. Andrews, A. Penfield, I. Puckette, K. A. Goodale and 
 S. A. Harfenist. **Determining Binary Stellar Orbits Using Kepplers Equation**.
 Journal of Double Star Observations, Vol 13, p 189. 2017.<br>
+[PDF](http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf)
 
 <a name="bischop"></a>  
 + C.M. Bishop. **Pattern Recognition and Machine Learning.**
@@ -13,6 +14,12 @@ Springer Science. 2006.<br>
 <a name="gregory"></a>  
 + P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
 Cambridge University Press. 2005.<br>
+
+<a name="gull"></a>
++ S.F. Gull. **Bayesian Data Analysis: Straight-line fitting.** 
+Maximum Entropy and Bayesian Methods. Ed: Skilling, J. (eds) 
+Fundamental Theories of Physics, vol 36. Springer, Dordrecht. 
+https://doi.org/10.1007/978-94-015-7860-8_55
 
 <a name="handley"></a>
 + WJ Handley, MP Hobson and AN Lasenby.

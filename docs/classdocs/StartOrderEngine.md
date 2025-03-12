@@ -26,7 +26,7 @@ Constructor.
 
 <b>Parameters</b>
 
-* walkers  :  SampleList
+* walkers  :  WalkerList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
 * errdis  :  ErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; error distribution to be used
@@ -50,7 +50,7 @@ Execute the engine by a random selection of the parameters.
 
 <b>Parameters</b>
 
-* kw  :  id
+* kw  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; id of waker to diffuse
 * lowLhood  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood

@@ -9,13 +9,8 @@
 Tophat (without convolutions) is a Kernel function which is 1.0 
 between [-0.5,0.5]; it is 0 elsewhere.
 
-<b>Attributes</b>
-
-* nconv  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; successive autoconvolutions of the tophat. max=6.
-
 | Name      | Definition          | Integral  | FWHM | range | comment     |
-* | : ----------|:--------------------|----------:|:----:|:-----:|:------------|
+|:----------|:--------------------|----------:|:----:|:-----:|:------------|
 | Tophat 0  | 1.0                 |      1.0  | 1.00 |  0.5  | like Uniform|
 | Tophat 1  | 1 - \|x\|           |      1.0  | 1.00 |  1.0  | aka Triangle|
 | Tophat 2  | 2nd order polynomial|      1.0  | 1.26 |  1.5  |             |
@@ -23,6 +18,11 @@ between [-0.5,0.5]; it is 0 elsewhere.
 | Tophat 4  | 4th order polynomial|      1.0  | 1.60 |  2.5  |             |
 | Tophat 5  | 5th order polynomial|      1.0  | 1.73 |  3.0  |             |
 | Tophat 6  | 6th order polynomial|      1.0  | 1.86 |  3.5  |             |
+
+<b>Attributes</b>
+
+* nconv  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; successive autoconvolutions of the tophat. max=6.
 
 Thanks to Romke Bontekoe and Mathematica for providing the analytic expressions.
 

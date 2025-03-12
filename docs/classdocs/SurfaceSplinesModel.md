@@ -26,8 +26,8 @@ The SplinesModel has more information about order and knots.
     yknots = numpy.arange(  nyk , dtype=float ) * 10      # make knots from 0 to 100
     csm = SurfaceSplinesModel( xknots, yknots, 2 )
     print csm.getNumberOfParameters( )      # ( nxk + order - 1 )*( nyk + order - 1 )
-216
-# ... fitter etc. see Fitter
+    216
+    # ... fitter etc. see Fitter
 
 Category     mathematics/Fitting
 

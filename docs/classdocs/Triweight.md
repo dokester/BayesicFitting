@@ -18,9 +18,9 @@ Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
 Constructor.
 
-&nbsp; Using
-<br>&nbsp; integral = 32.0/35.0
-<br>&nbsp; fwhm = 0.908404
+Using
+<br>&nbsp;&nbsp;&nbsp;&nbsp; integral = 32.0/35.0
+<br>&nbsp;&nbsp;&nbsp;&nbsp; fwhm = 0.908404
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">

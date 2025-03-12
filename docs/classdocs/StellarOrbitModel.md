@@ -8,11 +8,11 @@
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
-&nbsp; The algorithm was taken from
+&nbsp; The algorithm was taken from [Boule](../references.md#boule)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; http://www.jdso.org/volume13/number2/Harfenist<sub>189</sub>-199.pdf
 
-| par |symbol | description                        | limits- | comment |
+| par |symbol | description                        | limits  | comment |
 |-----|-------|------------------------------------|---------|---------|
 | p<sub>0</sub> |   e   | eccentricity of the elliptic orbit | 0<e<1   | 0 = circular orbit |
 | p<sub>1</sub> |   a   | semi major axis                    |   a>0   |                      |
@@ -104,7 +104,7 @@ Returns the result of the model function.
 * params  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
-The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
+The parameters are explained in the [StellarOrbitModel](#StellarOrbitModel) constructor.
 
 
 <a name="toRect"></a>
@@ -144,7 +144,7 @@ Returns the derivative (df/dx) of the model function.
 * params  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
-The parameters are explained in the [](./.md)#StellarOrbitModel constructor.
+The parameters are explained in the [StellarOrbitModel](#StellarOrbitModel) constructor.
 
 
 <a name="basePartial"></a>
@@ -164,13 +164,7 @@ The partials are x ( xdata ) to degree-th power.
 * parlist  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; list of indices active parameters (or None for all)
 
-* p_0  :  e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-* p_1  :  a     semi major axis
-* p_2  :  P     period of the orbit (>0)
-* p_3  :  p     phase since periastron passage (0<p<2pi)
-* p_4  :  i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-* p_5  :  O     position angle of the line of nodes
-* p_6  :  o     longitude of periastron
+The parameters are explained in the [StellarOrbitModel](#StellarOrbitModel) constructor.
 
 
 <a name="baseName"></a>

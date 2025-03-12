@@ -10,10 +10,7 @@ Class for calculating Kepplers second law for planetary motion.
 
 The projection of the orbit on the sky is not included in this class.
 
-The algorithm was taken from
-<br>&nbsp; Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
-
-http://www.jdso.org/volume13/number2/Harfenist<sub>189</sub>-199.pdf
+The algorithm was taken from [Boule](../references.md#boule).
 
 | param | abbr | name                   | limits    | comment     |
 |:-----:|:----:|:-----------------------|:---------:|:------------| 

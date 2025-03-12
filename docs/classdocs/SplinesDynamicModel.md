@@ -15,17 +15,17 @@ of knots)
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = SplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : 
+    18
+    # or alternatively
     csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
-* # or alternatively : 
+    18
+    # or alternatively
     npt = 161                                               # to include both 0 and 160.
     x = numpy.arange( npt, dtype=float )                    # x-values
     csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     print csm.getNumberOfParameters( )
-18
+    18
 
 <b>Attributes</b>
 

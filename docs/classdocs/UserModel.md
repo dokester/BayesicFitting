@@ -18,16 +18,16 @@ name  as  string
 
 <b>Examples</b>
 
-import numpy as np
+    import numpy as np
     def ur( x, p ) 
         return p[0] * np.sin( p[1] * x + p[2] * np.log( x + p[3] ) ) 
     
    
     mdl = UserModel( 4, ur, userName="slowchirp" )
     print( mdl )
-UserModel( slowchirp )
+    UserModel( slowchirp )
     print( mdl.npars )
-4
+    4
 
 
 <b>Attributes</b>

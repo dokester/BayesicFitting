@@ -18,12 +18,13 @@ between data (xdata,ydata) and (target, model(target)) is minimised.
 The target are nuisance parameters which are not part of the modeling
 solution.
 
-&nbsp; Define
+Define
 <br>&nbsp;&nbsp;&nbsp;&nbsp; xd = xdata 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; yd = ydata 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; u = target 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; F(u:P) = model( target )
-<br>&nbsp; Then the mismathes in both directions are
+
+Then the mismathes in both directions are
 <br>&nbsp;&nbsp;&nbsp;&nbsp; X = u - xd 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Y = F(u:p) - yd
 
@@ -33,8 +34,8 @@ between the mismatches X and Y
 As the targets need to be optimised they need a Prior. In the present
 implementation there is the same Prior for all targets, which the centered on
 each of the xdata values.
-S.Gull (1989) argues to use a GaussPrior with a scale similar to the errors
-in both X and Y.
+[S.Gull](../references.md#gull) argues to use a GaussPrior with a scale 
+similar to the errors in both X and Y.
 
 <b>Attributes</b>
 

@@ -27,27 +27,47 @@ Using
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
 </th></tr></thead></table>
+Return the result for input values.
+
+<b>Parameters</b>
+
+* x  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; input values
 
 <a name="resultsq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>resultsq(</strong> xsq )
 </th></tr></thead></table>
+Return the result for input values. Same as result.
+
+<b>Parameters</b>
+
+* xsq  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; input values
 
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> x )
 </th></tr></thead></table>
+Return the partial derivative wrt the input values.
+
+<b>Parameters</b>
+
+* x  :  array-like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the input values
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
 </th></tr></thead></table>
 
+Return True 
 <a name="name"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>name(</strong> )
 </th></tr></thead></table>
 
+Return the name of the kernel 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Kernel.html">Kernel</a></th></tr></thead></table>
 
