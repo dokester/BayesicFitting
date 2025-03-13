@@ -6,10 +6,11 @@
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>Module FitPlotter</strong> </th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py target=_blank>Source</a></th></tr></thead></table>
 
-This module contains 2 methods to plot the results of a fit by a Fitter resp. 
-a Sampler.
 
-They are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
+&nbsp; module contains 2 methods to plot the results of a fit by a Fitter resp. 
+mpler.
+
+&nbsp; are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
 
 
 <a name="plotFit"></a>
@@ -18,6 +19,7 @@ They are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
  residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5],
  xlim=None, ylim=None, filename=None, transparent=False ) 
 </th></tr></thead></table>
+
 Plot the data of a fit.
 
 <b>Parameters</b>

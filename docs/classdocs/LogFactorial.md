@@ -6,13 +6,15 @@
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>Module LogFactorial</strong> </th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py target=_blank>Source</a></th></tr></thead></table>
 
-One method that returns the log of the factorial of a number.
+
+method that returns the log of the factorial of a number.
 
 
 <a name="logFactorial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logFactorial(</strong> )
 </th></tr></thead></table>
+
 logFactorial.  It provides the natural log of k!
 
 if k is float, it will be truncated to int

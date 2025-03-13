@@ -6,13 +6,15 @@
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>Module Tools</strong> </th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py target=_blank>Source</a></th></tr></thead></table>
 
-This module contains a mixed bag of "usefull" methods.
+
+&nbsp; module contains a mixed bag of "usefull" methods.
 
 
 <a name="getItem"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getItem(</strong> k ) 
 </th></tr></thead></table>
+
 Return the k-th item of the ilist
 <br>&nbsp;&nbsp;&nbsp;&nbsp; or the last when not enough
 <br>&nbsp;&nbsp;&nbsp;&nbsp; or the ilist itself when it is not a list

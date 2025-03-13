@@ -6,13 +6,15 @@
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
 <strong>Module Formatter</strong> </th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Formatter.py target=_blank>Source</a></th></tr></thead></table>
 
-This module contains methods to format numbers, especially in arrays.
+
+&nbsp; module contains methods to format numbers, especially in arrays.
 
 
 <a name="formatter_init"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>formatter_init(</strong> indent=None, linelength=None, max=-1 )
 </th></tr></thead></table>
+
 Initialize the formatter with new default values.
 
 <b>Parameters</b>

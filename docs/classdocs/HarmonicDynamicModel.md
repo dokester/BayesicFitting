@@ -8,7 +8,7 @@
 
 Harmonic oscillator Model of adaptable order.
 
-f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> cos( 2 &pi; j x ) + p<sub>k</sub>+1 sin( 2 &pi; j x ) )
+f( x:p ) = &sum;<sub>j</sub> ( p<sub>k</sub> cos( 2 &pi; j x ) + p<sub>k+1</sub> sin( 2 &pi; j x ) )
 
 j = 1, N; k = 0, 2N
 
