@@ -22,6 +22,7 @@ solid DodgerBlue">Contents</span>
 | [Splines](./splines.md) |
 | [Quality](./dataquality.md) |
 | [BoundingBox](./BoundingBox.md) |
+| [Dimensions](./Dimensions.md) |
 
 </div>
 </div>

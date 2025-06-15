@@ -4,7 +4,6 @@
 
 
 # Expressing Data Quality in Fitting
-## Do Kester
 
 ## 1. Introduction
 
@@ -901,4 +900,6 @@ latex-->
 It is irrelevant what the exact form of the individual likelihoods is.
 They can all be combined in this way with weights.
 
+
+## Do Kester. 2023.
 

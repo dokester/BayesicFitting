@@ -167,3 +167,4 @@ The sectors are defined when ndim >= 3 and then dividing dimensions 1,
 ![png](images/BB_12.png)
     
 
+## Do Kester. 2024.

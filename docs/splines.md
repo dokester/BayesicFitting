@@ -373,3 +373,4 @@ when one parameter changed only localized effects are seen. Even when
 the position of a knot shifts, adjacent knots are only slightly
 affected. This opens the option of a **SplinesDynamicModel**.
 
+## Do Kester. 2020.
