@@ -22,6 +22,7 @@ solid DodgerBlue">Contents</span>
 | [Splines](./splines.md) |
 | [Quality](./dataquality.md) |
 | [BoundingBox](./BoundingBox.md) |
+| [Sampling](./Sampling.md) |
 | [Dimensions](./Dimensions.md) |
 
 </div>
@@ -54,6 +55,10 @@ data quality in terms of accuracy versus weights.
 
 ## BoundingBox
 
-A look at bounding boxes in higher dimensions.
+A look at [bounding boxes](./BoundingBox.md) in higher dimensions.
+
+## Sampling.
+
+[Sampling](./Sampling.md) from the Prior can lead in some cases to problems.
 
 
