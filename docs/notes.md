@@ -36,6 +36,11 @@ solid DodgerBlue">Contents</span>
 
 Here we present a number of notes related to BayesicFitting.
 
+To quote John Skilling on one of the Maxent conferences:
+"All these things are probably known to people who know these things."
+
+Well.. It aint me, babe.
+
 ## Splines.
 
 The [splines](./splines.md) note presents details on the construction and 
