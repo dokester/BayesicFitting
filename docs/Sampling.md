@@ -41,6 +41,7 @@ prior positions.
 Table 1. Numeric integration of Log Z..
 </td></tr>
 </table>
+
 | center |  lZ_true |  mean | 
 |:------:|:--------:|:-----:| 
 |   0    | -124.08  | 0.000 | 
@@ -74,6 +75,7 @@ at 9 sigma away.
 Table 2. Gaussian priors.
 </td></tr>
 </table>
+
 | center |  lZ_ns  |  dlZ  | lz_true  |    mean |
 |:------:|:-------:|:-----:|:--------:|:-------:|
 |    0   | -124.03 |  0.06 | -124.07  |   0.003 |
@@ -123,6 +125,7 @@ also for a uniform prior between [-100,100]
 Table 3. Uniform priors.
 </td></tr>
 </table>
+
 | center | lZ_true | lZ_ns10 |mean_10|lZ_ns_100|mean_100|
 |:------:|:-------:|:-------:|:-----:|:-------:|:------:|
 |   0    | -124.07 | -123.99 | 0.002 | -123.90 |  0.003 |
