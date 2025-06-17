@@ -1,4 +1,4 @@
-# Walkers and Engines
+# Walkers and Engines (under development)
 
 ## Glossary
 
@@ -62,7 +62,6 @@ In figure 1 we display the distributions for a number of spheres in
 several dimensions from 2 to 1024.  The bulk of the space in this
 projection is around zero with an average distance of at most sqrt(1/N).
 
-![png](images/distonaxis.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
@@ -70,10 +69,12 @@ Figure 1 shows the distribution of space as projected on a main axis for
 several N-d unit spheres. They are normalised to 1.0.
 </td></tr>
 </table>
+![png](images/distonaxis.png)
+<p>
 
 Although it would seem that the bulk of an N-d sphere is located at the
 center, this is not the case. Most points near the center have an
-euclidean distance of somewhat less than 1. So most of them are found on the
+euclidean distance very near to 1. So most of them are found on the
 outskirts.  If we trace the space in consecutive shells centered on the
 origin we see that it is proportional to the the surface area, a (N-1)-d
 space.
@@ -84,7 +85,6 @@ In figure 2 we show how the available space inside a N-d sphere is
 distributed as a function of the radius. After about N > 100 it gets so
 extreme that the distribution is almost a delta function at 1.
 
-![png](images/distinshells.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
@@ -92,6 +92,8 @@ Figure 2 shows the distribution of space in shells at equal distance to
 the origin for several N-d unit spheres. They are normalised to 1.0.
 </td></tr>
 </table>
+![png](images/distinshells.png)
+<p>
 
 In figures 3, 4 and 5 we show unit spheres of dimensions 2, 10 and 100, resp.
 In each sphere we have 10000 points, uniformly distributed, using the
@@ -104,29 +106,29 @@ comparison the theoretical distribution is also shown (in green).  In
 the right hand panels, the histograms of the distance to the origin (in
 red) and the theory (in green) are shown for the same spheres. 
 
-![png](images/pointsInSphere-02.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 3 shows the distribution uniform points in a 2-d sphere.
 </td></tr>
 </table>
+![png](images/pointsInSphere-02.png)
 
-![png](images/pointsInSphere-10.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 4 shows the distribution uniform points in a 10-d sphere.
 </td></tr>
 </table>
+![png](images/pointsInSphere-10.png)
 
-![png](images/pointsInSphere-100.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
 Figure 5 shows the distribution uniform points in a 100-d sphere.
 </td></tr>
 </table>
+![png](images/pointsInSphere-100.png)
 
 ## Engines
 
@@ -140,7 +142,12 @@ and identically distributed walker to replace the discarded one.  It is
 essential that the new points are indeed independent of each other and
 that they explores all of the available space,
 
-** Algorithm 1.** Galilean Engine.
+<table><tr>
+<td style="width: 40px;">  </td>
+<td style="width: 350px;">
+Algorithm 1. Galilean Engine.
+</td></tr>
+</table>
 
     1 Find a starting point from walkers or phantoms above lowL
     2 Find a random velocity from bounding box and size 
@@ -168,7 +175,12 @@ that they explores all of the available space,
     1 find starting point somewhat higher than lowL
     6 find edge of likelihood constrained area and mirror there 
 
-** Algorithm 2. ** Chord Engine.
+<table><tr>
+<td style="width: 40px;">  </td>
+<td style="width: 350px;">
+Algorithm 2. Chord Engine.
+</td></tr>
+</table>
 
     1 Find a starting point from walkers or phantoms
     2 Find a normalised velocity
@@ -224,12 +236,13 @@ starting value.
 
 The dotted blue line shows the theoretical value (50%, obviously).  All
 dotted lines shows the theoretical values for the same-colored
-historgams. 
+histograms. 
 
 In green (and black) we show the projections of the points on the main
-axes. In black the projection on axis 0, special because of the
-asymmetry. In green we added all projections on the other axes together;
-we do not expect any surprises there, as it is all supersymmetric.
+axes.  In black the projection on axis 0, specifically displayed because
+of the asymmetry in the strarting position.  In green we added all
+projections on the other axes together; we do not expect any surprises
+there, as it is all supersymmetric. 
 
 Finally in red we display the points as a function of distance to the
 origin. 
@@ -246,7 +259,6 @@ on average 3 forward steps are taken before we need a mirroring.
 
 As said before, the number of step is 20 throughout.
 
-![png](images/GalileanEngine-10.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
@@ -254,11 +266,11 @@ Figure 6 shows 1000 results of executing the Galilean Engine from 4
 different starting positions in a 10-d sphere.
 </td></tr>
 </table>
+![png](images/GalileanEngine-10.png)
 
 In 10 dimensions 
 
 
-![png](images/GalileanEngine-100.png)
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
@@ -266,6 +278,7 @@ Figure 7 shows 1000 results of executing the Galilean Engine from 4
 different starting positions in a 100-d sphere.
 </td></tr>
 </table>
+![png](images/GalileanEngine-100.png)
 
 
 
