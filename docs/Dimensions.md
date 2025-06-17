@@ -69,6 +69,7 @@ Figure 1 shows the distribution of space as projected on a main axis for
 several N-d unit spheres. They are normalised to 1.0.
 </td></tr>
 </table>
+
 ![png](images/distonaxis.png)
 <p>
 
@@ -92,6 +93,7 @@ Figure 2 shows the distribution of space in shells at equal distance to
 the origin for several N-d unit spheres. They are normalised to 1.0.
 </td></tr>
 </table>
+
 ![png](images/distinshells.png)
 <p>
 
@@ -112,7 +114,9 @@ red) and the theory (in green) are shown for the same spheres.
 Figure 3 shows the distribution uniform points in a 2-d sphere.
 </td></tr>
 </table>
+
 ![png](images/pointsInSphere-02.png)
+<p>
 
 <table><tr>
 <td style="width: 40px;">  </td>
@@ -120,6 +124,7 @@ Figure 3 shows the distribution uniform points in a 2-d sphere.
 Figure 4 shows the distribution uniform points in a 10-d sphere.
 </td></tr>
 </table>
+
 ![png](images/pointsInSphere-10.png)
 
 <table><tr>
@@ -128,6 +133,7 @@ Figure 4 shows the distribution uniform points in a 10-d sphere.
 Figure 5 shows the distribution uniform points in a 100-d sphere.
 </td></tr>
 </table>
+
 ![png](images/pointsInSphere-100.png)
 
 ## Engines
@@ -266,6 +272,7 @@ Figure 6 shows 1000 results of executing the Galilean Engine from 4
 different starting positions in a 10-d sphere.
 </td></tr>
 </table>
+
 ![png](images/GalileanEngine-10.png)
 
 In 10 dimensions 
@@ -278,6 +285,7 @@ Figure 7 shows 1000 results of executing the Galilean Engine from 4
 different starting positions in a 100-d sphere.
 </td></tr>
 </table>
+
 ![png](images/GalileanEngine-100.png)
 
 
