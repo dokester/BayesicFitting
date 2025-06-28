@@ -138,15 +138,24 @@ Figure 5 shows the distribution uniform points in a 100-d sphere.
 
 ## Engines
 
+An engine is an algorithm that moves a walker around within the present
+likelihood constraint until it is deemed independently distributed with
+respect to the other walkers and more specificly to it origin.
+
 Each engine is called with the list of walkers and the value of the
-lowLogLikelihood constraint. All engines have attributes like *nstep*
-and maybe *size* to govern the number of steps and the step size. Other
+lowLogLikelihood constraint, `lowL`. All engines have attributes like `nstep`
+and maybe `size` to govern the number of steps and the step size. Other
 attributes may be present in an engines to select different variants. 
 
 When it returns, the list of walkers is updated with a new independent
 and identically distributed walker to replace the discarded one.  It is
 essential that the new points are indeed independent of each other and
 that they explores all of the available space,
+
+### Schematic Algorithms.
+
+We present the schematic algorithms of the 2 engines we would like to
+discuss: The GalileanEngine and the ChordEngine.
 
 <table><tr>
 <td style="width: 40px;">  </td>
@@ -246,9 +255,9 @@ histograms.
 
 In green (and black) we show the projections of the points on the main
 axes.  In black the projection on axis 0, specifically displayed because
-of the asymmetry in the strarting position.  In green we added all
+of the asymmetry in the starting position.  In green we added all
 projections on the other axes together; we do not expect any surprises
-there, as it is all supersymmetric. 
+there, as it is all very symmetric by construction. 
 
 Finally in red we display the points as a function of distance to the
 origin. 
@@ -275,7 +284,11 @@ different starting positions in a 10-d sphere.
 
 ![png](images/GalileanEngine-10.png)
 
-In 10 dimensions 
+In figures 6 and 7, we display the results of executing the Galilean
+engine for 1000 runs, starting from four positions, one for each pair of
+panels.  In figures 6 we have a 10 dimensional problem, where all of our
+statistics are mostly OK.  It does not matter much from where we start,
+all spots in the sphere seem to be accessible. 
 
 
 <table><tr>
@@ -288,6 +301,87 @@ different starting positions in a 100-d sphere.
 
 ![png](images/GalileanEngine-100.png)
 
+In figure 7 we have a 100 dimensional problem. The first 2 starting
+points are still OK, but for points a 0.9 and 0.99, the resulting clouds
+has not migrated to the center where they should be. Obviously all
+resulting points are more or less correlated with the point they started
+from. 
+
+
+### Chord Engine
+
+In the ChordEngine we did not use the orthonormalisation. For
+a starting point at 0, the first step is always radially outward. When
+all consecutive steps are (ortho)normal to this first step, they move
+further and further into the edge of the sphere. So all points end up
+even nearer the edge than the dimensionality of the sphere would warrant.
+This also is true to a lesser extent, for a starting point at 0.5.
+
+As said before, the number of step is 20 throughout.
+
+<table><tr>
+<td style="width: 40px;">  </td>
+<td style="width: 350px;">
+Figure 8 shows 1000 results of executing the Chord Engine from 4
+different starting positions in a 10-d sphere.
+</td></tr>
+</table>
+
+![png](images/ChordEngine-10.png)
+
+Already in a 10-d space we see correlated behaviour in the use of the
+ChordEngine. We see clear shifts of the whole cloud, at 0.9 and 0.99.
+But even at a starting position of 0.5, the black histogram is shifted
+with respect to the green one, indicating a shift in resulting
+positions. 
+
+<table><tr>
+<td style="width: 40px;">  </td>
+<td style="width: 350px;">
+Figure 9 shows 1000 results of executing the Chord Engine from 4
+different starting positions in a 100-d sphere.
+</td></tr>
+</table>
+
+![png](images/ChordEngine-100.png)
+
+Things are worse in 100 dimensions. The resulting cloud seems
+to cling to the starting point, except for the one at 0. The green
+histograms, projections on all other axes, get progressively thinner.
+When one axis occupies more than 90 % of the available space, there is
+less space on the 99 other axes.
+
+The red histograms and the blue histograms, disregarding axis 0,  are OK
+as far as can be judged from the figures.
+
+### Discussion.
+
+We did not very well, especially in higher dimensions. How can we
+understand this situation.
+
+When proceeding from a point close to the edge, all directions, except
+one, end up in forbidden likelihood space very soon.  The one exception
+is the direction perpendicular to the local tangent plane. Near the edge
+there is very little space to move away from the starting point.  
+
+The ChordEngine has more problems to do so, as it draws a random chord
+through the starting point and find a new position randomly on that
+chord.  Possibly even moving closer to the edge, and the higher the
+dimensions the more probable it gets. A random direction is more likely
+along the tangent plane than across.
+
+The GalileanEngine tries a step in a random direction.  If the
+step falls in forbidden space, it tries to mirror (or reverse) back into
+allowed space.  However if the mirrored (or reversed) trial is also in
+forbidden space the step fails.  So with the GalileanEngine we have more
+options to move away from the starting point.
+
+Of course we never use one point the generate an ensemble of 1000
+walkers. This was an artificial setup to see what would happen. What we
+might learn from it, is that it could be wise to avoid the points
+closest to the edge when selecting a starting point. The points close to
+the edge are the points with a logLikelihood only slightly larger than
+`lowL`.  
 
 
 

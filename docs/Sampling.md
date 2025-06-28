@@ -238,7 +238,7 @@ Using 64-bit floats, Gauss priors yield non zero values in the sigma range
 [-8,8]. Outside that range NS breaks down, although effect of ill
 sampling are already felt as early as at 4 sigma.  For Laplace priors the
 non zero range is between sigmas [-36,36] and for Cauchy priors it is
-between [-1e16,1e16]. The latter would probably never be a pactical
+between [-1e16,1e16]. The latter would probably never be a practical
 problem. The former could ready be a problem halfway the range.
 
 Fortunately it can be remedied, by sampling over an integration box, and
