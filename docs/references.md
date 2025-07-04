@@ -11,6 +11,11 @@ Journal of Double Star Observations, Vol 13, p 189. 2017.<br>
 + C.M. Bishop. **Pattern Recognition and Machine Learning.**
 Springer Science. 2006.<br>
 
+<a name=buchner></a>
++ J. Buchner. 
+**Comparison of Step Samplers for Nested Sampling.**
+Phys. Sci. Forum 2022, 5(1), 46; https://doi.org/10.3390/psf2022005046<br>
+
 <a name="gregory"></a>  
 + P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
 Cambridge University Press. 2005.<br>
@@ -91,3 +96,14 @@ Cambridge University Press. 1988-2007. <br>
 **Data Analysis, A Bayesian Tutorial.** 
 Oxford University Press. 2006.<br>
 
+<a name="skilling1"></a>
++ J. Skilling.
+**Bayesian computation in big spaces-nested sampling and Galilean Monte Carlo.**
+AIP Conference Proceedings 1443 145–156. (2012)
+http:// dx.doi.org/10.1063/1.3703630<br>
+
+<a name="stokes"></a>
+Barrie Stokes, Frank Tuyl, and Irene Hudson.
+**New prior sampling methods for nested sampling - Development and testing**
+AIP Conference Proceedings 1853, 110003 (2017); 
+https://doi.org/10.1063/1.4985378<br>

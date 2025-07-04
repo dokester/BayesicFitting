@@ -4,20 +4,23 @@
 
 A *walker* is a member of an ensemble of (multidimensional) points each
 one representing the parameter set of an inference problem. They are also
-called "live points" [1 - Buchner]. 
+called "live points" [Buchner](./references.md#buchner). 
 
 An *engine* is an algorithm that moves a walker around within the present
 likelihood constraint until it is deemed independently distributed with
 respect to the other walkers and more specificly to it origin. They are
-also called likelihood-restricted prior sampling (LPRS) methods [2 - Stokes]
+also called likelihood-restricted prior sampling (LPRS) methods 
+[Stokes](./references.md#stokes)
 
 A *phantom* is a valid point visited by an engine during the search for
 a new walker position. As such, all walkers are also phantoms.
 
 ## Introduction.
 
-In this note we consider 2 engines, the ChordEngine [3 - Handley] and
-the GalileanEngine [4 - Skilling, Henderson]. Especially we look at
+In this note we consider 2 engines, the ChordEngine 
+[Handley et al.](references.md#handley) and
+the GalileanEngine [Skilling](./references.md#skilling), 
+[Henderson](./references.md#henderson). Especially we look at
 their performance in higher dimensions. But first we have to take a look
 at some properties of N-dimensional spaces.
 
@@ -59,8 +62,8 @@ Etc. So for an N-sphere it is proportional to
     d_N(x) ~ d_2(x)^(N-1)
 
 In figure 1 we display the distributions for a number of spheres in
-several dimensions from 2 to 1024.  The bulk of the space in this
-projection is around zero with an average distance of at most sqrt(1/N).
+several dimensions from 2 to 1024.  The bulk of the points in this
+projection is around zero with an average distance of sqrt(1/N).
 
 <table><tr>
 <td style="width: 40px;">  </td>
@@ -230,8 +233,8 @@ position.
 Due to the rotational symmetry of the N-sphere the only distinguishing
 feature of a point, is its distance to the origin. Without loss of
 generality, we take 4 points, positioned on axis 0 at 0.0, 0.5, 0.9 and
-0.99. From all these points we generate 1000 points using one of our
-two engines. We do this for N-sphres of 10 and 100 dimensions. The 2-d
+0.99. From these starting positions we generate 1000 points using one of our
+two engines. We do this for N-spheres of 10 and 100 dimensions. The 2-d
 sphere we skip, because it is very easy to check the preformance of engines
 in 2 dimensions and consequently everything there is hunkydory.
 
@@ -267,12 +270,17 @@ origin.
 In the version of the Galilean engine we have used here, we set the
 perturbation at each new step at 20%, the fraction of mirror steps to
 0.25 and we first locate the lowL edge before mirroring.  The random
-perturbation ensures that the engine is not moving around in circles,
-returning periodically to the starting point, while still pushing
-forward to new regions. The step size is dynamically adapted such that
-on average 3 forward steps are taken before we need a mirroring. 
+perturbation ensures that the engine is not moving around in circles
+within the N-sphere, returning periodically to the starting point, while
+still pushing forward to new regions.  The step size is dynamically
+adapted such that on average 3 forward steps are taken before we need a
+mirroring. 
 
-As said before, the number of step is 20 throughout.
+As said before, the number of steps is 20 throughout.
+
+In figures 6 and 7, we display the results of executing the Galilean
+engine for 1000 runs, starting from four positions, one for each pair of
+panels.  
 
 <table><tr>
 <td style="width: 40px;">  </td>
@@ -284,9 +292,7 @@ different starting positions in a 10-d sphere.
 
 ![png](images/GalileanEngine-10.png)
 
-In figures 6 and 7, we display the results of executing the Galilean
-engine for 1000 runs, starting from four positions, one for each pair of
-panels.  In figures 6 we have a 10 dimensional problem, where all of our
+In figure 6 we have a 10 dimensional problem, where all of our
 statistics are mostly OK.  It does not matter much from where we start,
 all spots in the sphere seem to be accessible. 
 
@@ -317,7 +323,7 @@ further and further into the edge of the sphere. So all points end up
 even nearer the edge than the dimensionality of the sphere would warrant.
 This also is true to a lesser extent, for a starting point at 0.5.
 
-As said before, the number of step is 20 throughout.
+Again, the number of steps is 20.
 
 <table><tr>
 <td style="width: 40px;">  </td>
@@ -361,11 +367,14 @@ understand this situation.
 
 When proceeding from a point close to the edge, all directions, except
 one, end up in forbidden likelihood space very soon.  The one exception
-is the direction perpendicular to the local tangent plane. Near the edge
-there is very little space to move away from the starting point.  
+is the direction perpendicular to the local tangent plane.  Near the
+edge there is very little space to move away from the starting point. 
+The tangential distance from a point at 0.99 to the edge is only 0.14. 
+It takes quite a number of these little steps to move a significant
+distance. 
 
 The ChordEngine has more problems to do so, as it draws a random chord
-through the starting point and find a new position randomly on that
+through the starting point and find a new position on that
 chord.  Possibly even moving closer to the edge, and the higher the
 dimensions the more probable it gets. A random direction is more likely
 along the tangent plane than across.
@@ -376,12 +385,78 @@ allowed space.  However if the mirrored (or reversed) trial is also in
 forbidden space the step fails.  So with the GalileanEngine we have more
 options to move away from the starting point.
 
-Of course we never use one point the generate an ensemble of 1000
-walkers. This was an artificial setup to see what would happen. What we
-might learn from it, is that it could be wise to avoid the points
-closest to the edge when selecting a starting point. The points close to
-the edge are the points with a logLikelihood only slightly larger than
-`lowL`.  
+The problem we encountered here is caused by starting points close to
+the edge, of which there are more in higher dimensional spaces, and at
+the same time, an increasing tendency for step directions in the tangent
+plane.  In high dimensions we select more points close to the edge to
+start from, while most directions are along the tangent, forcing the
+engine to small steps. 
+
+An obvious solution would be to avoid starting positions close to the
+edge.  While for a point at 0.99 the distance to the edge along the
+tangent is 0.14, starting at 0.9 it is already 0.44.  A small avoidance
+zone of 10 percent yields a stepping space, more that 3 times larger. 
+And it works independent of the dimensionality.  New points should be
+indenpendent and identically distributed anyway.  So avoiding some
+starting positions should not make a difference. 
+
+Just a we do not know exactly where the edge of allowed space is, we
+also dont know where the avoidance edge for a fraction of f is.  In both cases
+we use the calculated logL's as proxy. When the error distribution is a
+Gaussian, The proxy for the f edge is found as
+
+    logL_f = logL_low + &alpha; * ( logL_max - logL_low )
+    &alpha; = ( 1 - f ) ^ 2
+
+LogL_max is the highest value in the ensemble (or in the phantoms). It
+is the proxy for the point at the origin. 
+
+When the error distribution is Laplace, &alpha; = ( 1 - f ).
+
+All points with a logL < logL_f are avoided.  In higher dimensions,
+more points are deselected as more points are located near the edge. 
+This is exactly what we want to accomplice. 
+
+In the next section we investigate how the engines perform in higher
+dimensions. 
+
+## Performance.
+
+Of course we never use one starting position the generate an ensemble of
+1000 walkers.  It was an artificial setup to see what would happen. In
+this section we define a model which is easily extendable over more
+dimensions and we try to find out which values for the avoidance
+fraction and for the pertubation in the Galilean engine are optimal.
+
+### Linear Model
+
+As a model we take a cubic splines model with knots numbering from 2 to
+98, yielding 4 to 100 parameters (i.e. dimensions). The model is fit to
+just random noise from N(0,1). The length of the data set varies with
+the dimensions such that there are some 5 data points per knot. Our
+priors are uniform between [-10,10].
+
+With this setup we can calculate the evidence analytically as a
+multidimensional Gaussian. we call this the baseline evidence.
+
+Subsequently we use NestedSampler to calculate the evidence for several
+settings of &alpha; and the perturbance fraction. The baseline evidence
+is subtracted so that the results should be 0. If everything were OK.
+
+In the figures 10 to 12 We show the performance of the Galilean engine
+for 3 settings of &alpha; (avoid) and 5 setting of the perturbance.
+
+<table><tr>
+<td style="width: 40px;">  </td>
+<td style="width: 350px;">
+Figure 9 shows 1000 results of executing the Chord Engine from 4
+different starting positions in a 100-d sphere.
+</td></tr>
+</table>
+
+|:---:|:---:|:---:|
+| ![png](images/EvsD-p-0.png)| ![png](images/EvsD-p-11.png) | ![png](images/EvsD-p-12.png) |
+
 
 
 
