@@ -451,9 +451,7 @@ for 3 settings of &alpha; (avoid) and 5 setting of the perturbance.
 <td style="width: 350px;">
 Figure 9 shows 1000 results of executing the Chord Engine from 4
 different starting positions in a 100-d sphere.</td>
-<td style="width: 0px;">  </td>
-</td></tr>
-</table>
+</tr></table>
 <table><tr>
 <td style="width: 130px;">
 <img src="images/EvsD-p-0.png"/></td>
