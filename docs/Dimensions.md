@@ -49,7 +49,7 @@ In 1 dimension we have an uniform distribution of space along that axis.
 
 <!--latex
 \begin{displaymath}
-d_1(x) \propto 1
+\quad d_1(x) \propto 1
 \end{displaymath}
 latex-->
 
@@ -61,7 +61,7 @@ proportional to
 
 <!--latex
 \begin{displaymath}
-d_2(x) \propto \sqrt( 1 - x^2 ).
+\quad d_2(x) \propto \sqrt( 1 - x^2 ).
 \end{displaymath}
 latex-->
 
@@ -73,7 +73,7 @@ value. The volumes is proportional to
 
 <!--latex
 \begin{displaymath}
-d_3(x) \propto ( 1 - x^2 ) = d_2^2(x)
+\quad d_3(x) \propto ( 1 - x^2 ) = d_2^2(x)
 \end{displaymath}
 latex-->
 
@@ -84,7 +84,7 @@ For a 4-d (hyper)ball there is a 3-d ball at every x value.
 
 <!--latex
 \begin{displaymath}
-d_4(x) \propto d_2^3(x)
+\quad d_4(x) \propto d_2^3(x)
 \end{displaymath}
 latex-->
 
@@ -95,7 +95,7 @@ Etc. So for an N-sphere it is proportional to
 
 <!--latex
 \begin{displaymath}
- d_N(x) \propto d_2^{N-1}(x)
+\quad d_N(x) \propto d_2^{N-1}(x)
 \end{displaymath}
 latex-->
 
@@ -126,7 +126,7 @@ space.
 
 <!--latex
 \begin{displaymath}
-s_N(r) \propto r^{N-1} 
+\quad s_N(r) \propto r^{N-1} 
 \end{displaymath}
 latex-->
 
@@ -455,7 +455,7 @@ Gaussian, The proxy for the f edge is found as
 
 <!--latex
 \begin{eqnarray*}
-\log( L_f ) &=& \log( L_{\mbox{low}} ) + \alpha * 
+\quad \log( L_f ) &=& \log( L_{\mbox{low}} ) + \alpha * 
   ( \log( L_{\mbox{max}} ) - \log( L_{\mbox{low}} ) ) \\
 \alpha &=& ( 1 - f ) ^ 2 
 \end{eqnarray*}
