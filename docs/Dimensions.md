@@ -1,3 +1,9 @@
+<!--
+run: eqn4html.csh Dimensions.md
+to convert the embedded latex equations into images.
+-->
+
+
 # Walkers and Engines (under development)
 
 ## Glossary
@@ -41,25 +47,60 @@ projection to one axis through the origin.
 
 In 1 dimension we have an uniform distribution of space along that axis.
 
-    d_1(x) ~ 1
+<!--latex
+\begin{displaymath}
+d_1(x) ~ 1
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-1](images/dimeq-1.png "Eq 1") | (1) |
+|:-:|:-|-------------------------------------------------:|
 
 In 2 dimensions we have a circle. Its projection along the x-axis is
 proportional to 
 
-    d_2(x) ~ sqrt( 1 - x^2 ).
+<!--latex
+\begin{displaymath}
+d_2(x) ~ \sqrt( 1 - x^2 ).
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-2](images/dimeq-2.png "Eq 2") | (2) |
+|:-:|:-|-------------------------------------------------:|
 
 In 3 dimensions we have a ball. There is a circle present al every x
 value. The volumes is proportional to 
 
-    d_3(x) ~ ( 1 - x^2 ) = d_2(x)^2
+<!--latex
+\begin{displaymath}
+d_3(x) ~ ( 1 - x^2 ) = d_2^2(x)
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-3](images/dimeq-3.png "Eq 3") | (3) |
+|:-:|:-|-------------------------------------------------:|
 
 For a 4-d (hyper)ball there is a 3-d ball at every x value.
 
-    d_4(x) ~ d_2(x)^3
+<!--latex
+\begin{displaymath}
+d_4(x) ~ d_2^3(x)
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-4](images/dimeq-4.png "Eq 4") | (4) |
+|:-:|:-|-------------------------------------------------:|
 
 Etc. So for an N-sphere it is proportional to
 
-    d_N(x) ~ d_2(x)^(N-1)
+<!--latex
+\begin{displaymath}
+ d_N(x) ~ d_2^{N-1}(x)
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-5](images/dimeq-5.png "Eq 5") | (5) |
+|:-:|:-|-------------------------------------------------:|
 
 In figure 1 we display the distributions for a number of spheres in
 several dimensions from 2 to 1024.  The bulk of the points in this
@@ -83,7 +124,14 @@ outskirts.  If we trace the space in consecutive shells centered on the
 origin we see that it is proportional to the the surface area, a (N-1)-d
 space.
 
-    s_N(r) ~ r^(N-1) 
+<!--latex
+\begin{displaymath}
+s_N(r) ~ r^{N-1} 
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-6](images/dimeq-6.png "Eq 6") | (6) |
+|:-:|:-|-------------------------------------------------:|
 
 In figure 2 we show how the available space inside a N-d sphere is
 distributed as a function of the radius. After about N > 100 it gets so
@@ -405,8 +453,17 @@ also dont know where the avoidance edge for a fraction of f is.  In both cases
 we use the calculated logL's as proxy. When the error distribution is a
 Gaussian, The proxy for the f edge is found as
 
-    logL_f = logL_low + &alpha; * ( logL_max - logL_low )
-    &alpha; = ( 1 - f ) ^ 2
+<!--latex
+\begin{eqnarray*}
+\log( L_f ) & = & \log( L_{\mbox{low}} ) + \alpha * 
+  ( \log( L_{\mbox{max}} ) - \log( L_{\mbox{low}} ) ) \\
+\alpha & = & ( 1 - f ) ^ 2 
+\end{eqnarray*}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-7](images/dimeq-7.png "Eq 7") | (7) |
+|:-:|:-|-------------------------------------------------:|
+
 
 LogL_max is the highest value in the ensemble (or in the phantoms). It
 is the proxy for the point at the origin. 
