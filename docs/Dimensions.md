@@ -411,7 +411,8 @@ as far as can be judged from the figures.
 ### Discussion.
 
 We did not very well, especially in higher dimensions. How can we
-understand this situation.
+understand this situation. We assume that we are still working in a
+N-sphere, which has much resemblance to working on a linear problem.
 
 When proceeding from a point close to the edge, all directions, except
 one, end up in forbidden likelihood space very soon.  The one exception
@@ -497,26 +498,61 @@ With this setup we can calculate the evidence analytically as a
 multidimensional Gaussian. we call this the baseline evidence.
 
 Subsequently we use NestedSampler to calculate the evidence for several
-settings of &alpha; and the perturbance fraction. The baseline evidence
+settings of &alpha; and the perturbance fraction, w. The baseline evidence
 is subtracted so that the results should be 0. If everything were OK.
 
-In the figures 10 to 12 We show the performance of the Galilean engine
-for 3 settings of &alpha; (avoid) and 5 setting of the perturbance.
+#### Galilean engine.
+
+In figure 10 we show the performance of the Galilean engine for 3
+settings of &alpha; (avoid) and 5 setting of the perturbance.  The
+precision of the evidence calculation is 0.1 at dimension 4, increasing
+to 0.6 at dimension 100. 
 
 <table><tr>
 <td style="width: 40px;">  </td>
 <td style="width: 350px;">
-Figure 9 shows 1000 results of executing the Chord Engine from 4
-different starting positions in a 100-d sphere.</td>
+Figure 10 shows the relalive evidences obtained with the Galilean
+engine, at 3 settings of &alpha;, 5 settings of the perturbance
+fraction, over dimensions ranging from 4 to 100.
 </tr></table>
+
+![png](images/EvsD-gap.png)
+
+Firstly, we observe that a low dimensions the choice for &alpha; and w
+does not make much difference.  At dimension 10 the lines start to
+diverge.  When the avoidance zone is zero, all NS-calculated evidences
+are too low, meaning that we have oversampled the outskirts of the
+allowed space in the evidence integral.  For &alpha;s &gt; 0, we see a
+split in the pertubance behaviour.  For w is 0 or 0.1, the NS-evidences
+go up, meaning that we sampled too much of the central regions of
+allowed space.  The other values of w, are better, although the higher
+values 0.3 and 0.4, still have a tendency to to down. 
+
+From this, and considering that it is philosophically better to have low
+values for both &alpha; (more starting points) and w (more forward
+movement), we choose values for &alpha; = 0.1 and w = 0.2. 
+
+#### Chord engine.
+
+In figure 11 we show in two panels, the performance of all engines, Galilean, Chord and
+both, at an &alpha; setting of 0.1. For the Galilean engine the
+perturbance is set at w = 0.2. The Chord engines uses orthonormalised
+velocity vectors. In the left panel the number of steps is 10, in the
+right panel 20.  When both engines are used each gets half of the steps.
+
 <table><tr>
-<td style="width: 130px;">
-<img src="images/EvsD-p-0.png"/></td>
-<td style="width: 130px;">
-<img src="images/EvsD-p-11.png"/></td>
-<td style="width: 130px;">
-<img src="images/EvsD-p-12.png"/></td>
+<td style="width: 40px;">  </td>
+<td style="width: 350px;">
+Figure 11 shows the relalive evidences obtained with all
+engines Galilean, Chord and both in two panels, left for 10 steps and
+right for 20 steps.
 </tr></table>
+
+| ![png](images/EvsD-gc-10.png) | ![png](images/EvsD-gc-20.png) |
+|:-:|:-:|
+
+
+    
 
 
 
