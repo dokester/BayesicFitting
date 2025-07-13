@@ -4,32 +4,7 @@ to convert the embedded latex equations into images.
 -->
 
 
-# Walkers and Engines (under development)
-
-## Glossary
-
-A *walker* is a member of an ensemble of (multidimensional) points each
-one representing the parameter set of an inference problem. They are also
-called "live points" [[Buchner]](./references.md#buchner). 
-
-An *engine* is an algorithm that moves a walker around within the present
-likelihood constraint until it is deemed independently distributed with
-respect to the other walkers and more specificly to it origin. They are
-also called likelihood-restricted prior sampling (LPRS) methods 
-[[Stokes]](./references.md#stokes)
-
-A *phantom* is a valid point visited by an engine during the search for
-a new walker position. As such, all walkers are also phantoms.
-
-*Allowed space* is the part of prior space where the log Likelihood
-is larger than a certain log Likelihood, called lowLogL.
-
-*Forbidden space* is the complement of allowed space.
-
-*Edge" is the N-1 dimensional surface where log Likelihood equals
-LowLogL.
-
-
+# High Dimensionality in Parameter Space. 
 
 
 ## Introduction.
@@ -604,24 +579,28 @@ specific shape of the allowed space.
 
 
  
-    
+## Appendix: Glossary
 
+**Walker** is a member of an ensemble of (multidimensional) points each
+one representing the parameter set of an inference problem. They are also
+called "live points" [[Buchner]](./references.md#buchner). 
 
+**Engine** is an algorithm that moves a walker around within the present
+likelihood constraint until it is deemed independently distributed with
+respect to the other walkers and more specificly to it origin. They are
+also called likelihood-restricted prior sampling (LPRS) methods 
+[[Stokes]](./references.md#stokes)
 
+**Phantom** is a valid point visited by an engine during the search for
+a new walker position. As such, all walkers are also phantoms.
 
+**Allowed Space** is the part of prior space where the log Likelihood
+is larger than a certain log Likelihood, called lowLogL.
 
+**Forbidden Space** is the complement of allowed space.
 
-
-
-
-
-
-
-
-
-
-
-
+**Edge** is the N-1 dimensional surface where log Likelihood equals
+LowLogL.
 
 
 ## Do Kester. 2025.
