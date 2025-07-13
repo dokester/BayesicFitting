@@ -10,7 +10,7 @@ to convert the embedded latex equations into images.
 
 A *walker* is a member of an ensemble of (multidimensional) points each
 one representing the parameter set of an inference problem. They are also
-called "live points" [[1]](./references.md#buchner). 
+called "live points" [[Buchner]](./references.md#buchner). 
 
 An *engine* is an algorithm that moves a walker around within the present
 likelihood constraint until it is deemed independently distributed with
@@ -24,9 +24,9 @@ a new walker position. As such, all walkers are also phantoms.
 *Allowed space* is the part of prior space where the log Likelihood
 is larger than a certain log Likelihood, called lowLogL.
 
-*Forbidden space" is the complement of allowed space.
+*Forbidden space* is the complement of allowed space.
 
-"Edge" is the N-1 dimensional surface where log Likelihood equals
+*Edge" is the N-1 dimensional surface where log Likelihood equals
 LowLogL.
 
 
@@ -35,9 +35,9 @@ LowLogL.
 ## Introduction.
 
 In this note we consider 2 engines, the ChordEngine 
-[Handley et al.](references.md#handley) and
-the GalileanEngine [Skilling](./references.md#skilling), 
-[Henderson](./references.md#henderson). Especially we look at
+[[Handley et al.]](references.md#handley) and
+the GalileanEngine [[Skilling]](./references.md#skilling), 
+[[Henderson]](./references.md#henderson). Especially we look at
 their performance in higher dimensions. But first we have to take a look
 at some properties of N-dimensional spaces.
 
