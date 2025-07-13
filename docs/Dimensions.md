@@ -10,16 +10,27 @@ to convert the embedded latex equations into images.
 
 A *walker* is a member of an ensemble of (multidimensional) points each
 one representing the parameter set of an inference problem. They are also
-called "live points" [Buchner](./references.md#buchner). 
+called "live points" [[1]](./references.md#buchner). 
 
 An *engine* is an algorithm that moves a walker around within the present
 likelihood constraint until it is deemed independently distributed with
 respect to the other walkers and more specificly to it origin. They are
 also called likelihood-restricted prior sampling (LPRS) methods 
-[Stokes](./references.md#stokes)
+[[Stokes]](./references.md#stokes)
 
 A *phantom* is a valid point visited by an engine during the search for
 a new walker position. As such, all walkers are also phantoms.
+
+*Allowed space* is the part of prior space where the log Likelihood
+is larger than a certain log Likelihood, called lowLogL.
+
+*Forbidden space" is the complement of allowed space.
+
+"Edge" is the N-1 dimensional surface where log Likelihood equals
+LowLogL.
+
+
+
 
 ## Introduction.
 
@@ -107,7 +118,7 @@ several dimensions from 2 to 1024.  The bulk of the points in this
 projection is around zero with an average distance of sqrt(1/N).
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 1 shows the distribution of space as projected on a main axis for
 several N-d unit spheres. They are normalised to 1.0.
@@ -138,7 +149,7 @@ distributed as a function of the radius. After about N > 100 it gets so
 extreme that the distribution is almost a delta function at 1.
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 2 shows the distribution of space in shells at equal distance to
 the origin for several N-d unit spheres. They are normalised to 1.0.
@@ -160,8 +171,8 @@ the right hand panels, the histograms of the distance to the origin (in
 red) and the theory (in green) are shown for the same spheres. 
 
 <table><tr>
-<td style="width: 40px;">  </td>
-<td style="width: 350px;">
+<td style="width: 20px;">  </td>
+<td style="width: 350px; text-align: left;">
 Figure 3 shows the distribution uniform points in a 2-d sphere.
 </td></tr>
 </table>
@@ -170,8 +181,8 @@ Figure 3 shows the distribution uniform points in a 2-d sphere.
 <p>
 
 <table><tr>
-<td style="width: 40px;">  </td>
-<td style="width: 350px;">
+<td style="width: 20px;">  </td>
+<td style="width: 350px; text-align: left;">
 Figure 4 shows the distribution uniform points in a 10-d sphere.
 </td></tr>
 </table>
@@ -179,8 +190,8 @@ Figure 4 shows the distribution uniform points in a 10-d sphere.
 ![png](images/pointsInSphere-10.png)
 
 <table><tr>
-<td style="width: 40px;">  </td>
-<td style="width: 350px;">
+<td style="width: 20px;">  </td>
+<td style="width: 350px; text-align: left;">
 Figure 5 shows the distribution uniform points in a 100-d sphere.
 </td></tr>
 </table>
@@ -209,7 +220,7 @@ We present the schematic algorithms of the 2 engines we would like to
 discuss: The GalileanEngine and the ChordEngine.
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Algorithm 1. Galilean Engine.
 </td></tr>
@@ -242,7 +253,7 @@ Algorithm 1. Galilean Engine.
     6 find edge of likelihood constrained area and mirror there 
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Algorithm 2. Chord Engine.
 </td></tr>
@@ -256,7 +267,7 @@ Algorithm 2. Chord Engine.
     6 if not successful :
         Replace t0 or t1, with t
         goto 4 
-    7 Store point a a phantom
+    7 Store point as phantom
     8 if enough steps :
         Store point as walker
         return
@@ -331,7 +342,7 @@ engine for 1000 runs, starting from four positions, one for each pair of
 panels.  
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 6 shows 1000 results of executing the Galilean Engine from 4
 different starting positions in a 10-d sphere.
@@ -346,7 +357,7 @@ all spots in the sphere seem to be accessible.
 
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 7 shows 1000 results of executing the Galilean Engine from 4
 different starting positions in a 100-d sphere.
@@ -374,7 +385,7 @@ This also is true to a lesser extent, for a starting point at 0.5.
 Again, the number of steps is 20.
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 8 shows 1000 results of executing the Chord Engine from 4
 different starting positions in a 10-d sphere.
@@ -390,7 +401,7 @@ with respect to the green one, indicating a shift in resulting
 positions. 
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 9 shows 1000 results of executing the Chord Engine from 4
 different starting positions in a 100-d sphere.
@@ -509,7 +520,7 @@ precision of the evidence calculation is 0.1 at dimension 4, increasing
 to 0.6 at dimension 100. 
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 10 shows the relalive evidences obtained with the Galilean
 engine, at 3 settings of &alpha;, 5 settings of the perturbance
@@ -534,14 +545,15 @@ movement), we choose values for &alpha; = 0.1 and w = 0.2.
 
 #### Chord engine.
 
-In figure 11 we show in two panels, the performance of all engines, Galilean, Chord and
-both, at an &alpha; setting of 0.1. For the Galilean engine the
-perturbance is set at w = 0.2. The Chord engines uses orthonormalised
-velocity vectors. In the left panel the number of steps is 10, in the
-right panel 20.  When both engines are used each gets half of the steps.
+In figure 11 we show in two panels, the performance of all engines,
+Galilean, Chord and both, at an &alpha; setting of 0.1.  For the
+Galilean engine the perturbance is set at w = 0.2.  The Chord engines
+uses orthonormalised velocity vectors.  In the left panel the number of
+steps is 10, in the right panel it is 20.  When both engines are used
+each gets half of the steps. 
 
 <table><tr>
-<td style="width: 40px;">  </td>
+<td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 11 shows the relalive evidences obtained with all
 engines Galilean, Chord and both in two panels, left for 10 steps and
@@ -551,7 +563,47 @@ right for 20 steps.
 | ![png](images/EvsD-gc-10.png) | ![png](images/EvsD-gc-20.png) |
 |:-:|:-:|
 
+Throwing in a lower number of steps makes small difference, but not in
+the right direction. At higher dimensions the differences with the
+baseline evidence goes slightly up. Ten steps might not be enough to
+obtain a new iid walker. As we have seen before, at 20 steps the
+performance is OK at least up to dimension 100. 
 
+### General Models
+
+Up to here we always had a multidimensional spherical or elliptical
+allowed space, either by construction with the N-sphere or by using a
+linear model with a Gaussian error distribution, resulting in a
+multidimensional ellipse.  In the latter case we could calculate the
+evidence analytically and compare it with the evidences calculated by
+Nested Sampling.  While the baseline evidences ranged in value from -8.7
+to -281.6, the NS evidences were always within the precision, 0.1, for
+low dimensions, and with some smart settings of two attributes, we could
+achive the same over the whole range of dimensions, where the precision
+inceases to 0.6. 
+
+For non-linear models it is not that easy.  As there is a wide variety
+of non-linear models, most (all?) of which can not be integrated
+analytically, it is hard to draw definite conclusions. 
+
+However, the iron properties of multi-dimensional space still hold. The
+volumes of space goes up with the power of the dimensions. In high
+dimensions most of the volumes of any shape, be it spherical,
+ellipsoidal or even irregular and/or in parts, is at the edge. 
+Consequently most walkers are located at the outskirts, near the edges.
+When chosing one of these walkers near the edge to start a
+randomisation from, all but one directions are in the local tangent
+plane, where the options for moving into forbidden space are quite high.
+Only one of the directinal vector has to pass over the edge to move the
+walker out of allowed space. 
+
+All these considerations were presented for the N-sphere and/or linear
+models, they equally hold for general models because they only have to
+do with the dimensionality of the parameter space and much less with the
+specific shape of the allowed space.   
+
+
+ 
     
 
 
