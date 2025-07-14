@@ -3,12 +3,14 @@
 
 <a name="boule"></a>  
 + C. Boule, K. Andrews, A. Penfield, I. Puckette, K. A. Goodale and 
-S. A. Harfenist. **Determining Binary Stellar Orbits Using Kepplers Equation**.
+S. A. Harfenist. 
+**Determining Binary Stellar Orbits Using Kepplers Equation**.
 Journal of Double Star Observations, Vol 13, p 189. 2017.<br>
 [PDF](http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf)
 
 <a name="bischop"></a>  
-+ C.M. Bishop. **Pattern Recognition and Machine Learning.**
++ C.M. Bishop. 
+**Pattern Recognition and Machine Learning.**
 Springer Science. 2006.<br>
 
 <a name=buchner></a>
@@ -16,29 +18,39 @@ Springer Science. 2006.<br>
 **Comparison of Step Samplers for Nested Sampling.**
 Phys. Sci. Forum 2022, 5(1), 46; https://doi.org/10.3390/psf2022005046<br>
 
+<a name="goggans"></a>
++ Paul Goggans, R. W. Henderson, Ning Xiang
+**Using nested sampling with Galilean Monte Carlo for model comparison 
+problems in acoustics.**
+Proc. Mtgs. Acoust. 19, 055089 (2013); https://doi.org/10.1121/1.4800876<br>
+
 <a name="gregory"></a>  
-+ P.C. Gregory. **Bayesian Logical Data Analysis for the Physical Sciences.**
++ P.C. Gregory. 
+**Bayesian Logical Data Analysis for the Physical Sciences.**
 Cambridge University Press. 2005.<br>
 
 <a name="gull"></a>
-+ S.F. Gull. **Bayesian Data Analysis: Straight-line fitting.** 
++ S.F. Gull. 
+**Bayesian Data Analysis: Straight-line fitting.** 
 Maximum Entropy and Bayesian Methods. Ed: Skilling, J. (eds) 
 Fundamental Theories of Physics, vol 36. Springer, Dordrecht. 
-https://doi.org/10.1007/978-94-015-7860-8_55
+https://doi.org/10.1007/978-94-015-7860-8_55<br>
 
 <a name="handley"></a>
 + WJ Handley, MP Hobson and AN Lasenby.
 **POLYCHORD: next-generation nested sampling.**
-MNRAS (2015) Volume 453, Issue 4, p 4384–4398
+MNRAS (2015) Volume 453, Issue 4, p 4384–4398<br>
 
 <a name="jaynes"></a>  
-+ E.T. Jaynes. **Probability Theory.**
++ E.T. Jaynes. 
+**Probability Theory.**
 Cambridge University Press. 2003.<br>
 
 <a name="kester1"></a>  
 + Do Kester. **Straight Lines.**
 Maximum Entropy and Bayesian Methods. Eds: Von der Linden, W., et al.
-Garching, Kluwer Academic Publishers, pp. 179-188, 1999.<br>
+Garching, Kluwer Academic Publishers, pp. 179-188, 1999.
+DOI:10.1007/978-94-011-4710-1_19<br>
 
 <a name="kester2"></a>  
 + Do Kester. **A Software Package for Parameter Estimation and Model Comparison.**
@@ -103,7 +115,7 @@ AIP Conference Proceedings 1443 145–156. (2012)
 http:// dx.doi.org/10.1063/1.3703630<br>
 
 <a name="stokes"></a>
-Barrie Stokes, Frank Tuyl, and Irene Hudson.
++ Barrie Stokes, Frank Tuyl, and Irene Hudson.
 **New prior sampling methods for nested sampling - Development and testing**
 AIP Conference Proceedings 1853, 110003 (2017); 
 https://doi.org/10.1063/1.4985378<br>

@@ -4,15 +4,19 @@ to convert the embedded latex equations into images.
 -->
 
 
-# High Dimensionality in Parameter Space. 
-
+# High-Dimensional Parameter Space. 
 
 ## Introduction.
 
-In this note we consider 2 engines, the ChordEngine 
-[[Handley et al.]](references.md#handley) and
-the GalileanEngine [[Skilling]](./references.md#skilling), 
-[[Henderson]](./references.md#henderson). Especially we look at
+In this note we investigate the performance of Nested Sampling (NS) when
+the number of parameters in the model increases from a handfull to 100.
+Beyond 100 my implementation of NS gets too sluggish to do repeated
+numerical experiments. 
+
+Within NS we consider 2 [engines](#engine), the ChordEngine 
+[[Handley et al.]](./references.md#handley) and
+the GalileanEngine [[Skilling]](./references.md#skilling1), 
+[[Goggans]](./references.md#goggans). Especially we look at
 their performance in higher dimensions. But first we have to take a look
 at some properties of N-dimensional spaces.
 
@@ -175,9 +179,10 @@ Figure 5 shows the distribution uniform points in a 100-d sphere.
 
 ## Engines
 
-An engine is an algorithm that moves a walker around within the present
-likelihood constraint until it is deemed independently distributed with
-respect to the other walkers and more specificly to it origin.
+An [engine](#engine) is an algorithm that moves a [walker](#walker)
+around within the present likelihood constraint until it is deemed
+independently distributed with respect to the other walkers and more
+specificly to it origin. 
 
 Each engine is called with the list of walkers and the value of the
 lowLogLikelihood constraint, `lowL`. All engines have attributes like `nstep`
@@ -303,7 +308,7 @@ origin.
 
 In the version of the Galilean engine we have used here, we set the
 perturbation at each new step at 20%, the fraction of mirror steps to
-0.25 and we first locate the lowL edge before mirroring.  The random
+0.25 and we first locate the lowL [edge](#edge) before mirroring.  The random
 perturbation ensures that the engine is not moving around in circles
 within the N-sphere, returning periodically to the starting point, while
 still pushing forward to new regions.  The step size is dynamically
@@ -414,11 +419,12 @@ chord.  Possibly even moving closer to the edge, and the higher the
 dimensions the more probable it gets. A random direction is more likely
 along the tangent plane than across.
 
-The GalileanEngine tries a step in a random direction.  If the
-step falls in forbidden space, it tries to mirror (or reverse) back into
-allowed space.  However if the mirrored (or reversed) trial is also in
-forbidden space the step fails.  So with the GalileanEngine we have more
-options to move away from the starting point.
+The GalileanEngine tries a step in a random direction.  If the step
+falls in [forbidden space](#forbidden), it tries to mirror (or reverse)
+back into [allowed space](#allowed).  However if the mirrored (or
+reversed) trial is also in forbidden space the step fails.  So with the
+GalileanEngine we have more options to move away from the starting
+point. 
 
 The problem we encountered here is caused by starting points close to
 the edge, of which there are more in higher dimensional spaces, and at
@@ -581,24 +587,30 @@ specific shape of the allowed space.
  
 ## Appendix: Glossary
 
+<a name="walker"></a>
 **Walker** is a member of an ensemble of (multidimensional) points each
 one representing the parameter set of an inference problem. They are also
 called "live points" [[Buchner]](./references.md#buchner). 
 
+<a name="engine"></a>
 **Engine** is an algorithm that moves a walker around within the present
 likelihood constraint until it is deemed independently distributed with
 respect to the other walkers and more specificly to it origin. They are
 also called likelihood-restricted prior sampling (LPRS) methods 
 [[Stokes]](./references.md#stokes)
 
+<a name="phantom"></a>
 **Phantom** is a valid point visited by an engine during the search for
 a new walker position. As such, all walkers are also phantoms.
 
+<a name="allowed"></a>
 **Allowed Space** is the part of prior space where the log Likelihood
 is larger than a certain log Likelihood, called lowLogL.
 
+<a name="forbidden"></a>
 **Forbidden Space** is the complement of allowed space.
 
+<a name="edge"></a>
 **Edge** is the N-1 dimensional surface where log Likelihood equals
 LowLogL.
 
