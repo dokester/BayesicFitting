@@ -3,6 +3,8 @@ run: eqn4html.csh Dimensions.md
 to convert the embedded latex equations into images.
 -->
 
+<p>
+<p>
 
 # High-Dimensional Parameter Space. 
 
