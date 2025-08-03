@@ -58,6 +58,20 @@
     }
     </style>
 
+    tab0  { position:absolute;left:25px;  }
+    tab1  { position:absolute;left:50px;  }
+    tab2  { position:absolute;left:75px;  }
+    tab3  { position:absolute;left:100px; }
+    tab4  { position:absolute;left:125px; }
+    tab5  { position:absolute;left:150px; }
+    tab6  { position:absolute;left:175px; }
+    tab7  { position:absolute;left:200px; }
+    tab8  { position:absolute;left:225px; }
+    tab9  { position:absolute;left:250px; }
+    tab10 { position:absolute;left:275px; }
+
+
+
   </head>
 
   <body>
@@ -66,7 +80,7 @@
         <a href="{{ '/' | absolute_url }}">
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
         </a>
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+        <h3>{{ site.description | default: site.github.project_tagline }}</h3>
         {% if site.github.is_project_page %}
           <a href="{{ site.github.repository_url }}" class="button"><small>View project on</small> GitHub</a>
         {% endif %}
