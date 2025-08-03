@@ -6,7 +6,7 @@ markdown: GFM
 
 # Specific for BayesicFitting
 title: [BayesicFitting]
-description: [Bayesian Model Fitting and Evidence Calculation]
+description: [Model Fitting and Evidence Calculation]
 examples: 
   - img: ./docs/images/rijntemp.png
     cap: "Average temperature of the Rhine"
