@@ -8,7 +8,9 @@ to convert the embedded latex equations into images.
 
 # High-Dimensional Parameter Space. 
 
-## Introduction.
+## Still working on this one.
+
+## 1. Introduction.
 
 In this note we investigate the performance of Nested Sampling (NS) when
 the number of parameters in the model increases from a handfull to 100.
@@ -19,10 +21,29 @@ Within NS we consider 2 [engines](#engine), the ChordEngine
 [[Handley et al.]](./references.md#handley) and
 the GalileanEngine [[Skilling]](./references.md#skilling1), 
 [[Goggans]](./references.md#goggans). Especially we look at
-their performance in higher dimensions. But first we have to take a look
-at some properties of N-dimensional spaces.
+their performance in higher dimensions. 
 
-## Spaces.
+In section 2, we have to take a look at some properties of N-dimensional
+spheres. We show how space within a sphere is distributed when projected
+in various ways.
+
+In section 3, we take a closer look at the engines and list some
+variants we want to consider.
+
+In section 4, we exercise bpth engines in multi-dimensional spheres,
+starting from one points, to see whether the resulting walkers are
+iid.
+
+In section 5, NS runs the engines on a linear problem where the resulting
+evidences can be compared directtly with analytically calculated values.
+It also discusses how things are different (or the same) for non-linear
+problems.
+
+Section 6 TBW
+
+Section 7 discusses the results we have obtained.
+
+## 2. Spaces.
 
 To study properties of higher dimensional spaces we turn to a simple
 structure, the N-d unit sphere, i.e.  all points within a euclidean
@@ -179,7 +200,7 @@ Figure 5 shows the distribution uniform points in a 100-d sphere.
 
 ![png](images/pointsInSphere-100.png)
 
-## Engines
+## 3. Engines
 
 An [engine](#engine) is an algorithm that moves a [walker](#walker)
 around within the present likelihood constraint until it is deemed
@@ -264,7 +285,7 @@ Algorithm 2. Chord Engine.
     3 Check that exit points are outside constrained area.
     9 Don't orthonormalise; use new random direction each time
 
-### Test
+## 4. Correlation
 
 The premisse that the newly wandered point is independent of all others,
 entails that it does not matter which starting point we take and that all
@@ -401,78 +422,8 @@ less space on the 99 other axes.
 The red histograms and the blue histograms, disregarding axis 0,  are OK
 as far as can be judged from the figures.
 
-### Discussion.
 
-We did not do very well, especially in higher dimensions. How can we
-understand this situation. We are still working in a
-N-sphere, which has much resemblance to working on a linear problem.
-
-When proceeding from a point close to the edge, all directions, except
-one, end up in forbidden likelihood space very soon.  The one exception
-is the direction perpendicular to the local tangent plane.  Near the
-edge there is very little space to move away from the starting point. 
-The tangential distance from a point at 0.99 to the edge is only 0.14. 
-It takes quite a number of these little steps to move a significant
-distance. 
-
-The ChordEngine has more problems to do so, as it draws a random chord
-through the starting point and find a new position on that
-chord.  Possibly even moving closer to the edge, and the higher the
-dimensions the more probable it gets. A random direction is more likely
-along the tangent plane than across.
-
-The GalileanEngine tries a step in a random direction.  If the step
-falls in [forbidden space](#forbidden), it tries to mirror (or reverse)
-back into [allowed space](#allowed).  However if the mirrored (or
-reversed) trial is also in forbidden space the step fails.  So with the
-GalileanEngine we have more options to move away from the starting
-point. 
-
-The problem we encountered here is caused by starting points close to
-the edge, of which there are more in higher dimensional spaces, and at
-the same time, an increasing tendency for step directions in the tangent
-plane.  In high dimensions we select more points close to the edge to
-start from, while most directions are along the tangent, forcing the
-engine to small steps. 
-
-An obvious solution would be to avoid starting positions close to the
-edge.  While for a point at 0.99 the distance to the edge along the
-tangent is 0.14, starting at 0.9 it is already 0.44.  A small avoidance
-zone of 10 percent yields a stepping space, more that 3 times larger. 
-And it works independent of the dimensionality.  New points should be
-indenpendent and identically distributed anyway.  So avoiding some
-starting positions should not make a difference. 
-
-Just as we do not know exactly where the edge of allowed space is, we
-also dont know where the avoidance edge for a fraction of f is.  In both cases
-we use the calculated logL's as proxy. When the error distribution is a
-Gaussian, The proxy for the f edge is found as
-
-<!--latex
-\begin{eqnarray*}
-\quad \log( L_f ) &=& \log( L_{\mbox{low}} ) + \alpha * 
-  ( \log( L_{\mbox{max}} ) - \log( L_{\mbox{low}} ) ) \\
-\alpha &=& ( 1 - f ) ^ 2 
-\end{eqnarray*}
-latex-->
-
-| &nbsp; | ![DimensionsEquation-7](images/dimeq-7.png "Eq 7") | (7) |
-|:-:|:-|-------------------------------------------------:|
-
-
-LogL_max is the highest value in the ensemble (or in the phantoms). It
-is the proxy for the point at the origin. 
-
-When the error distribution is Laplace, &alpha; = ( 1 - f ).
-
-All points with a logL < logL_f are avoided.  In higher dimensions,
-more points are deselected as more points are located near the edge. 
-This is exactly what we want to accomplice. 
-
-In the next section we investigate how the engines perform in higher
-dimensions. 
-
-## Performance.
+## 5. Performance.
 
 Of course we never use one starting position the generate an ensemble of
 1000 walkers.  It was an artificial setup to see what would happen. In
@@ -588,8 +539,80 @@ models, they equally hold for general models because they only have to
 do with the dimensionality of the parameter space and much less with the
 specific shape of the allowed space.   
 
-## Ensemble of walkers and phantoms.
+## 6. Ensemble of walkers and phantoms.
 
+TBW
+
+## 7. Discussion.
+
+We did not do very well, especially in higher dimensions. How can we
+understand this situation. We are still working in a
+N-sphere, which has much resemblance to working on a linear problem.
+
+When proceeding from a point close to the edge, all directions, except
+one, end up in forbidden likelihood space very soon.  The one exception
+is the direction perpendicular to the local tangent plane.  Near the
+edge there is very little space to move away from the starting point. 
+The tangential distance from a point at 0.99 to the edge is only 0.14. 
+It takes quite a number of these little steps to move a significant
+distance. 
+
+The ChordEngine has more problems to do so, as it draws a random chord
+through the starting point and find a new position on that
+chord.  Possibly even moving closer to the edge, and the higher the
+dimensions the more probable it gets. A random direction is more likely
+along the tangent plane than across.
+
+The GalileanEngine tries a step in a random direction.  If the step
+falls in [forbidden space](#forbidden), it tries to mirror (or reverse)
+back into [allowed space](#allowed).  However if the mirrored (or
+reversed) trial is also in forbidden space the step fails.  So with the
+GalileanEngine we have more options to move away from the starting
+point. 
+
+The problem we encountered here is caused by starting points close to
+the edge, of which there are more in higher dimensional spaces, and at
+the same time, an increasing tendency for step directions in the tangent
+plane.  In high dimensions we select more points close to the edge to
+start from, while most directions are along the tangent, forcing the
+engine to small steps. 
+
+An obvious solution would be to avoid starting positions close to the
+edge.  While for a point at 0.99 the distance to the edge along the
+tangent is 0.14, starting at 0.9 it is already 0.44.  A small avoidance
+zone of 10 percent yields a stepping space, more that 3 times larger. 
+And it works independent of the dimensionality.  New points should be
+indenpendent and identically distributed anyway.  So avoiding some
+starting positions should not make a difference. 
+
+Just as we do not know exactly where the edge of allowed space is, we
+also dont know where the avoidance edge for a fraction of f is.  In both cases
+we use the calculated logL's as proxy. When the error distribution is a
+Gaussian, The proxy for the f edge is found as
+
+<!--latex
+\begin{eqnarray*}
+\quad \log( L_f ) &=& \log( L_{\mbox{low}} ) + \alpha * 
+  ( \log( L_{\mbox{max}} ) - \log( L_{\mbox{low}} ) ) \\
+\alpha &=& ( 1 - f ) ^ 2 
+\end{eqnarray*}
+latex-->
+
+| &nbsp; | ![DimensionsEquation-7](images/dimeq-7.png "Eq 7") | (7) |
+|:-:|:-|-------------------------------------------------:|
+
+
+LogL_max is the highest value in the ensemble (or in the phantoms). It
+is the proxy for the point at the origin. 
+
+When the error distribution is Laplace, &alpha; = ( 1 - f ).
+
+All points with a logL < logL_f are avoided.  In higher dimensions,
+more points are deselected as more points are located near the edge. 
+This is exactly what we want to accomplice. 
+
+In the next section we investigate how the engines perform in higher
+dimensions. 
 
 
  
