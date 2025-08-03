@@ -100,7 +100,7 @@ projection is around zero with an average distance of sqrt(1/N).
 <td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 1 shows the distribution of space as projected on a main axis for
-several N-d unit spheres. They are normalised to 1.0.
+several N-d unit spheres. Their maxima are normalised to 1.0.
 </td></tr>
 </table>
 
@@ -131,7 +131,7 @@ extreme that the distribution is almost a delta function at 1.
 <td style="width: 20px;">  </td>
 <td style="width: 350px;">
 Figure 2 shows the distribution of space in shells at equal distance to
-the origin for several N-d unit spheres. They are normalised to 1.0.
+the origin for several N-d unit spheres. Their maximum values are normalised to 1.0.
 </td></tr>
 </table>
 
@@ -182,15 +182,15 @@ Figure 5 shows the distribution uniform points in a 100-d sphere.
 An [engine](#engine) is an algorithm that moves a [walker](#walker)
 around within the present likelihood constraint until it is deemed
 independently distributed with respect to the other walkers and more
-specificly to it origin. 
+specificly to the place it started from. 
 
 Each engine is called with the list of walkers and the value of the
 lowLogLikelihood constraint, `lowL`. All engines have attributes like `nstep`
 and maybe `size` to govern the number of steps and the step size. Other
-attributes may be present in an engines to select different variants. 
+attributes may be present in an engine to select different variants. 
 
 When it returns, the list of walkers is updated with a new independent
-and identically distributed walker to replace the discarded one.  It is
+and identically distributed (iid) walker to replace the discarded one.  It is
 essential that the new points are indeed independent of each other and
 that they explores all of the available space,
 
@@ -254,7 +254,7 @@ Algorithm 2. Chord Engine.
     9 else : 
         Find new velocity
         Orthonormalise it with respect to earlier ones
-        goto 4
+        goto 3
 
     Variants at lines:
     1 Find starting point somewhat higher than lowL.
@@ -401,8 +401,8 @@ as far as can be judged from the figures.
 
 ### Discussion.
 
-We did not very well, especially in higher dimensions. How can we
-understand this situation. We assume that we are still working in a
+We did not do very well, especially in higher dimensions. How can we
+understand this situation. We are still working in a
 N-sphere, which has much resemblance to working on a linear problem.
 
 When proceeding from a point close to the edge, all directions, except
@@ -441,7 +441,7 @@ And it works independent of the dimensionality.  New points should be
 indenpendent and identically distributed anyway.  So avoiding some
 starting positions should not make a difference. 
 
-Just a we do not know exactly where the edge of allowed space is, we
+Just as we do not know exactly where the edge of allowed space is, we
 also dont know where the avoidance edge for a fraction of f is.  In both cases
 we use the calculated logL's as proxy. When the error distribution is a
 Gaussian, The proxy for the f edge is found as
@@ -514,7 +514,7 @@ Firstly, we observe that a low dimensions the choice for &alpha; and w
 does not make much difference.  At dimension 10 the lines start to
 diverge.  When the avoidance zone is zero, all NS-calculated evidences
 are too low, meaning that we have oversampled the outskirts of the
-allowed space in the evidence integral.  For &alpha;s &gt; 0, we see a
+allowed space in the evidence integral.  For &alpha; &gt; 0, we see a
 split in the pertubance behaviour.  For w is 0 or 0.1, the NS-evidences
 go up, meaning that we sampled too much of the central regions of
 allowed space.  The other values of w, are better, although the higher
@@ -557,31 +557,37 @@ allowed space, either by construction with the N-sphere or by using a
 linear model with a Gaussian error distribution, resulting in a
 multidimensional ellipse.  In the latter case we could calculate the
 evidence analytically and compare it with the evidences calculated by
-Nested Sampling.  While the baseline evidences ranged in value from -8.7
-to -281.6, the NS evidences were always within the precision, 0.1, for
-low dimensions, and with some smart settings of two attributes, we could
-achive the same over the whole range of dimensions, where the precision
-inceases to 0.6. 
+Nested Sampling.  
+
+As the number of parameters increase from 4 to 100, the baseline
+evidences range in value from -8.7 to -281.6, with precisions increasing
+from 0.1 to 0.6.  With some smart settings of two attributes, we found
+NS evidences, similar to the baseline evidences within the precision. 
+And we could achieve that over the whole range of dimensions. 
 
 For non-linear models it is not that easy.  As there is a wide variety
 of non-linear models, most (all?) of which can not be integrated
 analytically, it is hard to draw definite conclusions. 
 
-However, the iron properties of multi-dimensional space still hold. The
-volumes of space goes up with the power of the dimensions. In high
+However, the iron properties of multi-dimensional space still hold.  The
+volumes of space goes up with the power of the dimensions.  In high
 dimensions most of the volumes of any shape, be it spherical,
-ellipsoidal or even irregular and/or in parts, is at the edge. 
-Consequently most walkers are located at the outskirts, near the edges.
-When chosing one of these walkers near the edge to start a
-randomisation from, all but one directions are in the local tangent
-plane, where the options for moving into forbidden space are quite high.
-Only one of the directinal vector has to pass over the edge to move the
-walker out of allowed space. 
+ellipsoidal or even irregular and/or in parts, is at the edge, defined
+by the value of `lowLogL`.  Consequently most walkers are located at the
+outskirts, near the edges.  When chosing one of these walkers near the
+edge to start a randomisation process from, all but one directions are
+in the local tangent plane, where the options for moving into forbidden
+space are quite high.  Only one of the directional vector components has
+to pass over the edge to move the walker out of allowed space, forcing
+to take small steps, etc.
 
 All these considerations were presented for the N-sphere and/or linear
 models, they equally hold for general models because they only have to
 do with the dimensionality of the parameter space and much less with the
 specific shape of the allowed space.   
+
+## Ensemble of walkers and phantoms.
+
 
 
  
@@ -594,8 +600,8 @@ called "live points" [[Buchner]](./references.md#buchner).
 
 <a name="engine"></a>
 **Engine** is an algorithm that moves a walker around within the present
-likelihood constraint until it is deemed independently distributed with
-respect to the other walkers and more specificly to it origin. They are
+likelihood constraint until it is deemed identically and independently distributed with
+respect to the other walkers and more specificly to its origin. They are
 also called likelihood-restricted prior sampling (LPRS) methods 
 [[Stokes]](./references.md#stokes)
 
@@ -605,14 +611,16 @@ a new walker position. As such, all walkers are also phantoms.
 
 <a name="allowed"></a>
 **Allowed Space** is the part of prior space where the log Likelihood
-is larger than a certain log Likelihood, called lowLogL.
+is larger than a certain value of the log( likelihood ), called lowLogL. 
+Wandering walkers are allowed to move anywhere within its constraints.
 
 <a name="forbidden"></a>
-**Forbidden Space** is the complement of allowed space.
+**Forbidden Space** is the complement of allowed space. A wandering walker 
+if not allowed to move in there.   
 
 <a name="edge"></a>
 **Edge** is the N-1 dimensional surface where log Likelihood equals
-LowLogL.
+lowLogL.
 
 
 ## Do Kester. 2025.
