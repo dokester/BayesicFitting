@@ -30,16 +30,17 @@ in various ways.
 In section 3, we take a closer look at the engines and list some
 variants we want to consider.
 
-In section 4, we exercise bpth engines in multi-dimensional spheres,
+In section 4, we exercise both engines in multidimensional spheres,
 starting from one points, to see whether the resulting walkers are
 iid.
 
-In section 5, NS runs the engines on a linear problem where the resulting
-evidences can be compared directtly with analytically calculated values.
+In section 5, we find a way to ameliorate the problems found with walkers
+clinging to the edge in high dimensional space.
+
+In section 6, NS runs the engines on a linear problem where the resulting
+evidences can be compared directly with analytically calculated values.
 It also discusses how things are different (or the same) for non-linear
 problems.
-
-Section 6 TBW
 
 Section 7 discusses the results we have obtained.
 
@@ -422,128 +423,7 @@ less space on the 99 other axes.
 The red histograms and the blue histograms, disregarding axis 0,  are OK
 as far as can be judged from the figures.
 
-
-## 5. Performance.
-
-Of course we never use one starting position the generate an ensemble of
-1000 walkers.  It was an artificial setup to see what would happen. In
-this section we define a model which is easily extendable over more
-dimensions and we try to find out which values for the avoidance
-fraction and for the pertubation in the Galilean engine are optimal.
-
-### Linear Model
-
-As a model we take a cubic splines model with knots numbering from 2 to
-98, yielding 4 to 100 parameters (i.e. dimensions). The model is fit to
-just random noise from N(0,1). The length of the data set varies with
-the dimensions such that there are some 5 data points per knot. Our
-priors are uniform between [-10,10].
-
-With this setup we can calculate the evidence analytically as a
-multidimensional Gaussian. we call this the baseline evidence.
-
-Subsequently we use NestedSampler to calculate the evidence for several
-settings of &alpha; and the perturbance fraction, w. The baseline evidence
-is subtracted so that the results should be 0. If everything were OK.
-
-#### Galilean engine.
-
-In figure 10 we show the performance of the Galilean engine for 3
-settings of &alpha; (avoid) and 5 setting of the perturbance.  The
-precision of the evidence calculation is 0.1 at dimension 4, increasing
-to 0.6 at dimension 100. 
-
-<table><tr>
-<td style="width: 20px;">  </td>
-<td style="width: 350px;">
-Figure 10 shows the relalive evidences obtained with the Galilean
-engine, at 3 settings of &alpha;, 5 settings of the perturbance
-fraction, over dimensions ranging from 4 to 100.
-</tr></table>
-
-![png](images/EvsD-gap.png)
-
-Firstly, we observe that a low dimensions the choice for &alpha; and w
-does not make much difference.  At dimension 10 the lines start to
-diverge.  When the avoidance zone is zero, all NS-calculated evidences
-are too low, meaning that we have oversampled the outskirts of the
-allowed space in the evidence integral.  For &alpha; &gt; 0, we see a
-split in the pertubance behaviour.  For w is 0 or 0.1, the NS-evidences
-go up, meaning that we sampled too much of the central regions of
-allowed space.  The other values of w, are better, although the higher
-values 0.3 and 0.4, still have a tendency to to down. 
-
-From this, and considering that it is philosophically better to have low
-values for both &alpha; (more starting points) and w (more forward
-movement), we choose values for &alpha; = 0.1 and w = 0.2. 
-
-#### Chord engine.
-
-In figure 11 we show in two panels, the performance of all engines,
-Galilean, Chord and both, at an &alpha; setting of 0.1.  For the
-Galilean engine the perturbance is set at w = 0.2.  The Chord engines
-uses orthonormalised velocity vectors.  In the left panel the number of
-steps is 10, in the right panel it is 20.  When both engines are used
-each gets half of the steps. 
-
-<table><tr>
-<td style="width: 20px;">  </td>
-<td style="width: 350px;">
-Figure 11 shows the relalive evidences obtained with all
-engines Galilean, Chord and both in two panels, left for 10 steps and
-right for 20 steps.
-</tr></table>
-
-| ![png](images/EvsD-gc-10.png) | ![png](images/EvsD-gc-20.png) |
-|:-:|:-:|
-
-Throwing in a lower number of steps makes small difference, but not in
-the right direction. At higher dimensions the differences with the
-baseline evidence goes slightly up. Ten steps might not be enough to
-obtain a new iid walker. As we have seen before, at 20 steps the
-performance is OK at least up to dimension 100. 
-
-### General Models
-
-Up to here we always had a multidimensional spherical or elliptical
-allowed space, either by construction with the N-sphere or by using a
-linear model with a Gaussian error distribution, resulting in a
-multidimensional ellipse.  In the latter case we could calculate the
-evidence analytically and compare it with the evidences calculated by
-Nested Sampling.  
-
-As the number of parameters increase from 4 to 100, the baseline
-evidences range in value from -8.7 to -281.6, with precisions increasing
-from 0.1 to 0.6.  With some smart settings of two attributes, we found
-NS evidences, similar to the baseline evidences within the precision. 
-And we could achieve that over the whole range of dimensions. 
-
-For non-linear models it is not that easy.  As there is a wide variety
-of non-linear models, most (all?) of which can not be integrated
-analytically, it is hard to draw definite conclusions. 
-
-However, the iron properties of multi-dimensional space still hold.  The
-volumes of space goes up with the power of the dimensions.  In high
-dimensions most of the volumes of any shape, be it spherical,
-ellipsoidal or even irregular and/or in parts, is at the edge, defined
-by the value of `lowLogL`.  Consequently most walkers are located at the
-outskirts, near the edges.  When chosing one of these walkers near the
-edge to start a randomisation process from, all but one directions are
-in the local tangent plane, where the options for moving into forbidden
-space are quite high.  Only one of the directional vector components has
-to pass over the edge to move the walker out of allowed space, forcing
-to take small steps, etc.
-
-All these considerations were presented for the N-sphere and/or linear
-models, they equally hold for general models because they only have to
-do with the dimensionality of the parameter space and much less with the
-specific shape of the allowed space.   
-
-## 6. Ensemble of walkers and phantoms.
-
-TBW
-
-## 7. Discussion.
+## 5. Avoidance zone.
 
 We did not do very well, especially in higher dimensions. How can we
 understand this situation. We are still working in a
@@ -613,6 +493,128 @@ This is exactly what we want to accomplice.
 
 In the next section we investigate how the engines perform in higher
 dimensions. 
+
+
+## 6. Performance.
+
+Of course we never use one starting position the generate an ensemble of
+1000 walkers.  It was an artificial setup to see what would happen. In
+this section we define a model which is easily extendable over more
+dimensions and we try to find out which values for the avoidance
+fraction and for the pertubation in the Galilean engine are optimal.
+
+### Linear Model
+
+As a model we take a cubic splines model with knots numbering from 2 to
+98, yielding 4 to 100 parameters (i.e. dimensions). The model is fit to
+just random noise from N(0,1). The length of the data set varies with
+the dimensions such that there are some 5 data points per knot. Our
+priors are uniform between [-10,10].
+
+With this setup we can calculate the evidence analytically as a
+multidimensional Gaussian. We call this the baseline evidence.
+
+Subsequently we use NestedSampler to calculate the evidence for several
+settings of &alpha; and the perturbance fraction, w. The baseline evidence
+is subtracted so that the results should be 0. If everything were OK.
+
+#### Galilean engine.
+
+In figure 10 we show the performance of the Galilean engine for 3
+settings of &alpha; (avoidance zone) and 5 setting of the perturbance.  The
+precision of the evidence calculation is 0.1 at dimension 4, increasing
+to 0.6 at dimension 100. 
+
+<table><tr>
+<td style="width: 20px;">  </td>
+<td style="width: 350px;">
+Figure 10 shows the relalive evidences obtained with the Galilean
+engine, at 3 settings of &alpha;, 5 settings of the perturbance
+fraction, over dimensions ranging from 4 to 100.
+</tr></table>
+
+![png](images/EvsD-gap.png)
+
+Firstly, we observe that at low dimensions the choice for &alpha; and w
+does not make much difference.  At dimension 10 the lines start to
+diverge.  When the avoidance zone is zero, all NS-calculated evidences
+are too low, meaning that we have oversampled the outskirts of the
+allowed space in the evidence integral.  For &alpha; &gt; 0, we see a
+split in the pertubance behaviour.  For w is 0 or 0.1, the NS-evidences
+go up, meaning that we sampled too much of the central regions of
+allowed space.  The other values of w, are better, although the higher
+values 0.3 and 0.4, still have a tendency to to down. 
+
+From this, and considering that it is philosophically better to have low
+values for both &alpha; (more starting points) and w (more forward
+movement), we choose values for &alpha; = 0.1 and w = 0.2. 
+
+#### Chord engine.
+
+In figure 11 we show in two panels, the performance of all engines,
+Galilean, Chord and both, at an &alpha; setting of 0.1.  For the
+Galilean engine the perturbance is set at w = 0.2.  The Chord engines
+uses orthonormalised directions.  In the left panel the number of
+steps is 10, in the right panel it is 20.  When both engines are used
+each gets half of the steps. 
+
+<table><tr>
+<td style="width: 20px;">  </td>
+<td style="width: 350px;">
+Figure 11 shows the relalive evidences obtained with all
+engines Galilean, Chord and both in two panels, left for 10 steps and
+right for 20 steps.
+</tr></table>
+
+| ![png](images/EvsD-gc-10.png) | ![png](images/EvsD-gc-20.png) |
+|:-:|:-:|
+
+Throwing in a lower number of steps makes small difference, but not in
+the right direction. At higher dimensions the differences with the
+baseline evidence goes slightly up. Ten steps might not be enough to
+obtain a new iid walker. As we have seen before, at 20 steps the
+performance is OK at least up to dimension 100. 
+
+### General Models
+
+Up to here we always had a multidimensional spherical or elliptical
+allowed space, either by construction with the N-sphere or by using a
+linear model with a Gaussian error distribution, resulting in a
+multidimensional ellipse.  In the latter case we could calculate the
+evidence analytically and compare it with the evidences calculated by
+Nested Sampling.  
+
+As the number of parameters increase from 4 to 100, the baseline
+evidences range in value from -8.7 to -281.6, with precisions increasing
+from 0.1 to 0.6.  With some smart settings of two attributes, we found
+NS evidences, similar to the baseline evidences within the precision. 
+And we could achieve that over the whole range of dimensions. 
+
+For non-linear models, or non-Gaussian error distributions, it is not
+that easy.  As there is a wide variety of non-linear problems, most (all?)
+of which can not be integrated analytically, it is hard to draw definite
+conclusions. 
+
+However, the iron properties of multidimensional space still hold.  The
+volumes of space goes up with the power of the dimensions.  In high
+dimensions most of the volumes of any shape, be it spherical,
+ellipsoidal or even irregular and/or in parts, is at the edge, defined
+by the value of `lowLogL`.  Consequently most walkers are located at the
+outskirts, near the edges.  When chosing one of these walkers near the
+edge to start a randomisation process from, all but one directions are
+in the local tangent plane, where the options for moving into forbidden
+space are quite high.  Only one of the directional vector components has
+to pass over the edge to move the walker out of allowed space, forcing
+to take small steps, etc.
+
+All these considerations were presented for the N-sphere and/or linear
+models; they equally hold for general models because they only have to
+do with the dimensionality of the parameter space and much less with the
+specific shape of the allowed space.   
+
+## 7. Discussion.
+
+TBW
 
 
  
