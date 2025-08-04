@@ -8,7 +8,7 @@ to convert the embedded latex equations into images.
 
 # High-Dimensional Parameter Space. 
 
-## Still working on this one.
+## Still working on this note. DK.
 
 ## 1. Introduction.
 
@@ -426,16 +426,18 @@ as far as can be judged from the figures.
 ## 5. Avoidance zone.
 
 We did not do very well, especially in higher dimensions. How can we
-understand this situation. We are still working in a
-N-sphere, which has much resemblance to working on a linear problem.
+understand this situation. 
 
-When proceeding from a point close to the edge, all directions, except
-one, end up in forbidden likelihood space very soon.  The one exception
-is the direction perpendicular to the local tangent plane.  Near the
-edge there is very little space to move away from the starting point. 
-The tangential distance from a point at 0.99 to the edge is only 0.14. 
-It takes quite a number of these little steps to move a significant
-distance. 
+We are still working in a N-sphere, which has much resemblance to
+working on a linear problem.  When proceeding from a point close to the
+edge, all directions, except one, end up in forbidden likelihood space
+very soon.  The one exception is the direction perpendicular to the
+local tangent plane.  Near the edge there is very little space to move
+away from the starting point.  Independently of the dimensionality, the
+tangential distance from a point at 0.99 to the edge is only 0.14.  In
+high dimensional space, every direction but one has this distance to the
+edge.  It takes quite a number of these little steps to move a
+significant distance. 
 
 The ChordEngine has more problems to do so, as it draws a random chord
 through the starting point and find a new position on that
@@ -455,7 +457,7 @@ the edge, of which there are more in higher dimensional spaces, and at
 the same time, an increasing tendency for step directions in the tangent
 plane.  In high dimensions we select more points close to the edge to
 start from, while most directions are along the tangent, forcing the
-engine to small steps. 
+engine to take small steps. 
 
 An obvious solution would be to avoid starting positions close to the
 edge.  While for a point at 0.99 the distance to the edge along the
