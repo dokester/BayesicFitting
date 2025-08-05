@@ -430,14 +430,14 @@ understand this situation.
 
 We are still working in a N-sphere, which has much resemblance to
 working on a linear problem.  When proceeding from a point close to the
-edge, all directions, except one, end up in forbidden likelihood space
-very soon.  The one exception is the direction perpendicular to the
-local tangent plane.  Near the edge there is very little space to move
-away from the starting point.  Independently of the dimensionality, the
-tangential distance from a point at 0.99 to the edge is only 0.14.  In
-high dimensional space, every direction but one has this distance to the
-edge.  It takes quite a number of these little steps to move a
-significant distance. 
+edge, all directions except one, end up in [forbidden likelihood
+space](#forbidden) very soon.  The one exception is the direction
+perpendicular to the local tangent plane.  Near the edge there is very
+little space to move away from the starting point.  Independently of the
+dimensionality, the tangential distance from a point at 0.99 to the edge
+is only 0.14.  In high dimensional space, every direction but one has
+this small distance to the edge.  It takes quite a number of these little
+steps to move a significant distance. 
 
 The ChordEngine has more problems to do so, as it draws a random chord
 through the starting point and find a new position on that
@@ -448,9 +448,9 @@ along the tangent plane than across.
 The GalileanEngine tries a step in a random direction.  If the step
 falls in [forbidden space](#forbidden), it tries to mirror (or reverse)
 back into [allowed space](#allowed).  However if the mirrored (or
-reversed) trial is also in forbidden space the step fails.  So with the
-GalileanEngine we have more options to move away from the starting
-point. 
+reversed) trial is also in forbidden space the step fails.  So the
+GalileanEngine is more geared to move away from the starting
+point, even if it has to take small steps.
 
 The problem we encountered here is caused by starting points close to
 the edge, of which there are more in higher dimensional spaces, and at
@@ -462,7 +462,7 @@ engine to take small steps.
 An obvious solution would be to avoid starting positions close to the
 edge.  While for a point at 0.99 the distance to the edge along the
 tangent is 0.14, starting at 0.9 it is already 0.44.  A small avoidance
-zone of 10 percent yields a stepping space, more that 3 times larger. 
+zone of 10 percent in radius yields a stepping space, more that 3 times larger. 
 And it works independent of the dimensionality.  New points should be
 indenpendent and identically distributed anyway.  So avoiding some
 starting positions should not make a difference. 
@@ -484,24 +484,18 @@ latex-->
 |:-:|:-|-------------------------------------------------:|
 
 
-LogL_max is the highest value in the ensemble (or in the phantoms). It
+LogL<sub>max</sub> is the highest value in the ensemble (or in the phantoms). It
 is the proxy for the point at the origin. 
 
-When the error distribution is Laplace, &alpha; = ( 1 - f ).
-
-All points with a logL < logL_f are avoided.  In higher dimensions,
+All points with a logL < logL<sub>f</sub> are avoided.  In higher dimensions,
 more points are deselected as more points are located near the edge. 
 This is exactly what we want to accomplice. 
 
-In the next section we investigate how the engines perform in higher
-dimensions. 
-
-
 ## 6. Performance.
 
-Of course we never use one starting position the generate an ensemble of
+Of course we never use one starting position to generate an ensemble of
 1000 walkers.  It was an artificial setup to see what would happen. In
-this section we define a model which is easily extendable over more
+this section we define a model which is easily extendable over many
 dimensions and we try to find out which values for the avoidance
 fraction and for the pertubation in the Galilean engine are optimal.
 
@@ -537,8 +531,11 @@ fraction, over dimensions ranging from 4 to 100.
 
 ![png](images/EvsD-gap.png)
 
-Firstly, we observe that at low dimensions the choice for &alpha; and w
-does not make much difference.  At dimension 10 the lines start to
+We observe that at low dimensions the choice for &alpha; and w
+does not make much difference.  It is well known that things are simple
+when dealing with few parameters (low dimensionality).  
+
+At dimension 10 the lines start to
 diverge.  When the avoidance zone is zero, all NS-calculated evidences
 are too low, meaning that we have oversampled the outskirts of the
 allowed space in the evidence integral.  For &alpha; &gt; 0, we see a
@@ -577,7 +574,7 @@ baseline evidence goes slightly up. Ten steps might not be enough to
 obtain a new iid walker. As we have seen before, at 20 steps the
 performance is OK at least up to dimension 100. 
 
-### General Models
+## 7. Discussion.
 
 Up to here we always had a multidimensional spherical or elliptical
 allowed space, either by construction with the N-sphere or by using a
@@ -614,9 +611,7 @@ models; they equally hold for general models because they only have to
 do with the dimensionality of the parameter space and much less with the
 specific shape of the allowed space.   
 
-## 7. Discussion.
 
-TBW
 
 
  
