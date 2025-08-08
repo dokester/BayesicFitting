@@ -82,7 +82,7 @@ latex-->
 | &nbsp; | ![DimensionsEquation-2](images/dimeq-2.png "Eq 2") | (2) |
 |:-:|:-|-------------------------------------------------:|
 
-In 3 dimensions we have a ball. There is a circle present al every x
+In 3 dimensions we have a ball. There is a circle present at every x
 value. The volumes is proportional to 
 
 <!--latex
@@ -491,6 +491,9 @@ All points with a logL < logL<sub>f</sub> are avoided.  In higher dimensions,
 more points are deselected as more points are located near the edge. 
 This is exactly what we want to accomplice. 
 
+In the next section we try to find out what the optimal value for
+&alpha; could be. 
+
 ## 6. Performance.
 
 Of course we never use one starting position to generate an ensemble of
@@ -576,6 +579,35 @@ performance is OK at least up to dimension 100.
 
 ## 7. Discussion.
 
+In section 4, we found that the combination of high dimensions and
+points near the edge, lead to wandering walkers which have not yet lost
+their correlation with their starting point.  Correlation is stronger
+when the starting points are nearer to the edge.  There are increasingly
+more points near the edge at higher dimensions, leading possibly to
+serious problems for our engines, and consequently to the calculation of
+the evidence by NS.  
+
+In section 5 we described a way forward by defining a zone of avoidance
+near the edges, where we should not select starting points.  Under the
+assumption that the newly found position for the walker is iid, it
+should not matter where we start from.  All points should be reachable
+from any other position.  Hence we should be able to ignore starter
+points in the avoidance zone, without penalty. 
+
+In section 6 we run several numeric experiments to establish optimal
+values for &alpha; (avoidance) and w (perturbation). We have done more
+experiments than are shown here, but in all of them there seem to be a
+more or less linear relation between the deviation of the NS evidence
+values, compared to the baseline values, versus the number of
+dimensions. At low dimensions the deviations vanish, while they increase
+linearly with the number of parameters. The linearity in itself is a
+surprising fact. One setting of &alpha; and w results in one consistent
+line extending over more 2 orders of magnitude in dimensionality. Even
+more surprising is the fact that there are settings of &alpha; en w that
+result in a horizontal line, where the baseline evidences and the NS
+evidences are consistent over the whole range of dimensions, from 4 to
+100.  This is what we hoped for and it is what we got.
+
 Up to here we always had a multidimensional spherical or elliptical
 allowed space, either by construction with the N-sphere or by using a
 linear model with a Gaussian error distribution, resulting in a
@@ -598,7 +630,7 @@ However, the iron properties of multidimensional space still hold.  The
 volumes of space goes up with the power of the dimensions.  In high
 dimensions most of the volumes of any shape, be it spherical,
 ellipsoidal or even irregular and/or in parts, is at the edge, defined
-by the value of `lowLogL`.  Consequently most walkers are located at the
+by the value of `lowL`.  Consequently most walkers are located at the
 outskirts, near the edges.  When chosing one of these walkers near the
 edge to start a randomisation process from, all but one directions are
 in the local tangent plane, where the options for moving into forbidden
@@ -610,7 +642,6 @@ All these considerations were presented for the N-sphere and/or linear
 models; they equally hold for general models because they only have to
 do with the dimensionality of the parameter space and much less with the
 specific shape of the allowed space.   
-
 
 
 
@@ -635,7 +666,7 @@ a new walker position. As such, all walkers are also phantoms.
 
 <a name="allowed"></a>
 **Allowed Space** is the part of prior space where the log Likelihood
-is larger than a certain value of the log( likelihood ), called lowLogL. 
+is larger than a certain value of the log( likelihood ), called lowL. 
 Wandering walkers are allowed to move anywhere within its constraints.
 
 <a name="forbidden"></a>
@@ -644,7 +675,11 @@ if not allowed to move in there.
 
 <a name="edge"></a>
 **Edge** is the N-1 dimensional surface where log Likelihood equals
-lowLogL.
+lowL.
+
+<a name="boundingbox"></a>
+**Bounding Box** in a ractangular box aligned along the axes, of minimum
+extent that contains all the active walkers cq. phantoms.
 
 
 ## Do Kester. 2025.
