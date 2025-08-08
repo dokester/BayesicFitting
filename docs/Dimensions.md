@@ -615,11 +615,13 @@ multidimensional ellipse.  In the latter case we could calculate the
 evidence analytically and compare it with the evidences calculated by
 Nested Sampling.  
 
+<!--
 As the number of parameters increase from 4 to 100, the baseline
 evidences range in value from -8.7 to -281.6, with precisions increasing
 from 0.1 to 0.6.  With some smart settings of two attributes, we found
 NS evidences, similar to the baseline evidences within the precision. 
 And we could achieve that over the whole range of dimensions. 
+-->
 
 For non-linear models, or non-Gaussian error distributions, it is not
 that easy.  As there is a wide variety of non-linear problems, most (all?)
