@@ -39,10 +39,10 @@ clinging to the edge in high dimensional space.
 
 In section 6, NS runs the engines on a linear problem where the resulting
 evidences can be compared directly with analytically calculated values.
-It also discusses how things are different (or the same) for non-linear
-problems.
 
-Section 7 discusses the results we have obtained.
+Section 7 discusses the results we have obtained on linear problems. 
+Some thoughts are presented on how things are different (or the same)
+for non-linear problems. 
 
 ## 2. Spaces.
 
@@ -608,8 +608,8 @@ result in a horizontal line, where the baseline evidences and the NS
 evidences are consistent over the whole range of dimensions, from 4 to
 100.  This is what we hoped for and it is what we got.
 
-Up to here we always had a multidimensional spherical or elliptical
-allowed space, either by construction with the N-sphere or by using a
+Up to here we discussed multidimensional spherical or elliptical
+allowed spaces, either by construction with the N-sphere or by using a
 linear model with a Gaussian error distribution, resulting in a
 multidimensional ellipse.  In the latter case we could calculate the
 evidence analytically and compare it with the evidences calculated by
