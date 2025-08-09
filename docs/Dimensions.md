@@ -6,7 +6,7 @@ to convert the embedded latex equations into images.
 <p>
 <p>
 
-# High-Dimensional Parameter Space. 
+# Navigating High-Dimensional Parameter Space. 
 
 ## Still working on this note. DK.
 
