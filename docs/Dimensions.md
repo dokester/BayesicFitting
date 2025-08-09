@@ -23,16 +23,16 @@ the GalileanEngine [[Skilling]](./references.md#skilling1),
 [[Goggans]](./references.md#goggans). Especially we look at
 their performance in higher dimensions. 
 
-In section 2, we have to take a look at some properties of N-dimensional
+In section 2, we take a look at some properties of N-dimensional
 spheres. We show how space within a sphere is distributed when projected
 in various ways.
 
-In section 3, we take a closer look at the engines and list some
+In section 3, we explain the workings of the engines and list some
 variants we want to consider.
 
 In section 4, we exercise both engines in multidimensional spheres,
 starting from one points, to see whether the resulting walkers are
-iid.
+independent and identically distributed (iid).
 
 In section 5, we find a way to ameliorate the problems found with walkers
 clinging to the edge in high dimensional space.
@@ -44,7 +44,7 @@ Section 7 discusses the results we have obtained on linear problems.
 Some thoughts are presented on how things are different (or the same)
 for non-linear problems. 
 
-## 2. Spaces.
+## 2. High-dimensional Spaces.
 
 To study properties of higher dimensional spaces we turn to a simple
 structure, the N-d unit sphere, i.e.  all points within a euclidean
@@ -56,7 +56,7 @@ have little hope for more complicated cases.
 
 N-d spheres are hard to depict or even to imagine, except for dimensions 1
 and 2. We can project them in several ways to show the distribution of
-space along those projections. The first we are interested in is a
+space along those projections. The first we are interested in, is a
 projection to one axis through the origin. 
 
 In 1 dimension we have an uniform distribution of space along that axis.
@@ -71,7 +71,7 @@ latex-->
 |:-:|:-|-------------------------------------------------:|
 
 In 2 dimensions we have a circle. Its projection along the x-axis is
-proportional to 
+proportional to a half-circle.
 
 <!--latex
 \begin{displaymath}
@@ -83,7 +83,7 @@ latex-->
 |:-:|:-|-------------------------------------------------:|
 
 In 3 dimensions we have a ball. There is a circle present at every x
-value. The volumes is proportional to 
+value. The volumes is proportional to a parabola. 
 
 <!--latex
 \begin{displaymath}
@@ -133,8 +133,8 @@ several N-d unit spheres. Their maxima are normalised to 1.0.
 
 Although it would seem that the bulk of an N-d sphere is located at the
 center, this is not the case. Most points near the center have an
-euclidean distance very near to 1. So most of them are found on the
-outskirts.  If we trace the space in consecutive shells centered on the
+Euclidean distance very near to 1. So most of them are found on the
+outskirts.  If we trace the space in expanding shells centered on the
 origin we see that it is proportional to the the surface area, a (N-1)-d
 space.
 
@@ -164,8 +164,7 @@ the origin for several N-d unit spheres. Their maximum values are normalised to 
 
 In figures 3, 4 and 5 we show unit spheres of dimensions 2, 10 and 100, resp.
 In each sphere we have 10000 points, uniformly distributed, using the
-Marsaglia algorithm [https://en.wikipedia.org/wiki/N-sphere : Uniformly at
-random within the n-ball]. 
+[Marsaglia algorithm](https://en.wikipedia.org/wiki/N-sphere#Uniformly_at_random_within_the_n-ball)
 
 In the left hand panels we see the points in the first two axes and a
 histogram of the the points projected on the main axes (red line).  For
@@ -205,8 +204,8 @@ Figure 5 shows the distribution uniform points in a 100-d sphere.
 
 An [engine](#engine) is an algorithm that moves a [walker](#walker)
 around within the present likelihood constraint until it is deemed
-independently distributed with respect to the other walkers and more
-specificly to the place it started from. 
+independent and identically distributed with respect to the other
+walkers and more specificly to the place it started from. 
 
 Each engine is called with the list of walkers and the value of the
 lowLogLikelihood constraint, `lowL`. All engines have attributes like `nstep`
@@ -298,7 +297,7 @@ feature of a point, is its distance to the origin. Without loss of
 generality, we take 4 points, positioned on axis 0 at 0.0, 0.5, 0.9 and
 0.99. From these starting positions we generate 1000 points using one of our
 two engines. We do this for N-spheres of 10 and 100 dimensions. The 2-d
-sphere we skip, because it is very easy to check the preformance of engines
+sphere we skip, because it is very easy to check the performance of engines
 in 2 dimensions and consequently everything there is hunkydory.
 
 In all tests we take 20 steps before we declare that we have a new
@@ -312,7 +311,7 @@ projection of the resulting points on the (0,1) plane.  The starting
 position is indicated with a red '+'.  On the right several histograms
 are shown.  In blue the percentage of points that are negative in each
 of the dimensions, is displayed.  The value to watch is the very first
-as there we introduced a possible asymmetry with our choice of the
+one as we introduced a possible asymmetry in there with our choice of the
 starting value. 
 
 The dotted blue line shows the theoretical value (50%, obviously).  All
@@ -592,7 +591,9 @@ near the edges, where we should not select starting points.  Under the
 assumption that the newly found position for the walker is iid, it
 should not matter where we start from.  All points should be reachable
 from any other position.  Hence we should be able to ignore starter
-points in the avoidance zone, without penalty. 
+points in the avoidance zone, without penalty. It goes without saying
+that the points in the avoidance zone are *not* ignored when performing
+other calculations, like the evidence.
 
 In section 6 we run several numeric experiments to establish optimal
 values for &alpha; (avoidance) and w (perturbation). We have done more
