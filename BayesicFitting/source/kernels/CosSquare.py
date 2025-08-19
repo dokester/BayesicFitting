@@ -4,11 +4,11 @@ from .Kernel import Kernel
 from .Cosine import Cosine
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "3.2.4"
+__url__ = "https://dokester.github.io/BayesicFitting/"
+__status__ = "Perpetual Beta"
 
 #  *
 #  *    This file is part of the BayesicFitting package.
@@ -25,14 +25,13 @@ __status__ = "Development"
 #  *
 #  *    The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class CosSquare( Kernel ):
     """
     CosSquare (Cosine Squared) is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-        K( x ) = cos^2( 0.5 &pi; x )    if |x| < 1
-                 0                      elsewhere
+        K( x ) = cos^2( 0.5 &pi; x )  if |x| < 1 else 0
 
 
     """
@@ -43,23 +42,39 @@ class CosSquare( Kernel ):
         Using
             integral = 1.0
             fwhm = 1.0
+
         """
         super( CosSquare, self ).__init__( integral=1.0, fwhm=1.0 )
 
     def result( self, x ):
+        """
+        Return the result for input values.
+
+        Parameters
+        ----------
+        x : array-like
+            input values
+        """
         res = Cosine.result( Cosine, x )
         return res * res
 
-    def resultsq( self, xsq ):
-        return self.result( numpy.sqrt( xsq ) )
-
     def partial( self, x ):
+        """
+        Return the partial derivative wrt the input values.
+
+        Parameters
+        ----------
+        x : array-like
+            the input values
+        """
         return 2 * Cosine.result( Cosine, x ) * Cosine.partial( Cosine, x )
 
     def isBound( self ):
+        """ Return True """
         return True
 
     def name( self ):
+        """ Return the name of the kernel """
         return str( "CosSquare: cos^2( 0.5*PI*x ) if |x| < 1 else 0" )
 
 

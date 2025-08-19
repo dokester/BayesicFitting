@@ -11,9 +11,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Tophat import Tophat
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -36,7 +36,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2022 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class FreeShapeModel( LinearModel ):
     """
@@ -51,7 +51,7 @@ class FreeShapeModel( LinearModel ):
 
     By default ppb = 5.
 
-    The parameters are initialized at {0}.
+    The parameters are initialized at 0.
 
     Although this is a LinearModel it will not work very well with the ( linear )
     Fitter. It will be a very ill-posed problem.
@@ -213,7 +213,7 @@ class FreeShapeModel( LinearModel ):
 
         nxdata = Tools.length( xdata )
         xpix = self.npbase * ( xdata - self.xlo ) / ( self.xhi - self.xlo )
-        xpix += self.center
+        xpix -= self.center
 
         if parlist is None :
             parlist = [k for k in range( self.npbase )]

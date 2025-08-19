@@ -8,9 +8,9 @@ from .Kepplers2ndLaw import Kepplers2ndLaw
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,23 +29,27 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2025 Do Kester
 
 class StellarOrbitModel( NonLinearModel ):
     """
     Model for the radial velocity variations of a star caused by a orbiting planet.
 .
-    The algorithm was taken from
+     The algorithm was taken from [Boule](../references.md#boule)
         Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
         http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
 
-    p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-    p_1 : a     semi major axis (>0)
-    p_2 : P     period of the orbit (>0)
-    p_3 : T     phase since periastron passage (0<p_3<2pi)
-    p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = pi = in sky plane)
-    p_5 : Omega position angle from North to the line of nodes (0<Omega<pi; 0 = north )
-    p_6 : omega longitude from the node (in p_5) to the periastron (0<omega<2pi; 0 = periastron in node )
+    | par |symbol | description                        | limits  | comment |
+    |-----|-------|------------------------------------|---------|---------|
+    | p_0 |   e   | eccentricity of the elliptic orbit | 0<e<1   | 0 = circular orbit |
+    | p_1 |   a   | semi major axis                    |   a>0   |                      |
+    | p_2 |   P   | period of the orbit                |   P>0   |                      |
+    | p_3 |   T   | phase since periastron passage     |0<T<2&pi;|                      |
+    | p_4 |   i   | inclination of the orbit wrt sky   |0<i<&pi; | 0 = pi = in sky plane|
+    | p_5 |&Omega;| position angle from North          |         |                      |
+    |     |       |     to the line of nodes         |0<&Omega;<&pi;| 0 = north         |
+    | p_6 |&omega;| longitude from the node (in p_5) |              |                   |
+    |     |       |     to the periastron         |0<&omega;<2&pi;| 0 = periastron in node|
 
     Due to the fact that the orbit can be mirrored in the sky plane, one of p_5 or p_6
     has to be limited to [0,pi] and the other to [0,2pi].
@@ -82,7 +86,7 @@ class StellarOrbitModel( NonLinearModel ):
     --------
     >>> sm = StellarOrbitModel( )
     >>> print( sm.npars )
-    7
+    >>> 7
 
 
     """
@@ -135,13 +139,7 @@ class StellarOrbitModel( NonLinearModel ):
         params : array_like
             values for the parameters.
 
-        p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-        p_1 : a     semi major axis (>0)
-        p_2 : P     period of the orbit (>0)
-        p_3 : p     phase since periastron passage (0<p<2pi)
-        p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-        p_5 : Omega position angle of the line of nodes
-        p_6 : omega longitude of periastron from lines of nodes
+        The parameters are explained in the @#StellarOrbitModel constructor.
 
         """
         inclin = params[4]
@@ -210,13 +208,7 @@ class StellarOrbitModel( NonLinearModel ):
         params : array_like
             values for the parameters.
 
-        p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-        p_1 : a     semi major axis (>0)
-        p_2 : P     period of the orbit (>0)
-        p_3 : p     phase since periastron passage (0<p<2pi)
-        p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-        p_5 : O(mega) position angle of the line of nodes (0<Omega<pi)
-        p_6 : o(mega) longitude of periastron (0<omega<2pi)
+        The parameters are explained in the @#StellarOrbitModel constructor.
 
         """
         inclin = params[4]
@@ -280,13 +272,7 @@ class StellarOrbitModel( NonLinearModel ):
         parlist : array_like
             list of indices active parameters (or None for all)
 
-        p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-        p_1 : a     semi major axis
-        p_2 : P     period of the orbit (>0)
-        p_3 : p     phase since periastron passage (0<p<2pi)
-        p_4 : i     inclination of the orbit wrt sky (0<i<pi; 0 = orbit in sky plane)
-        p_5 : O     position angle of the line of nodes
-        p_6 : o     longitude of periastron
+        The parameters are explained in the @#StellarOrbitModel constructor.
 
         """
         inclin = params[4]

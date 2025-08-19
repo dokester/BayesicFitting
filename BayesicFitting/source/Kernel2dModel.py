@@ -9,9 +9,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Gauss import Gauss
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2022 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class Kernel2dModel( NonLinearModel ):
     """
@@ -42,23 +42,23 @@ class Kernel2dModel( NonLinearModel ):
 
     The Kernel2dModel is defined as
 
-        f( x:p ) = p_0 * K( r )
+     f( x:p ) = p_0 * K( r )
 
     where K( r ) is a selectable kernel function and r is the distance to the center.
 
-        r = sqrt( u^2 + v^2 ).
+     r = sqrt( u^2 + v^2 ).
 
     There are 3 options for u and v
 
-    1. CIRCULAR has 4 parameters
+    1. CIRCULAR has 4 parameters<br>
         Circular shape with only one width.
         u = ( x - p_1 ) / p_3
         v = ( x - p_2 ) / p_3
-    2. ELLIPTIC has 5 parameters
+    2. ELLIPTIC has 5 parameters<br>
         Elliptic shape aligned along the axes; 2 widths.
         u = ( x - p_1 ) / p_3
         v = ( x - p_2 ) / p_4
-    3. ROTATED has 6 parameters
+    3. ROTATED has 6 parameters<br>
         Rotated elliptical shape with 2 width and a rotational angle.
         u = ( ( x - p_1 )*cos( p_5 ) - ( y - p_2 )*sin( p_5) ) / p_3
         v = ( ( x - p_1 )*sin( p_5 ) + ( y - p_2 )*cos( p_5) ) / p_4

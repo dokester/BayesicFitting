@@ -7,9 +7,9 @@ from .JeffreysPrior import JeffreysPrior
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,18 +32,18 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class ScaledErrorDistribution( ErrorDistribution ):
     """
     Base class that defines methods common to error distributions with a scale.
 
-    GaussErrorDistribution
-    LaplaceErrorDistribution
-    CauchyErrorDistribution
-    ExponentialErrorDistribution
-    UniformErrorDistribution
+     GaussErrorDistribution
+     LaplaceErrorDistribution
+     CauchyErrorDistribution
+     ExponentialErrorDistribution
+     UniformErrorDistribution
 
     Author       Do Kester.
 
@@ -97,6 +97,7 @@ class ScaledErrorDistribution( ErrorDistribution ):
                 low limits
             high : float or array_like
                 high limits
+
         """
         if self.hyperpar[0].prior is None :
             self.hyperpar[0].prior = JeffreysPrior()

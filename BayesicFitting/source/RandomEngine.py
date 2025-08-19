@@ -4,9 +4,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -25,7 +25,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class RandomEngine( Engine ):
     """
@@ -77,7 +77,7 @@ class RandomEngine( Engine ):
         return str( "RandomEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by a random selection of the parameters.
 
@@ -107,7 +107,7 @@ class RandomEngine( Engine ):
         
         ## Make a unit box to find a new walker in
         nap = len( param )
-        um, ux = self.getUnitMinmax( problem, lowLhood )
+        um, ux = self.getUnitMinmax( problem, lowLhood, nap )
 
         mlen = len( self.walkers )
         dr = 10 * ( ux - um ) / mlen
@@ -119,7 +119,7 @@ class RandomEngine( Engine ):
         self.plotter.start( param=walker.allpars )
 
         t = 0
-        for tt in range( self.nstep ) :
+        for tt in range( self.nstep() ) :
             ptry = param.copy()
             uval = self.rng.uniform( um, ux, nap )
             ptry[fi] = self.unit2Domain( problem, uval, kpar=fi )
@@ -129,8 +129,7 @@ class RandomEngine( Engine ):
             if Ltry >= lowLhood :       ## Lucky, in 1 step a truely random point
                 self.plotter.move( param, ptry, col=0, sym=2 )
                 self.reportSuccess()
-                update = len( self.walkers ) if append else kw
-                self.setWalker( update, problem, ptry, Ltry, fitIndex=fi )
+                self.setWalker( kw, problem, ptry, Ltry, fitIndex=fi )
 
                 self.plotter.stop( param=ptry, name="RandomEngine" )
                 return nf                  # nr of successfull params moves

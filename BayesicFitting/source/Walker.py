@@ -5,11 +5,12 @@ from .Formatter import formatter as fmt
 
 from .Problem import Problem
 from .Sample import Sample
+from .ModelDistribution import ModelDistribution
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class Walker( object ):
     """
@@ -153,6 +154,8 @@ class Walker( object ):
                 return self.allpars[np:]
             else :
                 return None
+        elif name == "nap" :
+            return len( self.allpars )
         else :
             raise AttributeError( "Unknown attribute " + name )
 
@@ -178,27 +181,60 @@ class Walker( object ):
         return str( "Walker: %3d" % self.id )
 
 
-    def check( self, nhyp=0, nuisance=0 ) :
+    def check( self, errdis ) :
         """
         Perform some sanity checks.
         """
-        np = self.problem.model.npars
-        na = len( self.allpars )
-        nm = len( self.problem.model.parameters )
+        if self.problem.model is None :
+            np = self.problem.npars
+            nm = len( self.problem.parameters )
+        else :
+            np = self.problem.model.npars
+            nm = len( self.problem.model.parameters )
 
-        if not na == ( np + nhyp + nuisance):
+
+        na = len( self.allpars )
+
+        nhyp = errdis.nphypar
+        nuis = self.problem.nuispars if hasattr( self.problem, "nuispars" ) else 0
+
+
+        if not na == ( np + nhyp + nuis ):
             Tools.printclass( self )
             Tools.printclass( self.problem )
             raise ValueError( "Walker %d inconsistent parameter length : %d is not ( %d + %d )" %
                 ( self.id, na, np, nhyp ) )
 
-        if not nm == ( na - nhyp - nuisance) :
+        if not nm == ( na - nhyp - nuis ) :
             Tools.printclass( self )
             Tools.printclass( self.problem.model )
             raise ValueError( "Walker %d inconsistent with model: allpars: %d, model: %d, hyp: %d )" %
                 ( self.id, na, nm, nhyp ) )
 
         ## Does this (all hypars > 0) always have to be true ???
-#MA        if nhyp > 0 and self.allpars[-nhyp] < 0 :
         if nhyp > 0 and self.allpars[-nhyp] < 0 :
             raise ValueError( "Sample has non-positive hyperparameter: %f" % self.allpars[-nhyp] )
+
+        if self.fitIndex is not None :
+            for ki in self.fitIndex :
+                if ki < 0 :
+                    errdis.hyperpar[ki].prior.checkLimit( self.allpars[ki] )
+                elif ki < np :
+                    self.problem.model.getPrior( ki ).checkLimit( self.allpars[ki] )
+
+        ## ModelDistribution is too expesive to recalculate and check logL
+        if isinstance( errdis, ModelDistribution ) :
+             return
+
+        wlogL = errdis.logLikelihood( self.problem, self.allpars )
+
+#        print( "errdis  ", errdis )
+#        print( "walker  ", fmt( wlogL ), fmt( self.logL ) )
+
+        if wlogL != self.logL :
+            Tools.printclass( self )
+            print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, self.id, self.logL, wlogL ) )
+            print( fmt( self.allpars, max=None ) )
+            raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
+                                ( self.logL, wlogL ) )
+

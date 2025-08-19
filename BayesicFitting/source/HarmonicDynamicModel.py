@@ -8,9 +8,9 @@ from .HarmonicModel import HarmonicModel
 from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,14 +33,14 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2025 Do Kester
 
 
 class HarmonicDynamicModel( HarmonicModel, Dynamic ):
     """
     Harmonic oscillator Model of adaptable order.
 
-    f( x:p ) = &sum;_j ( p_k cos( 2 &pi; j x ) + p_k+1 sin( 2 &pi; j x ) )
+    f( x:p ) = &sum;_j ( p_k cos( 2 &pi; j x ) + p_{k+1} sin( 2 &pi; j x ) )
 
     j = 1, N; k = 0, 2N
 

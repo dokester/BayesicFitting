@@ -8,9 +8,9 @@ from .NonLinearModel import NonLinearModel
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,13 +33,13 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class PadeModel( NonLinearModel ):
     """
     General Pade model of arbitrary degrees in numerator and denominator.
 
-        f( x:p ) = &sum; p_n * x^n / ( &sum; p_{num+1+k} * x^k )
+     f( x:p ) = &sum; p_n * x^n / ( &sum; p_{num+1+k} * x^k )
 
     where the sum in the numerator is over n running from 0 to num ( inclusive )
     and the sum in the denominator is over k running from 0 to den ( inclusive )
@@ -59,7 +59,7 @@ class PadeModel( NonLinearModel ):
     --------
     >>> pade = PadeModel( 3, 1 )                # 3rd degree polynomial
     >>> print pade.getNumberOfParameters( )     # 5
-    5
+    >>> 5
 
     Attributes
     ----------

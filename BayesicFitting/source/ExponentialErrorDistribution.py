@@ -7,9 +7,9 @@ from .HyperParameter import HyperParameter
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class ExponentialErrorDistribution( ScaledErrorDistribution ):
@@ -39,25 +39,25 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
 
     For one residual, x, it holds
 
-        f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s ) ^ p )
+     f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )^p )
 
     where s is the scale and p is the power.
     s and p are hyperparameters, which might be estimated from the data.
 
     The variance of this function is
 
-        &sigma; ^ 2 = s ^ 2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )
+     &sigma;^2 = s^2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )
 
     See toSigma()
 
     The function is mostly used to calculate the likelihood L over N residuals,
     or easier to use log( L )
 
-        logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s ) ^ p )
+        logL = log( N p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( ( |x| / s )^p )
 
     Using weights this becomes:
 
-        logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s ) ^ p )
+        logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s )^p )
 
     Note
     ----
@@ -105,11 +105,11 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
             hi = limits[1]
             try :
                 slim = [lo[0],hi[0]]
-            except :
+            except Exception :
                 slim = [lo,hi]
             try :
                 plim = [lo[1],hi[1]]
-            except :
+            except Exception :
                 pass
 
         if copy is None :

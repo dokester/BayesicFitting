@@ -10,9 +10,9 @@ from .Formatter import fma
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2024 Do Kester
+#  *    2020 - 2025 Do Kester
 
 
 class SoftMaxModel( NonLinearModel ):
@@ -39,6 +39,7 @@ class SoftMaxModel( NonLinearModel ):
     Softmax Model is a Logistic model if the number of outputs is 1.
     Otherwise it is generalization of the LogisticModel over multiple outputs
 
+    ~~~
                        exp( sum_k( x_k * p_kn ) + q_n ) )
         f_n( x:p ) = -------------------------------------------
                      sum_i( exp( sum_k( x_k * p_ki ) + q_i ) ) )
@@ -51,7 +52,7 @@ class SoftMaxModel( NonLinearModel ):
 
            \|/     \|/     \|/     \|/     \|/      N offset parameters (if offset)
             0       0       0       0       0       N outputs
-
+    ~~~
 
 
     The parameters (p) are initialized at 1.0, except the offset (q).

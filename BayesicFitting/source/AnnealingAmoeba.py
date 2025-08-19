@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .ConvergenceError import ConvergenceError
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class AnnealingAmoeba( object ):
     """
@@ -66,7 +66,7 @@ class AnnealingAmoeba( object ):
     Iteration continues until the relative difference between the low and high
     points within the simplex is less than reltol
         |yhi - ylo| / ( |yhi| + |ylo| ) < reltol
-    and/or the absolute difference is less than abstol
+     and/or the absolute difference is less than abstol
         |yhi - ylo| < abstol.
 
     AnnealingAmoeba can be used with limits set to one or more of the input values.
@@ -87,12 +87,10 @@ class AnnealingAmoeba( object ):
         the best of the above values
     xopt : ndarray
         copy of the simplex point that has the best value (nx)
-
     rng : RandomState
         random number generator
     seed : int
         seed of rng
-
     reltol : float
         Relative tolerance. Program stops when ( |yhi-ylo| / (|yhi|+|ylo|) ) < reltol
     abstol : float
@@ -103,14 +101,12 @@ class AnnealingAmoeba( object ):
         iteration counter
     ncalls : int (read only)
         numbers of calls to func
-
     temp : float
         annealing temperature (default: 0)
     cooling : float (non existent when temp=0)
         cooling factor (default: 0.95)
     steps : int (non existent when temp=0)
         number of steps per cooling cycle (default: 10)
-
     verbose : int
         0  : silent
         1 : print results to output
@@ -119,7 +115,6 @@ class AnnealingAmoeba( object ):
     callback : callable
         function to be called every iteration of form :
         xopt = callback( xopt )
-
     simplex : ndarray
         the simplex has shape = (nx+1, nx); nx is the size of x
     values : ndarray

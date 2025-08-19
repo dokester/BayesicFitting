@@ -6,9 +6,9 @@ from .Dynamic import Dynamic
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2025 Do Kester
 
 
 class DeathEngine( Engine ):
@@ -79,7 +79,7 @@ class DeathEngine( Engine ):
         return str( "DeathEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by removins a component.
 
@@ -143,10 +143,8 @@ class DeathEngine( Engine ):
 
         if Ltry >= lowLhood:
             self.reportSuccess()
-            update = len( self.walkers ) if append else kw
-            self.setWalker( update, problem, ptry, Ltry, fitIndex=ftry )
-            wlkr = self.walkers[update]
-            wlkr.check( nhyp=nhyp )
+            self.setWalker( kw, problem, ptry, Ltry, fitIndex=ftry )
+
             return abs( dnp )
 
         self.reportReject( )

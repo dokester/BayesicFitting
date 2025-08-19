@@ -107,6 +107,7 @@ from .source.OrthonormalBasis import OrthonormalBasis
 from .source.PadeModel import PadeModel
 from .source.PhantomCollection import PhantomCollection
 from .source.PhantomSampler import PhantomSampler
+#from .source.PixelModel import PixelModel
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel
 from .source.PolySurfaceModel import PolySurfaceModel

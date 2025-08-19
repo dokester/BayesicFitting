@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class StepEngine( Engine ):
     """
@@ -78,7 +78,7 @@ class StepEngine( Engine ):
 
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -106,7 +106,7 @@ class StepEngine( Engine ):
         np = len( fitIndex )
 
         param = walker.allpars
-        urange, umin = self.getUnitRange( problem, lowLhood )
+        urange, umin = self.getUnitRange( problem, lowLhood, walker.nap )
         urange = urange[fitIndex]
 
         dur = urange / len( self.walkers )      ## some fraction
@@ -127,7 +127,7 @@ class StepEngine( Engine ):
         step = ( self.rng.rand( np ) - 0.5 ) * urange
         ks = kt = 0
 
-        while ks < self.nstep :
+        while ks < self.nstep() :
             ptry = param.copy()
 
             # iterate until all utry is in [0,1]
@@ -158,8 +158,7 @@ class StepEngine( Engine ):
 #                self.calcJourney( utry - usav )
                 self.reportSuccess( )
 
-                update = len( self.walkers ) if append else kw
-                self.setWalker( update, problem, ptry, Ltry, fitIndex=fitIndex )
+                self.setWalker( kw, problem, ptry, Ltry, fitIndex=fitIndex )
                 param = ptry
                 usav = utry
                 sz = 1.0

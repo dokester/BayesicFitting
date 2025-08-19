@@ -10,9 +10,9 @@ from .Formatter import formatter as fmt
 from .Model import Model
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -45,13 +45,13 @@ class AstropyModel( Model ):
     >>>
     >>> gauss = AstropyModel( gm )
     >>> print( gauss )
-    AstropyModel( Gauss1D )
+    >>> AstropyModel( Gauss1D )
     >>> print( gauss.getNumberOfParameters( ) )
-    3
+    >>> 3
     >>> print( gauss( numpy.linspace( -5, 5, 11 ) ) )
-    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
-       1.11089965e-02   3.35462628e-04   3.72665317e-06]
+    >>> [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+    >>>    6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+    >>>    1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
     Attributes
     ----------

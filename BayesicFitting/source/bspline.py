@@ -157,7 +157,7 @@ class Bspline():
 
         x = np.linspace(x_min, x_max, num=1000)
 
-        N = np.array([self(i) for i in x]).T;
+        N = np.array([self(i) for i in x]).T
 
         for n in N:
 
@@ -178,7 +178,7 @@ class Bspline():
 
         x = np.linspace(x_min, x_max, num=1000)
 
-        N = np.array([self.d(i) for i in x]).T;
+        N = np.array([self.d(i) for i in x]).T
 
         for n in N:
 

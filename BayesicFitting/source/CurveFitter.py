@@ -11,9 +11,9 @@ from .IterativeFitter import IterativeFitter
 from .IterationPlotter import IterationPlotter
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class CurveFitter( IterativeFitter ):
     """
@@ -112,7 +112,7 @@ class CurveFitter( IterativeFitter ):
 
         Raises
         ------
-            ValueError when ydata or weights contain a NaN
+        ValueError when ydata or weights contain a NaN
         """
         fitIndex, ydata, weights = self.fitprolog( ydata, weights=weights, 
                             accuracy=accuracy, keep=keep )

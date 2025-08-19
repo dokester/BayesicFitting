@@ -7,9 +7,9 @@ from .Engine import Engine
 from .Engine import DummyPlotter
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,13 +32,18 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class GibbsEngine( Engine ):
     """
     Move a one parameter at a time by a random amount.
 
     The walker is kept when the logLikelihood > lowLhood
+
+    Attributes
+    ----------
+    nstep : int (2)
+        number of steps in each dimension
 
     Attributes from Engine
     ----------------------
@@ -47,8 +52,11 @@ class GibbsEngine( Engine ):
     Author       Do Kester.
 
     """
+
+    NSTEP = 2       # number of default steps for Gibbs
+
     #  *********CONSTRUCTORS***************************************************
-    def __init__( self, walkers, errdis, nstep=2, copy=None, **kwargs ) :
+    def __init__( self, walkers, errdis, copy=None, **kwargs ) :
         """
         Constructor.
 
@@ -66,18 +74,18 @@ class GibbsEngine( Engine ):
         """
         super( ).__init__( walkers, errdis, copy=copy, **kwargs )
 
-        self.nstep = nstep
+        self.nstep = self.NSTEP
         self.plotter = DummyPlotter()
 
     def copy( self ):
         """ Return copy of this.  """
-        return GibbsEngine( self.walkers, self.errdis, nstep=self.nstep, copy=self )
+        return GibbsEngine( self.walkers, self.errdis, copy=self )
 
     def __str__( self ):
         return str( "GibbsEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -114,7 +122,7 @@ class GibbsEngine( Engine ):
         param = walker.allpars
         self.plotter.start( param=param )
 
-        ur, um = self.getUnitRange( problem, lowLhood )
+        ur, um = self.getUnitRange( problem, lowLhood, walker.nap )
         ur *= 1.10                                   ## add 10% on the edges.
 
         if self.verbose > 4 :
@@ -152,8 +160,7 @@ class GibbsEngine( Engine ):
                     self.reportSuccess( )
                     param = ptry
 
-                    update = len( self.walkers ) if append else kw
-                    self.setWalker( update, problem, param, Ltry, fitIndex=fitIndex )
+                    self.setWalker( kw, problem, param, Ltry, fitIndex=fitIndex )
                     steps += 1
                     break
                 elif kk < self.maxtrials :

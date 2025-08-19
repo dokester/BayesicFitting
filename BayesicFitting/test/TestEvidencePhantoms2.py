@@ -654,7 +654,8 @@ class Test( unittest.TestCase  ) :
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
         eng = ns.engines[0]
-        print( fmt( eng.getUnitRange( ns.problem, ns.walkers[0].logL) ) )
+        nap = ns.walkers[0].nap
+        print( fmt( eng.getUnitRange( ns.problem, ns.walkers[0].logL, nap) ) )
 #        print( eng.unitRange )
 #        print( eng.unitMin )
 

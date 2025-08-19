@@ -8,9 +8,9 @@ from .Tools import printclass as printclass
 from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2024 Do Kester
+#  *    2018 - 2025 Do Kester
 
 class Problem( object ):
     """
@@ -139,10 +139,8 @@ class Problem( object ):
         if name == "weights" :
             try :
                 delattr( self, "sumweight" )
-            except :
+            except Exception :
                 pass
-        else :
-            setatt( self, name, value )
 
     def __getattr__( self, name ) :
         """
@@ -155,6 +153,8 @@ class Problem( object ):
         """
         if name == 'npars' :
             return self.model.npars
+        elif name == 'nuispars' :           # number of nuisance parameters
+            return 0
         elif name == 'varyy' :
             return 0
         elif name == 'sumweight' :            # Return the sum over weight vector.
@@ -222,7 +222,6 @@ class Problem( object ):
         """
         res = self.ydata - ( self.result( param ) if mockdata is None else mockdata )
         return self.cyclicCorrection( res )
-
 
     def cyclicCorrection( self, res ):
         """

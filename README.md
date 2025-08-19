@@ -47,46 +47,25 @@ Citation index for the BayesicFitting package:
 DOI: 10.5281/zenodo.2597200
 
 
+<a name="whatsnew"></a>
 ## What's new.
 
- + 09 Dec 2024 version 3.2.3<br>
-   Issue 27: Remove invalid escape sequences from docstrings.
-
- + 05 Nov 2024 version 3.2.2<br>
-   Issue 24: Adapt to numpy-2 and pertaining Scipy, Astropy and MatplotLib
-
- + 27 March 2024 version 3.2.1<br>
-   A lot of fairly small stuff.
-   * \_\_status\_\_ changed to Alpha for some newer additions
-   * Priors: 
-      - Adapt to input arrays 
-      - Made limited and/or circular
-      - Proper integral when limited
-   * Engines:
-      - Add bestCheck and bestBoost
-      - Minor restructoring
-   * Models:
-      - Minor restructoring and renaming
-      - setLimits() replaced by setPrior() in RepeatingModel
-      - provide for more dimensions of outputs in derivative
-   * Problems:
-      - toString() method restructured
-   * Walker and WalkerList:
-      - Add logPrior attribute
-      - Change in inheritance reporting
-   * PhantomCollection:
-      - getList() method
-   * NestedSampler:
-      - Add repiter attribute: report every repiter when verbose=2
-      - Add bestBoost
-   * ModelDistribution:
-      - put internal sample() method in try-except block
-   * Tools:
-      - subclassof() method
-      - printclass finetuning
-   * Test and documentation. Update.
-
-
+ + 13 Aug 2025 version 3.2.4<br>
+   * Lauch new web site https://dokester.github.io/BayesicFitting/
+     Almost all docstrings adapted for the new site.
+   * GalileanEngine
+     - add a pertubation attribute: wiggle=0.2. See [Dimensions](./docs/Dimensions.md)
+     - find edge by repeated quadratic interpolation before mirroring
+   * NestedSampler
+     - add new attribute avoid=0.1. See [Dimensions](./docs/Dimensions.md)
+   * PhantomSampler now uses all phantoms to do the evidence integral
+     - Adaptions in Engines, Explorer, WalkerList, NestedSampler.
+     _ PhantomCollection has one WalkerList also in Dynanic cases.
+   * Removed Deprecations, Checks and/or Warnings.
+     - Model, ErrorDistributions, Problem
+     - Formatter
+     _ Sample
+    
 <a name="history"></a>
 ## 1. History 
 
@@ -465,11 +444,45 @@ More work needs to be done in:
    * Adaptations in existing tests
    * Reran all tests and examples
 
- + 20 March 2024 version 3.2.1
-   * See above in Whats new
+ + 27 March 2024 version 3.2.1<br>
+   A lot of fairly small stuff.
+   * \_\_status\_\_ changed to Alpha for some newer additions
+   * Priors: 
+      - Adapt to input arrays 
+      - Made limited and/or circular
+      - Proper integral when limited
+   * Engines:
+      - Add bestCheck and bestBoost
+      - Minor restructoring
+   * Models:
+      - Minor restructoring and renaming
+      - setLimits() replaced by setPrior() in RepeatingModel
+      - provide for more dimensions of outputs in derivative
+   * Problems:
+      - toString() method restructured
+   * Walker and WalkerList:
+      - Add logPrior attribute
+      - Change in inheritance reporting
+   * PhantomCollection:
+      - getList() method
+   * NestedSampler:
+      - Add repiter attribute: report every repiter when verbose=2
+      - Add bestBoost
+   * ModelDistribution:
+      - put internal sample() method in try-except block
+   * Tools:
+      - subclassof() method
+      - printclass finetuning
+   * Test and documentation. Update.
 
+ + 05 Nov 2024 version 3.2.2<br>
+   Issue 24: Adapt to numpy-2 and pertaining Scipy, Astropy and MatplotLib
 
+ + 09 Dec 2024 version 3.2.3<br>
+   Issue 27: Remove invalid escape sequences from docstrings.
 
+ + 13 Aug 2025 version 3.2.4<br>
+   See [What's new](#whatsnew)
 
 <br><br><br><br>
 

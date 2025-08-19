@@ -3,9 +3,9 @@ import math
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,11 +30,15 @@ __status__ = "Perpetual Beta"
 #  *    2006 - 2014 Do Kester, SRON (Java code)
 #  *    2017        Do Kester
 
+# Module LogFactorial
+"""
+One method that returns the log of the factorial of a number.
 
+"""
 
 def logFactorial( k ):
     """
-    logFactorial.  It provides the natural log of n!
+    logFactorial.  It provides the natural log of k!
 
     if k is float, it will be truncated to int
 
@@ -51,9 +55,9 @@ def logFactorial( k ):
     Example
     -------
     >>> print( logFactorial( 0 ) )
-    0
+    >>> 0
     >>> print( logFactorial( [3, 5, 10] ) )
-    [1.7917594692280550, 4.7874917427820458, 15.1044125730755159]
+    >>> [1.7917594692280550, 4.7874917427820458, 15.1044125730755159]
 
     Author
     ------
@@ -107,6 +111,12 @@ def logFactorial( k ):
     ksh = k.shape
 
     k = k.flatten()
+
+### This piece of code is wrong as it appears that the logfact array is also called for k>=100  
+#    lf = numpy.where( k < 100, logfactarray[k],
+#            0.9189385332046727 + ( k + 0.5 ) * numpy.log( k ) - k + 1.0 / ( 12.0 * k ) )
+#    return lf.reshape( ksh )
+
 
     lf = numpy.zeros( len( k ), dtype=float )
     q = numpy.where( k < 100 )[0]

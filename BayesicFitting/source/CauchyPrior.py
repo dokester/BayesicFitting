@@ -4,9 +4,9 @@ import math
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,23 +28,25 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 202024 Do Kester
+#  *    2016 - 202025 Do Kester
 
 
 class CauchyPrior( Prior ):
     """
     Cauchy prior distribution.
 
-        Pr( x ) =  s / ( &pi; * ( s^2 + ( x - c )^2 )
+    Pr( x ) =  s / ( &pi; * ( s^2 + ( x - c )^2 )
 
     By default: c = center = 0 and s = scale = 1.
 
-    It can also have a limited domain. (To be done)
+    It can also have a limited domain.
     By default the domain is [-Inf,+Inf].
     In computational practice it is limited to [-1e16, 1e16]
 
-    domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
-    unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
+     domain2unit: 
+        u = arctan( ( d - c ) / s ) / &pi; + 0.5
+     unit2domain: 
+        d = tan( ( u - 0.5 ) * &pi; ) * s + c
 
     Examples
     --------
@@ -63,8 +65,6 @@ class CauchyPrior( Prior ):
     Attributes from Prior
     --------------------=
     lowLimit, highLimit, deltaP, _lowDomain, _highDomain
-
-    lowLimit and highLimit cannot be used in this implementation.
 
     """
 
@@ -109,7 +109,7 @@ class CauchyPrior( Prior ):
         Return a value in [0,1] given a value within the valid domain of
         a parameter for a Cauchy distribution.
 
-        domain2unit: u = arctan( ( d - c ) / s ) / pi + 0.5
+        u = arctan( ( d - c ) / s ) / &pi; + 0.5
 
         Parameters
         ----------
@@ -124,7 +124,7 @@ class CauchyPrior( Prior ):
         Return a value within the valid domain of the parameter given a value
         between [0,1] for a Cauchy distribution.
 
-        unit2domain: d = tan( ( u - 0.5 ) * pi ) * s + c
+        d = tan( ( u - 0.5 ) * &pi; ) * s + c
 
         Parameters
         ----------
@@ -160,7 +160,6 @@ class CauchyPrior( Prior ):
         ----------
         x : float
             the value
-
         """
         xc = x - self.center
         return - 2 * xc / ( self.scale * self.scale + xc * xc )

@@ -9,9 +9,9 @@ from .Modifiable import Modifiable
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2023 Do Kester
+#  *    2020 - 2025 Do Kester
 
 class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
     """
@@ -42,17 +42,17 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
     >>> knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     >>> csm = SplinesModel( knots=knots, order=2 )
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> npt = 161                                               # to include both 0 and 160.
     >>> x = numpy.arange( npt, dtype=float )                    # x-values
     >>> csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
+    >>> 18
 
     Attributes
     ----------
@@ -235,7 +235,7 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
 
         try :
             self.basis = self.makeBasis()
-        except :
+        except Exception :
             print( "Grow: Could not make basis from", fmt( self.knots,max=None ) )
             return False
 
@@ -316,7 +316,7 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
         self.alterParameterSize( dnp, offset, location=location )
         try :
             self.basis = self.makeBasis()
-        except :
+        except Exception :
             print( "Shrk: Could not make basis from", fmt( self.knots,max=None ) )
             return False
 

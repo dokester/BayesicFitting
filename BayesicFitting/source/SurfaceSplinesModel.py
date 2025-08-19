@@ -6,9 +6,9 @@ from .LinearModel import LinearModel
 from .SplinesModel import SplinesModel
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class SurfaceSplinesModel( LinearModel ):
     """
@@ -55,8 +55,8 @@ class SurfaceSplinesModel( LinearModel ):
     >>> yknots = numpy.arange(  nyk , dtype=float ) * 10      # make knots from 0 to 100
     >>> csm = SurfaceSplinesModel( xknots, yknots, 2 )
     >>> print csm.getNumberOfParameters( )      # ( nxk + order - 1 )*( nyk + order - 1 )
-    216
-    # ... fitter etc. see Fitter
+    >>> 216
+    >>> # ... fitter etc. see Fitter
 
     Category     mathematics/Fitting
 

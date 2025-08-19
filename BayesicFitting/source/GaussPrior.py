@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,25 +26,31 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class GaussPrior( Prior ):
     """
     Gauss prior distribution. Use  normalized version:
 
-        Pr( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 * ( ( x - c ) / s )^2 )
+     Pr( x ) = 1 / &radic;( 2 &pi; s^2 ) exp( - 0.5 * ( ( x - c ) / s )^2 )
 
-    By default: c = center = 0 and s = scale = 1.
+     By default: 
+        c = center = 0 
+        s = scale = 1.
 
-    It can also have a limited domain. (To be done)
     By default the domain is [-Inf,+Inf].
     In computational practice the domain is limited to about [-8.5, 8.5] scale units.
+    Outside that range the Gaussian is indistinguishable from 0, computationally.
+
+    It can also have a limited domain.
 
     According to integral-calculator.com we have:
 
-    domain2unit: u = 0.5 * ( erf( ( d - c ) / ( s * &sqrt; 2 ) ) + 1 )
-    unit2domain: d = erfinv( 2 * u - 1 ) * s * &sqrt; 2 + c
+    domain2unit: 
+        u = 0.5 * ( erf( ( d - c ) / ( s * &radic;2 ) ) + 1 )
+    unit2domain: 
+        d = erfinv( 2 * u - 1 ) * s * &radic;2 + c
 
     Examples
     --------
@@ -116,7 +122,7 @@ class GaussPrior( Prior ):
         Return a value in [0,1] given a value within the valid domain of
         a parameter for a Gauss distribution.
 
-        domain2unit: u = 0.5 * ( erf( ( d - center ) / ( &sqrt; 2 * scale ( ) + 1 )
+         u = 0.5 * ( erf( ( d - center ) / ( &radic;2 * scale ( ) + 1 )
 
         Parameters
         ----------
@@ -131,7 +137,7 @@ class GaussPrior( Prior ):
         Return a value within the valid domain of the parameter given a value
         between [0,1] for a Gauss distribution.
 
-        unit2domain: d = erfinv( 2 * u - 1 ) * scale * &sqrt; 2 + center
+         d = erfinv( 2 * u - 1 ) * scale * &radic;2 + center
 
         Parameters
         ----------

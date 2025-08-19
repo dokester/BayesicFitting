@@ -12,6 +12,11 @@
 | [Examples][exlink] | [Trouble](./docs/troubles.md) |
 -->
 
+[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
+![Tests Status](./docs/images/tests-badge.svg)
+![Coverage Status](./docs/images/coverage-badge.svg)
+
+
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
 &nbsp;

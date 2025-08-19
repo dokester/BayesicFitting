@@ -6,9 +6,9 @@ from .Prior import Prior
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,24 +30,27 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 202024 Do Kester.
+#  *    2016 - 202025 Do Kester.
 
 class JeffreysPrior( Prior ):
     """
     Jeffreys prior distribution, for scale-like parameters.
+
     Jeffreys prior is a improper prior ( i.e. its integral is unbound ).
+
     Because of that it always needs limits, low and high, such that
     0 < low < high < +Inf.
 
-        Pr( x ) = 1.0 / ( x * norm )    if low < x < high
-                  0.0                   otherwise
+     Pr( x ) = 1.0 / ( x * norm ) if ( low < x < high ) else 0
 
     where norm = log( high ) - log( low )
 
     No limits are set by default.
 
-    domain2unit: u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );
-    unit2domain: d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
+    domain2unit: 
+        u = ( log( d ) - log( lo ) ) / ( log( hi ) - log( lo ) );
+    unit2domain: 
+        d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
 
     Examples
     --------

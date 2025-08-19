@@ -13,9 +13,9 @@ from .ExponentialPrior import ExponentialPrior
 from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2024 Do Kester
+#  *    2019 - 2025 Do Kester
 
 
 class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
@@ -63,7 +63,7 @@ class DecisionTreeModel( Modifiable, Dynamic, LinearModel ):
     --------
     >>> dtm = DecisionTreeModel( )
     >>> print( dtm )
-    DecisionTree: with 0 components and 1 parameters
+    >>> DecisionTree: with 0 components and 1 parameters
 
     Attributes
     ----------

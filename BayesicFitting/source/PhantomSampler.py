@@ -85,12 +85,6 @@ class PhantomSampler( NestedSampler ):
     In principle it speeds up the calculations by a factor step, of course it
     pays in exploratory power and precision.
 
-
-    Attributes
-    ----------
-    step : int (< 10)
-        percentage of the walkers to replace
-
     Attributes from NestedSampler
     -----------------------------
     xdata, model, ydata, weights, problem, distribution, ensemble, discard, rng, seed,
@@ -100,13 +94,13 @@ class PhantomSampler( NestedSampler ):
     Author       Do Kester.
 
     """
-    ENSEMBLE = 100
+    ENSEMBLE = 20
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata=None, model=None, ydata=None, weights=None,
-                accuracy=None, problem=None, distribution=None, limits=None, 
-                keep=None, ensemble=100, seed=80409, rate=1.0, engines=None, 
-                maxsize=None, threads=False, verbose=1, step=4 ) :
+                accuracy=None, problem=None, distribution=None, limits=None,
+                keep=None, ensemble=ENSEMBLE, seed=80409, rate=1.0, engines=None,
+                maxsize=None, threads=False, verbose=1 ) :
         """
         Create a new class, providing inputs and model.
 
@@ -115,11 +109,6 @@ class PhantomSampler( NestedSampler ):
 
         Parameters
         ----------
-        step : int
-            percentage of walkers to use
-
-        Parameters from NestedSampler
-        -----------------------------
         xdata : array_like
             array of independent input values
         model : Model
@@ -168,7 +157,7 @@ class PhantomSampler( NestedSampler ):
             high    high limit on hyperpars
             When limits are set the hyperpars are not fixed.
         ensemble : int
-            number of walkers
+            number of walkers (20)
         seed : int
             seed of random number generator
         rate : float
@@ -202,66 +191,120 @@ class PhantomSampler( NestedSampler ):
             >4  for debugging
 
         """
-
-        if step <= 10 :
-            self.step = step
-        else :
-            raise ValueError( "Please keep step <= 10" )
-
-        self.initEnsemble = ensemble
-        self.usePhantoms = True
-#        self.walkers = []
-
-        ## ensemble=None entails a dynamic emsemble value.
         super().__init__( xdata=xdata, model=model, ydata=ydata, weights=weights,
-                accuracy=accuracy, problem=problem, distribution=distribution, limits=limits, 
-                keep=keep, ensemble=None, seed=seed, rate=rate, engines=engines, maxsize=maxsize,
-                threads=threads, verbose=verbose )
+                accuracy=accuracy, problem=problem, distribution=distribution, limits=limits,
+                keep=keep, ensemble=ensemble, seed=seed, rate=rate, engines=engines,
+                maxsize=maxsize, usePhantoms=True, threads=threads, verbose=verbose )
 
 
     def __str__( self ):
         """ Return the name of this sampler.  """
         return str( "PhantomSampler" )
 
-    def __getattr__( self, name ) :
-        if name == "worst" :
-            return int( ( len( self.walkers ) * self.step ) // 100 )
-        else :
-            return super().__getattr__( name )
-
-    def initSample( self, ensemble=None, keep=None ) :
-
-        return super().initSample( ensemble=self.initEnsemble, keep=keep )
-
-
-    def updateWalkers( self, explorer, worst ) :
+    def sample( self, keep=None, plot=False ) :
         """
-        Update the walkerlist while appending the new (phantom) walkers to the list
+        see NestedSampler.sample()
+        """
+        self.logUnitDom = 0.0       ## unitDomain = 1
+
+        return super().sample( keep=keep, plot=plot )
+
+
+
+    def updateEvidence( self, worst ) :
+        """
+        Updates the evidence (logZ) and the information (H)
+
+        The walkers need to be sorted to logL
 
         Parameters
         ----------
-        explorer : Explorer
-            Explorer object
         worst : int
-            number of walkers to update
+            Number of walkers used in the update
+
         """
-        self.walkers[:worst] = []
 
-#        e0 = self.engines[0]
-#        print( "updateW  ", worst, len( self.walkers ), fma( e0.unitRange, linelength=200 ) )
+        kw = 0      ### DONT use enumerate here
+        for lowph in self.phancol.nextLowPhantom( self.lowLhood ) :
+            lpc = self.livepointcount
+            logWidth = self.logUnitDom - math.log( lpc )
+            logWeight = logWidth + lowph.logL + lowph.logPrior
 
-        while len( self.walkers ) <= self.initEnsemble :
-            # Explore the copied walker(s)
-            wlist = [self.rng.randint( worst, self.ensemble )]
-            explorer.explore( wlist, self.lowLhood, self.iteration )
+            # update evidence, logZ
+            logZnew = numpy.logaddexp( self.logZ, logWeight )
 
-#            print( "explore   ", wlist, self.ensemble, min(e0.unitRange), max( e0.unitRange) )
+            # update Information, H
+            self.info = ( math.exp( logWeight - logZnew ) * self.lowLhood +
+                    math.exp( self.logZ - logZnew ) * ( self.info + self.logZ ) - logZnew )
+
+            if math.isnan( self.info ) :
+                self.info = 0.0
+            self.logZ = logZnew
+
+            # store posterior samples
+            smpl = lowph.toSample( logWeight )
+            self.samples.add( smpl )
+
+            self.sumWidth += math.exp( logWidth )
+
+            self.logUnitDom = logWidth + math.log( lpc - 1 )
+
+            kw += 1
+
+        ## check if there has something been updated
+        if kw > 0 :
+            self.logdZ = logWeight - self.logZ
+
+        return
 
 
-        while len( self.walkers ) > self.initEnsemble :
-            ks = self.initEnsemble - self.step
-            k = ks + self.rng.randint( self.ensemble - ks - 1 )
-#            print( k, self.ensemble, len( self.walkers ), self.walkers[-1].logL )
-            del( self.walkers[k] )
+    def updateEvidence0( self, worst ) :
+        """
+        Updates the evidence (logZ) and the information (H)
 
+        The walkers need to be sorted to logL
+
+        Parameters
+        ----------
+        worst : int
+            Number of walkers used in the update
+
+        """
+        phansemble = self.livepointcount
+        kw = 0      ### DONT use enumerate here
+        for lowph in self.phancol.nextLowPhantom( self.lowLhood ) :
+            logWeight = self.logWidth + lowph.logL + lowph.logPrior
+
+            # update evidence, logZ
+            logZnew = numpy.logaddexp( self.logZ, logWeight )
+
+            # update Information, H
+            self.info = ( math.exp( logWeight - logZnew ) * self.lowLhood +
+                    math.exp( self.logZ - logZnew ) * ( self.info + self.logZ ) - logZnew )
+
+            if math.isnan( self.info ) :
+                self.info = 0.0
+            self.logZ = logZnew
+
+            # store posterior samples
+            smpl = lowph.toSample( logWeight )
+            self.samples.add( smpl )
+
+            self.sumWidth += math.exp( self.logWidth )
+
+#            self.logWidth -= 1.0 / ( phansemble - kw )
+            self.logWidth -= 1.0 / phansemble
+            kw += 1
+
+        ## check if there has something been updated
+        if kw > 0 :
+            self.logdZ = logWeight - self.logZ
+
+        return
+
+    def __getattr__( self, name ) :
+        if name == "livepointcount" :
+            return self.phancol.length()
+        else :
+            return super().__getattr__( name )
 

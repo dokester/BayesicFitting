@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,33 +32,34 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2025 Do Kester
 
 
 class GaussModel( NonLinearModel ):
     """
     Gaussian Model.
 
-        f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
+     f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
 
-        p_0 = amplitude
-        p_1 = center
-        p_2 = width
+     p_0 = amplitude
+     p_1 = center
+     p_2 = width
 
     The parameters are initialized at {1.0, 0.0, 1.0}.
-    Parameter 2 (width) is always kept stricktly positive ( >0 ).
+
+    Parameter 2 (width) is always kept stricktly positive (>0).
 
     Examples
     --------
     >>> gauss = GaussModel( )
     >>> print( gauss )
-    Gauss: f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
+    >>> Gauss: f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )
     >>> print( gauss.getNumberOfParameters( ) )
-    3
+    >>> 3
     >>> print( gauss( numpy.arange( 11 ) - 5 ) )
-    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
-       1.11089965e-02   3.35462628e-04   3.72665317e-06]
+    >>> [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+    >>>    6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+    >>>    1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
     Attributes from Model
     ---------------------

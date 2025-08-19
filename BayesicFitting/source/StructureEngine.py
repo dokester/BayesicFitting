@@ -6,9 +6,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2023 Do Kester
+#  *    2019 - 2025 Do Kester
 
 class StructureEngine( Engine ):
     """
@@ -77,7 +77,7 @@ class StructureEngine( Engine ):
         return str( "StructureEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by changing a component.
 
@@ -102,15 +102,12 @@ class StructureEngine( Engine ):
         t = 0
         perm = self.rng.permutation( self.walkers[kw].problem.model.ncomp - 2 )     ## TBC
         for p in perm :
-            update = len( self.walkers ) if append else kw
-            dt = self.executeOnce( kw, lowLhood, update, location=p+1 )
-            if dt > 0 :
-                kw = update
+            dt = self.executeOnce( kw, lowLhood, location=p+1 )
             t += dt
 
         return t
 
-    def executeOnce( self, wlkrid, lowLhood, update, location=None ) :
+    def executeOnce( self, wlkrid, lowLhood, location=None ) :
         """
         One execution call.
         """
@@ -149,10 +146,7 @@ class StructureEngine( Engine ):
 
         if Ltry >= lowLhood:
             self.reportSuccess()
-            self.setWalker( update, problem, ptry, Ltry, fitIndex=ftry )
-            wlkr = self.walkers[update]
-
-            wlkr.check( nhyp=self.errdis.nphypar )
+            self.setWalker( wlkrid, problem, ptry, Ltry, fitIndex=ftry )
 
             return 1
 

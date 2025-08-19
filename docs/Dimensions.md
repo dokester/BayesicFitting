@@ -12,7 +12,45 @@ to convert the embedded latex equations into images.
 
 ## 1. Introduction.
 
-In this note we investigate the performance of Nested Sampling (NS) when
+Nested Sampling (NS) is the algorithm of choice to integrate the product
+of prior and likelihood over the parameter space, to obtain the evidence
+for a problem containing N adjustable parameters.  As a side results, it
+yields weighted samples from the posterior. 
+
+For its operations, NS maintains an ensemble of M points (typically 100)
+evenly distributed over the prior.  These points are called walkers, or
+live points.  Each live point in the ensemble represents a particular
+parameter setting, for which the likelihood is calculated.  All
+likelihoods are sorted in increasing order.  As the walkers are
+uniformly distributed over the prior, each walker occupies one M-th of
+the available space. 
+
+Now an iterative scheme is set up.  The walker with lowest likelihood is
+selected. Its likelihood multiplied with the space the walker
+represents, is added into the integration of the evidence. Subsequently
+the walker moved from the ensemble into a list of (weighted)
+samples.  The next step is the most important of the NS algorithm and it
+is crucial to the proper evaluation of the evidence.  It is not for
+nothing called the "Central Problem of Nested Sampling".
+
+We choose one of the other members of the ensemble and move it randomly
+around in the N-dimensional parameter space, provided that its
+likelihood stays larger than the one of the discarded walker.  When the
+new walker has stepped sufficiently such that it is independent and
+identically distributed (iid) with respect to it origin, we say that we
+have a new walker and a new ensemble.  This emsemble has the same
+properties are the previous one, except that it occupies a space with a
+size of (M-1)/M.
+
+When we iterate this scheme, the available space shrinks slowly with
+steps of (on average) 1/M, while at the same time we climb to the
+maximum of the likelihood.  In this way we convert an integral over N
+dimensions into a simple one dimensional integral.  The large space
+steps at the beginning combine with low likelihood values.  At the end
+we have high likelihood values combined with small space steps. 
+Somewhere in between the bulk of the evidence is to be found. 
+ 
+In this note we investigate the Central Problem of Nested Sampling when
 the number of parameters in the model increases from a handfull to 100.
 Beyond 100 my implementation of NS gets too sluggish to do repeated
 numerical experiments. 

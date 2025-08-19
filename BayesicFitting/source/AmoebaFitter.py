@@ -6,9 +6,9 @@ from .MaxLikelihoodFitter import MaxLikelihoodFitter
 from .AnnealingAmoeba import AnnealingAmoeba
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class AmoebaFitter( MaxLikelihoodFitter ):
     """
@@ -43,7 +43,7 @@ class AmoebaFitter( MaxLikelihoodFitter ):
 
     Examples
     --------
-    # assume x and y are Double1d data arrays.
+    >>> # assume x and y are Double1d data arrays.
     >>> x = numpy.arange( 100, dtype=float ) / 10
     >>> y = 3.5 * SIN( x + 0.4 )                    # make sine
     >>> numpy.random.seed( 12345L )                 # Gaussian random number generator
@@ -60,7 +60,7 @@ class AmoebaFitter( MaxLikelihoodFitter ):
     >>> yfit  = amfit.getResult( )                # fitted values
     >>> yfit  = sine( x )                         # fitted values ( same as previous )
     >>> yband = amfit.monteCarloError( )               # 1 sigma confidence region
-    # for diagnostics ( or just for fun )
+    >>> # for diagnostics ( or just for fun )
     >>> amfit = AmoebaFitter( x, sine )
     >>> amfit.setTemperature( 10 )                # set a temperature to escape local minima
     >>> amfit.setVerbose( 10 )                    # report every 10th iteration

@@ -4,9 +4,9 @@ from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,19 +28,20 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class SplinesModel( LinearModel ):
     """
     General splines model of arbitrary order and with arbitrary knot settings.
     It is a linear model.
 
-    order   behaviour between knots     continuity at knots
-      0     piecewise constant          not continuous at all
-      1     piecewise linear            lines are continuous (connected)
-      2     parabolic pieces            1st derivatives are also continuous
-      3     cubic pieces                2nd derivatives are also continuous
-     n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
+    |order | behaviour between knots    | continuity at knots                     |
+    |------|----------------------------|-----------------------------------------|
+    |  0   | piecewise constant         | not continuous at all                   |
+    |  1   | piecewise linear           | lines are continuous (connected)        |
+    |  2   | parabolic pieces           | 1st derivatives are also continuous     |
+    |  3   | cubic pieces               | 2nd derivatives are also continuous     |
+    | n>3  | n-th order polynomials     | (n-1)-th derivatives are also continuous|
 
     The user lays out a number ( << datapoints ) of knots on the x-axis at
     arbitrary position, generally more knots where the curvature is higher.
@@ -61,17 +62,17 @@ class SplinesModel( LinearModel ):
     >>> knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     >>> csm = SplinesModel( knots=knots, order=2 )
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> npt = 161                                               # to include both 0 and 160.
     >>> x = numpy.arange( npt, dtype=float )                    # x-values
     >>> csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
+    >>> 18
 
     Attributes
     ----------
@@ -162,6 +163,7 @@ class SplinesModel( LinearModel ):
         self.knots = knots
 
     def copy( self ):
+        """ Returns copy of self """
         return SplinesModel( copy=self )
 
     def __setattr__( self, name, value ):

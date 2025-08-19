@@ -9,9 +9,9 @@ from .Prior import Prior
 from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 202024 Do Kester
+#  *    2016 - 202025 Do Kester
 
 class BaseModel( object ):
     """
@@ -83,12 +83,12 @@ class BaseModel( object ):
     parNames : list of str
         list of parameter names. (default : "parameter_k")
 
-    Author :         Do Kester
+    Author          Do Kester
 
     """
 
     #  *************************************************************************
-    def __init__( self, nparams=0, ndim=1, copy=None, posIndex=[], nonZero=[], **kwargs ):
+    def __init__( self, nparams=0, ndim=1, ndout=None, copy=None, posIndex=[], nonZero=[], **kwargs ):
         """
         BaseModel Constructor.
         <br>
@@ -113,6 +113,8 @@ class BaseModel( object ):
         if copy is None :
             setatt( self, "npbase", nparams )
             setatt( self, "ndim", ndim )
+            if ndout is not None :
+                setatt( self, "ndout", ndout, type=int )
             setatt( self, "priors", None )
             setatt( self, "posIndex", numpy.asarray( posIndex, dtype=int ) )
             setatt( self, "nonZero", numpy.asarray( nonZero, dtype=int ) )
@@ -123,6 +125,8 @@ class BaseModel( object ):
         else :
             setatt( self, "npbase", copy.npbase )
             setatt( self, "ndim", copy.ndim )
+            if "ndout" in vars( copy ) :
+                setatt( self, "ndout", copy.ndout, type=int )
             setatt( self, "priors", None if copy.priors is None else copy.priors.copy() )
             setatt( self, "posIndex", copy.posIndex )
             setatt( self, "nonZero", copy.nonZero )

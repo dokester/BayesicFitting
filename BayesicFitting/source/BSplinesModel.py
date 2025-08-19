@@ -9,9 +9,9 @@ from . import splinelab
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class BSplinesModel( LinearModel ):
     """
@@ -46,12 +46,13 @@ class BSplinesModel( LinearModel ):
 
     It is a linear model.
 
-    order   behaviour between knots     continuity at knots
-      0     piecewise constant          not continuous at all
-      1     piecewise linear            lines are continuous
-      2     parabolic pieces            1st derivatives are also continuous
-      3     cubic pieces                2nd derivatives are also continuous
-     n>3    n-th order polynomials      (n-1)-th derivatives are also continuous
+    | order |behaviour between knots | continuity at knots                |
+    |:-----:|:-----------------------|:-----------------------------------|
+    |   0   | piecewise constant     | not continuous at all              |
+    |   1   | piecewise linear       | lines are continuous               |
+    |   2   | parabolic pieces       | 1st derivatives are also continuous|
+    |   3   | cubic pieces           | 2nd derivatives are also continuous|
+    |  n>3  | n-th order polynomials | (n-1)th derivatives are continuous |
 
     The user lays out a number ( << datapoints ) of knots on the x-axis at
     arbitrary position, generally more knots where the curvature is higher.
@@ -72,17 +73,17 @@ class BSplinesModel( LinearModel ):
     >>> knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     >>> csm = BSplinesModel( knots=knots, order=2 )
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> csm = BSplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> npt = 161                                               # to include both 0 and 160.
     >>> x = numpy.arange( npt, dtype=float )                    # x-values
     >>> csm = BSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
+    >>> 18
 
     Attributes
     ----------

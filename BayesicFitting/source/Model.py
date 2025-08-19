@@ -14,9 +14,9 @@ from .Formatter import fma
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -38,7 +38,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2024 Do Kester
+#  *    2016 - 2025 Do Kester
 
 
 class Model( FixedModel ):
@@ -260,7 +260,7 @@ class Model( FixedModel ):
         """ Return length of the chain.  """
         last = self
         i = 0
-        while last != None:
+        while last is not None:
             last = last._next
             i += 1
         return i
@@ -426,11 +426,11 @@ class Model( FixedModel ):
             model = Brackets( model )     # provide brackets if model is a chain
 
         last = self
-        while last._next != None:
+        while last._next is not None:
             last = last._next
         setatt( last, "_next",  model )
         setatt( model, "_operation", operation )
-        while last._next != None:
+        while last._next is not None:
             last = last._next
             setatt( last, "_head", self._head )
 
@@ -690,17 +690,29 @@ class Model( FixedModel ):
 
 
     def selectPipe( self,  ndim, ninter, ndout ) :
+        """
+        Select one of 9 pipe operations, depending on the dimensionality
+        of the inputs and outputs of the model G and H
 
-        # Models G pars p and H pars q
+        Model G has pars p and model H has pars q.
 
-        # F(x:pq) ==>  H(G(x:p):q)            G(x:p) | H(*:q)   
-        # dF/dp   ==>  dH/dG * dG/dp          H.derivative(G,p) * G.partial(x,q)
-        # dF/dq   ==>  dH(G(x:p):q) / dq      G.partial(H,q)
+         F(x:pq) ==>  H(G(x:p):q)            G(x:p) | H(*:q)   
+         dF/dp   ==>  dH/dG * dG/dp          H.derivative(G,p) * G.partial(x,q)
+         dF/dq   ==>  dH(G(x:p):q) / dq      G.partial(H,q)
 
-        # G.ndout mustbe H.ndim
-        # partial <== G
-        # dfdx    <== H
+         G.ndout mustbe H.ndim
+         partial <== G
+         dfdx    <== H
 
+        Parameters
+        ----------
+        ndim : int
+            input dimensions to G and thus to F
+        ninter : int
+            output dim of G and input dim to H (must be same)
+        ndout : int
+            output dimensions of H and thus of F
+        """
 
         if ( ndim == 1 and ninter == 1 and ndout == 1 ) :
             self.pipePartial = self.pipe_0
@@ -755,6 +767,7 @@ class Model( FixedModel ):
     def pipe_0( self, dGd, dHdG ) :
         """
         ninter == 1 and ndout == 1
+
         Return partial in the form of [N,P]
         
         Parameters
@@ -769,6 +782,7 @@ class Model( FixedModel ):
     def pipe_1( self, dGd, dHdG ) :
         """
         ninter > 1 and ndout > 1
+
         Return partial in the form [O][N,P]
         
         Parameters
@@ -790,6 +804,7 @@ class Model( FixedModel ):
     def pipe_2( self, dGd, dHdG ) :
         """
         ndim == 1 and ninter > 1 and ndout == 1
+
         Return partial in the form of [N,P]
         
         Parameters
@@ -810,6 +825,7 @@ class Model( FixedModel ):
     def pipe_3( self, dGd, dHdG ) :
         """
         ndim == 1 and ninter = 1 and ndout > 1
+
         Return partial in the form of [O][NP]
         
         Parameters
@@ -828,6 +844,7 @@ class Model( FixedModel ):
     def pipe_4( self, dGdx, dHdG ) :
         """
         ndim == 0 and ninter == 1 and ndout == 1
+
         Return partial in the form of [N]
         
         Parameters
@@ -842,6 +859,7 @@ class Model( FixedModel ):
     def pipe_5( self, dGdx, dHdG ) :
         """
         ndim == 1 and ninter > 1 and ndout > 1
+
         Return derivative in the form of [N,O]
         
         Parameters
@@ -862,6 +880,7 @@ class Model( FixedModel ):
     def pipe_6( self, dGdx, dHdG ) :
         """
         ndim == 1 and ninter > 1 and ndout == 1
+
         Return derivative in the form of [N]
         
         Parameters
@@ -877,6 +896,7 @@ class Model( FixedModel ):
     def pipe_7( self, dGdx, dHdG ) :
         """
         ndim == 1 and ninter = 1 and ndout > 1
+
         Return derivative in the form of [N,O]
         
         Parameters
@@ -893,6 +913,7 @@ class Model( FixedModel ):
     def pipe_8( self, dGdx, dHdG ) :
         """
         ndim > 1 and ninter > 1 and ndout == 1
+
         Return derivative in the form of [N,I]
         
         Parameters
@@ -913,6 +934,7 @@ class Model( FixedModel ):
     def pipe_9( self, dGdx, dHdG ) :
         """
         ndim > 1 and ninter == 1 and ndout > 1
+
         Return derivative in the form of [O][N,I]
         
         Parameters
@@ -1037,7 +1059,7 @@ class Model( FixedModel ):
         np = self.npbase
         if kpar < np:
             return super( Model, self  ).getPrior( kpar )
-        elif self._next != None:
+        elif self._next is not None:
             return self._next.getPrior( kpar - np )
         else:
             raise IndexError( "The (compound) model does not have %d parameters"%
@@ -1064,7 +1086,7 @@ class Model( FixedModel ):
         np = self.npbase
         if kpar < np:
             super( Model, self  ).setPrior( kpar, prior=prior, **kwargs )
-        elif self._next != None:
+        elif self._next is not None:
             self._next.setPrior( kpar - np, prior=prior, **kwargs )
         else:
             raise IndexError( "The (compound) model does not have %d parameters"%
@@ -1089,7 +1111,7 @@ class Model( FixedModel ):
         np = self.npbase
         if kpar < np:
             return super( Model, self ).getParameterName( kpar )
-        elif self._next != None:
+        elif self._next is not None:
             return self._next.getParameterName( kpar - np )
         else:
             raise IndexError( "The (compound) model does not have %d parameters."%
@@ -1112,7 +1134,7 @@ class Model( FixedModel ):
         np = self.npbase
         if kpar < np:
             return super( Model, self).getParameterUnit( kpar )
-        elif self._next != None:
+        elif self._next is not None:
             return self._next.getParameterUnit( kpar - np )
         else:
             raise IndexError( "The (compound) model does not have %d parameters."%
@@ -1240,7 +1262,7 @@ class Model( FixedModel ):
         dval = numpy.fromiter( ( next( pgen ).unit2Domain( uv ) for uv in uvalue ), float )
         try :
             pgen.close()
-        except :
+        except Exception :
             pass
         return dval
 
@@ -1264,7 +1286,7 @@ class Model( FixedModel ):
         uval = numpy.fromiter( ( next( pgen ).domain2Unit( dv ) for dv in dvalue ), float )
         try :
             pgen.close()
-        except :
+        except Exception :
             pass
         return uval
 
@@ -1282,7 +1304,7 @@ class Model( FixedModel ):
         part = numpy.fromiter( ( next( pgen ).partialDomain2Unit( dv ) for dv in dvalue ), float )
         try :
             pgen.close()
-        except :
+        except Exception :
             pass
         return part
 
@@ -1292,7 +1314,7 @@ class Model( FixedModel ):
         while True :
             try :
                 yield mdl.priors[k]
-            except :
+            except Exception :
                 yield mdl.priors[-1]
             k += 1
             if k >= mdl.npbase :
@@ -1517,14 +1539,14 @@ class Model( FixedModel ):
 
         try :
             snum = self.strictNumericDerivative( xdata, params )
-        except :
+        except Exception :
             snum = 0
 
         try :
             df = self.derivative( xdata, params )
             if df is None :
                 raise ValueError
-        except :
+        except Exception :
             df = snum
             if not silent :
                 print( "The model has no derivatives df/dx" )
@@ -1536,7 +1558,7 @@ class Model( FixedModel ):
         snmp = self.strictNumericPartial( xdata, params )
         try :
             partial = self.partial( xdata, params )
-        except :
+        except Exception :
             partial = snmp
             if not silent :
                 print( "The model has no partials df/dp" )
@@ -1657,7 +1679,7 @@ class Model( FixedModel ):
             par[k] = params[k]
         try :
             dpg.close()
-        except :
+        except Exception :
             pass
         return partial
 
@@ -1794,10 +1816,10 @@ class Brackets( Model ):
         return self.model.derivative( xdata, param )
 
 
-    def XXXsetLimits( self, lowLimits=None, highLimits=None ) :
+    def _XXXsetLimits( self, lowLimits=None, highLimits=None ) :
         self.model.setLimits( lowLimits=lowLimits, highLimits=highLimits )
 
-    def XXXgetLimits( self ) :
+    def _XXXgetLimits( self ) :
         return self.model.getLimits()
 
     def setPrior( self, kpar, prior=None, **kwargs ):
@@ -1813,14 +1835,6 @@ class Brackets( Model ):
             return self.model.getPrior( kpar )
         else :
             return super().getPrior( kpar )
-
-    """
-    def setPrior( self, kpar, prior=None, **kwargs ):
-        return self.model.setPrior( kpar, prior=prior, **kwargs )
-
-    def getPrior( self, kpar ) :
-        return self.model.getPrior( kpar )
-    """
 
     def nextPrior( self ) :
         yield self.model.nextPrior()

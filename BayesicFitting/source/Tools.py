@@ -11,9 +11,9 @@ import inspect
 from astropy.table import Table
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.2"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,8 +31,13 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2024 Do Kester
+#  *    2016 - 2025 Do Kester
 
+# Module Tools
+"""
+This module contains a mixed bag of "usefull" methods.
+
+"""
 
 def getItem( ilist, k ) :
     """
@@ -68,16 +73,19 @@ def firstIndex( iterable, condition=lambda x: True ) :
 
     Raises
     ------
-    StopIteration: if no item satysfing the condition is found.
+     StopIteration: if no item satysfing the condition is found.
 
+    Examples
+    --------
     >>> firstIndex( (1,2,3), condition=lambda x: x % 2 == 0)
-    2
+    >>> 2
     >>> firstIndex( range( 3, 100 ) )
-    3
+    >>> 3
     >>> firstIndex( () )
-    Traceback (most recent call last):
-    ...
-    StopIteration
+    >>> Traceback (most recent call last):
+    >>> ...
+    >>> StopIteration
+
     """
     return next( k for k,x in enumerate( iterable ) if condition( x ) )
 
@@ -147,29 +155,27 @@ def setAttribute( obj, name, value, type=None, islist=False, isnone=False ) :
 
 def setNoneAttributes( obj, name, value, listNone ) :
     """
-    Set attribute contained in dictionary dictList into the attr-list.
-    A list is a native list or a numpy.ndarray. It also checks the type.
-    if values is a singular item of the proper type it will be inserted as [value].
+    Set an attribute to an object.
 
     Parameters
     ----------
     obj : object
-        to place the attribute in
+        to set the attribute to
     name : str
         of the attribute
     value : any
         of the attribute
-    listNone : list of names
-        that could have a None value
-
-    Returns
-    -------
-        True on succesful insertion. False otherwise.
+    type : class
+        check class of the object
+    islist : boolean
+        check if it is a list of type
+    isnone : boolean
+        value could be a None
 
     Raises
     ------
-        TypeError   if the type is not as in the dictionary
-     """
+    TypeError : if any  checks fails
+    """
     if name in listNone and value is None :
         object.__setattr__( obj, name, value )
         return True
@@ -190,18 +196,17 @@ def setListOfAttributes( obj, name, value, dictList ) :
         of the attribute
     value : any
         of the attribute
-    dictList : dictionary
-        of possible attributes {"name": type}
+    listNone : list of names
+        that could have a None value
 
     Returns
     -------
-        True on succesful insertion. False otherwise.
+     True on succesful insertion. False otherwise.
 
     Raises
     ------
-        TypeError   if the type is not as in the dictionary
-
-    """
+     TypeError   if the type is not as in the dictionary
+     """
     if name in dictList :
         _type = dictList[name]
         isl = isList( value, _type )
@@ -220,6 +225,40 @@ def setListOfAttributes( obj, name, value, dictList ) :
 
 def setSingleAttributes( obj, name, value, dictSingle ) :
     """
+    Set attribute contained in dictionary dictList into the attr-list.
+    A list is a native list or a numpy.ndarray. It also checks the type.
+    if values is a singular item of the proper type it will be inserted as [value].
+
+    Parameters
+    ----------
+    obj : object
+        to place the attribute in
+    name : str
+        of the attribute
+    value : any
+        of the attribute
+    dictList : dictionary
+        of possible attributes {"name": type}
+
+    Returns
+    -------
+     True on succesful insertion. False otherwise.
+
+    Raises
+    ------
+     TypeError   if the type is not as in the dictionary
+
+    """
+    if name in dictSingle :
+        if isInstance( value, dictSingle[name] ) :
+            object.__setattr__( obj, name, value )
+            return True
+        else :
+            raise TypeError( name + ' has not the proper type: ' + str( dictSingle[name] ) )
+    return False
+
+def makeNext( x, k ) :
+    """
     Set a singular attribute contained in dictionary dictSingle into the attr-list.
     It also checks the type.
 
@@ -236,25 +275,12 @@ def setSingleAttributes( obj, name, value, dictSingle ) :
 
     Returns
     -------
-        True on succesful insertion. False otherwise.
+     True on succesful insertion. False otherwise.
 
     Raises
     ------
-        TypeError   if the type is not as in the dictionary
+     TypeError   if the type is not as in the dictionary
      """
-    if name in dictSingle :
-        if isInstance( value, dictSingle[name] ) :
-            object.__setattr__( obj, name, value )
-            return True
-        else :
-            raise TypeError( name + ' has not the proper type: ' + str( dictSingle[name] ) )
-    return False
-
-def makeNext( x, k ) :
-    """
-    Return next item of x, and last item if x is exhausted.
-    Or x itself if x is singular.
-    """
     try :
         _xnext = x[-1]
     except Exception :
@@ -270,7 +296,8 @@ def makeNext( x, k ) :
 
 def length( x ) :
     """
-    Return the length of any item. Singletons have length 1; None has length 0..
+    Return next item of x, and last item if x is exhausted.
+    Or x itself if x is singular.
     """
     if x is None :
         return 0
@@ -280,6 +307,14 @@ def length( x ) :
         return 1
 
 def toArray( x, ndim=1, dtype=None ) :
+    """
+    Return the length of any item. Singletons have length 1; None has length 0..
+    """
+    if isinstance( x, Table ) :
+        return x
+    return numpy.array( x, dtype=dtype, ndmin=min( ndim, 2 ) )
+
+def isList( item, cls ) :
     """
     Return a array of x when x is a number
 
@@ -293,16 +328,6 @@ def toArray( x, ndim=1, dtype=None ) :
         conversion to type (None : as is)
 
     """
-    if isinstance( x, Table ) :
-        return x
-    return numpy.array( x, dtype=dtype, ndmin=min( ndim, 2 ) )
-
-def isList( item, cls ) :
-    """
-    Return (True,False) if item is a instance of cls
-           (True,True)  if item is a (list|ndarray) of instances of cls
-           (False,False) if not
-    """
 #    print( item, cls, item.__class__ )
     if isInstance( item, cls ) : return (True,False)
     islst = isinstance( item, list ) or isinstance( item, numpy.ndarray )
@@ -313,10 +338,9 @@ def isList( item, cls ) :
 
 def isInstance( item, cls ) :
     """
-    Returns true when one of the following is true
-    1. when cls is int   : item is an int or item is a numpy.integer.
-    2. when cls is float : item is an float or item is an int.
-    3. when cls is cls   : item is a cls.
+    Return (True,False) if item is a instance of cls
+           (True,True)  if item is a (list|ndarray) of instances of cls
+           (False,False) if not
     """
     if cls is int :
         return isinstance( item, int ) or isinstance( item, numpy.integer )
@@ -327,23 +351,16 @@ def isInstance( item, cls ) :
 
 def ndprint( x, form='{0:.3f}' ) :
     """
-    Print a ndarray, formatted.
+    Returns true when one of the following is true
+    1. when cls is int   : item is an int or item is a numpy.integer.
+    2. when cls is float : item is an float or item is an int.
+    3. when cls is cls   : item is a cls.
     """
     print( numpy.array2string(x, formatter={'float_kind':form.format}) )
 
 def decorate( src, des, copy=True ) :
     """
-    Transfer attributes from src to des.
-    If copy is True try to copy the attributes, otherwise link it.
-
-    Parameters
-    ----------
-    src : object
-        source of the attributes
-    des : object
-        destiny for the attributes
-    copy : bool
-        if True: copy
+    Print a ndarray, formatted.
     """
     atr = vars( src )
     ld = list( atr.keys() )
@@ -359,14 +376,17 @@ def decorate( src, des, copy=True ) :
 
 def subclassof( sub, cls ) :
     """
-    Determine if sub inherits from the class cls
-    
+    Transfer attributes from src to des.
+    If copy is True try to copy the attributes, otherwise link it.
+
     Parameters
     ----------
-    sub : class object
-        supposed sub class
-    cls : class object
-        supposed parent class
+    src : object
+        source of the attributes
+    des : object
+        destiny for the attributes
+    copy : bool
+        if True: copy
     """
     if not inspect.isclass( sub ) : 
         return False
@@ -379,7 +399,14 @@ def subclassof( sub, cls ) :
 
 def printclass( cls, nitems=8, printId=False ) :
     """
-    Print the attributes of a class.
+    Determine if sub inherits from the class cls
+    
+    Parameters
+    ----------
+    sub : class object
+        supposed sub class
+    cls : class object
+        supposed parent class
     """
     numpy.set_printoptions( precision=3, threshold=10, edgeitems=4 )
 
@@ -442,7 +469,7 @@ def printlist( val, nitems=8 ) :
 
 def shortName( val ):
     """
-    Return a short version the string representation: upto first non-letter.
+    Print the attributes of a class.
     """
     m = re.match( "^[0-9a-zA-Z_]*", val )
     return m[0]
@@ -450,7 +477,7 @@ def shortName( val ):
 
 def nicenumber( x ) :
     """
-    Return a nice number close to (but below) |x|.
+    Return a short version the string representation: upto first non-letter.
     """
     if x == 0 :
         return x
@@ -471,22 +498,18 @@ def nicenumber( x ) :
 
 def fix2int( x ) :
     """
-    Return integer array with values as in x
-    Parameters
-    ----------
-    x : array_like
-        array of integer floats
+    Return a nice number close to (but below) |x|.
     """
     return numpy.fix( x + 0.000001 ).astype( int )
 
 def track( statement ) :
     """
+    Return integer array with values as in x
 
     Parameters
     ----------
-    statement : str
-        statement to be traced
-
+    x : array_like
+        array of integer floats
     """
     # create a Trace object, telling it what to ignore, and whether to
     # do tracing or line-counting or both.
@@ -501,16 +524,12 @@ def track( statement ) :
 
 def average( xx, weights=None, circular=None ) :
     """
-    Return (weighted) average and standard deviation of input array.
 
     Parameters
     ----------
-    xx : array_like
-        input to be averaged
-    weights : array_like
-        if present these are the weights
-    circular : list of 2 floats
-        the input is a circular item between [low,high]
+    statement : str
+        statement to be traced
+
     """
     if circular is None :
         if weights is None :

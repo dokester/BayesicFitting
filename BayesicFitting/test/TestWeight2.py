@@ -36,7 +36,7 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
-class TestWeight2( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Engines
 
@@ -44,7 +44,7 @@ class TestWeight2( unittest.TestCase ):
 
     """
     def __init__( self, name ):
-        super( TestWeight2, self ).__init__( name )
+        super( ).__init__( name )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
 

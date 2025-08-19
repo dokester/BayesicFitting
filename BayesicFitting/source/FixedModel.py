@@ -10,9 +10,9 @@ from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *   2017 - 2024 Do Kester
+#  *   2017 - 2025 Do Kester
 
 class FixedModel( BaseModel ):
     """
@@ -50,11 +50,11 @@ class FixedModel( BaseModel ):
     >>> m1 = PolynomialModel( 1 )
     >>> m1 += SineModel()
     >>> print( m1.npchain )         # number of params: 2 + 3
-    5
+    >>> 5
     >>> fixed = { 0: 1.0, 1: m1 }
     >>> em = EtalonModel( fixed=fixed )
     >>> print( em.npbase, em.npmax, em.npchain )          # ( 4 - 2 ) + 5
-    7 9 7
+    >>> 7 9 7
     >>> print( em )
 
     Attributes
@@ -345,7 +345,7 @@ class FixedModel( BaseModel ):
             par[k] = params[k]
         try :
             dpg.close()
-        except :
+        except Exception :
             pass
         return partial
 

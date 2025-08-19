@@ -8,11 +8,12 @@ from .Engine import DummyPlotter
 from .OrthonormalBasis import OrthonormalBasis
 from .Formatter import formatter as fmt
 from .Formatter import fma
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +36,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -62,8 +63,11 @@ class ChordEngine( Engine ):
 
     Attributes
     ----------
-    debug : bool
-        perform the step-out action too
+    reset : bool (False)
+        always reset othonormal basis 
+    extend : bool (False)
+        perform the step-out action until logL < lowL
+    plotter : 
 
     Attributes from Engine
     ----------------------
@@ -92,18 +96,35 @@ class ChordEngine( Engine ):
 
         self.maxtrials = 25
         self.plotter = DummyPlotter()
-        self.debug = False
+
+        ## 2 attributes to govern the behaviour
+        ## extend the line on both sides until logL < lowL
+        self.extend = False
+        ## always reset the orthonormal basis 
+        self.reset = False
 
     def copy( self ):
         """ Return copy of this.  """
         return ChordEngine( self.walkers, self.errdis, copy=self )
+
+    def __setattr__( self, name, value ):
+        """
+        Set attributes.
+
+        """
+        setatt( self, name, value )
+        if name == "plotter" :
+            if isinstance( value, DummyPlotter ) :
+                self.plotout = self.plotOutDummy
+            else :
+                self.plotout = self.plotOut
 
     def __str__( self ):
         return str( "ChordEngine" )
 
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -113,8 +134,6 @@ class ChordEngine( Engine ):
             index of walker to diffuse
         lowLhood : float
             lower limit in logLikelihood
-        append : bool
-            set walker in place or append
         iteration : int
             iteration number
 
@@ -133,14 +152,19 @@ class ChordEngine( Engine ):
         param = walker.allpars
         usav = self.domain2Unit( problem, param[fitIndex], kpar=fitIndex )
         self.plotter.start( param=param )
+        self.tripSq = 0.0
+
 #        self.startJourney( usav )
 
         # Determine n-dim box boundaries in which the parameters are located 
-        uran, umin = self.getUnitRange( problem, lowLhood )
+        uran, umin = self.getUnitRange( problem, lowLhood, walker.nap )
+
+#        print( "CE   ", uran )
+
         uran = uran[fitIndex]
         umin = umin[fitIndex]
 
-        dur = 5 * numpy.max( uran ) / len( self.walkers )       # extend range a bit
+        dur = 5 * numpy.amax( uran ) / len( self.walkers )       # extend range a bit
         uran += 2 * dur
         umin -= dur
         umax = umin + uran
@@ -152,14 +176,15 @@ class ChordEngine( Engine ):
         umax = numpy.minimum( umax, 1 )
 
         # number of cycles in ChordEngine
-        nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
+        nstep = self.nstep()
 
         onb = OrthonormalBasis( )
         # random direction in n-dim unit-parameter space
         vel = self.rng.rand( np ) - 0.5
 
         if self.verbose > 4 :
-            print( "Chord     LogL  ", fmt( walker.logL ), " LowL  ", fmt( lowLhood), nstep, self.maxtrials )
+            print( "Chord     LogL  ", fmt( walker.logL ), " LowL  ", fmt( lowLhood), 
+                    nstep, self.maxtrials )
             print( "alpar ", fma( param, linelength=200 ) )
             print( "usav  ", fma( usav ) )
             print( "umin  ", fma( umin ) )
@@ -168,7 +193,7 @@ class ChordEngine( Engine ):
         reset = True
         ptry = param.copy()
         step = 0
-
+        st2 = 0
         for ks in range( nstep ) :
 
             ## orthonormalise the random vector
@@ -188,7 +213,7 @@ class ChordEngine( Engine ):
             t0 = numpy.max( numpy.where( tt < 0, tt, -math.inf ) )
 
             ## same now for the values at the edges of the unit box (0,1)
-            if self.debug :
+            if self.extend :
                 tt = numpy.append( - usav / vel, ( 1.0 - usav ) / vel )
                 if self.verbose > 4 :
                     print( "tt0   ", fma( tt[:10] ) )
@@ -199,23 +224,27 @@ class ChordEngine( Engine ):
                 tt0 = self.stepOut( problem, ptry, usav, vel, t0, t0max, lowLhood, fitIndex )
                 tt1 = self.stepOut( problem, ptry, usav, vel, t1, t1max, lowLhood, fitIndex )
 
-                print( fmt( ( t0max, tt0, t0, t1, tt1, t1max ), max=None ) )
+#                print( fmt( ( t0max, tt0, t0, t1, tt1, t1max ), max=None ) )
                 t0 = tt0
                 t1 = tt1
 
             if self.verbose > 4 :
-                print( ks, step, "vel   ", fmt( vel ), fmt( tt ), fmt( t0 ), fmt( t1 ) )
+                print( step, "vel   ", fmt( vel ), fmt( tt ), fmt( t0 ), fmt( t1 ) )
 
             kk = 0
             while True :
                 kk += 1
 
                 # assert t0 < 0 < t1, "%f < %f < %f"%(t0,0,t1)
+
                 if not ( t0 < 0 < t1 and math.isfinite( t0 ) and math.isfinite( t1 ) ) : 
                     break
 
+                self.plotout( problem, usav, vel, t0, t1 )
+
+
                 ## dt is timestep wrt. usav (at 0)
-                dt = t0 + self.rng.rand( 1 ) * ( t1 - t0 )
+                dt = t0 + self.rng.rand( ) * ( t1 - t0 )
 
                 utry = usav + vel * dt
 
@@ -231,8 +260,18 @@ class ChordEngine( Engine ):
 
                     step += 1
 
-                    self.plotter.move( param, ptry, col=0, sym=0 )
+#                    self.plotter.move( param, ptry, col=0, sym=0 )
+                    self.plotter.move( param, ptry, col=0 )
+#                    self.tripSq += self.unitTripSquare( usav - utry )
 #                    self.calcJourney( usav - utry )
+
+                    if self.verbose == 3 :
+                        cr = numpy.sqrt( numpy.sum( numpy.square( t1 - t0 ) ) )
+                        st = numpy.sum( numpy.square( usav - utry ) )
+                        st2 += st
+                        st = numpy.sqrt( st ) 
+                        print( fmt( ks ), fmt( kk ), fmt( step ), fmt( cr ),
+                            fmt( st ), fmt( numpy.sqrt( st2 ) ) )
 
                     ## check if better than Lbest in walkers[-1]
                     # self.checkBest( problem, ptry, Ltry, fitIndex )
@@ -250,12 +289,11 @@ class ChordEngine( Engine ):
                     ## find a new random direction, orthonormal to the previous ones
                     vel = self.rng.rand( np ) - 0.5
 
-                    ## TBC; for now reset always.
-                    reset = False
+                    ## by default dont reset.
+                    reset = self.reset
 
                     ## update the walker
-                    update = len( self.walkers ) if append else kw
-                    self.setWalker( update, problem, ptry, Ltry, fitIndex=fitIndex )
+                    self.setWalker( kw, problem, ptry, Ltry, fitIndex=fitIndex )
 
                     break
 
@@ -268,7 +306,8 @@ class ChordEngine( Engine ):
 
                     break
 
-                self.plotter.move( param, ptry, col=5, sym=4 )
+#                self.plotter.move( param, ptry, col=5, sym=4 )
+
                 self.reportReject( )
 
                 if dt < 0 :
@@ -282,7 +321,6 @@ class ChordEngine( Engine ):
         self.plotter.stop( param=param, name="ChordEngine" )
 
         return step * np            # nr of successfull parameter moves
-
 
     def stepOut( self, problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) :
         """
@@ -312,3 +350,14 @@ class ChordEngine( Engine ):
                     return tmax
 
         return t
+
+    def plotOut( self, problem, usave, vel, t0, t1 ) :
+        pedg0 = self.unit2Domain( problem, usave + t0 * vel )
+        pedg1 = self.unit2Domain( problem, usave + t1 * vel )
+
+        self.plotter.move( pedg0, pedg1, col=4 )
+                
+        return
+
+    def plotOutDummy( self, problem, usave, vel, t0, t1 ) :
+        pass

@@ -54,9 +54,9 @@ from .StructureEngine import StructureEngine
 from .BaseFitter import BaseFitter
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -79,7 +79,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class NestedSampler( object ):
     """
@@ -221,11 +221,13 @@ class NestedSampler( object ):
     END = 2
     RATE = 1.0
 
+    DEBUG = False           # set True for reraising the exceptions
+
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, xdata=None, model=None, ydata=None, weights=None,
                 accuracy=None, problem=None, distribution=None, limits=None, 
                 keep=None, ensemble=ENSEMBLE, discard=1, seed=80409, rate=RATE,
-                bestBoost=False,
+                bestBoost=False, usePhantoms=True, 
                 engines=None, maxsize=None, threads=False, verbose=1 ) :
         """
         Create a new class, providing inputs and model.
@@ -249,14 +251,13 @@ class NestedSampler( object ):
             all the same or one for each data point
         problem : None or string or Problem
             Defines the kind of problem to be solved.
-
-            None        same as "classic"
-            "classic" 	ClassicProblem
-            "errors"	ErrorsInXandYProblem
-            "multiple"	MultipleOutputProblem
-
-            Problem     Externally defined Problem. When Problem has been provided,
-                        xdata, model, weights and ydata are not used.
+                None        same as "classic"
+                "classic"   ClassicProblem
+                "errors"    ErrorsInXandYProblem
+                "multiple"  MultipleOutputProblem
+                Problem     Externally defined Problem. 
+                            When Problem has been provided, xdata, model, weights
+                            and ydata are not used.
         keep : None or dict of {int:float}
             None of the model parameters are kept fixed.
             Dictionary of indices (int) to be kept at a fixed value (float).
@@ -266,17 +267,15 @@ class NestedSampler( object ):
         distribution : None or String or ErrorDistribution
             Defines the ErrorDistribution to be used
             When the hyperpar(s) are not to be kept fixed, they need `Prior` and maybe limits.
-
-            None            same as "gauss"
-            "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0
-            "laplace"       LaplaceErrorDistribution with 1 hyperpar scale
-            "poisson"       PoissonErrorDistribution no hyperpar
-            "cauchy"        CauchyErrorDstribution with 1 hyperpar scale
-            "uniform"       UniformErrorDistribution with 1 hyperpar scale
-            "bernoulli"     BernoulliErrorDistribution no hyperpar
-            "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
-
-            ErrorDistribution Externally defined ErrorDistribution
+                None            same as "gauss"
+                "gauss"         GaussErrorDistribution with (fixed) scale equal to 1.0
+                "laplace"       LaplaceErrorDistribution with 1 hyperpar scale
+                "poisson"       PoissonErrorDistribution no hyperpar
+                "cauchy"        CauchyErrorDstribution with 1 hyperpar scale
+                "uniform"       UniformErrorDistribution with 1 hyperpar scale
+                "bernoulli"     BernoulliErrorDistribution no hyperpar
+                "exponential"   ExponentialErrorDistribution with 2 hyperpar (scale, power)
+                ErrorDistribution Externally defined ErrorDistribution
         limits : None or [low,high] or [[low],[high]]
             None    no limits implying fixed hyperparameters of the distribution
             low     low limit on hyperpars
@@ -290,26 +289,25 @@ class NestedSampler( object ):
             seed of random number generator
         rate : float
             speed of exploration
-        bestBoost : bool or Fitter
+        bestBoost : bool or Fitter (False)
             False   no updates of best logLikelihood
             True    boost the fit using LevenbergMarquardtFitter
             fitter  boost the fit using this fitter.
+        usePhantoms : bool (True)
+            True    Copy starting walkers from phantoms
+            False   Copy starting walkers from walkers
         engines : None or (list of) string or (list of) Engine
             to randomly move the walkers around, within the likelihood bound.
-
-            None        use a Problem defined selection of engines
-            "galilean"  GalileanEngine	move forward and mirror on edges
-            "chord"     ChordEngine   	select random point on random line
-            "gibbs" 	GibbsEngine 	move one parameter at a time
-            "step"  	StepEngine    	move all parameters in arbitrary direction
-
+                None        use a Problem defined selection of engines
+                "galilean"  GalileanEngine  move forward and mirror on edges
+                "chord"     ChordEngine     select random point on random line
+                "gibbs"     GibbsEngine     move one parameter at a time
+                "step"      StepEngine      move all parameters in arbitrary direction
             For Dynamic models only:
-            "birth" 	BirthEngine     increase the parameter list of a walker by one
-            "death" 	DeathEngine     decrease the parameter list of a walker by one
-
+                "birth"     BirthEngine     increase the parameter list of a walker by one
+                "death"     DeathEngine     decrease the parameter list of a walker by one
             For Modifiable models only:
-            "struct"    StructureEngine change the (internal) structure.
-
+                "struct"    StructureEngine change the (internal) structure.
             Engine      an externally defined (list of) Engine
         maxsize : None or int
             maximum size of the resulting sample list (None : no limit)
@@ -340,11 +338,12 @@ class NestedSampler( object ):
         if ensemble is not None :
             self.ensemble = ensemble
 
-        self.minimumIterations = 100            # to prvent premature stops
+        self.discard = discard
+        self.logDomainFraction = math.log( ( self.ensemble - discard ) / self.ensemble )
+        self.minimumIterations = 100 / discard  # to prevent premature stops
         self.maxIterations = None               # only for testing
         self.repiter = 100                      # report status every repiter
         self.tolerance = self.TOLERANCE
-        self.discard = discard
 
         self.rng = numpy.random.RandomState( seed )
         self.seed = seed
@@ -353,6 +352,9 @@ class NestedSampler( object ):
         self.rate = rate
         self.restart = None                     ## TBD
 
+        self.usePhantoms = usePhantoms
+        self.avoid = 0.1 if usePhantoms else 0.0
+        #self.avoid = 0.0
         self.bestBoost = bestBoost
 
         self.end = self.END
@@ -373,19 +375,22 @@ class NestedSampler( object ):
         ## Initialize the sample list
         self.samples = SampleList( model, 0, ndata=self.problem.ndata )
 
-        """
-        The order in which the main attributes are created.
 
-        where       method                  attribute
-        __init__    setProblem              self.problem
-        __init__    setErrorDistribution    self.distribution
-        __init__    setEngines              self.phantoms
-                                            self.engines
-        __init__                            self.samples
-        sample      initSample
-                      initWalkers           self.walkers
-                        setInitialEngine    self.initialEngine
-        """                                            
+        self.userReport = ( lambda x : None )       ## dummy function
+
+###################################################################
+#        The order in which the main attributes are created.
+#
+#        where       method                  attribute
+#        __init__    setProblem              self.problem
+#        __init__    setErrorDistribution    self.distribution
+#        __init__    setEngines              self.phantoms
+#                                            self.engines
+#        __init__                            self.samples
+#        sample      initSample
+#                     initWalkers           self.walkers
+#                       setInitialEngine    self.initialEngine
+###################################################################
     
     #  *******SAMPLE************************************************************
     def sample( self, keep=None, plot=False ):
@@ -416,36 +421,40 @@ class NestedSampler( object ):
             raise AttributeError( "%s cannot be combined with accuracies and variable scale" %
                                     self.distribution ) 
 
-#        if self.minimumIterations is None :
-#            self.minimumIterations = 10 * self.ensemble / self.discard
+        self.logUnitDomain = 0
+        if self.usePhantoms :
+            self.copyWalker = self.copyWalkerFromPhantoms
 
         tail = self.initReport( keep=keep )
 
         explorer = Explorer( self, threads=self.threads )
 
         ## move all walkers around for initial exploration of the complete space.
-        if not isinstance( self.problem.model, LinearModel ) :
+        if not isinstance( self.problem.model, LinearModel ) or self.usePhantoms :
+#            print( "BURNIN PHASE STARTS =================================" )
             self.lowLhood = -sys.float_info.max
             # Explore all walker(s)
             explorer.explore( range( self.ensemble ), self.lowLhood, self.iteration )
             self.iteration = 0                  # reset iteration number
+#            print( "BURNIN PHASE ENDS ===================================" )
 
+
+        self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL
 
         self.logZ = -sys.float_info.max
         self.logdZ = 0
         self.info = 0
-        self.logWidth = math.log( 1.0 - math.exp( -1.0 / self.ensemble ) )
+        self.logWidth = math.log( 1.0 - math.exp( -1.0 / self.livepointcount ) )
 
 #        TBD put self.logWidth in the saved file too
 #        if self.optionalRestart() :
 #            self.logWidth -= self.iteration * ( 1.0 * self.discard ) / self.ensemble
 
-        self.histinsert = []
-        ## iterate until done
-#        while self.iteration < self.getMaxIter( ):
-        while self.nextIteration() :
+        self.histinsert = []        ### TBC   what is this
+        self.sumWidth = 0.0
 
-            self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL
+        ## iterate until done
+        while self.nextIteration() :
 
             worst = self.worst                      # the worst are low in the sorted ensemble
             self.lowLhood = self.walkers[worst-1].logL
@@ -464,6 +473,9 @@ class NestedSampler( object ):
             self.histinsert += [self.walkers.firstIndex( newL )]
 
             self.optionalSave( )
+
+            self.walkers.sort( key=self.walkerLogL )    # sort the walker list on logL
+
 
 
         # End of Sampling: Update and store the remaining walkers
@@ -484,7 +496,19 @@ class NestedSampler( object ):
         return self.evidence
 
     def initSample( self, ensemble=None, keep=None ) :
+        """
+        Prolog for the sample method.
 
+        Parameters
+        ----------
+        ensemble : int or None
+            size of ensemble of walkers. None slects self.ensemble
+        keep : None or dict of {int:float}
+            Dictionary of indices (int) to be kept at a fixed value (float)
+            Hyperparameters follow model parameters
+            The values will override those at initialization.
+            They are only used in this call of fit.
+        """
         if keep is None :
             keep = self.keep
         fitIndex, allpars = self.makeFitlist( keep=keep )
@@ -503,11 +527,15 @@ class NestedSampler( object ):
 
         return keep
 
-#   Not in Use
-#    def sortLogL( self, walkers ) :
-#        return numpy.argsort( [w.logL for w in walkers] )
-
     def walkerLogL( self, w ) :
+        """ 
+        Return the logL of the walker (needed for sort())
+
+        Parameters
+        ----------
+        w : Walker
+            to get the logL from
+        """
         return w.logL
 
     def makeFitlist( self, keep=None ) :
@@ -579,15 +607,23 @@ class NestedSampler( object ):
         if isinstance( plot, str ) :
             return plot == 'last' or plot == 'all'
         else :
-            return plot == True
+            return True if plot else False
 
 
     def initReport( self, keep=None ) :
+        """
+        Print header of the processing report (if any).
 
+        Parameters
+        ----------
+        keep : dict or None
+            dict of parameters to keep fixed.
+        """
         if self.verbose >= 1 :
             fitIndex = self.walkers[0].fitIndex
-            print( "Fit", ( "all" if keep is None
-                                  else fitIndex ), "parameters of" )
+            print( "Fit", ( "all" if keep is None else fitIndex ),
+                    ( "(nuisance)" if self.problem.nuispars > 0 else "" ), 
+                    "parameters of" ) 
             if self.problem.model :
                 print( " ", self.problem.model._toString( "  " ) )
             else :
@@ -600,7 +636,7 @@ class NestedSampler( object ):
                 if np in fitIndex :
                     print( "unknown %s" % name, end="" )
                 else :
-                    print( "%s = %7.2f " % (name, hyp.hypar), end="" )
+                    print( "%s = %#10.3g " % (name, hyp.hypar), end="" )
                 np -= 1
                 cstr = " and "
             print( "\nMoving the walkers with ", end="" )
@@ -629,7 +665,18 @@ class NestedSampler( object ):
         return tail
 
     def iterReport( self, kw, tail, plot=False ) :
+        """
+        Reporting during iterations (if any)
 
+        Parameters
+        ----------
+        kw : int
+            walker index with low LogL
+        tail : int
+            number of params at the end to report (mostly hyperpars)
+        plot : bool
+            plot this iteration.
+        """
         if self.verbose >= 3 or ( self.verbose >= 1 and
                                   self.iteration % self.repiter == 0 ):
             if self.verbose == 1 :
@@ -643,9 +690,25 @@ class NestedSampler( object ):
 
             self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
 
+            self.ax = self.userReport( self )
 
     def printIterRep( self, kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) :
+        """
+        Print one iteration line.
 
+        Parameters
+        ----------
+        kw : int
+            walker index to report
+        parfmt : format ("%s")
+            to print the parameters
+        tail : int
+            nuber of tail pars to print. (see @Formatter)
+        max : int or None
+            maximum nr of pars to print. (see @Formatter)
+        indent : int
+            number of initial spaces. (see @Formatter)
+        """
         pl = self.walkers[kw].allpars
         fi = self.walkers[kw].fitIndex
         if fi is not None : 
@@ -654,38 +717,27 @@ class NestedSampler( object ):
 
         print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
                 self.info, self.lowLhood, np ), 
-                parfmt % fmt( pl, max=max, tail=tail, indent=indent ), end=end )
+                parfmt % fmt( pl, max=max, tail=tail, indent=indent ), 
+#                fmt( self.sumWidth ), fmt( self.livepointcount ), fmt( self.phancol.length() ),
+                end=end )
 
-        """
-        if self.iteration % 1000 == 0 :
-            print( fmt( pl, max=None ) )
-            npars = self.walkers[kw].problem.npars
-            pmn, pmx = self.phantoms.getParamMinmax( self.lowLhood, npars )
-            print( fmt( pmn, max=None ) )
-            print( fmt( pmx, max=None ) )
-            print( fmt( np ), fmt( self.phantoms.length( npars ) ), 
-                   fmt( self.logdZ, format="%10.3g" ) )
-            for ky in self.phantoms.phantoms :
-                print( fmt( ky ), fmt( len( self.phantoms.phantoms[ky] ) ) )
-        """
 
     def lastReport( self, kw, plot=False ) :
-
+        """
+        Print concluding remarks (if any)
+        
+        Parameters
+        ----------
+        kw : int
+            index of (last) walker.
+        plot : bool
+            to plot or not
+        """
         if self.verbose > 0 :
             if self.verbose == 1 :
                 print( "\nIteration     logZ        H       LowL     npar" )
 
-            self.printIterRep( kw, max=None, indent=13, parfmt="\nParameters  %s" )
-
-
-#            pl = self.walkers[kw].allpars
-#            fi = self.walkers[kw].fitIndex
-#            if fi is not None : 
-#                pl = pl[fi]
-#            np = len( pl )
-#            print( "%8d %#10.3g %8.1f %#10.3g %6d "%( self.iteration, self.logZ,
-#                    self.info, self.lowLhood, np ) )
-#            print( "Parameters  ", fmt( pl, max=None, indent=13 ) )
+            self.printIterRep( kw, max=None, indent=12, parfmt="\nParameters  %s" )
 
         if self.verbose >= 1 :
             self.report()
@@ -694,28 +746,31 @@ class NestedSampler( object ):
             self.plotLast()
 
     def plotLast( self ) :
+        """ Plot the result """
         Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata, 
                     figsize=[12,8], residuals=True )
-
-    def getMaxIter( self ) :
-        """
-        Return the maximum number of iteration.
-        """
-        maxi = ( self.iteration if self.logdZ < self.tolerance else 
-                 self.end * self.ensemble * self.info / self.worst )
-        maxi = max( self.minimumIterations, maxi )
-        return maxi if self.maxIterations is None else min( maxi, self.maxIterations )
 
     def nextIteration( self ) :
         """
         Return True when a next iteration is needed. False to stop
         """
+        ## all walker's logL are equal -> stop with warning
+        if self.walkers[0].logL >= self.walkers[-1].logL :
+            warnings.warn( "All walkers have the same log( Likelihood )" )
+            return False
+        ## iteration nr less than minimum -> continue
         if self.iteration < self.minimumIterations :
             return True
+        ## iteration nr larger than max (if existing) -> user stop
+        if self.maxIterations is not None and self.iteration >= self.maxIterations :
+            return False
+        ## evidence integral not (yet) complete -> continue
+        if self.sumWidth < 0.999 :
+            return True
+        ## relative logdZ contribution less than tolerance -> regular stop
         if self.logdZ < self.tolerance :
             return False
-        if self.maxIterations is not None and self.iteration > self.maxIterations :
-            return False
+        ## iteration passed the bulk of the evidence -> regular stop
         if self.iteration > self.end * self.ensemble * self.info / self.worst :
             return False
         return True
@@ -759,9 +814,7 @@ class NestedSampler( object ):
         ----------
         worst : int
             Number of walkers used in the update
-
         """
-
         for kw in range( worst ) :
             logWeight = self.logWidth + self.walkers[kw].logL + self.walkers[kw].logPrior
 
@@ -780,11 +833,22 @@ class NestedSampler( object ):
             smpl = self.walkers[kw].toSample( logWeight )
             self.samples.add( smpl )
 
-            self.logWidth -= 1.0 / ( self.ensemble - kw )
+            self.sumWidth += math.exp( self.logWidth )
+
+#            self.logWidth -= 1.0 / ( self.ensemble - kw )
+            self.logWidth -= 1.0 / self.ensemble
 
         self.logdZ = logWeight - self.logZ
+        self.logUnitDomain += self.logDomainFraction 
 
         return
+
+    def unitDomain( self ) :
+        """
+        Return the size of the remaining domain
+        """
+        return math.exp( self.logUnitDomain )
+
 
     def copyWalker( self, worst ):
         """
@@ -798,9 +862,6 @@ class NestedSampler( object ):
         for k in range( worst ) :
             kcp = self.rng.randint( worst, self.ensemble )
             self.walkers.copy( kcp, k, start=self.iteration )
-#            setatt( self.walkers[k], "parent", kcp )
-#            setatt( self.walkers[k], "start", self.iteration )
-#            setatt( self.walkers[k], "step", 0 )
 
     def copyWalkerFromPhantoms( self, worst ):
         """
@@ -811,46 +872,19 @@ class NestedSampler( object ):
         worst : int
             number of Walkers to copy
         """
-        plen = self.phantoms.length()
+        pst  = 0
+        plen = self.phancol.length()
+        logLconstraint = ( self.lowLhood * ( 1 - self.avoid ) + 
+                           self.phancol.phantoms[-1].logL * self.avoid )
 
         for k in range( worst ) :
             while True :
-                kcp = self.rng.randint( plen )
-                if self.phantoms.phantoms[kcp].logL > self.lowLhood :
+                kcp = self.rng.randint( pst, plen )
+                if self.phancol.phantoms[kcp].logL > logLconstraint :
                     break
-            self.walkers.copy( kcp, k, wlist=self.phantoms.phantoms,
+                pst = kcp + 1
+            self.walkers.copy( kcp, k, wlist=self.phancol.phantoms,
                                start=self.iteration )
-#            setatt( self.walkers[k], "parent", kcp )
-#            setatt( self.walkers[k], "start", self.iteration )
-
-    def copyWalkerFromDynamicPhantoms( self, worst ):
-        """
-        Kill worst walker( s ) in favour of one of the others
-
-        Parameters
-        ----------
-        worst : int
-            number of Walkers to copy
-        """
-        plen = self.phantoms.length()
-        for k in range( worst ) :
-            while True :
-                kcp = self.rng.randint( plen )
-    
-                for pk in self.phantoms.phantoms.keys() :
-                    pklen = self.phantoms.length( np=pk )
-                    if kcp < pklen :
-                        break
-                    kcp -= pklen
-
-                if self.phantoms.phantoms[pk][kcp].logL > self.lowLhood :
-                    break
-
-            self.walkers.copy( kcp, k, wlist=self.phantoms.phantoms[pk],
-                               start=self.iteration )
-#            setatt( self.walkers[k], "parent", kcp )
-#            setatt( self.walkers[k], "start", self.iteration )
-
 
 
     def updateWalkers( self, explorer, worst ) :
@@ -880,10 +914,7 @@ class NestedSampler( object ):
         elif name == "power" and isinstance( self.distribution, ExponentialErrorDistribution ) :
             self.distribution.power = value
         elif name == "copymode" and value == 1 :
-            if self.problem.isDynamic() :
-                self.copyWalker = self.copyWalkerFromDynamicPhantoms
-            else :
-                self.copyWalker = self.copyWalkerFromPhantoms
+            self.usePhantoms = True
         elif name == "bestUpdate" :
 
             self.myFitter = None
@@ -901,7 +932,7 @@ class NestedSampler( object ):
 
     def __getattr__( self, name ) :
 
-        if name == "ensemble" :
+        if name == "ensemble" or name == "livepointcount" :
             return len( self.walkers )
         elif name == "xdata" :
             return self.problem.xdata
@@ -1066,7 +1097,7 @@ class NestedSampler( object ):
             connecting names to the Engines
         """
         ## the same for all engines. 
-        self.phantoms = PhantomCollection( dynamic=self.problem.isDynamic() )
+        self.phancol = PhantomCollection( dynamic=self.problem.isDynamic() )
 
         if enginedict is None :
             enginedict = {
@@ -1090,7 +1121,7 @@ class NestedSampler( object ):
                 engine = name
                 engine.walkers  = self.walkers
                 engine.errdis   = self.distribution
-                engine.phantoms = self.phantoms
+                engine.phancol = self.phancol
                 engine.verbose  = self.verbose
                 self.engines   += [engine]
                 continue
@@ -1102,8 +1133,8 @@ class NestedSampler( object ):
                 Eng = enginedict[name]
                 seed = self.rng.randint( self.TWOP31 )
                 engine = Eng( self.walkers, self.distribution, seed=seed, 
-                            phantoms=self.phantoms, verbose=self.verbose )
-            except :
+                            phancol=self.phancol, verbose=self.verbose )
+            except Exception :
                 raise ValueError( "Unknown Engine name : %10s" % name )
 
             self.engines += [engine]
@@ -1148,14 +1179,16 @@ class NestedSampler( object ):
                 seed = self.rng.randint( self.TWOP31 )
                 self.initialEngine = StartEng( self.walkers, self.distribution,
                         seed=seed )
-            except :
+            except Exception :
                 raise ValueError( "Unknown StartEngine name : %10s" % name )
+
+        self.initialEngine.verbose = self.verbose
 
         # Calculate logL for all walkers.
         self.distribution.lowLhood = -math.inf
 
         # pass the PhantomCollection to the initial engine
-        self.initialEngine.phantoms = self.phantoms
+        self.initialEngine.phancol = self.phancol
 
     def initWalkers( self, ensemble, allpars, fitIndex, startdict=None ):
         """
@@ -1179,7 +1212,7 @@ class NestedSampler( object ):
         self.setInitialEngine( ensemble, allpars, fitIndex, startdict=startdict )
 
         for walker in self.walkers :
-            self.initialEngine.execute( walker.id, -math.inf )
+            self.initialEngine.execute( walker.id, -sys.float_info.max )
 
 #        for w in self.walkers :
 #            print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )

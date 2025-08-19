@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2025 Do Kester
 
 class Kepplers2ndLaw( object ):
     """
@@ -36,15 +36,14 @@ class Kepplers2ndLaw( object ):
 
     The projection of the orbit on the sky is not included in this class.
 .
-    The algorithm was taken from
-        Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
+    The algorithm was taken from [Boule](../references.md#boule).
 
-        http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
-
-    p_0 : e     eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-    p_1 : a     semi major axis (>0)
-    p_2 : P     period of the orbit (>0)
-    p_3 : T     phase since periastron passage (0<p_3<2 pi)
+    | param | abbr | name                   | limits    | comment     |
+    |:-----:|:----:|:-----------------------|:---------:|:------------| 
+    |   0   |  e   | eccentricity of orbit  | 0<e<1     | 0: circular |
+    |   1   |  a   | semi major axis        |   a>0     |             |
+    |   2   |  P   | period of the orbit    |   P>0     |             |
+    |   3   |  T   | phase since periastron | 0<T<2&pi; |             |
 
     The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 
@@ -57,9 +56,9 @@ class Kepplers2ndLaw( object ):
         Return the mean anomaly.
 
         P = params[2] = period
-        p = params[3] = periastron passage
+        T = params[3] = periastron passage
 
-        M = 2 * pi * xdata / P - p
+        M = 2 * pi * xdata / P - T
 
         Parameters
         ----------
@@ -119,8 +118,8 @@ class Kepplers2ndLaw( object ):
         Return the eccentric anomaly, i.e. the solution for E of
 
         Standard method by Jean Meuss :
-            Astronomical Algorithms, 2nd ed.,
-            Willmann-Bell, Inc, Virginia, 193-196, 397-399
+         Astronomical Algorithms, 2nd ed.,
+         Willmann-Bell, Inc, Virginia, 193-196, 397-399
 
         e = params[0] = eccentricity
         M = mean anomaly

@@ -5,9 +5,9 @@ from .Tools import setAttribute as setatt
 from .LaplacePrior import LaplacePrior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,13 +29,13 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 202024 Do Kester
+#  *    2017 - 202025 Do Kester
 
 class ExponentialPrior( LaplacePrior ):
     """
     Exponential prior distribution.
 
-        Pr( x ) = exp( -x / scale )
+     Pr( x ) = exp( -x / scale )
 
     By default scale = 1.
 
@@ -69,7 +69,8 @@ class ExponentialPrior( LaplacePrior ):
         """
         Constructor.
 
-        Parameters:
+        Parameters
+        ----------
         scale : float
             of the exponential
         hilimit : float
@@ -88,6 +89,7 @@ class ExponentialPrior( LaplacePrior ):
             prior=self )
 
     def shortName( self ) :
+        """ Return ExponentialPrior. """
         return "ExponentialPrior"
 
 

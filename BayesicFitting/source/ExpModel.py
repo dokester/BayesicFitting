@@ -4,9 +4,9 @@ from .NonLinearModel import NonLinearModel
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,32 +29,34 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2021 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class ExpModel( NonLinearModel ):
     """
     Exponential Model.
 
-        f( x:p ) = p_0 * exp( p_1 * x )
+     f( x:p ) = p_0 * exp( p_1 * x )
 
-    where p_0 = amplitude
-          p_1 = slope
-    As always x = input.
+     where 
+        p_0 = amplitude
+        p_1 = slope
+     As always 
+        x = input.
 
-    The parameters are initialized at {1.0, -1.0}. It is a non-linear model.
+    The parameters are initialized at [1.0, -1.0]. It is a non-linear model.
 
     Beware of a positive 2nd parameter; when positive the model is going off
     to Infinity very quickly.
 
     When decay is True the model changes into a decay model:
 
-        f( x:p ) = p_0 * exp( - p_1 * x )
+     f( x:p ) = p_0 * exp( - p_1 * x )
 
     The parameters are initialized at {1.0, 1.0}.
 
     Attributes
     ----------
-        sign : [-1,1]
+    sign : [-1,1]
         Whether decay is True or False.
 
     Attributes from Model
@@ -73,7 +75,7 @@ class ExpModel( NonLinearModel ):
     --------
     >>> em = ExpModel( )
     >>> print( em.getNumberOfParameters( ) )
-    2
+    >>> 2
 
     Author  Do Kester
 

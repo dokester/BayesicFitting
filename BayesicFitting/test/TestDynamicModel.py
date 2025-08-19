@@ -481,7 +481,7 @@ class Test( unittest.TestCase ):
         print( "====================" )
 
         phc = PhantomCollection( dynamic=True )
-        seng = StartEngine( sl, errdis, phantoms=phc )
+        seng = StartEngine( sl, errdis, phancol=phc )
         for k, s in enumerate( sl ) :
             print( "Walker  ", s.id, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
             seng.execute( k, 0.0 )
@@ -492,14 +492,13 @@ class Test( unittest.TestCase ):
         print( "lowl  ", fmt( lowl ) )
 
 #        Tools.printclass( phc )
-        for k in phc.phantoms.keys() :
-            for w in phc.phantoms[k] :
-                print( fmt( k ), fmt( w.logL ) )
-                print( fmt( w.allpars, tail=3 ) )
+        for ph in phc.phantoms :
+            print( fmt( ph.id ), fmt( ph.logL ) )
+            print( fmt( ph.allpars, tail=3 ) )
 
 
-        beng = BirthEngine( sl, errdis, phantoms=phc )
-        deng = DeathEngine( sl, errdis, phantoms=phc )
+        beng = BirthEngine( sl, errdis, phancol=phc )
+        deng = DeathEngine( sl, errdis, phancol=phc )
         print( "start  np ", m.npchain )
         for k, s in enumerate( sl ) :
             Tools.printclass( s )
@@ -509,10 +508,9 @@ class Test( unittest.TestCase ):
             suc = deng.execute( k, lowl )
             print( "Death  ", suc, s.problem.npars, s.problem.model.npars, s.problem.model.npchain )
 
-        for k in phc.phantoms.keys() :
-            for w in phc.phantoms[k] :
-                print( fmt( k ), fmt( w.logL ) )
-                print( fmt( w.allpars, tail=3 ) )
+        for ph in phc.phantoms :
+            print( fmt( ph.id ), fmt( ph.logL ) )
+            print( fmt( ph.allpars, tail=3 ) )
 
 
 

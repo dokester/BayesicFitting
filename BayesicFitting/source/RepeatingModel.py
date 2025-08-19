@@ -12,9 +12,9 @@ from .UniformPrior import UniformPrior
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL"
-__version__ = "3.2.2"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2018 - 202024 Do Kester
+#  *    2018 - 202025 Do Kester
 
 class RepeatingModel( Model, Dynamic ):
     """
@@ -78,9 +78,7 @@ class RepeatingModel( Model, Dynamic ):
 
     Attributes from Model
     ---------------------
-        parameters, stdevs, npchain
-        _next, _head, _operation
-        xUnit, yUnit (relegated to model)
+        parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit
 
     Attributes from FixedModel
     --------------------------

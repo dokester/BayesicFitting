@@ -4,9 +4,9 @@ import numpy as numpy
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 202024 Do Kester
+#  *    2016 - 202025 Do Kester
 
 class UniformPrior( Prior ):
     """
@@ -41,8 +41,10 @@ class UniformPrior( Prior ):
         Pr( x ) = 1 / ( high - low )    if low < x < high
                   0                     elsewhere
 
-    domain2Unit: u = ( d - lo ) / range
-    unit2Domain: d = u * range + lo
+    domain2Unit: 
+        u = ( d - lo ) / range
+    unit2Domain: 
+        d = u * range + lo
 
     Examples
     --------

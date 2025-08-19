@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,19 +32,18 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class HarmonicModel( LinearModel ):
     """
     Harmonic oscillator Model.
 
     For order = N and period = 1 :
-        f( x:p ) = SUM_j ( p_k * cos( 2*pi*j*x ) + p_k+1 * sin( 2*pi*j*x ) )
-                        j = 1:N; k = 0:2N:2.
+     f( x:p ) = &sum;_j ( p_k * cos( 2*&pi;*j*x ) + p_{k+1} * sin( 2*&pi;*j*x ) )
+     for j = 1:N; and k = 0:2N:2.
 
     Otherwise scale with period :
-        x /= period
-
+     x = x / period
 
     The number of parameters is 2 * order.
     The parameters are initialized at 1.0. It is a linear model.
@@ -55,7 +54,7 @@ class HarmonicModel( LinearModel ):
     --------
     >>> harm = HarmonicModel( 3 )            # period = 1
     >>> print( harm.npbase )
-    6
+    >>> 6
     >>> harm = HarmonicModel( 4, 2.7 )        # period = 2.7
 
     Attributes

@@ -6,9 +6,9 @@ from astropy import units
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,24 +31,24 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class ChebyshevPolynomialModel( LinearModel ):
     """
     Chebyshev polynomial model of arbitrary degree.
 
-        f( x:p ) = &sum; p_k * T_k( x )
+     f( x:p ) = &sum; p_k * T_k( x )
 
     where the sum is over k running from 0 to degree ( inclusive ).
 
     The T( x ) are Chebyshev polynomials of the first kind which are defined
     recursively as:
 
-        T_0( x ) = 1
-        T_1( x ) = x
-        T_n( x ) = 2 x T_{n-1}( x ) - T_{n-2}( x ) for n >= 2
+     T_0( x ) = 1
+     T_1( x ) = x
+     T_n( x ) = 2 x T_{n-1}( x ) - T_{n-2}( x ) for n >= 2
 
-    These polynomials are orthogonal, only when x is in [-1,+1].
+    These polynomials are orthogonal, when integrated over x in [-1,+1].
 
     It is a linear model.
 
@@ -59,21 +59,21 @@ class ChebyshevPolynomialModel( LinearModel ):
 
     Attributes from Model
     --------------------------
-        npchain, parameters, stdevs, xUnit, yUnit
+    npchain, parameters, stdevs, xUnit, yUnit
 
     Attributes from FixedModel
     --------------------------
-        npmax, fixed, parlist, mlist
+    npmax, fixed, parlist, mlist
 
     Attributes from BaseModel
     --------------------------
-        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+    npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
     Examples
     --------
     >>> poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
     >>> print poly.getNumberOfParameters( )
-    4
+    >>> 4
 
     """
     def __init__( self, degree, copy=None, **kwargs ):
@@ -120,7 +120,7 @@ class ChebyshevPolynomialModel( LinearModel ):
 
         The partials are calculated using the recurrence formula
 
-            f_n( x ) = 2 * x * f_{n-1}( x ) - f_{n-2}( x )
+         f_n( x ) = 2 * x * f_{n-1}( x ) - f_{n-2}( x )
 
         Parameters
         ----------
@@ -151,12 +151,11 @@ class ChebyshevPolynomialModel( LinearModel ):
         """
         Returns the derivative df/dx at the xdata value.
 
-            df_n = n * U_{n-1}
-
-        where
-            U_0 = 1
-            U_1 = 2x
-            U_{n+1} = 2 * x * U_n - U_{n-1}
+         df_n = n * U_{n-1}
+         where
+         U_0 = 1
+         U_1 = 2x
+         U_{n+1} = 2 * x * U_n - U_{n-1}
 
         Parameters
         ----------

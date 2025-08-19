@@ -112,7 +112,7 @@ class Test( unittest.TestCase ):
         sl = WalkerList( problem, nwalker, pars, fi )
 
         phc = PhantomCollection( dynamic=False )
-        steng = mystarteng( sl, errdis, verbose=5, phantoms=phc )
+        steng = mystarteng( sl, errdis, verbose=5, phancol=phc )
         for wlkr in steng.walkers :
             logL = errdis.logLikelihood( problem, wlkr.allpars )
             wid = wlkr.id
@@ -154,8 +154,8 @@ class Test( unittest.TestCase ):
             self.assertTrue( abs( s - logL ) < 1.0e-10 )
 
         phc = PhantomCollection( dynamic=False )
-        steng = StartOrderEngine( sl, errdis, verbose=5, phantoms=phc )
-        myeng = myengine( sl, errdis, verbose=5, phantoms=phc )
+        steng = StartOrderEngine( sl, errdis, verbose=5, phancol=phc )
+        myeng = myengine( sl, errdis, verbose=5, phancol=phc )
 
         for wlkr in steng.walkers :
             print( "=========", wlkr )

@@ -6,9 +6,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Biweight import Biweight
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class RobustShell( IterativeFitter ):
@@ -78,29 +78,40 @@ class RobustShell( IterativeFitter ):
 
     A number of weighting schemes are provided.
 
-    With bound support and smooth edges:
-       Kernel       Name        domain      comment
-       Biweight     Tukey         5.54      Default kernel
-       CosSquare                  6.00
-       Tricube                    5.08
-       Triweight                  6.60
+    | Kernel    | domain | support | edges | comment                |
+    |-----------|--------|---------|-------|------------------------|
+    | Biweight  |   5.54 |  bound  | smooth| Tukey: Default kernel  |
+    | CosSquare |   6.00 |  bound  | smooth|                        |
+    | Tricube   |   5.08 |  bound  | smooth|                        |
+    | Triweight |   6.60 |  bound  | smooth|                        |
+    | Uniform   |   3.00 |  bound  | hard  | clip outside domain    |
+    | Cosine    |   4.50 |  bound  | hard  |                        |
+    | Triangle  |   6.00 |  bound  | hard  |                        |
+    | Parabola  |   4.50 |  bound  | hard  |                        |
+    | Huber     |   1.50 | unbound | smooth| In domain mean; out domain median |
+    | Gauss     |   2.12 | unbound | smooth|                        |
+    | Lorentz   |   3.00 | unbound | smooth|                        |
 
-    With bound support and hard edges:
-       Uniform      Clip          3.00      Ignore all outside 3 sigma
-       Cosine                     4.50
-       Triangle                   6.00
-       Parabola                   4.50
-
-    with unbound support:
-       Huber        Median        1.50      Inside domain mean; outside domain median
-       Gauss                      2.12
-       Lorentz                    3.00
 
     Other schemes can be written by making another Kernel or writing a function
         wgts = func( d )
     where d is the deviant as above.
 
+    Attributes
+    ----------
+    fitter : BaseFitter
+        The fitter to be used
+    kernel : Kernel or callable
+        Kernel take function from this kernel
+        callable in the form f(d), where d = ( data - mock ) / ( domain * scale )
+    domain : float
+        domain of the kernel function
+    onesided : [-1,0,+1]
+        -1 apply to negative residuals
+         0 aplly to both sided (not onesided)
+        +1 apply to positive residuals.
 
+ 
     Notes
     -----
     Robust fitting is even more dangerous than ordinary fitting.

@@ -9,9 +9,9 @@ from .BracketModel import BracketModel
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 202024 Do Kester
+#  *    2017 - 202025 Do Kester
 
 class CombiModel( BracketModel ):
     """
@@ -44,7 +44,7 @@ class CombiModel( BracketModel ):
     The relations can be either multiplicative or additive.
     When these relations are set, they must be set for all models.
 
-        f( x:p ) = &sum; g( x:p )
+     f( x:p ) = &sum; g( x:p )
 
     where g( x:p ) is a model ( e.g. GaussModel )
 
@@ -78,39 +78,39 @@ class CombiModel( BracketModel ):
 
     Attributes from BracketModel
     --------------------------
-        model, deep
+     model, deep
 
     Attributes from Model
     --------------------------
-        npchain, parameters, stdevs, xUnit, yUnit
+     npchain, parameters, stdevs, xUnit, yUnit
 
     Attributes from FixedModel
     --------------------------
-        npmax, fixed, parlist, mlist
+     npmax, fixed, parlist, mlist
 
     Attributes from BaseModel
     --------------------------
-        npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
+     npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
     Examples
     --------
     >>> gauss = GaussModel( )
     >>> combi = CombiModel( gauss, 3, addCombi={1:[0,0.1,0.3]}, mulCombi={2,[0]*3} )
-    >>> print combi
-    Combi of 3 times GaussModel
+    >>> print( combi )
+    >>> Combi of 3 times GaussModel
     >>> print( combi.npchain, combi.nrepeat, combi.nmp, combi.nexpand )
-    5 3 3 9
+    >>> 5 3 3 9
     >>> print( combi.select )
-    [0 1 2 3 6]
+    >>> [0 1 2 3 6]
     >>> print( combi.expandindex )
-    [0 1 2 3 1 2 4 1 2]
+    >>> [0 1 2 3 1 2 4 1 2]
     >>> print( combi.modelindex )
-    [0 0 0 1 2]
+    >>> [0 0 0 1 2]
     >>> print( combi.addindex )
-    [1 4 7]
+    >>> [1 4 7]
     >>> print( combi.mulindex )
-    [2 5 8]
+    >>> [2 5 8]
 
     Category     mathematics/Fitting
 

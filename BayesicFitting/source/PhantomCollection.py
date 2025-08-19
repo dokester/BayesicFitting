@@ -3,6 +3,7 @@ import math
 
 from .Walker import Walker
 from .WalkerList import WalkerList
+from .Formatter import formatter as fmt
 from . import Tools
 
 __author__ = "Do Kester"
@@ -78,47 +79,66 @@ class PhantomCollection( object ):
         self.minpars = self.MINPARS
         self.ncalls = 0
             
-        if dynamic :
-            self.phantoms = {}
-            self.lowLhood = {}
-            self.paramMax = {}
-            self.paramMin = {}
-            self.getList = self.getDynamicList
-            self.getParamMinmax = self.getDynamic
-            self.storeItems = self.storeDynamic
-            self.length = self.lengthDynamic
-        else :
-            self.phantoms = WalkerList( )
-            self.lowLhood = -math.inf
+        self.phantoms = WalkerList()
+        self.lowLhood = -math.inf
+
+        self.npars = -1
 
     def __str__( self ):
         """ Return the name of this object.  """
         return "PhantomCollection"
 
-    ##  Methods for static models
 
-    def length( self, np=0 ) :
+    def length( self, np=None ) :
         """
         Return length of internal walkerlist
 
         Parameters
         ----------
-        np : int
+        np : int or None
+            None return overall length
             number of parameters (in case of dynamic only)
         """
-        return len( self.phantoms )
+        if np is None :
+            return len( self.phantoms )
 
-    def getList( self, walker ) :
+        kl = 0
+        for w in self.phantoms :
+            if w.nap == np :
+                kl += 1
+        return kl
+
+    def getBest( self, np ) :
         """
-        Return the applicable WalkerList
+        Return the best phantom with np parameters; or -1 if no phantom has
+        np parameters
 
         Parameters
         ----------
-        walker : Walker
-            return list pertaining to this walker (not used here)
+        np : int
+            number of parameters
         """
-        return self.phantoms
+        k = len( self.phantoms ) - 1
+        while k >= 0 and self.phantoms[k].nap != np :
+            k -= 1
+
+        return k
  
+    def nextLowPhantom( self, lowLhood ) :
+        """
+        Generator for phantoms with logL < lowLhood
+
+        Parameters
+        ----------
+        lowLhood : float
+            low border for likelihood
+        """
+        for ph in self.phantoms :
+            if ph.logL <= lowLhood :
+                yield ph
+            else :
+                return
+
     def storeItems( self, walker ) :
         """
         Store both items as arrays.
@@ -131,31 +151,8 @@ class PhantomCollection( object ):
         self.ncalls += 1
         self.phantoms = self.phantoms.insertWalker( walker )
 
-    def calculateParamMinmax( self, lowLhood, np=0 ):
-        """
-        Calculate the min and max values of the present parameter values.
 
-        Parameters
-        ----------
-        lowLhood : float
-            lower boundary of the log Likelihood
-        np : int
-            number of parameters (not used in this implementation)
-
-        """
-        self.lowLhood = lowLhood
-        self.phantoms = self.phantoms.cropOnLow( lowLhood )
-
-        if len( self.phantoms ) == 0 :
-            self.paramMin = None
-            self.paramMax = None
-        else :
-            pars = self.phantoms.allPars()
-            self.paramMin = numpy.nanmin( pars, axis=0 )
-            self.paramMax = numpy.nanmax( pars, axis=0 )
-
-
-    def getParamMinmax( self, lowLhood, np=0 ):
+    def getParamMinmax( self, lowLhood, np=None ):
         """
         Obtain the min and max values of the present parameter values.
 
@@ -163,61 +160,17 @@ class PhantomCollection( object ):
         ----------
         lowLhood : float
             lower boundary of the log Likelihood
-        np : int
+        np : int or None
             number of parameters (not used in this implementation)
 
         """
-        if lowLhood > self.lowLhood :
+        if lowLhood > self.lowLhood or self.npars != np :
             self.calculateParamMinmax( lowLhood, np=np )
 
         return ( self.paramMin, self.paramMax )
 
-    ##  Dynamic methods
 
-    def lengthDynamic( self, np=None ) :
-        """
-        Return length of internal walkerlist
-
-        Parameters
-        ----------
-        np : int
-            number of parameters (in case of dynamic only)
-        """
-        if np is None :
-            return numpy.sum( [len( ph ) for ph in self.phantoms.values()] )
-        return len( self.phantoms[np] ) if np in self.phantoms else 0
-
-    def getDynamicList( self, walker ) :
-        """
-        Return the applicable WalkerList or None if not present.
-
-        Parameters
-        ----------
-        walker : Walker
-            return list pertaining to this walker
-        """
-        np = walker.problem.npars
-        return self.phantoms[np] if np in self.phantoms else None
-
-    def storeDynamic( self, walker ) :
-        """
-        Put both items in the dictionaries with npars as key
-
-        Parameters
-        ----------
-        logL : float
-            log Likelihood 
-        pars : 1d array
-            parameters
-        """
-        self.ncalls += 1
-        np = walker.problem.npars
-        if not np in self.phantoms :
-            self.phantoms[np] = WalkerList()
-
-        self.phantoms[np] = self.phantoms[np].insertWalker( walker )
-
-    def calculateDynamic( self, lowLhood, np=0 ):
+    def calculateParamMinmax( self, lowLhood, np=None ):
         """
         Calculate the min and max values of the present parameters of length np.
 
@@ -225,43 +178,28 @@ class PhantomCollection( object ):
         ----------
         lowLhood : float
             lower boundary of the log Likelihood
-        np : int
+        np : int or None
+            None for static models.
             number of parameters
 
         """
-        self.lowLhood[np] = lowLhood
-        if np in self.phantoms :
-            self.phantoms[np] = self.phantoms[np].cropOnLow( lowLhood )
-        else :
-            self.phantoms[np] = WalkerList()
+        self.lowLhood = lowLhood
+        self.npars = np
 
+        self.phantoms = self.phantoms.cropOnLow( lowLhood )
 
         if self.length( np ) <= self.minpars :
-            self.paramMax[np] = None
-            self.paramMin[np] = None
+            self.paramMax = None
+            self.paramMin = None
             return
 
-        pars = self.phantoms[np].allPars()
-        self.paramMin[np] = numpy.nanmin( pars, axis=0 )
-        self.paramMax[np] = numpy.nanmax( pars, axis=0 )
+        pars = self.phantoms.allPars( npars=np )
+
+        self.paramMin = numpy.nanmin( pars, axis=0 )
+        self.paramMax = numpy.nanmax( pars, axis=0 )
 
         return
 
-    def getDynamic( self, lowLhood, np=0 ):
-        """
-        Return the min and max values of the present parameters of length np.
-
-        Parameters
-        ----------
-        lowLhood : float
-            lower boundary of the log Likelihood
-        np : int
-            number of parameters
-
-        """
-        if not np in self.lowLhood or lowLhood > self.lowLhood[np] or self.paramMin[np] is None :
-            self.calculateDynamic( lowLhood, np=np )
-        return ( self.paramMin[np], self.paramMax[np] )
 
 
 

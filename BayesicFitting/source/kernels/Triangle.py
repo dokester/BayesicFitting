@@ -3,11 +3,11 @@ import numpy as numpy
 from .Kernel import Kernel
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "3.2.4"
+__url__ = "https://dokester.github.io/BayesicFitting/"
+__status__ = "Perpetual Beta"
 
 #  *
 #  *    This file is part of the BayesicFitting package.
@@ -28,7 +28,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class Triangle( Kernel ):
     """
@@ -43,22 +43,40 @@ class Triangle( Kernel ):
         Constructor.
 
         Using
-            integral = 1.0K6.0/15.0
+            integral = 1.0
             fwhm = 1.0
         """
         super( Triangle, self ).__init__( integral=1.0, fwhm=1.0 )
 
     def result( self, x ):
+        """
+        Return the result for input values.
+
+        Parameters
+        ----------
+        x : array-like
+            input values
+        """
         ax = numpy.abs( x )
         return numpy.where( ax <= 1, 1 - ax, 0.0 )
 
     def partial( self, x ):
+        """
+        Return the partial derivative wrt the input values.
+
+        Parameters
+        ----------
+        x : array-like
+            the input values
+        """
         return numpy.where( numpy.abs( x ) <= 1, - numpy.sign( x ), 0.0 )
 
     def isBound( self ):
+        """ Return True """
         return True
 
     def name( self ):
+        """ Return the name of the kernel """
         return str( "Triangle: ( 1 - |x| ) if |x| < 1 else 0" )
 
 

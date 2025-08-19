@@ -3,11 +3,11 @@ import numpy as numpy
 from .Kernel import Kernel
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "3.2.4"
+__url__ = "https://dokester.github.io/BayesicFitting/"
+__status__ = "Perpetual Beta"
 
 #  *
 #  *    This file is part of the BayesicFitting package.
@@ -34,8 +34,7 @@ class Triweight( Kernel ):
     """
     Triweight is a Kernel function between [-1,1]; it is 0 elsewhere.
 
-        K( x ) = ( 1 - x^2 )^3      if |x| < 1
-                 0                  elsewhere
+     K( x ) = ( 1 - x^2 )^3 if |x| < 1 else 0
 
     """
     def __init__( self ) :
@@ -49,20 +48,46 @@ class Triweight( Kernel ):
         super( Triweight, self ).__init__( integral=32.0/35.0, fwhm=2 * 0.454202 )
 
     def result( self, x ):
+        """
+        Return the result for input values.
+
+        Parameters
+        ----------
+        x : array-like
+            input values
+        """
         return self.resultsq( x * x )
 
     def resultsq( self, xsq ):
+        """
+        Return the result for squared input values.
+
+        Parameters
+        ----------
+        x : array-like
+            the squares of the input values
+        """
         res = numpy.where( xsq <= 1, 1 - xsq, 0.0 )
         return res * res * res
 
     def partial( self, x ):
+        """
+        Return the partial derivative wrt the input values.
+
+        Parameters
+        ----------
+        x : array-like
+            the input values
+        """
         df = numpy.where( numpy.abs( x ) <= 1, 1 - x * x, 0.0 )
         return -6 * df * df * x
 
     def isBound( self ):
+        """ Return True """
         return True
 
     def name( self ):
+        """ Return the name of the kernel """
         return str( "Triweight: ( 1 - x^2 )^3 if |x| < 1 else 0" )
 
 

@@ -6,9 +6,9 @@ from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2015 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2024 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class EtalonModel( NonLinearModel ):
     """
@@ -44,12 +44,14 @@ class EtalonModel( NonLinearModel ):
         p_1 = finesse,
         p_2 = frequency in 1/wavenumber
         p_3 = phase,
+
     As always x = input; it is in wavenumbers
 
-    The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model.
+    The parameters are initialized at [1.0, 1.0, 1.0, 0.0]. It is a non-linear model.
 
     The finesse should be positive. However, solutions where -1 < p_1 < 0 are equivalent
     to a solution with parameters set as:
+
         p_0 /= ( 1 + p_1 )
         p_1 /= -( 1 + p_1 )
         p_3 += pi/2             # 90 degree phase shift
@@ -72,7 +74,7 @@ class EtalonModel( NonLinearModel ):
     --------
     >>> fpm = EtalonModel( )
     >>> print( fpm.npchain )
-    4
+    >>> 4
     >>> pars = [1.0, 30.0, 1.0, 0.0]
     >>> fpm.parameters = pars
     >>> print( fpm( numpy.arange( 101, dtype=float ) ) )     # etalon with 10 periods

@@ -6,9 +6,9 @@ from .ErrorDistribution import ErrorDistribution
 from .LogFactorial import logFactorial
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class PoissonErrorDistribution( ErrorDistribution ):
@@ -40,7 +40,7 @@ class PoissonErrorDistribution( ErrorDistribution ):
 
     For one observation with n counts it holds
 
-        f( n,x ) = x^n / ( e^x * n! )
+     f( n,x ) = x^n / ( e^x * n! )
 
     where x is the expected counts
 

@@ -5,9 +5,9 @@ from .Formatter import formatter as fmt
 
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class LinearModel( Model ):
     """
@@ -39,7 +39,7 @@ class LinearModel( Model ):
 
     For Linear models it holds that
 
-        f( x:p ) = &sum;( p_i * df( x )/dp_i )
+     f( x:p ) = &sum;( p_i * df( x )/dp_i )
 
     which means that only the partial derivatives to p_i need to be given
     as basePartial. The baseResult follows directly from that one.
@@ -51,9 +51,7 @@ class LinearModel( Model ):
 
     Attributes from Model
     ---------------------
-        parameters, stdevs, npchain
-        _next, _head, _operation
-        xUnit, yUnit (relegated to model)
+        parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)
 
     Attributes from FixedModel
     --------------------------

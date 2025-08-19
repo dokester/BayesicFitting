@@ -2,6 +2,7 @@ import numpy as numpy
 from astropy import units
 import math
 import warnings
+import sys
 from . import Tools
 from .Formatter import formatter as fmt
 from .Formatter import fma
@@ -12,9 +13,9 @@ from .Engine import DummyPlotter
 import matplotlib.pyplot as plt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +38,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class GalileanEngine( Engine ):
     """
@@ -48,18 +49,23 @@ class GalileanEngine( Engine ):
 
     Attributes
     ----------
-    size : 0.5
-        of the step
+    size : float (0.5)
+        adaptable fraction for the (unit) direction of the stepping
+    wiggle : float (0.3)
+        factor to perturb the direction at each step. 
+        between 0 (no perturbation) and 1 (new direction)
 
     Attributes from Engine
     ----------------------
-    walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
+    walkers, errdis, maxtrials, nstep, slow, rng, report, phancol, verbose
 
     Author       Do Kester.
 
     """
 
     SIZE = 0.5
+    WIGGLE = 0.2
+
 
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, walkers, errdis, copy=None, **kwargs ):
@@ -75,20 +81,26 @@ class GalileanEngine( Engine ):
         copy : GalileanEngine
             to be copied
         kwargs : for Engine
-            "phantoms", "slow", "seed", "verbose"
+            "phancol", "slow", "seed", "verbose"
 
         """
         super( ).__init__( walkers, errdis, copy=copy, **kwargs )
 
+        self.wiggle = self.WIGGLE
         self.size = self.SIZE
+        
+        ## increase step size at success; decrease at failure 
+        ## balance 3 successes to 1 failure
+        self._dsize = 0.01              ## fractional change in size
+        self._balance = 3               ## balance between increments and decrements
+        self._increment = 1 + self._dsize
+        self._decrement = 1 / ( 1 + self._balance * self._dsize )
 
         self.plotter = DummyPlotter( )
 
     def copy( self ):
         """ Return copy of this.  """
         engine = GalileanEngine( self.walkers, self.errdis, copy=self )
-        engine.nstep = self.nstep
-
         return engine
 
     def __str__( self ):
@@ -96,7 +108,7 @@ class GalileanEngine( Engine ):
         return str( "GalileanEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by diffusing the parameters.
 
@@ -106,8 +118,6 @@ class GalileanEngine( Engine ):
             index in walkerlist, of the walker
         lowLhood : float
             lower limit in logLikelihood
-        append : bool
-            set walker in place of append
 
         Returns
         -------
@@ -122,21 +132,23 @@ class GalileanEngine( Engine ):
         allpars = walker.allpars
         fitIndex = walker.fitIndex
 
-        inside = 0
+        isOutside = 0                                           ## start inside lowLhood area
         Ltry = 0
-        size = self.size
+
+        ff = ( 1.0 if lowLhood <= -sys.float_info.max 
+                else 1 / math.sqrt( max( 1, problem.npars ) ) )
+        size = self.size * ff                    ## adaptable size for velocity
 
         self.plotter.start( param=allpars )
         um = UnitMovements( walker, self, size, lowLhood )
 
-#        nstep = int( self.nstep * ( 1 + self.rng.rand() ) )
-        nstep = 2 + int( self.nstep * ( 1 + self.rng.rand() ) )
-
+        nstep = self.nstep()
         maxtrial = self.maxtrials
 
         ptry = allpars.copy()
         if self.verbose > 4 :
-            print( "Galilean   LogL  ", fmt( Lhood ), " LowL  ", fmt( lowLhood), nstep, maxtrial, size )
+            print( "Galilean   LogL  ", fmt( Lhood ), " LowL  ", fmt( lowLhood), 
+                    nstep, maxtrial, size )
             print( "alpar ", fma( ptry, linelength=200 ) )
             fip = allpars[fitIndex]
             print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex ), linelength=200) )
@@ -144,55 +156,50 @@ class GalileanEngine( Engine ):
             print( '--------------------' )
         step = 0
         trial = 0
+#        self.tripSq = 0
 
 #        um.setParameters( problem, allpars )
 #        self.startJourney( um.upar )
 
         while True:
             trial += 1
-            f = -1
 
-            um.setParameters( problem, allpars )        # restart at safe location
+            um.setParameters( problem, allpars )           # restart at safe location
 
-            if inside == 0 :                            # safely inside lowLhood area
+            if isOutside == 0 :                            # safely inside lowLhood area
+                um.uvel = ( 1 - self.wiggle ) * um.uvel + self.wiggle * um.getVelocity( size )
+
                 ptry[fitIndex] = um.trialStep( 1.0, size )
 
-            elif inside == 1 :                          # first time outside -> mirror
+            elif isOutside == 1 :                          # first time outside -> mirror
 
-                ptry[fitIndex] = um.trialStep( 0.5, size )    # params at mid point
-                Lmid = self.errdis.logLikelihood( problem, ptry )
-
-                f = self.quadinterpol( Lhood, Lmid, Ltry, lowLhood )
-
-                pedge = allpars.copy()
-                pedge[fitIndex] = um.trialStep( f, size )      # params at edge  
-
-                if self.verbose > 4 :
-                    Ledge = self.errdis.logLikelihood( problem, pedge )
-                    print( "Lmid  ", fmt( iteration ), fmt( Lmid ), fmt( f ), fmt( Ltry ),
-                            fmt( lowLhood ), fmt( Ledge ), fmt( Lhood ) )
+                pedge, restep = self.findEdge( problem, ptry, fitIndex, Lhood, Ltry, lowLhood, 
+                                              um, size, plot=False )
 
                 dLdp = self.errdis.partialLogL( problem, pedge, fitIndex )
-                self.plotter.move( allpars, pedge, col=1, sym=4 )
                 um.acceptTrial()
-
                 um.mirrorOnLowL( dLdp )
+                ptry[fitIndex] = um.trialStep( restep, size )    ## part of te step still to be done
 
-                ptry[fitIndex] = um.trialStep( 1 - f, size )
-
+#                self.plotter.move( allpars, pedge, col=1, sym=4 )
+                self.plotter.move( allpars, pedge, col=1 )
                 self.plotter.move( pedge, ptry, col=2 )
-            else:                                       # mirroring failed; do reverse
+
+            else:                                          # mirroring failed; do reverse
                 size *= 0.7
                 um.reverseVelocity( size )
                 ptry[fitIndex] = um.trialStep( 1.0, size )
 
-                self.plotter.move( allpars, ptry, col=3, sym=0 )
+#                self.plotter.move( allpars, ptry, col=3, sym=0 )
+                self.plotter.move( allpars, ptry, col=3 )
 
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
 
             if Ltry >= lowLhood:
-                self.plotter.move( allpars, ptry, col=0, sym=0 )
+#                self.plotter.move( allpars, ptry, col=0, sym=0 )
+                self.plotter.move( allpars, ptry, col=0 )
+#                self.tripSq += self.unitTripSquare( um.upar - um.uptry )
 #                self.calcJourney( um.upar - um.uptry )
 
                 um.acceptTrial()
@@ -200,30 +207,33 @@ class GalileanEngine( Engine ):
                 allpars = ptry.copy( )
                 Lhood = Ltry
                 self.reportSuccess( )
-                inside = 0
+                isOutside = 0
                 step += 1
                 trial = 0
-                size = self.size
+                ## adaptable size for velocity
+                size = self.incsize() * ff
 
                 ## update the walker
-                update = len( self.walkers ) if append else kw
-                self.setWalker( update, problem, allpars, Lhood, walker=walker,
+                self.setWalker( kw, problem, allpars, Lhood, walker=walker,
                                 fitIndex=fitIndex )
 
             else:
-                inside += 1
-                if inside == 1:
-                    self.plotter.move( allpars, ptry, col=5, sym=4 )
+                isOutside += 1
+                if isOutside == 1:
+#                    self.plotter.move( allpars, ptry, col=5, sym=4 )
+                    self.plotter.move( allpars, ptry, col=5 )
                     self.reportReject( )
                 else:
                     self.plotter.move( allpars, ptry, col=4 )
                     self.reportFailed( )
+                ## adaptable size for velocity
+                size = self.decsize() * ff
 
             if self.verbose > 4 :
                 print( "upar  ", fma( um.upar, linelength=200 ) )
                 print( "uvel  ", fma( um.uvel, linelength=200 ) )
                 print( "ptry  ", fma( ptry, linelength=200 ) )
-                print( "Ltry  ", fmt( Ltry ), inside, step, trial, self.plotter.iter-1, 
+                print( "Ltry  ", fmt( Ltry ), isOutside, step, trial, self.plotter.iter-1, 
                         fmt( size ) )
                 print( '--------------------' )
 
@@ -232,47 +242,139 @@ class GalileanEngine( Engine ):
                 break
 
 
-        # dynamically adjust step size
-        if step == 0 :
-            self.size = max( 0.9 * self.size, 1e-6 )
-            if self.verbose > 4 :
-                warnings.warn( "GalileanEngine: no steps found" )
-        else :
-            self.size = min( self.SIZE, self.size * 1.1 )
-
         self.plotter.stop( param=allpars, name="GalileanEngine" )
 
         return step * len( fitIndex )           # nr of successfull steps
 
-    def quadinterpol( self, L0, Lm, L1, lowL ) :
+    def incsize( self ):
+        """ Return increased self.size """
+        self.size = min( self.size * self._increment, self.SIZE * 4 )
+        return self.size
+
+    def decsize( self ) :
+        """ Return decreased self.size. """       
+        self.size = max( self.size * self._decrement, self.SIZE / 4 )
+        return self.size
+
+    def findEdge( self, problem, ptry, fitIndex, Lhood, Ltry, lowLhood, um, size, 
+                    plot=False ) :
         """
-        Quadratic interpolation of points (x,y)
-        x = [0.0, 0.5, 1.0]
-        y = [L0, Lm, L1]  where L0 > Lm > L1    
-        interpolation at y = lowL.
+        Find the edge of the likelihood where logL equals LowLhood. 
+
+        Parameters
+        ----------
+        problem : Problem
+            the problem
+        ptry : array-like
+            parameters with likelihood outside lowLhood region
+        fitIndex : array-like
+            indices of parameters that need fitting
+        Lhood : float
+            last likelihood before going outside
+        Ltry : float
+            likelihood outside (at ptry)
+        lowLhood : float
+            lower limit in logLikelihood
+        um : UnitMovements (see below)
+            of this run
+        size : float
+            present size value
 
         Returns
         -------
-        xvalue : float
-            largest of the two inside [0,1]
-        """ 
-        c = L0
-        b = 4 * Lm - L1 - 3 * L0
-        a = 2 * L0 - 4 * Lm  + 2 * L1
+        pedge : array-like
+            parameter values at the edge of lowLhood
+        restep : float
+            part of the step outside lowLhood area. 
+        """
+        if plot :
+            Led = [0] * 101
+            xed = [0.01*ked for ked in range( 101 )]
+            for ked in range( 101 ) :
+                ped = ptry.copy()
+                ped[fitIndex] = um.trialStep( 0.01*ked, size )
+                Led[ked] = self.errdis.logLikelihood( problem, ped )
+            plt.plot( xed, Led, 'b-' )
+            plt.plot( [0,1], [lowLhood,lowLhood], 'g-' )
+
+        ptry[fitIndex] = um.trialStep( 0.5, size )    # params at mid point
+        Lmid = self.errdis.logLikelihood( problem, ptry )
+
+        pedge = ptry.copy()
+
+        xint = [0.0, 0.5, 1.0]
+        yint = [Lhood, Lmid, Ltry]
+
+        eps = 0.001 * ( Lhood - Ltry )
+        for ktr in range( 10 ) :
+
+            f = self.quadInterpol( xint, yint, lowLhood, plot=plot )
+
+            pedge[fitIndex] = um.trialStep( f, size )
+            Ledge = self.errdis.logLikelihood( problem, pedge )
+
+            if plot :
+                plt.plot( [f], [Ledge], 'r*' )
+                plt.text( f, Ledge, "%d"%ktr )
+                plt.plot( [f,f], [lowLhood,Ledge], 'k-' )
+
+            if abs( Ledge - lowLhood ) < eps :
+                break
+
+            k = 2 if f < xint[1] else 0
+            yint[k] = yint[1]
+            xint[k] = xint[1]
+            yint[1] = Ledge
+            xint[1] = f
+
+#        print( ktr, Ledge, lowLhood )
+
+        if plot :
+            plt.show()
+
+
+        return pedge, 1 - f
+
+
+    def quadInterpol( self, x, y, lowL, plot=False ) :
+        """
+        Quadratic interpolation of a function defined by 3 point (x,y) at level
+        ylow.
+
+        Parameters
+        ----------
+        x : array of 3 floats
+            x-values
+        y : array of 3 floats
+            y-values   
+        ylow : float 
+            find xlow at ylow
+        """
+        mat = [[x[0]*x[0], x[0], 1.0], [x[1]*x[1], x[1], 1.0], [x[2]*x[2], x[2], 1.0]]
+        mat = numpy.array( mat )
+        beta = numpy.array( y )
+        try :
+            a, b, c = numpy.linalg.solve( mat, beta )
+        except :
+            return ( x[2] - x[0] ) / 2
 
         if a == 0 :
             return 1 if b == 0 else ( lowL - c ) / b
 
+        if plot :
+            tt = numpy.linspace( x[0], x[2], 101 )
+            aa = a * tt * tt + b * tt + c
+            plt.plot( tt, aa, 'r-' )
+
         det = b * b - 4 * a * ( c - lowL )
         det = 0 if det < 0 else math.sqrt( det )
 
-        x1 = ( - b - det ) / ( 2 * a )
-        x2 = ( - b + det ) / ( 2 * a )
+        xint = ( - b - det ) / ( 2 * a )
+        if x[0] < xint < x[2] :
+            return xint
+        else :
+            return ( - b + det ) / ( 2 * a )
 
-        if a < 0 :      # top parabola: return largest
-            return x1 if x1 > x2 else x2
-        else :          # valley parabala : return smallest
-            return x1 if x1 < x2 else x2
 
 
 
@@ -292,21 +394,35 @@ class UnitMovements( object ):
         self.engine = engine
         self.setParameters( self.problem, walker.allpars )
 
-        uran, umin = engine.getUnitRange( self.problem, lowLhood )
+        uran, umin = engine.getUnitRange( self.problem, lowLhood, walker.nap )
         self.upran = uran[self.fitIndex]
 
         self.upran = numpy.amax( self.upran )
         self.uvel = self.getVelocity( size )
 
-    def uniform( self ) :
+    def getVelocity( self, size ):
         """
-        Return random step between [0.5,0.5]
+        Return a new (random) unit velocity.
+
+        Parameters
+        ----------
+        size : float
+            of the (unit) bounding box
         """
-        return self.engine.rng.rand( self.np ) - 0.5
+        lohi = 0.5 * size * self.upran
+        return self.engine.rng.uniform( -lohi, lohi, self.np )
 
     def setParameters( self, problem, allpars ):
         """
         Set unit values for the applicable parameters
+
+        Parameters
+        ----------
+        problem : Problem
+            the problem at hand
+        allpars : array-like
+            all parameters of the problem
+
         """
         fip = allpars[self.fitIndex]
         self.upar = self.engine.domain2Unit( problem, fip, kpar=self.fitIndex )
@@ -314,6 +430,13 @@ class UnitMovements( object ):
     def trialStep( self, f, size ):
         """
         Return a new trial parameter set.
+
+        Parameters
+        ----------
+        f : float between [-1,1]
+            fraction of velocity to apply
+        size : float
+            of the (unit) bounding box
         """
         uv = self.uvel
         up = self.upar + uv * f
@@ -330,12 +453,18 @@ class UnitMovements( object ):
         return self.engine.unit2Domain( self.problem, self.uptry, kpar=self.fitIndex )
 
     def acceptTrial( self ) :
+        """ Accept this trial """
         self.upar = self.uptry
         self.uvel = self.uvtry
 
     def mirrorOnLowL( self, dLdp ):
         """
         Mirror the velocity on the low likelihood border.
+
+        Parameters
+        ----------
+        dLdp : array-like
+            derivative of logL to the parameters at the edge
         """
         inprod = numpy.sum( dLdp * self.uvel )
         sumsq  = numpy.sum( dLdp * dLdp )
@@ -344,29 +473,19 @@ class UnitMovements( object ):
         self.uvel -= 2 * dLdp * inprod / sumsq
 
 
-    def getVelocity( self, size ):
-        """
-        Return a new (random) unit velocity.
-        """
-        return self.uniform() * self.upran * size
-
     def reverseVelocity( self, size ):
         """
         Reverse the unit velocity when mirroring fails.
         Add small perturbation.
+
+        Parameters
+        ----------
+        size : float
+            of the (unit) bounding box
         """
         ff = 0.1                                # 10 percent
         uvpert = self.getVelocity( ff * size )  # unit velocity perturbance
         self.uvel *= ( ff - 1 )                 # reverse uvel and take 90 %
         self.uvel += uvpert                     # add perturbance
 
-        """
-        TBC I dont think this is any good.
-
-        uv = self.uvel                 # keep original velocity
-        self.uvel = self.getVelocity( size )        # get a new one to perturb
-        nm = len( self.engine.walkers )
-        self.uvel = size * ( self.np * self.uvel - nm * upv ) / ( nm + self.np )
-
-        """
 

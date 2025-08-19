@@ -9,9 +9,9 @@ from .Problem import Problem
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -46,8 +46,12 @@ class ErrorsInXandYProblem( Problem ):
     solution.
 
     Define
-        xd = xdata, yd = ydata, u = target, F(u:P) = model( target )
-    And the mismathes in both directions.
+        xd = xdata 
+        yd = ydata 
+        u = target 
+        F(u:P) = model( target )
+
+    Then the mismathes in both directions are
         X = u - xd 
         Y = F(u:p) - yd
 
@@ -57,8 +61,8 @@ class ErrorsInXandYProblem( Problem ):
     As the targets need to be optimised they need a Prior. In the present
     implementation there is the same Prior for all targets, which the centered on
     each of the xdata values.
-    S.Gull (1989) argues to use a GaussPrior with a scale similar to the errors
-    in both X and Y.
+    [S.Gull](../references.md#gull) argues to use a GaussPrior with a scale 
+    similar to the errors in both X and Y.
 
     Attributes
     ----------
@@ -119,7 +123,8 @@ class ErrorsInXandYProblem( Problem ):
 
         """
         super( ).__init__( model=model, xdata=xdata, ydata=ydata, weights=weights, copy=copy )
-        self.npars += Tools.length( self.xdata )
+        self.nuispars = Tools.length( self.xdata )
+        self.npars += self.nuispars
 
         if copy is None :
             self.prior = prior
@@ -160,14 +165,14 @@ class ErrorsInXandYProblem( Problem ):
             | var_yy, var_xy |
             | var_xy, var_xx |
 
-        When the accuracy is given, convert it to these items by
-        var_yy = acc[0] * acc[0]
-        var_xx = acc[1] * acc[1]
-        var_xy = acc[0] * acc[1] * acc[2]
+         When the accuracy is given, convert it to these items by
+          var_yy = acc[0] * acc[0]
+          var_xx = acc[1] * acc[1]
+          var_xy = acc[0] * acc[1] * acc[2]
 
         Store also the determinant of the covariance matrix. 
 
-        When both accuracy and covar are None
+         When both accuracy and covar are None
           var_yy = 0 
           var_xx = 1
           var_xy = 0

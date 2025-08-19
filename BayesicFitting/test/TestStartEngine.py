@@ -63,7 +63,7 @@ class TestStartEngine( TestEngine ):
         wl = WalkerList( problem, 100, ap, fi )
 
         phc = PhantomCollection( dynamic=False )
-        engine = StartEngine( wl, errdis, phantoms=phc )
+        engine = StartEngine( wl, errdis, phancol=phc )
         self.startenginetest( engine )
 
         print( "    make copy of engine" )

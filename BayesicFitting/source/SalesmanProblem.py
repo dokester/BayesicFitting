@@ -7,9 +7,9 @@ from . import Tools
 from .OrderProblem import OrderProblem
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -28,7 +28,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2025 Do Kester
 
 
 class SalesmanProblem( OrderProblem ):
@@ -46,11 +46,11 @@ class SalesmanProblem( OrderProblem ):
 
     Examples
     --------
-    >>>  tsm = SalesmanProblem( 100 )
+    >>> tsm = SalesmanProblem( 100 )
     >>> print( tsm )
-    TravelingSalesman in 2 dimensions with 100 nodes.
+    >>> TravelingSalesman in 2 dimensions with 100 nodes.
     >>> print( tsm.npars )
-    100
+    >>> 100
 
 
     """
@@ -152,6 +152,7 @@ class SalesmanProblem( OrderProblem ):
         starting node (if present), divided by the scale
 
         Each result is 
+
             res[k] = dis[k] * weight[params[k]] / scale
 
         Parameters
@@ -179,6 +180,7 @@ class SalesmanProblem( OrderProblem ):
         Use Manhattan distances (1-norm)
 
         Each distance is 
+
             dis[k] = SUM_i ( abs( xdata[pars[k],i] - xdata[pars[k+roll],i] ) )
 
         Parameters
@@ -199,6 +201,7 @@ class SalesmanProblem( OrderProblem ):
         Use Euclidic distances (2-norm)
 
         Each distance is 
+
             dis[k] = sqrt( SUM_i ( ( xdata[pars[k],i] - xdata[pars[k+roll],i] )^2 ) )
 
         Parameters
@@ -275,6 +278,7 @@ class SalesmanProblem( OrderProblem ):
         Use tabulated distances from self.table
 
         Each distance is 
+
             dis[k] = table[ pars[k], pars[k+roll] ]
 
         Parameters

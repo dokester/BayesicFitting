@@ -5,9 +5,9 @@ from .Engine import Engine
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class BirthEngine( Engine ):
     """
@@ -76,7 +76,7 @@ class BirthEngine( Engine ):
         return str( "BirthEngine" )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """
         Execute the engine by adding a component and diffusing the parameters.
 
@@ -149,10 +149,8 @@ class BirthEngine( Engine ):
 
             if Ltry >= lowLhood:
                 self.reportSuccess()
-                update = len( self.walkers ) if append else kw
-                self.setWalker( update, problem, ptry, Ltry, fitIndex=ftry )
-                wlkr = self.walkers[update]
-                wlkr.check( nhyp=nhyp )
+                self.setWalker( kw, problem, ptry, Ltry, fitIndex=ftry )
+
                 return dnp
             else :
                 uval = self.rng.rand( dnp )

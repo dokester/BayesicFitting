@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
  
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -69,6 +69,8 @@ class ErrorDistribution( object ):
 
     PARNAMES = ["hypar"]
 
+    DEBUG = False           # set True for reraising the exceptions
+
     #  *********CONSTRUCTORS***************************************************
     def __init__( self, fixed=None, constrain=None, copy=None ):
         """
@@ -80,7 +82,7 @@ class ErrorDistribution( object ):
             int     list if parameters to fix permanently. Default None.
             float   list of values for the fixed parameters.
         constrain : None or callable
-            function as: func( logL, problem, allpars )
+            function as: func( logL, problem, allpars, lowLhood )
             returning a (modified) value of the logLikelihood.
         copy : ErrorDistribution
             distribution to be copied.
@@ -315,6 +317,7 @@ class ErrorDistribution( object ):
     def domain2Unit( self, dval, ks ) :
         """
         Return value in [0,1] for the selected parameter.
+
         Parameters
         ----------
         dval : float
@@ -324,12 +327,14 @@ class ErrorDistribution( object ):
         """
         try :
             return self.hyperpar[ks].domain2Unit( dval )
-        except :
+        except Exception :
+            if self.DEBUG : raise
             return 0.0
 
     def unit2Domain( self, uval, ks ) :
         """
         Return domain value for the selected parameter.
+
         Parameters
         ----------
         uval : float
@@ -339,7 +344,8 @@ class ErrorDistribution( object ):
         """
         try :
             return self.hyperpar[ks].unit2Domain( uval )
-        except :
+        except Exception :
+            if self.DEBUG : raise
             return 0.0
 
     #  *********LIKELIHOODS***************************************************
@@ -401,11 +407,11 @@ class ErrorDistribution( object ):
 
             try :
                 pg.close()
-            except :
+            except Exception :
                 pass
 
             return dL
-        except :
+        except Exception :
 #            raise
 #            print( "Using numeric partialLogL." )
             return self.numPartialLogL( problem, allpars, fitIndex )

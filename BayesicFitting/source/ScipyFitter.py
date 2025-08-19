@@ -8,9 +8,9 @@ from .MaxLikelihoodFitter import MaxLikelihoodFitter
 #from ConvergenceError import ConvergenceError
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2025 Do Kester
 
 
 class ScipyFitter( MaxLikelihoodFitter ):
@@ -44,7 +44,7 @@ class ScipyFitter( MaxLikelihoodFitter ):
 
     Examples
     --------
-    # assume x and y are Double1d data arrays.
+    >>> # assume x and y are Double1d data arrays.
     >>> x = numpy.arange( 100, dtype=float ) / 10
     >>> y = numpy.arange( 100, dtype=float ) / 122          # make slope
     >>> y += 0.3 * numpy.random.randn( 100 )                # add noise
@@ -55,7 +55,7 @@ class ScipyFitter( MaxLikelihoodFitter ):
     >>> cgfit = ConjugateGradientFitter( x, gauss )
     >>> param = cgfit.fit( y )
     >>> print( len( param ) )
-    5
+    >>> 5
     >>> stdev = cgfit.stdevs
     >>> chisq = cgfit.chisq
     >>> scale = cgfit.scale                                 # noise scale
@@ -125,27 +125,27 @@ class ScipyFitter( MaxLikelihoodFitter ):
                             'L-BFGS-B' when the problem has limits
                             'BFGS' otherwise
             'CG'            Conjugate Gradient Method of Polak and Ribiere
-                            :ref:`(see here) <optimize.minimize-cg>`
+                            encapsulates `scipy.optimize.minimize-cg`
             'NELDER-MEAD'   Nelder Mead downhill simplex
-                            :ref:`(see here) <optimize.minimize-neldermead>`
+                            encapsulates `scipy.optimize.minimize-neldermead`
             'POWELL'        Powell's conjugate direction method
-                            :ref:`(see here) <optimize.minimize-powell>`
+                            encapsulates `scipy.optimize.minimize-powell`
             'BFGS'          Quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shannon
-                            :ref:`(see here) <optimize.minimize-bfgs>`
+                            encapsulates `scipy.optimize.minimize-bfgs`
             'NEWTON-CG'     Truncated Newton method
-                            :ref:`(see here) <optimize.minimize-newtoncg>`
+                            encapsulates `scipy.optimize.minimize-newtoncg`
             'L-BFGS-B'      Limited Memory Algorithm for Bound Constrained Optimization
-                            :ref:`(see here) <optimize.minimize-lbfgsb>`
+                            encapsulates `scipy.optimize.minimize-lbfgsb`
             'TNC'           Truncated Newton method with limits
-                            :ref:`(see here) <optimize.minimize-tnc>`
+                            encapsulates `scipy.optimize.minimize-tnc`
             'COBYLA'        Constrained Optimization BY Linear Approximation
-                            :ref:`(see here) <optimize.minimize-cobyla>`
+                            encapsulates `scipy.optimize.minimize-cobyla`
             'SLSQP'         Sequential Least Squares
-                            :ref:`(see here) <optimize.minimize-slsqp>`
+                            encapsulates `scipy.optimize.minimize-slsqp`
             'DOGLEG'        Dog-leg trust-region algorithm
-                            :ref:`(see here) <optimize.minimize-dogleg>`
+                            encapsulates `scipy.optimize.minimize-dogleg`
             'TRUST-NCG'     Newton conjugate gradient trust-region algorithm
-                            :ref:`(see here) <optimize.minimize-trustncg>`
+                            encapsulates `scipy.optimize.minimize-trustncg`
 
         gradient : bool or None or callable gradient( par )
             if True use gradient calculated from model. It is the default.
@@ -231,7 +231,7 @@ class ScipyFitter( MaxLikelihoodFitter ):
         if limits is not None and self.model.priors :
             try :
                 limits = ( self.model.lowLimits[fitIndex], self.model.highLimits[fitIndex] )
-            except :
+            except Exception :
                 limits = ( self.model.lowLimits, self.model.highLimits )
 
         if self.method is None:

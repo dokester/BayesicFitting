@@ -3,11 +3,11 @@ import numpy as numpy
 from .Kernel import Kernel
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "3.2.4"
+__url__ = "https://dokester.github.io/BayesicFitting/"
+__status__ = "Perpetual Beta"
 
 #  *
 #  *    This file is part of the BayesicFitting package.
@@ -27,8 +27,19 @@ __status__ = "Development"
 #  *    2017 - 2018 Do Kester
 
 class Tophat( Kernel ):
-    """
-    Tophat is a Kernel function which is 1.0 between [-0.5,0.5]; it is 0 elsewhere.
+    r"""
+    Tophat (without convolutions) is a Kernel function which is 1.0 
+    between [-0.5,0.5]; it is 0 elsewhere.
+
+    | Name      | Definition          | Integral  | FWHM | range | comment     |
+    |:----------|:--------------------|----------:|:----:|:-----:|:------------|
+    | Tophat 0  | 1.0                 |      1.0  | 1.00 |  0.5  | like Uniform|
+    | Tophat 1  | 1 - \|x\|           |      1.0  | 1.00 |  1.0  | aka Triangle|
+    | Tophat 2  | 2nd order polynomial|      1.0  | 1.26 |  1.5  |             |
+    | Tophat 3  | 3rd order polynomial|      1.0  | 1.44 |  2.0  |             |
+    | Tophat 4  | 4th order polynomial|      1.0  | 1.60 |  2.5  |             |
+    | Tophat 5  | 5th order polynomial|      1.0  | 1.73 |  3.0  |             |
+    | Tophat 6  | 6th order polynomial|      1.0  | 1.86 |  3.5  |             |
 
     Attributes
     ----------
@@ -37,7 +48,7 @@ class Tophat( Kernel ):
 
     Thanks to Romke Bontekoe and Mathematica for providing the analytic expressions.
 
-    """
+    r"""
     FWHM = [0.5, 0.5, 0.6339745962155612, 0.7223517244643762, 0.7971951696335494,
             0.8660920722545018, 0.9301994777857857]
     RANGE = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
@@ -49,6 +60,7 @@ class Tophat( Kernel ):
         Constructor.
 
         Integral, fwhm and range are dependent on the number of convolutions.
+        See table above.
 
         Parameters
         ----------
@@ -56,45 +68,58 @@ class Tophat( Kernel ):
             number of auto-convolutions
 
         """
-
-
         super( Tophat, self ).__init__( integral=self.INTEGRAL[nconv],
                         fwhm=2*self.FWHM[nconv], range=self.RANGE[nconv] )
         self.nconv = nconv
 
         if nconv == 0 :
-            self.conv = Conv0()
+            self.conv = _Conv0()
         elif nconv == 1 :
-            self.conv = Conv1()
+            self.conv = _Conv1()
         elif nconv == 2 :
-            self.conv = Conv2()
+            self.conv = _Conv2()
         elif nconv == 3 :
-            self.conv = Conv3()
+            self.conv = _Conv3()
         elif nconv == 4 :
-            self.conv = Conv4()
+            self.conv = _Conv4()
         elif nconv == 5 :
-            self.conv = Conv5()
+            self.conv = _Conv5()
         elif nconv == 6 :
-            self.conv = Conv6()
+            self.conv = _Conv6()
         else :
             raise ValueError( "Cannot handle more than 6 convolutions." )
 
     def result( self, x ):
+        """
+        Return the result for input values.
+
+        Parameters
+        ----------
+        x : array-like
+            input values
+        """
         return self.conv.result( x )
 
-    def resultsq( self, xsq ):
-        return self.result( xsq )                   #  the same
-
     def partial( self, x ):
+        """
+        Return the partial derivative wrt the input values.
+
+        Parameters
+        ----------
+        x : array-like
+            the input values
+        """
         return self.conv.partial( x )
 
     def isBound( self ):
+        """ Return True """
         return True
 
     def name( self ):
+        """ Return the name of the kernel """
         return str( "Tophat %d convolved" % self.nconv )
 
-class Conv0( object ) :
+class _Conv0( object ) :
     def result( self, x ) :
         ax = numpy.abs( x )
         return numpy.where( ax < 0.5, 1.0, numpy.where( ax == 0.5, 0.5, 0.0 ) )
@@ -102,7 +127,7 @@ class Conv0( object ) :
     def partial( self, x ):
         return numpy.zeros_like( x )
 
-class Conv1( object ) :
+class _Conv1( object ) :
     def result( self, x ) :
         ax = numpy.abs( x )
         return numpy.where( ax < 1.0, 1.0 - ax, 0.0 )
@@ -111,7 +136,7 @@ class Conv1( object ) :
         ax = numpy.abs( x )
         return numpy.where( ax < 1.0, - numpy.sign( x ), 0 )
 
-class Conv2( object ) :
+class _Conv2( object ) :
 
     def result( self, x ) :
         x = numpy.array( x, ndmin=1 )
@@ -149,7 +174,7 @@ class Conv2( object ) :
 
         return res
 
-class Conv3( object ) :
+class _Conv3( object ) :
     def result( self, x ) :
         x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
@@ -188,7 +213,7 @@ class Conv3( object ) :
 
         return res
 
-class Conv4( object ) :
+class _Conv4( object ) :
     def result( self, x ) :
         x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
@@ -231,7 +256,7 @@ class Conv4( object ) :
 
         return res
 
-class Conv5( object ) :
+class _Conv5( object ) :
     def result( self, x ) :
         x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )
@@ -276,7 +301,7 @@ class Conv5( object ) :
 
         return res
 
-class Conv6( object ) :
+class _Conv6( object ) :
     def result( self, x ) :
         x = numpy.array( x, ndmin=1 )
         ax = numpy.abs( x )

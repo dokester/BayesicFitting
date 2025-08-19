@@ -76,28 +76,23 @@ class Test( unittest.TestCase  ) :
             print( fmt( np ), fmt( logL ), fmt( pars ) )
             walker = Walker( k, problem, pars, None, logL=logL )
             phc.storeItems( walker )
-            self.assertTrue( np == phc.phantoms[np][0].problem.npars )
 
         printclass( phc )
 
-        for n in range( 3, 6 ) :
-            for k, ph in enumerate( phc.phantoms[n] ) :
-                print( fmt( n ), fmt( k ), fmt( ph.logL ), fmt( ph.allpars ) )
+        for k, ph in enumerate( phc.phantoms ) :
+            print( fmt( k ), fmt( ph.logL ), fmt( ph.allpars ) )
 
-#        lowL = min( [numpy.amin( ph.logL ) for ph in phc.phantoms] )
-        lowL = min( [numpy.amin( phc.phantoms[k].getLogL() ) for k in phc.phantoms.keys()] )
-        low0 = min( [phc.phantoms[k][0].logL for k in phc.phantoms.keys()] )
-
-        print( "low   ", lowL, low0 )
-        self.assertTrue( lowL == low0 )
+        for k in range( N-1 ) :
+            self.assertTrue( phc.phantoms[k].logL < phc.phantoms[k+1].logL )
 
         np = 5
+        lowL = phc.phantoms[0].logL
         ur, um = phc.getParamMinmax( lowL, np=np )
         print( "parange  ", fmt( ur ) )
         print( "parmin   ", fmt( um ) )
 
         for k in range( N, 2*N ) :
-            lowL = min( [phc.phantoms[k][0].logL for k in phc.phantoms.keys()] )
+            lowL = min( [ph.logL for ph in phc.phantoms] )
             np = numpy.random.randint( 3, high=6 )
             while True :
                 pars = numpy.random.randn( np ) * 30 / ( k + 1 )
@@ -117,16 +112,11 @@ class Test( unittest.TestCase  ) :
             else :
                 self.assertFalse( um is None )
 
-        for n in range( 3, 6 ) :
-            for k, ph in enumerate( phc.phantoms[n] ) :
-                print( fmt( n ), fmt( phc.phantoms[n]._count ), fmt( k ), fmt( ph.logL ), fmt( ph.allpars ) )
+        printclass( phc.phantoms[0] )
 
-        s = 0
-        for np in phc.phantoms :
-            s += phc.length( np )
-            print( np, phc.length( np ) )
-        print( phc.length() )        
-        self.assertTrue( s == phc.length() )
+        for k, ph in enumerate( phc.phantoms ) :
+            print( fmt( k ), fmt( ph.id ), fmt( ph.logL ), fmt( ph.allpars ) )
+
 
 if __name__ == '__main__':
     unittest.main( )

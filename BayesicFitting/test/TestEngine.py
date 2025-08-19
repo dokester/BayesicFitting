@@ -85,7 +85,7 @@ class TestEngine( unittest.TestCase ):
         wl = WalkerList( problem, 100, allpars, fi )
 
         phantoms = PhantomCollection()
-        engine = Engine( wl, errdis, phantoms=phantoms )
+        engine = Engine( wl, errdis, phancol=phantoms )
 
         self.enginetest( engine )
 
@@ -117,7 +117,8 @@ class TestEngine( unittest.TestCase ):
         print( engine.walkers[0] )
         print( engine.walkers[0].allpars )
 
-        ur, um = engine.getUnitRange( problem, lowL )
+        nap = engine.walkers[0].nap
+        ur, um = engine.getUnitRange( problem, lowL, nap )
 
         print( "UnitR ", ur )
 

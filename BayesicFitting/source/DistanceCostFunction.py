@@ -7,9 +7,9 @@ from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -28,7 +28,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2022 Do Kester
+#  *    2019 - 2025 Do Kester
 
 
 class DistanceCostFunction( ErrorDistribution ):

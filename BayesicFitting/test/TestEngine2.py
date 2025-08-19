@@ -113,7 +113,7 @@ class Test( unittest.TestCase ):
         v = [-500000,-100000,-50000,-10000,-5000, -3000, -1000, -500, -300, -200]
 
         trials = PhantomCollection( dynamic=m.isDynamic() )
-        engine = StartEngine( wl, errdis, phantoms=trials )
+        engine = StartEngine( wl, errdis, phancol=trials )
 #        Tools.printclass( engine.walkers[0] )
         for kw in range( len( engine.walkers ) ) :
             engine.execute( kw, -math.inf )
@@ -126,9 +126,11 @@ class Test( unittest.TestCase ):
             plt.plot( pevo[:,0], pevo[:,1], 'k.' )
 
         col = ['k-', 'r-', 'g-', 'b-']
-        engine = myengine( wl, errdis, phantoms=trials )
+        engine = myengine( wl, errdis, phancol=trials )
         if isinstance( engine, ChordEngine ) :
             engine.debug = True
+
+        nap = wl[0].nap
         for k in range( iter ) :
             if k == iter - 1 :
                 engine.verbose = 5
@@ -145,7 +147,7 @@ class Test( unittest.TestCase ):
             engine.execute( klo, lowL )
             p1 = wl[klo].allpars[:2]
             if k % 100 == 0 :
-                uran, umin = engine.getUnitRange( problem, lowL )
+                uran, umin = engine.getUnitRange( problem, lowL, nap )
                 print( k, klo, fmt(p1), fmt(wl[klo].logL), trials.length(),
                     uran, umin,  )
 

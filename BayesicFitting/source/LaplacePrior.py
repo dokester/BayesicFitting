@@ -5,9 +5,9 @@ import warnings
 from .Prior import Prior
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 202024 Do Kester
+#  *    2016 - 202025 Do Kester
 
 
 class LaplacePrior( Prior ):
@@ -46,10 +46,12 @@ class LaplacePrior( Prior ):
 
     Equivalent to a double-sided exponential prior
 
-    domain2unit: u = 0.5 * exp( ( d - c ) / scale )             if d < c
-                     1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise
-    unit2domain: d = c + log( 2 * u ) * scale                   if u < 0.5
-                     c - log( 2 * ( 1 - u ) ) * scale           otherwise
+    domain2unit: 
+     u = 0.5 * exp( ( d - c ) / scale )             if d < c
+         1.0 - 0.5 * exp( ( c - d ) / scale )       otherwise
+    unit2domain: 
+     d = c + log( 2 * u ) * scale                   if u < 0.5
+         c - log( 2 * ( 1 - u ) ) * scale           otherwise
 
     Examples
     --------
@@ -116,8 +118,8 @@ class LaplacePrior( Prior ):
         Return a value in [0,1] given a value within the valid domain of
         a parameter for a Laplace distribution.
 
-        domain2unit: u = 0.5 * exp( ( d - c ) / s ) if d < c else
-                         1.0 - 0.5 * exp( ( c - d ) / s )
+         u = 0.5 * exp( ( d - c ) / s )       if d < c else
+             1.0 - 0.5 * exp( ( c - d ) / s )
 
         Parameters
         ----------
@@ -139,8 +141,8 @@ class LaplacePrior( Prior ):
         Return a value within the valid domain of the parameter given a value
         between [0,1] for a Laplace distribution.
 
-        unit2domain: d = c + log( 2 * u ) * scale if u < 0.5 else
-                         c - log( 2 * ( 1 - u ) ) * scale;
+         d = c + log( 2 * u ) * scale           if u < 0.5 else
+             c - log( 2 * ( 1 - u ) ) * scale
 
         Parameters
         ----------

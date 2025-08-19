@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+from collections.abc import Iterable
 import numpy as numpy
 from numpy import ndarray
 from numpy import float64
@@ -7,9 +8,9 @@ from numpy import int64
 import math
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.7.2"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,10 +28,17 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2021 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
-gllen = 120
+# Module Formatter
+"""
+This module contains methods to format numbers, especially in arrays.
+
+"""
+
+
+gllen = 110
 gindent = 0
 gmax = 5
 fmt = { "float64" : " %8.3f", 
@@ -74,14 +82,14 @@ def formatter_init( format={}, indent=None, linelength=None, max=-1 ):
         gmax = max
 #    print( "init  ", gindent, gllen, gmax, fmt )
 
-def fma( array, **kwargs ) :
+def fma( erray, **kwargs ) :
     """
     Syntactic sugar for
         formatter( ..., max=None, ... )
     """
-    return formatter( array, max=None, **kwargs )
+    return formatter( erray, max=None, **kwargs )
 
-def formatter( array, format=None, indent=None, linelength=None, max=-1, tail=0 ) :
+def formatter( erray, format=None, indent=None, linelength=None, max=-1, tail=0 ) :
     """
     Format a number or an array nicely into a string
 
@@ -129,32 +137,37 @@ def formatter( array, format=None, indent=None, linelength=None, max=-1, tail=0 
     sp = 0
 #    print( count, nwl, sp, llen, indent, mx, fmt )
 
-    if not isinstance( array, ndarray ) :
-        array = numpy.asarray( array )
+    if not isinstance( erray, ndarray ) :
+        erray = numpy.asarray( erray )
 
     if format is None :
-        format = fmt[str(array.dtype)]
+        format = fmt[str(erray.dtype)]
 
     fmtlen = len( format % 1 )
 
     result = ""
-    result = recursive_format( result, array, format=format, indent=indent, tail=tail )
+    result = recursive_format( result, erray, format=format, indent=indent, tail=tail )
     return result
 
-def recursive_format( result, array, format=None, indent=0, tail=0 ) :
+def recursive_format( result, erray, format=None, indent=0, tail=0 ) :
     global count, nwl, sp, llen, fmtlen, mx, fmt
 
-    if array.size == 1 :
+    if erray.size == 1 :
         if count + fmtlen > llen :
             result += ( "\n%s" % spaces( sp + indent ) )
             count = indent
         if format is None :
-            format = fmt[array.__class__]
-        result += ( format % array )
+            format = fmt[erray.__class__]
+
+        ## Avoid DeprecationError from numpy.
+        erray = erray.item( 0 )
+
+        result += ( format % erray )
+
         count += fmtlen
         return result
 
-    shp = array.shape
+    shp = erray.shape
     if sp > 0 and nwl :
         result += ( "\n%s" % spaces( sp + indent ) )
     result += ( "[" )
@@ -162,7 +175,7 @@ def recursive_format( result, array, format=None, indent=0, tail=0 ) :
     sp += 1
     shp0 = shp[0] if mx is None else min( shp[0], mx )
     for k in range( shp0 ) :
-        result = recursive_format( result, array[k], format=format,
+        result = recursive_format( result, erray[k], format=format,
                                    indent=indent, tail=tail )
         nwl = True
     if mx is not None and shp[0] > mx :
@@ -174,7 +187,7 @@ def recursive_format( result, array, format=None, indent=0, tail=0 ) :
                 result += " ..."
         t = min( tail, shp[0] - mx )
         for k in range( -t, 0 ) :
-            result = recursive_format( result, array[k], format=format,
+            result = recursive_format( result, erray[k], format=format,
                                        indent=indent, tail=tail )
 
     result += ( "]"  )

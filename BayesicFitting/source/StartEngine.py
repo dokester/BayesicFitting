@@ -10,9 +10,9 @@ from .ErrorsInXandYProblem import ErrorsInXandYProblem
 from .ModelDistribution import ModelDistribution
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class StartEngine( Engine ):
     """
@@ -54,8 +54,13 @@ class StartEngine( Engine ):
     def __init__( self, walkers, errdis, copy=None, **kwargs ):
         """
         Constructor.
+
         Parameters
         ----------
+        walkers : WalkerList
+            list of walkers to be initiated
+        errdis : ErrorDistribution
+            error distribution to be used
         copy : StartEngine
             engine to be copied
 
@@ -76,8 +81,8 @@ class StartEngine( Engine ):
 
         Parameters
         ----------
-        walker : Sample
-            sample to diffuse
+        kw : int
+            index in the WalkerList
         lowLhood : float
             lower limit in logLikelihood
 
@@ -90,14 +95,18 @@ class StartEngine( Engine ):
         problem = walker.problem
         model = problem.model
         fitIndex = walker.fitIndex
-        allp = walker.allpars.copy()
+        ptry = walker.allpars.copy()
 
-        npar = len( allp )
+        nhyp = self.errdis.nphypar
+        npar = len( ptry ) - nhyp
         onp = problem.npars
 
         maxtrials = self.maxtrials
         if hasattr( self.errdis, "constrain" ) and callable( self.errdis.constrain ) :
             maxtrials *= 100
+
+        if self.verbose > 4 :
+            print( "Start   ", model.shortName(), fmt( model.npars ) )
 
         ktry = 0
         while True :
@@ -111,8 +120,6 @@ class StartEngine( Engine ):
                     off += model.npbase
                     model = model._next
 
-
-#                print( "SE   ", model.ncomp, model.maxComp, self.errdis )
                 npbase = model.npbase
                 ## Grow the dynamic model a number of times according to growPrior
                 while ( model.ncomp < model.growPrior.unit2Domain( self.rng.rand() ) and
@@ -123,36 +130,33 @@ class StartEngine( Engine ):
                     npbase = model.npbase
                     np0 = np1
 
-                allp = numpy.zeros( npar + np0 - onp, dtype=float )
+                if self.verbose > 4 :
+                    print( "Dyn  ", model.ncomp, model.npars )
+                    print( fmt( fitIndex, max=None ) )
+
+
+                ptry = numpy.zeros( npar + np0 - onp, dtype=float )
+                if nhyp > 0 :
+                    ptry = numpy.append( ptry, walker.allpars[-nhyp:] )
 
             uval = self.rng.rand( len( fitIndex ) )
 
-#            print( "SE FI  ", fitIndex )
-#            print( allp.__class__, fitIndex.__class__ )
+            ptry[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
 
-            allp[fitIndex] = self.unit2Domain( problem, uval, kpar=fitIndex )
+            logL = self.errdis.logLikelihood( problem, ptry )
 
-            logL = self.errdis.logLikelihood( problem, allp )
+            if self.verbose > 4 :
+                print( fmt( ptry, max=None ) )
+                print( "logL   ", fmt( logL ) )
 
-#            print( "SE 2  ", fmt( logL ) )
-
-            if numpy.isfinite( logL ) :
+            if math.isfinite( logL ) :
                 break
             elif ktry > ( maxtrials + walker.id ) :
                 raise RuntimeError( "Cannot find valid starting solutions at walker %d" % walker.id )
             else :
                 ktry += 1
 
-        self.setWalker( walker.id, problem, allp, logL, fitIndex=fitIndex )
-
-        wlkr = self.walkers[walker.id]
-#        print( walker.id, wlkr.id, wlkr.problem.model.npars, len( wlkr.allpars ), fmt( wlkr.logL ) )
-
-        nhyp = self.errdis.nphypar 
-        
-        nuisance = len( problem.xdata ) if isinstance( problem, ErrorsInXandYProblem ) else 0
-
-        wlkr.check( nhyp=nhyp, nuisance=nuisance )
+        self.setWalker( walker.id, problem, ptry, logL, fitIndex=fitIndex )
 
         return len( fitIndex )
 

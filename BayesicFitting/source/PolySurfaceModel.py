@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,13 +31,13 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2022 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class PolySurfaceModel( LinearModel ):
     """
     General polynomial surface model of arbitrary degree.
 
-        f( x,y:p ) = &sum;_d &sum;_k p_n * x^{d-k} * y^k )
+     f( x,y:p ) = &sum;_d &sum;_k p_n * x^{d-k} * y^k )
 
     where the first sum is over d running from 0 to degree ( inclusive )
     and the second sum is over k running from 0 to d ( inclusive ).
@@ -47,8 +47,8 @@ class PolySurfaceModel( LinearModel ):
 
     Examples
     --------
-    poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
-    print poly.getNumberOfParameters( )        # 10
+    >>> poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
+    >>> print poly.getNumberOfParameters( )        # 10
 
     Author      Do Kester
 
@@ -75,13 +75,14 @@ class PolySurfaceModel( LinearModel ):
         """
         Polynominal surface of a certain degree. Two dimensions.
 
-        degree      polysurface
-          0         p_0
-          1         p_0 + p_1 * x + p_2 * y
-          2         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2
-          3         p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 +
-                        p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3
-        etc.
+        | degree |  polysurface                                               |
+        |:------:|:-----------------------------------------------------------|
+        | 0 | p_0                                                             |
+        | 1 | p_0 + p_1 * x + p_2 * y                                         |
+        | 2 | p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2   |
+        | 3 | p_0 + p_1 * x + p_2 * y + p_3 * x^2 + p_4 * x * y + p_5 * y^2 + |
+        |   |        p_6 * x^3 + p_7 * x^2 * y + p_8 * x * y^2 + p_9 * y^3    |
+        |etc|                                                                 |
 
         The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 
@@ -162,17 +163,19 @@ class PolySurfaceModel( LinearModel ):
         """
         Return the derivative df/dx at each input (=x).
 
-        degree      df/dx
-          0         0
-          1         p_1
-          2         p_1 + 2 * p_3 * x + p_4 * y
-          3         p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2
+        | degree | df/dx |
+        |:------:|:------|
+        | 0 | 0          |
+        | 1 | p_1        |
+        | 2 | p_1 + 2 * p_3 * x + p_4 * y |
+        | 3 | p_1 + 2 * p_3 * x + p_4 * y + 3 * p_6 * x^2 + 2 * p_7 * x * y + p_8 * y^2 |
 
-        degree      df/dy
-          0         0
-          1         p_2
-          2         p_2 + p_4 * x + 2 * p_5 * y
-          3         p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2
+        | degree | df/dy |
+        |:------:|:------|
+        | 0 | 0          |
+        | 1 | p_2        | 
+        | 2 | p_2 + p_4 * x + 2 * p_5 * y |
+        | 3 | p_2 + p_4 * x + 2 * p_5 * y + p_7 * x^2 + 2 * p_8 * x * y + 3 * p_9 * y^2 |
 
 
         Parameters

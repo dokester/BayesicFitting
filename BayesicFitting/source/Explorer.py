@@ -2,13 +2,14 @@ import numpy as numpy
 from threading import Thread
 
 from .Engine import Engine
+from .ModelDistribution import ModelDistribution
 from .Formatter import formatter as fmt
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 threadErrors = []
@@ -87,7 +88,9 @@ class Explorer( object ):
         self.maxtrials = ns.maxtrials
         self.verbose = ns.verbose
         self.threads = threads
-        self.usePhantoms = hasattr( ns, "usePhantoms" ) and ns.usePhantoms
+        self.usePhantoms = ns.usePhantoms
+
+        self.unitSize = ns.unitDomain
 
         self.selectEngines = self.allEngines    ## default: always use all engines
         for eng in self.engines :
@@ -167,25 +170,31 @@ class Explorer( object ):
 
         self.errdis.lowLhood = lowLhood
 
-        maxmoves = len( walker.allpars ) / self.rate
+        npars = len( walker.allpars ) 
+        maxmoves = npars / self.rate
         maxtrials = self.maxtrials / self.rate
+#        minTripSq = self.unitSize()
+#        minTripSq *= len( walker.fitIndex ) ##  * minTripSq
 
         moves = 0
         trials = 0
+#        tripSq = 0
 
         while moves < maxmoves and trials < maxtrials :
 
             for engine in rng.permutation( engines ) :
-                mv = engine.execute( kw, lowLhood, append=self.usePhantoms, 
-                                     iteration=self.iteration )
+                mv = engine.execute( kw, lowLhood, iteration=self.iteration )
                 moves += mv
+#                tripSq += engine.tripSq
 
-                update = len( self.walkers ) - 1 if self.usePhantoms else kw
+#                if isinstance( self.errdis, ModelDistribution ) :
+#                    print( "%3d  %-15.15s %3d %3d %3d %3d %3d" % 
+#                           ( kw, engine, mv, moves, maxmoves, trials, maxtrials ) )
 
                 if self.verbose >= 4 and mv > 0 :
-                    wlkr = self.walkers[update]
+                    wlkr = self.walkers[kw]
                     print( "%4d %-15.15s %4d %10.3f %10.3f ==> %3d  %10.3f"%
-                            ( trials, engine, update, lowLhood, oldlogL, moves,
+                            ( trials, engine, kw, lowLhood, oldlogL, moves,
                                 wlkr.logL ) )
                     print( "IN       ", fmt( walker.allpars, max=None, linelength=200 ), len( walker.allpars ) )
                     print( "OUT      ", fmt( wlkr.allpars, max=None, linelength=200 ), len( wlkr.allpars ) )
@@ -195,16 +204,23 @@ class Explorer( object ):
                             ( len( wlkr.allpars ), len( wlkr.fitIndex ) ) )
                     oldlogL = wlkr.logL
 
-                    ## check all walkers for consistency
-                    self.logLcheck( walker )
+                    ## check walker for consistency
+                    walker.check( self.errdis )
 
             trials += 1
 
-        if moves == 0 :
-            self.logLcheck( self.walkers[kw] )
+#        if self.iteration % 100 == -1 :
+#            ur2 = engine.unitTripSquare( engine.urange[walker.fitIndex] )
+#            print( "Remaining  %#10.3g  %#10.3g %#10.3g   trip  %#10.3g  ratio   %#10.3g %#10.3g" % 
+#                ( minTripSq, numpy.power( 0.99, self.iteration ) * 5, ur2, tripSq, tripSq/minTripSq, tripSq/ur2 ) )
 
-        if self.walkers[update].logL < lowLhood :
+
+        if moves == 0 :
+            self.walkers[kw].check( self.errdis )
+
+        if self.walkers[kw].logL < lowLhood :
             raise Exception( "%10.3f < %10.3f" % ( self.walkers[kw].logL, lowLhood )  )
+
 
         return
 
@@ -236,47 +252,10 @@ class Explorer( object ):
         return self.engines
 
     def checkWalkers( self ) :
+        """ Perform sanity check on all walkers. """
         for w in self.walkers :
-            self.logLcheck( w )
+            w.check( self.errdis )
 
-
-    def logLcheck( self, walker ) :
-        """
-        Sanity check when no moves are found, if the LogL is still the same as the stored logL.
-
-        Parameters
-        ----------
-        walker : Walker
-            the one with the stored logL
-
-        Raises
-        ------
-        ValueError at inconsistency.
-
-        """
-        walker.check( nhyp=self.errdis.nphypar )
-
-        wlogL = self.errdis.logLikelihood( walker.problem, walker.allpars )
-        if walker.problem.model.npars < len( walker.allpars ) - self.errdis.nphypar :
-            Tools.printclass( walker )
-            print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, walker.id, walker.logL, wlogL ) )
-            print( fmt( walker.allpars, max=None ) )
-            raise ValueError( "Inconsistency in length of modelparams (%d) and allpars (%d - %d)" %
-                                ( walker.problem.model.npars, len( walker.allpars ), self.errdis.nphypar ) )
-
-        if wlogL != walker.logL :
-            Tools.printclass( walker )
-            print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, walker.id, walker.logL, wlogL ) )
-            print( fmt( walker.allpars, max=None ) )
-            raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
-                                ( walker.logL, wlogL ) )
-
-        for ki in walker.fitIndex :
-#            if walker.fitIndex[ki] >= 0 :
-            if ki < 0 :
-                self.errdis.hyperpar[ki].prior.checkLimit( walker.allpars[ki] )
-            elif ki < walker.problem.model.npars :
-                walker.problem.model.getPrior( ki ).checkLimit( walker.allpars[ki] )
 
 
 class ExplorerThread( Thread ):

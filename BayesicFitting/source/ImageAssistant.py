@@ -4,9 +4,9 @@ import math
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2006 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class ImageAssistant( object ):
@@ -42,26 +42,22 @@ class ImageAssistant( object ):
     2. resizeData Resizes the data arrays into a 1-dimensional array.
        To be used as data in the Fitter.
 
-
-
-
     Example
     -------
     >>> ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
     >>> ias = ImageAssistant()
     >>> ky = ias.getIndices( ymap )
     >>> print( ky.shape )
-        (6,2)
+    >>> (6,2)
     >>> print( ky[4,0], ky[4,1], ymap[ ky[4,0], ky[4,1] ] )
-        1 0 4
+    >>> 1 0 4
     >>> ias = ImageAssistant( order='F')
     >>> ky = ias.getIndices( ymap )
     >>> print( ky.shape )
-        (6,2)
+    >>> (6,2)
     >>> print( ky[4,0], ky[4,1], ymap[ ky[4,1], ky[4,0] ] )
-        0 1 4
-
-    ## Suppose y is a 2-dimensional map of something
+    >>> 0 1 4
+    >>> ## Suppose y is a 2-dimensional map of something
     >>> aass = ImageAssistant( )
     >>> input = aass.getIndices( y )
     >>> fitter = Fitter( input, some2dModel )

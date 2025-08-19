@@ -12,9 +12,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Tophat import Tophat
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.7.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2021 Do Kester
+#  *    2020 - 2025 Do Kester
 
 class BasicSplinesModel( SplinesModel ):
     """
@@ -42,12 +42,13 @@ class BasicSplinesModel( SplinesModel ):
     between 2 knots. At the knots they are continuous (differentiable) upto order - 1.
     Similarly the edges of the blobs are smoothly connected to 0.
 
-    order   support behaviour between knots     continuity at knots
-      0        1    piecewise constant          not continuous at all
-      1        2    piecewise linear            lines are continuous (connected)
-      2        3    parabolic pieces            1st derivatives are also continuous
-      3        4    cubic pieces                2nd derivatives are also continuous
-     n>3      n+1   n-th order polynomials      (n-1)-th derivatives are also continuous
+    |order |support| behaviour between knots | continuity at knots                |
+    |:----:|:-----:|:------------------------|:-----------------------------------|
+    |  0   |   1   | piecewise constant      | not continuous at all              |
+    |  1   |   2   | piecewise linear        | lines are continuous (connected)   |
+    |  2   |   3   | parabolic pieces        | 1st derivatives are also continuous|
+    |  3   |   4   | cubic pieces            | 2nd derivatives are also continuous|
+    | n>3  |  n+1  | n-th order polynomials  | (n-1)-th derivatives are continuous|
 
     The function result is the sum over all spline blobs, multiplied with
     the parameters, the amplitudes of the spline blobs.
@@ -75,17 +76,17 @@ class BasicSplinesModel( SplinesModel ):
     >>> knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     >>> csm = BasicSplinesModel( knots=knots, order=2 )
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
-    # or alternatively:
+    >>> 18
+    >>> # or alternatively:
     >>> npt = 161                                               # to include both 0 and 160.
     >>> x = numpy.arange( npt, dtype=float )                    # x-values
     >>> csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    18
+    >>> 18
 
     Attributes
     ----------
@@ -250,7 +251,6 @@ class BasicSplinesModel( SplinesModel ):
 
         np = self.order + 1
         nk = len( self.knots )
-        nh = ( np + 1 ) // 2
 
         basis = numpy.zeros( (nk-1,np,self.npmax), dtype=float )
 
@@ -348,14 +348,12 @@ class BasicSplinesModel( SplinesModel ):
         par : 2-d array
             sets of poly parameters.
         """
-        lo = knotix[0]
         hi = knotix[-1] + 1
 
         knots = self.knots
         order = self.order
         k0 = order + 1
         np = ( len( knotix ) - 1 ) * k0
-        nk = len( knots )
 
         mat = numpy.zeros( ( np, np ), dtype=float )
         kdf = numpy.arange( k0, dtype=int )
@@ -419,12 +417,6 @@ class BasicSplinesModel( SplinesModel ):
             n += 1
             k += 1
 
-        """
-        ## more normalization
-        if kpar > 0 :
-            mat[-1,-1] = 1.0             ## at right normalize to 1.0
-
-        """
         if kpar > 0 :
             if len( knotix ) == 2 :
                 cc = ( ( np - kpar ) * knots[0] + kpar * knots[1] ) / np
@@ -460,9 +452,6 @@ class BasicSplinesModel( SplinesModel ):
             parameters to the model (ignored in LinearModels)
 
         """
-        np = self.npmax
-        na = self.order + 1
-
         x2k = self.makeKnotIndices( xdata )
 
         pa = numpy.inner( self.basis, params )
@@ -504,14 +493,6 @@ class BasicSplinesModel( SplinesModel ):
             partial[:,k] = self.basicBlob( xdata, bss, x2k, self.poly )
 
         return partial
-
-        """
-        for kb in range( np ) :
-            bss = self.basis[:,:,kb]
-            partial[:,kb] = self.basicBlob( xdata, bss, x2k, self.poly )
-
-        return partial
-        """
 
     def makeKnotIndices( self, xdata ) :
         """

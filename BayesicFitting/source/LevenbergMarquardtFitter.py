@@ -8,9 +8,9 @@ from .ConvergenceError import ConvergenceError
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class LevenbergMarquardtFitter( IterativeFitter ):
@@ -52,13 +52,13 @@ class LevenbergMarquardtFitter( IterativeFitter ):
 
     Examples
     --------
-    # assume x and y are Double1d data arrays:
+    >>> # assume x and y are Double1d data arrays:
     >>> x = numpy.arange( 100, dtype=float ) / 10
     >>> y = numpy.arange( 100, dtype=float ) / 122            # make slope
     >>> rg = RandomGauss( seed=12345L )            # Gaussian random number generator
     >>> y += rg( numpy.asarray( 100, dtype=float ) ) * 0.2            # add noise
     >>> y[Range( 9,12 )] += numpy.asarray( [5,10,7], dtype=float )         # make some peak
-    # define a model: GaussModel + background polynomial
+    >>> # define a model: GaussModel + background polynomial
     >>> gauss = GaussModel( )                            # Gaussian
     >>> gauss += PolynomialModel( 1 )                    # add linear background
     >>> gauss.setParameters( numpy.asarray( [1,1,0.1,0,0], dtype=float ) )    # initial parameter guess
@@ -72,7 +72,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
     >>> scale = lmfit.getScale( )                         # noise scale
     >>> yfit  = lmfit.getResult( )                        # fitted values
     >>> yband = lmfit.monteCarloError( )                       # 1 sigma confidence region
-    # for diagnostics ( or just for fun )
+    >>> # for diagnostics ( or just for fun )
     >>> lmfit = LevenbergMarquardtFitter( x, gauss )
     >>> lmfit.setVerbose( 2 )                             # report every 100th iteration
     >>> plotter = IterationPlotter( )                     # from BayesicFitting

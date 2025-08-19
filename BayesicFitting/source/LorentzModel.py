@@ -4,9 +4,9 @@ from . import Tools
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -34,9 +34,9 @@ class LorentzModel( NonLinearModel ):
     """
     Lorentzian Model.
 
-        f( x:p ) = p_0 * ( p_2^2 / ( ( x - p_1 )^2 + p_2^2 )
+     f( x:p ) = p_0 * ( p_2^2 / ( ( x - p_1 )^2 + p_2^2 )
 
-    where
+     where
         p_0 = amplitude
         p_1 = x-shift
         p_2 = gamma ( width )
@@ -50,29 +50,26 @@ class LorentzModel( NonLinearModel ):
     Notes
     -----
     There are other possible definitions of this model, where the integral equals 1.0.
-    http://en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function
+    @http://en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function
 
     Definitions that integrate to 1.0 are more fit as a distribution function.
     See sample/CauchyErrorDistribution.
 
     We choose our definition for 2 reasons.
     1. to be in line with the definitions of the GaussModel, SincModel,
-        VoigtModel, all KernelModels etc. In all of them the amplitude parameter,
-        p_0, equals the maximum of the function. I.e. p_0 is indeed the amplitude.
+    VoigtModel, all KernelModels etc. In all of them the amplitude parameter,
+    p_0, equals the maximum of the function. 
+    I.e. p_0 is indeed the amplitude.
     2. to have maximally independent parameters, meaning that if you change one
-        parameter, only that aspect changes. In the present definition this is the case.
-        In the alternative definition if you change p_2, not only the width
-        of the function changes, but also the amplitude.
+    parameter, only that aspect changes. In the present definition this is the case.
+    In the alternative definition if you change p_2, not only the width
+    of the function changes, but also the amplitude.
 
     Examples
     --------
     >>> lorentz = LorentzModel( )
     >>> lorentz.setParameters( [5, 4, 1] )
     >>> print( lorentz( numpy.arange(  41 , dtype=float ) / 5 ) )
-
-    Attributes
-    ----------
-        none in this model
 
     Attributes from Model
     ---------------------

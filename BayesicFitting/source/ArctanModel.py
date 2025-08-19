@@ -4,9 +4,9 @@ from . import Tools
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,18 +28,20 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2007 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class ArctanModel( NonLinearModel ):
     """
     Arctangus Model.
 
         f( x:p ) = p_0 * arctan( p_2 * ( x - p_1 ) )
-        p_0 = amplitude;  p_1 = center; p_2 = slope.
+            p_0 = amplitude  
+            p_1 = center 
+            p_2 = slope.
 
     As always x = input.
 
-    The parameters are initialized at {2/pi, 0.0, 1.0}. It is a non-linear model.
+    The parameters are initialized at [2/pi, 0.0, 1.0]. It is a non-linear model.
 
     Attributes from Model
     --------------------------
@@ -57,7 +59,7 @@ class ArctanModel( NonLinearModel ):
     -------
     >>> arct = ArctanModel( )
     >>> print( arct.getNumberOfParameters( ) )
-    3
+    >>> 3
 
 
     Author:      Do Kester

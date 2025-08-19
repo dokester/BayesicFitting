@@ -15,9 +15,9 @@ from .Tools import setAttribute as setatt
 
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +37,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2024 Do Kester
+#  *    2019 - 2025 Do Kester
 
 
 class ModelDistribution( ScaledErrorDistribution ):
@@ -134,7 +134,7 @@ class ModelDistribution( ScaledErrorDistribution ):
         try :
             noiselim = self.hyperpar[0].getLimits()
             fscale = None
-        except :
+        except Exception :
             noiselim = None
             fscale = self.scale
 
@@ -168,24 +168,32 @@ class ModelDistribution( ScaledErrorDistribution ):
             elif name.startswith( "amoeba" ) :
                 ftr = AmoebaFitter( problem.xdata, mdl, fixedScale=fscale, **kwarbs )
 
-            elif name.startswith( "nested" ) :
-
-                ## Import NestedSampler here to avoid circular imports
-                from .NestedSampler import NestedSampler
-                ######################################################
-
+            else :
                 ## we need a static version of the model
                 model = mdl.copy( modifiable=False, dynamic=False )
 
                 ## add items to kwarbs if not already present
-                if not "ensemble" in kwarbs :
+                if "ensemble" not in kwarbs :
                     kwarbs["ensemble"] = 10
-                if not "verbose" in kwarbs :
+                if "verbose" not in kwarbs :
                     kwarbs["verbose"] = 0
-                if not "engines" in kwarbs :
-                    kwarbs["engines"] = ["chord", "step"]
-                ns = NestedSampler( model=model, xdata=problem.xdata, ydata=problem.ydata,
+                if "engines" not in kwarbs :
+                    kwarbs["engines"] = ["chord", "galilean"]
+
+                if name.startswith( "nested" ) :
+                    ## Import NestedSampler here to avoid circular imports
+                    from .NestedSampler import NestedSampler
+                    ######################################################
+                    ns = NestedSampler( model=model, xdata=problem.xdata, ydata=problem.ydata,
                         weights=problem.weights, limits=noiselim, **kwarbs )
+                elif name.startswith( "phantom" ) :
+                    ## Import PhantomSampler here to avoid circular imports
+                    from .PhantomSampler import PhantomSampler
+                    ######################################################
+                    ns = PhantomSampler( model=model, xdata=problem.xdata, ydata=problem.ydata,
+                        weights=problem.weights, limits=noiselim, **kwarbs )
+                else :
+                    raise ValueError( "Cannot interpret %s" % self.arbiter )
 
                 try :
                     evidence = ns.sample()
@@ -194,15 +202,17 @@ class ModelDistribution( ScaledErrorDistribution ):
                         allpars[-1] = ns.scale
                 except RuntimeError :
                     evidence = -math.inf
+
                 return evidence
 
-            else :
-                raise ValueError( "Cannot interpret %s" % self.arbiter )
 
-#        print( "MD Fitr    ", ftr ) 
-
+        ## Run the fitters
         try :
             pars = ftr.fit( problem.ydata )
+
+            for k,p in enumerate( pars ) :
+                mdl.getPrior( k ).checkLimit( p )
+
             evidence = ftr.getLogZ( limits=mdl.getLimits(), noiseLimits=noiselim )
 
             allpars[:mdl.npars] = pars
@@ -212,9 +222,9 @@ class ModelDistribution( ScaledErrorDistribution ):
 #            print( problem.npars, mdl.npars, noiselim, ftr.scale, allpars )
 
         except numpy.linalg.LinAlgError :
-            evidence = - sys.float_info.max
-        except ValueError :                         # math domain error
-            evidence = - sys.float_info.max
+            evidence = -sys.float_info.max
+        except ValueError :                         # math domain error or OOL
+            evidence = -sys.float_info.max
 
 
         return evidence

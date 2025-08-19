@@ -6,9 +6,9 @@ from .Tools import setAttribute as setatt
 from .Tools import printclass
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.2"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2024 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class Prior( object ):
     """
@@ -47,9 +47,11 @@ class Prior( object ):
 
     d is a value in the domain of the prior and u is a vlue in [0,1]
 
-    The handling of limits is relegated to this Prior class. Define
-        _umin = domain2Unit( lowLimit )
-        _urng = domain2Unit( highLimit ) - umin
+    The handling of limits is relegated to this Prior class. 
+
+     Define
+        umin = domain2Unit( lowLimit )
+        urange = domain2Unit( highLimit ) - umin
 
         u = ( domain2Unit( d ) - umin ) / urange
         d = unit2Domain( u * urange + umin )

@@ -7,9 +7,9 @@ from .PolynomialModel import PolynomialModel
 from .PolySurfaceModel import PolySurfaceModel
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,13 +32,13 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2024 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class ConstantModel( Model ):
     """
     ConstantModel is a Model which does not have any parameters.
 
-        f( x:p ) = f( x )
+     f( x:p ) = f( x )
 
     As such it is irrelevant whether it is linear or not.
     It has 0 params and returns a 0 for its partials.
@@ -81,9 +81,7 @@ class ConstantModel( Model ):
 
     >>> model = ConstantModel( values=1.0 )
     >>> model.addModel( ExpModel( ) )
-
-    To make a model that returns a fixed cosine of frequency 5
-
+    >>> ## To make a model that returns a fixed cosine of frequency 5
     >>> model = ConstantModel( fixedModel=SineModel(), values=[1.0,0.0,5.0] )
 
     """

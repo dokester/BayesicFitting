@@ -7,9 +7,9 @@ from .NonLinearModel import NonLinearModel
 from .Kepplers2ndLaw import Kepplers2ndLaw
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,24 +28,26 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2025 Do Kester
 
 class RadialVelocityModel( NonLinearModel ) :
     """
     Model for the radial velocity variations of a star caused by a orbiting planet.
 
-    p_0 : eccentricity of the elliptic orbit (0<e<1; 0 = circular orbit)
-    p_1 : amplitude    of the velocity variation (>0)
-    p_2 : period       of the velocity variation (>0)
-    p_3 : phase        phase of periastron (0<p<2pi)
-    p_4 : periastron   longitude of periastron (0<p<2pi)
+    | par | symbol | name         | description               | limits    | comment      |
+    |-----|--------|--------------|---------------------------|-----------|--------------|
+    | p_0 |   e    | eccentricity | of the elliptic orbit     | 0<e<1     | 0 = circular |
+    | p_1 |   a    | amplitude    | of the velocity variation |   a>0     |  | 
+    | p_2 |   P    | period       | of the velocity variation |   P>0     |  |
+    | p_3 |   T    | phase        | phase since periastron    | 0<T<2&pi; |  |
+    | p_4 | &omega;| periastron   | longitude of periastron   | 0<&omega;<2&pi; |  |
 
     This class uses @Kepplers2ndLaw to find radius and true anomaly.
 
     Note:
     The velocity of the star system is not included in this model. See example.
 
-    The parameters are initialized at {0.0, 1.0, 1.0, 0.0, 0.0}.
+    The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0].
     It is a non-linear model.
 
     Attributes
@@ -57,7 +59,7 @@ class RadialVelocityModel( NonLinearModel ) :
     --------
     >>> rv = RadialVelocityModel( )
     >>> print( rv.npars )
-    5
+    >>> 5
     >>> rv += PolynomialModel( 0 )          # add a constant system velocity
 
     """
@@ -150,11 +152,11 @@ class RadialVelocityModel( NonLinearModel ) :
 
         f(x:p) = p_1 * ( cos( v + p_4 ) + p_0 * cos( p_4 ) )
 
-        df/dp_0 = p_1 * ( - sin( v + p_4 ) dv/dp_0 + cos( p_4 ) )
-        df/dp_1 = cos( v + p_4 ) + p_0 * cos( p_4 )
-        df/dp_2 = - p_1 * sin( v + p_4 ) dv/dp_2
-        df/dp_3 = - p_1 * sin( v + p_4 ) dv/dp_3
-        df/dp_4 = - p_1 * ( sin( v + p_4 ) + p_0 * sin( p_4 ) )
+         df/dp_0 = p_1 * ( - sin( v + p_4 ) dv/dp_0 + cos( p_4 ) )
+         df/dp_1 = cos( v + p_4 ) + p_0 * cos( p_4 )
+         df/dp_2 = - p_1 * sin( v + p_4 ) dv/dp_2
+         df/dp_3 = - p_1 * sin( v + p_4 ) dv/dp_3
+         df/dp_4 = - p_1 * ( sin( v + p_4 ) + p_0 * sin( p_4 ) )
 
         Parameters
         ----------

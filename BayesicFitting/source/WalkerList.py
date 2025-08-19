@@ -3,12 +3,13 @@ from astropy import units
 import math
 from . import Tools
 from .Tools import setAttribute as setatt
+from .Formatter import formatter as fmt
 from .Walker import Walker
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class WalkerList( list ):
@@ -76,7 +77,7 @@ class WalkerList( list ):
         walkerlist : Walkerlist or None
             walkerlist to be incorporated.
         """
-        if not walkerlist is None :
+        if walkerlist is not None :
             super( WalkerList, self ).__init__( walkerlist )
             self._count = len( walkerlist )
             return
@@ -111,11 +112,9 @@ class WalkerList( list ):
         index : int
             the index at which to set
         """
-#        print( "setWalker  ", id( self ), len( self ), walker.id, index )
 
         if index < len( self ) :
             self[index] = walker
-
         else :
             walker.id = self._count
             self._count += 1
@@ -199,6 +198,14 @@ class WalkerList( list ):
 
         return self
 
+    def printwlogl( self, wlkrs, klow ) :
+        print( fmt( klow ), fmt( len( wlkrs ) ) )
+        for k,w in enumerate( wlkrs ) :
+            print( fmt( w.logL ), end="" )
+            if (k % 10 ) == 9 : print()
+        print()
+
+
     def cropOnLow( self, lowL ) :
         """
         Return WalkerList with all LogL > lowL
@@ -231,7 +238,7 @@ class WalkerList( list ):
         return walker.logL
 
 
-    def allPars( self ):
+    def allPars( self, npars=None ):
         """
         Return a 2d array of all parameters.
 
@@ -245,11 +252,16 @@ class WalkerList( list ):
             the parameter to be selected. Default: all
 
         """
-        nap = max( [len( w.allpars ) for w in self] )
-
-        pe = numpy.zeros( ( len( self ), nap ), dtype=float )
-        for k, walker in enumerate( self ) :
-            pe[k,:len( walker.allpars )] = walker.allpars
+        if npars is None :
+            pe = numpy.zeros( ( len( self ), self[0].nap ), dtype=float )
+            for k, walker in enumerate( self ) :
+                pe[k,:] = walker.allpars
+            return pe
+        
+        indx = [k for k,w in enumerate( self ) if w.nap == npars]
+        pe = numpy.zeros( ( len( indx ), npars ), dtype=float )
+        for k, i in enumerate( indx ) :
+            pe[k,:] = self[i].allpars
 
         return pe
 

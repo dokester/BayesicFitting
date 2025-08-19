@@ -5,9 +5,9 @@ from . import Tools
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,20 +30,20 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2004 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2020 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class PowerLawModel( NonLinearModel ):
     """
     General powerlaw model of arbitrary degree.
 
-        f( x:p ) = p_0 * ( x - p_1 )^p_2
+        f( x:p ) = p_0 * ( x - p_1 )^{p_2}
 
     with
         p_0 = amplitide
         p_1 = x-shift
         p_2 = power
 
-    The parameters are initialized at {1.0, 0.0, 1.0}.
+    The parameters are initialized at [1.0, 0.0, 1.0].
 
     Note that the term ( x - p_1 ) needs to be divided by a factor 1.0
     in the same units as the x, to get the overall units of f( x:p ) right.
@@ -53,7 +53,7 @@ class PowerLawModel( NonLinearModel ):
     --------
     >>> pl = PowerLawModel( )
     >>> print( pl.npchain )
-    4
+    >>> 4
 
     Attributes
     ----------

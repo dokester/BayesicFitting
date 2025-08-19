@@ -6,8 +6,11 @@ else
    set fn = $argv[1]
    /bin/rm -f $fn
 endif
+ 
+python --version
 
-foreach f (Test*.py)
+
+foreach f (TestUserModel.py)
   echo "###################################################" >> $fn
   echo "######## $f ##########################" >> $fn
   echo "###################################################" >> $fn

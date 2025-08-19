@@ -4,11 +4,11 @@ import math
 from .Kernel import Kernel
 
 __author__ = "Do Kester"
-__year__ = 2017
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "0.9"
-__maintainer__ = "Do"
-__status__ = "Development"
+__version__ = "3.2.4"
+__url__ = "https://dokester.github.io/BayesicFitting/"
+__status__ = "Perpetual Beta"
 
 #  *
 #  *    This file is part of the BayesicFitting package.
@@ -29,7 +29,7 @@ __status__ = "Development"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2017 Do Kester
+#  *    2016 - 2025 Do Kester
 
 
 
@@ -37,7 +37,7 @@ class Sinc( Kernel ):
     """
     Sinc is an unbound Kernel function.
 
-        f( x ) = sin( x ) / x.
+     K( x ) = sin( &pi; x ) / ( &pi; x )
 
     Sinc is not strictly positive.
 
@@ -46,27 +46,45 @@ class Sinc( Kernel ):
         """
         Constructor.
 
-        Using
-            integral = 1.0
-            fwhm = 2 * 1.8954942670 / &pi;
-            range = inf
+         Using
+         integral = 1.0
+         fwhm = 2 * 1.8954942670 / &pi;
+         range = inf
         """
         super( Sinc, self ).__init__( integral=1.0, fwhm=2 * 1.8954942670 / math.pi,
                                       range=math.inf )
 
     def result( self, x ):
-        xp = numpy.where( x == 0, 1.0, x * math.pi )
+        """
+        Return the result for input values.
+
+        Parameters
+        ----------
+        x : array-like
+            input values
+        """
+        xp = x * math.pi
         return numpy.where( x == 0, 1.0, numpy.sin( xp ) / xp )
 
     def partial( self, x ):
-        xp = numpy.where( x == 0, 1.0, x * math.pi )
+        """
+        Return the partial derivative wrt the input values.
+
+        Parameters
+        ----------
+        x : array-like
+            the input values
+        """
+        xp = x * math.pi
         return numpy.where( x == 0, 0.0,
                     math.pi * ( xp * numpy.cos( xp ) - numpy.sin( xp ) ) / ( xp * xp ) )
 
     def isBound( self ):
+        """ Return False """
         return False
 
     def name( self ):
-        return str( "Sinc: sin( x ) / x" )
+        """ Return the name of the kernel """
+        return str( "Sinc: sin( pi * x ) / ( pi * x )" )
 
 

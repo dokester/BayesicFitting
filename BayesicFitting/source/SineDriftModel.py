@@ -5,9 +5,9 @@ from . import Tools
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -36,14 +36,14 @@ class SineDriftModel( NonLinearModel ):
     """
     Sinusoidal Model with drifting frequency.
 
-        f( x:p ) = p_1 * cos( phi ) + p_2 * sin( phi )
-           phi = 2 * pi * x * ( p_0 + x * p_3 )
+        f( x:p ) = p_1 * cos( &phi; ) + p_2 * sin( &phi; )
+           &phi; = 2 * &pi; * x * ( p_0 + x * p_3 )
 
     where p_0 = frequency, p_3 = is the drift in frequency,
           p_1 = amplitude cosine and p_2 = amplitude sine.
     As always x = input.
 
-    The parameters are initialized at {1.0, 1.0, 1.0, 0.0}. It is a non-linear model.
+    The parameters are initialized at [1.0, 1.0, 1.0, 0.0]. It is a non-linear model.
 
     Examples
     --------
@@ -56,10 +56,6 @@ class SineDriftModel( NonLinearModel ):
     >>> sine.parameters = pars
     >>> print( sine( numpy.arange( 101, dtype=float ) ) )     # 10 sine periods, drifting
 
-
-    Attributes
-    ----------
-        No attributes of its own.
 
     Attributes from Model
     ---------------------

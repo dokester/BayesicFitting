@@ -893,7 +893,8 @@ class Test( unittest.TestCase  ) :
         print( "logZ  ", fmt( logz2 ), " +- ", fmt( dlz2 ) )
 
         eng = ns.engines[0]
-        print( "Uran  ", eng.getUnitRange( ns.problem, ns.lowLhood ) )
+        nap = eng.walkers[0].nap
+        print( "Uran  ", eng.getUnitRange( ns.problem, ns.lowLhood, nap ) )
 #        print( eng.unitRange )
 #        print( eng.unitMin )
 

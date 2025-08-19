@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .OrderEngine import OrderEngine
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -26,7 +26,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2025 Do Kester
 
 class LoopEngine( OrderEngine ):
     """
@@ -34,7 +34,7 @@ class LoopEngine( OrderEngine ):
 
     Only for 2 dimensional TS problems.
 
-    Input order :
+     Input order :
          0  1  2  3
         15 14  5  4
          7  6 13 12
@@ -44,7 +44,7 @@ class LoopEngine( OrderEngine ):
     of 6 and 13, and reversing the loop in between, a better solution is
     reached (triangle inequality)
 
-    output order:
+     Output order:
          0  1  2  3
         15 14  5  4
         12 13  6  7

@@ -5,9 +5,9 @@ from .ScaledErrorDistribution import ScaledErrorDistribution
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.1.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 
 class GaussErrorDistribution( ScaledErrorDistribution ):
@@ -39,7 +39,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
     For one residual, x, it holds
 
-        L( x ) = 1 / &sqrt;( 2 &pi; s^2 ) exp( - 0.5 ( x / s )^2 )
+     L( x ) = 1 / &radic;( 2 &pi; s^2 ) exp( - 0.5 ( x / s )^2 )
 
     where s is the scale.
     s is a hyperparameter, which might be estimated from the data.
@@ -49,11 +49,11 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
     The function is mostly used to calculate the likelihood L over N residuals,
     or easier to use log likelihood, logL.
 
-        logL = log( N / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( x / s ) ^ 2
+     logL = log( N / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( x / s )^2
 
     Using weights this becomes:
 
-        logL = log( &sum;( w ) / ( sqrt( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s ) ^ 2 )
+     logL = log( &sum;( w ) / ( &radic;( 2 &pi; ) s )  ) - 0.5 &sum;( w ( x / s )^2 )
 
 
     Author       Do Kester.

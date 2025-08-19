@@ -10,9 +10,9 @@ from .Sample import Sample
 from .SampleList import SampleList
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2020 Do Kester
+#  *    2019 - 2025 Do Kester
 
 
 class SampleMovie( object ):
@@ -39,10 +39,6 @@ class SampleMovie( object ):
     SampleMovie produces a movie (mp4) from a SampleList
 
     This class is provided as an example to vary upon.
-
-    ===========
-    MovieWriter
-    ===========
 
     This example uses a MovieWriter directly to grab individual frames and write
     them to a file. This avoids any event loop integration, but has the advantage

@@ -1,15 +1,17 @@
 import numpy as numpy
+import sys
 from . import Tools
 
 from .LevenbergMarquardtFitter import LevenbergMarquardtFitter
 from .Walker import Walker
 from .PhantomCollection import PhantomCollection
 from .Formatter import formatter as fmt
+from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +34,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2024 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class Engine( object ):
     """
@@ -77,9 +79,11 @@ class Engine( object ):
     BEST   = 3              #  better than all
     NCALLS = 4              #  number of calls
 
+    DEBUG = False           # set True for reraising the exceptions
+
     #  *********CONSTRUCTORS***************************************************
 
-    def __init__( self, walkers, errdis, slow=None, phantoms=None, copy=None, 
+    def __init__( self, walkers, errdis, slow=None, nstep=None, phancol=None, copy=None, 
                     seed=4213, verbose=0 ):
         """
         Constructor.
@@ -97,6 +101,9 @@ class Engine( object ):
         phantoms : None or PhantomCollection
             Container for all valid walkers, that have been tried. But were not kept.
             To calculate the spread of the parameters vs likelihood.
+        nstep : None or int
+            None automatically determine the number of steps
+            int  use this number of steps
         seed : int
             for random number generator
         verbose : int
@@ -112,23 +119,49 @@ class Engine( object ):
  
         if copy is None :
             self.maxtrials = self.MAXTRIALS
-            self.nstep = self.NSTEP
             self.rng = numpy.random.RandomState( seed )
+# Must be replaced by a Generator. TBD: check all self.rng calls
+#            self.rng = numpy.random.default_rng( seed )
+
+            if nstep is None :
+                self.nstep = ( lambda : 2 + int( self.NSTEP * ( 1 + self.rng.rand() ) ) )
+            else : 
+                self.nstep = ( lambda : nstep )
             self.verbose = verbose
-            if slow is not None : self.slow = slow
-            if not phantoms is None :
-                self.phantoms = phantoms
+            if slow is not None : 
+                self.slow = slow
+            if phancol is not None :
+                self.phancol = phancol
         else :
             self.maxtrials = copy.maxtrials
             self.nstep = copy.nstep
             self.rng = copy.rng
             self.verbose   = copy.verbose
             if hasattr( copy, "slow" ) : self.slow = copy.slow
-            self.phantoms = copy.phantoms
+            self.phancol = copy.phancol
 
     def copy( self ):
         """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
+
+    def XXX__setattr__( self, name, value ):
+        """
+        Set attributes.
+
+        Parameters
+        ----------
+        name :  string
+            name of the attribute
+        value :
+            value of the attribute
+
+        """
+        if name == 'nstep' :
+            setatt( self, name, ( lambda : value ) )
+        else :
+            setatt( self, name, value )
+
+
 
     def bestBoost( self, problem, myFitter=None ) :
         """
@@ -146,8 +179,6 @@ class Engine( object ):
         if myFitter is None :
             myFitter = LevenbergMarquardtFitter
         self.fitter = myFitter( problem.xdata, problem.model )
-
-
 
     #  *********SET & GET***************************************************
     def setWalker( self, kw, problem, allpars, logL, walker=None, fitIndex=None ) :
@@ -173,18 +204,21 @@ class Engine( object ):
             (new) fitIndex
         """
         if walker is None :
-            id = 0 if kw >= len( self.walkers ) else self.walkers[kw].id
-            wlkr = Walker( id, problem, allpars, fitIndex )
+            kid = 0 if kw >= len( self.walkers ) else self.walkers[kw].id
+            wlkr = Walker( kid, problem, allpars, fitIndex )
         else :
             wlkr = walker.copy()
             wlkr.allpars = allpars    # Tools.toArray( allpars, ndim=1, dtype=float )
 
         wlkr.logL = logL
+
         self.checkBest( wlkr )
 
-        self.walkers.setWalker( wlkr, kw )
+        if self.verbose > 4 :
+            wlkr.check( self.errdis )
 
-        self.phantoms.storeItems( wlkr )
+        self.walkers.setWalker( wlkr, kw )
+        self.phancol.storeItems( wlkr )
 
     def noBoost( self, walker ) :
         pass
@@ -198,13 +232,9 @@ class Engine( object ):
         walker : Walker
             new walker to be checked
         """
-        wlist = self.phantoms.getList( walker )
-
-        if wlist is None or wlist[-1].logL >= walker.logL :
+        kl = self.phancol.getBest( walker.nap )
+        if kl < 0 or self.phancol.phantoms[kl].logL >= walker.logL :
             return
-
-#        print( "Best   ", fmt( walker.logL ) )
-#        print( fmt( walker.allpars, max=None ) )
 
         problem = walker.problem
         nh = self.errdis.nphypar
@@ -212,8 +242,14 @@ class Engine( object ):
         try :
             self.fitter.model = problem.model
             pars = self.fitter.fit( problem.ydata, par0=par0 )
-        except :
+        except Exception :
+            if self.DEBUG : raise
             return
+
+        # check whether all parameters are within limits (cq. domain)
+        for k,p in enumerate( pars ) :
+            if problem.model.getPrior( k ).isOutOfLimits( p ) :
+                return
 
         if nh == 0 :
             ptry = pars
@@ -322,7 +358,8 @@ class Engine( object ):
     def reportJourney( self ) :
         try :
             return ( self.jstart, self.journey )
-        except :
+        except Exception :
+            if self.DEBUG : raise
             return ( 0,0 )
 
     def makeIndex( self, np, val ) :
@@ -380,7 +417,7 @@ class Engine( object ):
         return srate
 
 
-    def getUnitMinmax( self, problem, lowLhood ) :
+    def getUnitMinmax( self, problem, lowLhood, nap ) :
         """
         Calculate unit minimum and maximum from the Phantoms
 
@@ -391,19 +428,17 @@ class Engine( object ):
         lowLhood : float
             low likelihood boundary
         """
-        npars = problem.npars
-        pamin, pamax = self.phantoms.getParamMinmax( lowLhood, np=problem.npars )
+        pamin, pamax = self.phancol.getParamMinmax( lowLhood, np=nap )
 
-        npars += self.errdis.nphypar
-        umax = ( numpy.ones( npars, dtype=float )  if pamax is None
+        umax = ( numpy.ones( nap, dtype=float )  if pamax is None
                 else self.domain2Unit( problem, pamax ) )
-        umin = ( numpy.zeros( npars, dtype=float )  if pamin is None
+        umin = ( numpy.zeros( nap, dtype=float )  if pamin is None
                 else self.domain2Unit( problem, pamin ) )
         umin = numpy.fmin( umin, umax )
 
         return ( umin, umax )
 
-    def getUnitRange( self, problem, lowLhood ) :
+    def getUnitRange( self, problem, lowLhood, nap ) :
         """
         Calculate unit range and minimum from PhantomCollection
 
@@ -414,10 +449,19 @@ class Engine( object ):
         lowLhood : float
             low likelihood boundary
         """
-        umin, umax = self.getUnitMinmax( problem, lowLhood )
+        if lowLhood <= -sys.float_info.max :
+            umin = numpy.zeros( nap, dtype=float )
+            uran = numpy.ones( nap, dtype=float )
+            self.urange = uran
+            return ( uran, umin )
+
+        umin, umax = self.getUnitMinmax( problem, lowLhood, nap )
  
         uran = numpy.abs( umax - umin )
-                
+
+        self.urange = uran
+#        print( "EN   ", self.urange )
+        
         return ( uran, umin )
 
     def __str__( self ) :

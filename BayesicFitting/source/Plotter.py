@@ -7,9 +7,9 @@ from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,17 @@ __status__ = "Perpetual Beta"
 #
 # The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #
-#   2017 - 2023 Do Kester
+#   2017 - 2025 Do Kester
+
+# Module FitPlotter
+"""
+This module contains 2 methods to plot the results of a fit by a Fitter resp. 
+a Sampler.
+
+They are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
+ 
+""" 
+
 
 def plotFit( x, data=None, yfit=None, model=None, fitter=None, show=True,
              residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5], 
@@ -147,7 +157,7 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
     Plot the posterior as npt points from the SampleList.
 
     Parameters
-    ==========
+    ----------
     sl : SampleList
         the samplelist containing samples from the posterior
     xdata : arraylike
@@ -261,10 +271,16 @@ def plotSampleList( sl, xdata, ydata, errors=None, npt=10000,
         yhi = max( numpy.amax( ydata ), numpy.amax( yfit ) )
         ylo -= 0.05 * ( yhi - ylo )
         yhi += 0.05 * ( yhi - ylo )
+    else :
+        ylo = ylim[0]
+        yhi = ylim[1]
 
     if xlim is None :
         xlo -= 0.05 * xrng
         xhi += 0.05 * xrng
+    else : 
+        xlo = xlim[0]
+        xhi = xlim[1]
 
     plt.xlim( xlo, xhi )
     plt.ylim( ylo, yhi )

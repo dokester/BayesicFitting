@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2021
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.8.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2021 Do Kester
+#  *    2016 - 2025 Do Kester
 
 class SineAmpModel( LinearModel ):
     """
@@ -45,7 +45,7 @@ class SineAmpModel( LinearModel ):
     where
         p_0 = amplitude of cosine
         p_1 = amplitude of sine
-        &omega; is the fixed frequency of the model.
+        P_3 = &omega; is the fixed frequency of the model.
 
     It is a linear model with 2 parameters.
 
@@ -169,6 +169,7 @@ class SineAmpModel( LinearModel ):
     def baseParameterUnit( self, k ):
         """
         Return the name of a parameter.
+
         Parameters
         ----------
         k : int

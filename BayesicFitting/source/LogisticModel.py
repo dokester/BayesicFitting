@@ -7,9 +7,9 @@ from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,20 +28,19 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2020 Do Kester
+#  *    2018 - 2025 Do Kester
 
 
 class LogisticModel( NonLinearModel ):
     """
     Logistic Model.
 
-        f( x:p ) = p_0 / ( 1 + exp( ( x - p_1 ) / p_2 ) )
+     f( x:p ) = p_0 / ( 1 + exp( ( x - p_1 ) / p_2 ) )
 
     where
-
-        p_0 : amplitude
-        p_1 : center
-        p_2 : slope
+     p_0 : amplitude
+     p_1 : center
+     p_2 : slope
 
     The parameters are initialized at {1.0, 0.0, 1.0}.
 
@@ -49,13 +48,13 @@ class LogisticModel( NonLinearModel ):
     --------
     >>> lm = LogisticModel( )
     >>> print( lm )
-    Logistic: f( x:p ) = p_0 / ( 1 + exp( ( p_1 - x ) / p_2 ) )
+    >>> Logistic: f( x:p ) = p_0 / ( 1 + exp( ( p_1 - x ) / p_2 ) )
     >>> print( lm.npars )
-    3
+    >>> 3
     >>> print( lm( numpy.arange( 11 ) - 5 ) )
-    [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
-       6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
-       1.11089965e-02   3.35462628e-04   3.72665317e-06]
+    >>> [  3.72665317e-06   3.35462628e-04   1.11089965e-02   1.35335283e-01
+    >>>    6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
+    >>>    1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
     Attributes from Model
     ---------------------

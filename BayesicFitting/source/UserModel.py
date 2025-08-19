@@ -9,9 +9,9 @@ from .Tools import setAttribute as setatt
 from .Model import Model
 
 __author__ = "Do Kester"
-__year__ = 2022
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.0.1"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -47,16 +47,16 @@ class UserModel( Model ):
 
     Examples
     --------
-    import numpy as np
+    >>> import numpy as np
     >>> def ur( x, p ) :
     >>>     return p[0] * np.sin( p[1] * x + p[2] * np.log( x + p[3] ) ) 
     >>> 
     >>>
     >>> mdl = UserModel( 4, ur, userName="slowchirp" )
     >>> print( mdl )
-    UserModel( slowchirp )
+    >>> UserModel( slowchirp )
     >>> print( mdl.npars )
-    4
+    >>> 4
 
 
     Attributes

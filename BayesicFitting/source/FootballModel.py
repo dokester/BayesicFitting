@@ -6,9 +6,9 @@ from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2023 Do Kester
+#  *    2016 - 2025 Do Kester
 
 
 class FootballModel( NonLinearModel ):
@@ -38,28 +38,25 @@ class FootballModel( NonLinearModel ):
 
     For each team the complexity lists parameters
 
-       name                    limits    default    comment
-    0. Number of trials      0 < a         n/a     trials on the goal of the opponent
-    1. Defensive strength    0 < b < 1      0      fraction of the trials that is stopped
-    2. Midfield strength     0 < c < 2      1      relative strength of the team
-    3. Home advantage        0 < d < 2      1      advantage of playing at home
-    4. Strategy              0 < e < 2      1      
+    | name              |complexity| limits |default| comment                      |
+    |:------------------|:--------:|:------:|:-----:|:-----------------------------|
+    | Attack            |    1     |  0<a   |  n/a  | trials on the goal           |
+    | Defensive strength|    2     |  0<b<1 |   0   | fraction of trials stopped   |
+    | Midfield strength |    3     |  0<c<2 |   1   | relative strength of the team|
+    | Home advantage    |    4     |  0<d<2 |   1   | advantage of playing at home |
+    | Strategy          |    5     |  0<e<2 |   1   | defensive <-> offensive      |
+
 
     Note: Computational runtime errors/warnings occur when (some of) the parameters are at 
-          their limits. 
+    their limits. 
 
     The default values are chosen such that they dont have effect on the results.
     I.e. a model with complexity=5 and all parameters at the defaults except for 
     "trials", has the same result as a model with complexity 1 with the same "trials"
     value.
 
-    Let p1 denote the parameters of the home team and p2 those of the away team,
-    then the equations for calculating the strengths, S1 and S2, are
-
-        S1 = a1 * sqrt( c1 * d1 / c2 ) * ( 1 - b2 ^ ( c1 * d1 / c2 ) )
-
-        S2 = a2 * sqrt( c2 / ( c1 * d1 ) ) * ( 1 - b1 ^ ( c2 / ( c1 * d1 ) )
-
+    For information what is calculated at each level of complexity, see info at 
+    the methods goals1(), goals2(), ... goals5(), below.
 
     Note:
     This is about the game that most of the world calls football.
@@ -68,7 +65,7 @@ class FootballModel( NonLinearModel ):
     --------
     >>> fm = FootballModel( 18 ) 
     >>> print( fm.npars )
-    90
+    >>> 90
 
     Author : Do Kester
 
@@ -175,18 +172,59 @@ class FootballModel( NonLinearModel ):
 
 
     def goals1( self, xdata, par ) :
-        """ attack """
+        """ 
+        Consider attack (a) only.
+
+         S1 = a1
+         S2 = a2
+
+        Parameters
+        ----------
+        xdata : array of int
+            list of matches team 1 vs team 2
+        par : array_like
+            attack values
+
+        """
         return numpy.asarray( [par[xdata[:,0]], par[xdata[:,1]]] ).transpose()
 
     def goals2( self, xdata, par ) :
-        """ attack, defense """
+        """ 
+        Consider attack (a) and defense (d).
+
+         S1 = a1 * ( 1 - d2 )
+         S2 = a2 * ( 1 - d1 )
+
+        Parameters
+        ----------
+        xdata : array of int
+            list of matches team 1 vs team 2
+        par : array_like
+            team values
+
+        """
         k0 = xdata[:,0] * 2
         k1 = xdata[:,1] * 2
         return numpy.asarray( [par[k0] * ( 1 - par[k1+1] ), 
                                par[k1] * ( 1 - par[k0+1] )] ).transpose()
 
     def goals3( self, xdata, par ) :
-        """ attack, defense, midfield """
+        """ 
+        Consider attack (a), defense (d) and midfield (m).
+
+        The ratio of the midfield strength modifies attack and defense
+
+         S1 = a1 * &radic;(m1/m2) * ( 1 - d2 ^ (m2/m1) )
+         S2 = a2 * &radic;(m2/m1) * ( 1 - d1 ^ (m1/m2) )
+
+        Parameters
+        ----------
+        xdata : array of int
+            list of matches team 1 vs team 2
+        par : array_like
+            team values
+
+        """
         k0 = xdata[:,0] * 3
         k1 = xdata[:,1] * 3
         ma0 = md1 = par[k0+2] / par[k1+2]
@@ -199,7 +237,23 @@ class FootballModel( NonLinearModel ):
         return numpy.asarray( [sc0, sc1] ).transpose()
 
     def goals4( self, xdata, par ) :
-        """ attack, defense, midfield, home """
+        """ 
+        Consider attack (a), defense (d), midfield (m) and home advantage (h).
+
+        The strategy modifies the midfield strangth of the home team.
+
+         mh = m1 * h1
+         S1 = a1 * &radic;(mh/m2) * ( 1 - d2 ^ (m2/mh) )
+         S2 = a2 * &radic;(m2/mh) * ( 1 - d1 ^ (mh/m2) )
+
+        Parameters
+        ----------
+        xdata : array of int
+            list of matches team 1 vs team 2
+        par : array_like
+            team values
+
+        """
         k0 = xdata[:,0] * 4
         k1 = xdata[:,1] * 4
         ma0 = md1 = ( par[k0+2] * par[k0+3] ) / par[k1+2]
@@ -212,8 +266,23 @@ class FootballModel( NonLinearModel ):
         return numpy.asarray( [sc0, sc1] ).transpose()
 
     def goals5( self, xdata, par ) :
-        """
-        attack, defense, midfield, home, strategy 
+        """ 
+        Consider attack (a), defense (d), midfield (m), home advantage (h),
+        and strategy (s)
+
+         A offensive strategy (s>1) strenghtens the attach and weakens the defense. 
+         A defensive strategy (s<1) strenghtens the defense and weakens the attack. 
+
+         mh = m1 * h1
+         S1 = a1 * &radic;(s1 * mh/m2) * ( 1 - d2 ^ (s2 * m2/mh) )
+         S2 = a2 * &radic;(s2 * m2/mh) * ( 1 - d1 ^ (s1 * mh/m2) )
+
+        Parameters
+        ----------
+        xdata : array of int
+            list of matches team 1 vs team 2
+        par : array_like
+            team values
 
         """
         k0 = xdata[:,0] * 5
@@ -250,8 +319,6 @@ class FootballModel( NonLinearModel ):
         """
         return self.goals( xdata, params )
 
-
-
     def basePartial( self, xdata, params, parlist=None ):
         """
         Returns the partials at the input value.
@@ -266,28 +333,21 @@ class FootballModel( NonLinearModel ):
             parameters for the model (ignored for LinearModels).
         parlist : array_like
             list of indices of active parameters
-
-        to a1
-        (1-b_2^((c_1*d_1)/(c_2*f_2)))*sqrt((c_1*d_1)/c_2)
-        to b2
-        -(a_1*c_1*d_1*sqrt((c_1*d_1)/c_2)*b_2^((c_1*d_1)/(c_2*f_2)-1))/(c_2*f_2)
-        to c1
-        -(a_1*d_1*(2*b_2^((d_1*c_1)/(c_2*f_2))*log(b_2)*d_1*c_1+(b_2^((d_1*c_1)/(c_2*f_2))-1)
-            *c_2*f_2))/(2*c_2^2*f_2*sqrt((d_1*c_1)/c_2))
-        to c2
-        (a_1*c_1*d_1*((b_2^((c_1*d_1)/(f_2*c_2))-1)*f_2*c_2+2*b_2^((c_1*d_1)/(f_2*c_2))*
-            log(b_2)*c_1*d_1))/(2*f_2*sqrt((c_1*d_1)/c_2)*c_2^3)
-        to d1
-        -(a_1*c_1*(2*b_2^((c_1*d_1)/(c_2*f_2))*log(b_2)*c_1*d_1+(b_2^((c_1*d_1)/(c_2*f_2))-1)*
-            c_2*f_2))/(2*c_2^2*f_2*sqrt((c_1*d_1)/c_2))
-        to f2
-        (a_1*b_2^((c_1*d_1)/(c_2*f_2))*log(b_2)*c_1*d_1*sqrt((c_1*d_1)/c_2))/(c_2*f_2^2)
         """
         return self.parts( xdata, params )
 
-
-
     def part1( self, xdata, par ) :
+        """
+        Derivatives copies from https://www.derivative-calculator.net
+
+        Parameters
+        ----------
+        xdata : array_like [2:nteams]
+            list of team ids playing against each other.
+        par : array_like
+            parameters for the model 
+
+        """
         k0 = xdata[:,0]
         k1 = xdata[:,1]
         lenk = len( k0 )
@@ -300,6 +360,17 @@ class FootballModel( NonLinearModel ):
         return [phome,paway]    
     
     def part2( self, xdata, par ) :
+        """
+        Derivatives copies from https://www.derivative-calculator.net
+
+        Parameters
+        ----------
+        xdata : array_like [2:nteams]
+            list of team ids playing against each other.
+        par : array_like
+            parameters for the model 
+
+        """
         k0 = xdata[:,0] * 2
         k1 = xdata[:,1] * 2
         lenk = len( k0 )
@@ -316,6 +387,17 @@ class FootballModel( NonLinearModel ):
         return [phome,paway]    
 
     def part3( self, xdata, par ) :
+        """
+        Derivatives copies from https://www.derivative-calculator.net
+
+        Parameters
+        ----------
+        xdata : array_like [2:nteams]
+            list of team ids playing against each other.
+        par : array_like
+            parameters for the model 
+
+        """
         k0 = xdata[:,0] * 3
         k1 = xdata[:,1] * 3
         lenk = len( k0 )
@@ -364,6 +446,17 @@ class FootballModel( NonLinearModel ):
         return [phome,paway]    
 
     def part4( self, xdata, par ) :
+        """
+        Derivatives copies from https://www.derivative-calculator.net
+
+        Parameters
+        ----------
+        xdata : array_like [2:nteams]
+            list of team ids playing against each other.
+        par : array_like
+            parameters for the model 
+
+        """
         k0 = xdata[:,0] * 4
         k1 = xdata[:,1] * 4
         lenk = len( k0 )
@@ -423,44 +516,56 @@ class FootballModel( NonLinearModel ):
         """
         Derivatives copies from https://www.derivative-calculator.net
 
-        Fh = a0*sqrt((d0*f0*c0)/c1) * (1-b1**((d0*f1*c0)/c1))
-        Fa = a1*sqrt((c1*f1)/(c0*d0)) * (1-b0**((c1*f0)/(c0*d0)))
-
-        dFh/da0 = (1-b1**((d0*f1*c0)/c1))*sqrt((d0*f0*c0)/c1)
-        dFh/da1 = 0
-        dFh/db0 = 0
-        dFh/db1 = -(a0*c0*d0* sqrt((c0*d0*f0)/c1) *f1* b1**((c0*d0*f1)/c1-1)) / c1
-        dFh/dc0 = -(a0*d0*f0*(2*b1**((d0*f1*c0)/c1)*log(b1)*d0*f1*c0+
-                    (b1**((d0*f1*c0)/c1)-1)*c1))/(2*c1**2*sqrt((d0*f0*c0)/c1))
-        dFh/dc1 = (a0*c0*d0*f0*((b1**((c0*d0*f1)/c1)-1)*c1+2*b1**((c0*d0*f1)/c1)
-                   *log(b1)*c0*d0*f1))/(2*sqrt((c0*d0*f0)/c1)*c1**3)
-        dFh/dd0 = -(a0*c0*f0*(2*b1**((c0*f1*d0)/c1)*log(b1)*c0*f1*d0+
-                    (b1**((c0*f1*d0)/c1)-1)*c1))/(2*c1**2*sqrt((c0*f0*d0)/c1))
-        dFh/dd1 = 0
-        dFh/df0 = (a0*(1-b1**((c0*d0*f1)/c1))*c0*d0)/(2*c1*sqrt((c0*d0*f0)/c1))
-        dFh/df1 = -(a0*b1**((c0*d0*f1)/c1)*log(b1)*c0*d0*sqrt((c0*d0*f0)/c1))/c1
-
-        dFa/da0 = 0
-        dFa/da1 = (1-b0**((c1*f0)/(c0*d0)))*sqrt((c1*f1)/(c0*d0))
-        dFa/db0 = -(a1*c1*f0*sqrt((c1*f1)/(c0*d0))*b0**((c1*f0)/
-                    (c0*d0)-1))/(c0*d0)
-        dFa/db1 = 0
-        dFa/dc0 = (a1*c1*f1*((b0**((c1*f0)/(d0*c0))-1)*d0*c0+2*
-                    b0**((c1*f0)/(d0*c0))*log(b0)*c1*f0))/(2*d0**2*
-                    sqrt((c1*f1)/(d0*c0))*c0**3)
-        dFa/dc1 = -(a1*f1*(2*b0**((f0*c1)/(c0*d0))*log(b0)*f0*c1+
-                    (b0**((f0*c1)/(c0*d0))-1)*c0*d0))/(2*c0**2*d0**2*
-                    sqrt((f1*c1)/(c0*d0)))
-        dFa/dd0 = (a1*c1*f1*((b0**((c1*f0)/(c0*d0))-1)*c0*d0+2*
-                    b0**((c1*f0)/(c0*d0))*log(b0)*c1*f0))/(2*c0**2*
-                    sqrt((c1*f1)/(c0*d0))*d0**3)
-        dFa/dd1 = 0
-        dFa/df0 = -(a1*b0**((c1*f0)/(c0*d0))*log(b0)*c1*
-                    sqrt((c1*f1)/(c0*d0)))/(c0*d0)
-        dFa/df1 = (a1*(1-b0**((c1*f0)/(c0*d0)))*c1)/(2*c0*d0*
-                    sqrt((c1*f1)/(c0*d0)))
+        Parameters
+        ----------
+        xdata : array_like [2:nteams]
+            list of team ids playing against each other.
+        par : array_like
+            parameters for the model 
 
         """
+#################################################################################
+#        attack a, defense b, midfield c, home d, strategy f.
+#
+#        Fh = a0*sqrt((d0*f0*c0)/c1) * (1-b1**((d0*f1*c0)/c1))
+#        Fa = a1*sqrt((c1*f1)/(c0*d0)) * (1-b0**((c1*f0)/(c0*d0)))
+#
+#        dFh/da0 = (1-b1**((d0*f1*c0)/c1))*sqrt((d0*f0*c0)/c1)
+#        dFh/da1 = 0
+#        dFh/db0 = 0
+#        dFh/db1 = -(a0*c0*d0* sqrt((c0*d0*f0)/c1) *f1* b1**((c0*d0*f1)/c1-1)) / c1
+#        dFh/dc0 = -(a0*d0*f0*(2*b1**((d0*f1*c0)/c1)*log(b1)*d0*f1*c0+
+#                    (b1**((d0*f1*c0)/c1)-1)*c1))/(2*c1**2*sqrt((d0*f0*c0)/c1))
+#        dFh/dc1 = (a0*c0*d0*f0*((b1**((c0*d0*f1)/c1)-1)*c1+2*b1**((c0*d0*f1)/c1)
+#                   *log(b1)*c0*d0*f1))/(2*sqrt((c0*d0*f0)/c1)*c1**3)
+#        dFh/dd0 = -(a0*c0*f0*(2*b1**((c0*f1*d0)/c1)*log(b1)*c0*f1*d0+
+#                    (b1**((c0*f1*d0)/c1)-1)*c1))/(2*c1**2*sqrt((c0*f0*d0)/c1))
+#        dFh/dd1 = 0
+#        dFh/df0 = (a0*(1-b1**((c0*d0*f1)/c1))*c0*d0)/(2*c1*sqrt((c0*d0*f0)/c1))
+#        dFh/df1 = -(a0*b1**((c0*d0*f1)/c1)*log(b1)*c0*d0*sqrt((c0*d0*f0)/c1))/c1
+#
+#        dFa/da0 = 0
+#        dFa/da1 = (1-b0**((c1*f0)/(c0*d0)))*sqrt((c1*f1)/(c0*d0))
+#        dFa/db0 = -(a1*c1*f0*sqrt((c1*f1)/(c0*d0))*b0**((c1*f0)/
+#                    (c0*d0)-1))/(c0*d0)
+#        dFa/db1 = 0
+#        dFa/dc0 = (a1*c1*f1*((b0**((c1*f0)/(d0*c0))-1)*d0*c0+2*
+#                    b0**((c1*f0)/(d0*c0))*log(b0)*c1*f0))/(2*d0**2*
+#                    sqrt((c1*f1)/(d0*c0))*c0**3)
+#        dFa/dc1 = -(a1*f1*(2*b0**((f0*c1)/(c0*d0))*log(b0)*f0*c1+
+#                    (b0**((f0*c1)/(c0*d0))-1)*c0*d0))/(2*c0**2*d0**2*
+#                    sqrt((f1*c1)/(c0*d0)))
+#        dFa/dd0 = (a1*c1*f1*((b0**((c1*f0)/(c0*d0))-1)*c0*d0+2*
+#                    b0**((c1*f0)/(c0*d0))*log(b0)*c1*f0))/(2*c0**2*
+#                    sqrt((c1*f1)/(c0*d0))*d0**3)
+#        dFa/dd1 = 0
+#        dFa/df0 = -(a1*b0**((c1*f0)/(c0*d0))*log(b0)*c1*
+#                    sqrt((c1*f1)/(c0*d0)))/(c0*d0)
+#        dFa/df1 = (a1*(1-b0**((c1*f0)/(c0*d0)))*c1)/(2*c0*d0*
+#                    sqrt((c1*f1)/(c0*d0)))
+#
+#################################################################################
+
         k0 = xdata[:,0] * 5
         k1 = xdata[:,1] * 5
         lenk = len( k0 )
@@ -549,7 +654,8 @@ class FootballModel( NonLinearModel ):
             parameter number.
 
         """
-        return "%s_team_%d" % ( self.PARNAMES[k % self.complexity], k / self.complexity )
+        return "%s_team_%d" % ( self.PARNAMES[k % self.complexity], 
+                                k // self.complexity )
 
     def baseParameterUnit( self, k ):
         """

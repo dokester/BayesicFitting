@@ -6,9 +6,9 @@ from .Formatter import formatter as fmt
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2023 Do Kester
+#  *    2018 - 2025 Do Kester
 
 class OrderEngine( Engine ):
     """
@@ -63,7 +63,7 @@ class OrderEngine( Engine ):
         return OrderEngine( self.walkers, self.errdis, copy=self )
 
     #  *********EXECUTE***************************************************
-    def execute( self, kw, lowLhood, append=False, iteration=0 ):
+    def execute( self, kw, lowLhood, iteration=0 ):
         """ 
         Execute the engine by diffusing the parameters.
         

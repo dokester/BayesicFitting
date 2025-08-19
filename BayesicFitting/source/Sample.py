@@ -7,9 +7,9 @@ from .Model import Model
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2020
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "2.5.3"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2020 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class Sample( object ):
     """
@@ -169,12 +169,4 @@ class Sample( object ):
         return str( "Sample: %3d parent: %3d model: %s logL: %10.2f logW: %10.2f"%
                     ( self.id, self.parent, self.model.shortName(), self.logL, self.logW ) )
 
-    """
-    def check( self, nhyp=0 ) :
-#        print( len( self.allpars ), self.model.npchain, nhyp )
-        if not len( self.allpars ) == ( self.model.npchain + nhyp ) :
-            raise ValueError( "Sample inconsistent parameter length : %d is not ( %d + %d )" %
-                ( len( self.allpars ), self.model.npchain, nhyp ) )
-        if nhyp > 0 and self.allpars[-nhyp] <= 0 :
-            raise ValueError( "Sample has non-positive hyperparameter: %f" % self.allpars[-nhyp] )
-    """
+
