@@ -60,11 +60,11 @@ DOI: 10.5281/zenodo.2597200
      - add new attribute avoid=0.1. See [Dimensions](./docs/Dimensions.md)
    * PhantomSampler now uses all phantoms to do the evidence integral
      - Adaptions in Engines, Explorer, WalkerList, NestedSampler.
-     _ PhantomCollection has one WalkerList also in Dynanic cases.
+     - PhantomCollection has one WalkerList also in Dynamic cases.
    * Removed Deprecations, Checks and/or Warnings.
      - Model, ErrorDistributions, Problem
      - Formatter
-     _ Sample
+     - Sample
     
 <a name="history"></a>
 ## 1. History 
