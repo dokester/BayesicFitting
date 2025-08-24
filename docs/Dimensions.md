@@ -306,10 +306,10 @@ Algorithm 1. Galilean Engine.
         d Goto line 4
     9 if n_trial > maxtrial
         a Goto line 2
-   10 if enough steps :
+    10 if enough steps :
         a Store point as new walker
         b Return
-   11 else :
+    11 else :
         a Perturb the step by some amount
         b Adapt size to success-to-failure ratio
         c Goto line 3
