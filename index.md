@@ -34,7 +34,7 @@ making the model as close as possible to the data.
 BayesicFitting has various tools to find the optimal fit of the data to the model.
 The toolbox can also answer the question whether one model fits 
 the data better than another model. 
-Especially this latter aspect raises Bayesian fitting above other model fitting procedures.
+Especially this latter aspect elevates Bayesian fitting above other model fitting procedures.
 
 BayesicFitting consists of more than 100 Python classes, of which a third are model
 classes. Another third are fitters in one guise or another and miscelleaneous stuff.

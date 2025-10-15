@@ -52,7 +52,7 @@ DOI: 10.5281/zenodo.2597200
 
  + 13 Aug 2025 version 3.2.4<br>
    * Lauch new web site https://dokester.github.io/BayesicFitting/
-     Almost all docstrings adapted for the new site.
+     - Almost all docstrings adapted for the new site.
    * GalileanEngine
      - add a pertubation attribute: wiggle=0.2. See [Dimensions](./docs/Dimensions.md)
      - find edge by repeated quadratic interpolation before mirroring
@@ -152,6 +152,10 @@ directory a number of documents can be found.
 + [Manual](./docs/manual.md):
 The manual for the package.
 
++ [Classes](./docs/classes.md):
+Detailed documentation on all classes and their methods. Taken from the
+Python docstrings.
+
 + [Troubles](./docs/troubles.md):
 A list of troublesome situations and what to do about it.
 
@@ -202,26 +206,26 @@ More work needs to be done in:
 <a name="versions"></a>
 ## 5. Versions
 
- +  4 Jan 2018 version 0.9.0.<br>
+ +  4 Jan 2018 version 0.9.0
    * Initial upload to github.
 
- + 26 Jan 2018 version <br>
+ + 26 Jan 2018 version 1.0.0
 
- +  5 Mar 2018 version 1.0.1 <br>
+ +  5 Mar 2018 version 1.0.1
    * Package on pypi.com. 
    * Restructured all import statement to comply with PYPI package.
 
- + 14 Mar 2018 version 1.0.2 <br>
+ + 14 Mar 2018 version 1.0.2
    * Added Dynamic Models 
    * Added piping of models
 
- + 23 Mar 2018 version 1.0.3 <br>
+ + 23 Mar 2018 version 1.0.3
    * Some issues with ErrorDistributions and map fitting
    * 2-d fitting examples added
    * All examples revisited
    * Links in README.md updated
 
- + 28 May 2018 version 1.0.4 <br>
+ + 28 May 2018 version 1.0.4
    * New classes: CircularUniformPrior, PseudoVoigtModel
    * VoigtModel uses scipy.special.wozf() and has partials now,
    * Refactoring Priors to the BaseModel
@@ -230,7 +234,7 @@ More work needs to be done in:
    * New classes: UniformErrorDistribution, FreeShapeModel and kernels/Tophat
    * added to testharnesses and examples
 
- + 27 June 2018 version 1.0.5<br>
+ + 27 June 2018 version 1.0.5
    * New classes: RadialVelocityModel and MixedErrorDistribution
    * testharnesses and examples
    * documentation updates

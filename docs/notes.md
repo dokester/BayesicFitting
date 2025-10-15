@@ -19,11 +19,11 @@ solid DodgerBlue">Contents</span>
 
 | Notes |
 |:-:|
-| [Splines](./splines.md) |
-| [Quality](./dataquality.md) |
-| [BoundingBox](./BoundingBox.md) |
-| [Sampling](./Sampling.md) |
+| [Data Quality](./dataquality.md) |
 | [Dimensions](./Dimensions.md) |
+| [Prior Sampling](./Sampling.md) |
+| [BoundingBox](./BoundingBox.md) |
+| [Splines](./splines.md) |
 
 </div>
 </div>
@@ -41,29 +41,34 @@ To quote John Skilling on one of the Maxent conferences:
 
 Well.. It aint me, babe.
 
-## Splines.
-
-The [splines](./splines.md) note presents details on the construction and 
-algorithm of splines in 
-
- + **SplinesModel**  simple, fast and dense
- + **BSplinesModel** recursive de Boor algoritme, slow
- + **BasicSplineModel** non-recursive de Boor, faster
- + **SplinesDynamicModel** a **BasicSplinesModel** which is 
-   - **Dynamic** in the number of knots
-   - **Modifiable** in the position of the knots
-
 ## Data Quality.   
 
 The [quality](./dataquality.md) note discusses the merits of defining 
 data quality in terms of accuracy versus weights.
 
+## Dimensions.  
+
+High dimensional space is a confusing place to be.  With increasingly
+more space at the outskirts for higher dimensionality.  How this
+influences Nested Sampling is inverstigated in [Dimensions](./Dimensions.md). 
+
+## Prior Sampling.
+
+[Sampling](./Sampling.md) from the Prior can lead in some cases to problems.
+
 ## BoundingBox
 
 A look at [bounding boxes](./BoundingBox.md) in higher dimensions.
 
-## Sampling.
+## Splines.
 
-[Sampling](./Sampling.md) from the Prior can lead in some cases to problems.
+The [splines](./splines.md) note presents details on the algorithms for
+splines construction in
 
+ + **SplinesModel**:  simple, fast and dense
+ + **BSplinesModel**: recursive de Boor algoritme, slow
+ + **BasicSplineModel**: non-recursive de Boor, faster
+ + **SplinesDynamicModel**: a **BasicSplinesModel** which is 
+   - **Dynamic** in the number of knots
+   - **Modifiable** in the position of the knots
 
