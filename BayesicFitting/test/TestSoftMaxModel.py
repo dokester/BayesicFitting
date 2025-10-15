@@ -3,10 +3,7 @@
 import unittest
 import os
 import numpy as numpy
-from astropy import units
-import math
 import matplotlib.pyplot as plt
-import warnings
 
 from numpy.testing import assert_array_almost_equal as assertAAE
 from StdTests import stdModeltest

@@ -10,7 +10,6 @@ from .PoissonErrorDistribution import PoissonErrorDistribution
 from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .ClassicProblem import ClassicProblem
 
-from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2025

@@ -1,11 +1,7 @@
 import numpy as numpy
-from astropy import units
-from astropy.modeling import Model as AstroModel
 from astropy.modeling import FittableModel
-import math
 from . import Tools
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
 
 from .Model import Model
 

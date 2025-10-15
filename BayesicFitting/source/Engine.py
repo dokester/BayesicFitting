@@ -4,8 +4,6 @@ from . import Tools
 
 from .LevenbergMarquardtFitter import LevenbergMarquardtFitter
 from .Walker import Walker
-from .PhantomCollection import PhantomCollection
-from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"

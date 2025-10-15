@@ -1,9 +1,7 @@
 import numpy as numpy
 import math as math
-import warnings
 
 from .Tools import setAttribute as setatt
-from .Tools import printclass
 
 __author__ = "Do Kester"
 __year__ = 2025

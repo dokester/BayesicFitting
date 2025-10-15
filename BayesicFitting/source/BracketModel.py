@@ -1,8 +1,4 @@
-import numpy
-from .Model import Model
 from .Model import Brackets
-from . import Tools
-from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2025

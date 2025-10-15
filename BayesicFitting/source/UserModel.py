@@ -1,9 +1,5 @@
 import numpy as numpy
-from astropy import units
-from astropy.modeling import Model as AstroModel
-import math
 import warnings
-from . import Tools
 from .Tools import setAttribute as setatt
 
 from .Model import Model

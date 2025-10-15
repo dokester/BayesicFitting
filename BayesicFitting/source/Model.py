@@ -10,7 +10,6 @@ from .FixedModel import FixedModel
 #from .UniformPrior import UniformPrior
 from . import Tools
 from .Formatter import formatter as fmt
-from .Formatter import fma
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"

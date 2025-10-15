@@ -2,7 +2,6 @@ import numpy as numpy
 
 from .Modifiable import Modifiable
 from .Engine import Engine
-from . import Tools
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"

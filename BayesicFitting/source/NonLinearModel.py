@@ -1,5 +1,4 @@
 from .Model import Model
-from . import Tools
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"

@@ -1,24 +1,10 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
-from .Formatter import formatter as fmt
-from . import Plotter
-import sys
-import warnings
-import matplotlib.pyplot as plt
 
-from .Problem import Problem
-from .Walker import Walker
-from .WalkerList import WalkerList
-from .Sample import Sample
-from .SampleList import SampleList
 from .ErrorDistribution import ErrorDistribution
 
 from .NestedSampler import NestedSampler
 
 ## for Order Problems import the classes
-from .OrderProblem import OrderProblem
 from .DistanceCostFunction import DistanceCostFunction
 from .StartOrderEngine import StartOrderEngine
 #from .StartNearEngine import StartNearEngine

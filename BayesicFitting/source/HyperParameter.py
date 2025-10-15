@@ -1,8 +1,4 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
-from .Prior import Prior
 from .JeffreysPrior import JeffreysPrior
 
 __author__ = "Do Kester"

@@ -1,8 +1,6 @@
 import numpy as numpy
 import math
 
-from .Formatter import formatter as fmt
-from .Formatter import fma
 from .ErrorDistribution import ErrorDistribution
 
 __author__ = "Do Kester"

@@ -2,7 +2,6 @@ import math
 import numpy
 from scipy import special
 
-from .Formatter import formatter as fmt
 from .Prior import Prior
 
 __author__ = "Do Kester"

@@ -1,5 +1,4 @@
 import numpy as numpy
-from astropy import units
 import math
 from . import Tools
 from .Sample import Sample

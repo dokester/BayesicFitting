@@ -1,7 +1,6 @@
 import numpy as numpy
 
 from .Problem import Problem
-from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2025

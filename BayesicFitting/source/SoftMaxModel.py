@@ -1,11 +1,7 @@
 import numpy as numpy
 from astropy import units
-import math
-from . import Tools
 from . import NeuralNetUtilities
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
-from .Formatter import fma
 
 from .NonLinearModel import NonLinearModel
 

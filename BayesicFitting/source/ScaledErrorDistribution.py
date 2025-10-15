@@ -1,5 +1,4 @@
 import numpy as numpy
-import math
 
 from .ErrorDistribution import ErrorDistribution
 from .NoiseScale import NoiseScale

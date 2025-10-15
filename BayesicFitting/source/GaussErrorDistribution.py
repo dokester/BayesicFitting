@@ -2,7 +2,6 @@ import numpy as numpy
 import math
 
 from .ScaledErrorDistribution import ScaledErrorDistribution
-from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2025

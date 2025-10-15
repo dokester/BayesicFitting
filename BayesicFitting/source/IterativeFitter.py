@@ -1,14 +1,8 @@
 import numpy as numpy
-import math
 
 from .ConvergenceError import ConvergenceError
 from .BaseFitter import BaseFitter
 from .IterationPlotter import IterationPlotter
-from .GaussErrorDistribution import GaussErrorDistribution
-from .LaplaceErrorDistribution import LaplaceErrorDistribution
-from .CauchyErrorDistribution import CauchyErrorDistribution
-from .PoissonErrorDistribution import PoissonErrorDistribution
-from .ExponentialErrorDistribution import ExponentialErrorDistribution
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"

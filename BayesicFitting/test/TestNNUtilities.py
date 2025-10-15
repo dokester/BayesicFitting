@@ -2,10 +2,6 @@
 
 import unittest
 import numpy as numpy
-from astropy import units
-import math
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 
 from BayesicFitting import formatter as fmt
 

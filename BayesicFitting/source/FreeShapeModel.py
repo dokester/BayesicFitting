@@ -1,11 +1,8 @@
 import numpy as numpy
 import numpy.linalg
-from astropy import units
-import math
 
 from . import Tools
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
 from .LinearModel import LinearModel
 from .kernels.Kernel import Kernel
 from .kernels.Tophat import Tophat

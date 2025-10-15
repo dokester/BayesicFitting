@@ -1,10 +1,8 @@
 from __future__ import print_function
 
 import numpy as numpy
-from astropy import units
 import math
 from . import Tools
-from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 from . import Plotter
 import sys
@@ -12,10 +10,8 @@ import warnings
 import matplotlib.pyplot as plt
 
 from .Explorer import Explorer
-from .Model import Model
 from .Walker import Walker
 from .WalkerList import WalkerList
-from .Sample import Sample
 from .SampleList import SampleList
 
 from .Problem import Problem

@@ -1,7 +1,6 @@
 import numpy as numpy
 from . import Tools
 from .Tools import setAttribute as setatt
-import math
 # import (modified) bspline from Juha Jeronen
 from . import bspline
 from . import splinelab

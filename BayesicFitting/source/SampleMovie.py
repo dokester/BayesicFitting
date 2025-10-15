@@ -1,13 +1,10 @@
 
 import numpy as numpy
 import math
-from . import Tools
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-from .Sample import Sample
-from .SampleList import SampleList
 
 __author__ = "Do Kester"
 __year__ = 2025

@@ -1,7 +1,4 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
 from .Tools import setAttribute as setatt
 from .Formatter import formatter as fmt
 from .Walker import Walker

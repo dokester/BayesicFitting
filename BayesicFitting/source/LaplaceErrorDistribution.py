@@ -1,7 +1,6 @@
 import numpy as numpy
 import math
 
-from .Formatter import formatter as fmt
 from .ScaledErrorDistribution import ScaledErrorDistribution
 
 __author__ = "Do Kester"

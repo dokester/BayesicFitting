@@ -1,7 +1,4 @@
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
 
 from .HyperParameter import HyperParameter
 from .JeffreysPrior import JeffreysPrior

@@ -1,11 +1,9 @@
 import numpy as numpy
-import re
 
 from .Tools import shortName as ToolsShortName
 from .Tools import setAttribute as setatt
 from .Tools import printclass as printclass
 
-from .Dynamic import Dynamic
 
 __author__ = "Do Kester"
 __year__ = 2025

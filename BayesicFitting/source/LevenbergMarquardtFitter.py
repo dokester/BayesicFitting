@@ -1,11 +1,8 @@
 import numpy as numpy
-from astropy import units
 import math
-from . import Tools
 
 from .IterativeFitter import IterativeFitter
 from .ConvergenceError import ConvergenceError
-from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2025

@@ -10,7 +10,6 @@ from .BaseFitter import BaseFitter
 from .CurveFitter import CurveFitter
 from .AmoebaFitter import AmoebaFitter
 from .LevenbergMarquardtFitter import LevenbergMarquardtFitter
-from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 

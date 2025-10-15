@@ -1,8 +1,6 @@
 import numpy as numpy
-from astropy import units
 import math
 import warnings
-from . import Tools
 
 from .OrderProblem import OrderProblem
 

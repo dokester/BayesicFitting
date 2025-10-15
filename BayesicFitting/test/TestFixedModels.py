@@ -3,9 +3,6 @@
 import unittest
 import os
 import numpy as numpy
-from astropy import units
-import matplotlib.pyplot as plt
-import warnings
 
 from StdTests import stdModeltest
 from BayesicFitting import *

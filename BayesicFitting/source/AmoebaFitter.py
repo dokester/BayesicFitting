@@ -1,6 +1,4 @@
 import numpy as numpy
-import math
-from . import Tools
 
 from .MaxLikelihoodFitter import MaxLikelihoodFitter
 from .AnnealingAmoeba import AnnealingAmoeba

@@ -2,7 +2,6 @@ import numpy as numpy
 from . import Tools
 from .Tools import setAttribute as setatt
 
-from astropy import units
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"

@@ -2,9 +2,6 @@ import numpy as numpy
 import math
 
 from .ErrorDistribution import ErrorDistribution
-from .LogFactorial import logFactorial
-from .Formatter import formatter as fmt
-from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
 __year__ = 2025

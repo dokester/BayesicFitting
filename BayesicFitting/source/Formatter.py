@@ -1,11 +1,7 @@
 from __future__ import print_function
 
-from collections.abc import Iterable
 import numpy as numpy
 from numpy import ndarray
-from numpy import float64
-from numpy import int64
-import math
 
 __author__ = "Do Kester"
 __year__ = 2025

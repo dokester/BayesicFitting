@@ -1,6 +1,4 @@
 import numpy as numpy
-import math
-from . import Tools
 from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 from .LorentzModel import LorentzModel

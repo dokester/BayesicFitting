@@ -3,7 +3,6 @@
 import unittest
 import numpy as numpy
 import math
-import inspect
 from datetime import date
 
 from BayesicFitting import *

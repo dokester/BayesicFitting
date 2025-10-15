@@ -1,10 +1,7 @@
 import numpy as numpy
 import math
 
-from .Walker import Walker
 from .WalkerList import WalkerList
-from .Formatter import formatter as fmt
-from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2024

@@ -1,7 +1,6 @@
 import numpy as numpy
 from . import Tools
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
 
 from .LinearModel import LinearModel
 

@@ -4,7 +4,6 @@ import math
 from .HyperParameter import HyperParameter
 from . import Tools
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
  
 __author__ = "Do Kester"
 __year__ = 2025

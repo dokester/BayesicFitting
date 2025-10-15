@@ -2,7 +2,6 @@ import numpy as numpy
 from astropy import units
 import math
 from . import Tools
-from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"

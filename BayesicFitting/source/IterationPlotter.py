@@ -1,8 +1,5 @@
 import time
 import numpy as numpy
-from astropy import units
-import math
-from . import Tools
 import matplotlib.pyplot as pyplot
 
 __author__ = "Do Kester"

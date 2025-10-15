@@ -1,7 +1,6 @@
 import math as math
 import random as random
 
-from .Tools import setAttribute as setatt
 from .LaplacePrior import LaplacePrior
 
 __author__ = "Do Kester"

@@ -5,7 +5,6 @@ from . import Tools
 from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 from .Kepplers2ndLaw import Kepplers2ndLaw
-from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2025

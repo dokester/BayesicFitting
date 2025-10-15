@@ -1,7 +1,5 @@
 import numpy as numpy
-from . import Tools
 from .Tools import setAttribute as setatt
-from .SplinesModel import SplinesModel
 from .BasicSplinesModel import BasicSplinesModel
 from .Dynamic import Dynamic
 from .Modifiable import Modifiable

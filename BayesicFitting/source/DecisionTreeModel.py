@@ -1,16 +1,12 @@
 import numpy as numpy
-from astropy import units
-import math
 
 from . import Tools
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
 
 from .LinearModel import LinearModel
 from .Dynamic import Dynamic
 from .Modifiable import Modifiable
 from .ExponentialPrior import ExponentialPrior
-from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
 __year__ = 2025

@@ -7,7 +7,6 @@ from .ErrorDistribution import ErrorDistribution
 from .HyperParameter import HyperParameter
 from .UniformPrior import UniformPrior
 from . import Tools
-from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2025

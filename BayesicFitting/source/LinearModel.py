@@ -1,7 +1,6 @@
 import numpy as numpy
 from .Model import Model
 
-from .Formatter import formatter as fmt
 
 
 __author__ = "Do Kester"

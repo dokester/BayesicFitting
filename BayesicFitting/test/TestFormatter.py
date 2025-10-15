@@ -2,7 +2,6 @@
 
 import unittest
 import numpy as numpy
-import math
 
 from BayesicFitting import formatter as fmt
 from BayesicFitting import formatter_init as fmtinit

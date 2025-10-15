@@ -1,6 +1,4 @@
 import numpy as numpy
-from . import Tools
-from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 from .Prior import Prior
 from .ExponentialPrior import ExponentialPrior
