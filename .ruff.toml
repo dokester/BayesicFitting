@@ -1,0 +1,10 @@
+exclude = [
+    "__init__.py",
+    "setup.py",
+    "*.ipynb",
+]
+
+[lint]
+select = [
+    "F401",  # Unused imports
+]
