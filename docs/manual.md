@@ -34,7 +34,38 @@ solid DodgerBlue">Contents</span>
 
 
 
-[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples target=_blank
+[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+
+[exBess]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/Bessel-J0-UserModel.ipynb
+[exCorr]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/CorrelatedErrors.ipynb
+[exHD20]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/HD2039.ipynb
+[exHerm]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/Hermite1d-AstropyModel.ipynb
+[exXand]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/XandYErrors.ipynb
+[exalph]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/alphaComae.ipynb
+[exarct]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/arctanfit.ipynb
+[exboyl]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/boyles-law.ipynb
+[exchir]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/chirp.ipynb
+[exchi2]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/chirp2.ipynb
+[excomb]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/combifit.ipynb
+[exexpf]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/expfit.ipynb
+[exfixp]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/fix-parameters.ipynb
+[exgaus]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/gaussfit.ipynb
+[exharm]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/harmonicfit.ipynb
+[exmode]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/modelcomparison.ipynb
+[exmrsf]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/mrs-fringes.ipynb
+[exnois]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/noise.ipynb
+[exnoi2]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/noise2.ipynb
+[exout2]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/outliers-2.ipynb
+[exoutl]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/outliers.ipynb
+[exrand]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/randommap.ipynb
+[exroun]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/roundtrip.ipynb
+[exseal]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/sealevel.ipynb
+[exsimp]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/simplemap.ipynb
+[exsimf]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/simplemapfit.ipynb
+[exsumm]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/summerdays.ipynb
+[extemp]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/temperature.ipynb
+
+
 
 &nbsp;
 
@@ -270,7 +301,7 @@ the original.
     pm3 = PolynomialModel( 1, fixed={1:pm2} )	# 3rd order: p0 + ( p1 + ( p2 + p3 * x ) * x ) * x
     # etc. But not as efficient as PolynomialModel( 3 )
 
-See also the [mrs-fringes example]([exlink]/mrs-fringes.ipynb).
+See also the [mrs-fringes example][exmrsf].
 
 ![FixedModels](images/manual-2.png "Figure 2")
 <table><tr>
@@ -436,7 +467,7 @@ Figure 5 shows examples of Compound Models with a pipe.
 Compound models are **Model**s and can be combined with other (compound)
 models into a new model. This way quite complicated models can be formed
 without worrying about internal consistency. See the 
-[gaussfit example]([exlink]/gaussfit.ipynb).
+[gaussfit example][exgaus].
 
 Compound models are non-linear
 unless all its constituents are linear and its operations are additive.
@@ -504,7 +535,7 @@ Figure 6 shows example of a Combi Model.
 </table>
     
 See also the 
-[combifit example]([exlink]/combifit.ipynb).
+[combifit example][excomb].
 
 A **Repeating Model** is another way to define a repetition of the same model.
 The difference is that **RepeatingModel**s can be [dynamic](#dynamic).
@@ -781,7 +812,7 @@ The maximize the [likelihood](#list-errdis) selected for the fitter.
 
     ftr = AmoebaFitter( xdata, model, errdis='laplace' )
 
-See the [summerdays example]([exlink]/summerdays.ipynb).
+See the [summerdays example][exsumm].
 
 
 ### Fitter Results.
@@ -852,13 +883,13 @@ subjective. However, in real life problems there are always limits
 on what can be measured in sensitivity, spectral range, duration,
 location etc. And consequentially on what values the parameters can attain. 
 
-See [example on model comparison]([exlink]/modelcomparison.ipynb) or
-[harmonicfit]([exlink]/harmonicfit.ipynb) for demonstration of the use of
+See [example on model comparison][exmode] or
+[harmonicfit][exharm] for demonstration of the use of
 evidence to determine the best model.
 For instructions on when to optimize the noise scale too, see
-[noise2 example]([exlink]/noise2.ipynb). 
+[noise2 example][exnoi2].
 For a demonstration on the influence of noise on model selection see
-[noise example]([exlink]/noise.ipynb).
+[noise example][exnois].
 
 ### Keep fixed.
 
@@ -880,7 +911,7 @@ the parameter should be fixed.
 Note that [fixing the parameter in the model](#fixedmodel) replaces
 a parameter permanently with the chosen value. 
 
-See the [fix parameters example]([exlink]/fix-parameters.ipynb)
+See the [fix parameters example][exfixp]
 for the suble differences between fixing the model, the fitter or the fit.
 
 ### Two or more dimensions.
@@ -909,9 +940,8 @@ map is set.
     print( mdl( fitter.xdata ).shape )      # the model however, returns  
     > [12]                                  # a 1-d version of y
 
-See [simplemap]([exlink]/simplemap.ipynb) for more about 
-the use of the keyword `map`. 
-And [randommap]([exlink]/randommap.ipynb) for random
+See [simplemap][exsimp] for more about the use of the keyword `map`. 
+And [randommap][exrand] for random
 observation in a 2-d object and about the explicit use of
 **ImageAssistant**.
 
@@ -950,8 +980,8 @@ lower panel the resulting weights are displayed.
 Robust fitting is even more dangerous than ordinary fitting. Never trust
 the results without thorough checking.
 
-This more elaborate [example]([exlink]/ouliers.ipynb) shows the
-suppression of irrelevant points.
+This more elaborate [example][exoutl] shows the suppression of
+irrelevant points. 
 
 <!--
 ### Normalize
@@ -971,7 +1001,7 @@ NestedSampler. From the samples, the optimal values for the model
 parameters, its standard deviations etc can be calculated.
 
 Nested sampling is an idea of David McKay and John Skilling.
-Skilling has written a separate chapter in [Sivia's book](./refrences.md/#sivia)
+Skilling has written a separate chapter in [Sivia's book](./references.md/#sivia)
 explaining the Nested Sampling idea, including an algorithm in C, which
 served as the basis (via JAVA) for our implementation. 
 
@@ -1015,7 +1045,7 @@ Set up the model with limits on the uniform priors of the parameters.
 
 The likelihood is calculated by the **GaussErrorDistribution**. By
 default it has a fixed scale. However in most real cases ( see 
-[noise2 example]([exlink]/noise2.ipynb) )  it is better to 
+[noise2 example][exnoi2] )  it is better to 
 treat the scale as a hyperparameter, which needs a prior, by default a
 **JeffreysPrior**, and limits.
 
@@ -1045,8 +1075,7 @@ From the **SampleList** numerous items can be extracted.
     mlpar = slist.maxLikelihoodParameters
 
 In the examples directory the use of **NestedSampler** is demonstrated
-in [HD2039]([exlink]/HD2039.ipynb) and
-[outliers2]([exlink]/outliers-2.ipynb).
+in [HD2039][exHD20] and [outliers2][exout2].
 
 
 **NestedSolver** applies the same algorithm to **OrderProblem**s, where 
@@ -1242,7 +1271,7 @@ At present only the **SoftMaxModel** is available.
 
 The use of a mixture of 2 error distributions
 (**MixedErrorDistribution**) is shown in
-[outliers2]([exlink]/outliers-2.ipynb).
+[outliers2][exout2].
 
 To avoid certain combinations of parameters a "constrain" attribute can be 
 attached to an **ErrorDistribution**. It needs to be a user-provided callable 
@@ -1391,7 +1420,7 @@ kernels and miscellaneous.
 #### simple models 1-dimensional
 
 + **ArctanModel**<br>
-    Arctangus Model. See [example]([exlink]/arctanfit.ipynb)
+    Arctangus Model. See [example][exarct]
 + **BasicSplinesModel**<br>
     General splines model of arbitrary order and with arbitrary knot settings.
 + **BSplinesModel**<br>
@@ -1401,15 +1430,15 @@ kernels and miscellaneous.
 + **ConstantModel**<br>
     ConstantModel is a Model which does not have any parameters.
 + **EtalonModel**<br>
-    Fabry-Perot Etalon Model. See [example]([exlink]/mrs-fringes.ipynb)
+    Fabry-Perot Etalon Model. See [example][exmrsf]
 + **ExpModel**<br>
-    Exponential Model. See [example]([exlink]/expfit.ipynb)
+    Exponential Model. See [example][exexpf]
 + **FreeShapeModel**<br>
     Pixelated Model.
 + **GaussModel**<br>
-    Gaussian Model. See [example]([exlink]/gaussfit.ipynb)
+    Gaussian Model. See [example][exgaus]
 + **HarmonicModel**<br>
-    Harmonic oscillator Model. See [example]([exlink]/harmonicfit.ipynb)
+    Harmonic oscillator Model. See [example][exharm]
 + **KernelModel**<br>
     Kernel Model, a Model build around a [**Kernel**](#synops-kernel).
 + **LogisticModel**<br>
@@ -1418,41 +1447,41 @@ kernels and miscellaneous.
     Lorentz profile
 + **PadeModel**<br>
     General Pade model of arbitrary degrees in numerator and denominator.
-    See [example]([exlink]/boyles-law.ipynb) 
+    See [example][exboyl]
 + **PolySineAmpModel**<br>
     Sine of fixed frequency with polynomials as amplitudes.
 + **PolynomialModel**<br>
     General polynomial model of arbitrary degree. 
-    See [example]([exlink]/sealevel.ipynb)
+    See [example][exseal]
 + **PowerLawModel**<br>
     General powerlaw model of arbitrary degree.
 + **PowerModel**<br>
     General power model of arbitrary degree.
-    See [example]([exlink]/boyles-law.ipynb)
+    See [example][exboyl]
 + **PseudoVoigtModel**<br>
     Weighted sum of Gauss and Lorentz models; approximation of **VoigtModel**
 + **RadialVelocityModel**<br>
     Radial velocity variations of a star, caused by an orbiting planet. 
-    [Gregory](#ref4).  See [example]([exlink]/HD2039.ipynb)
+    [Gregory](#ref4).  See [example][exHD20]
 + **SincModel**<br>
     Sinc Model.
 + **SineAmpModel**<br>
     Sine with fixed frequency.
 + **SineModel**<br>
-    Sinusoidal Model. See [example](exlink]/outliers.ipynb)
+    Sinusoidal Model. See [example][exoutl]
 + **SplinesModel**<br>
     General splines model of arbitrary order and with arbitrary knot settings.
-    See [example]([exlink]/mrs-fringes.ipynb)
+    See [example][exmrsf]
 + **VoigtModel**<br>
     Voigt's Gauss Lorentz convoluted model for spectral line profiles.
 
 #### Simple wrapper models
 + **AstropyModel**<br>
     Wrapper fro FittableModels from astropy.modeling.
-    See [example]([exlink]/Hermite1d-AstropyModel.ipynb)
+    See [example][exHerm]
 + **UserModel**<br>
     Wrapper for a user provided function f(x:p).
-    See [example]([exlink]/Bessel-J0-UserModel.ipynb)
+    See [example][exBess]
 
 #### Simple models 2-dimensional inputs
 
@@ -1461,10 +1490,10 @@ kernels and miscellaneous.
 + **FreeShape2dModel**<br>
     Pixelated 2-dim Model. (TBD)
 + **Kernel2dModel**<br>
-    Two dimensional **Kernel** Model. See [example]([exlink]/randommap.ipynb)
+    Two dimensional **Kernel** Model. See [example][exrand]
 + **PolySurfaceModel**<br>
     General polynomial surface model of arbitrary degree.
-    See [example]([exlink]/simplemapfit.ipynb)
+    See [example][exsimf]
 + **ProductModel**<br>
     Direct product of 2 (or more) models. Two (or more) dimensional.
 + **SurfaceSplinesModel**<br>
@@ -1474,7 +1503,7 @@ kernels and miscellaneous.
 
 + **StellarOrbitModel**<br>
     Orbit of a double star as function of time, resulting in 2d sky position.
-    [Boule](#ref6). See [example]([exlink]/alphaComae.ipynb)
+    [Boule](#ref6). See [example][exalph]
 
 #### Simple models more-dimensional inputs and outputs
 
@@ -1505,7 +1534,7 @@ They can only be used with **NestedSampler**.
     BracketModel provides brackets to a chain of models.
 + **CombiModel**<br>
     CombiModel combines a number of copies of the same model.
-    See [example]([exlink]/combifit.ipynb)
+    See [example][excomb]
 
 #### Base models.
 
@@ -1539,7 +1568,7 @@ common to all classes that inherit from them.
 #### Linear fitters
 
 + **Fitter**<br>
-    Fitter for linear models. See [example]([exlink]/temperature.ipynb)
+    Fitter for linear models. See [example][extemp]
 + **QRFitter**<br>
     Fitter for linear models, using QR decomposition.
 
@@ -1549,13 +1578,13 @@ common to all classes that inherit from them.
     CurveFitter implements scipy.optimize.curve_fit.
 + **LevenbergMarquardtFitter**<br>
     Non-linear fitter using the Levenberg-Marquardt method.
-    See [example]([exlink]/outliers.ipynb)
+    See [example][exoutl]
 
 #### Nonlinear fitters (least-squares and maximum likelihood)
 
 + **AmoebaFitter**<br>
     Fitter using the simulated annealing simplex minimum finding algorithm,
-    See [example]([exlink]/combifit.ipynb)
+    See [example][excomb]
 + **ScipyFitter**<br>
     Unified interface to the Scipy minimization module `minimize`, to fit 
     data to a model.
@@ -1563,7 +1592,7 @@ common to all classes that inherit from them.
     - **NelderMeadFitter**<br>
         Nelder Mead downhill simplex.
     - **PowellFitter**<br>
-        Powell's conjugate direction method. See [example]([exlink]/summerdays.ipynb)
+        Powell's conjugate direction method. See [example][exsumm]
     - **ConjugateGradientFitter**<br>
         Conjugate Gradient Method of Polak and Ribiere.
     - **BfgsFitter**<br>
@@ -1598,10 +1627,10 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **RobustShell**<br>
     For fitting in the presence of outliers. 
-    See [example]([exlink]/outliers.ipynb)
+    See [example][exoutl]
 + **ImageAssistant**<br>
     Helper class in case the data are in the form of an image.
-    See [example]([exlink]/randommap.ipynb)
+    See [example][exrand]
 + **AnnealingAmoeba**<br>
     Minimizer using an annealing Nelder-Mead simplex.
 + **MonteCarlo**<br>
@@ -1615,9 +1644,9 @@ BaseFitters contain common methods for fitters that inherit from them.
 
 + **NestedSampler**<br>
     A novel technique to do Bayesian calculation.
-    See [example1]([exlink]/HD2039.ipynb) or
-    [example2]([exlink]/alphaComae.ipynb) or
-    [example3]([exlink]/outliers-2.ipynb)
+    See [example1][exHD20] or 
+    [example2][exalph] or 
+    [example3][exout2]
 + **PhantomSampler**<br>
     A possibly faster version of NestedSampler
 + **NestedSolver**<br>
@@ -1642,18 +1671,18 @@ BaseFitters contain common methods for fitters that inherit from them.
     Default problem
 + **ErrorsInXandYProblem**<br>
     Classic problem with errors in both xdata and ydata.
-    See [example]([exlink]/XandYErrors.ipynb)
+    See [example][exXand]
 + **EvidenceProblem**<br>
     For **Dynamic** and **Modifiable** models. [Kester and Mueller (2021)](./references.md/#kester8).
-    see [example]([exlink]/chirp2.ipynb).
+    see [example][exchi2]
 + **MultipleOutputProblem**<br>
     Problems with more dimensional output values.
-    See [example]([exlink]/alphaComae.ipynb)
+    See [example][exalph]
 + **OrderProblem**<br>
     Problems where the order of the data provides the solution.
 + **SalesmanProblem**<br>
     Traveling salesman problem.
-    See [example]([exlink]/roundtrip.ipynb)
+    See [example][exroun]
 
 
 <!-- dont remove -->
@@ -1677,10 +1706,10 @@ BaseFitters contain common methods for fitters that inherit from them.
     Laplace prior distribution.
 + **UniformPrior**<br>
     Uniform prior distribution, for location parameters.
-    See [example]([exlink]/XandYErrors.ipynb)
+    See [example][exXand]
 + **CircularUniformPrior**<br>
     Uniform prior distribution wrapped at the endpoints, for phase-like parameters.
-    See [example]([exlink]/alphaComae.ipynb)
+    See [example][exalph]
 
 <!-- dont remove -->
 
@@ -1696,26 +1725,26 @@ BaseFitters contain common methods for fitters that inherit from them.
     To calculate the distrance travelled by the salesman.
 + **GaussErrorDistribution**<br>
     To calculate a Gauss likelihood.
-    See [example]([exlink]/outliers-2.ipynb)
+    See [example][exout2]
 + **Gauss2dErrorDistribution**<br>
     To calculate a Gauss likelihood for correlated error in X and Y.
-    See [example]([exlink]/CorrelatedErrors.ipynb)
+    See [example][exCorr]
 + **ExponentialErrorDistribution**<br>
     To calculate a generalized Gaussian likelihood.
 + **LaplaceErrorDistribution**<br>
     To calculate a Laplace likelihood.
 + **MixedErrorDistribution**<br>
     A mixture of 2 errordistributions
-    See [example]([exlink]/outliers-2.ipynb)
+    See [example][exout2]
 + **ModelDistribution**<br>
     For use in **EvidenceProblem**
-    See [example]([exlink]/chirp.ipynb)
+    See [example][exchir]
 + **PoissonErrorDistribution**<br>
     To calculate a Poisson likelihood.
-    See [example]([exlink]/summerdays.ipynb)
+    See [example][exsumm]
 + **UniformErrorDistribution**<br>
     To calculate a Uniform likelihood.
-    See [example]([exlink]/outliers-2.ipynb)
+    See [example][exout2]
 
 <!-- dont remove -->
     
