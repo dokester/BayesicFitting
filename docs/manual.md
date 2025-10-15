@@ -34,7 +34,8 @@ solid DodgerBlue">Contents</span>
 
 
 
-[exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
+[exlink]:
+https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples target=_blank
 
 &nbsp;
 
