@@ -37,7 +37,9 @@ solid DodgerBlue">Contents</span>
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
 [exBess]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/Bessel-J0-UserModel.ipynb
+[exCoro]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/Corona.ipynb
 [exCorr]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/CorrelatedErrors.ipynb
+[exUefa]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/Uefa2022.ipynb
 [exHD20]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/HD2039.ipynb
 [exHerm]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/Hermite1d-AstropyModel.ipynb
 [exXand]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/XandYErrors.ipynb
@@ -58,6 +60,7 @@ solid DodgerBlue">Contents</span>
 [exout2]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/outliers-2.ipynb
 [exoutl]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/outliers.ipynb
 [exrand]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/randommap.ipynb
+[exradi]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/RadioSource.ipynb
 [exroun]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/roundtrip.ipynb
 [exseal]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/sealevel.ipynb
 [exsimp]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/simplemap.ipynb
@@ -235,7 +238,7 @@ It has 3 parameters to be fitted.
 
 ![SimpleModels](images/manual-1.png "Figure 1")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 1 shows 3 simple models: PolynomialModel (blue), GaussModel (red) 
 and ArctanModel (green).
@@ -305,7 +308,7 @@ See also the [mrs-fringes example][exmrsf].
 
 ![FixedModels](images/manual-2.png "Figure 2")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 2 shows the 2 fixed models listed above: PolynomialModel (red)
 and ArctanModel (green).
@@ -347,7 +350,7 @@ To construct an absorption line with a voigt profile on a constant background:
 
 ![CompoundModels1](images/manual-3.png "Figure 3")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 3 shows examples of Compound Models using addition and subtraction. 
 </td></tr>
@@ -375,7 +378,7 @@ in this case 1.0 for any value of `x`.
 
 ![CompoundModels2](images/manual-4.png "Figure 4")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 4 shows examples of Compound Models using multiplication and division.
 </td></tr>
@@ -458,7 +461,7 @@ models.
 
 ![CompoundModels3](images/manual-5.png "Figure 5")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 5 shows examples of Compound Models with a pipe.
 </td></tr>
@@ -507,6 +510,7 @@ The **ConstantModel** has no parameters and strictly speaking, it can not
 be fitted. It states that the the data, except for the constant form, is
 mere noise.  It might seem a useless class, but it can be interesting in
 model comparison. E.g. to decide whether some feature is present or not.
+See [example][exradi].
 
     m1 = ConstantModel( value=1.5 )
     m2 = ConstantModel( fixedModel=ExpModel( params=[1.0, -2.0] ) )
@@ -528,7 +532,7 @@ have a fixed separation. The remaining parameters are
 
 ![CombiModel](images/manual-c.png "Figure 6")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 6 shows example of a Combi Model.
 </td></tr>
@@ -555,7 +559,7 @@ value is 0 everywhere except for a region around zero.
 
 ![KernelModels](images/manual-k.png "Figure 7")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 7 shows examples of KernelModels. The Biweight kernel is in blue;
 the Cosine in green. The remaining 3 are 0, 1 and 4 convolutions of Tophat.
@@ -575,7 +579,7 @@ Two dimensional kernel models also exist: **Kernel2dModel**. They come is
 
 ![Kernel2dModels](images/manual-k2.png "Figure 8")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 8 shows examples of Kernel2dModels. Lower left is a circular 2d
 kernel; lower right an elliptic one and in the upper center a rotated one. 
@@ -607,7 +611,7 @@ and no maximum. The growPrior is an **ExponentialPrior**.
 mdl2 starts as a HarmonicModel of order 0 with a maximum at 6. The
 growPrior is a **UniformPrior**. 
 
-mdl3 consists of at least 1 repetition of a **GaussModel**, up to 6 repetions
+mdl3 consists of at least 1 repetition of a **GaussModel**, up to 6 repetitions
 are possible, where all **GaussModel**s have the same value for the 2nd
 parameters (width).
 
@@ -629,6 +633,9 @@ It is indeed debatable whether the internal structure is not just
 another set of parameters. We chose this way as changes in the internal
 structure can be much more complicated than a simple change in value. 
 
+An example of a Dynamic, Modifyable model can be found [here][exCoro] or
+[here][exchir].
+
 <a name="multioutput"></a>
 ### Multiple Output Models
 
@@ -636,7 +643,7 @@ Some models are easier defined when it results in 2 (or more) values per
 observation. Eg. the outcome of football match (3-1), or the position of
 a star in orbit around another (distance and angle). These model have an
 extra attribute `ndout` indicating how many output values per
-observation are present. 
+observation are present. See [example][exUefa].
 
 The use of **MultipleOutputProblem** is needed in **NestedSampler** to
 flatten the multiple outputs.
@@ -651,6 +658,9 @@ astropy.modeling.Model. Any **FittableModel**, wrapped in an
     from astropy import modeling
     gm = modeling.models.Gaussian1D()
     model = AstropyModel( gm )
+
+See [example][exHerm] for how to construct and use an Astropy-fittable 
+model.
 
 Using **UserModel**, externally generated functionals of the form f(x:p)
 can participate.
@@ -671,6 +681,8 @@ correctness of the (partial) derivatives can be checked with the method
     model.testPartial( x, p, silent=False )
 
 The methods are compared with numeric calculations of df/dp and df/dx.
+
+See [example][exBess] for how to construct and use a user-defined model
 
 <a name="fitter"></a>
 ## 4. Fitters 
@@ -695,33 +707,40 @@ method is computationally simple, especially if **f** is a linear
 function in its parameters **p**. These problems can be solved by (the
 equivalent of) one matrix inversion.
 Non-linear least-squares methods also exist. They are more demanding and
-require iterative methods to arrive at the minimum. 
+require iterative methods to arrive at the minimum.  Still, they are
+relatively simple.
 
-Other methods focus around the likelihood, which is maximized. Maximum
+Other methods focus around the maximalization of the likelihood. Maximum
 likelihood is attained when the errors are minimal.
-Several likelihood functions are available in BayesicFitting. They are
-called [**ErrorDistribution**](#list-errdis).
+Several likelihood functions, defining the probability of the errors,
+obtained by the combination of model and data, are available in BayesicFitting.
+These likelihoods are also known as [**ErrorDistribution**](#list-errdis)s.
 Using the **GaussErrorDistribution**, while maximizing the likelihood 
-is equivalent to using the least-squares method.
+is equivalent to using the least-squares method. And if the **Prior** is
+a **UniformPrior** for all parameters, the maximum likelihood solution
+is the same as the maximum posterior solution.  While the posterior
+itself is a multidimensional Gaussian.
+
+Procedures like least squares and maximum likelihood are usefull parts
+of the Bayesian framework. 
 
 ### Data Quality.
 
 In a fitting process, it often occurs that data points are of different 
 quality due to a variety of reasons. 
-We can express the quatilies as either importance weights attached to 
+We can express the qualities as either importance weights attached to 
 the data points, or as a scale factor in the residuals. 
 In our paper [Kester and Mueller (2021)](./references.md/#kester8) we 
 expressed our preference for weights.
-However, we reconsidered it in the light of correlated errors in both axes.
-[Kester 2023](./dataquality.html)
+However, we reconsidered it in the light of correlated errors in both
+axes, see [Data Quality](./dataquality.html)
 Since version 3.1.0 of BayesicFitting, we offer both options.
 
 
 #### Weights.
 
 Up on fitting, weights can be provided as a vector of the same length as
-the data vector. 
-The behaviour of the fitter is such
+the data vector.  The behaviour of the fitter is such
 that when a point has a weight of n, this is equivalent to a case where that
 particular point is present in the dataset n times. This concept is
 extended to non-integral values of the weights.<br>
@@ -741,7 +760,7 @@ Accuracies do not change the "number of observations", as weights do. Each
 measurement might have a different accuracy; it is still one measurement. 
 When choosing weight = accuracy<sup>-2</sup>, the difference only matters 
 in the calculation of the evidence.<br>
-Accuracy can be 1 number, valid for all data, or a vector of N, one value for 
+Accuracy can be one number, valid for all data, or a vector of N, one value for 
 each data point. When there are possibly errors in both the dependent variable 
 and the independent variable, it can be a matrix of (N,2) or of (N,3). 
 In the latter case the third number is the (Pearson) correlation coefficient 
@@ -766,7 +785,7 @@ This package has 2 linear fitters: **Fitter** and **QRFitter**.
     
 ![LinFit](images/manual-6.png "Figure 9")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 9. A simple linear fit. The black dots are the data,
 the red line is the model and the green line a one-sigma
@@ -797,7 +816,7 @@ maximum likelihood fitters too.
 
 ![NonLinFit](images/manual-7.png "Figure 10")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 10. A non-linear fit.
 </td></tr>
@@ -969,7 +988,7 @@ governed by one of the [kernels](#synops-kernel).
 
 ![RobustFit](images/manual-8.png "Figure 11")
 <table><tr>
-<td style="width: 20px;">  </td>
+<td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 11. A robust fit. The data points are in black; the outliers are
 red. The normal fit is the red line; the robust fit is green. In the
@@ -992,7 +1011,9 @@ irrelevant points.
 -->
 
 <a name="ns"></a>
-## 5. NestedSampler, PhantomSampler and NestedSolver
+## 5. Samplers
+
+### NestedSampler
 
 **NestedSampler** is a novel technique to do Bayesian calculations.  It
 samples the Posterior while integrating it to calculate the evidence.
@@ -1011,21 +1032,15 @@ started. Every iteration the walker with the lowest likelihood is
 discarded and replaced by a copy of one of the remaining walkers. The
 copied walker is wandered around randomly by one or more **Engine**s, 
 provided it keeps a higher likelihood than the value of the discarded
-walker. This way the ensemble of walkers stays randomly distributed over
+walker. Each of these steps is at a valid position, where they could
+be part of the ensemble. The steps are called phantoms. 
+By this procedure the ensemble of walkers stays randomly distributed over
 the prior while the ensemble as a whole slowly ascends the likelihood
 to the top. The discarded walker is kept as a sample of the posterior,
 appropriately weighted. 
-**NestedSampler** uses **Prior**s for the initial distribution of the 
-parameters and an **ErrorDistribution** to calculate the likelihoods.
-
-**PhantomSampler** is an extension of **NestedSampler**, in the sense 
-that it uses (some of) the intermediate positions that the walkers take 
-when they are wandered around by the **Engine**s. These positions are 
-commonly known as phantoms. How many phantoms are used, is governed by 
-the keyword step=. In each iteration `step` percent of the ensemble is 
-replace by new phantom walkers. The benefits of the scheme is a step-fold
-increase in calculation speed; the downside is less precision and less
-exploratory power. The value of `step` is limited to 10.
+**NestedSampler** uses **Prior**s for the initial distribution and for
+the sampling strategy of the parameters. An **ErrorDistribution** is
+used to calculate the likelihoods.
 
 **NestedSampler** needs more information to run than ordinary
 **Fitter**s. It needs priors for all  its parameters and it needs a
@@ -1044,7 +1059,7 @@ Set up the model with limits on the uniform priors of the parameters.
     model.setLimits( lolim, hilim )	    # use UniformPrior with limits
 
 The likelihood is calculated by the **GaussErrorDistribution**. By
-default it has a fixed scale. However in most real cases ( see 
+default it has a fixed scale (= 1). However in most real cases ( see 
 [noise2 example][exnoi2] )  it is better to 
 treat the scale as a hyperparameter, which needs a prior, by default a
 **JeffreysPrior**, and limits.
@@ -1077,6 +1092,22 @@ From the **SampleList** numerous items can be extracted.
 In the examples directory the use of **NestedSampler** is demonstrated
 in [HD2039][exHD20] and [outliers2][exout2].
 
+<a name="phantomsampler"></a>
+### PhantomSampler
+
+**PhantomSampler** is an extension of **NestedSampler**, in the sense 
+that it uses all phantoms to calculate the evidence integral. 
+The phantoms are the intermediate steps taken by the walker when it
+is wandered around by the engines. In general there are much more
+phantoms than walkers. Keeping the same density in integration steps,
+we need less walkers, which speeds up the algorithm. By default
+**PhantomSampler** has an ensemble of 20 walkers. 
+
+The downside is possibly less precision due to correlation between the
+phantoms.
+
+<a name="nestedsolver"></a>
+### NestedSolver
 
 **NestedSolver** applies the same algorithm to **OrderProblem**s, where 
 the problem is solved by finding an optimal order. The parameters are no
@@ -1104,7 +1135,7 @@ measured data at the locations of the indepemdent variables. Optionally
 there are weights and/or accuracies. 
 The **ClassicProblem** is invoked by default.
 
-Other **Problem**s need to be separately invoked.
+Other **Problem**s need to be invoked separately.
 
 In case there could be errors both in the independent variable (x) and in
 the dependent variable (y), the **ErrorsInXandYProblem** should be
@@ -1509,6 +1540,7 @@ kernels and miscellaneous.
 
 + **FootballModel**<br>
     More or less complex model for the outcome of football marches.
+    See [example][exUefa]
 + **SoftMaxModel**<br>
     Generalization of the LogisticModel over multiple inputs and outputs
 
