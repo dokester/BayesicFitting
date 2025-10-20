@@ -3,7 +3,6 @@
 import numpy as numpy
 import os
 from numpy.testing import assert_array_almost_equal as assertAAE
-from astropy import units
 import unittest
 import FitPlot
 

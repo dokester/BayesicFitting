@@ -1,7 +1,6 @@
 import numpy as numpy
 import math
 import warnings
-from . import Tools
 
 from .Engine import Engine
 from .Engine import DummyPlotter
@@ -13,7 +12,7 @@ from .Tools import setAttribute as setatt
 __author__ = "Do Kester"
 __year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.2.5"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 

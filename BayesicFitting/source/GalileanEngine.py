@@ -1,21 +1,22 @@
 import numpy as numpy
-from astropy import units
 import math
-import warnings
 import sys
-from . import Tools
 from .Formatter import formatter as fmt
 from .Formatter import fma
 
 from .Engine import Engine
 from .Engine import DummyPlotter
 
-import matplotlib.pyplot as plt
+### Uncomment all plot sections
+#> sed '/##PlotSection/, /^$/ s/^#PLT/    /g'
+### Comment back all plot sections
+#> sed '/##PlotSection/, /^$/ s/^    /#PLT/g'
+
 
 __author__ = "Do Kester"
 __year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.2.5"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -97,6 +98,9 @@ class GalileanEngine( Engine ):
         self._decrement = 1 / ( 1 + self._balance * self._dsize )
 
         self.plotter = DummyPlotter( )
+
+##PlotSection
+#PLT    self.plot = False               ## for checking the findEdge method
 
     def copy( self ):
         """ Return copy of this.  """
@@ -287,15 +291,17 @@ class GalileanEngine( Engine ):
         restep : float
             part of the step outside lowLhood area. 
         """
-        if plot :
-            Led = [0] * 101
-            xed = [0.01*ked for ked in range( 101 )]
-            for ked in range( 101 ) :
-                ped = ptry.copy()
-                ped[fitIndex] = um.trialStep( 0.01*ked, size )
-                Led[ked] = self.errdis.logLikelihood( problem, ped )
-            plt.plot( xed, Led, 'b-' )
-            plt.plot( [0,1], [lowLhood,lowLhood], 'g-' )
+##PlotSection
+#PLT    if self.plot :
+#PLT        import matplotlib.pyplot as plt
+#PLT        Led = [0] * 101
+#PLT        xed = [0.01*ked for ked in range( 101 )]
+#PLT        for ked in range( 101 ) :
+#PLT            ped = ptry.copy()
+#PLT            ped[fitIndex] = um.trialStep( 0.01*ked, size )
+#PLT            Led[ked] = self.errdis.logLikelihood( problem, ped )
+#PLT        plt.plot( xed, Led, 'b-' )
+#PLT        plt.plot( [0,1], [lowLhood,lowLhood], 'g-' )
 
         ptry[fitIndex] = um.trialStep( 0.5, size )    # params at mid point
         Lmid = self.errdis.logLikelihood( problem, ptry )
@@ -313,10 +319,11 @@ class GalileanEngine( Engine ):
             pedge[fitIndex] = um.trialStep( f, size )
             Ledge = self.errdis.logLikelihood( problem, pedge )
 
-            if plot :
-                plt.plot( [f], [Ledge], 'r*' )
-                plt.text( f, Ledge, "%d"%ktr )
-                plt.plot( [f,f], [lowLhood,Ledge], 'k-' )
+##PlotSection
+#PLT        if self.plot :
+#PLT            plt.plot( [f], [Ledge], 'r*' )
+#PLT            plt.text( f, Ledge, "%d"%ktr )
+#PLT            plt.plot( [f,f], [lowLhood,Ledge], 'k-' )
 
             if abs( Ledge - lowLhood ) < eps :
                 break
@@ -329,8 +336,9 @@ class GalileanEngine( Engine ):
 
 #        print( ktr, Ledge, lowLhood )
 
-        if plot :
-            plt.show()
+##PlotSection
+#PLT    if self.plot :
+#PLT        plt.show()
 
 
         return pedge, 1 - f
@@ -361,10 +369,11 @@ class GalileanEngine( Engine ):
         if a == 0 :
             return 1 if b == 0 else ( lowL - c ) / b
 
-        if plot :
-            tt = numpy.linspace( x[0], x[2], 101 )
-            aa = a * tt * tt + b * tt + c
-            plt.plot( tt, aa, 'r-' )
+##PlotSection
+#PLT    if self.plot :
+#PLT        tt = numpy.linspace( x[0], x[2], 101 )
+#PLT        aa = a * tt * tt + b * tt + c
+#PLT        plt.plot( tt, aa, 'r-' )
 
         det = b * b - 4 * a * ( c - lowL )
         det = 0 if det < 0 else math.sqrt( det )

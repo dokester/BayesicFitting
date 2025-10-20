@@ -6,11 +6,8 @@ import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
 import os
-from astropy import units
 import math
-import sys
 import matplotlib.pyplot as plt
-from StdTests import stdModeltest
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt

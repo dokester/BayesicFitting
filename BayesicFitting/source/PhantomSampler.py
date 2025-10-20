@@ -1,56 +1,21 @@
 from __future__ import print_function
 
 import numpy as numpy
-from astropy import units
 import math
-from . import Tools
-from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
-from .Formatter import fma
-from . import Plotter
-import sys
-import warnings
-import matplotlib.pyplot as plt
 
 from .NestedSampler import NestedSampler
 
 
-from .Explorer import Explorer
-from .Model import Model
-from .Walker import Walker
-from .WalkerList import WalkerList
-from .Sample import Sample
-from .SampleList import SampleList
 
-from .Problem import Problem
-from .ClassicProblem import ClassicProblem
-from .ErrorsInXandYProblem import ErrorsInXandYProblem
 
-from .ErrorDistribution import ErrorDistribution
-from .ScaledErrorDistribution import ScaledErrorDistribution
-from .GaussErrorDistribution import GaussErrorDistribution
-from .LaplaceErrorDistribution import LaplaceErrorDistribution
-from .PoissonErrorDistribution import PoissonErrorDistribution
-from .CauchyErrorDistribution import CauchyErrorDistribution
-from .UniformErrorDistribution import UniformErrorDistribution
-from .ExponentialErrorDistribution import ExponentialErrorDistribution
 
-from .Engine import Engine
-from .StartEngine import StartEngine
-from .ChordEngine import ChordEngine
-from .GibbsEngine import GibbsEngine
-from .GalileanEngine import GalileanEngine
-from .StepEngine import StepEngine
 ## for Dynamic Models import the classes
-from .BirthEngine import BirthEngine
-from .DeathEngine import DeathEngine
 ## for Modifiable Models:
-from .StructureEngine import StructureEngine
 
 __author__ = "Do Kester"
-__year__ = 2023
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.0"
+__version__ = "3.2.5"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -69,7 +34,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2023 Do Kester
+#  *    2017 - 2025 Do Kester
 
 class PhantomSampler( NestedSampler ):
     """

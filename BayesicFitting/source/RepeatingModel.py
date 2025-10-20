@@ -1,20 +1,16 @@
 import numpy as numpy
-from astropy import units
-import math
 from . import Tools
 from .Tools import setAttribute as setatt
-from .Formatter import formatter as fmt
 
 from .Model import Model
 from .Dynamic import Dynamic
 from .ExponentialPrior import ExponentialPrior
 from .UniformPrior import UniformPrior
-from .Prior import Prior
 
 __author__ = "Do Kester"
 __year__ = 2025
 __license__ = "GPL"
-__version__ = "3.2.4"
+__version__ = "3.2.5"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 

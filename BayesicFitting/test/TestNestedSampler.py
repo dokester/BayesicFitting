@@ -3,14 +3,9 @@
 
 import unittest
 import os
-import time
 import numpy as numpy
-from astropy import units
 import math
-from numpy.testing import assert_array_almost_equal as assertAAE
-from FitPlot import plotFit
 
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 from BayesicFitting import *

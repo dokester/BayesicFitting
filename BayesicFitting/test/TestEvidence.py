@@ -4,7 +4,6 @@ import unittest
 import os
 import numpy as np
 import math
-from numpy.testing import assert_array_almost_equal as assertAAE
 
 import matplotlib.pyplot as plt
 from BayesicFitting import *

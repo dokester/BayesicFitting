@@ -3,8 +3,6 @@
 import unittest
 import os
 import numpy as numpy
-from astropy import units
-import math
 import matplotlib.pyplot as plt
 
 from StdTests import stdModeltest

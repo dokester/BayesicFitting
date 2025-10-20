@@ -1,10 +1,9 @@
 import numpy as numpy
-from . import Tools
 
 __author__ = "Do Kester"
 __year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.2.5"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 

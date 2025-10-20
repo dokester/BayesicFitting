@@ -4,9 +4,6 @@ import unittest
 import numpy as numpy
 import math
 from numpy.testing import assert_array_almost_equal as assertAAE
-from astropy import units
-import matplotlib.pyplot as plt
-import warnings
 
 from BayesicFitting import logFactorial
 

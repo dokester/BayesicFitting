@@ -5,7 +5,6 @@ import os
 import numpy as numpy
 from numpy.testing import assert_array_almost_equal as assertAAE
 
-from astropy import units
 import math
 import matplotlib.pyplot as pyplot
 

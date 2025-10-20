@@ -2,18 +2,13 @@
 
 import unittest
 import os
-import math
 import numpy as numpy
-from astropy import units
-from astropy import modeling
 #from astropy.modeling.models import Gaussian1D
 #from astropy.modeling.models import Polynomial1D
 import matplotlib.pyplot as plt
-import warnings
 
 from numpy.testing import assert_array_almost_equal as assertAAE
 from numpy.testing import assert_array_equal as assertAE
-from StdTests import stdModeltest
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt

@@ -3,15 +3,10 @@
 import unittest
 import os
 import numpy as numpy
-from astropy import units
-from numpy.testing import assert_array_equal as assertAE
 from numpy.testing import assert_array_almost_equal as assertAAE
-import math
-import matplotlib.pyplot as plt
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
-from BayesicFitting import fma
 
 
 __author__ = "Do Kester"

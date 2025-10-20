@@ -1106,6 +1106,8 @@ we need less walkers, which speeds up the algorithm. By default
 The downside is possibly less precision due to correlation between the
 phantoms.
 
+The **PhantomSampler** is operated in the same way as **NestedSampler**.
+
 <a name="nestedsolver"></a>
 ### NestedSolver
 
@@ -1116,9 +1118,9 @@ example is the traveling salesman problem. However all kind of scheduling
 problems fall in this category too.
 
 A problem specific cost function functions as a (unnormalized) likelihood. 
-
-The **NestedSolver** returns the last (best) sample as the solution to the 
-order problem.
+As the likelihood is unnormalized, **NestedSolver** can not calculate an
+evidence. Instead, **NestedSolver**'s `solve()` method returns the last 
+(best) sample as the solution of the order problem.
 
 
 <a name="problem"></a>
@@ -1131,7 +1133,7 @@ are needed to solve the problem, where the parameters constitute the
 solution. 
 
 A **ClassicProblem** consists of a parameterized model with a list of
-measured data at the locations of the indepemdent variables. Optionally
+measured data at the locations of the independent variables. Optionally
 there are weights and/or accuracies. 
 The **ClassicProblem** is invoked by default.
 
@@ -1155,7 +1157,7 @@ The extra parameters needed here, are called nuisance parameters.
 For models that naturally produce 2 or more dimensional outputs (like
 the **StellarOrbitModel**) the **MultipleOutputProblem** need to be
 invoked. It just reshapes the residuals into a 1-dim array before it is
-used to calculate the likelihood..
+used to calculate the likelihood.
 
 The **EvidenceProblem** uses the evidence calculated for different
 instantiations of a **Modifiable** model, as "likelihood" in a next
@@ -1188,16 +1190,30 @@ A **Sample** is a collection of items.
 + hyper : array-like (optional)<br>
     list of hyper parameters from the **ErrorDistribution**.
 + nuisance : array-like (optional)<br>
-    list of nuisance parameters from **ErrorsInXandYProblem**.
+    list of nuisance parameters.
 + logL : float<br>
-    log Likelihood = log Prob( data | params )
+    log Likelihood = log P( data | params )
 + logW : float<br>
-    log weight. Relative weight of this sample.
+    log weight. The weights are found as the exp( logW ).
+    The weights sum to 1.0 when normalized
 + fitIndex : None or array-like<br>
     list of all parameters to be fitted; None is all.
+    
 
-**Sample**s can be collected in a **SampleList**.
-The resulting samples from the posterior are collected in a **SampleList**.
+The resulting samples from the posterior are collected in list of
+samples, a **SampleList**.  Once a sample list is obtained from a
+NestedSampler run, weighted average parameters and scale can be obtainde
+from it.  The maximum likelihood version of the same, is located at the
+last index of the sample list.  Median and modus version can be found at
+the midpoint of the cumulative weights, resp.  the maximum value of the
+weights. 
+
+    slist = ns.samples
+    param = slist.parameters		## same as params above
+    mlpar = slist.maxLikelihoodParameters
+    
+
+
 
 When using the samples of the posterior for other purposes than are
 provided in **SampleList**, all items derived from individual

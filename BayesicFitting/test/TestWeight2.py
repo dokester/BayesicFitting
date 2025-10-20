@@ -3,8 +3,6 @@
 import unittest
 import os
 import numpy as numpy
-from astropy import units
-import math
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 from BayesicFitting import *

@@ -4,12 +4,9 @@ import unittest
 import os
 import numpy as numpy
 import math
-from astropy import units
 import matplotlib.pyplot as plt
-import warnings
 from numpy.testing import assert_array_almost_equal as assertAAE
 
-from StdTests import stdModeltest
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt

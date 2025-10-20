@@ -3,7 +3,6 @@
 import numpy as numpy
 import os
 import unittest
-from astropy import units
 import math
 import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE

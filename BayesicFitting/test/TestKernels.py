@@ -5,7 +5,6 @@ import os
 import numpy as numpy
 from astropy import units
 import matplotlib.pyplot as plt
-import warnings
 
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt

@@ -1,14 +1,9 @@
 # run with : python3 -m unittest TestPhantomCollection
 
 import unittest
-import numpy as np
-import math
 import os
 
-from numpy.testing import assert_array_equal as assertAE
-from numpy.testing import assert_array_almost_equal as assertAAE
 
-import matplotlib.pyplot as plt
 from BayesicFitting import *
 from BayesicFitting import formatter as fmt
 

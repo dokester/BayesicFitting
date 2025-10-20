@@ -1,15 +1,12 @@
 import numpy as numpy
 import math
 
-from .Walker import Walker
 from .WalkerList import WalkerList
-from .Formatter import formatter as fmt
-from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2024
+__year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.1"
+__version__ = "3.2.5"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +25,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *           2024 Do Kester
+#  *           2025 Do Kester
 
 class PhantomCollection( object ):
     """

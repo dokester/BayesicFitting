@@ -50,6 +50,9 @@ DOI: 10.5281/zenodo.2597200
 <a name="whatsnew"></a>
 ## What's new.
 
+ + 20 Oct 2025 version 3.2.5<br>
+   * Removed unused import statements from source and test (pull request #1)
+
  + 13 Aug 2025 version 3.2.4<br>
    * Lauch new web site https://dokester.github.io/BayesicFitting/
      - Almost all docstrings adapted for the new site.
