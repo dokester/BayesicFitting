@@ -1,6 +1,7 @@
 include BayesicFitting/examples/*.ipynb
-include BayesicFitting/examples/data/*.csv
+include BayesicFitting/examples/data/*
 include docs/images/*.dia
 include docs/images/*.png
+include docs/images/*.svg
 include docs/*.md
 include LICENSE

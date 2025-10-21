@@ -1202,8 +1202,8 @@ A **Sample** is a collection of items.
 
 The resulting samples from the posterior are collected in list of
 samples, a **SampleList**.  Once a sample list is obtained from a
-NestedSampler run, weighted average parameters and scale can be obtainde
-from it.  The maximum likelihood version of the same, is located at the
+NestedSampler run, weighted average parameters and scale can be
+calculated.  Maximum likelihood versions of the same, are located at the
 last index of the sample list.  Median and modus version can be found at
 the midpoint of the cumulative weights, resp.  the maximum value of the
 weights. 
@@ -1211,7 +1211,7 @@ weights.
     slist = ns.samples
     param = slist.parameters		## same as params above
     mlpar = slist.maxLikelihoodParameters
-    
+    medianIndex = slist.medianIndex
 
 
 
