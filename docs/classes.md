@@ -1,6 +1,5 @@
 ---
 ---
-<!--
 
 <div class="dropdown3">
   <span style="background-color: DodgerBlue; color: White; border:5px
@@ -40,9 +39,6 @@ solid DodgerBlue">Contents</span>
 </div>
 </div>
 
--->
-
-{% include classes-dropdown.md %}
 
 [exlink]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples
 
