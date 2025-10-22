@@ -1083,11 +1083,7 @@ optimal fit of the model are available from **NestedSampler**.
 
 The values are actually obtained from the **SampleList**, a list of
 **Sample**s, that is the other result of the **NestedSampler**.
-From the **SampleList** numerous items can be extracted.
-
-    slist = ns.samples
-    param = slist.parameters		## same as params above
-    mlpar = slist.maxLikelihoodParameters
+See the [**SampleList**](#samples) for more items that can be extracted.
 
 In the examples directory the use of **NestedSampler** is demonstrated
 in [HD2039][exHD20] and [outliers2][exout2].
@@ -1170,7 +1166,6 @@ The **OrderProblem** is for integer valued problems where the solution
 is found in some ordering of the data. The only example now is the
 **SalesmanProblem**. 
 
-
 See below for lists of available [**Problem**s](#list-problems). 
 More **Problem**s can be expected in later versions.
  
@@ -1209,9 +1204,10 @@ the midpoint of the cumulative weights, resp.  the maximum value of the
 weights. 
 
     slist = ns.samples
-    param = slist.parameters		## same as params above
+    param = slist.parameters		## same as ns.parameters
     mlpar = slist.maxLikelihoodParameters
     medianIndex = slist.medianIndex
+
 
 
 
