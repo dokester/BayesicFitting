@@ -81,8 +81,8 @@ relationship between the classes, which is written next to it.
 width="936" height="707">
 
 <map name="modelmap">
-  <area shape="rect" coords="250,0,450,60" href="#img-linear" alt="Figure 3">
-  <area shape="rect" coords="560,0,770,60" href="#img-nonlin" alt="Figure 4">
+  <area shape="rect" coords="250,0,450,60" href="#linearmodel" alt="Figure 3">
+  <area shape="rect" coords="560,0,770,60" href="#nonlinearmodel" alt="Figure 4">
 </map>
 
 <table><tr>
@@ -325,7 +325,8 @@ figure 4.
 -->
 
 <a name="img-dynamic"></a>
-<img src="images/Dynamic.png" alt="Figure 4" usemap="#dynamicmap">
+<img src="images/Dynamic.png" alt="Figure 4" usemap="#dynamicmap"
+width="815" height="480">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -334,10 +335,10 @@ Figure 4. Class hierarchy diagram for dynamic and modifiable models.
 </table>
 
 <map name="dynamicmap">
-  <area shape="rect" coords="300,118,368,165" href="#img-model" alt="Figure 1">
-  <area shape="rect" coords="20,416,220,478" href="#img-model" alt="Figure 1">
-  <area shape="rect" coords="320,416,502,478" href="#img-model" alt="Figure 1">
-  <area shape="rect" coords="600,416,780,478" href="#img-model" alt="Figure 1">
+  <area shape="rect" coords="300,118,368,165" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="20,416,220,478" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="320,416,502,478" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="600,416,780,478" href="#modelclasses" alt="Figure 1">
 </map>
 
 
@@ -584,7 +585,8 @@ The classes associated with NestedSampler are displayed in figure 7.
 -->
 
 <a name="img-ns1"></a>
-<img src="images/NestedSampler.png" alt="Figure 7" usemap="#NS1map">
+<img src="images/NestedSampler.png" alt="Figure 7" usemap="#NS1map"
+width="777' height="711">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -593,11 +595,11 @@ Figure 7 Class diagram for NestedSampler.
 </table>
 
 <map name="NS1map">
-  <area shape="rect" coords="0,0,137,204" href="#img-problem" alt="Figure 9">
-  <area shape="rect" coords="0,260,141,320" href="#img-model" alt="Figure 1">
-  <area shape="rect" coords="0,380,186,438" href="#img-prior" alt="Figure 10">
-  <area shape="rect" coords="0,640,184,710" href="#img-engine" alt="Figure 12">
-  <area shape="rect" coords="240,620,512,705" href="#img-error" alt="Figure 11">
+  <area shape="rect" coords="0,0,137,204" href="#problem" alt="Figure 9">
+  <area shape="rect" coords="0,260,141,320" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="0,380,186,438" href="#prior" alt="Figure 10">
+  <area shape="rect" coords="0,640,184,710" href="#engine" alt="Figure 12">
+  <area shape="rect" coords="240,620,512,705" href="#errdis" alt="Figure 11">
 </map>
 
 #### Descendants.
@@ -617,7 +619,7 @@ competitions etc. also belong to this category.
 The classes inheriting from NestedSampler are in figure 8.
 
 <a name="img-ns2"></a>
-<img src="images/NS.png" alt="Figure 8">
+<img src="images/NS.png" alt="Figure 8" width="838" height="691">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -742,7 +744,8 @@ The available **Engine**s are displayed in figure 12.
 -->
 
 <a name="img-engine"></a>
-<img src="images/Engine.png" alt="Figure 12" usemap="#enginemap">
+<img src="images/Engine.png" alt="Figure 12" usemap="#enginemap"
+width="655" height="466">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -751,7 +754,7 @@ Figure 12. Class hierachy diagram for engines.
 </table>
 
 <map name="enginemap">
-  <area shape="rect" coords="20,200,154,270" href="#img-order" alt="Figure 13">
+  <area shape="rect" coords="20,200,154,270" href="#order" alt="Figure 13">
 </map>
 
 The **StartEngine** generates the initial random ensemble. It is called
@@ -765,6 +768,7 @@ The **ChordEngine** selects a random line through the present point
 until it reaches outside the allowed space. Then it moves to a random point
 on the line, while inside the allowed space. 
 
+<a name="order"></a>
 #### Ordering Engines
 
 For ordering problems a different set of engines is required. The ones
@@ -773,8 +777,7 @@ For other, e.g. scheduling problems, specific engines must be written.
 
 The classes for taveling salesman engines are listed in figure 13.
 
-<a name="img-order"></a>
-<img src="images/Order.png" alt="Figure 13">
+<img src="images/Order.png" alt="Figure 13" width="636" height="402">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
