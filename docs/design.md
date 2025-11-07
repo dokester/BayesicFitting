@@ -77,7 +77,8 @@ relationship between the classes, which is written next to it.
 -->
 
 <a name="img-model"></a>
-<img src="images/Model.png" alt="Figure 1" usemap="#modelmap">
+<img src="images/Model.png" alt="Figure 1" usemap="#modelmap"
+width="936" height="707">
 
 <map name="modelmap">
   <area shape="rect" coords="250,0,450,60" href="#img-linear" alt="Figure 3">
