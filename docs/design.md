@@ -72,8 +72,24 @@ displayed. An open arrow indicates inheritance: Model inherits from
 FixedModel which inherits from BaseModel. A black arrow indicates a
 relationship between the classes, which is written next to it.
 
-
+<!--
 ![Models](images/Model.png "Figure 1")
+-->
+
+<a name="img-model"></a>
+<img src="images/Model.png" alt="Figure 1" usemap="#modelmap">
+
+<map name="modelmap">
+  <area shape="rect" coords="250,0,450,60" href="#img-linear" alt="Figure 3">
+  <area shape="rect" coords="560,0,770,60" href="#img-nonlin" alt="Figure 4">
+</map>
+
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 1. Class hierarchy diagram for models.
+</td></tr>
+</table>
 
 
 
@@ -81,8 +97,8 @@ relationship between the classes, which is written next to it.
 
 ### BaseModel.
 
-**BaseModel** defines a simple or basic model and all its methods. 
-A basic model has methods to return the functional result,  
+**BaseModel** defines a simple or basic model and all its methods.  A
+basic model has methods to return the functional result,
 __y = f( x:p )__, where __p__ represents the parameters; it is an array (or
 list) of K floats. __x__ is the independent variable. It can have any length, 
 even being a single number. If the model is more-dimensional, __x__ needs to
@@ -94,16 +110,15 @@ If the **BaseModel** can handle it, the __x__ variable can even be a list of
 different types. No pre-defined model in this package is like that, but
 a user might see some usage for it.
 
-**BaseModel** also defines the partial derivatives of __f__ to __p__, 
-__&part;f(x:p)&thinsp;/&thinsp;&part;p__ and derivatives of __f__ to __x__. The shapes are
-resp. (N,K) and N or (N,D).
+**BaseModel** also defines the partial derivatives of __f__ to __p__,
+__&part;f(x:p)&thinsp;/&thinsp;&part;p__ and derivatives of __f__ to __x__.
+The shapes are resp. (N,K) and N or (N,D).
 When no (partial) derivatives can be calculated, this class automatically
 provides numerical (partial) derivatives.
 The derivative, __&part;f&thinsp;/&thinsp;&part;x__, is only used when
 models are connected via a pipe operation. See [**Model**](#model).
-However, the partials, 
-__&part;f&thinsp;/&thinsp;&part;p__, are intensively used by the fitters to feel
-its ways towards the minimum.
+However, the partials, __&part;f&thinsp;/&thinsp;&part;p__, are intensively
+used by the fitters to feel its ways towards the minimum.
 
 Each **BaseModel** provides its own name and names for its parameters.
 
@@ -164,28 +179,13 @@ The methods of a compound model are called recursively over the chain.
 
 For every (simple) model in a chain. relevant information is kept
 within the **Model** itself: lists of parameters, standard deviations
-(when available) and **Prior**s. The latter one is only seriously used
+(when available) and **Prior**s. The latter ones are only seriously used
 when the **Model** is used in [**NestedSampler**](#nested).
 
 
-<!--
-There are provisions to handle limits on the parameters although they
-are relegated to  the <a href="#prior">priors</a> which are defined for
-each of the parameters.  Similarly the complementary methods unit2Domain
-and domain2Unit obtain their information from the prior. 
-Most of this prior stuff can be disregarded for now. It becomes relevant
-when doing full Bayesian calculations as in the 
-<a href="../sample/doc/sample.html">sample</a> subpackage. 
-<p>
-Finally there are a few methods which are relevant only for Dynamic
-models. These models will be introduced in the sample subpackage too.
-
--->
-
 After the **Model** things starts to diversify into different
-directions, 
-**LinearModel** and **NonLinearModel**, the **BracketModel**
-and the **ConstantModel**.
+directions, **LinearModel**s and **NonLinearModel**s, **AstropyModel**s
+and **UserModel**s, the **BracketModel** and the **ConstantModel**.
 
 
 ### BracketModel.
@@ -196,7 +196,7 @@ chain the models are handled strictly left to right, so __m1 + m2 * m3__
 is implemented as __(m1 + m2 ) * m3__. The **BracketModel** can change the
 order of calculation where that is needed.
 
-### CombiModel
+### CombiModel.
 
 A **CombiModel** combines a fixed number of **Model**s into one, while
 maintaining certain relations between similar parameters. E.g. to fit a
@@ -214,10 +214,24 @@ constant form, no matter what the input. The constant form could be 0
 everywhere, but also another **Model** with known parameters, or even a
 table.
 
+### AstropyModel.
+
+**AstropyModel** is a wrapper around a FittableModel from the astropy
+library, astropy.modeling.FittableModel. When wrapped, the astropy
+models can be used as a simple model in all tools provided by
+BayesicFitting.
+
+### UserModel.
+
+**UserModel** is a wrapper around a user-supplied python method
+returning the result for a model. Optionally also partial and derivative
+methods can be supplied. A **UserModel** can be used as a simple model
+in all tools BayesicFitting provides.
+
 
 <a name="linearmodel"></a>
 
-### LinearModels
+### Linear Models.
 
 **LinearModel**s are linear in its parameters, meaning that the result
 of a concrete linear model is the inner product of the partial
@@ -227,11 +241,18 @@ partials as `basePartial`.
 
 All pre-defined linear models are displayed in figure 2
 
+<a name="img-linear"></a>
 ![LinearModels](images/LinearModel.png "Figure 2")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 2. Class hierarchy diagram for linear models.
+</td></tr>
+</table>
 
 **LinearModel**s have quite some benefits. Using a Gaussian error
 distribution (aka least squares) the optimal parameters can be found
-directly by inverting the Hessian matrix. Computationally there are
+directly by `inverting' the Hessian matrix. Computationally there are
 several methods to achieve it, which are all relatively simple. They are
 implemented in the [linear fitter classes](#linearfitter). Another benefit
 is that the posterior for the parameters is also a multidimensional
@@ -244,7 +265,7 @@ it can even be necessary e.g. when the number of parameters gets large.
 
 <a name="nonlinearmodel"></a>
 
-### NonLinearModels
+### Non Linear Models.
 
 All **Model**s that are not linear are **NonLinearModels**. They at
 least need to define the result as `baseResult`. When `basePartial` or
@@ -252,7 +273,24 @@ least need to define the result as `baseResult`. When `basePartial` or
 
 All pre-defined non-linear models are displayed in figure 3
 
+<!--
 ![NonLinearModels](images/NonLinearModel.png "Figure 3")
+-->
+
+<a name="img-nonlin"></a>
+<img src="images/NonLinearModel.png" alt="Figure 3" usemap="#nonlinmap">
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 3. Class hierarchy diagram for non-linear models.
+</td></tr>
+</table>
+
+<map name="nonlinmap">
+  <area shape="rect" coords="500,520,650,620" href="#img-kernel" alt="Figure 5">
+</map>
+
+
 
 **NonLinearModel**s need [non-linear (NL) fitters](#nonlinearfitter) to
 optimize their parameters. As NL fitters are iterative, more
@@ -262,23 +300,49 @@ complicated, slower and not guaranteed to find the best solution,
 
 <a name="dynamic"></a>
 
-### DynamicModels
+### Dynamic and Modifiable.
 
-**Dynamic** models are specialisations of **Model**s that have a fixed
-attribute. E.g **PolynomialModel** with fixed degree or
-**HarmonicModel** with fixed order. **Dynamic** implements methods to
-let the model grow or shrink. These models can not be used with ordinary
-**Fitter**s. Using **NestedSampler** they automatically converge on the
+**Dynamic** and/or **Modifiable** models are specialisations of
+**Model**s with some fixed attribute.  E.g **PolynomialModel** with
+fixed degree or **SplinesModel** with fixed knot list. 
+**Dynamic** implements methods to let the model grow or shrink.  
+**Modifiable** implement a method to vary the internal structure of the
+model, e.g. vary the knot location in a *BasicSplinesModel**.
+Dynamic cq. modifiable models inherit from **Model** but also from 
+**Dynamic** and maybe from **Modifiable**. They have more than one
+parent class.
+
+These models can not be used with ordinary **Fitter**s. 
+Using **NestedSampler** they automatically converge on the
 model with the optimal number of components. 
 
-All pre-defined **Dynamic** models are displayed in figure 4.
+All pre-defined **Dynamic** and **Modifiable** models are displayed in
+figure 4. 
 
+<!--
 ![Dynamic](images/Dynamic.png "Figure 4")
+-->
+
+<a name="img-dynamic"></a>
+<img src="images/Dynamic.png" alt="Figure 4" usemap="#dynamicmap">
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 4. Class hierarchy diagram for dynamic and modifiable models.
+</td></tr>
+</table>
+
+<map name="dynamicmap">
+  <area shape="rect" coords="300,118,368,165" href="#img-model" alt="Figure 1">
+  <area shape="rect" coords="20,416,220,478" href="#img-model" alt="Figure 1">
+  <area shape="rect" coords="320,416,502,478" href="#img-model" alt="Figure 1">
+  <area shape="rect" coords="600,416,780,478" href="#img-model" alt="Figure 1">
+</map>
 
 
 <a name="kernelmodel"></a>
 
-### KernelModels
+### KernelModels.
 
 A special case of **NonLinearModel**s are the **KernelModel**s and their
 more-dimensional variants, **Kernel2dModel**.
@@ -287,7 +351,14 @@ as an even function with a definite integral over (-inf,+inf).
 
 All pre-defined kernels are displayed in figure 5.
 
+<a name="img-kernel"></a>
 ![Kernels](images/Kernel.png "Figure 5")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 5. Class hierarchy diagram for kernels.
+</td></tr>
+</table>
 
 Of the more-dimensional variants, only the 2-dim is defined, where the
 2d kernel is either round or elliptic along the axes, or rotated
@@ -299,34 +370,16 @@ Note that **GaussModel** and **LorentzModel** could both be implemented
 as a **KernelModel**, while **SincModel** actually *is* a wrapper
 around a **KernelModel**.
 
-<!--
-I am not sure if this still works, or even if I want to advertise it.
 
-### Mixed Models.
+### Construction of new Models.
 
-Some non-linear models can specialize into a so-called Mixed Model,
-using the function <code>setMixedModel</code>.
-These models have both linear and non-linear
-parameters. When the linear parameters have been indicated all 
-Nonlinear Fitters (descendants from NonLinearFitter) will use this
-information to fit the linear parameters directly.
-This slashes the dimensions of the search space of the
-parameters by the number of linear parameters as these are
-fitted directly. It might turn an impossible problem into an acceptable
-one. 
-
--->
-
-
-### Construction of new Models
-
-If the needed model can not be constructed via the  [fixing of
-parameters](#fixedmodel) or by [concatenating models](#model), it is
-advised to take a similar (linear or non-linear) model as an example and
+If a newly required model can not be constructed via the 
+[fixing of parameters](#fixedmodel) or by [concatenating models](#model),
+it is advised to take a similar (linear or non-linear) model as an example and
 change the revelant methods. As a bare minimum the method `baseResult`
 need to be filled. The method `basePartial` either needs to be filled or
 the method should be removed. In the latter case numeric derivatives are
-used.
+used. A simple alternative is the **UserModel**.
 
 The method `testPartial` in **Model** can be used to check the
 consistency between the methods `baseResult` and `basePartial`.
@@ -337,9 +390,9 @@ degenerate, i.e. measuring essentially the same thing.
 
 
 <a name="fitterclasses"></a>
-## 3. The Fitter Classes ##
+## 3. The Fitter Classes.
 
-### BaseFitter
+### BaseFitter.
 
 The root of the fitter classes is **BaseFitter**, a large class
 containing the common methods for parameter fitting. Mostly these are
@@ -350,7 +403,7 @@ approximation of the posterior, also known as Laplace's method. For the
 prior a **UniformPrior** is asumed, for which limits are necessary to
 make it a proper probability. The limits need to be provided by the user. 
 
-In case of parameter estimation of a **LinearModel** Laplace's method is
+In case of parameter estimation of a **LinearModel**, Laplace's method is
 exact, provided that the limits on the parameters are wide enough. In
 all other cases it is an approximation, better or worse depending on the
 problem at hand. Nontheless it can be used succesfully in model
@@ -360,11 +413,19 @@ to all models etc.
 
 The Fitter inheritance tree is displayed in figure 6.
 
+<a name="img-fitter"></a>
 ![Fitters](images/Fitter.png "Figure 6")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 6. Class diagram for the fitters. Dark red boxes refer to
+methods of SciPy, outside the scope of BayesicFitting.
+</td></tr>
+</table>
 
 <a name="linearfitter"></a>
 
-### Linear Fitters
+### Linear Fitters.
 
 The package contains 2 linear fitter classes: **Fitter** and
 **QRFitter**. The former applies LU-decomposition of the Hessian matrix
@@ -384,7 +445,7 @@ The SVD-Fitter is TBW.
 
 <a name="nonlinearfitter"></a>
 
-### NonLinear Fitters
+### NonLinear Fitters.
 
 The other descendants of the **BaseFitter** are all iterative fitters to
 be used with non-linear models. **IterativeFitter** implements a number
@@ -399,7 +460,7 @@ the initial parameters are close to the final global minimum. When
 uncertain about it, one could start the fitter at widely different
 initial positions and see whether it ends up at the same location.
 
-### LevenbergMarquardtFitter
+### LevenbergMarquardtFitter.
 
 The **LevenbergMarquardtFitter** is an implementation of
 Levenberg-Marquardt algorithm from Numerical Recipes par. 15.5. It
@@ -407,19 +468,19 @@ actively uses the partial derivatives. The **LevenbergMarquardtFitter**
 will go downhill from its starting point, ending wherever it will find a
 minimum. Whether the minumum is local or global is unclear.
 
-### CurveFitter
+### CurveFitter.
 
 **CurveFitter** ecapsulates the method `scipy.optimize.curvefit`. See 
 [curvefit](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html)
 for details.
 
-### MaxLikelihoodFitter
+### MaxLikelihoodFitter.
 
 Up to now all fitters try to find the minimum in the __&chi;<sup>2</sup>__-landscape.
 They are strictly "least squares". **MaxLikelihoodFitter**s can also
 maximize the log likelihood of a selected [**ErrorDistribution**](#errdis). 
 
-### AmoebaFitter
+### AmoebaFitter.
 
 The **AmoebaFitter** performs the simplex method described in
 [AnnealingAmoeba](#amoeba) to find the minimum in __&chi;<sup>2</sup>__ or the
@@ -427,7 +488,7 @@ maximum in the likelihood.
 
 <a name="amoeba"></a>
 
-### AnnealingAmoeba
+#### AnnealingAmoeba.
 
 **AnnealingAmoeba** implements the simplex method designed by Nelder and
 Mead to find the minimum value in a functional landscape. In its simple
@@ -448,7 +509,7 @@ Nelder-Mead algorithm in [Press][5] par 10.4 and 10.9.
 
 <a name="scipy"></a>
 
-###  ScipyFitter
+###  ScipyFitter.
 
 The method `scipy.optimize.minimize` implements about 10 minimization
 algorithms. **ScipyFitter** encapsulates the minimize method and call 
@@ -458,7 +519,7 @@ all residing within **ScipyFitter**.
 They are presented here as is. We dont have much experience with most of
 them, except with the **ConjugateGradientFitter**. 
 
-#### ConjugateGradientFitter
+#### ConjugateGradientFitter.
 
 The ConjugateGradientFitter is especially usefull when there are many
 (>20) parameters to be fitted, as it does  not require matrix
@@ -476,7 +537,7 @@ For details on the individual **ScipyFitter**s see
 
 <a name="robust"></a>
 
-#### RobustShell
+#### RobustShell.
 
 In real life data often outliers are present, little understood large
 excursions from the general trend. It also can occur that some parts of
@@ -491,8 +552,7 @@ carefully check the results.
  
 
 <a name="nested"></a>
-
-## 4. NestedSampler
+## 4. NestedSampler.
 
 Nested Sampling is an algorithm invented by David MacKay and John
 Skilling, to integrate the posterior to obtain the evidence.
@@ -508,7 +568,7 @@ spanned by the (hyper)parameters is randomly distributed over the
 **Prior**s of the parameters. These points are **Walkers** and
 typically there are 100 of them. In an iterative loop, the walker with
 the lowest likelihood is removed from the ensemble of walkers. It is
-weighted and stored as a **Sample** in a **SamleList**. 
+weighted and stored as a **Sample** in the **SampleList**. 
 One of the remaining walkers is
 copied and randomly moved around by **Engine**s, provided that its
 likelihood stays higher than that of the stored **Sample**. This way the
@@ -518,7 +578,55 @@ a good estimate of the integral (evidence).
 
 The classes associated with NestedSampler are displayed in figure 7.
 
+<!--
 ![NestedSampler](images/NestedSampler.png "Figure 7")
+-->
+
+<a name="img-ns1"></a>
+<img src="images/NestedSampler.png" alt="Figure 7" usemap="#NS1map">
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 7 Class diagram for NestedSampler.
+</td></tr>
+</table>
+
+<map name="NS1map">
+  <area shape="rect" coords="0,0,137,204" href="#img-problem" alt="Figure 9">
+  <area shape="rect" coords="0,260,141,320" href="#img-model" alt="Figure 1">
+  <area shape="rect" coords="0,380,186,438" href="#img-prior" alt="Figure 10">
+  <area shape="rect" coords="0,640,184,710" href="#img-engine" alt="Figure 12">
+  <area shape="rect" coords="240,620,512,705" href="#img-error" alt="Figure 11">
+</map>
+
+#### Descendants.
+
+**NestedSampler** has two descendants.  The first is **PhantomSampler**. 
+It uses all phantoms to calculate the evidence.  By default it has an
+ensemble of 20 walkers, making it faster. The coarse integration steps
+ar filled by the phantoms. 
+
+The second descendant arises from the realization that the nested
+sampling algorithm is also a maximum finder. When some kind of cost
+function can be defined for each parameter configuration, the maximum
+can be found. That leads to **NestedSolver**. Upto now there is only the
+travelling salesman in **SalesmanProblem**, but school schedules, sports
+competitions etc. also belong to this category.
+
+The classes inheriting from NestedSampler are in figure 8.
+
+<a name="img-ns2"></a>
+<img src="images/NS.png" alt="Figure 8">
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 8. Class hierarchy diagram for NestedSampler.
+</td></tr>
+</table>
+
+
+<a name="problem"></a>
+### Problems.
 
 **NestedSampler** acts upon a **Problem**. A **Problem** is a object
 that encodes a solvable problem. This is meant in a very broad sense.
@@ -532,9 +640,16 @@ models, one or more dimensional input and one-dimensional outputs were
 handled. For these kind of problems ClassicProblem is introduced. Mostly 
 it stays behind the scenes and is invisible for the users.
 
-More **Problem**s can be found in figure 8.
+More **Problem**s can be found in figure 9.
 
-![Problems](images/Problem.png "Figure 8")
+<a name="img-problem"></a>
+![Problems](images/Problem.png "Figure 9")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 9. Class hierarchy diagram for problems.
+</td></tr>
+</table>
 
 A **Problem** knows how to calculate its result, partial and derivative
 given the parameters. It also knows which **Engine**s and which 
@@ -549,25 +664,34 @@ optional `weights`, the likelihood can be calculated by the
 **Explorer** which explores the likelihood via various **Engine**s.  
 
 <a name="prior"></a>
-
-### Priors
+### Priors.
 
 The **Prior**s contain information about the parameters which is known
 before the data is taken into account. It is the range that the
 parameters can move, without being frowned up on. 
 
-The predefined **Prior**s are displayed in figure 9.
+The predefined **Prior**s are displayed in figure 10.
 
-![Priors](images/Prior.png "Figure 9")
+<a name="img-prior"></a>
+![Priors](images/Prior.png "Figure 10")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 10. Class hierachy diagram for priors.
+</td></tr>
+</table>
 
 All **Prior**s define two methods `unit2domain` which transforms
 (random) value in [0,1] into a (random) value from the prior
 distribution, and its inverse `domain2unit`.    
 
+All **Prior**s can have limits, cutting off part of the domain.
+Symmetric ones can also be defined as circular, folding the high
+limit on to the low limit, or using a center and a period.
 
 <a name="errdis"></a>
 
-### ErrorDistribution
+### ErrorDistributions.
 
 The main task of the **ErrorDistribution** is to calculate the
 likelihood, or better the log thereof. The partial derivative of the
@@ -575,16 +699,23 @@ logLikelihood wrt the parameters is also defined. It is used in the
 **Engine** of choice for parameter with continuous values:
 **GalileanEngine**. 
 
-The predefined **ErrorDistribution**s are displayed in figure 10.
+The predefined **ErrorDistribution**s are displayed in figure 11.
 
-![ErrorDistributions](images/ErrorDistribution.png "Figure 10")
+<a name="img-error"></a>
+![ErrorDistributions](images/ErrorDistribution.png "Figure 11")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 11. Class hierachy diagram for error distributions.
+</td></tr>
+</table>
 
 Some **ErrorDistribution**s have parameters of themselves, so called
 **HyperParameter**s. One special case is the **NoiseScale**.
 
 <a name="noisescale"></a>
 
-### NoiseScale
+### NoiseScale.
 
 The **NoiseScale** contains information about the amount of noise in
 the data. This can be in the form of a fixed number, claimimg that the
@@ -596,24 +727,57 @@ means that its integral is unbound. Low and high limits (both > 0) need
 to be provided when calculating the evidence.
 
 <a name="engine"></a>
-
-### Engine
+### Engines.
 
 The way the walkers are moved around in the available parameter space is
 determined by the **Engine**s. Several **Engine**s are availble:
-""ChordEngine**, **GalileanEngine**, 
-**GibbsEngine**, **CrossEngine** and **StepEngine**. For
-**Dynamic**Models **BirthEngine** and **DeathEngine** are needed too.
+**ChordEngine**, **GalileanEngine**, **GibbsEngine**, and **StepEngine**.
+For **Dynamic** models, the  **BirthEngine** and the **DeathEngine** are needed.
+And for **Modifiable** models, the **StructureEngine** is needed.
 
-The available **Engine**s are displayed in figure 11.
+The available **Engine**s are displayed in figure 12.
+<!--
+![Engines](images/Engine.png "Figure 12")
+-->
 
-![Enginess](images/Engine.png "Figure 11")
+<a name="img-engine"></a>
+<img src="images/Engine.png" alt="Figure 12" usemap="#enginemap">
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 12. Class hierachy diagram for engines.
+</td></tr>
+</table>
 
-Two need special mentioning. The **StartEngine** generates the initial
-random ensemble. The **GalileanEngine** moves the point in a random
-direction for several steps. When the walker is moving outside the area
-defined by the lowest likelihood, the direction is mirrored on the
-likelihood boundary. The **GalileanEngine** is the most efficient
-engine.  
+<map name="enginemap">
+  <area shape="rect" coords="20,200,154,270" href="#img-order" alt="Figure 13">
+</map>
 
+The **StartEngine** generates the initial random ensemble. It is called
+before the iterations start.
+
+Two engines need special mentioning.  The **GalileanEngine** moves the
+point in a random direction for several steps.  When the walker is
+moving outside the area defined by the lowest likelihood, the direction
+is mirrored on the likelihood boundary.  
+The **ChordEngine** selects a random line through the present point
+until it reaches outside the allowed space. Then it moves to a random point
+on the line, while inside the allowed space. 
+
+#### Ordering Engines
+
+For ordering problems a different set of engines is required. The ones
+listed here are most probable only usefult for the **SalesmanProblem**. 
+For other, e.g. scheduling problems, specific engines must be written.  
+
+The classes for taveling salesman engines are listed in figure 13.
+
+<a name="img-order"></a>
+<img src="images/Order.png" alt="Figure 13">
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 13. Class hierachy diagram for order engines.
+</td></tr>
+</table>
 

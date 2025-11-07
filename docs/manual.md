@@ -1325,7 +1325,7 @@ method in the form
 
     errdis.constrain = insideSphere
 
-When the to be avoided condition occurs logL is returned as one less than the 
+When the to be avoided condition occurs, logL is returned as one less than the 
 low likelihood limit so it will never be selected. 
 Otherwise logL should be returned unchanged. It should be noted that the 
 acceptable area should be large enough that it can reasonly be sampled randomly
@@ -1520,7 +1520,7 @@ kernels and miscellaneous.
 
 #### Simple wrapper models
 + **AstropyModel**<br>
-    Wrapper fro FittableModels from astropy.modeling.
+    Wrapper for FittableModels from astropy.modeling.
     See [example][exHerm]
 + **UserModel**<br>
     Wrapper for a user provided function f(x:p).
