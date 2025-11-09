@@ -74,7 +74,6 @@ relationship between the classes, which is written next to it.
 
 <!--
 ![Models](images/Model.png "Figure 1")
--->
 
 <a name="img-model"></a>
 <img src="images/Model.png" alt="Figure 1" usemap="#modelmap"
@@ -84,11 +83,21 @@ width="936" height="707">
   <area shape="rect" coords="250,0,450,60" href="#linearmodel" alt="Figure 3">
   <area shape="rect" coords="560,0,770,60" href="#nonlinearmodel" alt="Figure 4">
 </map>
+-->
 
+<div style="position: relative;">
+  <img src="images/Model.png" style="width: 100%; height: auto;" 
+		alt="Figure 1">
+  <a href="#linearmodel" alt="Figure 2"><div style="position: absolute; 
+		left: 27%; top: 0%; width: 21%; height: 8%;"></div></a>
+  <a href="#nonlinearmodel" alt="Figure 3"><div style="position: absolute; 
+		left: 60%; top: 0%; width: 22%; height: 8%;"></div></a>
+</div>
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
-Figure 1. Class hierarchy diagram for models.
+Figure 1. Class hierarchy diagram for models. 
+Blue boxes refer to further hierachy diagrams.
 </td></tr>
 </table>
 
@@ -276,21 +285,24 @@ All pre-defined non-linear models are displayed in figure 3
 
 <!--
 ![NonLinearModels](images/NonLinearModel.png "Figure 3")
--->
 
 <a name="img-nonlin"></a>
 <img src="images/NonLinearModel.png" alt="Figure 3" usemap="#nonlinmap">
+-->
+
+
+<div style="position: relative;">
+  <img src="images/NonLinearModel.png" style="width: 100%; height: auto;" 
+		alt="Figure 3">
+  <a href="#kernelmodel" alt="Figure 5"><div style="position: absolute; 
+		left: 55%; top: 84%; width: 17%; height: 16%;"></div></a>
+</div>
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 3. Class hierarchy diagram for non-linear models.
 </td></tr>
 </table>
-
-<map name="nonlinmap">
-  <area shape="rect" coords="500,520,650,620" href="#img-kernel" alt="Figure 5">
-</map>
-
 
 
 **NonLinearModel**s need [non-linear (NL) fitters](#nonlinearfitter) to
@@ -322,17 +334,10 @@ figure 4.
 
 <!--
 ![Dynamic](images/Dynamic.png "Figure 4")
--->
 
 <a name="img-dynamic"></a>
 <img src="images/Dynamic.png" alt="Figure 4" usemap="#dynamicmap"
 width="815" height="480">
-<table><tr>
-<td style="width: 10px;">  </td>
-<td style="width: 350px; text-align: left;">
-Figure 4. Class hierarchy diagram for dynamic and modifiable models.
-</td></tr>
-</table>
 
 <map name="dynamicmap">
   <area shape="rect" coords="300,118,368,165" href="#modelclasses" alt="Figure 1">
@@ -340,6 +345,28 @@ Figure 4. Class hierarchy diagram for dynamic and modifiable models.
   <area shape="rect" coords="320,416,502,478" href="#modelclasses" alt="Figure 1">
   <area shape="rect" coords="600,416,780,478" href="#modelclasses" alt="Figure 1">
 </map>
+-->
+
+<div style="position: relative;">
+  <img src="images/Dynamic.png" style="width: 100%; height: auto;" 
+		alt="Figure 4">
+  <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
+		left: 37%; top: 25%; width: 8%; height: 10%;"></div></a>
+  <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
+		left:  2%; top: 87%; width: 25%; height: 13%;"></div></a>
+  <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
+		left: 39%; top: 87%; width: 22%; height: 13%;"></div></a>
+  <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
+		left: 74%; top: 87%; width: 22%; height: 13%;"></div></a>
+</div>
+
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 4. Class hierarchy diagram for dynamic and modifiable models.
+</td></tr>
+</table>
+
 
 
 <a name="kernelmodel"></a>
@@ -415,8 +442,13 @@ to all models etc.
 
 The Fitter inheritance tree is displayed in figure 6.
 
-<a name="img-fitter"></a>
-![Fitters](images/Fitter.png "Figure 6")
+<div style="position: relative;">
+  <img src="images/Fitter.png" style="width: 100%; height: auto;" 
+		alt="Figure 6">
+  <a href="#errdis" alt="Figure 11"><div style="position: absolute; 
+		left: 81%; top: 70%; width: 19%; height: 10%;"></div></a>
+</div>
+
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -580,40 +612,11 @@ a good estimate of the integral (evidence).
 
 The classes associated with NestedSampler are displayed in figure 7.
 
-<!--
-![NestedSampler](images/NestedSampler.png "Figure 7")
--->
-
 <a name="img-ns1"></a>
 
-
-<img src="images/NestedSampler.png" alt="Figure 7" usemap="#NS1map"
-width="777" height="711">
-<table><tr>
-<td style="width: 10px;">  </td>
-<td style="width: 350px; text-align: left;">
-Figure 7 Class diagram for NestedSampler.
-</td></tr>
-</table>
-
-<map name="NS1map">
-  <area shape="rect" coords="0,0,137,204" href="#problem" alt="Figure 9">
-  <area shape="rect" coords="0,260,141,320" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="0,380,186,438" href="#prior" alt="Figure 10">
-  <area shape="rect" coords="0,640,184,710" href="#engine" alt="Figure 12">
-  <area shape="rect" coords="240,620,512,705" href="#errdis" alt="Figure 11">
-</map>
-
-
-
-<!--
-Source - https://stackoverflow.com/a
-Posted by Tom Bisciglia, modified by community. See post 'Timeline' for change history
-Retrieved 2025-11-09, License - CC BY-SA 4.0
--->
-
 <div style="position: relative;">
-  <img src="images/NestedSampler.png" style="width: 100%; height: auto;">
+  <img src="images/NestedSampler.png" style="width: 100%; height: auto;" 
+		alt="Figure 7">
   <a href="#problem" alt="Figure 9"><div style="position: absolute; 
 		left: 0%; top: 0%; width: 17%; height: 28%;"></div></a>
   <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
@@ -625,8 +628,12 @@ Retrieved 2025-11-09, License - CC BY-SA 4.0
   <a href="#errdis" alt="Figure 11"><div style="position: absolute; 
 		left: 31%; top: 87%; width: 35%; height: 13%;"></div></a>
 </div>
-
-
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 7 Class diagram for NestedSampler.
+</td></tr>
+</table>
 
 #### Descendants.
 
@@ -644,22 +651,23 @@ competitions etc. also belong to this category.
 
 The classes inheriting from NestedSampler are in figure 8.
 
-<a name="img-ns2"></a>
-<img src="images/NS.png" alt="Figure 8" usemap="#NS2map"
-width="838" height="691">
+<div style="position: relative;">
+  <img src="images/NS2.png" style="width: 100%; height: auto;" alt="Figure 8">
+  <a href="#problem" alt="Figure 9"><div style="position: absolute; 
+		left: 3%; top: 41%; width: 16%; height: 18%;"></div></a>
+  <a href="#order" alt="Figure 13"><div style="position: absolute; 
+		left: 0%; top: 90%; width: 22%; height: 10%;"></div></a>
+  <a href="#erdis" alt="Figure 11"><div style="position: absolute; 
+		left: 31%; top: 90%; width: 33%; height: 10%;"></div></a>
+  <a href="#nested" alt="Figure 7"><div style="position: absolute; 
+		left: 69%; top: 55%; width: 31%; height: 41%;"></div></a>
+</div>
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 8. Class hierarchy diagram for NestedSampler.
 </td></tr>
 </table>
-
-<map name="NS2map">
-  <area shape="rect" coords="22,280,160,410" href="#problem" alt="Figure 9">
-  <area shape="rect" coords="0,620,184,690" href="#order" alt="Figure 13">
-  <area shape="rect" coords="260,620,534,690" href="#error" alt="Figure 11">
-  <area shape="rect" coords="580,380,838,664" href="#nested" alt="Figure 7">
-</map>
 
 <a name="problem"></a>
 ### Problems.
@@ -774,21 +782,25 @@ And for **Modifiable** models, the **StructureEngine** is needed.
 The available **Engine**s are displayed in figure 12.
 <!--
 ![Engines](images/Engine.png "Figure 12")
--->
 
 <a name="img-engine"></a>
 <img src="images/Engine.png" alt="Figure 12" usemap="#enginemap"
 width="655" height="466">
+-->
+
+
+<div style="position: relative;">
+  <img src="images/Engine.png" style="width: 100%; height: auto;" 
+		alt="Figure 12">
+  <a href="#order" alt="Figure 13"><div style="position: absolute; 
+		left: 3%; top: 43%; width: 21%; height: 15%;"></div></a>
+</div>
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 12. Class hierachy diagram for engines.
 </td></tr>
 </table>
-
-<map name="enginemap">
-  <area shape="rect" coords="20,200,154,270" href="#order" alt="Figure 13">
-</map>
 
 The **StartEngine** generates the initial random ensemble. It is called
 before the iterations start.
