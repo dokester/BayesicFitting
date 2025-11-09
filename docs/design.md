@@ -585,6 +585,8 @@ The classes associated with NestedSampler are displayed in figure 7.
 -->
 
 <a name="img-ns1"></a>
+
+
 <img src="images/NestedSampler.png" alt="Figure 7" usemap="#NS1map"
 width="777" height="711">
 <table><tr>
@@ -601,6 +603,30 @@ Figure 7 Class diagram for NestedSampler.
   <area shape="rect" coords="0,640,184,710" href="#engine" alt="Figure 12">
   <area shape="rect" coords="240,620,512,705" href="#errdis" alt="Figure 11">
 </map>
+
+
+
+<!--
+Source - https://stackoverflow.com/a
+Posted by Tom Bisciglia, modified by community. See post 'Timeline' for change history
+Retrieved 2025-11-09, License - CC BY-SA 4.0
+-->
+
+<div style="position: relative;">
+  <img src="images/NestedSampler.png" style="width: 100%; height: auto;">
+  <a href="#problem" alt="Figure 9"><div style="position: absolute; 
+		left: 0%; top: 0%; width: 17%; height: 28%;"></div></a>
+  <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
+		left: 0%; top: 37%; width: 18%; height: 8%;"></div></a>
+  <a href="#prior" alt="Figure 10"><div style="position: absolute; 
+		left: 0%; top: 53%; width: 24%; height: 10%;"></div></a>
+  <a href="#engine" alt="Figure 12"><div style="position: absolute; 
+		left: 0%; top: 90%; width: 24%; height: 10%;"></div></a>
+  <a href="#errdis" alt="Figure 11"><div style="position: absolute; 
+		left: 31%; top: 87%; width: 35%; height: 13%;"></div></a>
+</div>
+
+
 
 #### Descendants.
 
