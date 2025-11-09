@@ -652,7 +652,7 @@ competitions etc. also belong to this category.
 The classes inheriting from NestedSampler are in figure 8.
 
 <div style="position: relative;">
-  <img src="images/NS2.png" style="width: 100%; height: auto;" alt="Figure 8">
+  <img src="images/NS.png" style="width: 100%; height: auto;" alt="Figure 8">
   <a href="#problem" alt="Figure 9"><div style="position: absolute; 
 		left: 3%; top: 41%; width: 16%; height: 18%;"></div></a>
   <a href="#order" alt="Figure 13"><div style="position: absolute; 
