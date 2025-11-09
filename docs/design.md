@@ -586,7 +586,7 @@ The classes associated with NestedSampler are displayed in figure 7.
 
 <a name="img-ns1"></a>
 <img src="images/NestedSampler.png" alt="Figure 7" usemap="#NS1map"
-width="777' height="711">
+width="777" height="711">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -619,7 +619,8 @@ competitions etc. also belong to this category.
 The classes inheriting from NestedSampler are in figure 8.
 
 <a name="img-ns2"></a>
-<img src="images/NS.png" alt="Figure 8" width="838" height="691">
+<img src="images/NS.png" alt="Figure 8" usemap="#NS2map"
+width="838" height="691">
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
@@ -627,6 +628,12 @@ Figure 8. Class hierarchy diagram for NestedSampler.
 </td></tr>
 </table>
 
+<map name="NS2map">
+  <area shape="rect" coords="22,280,160,410" href="#problem" alt="Figure 9">
+  <area shape="rect" coords="0,620,184,690" href="#order" alt="Figure 13">
+  <area shape="rect" coords="260,620,534,690" href="#error" alt="Figure 11">
+  <area shape="rect" coords="580,380,838,664" href="#nested" alt="Figure 7">
+</map>
 
 <a name="problem"></a>
 ### Problems.
