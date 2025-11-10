@@ -100,6 +100,7 @@ Figure 1. Class hierarchy diagram for models.
 Blue boxes refer to further hierachy diagrams.
 </td></tr>
 </table>
+<p.
 
 
 
@@ -259,6 +260,7 @@ All pre-defined linear models are displayed in figure 2
 Figure 2. Class hierarchy diagram for linear models.
 </td></tr>
 </table>
+<p>
 
 **LinearModel**s have quite some benefits. Using a Gaussian error
 distribution (aka least squares) the optimal parameters can be found
@@ -303,6 +305,7 @@ All pre-defined non-linear models are displayed in figure 3
 Figure 3. Class hierarchy diagram for non-linear models.
 </td></tr>
 </table>
+<p>
 
 
 **NonLinearModel**s need [non-linear (NL) fitters](#nonlinearfitter) to
@@ -366,7 +369,7 @@ width="815" height="480">
 Figure 4. Class hierarchy diagram for dynamic and modifiable models.
 </td></tr>
 </table>
-
+<p>
 
 
 <a name="kernelmodel"></a>
@@ -388,6 +391,7 @@ All pre-defined kernels are displayed in figure 5.
 Figure 5. Class hierarchy diagram for kernels.
 </td></tr>
 </table>
+<p>
 
 Of the more-dimensional variants, only the 2-dim is defined, where the
 2d kernel is either round or elliptic along the axes, or rotated
@@ -456,6 +460,7 @@ Figure 6. Class diagram for the fitters. Dark red boxes refer to
 methods of SciPy, outside the scope of BayesicFitting.
 </td></tr>
 </table>
+<p>
 
 <a name="linearfitter"></a>
 
@@ -591,16 +596,18 @@ carefully check the results.
 Nested Sampling is an algorithm invented by David MacKay and John
 Skilling, to integrate the posterior to obtain the evidence.
 At the same time samples from the posterior are collected into a 
-**SampleList**. 
-**NestedSampler** follows the core algorithm as presented in
-[Sivia][1] closely, but is expanded with pluggable **Problem**s, **Model**s,
-**Prior**s, **ErrorDistribution**s and **Engine**s. It offers solutions
+**SampleList**.  **NestedSampler** follows the core algorithm as
+presented in [Sivia](./references.md/#sivia) closely, but is expanded
+with pluggable **Problem**s, **Model**s, **Prior**s, 
+**ErrorDistribution**s and **Engine**s. It offers solutions
 to a wide variety of inverse problems.
 
-Initially an ensemble of trial points, a **WalkerList**, in the space 
-spanned by the (hyper)parameters is randomly distributed over the
-**Prior**s of the parameters. These points are **Walkers** and
-typically there are 100 of them. In an iterative loop, the walker with
+Initially an ensemble of points representing the parameters, 
+is randomly distributed over their priors. These points are called 
+walkers and typically there are 100 of them. They are collected in 
+a **WalkerList**. 
+
+In an iterative loop, the walker with
 the lowest likelihood is removed from the ensemble of walkers. It is
 weighted and stored as a **Sample** in the **SampleList**. 
 One of the remaining walkers is
@@ -609,8 +616,6 @@ likelihood stays higher than that of the stored **Sample**. This way the
 walkers slowly climb to the maximum value of the likelihood. The stored
 **Sample**s provide enough pointers into the Likelihood function to make
 a good estimate of the integral (evidence).
-
-The classes associated with NestedSampler are displayed in figure 7.
 
 <a name="img-ns1"></a>
 
@@ -634,20 +639,27 @@ The classes associated with NestedSampler are displayed in figure 7.
 Figure 7 Class diagram for NestedSampler.
 </td></tr>
 </table>
+<p>
 
-#### Descendants.
+The classes associated with NestedSampler are displayed in figure 7.
+
+### Descendants.
 
 **NestedSampler** has two descendants.  The first is **PhantomSampler**. 
-It uses all phantoms to calculate the evidence.  By default it has an
-ensemble of 20 walkers, making it faster. The coarse integration steps
-ar filled by the phantoms. 
+Phantoms are the points in parameter space that are visited by the
+engines in their quest to randomize the copied walker.  
+**PhantomSampler** uses all phantoms in the calculation of the evidence. 
+By default it has an ensemble of 20 walkers, making it faster.  The
+coarse integration steps are filled in by the phantoms. 
 
 The second descendant arises from the realization that the nested
 sampling algorithm is also a maximum finder. When some kind of cost
 function can be defined for each parameter configuration, the maximum
 can be found. That leads to **NestedSolver**. Upto now there is only the
-travelling salesman in **SalesmanProblem**, but school schedules, sports
-competitions etc. also belong to this category.
+travelling salesman in **SalesmanProblem** using a **DistanceCostFunction**. 
+School schedules, sports competitions etc. also belong to this category.
+They would need specialized **CostFunction**s and also specialized 
+**OrderEngine**s.
 
 The classes inheriting from NestedSampler are in figure 8.
 
@@ -657,7 +669,7 @@ The classes inheriting from NestedSampler are in figure 8.
 		left: 3%; top: 41%; width: 16%; height: 18%;"></div></a>
   <a href="#order" alt="Figure 13"><div style="position: absolute; 
 		left: 0%; top: 90%; width: 22%; height: 10%;"></div></a>
-  <a href="#erdis" alt="Figure 11"><div style="position: absolute; 
+  <a href="#errdis" alt="Figure 11"><div style="position: absolute; 
 		left: 31%; top: 90%; width: 33%; height: 10%;"></div></a>
   <a href="#nested" alt="Figure 7"><div style="position: absolute; 
 		left: 69%; top: 55%; width: 31%; height: 41%;"></div></a>
@@ -665,9 +677,10 @@ The classes inheriting from NestedSampler are in figure 8.
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
-Figure 8. Class hierarchy diagram for NestedSampler.
+Figure 8. Classes inheriting from NestedSampler.
 </td></tr>
 </table>
+<p>
 
 <a name="problem"></a>
 ### Problems.
@@ -679,12 +692,39 @@ with (special) ErrorDistribution, Engines and Priors, NestedSampler
 can optimize the parameters. What the Problem, parameters, etc. exactly 
 are, is completely dependent on the problem to be solved. 
 
-In versions 1.0 of this package and below, only problems with parameterized
-models, one or more dimensional input and one-dimensional outputs were 
-handled. For these kind of problems ClassicProblem is introduced. Mostly 
-it stays behind the scenes and is invisible for the users.
+In versions before 2.0 of this package, only problems with parameterized
+models, and one-dimensional outputs were handled.  For these kind of
+problems ClassicProblem is introduced.  Mostly it operates behind the
+scenes and is invisible for the users. 
 
-More **Problem**s can be found in figure 9.
+IN version 2 the concept of a **Problem** was introduced to handle more
+complicated cases. We have the **MultipleOutputProblem** for problems
+with more dimensional output, like a steller orbit on the sky, selection
+in categories, football matches etc. A further specialization is the
+**FlippedDataProblem** (not yet in this version) where there might be
+ambiguity in the stellar orbit data. 
+
+Classically it is assumed the `xdata` are known with a much higher
+precision than the `ydata`. For cases where this is not met, we have the
+**ErrorsInXandYProblem**. Now the true positions of the `xdata` have to
+estimated too. **ErrorsInXandYProblem** introduces extra problem
+parameters for all `xdata` positions. All these extra parameters need a
+**Prior**. They are all optimized along with the model parameters. And
+subsequently ignored. They are called nuisance parameters.
+
+The **EvidenceProblem** is not about optimizing parameters, but about
+optimizing **Model**s. We need **Modifiable** models and optimize the
+structure of the model by finding the one with the best evidence. The
+error distribution for this problem is called **ModelDistribution**.
+
+And finally we have the **OrderProblem**s where the parameters to be
+optimize might be something much more convoluted than a simple list of
+numbers. **OrderProblem**s need their own **Engine**s. They need an
+**ErrorDistribution**  in the form of a **CostFunction**.
+**OrderProblems** are not strictly Bayesian, unless the **CostFunction**
+is a true distribution.
+
+The class diagram for **Problem**s can be found in figure 9.
 
 <a name="img-problem"></a>
 ![Problems](images/Problem.png "Figure 9")
@@ -694,18 +734,13 @@ More **Problem**s can be found in figure 9.
 Figure 9. Class hierarchy diagram for problems.
 </td></tr>
 </table>
+<p>
 
-A **Problem** knows how to calculate its result, partial and derivative
+A **Problem** has **Prior**s for all its parameters. 
+Itknows how to calculate its result, partial and derivative
 given the parameters. It also knows which **Engine**s and which 
 **ErrorDistribution** is the best choice.
 
-
-The **ClassicProblem** has a **Model**, containing a list of parameters, each
-of which has a **Prior**. Together with the `xdata`, the `ydata` and the
-optional `weights`, the likelihood can be calculated by the
-**ErrorDistribution**. The **ErrorDistribution** itself might have
-**HyperParameter**s, that have to be estimated too. Finally there is the
-**Explorer** which explores the likelihood via various **Engine**s.  
 
 <a name="prior"></a>
 ### Priors.
@@ -724,6 +759,7 @@ The predefined **Prior**s are displayed in figure 10.
 Figure 10. Class hierachy diagram for priors.
 </td></tr>
 </table>
+<p>
 
 All **Prior**s define two methods `unit2domain` which transforms
 (random) value in [0,1] into a (random) value from the prior
@@ -738,10 +774,9 @@ limit on to the low limit, or using a center and a period.
 ### ErrorDistributions.
 
 The main task of the **ErrorDistribution** is to calculate the
-likelihood, or better the log thereof. The partial derivative of the
-logLikelihood wrt the parameters is also defined. It is used in the
-**Engine** of choice for parameter with continuous values:
-**GalileanEngine**. 
+likelihood, or better the log thereof.  The partial derivative of the
+log( likelihood ) with respect to the parameters is also defined.  It is
+used in the **GalileanEngine**. 
 
 The predefined **ErrorDistribution**s are displayed in figure 11.
 
@@ -753,13 +788,14 @@ The predefined **ErrorDistribution**s are displayed in figure 11.
 Figure 11. Class hierachy diagram for error distributions.
 </td></tr>
 </table>
+<p>
 
 Some **ErrorDistribution**s have parameters of themselves, so called
 **HyperParameter**s. One special case is the **NoiseScale**.
 
 <a name="noisescale"></a>
 
-### NoiseScale.
+#### NoiseScale.
 
 The **NoiseScale** contains information about the amount of noise in
 the data. This can be in the form of a fixed number, claimimg that the
@@ -801,6 +837,7 @@ width="655" height="466">
 Figure 12. Class hierachy diagram for engines.
 </td></tr>
 </table>
+<p>
 
 The **StartEngine** generates the initial random ensemble. It is called
 before the iterations start.
@@ -811,16 +848,17 @@ moving outside the area defined by the lowest likelihood, the direction
 is mirrored on the likelihood boundary.  
 The **ChordEngine** selects a random line through the present point
 until it reaches outside the allowed space. Then it moves to a random point
-on the line, while inside the allowed space. 
+on the line, while staying inside the allowed space. And repeats until
+done.  
 
 <a name="order"></a>
 #### Ordering Engines
 
 For ordering problems a different set of engines is required. The ones
-listed here are most probable only usefult for the **SalesmanProblem**. 
+listed here are most probable only usefull for the **SalesmanProblem**. 
 For other, e.g. scheduling problems, specific engines must be written.  
 
-The classes for taveling salesman engines are listed in figure 13.
+The classes for traveling salesman engines are listed in figure 13.
 
 <img src="images/Order.png" alt="Figure 13" width="636" height="402">
 <table><tr>
@@ -829,4 +867,4 @@ The classes for taveling salesman engines are listed in figure 13.
 Figure 13. Class hierachy diagram for order engines.
 </td></tr>
 </table>
-
+<p>
