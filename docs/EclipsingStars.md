@@ -74,6 +74,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-1](images/es-eq-1.png "Eq 1") | (1) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 In total, these simple eclipsing star models have 6 or 9 adjustable
 parameters. 
@@ -122,6 +123,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-2](images/es-eq-2.png "Eq 2") | (2) |   
 |:-:|:-|-------------------------------------------------:|   
+<p>
 
 A<sub>m</sub> is the area of the smaller star (in radius).
 
@@ -136,6 +138,7 @@ sectors starting in A and B and subtracting the 2 triangles ACD and BCD.
 Figure 1. Area of two overlapping circles.
 </td></tr>
 </table>
+<p>
 
 The sector A is found as 2 &beta; * r<sub>1</sub><sup>2</sup>. 
 The triangle ACD is equal to 2 * AE * ED = 
@@ -153,6 +156,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-3](images/es-eq-3.png "Eq 3") | (3) |
 |:-:|:-|-------------------------------------------------:|
+<p>
   
 The angle &alpha; and &beta; are found using the cosine rule.
 
@@ -168,6 +172,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-4](images/es-eq-4.png "Eq 4") | (4) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 Limb darkening or variations in temperature over the surface of the
 stars (like sun spots) are not taken into account. 
@@ -179,6 +184,7 @@ stars (like sun spots) are not taken into account.
 Figure 2. Eclipsing binary star.
 </td></tr>
 </table>
+<p>
 
 The eclipsing of stars can be seen in figure 2, the black line.
 
@@ -199,6 +205,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-5](images/es-eq-5.png "Eq 5") | (5) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 The hot spot is always facing the other star, so the observer sees
 it in phases, with the larger contribution when z < 0, i.e. star 2 is behind
@@ -206,7 +213,7 @@ star 1. The phase modulates the spot with cos<sup>2</sup>( 2 ( &theta; - 90 )
 
 The proportionality in eq.4 defines another adjustable parameter,
 f<sub>s</sub>, which combined with the fact that the luminosity is
-proportional to T<sup>4</sup>, yields the result for L<sub>2</sub>> 
+proportional to T<sup>4</sup>, yields the result for L<sub>2</sub>
 
 <!--latex
 \begin{displaymath}
@@ -216,6 +223,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-6](images/es-eq-6.png "Eq 6") | (6) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 There is also a heating of star 1 by star 2, which is the same, mutatis
 mutandis, as eq.6, except that the phase is reversed, as star 1 needs to
@@ -247,6 +255,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-7](images/es-eq-7.png "Eq 7") | (7) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 A similar formula holds for star 2. 
 
@@ -269,6 +278,7 @@ apparent semi-minor axis is the same as the true one.
 Figure 3. Gravitational tides.
 </td></tr>
 </table>
+<p>
 
 We dont know the masses of the stars and also not the true distance,
 so we introduce another parameter: p<sub>t</sub>. The gravity works on
@@ -284,6 +294,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-8](images/es-eq-8.png "Eq 8") | (8) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 We assume that the deformation is either instantaneous or the stars are
 tidally locked. Anyway, the long axis of the ellipsoids is always
@@ -298,6 +309,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-9](images/es-eq-9.png "Eq 9") | (9) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 Projecting a prolate ellipsoid, yields an ellipse with the same minor
 axis as the ellipsoid, and an apparent major axis, m<sub>a</sub>,  
@@ -312,6 +324,7 @@ latex-->
 
 | &nbsp; | ![ES-Equation-10](images/es-eq-10.png "Eq 10") | (10) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 Assuming, as we did before, that the surface temperature is the same
 everywhere, we see the luminosity increase when looking sideways at the
