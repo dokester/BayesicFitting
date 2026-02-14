@@ -16,13 +16,21 @@ Springer Science. 2006.<br>
 <a name=buchner></a>
 + J. Buchner. 
 **Comparison of Step Samplers for Nested Sampling.**
-Phys. Sci. Forum 2022, 5(1), 46; https://doi.org/10.3390/psf2022005046<br>
+Phys. Sci. Forum 2022, 5(1), 46;<br>
+[PDF](https://doi.org/10.3390/psf2022005046)
+
+<a name=dzygunenko></a>
++ Andrii Dzygunenko and Dmytro Tvardovskyi.
+**Period Analysis Of 3 Eclipsing Binary Stars With Tess Data.**
+European Journal on Variable Stars (2025); <br>
+[PDF](https://doi.org/10.5817/OEJV2025-0258)
 
 <a name="goggans"></a>
 + Paul Goggans, R. W. Henderson, Ning Xiang
 **Using nested sampling with Galilean Monte Carlo for model comparison 
 problems in acoustics.**
-Proc. Mtgs. Acoust. 19, 055089 (2013); https://doi.org/10.1121/1.4800876<br>
+Proc. Mtgs. Acoust. 19, 055089 (2013);<br> 
+[PDF](https://doi.org/10.1121/1.4800876)
 
 <a name="gregory"></a>  
 + P.C. Gregory. 
@@ -33,8 +41,8 @@ Cambridge University Press. 2005.<br>
 + S.F. Gull. 
 **Bayesian Data Analysis: Straight-line fitting.** 
 Maximum Entropy and Bayesian Methods. Ed: Skilling, J. (eds) 
-Fundamental Theories of Physics, vol 36. Springer, Dordrecht. 
-https://doi.org/10.1007/978-94-015-7860-8_55<br>
+Fundamental Theories of Physics, vol 36. Springer, Dordrecht. <br>
+[PDF](https://doi.org/10.1007/978-94-015-7860-8_55)
 
 <a name="handley"></a>
 + WJ Handley, MP Hobson and AN Lasenby.
@@ -49,8 +57,8 @@ Cambridge University Press. 2003.<br>
 <a name="kester1"></a>  
 + Do Kester. **Straight Lines.**
 Maximum Entropy and Bayesian Methods. Eds: Von der Linden, W., et al.
-Garching, Kluwer Academic Publishers, pp. 179-188, 1999.
-DOI:10.1007/978-94-011-4710-1_19<br>
+Garching, Kluwer Academic Publishers, pp. 179-188, 1999.<br>
+[PDF](https://doi.org/10.1007/978-94-011-4710-1_19)
 
 <a name="kester2"></a>  
 + Do Kester. **A Software Package for Parameter Estimation and Model Comparison.**
@@ -62,6 +70,7 @@ Garching, 2004, AIP Conference Proceedings 735 2004, p. 379.<br>
 + Do Kester, Douwe Beintema and Dieter Lutz. 
 **SWS Fringes and Models**
 ESA SP-481, Vilspa, pp. 375-378. 2009.<br>
+[PDF](https://irsa.ipac.caltech.edu/data/SPITZER/docs/files/spitzer/Kester2001.pdf)
 
 <a name="kester4"></a>  
 + Do Kester and Romke Bontekoe.
@@ -69,6 +78,7 @@ ESA SP-481, Vilspa, pp. 375-378. 2009.<br>
 Bayesian Inference and Maximum Entropy Methods in Science and Engineering.
 Eds: Ali-Mohammad Djafari et al. Chamonix. 
 AIP Conference Proceedings 1305, p.49. 2010.<br>
+[PDF](https://doi.org/10.1063/1.3573656)
 
 <a name="kester5"></a>  
 + Do Kester.
@@ -76,12 +86,14 @@ AIP Conference Proceedings 1305, p.49. 2010.<br>
 Bayesian Inference and Maximum Entropy Methods in Science and Engineering.
 Eds: Ali-Mohammad Djafari et al. Chamonix.
 AIP Conference Proceedings 1305. p.107. 2010.<br>
+[PDF](https://doi.org/10.1063/1.3573606)
 
 <a name="kester6"></a>  
 + Do Kester, Ian Avruch and David Teyssier. 
 **Correction of Electric Standing Waves.** 
 in Bayesian Inference and Maximum Entropy Methods in Science and Engineering,
 AIP Conf. Proc., 1636, 62. 2014.<br>
+[PDF](https://doi.org/10.1063/1.4903711)
 
 <a name="kester7"></a>  
 + Do Kester, Ronan Higgins and David Teyssier.
@@ -91,7 +103,8 @@ A &amp; A 599 A115. 2017.<br>
 <a name="kester8"></a>  
 + Do Kester and Migo Mueller.
 **BayesicFitting, a PYTHON toolbox for Bayesian fitting and Evidence Calculation**
-Astronomy and Computing, Vol 37, 100503. 2021. doi: 10.1016/j.ascom.2021.100503<br>
+Astronomy and Computing, Vol 37, 100503. 2021.<br> 
+[PDF](https://doi.org/10.1016/j.ascom.2021.100503)
 
 <a name="linden"></a>  
 + W. von der Linden, V. Dose, U. Toussaint. 
@@ -111,11 +124,11 @@ Oxford University Press. 2006.<br>
 <a name="skilling1"></a>
 + J. Skilling.
 **Bayesian computation in big spaces-nested sampling and Galilean Monte Carlo.**
-AIP Conference Proceedings 1443 145–156. (2012)
-http:// dx.doi.org/10.1063/1.3703630<br>
+AIP Conference Proceedings 1443 145–156. (2012)<br>
+[PDF](https://.doi.org/10.1063/1.3703630)
 
 <a name="stokes"></a>
 + Barrie Stokes, Frank Tuyl, and Irene Hudson.
 **New prior sampling methods for nested sampling - Development and testing**
-AIP Conference Proceedings 1853, 110003 (2017); 
-https://doi.org/10.1063/1.4985378<br>
+AIP Conference Proceedings 1853, 110003 (2017);<br> 
+[PDF](https://doi.org/10.1063/1.4985378)

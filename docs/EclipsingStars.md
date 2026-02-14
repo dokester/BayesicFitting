@@ -29,7 +29,7 @@ one star is behind the other.
 
 On the face of it, the light curve is simple: add the light when both
 stars are seen, otherwise subtract the occluded parts. And indeed such
-systems exists. When the stars are really close to each other, of the
+systems exist. When the stars are really close to each other, of the
 order of a few stellar radii, other effects start to emerge. The stars
 heat each other, making a hot hemisphere where the stars face each
 other. Depending on the time, the hot spots are seen in phases. Think of
@@ -112,12 +112,13 @@ are possible (Pr = 1), rejects them when there can not be any eclipses
 
 When the projected distance, d, is larger than the sum or the radii,
 there is no overlap. When the difference between the radii is smaller
-than the distance there is complete overlap. 
+than the distance there is complete overlap. In these cases the overlap
+area, A<sub>o</sub>, is defined as
 
 <!--latex
 \begin{eqnarray*}
-\quad A =\!&\!0 \quad\ \ & \mbox{if}\ d > r_1 + r_2 \\
-         \!&\!A_m    \ \ & \mbox{if}\ d < | r_1 - r_2 |
+\quad A_o =\!&\!0 \quad\ \ & \mbox{if}\ d > r_1 + r_2 \\
+           \!&\!A_m    \ \ & \mbox{if}\ d < | r_1 - r_2 |
 \end{eqnarray*}
 latex-->
 
@@ -142,7 +143,7 @@ Figure 1. Area of two overlapping circles.
 
 The sector A is found as 2 &beta; * r<sub>1</sub><sup>2</sup>. 
 The triangle ACD is equal to 2 * AE * ED = 
-2 * r<sub>1</sub><sup>2</sup> cos( &beta; ) sin( &beta; )
+r<sub>1</sub><sup>2</sup> cos( &beta; ) sin( &beta; )
 
 For sector B and triangle BCD hold similar equations so that the
 combined overlap area, A<sub>o</sub>, equals
@@ -190,11 +191,12 @@ The eclipsing of stars can be seen in figure 2, the black line.
 
 ## 5. Spot Illumination.
 
-When two stars are real close, they heat each other up. On the near
-sides. The heating is proportional to the temperature of the other star
+When two stars are real close, they heat each other up, on the near
+sides only. The heating is proportional to the temperature of the other star
 times it surface, and inversely proportional to the true distance
 squared. The equation was taken from 
-[Dzygunenko and Tvardovskyi](https://oejv.physics.muni.cz/issues/oejv_0258.pdf).
+[Dzygunenko and Tvardovskyi](./references.md/#dzygunenko) or 
+[PDF](https://oejv.physics.muni.cz/issues/oejv_0258.pdf).
 It gives the extra temperture on star 2, caused by star 1
 
 <!--latex
@@ -208,12 +210,14 @@ latex-->
 <p>
 
 The hot spot is always facing the other star, so the observer sees
-it in phases, with the larger contribution when z < 0, i.e. star 2 is behind
-star 1. The phase modulates the spot with cos<sup>2</sup>( 2 ( &theta; - 90 )
+it in phases, with the larger contribution when z < 0, i.e. star 2 
+is behind star 1. The phase modulates the spot with 
+cos<sup>2</sup>( 2 ( &theta; - 90 ) )
 
-The proportionality in eq.4 defines another adjustable parameter,
+The proportionality in eq.5 defines another adjustable parameter,
 f<sub>s</sub>, which combined with the fact that the luminosity is
-proportional to T<sup>4</sup>, yields the result for L<sub>2</sub>
+proportional to T<sup>4</sup>, yields the result, to be added to
+L<sub>2</sub>
 
 <!--latex
 \begin{displaymath}
@@ -227,7 +231,7 @@ latex-->
 
 There is also a heating of star 1 by star 2, which is the same, mutatis
 mutandis, as eq.6, except that the phase is reversed, as star 1 needs to
-be behind star 2 for full illumination. phase = ( 1 + z / &rho; ). 
+be behind star 2 for full illumination: phase = ( 1 + z / &rho; ). 
 
 Even though the hotter star produces a much larger effect on the other
 than reverse, we implemented both as we don't know in advance which star
@@ -312,9 +316,9 @@ latex-->
 <p>
 
 Projecting a prolate ellipsoid, yields an ellipse with the same minor
-axis as the ellipsoid, and an apparent major axis, m<sub>a</sub>,  
-varying between both axis. 
-The size of the major axis depends on the aspect angle &theta;.
+axis as the ellipsoid, and an apparent major axis, m<sub>a</sub>,
+varying between both axis.  The size of the major axis depends on the
+aspect angle &theta;. 
 
 <!--latex
 \begin{displaymath}
@@ -353,7 +357,9 @@ the previous orbital parameters we fixed. They don't show in the final
 solution at all, while here we actively prefer one solution above
 another, with no real basis to do so. 
  
-
+However, when averaging the parameters from the samples in the sample
+list, we must take care not to average parameters for different
+solutions.  
 
 
 

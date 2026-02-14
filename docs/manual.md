@@ -170,6 +170,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-1](images/maneq-1.png "Eq 1") | (1) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 The result of the function together with its derivatives, parameter
 values, and other possibly usefull information is packed into the
@@ -220,6 +221,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-2](images/maneq-2.png "Eq 2") | (2) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 It has 2 parameters that can be optimized to fit the `ydata`.
 
@@ -233,6 +235,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-3](images/maneq-3.png "Eq 3") | (3) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 It has 3 parameters to be fitted.
 
@@ -404,10 +407,9 @@ latex-->
 
 | &nbsp; | ![manualEquation-4](images/maneq-4.png "Eq 4") | (4) |
 |:-:|:-|-------------------------------------------------:|
-
+<p>
 
 then
-
 
 <!--latex
 \begin{displaymath}
@@ -417,6 +419,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-5](images/maneq-5.png "Eq 5") | (5) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 The input of *m<sub>2</sub>* is replaced by the result of *m<sub>1</sub>*. While in case of
 
@@ -428,6 +431,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-6](images/maneq-6.png "Eq 6") | (6) |
 |:-:|:-|-------------------------------------------------:|
+<p>
 
 the m1 only influences m2, not m3. To influence both *m<sub>2</sub>* and *m<sub>3</sub>*, 
 brackets are needed.
@@ -440,7 +444,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-7](images/maneq-7.png "Eq 7") | (7) |
 |:-:|:-|-------------------------------------------------:|
-
+<p>
 
 This is the only place where a 2-d model can be combined with a 1-d
 model if the output of a 2-d model is 1 dimensional. Or in general the 
@@ -698,7 +702,7 @@ latex-->
 
 | &nbsp; | ![manualEquation-8](images/maneq-8.png "Eq 8") | (8) |
 |:-:|:-|-------------------------------------------------:|
-
+<p>
 
 The best fit is found through optimization of the parameters **p**.
 Traditionally this is done by finding the minimum of
