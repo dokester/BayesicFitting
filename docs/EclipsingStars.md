@@ -342,25 +342,68 @@ blue lines.
 
 ## 7. Symmetry.
 
-As we are seeing only one dot of light that adds the contribution of
+As we are seeing only one dot of light which contains the contribution of
 both stars, the orbit that fit the light curve, is not unique.  Even
 after we fixed the line of nodes to pointing north and the semi-major
-axis to 1, there are still 2 completely identical solutions. We can find
-the other one by flipping the inclination by 180 degrees and exchanging
-both the radii and the luminosities of the stars. 
+axis to 1, there are still several completely identical solutions. 
+We can find the other solutions by mirroring of the main axes.
 
-We could make a choice here. E.g. allowing only positive values for the
-inclination, or selecting the star with the larger radius as being star
-1, or the same for the larger luminosty. But it all seems to be
-arbitrary, assuming knowledge that we don't have. It is different from
-the previous orbital parameters we fixed. They don't show in the final
-solution at all, while here we actively prefer one solution above
-another, with no real basis to do so. 
+![Tides](images/symmetry.png "Figure 4")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 4. Orbital symmetries.
+</td></tr>
+</table>
+<p>
+
+In figure 4 we display 4 panels. The first one, panel a, shows the
+starting point, from which we mirror to get to the other panels. In each
+panel we see the light curve at the top. The numbered arrows refer to the
+positions of star 2 in the insets low-left and low-right. The insets
+give two views of the orbit; to the left as eclipsing view and to the
+right in a sideways view, with the observer further to the right. The
+effects of spot illumination and tidal distortion is only shown in star
+2. It would be confusing to show it also for star 1.
+
+Panel b shows the orbit mirrored in the y-z plane, most clearly in the
+left inset.  We see star 2 pass on the other side over star 1.  This can
+be achieved by changing the inclination into ( 180 - inclination )
+
+Panel c shows the orbit mirrored in the x-z plane, most clearly in the
+right inset. The stars are running anti-clockwise. This mirroring comes
+about when both the inclination and the longitude of the periastron are 
+increased by 180 degrees. The orbit is flipped with respect to
+the sky plane and the orbit itself is moved forward by half a period. 
+
+Panel d shows the orbit mirrored in the x-y plane. What was back is now
+up front and vice versa. To keep the same light curve we also have to
+flip the stars. To achieve this we increase the inclination by 180
+degrees and exchange the radii and luminosities of the stars.
+
+The mirrorings are summarized in the table below.
+
+| mirror | panel  |  incl  |  long  |  radius   |  lumen   | 
+|:------:|:------:|:------:|:------:|:---------:|:--------:|
+|   y z  |   b    | &pi;-i |        |           |          | 
+|   x z  |   c    |  +&pi; |  +&pi; |           |          |
+|   x y  |   d    |  +&pi; |        |1&le;&gt;2 |1&le;&gt;2|
+
+<p>
+The 3 mirrorings on fundamental planes, can be combined into 8
+parameter sets that all produce the same light curve.
  
-However, when averaging the parameters from the samples in the sample
-list, we must take care not to average parameters for different
-solutions.  
+We could make the choice here to allow all these solutions and see where 
+the final ends. However we already have a 10 dimensional parameter space
+where the solution must be found in a tiny area, with in some dimensions
+almost no gradient leading to it. If e.g. the period is of by a very
+small fraction, it is just as bad as when is is off by a large factor.
 
+## 8. Constriction.
+
+Constricting the search space as much as possible is a must.
+
+First and foremost we need to know the period. 
 
 
 
