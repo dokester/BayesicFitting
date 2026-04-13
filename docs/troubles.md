@@ -276,14 +276,6 @@ For **NS** all data points are independent, even when we see a clear
 systematic behaviour in the residuals, fitters, including **NS** do not
 have that overview. 
 
-The keyword `bestBoost` was introduced to address this issue. When set
-`True`, every valid step is checked whether it is better than any of the
-previous steps residing in the **PhantomCollection**.  If so, a
-**Fitter** is run, starting at the best position to improve the best
-even further.  As this is happening in the **PhantomCollection** it does
-not affect the evidence calculation.  But it opens a corridor to the
-top. 
-
 
 
 

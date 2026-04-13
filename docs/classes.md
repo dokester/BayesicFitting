@@ -64,7 +64,7 @@ In a Python session they are called as:
     from BayesicFitting import SomeClass
     ## construct an instantiation of SomeClass
     sc = SomeClass( some, arguments )
-    ## assign an attribute of the class
+    ## obtain an attribute from the class
     a = sc.someAttribute
     ## run a method of the class
     r = sc.someMethod( more, arguments )

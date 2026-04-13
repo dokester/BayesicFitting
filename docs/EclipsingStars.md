@@ -34,7 +34,13 @@ order of a few stellar radii, other effects start to emerge. The stars
 heat each other, making a hot hemisphere where the stars face each
 other. Depending on the time, the hot spots are seen in phases. Think of
 the phases of the Moon or Venus. Also at close distances, tidal
-attaction will distort the spherical shape of the stars.  
+attaction will distort the spherical shape of the stars into prolate
+spheroids. The spheroids present a surface, larger than the undisturbed
+star when looked at sideways, and smaller when looked at head on.
+
+In this not the star at the center of the (calculated) orbit will be
+designated as star 1; the orbiting star is star 2. 
+
 
 ## 2. Stellar Orbit in 3 dimensions.
 
@@ -62,13 +68,13 @@ as d.
 
 We minimally need 4 more parameters: the radii of both stars and their
 luminosities. The radii are given in fractions of the semi-major axis,
-i.d. r1,r2 < 1. The luminosities need to be additive, so they cannot be
+i.e. r1,r2 < 1. The luminosities need to be additive, so they cannot be
 magnitudes. We need to translate to the magnitude, m, to luminosty, L,
 and scale them to some nice number range.
 
 <!--latex
 \begin{displaymath}
-L = 10 ^ { -m / 2.5 } 
+L = 10 ^ { -m / 2.512 } 
 \end{displaymath}
 latex-->
 
@@ -86,10 +92,10 @@ should not crash or rupture each other en secondly they should actually
 show eclipses.
 
 Constraints are implemented as change in the likelihood, but
-theoretically they are extra priors. It is knowledge we have beforehand,
-but it can not be implemented with simple, mutually independent
-probability distributions. It is the relation between the parameters
-that define the prior.
+theoretically they are extra priors.  It is knowledge we have
+beforehand, but it can not be implemented with simple, mutually
+independent probability distributions, acting on the parameters.  It is
+the relation between the parameters that define the prior. 
 
 The no-crash constraint entails that the sum of the stellar radii must
 be smaller than the distance between the stars, or better even the Roche
@@ -141,8 +147,8 @@ Figure 1. Area of two overlapping circles.
 </table>
 <p>
 
-The sector A is found as 2 &beta; * r<sub>1</sub><sup>2</sup>. 
-The triangle ACD is equal to 2 * AE * ED = 
+The sector A is found as: 2 &beta; r<sub>1</sub><sup>2</sup>. 
+The triangle ACD is equal to  AE * ED = 
 r<sub>1</sub><sup>2</sup> cos( &beta; ) sin( &beta; )
 
 For sector B and triangle BCD hold similar equations so that the
@@ -161,15 +167,18 @@ latex-->
   
 The angle &alpha; and &beta; are found using the cosine rule.
 
-From the overlap area, the fraction of occluded light is found.
-The total luminosity, L, 
+from the overlap area, we define 2 visibility functions, one for each
+star. The sum of these visibilities, multiplied with the luminosities,
+yield the light curve of the double star.
 
 <!--latex
 \begin{eqnarray*}
-L =\!&\!\!L_1 ( 1 - A_o / A_1 ) + L_2 \quad & \mbox{if}\ z > 0 \\ 
-   \!&\!\!L_1 + L_2 ( 1 - A_o / A_2 ) \quad & \mbox{if}\ z < 0
+V_1 &=& 1 - ( A_o / A_1 ) \delta( z > 0 ) \\
+V_2 &=& 1 - ( A_o / A_2 ) \delta( z < 0 ) 
 \end{eqnarray*}
 latex-->
+
+The Kronecker &delta; return 1 when the condition is true, 0 otherwise. 
 
 | &nbsp; | ![ES-Equation-4](images/es-eq-4.png "Eq 4") | (4) |
 |:-:|:-|-------------------------------------------------:|
@@ -182,7 +191,7 @@ stars (like sun spots) are not taken into account.
 <table><tr>
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
-Figure 2. Eclipsing binary star.
+Figure 2. Eclipsing binary star with a variety of additional settings.
 </td></tr>
 </table>
 <p>
@@ -211,8 +220,9 @@ latex-->
 
 The hot spot is always facing the other star, so the observer sees
 it in phases, with the larger contribution when z < 0, i.e. star 2 
-is behind star 1. The phase modulates the spot with 
-cos<sup>2</sup>( 2 ( &theta; - 90 ) )
+is almost behind star 1. <br>
+The phase modulates the spot with 
+cos<sup>2</sup>(&nbsp;2&nbsp;(&nbsp;&theta;&nbsp;-&nbsp;90&nbsp;)&nbsp;).
 
 The proportionality in eq.5 defines another adjustable parameter,
 f<sub>s</sub>, which combined with the fact that the luminosity is
@@ -231,7 +241,8 @@ latex-->
 
 There is also a heating of star 1 by star 2, which is the same, mutatis
 mutandis, as eq.6, except that the phase is reversed, as star 1 needs to
-be behind star 2 for full illumination: phase = ( 1 + z / &rho; ). 
+be behind star 2 for visible full illumination: <br>
+phase = ( 1 + z / &rho; ). 
 
 Even though the hotter star produces a much larger effect on the other
 than reverse, we implemented both as we don't know in advance which star
@@ -264,35 +275,18 @@ latex-->
 A similar formula holds for star 2. 
 
 The result of this gravitational pull is a distortion of the spherical
-star into a prolate (elongated) ellipsoid. As the tidal forces are
-proportional to the radius of the star, the ellipsoids on both stars
-have the same shape, except for the size. 
+star into a prolate (elongated) spheroid. We assume that these effects
+act immediately resulting in an elongation directed to the other star.
 
-In figure 3, we display the binary system, as seen from the side.  The
-observer is at the top.  The variables a<sub>1</sub>, b<sub>1</sub>, and
-c<sub>1</sub> are defined as the true semi-major axis, the semi-minor
-axis and the apparent semi-major axis of the ellipsoid, respectively. 
-As the ellipsoid is rotationally symmetric along the long axis, the
-apparent semi-minor axis is the same as the true one. 
-
-![Tides](images/tides.png "Figure 3")
-<table><tr>
-<td style="width: 10px;">  </td>
-<td style="width: 350px; text-align: left;">
-Figure 3. Gravitational tides.
-</td></tr>
-</table>
-<p>
-
-We dont know the masses of the stars and also not the true distance,
-so we introduce another parameter: p<sub>t</sub>. The gravity works on
-bot stars in the same way, resulting in conformal ellipsoids. So we can
-calculate the semi-major axis, m<sub>j</sub>, of the ellipsoid,
-independent of the star as
+The ellipticity of a uniform
+fluid sphere of radius, r<sub>2</sub>, is given, in first approximation,
+by 
+[equations 1.468 of teaching site](https://farside.ph.utexas.edu/teaching/355/Surveyhtml/node69.html)
+--admittedly not a very good reference, but it is all I could find--
 
 <!--latex
 \begin{displaymath}
-m_j = 1 + \frac{p_t}{\rho^3} 
+\epsilon_2 = \frac{15}{4} \frac{ m_1 }{ m_2 } \big( \frac{ r_2 }{ \rho } \big)^3
 \end{displaymath}
 latex-->
 
@@ -300,29 +294,64 @@ latex-->
 |:-:|:-|-------------------------------------------------:|
 <p>
 
-We assume that the deformation is either instantaneous or the stars are
-tidally locked. Anyway, the long axis of the ellipsoids is always
-pointing to the other star. Also assuming that the volumes of the stars
-are conserved, we can calculate the semi-minor axis, m<sub>n</sub>, as
+In eq.8 we have the ratio of the masses of the stars, 
+m<sub>1</sub>&nbsp;/&nbsp;m<sub2</sub>, which is another
+unknown that appears as an extra parameter in the model. In the
+analogous equation for the ellipticity of star 1, the same ratio
+appears, but now in the inverse. So in total we have one extra
+parameters, governing the tidal distortion, which as a bonus,
+--for all it's worth--, even represents something physical, the mass
+ratio of the stars. 
+
+Assuming that the total volume of the star is preserved, during tidal
+distortion, we have that the cube of the (nominal) radius, r, equals the
+semimajor axis, a, times the semiminor axis, b, squared. Together with
+the ellipticity, &epsilon;, which connectd a and b, via 
+a = b ( 1 - &epsilon; ), we find
 
 <!--latex
-\begin{displaymath}
-m_n = \sqrt{ \frac{1}{m_j} } 
-\end{displaymath}
+
+\begin{eqnarray*}
+a_1 &=& r_1 / ( 1 - \epsilon_1 )^{2/3} \\ 
+b_1 &=& r_1 * ( 1 - \epsilon_1 )^{1/3}
+\end{eqnarray*}
 latex-->
 
 | &nbsp; | ![ES-Equation-9](images/es-eq-9.png "Eq 9") | (9) |
 |:-:|:-|-------------------------------------------------:|
 <p>
 
-Projecting a prolate ellipsoid, yields an ellipse with the same minor
-axis as the ellipsoid, and an apparent major axis, m<sub>a</sub>,
+Obviously the ellipticity has to be kept strickly within the range
+[0,1]. Equation 8, does not automatically guarantee that. We need
+another constraint on the combination of parameters that yields the
+&epsilon;s.
+
+In figure 3, we display 6 positions of the secundary star in the binary
+system. The observer is at the top.  The
+variables a<sub>1</sub>, b<sub>1</sub>, and c<sub>1</sub> are defined as
+the true semi-major axis, the semi-minor axis and the apparent
+semi-major axis of the ellipsoid, respectively.  As the ellipsoid is
+rotationally symmetric along the long axis, the apparent semi-minor axis
+is the same as the true one. 
+
+![Tides](images/tides.png "Figure 3")
+<table><tr>
+<td style="width: 10px;">  </td>
+<td style="width: 350px; text-align: left;">
+Figure 3. Gravitational tides. The shape of star 2 changes considerably
+in its elliptic orbit. On star 1, shape changes are hardly noticeable.
+</td></tr>
+</table>
+<p>
+
+Projecting a prolate spheroid, yields an ellipse with the same minor
+axis as the spheroid, and an apparent major axis, m<sub>a</sub>,
 varying between both axis.  The size of the major axis depends on the
 aspect angle &theta;. 
 
 <!--latex
 \begin{displaymath}
-m_a = \sqrt{ m_j^2 \sin^2 \theta + m_n^2 \cos^2 \theta  } 
+c_1 = \sqrt{ a_1^2 \sin^2 \theta + b_1^2 \cos^2 \theta  } 
 \end{displaymath}
 latex-->
 
@@ -332,9 +361,10 @@ latex-->
 
 Assuming, as we did before, that the surface temperature is the same
 everywhere, we see the luminosity increase when looking sideways at the
-prolate ellipsoid and decrease when looking head-on. 
+prolate spheroid and decrease when looking head-on. 
 The luminosity changes proportional to the apparent surface area: 
-m<sub>a</sub> * m<sub>n</sub>.
+c<sub>1</sub> * b<sub>1</sub> and c<sub>2</sub> * b<sub>2</sub>,
+respectively. 
 
 The effects of tidal distortion can be seen in figure 2, the red and
 blue lines.
@@ -342,7 +372,7 @@ blue lines.
 
 ## 7. Symmetry.
 
-As we are seeing only one dot of light which contains the contribution of
+As we are seeing only one dot of light which sums the contribution of
 both stars, the orbit that fit the light curve, is not unique.  Even
 after we fixed the line of nodes to pointing north and the semi-major
 axis to 1, there are still several completely identical solutions. 
@@ -387,7 +417,7 @@ The mirrorings are summarized in the table below.
 |:------:|:------:|:------:|:------:|:---------:|:--------:|
 |   y z  |   b    | &pi;-i |        |           |          | 
 |   x z  |   c    |  +&pi; |  +&pi; |           |          |
-|   x y  |   d    |  +&pi; |        |1&le;&gt;2 |1&le;&gt;2|
+|   x y  |   d    |  +&pi; |        |1&lt;=&gt;2 |1&lt;=&gt;2|
 
 <p>
 The 3 mirrorings on fundamental planes, can be combined into 8
@@ -396,14 +426,41 @@ parameter sets that all produce the same light curve.
 We could make the choice here to allow all these solutions and see where 
 the final ends. However we already have a 10 dimensional parameter space
 where the solution must be found in a tiny area, with in some dimensions
-almost no gradient leading to it. If e.g. the period is of by a very
+almost no gradient leading to it. If e.g. the period is off by a very
 small fraction, it is just as bad as when is is off by a large factor.
 
-## 8. Constriction.
+## 8. Practicalities.
 
-Constricting the search space as much as possible is a must.
-
+Constricting the parameter search space as much as possible is a must. 
 First and foremost we need to know the period. 
+
+There are 2 problems here.  Firstly, we have irregularly spaced data. 
+This prohibits everyones favorite method, the FFT.  And secondly, a
+light curve does not resemble (co)sines in any way. That makes the 
+Lomb-Scargle method much less effective. 
+
+However, inspired by the idea that Lomb-Scargle boils essentially down
+to the fitting of (co)sines to a linear series to frequencies, we
+replaced the (co)sines for splines. The splines have less of a problem to
+follow the intrincacies of a light curve, when it has enough knots.
+Assuming that the eclipse time is about 10 % of the total time, we would
+need about 20 knots in a periodic configuration. So we at least catch
+the eclipses at one knot location. The fitting is more complicated than
+with (co)sines, but it is still a linear problem and easily doable in
+one (quasi) matrix inversion.
+
+When following this route, we still need to finely search the frequency
+space. Generally, the eclipses have steep slopes, prohibiting gradients
+along which to slide toward the true minimum. 
+
+ 
+
+
+
+
+
+
+  
 
 
 
