@@ -178,11 +178,11 @@ V_2 &=& 1 - ( A_o / A_2 ) \delta( z < 0 )
 \end{eqnarray*}
 latex-->
 
-The Kronecker &delta; return 1 when the condition is true, 0 otherwise. 
-
 | &nbsp; | ![ES-Equation-4](images/es-eq-4.png "Eq 4") | (4) |
 |:-:|:-|-------------------------------------------------:|
 <p>
+
+The Kronecker &delta; returns 1 when the condition is true, 0 otherwise. 
 
 Limb darkening or variations in temperature over the surface of the
 stars (like sun spots) are not taken into account. 
@@ -275,18 +275,18 @@ latex-->
 A similar formula holds for star 2. 
 
 The result of this gravitational pull is a distortion of the spherical
-star into a prolate (elongated) spheroid. We assume that these effects
-act immediately resulting in an elongation directed to the other star.
+star into a prolate (elongated) spheroid.  We assume that the stars are
+tidally locked or that the distortion effects act immediately resulting
+in an elongation directed to the other star. 
 
-The ellipticity of a uniform
-fluid sphere of radius, r<sub>2</sub>, is given, in first approximation,
-by 
+The ellipticity of a uniform fluid sphere of radius, r<sub>2</sub>, is 
+given, in first approximation, by 
 [equations 1.468 of teaching site](https://farside.ph.utexas.edu/teaching/355/Surveyhtml/node69.html)
 --admittedly not a very good reference, but it is all I could find--
 
 <!--latex
 \begin{displaymath}
-\epsilon_2 = \frac{15}{4} \frac{ m_1 }{ m_2 } \big( \frac{ r_2 }{ \rho } \big)^3
+\epsilon_2 = \frac{15}{4} \frac{ m_1 }{ m_2 } \left( \frac{ r_2 }{ \rho } \right)^3
 \end{displaymath}
 latex-->
 
@@ -295,10 +295,15 @@ latex-->
 <p>
 
 In eq.8 we have the ratio of the masses of the stars, 
-m<sub>1</sub>&nbsp;/&nbsp;m<sub2</sub>, which is another
-unknown that appears as an extra parameter in the model. In the
-analogous equation for the ellipticity of star 1, the same ratio
-appears, but now in the inverse. So in total we have one extra
+m<sub>1</sub>&nbsp;/&nbsp;m<sub>2</sub>, which is another
+unknown that appears as an extra parameter in the model. Second order
+approximations would turn the stars into eqq-shapes where the pointy
+parts are directed to each other, eventually resulting th mass transfer
+from one star to the other. However that would not be the stable
+situation we should consider.
+
+In the analogous equation for the ellipticity of star 1, the same ratio
+appears, but now in the inverse.  So in total we have one extra
 parameters, governing the tidal distortion, which as a bonus,
 --for all it's worth--, even represents something physical, the mass
 ratio of the stars. 
@@ -307,7 +312,7 @@ Assuming that the total volume of the star is preserved, during tidal
 distortion, we have that the cube of the (nominal) radius, r, equals the
 semimajor axis, a, times the semiminor axis, b, squared. Together with
 the ellipticity, &epsilon;, which connectd a and b, via 
-a = b ( 1 - &epsilon; ), we find
+b = a ( 1 - &epsilon; ), we find
 
 <!--latex
 
@@ -323,14 +328,29 @@ latex-->
 
 Obviously the ellipticity has to be kept strickly within the range
 [0,1]. Equation 8, does not automatically guarantee that. We need
-another constraint on the combination of parameters that yields the
-&epsilon;s.
+another constraint on the combination of parameters that yields
+&epsilon;.
+
+Projecting a prolate spheroid, yields an ellipse with the same minor
+axis as the spheroid, and an apparent major axis, c, varying between
+both axis.  The size of the apparent major axis depends on the aspect
+angle &theta;. 
+
+<!--latex
+\begin{displaymath}
+c_1 = \sqrt{ a_1^2 \sin^2 \theta + b_1^2 \cos^2 \theta  } 
+\end{displaymath}
+latex-->
+
+| &nbsp; | ![ES-Equation-10](images/es-eq-10.png "Eq 10") | (10) |
+|:-:|:-|-------------------------------------------------:|
+<p>
 
 In figure 3, we display 6 positions of the secundary star in the binary
 system. The observer is at the top.  The
 variables a<sub>1</sub>, b<sub>1</sub>, and c<sub>1</sub> are defined as
 the true semi-major axis, the semi-minor axis and the apparent
-semi-major axis of the ellipsoid, respectively.  As the ellipsoid is
+semi-major axis of the spheroid, respectively.  As the spheroid is
 rotationally symmetric along the long axis, the apparent semi-minor axis
 is the same as the true one. 
 
@@ -344,20 +364,6 @@ in its elliptic orbit. On star 1, shape changes are hardly noticeable.
 </table>
 <p>
 
-Projecting a prolate spheroid, yields an ellipse with the same minor
-axis as the spheroid, and an apparent major axis, m<sub>a</sub>,
-varying between both axis.  The size of the major axis depends on the
-aspect angle &theta;. 
-
-<!--latex
-\begin{displaymath}
-c_1 = \sqrt{ a_1^2 \sin^2 \theta + b_1^2 \cos^2 \theta  } 
-\end{displaymath}
-latex-->
-
-| &nbsp; | ![ES-Equation-10](images/es-eq-10.png "Eq 10") | (10) |
-|:-:|:-|-------------------------------------------------:|
-<p>
 
 Assuming, as we did before, that the surface temperature is the same
 everywhere, we see the luminosity increase when looking sideways at the
@@ -401,23 +407,25 @@ left inset.  We see star 2 pass on the other side over star 1.  This can
 be achieved by changing the inclination into ( 180 - inclination )
 
 Panel c shows the orbit mirrored in the x-z plane, most clearly in the
-right inset. The stars are running anti-clockwise. This mirroring comes
-about when both the inclination and the longitude of the periastron are 
-increased by 180 degrees. The orbit is flipped with respect to
-the sky plane and the orbit itself is moved forward by half a period. 
+right inset.  The stars are running anti-clockwise.  This mirroring
+comes about when both the inclination and the longitude of the
+periastron are increased by 180 degrees.  The orbit is flipped with
+respect to the sky plane, due to the increase in inclination, and the
+orbit itself is moved forward by increasing the longitude by half a period. 
 
 Panel d shows the orbit mirrored in the x-y plane. What was back is now
 up front and vice versa. To keep the same light curve we also have to
 flip the stars. To achieve this we increase the inclination by 180
-degrees and exchange the radii and luminosities of the stars.
+degrees and exchange the radii and luminosities of the stars, and
+invert the massratio parameter. 
 
 The mirrorings are summarized in the table below.
 
-| mirror | panel  |  incl  |  long  |  radius   |  lumen   | 
-|:------:|:------:|:------:|:------:|:---------:|:--------:|
-|   y z  |   b    | &pi;-i |        |           |          | 
-|   x z  |   c    |  +&pi; |  +&pi; |           |          |
-|   x y  |   d    |  +&pi; |        |1&lt;=&gt;2 |1&lt;=&gt;2|
+| mirror | panel  |  incl  |  long  |  radius   |  lumen   | massratio |
+|:------:|:------:|:------:|:------:|:---------:|:--------:|:---------:|
+|   y z  |   b    | &pi;-i |        |           |          |           |
+|   x z  |   c    |  +&pi; |  +&pi; |           |          |           |
+|   x y  |   d    |  +&pi; |        |1&lt;=&gt;2 |1&lt;=&gt;2| 1/mr    |
 
 <p>
 The 3 mirrorings on fundamental planes, can be combined into 8
@@ -449,10 +457,65 @@ the eclipses at one knot location. The fitting is more complicated than
 with (co)sines, but it is still a linear problem and easily doable in
 one (quasi) matrix inversion.
 
-When following this route, we still need to finely search the frequency
-space. Generally, the eclipses have steep slopes, prohibiting gradients
-along which to slide toward the true minimum. 
+Generally, the eclipses have steep slopes, prohibiting gradients
+along which to slide toward the true minimum. We need a geometrically
+spaced grid of about 1000 points per decade, to find a hint of a
+possible minimum. Subsequently we need to do a downhill search to check
+and visually inspect whether the true period is found. 
 
+Given a period and a splines fit, we can find from the distance between
+the minima what the minimal value of the eccentricity has to be. The
+periastron is somewhere between the minima, where the distance is
+shortest. The luminosities can be found from the depths of the minima
+and the sign of the inclination from the order of the minima.
+
+All these values are of course initial guesses, to be fed into the
+priors for the parameters.
+
+Only with these priors we can hope to find a believable solution.
+
+## 9. Implementation.
+
+The material in sections 1 to 7, are implemented in
+**EclipsingStarModel** which calculates how the light intensity changes
+as a function of time, and given a set of parameters.
+
+It starts off with a **StellarOrbitModel**
+using dummy values for the missing parameters, to produce a
+3-dimensional stellar orbit in x, y and z. X and y yield the distance
+between the stars and z determines which star is in front of the other.
+
+The method **tidalDistortion** determines how much the stellar
+dimensions vary in their orbit around each other.  The apparent
+semi-major axes determine when the stars start to overlap. 
+
+The method **overlap** calculates the amount of overlap when the stars
+pass in front of each other.  It assumes that the stars are circular;
+not exactly true but near enough.  At eclipse times, we are looking at
+the stars almost head-on, when they are truely circular.  From the
+fraction of overlap and the orientation of the stars, we find the
+**visibleFraction**. 
+
+**spotIllumination** is a method that calculates the heating of the
+stars on each other. This results in a brightening of the hemispheres on
+the near side. It alters the nominal luminosities of the stars. On top
+of this, the luminosities also change due to change in apparent surface
+as a result of the tidal distortion.
+
+The luminosities multiplied with the visible fractions sum into the
+light curve. This is done in the eponymous method **lightCurve**.
+
+For all these methods there are methods to calculate the derivative to  
+time and partial derivatives to each of the parameters. They were
+obtained from the 
+[Online Derivative Calculator](https://www.derivative-calculator.net).
+--Thanks, thanks thanks. A very usefull site.--
+
+Section 8 is implemented in **PeriodicScout**, still a somewhat
+experimental class which sould only be trusted afet careful inspection.
+
+
+ 
  
 
 
