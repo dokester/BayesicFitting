@@ -512,7 +512,8 @@ obtained from the
 --Thanks, thanks thanks. A very usefull site.--
 
 Section 8 is implemented in **PeriodicScout**, still a somewhat
-experimental class which sould only be trusted afet careful inspection.
+experimental class which should only be trusted after careful inspection
+of the results.
 
 
  
