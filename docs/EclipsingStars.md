@@ -49,9 +49,9 @@ merged into one point, we set the semi-major axis to 1 and the rotation
 of the line of nodes to 0.  Those parameters of a stellar orbit model
 have no effect in an eclipsing star system. 
 
-When the orbit has grinded down to a completely circular one, 3 more
+When the orbit has grinded down to a completely circular one, 2 more
 parameters of the steller orbit model vanish: the eccentricity is 0 by
-definition for circles; the phase and the longitude from north disappear
+definition for circles.  the phase and the longitude from north disappear
 by want of a periastron.  Both are undefined as the periastron does
 not exist any more.  We set both values to 0.  This latter model has
 only 2 parameters left: the period and the inclination. 
@@ -122,17 +122,17 @@ than the distance there is complete overlap. In these cases the overlap
 area, A<sub>o</sub>, is defined as
 
 <!--latex
-\begin{eqnarray*}
-\quad A_o =\!&\!0 \quad\ \ & \mbox{if}\ d > r_1 + r_2 \\
-           \!&\!A_m    \ \ & \mbox{if}\ d < | r_1 - r_2 |
-\end{eqnarray*}
+\begin{align*}
+\quad A_o = 0 \quad\ \ & \mbox{if}\ d > \,r_1 + r_2 \\
+            A_m    \ \ & \mbox{if}\ d < | r_1 - r_2 |
+\end{align*}
 latex-->
 
 | &nbsp; | ![ES-Equation-2](images/es-eq-2.png "Eq 2") | (2) |   
 |:-:|:-|-------------------------------------------------:|   
 <p>
 
-A<sub>m</sub> is the area of the smaller star (in radius).
+A<sub>m</sub> is the area of the smaller star.
 
 The overlap of 2 stars approaching each other is given by the
 pink area in figure 1. The area can be calculated as the sum of the two
@@ -172,10 +172,10 @@ star. The sum of these visibilities, multiplied with the luminosities,
 yield the light curve of the double star.
 
 <!--latex
-\begin{eqnarray*}
-V_1 &=& 1 - ( A_o / A_1 ) \delta( z > 0 ) \\
-V_2 &=& 1 - ( A_o / A_2 ) \delta( z < 0 ) 
-\end{eqnarray*}
+\begin{align*}
+V_1 &= 1 - ( A_o / A_1 ) \delta( z > 0 ) \\
+V_2 &= 1 - ( A_o / A_2 ) \delta( z < 0 ) 
+\end{align*}
 latex-->
 
 | &nbsp; | ![ES-Equation-4](images/es-eq-4.png "Eq 4") | (4) |
@@ -295,18 +295,20 @@ latex-->
 <p>
 
 In eq.8 we have the ratio of the masses of the stars, 
-m<sub>1</sub>&nbsp;/&nbsp;m<sub>2</sub>, which is another
-unknown that appears as an extra parameter in the model. Second order
-approximations would turn the stars into eqq-shapes where the pointy
-parts are directed to each other, eventually resulting th mass transfer
-from one star to the other. However that would not be the stable
-situation we should consider.
+m<sub>1</sub>&nbsp;/&nbsp;m<sub>2</sub>. When we normalize the sum of
+the stellar masses to 1, we can have the (relative) mass of star 1,
+m<sub>1</sub>, as extra parameter, from which the (relative) mass of the
+second star follows as
+m<sub>2</sub>&nbsp;=&nbsp;1&nbsp;-&nbsp;m<sub>1</sub>.   
+
+Second order approximations would turn the stars into egg-shapes where
+the pointy parts are directed to each other, eventually resulting th
+mass transfer from one star to the other.  However that would not be the
+stable situation we would like to consider. 
 
 In the analogous equation for the ellipticity of star 1, the same ratio
-appears, but now in the inverse.  So in total we have one extra
-parameters, governing the tidal distortion, which as a bonus,
---for all it's worth--, even represents something physical, the mass
-ratio of the stars. 
+appears, but now in the inverse.  So with one stellar mass as 
+parameter, we can calculate the tidal distortion for both stars.
 
 Assuming that the total volume of the star is preserved, during tidal
 distortion, we have that the cube of the (nominal) radius, r, equals the
@@ -316,17 +318,17 @@ b = a ( 1 - &epsilon; ), we find
 
 <!--latex
 
-\begin{eqnarray*}
-a_1 &=& r_1 / ( 1 - \epsilon_1 )^{2/3} \\ 
-b_1 &=& r_1 * ( 1 - \epsilon_1 )^{1/3}
-\end{eqnarray*}
+\begin{align*}
+a_1 =&\ r_1 \:/\: ( 1 - \epsilon_1 )^{2/3} \\ 
+b_1 =&\ r_1 * ( 1 - \epsilon_1 )^{1/3}
+\end{align*}
 latex-->
 
 | &nbsp; | ![ES-Equation-9](images/es-eq-9.png "Eq 9") | (9) |
 |:-:|:-|-------------------------------------------------:|
 <p>
 
-Obviously the ellipticity has to be kept strickly within the range
+Obviously the ellipticity has to be kept strictly within the range
 [0,1]. Equation 8, does not automatically guarantee that. We need
 another constraint on the combination of parameters that yields
 &epsilon;.
