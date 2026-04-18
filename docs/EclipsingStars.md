@@ -423,11 +423,11 @@ invert the massratio parameter.
 
 The mirrorings are summarized in the table below.
 
-| mirror | panel  |  incl  |  long  |  radius   |  lumen   | massratio |
+| mirror | panel  |  incl  |  long  |  radius   |  lumen   | mass_1   |
 |:------:|:------:|:------:|:------:|:---------:|:--------:|:---------:|
 |   y z  |   b    | &pi;-i |        |           |          |           |
 |   x z  |   c    |  +&pi; |  +&pi; |           |          |           |
-|   x y  |   d    |  +&pi; |        |1&lt;=&gt;2 |1&lt;=&gt;2| 1/mr    |
+|   x y  |   d    |  +&pi; |        |1&lt;=&gt;2 |1&lt;=&gt;2| 1 - m<sub>1</sub>   |
 
 <p>
 The 3 mirrorings on fundamental planes, can be combined into 8
