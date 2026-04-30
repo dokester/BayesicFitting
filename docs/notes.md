@@ -24,6 +24,7 @@ solid DodgerBlue">Contents</span>
 | [Prior Sampling](./Sampling.md) |
 | [BoundingBox](./BoundingBox.md) |
 | [Splines](./splines.md) |
+| [EclipsingStars](./EclipsingStars.md) |
 
 </div>
 </div>
@@ -72,3 +73,8 @@ splines construction in
    - **Dynamic** in the number of knots
    - **Modifiable** in the position of the knots
 
+## Eclipsing Stars.
+
+[Eclipsing Stars](./EclipsingStars.md) is a note that explains the 
+mathematics and the internal construction of the classes 
+**EclipsingStarModel** and **PeriodicScout**. 

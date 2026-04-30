@@ -22,23 +22,23 @@ elementary physics.
 ## 1. Introduction.
 
 Eclipsing binaries are double stars that pass in front of each other
-while orbiting. Here we are only concerned with stars that are so close
-and far away, that they manifest themselves as one point of light
-(star). These stars show periodic behaviour as the light diminishes when
-one star is behind the other.
+while orbiting.  Here we are only concerned with stars that are so close
+together, and far away from us, that they manifest themselves as one
+point of light (star).  These stars show periodic behaviour as the light
+diminishes when one star is behind the other. 
 
 On the face of it, the light curve is simple: add the light when both
 stars are seen, otherwise subtract the occluded parts. And indeed such
-systems exist. When the stars are really close to each other, of the
-order of a few stellar radii, other effects start to emerge. The stars
+systems exist. When the stars are really close to each other - of the
+order of a few stellar radii -, other effects start to emerge. The stars
 heat each other, making a hot hemisphere where the stars face each
-other. Depending on the time, the hot spots are seen in phases. Think of
+other. Depending on the time, the hot spots are seen in phases. Like
 the phases of the Moon or Venus. Also at close distances, tidal
 attaction will distort the spherical shape of the stars into prolate
 spheroids. The spheroids present a surface, larger than the undisturbed
 star when looked at sideways, and smaller when looked at head on.
 
-In this not the star at the center of the (calculated) orbit will be
+In this note, the star at the center of the (calculated) orbit will be
 designated as star 1; the orbiting star is star 2. 
 
 
@@ -51,10 +51,10 @@ have no effect in an eclipsing star system.
 
 When the orbit has grinded down to a completely circular one, 2 more
 parameters of the steller orbit model vanish: the eccentricity is 0 by
-definition for circles.  the phase and the longitude from north disappear
-by want of a periastron.  Both are undefined as the periastron does
-not exist any more.  We set both values to 0.  This latter model has
-only 2 parameters left: the period and the inclination. 
+definition for circles, and the longitude from north disappear by want
+of a periastron.  We set the value for the longitude to 0.  This latter
+model has only 3 parameters left: the period, the phase, and the
+inclination. 
 
 The stellar orbit model yields 3 coordinates (x,y,z).  The +x coordinate
 is pointing to the east, -y is pointing north and z is towards the
@@ -67,10 +67,10 @@ The apparent distance (in the xy-plane) between the stars is indicated
 as d. 
 
 We minimally need 4 more parameters: the radii of both stars and their
-luminosities. The radii are given in fractions of the semi-major axis,
-i.e. r1,r2 < 1. The luminosities need to be additive, so they cannot be
-magnitudes. We need to translate to the magnitude, m, to luminosty, L,
-and scale them to some nice number range.
+luminosities.  The radii are given in fractions of the semi-major axis,
+i.e.  r<sub>1</sub>,r<sub>2</sub> < 1.  The luminosities need to be
+additive, so they cannot be magnitudes.  We need to translate to the
+magnitude, m, to luminosty, L, and scale them to some nice number range. 
 
 <!--latex
 \begin{displaymath}
@@ -88,14 +88,14 @@ parameters.
 ## 3. Constraints
 
 There are 2 obvious constraints for the parameters. Firstly the stars
-should not crash or rupture each other en secondly they should actually
-show eclipses.
+should not crash or rupture each other and secondly they should actually
+show eclipses.  
 
-Constraints are implemented as change in the likelihood, but
-theoretically they are extra priors.  It is knowledge we have
-beforehand, but it can not be implemented with simple, mutually
-independent probability distributions, acting on the parameters.  It is
-the relation between the parameters that define the prior. 
+Constraints are implemented as an extra log prior, added to the log
+likelihood.  It is knowledge we have beforehand, but it can not be
+implemented with simple, mutually independent probability distributions,
+acting on the parameters.  It is the relation between the parameters
+that define the prior. 
 
 The no-crash constraint entails that the sum of the stellar radii must
 be smaller than the distance between the stars, or better even the Roche
@@ -113,6 +113,10 @@ we can calculate the nearest approach as projected on the sky plane.
 We define an extra prior which accepts the orbit setting when eclipses
 are possible (Pr = 1), rejects them when there can not be any eclipses
 (Pr = 0) and a linear relation in the in-between zone.
+
+However, some variable double star systems, the so-called heartbeat
+stars, are not always eclipsing.  The heating and distortion effects are
+the cause of the variability. 
 
 ## 4. Overlap.
 
@@ -167,7 +171,7 @@ latex-->
   
 The angle &alpha; and &beta; are found using the cosine rule.
 
-from the overlap area, we define 2 visibility functions, one for each
+From the overlap area, we define 2 visibility functions, one for each
 star. The sum of these visibilities, multiplied with the luminosities,
 yield the light curve of the double star.
 
@@ -183,6 +187,7 @@ latex-->
 <p>
 
 The Kronecker &delta; returns 1 when the condition is true, 0 otherwise. 
+It determines which star is in front of the other.
 
 Limb darkening or variations in temperature over the surface of the
 stars (like sun spots) are not taken into account. 
@@ -196,7 +201,8 @@ Figure 2. Eclipsing binary star with a variety of additional settings.
 </table>
 <p>
 
-The eclipsing of stars can be seen in figure 2, the black line.
+The light curve of a simple eclipsing star can be seen in figure 2, the
+black line. 
 
 ## 5. Spot Illumination.
 
@@ -419,7 +425,7 @@ Panel d shows the orbit mirrored in the x-y plane. What was back is now
 up front and vice versa. To keep the same light curve we also have to
 flip the stars. To achieve this we increase the inclination by 180
 degrees and exchange the radii and luminosities of the stars, and
-invert the massratio parameter. 
+change the mass parameter into 1 - m<sub>1</sub>. 
 
 The mirrorings are summarized in the table below.
 
@@ -461,7 +467,7 @@ one (quasi) matrix inversion.
 
 Generally, the eclipses have steep slopes, prohibiting gradients
 along which to slide toward the true minimum. We need a geometrically
-spaced grid of about 1000 points per decade, to find a hint of a
+spaced grid of about 1000 points per octave, to find a hint of a
 possible minimum. Subsequently we need to do a downhill search to check
 and visually inspect whether the true period is found. 
 
@@ -469,7 +475,8 @@ Given a period and a splines fit, we can find from the distance between
 the minima what the minimal value of the eccentricity has to be. The
 periastron is somewhere between the minima, where the distance is
 shortest. The luminosities can be found from the depths of the minima
-and the sign of the inclination from the order of the minima.
+and the sign of the inclination from the order of the minima since
+periastron.
 
 All these values are of course initial guesses, to be fed into the
 priors for the parameters.
@@ -482,10 +489,10 @@ The material in sections 1 to 7, are implemented in
 **EclipsingStarModel** which calculates how the light intensity changes
 as a function of time, and given a set of parameters.
 
-It starts off with a **StellarOrbitModel**
-using dummy values for the missing parameters, to produce a
-3-dimensional stellar orbit in x, y and z. X and y yield the distance
-between the stars and z determines which star is in front of the other.
+It starts off with a **StellarOrbitModel** using dummy values for the
+missing parameters, to produce a 3-dimensional stellar orbit in x, y and
+z.  The distance and orientation of the stars in the sky plane is given
+by x and y, and z determines which star is in front of the other. 
 
 The method **tidalDistortion** determines how much the stellar
 dimensions vary in their orbit around each other.  The apparent
@@ -507,15 +514,16 @@ as a result of the tidal distortion.
 The luminosities multiplied with the visible fractions sum into the
 light curve. This is done in the eponymous method **lightCurve**.
 
-For all these methods there are methods to calculate the derivative to  
+For all these methods there are methods to calculate the derivative to
 time and partial derivatives to each of the parameters. They were
-obtained from the 
+obtained from the
 [Online Derivative Calculator](https://www.derivative-calculator.net).
 --Thanks, thanks thanks. A very usefull site.--
 
 Section 8 is implemented in **PeriodicScout**, still a somewhat
 experimental class which should only be trusted after careful inspection
-of the results.
+of the results. Even then, they only provide starting points (priors) for
+the optimalisation of the final parameters.
 
 
  
