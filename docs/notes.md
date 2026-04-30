@@ -25,6 +25,7 @@ solid DodgerBlue">Contents</span>
 | [BoundingBox](./BoundingBox.md) |
 | [Splines](./splines.md) |
 | [EclipsingStars](./EclipsingStars.md) |
+| [In+Output](./InOutModels.md) |
 
 </div>
 </div>
@@ -78,3 +79,8 @@ splines construction in
 [Eclipsing Stars](./EclipsingStars.md) is a note that explains the 
 mathematics and the internal construction of the classes 
 **EclipsingStarModel** and **PeriodicScout**. 
+
+## Input and Output dimensions for Models
+
+The layout for inputs and output of more-dimensional models is 
+documented in this [note](./InOutModels.md).

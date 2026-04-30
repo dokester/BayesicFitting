@@ -15,7 +15,7 @@ mdl-I-O : a model with I dim inputs and O dim outputs<br>
 <p>
 
 | array   | mdl-1-1 | mdl-I-1 | mdl-1-O  | mdl-I-O  | 
-|:--------|:-------:|:-------:|:--------:|:--------:|
+|:-------:|:-------:|:-------:|:--------:|:--------:|
 | ndata   |     N   |    N    |    N     |    N     |
 | npars   |     P   |    P    |    P     |    P     |
 | ndim    |     -   |    I    |    -     |    I     |
