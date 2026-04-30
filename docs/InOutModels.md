@@ -20,7 +20,7 @@ mdl-I-O : a model with I dim inputs and O dim outputs<br>
 | npars   |     P   |    P    |    P     |    P     |
 | ndim    |     -   |    I    |    -     |    I     |
 | ndout   |     -   |    -    |    O     |    O     |
-|                                                   |
+|**method** |       |         |          |          |
 | input   |   [N]   |  [N,I]  |   [N]    |  [N,I]   |
 | result  |   [N]   |   [N]   |  [N,O]   |  [N,O]   |
 | partial |  [N,P]  |  [N,P]  | [O][N,P] | [O][N,P] |
