@@ -1,19 +1,15 @@
-from __future__ import print_function
-
 import numpy as numpy
 import math as math
 import numbers
-import sys
-import trace
 import re
 import inspect
 
 from astropy.table import Table
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 # Module Tools
 """
@@ -349,31 +345,6 @@ def isInstance( item, cls ) :
     else :
         return isinstance( item, cls )
 
-def ndprint( x, form='{0:.3f}' ) :
-    """
-    Returns true when one of the following is true
-    1. when cls is int   : item is an int or item is a numpy.integer.
-    2. when cls is float : item is an float or item is an int.
-    3. when cls is cls   : item is a cls.
-    """
-    print( numpy.array2string(x, formatter={'float_kind':form.format}) )
-
-def decorate( src, des, copy=True ) :
-    """
-    Print a ndarray, formatted.
-    """
-    atr = vars( src )
-    ld = list( atr.keys() )
-    for key in ld :
-        value = atr[key]
-        if copy :
-            try :
-                value = value.copy()
-            except Exception :
-                pass
-        object.__setattr__( des, key, value )
-
-
 def subclassof( sub, cls ) :
     """
     Transfer attributes from src to des.
@@ -496,31 +467,6 @@ def nicenumber( x ) :
         n /= 10
     return sgn * int( x ) * n
 
-def fix2int( x ) :
-    """
-    Return a nice number close to (but below) |x|.
-    """
-    return numpy.fix( x + 0.000001 ).astype( int )
-
-def track( statement ) :
-    """
-    Return integer array with values as in x
-
-    Parameters
-    ----------
-    x : array_like
-        array of integer floats
-    """
-    # create a Trace object, telling it what to ignore, and whether to
-    # do tracing or line-counting or both.
-    tracer = trace.Trace( ignoredirs=[sys.prefix, sys.exec_prefix], trace=0, count=1 )
-
-    # run the new command using the given tracer
-    tracer.run( statement )
-
-    # make a report, placing output in the current directory
-    r = tracer.results()
-    r.write_results(show_missing=True, coverdir=".")
 
 def average( xx, weights=None, circular=None ) :
     """
@@ -560,3 +506,231 @@ def average( xx, weights=None, circular=None ) :
         while averx > circular[1] : averx -= range
 
     return( averx, stdvx )
+
+def toRect( rp, phi=None ):
+    """
+    Return (x,y) coordinates from (rho,phi)
+
+    Angles are measured counterclockwise from north to east
+    North is Down (-y) and East is to the Right (+x)
+
+    Parameters
+    ----------
+    rp : array of pairs [rho,phi] or tuple of (rhos,phis)
+        rp[:,0] : separation of the stars
+        rp[:,1] : angle from north (down) CCW to east (right)
+    phi : array
+        When phi is given, rp is interpeted as rho.
+
+    Returns
+    -------
+    2d-array if the input is a 2d-array  or
+    tuple of 2 arrays if the input is a tuple of 2 arrays or phi is given
+
+    """
+    if phi is not None :
+        x =  rp * numpy.sin( phi )
+        y = -rp * numpy.cos( phi )
+        return ( x, y )
+
+    if isinstance( rp, tuple ) :
+        x =  rp[0] * numpy.sin( rp[1] )
+        y = -rp[0] * numpy.cos( rp[1] )
+        return ( x, y )
+
+    xy = numpy.empty_like( rp )
+    xy[:,0] = rp[:,0] * numpy.sin( rp[:,1] )
+    xy[:,1] =-rp[:,0] * numpy.cos( rp[:,1] )
+
+    return xy
+
+def toRect3D( rho, phi, theta ):
+    """
+    Return (x,y,z) coordinates from (rho,phi,theta)
+
+    The angle phi is measured counterclockwise from north to east
+    North is Down (-y) and East is to the Right (+x)
+    The angle theta is measured form the (x,y) plane. 
+    Up is positive (+) and down is negative (-)
+
+    Parameters
+    ----------
+    rho : array of float
+        Separation between the stars
+    phi : array of float
+        angle in (x,y) plane from -y (North,down) to +x (East,right)
+    theta : array of float 
+        angle between z and star 2
+ 
+    Returns
+    -------
+    (x,y,z) : tuple of 3 arrays 
+
+    """
+    # x, y = toRect( rho * numpy.sin( theta ), phi )
+    rxy = rho * numpy.sin( theta )
+    y = -rxy * numpy.cos( phi )
+    x =  rxy * numpy.sin( phi )
+    z = rho * numpy.cos( theta )
+
+    return ( x, y, z )
+
+
+def toSpher3D( x, y, z ) :
+    """
+    Return (rho,phi,theta) coordinates from (x,y,z)
+
+    See toRect3D()
+
+    Parameters
+    ----------
+    x : array of float
+        x position
+    y : array of float
+        y position
+    z : array of float
+        z position
+
+    Returns
+    -------
+    (rho,phi,theta) : tuple of 3 arrays 
+
+    """
+    rho = numpy.sqrt( x * x + y * y + z * z )
+    numpy.seterr( divide="ignore" )
+    theta = numpy.where( rho == 0, 0, numpy.arccos( z / rho ) )
+    phi = numpy.arctan2( x, -y )
+
+    return ( rho, phi, theta )
+    
+def toSpher( xy, y=None ) :
+    """
+    Return (rho,phi) coordinates from (x,y)
+
+    Angles are measured counterclockwise from north to east
+    North is Down (-y) and East is to the Right (+x)
+
+    Parameters
+    ----------
+    xy : array of pairs [x,y] or tuple of (x array,y array)
+        xy[:,0] : x position
+        xy[:,1] : y position
+    y : array
+        when given xy is interpreted as x
+
+    Returns
+    -------
+    2d-array if the input is a 2d-array  or
+    tuple of 2 arrays if the input is a tuple of 2 arrays or when y is given
+
+    """
+    if y is not None :
+        r = numpy.hypot( xy, y )
+        p = numpy.arctan2( xy, -y )
+        return ( r, p )
+
+    if isinstance( xy, tuple ) :
+        r = numpy.hypot( xy[0], xy[1] )
+        p = numpy.arctan2( xy[0], -xy[1] )
+        return ( r, p )
+
+    rp = numpy.empty_like( xy )
+    rp[:,0] = numpy.hypot( xy[:,0], xy[:,1] )
+    rp[:,1] = numpy.arctan2( xy[:,0], -xy[:,1] )
+
+    return rp
+
+def arrow( x, y, z=None, scale=1.0 ) :
+    """
+    Return the coordinates of an arrow point from (xyz[0]) to (xyz[1])
+
+    The returned 2-d coordinates are at
+        tail, top, left-head, right-head, top 
+
+    the returned 3-d coordinates are at 
+        tail, top, left-head, right-head, top, read-head, near-head, top
+
+    Parameters
+    ----------
+    x : array of length 2 (at least)
+        x-coordinates
+    y : array of length 2 (at least)
+        y-coordinates
+    z : array of length 2 or None
+	when None return 2D array else 3D
+    scale : float
+        scale factor. End point stays in place
+    """
+    dx = ( x[1] - x[0] ) * scale
+    dy = ( y[1] - y[0] ) * scale
+
+    xb = x[1] - dx 
+    yb = y[1] - dy
+
+    dx /= 2
+    dy /= 2
+
+    xarrow = numpy.array( [x[0], x[1], xb + dy, xb - dy, x[1]] )
+    yarrow = numpy.array( [y[0], y[1], yb - dx, yb + dx, y[1]] )
+
+    if z is None :
+        return ( xarrow, yarrow )
+
+    dx = x[0] - x[1]
+    dy = y[0] - y[1]
+    dz = z[0] - z[1]
+
+    rho, phi, theta = toSpher3D( dx, dy, dz )
+
+    ## make arrow along x-axis of length rho 
+    hd = scale * rho / 2
+    tl = hd - rho
+    wd = hd / 2
+    ya = numpy.array( [tl, hd,  0,  0, hd,  0,  0, hd] )
+    za = numpy.array( [ 0,  0, wd,-wd,  0,  0,  0,  0] )
+    xa = numpy.array( [ 0,  0,  0,  0,  0, wd,-wd,  0] )
+
+    ## transform arrow to spherical
+    ra, pa, ta = toSpher3D( xa, ya, za )
+
+    ## rotate over theta and phi
+    ta += ( theta - numpy.pi / 2 ) * numpy.cos( pa )
+    pa += phi
+
+    ## transform back and add starting point.
+    x1, y1, z1 = toRect3D( ra, pa, ta )
+
+    ## shift in place
+    ba = hd / rho
+    bb = 1 - ba
+    xar = x1 + ba * x[0] + bb * x[1]
+    yar = y1 + ba * y[0] + bb * y[1]
+    zar = z1 + ba * z[0] + bb * z[1]
+
+    return ( xar, yar, zar )
+
+
+def minmax( x, range=False, mid=False ) :
+    """
+    Return minimum, maximum, range and midpoint of an array
+
+    Parameters
+    ----------
+    x : array
+        the array
+    range : bool (False)
+        return range (max - min) too
+    mid : bool (False)
+        return midpoint (max + min) / 2 too
+    """
+    mn = min( x )
+    mx = max( x )
+    if not ( range or mid ) :
+        return ( mn, mx )
+    if range & mid :
+        return ( mn, mx, mx-mn, (mx+mn)/2 )
+    if range :
+        return ( mn, mx, mx-mn )
+
+    return ( mn, mx, (mx+mn)/2 )
+
