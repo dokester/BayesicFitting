@@ -1,15 +1,18 @@
 import numpy as numpy
 from astropy import units
 import math
+
 from . import Tools
 from .Tools import setAttribute as setatt
 from .NonLinearModel import NonLinearModel
 from .Kepplers2ndLaw import Kepplers2ndLaw
 
+## import matplotlib.pyplot as plt
+
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2025 Do Kester
+#  *    2018 - 2026 Do Kester
 
 class StellarOrbitModel( NonLinearModel ):
     """
@@ -51,7 +54,9 @@ class StellarOrbitModel( NonLinearModel ):
     |     |       |     to the periastron         |0<&omega;<2&pi;| 0 = periastron in node|
 
     Due to the fact that the orbit can be mirrored in the sky plane, one of p_5 or p_6
-    has to be limited to [0,pi] and the other to [0,2pi].
+    has to be limited to [0,pi] and the other to [0,2pi]. However it could be preferred to
+    keep the inclination between [0,pi] as it keeps the ascending node at the same place.
+    All parameter from 3 on, are cyclic and would profit from a circular prior. 
 
     The parameters are initialized at [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0].
     It is a non-linear model.
@@ -65,9 +70,16 @@ class StellarOrbitModel( NonLinearModel ):
     ndout : int
         The number of outputs is 2. Use @MultipleOutputProblem.
     spherical : bool
-        if True return the results in spherical coordinates.
+        if True return the results in spherical coordinates, as [rho,phi]
+        otherwise return euclidian coordinates [x,y]
+        Angles are measured counterclockwise from north to east
+        North is Down (-y) and East is to the Right (+x)
     cyclic : { 1 : 2*pi }
         Only if spherical, indicating that result[:,1] is cyclic.
+    toRect : Tools.toRect
+        Return (x,y) coordinates from (rho,phi). See @Tools#toRect
+    toSpher : Tools.toSpher
+        Return (rho,phi) coordinates from (x,y). See @Tools#toSpher
 
     Attributes from Model
     ---------------------
@@ -120,16 +132,33 @@ class StellarOrbitModel( NonLinearModel ):
 
         setatt( self, "keppler", Kepplers2ndLaw() )
 
+        setatt( self, "toRect", Tools.toRect )
+        setatt( self, "toSpher", Tools.toSpher )
+
         if spherical :
             setatt( self, "cyclic", {1:2*math.pi} )
 
-    def copy( self ):
-        """ Copy method.  """
-        return StellarOrbitModel( spherical=self.spherical, copy=self )
+    def copy( self, spherical=None ):
+        """ 
+        Copy method.  
+    
+        Parameters
+        ----------
+        spherical : None or bool
+            return spherical (True) or rectangular (False) coordinates
+
+        """
+        if spherical is None :
+            spherical = self.spherical
+
+        return StellarOrbitModel( spherical=spherical, copy=self )
 
     def baseResult( self, xdata, params ):
         """
-        Returns the result of the model function.
+        Returns
+        ------- 
+        the result of the model function as a 2-d array containing 
+        [rho,phi] when spherical is true else [x,y]
 
         Parameters
         ----------
@@ -141,64 +170,20 @@ class StellarOrbitModel( NonLinearModel ):
         The parameters are explained in the @#StellarOrbitModel constructor.
 
         """
-        inclin = params[4]
-        ascpos = params[5]
-        asclon = params[6]
-
-        ( r, v ) = self.keppler.radiusAndTrueAnomaly( xdata, params[:4] )
-
-        vp = v + asclon
-        svp = numpy.sin( vp ) * math.cos( inclin )
-        cvp = numpy.cos( vp )
-
-        ## theta = angle on sky of stars wrt each other
-        theta = numpy.arctan2( svp, cvp ) + ascpos
-        ## rho = distance between stars
-        rho = r * numpy.sqrt( svp * svp + cvp * cvp )
-
+        xr, yp = self.getOrbit( xdata, params )
+        
         result = numpy.zeros( ( len( xdata ), 2 ), dtype=float )
-        result[:,0] = rho       ## distance
-        result[:,1] = theta     ## positional angle from north counterclock
-
-        if not self.spherical :
-            result = self.toRect( result )
+        result[:,0] = xr       ## distance
+        result[:,1] = yp       ## positional angle from north counterclock
 
         return result
 
-    def toRect( self, rp ):
-        """
-        Return (x,y) coordinates from (rho,phi)
 
-        Parameters
-        ----------
-        rp : array
-            rp[:,0] : separation of the stars
-            rp[:,1] : angle from north (down) CCW to east (right)
+    def getOrbit( self, xdata, params, d3=False ) :
         """
-        xy = numpy.empty_like( rp )
-        xy[:,0] = rp[:,0] * numpy.sin( rp[:,1] )
-        xy[:,1] =-rp[:,0] * numpy.cos( rp[:,1] )
-        return xy
+        Calculate the 2 (or 3)-dim result of the model function as a tuple of arrays 
 
-
-    def toSpher( self, xy ) :
-        """
-        Return (rho,phi) coordinates from (x,y)
-
-        Parameters
-        ----------
-        xy : array
-            xy[:,0] : x position
-            xy[:,1] : y position
-        """
-        rp = numpy.empty_like( xy )
-        rp[:,0] = numpy.hypot( xy[:,0], xy[:,1] )
-        rp[:,1] = numpy.arctan2( xy[:,0], -xy[:,1] )
-        return rp
-
-    def baseDerivative( self, xdata, params ):
-        """
-        Returns the derivative (df/dx) of the model function.
+        The pertaining rho, phi, (theta) are available from self.
 
         Parameters
         ----------
@@ -206,6 +191,66 @@ class StellarOrbitModel( NonLinearModel ):
             values at which to calculate the result
         params : array_like
             values for the parameters.
+        d3 : bool (False)
+            return 3 dim result if true else 2 dim
+
+        The parameters are explained in the @#StellarOrbitModel constructor.
+
+        Returns
+        ------- 
+        x, y(, z) : tuple of arrays
+            containing the rectangular coordinates
+        """
+
+        inclin = params[4]
+        ascpos = params[5]
+        asclon = params[6]
+
+        ## rho = distance between stars
+        if math.isnan( params[0] ) :
+            from .Formatter import fma
+            print( "pars   ", fma( params ) )
+
+        ( rho, v ) = self.keppler.radiusAndTrueAnomaly( xdata, params[:4] )
+
+        ## add the longitude (along the orbit) from the ascending node to the periastron
+        vp = v + asclon
+
+        ## project on the xy plane 
+        svp = numpy.sin( vp )
+        svi = svp * math.cos( inclin )
+        cvp = numpy.cos( vp )
+
+        ## phi = angle on sky (xy-plane) of stars wrt each other
+        ## add angle (in xy plane) from north to ascending node
+        phi = numpy.arctan2( svi, cvp ) + ascpos
+        rxy = rho * numpy.sqrt( svi * svi + cvp * cvp )
+
+        if not d3 :
+            return ( ( rxy, phi ) if self.spherical else 
+                     Tools.toRect( rxy, phi ) )
+        
+        x, y = Tools.toRect( rxy, phi )
+        z = rho * svp * math.sin( inclin )
+
+        return ( x, y, z )
+
+    def baseDerivative( self, xdata, params, d3=False ):
+        """
+        Returns the derivative [df1/dt, df2/dt] of the model function.
+        Where f1 = rho if spherical else x
+              f2 = phi if spherical else y
+        and t is time, input data, here aliased to 'xdata' 
+
+        Parameters
+        ----------
+        xdata : array_like
+            values at which to calculate the result
+        params : array_like
+            values for the parameters.
+        d3 : boolean
+            when True also return df3/dt in the array
+            f3 is theta if spherical else z 
 
         The parameters are explained in the @#StellarOrbitModel constructor.
 
@@ -214,7 +259,7 @@ class StellarOrbitModel( NonLinearModel ):
         ascpos = params[5]
         asclon = params[6]
 
-        dfdx = numpy.zeros( ( len( xdata ), 2 ), dtype=float )
+        dfdt = numpy.zeros( ( len( xdata ), 2 ), dtype=float )
 
         p = params[:4]
         r, v = self.keppler.radiusAndTrueAnomaly( xdata, p )
@@ -222,7 +267,7 @@ class StellarOrbitModel( NonLinearModel ):
         cosE = self.keppler.cosE
         cosE = numpy.where( cosE == -1, -0.99999, cosE )
         sinE = self.keppler.sinE
-        drdx, dvdx = self.keppler.drvdx( xdata, p, cosE, sinE )
+        drdt, dvdt = self.keppler.drvdx( xdata, p, cosE, sinE )
 
         vp = v + asclon
         svp = numpy.sin( vp )
@@ -232,35 +277,55 @@ class StellarOrbitModel( NonLinearModel ):
         cvp2 = cvp * cvp
         ci2 = ci * ci
 
-        ## theta = angle on sky of stars wrt each other
-        theta = numpy.arctan2( svp * ci, cvp ) + ascpos
-        dtdv = ci * ( svp2 + cvp2 ) / ( ci2 * svp2 + cvp2 )
-        dtdx = dtdv * dvdx
+        ## phi = angle on sky of stars wrt each other
+        phi = numpy.arctan2( svp * ci, cvp ) + ascpos
+        dFdv = ci * ( svp2 + cvp2 ) / ( ci2 * svp2 + cvp2 )
+        dFdt = dFdv * dvdt
 
         ## rho = distance between stars
         ssc = numpy.sqrt( svp2 * ci2 + cvp2 )
         rho = r * ssc
         dRdr = ssc
         dRdv = r / ssc * ( svp * cvp * ( ci2 - 1 ) )
-        dRdx = dRdr * drdx + dRdv * dvdx
+        dRdt = dRdr * drdt + dRdv * dvdt
 
         if self.spherical :
-            dfdx[:,0] = dRdx
-            dfdx[:,1] = dtdx
+            dfdt[:,0] = dRdt
+            dfdt[:,1] = dFdt
         else :
-            ct = numpy.cos( theta )
-            st = numpy.sin( theta )
-            dfdx[:,0] = +st * dRdx + rho * ct * dtdx
-            dfdx[:,1] = -ct * dRdx + rho * st * dtdx
+            cf = numpy.cos( phi )
+            sf = numpy.sin( phi )
+            dfdt[:,0] = +sf * dRdt + rho * cf * dFdt
+            dfdt[:,1] = -cf * dRdt + rho * sf * dFdt
 
-        return dfdx
+        if not d3 :
+            return dfdt
+
+        ## theta is angle between z-axis and star 2
+        ## theta = numpy.arccos( svp * math.sin( inclin ) )
+
+        ## if not spherical:
+        ## z = r * svp * math.sin( inclin )
+
+        si = math.sin( inclin )
+
+        if self.spherical :
+            ## coordinate_0 is now r, not rho (= r projected on the sky)
+            dfdt[:,0] = drdt 
+            dTdv =  -( si * cvp ) / numpy.sqrt( 1 - si * si * svp2 )
+            dTdt = dTdv * dvdt
+            dfdt = numpy.append( dfdt, dTdt.reshape( (-1,1) ), 1 )
+        else :
+            dzdt = svp * si * drdt + r * si * cvp * dvdt
+#            dTdt = numpy.cos( theta ) * drdt - numpy.sin( theta ) * dTdt
+            dfdt = numpy.append( dfdt, dzdt.reshape( (-1,1) ), 1 )
+
+        return dfdt
 
 
-    def basePartial( self, xdata, params, parlist=None ) :
+    def basePartial( self, xdata, params, parlist=None, d3=False ) :
         """
         Returns the partials at the xdata value.
-        <br>
-        The partials are x ( xdata ) to degree-th power.
 
         Parameters
         ----------
@@ -270,6 +335,8 @@ class StellarOrbitModel( NonLinearModel ):
             values for the parameters. (not used for linear models)
         parlist : array_like
             list of indices active parameters (or None for all)
+        d3 : bool
+            if True also return derivatives of theta cq z
 
         The parameters are explained in the @#StellarOrbitModel constructor.
 
@@ -285,8 +352,15 @@ class StellarOrbitModel( NonLinearModel ):
         cosE = numpy.where( cosE == -1, -0.99999, cosE )
         sinE = self.keppler.sinE
         E = self.keppler.eccAnomaly
+
+        ## dr.., dv.. derivatives of r and v to each op the parameters
+        ##   e : eccentricity, a : semimajor axis, P : period, and p : phase
         drde, drda, drdP, drdp, dvde, dvdP, dvdp = self.keppler.drvdpar( xdata, p,
                                                    E, cosE, sinE )
+
+        #######################################################
+        ##  2-D parts                                        ##
+        #######################################################
 
         vp = v + asclon
         svp = numpy.sin( vp )
@@ -297,18 +371,16 @@ class StellarOrbitModel( NonLinearModel ):
         cvp2 = cvp * cvp
         ci2 = ci * ci
 
-        partial0 = numpy.zeros( ( Tools.length( xdata ), self.npbase ), dtype=float )
-        partial1 = numpy.zeros( ( Tools.length( xdata ), self.npbase ), dtype=float )
-
-        ## theta = angle on sky of stars wrt each other
-        theta = numpy.arctan2( svp * ci, cvp ) + ascpos
-        dTdv = ci * ( svp2 + cvp2 ) / ( ci2 * svp2 + cvp2 )
+        ## phi = angle on sky of stars wrt each other
+        ## dF.. derivative to phi
+        phi = numpy.arctan2( svp * ci, cvp ) + ascpos
+        dFdv = ci * ( svp2 + cvp2 ) / ( ci2 * svp2 + cvp2 )
 
         ## rho = distance between stars
         ssc = numpy.sqrt( svp2 * ci2 + cvp2 )
         rho = r * ssc
         dRdr = ssc
-        dRdv = r / ssc * ( ci2 - 1 ) * svp * cvp
+        dRdv = r * ( ci2 - 1 ) * svp * cvp / ssc
 
 
         part0 = { 0 : ( lambda: dRdr * drde + dRdv * dvde ),
@@ -319,62 +391,109 @@ class StellarOrbitModel( NonLinearModel ):
                   5 : ( lambda: 0 ),
                   6 : ( lambda: dRdv ) }
 
-        part1 = { 0 : ( lambda: dTdv * dvde ),
+        part1 = { 0 : ( lambda: dFdv * dvde ),
                   1 : ( lambda: 0 ),
-                  2 : ( lambda: dTdv * dvdP ),
-                  3 : ( lambda: dTdv * dvdp ),
+                  2 : ( lambda: dFdv * dvdP ),
+                  3 : ( lambda: dFdv * dvdp ),
                   4 : ( lambda: -cvp * svp * si / ( cvp2 + svp2 * ci2 ) ),
                   5 : ( lambda: 1 ),
-                  6 : ( lambda: dTdv ) }
+                  6 : ( lambda: dFdv ) }
 
-        if not self.spherical :
-            dRde = part0[0]()
-            dRda = part0[1]()
-            dRdP = part0[2]()
-            dRdp = part0[3]()
-            dRdi = part0[4]()
-            dRdO = 0
-            dRdo = part0[6]()
+        if self.spherical :
+            rhorx = lambda p0, p1 : p0()
+            phory = lambda p0, p1 : p1()
 
-            dTde = part1[0]()
-            dTda = 0
-            dTdP = part1[2]()
-            dTdp = part1[3]()
-            dTdi = part1[4]()
-            dTdO = 1
-            dTdo = part1[6]()
-
-            ct = numpy.cos( theta )
-            st = numpy.sin( theta )
+        else :
+            ct = numpy.cos( phi )
+            st = numpy.sin( phi )
             rst = rho * st
             rct = rho * ct
             ct *= -1
 
-            part0 = { 0 : ( lambda: st * dRde + rct * dTde ),
-                      1 : ( lambda: st * dRda + rct * dTda ),
-                      2 : ( lambda: st * dRdP + rct * dTdP ),
-                      3 : ( lambda: st * dRdp + rct * dTdp ),
-                      4 : ( lambda: st * dRdi + rct * dTdi ),
-                      5 : ( lambda: st * dRdO + rct * dTdO ),
-                      6 : ( lambda: st * dRdo + rct * dTdo ) }
-            part1 = { 0 : ( lambda: ct * dRde + rst * dTde ),
-                      1 : ( lambda: ct * dRda + rst * dTda ),
-                      2 : ( lambda: ct * dRdP + rst * dTdP ),
-                      3 : ( lambda: ct * dRdp + rst * dTdp ),
-                      4 : ( lambda: ct * dRdi + rst * dTdi ),
-                      5 : ( lambda: ct * dRdO + rst * dTdO ),
-                      6 : ( lambda: ct * dRdo + rst * dTdo ) }
-
+            rhorx = lambda p0, p1 : st * p0() + rct * p1()
+            phory = lambda p0, p1 : ct * p0() + rst * p1()
 
         if parlist is None :
             parlist = range( self.npmax )
 
+        npl = len( parlist )
+        partial0 = numpy.zeros( ( Tools.length( xdata ), npl ), dtype=float )
+        partial1 = numpy.zeros( ( Tools.length( xdata ), npl ), dtype=float )
+
         for k,kp in enumerate( parlist ) :
-            partial0[:,k] = part0[kp]()
-            partial1[:,k] = part1[kp]()
+            partial0[:,k] = rhorx( part0[kp], part1[kp] )
+            partial1[:,k] = phory( part0[kp], part1[kp] )
+
+        if not d3 :
+            return ( partial0, partial1 )
 
 
-        return ( partial0, partial1 )
+        #######################################################
+        ##  3-D parts                                        ##
+        #######################################################
+
+
+        si = math.sin( inclin )
+        partial2 = numpy.zeros( ( Tools.length( xdata ), npl ), dtype=float )
+
+        if self.spherical :
+
+            ## r is just the distance to star 2 (unprojected)
+            ## phi si the same as above
+
+            ## theta is angle between z-axis and star 2
+            ## theta = numpy.arccos( svp * math.sin( inclin ) )
+            ## dTdp = -cvp * sin( inclin)  / sqrt( 1 - svp^2 * sin^2( inclin ) ) 
+
+            si2 = si * si
+            sss = numpy.sqrt( 1 - svp2 * si2 )
+            dTdv =  -( si * cvp ) / sss
+
+            part0 = { 0 : ( lambda: drde ),
+                      1 : ( lambda: drda ),
+                      2 : ( lambda: drdP ),
+                      3 : ( lambda: drdp ),
+                      4 : ( lambda: 0 ),
+                      5 : ( lambda: 0 ),
+                      6 : ( lambda: 0 ) }
+
+            part2 = { 0 : ( lambda: dTdv * dvde ),
+                      1 : ( lambda: 0 ),
+                      2 : ( lambda: dTdv * dvdP ),
+                      3 : ( lambda: dTdv * dvdp ),
+                      4 : ( lambda: -svp * ci / sss ),  
+                      5 : ( lambda: 0 ),
+                      6 : ( lambda: -cvp * si / sss ) }
+
+            for k,kp in enumerate( parlist ) :
+                partial0[:,k] = part0[kp]()
+                partial2[:,k] = part2[kp]()
+
+
+        else :
+
+            ## rectangular (x,y,z)
+            ## z = r * sin( v - p[6] ) * math.sin( inclin )
+            ## dzdp = svp * si * drdp + r * si * cvp * dvdp + r * svp * ci * didp
+
+            svps = svp * si
+            cvps = cvp * si * r
+            svpc = svp * ci
+            part2 = { 0 : ( lambda: svps * drde + cvps * dvde ),
+                      1 : ( lambda: svps * drda ),
+                      2 : ( lambda: svps * drdP + cvps * dvdP ),
+                      3 : ( lambda: svps * drdp + cvps * dvdp ),
+                      4 : ( lambda: svpc * r ),
+                      5 : ( lambda: 0 ),
+                      6 : ( lambda: cvps ) }
+
+
+#            thorz = lambda p0, p2 : ( ct * p0() - st * p2() )
+
+            for k,kp in enumerate( parlist ) :
+                partial2[:,k] = part2[kp]()
+
+        return ( partial0, partial1, partial2 )
 
 
     def baseName( self ):
@@ -403,4 +522,75 @@ class StellarOrbitModel( NonLinearModel ):
             return 1.0 / self.xUnit
         return units.Unit( units.si.rad )
 
+    def convertParameters( self, param, stdevs=None, year=2000 ) :
+        """
+        Return time of periastron (p_3) in years after year and inclination (p_4), 
+            the position angle from North to the line of nodes (p_5) and
+            the longitude from line of nodes to periastron (p_6) in degrees
+
+        Parameters
+        ----------
+        param : array
+            parameters to be converted
+        stdevs : array
+            standard deviations to be converted
+        year : float
+            return the first periastron passage after year
+
+        Returns
+        -------
+        converted parameters if stdevs is None
+        converted (parameters, stdevs) else 
+        """
+        r2d = 180 / math.pi
+
+        pp = param.copy()
+        pp[3] *= param[2] / ( 2 * math.pi )
+        while pp[3] < year :
+            pp[3] += pp[2]
+        pp[4] *= r2d
+        pp[5] *= r2d
+        pp[6] *= r2d
+        if stdevs is None :
+            return pp
+
+        sd = stdevs.copy()
+        sd[3] *= param[2] / ( 2 * math.pi )
+        sd[4] *= r2d
+        sd[5] *= r2d
+        sd[6] *= r2d
+
+        return ( pp, sd )
+
+
+    def plotOrbit( self, par, npoint=361, xdata=None, ydata=None, 
+                plot=None, color='k', ls='-' ) :
+        """
+        Plot the orbit in N points, a forward pointing arrow at T = 0, 
+        the line to the periastron and an extended line of nodes. 
+
+        if ydata is present, plot the datapoints. If also xdata is present, 
+        plot the connecting lines too.
+
+        Parameters
+        ----------
+        par :  array
+            parameter of the model
+        npoint : int
+            number of points in the orbit
+        xdata : array 
+            array of times at which the data are measured
+        ydata : 2d array 
+            array of [x,y] pairs representing the data
+        plot : None or pyplot
+            None    make a self standing plot and show it
+            pyplot  operate within thid plot; do not show
+        color, ls : color and linestyle
+            for the plot
+
+        """
+        from . import Plotter
+
+        Plotter.plotOrbit( self, par, npoint=npoint, xdata=xdata, ydata=ydata,
+                plot=plot, color=color, ls=ls )
 
