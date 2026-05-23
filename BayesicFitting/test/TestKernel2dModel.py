@@ -36,7 +36,7 @@ __status__ = "Development"
 #  *  2017        Do Kester
 
 
-class TestKernel2dModel( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Fitter class.
 
@@ -47,7 +47,7 @@ class TestKernel2dModel( unittest.TestCase ):
     #      * Define x independent variable
 
     def __init__( self, name ):
-        super( TestKernel2dModel, self ).__init__( name )
+        super( ).__init__( name )
 
     def setUp( self ):
         pass

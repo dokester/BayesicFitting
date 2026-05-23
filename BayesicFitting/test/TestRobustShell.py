@@ -33,7 +33,7 @@ __status__ = "Development"
 #  *
 #  *    2004 - 2020 Do Kester
 
-class TestRobustShell( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for RobustShell.
 

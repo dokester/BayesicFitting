@@ -351,6 +351,43 @@ class Test( unittest.TestCase ):
 
         stdModeltest( m, p, plot=self.doplot )
 
+    def testEclipsingStarModel( self ):
+        x  = numpy.linspace( 0, 1.6, 101, dtype=float )
+        print( "******EclipsingStar***************" )
+        m = EclipsingStarModel(  )
+        self.assertTrue( m.npars == 9 )
+        self.assertTrue( m.npbase == 9 )
+        p = [0.3, 4, 0.4, 0.0, numpy.pi/2, 0.4, 0.1, 3.0, 1.0]
+        p = [0.129, 1.594, 0.027, 3.814, 1.196, 0.343, 0.254, 0.492, 4.996, 0.141]
+        if self.doplot :
+            for k in range( 4 ) :
+                y = m.result( x, p )
+                plt.plot( x, y, '-' )
+                p[4] += 0.1
+
+            plt.show()
+
+#        stdModeltest( m, p, plot=self.doplot )
+
+    def testESM( self ):
+        tx = numpy.linspace( 0, 1.6, 101, dtype=float )
+        print( "******EclipsingStar***************" )
+        m = EclipsingStarModel(  )
+        self.assertTrue( m.npars == 9 )
+        self.assertTrue( m.npbase == 9 )
+        p = [0.129, 1.594, 0.027, 3.814, 1.196, 0.343, 0.254, 0.492, 4.996, 0.141]
+
+#        print( "tx   ", fma( tx ) )
+        ty = m.result( tx, p )
+
+#        print( "ty   ", fma( ty ) )
+
+        if self.doplot :
+            plt.plot( tx, ty, 'k.-' )
+            plt.show()
+
+#        stdModeltest( m, p, plot=self.doplot )
+
     def testSincModel( self ):
         x  = numpy.asarray( [-1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0] )
         print( "******SINC***********************" )

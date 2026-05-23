@@ -132,6 +132,7 @@ class Test( unittest.TestCase ):
             self.assertTrue( part[k,int(res[k]-0.99)] == 1 )
             self.assertTrue( numpy.sum( part[k,:] ) == 1 )
 
+        self.assertTrue( m.check() )
 
     def test3( self ):
         print( "  Test 3 DecisionTreeModel" )

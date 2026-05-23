@@ -30,15 +30,19 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
+
+### BEWARE: Dont change the class to Test; 
+### See TestStartEngine wich inherits from it
+
 class TestEngine( unittest.TestCase ):
     """
-    Test harness for Fitter class.
+    Test harness for Engine class.
 
     Author       Do Kester
 
     """
     def __init__( self, name ):
-        super( TestEngine, self ).__init__( name )
+        super( ).__init__( name )
 
 
     def initEngine( self ):

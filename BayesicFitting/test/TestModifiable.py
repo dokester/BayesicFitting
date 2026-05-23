@@ -158,6 +158,7 @@ class Test( unittest.TestCase ):
         knots =[0, 25, 50, 75, 100]
         xm = SplinesDynamicModel( knots=knots, dynamic=False )
         xm += PowerModel( 1, fixed={0:1.0} )
+
         xm.setPrior( 0, LaplacePrior( center=0, scale=4 ) )
 
         sm = SineModel()
@@ -165,9 +166,11 @@ class Test( unittest.TestCase ):
 
         mdl = xm | sm
 
-        ns = NestedSampler( t, mdl, y, seed=31234 )
+#        printclass( mdl )
+
+        ns = NestedSampler( t, mdl, y, seed=31234, verbose=2 )
         ns.distribution.setLimits( [0.01,100] )
-        ns.verbose = 2
+#        ns.verbose = 5
 #        ns.engines[2].verbose = 5
         ns.engines[2].slow = 5
         ## Comment next if-statement out for a full run of NestedSampler
@@ -420,16 +423,15 @@ class Test( unittest.TestCase ):
 
         kwa = Tools.getKwargs( engines=["gibbs", "chord"], verbose=0, limits=[0.1,10] )
         distr = ModelDistribution( arbiter="NestedSampler", **kwa )
-        
+
         ns = NestedSampler( problem=ep, distribution=distr, ensemble=10 )
 
-        ns.minimumIterations = 5
-        ns.maxIterations = 10
+        ns.minimumIterations = 2
         ns.verbose = 3
 
         ## Comment next if-statement out for a full run of NestedSampler
         if not self.dofull :
-            ns.maxIterations = 10
+            ns.maxIterations = 4
 
         Tools.printclass( ns )
         

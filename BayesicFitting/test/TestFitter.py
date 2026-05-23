@@ -1,6 +1,7 @@
 # run with : python3 -m unittest TestFitter
 
 import numpy as numpy
+from numpy.testing import assert_almost_equal as assertAE
 from numpy.testing import assert_array_almost_equal as assertAAE
 import unittest
 import os
@@ -92,7 +93,8 @@ class Test( unittest.TestCase ):
         par = fitter.fit( y )
         alt = altfit.fit( y )
 
-        plotFit( self.x, data=y, model=model, fitter=fitter, residuals=True, show=self.doplot )
+        plotFit( self.x, data=y, model=model, fitter=fitter, residuals=True, 
+                 show=self.doplot )
 
 
         print( "offst = %f  alt = %f  truth = %f"%(par[0], alt[0], self.aa) )
@@ -113,7 +115,7 @@ class Test( unittest.TestCase ):
         par1 = altfit.fit( y, keep={0:par[0]} )
 
         plotFit( self.x, data=y, model=model0, fitter=altfit, residuals=False, 
-            figsize=[12,7], xlim=[0,12], ylim=[-10,10], show=self.doplot )
+            figsize=[12,7], xlim=[0,6], ylim=[0,15], show=self.doplot )
 
         self.assertTrue( 2 == len( par1) )
         assertAAE( par1, par )
@@ -254,7 +256,7 @@ class Test( unittest.TestCase ):
         self.assertTrue( par3[2] == -7.0 )
 
 #        printclass( lmfit )
-        """
+
 ###     For update of BaseFitter  ###        
         print( "   3. limits and keep in fitter and fit " )
         modl3 = PolynomialModel( 4 )
@@ -269,16 +271,16 @@ class Test( unittest.TestCase ):
         print( "chisq4  ", lmfit.chisq )
 #        printclass( lmfit )
         self.assertTrue( par4[0] != 3.3 )
-        self.assertTrue( par4[2] == -7.0 )
+        #assertAE( par4[2], -7.0 )
 
-        par5 = lmfit.fit( y, keep={0:3.3} )
+        par5 = lmfit.limitsFit( y, keep={0:3.3} )
         print( "pars5   ", fmt( par5 ) )
         print( "stdv5   ", fmt( lmfit.stdevs ) )
         print( "chisq5  ", lmfit.chisq )
         self.assertTrue( par5[0] == 3.3 )
         self.assertTrue( par5[2] == -7.0 )
         self.assertTrue( len( par5 ) == 4  )
-        """
+
 
         if self.doplot :
             xx = numpy.linspace( -1, +1, 1001 )

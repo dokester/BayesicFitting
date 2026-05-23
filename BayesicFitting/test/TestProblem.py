@@ -1,6 +1,6 @@
 ## run as : python3 -m unittest TestProblem
 
-from __future__ import print_function
+# from __future__ import print_function
 
 import numpy as numpy
 import os
@@ -675,7 +675,67 @@ class Test( unittest.TestCase ):
         print( aa )
         print( aa.reshape( -1, 2 ) )
 
-    def XXXtest6( self ) :
+    def test6( self ) :
+        print( "====test6 FlippedDataProblem============================" )
+        ND = 8
+        NO = 2
+        NP = 7
+
+        x = numpy.array( [1,2,3,4,5,6,7,0], dtype=float )
+        y = numpy.array( [[1,0],[0,1],[-1,0],[0,-1],[1,0],[0,1],[-1,0],[0,-1]], dtype=float )
+        w = numpy.array( [0.9,1.0,1.1,1.2,0.9,1.0,1.1,1.2], dtype=float )
+
+        ## Flip first and last point of y
+        yf = y.copy()
+        yf[0,:] = -y[0,:]
+        yf[7,:] = -y[7,:]
+
+        mdl = StellarOrbitModel( spherical=False )
+        p = [ 0.0, 1.01, 4.0, 0.0, 0.0, 0.0, 0.0]
+
+        problem = FlippedDataProblem( model=mdl, xdata=x, ydata=yf, weights=w, nflip=3 )
+        self.assertFalse( problem.hasAccuracy )
+
+        ym = problem.result( p )
+        res = problem.residuals( p )
+
+        print( problem )
+        print( yf.T )
+        print( ym.T )
+        print( res.T )
+
+        kfl = problem.flipped
+        print( problem.maxflip, kfl )
+
+        self.assertTrue( problem.maxflip == 3 )
+        self.assertTrue( problem.nflip == 2 )
+        self.assertTrue( kfl[0] == 0 and kfl[1] == 7 )
+        self.assertTrue( ( y == problem.getFlippedData() ).all() )
+        
+        problem = FlippedDataProblem( model=mdl, xdata=x, ydata=yf, nflip=0 )
+
+        res = problem.residuals( p )
+        kfl = problem.flipped
+        print( problem.maxflip, kfl )
+        self.assertTrue( problem.maxflip == 0 )
+        self.assertTrue( problem.nflip == 0 )
+        self.assertTrue( len( kfl ) == 0 )
+        self.assertTrue( ( yf == problem.getFlippedData() ).all() )
+        
+        problem1 = FlippedDataProblem( model=mdl, xdata=x, ydata=yf, nflip=1 )
+        problem = problem1.copy()
+
+        res = problem.residuals( p )
+        kfl = problem.flipped
+        print( problem.maxflip, kfl )
+        self.assertTrue( problem.maxflip == 1 )
+        self.assertTrue( problem.nflip == 1 )
+        self.assertTrue( len( kfl ) == 1 )
+        self.assertFalse( ( yf == problem.getFlippedData() ).all() )
+        
+
+
+    def XXXtestCat( self ) :
         print( "====test6 CategoricalProblem============================" )
 
         x = numpy.array( [[1,4,2,1,3,2,4,2,3,2,1,2,3]], dtype=float ).transpose()

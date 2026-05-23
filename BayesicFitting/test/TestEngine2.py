@@ -81,7 +81,11 @@ class Test( unittest.TestCase ):
         print( "\n   Chord Engine Test\n" )
         self.stdenginetest( ChordEngine, iter=100, nsamp=10, plot=self.doplot )
 
-    def stdenginetest( self, myengine, nsamp=4, iter=100, plot=False ) :
+    def testChordEngine2( self ):
+        print( "\n   Chord Engine Test 2\n" )
+        self.stdenginetest( ChordEngine, iter=100, nsamp=10, plot=self.doplot, extend=True )
+
+    def stdenginetest( self, myengine, nsamp=4, iter=100, plot=False, extend=False ) :
         m, xdata, data = self.initEngine()
         problem = ClassicProblem( m, xdata=xdata, ydata=data )
 
@@ -127,7 +131,7 @@ class Test( unittest.TestCase ):
         col = ['k-', 'r-', 'g-', 'b-']
         engine = myengine( wl, errdis, phancol=trials )
         if isinstance( engine, ChordEngine ) :
-            engine.debug = True
+            engine.extend = extend
 
         nap = wl[0].nap
         for k in range( iter ) :
@@ -147,8 +151,8 @@ class Test( unittest.TestCase ):
             p1 = wl[klo].allpars[:2]
             if k % 100 == 0 :
                 uran, umin = engine.getUnitRange( problem, lowL, nap )
-                print( k, klo, fmt(p1), fmt(wl[klo].logL), trials.length(),
-                    uran, umin,  )
+                print( fmt(k), fmt(klo), fmt(p1), gmt(wl[klo].logL), fmt(trials.length()),
+                    fmt( uran ), fmt( umin ), fmt( engine.successRate() )   )
 
             if plot :
                 plt.plot( [p0[0],p1[0]], [p0[1],p1[1]], col[klo%4] )

@@ -45,10 +45,24 @@ class Test( unittest.TestCase ):
         super( ).__init__( name )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
+    def test0( self ):
+        print( "==== test 0 ====================" )
+
+        self.assertRaises( ValueError, BasicSplinesModel )
+
+        self.assertRaises( ValueError, BasicSplinesModel, nrknots=4 )
+        self.assertRaises( ValueError, BasicSplinesModel, nrknots=4, min=0 )
+        self.assertRaises( ValueError, BasicSplinesModel, nrknots=4, max=10 )
+
+        kn1 = numpy.asarray( [0,4,6,10], dtype=float )
+        self.assertRaises( ValueError, BasicSplinesModel, knots=kn1, border=1 )
+
+
     def test1( self ) :
         print( "==== test 1 ====================" )
 
         x = numpy.linspace( 0, 10, 101, dtype=float )
+
         kn1 = numpy.asarray( [0,2,4,6,8,10], dtype=float )
 
         cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
@@ -72,6 +86,34 @@ class Test( unittest.TestCase ):
 
                 plt.show()
 
+    def test1a( self ) :
+        print( "==== test 1a ====================" )
+
+        x = numpy.linspace( 0, 10, 101, dtype=float )
+
+        cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
+        for k in range( 4 ) :
+            kn1 = numpy.linspace( 0,10,k+2, dtype=float )
+
+            sm = BasicSplinesModel( knots=kn1, order=k, border=1 )
+            print( k, sm.npars )
+            par = numpy.ones( sm.npars, dtype=float )
+
+            y = sm.result( x, par )
+            dy = sm.derivative( x, par )
+            pt = sm.partial( x, par )
+
+#            for i in range( 101 ) :
+#                print( fmt( x[i] ), fmt( pt[i,:], max=None ) )
+
+            if self.doplot :
+                plt.plot( x, y, cc[k] )
+                plt.plot( x, dy, cc[k+1] )
+                for i in range( sm.npars ) :
+                    plt.plot( x, pt[:,i] )
+
+                plt.show()
+
     def test2( self ) :
         print( "==== test 2 ====================" )
 
@@ -81,6 +123,9 @@ class Test( unittest.TestCase ):
         cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
         for k in [0,1] :
             sm = BasicSplinesModel( knots=kn1, border=k )
+
+#            print( k, sm.npars )
+            self.assertTrue( sm.npars == 10 - 3*k )
 
             par = numpy.ones( sm.npars, dtype=float )
 
@@ -98,6 +143,39 @@ class Test( unittest.TestCase ):
                     plt.plot( x, pt[:,i] )
                 plt.plot( kn1, [-0.02]*8, 'r|' )
                 plt.show()
+
+    def test2a( self ) :
+        print( "==== test 2a ====================" )
+
+        x = numpy.linspace( 0, 30, 301, dtype=float )
+        kn1 = numpy.asarray( [0,1,4,5,6,7,8,10], dtype=float )
+
+        cc = ['k-', 'b-', 'r-', 'g-', 'c-', 'm-']
+
+        sm = BasicSplinesModel( knots=kn1, border=1 )
+
+        par = numpy.array( [1,1,2,3,1,0,0,1,2], dtype=float )
+
+        y = sm.result( x, par )
+        dy = sm.derivative( x, par )
+        pt = sm.partial( x, par )
+
+        assertAAE( y[0:101], y[100:201] )
+        assertAAE( y[0:101], y[200:301] )
+        assertAAE( dy[0:101], dy[100:201] )
+        assertAAE( dy[0:101], dy[200:301] )
+        for k in range( sm.npars ) :
+            assertAAE( pt[0:101,k], pt[100:201,k] )
+            assertAAE( pt[0:101,k], pt[200:301,k] )
+
+
+        if self.doplot :
+            plt.plot( x, y, cc[0] )
+            plt.plot( x, dy, cc[1] )
+            for i in range( sm.npars ) :
+                plt.plot( x, pt[:,i] )
+            plt.plot( kn1, [-0.02]*8, 'r|' )
+            plt.show()
 
     def test3( self ) :
         print( "==== test 3 BasicSplinesModel ====================" )

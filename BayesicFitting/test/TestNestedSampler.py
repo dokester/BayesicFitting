@@ -107,7 +107,12 @@ class Test( unittest.TestCase ):
 
         problem = ClassicProblem( model=gm, xdata=x, ydata=y, accuracy=0.1 )
 
+        self.assertWarns( UserWarning, NestedSampler, problem=problem, bestBoost=True )
+
         ns = NestedSampler( problem=problem, distribution="laplace", limits=[0.01,1] )
+
+        self.assertWarns( UserWarning, ns.__setattr__, "bestBoost", True )
+
         self.assertRaises( AttributeError, ns.sample )
 
         self.assertRaises( ValueError, NestedSampler, problem=problem, distribution=1 )
@@ -143,7 +148,7 @@ class Test( unittest.TestCase ):
 
         printclass( ns.walkers[-1] )
 
-        plotSampleList( sl, x, y, residuals=True, show=plot )
+        plotSampleList( sl, x, y, problem=ns.problem, residuals=True, show=plot )
 
 #        start = time.time()
 #        SampleMovie( sl, problem=ns.problem, kpar=[1,0] )
@@ -156,7 +161,7 @@ class Test( unittest.TestCase ):
 
         plot = self.doplot
 
-        pp, y0, x, y, w = self.makeData( 2, ndata=401 )
+        pp, y0, x, y, w = self.makeData( 2, ndata=101 )
 
         gm = GaussModel( )
         gm.addModel( PolynomialModel(1) )
@@ -175,17 +180,22 @@ class Test( unittest.TestCase ):
         print( "LMFstdv ", fmt( lmf.stdevs, max=None ) )
 
         ns = NestedSampler( x, gm, y )
-        ns.verbose = 2
+        #ns.verbose = 2
 
         evi = ns.sample()
-        print( "NS pars ", fmt( ns.parameters ) )
-        print( "NS stdv ", fmt( ns.stdevs ) )
+        npar = ns.parameters
+        nstd = ns.stdevs
+
+        print( "NS pars ", fmt( npar ) )
+        print( "NS stdv ", fmt( nstd ) )
         print( "NS scal ", fmt( ns.scale ) )
 
         print( "NS wgt  ", fmt( ns.weights ) )
         print( "NS info ", fmt( ns.information ) )
         print( "NS hypp ", fmt( ns.hypars ) )
         print( "NS sthp ", fmt( ns.stdevHypars ) )
+
+        self.assertTrue( all( numpy.abs( pars - npar ) < 2 * nstd ) )
 
 
     def test2b( self ):
@@ -262,7 +272,17 @@ class Test( unittest.TestCase ):
         ns.bestBoost = True
         ns.verbose = 2
 
-        evi = ns.sample( plot="test" )
+        if plot :
+            iplt = "iter"
+            ns.repiter = 40
+        else :
+            iplt = "test"
+        evi = ns.sample( plot=iplt )
+
+        print( ns.doIterPlot )
+        print( ns.doLastPlot )
+        print( ns.show )
+
         print( "NS pars ", fmt( ns.parameters ) )
         print( "NS stdv ", fmt( ns.stdevs ) )
         print( "NS scal ", fmt( ns.scale ) )
@@ -270,7 +290,7 @@ class Test( unittest.TestCase ):
         print( "NS hypp ", fmt( ns.hypars ) )
         print( "NS sthp ", fmt( ns.stdevHypars ) )
 
-        plotSampleList( ns.samples, x, y, residuals=True, show=plot )
+#        plotSampleList( ns.samples, x, y, residuals=True, show=plot )
 
 #        print( "truth  ", pp )
 #        self.dofit( ns, pp, plot=plot )
@@ -342,11 +362,14 @@ class Test( unittest.TestCase ):
             ns.distribution.setLimits( [0.01, 100] )
 
             evi = ns.sample()
-            print( "NS pars ", fmt( ns.parameters ) )
-            print( "NS stdv ", fmt( ns.stdevs ) )
+            npar = ns.parameters
+            nstd = ns.stdevs
+            print( "NS pars ", fmt( npar ) )
+            print( "NS stdv ", fmt( nstd ) )
             print( "NS scal ", fmt( ns.scale ) )
             print( "NS evid ", fmt( evi ), " +- ", fmt( ns.precision ) )
 
+            self.assertTrue( all( numpy.abs( pars - npar ) < 2 * nstd ) )
 
 
     def test3( self ):

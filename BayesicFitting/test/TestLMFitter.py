@@ -96,8 +96,6 @@ class Test( unittest.TestCase ):
         print( "hessian \n", fmt( amfit.hessian ) )
         print( "design  \n", fmt( amfit.design[-4:,:], max=None ) )
 
-
-
         print( "With background" )
         x,z,p2 = self.makeData( bg=True )
 
@@ -107,7 +105,7 @@ class Test( unittest.TestCase ):
         modl2.parameters = numpy.append( par1, [0,0] )
         lmfit = LMFitter( x, modl2 )
 
-        par2 = lmfit.fit( z )
+        par2 = lmfit.fit( z, plot="test" )
         print( "truth   ", fmt( p2 ) )
         print( "pars2   ", fmt( par2 ) )
 
@@ -268,8 +266,7 @@ class Test( unittest.TestCase ):
         amfit = LMFitter( x, modl1 )
 
         print( "truth   ", fmt( p1 ) )
-#        par1 = amfit.limitsFit( amfit.fit, y )
-        par1 = amfit.limitsFit( y )
+        par1 = amfit.limitsFit( y, plot=self.doplot )
 
         print( "pars1   ", fmt( par1 ) )
         assertAAE( par1, p1, 1 )
@@ -287,8 +284,7 @@ class Test( unittest.TestCase ):
         modl2.parameters = par1
         lmfit = LMFitter( x, modl2 )
 
-#        par2 = lmfit.limitsFit( lmfit.fit, y )
-        par2 = lmfit.limitsFit( y )
+        par2 = lmfit.limitsFit( y, plot=self.doplot )
         print( "pars2   ", fmt( par2 ) )
 
         print( "chisq2  ", lmfit.chisq )
@@ -298,13 +294,6 @@ class Test( unittest.TestCase ):
         print( "hessian \n", fmt( lmfit.hessian ) )
         print( "design  \n", fmt( lmfit.design[-4:,:], max=None ) )
 
-        if self.doplot :
-            xx = numpy.linspace( -1, +1, 1001 )
-            plt.plot( x, y, 'k+' )
-            plt.plot( xx, modl1.result( xx ), 'k-' )
-
-            plt.plot( xx, modl2.result( xx ), 'r-' )
-            plt.show()
 
 
     def test6( self ) :
@@ -385,7 +374,7 @@ class Test( unittest.TestCase ):
         print( "xdata  ", fmt( x ) )
         print( "ydata  ", fmt( y ) )
 
-        par = ftr.fit( y )
+        par = ftr.fit( y, plot=self.doplot )
         print( "truth  ", fmt( p ) )
         print( "param  ", fmt( par ) )
 

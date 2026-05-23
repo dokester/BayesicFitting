@@ -274,8 +274,42 @@ class Test( unittest.TestCase ):
         m = self.growshrink( m, dnp=1, npf=4, rng=rng, prnt=True )
 
         print( "Change Structure" )
-        for k in range( 6 ) :
-            m.vary( rng=rng )
+        for k in range( m.nrknots ) :
+            m.vary( rng=rng, location=k )
+            self.report( m, prnt=True )
+
+        cm = m.copy()
+        Tools.printclass( cm )
+
+    def test1Model12( self ):
+        print( "  Test SplinesDynamicModel periodic" )
+        knots = numpy.linspace( 0, 2, 6 )
+        m = SplinesDynamicModel( knots=knots, border=1 )
+        m.setLimits( [-10.0], [10.0] )
+        m.parameters = numpy.arange( m.npars, dtype=float )
+        rng  = numpy.random.RandomState( 123456 )
+        m = self.growshrink( m, dnp=1, npf=4, rng=rng, prnt=True )
+
+        print( "Change Structure" )
+        for k in range( m.nrknots ) :
+            m.vary( rng=rng, location=k )
+            self.report( m, prnt=True )
+
+        cm = m.copy()
+        Tools.printclass( cm )
+
+    def test1Model13( self ):
+        print( "  Test SplinesDynamicModel flexable periodic" )
+        knots = numpy.linspace( 0, 2, 6 )
+        m = SplinesDynamicModel( knots=knots, border=3 )
+        m.setLimits( [-10.0], [10.0] )
+        m.parameters = numpy.arange( m.npars, dtype=float )
+        rng  = numpy.random.RandomState( 123456 )
+        m = self.growshrink( m, dnp=1, npf=4, rng=rng, prnt=True )
+
+        print( "Change Structure" )
+        for k in range( m.nrknots ) :
+            m.vary( rng=rng, location=k )
             self.report( m, prnt=True )
 
         cm = m.copy()

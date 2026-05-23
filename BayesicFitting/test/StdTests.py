@@ -1,6 +1,6 @@
 # helper methods for Model testing
 
-from __future__ import print_function
+# from __future__ import print_function
 import unittest
 import numpy as numpy
 from astropy import units

@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from numpy.testing import assert_array_almost_equal as assertAAE
 
 from BayesicFitting import *
+from BayesicFitting import fma
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -92,7 +93,7 @@ class Test( unittest.TestCase ):
 
 
     def test2( self ) :
-        x  = numpy.linspace( 0, 1400, 7, dtype=float )
+        x  = numpy.linspace( 0, 1400, 9, dtype=float )
         print( "****** STELLAR ORBIT test 2 ***************" )
         m = StellarOrbitModel( )
 
@@ -104,10 +105,11 @@ class Test( unittest.TestCase ):
         print( "Make copy of model: ", m )
         mc = m.copy()
 
-        self.dtest( x, mc, p )
+        self.dtest2( x, mc, p )
+
 
     def test3( self ) :
-        x  = numpy.linspace( 0, 1400, 7, dtype=float )
+        x  = numpy.linspace( 0, 1400, 9, dtype=float )
         print( "****** STELLAR ORBIT test 3 ***************" )
         m = StellarOrbitModel( spherical=False )
 
@@ -119,7 +121,9 @@ class Test( unittest.TestCase ):
         print( "Make copy of model: ", m )
         mc = m.copy()
 
-        self.dtest( x, mc, p )
+        self.dtest2( x, mc, p )
+
+        Plotter.plotOrbit( m, p, show=self.doplot )       
 
     def test4( self ) :
 
@@ -162,7 +166,7 @@ class Test( unittest.TestCase ):
         print( "t3   ", fma( rp3[:,1] ) )
 
 
-#        assertAAE( xy0, xy1 )
+        assertAAE( xy0, xy1 )
         assertAAE( xy1, xy2 )
         assertAAE( rp1, rp2 )
         assertAAE( rp2, rp3 )
@@ -193,6 +197,99 @@ class Test( unittest.TestCase ):
 
         ns.sample( plot=self.doplot )
 
+        p = ns.parameters
+
+        print( fma( p ) )
+
+        Plotter.plotOrbit( m, p, xdata=xdata, ydata=ydata, show=self.doplot )       
+
+
+    def test6( self ) :
+        x  = numpy.linspace( 0, 1400, 7, dtype=float )
+        print( "****** STELLAR ORBIT test 3 ***************" )
+        m = StellarOrbitModel( spherical=False )
+
+        ksl = Kepplers2ndLaw()
+
+        # eccen, semimajor, period, periastron, inclin, ascnodepos, ascnodelong
+        p = [0.67, 13, 1200.0, 0.1, 0.2, 0.3, 0.4]
+        p = [0.7, 10, 100.0, 0.0, 0.0, 0.0, 0.0]
+        dp = [0, 0, 0, 0.5, numpy.pi/2+0.01, 1.4, 2.0]
+        t = numpy.linspace( 0, p[2], 361, dtype=float )
+
+#        if not self.doplot :
+#            return
+
+        ax = plt.figure( "Orbit", figsize=[9,9] ).add_subplot(projection='3d')
+        #y = m.result( t, p )
+        Plotter.plotOrbit3D( m, p, plot=ax, show=False )
+        cl = ['k', 'k', 'k', 'r', 'g', 'b','m']
+
+        for k in [6,3,5,4] :
+            p[k] = dp[k]
+            print( "p   :", fma( p ) )
+            #y = m.result( t, p )
+            Plotter.plotOrbit3D( m, p, plot=ax, color=cl[k], ls='', 
+                        northEast=False, show=False )
+
+        ax.axis( "equal" )
+        if self.doplot :
+            plt.show()
+            
+    def test7( self ) :
+
+        keppler = Kepplers2ndLaw()
+        pi = numpy.pi
+
+        p = [0.7, 1, 100.0, 0.5, pi/3, 1.4, 2.0]
+
+        t = numpy.linspace( 0, p[2], 361, dtype=float )
+
+
+        #inclin = params[4]
+        #ascpos = params[5]
+        #asclon = params[6]
+
+        inclin = p[4]
+        nor2nod = p[5]
+        nod2per = p[6]
+
+        ## rho = distance between stars
+        ( rho, v ) = keppler.radiusAndTrueAnomaly( t, p[:4] )
+
+#        if not self.doplot :
+#            return
+
+        x, y = Tools.toRect( rho, v ) 
+        plt.plot( x, y, 'k-' )
+
+        ## add the longitude (along the orbit) from the ascending node to the periastron
+        vp = v + nod2per
+
+        x, y = Tools.toRect( rho, vp ) 
+        plt.plot( x, y, 'r-' )
+
+        ## project on the xy plane
+        svp = numpy.sin( vp ) * math.cos( inclin )
+        cvp = numpy.cos( vp )
+
+        ## phi = angle on sky (xy-plane) of stars wrt each other
+        ## add angle (in xy plane) from north to ascending node
+        phi = numpy.arctan2( svp, cvp ) + nor2nod
+        #phi = numpy.arctan2( svp, cvp )
+        rxy = rho * numpy.sqrt( svp * svp + cvp * cvp )
+        rz  = rho * numpy.sin( vp ) * math.sin( inclin )
+
+        #phi += nor2nod
+
+        x, y = Tools.toRect( rxy, phi ) 
+        plt.plot( x, y, 'g-' )
+
+        plt.axis( "equal" )
+        if self.doplot :
+            plt.show()
+
+        return
 
     def dtest( self, x, m, p ) :
 
@@ -230,6 +327,55 @@ class Test( unittest.TestCase ):
             print( "nm1   ", fma( num1 ) )
             assertAAE( part0[:,k], num0 )
             assertAAE( part1[:,k], num1 )
+
+    def dtest2( self, x, m, p ) :
+
+        dfdx = m.baseDerivative( x, p, d3=True )
+
+#        print( dfdx.shape, m.spherical )
+
+        xp = x + 0.0001
+        xm = x - 0.0001
+
+        yp = m.getOrbit( xp, p, d3=True )
+        ym = m.getOrbit( xm, p, d3=True )
+
+        if m.spherical :
+            yp = Tools.toSpher3D( *yp )
+            ym = Tools.toSpher3D( *ym )
+            c = ["r", "p", "t"]
+        else :
+            c = ["x", "y", "z"]
+
+        for k in range( 3 ) :
+            numx = ( yp[k] - ym[k] ) / 0.0002
+
+            print( "d%sdt   "%c[k], fma( dfdx[:,k] ) )
+            print( "num%d   "%k, fma( numx ) )
+            assertAAE( dfdx[:,k], numx )
+
+
+        cp = ["e", "a", "P", "p", "i", "n", "o"]
+        parts = m.basePartial( x, p, d3=True )
+        for k in range( 7 ) :
+            pp = p[:]
+            pp[k] += 0.0001
+            pm = p[:]
+            pm[k] -= 0.0001
+            yp = m.getOrbit( x, pp, d3=True )
+            ym = m.getOrbit( x, pm, d3=True )
+            if m.spherical :
+                yp = Tools.toSpher3D( *yp )
+                ym = Tools.toSpher3D( *ym )
+
+            print( "parameter ", k, "  ", cp[k],  m.parNames[k] )
+
+            for n,prt in enumerate( parts ) :
+
+                num = ( yp[n] - ym[n] ) / 0.0002
+                print( "d%sd%s    "%(c[n],cp[k]), fma( prt[:,k] ) )
+                print( "num%d    "%k, fma( num ) )
+                assertAAE( prt[:,k], num )
 
 
     @classmethod

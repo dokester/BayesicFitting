@@ -34,7 +34,7 @@ __status__ = "Development"
 #  *
 #  *  2006 Do Kester
 
-class TestKepplers2ndLaw( unittest.TestCase ):
+class Test( unittest.TestCase ):
     """
     Test harness for Kepplers 2nd law
 
@@ -47,9 +47,23 @@ class TestKepplers2ndLaw( unittest.TestCase ):
         super( ).__init__( testname )
         self.doplot = ( "DOPLOT" in os.environ and os.environ["DOPLOT"] == "1" )
 
+    def test0( self ):
+        print( "******KEPPLERS LAW test 0***************" )
+        KL = Kepplers2ndLaw( )
+        self.assertTrue( KL.eccentricAnomaly == KL.eccentricAnomaly2 )
+        KL = Kepplers2ndLaw( eccentricAnomaly="standard" )
+        self.assertTrue( KL.eccentricAnomaly == KL.eccentricAnomaly0 )
+        KL = Kepplers2ndLaw( eccentricAnomaly="Newton" )
+        self.assertTrue( KL.eccentricAnomaly == KL.eccentricAnomaly1 )
+        KL = Kepplers2ndLaw( eccentricAnomaly="HALLEY" )
+        self.assertTrue( KL.eccentricAnomaly == KL.eccentricAnomaly2 )
+
+        self.assertRaises( ValueError, Kepplers2ndLaw, eccentricAnomaly="hally" )
+
+
     def test1( self ):
         x  = numpy.linspace( 0.0, 10, 101, dtype=float )
-        print( "******KEPPLERS LAW***************" )
+        print( "******KEPPLERS LAW test1***************" )
         KL = Kepplers2ndLaw( )
 
         # eccen, semimajor, period, periastron
@@ -111,6 +125,8 @@ class TestKepplers2ndLaw( unittest.TestCase ):
             e2 = KL.eccentricAnomaly2( x, p, Estart=e2 )
             i2 = KL.iter
             print( "Eccentricity  ", fmt(p[0]), fmt(i0), fmt(i1), fmt(i2) )
+            print( "EccAnom   sin ", fmt( KL.sinE ) )
+            print( "EccAnom   cos ", fmt( KL.cosE ) )
             p[0] += 0.1
 
 

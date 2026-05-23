@@ -4,8 +4,11 @@ import unittest
 import numpy as numpy
 import math
 from datetime import date
+from numpy.testing import assert_array_almost_equal as assertAAE
+
 
 from BayesicFitting import *
+from BayesicFitting import formatter as fmt
 
 __author__ = "Do Kester"
 __year__ = 2017
@@ -301,7 +304,120 @@ class Test( unittest.TestCase ) :
         print( "nicenumber of %f is %f (%f)" % ( x, k, n ) )
         self.assertTrue( k == n )
 
+    def testtoRect( self ):
+        x = numpy.array( [0, 1, 2, 0.4] )
+        y = numpy.roll( x, 2 )
+        r,p = Tools.toSpher( ( x, y ) )
 
+        a, b = Tools.toRect( r, phi=p )
+        assertAAE( a, x )
+        assertAAE( b, y )
+
+        s, t = Tools.toSpher( a, b )
+        assertAAE( s, r )
+        assertAAE( t, p )
+
+        xy = numpy.append( x, y ).reshape( (-1,2) )
+        rp = Tools.toSpher( xy )
+        print( xy )
+        print( rp )
+        ab = Tools.toRect( rp )
+        print( ab )
+        assertAAE( xy, ab )
+#        assertAAE( rp[:,0], s )
+#        assertAAe( rp[:,1], t )
+
+
+    def testtoRect3D( self ):
+        x = numpy.array( [0, 1, 2, 0.4] )
+        y = numpy.roll( x, 2 )
+        z = numpy.roll( y, 1 )
+        r, p, t = Tools.toSpher3D( x, y, z )
+
+        a, b, c = Tools.toRect3D( r, p, t )
+        assertAAE( a, x )
+        assertAAE( b, y )
+        assertAAE( c, z )
+
+        u, v, w = Tools.toSpher3D( a, b, c )
+        assertAAE( u, r )
+        assertAAE( v, p )
+        assertAAE( w, t )
+
+
+    def testArrow2d( self ) :
+
+
+        z = numpy.array( [0,2,4], dtype=float )
+        x = numpy.zeros( 3, dtype=float )
+        y = numpy.zeros( 3, dtype=float )
+
+        za, ya = Tools.arrow( z, y, scale=1.0 )
+        print( fma( za ) )
+        print( fma( ya ) )
+
+        x = numpy.linspace( 4, 16, 5 )
+        y = x * 1.2333
+        xa, ya = Tools.arrow( x, y )
+        qa = numpy.asarray( [0,1,4], dtype=int )
+        qq = numpy.asarray( [0,1,1] )
+        assertAAE( xa[qa], x[qq] ) 
+        assertAAE( ya[qa], y[qq] ) 
+
+
+        xa, ya, za = Tools.arrow( x, y, z, scale=1.0 )
+        print( fma( xa ) )
+        print( fma( ya ) )
+        print( fma( za ) )
+
+        return
+
+    def testArrow3d( self ):
+
+        rng = numpy.random.default_rng( seed=345678 )
+
+
+        for k in range( 4 ) :
+            x = rng.uniform( -1, 1, 2 )
+            y = rng.uniform( -1, 1, 2 )
+            z = rng.uniform( -1, 1, 2 )
+            s = rng.uniform(  0, 1, 1 )[0] + 0.1
+            self.arrow3d( x, y, z, s, plot=False )
+
+    def arrow3d( self, x, y, z, s, plot=False ) :
+
+        xa,ya,za = Tools.arrow( x, y, z, scale=s )
+
+        print( fmt( x ) )
+        print( fmt( y ) )
+        print( fmt( z ) )
+        print( fma( xa ) )
+        print( fma( ya ) )
+        print( fma( za ) )
+
+        qa = numpy.array( [0,1,4,7] )
+        qq = numpy.array( [0,1,1,1] )
+
+        assertAAE( xa[qa], x[qq] ) 
+        assertAAE( ya[qa], y[qq] ) 
+        assertAAE( za[qa], z[qq] ) 
+
+        if plot :
+            import matplotlib.pyplot as plt
+            ax = plt.figure( "arrow3d", figsize=[7,7] ).add_subplot( projection='3d' )
+            ax.plot( x, y, z, 'r-' )
+            ax.plot( x[0], y[0], z[0], 'ro' )
+            ax.plot( x[1], y[1], z[1], 'r*' )
+            ax.plot( xa, ya, za, 'k-' )
+
+            sz = 0.5
+            xx = [sz,-sz,-sz]
+            yy = [-sz,sz,-sz]
+            zz = [-sz,-sz,sz]
+            ax.plot( xx, yy, zz, 'b,' )
+
+            ax.set_box_aspect( [1,1,1] )
+            plt.show()
 
 
     @classmethod
