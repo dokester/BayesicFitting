@@ -6,9 +6,9 @@ from .IterationPlotter import IterationPlotter
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class IterativeFitter( BaseFitter ):
     """
@@ -110,9 +110,9 @@ class IterativeFitter( BaseFitter ):
         self.maxIter = maxIter
         self.verbose = verbose
         self.tooLarge = 100
-        self.plotter = IterationPlotter()
 
-        self.plotfreq = 0
+#        self.plotter = IterationPlotter()
+#        self.plotfreq = 0
 
     #  *************************************************************************
     def setParameters( self, params ):
@@ -128,21 +128,53 @@ class IterativeFitter( BaseFitter ):
         """
         self.model.parameters = params
 
-    def doPlot( self, param, force=False ):
-        """
-        Plot intermediate result.
 
+    def setPlotters( self, plot ) :
+        """
+        Set plot methods as requested by plot.
+
+        | plot   | doIterPlot |   doLastPlot   |   comment            |
+        |--------|------------|----------------|----------------------|
+        | False  |  no plot   |   no plot      | default; dont plot   |
+        | True   |  no plot   | plotSampleList |                      |
+        | "last" |  no plot   | plotSampleList |                      |
+        | "iter" | plotWalker |   no plot      |                      |
+        | "all"  | plotWalker | plotSampleList |                      |
+        | "test" | plotWalker | plotSampleList | no show(), for tests |
+
+        The plot methods plotWalker and plotSampleList are part of the
+        module Plotter.py
+            
         Parameters
         ----------
-        param : array_like
-            of the model
-        force : bool
-            do the plot
-
+        plot : str or bool (False)
+            as in table
         """
-        if ( self.plotfreq > 0 and self.iter % self.plotfreq == 0 ) or force :
-            y = self.model.result( self.xdata, param )
-            self.plotter.plotResult( self.xdata, y, self._iter )
+        self.doIterPlot = self.plotNot
+        self.doLastPlot = False
+        if not ( plot or plot in ["last", "iter", "all", "test"] ) :
+            return
+
+        if isinstance( plot, str ) :
+            if plot in ["iter", "all", "test"] :
+                self.doIterPlot = self.plotIter
+            elif plot in ["last", "all"] :
+                self.doLastPlot = True
+            self.show = not ( plot == "test" )
+        elif plot :
+            self.doLastPlot = True
+
+    def plotNot( self, ydata, param, force=False ) :
+        """ do not plot """
+        pass
+
+    def plotIter( self, ydata, param, force=False ) :
+        """ Plot Iteration results """
+        ## import plot methods only when needed.
+        from . import Plotter
+
+        Plotter.plotIter( self.xdata, ydata, self.model, param, self.iter, show=self.show )
+
 
     def fitprolog( self, ydata, weights=None, accuracy=None, keep=None ) :
         """
@@ -170,8 +202,9 @@ class IterativeFitter( BaseFitter ):
             Indices of the parameters that need fitting
 
         """
-        if self.plotfreq > 0 :
-            self.plotter.plotData( self.xdata, ydata, self.__str__( ) )
+#        if self.plotfreq > 0 :
+#            self.doPlotIter = self.doPlot
+#            self.plotter.plotResult( self.xdata, ydata, self.__str__( ) )
 
         self.iter = 0
         self.ntrans = 0
@@ -203,7 +236,7 @@ class IterativeFitter( BaseFitter ):
         """
         raise ConvergenceError( "IterativeFitter is a base class, not suitable itself to perform fits." )
 
-    def report( self, verbose, param, chi, more=None, force=False ) :
+    def report( self, verbose, ydata, param, chi, more=None, force=False ) :
         """
         Report on intermediate results.
         """
@@ -214,6 +247,7 @@ class IterativeFitter( BaseFitter ):
             print( fmt( self.iter, format='%6d' ), mr, fmt( chi, format="%8.1f " ),
                    fmt( param, max=mx ) )
 
+        self.doIterPlot( ydata, param, force=force )
 
 
     def __str__( self ):

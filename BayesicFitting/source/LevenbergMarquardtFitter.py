@@ -5,9 +5,9 @@ from .IterativeFitter import IterativeFitter
 from .ConvergenceError import ConvergenceError
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 class LevenbergMarquardtFitter( IterativeFitter ):
@@ -118,6 +118,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
         """
         super( LevenbergMarquardtFitter, self ).__init__( xdata, model, **kwargs )
 
+        self.plotfreq = 0
         self.lamda = 0.001
         self.converged = False
         self.first = True
@@ -174,6 +175,8 @@ class LevenbergMarquardtFitter( IterativeFitter ):
         if tolerance is None : tolerance = self.tolerance
         if verbose is None : verbose = self.verbose
 
+        self.setPlotters( plot )
+
         fitIndex, data, fitWgts = self.fitprolog( data, weights=weights, 
                         accuracy=accuracy, keep=keep )
 
@@ -193,16 +196,18 @@ class LevenbergMarquardtFitter( IterativeFitter ):
 
         while self.iter < maxiter :
 
-            trypar, trychi = self.trialfit( trypar, fitIndex, data, fitWgts, verbose, maxiter )
+            trypar, trychi = self.trialfit( trypar, fitIndex, data, fitWgts, verbose, 
+                                            maxiter )
             self.model.parameters = trypar
 
             tol = tolerance if self.chi < 1 else tolerance * self.chi
             if abs( self.chi - trychi ) < tol :
                 self.chi = trychi
-                self.report( verbose, trypar, trychi, more=math.log10( self.lamda ), force=True )
+                self.report( verbose, data, trypar, trychi, more=math.log10( self.lamda ), 
+                             force=True )
                 self.converged = True
 
-                self.fitpostscript( data, plot=plot )
+                self.fitpostscript( data, plot=self.doLastPlot )
                 return trypar                   # we are done.
 
             self.chi = trychi
@@ -264,7 +269,7 @@ class LevenbergMarquardtFitter( IterativeFitter ):
             self.iter += 1
 
 #            print( "trialfit", self.chi, trychi, math.log10( self.lamda ) )
-            self.report( verbose, trypar, trychi, more=math.log10( self.lamda ),
+            self.report( verbose, data, trypar, trychi, more=math.log10( self.lamda ),
                          force=(verbose >= 3) )
 
             if trychi <= self.chi:

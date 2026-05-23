@@ -1,13 +1,10 @@
-from __future__ import print_function
-
 import numpy as numpy
 import math
 from . import Tools
 from .Formatter import formatter as fmt
-from . import Plotter
+from .Formatter import formatter as gmt
 import sys
 import warnings
-import matplotlib.pyplot as plt
 
 from .Explorer import Explorer
 from .Walker import Walker
@@ -50,9 +47,9 @@ from .StructureEngine import StructureEngine
 from .BaseFitter import BaseFitter
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -75,7 +72,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class NestedSampler( object ):
     """
@@ -177,32 +174,44 @@ class NestedSampler( object ):
         to be solved (container of model, xdata, ydata and weights)
     distribution : ErrorDistribution
         to calculate the loglikelihood
+    limits : None or [low,high]
+        limits to the hyperparameter(s) of the distribution
+    keep : None or dist of {int:float}
+        Indices of parameters that are kept fixed at the given value.
     ensemble : int (100)
         number of walkers
     discard : int (1)
         number of walkers to be replaced each generation
-    rng : RandomState
-        random number generator
     seed : int (80409)
-        seed of rng
+        seed of the Random number generator (rng)
     rate : float (1.0)
         speed of exploration
+    bestBoost : bool or Fitter (False) (deprecated)
+        IGNORED with Warning: It causes an erroneous evidence calculation
+    usePhantoms : bool (True)
+        Find starting point in the Phantoms (Walkers if False)
+    engines : list of Engine
+        Engine that move the walkers around within the given constraint: logL > lowLogL
     maxsize : None or int
         maximum size of the resulting sample list (None : no limit)
+    threads : bool ( False)
+        Use threads (only when discard > 1)
+    verbose : int
+        level of blabbering
+    repiter : int (100)
+        report every reiter iteration (when verbose=2)
     minimumIterations : int (100)
         minimum number of iterations (adapt when starting problems occur)
     end : float (2.0)
         stopping criterion
-    tolerance : float (-12)
+    tolerance : float (-20)
         stopping criterion: stop if log( dZ / Z ) < tolerance
-    verbose : int
-        level of blabbering
+    rng : RandomState
+        random number generator
     walkers : WalkerList
         ensemble of walkers that explore the likelihood space
     samples : SampleList
         Samples resulting from the exploration
-    engines : list of Engine
-        Engine that move the walkers around within the given constraint: logL > lowLogL
     initialEngine : Engine
         Engine that distributes the walkers over the available space
     restart : StopStart (TBW)
@@ -213,7 +222,7 @@ class NestedSampler( object ):
     """
     TWOP31 = 2 ** 31        ## 2 ** 32 raises an error on Windows systems.
     ENSEMBLE = 100
-    TOLERANCE = -12
+    TOLERANCE = -20
     END = 2
     RATE = 1.0
 
@@ -285,10 +294,8 @@ class NestedSampler( object ):
             seed of random number generator
         rate : float
             speed of exploration
-        bestBoost : bool or Fitter (False)
-            False   no updates of best logLikelihood
-            True    boost the fit using LevenbergMarquardtFitter
-            fitter  boost the fit using this fitter.
+        bestBoost : bool or Fitter (False) (deprecated)
+            IGNORED with Warning: It causes an erroneous evidence calculation
         usePhantoms : bool (True)
             True    Copy starting walkers from phantoms
             False   Copy starting walkers from walkers
@@ -350,8 +357,11 @@ class NestedSampler( object ):
 
         self.usePhantoms = usePhantoms
         self.avoid = 0.1 if usePhantoms else 0.0
-        #self.avoid = 0.0
-        self.bestBoost = bestBoost
+
+        if bestBoost :
+            warnings.warn( "bestBoost Ignored. It causes an erroneous evidence calculation" )
+
+        self.bestBoost = False
 
         self.end = self.END
         self.maxtrials = 5
@@ -389,7 +399,7 @@ class NestedSampler( object ):
 ###################################################################
     
     #  *******SAMPLE************************************************************
-    def sample( self, keep=None, plot=False ):
+    def sample( self, keep=None, plot=False, **kwargs ):
         """
         Sample the posterior and return the 10log( evidence )
 
@@ -398,17 +408,20 @@ class NestedSampler( object ):
 
         Parameters
         ----------
-        keep : None or dict of {int:float}
+        keep : None or dict of {int:float}  (None)
             Dictionary of indices (int) to be kept at a fixed value (float)
             Hyperparameters follow model parameters
             The values will override those at initialization.
             They are only used in this call of fit.
-        plot : bool or str
+        plot : bool or str (False)
             bool    show a plot of the final results
             "iter" 	show iterations
             "all"  	show iterations and final result
             "last" 	show final result
             "test"      plot iterations but dont show (for testing)
+        kwargs : dict
+            to be fed to the plot
+
         """
         keep = self.initSample( keep=keep )
 
@@ -416,6 +429,8 @@ class NestedSampler( object ):
                 not isinstance( self.distribution, GaussErrorDistribution ) ) :
             raise AttributeError( "%s cannot be combined with accuracies and variable scale" %
                                     self.distribution ) 
+
+        self.setPlotters( plot )
 
         self.logUnitDomain = 0
         if self.usePhantoms :
@@ -457,7 +472,7 @@ class NestedSampler( object ):
 
             self.updateEvidence( worst )            # Update Z and H and store posterior samples
 
-            self.iterReport( worst - 1, tail, plot=plot ) # some output when needed
+            self.iterReport( worst - 1, tail )      # some output when needed
 
             self.samples.weed( self.maxsize )       # remove overflow in samplelist
 
@@ -487,7 +502,7 @@ class NestedSampler( object ):
             self.problem.model.parameters = self.samples.parameters
             self.problem.model.stdevs = self.samples.stdevs
 
-        self.lastReport( -1, plot=plot )
+        self.lastReport( -1, **kwargs )
 
         return self.evidence
 
@@ -516,8 +531,8 @@ class NestedSampler( object ):
         for eng in self.engines :
             eng.walkers = self.walkers
             eng.lastWalkerId = len( self.walkers )
-            if self.bestBoost :
-                eng.bestBoost( self.problem, myFitter=self.myFitter )
+#            if self.bestBoost :
+#                eng.bestBoost( self.problem, myFitter=self.myFitter )
 
         self.distribution.ncalls = 0                      #  reset number of calls
 
@@ -575,37 +590,6 @@ class NestedSampler( object ):
         return ( fitlist, allpars )
 
 
-    def doIterPlot( self, plot ) :
-        """
-        Returns
-        -------
-        int 0   no plot
-            1   plot
-            2   plot but dont show (for testing)
-        """
-        if isinstance( plot, str ) :
-            if plot == 'iter' or plot == 'all' :
-                return 1
-            elif plot == 'test' :
-                return 2
-            else :
-                return 0
-        else :
-            return 0
-
-    def doLastPlot( self, plot ) :
-        """
-        Return
-        ------
-        True when the last plot is requested (plot equals 'last' or 'all' or True)
-        False otherwise
-        """
-        if isinstance( plot, str ) :
-            return plot == 'last' or plot == 'all'
-        else :
-            return True if plot else False
-
-
     def initReport( self, keep=None ) :
         """
         Print header of the processing report (if any).
@@ -660,7 +644,7 @@ class NestedSampler( object ):
 
         return tail
 
-    def iterReport( self, kw, tail, plot=False ) :
+    def iterReport( self, kw, tail ) :
         """
         Reporting during iterations (if any)
 
@@ -670,8 +654,6 @@ class NestedSampler( object ):
             walker index with low LogL
         tail : int
             number of params at the end to report (mostly hyperpars)
-        plot : bool
-            plot this iteration.
         """
         if self.verbose >= 3 or ( self.verbose >= 1 and
                                   self.iteration % self.repiter == 0 ):
@@ -684,7 +666,7 @@ class NestedSampler( object ):
             else :
                 self.printIterRep( kw, tail=tail, max=4 )
 
-            self.plotResult( self.walkers[kw], self.iteration, plot=self.doIterPlot( plot ) )
+            self.doIterPlot( kw, show=self.show )
 
             self.ax = self.userReport( self )
 
@@ -718,7 +700,7 @@ class NestedSampler( object ):
                 end=end )
 
 
-    def lastReport( self, kw, plot=False ) :
+    def lastReport( self, kw, **kwargs ) :
         """
         Print concluding remarks (if any)
         
@@ -726,8 +708,8 @@ class NestedSampler( object ):
         ----------
         kw : int
             index of (last) walker.
-        plot : bool
-            to plot or not
+        kwargs : dict
+            for plotter
         """
         if self.verbose > 0 :
             if self.verbose == 1 :
@@ -738,21 +720,73 @@ class NestedSampler( object ):
         if self.verbose >= 1 :
             self.report()
 
-        if self.doLastPlot( plot ) :
-            self.plotLast()
+        self.doLastPlot( kw, show=self.show, **kwargs )
 
-    def plotLast( self ) :
+    def setPlotters( self, plot ) :
+        """
+        Set plot methods as requested by plot.
+
+        | plot   | doIterPlot |   doLastPlot   |   comment            |
+        |--------|------------|----------------|----------------------|
+        | False  |  no plot   |   no plot      | default; dont plot   |
+        | True   |  no plot   | plotSampleList |                      |
+        | "last" |  no plot   | plotSampleList |                      |
+        | "iter" | plotWalker |   no plot      |                      |
+        | "all"  | plotWalker | plotSampleList |                      |
+        | "test" | plotWalker | plotSampleList | no show(), for tests |
+
+        The plot methods plotWalker and plotSampleList are part of the 
+        module Plotter.py
+
+        Parameters
+        ----------
+        plot : str or bool (False)
+            as in table
+        """
+        self.doIterPlot = self.plotNot
+        self.doLastPlot = self.plotNot
+        if not ( plot or plot in ["last", "iter", "all", "test"] ) :
+            return
+
+        if isinstance( plot, str ) :
+            if plot in ["iter", "all", "test"] :
+                self.doIterPlot = self.plotIter
+            elif plot in ["last", "all", "test"] :
+                self.doLastPlot = self.plotLast
+            self.show = not ( plot == "test" )
+        elif plot :
+            self.doLastPlot = self.plotLast
+        
+    def plotNot( self, kw, show=False ) :
+        """ do not plot """
+        pass
+
+    def plotIter( self, kw, show=False ) :
+        """ Plot Iteration results """
+        ## import plot methods only when needed.
+        from . import Plotter
+
+        Plotter.plotWalker( self.walkers[kw], self.iteration, show=show )
+
+    def plotLast( self, kw, show=False, **kwargs ) :
         """ Plot the result """
+        ## import plot methods only when needed.
+        from . import Plotter
+
         Plotter.plotSampleList( self.samples, self.problem.xdata, self.problem.ydata, 
-                    figsize=[12,8], residuals=True )
+                    problem=self.problem, figsize=[12,8], residuals=True, 
+                    show=show, **kwargs )
 
     def nextIteration( self ) :
         """
         Return True when a next iteration is needed. False to stop
         """
+
         ## all walker's logL are equal -> stop with warning
         if self.walkers[0].logL >= self.walkers[-1].logL :
-            warnings.warn( "All walkers have the same log( Likelihood )" )
+            print( gmt( self.walkers[0].logL ), gmt( self.walkers[-1].logL ) )
+            warnings.warn( "All walkers have the same log( Likelihood ): %s" % 
+                            gmt( self.walkers[-1].logL ) )
             return False
         ## iteration nr less than minimum -> continue
         if self.iteration < self.minimumIterations :
@@ -911,7 +945,10 @@ class NestedSampler( object ):
             self.distribution.power = value
         elif name == "copymode" and value == 1 :
             self.usePhantoms = True
-        elif name == "bestUpdate" :
+        elif name == "bestBoost" :
+            if value :
+                warnings.warn( "bestBoost Ignored. It causes an erroneous evidence calculation" )
+                value = False
 
             self.myFitter = None
             if Tools.subclassof( value, BaseFitter ) :
@@ -1210,53 +1247,6 @@ class NestedSampler( object ):
         for walker in self.walkers :
             self.initialEngine.execute( walker.id, -sys.float_info.max )
 
-#        for w in self.walkers :
-#            print( w.id, w.problem.model.npars, len( w.problem.model.parameters), len( w.allpars) )
-#            w.check( nhyp=self.distribution.nphypar )
-
-
-    def plotResult( self, walker, iter, plot=0 ):
-        """
-        Plot the results for a walker.
-
-        Parameters
-        ----------
-        walker : Walker
-            the walker to plot
-        iter : int
-            iteration number
-        plot : int (one of (0,1,2)
-            0 immediate return, no action
-            1 plot
-            2 plot but dont show (for testing)
-        """
-        if plot == 0 :
-            return
-
-        plt.figure( 'iterplot' )
-
-        if self.line is not None :
-            ax = plt.gca()
-            if plot < 2 :
-                plt.pause( 0.02 )       ## updates and displays the plot before pause
-            ax.remove( )
-            self.text.set_text( "Iteration %d" % iter )
-
-        if self.ymin is None :
-            self.ymin = numpy.min( self.problem.ydata )
-            self.ymax = numpy.max( self.problem.ydata )
-
-        param = walker.allpars
-        model = walker.problem.model
-        mock = model.result( self.problem.xdata, param )
-        plt.plot( self.problem.xdata, self.problem.ydata, 'k.' )
-        self.text = plt.title( "Iteration %d" % iter )
-        self.line, = plt.plot( self.problem.xdata, mock, 'r-' )
-        dmin = min( self.ymin, numpy.min( mock ) )
-        dmax = max( self.ymax, numpy.max( mock ) )
-        dd = 0.05 * ( dmax - dmin ) 
-        plt.ylim( dmin - dd, dmax + dd )
-
 
     def report( self ):
         """
@@ -1264,8 +1254,8 @@ class NestedSampler( object ):
         """
 #        print( "Rate        %f" % self.rate )
         print( "Engines              success     reject     failed", end="" )
-        if self.bestBoost :
-            print( "       best", end="" )
+#        if self.bestBoost :
+#            print( "       best", end="" )
         print( "      calls" )
 
         for engine in self.engines :
