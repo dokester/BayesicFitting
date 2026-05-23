@@ -1,8 +1,11 @@
 import numpy as numpy
 import math
+import warnings
 import sys
+
 from .Formatter import formatter as fmt
 from .Formatter import fma
+from .Formatter import gmt
 
 from .Engine import Engine
 from .Engine import DummyPlotter
@@ -14,9 +17,9 @@ from .Engine import DummyPlotter
 
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -39,7 +42,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class GalileanEngine( Engine ):
     """
@@ -150,20 +153,22 @@ class GalileanEngine( Engine ):
         maxtrial = self.maxtrials
 
         ptry = allpars.copy()
+
+#        self.verbose = 5 if iteration == 2752 else 0
+
         if self.verbose > 4 :
-            print( "Galilean   LogL  ", fmt( Lhood ), " LowL  ", fmt( lowLhood), 
-                    nstep, maxtrial, size )
+            print( "Galilean  %2d  LogL  " % walker.id, gmt( Lhood ), " LowL  ", gmt( lowLhood), 
+                    nstep, maxtrial, fmt( size ) )
             print( "alpar ", fma( ptry, linelength=200 ) )
             fip = allpars[fitIndex]
             print( "uap   ", fma( self.domain2Unit( problem, fip, fitIndex ), linelength=200) )
+            uran, umin = self.getUnitRange( problem, lowLhood, walker.nap )
+
+            print( "uran  ", fma( uran, linelength=200 ) )
             print( "unitr ", fma( um.upran, linelength=200 ) )
             print( '--------------------' )
         step = 0
         trial = 0
-#        self.tripSq = 0
-
-#        um.setParameters( problem, allpars )
-#        self.startJourney( um.upar )
 
         while True:
             trial += 1
@@ -173,19 +178,25 @@ class GalileanEngine( Engine ):
             if isOutside == 0 :                            # safely inside lowLhood area
                 um.uvel = ( 1 - self.wiggle ) * um.uvel + self.wiggle * um.getVelocity( size )
 
-                ptry[fitIndex] = um.trialStep( 1.0, size )
+                frac = 1.0
+                ptry[fitIndex] = um.trialStep( frac, size )
 
             elif isOutside == 1 :                          # first time outside -> mirror
 
                 pedge, restep = self.findEdge( problem, ptry, fitIndex, Lhood, Ltry, lowLhood, 
                                               um, size, plot=False )
 
-                dLdp = self.errdis.partialLogL( problem, pedge, fitIndex )
+                try :
+                    with warnings.catch_warnings() :
+                        warnings.simplefilter( "error" )
+                        dLdp = self.errdis.partialLogL( problem, pedge, fitIndex )
+                except RuntimeWarning :
+                    dLdp = 0                              # no dLdp; no mirroring; goto next
+
                 um.acceptTrial()
                 um.mirrorOnLowL( dLdp )
                 ptry[fitIndex] = um.trialStep( restep, size )    ## part of te step still to be done
 
-#                self.plotter.move( allpars, pedge, col=1, sym=4 )
                 self.plotter.move( allpars, pedge, col=1 )
                 self.plotter.move( pedge, ptry, col=2 )
 
@@ -194,17 +205,30 @@ class GalileanEngine( Engine ):
                 um.reverseVelocity( size )
                 ptry[fitIndex] = um.trialStep( 1.0, size )
 
-#                self.plotter.move( allpars, ptry, col=3, sym=0 )
                 self.plotter.move( allpars, ptry, col=3 )
+
+            if not all( numpy.isfinite( ptry ) ) :
+                if self.verbose > 4 :
+                    print( "ptry  ", fma( ptry, linelength=200 ) )
+                    print( "Ltry  ", gmt( Ltry ), iteration, isOutside, step, trial, fmt( size ) )
+                    print( "upar  ", fma( um.upar, linelength=200 ) )
+                    print( "uvel  ", fma( um.uvel, linelength=200 ) )
+                    print( "utry  ", fma( um.uptry, linelength=200 ) )
+                    print( '--------------------' )
+
+                return 0
+
 
             Ltry = self.errdis.logLikelihood( problem, ptry )
 
+            while Ltry == lowLhood :
+                frac *= 0.5
+                ptry[fitIndex] = um.trialStep( frac, size )
+                Ltry = self.errdis.logLikelihood( problem, ptry )
 
-            if Ltry >= lowLhood:
-#                self.plotter.move( allpars, ptry, col=0, sym=0 )
+
+            if Ltry > lowLhood:
                 self.plotter.move( allpars, ptry, col=0 )
-#                self.tripSq += self.unitTripSquare( um.upar - um.uptry )
-#                self.calcJourney( um.upar - um.uptry )
 
                 um.acceptTrial()
 
@@ -224,7 +248,6 @@ class GalileanEngine( Engine ):
             else:
                 isOutside += 1
                 if isOutside == 1:
-#                    self.plotter.move( allpars, ptry, col=5, sym=4 )
                     self.plotter.move( allpars, ptry, col=5 )
                     self.reportReject( )
                 else:
@@ -236,8 +259,9 @@ class GalileanEngine( Engine ):
             if self.verbose > 4 :
                 print( "upar  ", fma( um.upar, linelength=200 ) )
                 print( "uvel  ", fma( um.uvel, linelength=200 ) )
+                print( "utry  ", fma( um.uptry, linelength=200 ) )
                 print( "ptry  ", fma( ptry, linelength=200 ) )
-                print( "Ltry  ", fmt( Ltry ), isOutside, step, trial, self.plotter.iter-1, 
+                print( "Ltry  ", gmt( Ltry ), iteration, isOutside, step, trial, self.plotter.iter-1, 
                         fmt( size ) )
                 print( '--------------------' )
 
@@ -315,8 +339,13 @@ class GalileanEngine( Engine ):
         for ktr in range( 10 ) :
 
             f = self.quadInterpol( xint, yint, lowLhood, plot=plot )
-
             pedge[fitIndex] = um.trialStep( f, size )
+
+            if math.isnan( pedge[0] ) :
+                print( fmt( ktr ), fmt( f ), fmt( lowLhood ), fmt( size ) )
+                print( "xint  ", fmt( xint ) )
+                print( "yint  ", fmt( yint ) )
+
             Ledge = self.errdis.logLikelihood( problem, pedge )
 
 ##PlotSection
@@ -333,8 +362,6 @@ class GalileanEngine( Engine ):
             xint[k] = xint[1]
             yint[1] = Ledge
             xint[1] = f
-
-#        print( ktr, Ledge, lowLhood )
 
 ##PlotSection
 #PLT    if self.plot :
@@ -363,7 +390,7 @@ class GalileanEngine( Engine ):
         beta = numpy.array( y )
         try :
             a, b, c = numpy.linalg.solve( mat, beta )
-        except :
+        except Exception :
             return ( x[2] - x[0] ) / 2
 
         if a == 0 :
@@ -479,8 +506,15 @@ class UnitMovements( object ):
         sumsq  = numpy.sum( dLdp * dLdp )
         if sumsq == 0 : return
 
-        self.uvel -= 2 * dLdp * inprod / sumsq
+        warnings.filterwarnings( "error" )
+        try :
+            self.uvel -= 2 * dLdp * inprod / sumsq
+        except RuntimeWarning :
+                print( fmt( inprod ), fmt( sumsq ) )
+                print( fma( dLdp ) )
+                raise RuntimeError()
 
+        warnings.resetwarnings()
 
     def reverseVelocity( self, size ):
         """
