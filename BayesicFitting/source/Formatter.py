@@ -1,12 +1,10 @@
-from __future__ import print_function
-
 import numpy as numpy
 from numpy import ndarray
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -24,7 +22,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 # Module Formatter
@@ -84,6 +82,13 @@ def fma( erray, **kwargs ) :
         formatter( ..., max=None, ... )
     """
     return formatter( erray, max=None, **kwargs )
+
+def gmt( erray, **kwargs ) :
+    """
+    Syntactic sugar for
+        formatter( ..., format=" %#10.3g", ... )
+    """
+    return formatter( erray, format=" %#10.3g", **kwargs )
 
 def formatter( erray, format=None, indent=None, linelength=None, max=-1, tail=0 ) :
     """

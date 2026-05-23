@@ -7,9 +7,9 @@ from .Modifiable import Modifiable
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2025 Do Kester
+#  *    2020 - 2026 Do Kester
 
 class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
     """
@@ -37,27 +37,35 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
 
     Examples
     --------
-    >>> knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
-    >>> csm = SplinesModel( knots=knots, order=2 )
+    >>> # make dynamic splinesmodel, initially with 4 equidistant knots from 0 to 10
+    >>> knots = numpy.linspace( 0, 10, 4, dtype=float )
+    >>> csm = SplinesDynamicModel( knots=knots, modifiable=False )
     >>> print csm.getNumberOfParameters( )
-    >>> 18
-    >>> # or alternatively:
-    >>> csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    >>> 6
+    >>> # or similarly, also modifiable
+    >>> csm = SplinesDynamicModel( nrknots=4, min=0, max=10 )
     >>> print csm.getNumberOfParameters( )
-    >>> 18
-    >>> # or alternatively:
-    >>> npt = 161                                               # to include both 0 and 160.
-    >>> x = numpy.arange( npt, dtype=float )                    # x-values
-    >>> csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    >>> 6
+    >>> # or periodic and not dynamic:
+    >>> x = numpy.arange( npt, dtype=float )
+    >>> knots = numpy.linspace( 0, 10, 4, dtype=float )
+    >>> csm = SplinesDynamicModel( knots=knots, border=1, dynamic=False )
     >>> print csm.getNumberOfParameters( )
-    >>> 18
+    >>> 5
 
     Attributes
     ----------
     minKnots : int
         minimum number of knots
-    maxDegree : int or None
+    maxKnots : int or None
         maximum number of knots
+    minDistance : float
+        minimum distance between knots
+    border : int (0)
+        0,1,2 as in BasicSplinesModel
+        3 periodic (as 1) with flexible period
+    flexPeriod : bool
+        flexible period when the model is periodic
 
     Attributes from Modifiable
     --------------------------
@@ -65,7 +73,11 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
 
     Attributes from Dynamic
     -----------------------
-        dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior
+        dynamic, ncomp, deltaNpar, minComp, maxComp, growPrior
+
+    Attributes from BasicSplinesModel
+    ---------------------------------
+        border, period
 
     Attributes from SplinesModel
     ----------------------------
@@ -90,7 +102,7 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
 
     """
     def __init__( self, modifiable=True, dynamic=True, growPrior=None, minKnots=2, maxKnots=None,
-                        minDistance=0.01, copy=None, **kwargs ):
+                        minDistance=0.01, border=0, copy=None, **kwargs ):
         """
         Splines on a given set of knots and a given order.
 
@@ -98,17 +110,19 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
 
         Parameters
         ----------
-        modifiable : bool
+        modifiable : bool (True)
             if True allow changement of the knot locations
-        dynamic : bool
+        dynamic : bool (True)
             if True allow growth and shrinkage of number of knots
-        minKnots : int
-            minimum number of knots (def=2)
+        minKnots : int (2)
+            minimum number of knots
         maxKnots : None or int
             maximum number of Knots
-        minDistance : float
+        minDistance : float ( 0.01 * mean knot separation )
             minimum distance between knots, provided as fraction of average knot distance.
-            default is ( 0.01 * ( knots[-1] - knots[0] ) / nrknots )
+        border : int (0)
+            0,1,2 as in BasicSplinesModel
+            3 periodic (as 1) with flexible period
         growPrior : None or Prior
             governing the birth and death.
             ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior
@@ -127,7 +141,13 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
         Modifiable.__init__( self, modifiable=modifiable )
         Dynamic.__init__( self, dynamic=dynamic )
 
-        BasicSplinesModel.__init__( self, copy=copy, **kwargs )
+        if border == 3 :
+            flexPeriod = True
+            border = 1
+        else :
+            flexPeriod = False
+
+        BasicSplinesModel.__init__( self, border=border, copy=copy, **kwargs )
 
         nrknots = len( self.knots )
         if nrknots < minKnots or ( maxKnots is not None and nrknots > maxKnots ) :
@@ -138,6 +158,9 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
         if copy is None :
             minDistance *= ( self.knots[-1] - self.knots[0] ) / nrknots
             setatt( self, "minDistance", minDistance )
+            setatt( self, "flexPeriod", flexPeriod )
+            if border == 1 :
+                minKnots = max( minKnots, 5 )
             self.setGrowPrior( growPrior=growPrior, min=minKnots, max=maxKnots,
                            name="Knots" )
         else :
@@ -145,17 +168,28 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
             setatt( self, "minKnots", copy.minKnots )
             setatt( self, "maxKnots", copy.maxKnots )
             setatt( self, "minDistance", copy.minDistance )
+            setatt( self, "flexPeriod", copy.flexPeriod )
             setatt( self, "growPrior", copy.growPrior.copy() )
 
 
     def copy( self, modifiable=None, dynamic=None ):
+        """
+        Make a copy of the model, optionally unchangeable.
+
+        Parameters
+        ----------
+        modifiable : bool
+            is a modifiable model
+        dynamic : bool
+            is a dynamic model
+        """
         if modifiable is None :
             modifiable = self.modifiable
         if dynamic is None :
             dynamic = self.dynamic
 
         return SplinesDynamicModel( knots=self.knots, modifiable=modifiable,
-                                    dynamic=dynamic, copy=self )
+                                    dynamic=dynamic, border=self.border, copy=self )
 
     def __setattr__( self, name, value ) :
         if self.setDynamicAttribute( name, value ) :
@@ -202,7 +236,7 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
         rng : random number generator (obligatory)
             to generate a new parameter.
         force : bool
-            dont check maxKnots
+            dont check maxKnots (only for varyAlt())
 
         Return
         ------
@@ -332,23 +366,51 @@ class SplinesDynamicModel( Modifiable, Dynamic, BasicSplinesModel ):
         return True
 
     def vary( self, rng=None, location=None ) :
+        """
+        Vary the structure of a Modifiable Model
+
+
+        Parameters
+        ----------
+        rng : RNG
+            random number generator
+        location : int
+            index of the item to be modified; otherwise random
+        kwargs : keyword arguments
+            for specific implementations
+
+        """
 
         nrknots = len( self.knots )
-        if nrknots <= 2 or location == 0 or location == nrknots :
+        if ( nrknots <= 2 or location == 0 or 
+             ( not self.flexPeriod and location == nrknots - 1 ) ) :
             return False
 
-        kk = location if location is not None else rng.randint( nrknots - 2 ) + 1
+        if location is None :
+            kk = 1 + rng.randint( nrknots - ( 1 if self.flexPeriod else 2 ) )
+        else :
+            kk = location
 
         newkn = self.knots[kk]
+        lastk = ( kk == nrknots - 1 )
 
         while True :
+            # draw from triangular distribution
             rn = ( rng.rand() + rng.rand() ) - 1
-            newkn += rn * ( ( newkn - self.knots[kk-1] ) if rn < 0 else
-                            ( self.knots[kk+1] - newkn ) )
+
+            if rn < 0 :
+                newkn += rn * ( newkn - self.knots[kk-1] )
+            elif lastk :
+                newkn += rn * self.period / nrknots
+            else :
+                newkn += rn * ( self.knots[kk+1] - newkn )
+
+            if lastk :
+                self.period = self.knots[-1] - self.knots[0]                
 
             ## check minimum distance from neighbouring knots
             if ( newkn - self.knots[kk-1] > self.minDistance and
-                 self.knots[kk+1] - newkn > self.minDistance ) :
+                 ( lastk or self.knots[kk+1] - newkn > self.minDistance ) ) :
                 break
 
 #        print( "SDM   ", fmt( self.knots, max=None ), kk, newkn )

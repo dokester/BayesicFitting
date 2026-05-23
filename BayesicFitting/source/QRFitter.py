@@ -4,9 +4,9 @@ import math
 from .BaseFitter import BaseFitter
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class QRFitter( BaseFitter ):
     """
@@ -115,7 +115,7 @@ class QRFitter( BaseFitter ):
         self.needsNewDecomposition = True
         self.qrmat = None
 
-    def fit( self, ydata, weights=None, accuracy=None, keep=None ):
+    def fit( self, ydata, weights=None, accuracy=None, keep=None, plot=False ):
         """
         Return model parameters fitted to the data, including weights.
 
@@ -131,6 +131,9 @@ class QRFitter( BaseFitter ):
             dictionary of indices (int) to be kept at a fixed value (float)
             The values will override those at initialization.
             They are only used in this call of fit.
+        plot : bool
+            to plot or not
+
         Raises
         ------
         ValueError when ydata or weights contain a NaN
@@ -178,6 +181,8 @@ class QRFitter( BaseFitter ):
         params = self.insertParameters( params, index=fi )
         self.model.parameters = params
         self.chiSquared( ydata, weights=fitwgts )
+
+        self.fitpostscript( ydata, plot=plot )
 
         return params
 

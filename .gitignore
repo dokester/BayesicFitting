@@ -9,11 +9,16 @@ build/
 docs/images/.ipynb_checkpoints
 BayesicFitting/examples/.ipynb_checkpoints
 BayesicFitting/examples/Untitled*.ipynb
+BayesicFitting/source/newsources
 BayesicFitting/source/__pycache__
 BayesicFitting/source/kernels/__pycache__
 BayesicFitting/test/__pycache__
+BayesicFitting/test/ATest*
+BayesicFitting/test/Test*.py.*
+BayesicFitting/test/*png
 BayesicFitting/test/*mp4
-BayesicFitting/test/testresults*
+BayesicFitting/test/testres*
+BayesicFitting/testres*
 BayesicFitting/TBD-examples/
 BayesicFitting/TBD-test/
 BayesicFitting/examples/test/

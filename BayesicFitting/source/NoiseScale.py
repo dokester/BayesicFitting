@@ -97,7 +97,8 @@ class NoiseScale( HyperParameter ):
 
     def copy( self ):
         """ Return a copy.  """
-        return NoiseScale( scale=self.scale, copy=self )
+        return NoiseScale( scale=self.scale, isFixed=self.isFixed, 
+                           prior=self.prior, copy=self )
 
     def __setattr__( self, name, value ) :
         """

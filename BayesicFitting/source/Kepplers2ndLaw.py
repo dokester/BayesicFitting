@@ -4,9 +4,9 @@ import math
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -25,7 +25,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2025 Do Kester
+#  *    2018 - 2026 Do Kester
 
 class Kepplers2ndLaw( object ):
     """
@@ -44,9 +44,40 @@ class Kepplers2ndLaw( object ):
 
     The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 
+    Attributes
+    ----------
+    eccenticAnomaly : "standard" or "newton" or "halley"
+        method to use in the calculation. 
+        By default Halleys method is used.
+        It converges in a few iterations for e <= 0.999999999
+    sinE : array (read only)
+        sin of eccentricAnomaly 
+    cosE : array (read only)
+        cos of eccentricAnomaly 
     """
     TWOPI = 2 * math.pi
     MAXITER = 100
+
+    def __init__( self, eccentricAnomaly="halley" ) :
+        """
+        Use Keppler's 2nd Law to derive the radius and true anomaly.
+
+        Parameters
+        ----------
+        eccentricAnomaly : ["standard", "newton", "halley"]
+            method to use in the calculation
+
+        """
+        eccentricAnomaly = eccentricAnomaly.lower()
+        if eccentricAnomaly == "halley" :
+            self.eccentricAnomaly = self.eccentricAnomaly2
+        elif eccentricAnomaly == "newton" :
+            self.eccentricAnomaly = self.eccentricAnomaly1
+        elif eccentricAnomaly == "standard" :
+            self.eccentricAnomaly = self.eccentricAnomaly0
+        else :
+            raise ValueError( "Unknown method for eccentricAnomaly : %s" % 
+                        eccentricAnomaly )
 
     def meanAnomaly( self, xdata, params ) :
         """
@@ -101,16 +132,7 @@ class Kepplers2ndLaw( object ):
         return ( dMdP, dMdp )
 
 
-    def eccentricAnomaly( self, xdata, params, Estart=None ) :
-        """
-        Take the best one : Halleys method
-
-        It converges in a few iterations for e <= 0.999999999
-        """
-        return self.eccentricAnomaly2( xdata, params, Estart=Estart )
-
-
-    def eccentricAnomaly0( self, xdata, params ) :
+    def eccentricAnomaly0( self, xdata, params, Estart=None ) :
         """
         Return the eccentric anomaly, i.e. the solution for E of
 
@@ -129,6 +151,8 @@ class Kepplers2ndLaw( object ):
             times in the orbit
         params : array_like
             parameters: eccentr, semimajor, period, ppass
+        Estart : array_like
+            starting values for E
         """
         M = self.meanAnomaly( xdata, params )
         eccen = params[0]
@@ -146,9 +170,12 @@ class Kepplers2ndLaw( object ):
             print( "EA0: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
 
         setatt( self, "iter", iter )
+        setatt( self, "sinE", sinE )
+        setatt( self, "cosE", numpy.cos( Ep ) )
+
         return E
 
-    def eccentricAnomaly1( self, xdata, params ) :
+    def eccentricAnomaly1( self, xdata, params, Estart=None ) :
         """
         Newtons method.
 
@@ -165,6 +192,8 @@ class Kepplers2ndLaw( object ):
             times in the orbit
         params : array_like
             parameters: eccentr, semimajor, period, ppass
+        Estart : array_like
+            starting values for E
         """
         M = self.meanAnomaly( xdata, params )
         eccen = params[0]
@@ -183,6 +212,8 @@ class Kepplers2ndLaw( object ):
             print( "EA1: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
 
         setatt( self, "iter", iter )
+        setatt( self, "sinE", sinE )
+        setatt( self, "cosE", cosE )
         return E
 
     def eccentricAnomaly2( self, xdata, params, Estart=None ) :
@@ -226,6 +257,7 @@ class Kepplers2ndLaw( object ):
             if all( numpy.abs( E - Ep ) < 1e-8 ) : break
         else :
 #            # uncomment for more diagnostics
+#            from .Formatter import formatter as fmt
 #            q = numpy.where( numpy.abs( E - Ep ) > 1e-8 )
 #            print( "\n" )
 #            print( "params  ", fmt( params, max=None ) )
@@ -233,8 +265,7 @@ class Kepplers2ndLaw( object ):
 #            print( "E       ", fmt( E[q] ) )
 #            print( "sinE    ", fmt( sinE[q] ) )
 #            print( "cosE    ", fmt( cosE[q] ) )
-
-            print( "EA2: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
+            raise RuntimeError( "EA2: No convergence at iter %d for eccentricity %8.4f" % ( iter, eccen ) )
 
         setatt( self, "iter", iter )
         setatt( self, "sinE", sinE )
@@ -332,6 +363,7 @@ class Kepplers2ndLaw( object ):
         r = semimaj * ( 1 - eccen * cosE )
 
         ## v = true anomaly
+        #print( "eccen   ", eccen )
         ef = math.sqrt( ( 1 + eccen ) / ( 1 - eccen ) )
 
         v = 2 * numpy.arctan2( ef * self.sinE, 1 + cosE )

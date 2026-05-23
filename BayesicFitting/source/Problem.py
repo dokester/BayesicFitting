@@ -6,9 +6,9 @@ from .Tools import printclass as printclass
 
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2018 - 2025 Do Kester
+#  *    2018 - 2026 Do Kester
 
 class Problem( object ):
     """
@@ -62,7 +62,8 @@ class Problem( object ):
         number of parameters in the model of the problem
     partype : float | int
         type of the parameters
-
+    ndout : int
+        number of output dimensions
 
     Author :         Do Kester
 
@@ -100,6 +101,8 @@ class Problem( object ):
             self.weights = None if weights is None else numpy.asarray( weights )
             self.partype = float
             self.setAccuracy( accuracy=accuracy )
+            self.ndout = 1 if model is None else model.ndout
+
         else :
             self.xdata = copy.xdata
             self.ydata = copy.ydata
@@ -112,6 +115,7 @@ class Problem( object ):
             else :
                 self.model = copy.model
             self.partype = copy.partype
+            self.ndout = copy.ndout
 
         if self.model is None or not hasattr( self.model, "cyclic" ) :
             pass                                    # default is no correction
@@ -292,36 +296,6 @@ class Problem( object ):
         hp = period / 2
         return numpy.where( res < -hp, res + period,
                numpy.where( res >  hp, res - period, res ) )
-
-
-
-    def XXXweightedResiduals( self, param, mockdata=None, extra=False ) :
-        """
-        Returns the (weighted) residuals, calculated at the xdata.
-
-        Optionally (extra=True) the weighted signs of the residuals are returned too.
-
-        Parameters
-        ----------
-        param : array_like
-            values for the parameters.
-        mockdata : array_like
-            model fit at xdata
-        extra : bool (False)
-            true  : return ( wgt * res, wgt * sign( res ) )
-            false : return wgt * res
-        """
-        res = self.residuals( param, mockdata=mockdata )
-
-        if extra :
-            if self.weights is None :
-                wgt = numpy.ones_like( self.ydata )
-                return ( res, numpy.copysign( wgt, res ) )
-            else :
-                return ( res * self.weights, numpy.copysign( self.weights, res ) )
-        else :
-            return res if self.weights is None else res * self.weights
-
 
     def weightedResSq( self, allpars, mockdata=None, extra=False ) :
         """

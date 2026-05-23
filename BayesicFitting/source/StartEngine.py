@@ -5,9 +5,9 @@ from .Dynamic import Dynamic
 from .Engine import Engine
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +30,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class StartEngine( Engine ):
     """
@@ -101,7 +101,7 @@ class StartEngine( Engine ):
             maxtrials *= 100
 
         if self.verbose > 4 :
-            print( "Start   ", model.shortName(), fmt( model.npars ) )
+            print( "Start  wlkr ", fmt( walker.id ), model.shortName(), fmt( model.npars ) )
 
         ktry = 0
         while True :
@@ -141,8 +141,7 @@ class StartEngine( Engine ):
             logL = self.errdis.logLikelihood( problem, ptry )
 
             if self.verbose > 4 :
-                print( fmt( ptry, max=None ) )
-                print( "logL   ", fmt( logL ) )
+                print( fmt( ptry, max=None ), "  logL   ", fmt( logL ) )
 
             if math.isfinite( logL ) :
                 break

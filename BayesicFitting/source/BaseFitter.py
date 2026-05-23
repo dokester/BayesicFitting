@@ -5,13 +5,12 @@ from astropy.table import Table
 from .ImageAssistant import ImageAssistant
 from .MonteCarlo import MonteCarlo
 from . import Tools
-from . import Plotter
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class BaseFitter( object ):
     """
@@ -339,7 +338,7 @@ class BaseFitter( object ):
         return pars
 
     #  *****FIT*****************************************************************
-    def modelFit( self, ydata, weights=None, keep=None ):
+    def modelFit( self, ydata, weights=None, keep=None, **kwargs ):
         """
         Return model fitted to the data.
 
@@ -353,13 +352,15 @@ class BaseFitter( object ):
             dictionary of indices (int) to be kept at a fixed value (float)
             The values will override those at initialization.
             They are only used in this call of fit.
+        kwargs : keyword arguments
+            to be passed to fit()
 
         """
-        self.model.parameters = self.fit( ydata, weights=weights, keep=keep )
+        self.model.parameters = self.fit( ydata, weights=weights, keep=keep, **kwargs )
         return self.yfit
 
 
-    def limitsFit( self, ydata, weights=None, keep=None ) :
+    def limitsFit( self, ydata, weights=None, keep=None, **kwargs ) :
         """
         Fit the data to the model.
         When a parameter(s) transgresses the limits, it set and fixed at that limit
@@ -376,6 +377,8 @@ class BaseFitter( object ):
             dictionary of indices (int) to be kept at a fixed value (float)
             The values will override those at initialization.
             They are only used in this call of fit.
+        kwargs : keywords
+            to be passed to fit()
 
         Returns
         -------
@@ -387,7 +390,7 @@ class BaseFitter( object ):
         Warning when parameters have been reset at the limits.
 
         """
-        pars = self.fit( ydata, weights=weights, keep=keep )          # perform the fit
+        pars = self.fit( ydata, weights=weights, keep=keep, **kwargs )      # perform the fit
 
         if self.model.priors is None :                  # no priors -> no limits
             return pars
@@ -437,7 +440,7 @@ class BaseFitter( object ):
         return pars                                         # return parameters
 
 
-    def fit( self, ydata, weights=None, keep=None ) :
+    def fit( self, ydata, weights=None, keep=None, **kwargs ) :
         """
         Return model parameters fitted to the data.
 
@@ -770,9 +773,9 @@ class BaseFitter( object ):
         return self.model.stdevs
 
     #  *****MONTE CARLO ERROR***************************************************
-    def monteCarloError( self, xdata=None, monteCarlo=None):
+    def monteCarloError( self, xdata=None, monteCarlo=None, scale=1.0 ):
         """
-        Calculates &sigma;-confidence regions on the model given some inputs.
+        Calculates scale * &sigma;-confidence regions on the model given some inputs.
 
         From the full covariance matrix (inverse of the Hessian) random
         samples are drawn, which are added to the parameters. With this new
@@ -789,14 +792,15 @@ class BaseFitter( object ):
             input data over which to calculate the error bars.
         monteCarlo : MonteCarlo
             a ready-made MonteCarlo class.
-
+        scale : float
+            factor for &sigma;
         """
         if xdata is None : xdata = self.xdata
         if monteCarlo is None :
             monteCarlo = MonteCarlo( xdata, self.model, self.covariance,
                                           index=self.fitIndex )
 
-        return monteCarlo.getError( xdata )
+        return monteCarlo.getError( xdata, scale=scale )
 
     #  *************************************************************************
     def getScale( self ):
@@ -982,13 +986,16 @@ class BaseFitter( object ):
         show : bool
             display the plot.
         """
+        ## Import plot methods only when needed
+        from . import Plotter
+
         if xdata is None :
             xdata = self.xdata
         if model is None :
             model = self.model
-        fitter = self if confidence else None
+        #fitter = self if confidence else None
 
         Plotter.plotFit( xdata, data=ydata, model=model, show=show,
-                fitter=fitter, residuals=residuals )
+                fitter=self, residuals=residuals )
 
 

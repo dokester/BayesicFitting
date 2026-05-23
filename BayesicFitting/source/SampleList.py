@@ -4,9 +4,9 @@ from . import Tools
 from .Sample import Sample
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -349,13 +349,19 @@ class SampleList( list ):
 
     def averstd( self, name ) :
         """
-        Return the average and the stddevs of the named attribute from Sample
-
+        Return
+        ------
+        The average and the stddevs of the named attribute from Sample or
+        ( None, None ) if the item does not exist
+               
         Parameters
         ----------
         name : str
             name of an attribute from Sample
         """
+        if not hasattr( self[-1], name ) :
+            return ( None, None )
+
         aver = 0.0
         stdv = 0.0
         sw = 0.0
@@ -425,6 +431,10 @@ class SampleList( list ):
         In case of dynamic models the number of parameters may vary.
         They are zero-padded. Use `getNumberOfParametersEvolution`
         to get the actual number.
+
+        Returns
+        -------
+        tuple of parameters [NS,NP] and weights [NS]
 
         """
         pe = []
@@ -517,9 +527,6 @@ class SampleList( list ):
             the input
 
         """
-#        ndata = Tools.length( xdata )
-#        result = numpy.zeros( ndata, dtype=float )
-#        error = numpy.zeros( ndata, dtype=float )
         result = 0
         error = 0
         sumwgt = 0

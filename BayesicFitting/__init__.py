@@ -23,7 +23,6 @@ I.e. leave out the base classes and helper classes.
 TBC: How much time does this take. Everything is translated ??
 
 """
-
 from .source.AmoebaFitter import AmoebaFitter
 from .source.AnnealingAmoeba import AnnealingAmoeba
 from .source.ArctanModel import ArctanModel
@@ -45,11 +44,10 @@ from .source.CombiModel import CombiModel
 from .source.ConstantModel import ConstantModel
 from .source.ConvergenceError import ConvergenceError
 from .source.CurveFitter import CurveFitter
-#from .source.DarwinModel import DarwinModel
-#from .source.DarwinProblem import DarwinProblem
 from .source.DeathEngine import DeathEngine
 from .source.DecisionTreeModel import DecisionTreeModel
 from .source.Dynamic import Dynamic
+from .source.EclipsingStarModel import EclipsingStarModel
 from .source.Engine import Engine
 from .source.ErrorDistribution import ErrorDistribution
 from .source.ErrorsInXandYProblem import ErrorsInXandYProblem
@@ -62,17 +60,14 @@ from .source.ExponentialErrorDistribution import ExponentialErrorDistribution
 from .source.ExponentialPrior import ExponentialPrior
 from .source.Fitter import Fitter
 from .source.FixedModel import FixedModel
+from .source.FlippedDataProblem import FlippedDataProblem
 from .source.FootballModel import FootballModel
-#from .source.FreeShape2dModel import FreeShape2dModel
 from .source.FreeShapeModel import FreeShapeModel
 from .source.GalileanEngine import GalileanEngine
 from .source.GaussErrorDistribution import GaussErrorDistribution
 from .source.Gauss2dErrorDistribution import Gauss2dErrorDistribution
 from .source.GaussModel import GaussModel
 from .source.GaussPrior import GaussPrior
-#from .source.Gene import *
-#from .source.Genome import Genome
-#from .source.GenomeMaker import GenomeMaker
 from .source.GibbsEngine import GibbsEngine
 from .source.HarmonicModel import HarmonicModel
 from .source.HarmonicDynamicModel import HarmonicDynamicModel
@@ -99,15 +94,14 @@ from .source.Modifiable import Modifiable
 from .source.MonteCarlo import MonteCarlo
 from .source.MultipleOutputProblem import MultipleOutputProblem
 from .source.NestedSampler import NestedSampler
-#from .source.NeuralNetModel import NeuralNetModel
 from .source import NeuralNetUtilities
 from .source.NoiseScale import NoiseScale
 from .source.NonLinearModel import NonLinearModel
 from .source.OrthonormalBasis import OrthonormalBasis
 from .source.PadeModel import PadeModel
+from .source.PeriodicScout import PeriodicScout
 from .source.PhantomCollection import PhantomCollection
 from .source.PhantomSampler import PhantomSampler
-#from .source.PixelModel import PixelModel
 from .source.PoissonErrorDistribution import PoissonErrorDistribution
 from .source.PolySineAmpModel import PolySineAmpModel
 from .source.PolySurfaceModel import PolySurfaceModel
@@ -146,6 +140,7 @@ from .source.StructureEngine import StructureEngine
 from .source.SurfaceSplinesModel import SurfaceSplinesModel
 from .source.UniformErrorDistribution import UniformErrorDistribution
 from .source.UniformPrior import UniformPrior
+from .source.UniformRatioPrior import UniformRatioPrior
 from .source.UserModel import UserModel
 from .source.VoigtModel import VoigtModel
 from .source.Walker import Walker
@@ -162,23 +157,27 @@ from .source.OrderProblem import OrderProblem
 from .source.ReverseEngine import ReverseEngine
 from .source.SalesmanProblem import SalesmanProblem
 from .source.ShuffleEngine import ShuffleEngine
-#from .source.StartNearEngine import StartNearEngine
 from .source.StartOrderEngine import StartOrderEngine
 from .source.SwitchEngine import SwitchEngine
 
+## miscelleaneous imports
 from .source.Formatter import formatter
 from .source.Formatter import fma
+from .source.Formatter import gmt
 from .source.Formatter import formatter_init
 from .source.Plotter import plotFit
 from .source.Plotter import plotSampleList
+from .source.Plotter import plotWalker
+from .source.Plotter import plotIter
+from .source.Plotter import plotOrbit
+from .source.Plotter import plotEclipsingStar
+from .source.Plotter import plotEsmSideView
+from .source.Plotter import plotEsmEclipseView
+from .source import Plotter
 from .source.Tools import printclass
 from .source import Tools
-#from .source import bspline
-#from .source import splinelab
 
-#from .source.bsplines.bspline import bspline
-#from .source.bsplines.splinelab import splinelab
-
+## import kernels
 from .source.kernels.Biweight import Biweight
 from .source.kernels.CosSquare import CosSquare
 from .source.kernels.Cosine import Cosine
@@ -193,4 +192,22 @@ from .source.kernels.Tophat import Tophat
 from .source.kernels.Tricube import Tricube
 from .source.kernels.Triweight import Triweight
 from .source.kernels.Uniform import Uniform
+
+## import from newsources.
+#from .source.newsources.DarwinModel import DarwinModel
+#from .source.newsources.DarwinProblem import DarwinProblem
+#from .source.newsources.EvolutionEngine import EvolutionEngine
+#from .source.newsources.StartEvolutionEngine import StartEvolutionEngine
+#from .source.newsources.Gene import *
+#from .source.newsources.Genome import Genome
+#from .source.newsources.GenomeMaker import GenomeMaker
+#from .source.newsources.NeuralNetModel import NeuralNetModel
+#from .source.newsources.PixelModel import PixelModel
+#from .source.newsources.AbsoluteValueFilter import AbsoluteValueFilter
+#from .source.newsources.BaseFilter import BaseFilter
+#from .source.newsources.HeavisideFilter import HeavisideFilter
+#from .source.newsources.LogisticFilter import LogisticFilter
+#from .source.newsources.SoftMaxFilter import SoftMaxFilter
+
+
 

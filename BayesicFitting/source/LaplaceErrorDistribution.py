@@ -192,6 +192,8 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         """
         np = problem.npars
         res = problem.residuals( allpars[:np], mockdata=mockdata )
+        if problem.ndout > 1 :
+            res = res.flatten()
 
         scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         res = - numpy.abs( res ) / scale - ( self.LOG2 + numpy.log( scale ) )
@@ -255,6 +257,8 @@ class LaplaceErrorDistribution( ScaledErrorDistribution ):
         param = allpars[:-1]
         scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         res = problem.residuals( param, mockdata=mockdata )
+        if problem.ndout > 1 :
+            res = res.flatten()
 
         dM = problem.partial( param )
 ##      TBD import mockdata into partial

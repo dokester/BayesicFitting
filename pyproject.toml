@@ -4,13 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "BayesicFitting"
-version = "3.2.5"
+version = "3.3.0"
 dependencies = [
     'numpy >= 1.9',
     'matplotlib >= 2.0',
     'scipy >= 1.0',
-    'astropy >= 2.0',
-    'future'
+    'astropy >= 2.0'
 ]
 authors = [
     { name = "Do Kester", email = "dokester@home.nl" }
@@ -43,8 +42,7 @@ homepage = "https://dokester.github.io/BayesicFitting/"
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
-    "BayesicFitting/TBD-examples",
-    "BayesicFitting/TBD-tests",
+    "BayesicFitting/source/newsources",
     "BayesicFitting/__pycache__",
     ".git",
     ".pytest_cache",

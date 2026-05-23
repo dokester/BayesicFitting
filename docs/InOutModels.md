@@ -4,8 +4,9 @@
 # Input and output dimensions for multidimensional models.
 
 
-In the table we show the shapes of the input arrays and results 
-for models with more dimensional inputs or outputs 
+In the table we show the shapes of the input arrays and return 
+arrays for the methods result(), partal() and derivative(), 
+for models with more dimensional inputs or outputs.
 
 <p>
 mdl-1-1 : a model with 1 dim inputs and 1 dim outputs<br>
@@ -21,11 +22,11 @@ mdl-I-O : a model with I dim inputs and O dim outputs<br>
 | ndim    |     -   |    I    |    -     |    I     |
 | ndout   |     -   |    -    |    O     |    O     |
 |**method** |       |         |          |          |
-| input   |   [N]   |  [N,I]  |   [N]    |  [N,I]   |
-| result  |   [N]   |   [N]   |  [N,O]   |  [N,O]   |
-| partial |  [N,P]  |  [N,P]  | [O][N,P] | [O][N,P] |
+| input   |   (N)   |  (N,I)  |   (N)    |  (N,I)   |
+| result  |   (N)   |   (N)   |  (N,O)   |  (N,O)   |
+| partial |  (N,P)  |  (N,P)  | (O)(N,P) | (O)(N,P) |
 |  (dfdp) |         |         |          |          |
-| derivative|   [N]   |  [N,I]  |  [N,O]   | [O][N,I] |
+| derivative|   (N)   |  (N,I)  |  (N,O)   | (O)(N,I) |
 |  (dfdx) |         |         |          |          |
 
 

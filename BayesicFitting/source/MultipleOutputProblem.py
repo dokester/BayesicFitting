@@ -5,7 +5,7 @@ from .Problem import Problem
 __author__ = "Do Kester"
 __year__ = 2025
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.2.4"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -123,12 +123,16 @@ class MultipleOutputProblem( Problem ):
             values for the parameters + nuisance params.
 
         """
-
         parts = self.model.partial( self.xdata, param )
 
         partial = parts[0]
         for k in range( 1, self.model.ndout ) :
             partial = numpy.append( partial, parts[k], 1 )
+
+#        print( partial.shape )
+#        partial = partial.reshape( -1, self.npars )
+#        print( partial.shape )
+#        return partial
 
         return partial.reshape( -1, self.npars )
 
@@ -149,7 +153,28 @@ class MultipleOutputProblem( Problem ):
         Returns residuals in a flattened array.
         """
         res = super().residuals( param, mockdata=mockdata )
-        return res.flatten()
+        return res
+
+    def weightedResSq( self, allpars, mockdata=None, extra=False ) :
+        """
+        Returns the (weighted) squared residuals, calculated at the xdata.
+
+        Optionally (extra=True) the weighted residuals themselves are returned too.
+
+        Parameters
+        ----------
+        allpars : array_like
+            values for the parameters.
+        mockdata : array_like
+            model fit at xdata
+        extra : bool (False)
+            true  : return ( wgt * res^2, wgt * res )
+            false : return wgt * res^2
+        """
+        res = self.residuals( allpars[:self.npars], mockdata=mockdata ).flatten()
+
+        resw = res if self.weights is None else res * self.weights
+        return ( resw * res, resw ) if extra else resw * res
 
     def myEngines( self ) :
         """

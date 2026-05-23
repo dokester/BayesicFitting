@@ -242,7 +242,10 @@ class CauchyErrorDistribution( ScaledErrorDistribution ):
             as calculated by the model
 
         """
-        res = problem.residuals( allpars[:-1], mockdata=mockdata )
+        res = problem.residuals( allpars[:-1], mockdata=mockdata ).flatten()
+        if problem.ndout > 1 :          ## MultipleOutputProblem
+            res = res.flatten()
+
         scale = allpars[-1] if not problem.hasAccuracy else problem.accuracy
         r2s = res * res + scale * scale
 

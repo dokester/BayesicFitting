@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Python/Numpy implementation of Bspline basis functions via Cox - de Boor algorithm."""
 
-from __future__ import division
+# from __future__ import division
 
 from functools import partial
 import numpy as np
@@ -149,7 +149,9 @@ class Bspline():
         Convenience function to plot basis functions over full
         range of knots.
         """
+        pass
 
+        """
         import matplotlib.pyplot as plt
 
         x_min = np.min(self.knot_vector)
@@ -164,13 +166,15 @@ class Bspline():
             plt.plot(x,n)
 
         return plt.show()
+        """
 
     def dplot(self):
         """
         Convenience function to plot derivatives of basis functions over
         full range of knots.
         """
-
+        pass
+        """
         import matplotlib.pyplot as plt
 
         x_min = np.min(self.knot_vector)
@@ -185,7 +189,7 @@ class Bspline():
             plt.plot(x,n)
 
         return plt.show()
-
+        """
 
     def __diff_internal(self):
         """

@@ -5,9 +5,9 @@ from .Engine import Engine
 from .Formatter import formatter as fmt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,7 +26,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2025 Do Kester
+#  *    2019 - 2026 Do Kester
 
 class StructureEngine( Engine ):
     """
@@ -99,9 +99,9 @@ class StructureEngine( Engine ):
         self.reportCall()
 
         t = 0
-        perm = self.rng.permutation( self.walkers[kw].problem.model.ncomp - 2 )     ## TBC
+        perm = self.rng.permutation( self.walkers[kw].problem.model.ncomp )     ## TBC
         for p in perm :
-            dt = self.executeOnce( kw, lowLhood, location=p+1 )
+            dt = self.executeOnce( kw, lowLhood, location=p )
             t += dt
 
         return t

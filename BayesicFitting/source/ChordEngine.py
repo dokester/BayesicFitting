@@ -7,12 +7,13 @@ from .Engine import DummyPlotter
 from .OrthonormalBasis import OrthonormalBasis
 from .Formatter import formatter as fmt
 from .Formatter import fma
+from .Formatter import gmt
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -35,7 +36,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class ChordEngine( Engine ):
     """
@@ -182,7 +183,7 @@ class ChordEngine( Engine ):
         vel = self.rng.rand( np ) - 0.5
 
         if self.verbose > 4 :
-            print( "Chord     LogL  ", fmt( walker.logL ), " LowL  ", fmt( lowLhood), 
+            print( "Chord  %2d   LogL  " % walker.id, gmt( walker.logL ), " LowL  ", gmt( lowLhood), 
                     nstep, self.maxtrials )
             print( "alpar ", fma( param, linelength=200 ) )
             print( "usav  ", fma( usav ) )
@@ -252,9 +253,9 @@ class ChordEngine( Engine ):
                 Ltry = self.errdis.logLikelihood( problem, ptry )
 
                 if self.verbose > 4 :
-                    print( kk, fmt(t0), fmt(t1), fmt(dt), fmt(t1-t0), fmt(Ltry) )
+                    print( kk, fmt(t0), fmt(t1), fmt(dt), fmt(t1-t0), gmt(Ltry) )
 
-                if Ltry >= lowLhood:
+                if Ltry > lowLhood:
                     self.reportSuccess( )
 
                     step += 1
@@ -264,7 +265,7 @@ class ChordEngine( Engine ):
 #                    self.tripSq += self.unitTripSquare( usav - utry )
 #                    self.calcJourney( usav - utry )
 
-                    if self.verbose == 3 :
+                    if self.verbose > 4 :
                         cr = numpy.sqrt( numpy.sum( numpy.square( t1 - t0 ) ) )
                         st = numpy.sum( numpy.square( usav - utry ) )
                         st2 += st

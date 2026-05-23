@@ -50,24 +50,32 @@ DOI: 10.5281/zenodo.2597200
 <a name="whatsnew"></a>
 ## What's new.
 
- + 20 Oct 2025 version 3.2.5<br>
-   * Removed unused import statements from source and test (pull request #1)
-
- + 13 Aug 2025 version 3.2.4<br>
-   * Lauch new web site https://dokester.github.io/BayesicFitting/
-     - Almost all docstrings adapted for the new site.
+ + 23 May 2026 version 3.3.0<br>
+   * New Classes
+     - EclipsingStarModel, FlippedDataProblem, PeriodicScout, UniformRatioPrior
+     - [EclipsingStars](./docs/EclipsingStars.md) explains EclipsingStarModel and PeriodicScout
+   * New Examples and Tests
+     - heartbeat-045.ipynb, TestEclipsingStarModel, TestPeriodicScout, TestWalker
+   * Plotter (addressing pull request #28)
+     - Move methods using matplotlib to Plotter
+     - Added methods: plotWalker, plotIter, plotOrbit, plotOrbit3D, lineOfNodes,
+       plotEclipsingStar, plotEsmSideView, plotEsmEclipseView
+   * StellarOrbitModel, Tools
+     - Lot of additions for use in EclipsingStarModel, e.g. 3D orbit
+     - Methods toRect() and toSpher(), in 2 and 3 dim, moved to Tools
+   * NestedSampler, IterativeFitter, LevenbergMarquardtFitter
+     - Moved plotting stuff to Plotter
    * GalileanEngine
-     - add a pertubation attribute: wiggle=0.2. See [Dimensions](./docs/Dimensions.md)
-     - find edge by repeated quadratic interpolation before mirroring
-   * NestedSampler
-     - add new attribute avoid=0.1. See [Dimensions](./docs/Dimensions.md)
-   * PhantomSampler now uses all phantoms to do the evidence integral
-     - Adaptions in Engines, Explorer, WalkerList, NestedSampler.
-     - PhantomCollection has one WalkerList also in Dynamic cases.
-   * Removed Deprecations, Checks and/or Warnings.
-     - Model, ErrorDistributions, Problem
-     - Formatter
-     - Sample
+     - Skip mirroring when partial LogL fails (with warning)
+   * Removed splineslab. One methods of splineslab moved to BSplinesModel
+   * Removed references to __future__
+     - pyproject.toml, .gitignore, bspline.py
+   * Minor additions, documentation etc.
+   * Rerun all examples
+   * Added to Testharnasses
+   * Update documentation
+     - manual
+     - classdocs
     
 <a name="history"></a>
 ## 1. History 
@@ -105,12 +113,12 @@ specific python3 features. It uses numpy (>= 1.9) for its array
 structure, scipy (>=1.0) for linear algebra and other stuff and astropy
 (>=2.0) for units. Matplotlib (>=2.0) is used for plotting.
 
-Download and unpack the BayesicFitting zip file from github. Move into 
-the BayesicFitting-master directory and run:
+Download and unpack the BayesicFitting zip file from github.com. 
+Move into the BayesicFitting-master directory and run:
 
-    python setup.py install
+    pip install .
 
-where python is python3. Or install it as :
+where python is python3. Or much more easily, install it from pypi.com as :
 
     pip install BayesicFitting
 
@@ -490,6 +498,25 @@ More work needs to be done in:
 
  + 13 Aug 2025 version 3.2.4<br>
    See [What's new](#whatsnew)
+
+ + 20 Oct 2025 version 3.2.5<br>
+   * Removed unused import statements from source and test (pull request #28)
+
+ + 13 Aug 2025 version 3.2.4<br>
+   * Lauch new web site https://dokester.github.io/BayesicFitting/
+     - Almost all docstrings adapted for the new site.
+   * GalileanEngine
+     - add a pertubation attribute: wiggle=0.2. See [Dimensions](./docs/Dimensions.md)
+     - find edge by repeated quadratic interpolation before mirroring
+   * NestedSampler
+     - add new attribute avoid=0.1. See [Dimensions](./docs/Dimensions.md)
+   * PhantomSampler now uses all phantoms to do the evidence integral
+     - Adaptions in Engines, Explorer, WalkerList, NestedSampler.
+     - PhantomCollection has one WalkerList also in Dynamic cases.
+   * Removed Deprecations, Checks and/or Warnings.
+     - Model, ErrorDistributions, Problem
+     - Formatter
+     - Sample
 
 <br><br><br><br>
 

@@ -7,9 +7,9 @@ from .Walker import Walker
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class Engine( object ):
     """
@@ -113,8 +113,6 @@ class Engine( object ):
         self.errdis = errdis
         self.report = [0]*5
 
-        self.checkBest = self.noBoost
- 
         if copy is None :
             self.maxtrials = self.MAXTRIALS
             self.rng = numpy.random.RandomState( seed )
@@ -142,42 +140,6 @@ class Engine( object ):
         """ Return a copy of this engine.  """
         return Engine( self.walkers, self.errdis, copy=self )
 
-    def XXX__setattr__( self, name, value ):
-        """
-        Set attributes.
-
-        Parameters
-        ----------
-        name :  string
-            name of the attribute
-        value :
-            value of the attribute
-
-        """
-        if name == 'nstep' :
-            setatt( self, name, ( lambda : value ) )
-        else :
-            setatt( self, name, value )
-
-
-
-    def bestBoost( self, problem, myFitter=None ) :
-        """
-        When a logL is found better that all the rest, try to update
-        it using a fitter.
-
-        Parameters
-        problem : Problem
-            the problem at hand
-        myFitter : None or Fitter
-            None fetches LevenbergMarquardtFitter
-            a (non-linear) fitter
-        """
-        self.checkBest = self.doBoost
-        if myFitter is None :
-            myFitter = LevenbergMarquardtFitter
-        self.fitter = myFitter( problem.xdata, problem.model )
-
     #  *********SET & GET***************************************************
     def setWalker( self, kw, problem, allpars, logL, walker=None, fitIndex=None ) :
         """
@@ -185,9 +147,6 @@ class Engine( object ):
 
         Parameters
         ----------
-        walker : Sample
-            sample to be updated
-
         kw : int
             index in walkerlist, of the walker to be replaced
         problem : Problem
@@ -210,62 +169,11 @@ class Engine( object ):
 
         wlkr.logL = logL
 
-        self.checkBest( wlkr )
-
         if self.verbose > 4 :
             wlkr.check( self.errdis )
 
         self.walkers.setWalker( wlkr, kw )
         self.phancol.storeItems( wlkr )
-
-    def noBoost( self, walker ) :
-        pass
-
-    def doBoost( self, walker ) :
-        """
-        Check if walker is best in phantoms and try to optimize.
-
-        Parameters
-        ----------
-        walker : Walker
-            new walker to be checked
-        """
-        kl = self.phancol.getBest( walker.nap )
-        if kl < 0 or self.phancol.phantoms[kl].logL >= walker.logL :
-            return
-
-        problem = walker.problem
-        nh = self.errdis.nphypar
-        par0 = walker.allpars[:-nh]
-        try :
-            self.fitter.model = problem.model
-            pars = self.fitter.fit( problem.ydata, par0=par0 )
-        except Exception :
-            if self.DEBUG : raise
-            return
-
-        # check whether all parameters are within limits (cq. domain)
-        for k,p in enumerate( pars ) :
-            if problem.model.getPrior( k ).isOutOfLimits( p ) :
-                return
-
-        if nh == 0 :
-            ptry = pars
-        elif walker.fitIndex[-1] == -1 :
-            ptry = numpy.append( pars, self.fitter.getScale() )
-        else :
-            ptry = numpy.append( pars, walker.allpars[-1] )
-
-        Ltry = self.errdis.logLikelihood( problem, ptry )
-
-        if Ltry > walker.logL :
-            walker.allpars = ptry
-            walker.logL = Ltry
-
-#        print( "Better ", fmt( walker.logL ) )
-#        print( fmt( walker.allpars, max=None ) )
-
-        self.reportBest()
 
 ######## domain <> unit ###########################################
 
@@ -483,6 +391,26 @@ class Engine( object ):
         """
         pass
 
+    def printIter( self, iteration=0, repiter=1000 ) :
+        """
+        Return True when to print this iteration
+
+        Parameters
+        ----------
+        iteration : int
+            iteration number
+        repiter : int
+            if verbose == 4 print every repiter
+        """
+        if self.verbose < 4 :
+            return False
+        if self.verbose > 4 :
+            return True
+        if ( iteration % repiter ) == 0 :
+            return True
+        else :
+            return False
+
 
 class DummyPlotter( object ) :
 
@@ -508,4 +436,5 @@ class DummyPlotter( object ) :
     def stop( self, param=None, name=None ):
         """ Stop (show) the plot. """
         pass
+
 

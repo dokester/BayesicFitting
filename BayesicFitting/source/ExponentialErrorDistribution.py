@@ -308,6 +308,9 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
         """
         param = allpars[:-2]
         res = problem.residuals( param, mockdata=mockdata )
+        if problem.ndout > 1 :          ## MultipleOutputProblem
+            res = res.flatten()
+
         scale = allpars[-2] if not problem.hasAccuracy else problem.accuracy
         power = allpars[-1]
 

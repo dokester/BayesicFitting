@@ -1,14 +1,16 @@
 import numpy as numpy
 import math
+import warnings
 
 from .HyperParameter import HyperParameter
 from . import Tools
 from .Tools import setAttribute as setatt
+from .Formatter import fma 
  
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 class ErrorDistribution( object ):
@@ -104,6 +106,9 @@ class ErrorDistribution( object ):
             self.deltaP = copy.deltaP
             self.fixed = self.keepFixed( copy.fixed )
             self.constrain = copy.constrain
+
+        ## issue the warning for numeric partialLogL only once
+        warnings.filterwarnings( "once", category=UserWarning )
 
     def copy( self ):
         """ Return copy of this.  """
@@ -192,7 +197,9 @@ class ErrorDistribution( object ):
             nh = self.nphypar
             param = allpars[:-nh]
 
-        return problem.residuals( param )
+        res = problem.residuals( param ) 
+
+        return res if problem.ndout == 1 else res.flatten()
 
 
     def getChisq( self, problem, allpars=None ):
@@ -360,9 +367,14 @@ class ErrorDistribution( object ):
         allpars : array_like
             parameters of the problem
         """
-        logL = self.logLhood( problem, allpars )
+        logPrior = self.constrain( 0.0, problem, allpars, self.lowLhood )
+        if logPrior == -math.inf :
+            return self.lowLhood - 1
 
-        return self.constrain( logL, problem, allpars, self.lowLhood )
+        return logPrior + self.logLhood( problem, allpars )
+
+#        logL = self.logLhood( problem, allpars )
+#        return self.constrain( logL, problem, allpars, self.lowLhood )
 
     def logLhood( self, problem, allpars ):
         """
@@ -397,13 +409,25 @@ class ErrorDistribution( object ):
         self.nparts += 1                ## counts calls tp partialLogL
         mock = problem.result( allpars[:problem.model.npars] )
 
+        pg = self.nextPartialData( problem, allpars, fitIndex, mockdata=mock )
+        np = len( fitIndex )
+        dL = numpy.zeros( np, dtype=float )
+        for k in range( np ) :
+            dL[k] = numpy.sum( next( pg ) )
+        try :
+            pg.close()
+        except Exception :
+            pass
+
+        return dL
+
+        """
         try :
             pg = self.nextPartialData( problem, allpars, fitIndex, mockdata=mock )
             np = len( fitIndex )
             dL = numpy.zeros( np, dtype=float )
             for k in range( np ) :
                 dL[k] = numpy.sum( next( pg ) )
-
             try :
                 pg.close()
             except Exception :
@@ -411,10 +435,10 @@ class ErrorDistribution( object ):
 
             return dL
         except Exception :
-#            raise
-#            print( "Using numeric partialLogL." )
-            return self.numPartialLogL( problem, allpars, fitIndex )
+            warnings.warn( "Using numeric partialLogL.", UserWarning )
 
+            return self.numPartialLogL( problem, allpars, fitIndex )
+        """
 
     def partialLogL_alt( self, problem, allpars, fitIndex ) :
         """
@@ -483,9 +507,6 @@ class ErrorDistribution( object ):
             float (old) value of the parameter
         """
         return self.logLikelihood( problem, allpars )
-
-    def setResult( self ):
-        pass
 
     def __str__( self ) :
         """

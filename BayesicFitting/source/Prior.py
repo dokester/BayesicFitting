@@ -1,12 +1,13 @@
 import numpy as numpy
 import math as math
+import warnings
 
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2010 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class Prior( object ):
     """
@@ -173,7 +174,6 @@ class Prior( object ):
         ValueError when low limit is larger than high limit or out of Domain
 
         """
-#        print( "Prior 1 ", limits )
         if limits is None :
             self.lowLimit  = self._lowDomain
             self.highLimit = self._highDomain
@@ -183,7 +183,6 @@ class Prior( object ):
             self.highLimit = limits[1] if limits[1] is not None else self._highDomain
             reset = ( limits[0] is not None ) or ( limits[1] is not None )
 
-#        print( "Prior 2 ", self.lowLimit, self.highLimit )
         if not ( self._lowDomain <= self.lowLimit < self.highLimit <= self._highDomain ) :
             print( self._lowDomain, self.lowLimit, self.highLimit, self._highDomain )
             raise ValueError( "Limits out of order or out of domain" )
@@ -197,7 +196,6 @@ class Prior( object ):
         except Exception :
             self._urng = math.inf
 
-#        print( "Prior 3 ", self._umin, self._urng )
 
         if math.isinf( self._urng ) :
 #            warnings.warn( "%s needs limits" % self.__str__() )
@@ -225,12 +223,14 @@ class Prior( object ):
             True    Calculate period and center from limits
             float   period
         """
+
         if isinstance( circular, bool ) :
             self.setLimits( limits )
             if circular and limits is not None :
                 period = limits[1] - limits[0]
             else :
                 return
+
         else :
             period = circular
 

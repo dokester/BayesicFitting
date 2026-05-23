@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 
 class FootballModel( NonLinearModel ):
     """
-    More or less complex model for the outcome of football marches.
+    More or less complex model for the outcome of football matches.
 
     The input values are a (nteams,2) list of integers. They represent 
     teams that play a match, the first at home the other away.
@@ -238,7 +238,7 @@ class FootballModel( NonLinearModel ):
         """ 
         Consider attack (a), defense (d), midfield (m) and home advantage (h).
 
-        The strategy modifies the midfield strangth of the home team.
+        The strategy modifies the midfield strength of the home team.
 
          mh = m1 * h1
          S1 = a1 * &radic;(mh/m2) * ( 1 - d2 ^ (m2/mh) )

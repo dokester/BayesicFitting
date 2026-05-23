@@ -8,9 +8,9 @@ from .PolynomialModel import PolynomialModel
 
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2020 - 2025 Do Kester
+#  *    2020 - 2026 Do Kester
 
 class BasicSplinesModel( SplinesModel ):
     """
@@ -69,27 +69,39 @@ class BasicSplinesModel( SplinesModel ):
 
     Examples
     --------
-    >>> knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
+    >>> knots = numpy.arange( 17, dtype=float ) * 10     # make  knots from 0 to 160
     >>> csm = BasicSplinesModel( knots=knots, order=2 )
     >>> print csm.getNumberOfParameters( )
     >>> 18
-    >>> # or alternatively:
-    >>> csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    >>> # Make a periodic cubic splines, defined everwhere:
+    >>> knots = [0,3,9,10,11,17,20]                     # make knots from 0 to 20
+    >>> csm = BasicSplinesModel( knots=knots, border=1 )
     >>> print csm.getNumberOfParameters( )
-    >>> 18
-    >>> # or alternatively:
-    >>> npt = 161                                               # to include both 0 and 160.
-    >>> x = numpy.arange( npt, dtype=float )                    # x-values
-    >>> csm = BasicSplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    >>> 6
+    >>> # or alternatively, as cubic splines, defined on [0,20]:
+    >>> csm = SplinesModel( nrknots=10, min=0, max=20 )   # automatic layout of knots
     >>> print csm.getNumberOfParameters( )
-    >>> 18
+    >>> 12
+    >>> # or alternatively:
+    >>> npt = 21                                          # to include both 0 and 20.
+    >>> x = numpy.arange( npt, dtype=float )              # x-values
+    >>> csm = BasicSplinesModel( nrknots=10, xrange=x )   # automatic layout of knots
+    >>> print csm.getNumberOfParameters( )
+    >>> 12
 
     Attributes
     ----------
-    knots : array_like
-        positions of the spline knots
-    order : int
-        order of the spline. default: 3
+    border : int (0)
+        behaviour at edges
+        0 hard edge
+        1 periodic
+        2 soft edge
+    period : float
+        distance between first and last knot (when border=1)
+
+    Attributes from SplinesModel
+    ----------------------------
+        knots, order
 
     Attributes from Model
     ---------------------
@@ -114,14 +126,16 @@ class BasicSplinesModel( SplinesModel ):
         """
         Splines on a given set of knots and a given order.
 
-        The number of parameters is ( length( knots ) + order - 1 )
+        The number of parameters is ( length( knots ) + order - 1 ), 
+        Except when border=1, then the model is periodic with ( nrknots - 1 ) 
+        parameters as the first and the last knot are the same.
 
         Parameters
         ----------
         knots : array_like
             a array of arbitrarily positioned knots
-        order : int
-            order of the spline. Default 3 (cubic splines)
+        order : int (3)
+            order of the spline. Default is cubic splines
         nrknots : int
             number of knots, equidistantly posited over xrange or [min,max]
         border : [0, 1, 2]
@@ -148,23 +162,38 @@ class BasicSplinesModel( SplinesModel ):
         ------
         ValueError : At least either (`knots`) or (`nrknots`, `min`, `max`) or
                 (`nrknots`, `xrange`) must be provided to define a valid model.
+        ValueError : when border = 1 and nrknots < order + 2, there are not enough
+                independent knots
+
 
         Notes
         -----
-        The SplinesModel is only strictly valid inside the domain defined by the
+        The BasicSplinesModel is only strictly valid inside the domain defined by the
         minmax of knots. It deteriorates fastly going outside the domain.
+        Except when border=1, then the model is periodic, defined everywhere
 
         """
         if knots is None and nrknots is None :
             raise ValueError( "Need either knots or (nrknots,min,max) or (nrknots,xrange)" )
 
-        npar = nrknots if knots is None else len( knots )
-        npar += order - 1 if border == 0 else -1
+        if nrknots is None :
+            nrknots = len( knots )
+        npar = ( nrknots + order - 1 ) if border == 0 else ( nrknots - 1 )
 
         super( ).__init__( nparams=npar, knots=knots, order=order, nrknots=nrknots,
                            min=min, max=max, xrange=xrange, copy=copy, **kwargs )
 
         self.border = border
+        if border == 1 :
+            if nrknots < order + 2 :
+                raise ValueError( "Not enough (%d) knots; must be > %d" % 
+                                    ( nrknots, order+2 ) )
+ 
+            self.period = self.knots[-1] - self.knots[0]
+            self._fold = ( lambda x : ( ( x - self.knots[0] ) % self.period ) + self.knots[0] )
+        else :
+            self._fold = ( lambda x : x )
+
         self.makeBasis = self.makeBaseBasis if border == 0 else self.makePeriodicBasis
 
         if copy is None :
@@ -179,6 +208,20 @@ class BasicSplinesModel( SplinesModel ):
     def copy( self ):
         return BasicSplinesModel( knots=self.knots, border=self.border, copy=self )
 
+    def __getattr__( self, name ) :
+        """
+        Return value belonging to attribute with name.
+        
+        Parameters
+        ----------
+        name : string
+            name of the attribute
+        """
+        if name == 'nrknots' :
+            return len( self.knots )
+            
+        return super( ).__getattr__( name )
+
     def __setattr__( self, name, value ):
         """
         Set attributes: knots, order
@@ -188,6 +231,10 @@ class BasicSplinesModel( SplinesModel ):
             setatt( self, name, value )
         elif name == "border" :
             setatt( self, name, value, type=int )
+        elif name == "period" :
+            setatt( self, name, value )
+        elif name == "_fold" :
+            setatt( self, name, value )
         elif name == "poly" :
             setatt( self, name, value, type=PolynomialModel )
         elif name == "makeBasis" :
@@ -448,6 +495,7 @@ class BasicSplinesModel( SplinesModel ):
             parameters to the model (ignored in LinearModels)
 
         """
+        xdata = self._fold( xdata )
         x2k = self.makeKnotIndices( xdata )
 
         pa = numpy.inner( self.basis, params )
@@ -483,6 +531,7 @@ class BasicSplinesModel( SplinesModel ):
         if parlist is None :
             parlist = range( self.npmax )
 
+        xdata = self._fold( xdata )
         x2k = self.makeKnotIndices( xdata )
         for k,kb in enumerate( parlist ) :
             bss = self.basis[:,:,kb]
@@ -544,6 +593,7 @@ class BasicSplinesModel( SplinesModel ):
             parameters to the model
 
         """
+        xdata = self._fold( xdata )
         dfdx = numpy.zeros_like( xdata )
         if self.order == 0 :
             return dfdx

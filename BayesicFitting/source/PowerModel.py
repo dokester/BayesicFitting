@@ -1,11 +1,12 @@
 import numpy as numpy
 from .LinearModel import LinearModel
+from . import Tools
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2004 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class PowerModel( LinearModel ):
     """
@@ -124,12 +125,16 @@ class PowerModel( LinearModel ):
             list of indices active parameters (or None for all)
 
         """
-        if parlist is None or parlist[0] == 0 :
-            inp = numpy.asarray( [xdata] ).transpose()
-            return numpy.power( inp, self.exponent )
-        else :
-            return numpy.asarray( [] )
+        nxdata = Tools.length( xdata )
 
+        partial = numpy.zeros( ( nxdata, self.npmax ), dtype=float )
+        partial[:,0] = numpy.power( xdata, self.exponent )
+
+        if parlist is None :
+            return partial
+
+        return partial[:,parlist]
+        
     def baseDerivative( self, xdata, params ) :
         """
         Return the derivative df/dx at each xdata (=x).

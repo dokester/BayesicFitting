@@ -4,9 +4,9 @@ import math
 from .ScaledErrorDistribution import ScaledErrorDistribution
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -29,7 +29,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 class GaussErrorDistribution( ScaledErrorDistribution ):
@@ -243,6 +243,7 @@ class GaussErrorDistribution( ScaledErrorDistribution ):
 
         scale = allpars[-1]
         s2 = scale * scale + problem.varyy
+
         for  k in fitIndex:
             if k >= 0 :                         ## the parameters
                 yield ( res * dM[:,k] ) / s2

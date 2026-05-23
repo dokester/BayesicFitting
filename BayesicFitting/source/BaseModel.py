@@ -9,9 +9,9 @@ from .Prior import Prior
 from .UniformPrior import UniformPrior
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -33,7 +33,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2011 - 2014 Do Kester, SRON (Java code)
-#  *    2016 - 202025 Do Kester
+#  *    2016 - 202026 Do Kester
 
 class BaseModel( object ):
     """
@@ -156,9 +156,6 @@ class BaseModel( object ):
             return
 
         raise AttributeError(
-
-
-
             "Model has no attribute " + name + " of type " + str( value.__class__ ) )
 
     def __getattr__( self, name ) :
@@ -174,7 +171,6 @@ class BaseModel( object ):
             return None
 
         elif name == "parNames" :
-#        if name == "parNames" :
             raise AttributeError( "Model has no defined parameter names." )
 
         for k,pn in enumerate( self.parNames ) :
@@ -387,6 +383,61 @@ class BaseModel( object ):
             return self.priors[kpar]
         else :
             return self.priors[-1]
+
+    def getParameterIndex( self, parname ) :
+        """
+        Return the index of the  parameter.
+        Uses dictionary self._parindex
+
+        Parameters
+        ---------
+        parname : str
+            parameter name.
+
+        Raise
+        -----
+        ValueError when parname is not present
+
+        """
+        if not hasattr( self, "_parindex" ) :
+            parindex = {}
+            for k in range( self.npbase ) :
+                parindex[ self.getParameterName( k ) ] = k
+            setatt( self, "_parindex", parindex )
+
+        try :
+            return self._parindex[ parname ]
+        except Exception :
+            raise ValueError( "The supplied name, %s, is not present in this model" % parname )
+
+        return
+
+    def getParameterValue( self, param, name, default=None ) :
+        """
+        Return the value of the parameter with the given name from the param array.
+
+        Parameters
+        ----------
+        param : array
+            parameter values
+        name : str
+            name of parameter
+        default : None or not
+            NOne : raise Error
+            not  : return the default
+
+        Raise
+        -----
+        ValueError when name cannot be found.
+
+        """
+        try :
+            return param[self.getParameterIndex( name )]
+        except ValueError :
+            if default is None :
+                raise
+            else :
+                return default
 
     def getParameterName( self, kpar ) :
         """

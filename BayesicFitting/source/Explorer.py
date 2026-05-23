@@ -3,11 +3,12 @@ from threading import Thread
 
 from .Engine import Engine
 from .Formatter import formatter as fmt
+from .Formatter import formatter as gmt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -30,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 threadErrors = []
@@ -171,27 +172,18 @@ class Explorer( object ):
         npars = len( walker.allpars ) 
         maxmoves = npars / self.rate
         maxtrials = self.maxtrials / self.rate
-#        minTripSq = self.unitSize()
-#        minTripSq *= len( walker.fitIndex ) ##  * minTripSq
 
         moves = 0
         trials = 0
-#        tripSq = 0
 
         while moves < maxmoves and trials < maxtrials :
 
             for engine in rng.permutation( engines ) :
-                mv = engine.execute( kw, lowLhood, iteration=self.iteration )
-                moves += mv
-#                tripSq += engine.tripSq
+                moves += engine.execute( kw, lowLhood, iteration=self.iteration )
 
-#                if isinstance( self.errdis, ModelDistribution ) :
-#                    print( "%3d  %-15.15s %3d %3d %3d %3d %3d" % 
-#                           ( kw, engine, mv, moves, maxmoves, trials, maxtrials ) )
-
-                if self.verbose >= 4 and mv > 0 :
+                if self.verbose >= 4 :
                     wlkr = self.walkers[kw]
-                    print( "%4d %-15.15s %4d %10.3f %10.3f ==> %3d  %10.3f"%
+                    print( "%4d %-15.15s %4d %#10.3g %#10.3g ==> %3d  %#10.3g"%
                             ( trials, engine, kw, lowLhood, oldlogL, moves,
                                 wlkr.logL ) )
                     print( "IN       ", fmt( walker.allpars, max=None, linelength=200 ), len( walker.allpars ) )
@@ -207,17 +199,11 @@ class Explorer( object ):
 
             trials += 1
 
-#        if self.iteration % 100 == -1 :
-#            ur2 = engine.unitTripSquare( engine.urange[walker.fitIndex] )
-#            print( "Remaining  %#10.3g  %#10.3g %#10.3g   trip  %#10.3g  ratio   %#10.3g %#10.3g" % 
-#                ( minTripSq, numpy.power( 0.99, self.iteration ) * 5, ur2, tripSq, tripSq/minTripSq, tripSq/ur2 ) )
-
-
         if moves == 0 :
             self.walkers[kw].check( self.errdis )
 
         if self.walkers[kw].logL < lowLhood :
-            raise Exception( "%10.3f < %10.3f" % ( self.walkers[kw].logL, lowLhood )  )
+            raise Exception( "%#10.3g < %#10.3g" % ( self.walkers[kw].logL, lowLhood )  )
 
 
         return

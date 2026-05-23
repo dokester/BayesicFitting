@@ -76,15 +76,24 @@ class HyperParameter( object ):
         """
         super( HyperParameter, self ).__init__( )
         self.hypar = hypar
-        self.isFixed = isFixed
         self.stdev = None
+
+        if limits is not None :
+            if prior is None :
+                prior = JeffreysPrior( )
+            prior.setLimits( limits )
+
         self.prior = prior
+        self.isFixed = prior is None
+
+
+        """
         if prior is not None :
             self.prior.setLimits( limits )
             self.isFixed = False
         elif limits is not None :
             self.prior = JeffreysPrior( limits=limits ) 
-
+        """
 
         if copy is not None :
             self.hypar = copy.hypar

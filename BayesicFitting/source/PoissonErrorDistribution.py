@@ -203,11 +203,13 @@ class PoissonErrorDistribution( ErrorDistribution ):
         if mockdata is None :
             mockdata = problem.result( allpars )
         dM = problem.partial( allpars )
+
 ##      TBD import mockdata into partial
 #        dM = problem.partial( allpars, mockdata=mockdata )
 
+        res = ( problem.ydata / mockdata - 1 ).flatten()
         for k in fitIndex :
-            yield ( problem.ydata / mockdata - 1 ) * dM[:,k]
+            yield res * dM[:,k]
 
         return
 

@@ -3,9 +3,9 @@ from . import Tools
 
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -27,7 +27,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class MonteCarlo( object ):
     """
@@ -100,14 +100,22 @@ class MonteCarlo( object ):
         self.decompose( covariance )
 
     def decompose( self, covariance ):
+        """
+        Decompose a covariance matrix into eigenvectors and eigenvalues
+
+        Parameters
+        ----------
+        covariance : matrix
+            covariance matrix
+        """
         val, vec = numpy.linalg.eigh( covariance )
         self._eigenvectors = vec
         self._eigenvalues = numpy.sqrt( val )
 
     #  *****MONTE CARLO ERROR***************************************************
-    def getError( self, xdata=None ):
+    def getError( self, xdata=None, scale=1.0 ):
         """
-        Calculates 1 &sigma;-confidence regions on the model given some inputs.
+        Calculates scale * &sigma;-confidence regions on the model given some inputs.
 
         From the full covariance matrix ( = inverse of the Hessian ) random
         samples are drawn, which are added to the parameters. With this new
@@ -119,7 +127,8 @@ class MonteCarlo( object ):
         ----------
         xdata : array_like
             input data over which to calculate the error bars. default provided xdata
-
+        scale : float (1.0)
+            factor for &sigma;
         """
         if xdata is None :
             xdata = self.xdata
@@ -128,14 +137,14 @@ class MonteCarlo( object ):
         sm2 = numpy.zeros( ninp )
 
         for k in range( self.mcycles ) :
-            model = self.randomVariant( xdata )
+            model = self.randomVariant( xdata, scale=scale )
             sm1 += model
             sm2 += numpy.square( model )
         sm1 /= self.mcycles
         sm2 /= self.mcycles
         return numpy.sqrt( sm2  - sm1 * sm1 )
 
-    def randomVariant( self, xdata ):
+    def randomVariant( self, xdata, scale=1.0 ):
         """
         Return a random variant of the model result.
         Taking into account the stdev of the parameters and their covariance.
@@ -144,10 +153,11 @@ class MonteCarlo( object ):
         ----------
         xdata : array_like
             input data at these indpendent points
-
+        scale : float (1.0)
+            factor for &sigma;
         """
         nfit = self.model.npchain if self.index is None else len( self.index )
-        err = self._random.standard_normal( nfit )
+        err = self._random.standard_normal( nfit ) * scale
         err = numpy.inner( self._eigenvectors, self._eigenvalues * err )
         par = self.model.parameters.copy()
         if self.index is None :

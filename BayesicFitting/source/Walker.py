@@ -7,9 +7,9 @@ from .Sample import Sample
 from .ModelDistribution import ModelDistribution
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class Walker( object ):
     """
@@ -75,7 +75,7 @@ class Walker( object ):
 
         Parameters
         ----------
-        wid : int
+        id : int
             id of the walker
         problem : Problem
             the problem being used. Parameters are copied from its model.
@@ -183,6 +183,11 @@ class Walker( object ):
     def check( self, errdis ) :
         """
         Perform some sanity checks.
+
+        Parameters
+        ----------
+        errdis : ErrorDistribution
+            to check logL
         """
         if self.problem.model is None :
             np = self.problem.npars
@@ -197,16 +202,11 @@ class Walker( object ):
         nhyp = errdis.nphypar
         nuis = self.problem.nuispars if hasattr( self.problem, "nuispars" ) else 0
 
-
         if not na == ( np + nhyp + nuis ):
-            Tools.printclass( self )
-            Tools.printclass( self.problem )
             raise ValueError( "Walker %d inconsistent parameter length : %d is not ( %d + %d )" %
                 ( self.id, na, np, nhyp ) )
 
         if not nm == ( na - nhyp - nuis ) :
-            Tools.printclass( self )
-            Tools.printclass( self.problem.model )
             raise ValueError( "Walker %d inconsistent with model: allpars: %d, model: %d, hyp: %d )" %
                 ( self.id, na, nm, nhyp ) )
 
@@ -232,7 +232,7 @@ class Walker( object ):
 
         if wlogL != self.logL :
             Tools.printclass( self )
-            print( "Iteration %4d %4d %10.3f  %10.3f" % ( self.iteration, self.id, self.logL, wlogL ) )
+            print( "Walker %4d %10.3f  %10.3f" % ( self.id, self.logL, wlogL ) )
             print( fmt( self.allpars, max=None ) )
             raise ValueError( "Inconsistency between stored logL %f and calculated logL %f" %
                                 ( self.logL, wlogL ) )

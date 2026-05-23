@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import numpy as numpy
 import random
 from astropy import units
@@ -13,9 +11,9 @@ from .Formatter import formatter as fmt
 from .Tools import setAttribute as setatt
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -37,7 +35,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2011 Do Kester, SRON (JAVA code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 
 class Model( FixedModel ):
@@ -163,7 +161,7 @@ class Model( FixedModel ):
 
         """
         super( Model, self ).__init__( nparams=nparams, ndim=ndim, copy=copy,
-                            **kwargs )
+                                        **kwargs )
 
         setatt( self, "_next", None )
         setatt( self, "_head", self )
@@ -202,7 +200,9 @@ class Model( FixedModel ):
         setatt( self, "yUnit", copy.yUnit )
 
     def copy( self ):
-        """ Return a copy.  """
+        """ 
+        Return a copy.  
+        """
         return Model( copy=self )
 
     def __setattr__( self, name, value ):
@@ -256,7 +256,9 @@ class Model( FixedModel ):
 
 
     def chainLength( self ):
-        """ Return length of the chain.  """
+        """ 
+        Return length of the chain.  
+        """
         last = self
         i = 0
         while last is not None:
@@ -512,6 +514,18 @@ class Model( FixedModel ):
         return res
 
     def operate( self, res, pars, next ):
+        """
+        Apply the operation present in self.
+
+        Parameters
+        ----------
+        res : array
+            result of the chain upto now
+        pars : array
+            parameters for the next result (in case of pipe)
+        next :
+            result of next model in chain.
+        """
         if res is None or self._operation == self.NOP: # first one
             res = next
         elif self._operation == self.ADD:                 # NOP & ADD
@@ -560,15 +574,9 @@ class Model( FixedModel ):
         par = param[:np]
         nextres = None
 
-#        if self.npmax > 0:            #  the base model has no parameters at all: skip
         xd = xdata if self._operation != self.PIP else result
         nextdf = ( super( ).numDerivative( xd, par ) if useNum else 
                        super( ).derivative( xd, par ) )
-
-#        else :
-#            nextdf = numpy.zeros_like( xdata, dtype=float )
-
-#        print( "Model2  ", self.shortName(), df.shape, nextdf.shape, self._operation )
 
         isnotlist = self.ndim == 1 or self.ndout == 1
         if self._operation == self.NOP :
@@ -590,7 +598,6 @@ class Model( FixedModel ):
             df = ( df * nextres - nextdf * result ) / ( nextres * nextres )
 
         elif self._operation == self.PIP :
-#            nextres = 'dummy'           ## not needed, but needs something
             df = self.pipeDeriv( df, nextdf )
         else :
             raise ValueError( "Unknown operation: %d" & self.PIP )
@@ -980,7 +987,9 @@ class Model( FixedModel ):
 
     #  *****GET/SET*************************************************************
     def getNumberOfParameters( self ):
-        """ Returns the number of parameters of the ( compound ) model.  """
+        """ 
+        Returns the number of parameters of the ( compound ) model.  
+        """
         return len( self._head.parameters )
 
     #  *****NUMERIC DERIVATIVE*************************************************

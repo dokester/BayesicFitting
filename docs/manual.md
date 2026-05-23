@@ -52,6 +52,7 @@ solid DodgerBlue">Contents</span>
 [exexpf]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/expfit.ipynb
 [exfixp]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/fix-parameters.ipynb
 [exgaus]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/gaussfit.ipynb
+[exhart]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/heartbeat-045.ipynb
 [exharm]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/harmonicfit.ipynb
 [exmode]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/modelcomparison.ipynb
 [exmrsf]: https://github.com/dokester/BayesicFitting/tree/master/BayesicFitting/examples/mrs-fringes.ipynb
@@ -1476,6 +1477,8 @@ kernels and miscellaneous.
     Chebyshev polynomial model of arbitrary degree.
 + **ConstantModel**<br>
     ConstantModel is a Model which does not have any parameters.
++ **EclipsingStarModel**<br>
+    Model for eclipsing double stars. See [example][exhart]
 + **EtalonModel**<br>
     Fabry-Perot Etalon Model. See [example][exmrsf]
 + **ExpModel**<br>
@@ -1723,6 +1726,8 @@ BaseFitters contain common methods for fitters that inherit from them.
 + **EvidenceProblem**<br>
     For **Dynamic** and **Modifiable** models. [Kester and Mueller (2021)](./references.md/#kester8).
     see [example][exchi2]
++ **FlippedDataProblem**<br>
+    Classic problem for stellar orbits, where some data have misidentified stars.
 + **MultipleOutputProblem**<br>
     Problems with more dimensional output values.
     See [example][exalph]
@@ -1758,6 +1763,8 @@ BaseFitters contain common methods for fitters that inherit from them.
 + **CircularUniformPrior**<br>
     Uniform prior distribution wrapped at the endpoints, for phase-like parameters.
     See [example][exalph]
++ **UniformRatioPrior**<br>
+    Prior for ratio of 2 uniform distributions.
 
 <!-- dont remove -->
 
@@ -1897,6 +1904,8 @@ They can be encapsulated in a **KernelModel** or in a 2dim
     Natural logarithm of n!
 + **OrthonormalBasis**<br>
     Construct a orthonormal basis from (random) vectors.
++ **PeriodicScout**<br>
+    Find period (and initial parameters) in eclipsing star data. See [example][exhart]
 + **Plotter**<br>
     Plot a model fitted to data.
 + **Tools**<br>

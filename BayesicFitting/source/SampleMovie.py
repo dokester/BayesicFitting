@@ -7,9 +7,9 @@ import matplotlib.animation as animation
 
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2019 - 2025 Do Kester
+#  *    2019 - 2026 Do Kester
 
 
 class SampleMovie( object ):
@@ -64,7 +64,7 @@ class SampleMovie( object ):
 
         bakend = matplotlib.get_backend()       ## save present backend to restore
 
-        matplotlib.use("Agg")					## need to use this one to make a movie
+        matplotlib.use("Agg")			## need to use this one to make a movie
 
         FFMpegWriter = animation.writers[ 'ffmpeg' ]
         metadata = dict( title='Sample Movie', artist='BayesicFitting',

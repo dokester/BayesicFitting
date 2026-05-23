@@ -3,7 +3,7 @@ from . import Tools
 from .Tools import setAttribute as setatt
 # import (modified) bspline from Juha Jeronen
 from . import bspline
-from . import splinelab
+#from . import splinelab
 
 from .LinearModel import LinearModel
 
@@ -171,12 +171,22 @@ class BSplinesModel( LinearModel ):
             knots = numpy.linspace( min, max, nrknots, dtype=float )
         self.knots = knots
 
-        augknots = splinelab.augknt( knots, order )
+#        augknots = splinelab.augknt( knots, order )
+        augknots = self.augknt( knots, order )
         setatt( self, "_bspline", bspline.Bspline( augknots, self.order, last=True ) )
         self.eps = 0.0
 
     def copy( self ):
         return BSplinesModel( copy=self )
+
+    def augknt( self, knots, order ) :
+        """
+        Copy of the augknt method of splinelab
+        """
+        knots = list( knots )
+
+        return numpy.array( [knots[0]] * order  +  knots  +  [knots[-1]] * order )
+
 
     def __setattr__( self, name, value ):
         """
@@ -197,7 +207,8 @@ class BSplinesModel( LinearModel ):
             super( BSplinesModel, self ).__setattr__( name, value )
 
         if rerun :
-            augknots = splinelab.augknt( self.knots, self.order )
+#            augknots = splinelab.augknt( self.knots, self.order )
+            augknots = self.augknt( self.knots, self.order )
             setatt( self, "_bspline", bspline.Bspline( augknots, self.order, last=True ) )
 
 

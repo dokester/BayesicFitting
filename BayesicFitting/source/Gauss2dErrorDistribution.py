@@ -87,7 +87,7 @@ class Gauss2dErrorDistribution( GaussErrorDistribution ):
         """ Return copy of this.  """
         return Gauss2dErrorDistribution( copy=self )
 
-    def TBDgetScale( self, problem, allpars=None ) :
+    def _TBDgetScale( self, problem, allpars=None ) :
         """
         Return the noise scale.
 

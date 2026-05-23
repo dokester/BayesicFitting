@@ -1,21 +1,12 @@
-from __future__ import print_function
-
 import numpy as numpy
 import math
 
 from .NestedSampler import NestedSampler
 
-
-
-
-
-## for Dynamic Models import the classes
-## for Modifiable Models:
-
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Alpha"
 
@@ -34,7 +25,7 @@ __status__ = "Alpha"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class PhantomSampler( NestedSampler ):
     """
@@ -223,7 +214,7 @@ class PhantomSampler( NestedSampler ):
         return
 
 
-    def updateEvidence0( self, worst ) :
+#    def updateEvidence0( self, worst ) :
         """
         Updates the evidence (logZ) and the information (H)
 
@@ -234,7 +225,11 @@ class PhantomSampler( NestedSampler ):
         worst : int
             Number of walkers used in the update
 
-        """
+
+#       HERE ENDS THE DOCUMENTATION 
+
+
+
         phansemble = self.livepointcount
         kw = 0      ### DONT use enumerate here
         for lowph in self.phancol.nextLowPhantom( self.lowLhood ) :
@@ -266,6 +261,7 @@ class PhantomSampler( NestedSampler ):
             self.logdZ = logWeight - self.logZ
 
         return
+        """
 
     def __getattr__( self, name ) :
         if name == "livepointcount" :

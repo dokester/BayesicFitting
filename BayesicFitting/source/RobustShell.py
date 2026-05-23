@@ -6,9 +6,9 @@ from .kernels.Kernel import Kernel
 from .kernels.Biweight import Biweight
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -31,7 +31,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2008 - 2014 Do Kester, SRON (Java code)
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 class RobustShell( IterativeFitter ):
@@ -221,7 +221,8 @@ class RobustShell( IterativeFitter ):
             raise ValueError( "Could not interpret the value for onesided: %s" % str( onesided ) )
 
 
-    def fit( self, data, weights=None, kernel=None, domain=None, onesided=None, **kwargs ) :
+    def fit( self, data, weights=None, kernel=None, domain=None, onesided=None, plot=False, 
+             **kwargs ) :
         """
         Perform a robustification step.
 
@@ -229,9 +230,18 @@ class RobustShell( IterativeFitter ):
         ----------
         data : array_like
             the data as they go into a fitter
+        weights : array_like
+            weights pertaining to the data
+        kernel : Kernel or None
+            use this Kernel (see constructor)
+        domain : float or None
+            use this domain (see constructor)
+        plot : bool
+            plot the results
         kwargs : dict
             keyword args to be passed to fitter.fit()
         """
+        self.setPlotters( plot )
 
         kernelfunc = self.kernelfunc if kernel is None else self.setKernel( kernel )
         onesided = self.onesided if onesided is None else self.setOneSided( onesided )
@@ -260,10 +270,10 @@ class RobustShell( IterativeFitter ):
             tol = self.tolerance if trychi < 1 else self.tolerance * trychi
 
             if abs( chi - trychi ) < tol :
-                self.report( self.verbose, param, trychi, more=scale, force=True )
+                self.report( self.verbose, data, param, trychi, more=scale, force=True )
                 break
 
-            self.report( self.verbose, param, trychi, more=scale, force=(self.verbose>=3) )
+            self.report( self.verbose, data, param, trychi, more=scale, force=(self.verbose>=3) )
             chi = trychi
             self.iter += 1
 

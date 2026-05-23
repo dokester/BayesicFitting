@@ -4,9 +4,9 @@ from .Tools import setAttribute as setatt
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  * Science System (HCSS), also under GPL3.
 #  *
 #  *    2003 - 2014 Do Kester, SRON (JAVA code)
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class SplinesModel( LinearModel ):
     """
@@ -143,8 +143,9 @@ class SplinesModel( LinearModel ):
         if copy is not None :
             knots = copy.knots
             order = copy.order
-        if knots is not None : nrknots = len( knots )
-        elif nrknots is None :
+        if knots is not None : 
+            nrknots = len( knots )
+        elif nrknots is None or ( xrange is None and ( min is None or max is None ) ) :
             raise ValueError( "Need either knots or (nrknots,min,max) or (nrknots,xrange)" )
 
         if 'nparams' in kwargs :
