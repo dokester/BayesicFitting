@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="SincModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Sinc Model.
 Also known as Cardinal Sine.
@@ -50,7 +51,7 @@ See [KernelModel](./KernelModel.md)
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SincModel(</strong> copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py#L75-L90 target=_blank>[source]</a></th></tr></thead></table>
 
 Sinc model.
 
@@ -68,9 +69,10 @@ Number of parameters is 3.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
+Endline #L96
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./KernelModel.html">KernelModel</a></th></tr></thead></table>
 

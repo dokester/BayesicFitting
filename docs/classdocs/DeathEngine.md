@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="DeathEngine"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class DeathEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class DeathEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 The DeathEngine deletes a component from the model.
 
@@ -23,7 +24,7 @@ Author       Do Kester.
 <a name="DeathEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DeathEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py#L55-L71 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -41,13 +42,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py#L73-L79 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )
-</th></tr></thead></table>
+<strong>execute(</strong> kw, lowLhood, iteration=0 )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py#L81-L151 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by removins a component.
 
 <b>Parameters</b>
@@ -66,6 +67,7 @@ Execute the engine by removins a component.
 * int  :  the number of successfull moves
 
 
+Endline #L153
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 

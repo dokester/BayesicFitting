@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ErrorDistribution(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ErrorDistribution(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 ErrorDistribution defines general methods for a error distribution.
 
@@ -38,7 +39,7 @@ Author       Do Kester.
 <a name="ErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ErrorDistribution(</strong> fixed=None, constrain=None, copy=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L76-L111 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -48,7 +49,7 @@ Constructor.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; int     list if parameters to fix permanently. Default None.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; float   list of values for the fixed parameters.
 * constrain  :  None or callable
-<br>&nbsp;&nbsp;&nbsp;&nbsp; function as: func( logL, problem, allpars )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; function as: func( logL, problem, allpars, lowLhood )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; returning a (modified) value of the logLikelihood.
 * copy  :  ErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
@@ -61,13 +62,13 @@ ValueError when constrain is not a callable method.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L113-L162 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="getGaussianScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getGaussianScale(</strong> problem, allpars=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L164-L180 target=_blank>[source]</a></th></tr></thead></table>
 Return the noise scale.
 
 *** Gaussian approximation ***
@@ -83,7 +84,7 @@ Return the noise scale.
 <a name="getResiduals"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getResiduals(</strong> problem, allpars=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L182-L203 target=_blank>[source]</a></th></tr></thead></table>
 Return residuals: ydata - model.result
 
 <b>Parameters</b>
@@ -97,7 +98,7 @@ Return residuals: ydata - model.result
 <a name="getChisq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getChisq(</strong> problem, allpars=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L205-L229 target=_blank>[source]</a></th></tr></thead></table>
 Return chisq
 
 *** Gaussian approximation ***
@@ -115,7 +116,7 @@ Sum over the (weighted) squared residuals
 <a name="toSigma"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSigma(</strong> scale ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L231-L242 target=_blank>[source]</a></th></tr></thead></table>
 Return sigma, the squareroot of the variance.
 
 <b>Parameter</b>
@@ -128,19 +129,19 @@ Return default value : scale
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L244-L255 target=_blank>[source]</a></th></tr></thead></table>
 True when all priors of its (hyper)parameters are bound
 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L257-L259 target=_blank>[source]</a></th></tr></thead></table>
 
 True if the distribution accepts weights. 
 <a name="keepFixed"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>keepFixed(</strong> fixed=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L261-L289 target=_blank>[source]</a></th></tr></thead></table>
 Keeps (hyper)parameters fixed at the provided values.
 
 1. Repeated calls start from scratch.<br>
@@ -155,7 +156,7 @@ Keeps (hyper)parameters fixed at the provided values.
 <a name="setPriors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPriors(</strong> priors ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L291-L301 target=_blank>[source]</a></th></tr></thead></table>
 Set priors on the hyper parameter(s).
 
 <b>Parameters</b>
@@ -166,7 +167,7 @@ Set priors on the hyper parameter(s).
 <a name="setLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L303-L321 target=_blank>[source]</a></th></tr></thead></table>
 Set limits on the hyper parameter(s).
 
 <b>Parameters</b>
@@ -180,7 +181,7 @@ Set limits on the hyper parameter(s).
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval, ks ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L323-L338 target=_blank>[source]</a></th></tr></thead></table>
 Return value in [0,1] for the selected parameter.
 
 <b>Parameters</b>
@@ -193,7 +194,7 @@ Return value in [0,1] for the selected parameter.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval, ks ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L340-L357 target=_blank>[source]</a></th></tr></thead></table>
 Return domain value for the selected parameter.
 
 <b>Parameters</b>
@@ -206,7 +207,7 @@ Return domain value for the selected parameter.
 <a name="logCLhood"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logCLhood(</strong> problem, allpars )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L359-L377 target=_blank>[source]</a></th></tr></thead></table>
 Return the constrained log( likelihood ).
 
 <b>Parameters</b>
@@ -219,7 +220,7 @@ Return the constrained log( likelihood ).
 <a name="logLhood"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLhood(</strong> problem, allpars )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L379-L393 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ).
 
 <b>Parameters</b>
@@ -232,7 +233,7 @@ Return the log( likelihood ).
 <a name="partialLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL(</strong> problem, allpars, fitIndex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L395-L441 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
 <b>Parameters</b>
@@ -244,11 +245,27 @@ Return the partial derivative of log( likelihood ) to the parameters.
 * fitIndex  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; indices of parameters to be fitted
 
+try 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; pg = self.nextPartialData( problem, allpars, fitIndex, mockdata=mock )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; np = len( fitIndex )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dL = numpy.zeros( np, dtype=float )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; for k in range( np ) 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dL[k] = numpy.sum( next( pg ) )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; try 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pg.close()
+<br>&nbsp;&nbsp;&nbsp;&nbsp; except Exception 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pass
+
+&nbsp;&nbsp;&nbsp;&nbsp; return dL
+except Exception 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; warnings.warn( "Using numeric partialLogL.", UserWarning )
+
+&nbsp;&nbsp;&nbsp;&nbsp; return self.numPartialLogL( problem, allpars, fitIndex )
 
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L443-L459 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
 Alternative calculation.
@@ -266,7 +283,7 @@ Alternative calculation.
 <a name="numPartialLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartialLogL(</strong> problem, allpars, fitIndex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L461-L489 target=_blank>[source]</a></th></tr></thead></table>
 Return d log( likelihood ) / dp, numerically calculated.
 
 <b>Parameters</b>
@@ -282,7 +299,7 @@ Return d log( likelihood ) / dp, numerically calculated.
 <a name="updateLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateLogL(</strong> problem, allpars, parval=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L491-L515 target=_blank>[source]</a></th></tr></thead></table>
 Return a update of the log( likelihood ) given a change in a few parameter.
 
 This method provides the opportunity to optimize the logL calculation.
@@ -299,15 +316,10 @@ For now it just refers to logLikelihood() itself.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; int index of a parameter
 <br>&nbsp;&nbsp;&nbsp;&nbsp; float (old) value of the parameter
 
-<a name="setResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>setResult(</strong> )
-</th></tr></thead></table>
-
 <a name="hyparname"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hyparname(</strong> k ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorDistribution.py#L517-L527 target=_blank>[source]</a></th></tr></thead></table>
 Return name of the hyperparameter
 
 <b>Parameters</b>
@@ -315,3 +327,4 @@ Return name of the hyperparameter
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of the hyperparameter
 
+Endline #L529

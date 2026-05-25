@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="RobustShell"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 RobustShell tries to make a fit more robust in the presence of outliers.
 
@@ -106,7 +107,7 @@ Author       Do Kester.
 <a name="RobustShell"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RobustShell(</strong> fitter, kernel=Biweight, domain=None, onesided=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L136-L164 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing the fitter to be used.
 
@@ -131,7 +132,7 @@ Create a new class, providing the fitter to be used.
 <a name="setKernel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setKernel(</strong> kernel ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L166-L193 target=_blank>[source]</a></th></tr></thead></table>
 Set the robust kernel to be used.
 
 <b>Parameters</b>
@@ -149,7 +150,7 @@ ValueError when kernel is not recognized.
 <a name="setOneSided"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setOneSided(</strong> onesided ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L195-L223 target=_blank>[source]</a></th></tr></thead></table>
 set self.onesided to either 0 or +1 or -1.
 
 <b>Parameters</b>
@@ -166,25 +167,42 @@ ValueError when onesided could not be interpreted.
 
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>fit(</strong> data, weights=None, kernel=None, domain=None, onesided=None, **kwargs ) 
-</th></tr></thead></table>
+<strong>fit(</strong> data, weights=None, kernel=None, domain=None, onesided=None, plot=False,
+ **kwargs ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L225-L283 target=_blank>[source]</a></th></tr></thead></table>
 Perform a robustification step.
 
 <b>Parameters</b>
 
 * data  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data as they go into a fitter
+* weights  :  array_like
+<br>&nbsp;&nbsp;&nbsp;&nbsp; weights pertaining to the data
+* kernel  :  Kernel or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; use this Kernel (see constructor)
+* domain  :  float or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; use this domain (see constructor)
+* plot  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; plot the results
 * kwargs  :  dict
 <br>&nbsp;&nbsp;&nbsp;&nbsp; keyword args to be passed to fitter.fit()
 
+<a name="getOneSidedWeights"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>getOneSidedWeights(</strong> wgt, res, onesided ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L285-L312 target=_blank>[source]</a></th></tr></thead></table>
+
+Endline #L314
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
 * [<strong>setParameters(</strong> params )](./IterativeFitter.md#setParameters)
-* [<strong>doPlot(</strong> param, force=False )](./IterativeFitter.md#doPlot)
+* [<strong>setPlotters(</strong> plot ) ](./IterativeFitter.md#setPlotters)
+* [<strong>plotNot(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotNot)
+* [<strong>plotIter(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotIter)
 * [<strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) ](./IterativeFitter.md#fitprolog)
-* [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
+* [<strong>report(</strong> verbose, ydata, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -195,8 +213,8 @@ Perform a robustification step.
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -207,7 +225,7 @@ Perform a robustification step.
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getScale(</strong> )](./BaseFitter.md#getScale)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) ](./BaseFitter.md#getLogLikelihood)

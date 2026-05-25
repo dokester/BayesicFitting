@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="PhantomSampler"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 PhantomSampler is a version of NestedSampler that removes step walkers from
 the list. It uses a selection of the intermediate (phantom) positions which
@@ -17,12 +18,6 @@ and are subsequently transferred to the list of posterior samples.
 
 In principle it speeds up the calculations by a factor step, of course it
 pays in exploratory power and precision.
-
-
-<b>Attributes</b>
-
-* step  :  int (< 10)
-<br>&nbsp;&nbsp;&nbsp;&nbsp; percentage of the walkers to replace
 
 <b>Attributes from NestedSampler</b>
 
@@ -37,9 +32,9 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PhantomSampler(</strong> xdata=None, model=None, ydata=None, weights=None,
  accuracy=None, problem=None, distribution=None, limits=None,
- keep=None, ensemble=100, seed=80409, rate=1.0, engines=None,
- maxsize=None, threads=False, verbose=1, step=4 ) 
-</th></tr></thead></table>
+ keep=None, ensemble=ENSEMBLE, seed=80409, rate=1.0, engines=None,
+ maxsize=None, threads=False, verbose=1 ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L59-L158 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
@@ -47,11 +42,6 @@ Either (model,xdata,ydata) needs to be provided or a completely filled
 problem.
 
 <b>Parameters</b>
-
-* step  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; percentage of walkers to use
-
-<b>Parameters from NestedSampler</b>
 
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
@@ -101,7 +91,7 @@ problem.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; high    high limit on hyperpars
 <br>&nbsp;&nbsp;&nbsp;&nbsp; When limits are set the hyperpars are not fixed.
 * ensemble  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; number of walkers
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of walkers (20)
 * seed  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; seed of random number generator
 * rate  :  float
@@ -135,50 +125,97 @@ problem.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; >4  for debugging
 
 
-<a name="initSample"></a>
+<a name="sample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>initSample(</strong> ensemble=None, keep=None ) 
-</th></tr></thead></table>
+<strong>sample(</strong> keep=None, plot=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L160-L168 target=_blank>[source]</a></th></tr></thead></table>
+see NestedSampler.sample()
 
-<a name="updateWalkers"></a>
+<a name="updateEvidence"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>updateWalkers(</strong> explorer, worst ) 
-</th></tr></thead></table>
-Update the walkerlist while appending the new (phantom) walkers to the list
+<strong>updateEvidence(</strong> worst ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L170-L269 target=_blank>[source]</a></th></tr></thead></table>
+Updates the evidence (logZ) and the information (H)
+
+The walkers need to be sorted to logL
 
 <b>Parameters</b>
 
-* explorer  :  Explorer
-<br>&nbsp;&nbsp;&nbsp;&nbsp; Explorer object
 * worst  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; number of walkers to update
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Number of walkers used in the update
 
+Updates the evidence (logZ) and the information (H)
+
+The walkers need to be sorted to logL
+
+<b>Parameters</b>
+
+* worst  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Number of walkers used in the update
+
+
+HERE ENDS THE DOCUMENTATION 
+
+
+
+phansemble = self.livepointcount
+kw = 0      ### DONT use enumerate here
+* for lowph in self.phancol.nextLowPhantom( self.lowLhood )  : 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logWeight = self.logWidth + lowph.logL + lowph.logPrior
+
+&nbsp;&nbsp;&nbsp;&nbsp; # update evidence, logZ
+<br>&nbsp;&nbsp;&nbsp;&nbsp; logZnew = numpy.logaddexp( self.logZ, logWeight )
+
+&nbsp;&nbsp;&nbsp;&nbsp; # update Information, H
+<br>&nbsp;&nbsp;&nbsp;&nbsp; self.info = ( math.exp( logWeight - logZnew ) * self.lowLhood +
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; math.exp( self.logZ - logZnew ) * ( self.info + self.logZ ) - logZnew )
+
+&nbsp;&nbsp;&nbsp;&nbsp; if math.isnan( self.info ) 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.info = 0.0
+<br>&nbsp;&nbsp;&nbsp;&nbsp; self.logZ = logZnew
+
+&nbsp;&nbsp;&nbsp;&nbsp; # store posterior samples
+<br>&nbsp;&nbsp;&nbsp;&nbsp; smpl = lowph.toSample( logWeight )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; self.samples.add( smpl )
+
+&nbsp;&nbsp;&nbsp;&nbsp; self.sumWidth += math.exp( self.logWidth )
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self.logWidth -= 1.0 / ( phansemble - kw )
+<br>&nbsp;&nbsp;&nbsp;&nbsp; self.logWidth -= 1.0 / phansemble
+<br>&nbsp;&nbsp;&nbsp;&nbsp; kw += 1
+
+## check if there has something been updated
+* if kw > 0  : 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; self.logdZ = logWeight - self.logZ
+
+return
+
+Endline #L271
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NestedSampler.html">NestedSampler</a></th></tr></thead></table>
 
 
-* [<strong>sample(</strong> keep=None, plot=False )](./NestedSampler.md#sample)
+* [<strong>initSample(</strong> ensemble=None, keep=None ) ](./NestedSampler.md#initSample)
 * [<strong>walkerLogL(</strong> w ) ](./NestedSampler.md#walkerLogL)
 * [<strong>makeFitlist(</strong> keep=None ) ](./NestedSampler.md#makeFitlist)
-* [<strong>doIterPlot(</strong> plot ) ](./NestedSampler.md#doIterPlot)
-* [<strong>doLastPlot(</strong> plot ) ](./NestedSampler.md#doLastPlot)
 * [<strong>initReport(</strong> keep=None ) ](./NestedSampler.md#initReport)
-* [<strong>iterReport(</strong> kw, tail, plot=False ) ](./NestedSampler.md#iterReport)
+* [<strong>iterReport(</strong> kw, tail ) ](./NestedSampler.md#iterReport)
 * [<strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) ](./NestedSampler.md#printIterRep)
-* [<strong>lastReport(</strong> kw, plot=False ) ](./NestedSampler.md#lastReport)
-* [<strong>plotLast(</strong> ) ](./NestedSampler.md#plotLast)
-* [<strong>getMaxIter(</strong> ) ](./NestedSampler.md#getMaxIter)
+* [<strong>lastReport(</strong> kw, **kwargs ) ](./NestedSampler.md#lastReport)
+* [<strong>setPlotters(</strong> plot ) ](./NestedSampler.md#setPlotters)
+* [<strong>plotNot(</strong> kw, show=False ) ](./NestedSampler.md#plotNot)
+* [<strong>plotIter(</strong> kw, show=False ) ](./NestedSampler.md#plotIter)
+* [<strong>plotLast(</strong> kw, show=False, **kwargs ) ](./NestedSampler.md#plotLast)
 * [<strong>nextIteration(</strong> ) ](./NestedSampler.md#nextIteration)
 * [<strong>optionalRestart(</strong> )](./NestedSampler.md#optionalRestart)
 * [<strong>optionalSave(</strong> )](./NestedSampler.md#optionalSave)
-* [<strong>updateEvidence(</strong> worst ) ](./NestedSampler.md#updateEvidence)
+* [<strong>unitDomain(</strong> ) ](./NestedSampler.md#unitDomain)
 * [<strong>copyWalker(</strong> worst )](./NestedSampler.md#copyWalker)
 * [<strong>copyWalkerFromPhantoms(</strong> worst )](./NestedSampler.md#copyWalkerFromPhantoms)
-* [<strong>copyWalkerFromDynamicPhantoms(</strong> worst )](./NestedSampler.md#copyWalkerFromDynamicPhantoms)
+* [<strong>updateWalkers(</strong> explorer, worst ) ](./NestedSampler.md#updateWalkers)
 * [<strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,](./NestedSampler.md#setProblem)
 * [<strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )](./NestedSampler.md#setErrorDistribution)
 * [<strong>setEngines(</strong> engines=None, enginedict=None ) ](./NestedSampler.md#setEngines)
 * [<strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )](./NestedSampler.md#setInitialEngine)
 * [<strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )](./NestedSampler.md#initWalkers)
-* [<strong>plotResult(</strong> walker, iter, plot=0 )](./NestedSampler.md#plotResult)
 * [<strong>report(</strong> )](./NestedSampler.md#report)

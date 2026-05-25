@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="NestedSampler"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class NestedSampler(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class NestedSampler(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Nested Sampling is a novel technique to do Bayesian calculations.
 
@@ -104,32 +105,44 @@ For modifiable models 1 engine is defined.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved (container of model, xdata, ydata and weights)
 * distribution  :  ErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate the loglikelihood
+* limits  :  None or [low,high]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; limits to the hyperparameter(s) of the distribution
+* keep  :  None or dist of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Indices of parameters that are kept fixed at the given value.
 * ensemble  :  int (100)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of walkers
 * discard  :  int (1)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of walkers to be replaced each generation
-* rng  :  RandomState
-<br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
 * seed  :  int (80409)
-<br>&nbsp;&nbsp;&nbsp;&nbsp; seed of rng
+<br>&nbsp;&nbsp;&nbsp;&nbsp; seed of the Random number generator (rng)
 * rate  :  float (1.0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; speed of exploration
+* bestBoost  :  bool or Fitter (False) (deprecated)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; IGNORED with Warning: It causes an erroneous evidence calculation
+* usePhantoms  :  bool (True)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Find starting point in the Phantoms (Walkers if False)
+* engines  :  list of Engine
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Engine that move the walkers around within the given constraint: logL > lowLogL
 * maxsize  :  None or int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; maximum size of the resulting sample list (None : no limit)
+* threads  :  bool ( False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Use threads (only when discard > 1)
+* verbose  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; level of blabbering
+* repiter  :  int (100)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; report every reiter iteration (when verbose=2)
 * minimumIterations  :  int (100)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of iterations (adapt when starting problems occur)
 * end  :  float (2.0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; stopping criterion
-* tolerance  :  float (-12)
+* tolerance  :  float (-20)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; stopping criterion: stop if log( dZ / Z ) < tolerance
-* verbose  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; level of blabbering
+* rng  :  RandomState
+<br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
 * walkers  :  WalkerList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; ensemble of walkers that explore the likelihood space
 * samples  :  SampleList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Samples resulting from the exploration
-* engines  :  list of Engine
-<br>&nbsp;&nbsp;&nbsp;&nbsp; Engine that move the walkers around within the given constraint: logL > lowLogL
 * initialEngine  :  Engine
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Engine that distributes the walkers over the available space
 * restart  :  StopStart (TBW)
@@ -143,9 +156,9 @@ Author       Do Kester.
 <strong>NestedSampler(</strong> xdata=None, model=None, ydata=None, weights=None,
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=ENSEMBLE, discard=1, seed=80409, rate=RATE,
- bestBoost=False,
+ bestBoost=False, usePhantoms=True,
  engines=None, maxsize=None, threads=False, verbose=1 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L236-L400 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
@@ -172,8 +185,9 @@ problem.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "classic"   ClassicProblem
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "errors"    ErrorsInXandYProblem
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "multiple"  MultipleOutputProblem
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Problem     Externally defined Problem. When Problem has been provided,
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xdata, model, weights and ydata are not used.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Problem     Externally defined Problem. 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When Problem has been provided, xdata, model, weights
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and ydata are not used.
 * keep  :  None or dict of {int:float}
 <br>&nbsp;&nbsp;&nbsp;&nbsp; None of the model parameters are kept fixed.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float).
@@ -205,10 +219,11 @@ problem.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; seed of random number generator
 * rate  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; speed of exploration
-* bestBoost  :  bool or Fitter
-<br>&nbsp;&nbsp;&nbsp;&nbsp; False   no updates of best logLikelihood
-<br>&nbsp;&nbsp;&nbsp;&nbsp; True    boost the fit using LevenbergMarquardtFitter
-<br>&nbsp;&nbsp;&nbsp;&nbsp; fitter  boost the fit using this fitter.
+* bestBoost  :  bool or Fitter (False) (deprecated)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; IGNORED with Warning: It causes an erroneous evidence calculation
+* usePhantoms  :  bool (True)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; True    Copy starting walkers from phantoms
+<br>&nbsp;&nbsp;&nbsp;&nbsp; False   Copy starting walkers from walkers
 * engines  :  None or (list of) string or (list of) Engine
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to randomly move the walkers around, within the likelihood bound.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None        use a Problem defined selection of engines
@@ -236,8 +251,8 @@ problem.
 
 <a name="sample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>sample(</strong> keep=None, plot=False )
-</th></tr></thead></table>
+<strong>sample(</strong> keep=None, plot=False, **kwargs )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L402-L507 target=_blank>[source]</a></th></tr></thead></table>
 Sample the posterior and return the 10log( evidence )
 
 A additional result of this method is a SampleList which contains
@@ -245,32 +260,52 @@ samples taken from the posterior distribution.
 
 <b>Parameters</b>
 
-* keep  :  None or dict of {int:float}
+* keep  :  None or dict of {int:float}  (None)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.
-* plot  :  bool or str
+* plot  :  bool or str (False)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; bool    show a plot of the final results
 <br>&nbsp;&nbsp;&nbsp;&nbsp; "iter" 	show iterations
 <br>&nbsp;&nbsp;&nbsp;&nbsp; "all"  	show iterations and final result
 <br>&nbsp;&nbsp;&nbsp;&nbsp; "last" 	show final result
 <br>&nbsp;&nbsp;&nbsp;&nbsp; "test"      plot iterations but dont show (for testing)
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be fed to the plot
+
 
 <a name="initSample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initSample(</strong> ensemble=None, keep=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L509-L539 target=_blank>[source]</a></th></tr></thead></table>
+Prolog for the sample method.
+
+<b>Parameters</b>
+
+* ensemble  :  int or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; size of ensemble of walkers. None slects self.ensemble
+* keep  :  None or dict of {int:float}
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters
+<br>&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.
+<br>&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.
 
 <a name="walkerLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>walkerLogL(</strong> w ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L541-L550 target=_blank>[source]</a></th></tr></thead></table>
+Return the logL of the walker (needed for sort())
+
+<b>Parameters</b>
+
+* w  :  Walker
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to get the logL from
 
 <a name="makeFitlist"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeFitlist(</strong> keep=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L552-L591 target=_blank>[source]</a></th></tr></thead></table>
 Make list of indices of (hyper)parameters that need fitting.
 
 <b>Parameters</b>
@@ -278,88 +313,125 @@ Make list of indices of (hyper)parameters that need fitting.
 * keep  :  None or dict of {int : float}
 <br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices that need to be kept at the float value.
 
-<a name="doIterPlot"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>doIterPlot(</strong> plot ) 
-</th></tr></thead></table>
-<b>Returns</b>
-
-int 0   no plot
-<br>&nbsp;&nbsp;&nbsp;&nbsp; 1   plot
-<br>&nbsp;&nbsp;&nbsp;&nbsp; 2   plot but dont show (for testing)
-
-<a name="doLastPlot"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>doLastPlot(</strong> plot ) 
-</th></tr></thead></table>
-<b>Return</b>
-
-True when the last plot is requested (plot equals 'last' or 'all' or True)
-False otherwise
-
 <a name="initReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initReport(</strong> keep=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L593-L645 target=_blank>[source]</a></th></tr></thead></table>
+Print header of the processing report (if any).
+
+<b>Parameters</b>
+
+* keep  :  dict or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dict of parameters to keep fixed.
 
 <a name="iterReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>iterReport(</strong> kw, tail, plot=False ) 
-</th></tr></thead></table>
+<strong>iterReport(</strong> kw, tail ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L647-L671 target=_blank>[source]</a></th></tr></thead></table>
+Reporting during iterations (if any)
+
+<b>Parameters</b>
+
+* kw  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; walker index with low LogL
+* tail  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of params at the end to report (mostly hyperpars)
 
 <a name="printIterRep"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
-</th></tr></thead></table>
-if self.iteration % 1000 == 0 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( pl, max=None ) )
-<br>&nbsp;&nbsp;&nbsp;&nbsp; npars = self.walkers[kw].problem.npars
-<br>&nbsp;&nbsp;&nbsp;&nbsp; pmn, pmx = self.phantoms.getParamMinmax( self.lowLhood, npars )
-<br>&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( pmn, max=None ) )
-<br>&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( pmx, max=None ) )
-<br>&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( np ), fmt( self.phantoms.length( npars ) ), 
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fmt( self.logdZ, format="%10.3g" ) )
-<br>&nbsp;&nbsp;&nbsp;&nbsp; for ky in self.phantoms.phantoms 
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print( fmt( ky ), fmt( len( self.phantoms.phantoms[ky] ) ) )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L673-L701 target=_blank>[source]</a></th></tr></thead></table>
+Print one iteration line.
+
+<b>Parameters</b>
+
+* kw  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; walker index to report
+* parfmt  :  format ("%s")
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to print the parameters
+* tail  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; nuber of tail pars to print. (see [Formatter](./Formatter.md))
+* max  :  int or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; maximum nr of pars to print. (see [Formatter](./Formatter.md))
+* indent  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of initial spaces. (see [Formatter](./Formatter.md))
 
 <a name="lastReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>lastReport(</strong> kw, plot=False ) 
-</th></tr></thead></table>
+<strong>lastReport(</strong> kw, **kwargs ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L703-L723 target=_blank>[source]</a></th></tr></thead></table>
+Print concluding remarks (if any)
 
+<b>Parameters</b>
+
+* kw  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of (last) walker.
+* kwargs  :  dict
+<br>&nbsp;&nbsp;&nbsp;&nbsp; for plotter
+
+<a name="setPlotters"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>setPlotters(</strong> plot ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L725-L758 target=_blank>[source]</a></th></tr></thead></table>
+Set plot methods as requested by plot.
+
+| plot   | doIterPlot |   doLastPlot   |   comment            |
+|--------|------------|----------------|----------------------|
+| False  |  no plot   |   no plot      | default; dont plot   |
+| True   |  no plot   | plotSampleList |                      |
+| "last" |  no plot   | plotSampleList |                      |
+| "iter" | plotWalker |   no plot      |                      |
+| "all"  | plotWalker | plotSampleList |                      |
+| "test" | plotWalker | plotSampleList | no show(), for tests |
+
+The plot methods plotWalker and plotSampleList are part of the 
+module Plotter.py
+
+<b>Parameters</b>
+
+* plot  :  str or bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as in table
+
+<a name="plotNot"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>plotNot(</strong> kw, show=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L760-L762 target=_blank>[source]</a></th></tr></thead></table>
+
+do not plot 
+<a name="plotIter"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>plotIter(</strong> kw, show=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L764-L769 target=_blank>[source]</a></th></tr></thead></table>
+
+Plot Iteration results 
 <a name="plotLast"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>plotLast(</strong> ) 
-</th></tr></thead></table>
+<strong>plotLast(</strong> kw, show=False, **kwargs ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L771-L778 target=_blank>[source]</a></th></tr></thead></table>
 
-<a name="getMaxIter"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>getMaxIter(</strong> ) 
-</th></tr></thead></table>
-Return the maximum number of iteration.
-
+Plot the result 
 <a name="nextIteration"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextIteration(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L780-L812 target=_blank>[source]</a></th></tr></thead></table>
 Return True when a next iteration is needed. False to stop
 
 <a name="optionalRestart"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>optionalRestart(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L814-L824 target=_blank>[source]</a></th></tr></thead></table>
 Restart the session from a file. (not yet operational)
 
 <a name="optionalSave"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>optionalSave(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L826-L835 target=_blank>[source]</a></th></tr></thead></table>
 Save the session to a file. (not yet operational)
 
 <a name="updateEvidence"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateEvidence(</strong> worst ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L837-L874 target=_blank>[source]</a></th></tr></thead></table>
 Updates the evidence (logZ) and the information (H)
 
 The walkers need to be sorted to logL
@@ -369,11 +441,16 @@ The walkers need to be sorted to logL
 * worst  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Number of walkers used in the update
 
+<a name="unitDomain"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>unitDomain(</strong> ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L876-L881 target=_blank>[source]</a></th></tr></thead></table>
+Return the size of the remaining domain
 
 <a name="copyWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalker(</strong> worst )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L883-L894 target=_blank>[source]</a></th></tr></thead></table>
 Kill worst walker( s ) in favour of one of the others
 
 <b>Parameters</b>
@@ -384,18 +461,7 @@ Kill worst walker( s ) in favour of one of the others
 <a name="copyWalkerFromPhantoms"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalkerFromPhantoms(</strong> worst )
-</th></tr></thead></table>
-Kill worst walker( s ) in favour of one of the others
-
-<b>Parameters</b>
-
-* worst  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; number of Walkers to copy
-
-<a name="copyWalkerFromDynamicPhantoms"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>copyWalkerFromDynamicPhantoms(</strong> worst )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L896-L918 target=_blank>[source]</a></th></tr></thead></table>
 Kill worst walker( s ) in favour of one of the others
 
 <b>Parameters</b>
@@ -406,7 +472,7 @@ Kill worst walker( s ) in favour of one of the others
 <a name="updateWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateWalkers(</strong> explorer, worst ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L920-L1005 target=_blank>[source]</a></th></tr></thead></table>
 Update the walkerlist in place.
 
 <b>Parameters</b>
@@ -420,7 +486,7 @@ Update the walkerlist in place.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,
  accuracy=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1007-L1062 target=_blank>[source]</a></th></tr></thead></table>
 Set the problem for this run.
 
 If name is a Problem, then the keyword arguments (xdata,model,ydata,weights)
@@ -446,7 +512,7 @@ are overwritten provided they are not None
 <a name="setErrorDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1064-L1117 target=_blank>[source]</a></th></tr></thead></table>
 Set the error distribution for calculating the likelihood.
 
 <b>Parameters</b>
@@ -471,7 +537,7 @@ Set the error distribution for calculating the likelihood.
 <a name="setEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1119-L1175 target=_blank>[source]</a></th></tr></thead></table>
 initialize the engines.
 
 <b>Parameters</b>
@@ -486,7 +552,7 @@ initialize the engines.
 <a name="setInitialEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1177-L1224 target=_blank>[source]</a></th></tr></thead></table>
 Initialize the walkers at random values of parameters and scale
 
 <b>Parameters</b>
@@ -507,7 +573,7 @@ Initialize the walkers at random values of parameters and scale
 <a name="initWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1226-L1249 target=_blank>[source]</a></th></tr></thead></table>
 Initialize the walkers at random values of parameters and scale
 
 <b>Parameters</b>
@@ -521,26 +587,10 @@ Initialize the walkers at random values of parameters and scale
 * startdict  :  dictionary of { str : Engine }
 <br>&nbsp;&nbsp;&nbsp;&nbsp; connecting a name to a StartEngine
 
-<a name="plotResult"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>plotResult(</strong> walker, iter, plot=0 )
-</th></tr></thead></table>
-Plot the results for a walker.
-
-<b>Parameters</b>
-
-* walker  :  Walker
-<br>&nbsp;&nbsp;&nbsp;&nbsp; the walker to plot
-* iter  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
-* plot  :  int (one of (0,1,2)
-<br>&nbsp;&nbsp;&nbsp;&nbsp; 0 immediate return, no action
-<br>&nbsp;&nbsp;&nbsp;&nbsp; 1 plot
-<br>&nbsp;&nbsp;&nbsp;&nbsp; 2 plot but dont show (for testing)
-
 <a name="report"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>report(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1251-L1272 target=_blank>[source]</a></th></tr></thead></table>
 Final report on the run.
 
+Endline #L1274

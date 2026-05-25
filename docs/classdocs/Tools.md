@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="Tools"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>Module Tools</strong> </th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>Module Tools</strong> </th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 
 &nbsp; module contains a mixed bag of "usefull" methods.
@@ -13,7 +14,7 @@
 <a name="getItem"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getItem(</strong> k ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L38-L54 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the k-th item of the ilist
 <br>&nbsp;&nbsp;&nbsp;&nbsp; or the last when not enough
@@ -30,7 +31,7 @@ Return the k-th item of the ilist
 <a name="firstIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>firstIndex(</strong> condition=lambda x: True ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L56-L87 target=_blank>[source]</a></th></tr></thead></table>
 Returns the index of first item in the `iterable` that
 satisfies the `condition`.
 
@@ -62,7 +63,7 @@ If the condition is not given, it returns 0
 <a name="getColumnData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getColumnData(</strong> kcol ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L89-L105 target=_blank>[source]</a></th></tr></thead></table>
 Return the kcol-th column from xdata
 
 <b>Parameters</b>
@@ -75,20 +76,25 @@ kcol    int
 <a name="isBetween"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBetween(</strong> x, xe ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L107-L112 target=_blank>[source]</a></th></tr></thead></table>
 Return True when x falls between xs and xe or on xs or xe.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; where the order of xs, xe is unknown.
 
 <a name="getKwargs"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getKwargs(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L114-L118 target=_blank>[source]</a></th></tr></thead></table>
 Return kwargs as dictionary
 
 <a name="setAttribute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAttribute(</strong> name, value, type=None, islist=False, isnone=False ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L120-L150 target=_blank>[source]</a></th></tr></thead></table>
+
+<a name="setNoneAttributes"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>setNoneAttributes(</strong> name, value, listNone ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L152-L179 target=_blank>[source]</a></th></tr></thead></table>
 Set an attribute to an object.
 
 <b>Parameters</b>
@@ -110,10 +116,10 @@ Set an attribute to an object.
 
 TypeError : if any  checks fails
 
-<a name="setNoneAttributes"></a>
+<a name="setListOfAttributes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>setNoneAttributes(</strong> name, value, listNone ) 
-</th></tr></thead></table>
+<strong>setListOfAttributes(</strong> name, value, dictList ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L181-L220 target=_blank>[source]</a></th></tr></thead></table>
 Set attribute contained in dictionary dictList into the attr-list.
 A list is a native list or a numpy.ndarray. It also checks the type.
 if values is a singular item of the proper type it will be inserted as [value].
@@ -137,10 +143,10 @@ if values is a singular item of the proper type it will be inserted as [value].
 
 &nbsp; TypeError   if the type is not as in the dictionary
 
-<a name="setListOfAttributes"></a>
+<a name="setSingleAttributes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>setListOfAttributes(</strong> name, value, dictList ) 
-</th></tr></thead></table>
+<strong>setSingleAttributes(</strong> name, value, dictSingle ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L222-L254 target=_blank>[source]</a></th></tr></thead></table>
 <br>&nbsp; """
 Set attribute contained in dictionary dictList into the attr-list.
 A list is a native list or a numpy.ndarray. It also checks the type.
@@ -166,10 +172,10 @@ if values is a singular item of the proper type it will be inserted as [value].
 &nbsp; TypeError   if the type is not as in the dictionary
 
 
-<a name="setSingleAttributes"></a>
+<a name="makeNext"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>setSingleAttributes(</strong> name, value, dictSingle ) 
-</th></tr></thead></table>
+<strong>makeNext(</strong> k ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L256-L291 target=_blank>[source]</a></th></tr></thead></table>
 Set a singular attribute contained in dictionary dictSingle into the attr-list.
 It also checks the type.
 
@@ -192,24 +198,24 @@ It also checks the type.
 
 &nbsp; TypeError   if the type is not as in the dictionary
 
-<a name="makeNext"></a>
+<a name="length"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>makeNext(</strong> k ) 
-</th></tr></thead></table>
+<strong>length(</strong> ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L293-L303 target=_blank>[source]</a></th></tr></thead></table>
 <br>&nbsp; """
 Return next item of x, and last item if x is exhausted.
 Or x itself if x is singular.
 
-<a name="length"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>length(</strong> ) 
-</th></tr></thead></table>
-Return the length of any item. Singletons have length 1; None has length 0..
-
 <a name="toArray"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toArray(</strong> ndim=1, dtype=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L305-L311 target=_blank>[source]</a></th></tr></thead></table>
+Return the length of any item. Singletons have length 1; None has length 0..
+
+<a name="isList"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>isList(</strong> cls ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L313-L333 target=_blank>[source]</a></th></tr></thead></table>
 Return a array of x when x is a number
 
 <b>Parameters</b>
@@ -222,33 +228,18 @@ Return a array of x when x is a number
 <br>&nbsp;&nbsp;&nbsp;&nbsp; conversion to type (None : as is)
 
 
-<a name="isList"></a>
+<a name="isInstance"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>isList(</strong> cls ) 
-</th></tr></thead></table>
+<strong>isInstance(</strong> cls ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L335-L346 target=_blank>[source]</a></th></tr></thead></table>
 Return (True,False) if item is a instance of cls
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (True,True)  if item is a (list|ndarray) of instances of cls
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (False,False) if not
 
-<a name="isInstance"></a>
+<a name="subclassof"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>isInstance(</strong> cls ) 
-</th></tr></thead></table>
-Returns true when one of the following is true
-1. when cls is int   : item is an int or item is a numpy.integer.
-2. when cls is float : item is an float or item is an int.
-3. when cls is cls   : item is a cls.
-
-<a name="ndprint"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>ndprint(</strong> form='{0:.3f}' ) 
-</th></tr></thead></table>
-Print a ndarray, formatted.
-
-<a name="decorate"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>decorate(</strong> des, copy=True ) 
-</th></tr></thead></table>
+<strong>subclassof(</strong> cls ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L348-L369 target=_blank>[source]</a></th></tr></thead></table>
 Transfer attributes from src to des.
 If copy is True try to copy the attributes, otherwise link it.
 
@@ -261,10 +252,10 @@ If copy is True try to copy the attributes, otherwise link it.
 * copy  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if True: copy
 
-<a name="subclassof"></a>
+<a name="printclass"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>subclassof(</strong> cls ) 
-</th></tr></thead></table>
+<strong>printclass(</strong> nitems=8, printId=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L371-L417 target=_blank>[source]</a></th></tr></thead></table>
 Determine if sub inherits from the class cls
 
 <b>Parameters</b>
@@ -274,44 +265,27 @@ Determine if sub inherits from the class cls
 * cls  :  class object
 <br>&nbsp;&nbsp;&nbsp;&nbsp; supposed parent class
 
-<a name="printclass"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>printclass(</strong> nitems=8, printId=False ) 
-</th></tr></thead></table>
-Print the attributes of a class.
-
 <a name="printlist"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>printlist(</strong> nitems=8 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L419-L439 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
-</th></tr></thead></table>
-Return a short version the string representation: upto first non-letter.
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L441-L447 target=_blank>[source]</a></th></tr></thead></table>
+Print the attributes of a class.
 
 <a name="nicenumber"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nicenumber(</strong> ) 
-</th></tr></thead></table>
-Return a nice number close to (but below) |x|.
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L449-L469 target=_blank>[source]</a></th></tr></thead></table>
+Return a short version the string representation: upto first non-letter.
 
-<a name="fix2int"></a>
+<a name="average"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>fix2int(</strong> ) 
-</th></tr></thead></table>
-Return integer array with values as in x
-
-<b>Parameters</b>
-
-* x  :  array_like
-<br>&nbsp;&nbsp;&nbsp;&nbsp; array of integer floats
-
-<a name="track"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>track(</strong> ) 
-</th></tr></thead></table>
+<strong>average(</strong> weights=None, circular=None ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L471-L508 target=_blank>[source]</a></th></tr></thead></table>
 
 <b>Parameters</b>
 
@@ -319,18 +293,135 @@ Return integer array with values as in x
 <br>&nbsp;&nbsp;&nbsp;&nbsp; statement to be traced
 
 
-<a name="average"></a>
+<a name="toRect"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>average(</strong> weights=None, circular=None ) 
-</th></tr></thead></table>
-Return (weighted) average and standard deviation of input array.
+<strong>toRect(</strong> phi=None )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L510-L545 target=_blank>[source]</a></th></tr></thead></table>
+Return (x,y) coordinates from (rho,phi)
+
+Angles are measured counterclockwise from north to east
+North is Down (-y) and East is to the Right (+x)
 
 <b>Parameters</b>
 
-* xx  :  array_like
-<br>&nbsp;&nbsp;&nbsp;&nbsp; input to be averaged
-* weights  :  array_like
-<br>&nbsp;&nbsp;&nbsp;&nbsp; if present these are the weights
-* circular  :  list of 2 floats
-<br>&nbsp;&nbsp;&nbsp;&nbsp; the input is a circular item between [low,high]
+* rp  :  array of pairs [rho,phi] or tuple of (rhos,phis)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; rp[:,0] : separation of the stars
+<br>&nbsp;&nbsp;&nbsp;&nbsp; rp[:,1] : angle from north (down) CCW to east (right)
+* phi  :  array
+<br>&nbsp;&nbsp;&nbsp;&nbsp; When phi is given, rp is interpeted as rho.
 
+<b>Returns</b>
+
+2d-array if the input is a 2d-array  or
+tuple of 2 arrays if the input is a tuple of 2 arrays or phi is given
+
+
+<a name="toRect3D"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>toRect3D(</strong> phi, theta )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L547-L577 target=_blank>[source]</a></th></tr></thead></table>
+Return (x,y,z) coordinates from (rho,phi,theta)
+
+The angle phi is measured counterclockwise from north to east
+North is Down (-y) and East is to the Right (+x)
+The angle theta is measured form the (x,y) plane. 
+Up is positive (+) and down is negative (-)
+
+<b>Parameters</b>
+
+* rho  :  array of float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Separation between the stars
+* phi  :  array of float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; angle in (x,y) plane from -y (North,down) to +x (East,right)
+* theta  :  array of float 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; angle between z and star 2
+
+<b>Returns</b>
+
+* (x,y,z)  :  tuple of 3 arrays 
+
+
+<a name="toSpher3D"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>toSpher3D(</strong> y, z ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L579-L604 target=_blank>[source]</a></th></tr></thead></table>
+Return (rho,phi,theta) coordinates from (x,y,z)
+
+See toRect3D()
+
+<b>Parameters</b>
+
+* x  :  array of float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; x position
+* y  :  array of float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; y position
+* z  :  array of float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; z position
+
+<b>Returns</b>
+
+* (rho,phi,theta)  :  tuple of 3 arrays 
+
+
+<a name="toSpher"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>toSpher(</strong> y=None ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L606-L641 target=_blank>[source]</a></th></tr></thead></table>
+Return (rho,phi) coordinates from (x,y)
+
+Angles are measured counterclockwise from north to east
+North is Down (-y) and East is to the Right (+x)
+
+<b>Parameters</b>
+
+* xy  :  array of pairs [x,y] or tuple of (x array,y array)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; xy[:,0] : x position
+<br>&nbsp;&nbsp;&nbsp;&nbsp; xy[:,1] : y position
+* y  :  array
+<br>&nbsp;&nbsp;&nbsp;&nbsp; when given xy is interpreted as x
+
+<b>Returns</b>
+
+2d-array if the input is a 2d-array  or
+tuple of 2 arrays if the input is a tuple of 2 arrays or when y is given
+
+
+<a name="arrow"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>arrow(</strong> y, z=None, scale=1.0 ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L643-L711 target=_blank>[source]</a></th></tr></thead></table>
+Return the coordinates of an arrow point from (xyz[0]) to (xyz[1])
+
+The returned 2-d coordinates are at
+<br>&nbsp;&nbsp;&nbsp;&nbsp; tail, top, left-head, right-head, top 
+
+the returned 3-d coordinates are at 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; tail, top, left-head, right-head, top, read-head, near-head, top
+
+<b>Parameters</b>
+
+* x  :  array of length 2 (at least)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; x-coordinates
+* y  :  array of length 2 (at least)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; y-coordinates
+* z  :  array of length 2 or None
+n None return 2D array else 3D
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; scale factor. End point stays in place
+
+<a name="minmax"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>minmax(</strong> range=False, mid=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Tools.py#L713-L734 target=_blank>[source]</a></th></tr></thead></table>
+Return minimum, maximum, range and midpoint of an array
+
+<b>Parameters</b>
+
+* x  :  array
+<br>&nbsp;&nbsp;&nbsp;&nbsp; the array
+* range  :  bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; return range (max - min) too
+* mid  :  bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; return midpoint (max + min) / 2 too
+
+Endline #L736

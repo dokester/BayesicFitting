@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="StartEngine"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class StartEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StartEngine.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class StartEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StartEngine.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 StartEngine generates a random trial sample.
 
@@ -20,7 +21,7 @@ Author       Do Kester.
 <a name="StartEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>StartEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StartEngine.py#L49-L63 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -37,13 +38,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StartEngine.py#L65-L71 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StartEngine.py#L73-L156 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by a random selection of the parameters.
 
 <b>Parameters</b>
@@ -58,14 +59,12 @@ Execute the engine by a random selection of the parameters.
 * int  :  the number of successfull moves
 
 
+Endline #L158
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 
-* [<strong>bestBoost(</strong> problem, myFitter=None ) ](./Engine.md#bestBoost)
 * [<strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) ](./Engine.md#setWalker)
-* [<strong>noBoost(</strong> walker ) ](./Engine.md#noBoost)
-* [<strong>doBoost(</strong> walker ) ](./Engine.md#doBoost)
 * [<strong>domain2Unit(</strong> problem, dval, kpar=None ) ](./Engine.md#domain2Unit)
 * [<strong>unit2Domain(</strong> problem, uval, kpar=None ) ](./Engine.md#unit2Domain)
 * [<strong>startJourney(</strong> unitStart ) ](./Engine.md#startJourney)
@@ -79,5 +78,6 @@ Execute the engine by a random selection of the parameters.
 * [<strong>reportBest(</strong> )](./Engine.md#reportBest)
 * [<strong>printReport(</strong> best=False ) ](./Engine.md#printReport)
 * [<strong>successRate(</strong> ) ](./Engine.md#successRate)
-* [<strong>getUnitMinmax(</strong> problem, lowLhood ) ](./Engine.md#getUnitMinmax)
-* [<strong>getUnitRange(</strong> problem, lowLhood ) ](./Engine.md#getUnitRange)
+* [<strong>getUnitMinmax(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitMinmax)
+* [<strong>getUnitRange(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitRange)
+* [<strong>printIter(</strong> iteration=0, repiter=1000 ) ](./Engine.md#printIter)

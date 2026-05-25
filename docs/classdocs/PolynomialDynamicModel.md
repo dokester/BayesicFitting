@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="PolynomialDynamicModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 General polynomial model of an adaptable degree.
 
@@ -64,7 +65,7 @@ Category     mathematics/Fitting
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolynomialDynamicModel(</strong> degree, minDegree=0, maxDegree=None, fixed=None,
  growPrior=None, copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L95-L137 target=_blank>[source]</a></th></tr></thead></table>
 
 Polynomial of a adaptable degree.
 
@@ -93,25 +94,26 @@ ValueError when degree is outside [min..max] range
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L139-L141 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L143-L144 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L146-L172 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L174-L176 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the model. 
+Endline #L178
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./PolynomialModel.html">PolynomialModel,</a></th></tr></thead></table>
 

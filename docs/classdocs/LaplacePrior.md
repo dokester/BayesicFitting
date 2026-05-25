@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="LaplacePrior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class LaplacePrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class LaplacePrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Laplace prior distribution.
 
@@ -49,7 +50,7 @@ lowLimit and highLimit cannot be used in this implementation.
 <a name="LaplacePrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LaplacePrior(</strong> center=0.0, scale=1.0, limits=None, circular=False, prior=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L80-L110 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -72,12 +73,12 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L112-L114 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L116-L137 target=_blank>[source]</a></th></tr></thead></table>
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Laplace distribution.
 
@@ -93,7 +94,7 @@ a parameter for a Laplace distribution.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L139-L170 target=_blank>[source]</a></th></tr></thead></table>
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Laplace distribution.
 
@@ -109,7 +110,7 @@ between [0,1] for a Laplace distribution.
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L172-L184 target=_blank>[source]</a></th></tr></thead></table>
 Return a the result of the distribution function at x.
 
 <b>Parameters</b>
@@ -121,7 +122,7 @@ Return a the result of the distribution function at x.
 <a name="logResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logResult(</strong> x )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L186-L198 target=_blank>[source]</a></th></tr></thead></table>
 Return a the log of the result of the distribution function to p.
 
 <b>Parameters</b>
@@ -133,7 +134,7 @@ Return a the log of the result of the distribution function to p.
 <a name="partialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> x )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L200-L213 target=_blank>[source]</a></th></tr></thead></table>
 Return partial derivative of log( Prior ) wrt parameter.
 
 <b>Parameters</b>
@@ -145,14 +146,15 @@ Return partial derivative of log( Prior ) wrt parameter.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L215-L217 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the integral over the prior is bound. 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplacePrior.py#L219-L220 target=_blank>[source]</a></th></tr></thead></table>
 
+Endline #L222
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 

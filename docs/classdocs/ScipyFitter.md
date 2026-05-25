@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ScipyFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Unified interface to the Scipy minimization module minimize, to fit data to a model.
 
@@ -78,7 +79,7 @@ scipy.optimize.minimize
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ScipyFitter(</strong> xdata, model, method=None, gradient=True, hessp=None,
  **kwargs ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L109-L177 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 Create a class, providing inputs and model.
@@ -138,7 +139,7 @@ Create a class, providing inputs and model.
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, constraints=(), verbose=0,
  accuracy=None, plot=False, callback=None, **options )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L179-L370 target=_blank>[source]</a></th></tr></thead></table>
 Return      parameters for the model fitted to the data array.
 
 <b>Parameters</b>
@@ -186,8 +187,9 @@ Return      parameters for the model fitted to the data array.
 <a name="collectVectors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>collectVectors(</strong> par ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L372-L388 target=_blank>[source]</a></th></tr></thead></table>
 
+Endline #L390
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th></tr></thead></table>
 
@@ -204,9 +206,11 @@ Return      parameters for the model fitted to the data array.
 
 
 * [<strong>setParameters(</strong> params )](./IterativeFitter.md#setParameters)
-* [<strong>doPlot(</strong> param, force=False )](./IterativeFitter.md#doPlot)
+* [<strong>setPlotters(</strong> plot ) ](./IterativeFitter.md#setPlotters)
+* [<strong>plotNot(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotNot)
+* [<strong>plotIter(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotIter)
 * [<strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) ](./IterativeFitter.md#fitprolog)
-* [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
+* [<strong>report(</strong> verbose, ydata, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -217,8 +221,8 @@ Return      parameters for the model fitted to the data array.
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -228,7 +232,7 @@ Return      parameters for the model fitted to the data array.
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogZ(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getLogZ)
 * [<strong>plotResult(</strong> xdata=None, ydata=None, model=None, residuals=True,](./BaseFitter.md#plotResult)

@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ClassicProblem"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ClassicProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ClassicProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 A ClassicProblem is an optimization of parameters which involves
 the fitting of data to a Model at a fixed set of x values.
@@ -28,7 +29,7 @@ model, xdata, ydata, weights, accuracy, varyy
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ClassicProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, copy=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L51-L74 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor for classic problems.
 
@@ -52,7 +53,7 @@ Constructor for classic problems.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L76-L83 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 The copy points to the same instance of model.
@@ -60,7 +61,7 @@ The copy points to the same instance of model.
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L85-L96 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result calculated at the xdatas.
 
 <b>Parameters</b>
@@ -72,7 +73,7 @@ Returns the result calculated at the xdatas.
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> param ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L98-L107 target=_blank>[source]</a></th></tr></thead></table>
 Return the partials of the internal model.
 
 <b>Parameters</b>
@@ -83,7 +84,7 @@ Return the partials of the internal model.
 <a name="derivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> param ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L109-L118 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative of the internal model.
 
 <b>Parameters</b>
@@ -94,27 +95,28 @@ Return the derivative of the internal model.
 <a name="myEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L120-L132 target=_blank>[source]</a></th></tr></thead></table>
 Return a default list of preferred engines
 
 <a name="myStartEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L134-L138 target=_blank>[source]</a></th></tr></thead></table>
 Return a default preferred start engines: "start"
 
 <a name="myDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L140-L145 target=_blank>[source]</a></th></tr></thead></table>
 Return a default preferred ErrorDistribution: "gauss"
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ClassicProblem.py#L147-L150 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
+Endline #L152
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 

@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ExponentialPrior"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ExponentialPrior(</strong> <a href="./LaplacePrior.html">LaplacePrior</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ExponentialPrior(</strong> <a href="./LaplacePrior.html">LaplacePrior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Exponential prior distribution.
 
@@ -37,7 +38,7 @@ Author: Do Kester.
 <a name="ExponentialPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ExponentialPrior(</strong> scale=1.0, hilimit=math.inf, prior=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py#L67-L83 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -54,15 +55,16 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py#L85-L88 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy the prior 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py#L90-L93 target=_blank>[source]</a></th></tr></thead></table>
 
-Return a short name 
+Return ExponentialPrior. 
+Endline #L95
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LaplacePrior.html">LaplacePrior</a></th></tr></thead></table>
 

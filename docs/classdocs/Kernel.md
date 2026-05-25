@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="Kernel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class Kernel(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class Kernel(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 A kernel is an even real-valued integrable function.
 
@@ -66,7 +67,7 @@ Category    mathematics/Fitting
 <a name="Kernel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Kernel(</strong> integral=1.0, fwhm=1.0, range=1.0 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L91-L107 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor
 
@@ -82,7 +83,7 @@ Constructor
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L109-L118 target=_blank>[source]</a></th></tr></thead></table>
 Return the result for input values.
 
 <b>Parameters</b>
@@ -93,7 +94,7 @@ Return the result for input values.
 <a name="resultsq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>resultsq(</strong> xsq )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L120-L129 target=_blank>[source]</a></th></tr></thead></table>
 Return the result for squared input values.
 
 <b>Parameters</b>
@@ -104,7 +105,7 @@ Return the result for squared input values.
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> x )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L131-L140 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative wrt the input values.
 
 <b>Parameters</b>
@@ -115,13 +116,14 @@ Return the partial derivative wrt the input values.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L142-L147 target=_blank>[source]</a></th></tr></thead></table>
 Return true when the kernel is bound, i.e.
 all non-zero values are between -1 and +1
 
 <a name="name"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>name(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L149-L159 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the kernel.
 
+Endline #L161

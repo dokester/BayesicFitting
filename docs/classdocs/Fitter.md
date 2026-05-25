@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="Fitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Fitter for linear models.
 
@@ -41,7 +42,7 @@ Author  Do Kester
 <a name="Fitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Fitter(</strong> xdata, model, map=False, keep=None, fixedScale=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py#L67-L93 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing xdatas and model.
 
@@ -70,7 +71,7 @@ input vector is needed a new object should be created.
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py#L95-L162 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data, including weights.
 
 For Linear models the matrix equation
@@ -102,6 +103,7 @@ and &beta; is the inproduct of the data with the D, design matrix.
 &nbsp;&nbsp;&nbsp;&nbsp; ValueError when ydata or weights contain a NaN
 
 
+Endline #L164
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
@@ -111,8 +113,8 @@ and &beta; is the inproduct of the data with the D, design matrix.
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -123,7 +125,7 @@ and &beta; is the inproduct of the data with the D, design matrix.
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getScale(</strong> )](./BaseFitter.md#getScale)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) ](./BaseFitter.md#getLogLikelihood)

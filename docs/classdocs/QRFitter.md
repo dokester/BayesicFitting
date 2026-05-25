@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="QRFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Fitter for linear models, using QR decomposition.
 The QRFitter class is to be used in conjunction with Model classes, linear
@@ -62,7 +63,7 @@ In that case it uses the same decomposition for all fits.
 <a name="QRFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>QRFitter(</strong> xdata, model, map=False, keep=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py#L89-L116 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing xdatas and model.
 
@@ -88,8 +89,8 @@ input vector is needed a new object should be created.
 
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None )
-</th></tr></thead></table>
+<strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py#L118-L192 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data, including weights.
 
 <b>Parameters</b>
@@ -104,11 +105,15 @@ Return model parameters fitted to the data, including weights.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.
+* plot  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to plot or not
+
 <b>Raises</b>
 
 ValueError when ydata or weights contain a NaN
 
 
+Endline #L194
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
@@ -118,8 +123,8 @@ ValueError when ydata or weights contain a NaN
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -130,7 +135,7 @@ ValueError when ydata or weights contain a NaN
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getScale(</strong> )](./BaseFitter.md#getScale)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) ](./BaseFitter.md#getLogLikelihood)

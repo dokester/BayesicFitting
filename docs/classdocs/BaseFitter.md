@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="BaseFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class BaseFitter(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class BaseFitter(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Base class for all Fitters.
 
@@ -22,7 +23,7 @@ Other Fitter classes relegate their calculation in these issues to this one.
 
 <b>Examples</b>
 
-It is not possible to use this class. User Fitter, CurveFitter etc. in stead
+It is not possible to use this class. Use Fitter, CurveFitter etc. in stead
 
 <b>Note Also</b>
 
@@ -56,7 +57,6 @@ It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the fixed noise scale.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The presence of `fixedScale` has consequences for the definitions of `chisq`,
 <br>&nbsp;&nbsp;&nbsp;&nbsp; `(co)variance`, `stdevs` and `evidence`
-
 * minimumScale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; introduce a minimum value for the noise scale
 * design  :  matrix (read only)
@@ -104,7 +104,7 @@ It is not possible to use this class. User Fitter, CurveFitter etc. in stead
 <a name="BaseFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BaseFitter(</strong> xdata, model, map=False, keep=None, fixedScale=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L135-L198 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing inputs and model.
 
@@ -142,7 +142,7 @@ ValueError when one of the following is true
 <a name="setMinimumScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setMinimumScale(</strong> scale=0 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L200-L211 target=_blank>[source]</a></th></tr></thead></table>
 Introduce a minimum in scale calculation and consequently in chisq.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; chi<sup>2</sup> >= sumwgt * scale<sup>2</sup>
 
@@ -154,7 +154,7 @@ Introduce a minimum in scale calculation and consequently in chisq.
 <a name="fitprolog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L213-L274 target=_blank>[source]</a></th></tr></thead></table>
 Prolog for all Fitters.
 
 1. Checks data/weighs/accuracy for Nans
@@ -184,13 +184,13 @@ Prolog for all Fitters.
 <a name="fitpostscript"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitpostscript(</strong> ydata, plot=False ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L276-L283 target=_blank>[source]</a></th></tr></thead></table>
 Produce a plot of the results.
 
 <a name="keepFixed"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>keepFixed(</strong> keep=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L285-L313 target=_blank>[source]</a></th></tr></thead></table>
 Keeps parameters fixed at the provided values.
 
 1. The model will act exactly as if it were a model with less
@@ -211,7 +211,7 @@ Keeps parameters fixed at the provided values.
 <a name="insertParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>insertParameters(</strong> fitpar, index=None, into=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L315-L339 target=_blank>[source]</a></th></tr></thead></table>
 Insert fitparameters into the parameters when fitIndex is present.
 
 <b>Parameters</b>
@@ -226,8 +226,8 @@ Insert fitparameters into the parameters when fitIndex is present.
 
 <a name="modelFit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>modelFit(</strong> ydata, weights=None, keep=None )
-</th></tr></thead></table>
+<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L341-L361 target=_blank>[source]</a></th></tr></thead></table>
 Return model fitted to the data.
 
 <b>Parameters</b>
@@ -240,12 +240,14 @@ Return model fitted to the data.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.
+* kwargs  :  keyword arguments
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be passed to fit()
 
 
 <a name="limitsFit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>limitsFit(</strong> ydata, weights=None, keep=None ) 
-</th></tr></thead></table>
+<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L363-L441 target=_blank>[source]</a></th></tr></thead></table>
 Fit the data to the model.
 When a parameter(s) transgresses the limits, it set and fixed at that limit
 and the fit is done again, excluding the parameter(s)
@@ -261,6 +263,8 @@ When the chisq landscape is largely monomodal (no local minima) this is OK.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; dictionary of indices (int) to be kept at a fixed value (float)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The values will override those at initialization.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; They are only used in this call of fit.
+* kwargs  :  keywords
+<br>&nbsp;&nbsp;&nbsp;&nbsp; to be passed to fit()
 
 <b>Returns</b>
 
@@ -274,8 +278,8 @@ Warning when parameters have been reset at the limits.
 
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>fit(</strong> ydata, weights=None, keep=None ) 
-</th></tr></thead></table>
+<strong>fit(</strong> ydata, weights=None, keep=None, **kwargs ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L443-L463 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data.
 
 <b>Parameters</b>
@@ -297,7 +301,7 @@ NotImplementedError. BaseFitter cannot perform fits by itself.
 <a name="checkNan"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkNan(</strong> ydata, weights=None, accuracy=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L465-L536 target=_blank>[source]</a></th></tr></thead></table>
 Check there are no Nans or Infs in ydata or weights or accuracy.
 Check also for zeros or negatives in accuracy.
 
@@ -317,7 +321,7 @@ ValueError.
 <a name="getVector"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getVector(</strong> ydata, index=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L538-L558 target=_blank>[source]</a></th></tr></thead></table>
 Return the &beta;-vector.
 
 It includes "normalized" data if present. See normalize().
@@ -334,7 +338,7 @@ It includes "normalized" data if present. See normalize().
 <a name="getHessian"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getHessian(</strong> params=None, weights=None, index=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L560-L603 target=_blank>[source]</a></th></tr></thead></table>
 Calculates the hessian matrix for a given set of model parameters.
 
 It includes "normalized" data if present. See normalize()
@@ -352,7 +356,7 @@ It includes "normalized" data if present. See normalize()
 <a name="getInverseHessian"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getInverseHessian(</strong> params=None, weights=None, index=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L605-L621 target=_blank>[source]</a></th></tr></thead></table>
 Return the inverse of the Hessian Matrix, H.
 
 <b>Parameters</b>
@@ -368,7 +372,7 @@ Return the inverse of the Hessian Matrix, H.
 <a name="getCovarianceMatrix"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getCovarianceMatrix(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L623-L633 target=_blank>[source]</a></th></tr></thead></table>
 Returns the inverse hessian matrix over the fitted parameters,
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; multiplied by the variance.
 
@@ -378,7 +382,7 @@ Stdevs are found from this as np.sqrt( np.diag( covarianceMatrix ) )
 <a name="makeVariance"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeVariance(</strong> scale=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L635-L655 target=_blank>[source]</a></th></tr></thead></table>
 Return the (calculated) variance of the remaining noise. I.e.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; var = chisq / dof
 when automatic noise scaling is requested or
@@ -393,7 +397,7 @@ when we have a fixed scale.
 <a name="normalize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalize(</strong> normdfdp, normdata, weight=1.0 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L657-L688 target=_blank>[source]</a></th></tr></thead></table>
 If for some reason the model is degenerate, e.g when two parameters measure
 essentially the same thing, This method can disambiguate these parameters.
 
@@ -411,7 +415,7 @@ It is like adding a dummy measurement of one (or more) parameter to the data.
 <a name="getDesign"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getDesign(</strong> params=None, xdata=None, index=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L690-L716 target=_blank>[source]</a></th></tr></thead></table>
 Return the design matrix, D.
 The design matrix is also known as the Jacobian Matrix.
 
@@ -428,7 +432,7 @@ The design matrix is also known as the Jacobian Matrix.
 <a name="chiSquared"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chiSquared(</strong> ydata, params=None, weights=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L718-L747 target=_blank>[source]</a></th></tr></thead></table>
 Calculates Chi-Squared for data and weights.
 
 It is the (weighted) sum of the squared residuals.
@@ -450,7 +454,7 @@ ValueError when chisq <= 0.
 <a name="getStandardDeviations"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getStandardDeviations(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L749-L774 target=_blank>[source]</a></th></tr></thead></table>
 Calculates of standard deviations pertaining to the parameters.
 
 &nbsp;&nbsp;&nbsp;&nbsp; &sigma;<sub>i</sub> = s * sqrt( C[i,i] )
@@ -466,9 +470,9 @@ datapoints while the noise scale, s, does not.
 
 <a name="monteCarloError"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)
-</th></tr></thead></table>
-Calculates &sigma;-confidence regions on the model given some inputs.
+<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L776-L804 target=_blank>[source]</a></th></tr></thead></table>
+Calculates scale * &sigma;-confidence regions on the model given some inputs.
 
 From the full covariance matrix (inverse of the Hessian) random
 samples are drawn, which are added to the parameters. With this new
@@ -485,12 +489,13 @@ MonteCarlo. For tweaking of that class can be done outside BaseFitter.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars.
 * monteCarlo  :  MonteCarlo
 <br>&nbsp;&nbsp;&nbsp;&nbsp; a ready-made MonteCarlo class.
-
+* scale  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; factor for &sigma;
 
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L806-L823 target=_blank>[source]</a></th></tr></thead></table>
 <b>Return</b>
 
 * float  :  the noise scale
@@ -504,7 +509,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 <a name="getEvidence"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getEvidence(</strong> limits=None, noiseLimits=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L825-L849 target=_blank>[source]</a></th></tr></thead></table>
 Calculation of the evidence, log10( Z ), for the model given the data.
 
 &nbsp;&nbsp;&nbsp;&nbsp; E = log10( P( Model | data ) )
@@ -530,7 +535,7 @@ ValueError when no Prior is available
 <a name="getLogLikelihood"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L851-L876 target=_blank>[source]</a></th></tr></thead></table>
 Return the log likelihood.
 
 It is implementing eq 19/20 last parts (Kester 2002) term by term
@@ -545,7 +550,7 @@ It is implementing eq 19/20 last parts (Kester 2002) term by term
 <a name="getLogZ"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogZ(</strong> limits=None, noiseLimits=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L878-L968 target=_blank>[source]</a></th></tr></thead></table>
 Calculation of the evidence, log( Z ), for the model given the data.
 
 &nbsp;&nbsp;&nbsp;&nbsp; logZ = log( P( Model | data ) )
@@ -574,7 +579,7 @@ RuntimeError when DoF <= 0. The number of (weighted) datapoints is too small.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotResult(</strong> xdata=None, ydata=None, model=None, residuals=True,
  confidence=False, show=True ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseFitter.py#L970-L999 target=_blank>[source]</a></th></tr></thead></table>
 Plot the results of the fit.
 
 <b>Parameters</b>
@@ -592,3 +597,4 @@ Plot the results of the fit.
 * show  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; display the plot.
 
+Endline #L1001

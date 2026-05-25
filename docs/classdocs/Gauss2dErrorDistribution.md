@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="Gauss2dErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class Gauss2dErrorDistribution(</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class Gauss2dErrorDistribution(</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 To calculate a Gauss likelihood in case of errors in X and Y
 
@@ -33,7 +34,7 @@ Author       Do Kester.
 <a name="Gauss2dErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Gauss2dErrorDistribution(</strong> scale=1.0, limits=None, copy=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L66-L84 target=_blank>[source]</a></th></tr></thead></table>
 
 Default Constructor.
 
@@ -54,27 +55,13 @@ Default Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L86-L102 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
-<a name="TBDgetScale"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>TBDgetScale(</strong> problem, allpars=None ) 
-</th></tr></thead></table>
-Return the noise scale.
-
-<b>Parameters</b>
-
-* problem  :  Problem
-<br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
-* allpars  :  array_like
-<br>&nbsp;&nbsp;&nbsp;&nbsp; None take parameters from problem.model
-<br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters in the problem
-
 <a name="updateDeterminant"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateDeterminant(</strong> problem, scale ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L104-L118 target=_blank>[source]</a></th></tr></thead></table>
 Update the determinant of the covar matrix with scale
 
 <b>Parameters</b>
@@ -87,7 +74,7 @@ Update the determinant of the covar matrix with scale
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L120-L148 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Gaussian distribution.
 
 Alternate calculation
@@ -103,7 +90,7 @@ Alternate calculation
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L150-L175 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
@@ -121,7 +108,7 @@ logL = sum( logLdata )
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L177-L219 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
 Alternate calculation
@@ -139,7 +126,7 @@ Alternate calculation
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Gauss2dErrorDistribution.py#L221-L299 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative all elements of the log( likelihood )
 to the parameters in fitIndex.
 
@@ -154,6 +141,7 @@ to the parameters in fitIndex.
 * mockdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated for the problem
 
+Endline #L301
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./GaussErrorDistribution.html">GaussErrorDistribution</a></th></tr></thead></table>
 

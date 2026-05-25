@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="LaplaceErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class LaplaceErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class LaplaceErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 To calculate a Laplace likelihood.
 
@@ -35,7 +36,7 @@ Author       Do Kester.
 <a name="LaplaceErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LaplaceErrorDistribution(</strong> scale=1.0, limits=None, copy=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L69-L87 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor of Laplace Distribution.
 
@@ -55,20 +56,20 @@ Constructor of Laplace Distribution.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L89-L92 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L94-L99 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 Always true for this distribution.
 
 <a name="toSigma"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSigma(</strong> scale ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L101-L109 target=_blank>[source]</a></th></tr></thead></table>
 Return sigma, the squareroot of the variance.
 <b>Parameter</b>
 
@@ -78,7 +79,7 @@ Return sigma, the squareroot of the variance.
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L111-L125 target=_blank>[source]</a></th></tr></thead></table>
 Return the noise scale
 
 <b>Parameters</b>
@@ -92,7 +93,7 @@ Return the noise scale
 <a name="getSumRes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getSumRes(</strong> problem, allpars=None, scale=1 )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L127-L149 target=_blank>[source]</a></th></tr></thead></table>
 Return the sum of the absolute values of the residuals.
 
 &nbsp;&nbsp;&nbsp;&nbsp; sum ( | res | )
@@ -110,7 +111,7 @@ Return the sum of the absolute values of the residuals.
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L151-L175 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Gaussian distribution.
 
 <b>Parameters</b>
@@ -124,7 +125,7 @@ Return the log( likelihood ) for a Gaussian distribution.
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L177-L202 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
@@ -142,7 +143,7 @@ logL = sum( logLdata )
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L204-L236 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
 dL/ds is not implemented for problems with accuracy
@@ -160,7 +161,7 @@ dL/ds is not implemented for problems with accuracy
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LaplaceErrorDistribution.py#L238-L279 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of elements of the log( likelihood )
 to the parameters.
 
@@ -178,6 +179,7 @@ dL/ds is not implemented for problems with accuracy
 <br>&nbsp;&nbsp;&nbsp;&nbsp; as calculated by the model
 
 
+Endline #L281
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a></th></tr></thead></table>
 

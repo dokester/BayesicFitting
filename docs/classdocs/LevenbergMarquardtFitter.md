@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="LevenbergMarquardtFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Non-linear fitter using the Levenberg-Marquardt method.
 
@@ -71,7 +72,7 @@ only exact for linear models with a fixed scale.
 <a name="LevenbergMarquardtFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LevenbergMarquardtFitter(</strong> xdata, model, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L101-L127 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a class, providing xdata and model.
 
@@ -94,7 +95,7 @@ Create a class, providing xdata and model.
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, verbose=None, plot=False,
  accuracy=None, callback=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L129-L219 target=_blank>[source]</a></th></tr></thead></table>
 Return Model fitted to the data arrays.
 
 It will calculate the hessian matrix and chisq.
@@ -141,18 +142,18 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 <a name="chiSquaredExtra"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chiSquaredExtra(</strong> data, params, weights=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L221-L233 target=_blank>[source]</a></th></tr></thead></table>
 Add normalizing data to chisq.
 
 <a name="trialfit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>trialfit(</strong> params, fi, data, weights, verbose, maxiter )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L235-L292 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="getParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameters(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L294-L305 target=_blank>[source]</a></th></tr></thead></table>
 Return status of the fitter: parameters ( for debugging ).
 
 Only for debugging; use Model.getParameters( ) otherwise
@@ -161,17 +162,20 @@ Only for debugging; use Model.getParameters( ) otherwise
 <a name="checkLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkLimits(</strong> fitpar, fitindex )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L307-L330 target=_blank>[source]</a></th></tr></thead></table>
 
 
+Endline #L332
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 
 
 * [<strong>setParameters(</strong> params )](./IterativeFitter.md#setParameters)
-* [<strong>doPlot(</strong> param, force=False )](./IterativeFitter.md#doPlot)
+* [<strong>setPlotters(</strong> plot ) ](./IterativeFitter.md#setPlotters)
+* [<strong>plotNot(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotNot)
+* [<strong>plotIter(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotIter)
 * [<strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) ](./IterativeFitter.md#fitprolog)
-* [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
+* [<strong>report(</strong> verbose, ydata, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -182,8 +186,8 @@ Only for debugging; use Model.getParameters( ) otherwise
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -194,7 +198,7 @@ Only for debugging; use Model.getParameters( ) otherwise
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getScale(</strong> )](./BaseFitter.md#getScale)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) ](./BaseFitter.md#getLogLikelihood)

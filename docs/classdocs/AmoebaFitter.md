@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="AmoebaFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Fitter using the simulated annealing simplex minimum finding algorithm,
 
@@ -52,7 +53,7 @@ only exact for linear models with a fixed scale.
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>AmoebaFitter(</strong> xdata, model, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py#L80-L104 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Amoeba class, providing inputs and model.
 
@@ -75,7 +76,7 @@ Create a new Amoeba class, providing inputs and model.
  seed=4567, temp=0, limits=None, maxiter=1000,
  tolerance=0.0001, cooling=0.95, steps=10,
  verbose=0, plot=False, accuracy=None, callback=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py#L106-L220 target=_blank>[source]</a></th></tr></thead></table>
 Return Model fitted to the data array.
 
 When done, it also calculates the hessian matrix and chisq.
@@ -127,6 +128,7 @@ When done, it also calculates the hessian matrix and chisq.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; where `val` is the minimizable array
 
 
+Endline #L222
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th></tr></thead></table>
 

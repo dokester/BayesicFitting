@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="BaseModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class BaseModel(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class BaseModel(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 BaseModel implements the common parts of simple Models.
 
@@ -52,13 +53,13 @@ itself.
 * parNames  :  list of str
 <br>&nbsp;&nbsp;&nbsp;&nbsp; list of parameter names. (default : "parameter_k")
 
-* Author  :          Do Kester
+Author          Do Kester
 
 
 <a name="BaseModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>BaseModel(</strong> nparams=0, ndim=1, copy=None, posIndex=[], nonZero=[], **kwargs )
-</th></tr></thead></table>
+<strong>BaseModel(</strong> nparams=0, ndim=1, ndout=None, copy=None, posIndex=[], nonZero=[], **kwargs )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L91-L183 target=_blank>[source]</a></th></tr></thead></table>
 
 BaseModel Constructor.
 <br>
@@ -81,7 +82,7 @@ kwargs
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, param )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L185-L199 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result calculated at the xdatas.
 
 <b>Parameters</b>
@@ -95,7 +96,7 @@ Returns the result calculated at the xdatas.
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param, parlist=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L201-L216 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partial derivatives calculated at the inputs.
 
 <b>Parameters</b>
@@ -111,7 +112,7 @@ Returns the partial derivatives calculated at the inputs.
 <a name="checkParameter"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkParameter(</strong> param ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L218-L230 target=_blank>[source]</a></th></tr></thead></table>
 Return parameters corrected for positivity and Non-zero.
 
 <b>Parameters</b>
@@ -123,7 +124,7 @@ Return parameters corrected for positivity and Non-zero.
 <a name="checkPositive"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkPositive(</strong> param ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L232-L243 target=_blank>[source]</a></th></tr></thead></table>
 Check parameters for positivity. Silently correct.
 
 <b>Parameters</b>
@@ -135,7 +136,7 @@ Check parameters for positivity. Silently correct.
 <a name="checkZeroParameter"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkZeroParameter(</strong> param )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L245-L260 target=_blank>[source]</a></th></tr></thead></table>
 Check parameters for Non-zero. Correct after one warning.
 
 <b>Parameters</b>
@@ -147,26 +148,26 @@ Check parameters for Non-zero. Correct after one warning.
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L262-L266 target=_blank>[source]</a></th></tr></thead></table>
 Whether the model implements Dynamic
 
 <a name="isModifiable"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isModifiable(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L268-L277 target=_blank>[source]</a></th></tr></thead></table>
 Whether the model implements Modifiable
 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L279-L285 target=_blank>[source]</a></th></tr></thead></table>
 Return a short version the string representation: upto first non-letter.
 
 
 <a name="derivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> xdata, param ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L287-L302 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of the model to xdata.
 
 It is a numeric derivative as the analytic derivative is not present
@@ -183,7 +184,7 @@ in the model.
 <a name="setPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L304-L344 target=_blank>[source]</a></th></tr></thead></table>
 set the prior and/or limits for the indicated parameter.
 
 The prior (by default UniformPrior) is appended when kpar is equal to np, 
@@ -209,7 +210,7 @@ IndexError
 <a name="hasPriors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> isBound=True ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L346-L356 target=_blank>[source]</a></th></tr></thead></table>
 Return True when the model has priors for all its parameters.
 
 <b>Parameters</b>
@@ -220,7 +221,7 @@ Return True when the model has priors for all its parameters.
 <a name="getPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L358-L367 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior of the indicated parameter.
 
 <b>Parameters</b>
@@ -231,7 +232,7 @@ Return the prior of the indicated parameter.
 <a name="basePrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L369-L385 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior of the indicated parameter.
 
 <b>Parameters</b>
@@ -239,10 +240,48 @@ Return the prior of the indicated parameter.
 * kpar  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
+<a name="getParameterIndex"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>getParameterIndex(</strong> parname ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L387-L413 target=_blank>[source]</a></th></tr></thead></table>
+Return the index of the  parameter.
+Uses dictionary self.<sub>parindex</sub>
+
+<b>Parameters</b>
+
+* parname  :  str
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter name.
+
+<b>Raise</b>
+
+ValueError when parname is not present
+
+
+<a name="getParameterValue"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>getParameterValue(</strong> param, name, default=None ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L415-L440 target=_blank>[source]</a></th></tr></thead></table>
+Return the value of the parameter with the given name from the param array.
+
+<b>Parameters</b>
+
+* param  :  array
+<br>&nbsp;&nbsp;&nbsp;&nbsp; parameter values
+* name  :  str
+<br>&nbsp;&nbsp;&nbsp;&nbsp; name of parameter
+* default  :  None or not
+<br>&nbsp;&nbsp;&nbsp;&nbsp; NOne : raise Error
+<br>&nbsp;&nbsp;&nbsp;&nbsp; not  : return the default
+
+<b>Raise</b>
+
+ValueError when name cannot be found.
+
+
 <a name="getParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterName(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L442-L452 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 
 <b>Parameters</b>
@@ -253,7 +292,7 @@ Return the name of the indicated parameter.
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L454-L463 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 
 <b>Parameters</b>
@@ -264,7 +303,7 @@ Return the name of the indicated parameter.
 <a name="getParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterUnit(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L465-L474 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
 <b>Parameters</b>
@@ -275,7 +314,7 @@ Return the unit of the indicated parameter.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L476-L485 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 
 <b>Parameters</b>
@@ -286,6 +325,7 @@ Return the name of the indicated parameter.
 <a name="hasLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLimits(</strong> fitindex=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BaseModel.py#L487-L503 target=_blank>[source]</a></th></tr></thead></table>
 Return True if the model has limits set.
 
+Endline #L505

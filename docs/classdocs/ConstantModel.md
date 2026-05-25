@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ConstantModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 ConstantModel is a Model which does not have any parameters.
 
@@ -59,7 +60,7 @@ To make a model that decays to 1.0
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ConstantModel(</strong> ndim=1, copy=None, fixedModel=None, values=None,
  table=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L89-L129 target=_blank>[source]</a></th></tr></thead></table>
 
 The ConstantModel implementation.
 
@@ -87,13 +88,13 @@ At other vales than xdata, the model does not work.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L131-L150 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L152-L167 target=_blank>[source]</a></th></tr></thead></table>
 Returns a constant form.
 
 <b>Parameters</b>
@@ -107,7 +108,7 @@ Returns a constant form.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L169-L183 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata value. (=empty array)
 
 <b>Parameters</b>
@@ -123,7 +124,7 @@ Returns the partials at the xdata value. (=empty array)
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L185-L200 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each point x (== 0).
 
 <b>Parameters</b>
@@ -137,10 +138,11 @@ Return the derivative df/dx at each point x (== 0).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L202-L208 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
+Endline #L210
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 

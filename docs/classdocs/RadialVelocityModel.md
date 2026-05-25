@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="RadialVelocityModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class RadialVelocityModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class RadialVelocityModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
 
@@ -40,7 +41,7 @@ It is a non-linear model.
 <a name="RadialVelocityModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RadialVelocityModel(</strong> copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L68-L90 target=_blank>[source]</a></th></tr></thead></table>
 
 Radial velocity model.
 
@@ -59,13 +60,13 @@ Number of parameters is 5
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L92-L109 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="getMsini"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMsini(</strong> stellarmass ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L111-L122 target=_blank>[source]</a></th></tr></thead></table>
 Return the mass of the exoplanet in Jupiter masses.
 
 <b>Parameters</b>
@@ -76,7 +77,7 @@ Return the mass of the exoplanet in Jupiter masses.
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L124-L147 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
 f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
@@ -94,7 +95,7 @@ where v is the true anomaly
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L149-L206 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub>4</sub> ) )
@@ -118,7 +119,7 @@ f(x:p) = p<sub>1</sub> * ( cos( v + p<sub>4</sub> ) + p<sub>0</sub> * cos( p<sub
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L208-L229 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of f to x (df/dx) at the input values.
 
 dfdx = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) * dvdx
@@ -134,14 +135,14 @@ dfdx = - p<sub>1</sub> * sin( v + p<sub>4</sub> ) * dvdx
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L231-L236 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RadialVelocityModel.py#L238-L249 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of a parameter.
 
 <b>Parameters</b>
@@ -150,6 +151,7 @@ Return the unit of a parameter.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
 
+Endline #L251
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 
@@ -232,4 +234,6 @@ Return the unit of a parameter.
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)
 * [<strong>baseParameterName(</strong> kpar ) ](./BaseModel.md#baseParameterName)

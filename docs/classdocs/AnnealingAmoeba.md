@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="AnnealingAmoeba"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class AnnealingAmoeba(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class AnnealingAmoeba(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Simulated annealing simplex finding minimum.
 
@@ -37,7 +38,7 @@ with a factor set by cooling=0.95, by default.
 Iteration continues until the relative difference between the low and high
 points within the simplex is less than reltol
 <br>&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| / ( |yhi| + |ylo| ) < reltol
-and/or the absolute difference is less than abstol
+<br>&nbsp; and/or the absolute difference is less than abstol
 <br>&nbsp;&nbsp;&nbsp;&nbsp; |yhi - ylo| < abstol.
 
 AnnealingAmoeba can be used with limits set to one or more of the input values.
@@ -58,12 +59,10 @@ Author       Do Kester
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the best of the above values
 * xopt  :  ndarray
 <br>&nbsp;&nbsp;&nbsp;&nbsp; copy of the simplex point that has the best value (nx)
-
 * rng  :  RandomState
 <br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
 * seed  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; seed of rng
-
 * reltol  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Relative tolerance. Program stops when ( |yhi-ylo| / (|yhi|+|ylo|) ) < reltol
 * abstol  :  float
@@ -74,14 +73,12 @@ Author       Do Kester
 <br>&nbsp;&nbsp;&nbsp;&nbsp; iteration counter
 * ncalls  :  int (read only)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; numbers of calls to func
-
 * temp  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; annealing temperature (default: 0)
 * cooling  :  float (non existent when temp=0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; cooling factor (default: 0.95)
 * steps  :  int (non existent when temp=0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of steps per cooling cycle (default: 10)
-
 * verbose  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 0  : silent
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 1 : print results to output
@@ -90,7 +87,6 @@ Author       Do Kester
 * callback  :  callable
 <br>&nbsp;&nbsp;&nbsp;&nbsp; function to be called every iteration of form 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; xopt = callback( xopt )
-
 * simplex  :  ndarray
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the simplex has shape = (nx+1, nx); nx is the size of x
 * values  :  ndarray
@@ -104,7 +100,7 @@ Author       Do Kester
 <strong>AnnealingAmoeba(</strong> func, xini, size=1, seed=4567, temp=0, limits=None,
  maxiter=1000, reltol=0.0001, abstol=0.0001, cooling=0.95, steps=10,
  verbose=0, callback=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L129-L218 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new AnnealingAmoeba class to minimize the function
 
@@ -156,7 +152,7 @@ ValueError
 <a name="makeSimplex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeSimplex(</strong> xini, step )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L220-L270 target=_blank>[source]</a></th></tr></thead></table>
 Make a simplex for the given set of parameters.
 
 <b>Parameters</b>
@@ -170,19 +166,19 @@ Make a simplex for the given set of parameters.
 <a name="hasLowLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLowLimits(</strong> k ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L272-L276 target=_blank>[source]</a></th></tr></thead></table>
 Return True if it has low limits > -inf.
 
 <a name="hasHighLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasHighLimits(</strong> k ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L278-L282 target=_blank>[source]</a></th></tr></thead></table>
 Return True if it has high limits < inf.
 
 <a name="stayInLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>stayInLimits(</strong> oldpar, trypar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L284-L309 target=_blank>[source]</a></th></tr></thead></table>
 Keep the parameters within the limits.
 
 <b>Parameters</b>
@@ -200,7 +196,7 @@ Keep the parameters within the limits.
 <a name="checkSimplex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkSimplex(</strong> simplex )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L311-L328 target=_blank>[source]</a></th></tr></thead></table>
 Check for degeneracy: all points on same location.
 
 <b>Parameters</b>
@@ -211,14 +207,14 @@ Check for degeneracy: all points on same location.
 <a name="setValues"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setValues(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L330-L348 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the function values a simplex's corners
 
 
 <a name="minimize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>minimize(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L350-L384 target=_blank>[source]</a></th></tr></thead></table>
 Converge the simplex.
 
 <b>Returns</b>
@@ -232,7 +228,7 @@ ConvergenceError when too many iterations are needed.
 <a name="temperatureStep"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>temperatureStep(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L386-L513 target=_blank>[source]</a></th></tr></thead></table>
 Perform simplex moves in the right direction.
 
 <b>Returns</b>
@@ -243,17 +239,17 @@ Perform simplex moves in the right direction.
 <a name="doVerbose"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>doVerbose(</strong> name, chisq, par, verbose=0 ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L515-L525 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="randomRange"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>randomRange(</strong> factor )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L527-L528 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="inflateSimplex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>inflateSimplex(</strong> ilo, factor )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L530-L567 target=_blank>[source]</a></th></tr></thead></table>
 Inflate/deflate simplex around the (lowest) point (ilo).
 
 inflate if factor > 1
@@ -271,7 +267,7 @@ mirror  if factor < 0
 <a name="trialStep"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>trialStep(</strong> ihi, yhi, factor )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L569-L603 target=_blank>[source]</a></th></tr></thead></table>
 Do a trial step to improve the worst (highest) point.
 
 <b>Parameters</b>
@@ -286,5 +282,6 @@ Do a trial step to improve the worst (highest) point.
 <a name="logRanTemp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logRanTemp(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L605-L611 target=_blank>[source]</a></th></tr></thead></table>
 
+Endline #L613

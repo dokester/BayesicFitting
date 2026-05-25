@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="HarmonicDynamicModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class HarmonicDynamicModel(</strong> <a href="./HarmonicModel.html">HarmonicModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class HarmonicDynamicModel(</strong> <a href="./HarmonicModel.html">HarmonicModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Harmonic oscillator Model of adaptable order.
 
@@ -59,7 +60,7 @@ Category     mathematics/Fitting
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>HarmonicDynamicModel(</strong> order, minOrder=1, maxOrder=None, period=1.0, fixed=None,
  growPrior=None, copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L90-L137 target=_blank>[source]</a></th></tr></thead></table>
 
 Harmonic of a adaptable order.
 
@@ -93,23 +94,23 @@ ValueError when order is outside [min..max] range
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L139-L141 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L143-L144 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L146-L171 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="basePrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> k )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L173-L183 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior for parameter k.
 
 <b>Parameters</b>
@@ -120,9 +121,10 @@ Return the prior for parameter k.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L185-L187 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the model. 
+Endline #L189
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./HarmonicModel.html">HarmonicModel,</a></th></tr></thead></table>
 

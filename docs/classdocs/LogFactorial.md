@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="LogFactorial"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>Module LogFactorial</strong> </th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>Module LogFactorial</strong> </th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 
 method that returns the log of the factorial of a number.
@@ -13,7 +14,7 @@ method that returns the log of the factorial of a number.
 <a name="logFactorial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logFactorial(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py#L39-L130 target=_blank>[source]</a></th></tr></thead></table>
 
 logFactorial.  It provides the natural log of k!
 
@@ -42,3 +43,4 @@ Do Kester, shamelessly copied from J.Skilling
 
 
 
+Endline #L132

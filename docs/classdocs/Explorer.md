@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="Explorer"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class Explorer(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class Explorer(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Explorer is a helper class of NestedSampler, which contains and runs the
 diffusion engines.
@@ -38,7 +39,7 @@ Author       Do Kester.
 <a name="Explorer"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Explorer(</strong> ns, threads=False )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L72-L98 target=_blank>[source]</a></th></tr></thead></table>
 
 Construct Explorer from a NestedSampler object.
 
@@ -51,7 +52,7 @@ Construct Explorer from a NestedSampler object.
 <a name="explore"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>explore(</strong> worst, lowLhood, iteration )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L100-L145 target=_blank>[source]</a></th></tr></thead></table>
 Explore the likelihood function, using threads.
 
 <b>Parameters</b>
@@ -65,7 +66,7 @@ Explore the likelihood function, using threads.
 <a name="exploreWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>exploreWalker(</strong> kw, lowLhood, engines, rng )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L147-L209 target=_blank>[source]</a></th></tr></thead></table>
 Move the walker around until it is randomly distributed over the prior and
 higher in logL then lowLhood
 
@@ -83,7 +84,7 @@ higher in logL then lowLhood
 <a name="selEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>selEngines(</strong> iteration ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L211-L225 target=_blank>[source]</a></th></tr></thead></table>
 Select engines with slowly changing parameters once per so many iterations.
 
 <b>Parameter</b>
@@ -94,7 +95,7 @@ Select engines with slowly changing parameters once per so many iterations.
 <a name="allEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>allEngines(</strong> iteration ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L227-L236 target=_blank>[source]</a></th></tr></thead></table>
 Always use all engines.
 
 <b>Parameters</b>
@@ -105,22 +106,7 @@ Always use all engines.
 <a name="checkWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkWalkers(</strong> ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L238-L243 target=_blank>[source]</a></th></tr></thead></table>
 
-Perform logLcheck() on all walkers. 
-<a name="logLcheck"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>logLcheck(</strong> walker ) 
-</th></tr></thead></table>
-Sanity check when no moves are found, if the LogL is still the same as the stored logL.
-
-<b>Parameters</b>
-
-* walker  :  Walker
-<br>&nbsp;&nbsp;&nbsp;&nbsp; the one with the stored logL
-
-<b>Raises</b>
-
-ValueError at inconsistency.
-
-
+Perform sanity check on all walkers. 
+Endline #L245

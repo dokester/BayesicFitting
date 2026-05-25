@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="IterativeFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class IterativeFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class IterativeFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Base class with methods common to all iterative fitters.
 
@@ -46,7 +47,7 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 <a name="IterativeFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>IterativeFitter(</strong> xdata, model, maxIter=None, tolerance=0.0001, verbose=1, **kwargs ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L75-L116 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new iterative fitter, providing xdatas and model.
 
@@ -78,7 +79,7 @@ kwargs for [BaseFitter](./BaseFitter.md)
 <a name="setParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setParameters(</strong> params )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L118-L130 target=_blank>[source]</a></th></tr></thead></table>
 Initialize the parameters of the model
 A little superfluous: see [link](./link.md) Model#setParameters
 
@@ -88,24 +89,45 @@ A little superfluous: see [link](./link.md) Model#setParameters
 <br>&nbsp;&nbsp;&nbsp;&nbsp; initial parameters
 
 
-<a name="doPlot"></a>
+<a name="setPlotters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>doPlot(</strong> param, force=False )
-</th></tr></thead></table>
-Plot intermediate result.
+<strong>setPlotters(</strong> plot ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L132-L165 target=_blank>[source]</a></th></tr></thead></table>
+Set plot methods as requested by plot.
 
+| plot   | doIterPlot |   doLastPlot   |   comment            |
+|--------|------------|----------------|----------------------|
+| False  |  no plot   |   no plot      | default; dont plot   |
+| True   |  no plot   | plotSampleList |                      |
+| "last" |  no plot   | plotSampleList |                      |
+| "iter" | plotWalker |   no plot      |                      |
+| "all"  | plotWalker | plotSampleList |                      |
+| "test" | plotWalker | plotSampleList | no show(), for tests |
+
+The plot methods plotWalker and plotSampleList are part of the
+module Plotter.py
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 
 <b>Parameters</b>
 
-* param  :  array_like
-<br>&nbsp;&nbsp;&nbsp;&nbsp; of the model
-* force  :  bool
-<br>&nbsp;&nbsp;&nbsp;&nbsp; do the plot
+* plot  :  str or bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; as in table
 
+<a name="plotNot"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>plotNot(</strong> ydata, param, force=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L167-L169 target=_blank>[source]</a></th></tr></thead></table>
 
+do not plot 
+<a name="plotIter"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>plotIter(</strong> ydata, param, force=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L171-L177 target=_blank>[source]</a></th></tr></thead></table>
+
+Plot Iteration results 
 <a name="fitprolog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L179-L213 target=_blank>[source]</a></th></tr></thead></table>
 Prolog for all iterative Fitters.
 
 1. Sets up plotting (if requested)
@@ -133,7 +155,7 @@ Prolog for all iterative Fitters.
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, keep=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L215-L237 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data.
 
 It will calculate the hessian matrix and chisq.
@@ -156,10 +178,11 @@ ConvergenceError if it stops when the tolerance has not yet been reached.
 
 <a name="report"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>report(</strong> verbose, param, chi, more=None, force=False ) 
-</th></tr></thead></table>
+<strong>report(</strong> verbose, ydata, param, chi, more=None, force=False ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/IterativeFitter.py#L239-L254 target=_blank>[source]</a></th></tr></thead></table>
 Report on intermediate results.
 
+Endline #L256
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 
@@ -168,8 +191,8 @@ Report on intermediate results.
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -180,7 +203,7 @@ Report on intermediate results.
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getScale(</strong> )](./BaseFitter.md#getScale)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) ](./BaseFitter.md#getLogLikelihood)

@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ScaledErrorDistribution"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ScaledErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScaledErrorDistribution.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ScaledErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScaledErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Base class that defines methods common to error distributions with a scale.
 
@@ -20,7 +21,7 @@ Author       Do Kester.
 <a name="ScaledErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ScaledErrorDistribution(</strong> scale=1.0, limits=None, fixed=None, copy=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScaledErrorDistribution.py#L53-L82 target=_blank>[source]</a></th></tr></thead></table>
 
 Default Constructor.
 
@@ -44,13 +45,13 @@ Default Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScaledErrorDistribution.py#L84-L86 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="setLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScaledErrorDistribution.py#L88-L129 target=_blank>[source]</a></th></tr></thead></table>
 Set limits for scale.
 
 <b>Parameters</b>
@@ -62,6 +63,7 @@ Set limits for scale.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; high limits
 
 
+Endline #L131
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a></th></tr></thead></table>
 
@@ -82,5 +84,4 @@ Set limits for scale.
 * [<strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) ](./ErrorDistribution.md#partialLogL_alt)
 * [<strong>numPartialLogL(</strong> problem, allpars, fitIndex ) ](./ErrorDistribution.md#numPartialLogL)
 * [<strong>updateLogL(</strong> problem, allpars, parval=None )](./ErrorDistribution.md#updateLogL)
-* [<strong>setResult(</strong> )](./ErrorDistribution.md#setResult)
 * [<strong>hyparname(</strong> k ) ](./ErrorDistribution.md#hyparname)

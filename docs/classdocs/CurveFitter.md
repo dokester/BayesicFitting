@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="CurveFitter"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 CurveFitter implements scipy.optimize.curve<sub>fit</sub>.
 
@@ -25,7 +26,7 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 <a name="CurveFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CurveFitter(</strong> xdata, model, method=None, fixedScale=None, map=False, keep=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L49-L77 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
@@ -53,7 +54,7 @@ Create a new class, providing inputs and model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, inipar=None, keep=None, limits=None,
  accuracy=None, plot=False, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L79-L180 target=_blank>[source]</a></th></tr></thead></table>
 Return      parameters for the model fitted to the data array.
 
 <b>Parameters</b>
@@ -88,7 +89,7 @@ ValueError when ydata or weights contain a NaN
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, *fitpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L182-L200 target=_blank>[source]</a></th></tr></thead></table>
 Result method to make connection to the scipy optimizers
 
 <b>Parameters</b>
@@ -101,7 +102,7 @@ Result method to make connection to the scipy optimizers
 <a name="jacobian"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>jacobian(</strong> xdata, *fitpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L202-L216 target=_blank>[source]</a></th></tr></thead></table>
 Method to make connection to the scipy optimizers
 
 <b>Parameters</b>
@@ -111,6 +112,7 @@ Method to make connection to the scipy optimizers
 * fitpar  :  (tuple of) float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters for the model
 
+Endline #L218
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 

@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="SplinesDynamicModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 BasicSplinesModel that is modifiable (knot locations) and dynamic (in number
 of knots)
@@ -12,27 +13,35 @@ of knots)
 
 <b>Examples</b>
 
-    knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
-    csm = SplinesModel( knots=knots, order=2 )
+    # make dynamic splinesmodel, initially with 4 equidistant knots from 0 to 10
+    knots = numpy.linspace( 0, 10, 4, dtype=float )
+    csm = SplinesDynamicModel( knots=knots, modifiable=False )
     print csm.getNumberOfParameters( )
-    18
-    # or alternatively
-    csm = SplinesModel( nrknots=17, order=2, min=0, max=160 )    # automatic layout of knots
+    6
+    # or similarly, also modifiable
+    csm = SplinesDynamicModel( nrknots=4, min=0, max=10 )
     print csm.getNumberOfParameters( )
-    18
-    # or alternatively
-    npt = 161                                               # to include both 0 and 160.
-    x = numpy.arange( npt, dtype=float )                    # x-values
-    csm = SplinesModel( nrknots=17, order=2, xrange=x )     # automatic layout of knots
+    6
+    # or periodic and not dynamic
+    x = numpy.arange( npt, dtype=float )
+    knots = numpy.linspace( 0, 10, 4, dtype=float )
+    csm = SplinesDynamicModel( knots=knots, border=1, dynamic=False )
     print csm.getNumberOfParameters( )
-    18
+    5
 
 <b>Attributes</b>
 
 * minKnots  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots
-* maxDegree  :  int or None
+* maxKnots  :  int or None
 <br>&nbsp;&nbsp;&nbsp;&nbsp; maximum number of knots
+* minDistance  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum distance between knots
+* border  :  int (0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0,1,2 as in BasicSplinesModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 3 periodic (as 1) with flexible period
+* flexPeriod  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; flexible period when the model is periodic
 
 <b>Attributes from Modifiable</b>
 
@@ -40,7 +49,11 @@ of knots)
 
 <b>Attributes from Dynamic</b>
 
-&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior
+&nbsp;&nbsp;&nbsp;&nbsp; dynamic, ncomp, deltaNpar, minComp, maxComp, growPrior
+
+<b>Attributes from BasicSplinesModel</b>
+
+&nbsp;&nbsp;&nbsp;&nbsp; border, period
 
 <b>Attributes from SplinesModel</b>
 
@@ -67,8 +80,8 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 <a name="SplinesDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SplinesDynamicModel(</strong> modifiable=True, dynamic=True, growPrior=None, minKnots=2, maxKnots=None,
- minDistance=0.01, copy=None, **kwargs )
-</th></tr></thead></table>
+ minDistance=0.01, border=0, copy=None, **kwargs )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L105-L173 target=_blank>[source]</a></th></tr></thead></table>
 
 Splines on a given set of knots and a given order.
 
@@ -76,17 +89,19 @@ The number of parameters is ( length( knots ) + order - 1 )
 
 <b>Parameters</b>
 
-* modifiable  :  bool
+* modifiable  :  bool (True)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if True allow changement of the knot locations
-* dynamic  :  bool
+* dynamic  :  bool (True)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if True allow growth and shrinkage of number of knots
-* minKnots  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots (def=2)
+* minKnots  :  int (2)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; minimum number of knots
 * maxKnots  :  None or int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; maximum number of Knots
-* minDistance  :  float
+* minDistance  :  float ( 0.01 * mean knot separation )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; minimum distance between knots, provided as fraction of average knot distance.
-<br>&nbsp;&nbsp;&nbsp;&nbsp; default is ( 0.01 * ( knots[-1] - knots[0] ) / nrknots )
+* border  :  int (0)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 0,1,2 as in BasicSplinesModel
+<br>&nbsp;&nbsp;&nbsp;&nbsp; 3 periodic (as 1) with flexible period
 * growPrior  :  None or Prior
 <br>&nbsp;&nbsp;&nbsp;&nbsp; governing the birth and death.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; ExponentialPrior (scale=2) if  maxDegree is None else UniformPrior
@@ -105,23 +120,31 @@ ValueError if not minKnots <= nrknots <= maxKnots
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> modifiable=None, dynamic=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L175-L216 target=_blank>[source]</a></th></tr></thead></table>
+Make a copy of the model, optionally unchangeable.
+
+<b>Parameters</b>
+
+* modifiable  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; is a modifiable model
+* dynamic  :  bool
+<br>&nbsp;&nbsp;&nbsp;&nbsp; is a dynamic model
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L218-L223 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L225-L226 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, force=False, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L228-L293 target=_blank>[source]</a></th></tr></thead></table>
 Increase the degree by one upto maxComp ( if present ).
 
 <b>Parameters</b>
@@ -131,7 +154,7 @@ Increase the degree by one upto maxComp ( if present ).
 * rng  :  random number generator (obligatory)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to generate a new parameter.
 * force  :  bool
-<br>&nbsp;&nbsp;&nbsp;&nbsp; dont check maxKnots
+<br>&nbsp;&nbsp;&nbsp;&nbsp; dont check maxKnots (only for varyAlt())
 
 <b>Return</b>
 
@@ -141,7 +164,7 @@ Increase the degree by one upto maxComp ( if present ).
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L295-L366 target=_blank>[source]</a></th></tr></thead></table>
 Decrease the degree by one downto minComp ( default 1 ).
 
 <b>Parameters</b>
@@ -159,12 +182,24 @@ Decrease the degree by one downto minComp ( default 1 ).
 <a name="vary"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L368-L426 target=_blank>[source]</a></th></tr></thead></table>
+Vary the structure of a Modifiable Model
+
+
+<b>Parameters</b>
+
+* rng  :  RNG
+<br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
+* location  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; index of the item to be modified; otherwise random
+* kwargs  :  keyword arguments
+<br>&nbsp;&nbsp;&nbsp;&nbsp; for specific implementations
+
 
 <a name="varyAlt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>varyAlt(</strong> offset=0, rng=None, **kwargs ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L428-L444 target=_blank>[source]</a></th></tr></thead></table>
 Vary the structure of a Modifiable Model
 
 
@@ -177,6 +212,7 @@ Vary the structure of a Modifiable Model
 * kwargs  :  keyword arguments
 <br>&nbsp;&nbsp;&nbsp;&nbsp; for specific implementations
 
+Endline #L446
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Modifiable.html">Modifiable,</a></th></tr></thead></table>
 

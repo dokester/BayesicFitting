@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ChebyshevPolynomialModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ChebyshevPolynomialModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ChebyshevPolynomialModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Chebyshev polynomial model of arbitrary degree.
 
@@ -50,7 +51,7 @@ npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 <a name="ChebyshevPolynomialModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ChebyshevPolynomialModel(</strong> degree, copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py#L78-L101 target=_blank>[source]</a></th></tr></thead></table>
 
 Chebyshev Polynomial of a certain degree.
 
@@ -72,13 +73,13 @@ The number of parameters is ( degree + 1 )
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py#L103-L114 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py#L116-L147 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata value.
 
 The partials are calculated using the recurrence formula
@@ -98,7 +99,7 @@ The partials are calculated using the recurrence formula
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py#L149-L182 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative df/dx at the xdata value.
 
 &nbsp; df<sub>n</sub> = n * U<sub>n-1</sub>
@@ -118,14 +119,14 @@ Returns the derivative df/dx at the xdata value.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py#L184-L192 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChebyshevPolynomialModel.py#L194-L206 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 It is always yUnit, as it cannot be otherwise.
 The xUnit must be dimensionless.
@@ -136,6 +137,7 @@ The xUnit must be dimensionless.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
+Endline #L208
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./LinearModel.html">LinearModel</a></th></tr></thead></table>
 

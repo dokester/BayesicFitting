@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ChordEngine"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ChordEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ChordEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Move a a walker in a random direction.
 
@@ -29,8 +30,11 @@ MNRAS (2015) Volume 453, Issue 4, p 4384–4398
 
 <b>Attributes</b>
 
-* debug  :  bool
-<br>&nbsp;&nbsp;&nbsp;&nbsp; perform the step-out action too
+* reset  :  bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; always reset othonormal basis 
+* extend  :  bool (False)
+<br>&nbsp;&nbsp;&nbsp;&nbsp; perform the step-out action until logL < lowL
+* plotter  :  
 
 <b>Attributes from Engine</b>
 
@@ -42,7 +46,7 @@ Author       Do Kester.
 <a name="ChordEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ChordEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py#L80-L104 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -60,13 +64,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py#L106-L125 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )
-</th></tr></thead></table>
+<strong>execute(</strong> kw, lowLhood, iteration=0 )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py#L127-L323 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by diffusing the parameters.
 
 <b>Parameters</b>
@@ -75,8 +79,6 @@ Execute the engine by diffusing the parameters.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
 * lowLhood  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood
-* append  :  bool
-<br>&nbsp;&nbsp;&nbsp;&nbsp; set walker in place or append
 * iteration  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
 
@@ -88,9 +90,20 @@ Execute the engine by diffusing the parameters.
 <a name="stepOut"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>stepOut(</strong> problem, ptry, usav, vel, t, tmax, lowLhood, fitIndex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py#L325-L352 target=_blank>[source]</a></th></tr></thead></table>
 Check if endpoints are indeed outside the lowLhood domain.
 
+<a name="plotOut"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>plotOut(</strong> problem, usave, vel, t0, t1 ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py#L354-L360 target=_blank>[source]</a></th></tr></thead></table>
+
+<a name="plotOutDummy"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>plotOutDummy(</strong> problem, usave, vel, t0, t1 ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ChordEngine.py#L362-L361 target=_blank>[source]</a></th></tr></thead></table>
+
+Endline #L363
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 

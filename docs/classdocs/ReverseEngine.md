@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="ReverseEngine"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class ReverseEngine(</strong> <a href="./OrderEngine.html">OrderEngine</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ReverseEngine.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class ReverseEngine(</strong> <a href="./OrderEngine.html">OrderEngine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ReverseEngine.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 The ReverseEngine tries to reverse a selection of the parameters in place.
 
@@ -27,7 +28,7 @@ Author       Do Kester.
 <a name="ReverseEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ReverseEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ReverseEngine.py#L50-L65 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -45,19 +46,20 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ReverseEngine.py#L67-L73 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="executeOnce"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>executeOnce(</strong> kw, lowLhood ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ReverseEngine.py#L75-L111 target=_blank>[source]</a></th></tr></thead></table>
 
+Endline #L113
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./OrderEngine.html">OrderEngine</a></th></tr></thead></table>
 
 
-* [<strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )](./OrderEngine.md#execute)
+* [<strong>execute(</strong> kw, lowLhood, iteration=0 )](./OrderEngine.md#execute)
 * [<strong>calculateUnitRange(</strong> ) ](./OrderEngine.md#calculateUnitRange)
 
 
@@ -65,10 +67,7 @@ Return copy of this.
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 
-* [<strong>bestBoost(</strong> problem, myFitter=None ) ](./Engine.md#bestBoost)
 * [<strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) ](./Engine.md#setWalker)
-* [<strong>noBoost(</strong> walker ) ](./Engine.md#noBoost)
-* [<strong>doBoost(</strong> walker ) ](./Engine.md#doBoost)
 * [<strong>domain2Unit(</strong> problem, dval, kpar=None ) ](./Engine.md#domain2Unit)
 * [<strong>unit2Domain(</strong> problem, uval, kpar=None ) ](./Engine.md#unit2Domain)
 * [<strong>startJourney(</strong> unitStart ) ](./Engine.md#startJourney)
@@ -82,5 +81,6 @@ Return copy of this.
 * [<strong>reportBest(</strong> )](./Engine.md#reportBest)
 * [<strong>printReport(</strong> best=False ) ](./Engine.md#printReport)
 * [<strong>successRate(</strong> ) ](./Engine.md#successRate)
-* [<strong>getUnitMinmax(</strong> problem, lowLhood ) ](./Engine.md#getUnitMinmax)
-* [<strong>getUnitRange(</strong> problem, lowLhood ) ](./Engine.md#getUnitRange)
+* [<strong>getUnitMinmax(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitMinmax)
+* [<strong>getUnitRange(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitRange)
+* [<strong>printIter(</strong> iteration=0, repiter=1000 ) ](./Engine.md#printIter)

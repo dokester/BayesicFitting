@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="CombiModel"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class CombiModel(</strong> <a href="./BracketModel.html">BracketModel</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class CombiModel(</strong> <a href="./BracketModel.html">BracketModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 CombiModel combines a number of copies of the same model.
 
@@ -96,7 +97,7 @@ to work.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CombiModel(</strong> model, nrepeat=1, copy=None, oper='add',
  addCombi=None, mulCombi=None, **kwargs )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L124-L182 target=_blank>[source]</a></th></tr></thead></table>
 
 CombiModel combines several copies of the same model int one.
 
@@ -129,13 +130,13 @@ CombiModel combines several copies of the same model int one.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L184-L191 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="combine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>combine(</strong> addCombi=None, mulCombi=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L193-L240 target=_blank>[source]</a></th></tr></thead></table>
 (re)sets the value of attributes "addindex", "addvalue", "mulindex", "mulvalue",
 "select" and "expandindex".
 
@@ -162,23 +163,23 @@ Copy method.
 <a name="makeExpandIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeExpandIndex(</strong> expandindex, amindex ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L242-L254 target=_blank>[source]</a></th></tr></thead></table>
 Make an expanded index enumerating the parameters for the full model
 
 <a name="setCombi"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setCombi(</strong> combi ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L256-L273 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="expandParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>expandParameters(</strong> param ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L275-L279 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L281-L294 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result calculated at the xdatas.
 
 <b>Parameters</b>
@@ -192,7 +193,7 @@ Returns the result calculated at the xdatas.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L296-L325 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partial derivatives calculated at the xdatas.
 
 <b>Parameters</b>
@@ -208,7 +209,7 @@ Returns the partial derivatives calculated at the xdatas.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L327-L340 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative (df/dx) calculated at the xdatas.
 
 <b>Parameters</b>
@@ -222,13 +223,13 @@ Returns the derivative (df/dx) calculated at the xdatas.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L342-L346 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> kpar )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L348-L362 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 
 <b>Parameters</b>
@@ -240,7 +241,7 @@ Return the name of the indicated parameter.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L364-L374 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
 <b>Parameters</b>
@@ -252,7 +253,7 @@ Return the unit of the indicated parameter.
 <a name="getPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> kpar ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CombiModel.py#L376-L394 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior for parameter kpar.
 
 First try at the kpar location, possibly further in the chain;
@@ -263,6 +264,7 @@ Upon failure try at the equivalent position in the head model
 * kpar  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter to be selected.
 
+Endline #L396
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BracketModel.html">BracketModel</a></th></tr></thead></table>
 

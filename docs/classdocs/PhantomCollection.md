@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="PhantomCollection"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class PhantomCollection(</strong> object )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class PhantomCollection(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 Helper class for NestedSamplers Engines to collect all trial walkers
 obtained during the NS run. They are kept ordered according to their logL.  
@@ -40,7 +41,7 @@ Author       Do Kester.
 <a name="PhantomCollection"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PhantomCollection(</strong> dynamic=False )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L67-L87 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -51,30 +52,43 @@ Constructor.
 
 <a name="length"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>length(</strong> np=0 ) 
-</th></tr></thead></table>
+<strong>length(</strong> np=None ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L89-L106 target=_blank>[source]</a></th></tr></thead></table>
 Return length of internal walkerlist
 
 <b>Parameters</b>
 
-* np  :  int
+* np  :  int or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None return overall length
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters (in case of dynamic only)
 
-<a name="getList"></a>
+<a name="getBest"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>getList(</strong> walker ) 
-</th></tr></thead></table>
-Return the applicable WalkerList
+<strong>getBest(</strong> np ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L108-L122 target=_blank>[source]</a></th></tr></thead></table>
+Return the best phantom with np parameters; or -1 if no phantom has
+np parameters
 
 <b>Parameters</b>
 
-* walker  :  Walker
-<br>&nbsp;&nbsp;&nbsp;&nbsp; return list pertaining to this walker (not used here)
+* np  :  int
+<br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters
+
+<a name="nextLowPhantom"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>nextLowPhantom(</strong> lowLhood ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L124-L137 target=_blank>[source]</a></th></tr></thead></table>
+Generator for phantoms with logL < lowLhood
+
+<b>Parameters</b>
+
+* lowLhood  :  float
+<br>&nbsp;&nbsp;&nbsp;&nbsp; low border for likelihood
 
 <a name="storeItems"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>storeItems(</strong> walker ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L139-L150 target=_blank>[source]</a></th></tr></thead></table>
 Store both items as arrays.
 
 <b>Parameters</b>
@@ -82,94 +96,33 @@ Store both items as arrays.
 * walker  :  Walker
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be added to the PhantomCollection
 
-<a name="calculateParamMinmax"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>calculateParamMinmax(</strong> lowLhood, np=0 )
-</th></tr></thead></table>
-Calculate the min and max values of the present parameter values.
-
-<b>Parameters</b>
-
-* lowLhood  :  float
-<br>&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood
-* np  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters (not used in this implementation)
-
-
 <a name="getParamMinmax"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>getParamMinmax(</strong> lowLhood, np=0 )
-</th></tr></thead></table>
+<strong>getParamMinmax(</strong> lowLhood, np=None )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L152-L168 target=_blank>[source]</a></th></tr></thead></table>
 Obtain the min and max values of the present parameter values.
 
 <b>Parameters</b>
 
 * lowLhood  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood
-* np  :  int
+* np  :  int or None
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters (not used in this implementation)
 
 
-<a name="lengthDynamic"></a>
+<a name="calculateParamMinmax"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>lengthDynamic(</strong> np=None ) 
-</th></tr></thead></table>
-Return length of internal walkerlist
-
-<b>Parameters</b>
-
-* np  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters (in case of dynamic only)
-
-<a name="getDynamicList"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>getDynamicList(</strong> walker ) 
-</th></tr></thead></table>
-Return the applicable WalkerList or None if not present.
-
-<b>Parameters</b>
-
-* walker  :  Walker
-<br>&nbsp;&nbsp;&nbsp;&nbsp; return list pertaining to this walker
-
-<a name="storeDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>storeDynamic(</strong> walker ) 
-</th></tr></thead></table>
-Put both items in the dictionaries with npars as key
-
-<b>Parameters</b>
-
-* logL  :  float
-<br>&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood 
-* pars  :  1d array
-<br>&nbsp;&nbsp;&nbsp;&nbsp; parameters
-
-<a name="calculateDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>calculateDynamic(</strong> lowLhood, np=0 )
-</th></tr></thead></table>
+<strong>calculateParamMinmax(</strong> lowLhood, np=None )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L170-L201 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the min and max values of the present parameters of length np.
 
 <b>Parameters</b>
 
 * lowLhood  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood
-* np  :  int
+* np  :  int or None
+<br>&nbsp;&nbsp;&nbsp;&nbsp; None for static models.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters
 
 
-<a name="getDynamic"></a>
-<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>getDynamic(</strong> lowLhood, np=0 )
-</th></tr></thead></table>
-Return the min and max values of the present parameters of length np.
-
-<b>Parameters</b>
-
-* lowLhood  :  float
-<br>&nbsp;&nbsp;&nbsp;&nbsp; lower boundary of the log Likelihood
-* np  :  int
-<br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters
-
-
+Endline #L203

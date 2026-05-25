@@ -3,8 +3,9 @@
 <br><br>
 
 <a name="WalkerList"></a>
-<table><thead style="background-color:#FFE0E0; width:100%; font-size:20px"><tr><th style="text-align:left">
-<strong>class WalkerList(</strong> <a href="./list.html">list</a> )</th><th style="text-align:right"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py target=_blank>Source</a></th></tr></thead></table>
+<table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
+<strong>class WalkerList(</strong> <a href="./list.html">list</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py target=_blank>[source]</a></th></tr></thead></table>
+<p>
 
 WalkerList is a list of Walker.
 
@@ -28,7 +29,7 @@ Author       Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>WalkerList(</strong> problem=None, ensemble=0, allpars=None, fitIndex=None,
  walker=None, walkerlist=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L56-L89 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -52,12 +53,12 @@ To be valid it needs either problem/allpars/fitindex or walker or walkerlist
 <a name="addWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>addWalkers(</strong> walker, ensemble )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L91-L99 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="setWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setWalker(</strong> walker, index )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L101-L118 target=_blank>[source]</a></th></tr></thead></table>
 replace/append a Walker to this list
 
 <b>Parameters</b>
@@ -70,7 +71,7 @@ replace/append a Walker to this list
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> src, des, wlist=None, start=0 )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L120-L144 target=_blank>[source]</a></th></tr></thead></table>
 Copy one item of the list onto another.
 
 <b>Parameters</b>
@@ -87,13 +88,13 @@ Copy one item of the list onto another.
 <a name="logPlus"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logPlus(</strong> x, y )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L146-L150 target=_blank>[source]</a></th></tr></thead></table>
 Return the log of sum.
 
 <a name="firstIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>firstIndex(</strong> lowL ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L152-L165 target=_blank>[source]</a></th></tr></thead></table>
 Return  index of the first walker with walker.logL > lowL, 
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None if list is empty
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len  if no item applies 
@@ -106,7 +107,7 @@ Return  index of the first walker with walker.logL > lowL,
 <a name="insertWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>insertWalker(</strong> walker )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L167-L196 target=_blank>[source]</a></th></tr></thead></table>
 Insert walker to this list keeping it sorted in logL
 
 <b>Parameters</b>
@@ -114,10 +115,15 @@ Insert walker to this list keeping it sorted in logL
 * walker  :  Walker
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the list to take to copy from
 
+<a name="printwlogl"></a>
+<table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
+<strong>printwlogl(</strong> wlkrs, klow ) 
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L198-L204 target=_blank>[source]</a></th></tr></thead></table>
+
 <a name="cropOnLow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cropOnLow(</strong> lowL ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L206-L221 target=_blank>[source]</a></th></tr></thead></table>
 Return WalkerList with all LogL > lowL
 
 Precondition: self is ordered on logL
@@ -130,7 +136,7 @@ Precondition: self is ordered on logL
 <a name="getLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogL(</strong> walker=None ) 
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L223-L236 target=_blank>[source]</a></th></tr></thead></table>
 Return the logL of the/all walker
 
 <b>Parameters</b>
@@ -141,8 +147,8 @@ Return the logL of the/all walker
 
 <a name="allPars"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
-<strong>allPars(</strong> )
-</th></tr></thead></table>
+<strong>allPars(</strong> npars=None )
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L238-L263 target=_blank>[source]</a></th></tr></thead></table>
 Return a 2d array of all parameters.
 
 In case of dynamic models the number of parameters may vary.
@@ -158,7 +164,7 @@ to get the actual number.
 <a name="getParameterEvolution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterEvolution(</strong> kpar=None )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L265-L285 target=_blank>[source]</a></th></tr></thead></table>
 Return the evolution of one or all parameters.
 
 In case of dynamic models the number of parameters may vary.
@@ -174,18 +180,19 @@ to get the actual number.
 <a name="getScaleEvolution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScaleEvolution(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L287-L290 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the evolution of the scale. 
 <a name="getLogLikelihoodEvolution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihoodEvolution(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L292-L295 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the evolution of the log( Likelihood ). 
 <a name="getLowLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLowLogL(</strong> )
-</th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/WalkerList.py#L297-L312 target=_blank>[source]</a></th></tr></thead></table>
 Return the lowest value of logL in the walkerlist, plus its index.
 
+Endline #L314
