@@ -4,7 +4,7 @@
 
 <a name="Prior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Prior(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Prior(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Base class defining prior distributions.
@@ -62,7 +62,7 @@ The copy method is also necessary.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Prior(</strong> limits=None, circular=False, domain=[-math.inf,math.inf],
  prior=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L96-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L96-L123 target=_blank>[source]</a></th></tr></thead></table>
 
 Default constructor.
 
@@ -82,13 +82,13 @@ Default constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L125-L127 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L127 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a copy 
 <a name="limitedIntegral"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitedIntegral(</strong> center=0, circular=False, limits=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L129-L159 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L129-L159 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the Integral of the prior where tails are cut off
 due to limits or circularity.
 
@@ -106,7 +106,7 @@ due to limits or circularity.
 <a name="setLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L161-L211 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L161-L211 target=_blank>[source]</a></th></tr></thead></table>
 Set limits.
 It is asserted that lowLimit is smaller than highLimit.
 
@@ -124,7 +124,7 @@ ValueError when low limit is larger than high limit or out of Domain
 <a name="setPriorAttributes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPriorAttributes(</strong> limits, circular ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L213-L247 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L213-L247 target=_blank>[source]</a></th></tr></thead></table>
 Set circular attributes.
 
 <b>Parameters</b>
@@ -139,43 +139,43 @@ Set circular attributes.
 <a name="isCircular"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isCircular(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L249-L253 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L249-L253 target=_blank>[source]</a></th></tr></thead></table>
 Whether circular
 
 <a name="limitedDomain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitedDomain2Unit(</strong> dval ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L255-L259 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L255-L259 target=_blank>[source]</a></th></tr></thead></table>
 Shrink domain to value in [0,1]
 
 <a name="limitedUnit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>limitedUnit2Domain(</strong> uval ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L261-L265 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L261-L265 target=_blank>[source]</a></th></tr></thead></table>
 Expand value in [0,1] to domain
 
 <a name="circularDomain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>circularDomain2Unit(</strong> dval ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L267-L271 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L267-L271 target=_blank>[source]</a></th></tr></thead></table>
 Make domain circular in unit by shrinking: domain ==> unit ==> [1/3,2/3]
 
 <a name="circularUnit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>circularUnit2Domain(</strong> uval ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L273-L315 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L273-L315 target=_blank>[source]</a></th></tr></thead></table>
 Unpack circular unit to domain: [1/3,2/3] ==> unit ==> domain
 
 <a name="unsetLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unsetLimits(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L317-L320 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L317-L320 target=_blank>[source]</a></th></tr></thead></table>
 
 Remove all limits. 
 <a name="setAttributes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAttributes(</strong> limits=None, scale=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L322-L336 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L322-L336 target=_blank>[source]</a></th></tr></thead></table>
 Set possible attributes for a Prior.
 
 <b>Parameters</b>
@@ -188,7 +188,7 @@ Set possible attributes for a Prior.
 <a name="isOutOfLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isOutOfLimits(</strong> par )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L338-L348 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L338-L348 target=_blank>[source]</a></th></tr></thead></table>
 True if the parameter is out of limits
 
 <b>Parameters</b>
@@ -200,7 +200,7 @@ True if the parameter is out of limits
 <a name="checkLimit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkLimit(</strong> par )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L350-L366 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L350-L366 target=_blank>[source]</a></th></tr></thead></table>
 Check whether the parameter is within limits.
 
 <b>Parameters</b>
@@ -216,7 +216,7 @@ Check whether the parameter is within limits.
 <a name="stayInLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>stayInLimits(</strong> par )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L368-L382 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L368-L382 target=_blank>[source]</a></th></tr></thead></table>
 Return lower limit or upper limit when parameter is outside.
 
 <b>Parameters</b>
@@ -228,31 +228,31 @@ Return lower limit or upper limit when parameter is outside.
 <a name="hasLowLimit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLowLimit(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L384-L386 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L384-L386 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the prior has its low limits set. 
 <a name="hasHighLimit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasHighLimit(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L388-L390 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L388-L390 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the prior has its high limits set. 
 <a name="hasLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLimits(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L392-L394 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L392-L394 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if it has any limits. 
 <a name="getLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLimits(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L396-L398 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L396-L398 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the limits. 
 <a name="getIntegral"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegral(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L400-L406 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L400-L406 target=_blank>[source]</a></th></tr></thead></table>
 Return the integral of the prior over the valid range.
 
 Default: 1.0 (for bound priors)
@@ -260,13 +260,13 @@ Default: 1.0 (for bound priors)
 <a name="getRange"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getRange(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L408-L411 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L408-L411 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the range. 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L413-L424 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L413-L424 target=_blank>[source]</a></th></tr></thead></table>
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a distribution.
 
@@ -279,7 +279,7 @@ a parameter for a distribution.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L426-L437 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L426-L437 target=_blank>[source]</a></th></tr></thead></table>
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a distribution.
 
@@ -292,7 +292,7 @@ between [0,1] for a distribution.
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> p )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L439-L451 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L439-L451 target=_blank>[source]</a></th></tr></thead></table>
 Return value of the Prior at a given value.
 
 If result is not defined, fall back to numerical derivative of Domain2Unit.
@@ -306,7 +306,7 @@ If result is not defined, fall back to numerical derivative of Domain2Unit.
 <a name="partialDomain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialDomain2Unit(</strong> p )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L453-L463 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L453-L463 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative of Domain2Unit, aka the result of the distribution at p
 
 <b>Parameters</b>
@@ -318,7 +318,7 @@ Return the derivative of Domain2Unit, aka the result of the distribution at p
 <a name="logResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logResult(</strong> p ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L465-L478 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L465-L478 target=_blank>[source]</a></th></tr></thead></table>
 Return the log of the result; -inf when p == 0.
 
 <b>Parameters</b>
@@ -330,7 +330,7 @@ Return the log of the result; -inf when p == 0.
 <a name="numPartialDomain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartialDomain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L480-L492 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L480-L492 target=_blank>[source]</a></th></tr></thead></table>
 Return a the numeric derivate of the domain2Unit function to dval.
 
 <b>Parameters</b>
@@ -342,7 +342,7 @@ Return a the numeric derivate of the domain2Unit function to dval.
 <a name="partialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> p )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L494-L505 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L494-L505 target=_blank>[source]</a></th></tr></thead></table>
 Return partial derivative of log( Prior ) wrt parameter.
 default numPartialLog
 
@@ -355,7 +355,7 @@ default numPartialLog
 <a name="numPartialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartialLog(</strong> p )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L507-L520 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L507-L520 target=_blank>[source]</a></th></tr></thead></table>
 Return the numeric partial derivative of log( Prior ) wrt parameter.
 <b>Parameters</b>
 
@@ -366,7 +366,6 @@ Return the numeric partial derivative of log( Prior ) wrt parameter.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Prior.py#L522-L540 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L522-L540 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the integral over the prior is bound. 
-Endline #L542

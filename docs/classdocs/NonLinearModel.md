@@ -4,7 +4,7 @@
 
 <a name="NonLinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class NonLinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class NonLinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Anchestor of all non-linear models.
@@ -36,7 +36,7 @@ Author       Do Kester
 <a name="NonLinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NonLinearModel(</strong> nparams, ndim=1, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py#L59-L81 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L59-L81 target=_blank>[source]</a></th></tr></thead></table>
 
 Parent class for all non linear models.
 
@@ -57,7 +57,7 @@ Parent class for all non linear models.
 <a name="setMixedModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setMixedModel(</strong> lindex )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py#L83-L99 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L83-L99 target=_blank>[source]</a></th></tr></thead></table>
 Convert a NonLinear model into a Mixed model with linear and
 non-linear parameters.
 
@@ -72,19 +72,19 @@ Reset with SetMixedModel( null );
 <a name="isMixed"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isMixed(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py#L101-L103 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L101-L103 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns true when linear indices have been set 
 <a name="getNonLinearIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNonLinearIndex(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py#L105-L109 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L105-L109 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns the index of the non-linear parameters. 
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param=None, useNum=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NonLinearModel.py#L111-L126 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L111-L126 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivatives for the model.
 
 <b>Parameters</b>
@@ -97,7 +97,6 @@ Return the partial derivatives for the model.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if True use numeric partial derivatives. Default False
 
 
-Endline #L128
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Model.html">Model</a></th></tr></thead></table>
 

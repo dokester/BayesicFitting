@@ -4,7 +4,7 @@
 
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Sinc Model.
@@ -51,7 +51,7 @@ See [KernelModel](./KernelModel.md)
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SincModel(</strong> copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py#L75-L90 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L75-L90 target=_blank>[source]</a></th></tr></thead></table>
 
 Sinc model.
 
@@ -69,10 +69,9 @@ Number of parameters is 3.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
-Endline #L96
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./KernelModel.html">KernelModel</a></th></tr></thead></table>
 
@@ -167,4 +166,6 @@ Endline #L96
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)
 * [<strong>baseParameterName(</strong> kpar ) ](./BaseModel.md#baseParameterName)

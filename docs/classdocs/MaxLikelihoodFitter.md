@@ -4,7 +4,7 @@
 
 <a name="MaxLikelihoodFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class MaxLikelihoodFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class MaxLikelihoodFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Base class with methods common to fitters handling ErrorDistributions.
@@ -32,7 +32,7 @@ ConvergenceError    Something went wrong during the convergence if the fit.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MaxLikelihoodFitter(</strong> xdata, model, errdis=None, scale=None, power=2.0,
  **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py#L66-L101 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L66-L101 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new iterative fitter, providing xdatas and model.
 
@@ -64,7 +64,7 @@ It does not work by itself.
 <a name="makeFuncs"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeFuncs(</strong> data, weights=None, index=None, ret=3 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py#L103-L145 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L103-L145 target=_blank>[source]</a></th></tr></thead></table>
 Make connection to the desired func, gradient and hessian.
 
 <b>Parameters</b>
@@ -81,18 +81,18 @@ Make connection to the desired func, gradient and hessian.
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py#L147-L155 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L147-L155 target=_blank>[source]</a></th></tr></thead></table>
 Return the stdev of the noise.
 
 <a name="getLogLikelihood"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLogLikelihood(</strong> autoscale=False, var=1.0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py#L157-L168 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L157-L168 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="normalize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalize(</strong> normdfdp, normdata, weight=1.0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py#L170-L181 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L170-L181 target=_blank>[source]</a></th></tr></thead></table>
 Not Implemented.
 
 <b>Raises</b>
@@ -104,11 +104,10 @@ the method is not implemented for MaxLikelihoodFitters
 <a name="testGradient"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>testGradient(</strong> par, at, data, weights=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MaxLikelihoodFitter.py#L183-L207 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L183-L207 target=_blank>[source]</a></th></tr></thead></table>
 returns true if the test fails.
 
 
-Endline #L209
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>
 

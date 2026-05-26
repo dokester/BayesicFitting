@@ -4,7 +4,7 @@
 
 <a name="ErrorsInXandYProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ErrorsInXandYProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ErrorsInXandYProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 A ErrorsInXandYProblem is an optimization of parameters which involves
@@ -63,7 +63,7 @@ model, xdata, ydata, weights, partype
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ErrorsInXandYProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  prior=None, covar=None, accuracy=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L87-L135 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L87-L135 target=_blank>[source]</a></th></tr></thead></table>
 
 Problem Constructor.
 
@@ -100,14 +100,14 @@ Problem Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L137-L155 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L137-L155 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 
 <a name="setAccuracy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAccuracy(</strong> accuracy=None, covar=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L157-L243 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L157-L243 target=_blank>[source]</a></th></tr></thead></table>
 Store 3 items from the covar matrix : 
 
 &nbsp;&nbsp;&nbsp;&nbsp; | var<sub>yy</sub>, var<sub>xy</sub> |
@@ -148,13 +148,13 @@ AttributeError. When both accuracy and covar are not None.
 <a name="hasWeights"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasWeights(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L245-L249 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L245-L249 target=_blank>[source]</a></th></tr></thead></table>
 
 Return whether it has weights. 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L251-L263 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L251-L263 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result calculated at the xdatas.
 
 <b>Parameters</b>
@@ -166,7 +166,7 @@ Returns the result calculated at the xdatas.
 <a name="splitParam"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>splitParam(</strong> param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L265-L281 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L265-L281 target=_blank>[source]</a></th></tr></thead></table>
 Split the parameters into Model parameters and targets.
 
 <b>Parameters</b>
@@ -182,7 +182,7 @@ tuple of ( targets, model parameters )
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L283-L314 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L283-L314 target=_blank>[source]</a></th></tr></thead></table>
 Return the partials as a matrix [2*nx,np+nx], where nx is the number of
 datapoints and np the number of parameters in the model.
 
@@ -200,7 +200,7 @@ datapoints and np the number of parameters in the model.
 <a name="derivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L316-L327 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L316-L327 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative to the Model.
 
 <b>Parameters</b>
@@ -211,7 +211,7 @@ Return the derivative to the Model.
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval, kpar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L329-L346 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L329-L346 target=_blank>[source]</a></th></tr></thead></table>
 Return value in [0,1] for the selected parameter.
 
 <b>Parameters</b>
@@ -224,7 +224,7 @@ Return value in [0,1] for the selected parameter.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval, kpar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L348-L362 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L348-L362 target=_blank>[source]</a></th></tr></thead></table>
 Return domain value for the selected parameter.
 
 <b>Parameters</b>
@@ -237,7 +237,7 @@ Return domain value for the selected parameter.
 <a name="getXYresiduals"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getXYresiduals(</strong> param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L364-L379 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L364-L379 target=_blank>[source]</a></th></tr></thead></table>
 Return residuals in y-direction and x-direction.
 
 <b>Parameters</b>
@@ -252,7 +252,7 @@ tuple of (y residuals, x residuals)
 <a name="weightedResSq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L381-L433 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L381-L433 target=_blank>[source]</a></th></tr></thead></table>
 Return the (weighted) squared distance between (xdata,ydata) and (xtry,ytry) where xtry are
 the trial values for xdata and ytry = model.result( xtry, param )
 
@@ -269,28 +269,27 @@ the trial values for xdata and ytry = model.result( xtry, param )
 <a name="myEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L435-L439 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L435-L439 target=_blank>[source]</a></th></tr></thead></table>
 Return a default list of preferred engines
 
 <a name="myStartEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L441-L445 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L441-L445 target=_blank>[source]</a></th></tr></thead></table>
 Return a default preferred start engines: "start"
 
 <a name="myDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L447-L452 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L447-L452 target=_blank>[source]</a></th></tr></thead></table>
 Return a default preferred ErrorDistribution: "gauss2d"
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ErrorsInXandYProblem.py#L454-L456 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L454-L456 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
-Endline #L458
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Problem.html">Problem</a></th></tr></thead></table>
 

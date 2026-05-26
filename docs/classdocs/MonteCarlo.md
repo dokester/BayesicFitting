@@ -4,7 +4,7 @@
 
 <a name="MonteCarlo"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class MonteCarlo(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class MonteCarlo(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Helper class to calculate the confidence region of a fitted model.
@@ -38,7 +38,7 @@ Author:      Do Kester
 <a name="MonteCarlo"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MonteCarlo(</strong> xdata, model, covariance, index=None, seed=12345, mcycles=25 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L64-L100 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L64-L100 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new MonteCarlo, providing inputs and model.
 
@@ -69,7 +69,7 @@ ValueError when model and input have different dimensions
 <a name="decompose"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decompose(</strong> covariance )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L102-L114 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L102-L114 target=_blank>[source]</a></th></tr></thead></table>
 Decompose a covariance matrix into eigenvectors and eigenvalues
 
 <b>Parameters</b>
@@ -80,7 +80,7 @@ Decompose a covariance matrix into eigenvectors and eigenvalues
 <a name="getError"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getError(</strong> xdata=None, scale=1.0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L116-L145 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L116-L145 target=_blank>[source]</a></th></tr></thead></table>
 Calculates scale * &sigma;-confidence regions on the model given some inputs.
 
 From the full covariance matrix ( = inverse of the Hessian ) random
@@ -99,7 +99,7 @@ The standard deviation of the models is returned as the error bar.
 <a name="randomVariant"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>randomVariant(</strong> xdata, scale=1.0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L147-L175 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L147-L175 target=_blank>[source]</a></th></tr></thead></table>
 Return a random variant of the model result.
 Taking into account the stdev of the parameters and their covariance.
 
@@ -110,4 +110,3 @@ Taking into account the stdev of the parameters and their covariance.
 * scale  :  float (1.0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; factor for &sigma;
 
-Endline #L177

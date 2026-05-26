@@ -4,7 +4,7 @@
 
 <a name="PhantomCollection"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PhantomCollection(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PhantomCollection(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Helper class for NestedSamplers Engines to collect all trial walkers
@@ -41,7 +41,7 @@ Author       Do Kester.
 <a name="PhantomCollection"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PhantomCollection(</strong> dynamic=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L67-L87 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L67-L87 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -53,7 +53,7 @@ Constructor.
 <a name="length"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>length(</strong> np=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L89-L106 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L106 target=_blank>[source]</a></th></tr></thead></table>
 Return length of internal walkerlist
 
 <b>Parameters</b>
@@ -65,7 +65,7 @@ Return length of internal walkerlist
 <a name="getBest"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getBest(</strong> np ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L108-L122 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L108-L122 target=_blank>[source]</a></th></tr></thead></table>
 Return the best phantom with np parameters; or -1 if no phantom has
 np parameters
 
@@ -77,7 +77,7 @@ np parameters
 <a name="nextLowPhantom"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextLowPhantom(</strong> lowLhood ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L124-L137 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L124-L137 target=_blank>[source]</a></th></tr></thead></table>
 Generator for phantoms with logL < lowLhood
 
 <b>Parameters</b>
@@ -88,7 +88,7 @@ Generator for phantoms with logL < lowLhood
 <a name="storeItems"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>storeItems(</strong> walker ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L139-L150 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L139-L150 target=_blank>[source]</a></th></tr></thead></table>
 Store both items as arrays.
 
 <b>Parameters</b>
@@ -99,7 +99,7 @@ Store both items as arrays.
 <a name="getParamMinmax"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParamMinmax(</strong> lowLhood, np=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L152-L168 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L152-L168 target=_blank>[source]</a></th></tr></thead></table>
 Obtain the min and max values of the present parameter values.
 
 <b>Parameters</b>
@@ -113,7 +113,7 @@ Obtain the min and max values of the present parameter values.
 <a name="calculateParamMinmax"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calculateParamMinmax(</strong> lowLhood, np=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomCollection.py#L170-L201 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L170-L201 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the min and max values of the present parameters of length np.
 
 <b>Parameters</b>
@@ -125,4 +125,3 @@ Calculate the min and max values of the present parameters of length np.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters
 
 
-Endline #L203

@@ -4,7 +4,7 @@
 
 <a name="CircularUniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class CircularUniformPrior(</strong> <a href="./UniformPrior.html">UniformPrior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CircularUniformPrior.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class CircularUniformPrior(</strong> <a href="./UniformPrior.html">UniformPrior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Circular Uniform prior distribution, for location parameters.
@@ -26,7 +26,7 @@ lowLimit, highLimit, deltaP, circular, _lowDomain, _highDomain, _umin, _urng
 <a name="CircularUniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CircularUniformPrior(</strong> circular=None, limits=None, prior=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CircularUniformPrior.py#L47-L64 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L47-L64 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -43,10 +43,9 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CircularUniformPrior.py#L66-L74 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L66-L74 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a (deep) copy of itself. 
-Endline #L76
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./UniformPrior.html">UniformPrior</a></th></tr></thead></table>
 

@@ -4,7 +4,7 @@
 
 <a name="Dynamic"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Dynamic(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Dynamic(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Class adjoint to Model which implements some dynamic behaviour.
@@ -28,7 +28,7 @@ Class adjoint to Model which implements some dynamic behaviour.
 <a name="Dynamic"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Dynamic(</strong> dynamic=True ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L51-L60 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L51-L60 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor for Dynamic
 
@@ -40,12 +40,12 @@ Constructor for Dynamic
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L62-L63 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L62-L63 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="setGrowPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setGrowPrior(</strong> growPrior=None, min=1, max=None, name="Comp" ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L65-L91 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L65-L91 target=_blank>[source]</a></th></tr></thead></table>
 Set the growth prior.
 
 <b>Parameters</b>
@@ -63,7 +63,7 @@ Set the growth prior.
 <a name="setDynamicAttribute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setDynamicAttribute(</strong> name, value ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L93-L127 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L93-L127 target=_blank>[source]</a></th></tr></thead></table>
 Set attribute, if it belongs to a Dynamic Models.
 
 <b>Parameters</b>
@@ -82,7 +82,7 @@ Set attribute, if it belongs to a Dynamic Models.
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L129-L169 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L129-L169 target=_blank>[source]</a></th></tr></thead></table>
 Increase the degree by one upto maxComp ( if present ).
 
 <b>Parameters</b>
@@ -100,7 +100,7 @@ Increase the degree by one upto maxComp ( if present ).
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L171-L203 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L171-L203 target=_blank>[source]</a></th></tr></thead></table>
 Decrease the degree by one downto minComp ( default 1 ).
 
 <b>Parameters</b>
@@ -118,7 +118,7 @@ Decrease the degree by one downto minComp ( default 1 ).
 <a name="alterParameterNames"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterParameterNames(</strong> dnp ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L205-L220 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L205-L220 target=_blank>[source]</a></th></tr></thead></table>
 Renumber the parameter names.
 
 <b>Parameters</b>
@@ -129,7 +129,7 @@ Renumber the parameter names.
 <a name="alterParameterSize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterParameterSize(</strong> dnp, offset, location=None, value=0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L222-L249 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L222-L249 target=_blank>[source]</a></th></tr></thead></table>
 Change the number of parameters and self.parameters.
 
 <b>Parameters</b>
@@ -144,7 +144,7 @@ Change the number of parameters and self.parameters.
 <a name="alterParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterParameters(</strong> param, location, dnp, offset, value=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L251-L309 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L251-L309 target=_blank>[source]</a></th></tr></thead></table>
 change the parameters to comply with the changed model.
 
 param:      [p0 p1 p2 p3 p4 p5 p6 p7 p8 p9]   # previous set
@@ -181,7 +181,7 @@ dnp:        -2
 <a name="alterFitindex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>alterFitindex(</strong> findex, location, dnp, offset ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L311-L351 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L311-L351 target=_blank>[source]</a></th></tr></thead></table>
 change the fit index to comply with the changed model.
 
 <b>Parameters</b>
@@ -198,7 +198,7 @@ change the fit index to comply with the changed model.
 <a name="shuffle"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shuffle(</strong> param, offset, np, rng ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Dynamic.py#L353-L371 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L353-L371 target=_blank>[source]</a></th></tr></thead></table>
 Shuffle the parameters of the components (if they are equivalent)
 Default implementation: does nothing.
 
@@ -213,4 +213,3 @@ Default implementation: does nothing.
 * rng  :  RNG
 <br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
 
-Endline #L373

@@ -4,7 +4,7 @@
 
 <a name="SoftMaxModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SoftMaxModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SoftMaxModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Softmax Model is a Logistic model if the number of outputs is 1.
@@ -58,7 +58,7 @@ They are initialized at 0.0.
 <a name="SoftMaxModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SoftMaxModel(</strong> ndim=1, ndout=1, copy=None, offset=False, normed=True, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L84-L135 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L84-L135 target=_blank>[source]</a></th></tr></thead></table>
 
 Logistic response model.
 
@@ -83,13 +83,13 @@ Number of parameters is npars (see offset)
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L137-L140 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L137-L140 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L142-L158 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L142-L158 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function: F<sub>n</sub>( x<sub>k</sub> ) as array of
 shape [nx,ndout], where nx number of data points and ndout is the number of
 outputs.
@@ -105,7 +105,7 @@ outputs.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L160-L180 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L160-L180 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value as a list (size N) of arrays
 of shape (K,P). N is #outputs; K is #datapoints; P is #parameters.
 
@@ -122,7 +122,7 @@ of shape (K,P). N is #outputs; K is #datapoints; P is #parameters.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L182-L206 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L182-L206 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df<sub>i</sub>/dx<sub>n</sub> of each output f<sub>i</sub> to the data x<sub>n</sub>
 at each xdata (=x).
 It is returned as an array of shape (N,I) of an array of length K.
@@ -139,14 +139,14 @@ N is #outputs; I is #inputs (ndim); K is #datapoints.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L208-L214 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L208-L214 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SoftMaxModel.py#L216-L226 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L216-L226 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
 <b>Parameters</b>
@@ -155,7 +155,6 @@ Return the unit of the indicated parameter.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
-Endline #L228
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 

@@ -4,7 +4,7 @@
 
 <a name="SalesmanProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SalesmanProblem(</strong> <a href="./OrderProblem.html">OrderProblem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SalesmanProblem(</strong> <a href="./OrderProblem.html">OrderProblem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Traveling Salesman Problem.
@@ -32,7 +32,7 @@ The parameters are initialized at [k for k in range( npars )]
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SalesmanProblem(</strong> xdata=None, weights=None, distance="euclid", scale=None, table=None,
  oneway=False, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L60-L133 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L60-L133 target=_blank>[source]</a></th></tr></thead></table>
 
 Traveling Salesman problem.
 
@@ -64,20 +64,20 @@ Traveling Salesman problem.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L135-L137 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L135-L137 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L139-L144 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L139-L144 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L146-L174 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L146-L174 target=_blank>[source]</a></th></tr></thead></table>
 Calculates the distance between the nodes (xdata) in the order
 given by the parameters (params), multiplied by the weight at the 
 starting node (if present), divided by the scale
@@ -99,7 +99,7 @@ An array of distances
 <a name="manhattan"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>manhattan(</strong> xdata, pars, roll=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L176-L195 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L176-L195 target=_blank>[source]</a></th></tr></thead></table>
 Use Manhattan distances (1-norm)
 
 Each distance is 
@@ -118,7 +118,7 @@ Each distance is
 <a name="euclidic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>euclidic(</strong> xdata, pars, roll=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L197-L216 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L197-L216 target=_blank>[source]</a></th></tr></thead></table>
 Use Euclidic distances (2-norm)
 
 Each distance is 
@@ -137,7 +137,7 @@ Each distance is
 <a name="spherical"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>spherical(</strong> xdata, pars, roll=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L218-L272 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L218-L272 target=_blank>[source]</a></th></tr></thead></table>
 Use distances over a 2-d unit sphere.
 
 Each distance is calculated according to the Haversine formula.
@@ -158,7 +158,7 @@ The results are in radian.
 <a name="tabulated"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>tabulated(</strong> xdata, pars, roll=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L274-L293 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L274-L293 target=_blank>[source]</a></th></tr></thead></table>
 Use tabulated distances from self.table
 
 Each distance is 
@@ -177,7 +177,7 @@ Each distance is
 <a name="minimumDistance"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>minimumDistance(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L295-L306 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L295-L306 target=_blank>[source]</a></th></tr></thead></table>
 Return the smallest distance in the data.
 
 
@@ -192,7 +192,7 @@ return md
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SalesmanProblem.py#L308-L315 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L308-L315 target=_blank>[source]</a></th></tr></thead></table>
 
 baseName( self )
 return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
@@ -200,7 +200,6 @@ return str( "TravelingSalesman in %d dimensions with %d nodes. %s distance" %
 
 
 
-Endline #L317
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./OrderProblem.html">OrderProblem</a></th></tr></thead></table>
 

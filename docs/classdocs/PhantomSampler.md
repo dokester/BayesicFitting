@@ -4,7 +4,7 @@
 
 <a name="PhantomSampler"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 PhantomSampler is a version of NestedSampler that removes step walkers from
@@ -34,7 +34,7 @@ Author       Do Kester.
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=ENSEMBLE, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L59-L158 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L59-L158 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
@@ -128,13 +128,13 @@ problem.
 <a name="sample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sample(</strong> keep=None, plot=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L160-L168 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L160-L168 target=_blank>[source]</a></th></tr></thead></table>
 see NestedSampler.sample()
 
 <a name="updateEvidence"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateEvidence(</strong> worst ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L170-L269 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L170-L269 target=_blank>[source]</a></th></tr></thead></table>
 Updates the evidence (logZ) and the information (H)
 
 The walkers need to be sorted to logL
@@ -190,7 +190,6 @@ kw = 0      ### DONT use enumerate here
 
 return
 
-Endline #L271
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NestedSampler.html">NestedSampler</a></th></tr></thead></table>
 

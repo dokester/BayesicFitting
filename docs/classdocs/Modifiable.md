@@ -4,7 +4,7 @@
 
 <a name="Modifiable"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Modifiable(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Modifiable.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Modifiable(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Class adjoint to Model which implements the modifiable behaviour of some Models.
@@ -15,7 +15,7 @@ In the inhertance list is should be *before* Model as it changes the behaviour o
 <a name="Modifiable"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Modifiable(</strong> modifiable=True ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Modifiable.py#L36-L46 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L36-L46 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor for Modifiable
 
@@ -27,12 +27,12 @@ Constructor for Modifiable
 <a name="isModifiable"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isModifiable(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Modifiable.py#L48-L50 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L48-L50 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="vary"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> location=None, rng=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Modifiable.py#L52-L68 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L52-L68 target=_blank>[source]</a></th></tr></thead></table>
 Vary the structure of a Modifiable Model
 Default implementation: does nothing.
 
@@ -45,4 +45,3 @@ Default implementation: does nothing.
 * kwargs  :  keyword arguments
 <br>&nbsp;&nbsp;&nbsp;&nbsp; for specific implementations
 
-Endline #L70

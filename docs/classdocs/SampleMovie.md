@@ -4,7 +4,7 @@
 
 <a name="SampleMovie"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SampleMovie(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SampleMovie.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SampleMovie(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 SampleMovie produces a movie (mp4) from a SampleList
@@ -20,7 +20,7 @@ interactive setting.
 <a name="SampleMovie"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SampleMovie(</strong> samplelist, filename="samplemovie.mp4", problem=None, kpar=[0,1] ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SampleMovie.py#L47-L138 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L47-L138 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -37,4 +37,3 @@ The constructor produces the movie.
 * kpar  :  list of 2 ints
 <br>&nbsp;&nbsp;&nbsp;&nbsp; indices of the parameters to plot
 
-Endline #L140

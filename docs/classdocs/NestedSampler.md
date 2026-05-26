@@ -4,7 +4,7 @@
 
 <a name="NestedSampler"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class NestedSampler(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class NestedSampler(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Nested Sampling is a novel technique to do Bayesian calculations.
@@ -158,7 +158,7 @@ Author       Do Kester.
  keep=None, ensemble=ENSEMBLE, discard=1, seed=80409, rate=RATE,
  bestBoost=False, usePhantoms=True,
  engines=None, maxsize=None, threads=False, verbose=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L236-L400 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L236-L400 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
@@ -252,7 +252,7 @@ problem.
 <a name="sample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sample(</strong> keep=None, plot=False, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L402-L507 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L402-L507 target=_blank>[source]</a></th></tr></thead></table>
 Sample the posterior and return the 10log( evidence )
 
 A additional result of this method is a SampleList which contains
@@ -278,7 +278,7 @@ samples taken from the posterior distribution.
 <a name="initSample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initSample(</strong> ensemble=None, keep=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L509-L539 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L509-L539 target=_blank>[source]</a></th></tr></thead></table>
 Prolog for the sample method.
 
 <b>Parameters</b>
@@ -294,7 +294,7 @@ Prolog for the sample method.
 <a name="walkerLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>walkerLogL(</strong> w ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L541-L550 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L541-L550 target=_blank>[source]</a></th></tr></thead></table>
 Return the logL of the walker (needed for sort())
 
 <b>Parameters</b>
@@ -305,7 +305,7 @@ Return the logL of the walker (needed for sort())
 <a name="makeFitlist"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeFitlist(</strong> keep=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L552-L591 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L552-L591 target=_blank>[source]</a></th></tr></thead></table>
 Make list of indices of (hyper)parameters that need fitting.
 
 <b>Parameters</b>
@@ -316,7 +316,7 @@ Make list of indices of (hyper)parameters that need fitting.
 <a name="initReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initReport(</strong> keep=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L593-L645 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L593-L645 target=_blank>[source]</a></th></tr></thead></table>
 Print header of the processing report (if any).
 
 <b>Parameters</b>
@@ -327,7 +327,7 @@ Print header of the processing report (if any).
 <a name="iterReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>iterReport(</strong> kw, tail ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L647-L671 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L647-L671 target=_blank>[source]</a></th></tr></thead></table>
 Reporting during iterations (if any)
 
 <b>Parameters</b>
@@ -340,7 +340,7 @@ Reporting during iterations (if any)
 <a name="printIterRep"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>printIterRep(</strong> kw, parfmt="%s", tail=0, max=None, indent=0, end="\n" ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L673-L701 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L673-L701 target=_blank>[source]</a></th></tr></thead></table>
 Print one iteration line.
 
 <b>Parameters</b>
@@ -359,7 +359,7 @@ Print one iteration line.
 <a name="lastReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>lastReport(</strong> kw, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L703-L723 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L703-L723 target=_blank>[source]</a></th></tr></thead></table>
 Print concluding remarks (if any)
 
 <b>Parameters</b>
@@ -372,7 +372,7 @@ Print concluding remarks (if any)
 <a name="setPlotters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPlotters(</strong> plot ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L725-L758 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L725-L758 target=_blank>[source]</a></th></tr></thead></table>
 Set plot methods as requested by plot.
 
 | plot   | doIterPlot |   doLastPlot   |   comment            |
@@ -395,43 +395,43 @@ module Plotter.py
 <a name="plotNot"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotNot(</strong> kw, show=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L760-L762 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L760-L762 target=_blank>[source]</a></th></tr></thead></table>
 
 do not plot 
 <a name="plotIter"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotIter(</strong> kw, show=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L764-L769 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L764-L769 target=_blank>[source]</a></th></tr></thead></table>
 
 Plot Iteration results 
 <a name="plotLast"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotLast(</strong> kw, show=False, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L771-L778 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L771-L778 target=_blank>[source]</a></th></tr></thead></table>
 
 Plot the result 
 <a name="nextIteration"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextIteration(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L780-L812 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L780-L812 target=_blank>[source]</a></th></tr></thead></table>
 Return True when a next iteration is needed. False to stop
 
 <a name="optionalRestart"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>optionalRestart(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L814-L824 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L814-L824 target=_blank>[source]</a></th></tr></thead></table>
 Restart the session from a file. (not yet operational)
 
 <a name="optionalSave"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>optionalSave(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L826-L835 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L826-L835 target=_blank>[source]</a></th></tr></thead></table>
 Save the session to a file. (not yet operational)
 
 <a name="updateEvidence"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateEvidence(</strong> worst ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L837-L874 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L837-L874 target=_blank>[source]</a></th></tr></thead></table>
 Updates the evidence (logZ) and the information (H)
 
 The walkers need to be sorted to logL
@@ -444,13 +444,13 @@ The walkers need to be sorted to logL
 <a name="unitDomain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unitDomain(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L876-L881 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L876-L881 target=_blank>[source]</a></th></tr></thead></table>
 Return the size of the remaining domain
 
 <a name="copyWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalker(</strong> worst )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L883-L894 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L883-L894 target=_blank>[source]</a></th></tr></thead></table>
 Kill worst walker( s ) in favour of one of the others
 
 <b>Parameters</b>
@@ -461,7 +461,7 @@ Kill worst walker( s ) in favour of one of the others
 <a name="copyWalkerFromPhantoms"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copyWalkerFromPhantoms(</strong> worst )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L896-L918 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L896-L918 target=_blank>[source]</a></th></tr></thead></table>
 Kill worst walker( s ) in favour of one of the others
 
 <b>Parameters</b>
@@ -472,7 +472,7 @@ Kill worst walker( s ) in favour of one of the others
 <a name="updateWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateWalkers(</strong> explorer, worst ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L920-L1005 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L920-L1005 target=_blank>[source]</a></th></tr></thead></table>
 Update the walkerlist in place.
 
 <b>Parameters</b>
@@ -486,7 +486,7 @@ Update the walkerlist in place.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setProblem(</strong> name, model=None, xdata=None, ydata=None, weights=None,
  accuracy=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1007-L1062 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1007-L1062 target=_blank>[source]</a></th></tr></thead></table>
 Set the problem for this run.
 
 If name is a Problem, then the keyword arguments (xdata,model,ydata,weights)
@@ -512,7 +512,7 @@ are overwritten provided they are not None
 <a name="setErrorDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, limits=None, scale=1.0, power=2.0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1064-L1117 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1064-L1117 target=_blank>[source]</a></th></tr></thead></table>
 Set the error distribution for calculating the likelihood.
 
 <b>Parameters</b>
@@ -537,7 +537,7 @@ Set the error distribution for calculating the likelihood.
 <a name="setEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1119-L1175 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1119-L1175 target=_blank>[source]</a></th></tr></thead></table>
 initialize the engines.
 
 <b>Parameters</b>
@@ -552,7 +552,7 @@ initialize the engines.
 <a name="setInitialEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setInitialEngine(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1177-L1224 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1177-L1224 target=_blank>[source]</a></th></tr></thead></table>
 Initialize the walkers at random values of parameters and scale
 
 <b>Parameters</b>
@@ -573,7 +573,7 @@ Initialize the walkers at random values of parameters and scale
 <a name="initWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1226-L1249 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1226-L1249 target=_blank>[source]</a></th></tr></thead></table>
 Initialize the walkers at random values of parameters and scale
 
 <b>Parameters</b>
@@ -590,7 +590,6 @@ Initialize the walkers at random values of parameters and scale
 <a name="report"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>report(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSampler.py#L1251-L1272 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1251-L1272 target=_blank>[source]</a></th></tr></thead></table>
 Final report on the run.
 
-Endline #L1274

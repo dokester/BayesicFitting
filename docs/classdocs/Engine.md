@@ -4,7 +4,7 @@
 
 <a name="Engine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Engine(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Engine(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Engine defines common properties of all Engines.
@@ -28,7 +28,6 @@ remain above the low-likelihood-limit.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; random number generator
 * verbose  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if verbose > 4 report about the engines. (mostly for debugging)
-
 * report  :  list of int (read only)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; reports number of succes, accepted, rejected, failed calls. Plus the total.
 * unitRange  :  array_like (read only)
@@ -43,7 +42,7 @@ Author       Do Kester.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Engine(</strong> walkers, errdis, slow=None, nstep=None, phancol=None, copy=None,
  seed=4213, verbose=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L85-L137 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L84-L136 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -73,13 +72,13 @@ Only one PhantomCollection should be present for all Engines.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L139-L142 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L138-L141 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a copy of this engine. 
 <a name="setWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L144-L178 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L143-L177 target=_blank>[source]</a></th></tr></thead></table>
 Update the walker with problem, allpars, LogL and logW.
 
 <b>Parameters</b>
@@ -100,7 +99,7 @@ Update the walker with problem, allpars, LogL and logW.
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> problem, dval, kpar=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L180-L209 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L179-L208 target=_blank>[source]</a></th></tr></thead></table>
 Return value in [0,1] for the selected parameter.
 
 <b>Parameters</b>
@@ -116,7 +115,7 @@ Return value in [0,1] for the selected parameter.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> problem, uval, kpar=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L211-L239 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L210-L238 target=_blank>[source]</a></th></tr></thead></table>
 Return domain value for the selected parameter.
 
 <b>Parameters</b>
@@ -132,7 +131,7 @@ Return domain value for the selected parameter.
 <a name="startJourney"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>startJourney(</strong> unitStart ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L241-L251 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L240-L250 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the starting position and reset
 
 <b>Parameters</b>
@@ -143,7 +142,7 @@ Calculate the starting position and reset
 <a name="calcJourney"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>calcJourney(</strong> unitDistance ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L253-L262 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L252-L261 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the distance travelled since reset
 
 <b>Parameters</b>
@@ -154,58 +153,58 @@ Calculate the distance travelled since reset
 <a name="reportJourney"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportJourney(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L264-L269 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L263-L268 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="makeIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeIndex(</strong> np, val ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L271-L275 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L270-L274 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="reportCall"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportCall(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L277-L279 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L276-L278 target=_blank>[source]</a></th></tr></thead></table>
 
 Store a call to engine 
 <a name="reportSuccess"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportSuccess(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L281-L285 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L280-L284 target=_blank>[source]</a></th></tr></thead></table>
 Add 1 to the number of succesfull steps: logL < lowLhood.
 
 <a name="reportReject"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportReject(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L287-L291 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L286-L290 target=_blank>[source]</a></th></tr></thead></table>
 Add 1 to the number of rejected steps: logL > lowLhood.
 
 <a name="reportFailed"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportFailed(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L293-L297 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L292-L296 target=_blank>[source]</a></th></tr></thead></table>
 Add 1 to the number of failed steps: could not construct a step.
 
 <a name="reportBest"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportBest(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L299-L303 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L298-L302 target=_blank>[source]</a></th></tr></thead></table>
 Add 1 to the number of best likelihoods found upto now.
 
 <a name="printReport"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>printReport(</strong> best=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L305-L311 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L304-L310 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="successRate"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>successRate(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L313-L324 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L312-L323 target=_blank>[source]</a></th></tr></thead></table>
 Return percentage of success.
 
 <a name="getUnitMinmax"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getUnitMinmax(</strong> problem, lowLhood, nap ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L326-L345 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L325-L344 target=_blank>[source]</a></th></tr></thead></table>
 Calculate unit minimum and maximum from the Phantoms
 
 <b>Parameters</b>
@@ -218,7 +217,7 @@ Calculate unit minimum and maximum from the Phantoms
 <a name="getUnitRange"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getUnitRange(</strong> problem, lowLhood, nap ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L347-L374 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L346-L373 target=_blank>[source]</a></th></tr></thead></table>
 Calculate unit range and minimum from PhantomCollection
 
 <b>Parameters</b>
@@ -231,7 +230,7 @@ Calculate unit range and minimum from PhantomCollection
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L376-L392 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L375-L391 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine for difusing the parameters
 
 <b>Parameters</b>
@@ -249,7 +248,7 @@ Execute the engine for difusing the parameters
 <a name="printIter"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>printIter(</strong> iteration=0, repiter=1000 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Engine.py#L394-L413 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L393-L412 target=_blank>[source]</a></th></tr></thead></table>
 Return True when to print this iteration
 
 <b>Parameters</b>
@@ -259,4 +258,3 @@ Return True when to print this iteration
 * repiter  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if verbose == 4 print every repiter
 
-Endline #L415

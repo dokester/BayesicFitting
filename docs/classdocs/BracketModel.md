@@ -4,7 +4,7 @@
 
 <a name="BracketModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 BracketModel provides brackets to a chain of Models.
@@ -78,7 +78,7 @@ BracketModel is about rather advanced model building.
 <a name="BracketModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BracketModel(</strong> model, copy=None, fixed=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py#L102-L127 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L102-L127 target=_blank>[source]</a></th></tr></thead></table>
 
 BracketModel
 
@@ -103,11 +103,10 @@ parameters that were 'fixed' in the constituent Models. They stay fixed.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py#L129-L133 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L129-L133 target=_blank>[source]</a></th></tr></thead></table>
 Copy a Bracket Model.
 
 
-Endline #L135
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Brackets.html">Brackets</a></th></tr></thead></table>
 
@@ -193,3 +192,5 @@ Endline #L135
 * [<strong>checkPositive(</strong> param ) ](./BaseModel.md#checkPositive)
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)

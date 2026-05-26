@@ -4,7 +4,7 @@
 
 <a name="GaussPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class GaussPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class GaussPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Gauss prior distribution. Use  normalized version
@@ -51,7 +51,7 @@ lowLimit, highLimit, circular, deltaP, _lowDomain, _highDomain
 <a name="GaussPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GaussPrior(</strong> center=0.0, scale=1.0, limits=None, circular=False, prior=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L82-L112 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L82-L112 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -74,13 +74,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L114-L117 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L114-L117 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy the prior 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L119-L132 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L119-L132 target=_blank>[source]</a></th></tr></thead></table>
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Gauss distribution.
 
@@ -95,7 +95,7 @@ a parameter for a Gauss distribution.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L134-L152 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L134-L152 target=_blank>[source]</a></th></tr></thead></table>
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Gauss distribution.
 
@@ -110,7 +110,7 @@ between [0,1] for a Gauss distribution.
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L154-L167 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L154-L167 target=_blank>[source]</a></th></tr></thead></table>
 Return a the result of the distribution function at x.
 
 <b>Parameters</b>
@@ -122,7 +122,7 @@ Return a the result of the distribution function at x.
 <a name="logResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logResult(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L169-L184 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L169-L184 target=_blank>[source]</a></th></tr></thead></table>
 Return a the log of the result of the prior.
 
 <b>Parameters</b>
@@ -134,7 +134,7 @@ Return a the log of the result of the prior.
 <a name="partialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L186-L196 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L186-L196 target=_blank>[source]</a></th></tr></thead></table>
 Return partial derivative of log( Prior ) wrt x.
 
 <b>Parameters</b>
@@ -146,16 +146,15 @@ Return partial derivative of log( Prior ) wrt x.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L198-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L198-L200 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the integral over the prior is bound. 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussPrior.py#L202-L205 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L205 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the prior. 
-Endline #L207
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Prior.html">Prior</a></th></tr></thead></table>
 

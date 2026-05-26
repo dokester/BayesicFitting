@@ -4,7 +4,7 @@
 
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Fitter using the simulated annealing simplex minimum finding algorithm,
@@ -53,7 +53,7 @@ only exact for linear models with a fixed scale.
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>AmoebaFitter(</strong> xdata, model, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py#L80-L104 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L80-L104 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Amoeba class, providing inputs and model.
 
@@ -76,7 +76,7 @@ Create a new Amoeba class, providing inputs and model.
  seed=4567, temp=0, limits=None, maxiter=1000,
  tolerance=0.0001, cooling=0.95, steps=10,
  verbose=0, plot=False, accuracy=None, callback=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py#L106-L220 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L106-L220 target=_blank>[source]</a></th></tr></thead></table>
 Return Model fitted to the data array.
 
 When done, it also calculates the hessian matrix and chisq.
@@ -128,7 +128,6 @@ When done, it also calculates the hessian matrix and chisq.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; where `val` is the minimizable array
 
 
-Endline #L222
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th></tr></thead></table>
 
@@ -145,9 +144,11 @@ Endline #L222
 
 
 * [<strong>setParameters(</strong> params )](./IterativeFitter.md#setParameters)
-* [<strong>doPlot(</strong> param, force=False )](./IterativeFitter.md#doPlot)
+* [<strong>setPlotters(</strong> plot ) ](./IterativeFitter.md#setPlotters)
+* [<strong>plotNot(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotNot)
+* [<strong>plotIter(</strong> ydata, param, force=False ) ](./IterativeFitter.md#plotIter)
 * [<strong>fitprolog(</strong> ydata, weights=None, accuracy=None, keep=None ) ](./IterativeFitter.md#fitprolog)
-* [<strong>report(</strong> verbose, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
+* [<strong>report(</strong> verbose, ydata, param, chi, more=None, force=False ) ](./IterativeFitter.md#report)
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -158,8 +159,8 @@ Endline #L222
 * [<strong>fitpostscript(</strong> ydata, plot=False ) ](./BaseFitter.md#fitpostscript)
 * [<strong>keepFixed(</strong> keep=None ) ](./BaseFitter.md#keepFixed)
 * [<strong>insertParameters(</strong> fitpar, index=None, into=None ) ](./BaseFitter.md#insertParameters)
-* [<strong>modelFit(</strong> ydata, weights=None, keep=None )](./BaseFitter.md#modelFit)
-* [<strong>limitsFit(</strong> ydata, weights=None, keep=None ) ](./BaseFitter.md#limitsFit)
+* [<strong>modelFit(</strong> ydata, weights=None, keep=None, **kwargs )](./BaseFitter.md#modelFit)
+* [<strong>limitsFit(</strong> ydata, weights=None, keep=None, **kwargs ) ](./BaseFitter.md#limitsFit)
 * [<strong>checkNan(</strong> ydata, weights=None, accuracy=None )](./BaseFitter.md#checkNan)
 * [<strong>getVector(</strong> ydata, index=None )](./BaseFitter.md#getVector)
 * [<strong>getHessian(</strong> params=None, weights=None, index=None )](./BaseFitter.md#getHessian)
@@ -169,7 +170,7 @@ Endline #L222
 * [<strong>getDesign(</strong> params=None, xdata=None, index=None )](./BaseFitter.md#getDesign)
 * [<strong>chiSquared(</strong> ydata, params=None, weights=None )](./BaseFitter.md#chiSquared)
 * [<strong>getStandardDeviations(</strong> )](./BaseFitter.md#getStandardDeviations)
-* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None)](./BaseFitter.md#monteCarloError)
+* [<strong>monteCarloError(</strong> xdata=None, monteCarlo=None, scale=1.0 )](./BaseFitter.md#monteCarloError)
 * [<strong>getEvidence(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getEvidence)
 * [<strong>getLogZ(</strong> limits=None, noiseLimits=None )](./BaseFitter.md#getLogZ)
 * [<strong>plotResult(</strong> xdata=None, ydata=None, model=None, residuals=True,](./BaseFitter.md#plotResult)

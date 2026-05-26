@@ -4,7 +4,7 @@
 
 <a name="DecisionTreeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class DecisionTreeModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class DecisionTreeModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 A DecisionTree Model (DTM) is mostly defined on multiple input dimensions (axes).
@@ -77,7 +77,7 @@ The parameters are all initialized at 0.0
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DecisionTreeModel(</strong> ndim=1, depth=0, split=0.5, kdim=0, itypes=[0], modifiable=True,
  dynamic=True, code=None, growPrior=None, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L109-L210 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L109-L210 target=_blank>[source]</a></th></tr></thead></table>
 
 DecisionTree model.
 
@@ -107,25 +107,25 @@ The DTM standardly has a UniformPrior for all parameters, with limits [0,1]
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L212-L248 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L212-L248 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="setSplitOrMask"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setSplitOrMask(</strong> itype, split ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L250-L256 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L250-L256 target=_blank>[source]</a></th></tr></thead></table>
 
 For internal use only 
 <a name="isLeaf"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isLeaf(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L258-L262 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L258-L262 target=_blank>[source]</a></th></tr></thead></table>
 Return true if self is a leaf
 
 <a name="partitionList"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partitionList(</strong> xdata, plist ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L264-L300 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L264-L300 target=_blank>[source]</a></th></tr></thead></table>
 Partition the xdata in plist over 2 new lists according to the DTM-branch.
 
 <b>Paramaters</b>
@@ -143,7 +143,7 @@ Partition the xdata in plist over 2 new lists according to the DTM-branch.
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L302-L326 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L302-L326 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
 <b>Parameters</b>
@@ -157,13 +157,13 @@ Returns the result of the model function.
 <a name="recursiveResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveResult(</strong> xdata, params, kpar, plist, res ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L328-L345 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L328-L345 target=_blank>[source]</a></th></tr></thead></table>
 
 For internal use only 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L347-L372 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L347-L372 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 <b>Parameters</b>
@@ -179,13 +179,13 @@ Returns the partials at the input value.
 <a name="recursivePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursivePartial(</strong> xdata, kpar, plist, part ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L374-L391 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L374-L391 target=_blank>[source]</a></th></tr></thead></table>
 
 For internal use only 
 <a name="sortXdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sortXdata(</strong> xdata )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L393-L409 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L393-L409 target=_blank>[source]</a></th></tr></thead></table>
 Reorder the xdata according to the parameter ordering
 
 <b>Parameters</b>
@@ -197,13 +197,13 @@ Reorder the xdata according to the parameter ordering
 <a name="recursiveOrder"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveOrder(</strong> xdata, plist ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L411-L423 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L411-L423 target=_blank>[source]</a></th></tr></thead></table>
 
 For internal use only 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L425-L437 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L425-L437 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each xdata (=x).
 
 <b>Parameters</b>
@@ -217,14 +217,14 @@ Return the derivative df/dx at each xdata (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L439-L446 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L439-L446 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="fullName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fullName(</strong> ids=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L448-L465 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L448-L465 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 <b>Parameters</b>
@@ -236,13 +236,13 @@ Returns a string representation of the model.
 <a name="recursiveName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>recursiveName(</strong> name, indent, kpar, ids=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L467-L492 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L467-L492 target=_blank>[source]</a></th></tr></thead></table>
 
 For internal use only 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L494-L505 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L494-L505 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
 <b>Parameters</b>
@@ -254,7 +254,7 @@ Return the unit of the indicated parameter.
 <a name="walk"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>walk(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L507-L518 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L507-L518 target=_blank>[source]</a></th></tr></thead></table>
 Iterate tree in pre-order depth-first search order
 
 Found this piece of code on the internet. Fairly obscure.
@@ -262,7 +262,7 @@ Found this piece of code on the internet. Fairly obscure.
 <a name="encode"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>encode(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L520-L550 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L520-L550 target=_blank>[source]</a></th></tr></thead></table>
 Make a code tuple to be used by the constructor to resurrect the DTM
 The tuple consists of
 code : list of (list or 1 or 2), encoding the structure of DTM
@@ -273,7 +273,7 @@ splim : list of split/mask values at the branches
 <a name="decode"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decode(</strong> code, kdim, splim, kbr ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L552-L599 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L552-L599 target=_blank>[source]</a></th></tr></thead></table>
 Resurrect the DTM from the code generated by encode().
 For internal use in the Constructor.
 
@@ -291,7 +291,7 @@ For internal use in the Constructor.
 <a name="findLeaf"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findLeaf(</strong> kleaf ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L601-L618 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L601-L618 target=_blank>[source]</a></th></tr></thead></table>
 Find a leaf in the tree, returning the leaf.
 
 <b>Parameter</b>
@@ -302,7 +302,7 @@ Find a leaf in the tree, returning the leaf.
 <a name="findBranch"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findBranch(</strong> kbranch ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L620-L641 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L620-L641 target=_blank>[source]</a></th></tr></thead></table>
 Find a branch in the tree, returning the branch.
 
 <b>Parameter</b>
@@ -313,7 +313,7 @@ Find a branch in the tree, returning the branch.
 <a name="check"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>check(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L643-L676 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L643-L676 target=_blank>[source]</a></th></tr></thead></table>
 Find a branch in the tree, returning the branch.
 
 <b>Parameter</b>
@@ -324,32 +324,32 @@ Find a branch in the tree, returning the branch.
 <a name="findRoot"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findRoot(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L678-L687 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L678-L687 target=_blank>[source]</a></th></tr></thead></table>
 Return the root of the tree.
 
 
 <a name="count"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>count(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L689-L706 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L689-L706 target=_blank>[source]</a></th></tr></thead></table>
 Return number of leafs and branches.
 
 <a name="countLeaf"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>countLeaf(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L708-L712 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L708-L712 target=_blank>[source]</a></th></tr></thead></table>
 Return number of leafs.
 
 <a name="countBranch"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>countBranch(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L714-L719 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L714-L719 target=_blank>[source]</a></th></tr></thead></table>
 Return number of leafs.
 
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, location=0, split=0.5, kdim=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L721-L794 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L721-L794 target=_blank>[source]</a></th></tr></thead></table>
 Increase the the number of components by 1 (if allowed by maxComp)
 
 <b>Parameters</b>
@@ -373,7 +373,7 @@ Increase the the number of components by 1 (if allowed by maxComp)
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, location=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L796-L846 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L796-L846 target=_blank>[source]</a></th></tr></thead></table>
 Decrease the the number of componenets by 1 (if allowed by minComp)
 Remove an arbitrary item.
 
@@ -390,7 +390,7 @@ Remove an arbitrary item.
 <a name="vary"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=0, split=0.5, kdim=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DecisionTreeModel.py#L848-L908 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L848-L908 target=_blank>[source]</a></th></tr></thead></table>
 Vary the model structure by changing kdim and/or split at location
 
 <b>Parameters</b>
@@ -409,7 +409,6 @@ Vary the model structure by changing kdim and/or split at location
 * bool  :   succes
 
 
-Endline #L910
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Modifiable.html">Modifiable,</a></th></tr></thead></table>
 

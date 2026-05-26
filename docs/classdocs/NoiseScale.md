@@ -4,7 +4,7 @@
 
 <a name="NoiseScale"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class NoiseScale(</strong> <a href="./HyperParameter.html">HyperParameter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class NoiseScale(</strong> <a href="./HyperParameter.html">HyperParameter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Hyperparameter for the scale of a ScaledErrorDistribution
@@ -38,7 +38,7 @@ in NestedSampler
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NoiseScale(</strong> scale=1.0, isFixed=True, prior=None, limits=None,
  copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py#L65-L96 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L65-L96 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -65,13 +65,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py#L98-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L98-L123 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a copy. 
 <a name="minimumScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>minimumScale(</strong> scale=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py#L125-L139 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L139 target=_blank>[source]</a></th></tr></thead></table>
 Fit the noise scale with a minimum value.
 
 <b>Parameters</b>
@@ -80,7 +80,6 @@ Fit the noise scale with a minimum value.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the value of the noise scale. Default: noiseScale.scale
 
 
-Endline #L141
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./HyperParameter.html">HyperParameter</a></th></tr></thead></table>
 

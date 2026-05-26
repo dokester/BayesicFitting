@@ -4,7 +4,7 @@
 
 <a name="FootballModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class FootballModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class FootballModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 More or less complex model for the outcome of football matches.
@@ -69,7 +69,7 @@ This is about the game that most of the world calls football.
 <a name="FootballModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>FootballModel(</strong> nteams, complexity=5, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L93-L121 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L93-L121 target=_blank>[source]</a></th></tr></thead></table>
 
 Calculate the score of football matches
 
@@ -93,13 +93,13 @@ The number of parameters is ( nteams * complexity )
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L123-L125 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L123-L125 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="getPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> k ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L127-L170 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L127-L170 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior of the parameter, indicated by k modulo the complexity
 
 <b>Parameters</b>
@@ -110,7 +110,7 @@ Return the prior of the parameter, indicated by k modulo the complexity
 <a name="goals1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals1(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L172-L187 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L172-L187 target=_blank>[source]</a></th></tr></thead></table>
 Consider attack (a) only.
 
 &nbsp; S1 = a1
@@ -127,7 +127,7 @@ Consider attack (a) only.
 <a name="goals2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals2(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L189-L207 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L189-L207 target=_blank>[source]</a></th></tr></thead></table>
 Consider attack (a) and defense (d).
 
 &nbsp; S1 = a1 * ( 1 - d2 )
@@ -144,7 +144,7 @@ Consider attack (a) and defense (d).
 <a name="goals3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals3(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L209-L235 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L209-L235 target=_blank>[source]</a></th></tr></thead></table>
 Consider attack (a), defense (d) and midfield (m).
 
 The ratio of the midfield strength modifies attack and defense
@@ -163,7 +163,7 @@ The ratio of the midfield strength modifies attack and defense
 <a name="goals4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals4(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L237-L264 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L237-L264 target=_blank>[source]</a></th></tr></thead></table>
 Consider attack (a), defense (d), midfield (m) and home advantage (h).
 
 The strategy modifies the midfield strength of the home team.
@@ -183,7 +183,7 @@ The strategy modifies the midfield strength of the home team.
 <a name="goals5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>goals5(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L266-L302 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L266-L302 target=_blank>[source]</a></th></tr></thead></table>
 Consider attack (a), defense (d), midfield (m), home advantage (h),
 and strategy (s)
 
@@ -205,7 +205,7 @@ and strategy (s)
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L304-L318 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L304-L318 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
@@ -221,7 +221,7 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L320-L335 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L320-L335 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 The partials are the powers of x ( xdata ) from 0 to degree.
@@ -238,7 +238,7 @@ The partials are the powers of x ( xdata ) from 0 to degree.
 <a name="part1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part1(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L337-L358 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L337-L358 target=_blank>[source]</a></th></tr></thead></table>
 Derivatives copies from https://www.derivative-calculator.net
 
 <b>Parameters</b>
@@ -252,7 +252,7 @@ Derivatives copies from https://www.derivative-calculator.net
 <a name="part2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part2(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L360-L385 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L360-L385 target=_blank>[source]</a></th></tr></thead></table>
 Derivatives copies from https://www.derivative-calculator.net
 
 <b>Parameters</b>
@@ -266,7 +266,7 @@ Derivatives copies from https://www.derivative-calculator.net
 <a name="part3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part3(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L387-L444 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L387-L444 target=_blank>[source]</a></th></tr></thead></table>
 Derivatives copies from https://www.derivative-calculator.net
 
 <b>Parameters</b>
@@ -280,7 +280,7 @@ Derivatives copies from https://www.derivative-calculator.net
 <a name="part4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part4(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L446-L511 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L446-L511 target=_blank>[source]</a></th></tr></thead></table>
 Derivatives copies from https://www.derivative-calculator.net
 
 <b>Parameters</b>
@@ -294,7 +294,7 @@ Derivatives copies from https://www.derivative-calculator.net
 <a name="part5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>part5(</strong> xdata, par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L513-L623 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L513-L623 target=_blank>[source]</a></th></tr></thead></table>
 Derivatives copies from https://www.derivative-calculator.net
 
 <b>Parameters</b>
@@ -308,7 +308,7 @@ Derivatives copies from https://www.derivative-calculator.net
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L625-L637 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L625-L637 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each input (=x).
 
 <b>Parameters</b>
@@ -322,14 +322,14 @@ Return the derivative df/dx at each input (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L639-L644 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L639-L644 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L646-L656 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L646-L656 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 <b>Parameters</b>
 
@@ -340,7 +340,7 @@ Return the name of the indicated parameter.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FootballModel.py#L658-L668 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L658-L668 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
 <b>Parameters</b>
@@ -349,7 +349,6 @@ Return the unit of the indicated parameter.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
 
-Endline #L670
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>
 
@@ -431,3 +430,5 @@ Endline #L670
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)

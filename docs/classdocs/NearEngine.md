@@ -4,7 +4,7 @@
 
 <a name="NearEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class NearEngine(</strong> <a href="./OrderEngine.html">OrderEngine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NearEngine.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class NearEngine(</strong> <a href="./OrderEngine.html">OrderEngine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 The NearEngine searches the nearest neighbour (NN) for a point and
@@ -27,7 +27,7 @@ Author       Do Kester.
 <a name="NearEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NearEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NearEngine.py#L49-L73 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L49-L73 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -46,13 +46,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NearEngine.py#L75-L81 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L75-L81 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="executeOnce"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>executeOnce(</strong> kw, lowLhood, dims=[0,1] ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NearEngine.py#L83-L163 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L83-L163 target=_blank>[source]</a></th></tr></thead></table>
 Execute the NearEngine one time.
 
 TBC: This engine seems to take a lot of CPU.
@@ -66,12 +66,11 @@ TBC: This engine seems to take a lot of CPU.
 * dims  :  list of 2 ints
 <br>&nbsp;&nbsp;&nbsp;&nbsp; dimensions to process over
 
-Endline #L165
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./OrderEngine.html">OrderEngine</a></th></tr></thead></table>
 
 
-* [<strong>execute(</strong> kw, lowLhood, append=False, iteration=0 )](./OrderEngine.md#execute)
+* [<strong>execute(</strong> kw, lowLhood, iteration=0 )](./OrderEngine.md#execute)
 * [<strong>calculateUnitRange(</strong> ) ](./OrderEngine.md#calculateUnitRange)
 
 
@@ -79,10 +78,7 @@ Endline #L165
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 
 
-* [<strong>bestBoost(</strong> problem, myFitter=None ) ](./Engine.md#bestBoost)
 * [<strong>setWalker(</strong> kw, problem, allpars, logL, walker=None, fitIndex=None ) ](./Engine.md#setWalker)
-* [<strong>noBoost(</strong> walker ) ](./Engine.md#noBoost)
-* [<strong>doBoost(</strong> walker ) ](./Engine.md#doBoost)
 * [<strong>domain2Unit(</strong> problem, dval, kpar=None ) ](./Engine.md#domain2Unit)
 * [<strong>unit2Domain(</strong> problem, uval, kpar=None ) ](./Engine.md#unit2Domain)
 * [<strong>startJourney(</strong> unitStart ) ](./Engine.md#startJourney)
@@ -96,5 +92,6 @@ Endline #L165
 * [<strong>reportBest(</strong> )](./Engine.md#reportBest)
 * [<strong>printReport(</strong> best=False ) ](./Engine.md#printReport)
 * [<strong>successRate(</strong> ) ](./Engine.md#successRate)
-* [<strong>getUnitMinmax(</strong> problem, lowLhood ) ](./Engine.md#getUnitMinmax)
-* [<strong>getUnitRange(</strong> problem, lowLhood ) ](./Engine.md#getUnitRange)
+* [<strong>getUnitMinmax(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitMinmax)
+* [<strong>getUnitRange(</strong> problem, lowLhood, nap ) ](./Engine.md#getUnitRange)
+* [<strong>printIter(</strong> iteration=0, repiter=1000 ) ](./Engine.md#printIter)

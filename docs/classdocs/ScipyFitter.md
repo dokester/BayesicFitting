@@ -4,7 +4,7 @@
 
 <a name="ScipyFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Unified interface to the Scipy minimization module minimize, to fit data to a model.
@@ -79,7 +79,7 @@ scipy.optimize.minimize
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ScipyFitter(</strong> xdata, model, method=None, gradient=True, hessp=None,
  **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L109-L177 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L109-L177 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 Create a class, providing inputs and model.
@@ -139,7 +139,7 @@ Create a class, providing inputs and model.
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, constraints=(), verbose=0,
  accuracy=None, plot=False, callback=None, **options )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L179-L370 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L179-L370 target=_blank>[source]</a></th></tr></thead></table>
 Return      parameters for the model fitted to the data array.
 
 <b>Parameters</b>
@@ -187,9 +187,8 @@ Return      parameters for the model fitted to the data array.
 <a name="collectVectors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>collectVectors(</strong> par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L372-L388 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L372-L388 target=_blank>[source]</a></th></tr></thead></table>
 
-Endline #L390
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th></tr></thead></table>
 

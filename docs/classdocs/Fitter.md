@@ -4,7 +4,7 @@
 
 <a name="Fitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Fitter for linear models.
@@ -42,7 +42,7 @@ Author  Do Kester
 <a name="Fitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Fitter(</strong> xdata, model, map=False, keep=None, fixedScale=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py#L67-L93 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L67-L93 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing xdatas and model.
 
@@ -71,7 +71,7 @@ input vector is needed a new object should be created.
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py#L95-L162 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L95-L162 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data, including weights.
 
 For Linear models the matrix equation
@@ -103,7 +103,6 @@ and &beta; is the inproduct of the data with the D, design matrix.
 &nbsp;&nbsp;&nbsp;&nbsp; ValueError when ydata or weights contain a NaN
 
 
-Endline #L164
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 

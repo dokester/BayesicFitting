@@ -4,7 +4,7 @@
 
 <a name="GalileanEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class GalileanEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class GalileanEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Move all parameters in forward steps, with optional mirroring on the edge.
@@ -16,7 +16,7 @@ on the gradient of the logLikelihood when the parameters enter the zone of logLl
 
 * size  :  float (0.5)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; adaptable fraction for the (unit) direction of the stepping
-* wiggle  :  float (0.3)
+* wiggle  :  float (0.2)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; factor to perturb the direction at each step. 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; between 0 (no perturbation) and 1 (new direction)
 
@@ -30,7 +30,7 @@ Author       Do Kester.
 <a name="GalileanEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GalileanEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L75-L106 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L75-L106 target=_blank>[source]</a></th></tr></thead></table>
 
 Default Constructor.
 
@@ -49,13 +49,13 @@ Default Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L108-L116 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L108-L116 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L118-L275 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L118-L275 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by diffusing the parameters.
 
 <b>Parameters</b>
@@ -73,20 +73,20 @@ Execute the engine by diffusing the parameters.
 <a name="incsize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>incsize(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L277-L280 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L277-L280 target=_blank>[source]</a></th></tr></thead></table>
 
 Return increased self.size 
 <a name="decsize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decsize(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L282-L286 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L282-L286 target=_blank>[source]</a></th></tr></thead></table>
 
 Return decreased self.size. 
 <a name="findEdge"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findEdge(</strong> problem, ptry, fitIndex, Lhood, Ltry, lowLhood, um, size,
  plot=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L288-L372 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L288-L372 target=_blank>[source]</a></th></tr></thead></table>
 Find the edge of the likelihood where logL equals LowLhood. 
 
 <b>Parameters</b>
@@ -118,7 +118,7 @@ Find the edge of the likelihood where logL equals LowLhood.
 <a name="quadInterpol"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>quadInterpol(</strong> x, y, lowL, plot=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GalileanEngine.py#L374-L415 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L374-L415 target=_blank>[source]</a></th></tr></thead></table>
 Quadratic interpolation of a function defined by 3 point (x,y) at level
 ylow.
 
@@ -131,7 +131,6 @@ ylow.
 * ylow  :  float 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; find xlow at ylow
 
-Endline #L417
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Engine.html">Engine</a></th></tr></thead></table>
 

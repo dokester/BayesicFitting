@@ -4,7 +4,7 @@
 
 <a name="FixedModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class FixedModel(</strong> <a href="./BaseModel.html">BaseModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class FixedModel(</strong> <a href="./BaseModel.html">BaseModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 A FixedModel is a BaseModel where some parameters are permanently fixed.
@@ -55,7 +55,7 @@ Author       Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>FixedModel(</strong> nparams=0, ndim=1, copy=None, fixed=None,
  names=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L81-L150 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L81-L150 target=_blank>[source]</a></th></tr></thead></table>
 
 FixedModel Constructor.
 
@@ -81,13 +81,13 @@ FixedModel Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L152-L177 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L152-L177 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a copy. 
 <a name="select"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>select(</strong> params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L179-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L179-L200 target=_blank>[source]</a></th></tr></thead></table>
 Select the relevant parameters and store them.
 
 <b>Parameters</b>
@@ -98,7 +98,7 @@ Select the relevant parameters and store them.
 <a name="selectNames"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>selectNames(</strong> names ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L202-L225 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L225 target=_blank>[source]</a></th></tr></thead></table>
 Select the relevant parameter names and store them.
 
 <b>Parameters</b>
@@ -109,7 +109,7 @@ Select the relevant parameter names and store them.
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L227-L240 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L227-L240 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result calculated at the xdatas.
 
 <b>Parameters</b>
@@ -123,7 +123,7 @@ Returns the result calculated at the xdatas.
 <a name="expand"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>expand(</strong> xdata, param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L242-L273 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L242-L273 target=_blank>[source]</a></th></tr></thead></table>
 Returns a complete list of parameters, where the fixed parameters
 have been replaced by either a constant value or by the results of
 the fixed function.
@@ -131,7 +131,7 @@ the fixed function.
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L275-L311 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L275-L311 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partial derivatives calculated at the inputs.
 
 <b>Parameters</b>
@@ -145,7 +145,7 @@ Returns the partial derivatives calculated at the inputs.
 <a name="numPartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartial(</strong> xdata, params, parlist=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L313-L347 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L313-L347 target=_blank>[source]</a></th></tr></thead></table>
 Returns numerical partial derivatives of the model to params.
 
 <b>Parameters</b>
@@ -161,7 +161,7 @@ Returns numerical partial derivatives of the model to params.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, param, parlist=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L349-L371 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L349-L371 target=_blank>[source]</a></th></tr></thead></table>
 Replacement for models that dont define a partial.
 
 <b>Parameters</b>
@@ -177,7 +177,7 @@ Replacement for models that dont define a partial.
 <a name="derivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> xdata, param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L373-L395 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L373-L395 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of the model to xdata.
 
 It is a numeric derivative as the analytic derivative is not present
@@ -197,7 +197,7 @@ from the constituent models. Use `numDerivative` instead.
 <a name="numDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numDerivative(</strong> xdata, param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FixedModel.py#L397-L486 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L397-L486 target=_blank>[source]</a></th></tr></thead></table>
 Returns the numeric derivative of the model to input
 
 <b>Parameters</b>
@@ -212,7 +212,6 @@ Returns the numeric derivative of the model to input
 ValueError when the number of xdata dimensions > 1.
 
 
-Endline #L488
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseModel.html">BaseModel</a></th></tr></thead></table>
 

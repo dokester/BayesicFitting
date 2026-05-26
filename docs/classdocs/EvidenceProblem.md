@@ -4,7 +4,7 @@
 
 <a name="EvidenceProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class EvidenceProblem(</strong> <a href="./ClassicProblem.html">ClassicProblem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class EvidenceProblem(</strong> <a href="./ClassicProblem.html">ClassicProblem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 An EvidenceProblem is a ClassicProblem containing a Dynamic and/or Modifiable
@@ -28,7 +28,7 @@ model, xdata, ydata, weights
 <a name="EvidenceProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>EvidenceProblem(</strong> model=None, xdata=None, ydata=None, weights=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py#L50-L73 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L50-L73 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor for classic problems.
 
@@ -49,7 +49,7 @@ Constructor for classic problems.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py#L75-L83 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L75-L83 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 The copy points to the same instance of model.
@@ -57,22 +57,21 @@ The copy points to the same instance of model.
 <a name="myEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py#L85-L97 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L85-L97 target=_blank>[source]</a></th></tr></thead></table>
 Return a default list of preferred engines
 
 <a name="myDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py#L99-L104 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L99-L104 target=_blank>[source]</a></th></tr></thead></table>
 Return the default preferred ModelDistribution: "model"
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EvidenceProblem.py#L106-L109 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L106-L109 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
-Endline #L111
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./ClassicProblem.html">ClassicProblem</a></th></tr></thead></table>
 

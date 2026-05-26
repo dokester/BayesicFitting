@@ -4,7 +4,7 @@
 
 <a name="AnnealingAmoeba"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class AnnealingAmoeba(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class AnnealingAmoeba(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Simulated annealing simplex finding minimum.
@@ -100,7 +100,7 @@ Author       Do Kester
 <strong>AnnealingAmoeba(</strong> func, xini, size=1, seed=4567, temp=0, limits=None,
  maxiter=1000, reltol=0.0001, abstol=0.0001, cooling=0.95, steps=10,
  verbose=0, callback=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L129-L218 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L129-L218 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new AnnealingAmoeba class to minimize the function
 
@@ -152,7 +152,7 @@ ValueError
 <a name="makeSimplex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeSimplex(</strong> xini, step )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L220-L270 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L220-L270 target=_blank>[source]</a></th></tr></thead></table>
 Make a simplex for the given set of parameters.
 
 <b>Parameters</b>
@@ -166,19 +166,19 @@ Make a simplex for the given set of parameters.
 <a name="hasLowLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLowLimits(</strong> k ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L272-L276 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L272-L276 target=_blank>[source]</a></th></tr></thead></table>
 Return True if it has low limits > -inf.
 
 <a name="hasHighLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasHighLimits(</strong> k ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L278-L282 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L278-L282 target=_blank>[source]</a></th></tr></thead></table>
 Return True if it has high limits < inf.
 
 <a name="stayInLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>stayInLimits(</strong> oldpar, trypar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L284-L309 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L284-L309 target=_blank>[source]</a></th></tr></thead></table>
 Keep the parameters within the limits.
 
 <b>Parameters</b>
@@ -196,7 +196,7 @@ Keep the parameters within the limits.
 <a name="checkSimplex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkSimplex(</strong> simplex )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L311-L328 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L311-L328 target=_blank>[source]</a></th></tr></thead></table>
 Check for degeneracy: all points on same location.
 
 <b>Parameters</b>
@@ -207,14 +207,14 @@ Check for degeneracy: all points on same location.
 <a name="setValues"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setValues(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L330-L348 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L330-L348 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the function values a simplex's corners
 
 
 <a name="minimize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>minimize(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L350-L384 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L350-L384 target=_blank>[source]</a></th></tr></thead></table>
 Converge the simplex.
 
 <b>Returns</b>
@@ -228,7 +228,7 @@ ConvergenceError when too many iterations are needed.
 <a name="temperatureStep"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>temperatureStep(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L386-L513 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L386-L513 target=_blank>[source]</a></th></tr></thead></table>
 Perform simplex moves in the right direction.
 
 <b>Returns</b>
@@ -239,17 +239,17 @@ Perform simplex moves in the right direction.
 <a name="doVerbose"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>doVerbose(</strong> name, chisq, par, verbose=0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L515-L525 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L515-L525 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="randomRange"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>randomRange(</strong> factor )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L527-L528 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L527-L528 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="inflateSimplex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>inflateSimplex(</strong> ilo, factor )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L530-L567 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L530-L567 target=_blank>[source]</a></th></tr></thead></table>
 Inflate/deflate simplex around the (lowest) point (ilo).
 
 inflate if factor > 1
@@ -267,7 +267,7 @@ mirror  if factor < 0
 <a name="trialStep"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>trialStep(</strong> ihi, yhi, factor )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L569-L603 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L569-L603 target=_blank>[source]</a></th></tr></thead></table>
 Do a trial step to improve the worst (highest) point.
 
 <b>Parameters</b>
@@ -282,6 +282,5 @@ Do a trial step to improve the worst (highest) point.
 <a name="logRanTemp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logRanTemp(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AnnealingAmoeba.py#L605-L611 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L605-L611 target=_blank>[source]</a></th></tr></thead></table>
 
-Endline #L613

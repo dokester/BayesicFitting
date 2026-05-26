@@ -4,7 +4,7 @@
 
 <a name="QRFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Fitter for linear models, using QR decomposition.
@@ -63,7 +63,7 @@ In that case it uses the same decomposition for all fits.
 <a name="QRFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>QRFitter(</strong> xdata, model, map=False, keep=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py#L89-L116 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L116 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing xdatas and model.
 
@@ -90,7 +90,7 @@ input vector is needed a new object should be created.
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py#L118-L192 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L118-L192 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data, including weights.
 
 <b>Parameters</b>
@@ -113,7 +113,6 @@ Return model parameters fitted to the data, including weights.
 ValueError when ydata or weights contain a NaN
 
 
-Endline #L194
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./BaseFitter.html">BaseFitter</a></th></tr></thead></table>
 

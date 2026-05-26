@@ -4,7 +4,7 @@
 
 <a name="Model"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Model(</strong> <a href="./FixedModel.html">FixedModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Model(</strong> <a href="./FixedModel.html">FixedModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Model implements the common parts of (compound) models.
@@ -99,7 +99,7 @@ Author       Do Kester
 <a name="Model"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Model(</strong> nparams=0, ndim=1, copy=None, params=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L141-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L141-L200 target=_blank>[source]</a></th></tr></thead></table>
 
 Initializes the Model with all attributes set to None, except for
 the parammeters which are all initialized to 0.
@@ -124,25 +124,25 @@ the parammeters which are all initialized to 0.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L202-L256 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L256 target=_blank>[source]</a></th></tr></thead></table>
 Return a copy.  
 
 <a name="chainLength"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chainLength(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L258-L267 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L258-L267 target=_blank>[source]</a></th></tr></thead></table>
 Return length of the chain.  
 
 <a name="isNullModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isNullModel(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L269-L273 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L269-L273 target=_blank>[source]</a></th></tr></thead></table>
 Return True if the model has no parameters (a NullModel).
 
 <a name="isolateModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isolateModel(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L275-L321 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L275-L321 target=_blank>[source]</a></th></tr></thead></table>
 Return a ( isolated ) copy of the k-th model in the chain.
 Fixed parameters and priors which might be present in the compound model
 will be lost in the isolated model.
@@ -160,7 +160,7 @@ IndexError when the chain is shorter than k.
 <a name="addModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>addModel(</strong> model )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L323-L342 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L323-L342 target=_blank>[source]</a></th></tr></thead></table>
 Make a compound model by concatinating/adding model to this.
 
 The final result is the sum of the individual results.
@@ -181,7 +181,7 @@ existing chain. For the use of "brackets" in a chain use BracketModel.
 <a name="subtractModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>subtractModel(</strong> model )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L344-L356 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L344-L356 target=_blank>[source]</a></th></tr></thead></table>
 Make a compound model by concatinating/subtracting a model from this.
 
 The final result is the difference of the models.
@@ -195,7 +195,7 @@ The final result is the difference of the models.
 <a name="multiplyModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>multiplyModel(</strong> model )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L358-L370 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L358-L370 target=_blank>[source]</a></th></tr></thead></table>
 Make a compound model by concatinating/multiplying a model with this.
 
 The final result is the product of the models.
@@ -209,7 +209,7 @@ The final result is the product of the models.
 <a name="divideModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>divideModel(</strong> model )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L372-L384 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L372-L384 target=_blank>[source]</a></th></tr></thead></table>
 Make a compound model by concatinating/dividing by a model.
 
 The final result is the division of the models.
@@ -223,7 +223,7 @@ The final result is the division of the models.
 <a name="pipeModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipeModel(</strong> model )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L386-L396 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L386-L396 target=_blank>[source]</a></th></tr></thead></table>
 Make a compound model by piping the result into the next.
 
 <b>Parameters</b>
@@ -235,7 +235,7 @@ Make a compound model by piping the result into the next.
 <a name="appendModel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>appendModel(</strong> model, operation )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L398-L452 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L398-L452 target=_blank>[source]</a></th></tr></thead></table>
 Append a model to the present chain using a operation.
 
 <b>Parameters</b>
@@ -252,7 +252,7 @@ ValueError when a model of a different dimensionality is offered.
 <a name="correctParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>correctParameters(</strong> params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L454-L479 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L454-L479 target=_blank>[source]</a></th></tr></thead></table>
 Check parameters for non-zero and positivity
 
 <b>Parameters</b>
@@ -264,7 +264,7 @@ Check parameters for non-zero and positivity
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, param=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L481-L514 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L481-L514 target=_blank>[source]</a></th></tr></thead></table>
 Return the result of the model as applied to an array of input data.
 
 <b>Parameters</b>
@@ -278,7 +278,7 @@ Return the result of the model as applied to an array of input data.
 <a name="operate"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>operate(</strong> res, pars, next )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L516-L543 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L516-L543 target=_blank>[source]</a></th></tr></thead></table>
 Apply the operation present in self.
 
 <b>Parameters</b>
@@ -293,7 +293,7 @@ Apply the operation present in self.
 <a name="derivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> xdata, param, useNum=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L545-L615 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L545-L615 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivatives (df/dx) of the model at the inputs
 
 <b>Parameters</b>
@@ -309,7 +309,7 @@ Return the derivatives (df/dx) of the model at the inputs
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> xdata, param, useNum=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L617-L696 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L617-L696 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivatives of the model at the inputs
 
 <b>Parameters</b>
@@ -325,7 +325,7 @@ Return the partial derivatives of the model at the inputs
 <a name="selectPipe"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>selectPipe(</strong> ndim, ninter, ndout ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L698-L771 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L698-L771 target=_blank>[source]</a></th></tr></thead></table>
 Select one of 9 pipe operations, depending on the dimensionality
 of the inputs and outputs of the model G and H
 
@@ -351,7 +351,7 @@ Model G has pars p and model H has pars q.
 <a name="pipe_0"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_0(</strong> dGd, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L773-L786 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L773-L786 target=_blank>[source]</a></th></tr></thead></table>
 ninter == 1 and ndout == 1
 
 Return partial in the form of [N,P]
@@ -366,7 +366,7 @@ Return partial in the form of [N,P]
 <a name="pipe_1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_1(</strong> dGd, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L788-L808 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L788-L808 target=_blank>[source]</a></th></tr></thead></table>
 ninter > 1 and ndout > 1
 
 Return partial in the form [O][N,P]
@@ -381,7 +381,7 @@ Return partial in the form [O][N,P]
 <a name="pipe_2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_2(</strong> dGd, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L810-L829 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L810-L829 target=_blank>[source]</a></th></tr></thead></table>
 ndim == 1 and ninter > 1 and ndout == 1
 
 Return partial in the form of [N,P]
@@ -396,7 +396,7 @@ Return partial in the form of [N,P]
 <a name="pipe_3"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_3(</strong> dGd, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L831-L848 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L831-L848 target=_blank>[source]</a></th></tr></thead></table>
 ndim == 1 and ninter = 1 and ndout > 1
 
 Return partial in the form of [O][NP]
@@ -411,7 +411,7 @@ Return partial in the form of [O][NP]
 <a name="pipe_4"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_4(</strong> dGdx, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L850-L863 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L850-L863 target=_blank>[source]</a></th></tr></thead></table>
 ndim == 0 and ninter == 1 and ndout == 1
 
 Return partial in the form of [N]
@@ -426,7 +426,7 @@ Return partial in the form of [N]
 <a name="pipe_5"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_5(</strong> dGdx, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L865-L884 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L865-L884 target=_blank>[source]</a></th></tr></thead></table>
 ndim == 1 and ninter > 1 and ndout > 1
 
 Return derivative in the form of [N,O]
@@ -441,7 +441,7 @@ Return derivative in the form of [N,O]
 <a name="pipe_6"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_6(</strong> dGdx, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L886-L900 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L886-L900 target=_blank>[source]</a></th></tr></thead></table>
 ndim == 1 and ninter > 1 and ndout == 1
 
 Return derivative in the form of [N]
@@ -456,7 +456,7 @@ Return derivative in the form of [N]
 <a name="pipe_7"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_7(</strong> dGdx, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L902-L917 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L902-L917 target=_blank>[source]</a></th></tr></thead></table>
 ndim == 1 and ninter = 1 and ndout > 1
 
 Return derivative in the form of [N,O]
@@ -471,7 +471,7 @@ Return derivative in the form of [N,O]
 <a name="pipe_8"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_8(</strong> dGdx, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L919-L938 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L919-L938 target=_blank>[source]</a></th></tr></thead></table>
 ndim > 1 and ninter > 1 and ndout == 1
 
 Return derivative in the form of [N,I]
@@ -486,7 +486,7 @@ Return derivative in the form of [N,I]
 <a name="pipe_9"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>pipe_9(</strong> dGdx, dHdG ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L940-L974 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L940-L974 target=_blank>[source]</a></th></tr></thead></table>
 ndim > 1 and ninter == 1 and ndout > 1
 
 Return derivative in the form of [O][N,I]
@@ -501,19 +501,19 @@ Return derivative in the form of [O][N,I]
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L976-L987 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L976-L987 target=_blank>[source]</a></th></tr></thead></table>
 Return a short version the string representation: upto first non-letter.
 
 <a name="getNumberOfParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getNumberOfParameters(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L989-L994 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L989-L994 target=_blank>[source]</a></th></tr></thead></table>
 Returns the number of parameters of the ( compound ) model.  
 
 <a name="numDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numDerivative(</strong> xdata, param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L996-L1009 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L996-L1009 target=_blank>[source]</a></th></tr></thead></table>
 Returns numerical derivatives (df/dx) of the model function.
 
 <b>Parameters</b>
@@ -527,7 +527,7 @@ Returns numerical derivatives (df/dx) of the model function.
 <a name="numPartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>numPartial(</strong> xdata, param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1011-L1023 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1011-L1023 target=_blank>[source]</a></th></tr></thead></table>
 Returns numerical partial derivatives of the model function.
 
 <b>Parameters</b>
@@ -541,13 +541,13 @@ Returns numerical partial derivatives of the model function.
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1025-L1035 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1025-L1035 target=_blank>[source]</a></th></tr></thead></table>
 Return whether the model can change the number of parameters dynamically.
 
 <a name="hasPriors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> isBound=True ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1037-L1051 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1037-L1051 target=_blank>[source]</a></th></tr></thead></table>
 Return True when the model has priors for all its parameters.
 
 <b>Parameters</b>
@@ -558,7 +558,7 @@ Return True when the model has priors for all its parameters.
 <a name="getPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPrior(</strong> kpar )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1053-L1074 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1053-L1074 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior of the indicated parameter.
 
 <b>Parameters</b>
@@ -574,7 +574,7 @@ IndexError when kpar is larger than the number of parameters.
 <a name="setPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1076-L1103 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1076-L1103 target=_blank>[source]</a></th></tr></thead></table>
 Set the prior for the indicated parameter.
 
 <b>Parameters</b>
@@ -594,7 +594,7 @@ IndexError when kpar is larger than the number of parameters.
 <a name="getParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterName(</strong> kpar )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1105-L1126 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1105-L1126 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 
 <b>Parameters</b>
@@ -610,7 +610,7 @@ IndexError when kpar is larger than the number of parameters.
 <a name="getParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameterUnit(</strong> kpar )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1128-L1150 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1128-L1150 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
 <b>Parameters</b>
@@ -626,13 +626,13 @@ IndexError when kpar is > number of parameters
 <a name="getIntegralUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegralUnit(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1152-L1161 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1152-L1161 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the unit of the integral of the model over x. 
 <a name="setLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> lowLimits=None, highLimits=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1163-L1198 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1163-L1198 target=_blank>[source]</a></th></tr></thead></table>
 Sets the limits for the parameters of the compound model.
 
 1. It is valid to insert for either parameter a None value
@@ -651,7 +651,7 @@ It only works in *Fitter classes which support it.
 <a name="getLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLimits(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1200-L1228 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1200-L1228 target=_blank>[source]</a></th></tr></thead></table>
 Return the limits stored in the priors
 
 <b>Returns</b>
@@ -674,7 +674,7 @@ return (lolim, hilim)
 <a name="hasLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasLimits(</strong> fitindex=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1230-L1251 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1230-L1251 target=_blank>[source]</a></th></tr></thead></table>
 Return true if limits has been set for this model.
 
 <b>Parameters</b>
@@ -685,7 +685,7 @@ fitindex    list of indices to be fitted.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uvalue, kpar=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1253-L1276 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1253-L1276 target=_blank>[source]</a></th></tr></thead></table>
 Convert a value in [0,1] to one inside the limits of the parameter.
 
 <b>Parameters</b>
@@ -699,7 +699,7 @@ Convert a value in [0,1] to one inside the limits of the parameter.
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dvalue, kpar=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1278-L1299 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1278-L1299 target=_blank>[source]</a></th></tr></thead></table>
 Convert a value within the domain of the parameter to one in [0,1].
 
 <b>Parameters</b>
@@ -713,7 +713,7 @@ Convert a value within the domain of the parameter to one in [0,1].
 <a name="partialDomain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialDomain2Unit(</strong> dvalue )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1301-L1317 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1301-L1317 target=_blank>[source]</a></th></tr></thead></table>
 Return a the derivate of the domain2Unit function to dval.
 
 <b>Parameters</b>
@@ -725,24 +725,24 @@ Return a the derivate of the domain2Unit function to dval.
 <a name="nextPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPrior(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1319-L1332 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1319-L1332 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="isMixed"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isMixed(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1334-L1336 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1334-L1336 target=_blank>[source]</a></th></tr></thead></table>
 
 Return false. 
 <a name="getLinearIndex"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLinearIndex(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1338-L1519 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1338-L1519 target=_blank>[source]</a></th></tr></thead></table>
 
 Return null. 
 <a name="testPartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>testPartial(</strong> xdata, params, silent=True )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1521-L1647 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1521-L1647 target=_blank>[source]</a></th></tr></thead></table>
 A test routine to check the calculation of the partial derivatives.
 
 It is compared to a numerical calculation.
@@ -764,7 +764,7 @@ The number of large deviations.
 <a name="strictNumericPartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>strictNumericPartial(</strong> xdata, params, parlist=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1649-L1692 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1649-L1692 target=_blank>[source]</a></th></tr></thead></table>
 Strictly numeric calculation of partials to params.
 
 For compound models it is different from numPartial and numDerivative.
@@ -781,17 +781,17 @@ For compound models it is different from numPartial and numDerivative.
 <a name="assignDF1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>assignDF1(</strong> partial, i, dpi ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1694-L1695 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1694-L1695 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="assignDF2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>assignDF2(</strong> partial, i, dpi ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1697-L1702 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1697-L1702 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="strictNumericDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>strictNumericDerivative(</strong> xdata, param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Model.py#L1704-L1749 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1704-L1749 target=_blank>[source]</a></th></tr></thead></table>
 Strictly numeric calculation of derivative.
 
 For compound models it is different from numPartial and numDerivative.
@@ -805,7 +805,6 @@ For compound models it is different from numPartial and numDerivative.
 * param  :  array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters
 
-Endline #L1751
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./FixedModel.html">FixedModel</a></th></tr></thead></table>
 

@@ -4,7 +4,7 @@
 
 <a name="Explorer"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Explorer(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Explorer(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Explorer is a helper class of NestedSampler, which contains and runs the
@@ -39,7 +39,7 @@ Author       Do Kester.
 <a name="Explorer"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Explorer(</strong> ns, threads=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L72-L98 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L72-L98 target=_blank>[source]</a></th></tr></thead></table>
 
 Construct Explorer from a NestedSampler object.
 
@@ -52,7 +52,7 @@ Construct Explorer from a NestedSampler object.
 <a name="explore"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>explore(</strong> worst, lowLhood, iteration )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L100-L145 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L100-L145 target=_blank>[source]</a></th></tr></thead></table>
 Explore the likelihood function, using threads.
 
 <b>Parameters</b>
@@ -66,7 +66,7 @@ Explore the likelihood function, using threads.
 <a name="exploreWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>exploreWalker(</strong> kw, lowLhood, engines, rng )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L147-L209 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L147-L209 target=_blank>[source]</a></th></tr></thead></table>
 Move the walker around until it is randomly distributed over the prior and
 higher in logL then lowLhood
 
@@ -84,7 +84,7 @@ higher in logL then lowLhood
 <a name="selEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>selEngines(</strong> iteration ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L211-L225 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L211-L225 target=_blank>[source]</a></th></tr></thead></table>
 Select engines with slowly changing parameters once per so many iterations.
 
 <b>Parameter</b>
@@ -95,7 +95,7 @@ Select engines with slowly changing parameters once per so many iterations.
 <a name="allEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>allEngines(</strong> iteration ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L227-L236 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L227-L236 target=_blank>[source]</a></th></tr></thead></table>
 Always use all engines.
 
 <b>Parameters</b>
@@ -106,7 +106,6 @@ Always use all engines.
 <a name="checkWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkWalkers(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Explorer.py#L238-L243 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L238-L243 target=_blank>[source]</a></th></tr></thead></table>
 
 Perform sanity check on all walkers. 
-Endline #L245

@@ -4,7 +4,7 @@
 
 <a name="SplinesDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SplinesDynamicModel(</strong> <a href="./Modifiable.html">Modifiable,</a><a href="./Dynamic.html">Dynamic,</a><a href="./BasicSplinesModel.html">BasicSplinesModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 BasicSplinesModel that is modifiable (knot locations) and dynamic (in number
@@ -81,7 +81,7 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SplinesDynamicModel(</strong> modifiable=True, dynamic=True, growPrior=None, minKnots=2, maxKnots=None,
  minDistance=0.01, border=0, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L105-L173 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L105-L173 target=_blank>[source]</a></th></tr></thead></table>
 
 Splines on a given set of knots and a given order.
 
@@ -120,7 +120,7 @@ ValueError if not minKnots <= nrknots <= maxKnots
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> modifiable=None, dynamic=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L175-L216 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L175-L216 target=_blank>[source]</a></th></tr></thead></table>
 Make a copy of the model, optionally unchangeable.
 
 <b>Parameters</b>
@@ -133,18 +133,18 @@ Make a copy of the model, optionally unchangeable.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L218-L223 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L218-L223 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L225-L226 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L225-L226 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, force=False, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L228-L293 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L228-L293 target=_blank>[source]</a></th></tr></thead></table>
 Increase the degree by one upto maxComp ( if present ).
 
 <b>Parameters</b>
@@ -164,7 +164,7 @@ Increase the degree by one upto maxComp ( if present ).
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, rng=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L295-L366 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L295-L366 target=_blank>[source]</a></th></tr></thead></table>
 Decrease the degree by one downto minComp ( default 1 ).
 
 <b>Parameters</b>
@@ -182,7 +182,7 @@ Decrease the degree by one downto minComp ( default 1 ).
 <a name="vary"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>vary(</strong> rng=None, location=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L368-L426 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L368-L426 target=_blank>[source]</a></th></tr></thead></table>
 Vary the structure of a Modifiable Model
 
 
@@ -199,7 +199,7 @@ Vary the structure of a Modifiable Model
 <a name="varyAlt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>varyAlt(</strong> offset=0, rng=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SplinesDynamicModel.py#L428-L444 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L428-L444 target=_blank>[source]</a></th></tr></thead></table>
 Vary the structure of a Modifiable Model
 
 
@@ -212,7 +212,6 @@ Vary the structure of a Modifiable Model
 * kwargs  :  keyword arguments
 <br>&nbsp;&nbsp;&nbsp;&nbsp; for specific implementations
 
-Endline #L446
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Modifiable.html">Modifiable,</a></th></tr></thead></table>
 

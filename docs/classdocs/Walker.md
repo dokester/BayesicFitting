@@ -4,7 +4,7 @@
 
 <a name="Walker"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Walker(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Walker(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Walker is member of the cloud of points used in NestedSampler.
@@ -40,7 +40,7 @@ Author       Do Kester
 <a name="Walker"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Walker(</strong> wid, problem, allpars, fitIndex, logL=0, parent=-1, start=0, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py#L70-L112 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L70-L112 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
@@ -70,20 +70,20 @@ Either errdis or copy is obligatory.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py#L114-L119 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L114-L119 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 
 <a name="toSample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSample(</strong> logW ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py#L121-L181 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L121-L181 target=_blank>[source]</a></th></tr></thead></table>
 Return the contents of the Walker as a Sample.
 
 <a name="check"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>check(</strong> errdis ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Walker.py#L183-L237 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L183-L237 target=_blank>[source]</a></th></tr></thead></table>
 Perform some sanity checks.
 
 <b>Parameters</b>
@@ -91,4 +91,3 @@ Perform some sanity checks.
 * errdis  :  ErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to check logL
 
-Endline #L239
