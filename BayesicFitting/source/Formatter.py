@@ -98,7 +98,7 @@ def formatter( erray, format=None, indent=None, linelength=None, max=-1, tail=0 
 
     Parameters
     ----------
-    array : array_like or number
+    erray : array or number
         number or list of numbers or n-dim array of numbers
     format : None or string
         format applying to one item of array
@@ -147,10 +147,10 @@ def formatter( erray, format=None, indent=None, linelength=None, max=-1, tail=0 
     fmtlen = len( format % 1 )
 
     result = ""
-    result = recursive_format( result, erray, format=format, indent=indent, tail=tail )
+    result = _recursive_format( result, erray, format=format, indent=indent, tail=tail )
     return result
 
-def recursive_format( result, erray, format=None, indent=0, tail=0 ) :
+def _recursive_format( result, erray, format=None, indent=0, tail=0 ) :
     global count, nwl, sp, llen, fmtlen, mx, fmt
 
     if erray.size == 1 :
@@ -176,7 +176,7 @@ def recursive_format( result, erray, format=None, indent=0, tail=0 ) :
     sp += 1
     shp0 = shp[0] if mx is None else min( shp[0], mx )
     for k in range( shp0 ) :
-        result = recursive_format( result, erray[k], format=format,
+        result = _recursive_format( result, erray[k], format=format,
                                    indent=indent, tail=tail )
         nwl = True
     if mx is not None and shp[0] > mx :
@@ -188,7 +188,7 @@ def recursive_format( result, erray, format=None, indent=0, tail=0 ) :
                 result += " ..."
         t = min( tail, shp[0] - mx )
         for k in range( -t, 0 ) :
-            result = recursive_format( result, erray[k], format=format,
+            result = _recursive_format( result, erray[k], format=format,
                                        indent=indent, tail=tail )
 
     result += ( "]"  )

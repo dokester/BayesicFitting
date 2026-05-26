@@ -4,9 +4,9 @@ from . import Tools
 from .NonLinearModel import NonLinearModel
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -50,7 +50,7 @@ class LorentzModel( NonLinearModel ):
     Notes
     -----
     There are other possible definitions of this model, where the integral equals 1.0.
-    @http://en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function
+    @en.wikipedia.org/wiki/Cauchy_distribution#Probability_density_function
 
     Definitions that integrate to 1.0 are more fit as a distribution function.
     See sample/CauchyErrorDistribution.

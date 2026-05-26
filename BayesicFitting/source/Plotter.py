@@ -32,17 +32,18 @@ __status__ = "Perpetual Beta"
 #
 #   2017 - 2026 Do Kester
 
-# Module FitPlotter
+# Module Plotter
 """
-This module contains several methods to plot the results of some class 
- + a fit by a Fitter.
- + a fit by a Sampler.
- + a fit to a StellarOrbit
- + iteration samples
- + 3-D plot of a stellar orbit
- + Eclipsing stars
+    This module contains several methods to plot the results of some class 
 
-The fits are invoked when Fitter.fit() or Sampler.sample() is called with plot=True.
+     + a fit by a Fitter.
+     + a fit by a Sampler.
+     + a fit to a StellarOrbit
+     + iteration samples from NestedSampler(s)
+     + 3D plot of a stellar orbit
+     + Eclipsing stars
+
+    The fits are invoked when Fitter.fit() or Sampler.sample() are called with plot=True.
  
 """ 
 

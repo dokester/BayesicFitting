@@ -55,7 +55,7 @@ class GalileanEngine( Engine ):
     ----------
     size : float (0.5)
         adaptable fraction for the (unit) direction of the stepping
-    wiggle : float (0.3)
+    wiggle : float (0.2)
         factor to perturb the direction at each step. 
         between 0 (no perturbation) and 1 (new direction)
 

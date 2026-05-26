@@ -36,10 +36,9 @@ __status__ = "Perpetual Beta"
 class StellarOrbitModel( NonLinearModel ):
     """
     Model for the radial velocity variations of a star caused by a orbiting planet.
-.
-     The algorithm was taken from [Boule](../references.md#boule)
-        Cory Boule etal. (2017) J. of Double Star Observations Vol 13 p.189.
-        http://www.jdso.org/volume13/number2/Harfenist_189-199.pdf
+
+    The algorithm was taken from Cory Boule etal. (2017) 
+    J. of Double Star Observations Vol 13 p.189. [Boule](../references.md#boule)
 
     | par |symbol | description                        | limits  | comment |
     |-----|-------|------------------------------------|---------|---------|

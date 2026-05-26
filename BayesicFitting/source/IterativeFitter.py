@@ -98,8 +98,8 @@ class IterativeFitter( BaseFitter ):
             1 : report result
             2 : report every 100th iteration
             3 : report every iteration
-        kwargs for @BaseFitter
-            map, keep, fixedScale
+        kwargs : dict
+            for @BaseFitter  map, keep, fixedScale
 
         """
         super( IterativeFitter, self ).__init__( xdata, model, **kwargs )
@@ -118,7 +118,7 @@ class IterativeFitter( BaseFitter ):
     def setParameters( self, params ):
         """
         Initialize the parameters of the model
-        A little superfluous: see {@link Model#setParameters}
+        A little superfluous: see @Model#setParameters.
 
         Parameters
         ----------

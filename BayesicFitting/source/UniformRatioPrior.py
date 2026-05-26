@@ -39,17 +39,17 @@ class UniformRatioPrior( Prior ):
     Distribution of the ratio of two uniform distributed, positive variables.
 
     A uniform ratio prior is a proper prior.
-
-        Pr( x ) = 0         if X < 0
+        Pr( x ) = 0         if x < 0
                   0.5       if 0 < x < 1
                   0.5/x**2  if x > 1
 
-    domain2Unit: 
-        u = 0.5*d       if 0 < d < 1
+    domain2Unit.
+        u = 0.5 d       if 0 < d < 1
             1 - 0.5/d   if d > 1
-    unit2Domain: 
-        d = 2*u         if 0   < u < 0.5
-            1/(2-2*u)   if 0.5 < u < 1
+
+    unit2Domain.
+        d = 2 u         if 0   < u < 0.5
+            1/2(1-u)    if 0.5 < u < 1
 
     The keyword "circular" does not apply to this prior.
 

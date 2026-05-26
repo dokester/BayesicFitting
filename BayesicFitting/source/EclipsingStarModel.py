@@ -35,34 +35,33 @@ __status__ = "Alpha"
 #  *
 #  *    2018 - 2026 Do Kester
 
-
 class EclipsingStarModel( NonLinearModel ) :
     """
-    Model for the radial velocity variations of a star caused by a orbiting planet.
+    Model for the light curve of an eclipsing double star, as a function of time, t. 
 
     | par | symbol | name         | description               | limits     | comment      |
     |-----|--------|--------------|---------------------------|------------|--------------|
-    | p_0 |   e    | eccentricity | of the elliptic orbit     | 0<e<1      | 0 = circular |
+    | p_0 |   e    | eccentricity | of the elliptic orbit     | 0<e<1      | 0 is circular |
     | p_1 |   P    | period       | of the velocity variation |   P>0      |  |
-    | p_2 |   T    | phase        | phase since periastron    | 0<T<2&pi;  |  |
+    | p_2 |   T    | phase        | phase until t = 0         | 0<T<2&pi;  |  |
     | p_3 |   i    | inclination  | of orbit (close to 90)    | 0<i<&pi;   |  |
     | p_4 | &omega;| longitude    | from north to periastron  | 0<&omega;<2&pi; |  |
     | p_5 |   r1   | radius_1     | radius of star 1          | 0<r1<1     |  |
     | p_6 |   r2   | radius_2     | radius of star 2          | 0<r2<1     |  |
     | p_7 |   f1   | lumen_1      | luminosity of star 1      |            |  |
     | p_8 |   f2   | lumen_2      | luminosity of star 2      |            |  |
-    | p_9 |   fs   | spot         | spot illumination         | fs >= 0    | optional |
-    | p_10|   mr   | mass_1       | relative mass of star 1   | 0 < m1 < 1 | optional |
+    | p_9 |   fs   | spot         | spot illumination         | fs >= 0    | 0 is no spot |
+    | p_10|   m1   | mass_1       | relative mass of star 1   | 0 < m1 < 1 | m2 = 1 - m1 |
 
     The amplitude (semimajor axis) is set to 1.0. Both stellar radii are given 
     as a fraction of the amplitude. The mass of star 2 is ( 1 - m1 ). The mass ratio
     is used in calculating the tidal distortion.
 
-    When the sum of the radii (p_5 + p_6) is larger than the periastron distance 
-    (1 - p_0), the stars clash. 
+    When the sum of the radii, p_5 + p_6, is larger than the periastron distance,
+    1 - p_0, the stars clash.
 
-    When the model is defined with "circular=True", the parameters p_0 and p_4
-    loose their meaning. They are removed from the model.
+    When the model is constructed as circular, the parameter p_0 becomes 0 by 
+    definition and p_4 looses its meaning. They are removed from the model.
 
     This class uses @StellarOrbitModel to find the true orbit
 
@@ -73,7 +72,7 @@ class EclipsingStarModel( NonLinearModel ) :
     For the mathematics of this model and further explanation see @EclipsingStars.html.
 
     (Partial) derivatives were obtained with the help of  
-    @https://www.derivative-calculator.net
+    @www.derivative-calculator.net
     Muchas Gracias
 
 
@@ -87,8 +86,8 @@ class EclipsingStarModel( NonLinearModel ) :
         apply spot illumination and tidal distortion
     tides : bool
         apply tidal distortion
-    noeclipses : bool
-        no eclipses stricty necessary
+    occultation : bool
+        True: eclipses stricty enforced
     fixpar : lambda function
         to provide parameters for StellarOrbitModel
 
@@ -102,8 +101,8 @@ class EclipsingStarModel( NonLinearModel ) :
     """
     TWOPI = 2 * math.pi
 
-    def __init__( self, circular=False, spot=False, tides=False, copy=None, 
-                  noeclipses=False, debug=False, **kwargs ):
+    def __init__( self, circular=False, spot=False, tides=False, occultation=True, 
+                  copy=None, **kwargs ):
         """
         Radial velocity model.
 
@@ -114,13 +113,13 @@ class EclipsingStarModel( NonLinearModel ) :
         Parameters
         ----------
         circular : bool
-            stellar orbit is circular: eccentricity = 0 ==> phase = lonod = 0
+            stellar orbit is circular: eccentricity = 0 ==> lonod = 0
         spot : bool or number
             apply spot illumination; more pronounced when spot > 1
         tides : bool
             apply tidal distortion
-        noeclipses : bool (False)
-            no eclipses stricty enforced
+        occultation : bool (True)
+            eclipses are stricty enforced
         copy : EclipsingStarModel
             model to copy
         """
@@ -156,16 +155,16 @@ class EclipsingStarModel( NonLinearModel ) :
         ## force spot to be a number
         setatt( self, "spot", spot + 0 )
 
-        setatt( self, "noeclipses", noeclipses )
+        setatt( self, "occultation", occultation )
 
-        if not debug :
-            setatt( self, "assertDeriv", self._nodebug )
-            setatt( self, "assertParts", self._nodebug )
-        else :
+        if "debug" in kwargs and kwargs["debug"] :          ## present and True
             from .Formatter import formatter_init 
             formatter_init( linelength=100 )
-            setatt( self, "assertDeriv", self._debugDeriv ) 
-            setatt( self, "assertParts", self._debugParts ) 
+            setatt( self, "_assertDeriv", self._debugDeriv ) 
+            setatt( self, "_assertParts", self._debugParts ) 
+        else :                                              ## default
+            setatt( self, "_assertDeriv", self._nodebug )
+            setatt( self, "_assertParts", self._nodebug )
 
         super().__init__( npar, copy=copy, params=param, names=names, **kwargs )
 
@@ -229,7 +228,7 @@ class EclipsingStarModel( NonLinearModel ) :
             if ( 1.4 * ( r1 + r2 ) ) > perdis :
                 return -math.inf 
 
-        if self.noeclipses :
+        if not self.occultation :
             return 0
 
         ## calculate distance between stars at eclipse (= lonod+90)
@@ -696,7 +695,8 @@ class EclipsingStarModel( NonLinearModel ) :
             radius of star 1
         r2 : array
             radius of star 2
-        """        
+
+        """
         dOdr1 = numpy.where( r1 > r2, 0.0,  
                     numpy.where( xy < r1 + r2, 2 * math.pi * r1, 0.0 ) )
         dOdr2 = numpy.where( r1 < r2, 0.0,  
@@ -741,7 +741,7 @@ class EclipsingStarModel( NonLinearModel ) :
         """
         Returns partials of the SpotIllumination.
         Specificly of the modified f1 and f2 to params[-5:] 
-        (radius_1, raduis_2, lumen_1, lumen_2, spot) 
+        (radius_1, radius_2, lumen_1, lumen_2, spot) 
 
         If no spot illumination is requested, the dF*dfs are returned as zero.
 
@@ -829,7 +829,7 @@ class EclipsingStarModel( NonLinearModel ) :
         tdresult = self.tidalDistortion( xy, z, params )
         tdpart = self.TDpartial( xy, z, params, TDresult=tdresult )
 
-        self.assertParts( xy, z, params, tdpart, debug=1 )
+        self._assertParts( xy, z, params, tdpart, debug=1 )
 
         a1, b1, a2, b2 = tdresult
         da1dm, db1dm, da2dm, db2dm, da1dr, db1dr, da2dr, db2dr = tdpart
@@ -854,7 +854,7 @@ class EclipsingStarModel( NonLinearModel ) :
         dV2dr1 = dV2dra1 * dra1dr1 
         dV2dr2 = dV2dra2 * dra2dr2 
 
-        self.assertParts( xy, z, params, 
+        self._assertParts( xy, z, params, 
             ( dV1dr1, dV2dr1, dV1dr2, dV2dr2, dV1dm1, dV2dm1 ), debug=2 )
 
 
@@ -865,7 +865,7 @@ class EclipsingStarModel( NonLinearModel ) :
 
         sipart = self.SIpartial( xy, z, params )
 
-        self.assertParts( xy, z, params, sipart, debug=3 )
+        self._assertParts( xy, z, params, sipart, debug=3 )
 
         sipart = tuple( [df * surface1 for df in sipart[:5]] + 
                         [df * surface2 for df in sipart[5:]] )
@@ -882,7 +882,7 @@ class EclipsingStarModel( NonLinearModel ) :
         dF1dm1 = F1 * ( a1 * db1dm + b1 * da1dm )
         dF2dm1 = F2 * ( a2 * db2dm + b2 * da2dm )
 
-        self.assertParts( xy, z, params, 
+        self._assertParts( xy, z, params, 
             ( dF1dr1, dF1dr2, dF1df1, dF1df2, dF1dfs, dF1dm1, 
               dF2dr1, dF2dr2, dF2df1, dF2df2, dF2dfs, dF2dm1 ), debug=4 )
 
@@ -914,7 +914,7 @@ class EclipsingStarModel( NonLinearModel ) :
 
         dLCdp = dLCdp.reshape( ( ksh, -1 ) ).T
 
-        self.assertParts( xy, z, params, dLCdp, debug=5, doprint=False )
+        self._assertParts( xy, z, params, dLCdp, debug=5, doprint=False )
 
         return dLCdp
 
@@ -1032,7 +1032,8 @@ class EclipsingStarModel( NonLinearModel ) :
             radius of star 1
         r2 : array
             radius of star 2
-        """    
+
+        """
         dOdr = numpy.zeros_like( xy )
 
         q = numpy.where( ( xy >= abs( r1 - r2 ) ) & ( xy <= r1 + r2 ) )
@@ -1067,6 +1068,7 @@ class EclipsingStarModel( NonLinearModel ) :
             distance of star 2 to the sky plane
         params : array
             parameters of the model
+
         """
         ## radii and luminosities of both stars
         r1 = self.getParameterValue( params, "radius_1" )
@@ -1078,7 +1080,7 @@ class EclipsingStarModel( NonLinearModel ) :
         tdderiv  = self.TDderivative( xy, z, params, TDresult=tdresult )
         a1, b1, a2, b2 = tdresult
 
-        self.assertDeriv(  xy, z, params, tdderiv, debug=1 )
+        self._assertDeriv(  xy, z, params, tdderiv, debug=1 )
 
         ## Find overlap area between two circles of radius r1 and r2
         ##  at distances xy; r1,r2 depend on distortion 
@@ -1102,7 +1104,7 @@ class EclipsingStarModel( NonLinearModel ) :
         f1, f2 = self.spotIllumination( xy, z, params )
         ( df1dx, df2dx, df1dz, df2dz ) = self.SIderivative( xy, z, params )
 
-        self.assertDeriv(  xy, z, params, ( df1dx, df2dx, df1dz, df2dz ), debug=3 )
+        self._assertDeriv(  xy, z, params, ( df1dx, df2dx, df1dz, df2dz ), debug=3 )
 
         F1 = f1 * surface1
         F2 = f2 * surface2
@@ -1113,7 +1115,7 @@ class EclipsingStarModel( NonLinearModel ) :
         dF1dz = surface1 * df1dz + f1 * ds1dz
         dF2dz = surface2 * df2dz + f2 * ds2dz
 
-        self.assertDeriv(  xy, z, params, ( dF1dx, dF2dx, dF1dz, dF2dz ), debug=4 )
+        self._assertDeriv(  xy, z, params, ( dF1dx, dF2dx, dF1dz, dF2dz ), debug=4 )
 
         V1, V2 = self.visibleFraction( xy, z, ra1, ra2 )
         dV1dx, dV2dx, dV1dz, dV2dz = self.VFderivative( xy, z, ra1, ra2 )
@@ -1127,14 +1129,14 @@ class EclipsingStarModel( NonLinearModel ) :
         dV2dx[q] += dV2dra1[q] * r1 * da1dx[q] + dV2dra2[q] * r2 * da2dx[q]
         dV2dz[q] += dV2dra1[q] * r1 * da1dz[q] + dV2dra2[q] * r2 * da2dz[q]
 
-        self.assertDeriv(  xy, z, params, ( dV1dx, dV2dx, dV1dz, dV2dz ), 
+        self._assertDeriv(  xy, z, params, ( dV1dx, dV2dx, dV1dz, dV2dz ), 
                            debug=2, doprint=False )
 
         ## LC = V1 * F1 + V2 * F2
         dLCdx = V1 * dF1dx + F1 * dV1dx + V2 * dF2dx + F2 * dV2dx
         dLCdz = V1 * dF1dz + F1 * dV1dz + V2 * dF2dz + F2 * dV2dz
 
-        self.assertDeriv(  xy, z, params, ( dLCdx, dLCdz ), debug=5 )
+        self._assertDeriv(  xy, z, params, ( dLCdx, dLCdz ), debug=5 )
 
         return ( dLCdx, dLCdz )
 
@@ -1390,20 +1392,7 @@ class EclipsingStarModel( NonLinearModel ) :
         k += 1
         print( "%-12.12s :" % self.getParameterName( k ), pf( k, fm ), funit )
         k += 1
-        """
-        m1 = param[k]
-        m2 = param[k+1]
-        if toMags :
-            fm = float( toMags )
-            m1 = -2.512 * math.log10( m1 * fm )
-            m2 = -2.512 * math.log10( m2 * fm )
-            print( fm, m1, m2 )
 
-        print( "%-12.12s : %10.3f" % ( self.getParameterName( k ), m1 ) )
-        print( "%-12.12s : %10.3f" % ( self.getParameterName( k+1 ), m2 ) )
-
-        k += 2
-        """
         if self.spot :
             print( "%-12.12s :" % self.getParameterName( k ), p0( k ) )
             k += 1
@@ -1432,7 +1421,7 @@ class EclipsingStarModel( NonLinearModel ) :
             for k, df in enumerate( dfs ) :
                 msg = ( "tides %d %s" % 
                       ( k, fma( df, indent=8 ) ) )
-                self.assertPrint( df, zs, tol, msg, doprint=doprint )
+                self._assertPrint( df, zs, tol, msg, doprint=doprint )
             return
 
         if self.spot :
@@ -1443,7 +1432,7 @@ class EclipsingStarModel( NonLinearModel ) :
 #            for k, df in enumerate( dfs ) :
 #                msg = ( "spot  %d %s" % 
 #                      ( k, fma( df, indent=8 ) ) )
-#                self.assertPrint( df, ons, tol, msg, doprint=doprint )
+#                self._assertPrint( df, ons, tol, msg, doprint=doprint )
             return
         
         kf2 = [np - 1]
@@ -1503,7 +1492,7 @@ class EclipsingStarModel( NonLinearModel ) :
                 nmdr = ( yp - ym ) / 0.0002
                 msg = ( "%sd%sd%s  %s\nnumer   %s" % 
                       ( msp, rn[0], pn[k], fma( dfs[k], indent=8 ), fma( nmdr, indent=8 ) ) )
-                self.assertPrint( dfs[k], nmdr, tol, msg, doprint=doprint )
+                self._assertPrint( dfs[k], nmdr, tol, msg, doprint=doprint )
                 continue
 
             if debug > 2 :
@@ -1515,12 +1504,12 @@ class EclipsingStarModel( NonLinearModel ) :
                 msg1 = ( "%sd%sd%s  %s\nnumer   %s" % 
                        ( msp, rn[i], pn[k], fma( dfr, indent=8 ), fma( nmdr, indent=8 ) ) )
 #                print( msg1 )
-                self.assertPrint( dfr, nmdr, tol, msg1, doprint=doprint )
+                self._assertPrint( dfr, nmdr, tol, msg1, doprint=doprint )
                 n += np
 
         return
 
-    def assertPrint( self, df, nm, tol, msg, doprint=False ) :
+    def _assertPrint( self, df, nm, tol, msg, doprint=False ) :
         if doprint :
             print( msg )
             q = numpy.where( abs( df - nm ) > ( tol + tol * abs( nm ) ) )
@@ -1566,11 +1555,11 @@ class EclipsingStarModel( NonLinearModel ) :
 
             msg1 = "d%sdx   %s\nnmdx    %s" % ( rn[0], 
                     fma( dfs[0], indent=8 ), fma( nmdr, indent=8 ) )
-            self.assertPrint( dfs[0], nmdr, tol, msg1, doprint=doprint )
+            self._assertPrint( dfs[0], nmdr, tol, msg1, doprint=doprint )
 
             msg2 = "d%sdz   %s\nnmdz    %s" % ( rn[0], 
                     fma( dfs[1], indent=8 ), fma( nmdz, indent=8 ) )
-            self.assertPrint( dfs[1], nmdz, tol, msg2, doprint=doprint )
+            self._assertPrint( dfs[1], nmdz, tol, msg2, doprint=doprint )
             return
 
         nk = len( ypr )
@@ -1583,11 +1572,11 @@ class EclipsingStarModel( NonLinearModel ) :
 
             msg1 = "d%sdx   %s\nnmdx    %s" % ( rn[k], 
                     fma( dfr, indent=8 ), fma( nmdr, indent=8 ) )
-            self.assertPrint( dfr, nmdr, tol, msg1, doprint=doprint )
+            self._assertPrint( dfr, nmdr, tol, msg1, doprint=doprint )
 
             msg2 = "d%sdz   %s\nnmdz    %s" % ( rn[k], 
                     fma( dfz, indent=8 ), fma( nmdz, indent=8 ) )
-            self.assertPrint( dfz, nmdz, tol, msg2, doprint=doprint )
+            self._assertPrint( dfz, nmdz, tol, msg2, doprint=doprint )
 
 
         return

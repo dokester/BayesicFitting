@@ -57,7 +57,6 @@ class Engine( object ):
         random number generator
     verbose : int
         if verbose > 4 report about the engines. (mostly for debugging)
-
     report : list of int (read only)
         reports number of succes, accepted, rejected, failed calls. Plus the total.
     unitRange : array_like (read only)
