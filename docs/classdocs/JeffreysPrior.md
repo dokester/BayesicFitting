@@ -25,7 +25,8 @@ domain2unit:
 unit2domain: 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = JeffreysPrior()                       # unbound prior
     pr = JeffreysPrior( limits=[0.1,1.0] )     # limited to the range [0.1,1.0]
 

@@ -38,7 +38,8 @@ Model.Brackets is an internal class inside Model.
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
 Explicit use of BrackeModel
 
     m1 = GaussModel( )

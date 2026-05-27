@@ -18,7 +18,8 @@ in here.
 Unfortunately the methods derivative (df/dx) is model dependent.
 It is reset to numDerivative.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     m1 = PolynomialModel( 1 )
     m1 += SineModel()
     print( m1.npchain )         # number of params: 2 + 3

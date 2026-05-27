@@ -20,7 +20,8 @@ Parameters 2 & 3 ( widths ) is always kept positive ( >=0 ).
 
 The implementation uses the Faddeeva function from scipy.special.wofz.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     voigt = VoigtModel( )
     voigt.setParameters( [5, 4, 1, 2] )
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]

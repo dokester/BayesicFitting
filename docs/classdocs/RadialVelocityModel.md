@@ -29,7 +29,8 @@ It is a non-linear model.
 * keppler  :  Kepplers2ndLaw()
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     rv = RadialVelocityModel( )
     print( rv.npars )
     5

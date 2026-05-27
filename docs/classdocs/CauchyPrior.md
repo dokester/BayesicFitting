@@ -22,7 +22,8 @@ In computational practice it is limited to [-1e16, 1e16]
 <br>&nbsp; unit2domain: 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; d = tan( ( u - 0.5 ) * &pi; ) * s + c
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = CauchyPrior()                         # center=0, scale=1
     pr = CauchyPrior( center=1.0, scale=0.5 )
     pr = CauchyPrior( limits=[0,None] )        # lowlimit=0, highlimit=inf

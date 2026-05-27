@@ -17,7 +17,8 @@ P(y), Q(y) are Polynomials of a certain order, n.
 
 It is a linear model in 2 dimensions, with 2n+2 papameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = PolySineAmpModel( 2, 150.0 )        # fixed frequency of 150 Hz
 
 <b>Attributes</b><br>

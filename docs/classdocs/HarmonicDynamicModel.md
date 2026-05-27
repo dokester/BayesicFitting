@@ -41,7 +41,8 @@ Author       Do Kester
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     harm = HarmonicDynamicModel( 3 )            # period = 1
     print harm.getNumberOfParameters( )         # 6
     harm = HarmonicModel( 4, period=2.7 )       # period = 2.7

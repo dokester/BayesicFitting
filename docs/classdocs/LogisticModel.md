@@ -18,7 +18,8 @@ where
 
 The parameters are initialized at 1.0, 0.0, 1.0.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     lm = LogisticModel( )
     print( lm )
     Logistic: f( x:p ) = p_0 / ( 1 + exp( ( p_1 - x ) / p_2 ) )

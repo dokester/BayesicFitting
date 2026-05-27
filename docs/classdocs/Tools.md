@@ -45,7 +45,8 @@ If the condition is not given, it returns 0
 <b>Raises</b><br>
 &nbsp; StopIteration: if no item satysfing the condition is found.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     firstIndex( (1,2,3), condition=lambda x: x % 2 == 0)
     2
     firstIndex( range( 3, 100 ) )

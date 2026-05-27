@@ -37,7 +37,8 @@ the methods goals1(), goals2(), ... goals5(), below.
 Note
 This is about the game that most of the world calls football.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     fm = FootballModel( 18 ) 
     print( fm.npars )
     90

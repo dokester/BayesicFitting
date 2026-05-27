@@ -21,7 +21,8 @@ They all derive more or less from the inverse Hessian matrix ( aka the
 covariance matrix ). All these calculations are in this Fitter class.
 Other Fitter classes relegate their calculation in these issues to this one.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
 It is not possible to use this class. Use Fitter, CurveFitter etc. in stead
 
 <b>Note Also</b><br>

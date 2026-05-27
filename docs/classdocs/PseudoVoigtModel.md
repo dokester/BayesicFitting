@@ -20,7 +20,8 @@ the balance between the models
 These are initialised to [1, 0, 1, 0.5].
 Parameter 2 (width) is always kept positive ( >=0 ).
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     voigt = PseudoVoigtModel( )
     voigt.setParameters( [5, 4, 1, 0.7] )
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]

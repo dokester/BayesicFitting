@@ -49,7 +49,8 @@ parameters are kept positive.
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     nn = 100
     fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
     print( fsm.shape )

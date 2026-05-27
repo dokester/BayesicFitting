@@ -18,7 +18,8 @@ As always x = input.
 
 The parameters are initialized at [1.0, 1.0, 1.0, 0.0]. It is a non-linear model.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = SineDriftModel( )
     print( sine.npchain )
     pars = [0.1,0,1,0.0]

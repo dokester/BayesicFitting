@@ -26,7 +26,8 @@ unit2domain:
 <br>&nbsp; d = c + log( 2 * u ) * scale                   if u < 0.5
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c - log( 2 * ( 1 - u ) ) * scale           otherwise
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = LaplacePrior()                         # center=0, scale=1
     pr = LaplacePrior( center=1.0, scale=0.5 )
     pr = LaplacePrior( limits=[0,None] )        # limites to values >= 0

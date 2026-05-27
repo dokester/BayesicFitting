@@ -19,7 +19,8 @@ The parameters are initialized at 1.0, 0.0, 1.0.
 
 Parameter 2 (width) is always kept stricktly positive (>0).
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     gauss = GaussModel( )
     print( gauss )
     Gauss: f( x:p ) = p_0 * exp( -0.5 * ( ( x - p_1 ) / p_2 )^2 )

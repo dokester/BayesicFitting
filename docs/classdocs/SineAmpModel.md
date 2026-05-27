@@ -20,7 +20,8 @@ where
 
 It is a linear model with 2 parameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = SineAmpModel( 150 )        # fixed frequency of 150 Hz
 
 <b>Attributes</b><br>

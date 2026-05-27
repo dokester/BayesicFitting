@@ -39,7 +39,8 @@ A finesse below -1 causes infinities.
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     fpm = EtalonModel( )
     print( fpm.npchain )
     4

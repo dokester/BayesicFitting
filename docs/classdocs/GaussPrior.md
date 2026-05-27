@@ -28,7 +28,8 @@ domain2unit:
 unit2domain: 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; d = erfinv( 2 * u - 1 ) * s * &radic;2 + c
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = GaussPrior()                         # center=0, scale=1
     pr = GaussPrior( center=1.0, scale=0.5 )
     pr = GaussPrior( limits=[0,None] )        # limited to values >= 0

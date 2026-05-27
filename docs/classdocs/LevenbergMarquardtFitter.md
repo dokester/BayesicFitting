@@ -19,7 +19,8 @@ This might be the third or fourth transcription of it.
 
 Author       Do Kester.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # assume x and y are Double1d data arrays
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122            # make slope

@@ -17,7 +17,8 @@ It is a linear model.
 
 Author       Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = PolynomialDynamicModel( )         # polynomial with unknown degree
     poly.grow( )                         # starts at degree = 0, npar = 1
     poly.grow( )                         # each grow( ) adds 1

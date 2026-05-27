@@ -60,7 +60,8 @@ This class uses [Kepplers2ndLaw to find the radius and anomaly.](Kepplers2ndLaw 
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sm = StellarOrbitModel( )
     print( sm.npars )
     7

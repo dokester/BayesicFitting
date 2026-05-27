@@ -29,7 +29,8 @@ used when partial is not given in the model definition itself. This same
 numerical derivation of partial is used in testPartial to indeed test
 whether the partial has been implemented properly.
 
-<b>Example:</b><br>
+<b>Example:</b>
+
     x = numpy.arange( 10 )
     poly = PolynomialModel( 2 )             # quadratic model
     poly.parameters = [3,2,1]               # set the parameters for the model

@@ -18,7 +18,8 @@ needs to be divided by a factor 1.0 in the same units as the x.
 Otherwise possibly fractional dimensions are created.
 The factor is omitted as it does not contribute in the calculations.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pwr = PowerModel( -1 )
     print pwr.getNumberOfParameters( )       # 1
     1

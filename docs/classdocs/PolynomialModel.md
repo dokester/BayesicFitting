@@ -14,7 +14,8 @@ General polynomial model of arbitrary degree.
 where the sum is over k running from 0 to degree ( inclusive ).
 
 It is a linear model.
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = PolynomialModel( 3 )            # 3rd degree polynomial
     print( poly.getNumberOfParameters() )
     4

@@ -13,7 +13,8 @@ See also: [AnnealingAmoeba](./AnnealingAmoeba.md)
 
 Author       Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = 3.5 * SIN( x + 0.4 )                    # make sine

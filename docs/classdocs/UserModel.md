@@ -17,7 +17,8 @@ df/dx as  userDeriv( x. param )
 name  as  string
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     import numpy as np
     def ur( x, p ) 
         return p[0] * np.sin( p[1] * x + p[2] * np.log( x + p[3] ) ) 

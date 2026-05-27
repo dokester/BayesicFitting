@@ -41,7 +41,8 @@ The parameters are initialized at 1.0, 1.0.
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     em = ExpModel( )
     print( em.getNumberOfParameters( ) )
     2

@@ -27,7 +27,8 @@ The parameters are initialized at [2/pi, 0.0, 1.0]. It is a non-linear model.
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Example</b><br>
+<b>Example</b>
+
     arct = ArctanModel( )
     print( arct.getNumberOfParameters( ) )
     3

@@ -25,7 +25,8 @@ Beware of the poles where the denominator equals zero.
 
 Author:      Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pade = PadeModel( 3, 1 )                # 3rd degree polynomial
     print pade.getNumberOfParameters( )     # 5
     5

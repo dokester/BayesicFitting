@@ -57,7 +57,8 @@ As we have copies of the same model, each model can have its own priors.
 &nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     gauss = GaussModel( )
     combi = CombiModel( gauss, 3, addCombi={1:[0,0.1,0.3]}, mulCombi={2,[0]*3} )
     print( combi )

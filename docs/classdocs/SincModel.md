@@ -26,7 +26,8 @@ Parameter 2 ( width ) is always kept positive ( >=0 ).
 <br>&nbsp;&nbsp;&nbsp;&nbsp; KernelModel( kernel=Sinc() )
 See [KernelModel](./KernelModel.md)
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sinc = SincModel( )
     print sinc.npchain
     3

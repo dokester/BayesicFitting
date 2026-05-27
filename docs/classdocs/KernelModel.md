@@ -29,7 +29,8 @@ Beware: The "bound" models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     model = KernelModel( )
     model.kernel = Triweight()
 

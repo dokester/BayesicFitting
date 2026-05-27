@@ -32,7 +32,8 @@ Its usefullness elsewhere is doubtfull.
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     fpm = EtalonDriftModel( )
     print( fpm.npchain )
 5

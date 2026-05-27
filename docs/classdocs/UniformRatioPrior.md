@@ -24,7 +24,8 @@ unit2Domain.
 
 The keyword "circular" does not apply to this prior.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = UniformRatioPrior()
 
 <b>Attributes from Prior</b><br>

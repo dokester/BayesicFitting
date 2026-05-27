@@ -18,7 +18,8 @@ The result is a list of distances.
 The number of parameters is equal to the length of the xdata array
 The parameters are initialized at [k for k in range( npars )]
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     tsm = SalesmanProblem( 100 )
     print( tsm )
     TravelingSalesman in 2 dimensions with 100 nodes.

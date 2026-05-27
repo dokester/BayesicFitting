@@ -15,7 +15,8 @@ fitting.
 2. resizeData Resizes the data arrays into a 1-dimensional array.
 <br>&nbsp;&nbsp;&nbsp; To be used as data in the Fitter.
 
-<b>Example</b><br>
+<b>Example</b>
+
     ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
     ias = ImageAssistant()
     ky = ias.getIndices( ymap )

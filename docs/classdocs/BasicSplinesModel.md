@@ -41,7 +41,8 @@ larger than the x-values in the dataset.
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = numpy.arange( 17, dtype=float ) * 10     # make  knots from 0 to 160
     csm = BasicSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )

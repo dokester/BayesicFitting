@@ -9,7 +9,8 @@
 
 Wrapper for Astropy Models, so they can be used in BayesicFitting.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     from astropy.modelling.models import Gaussian1D
     gm = Gaussian1D( mean=0, stddev=1, amplitude=1 )
    

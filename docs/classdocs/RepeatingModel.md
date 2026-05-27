@@ -49,7 +49,8 @@ same parameters. Use keywords same=.
 <b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Example</b><br>
+<b>Example</b>
+
     # Define a model containing between 1 and 6 VoigtModels, starting with 3
     # and all with the same widths (for Gauss and Cauchy)
     vgt = VoigtModel()

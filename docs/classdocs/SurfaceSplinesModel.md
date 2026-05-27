@@ -19,7 +19,8 @@ The number of parameters is
 
 The SplinesModel has more information about order and knots.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     nxk = 17
     nyk = 11
     xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160

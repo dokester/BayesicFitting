@@ -32,7 +32,8 @@ extrapoling spline is obtained. It still works more or less. Dont push it.
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = SplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )

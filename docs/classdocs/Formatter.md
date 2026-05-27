@@ -10,7 +10,8 @@
 
 This module contains methods to format numbers, especially in arrays.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     arr = numpy.linspace( 0, 10, 48 ).reshape( (4,12) )
     print( "array ", formatter( arr, indent=7, tail=2, max=5 ) )
     array  [[    0.000    0.213    0.426    0.638    0.851 ...    2.128    2.340]

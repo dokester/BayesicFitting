@@ -13,7 +13,8 @@ The dimensionality of this model is equal to the number of constituent models.
 
 The number of parameters is the sum of the parameters of the models.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     nxk = 17
     nyk = 11
     xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160

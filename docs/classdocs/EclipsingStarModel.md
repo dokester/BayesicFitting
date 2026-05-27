@@ -60,7 +60,8 @@ Muchas Gracias
 * fixpar  :  lambda function
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to provide parameters for StellarOrbitModel
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     esm = EclipsingStarModel( spot=True, tides=True )
     print( esm.npars )
     10

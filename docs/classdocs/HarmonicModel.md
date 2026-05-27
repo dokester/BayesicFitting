@@ -21,7 +21,8 @@ The parameters are initialized at 1.0. It is a linear model.
 
 Author:      Do Kester
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     harm = HarmonicModel( 3 )            # period = 1
     print( harm.npbase )
     6

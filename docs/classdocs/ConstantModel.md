@@ -42,7 +42,8 @@ or a family of similar shapes.
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
 To make a model that decays to 1.0
 
     model = ConstantModel( values=1.0 )

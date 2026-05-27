@@ -27,7 +27,8 @@ The tree is searched left to right.
 
 The parameters are all initialized at 0.0
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     dtm = DecisionTreeModel( )
     print( dtm )
     DecisionTree: with 0 components and 1 parameters

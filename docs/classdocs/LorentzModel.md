@@ -39,7 +39,8 @@ parameter, only that aspect changes. In the present definition this is the case.
 In the alternative definition if you change p_2, not only the width
 of the function changes, but also the amplitude.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     lorentz = LorentzModel( )
     lorentz.setParameters( [5, 4, 1] )
     print( lorentz( numpy.arange(  41 , dtype=float ) / 5 ) )

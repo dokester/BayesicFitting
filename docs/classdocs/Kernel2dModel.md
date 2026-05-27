@@ -45,7 +45,8 @@ Beware: These models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Example</b><br>
+<b>Example</b>
+
     model = Kernel2dModel( )                                 # default: circular Gauss
     model.setKernelShape( Lorentz(), 'Elliptic'  )             # elliptic Lorentz model.
     model = Kernel2dModel( shape=3 )                         # rotated Gauss

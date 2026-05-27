@@ -11,7 +11,8 @@ BasicSplinesModel that is modifiable (knot locations) and dynamic (in number
 of knots)
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # make dynamic splinesmodel, initially with 4 equidistant knots from 0 to 10
     knots = numpy.linspace( 0, 10, 4, dtype=float )
     csm = SplinesDynamicModel( knots=knots, modifiable=False )

@@ -20,7 +20,8 @@ Where PM is a PolynomialModel and SM a SplinesModel
 
 It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = [3.0*k for k in range( 11 )]
     sine = SineSplineDriftModel( 150, knots )        # fixed frequency of 150 Hz
     print( sine.npbase )                        # number of parameters

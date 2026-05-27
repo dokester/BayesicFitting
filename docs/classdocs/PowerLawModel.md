@@ -22,7 +22,8 @@ Note that the term ( x - p<sub>1</sub> ) needs to be divided by a factor 1.0
 in the same units as the x, to get the overall units of f( x:p ) right.
 The factor is omitted as it does not contribute in the calculations.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pl = PowerLawModel( )
     print( pl.npchain )
     4

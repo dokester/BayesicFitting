@@ -37,7 +37,8 @@ npmax, fixed, parlist, mlist
 <b>Attributes from BaseModel</b><br>
 npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = ChebyshevPolynomialModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )
     4

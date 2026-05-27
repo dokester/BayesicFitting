@@ -13,7 +13,8 @@ The lowLimit is wrapped onto the highLimit.
 A wrapper around
 <br>&nbsp;&nbsp;&nbsp;&nbsp; UniformPrior( circular=... limits=... )
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = CircularUniformPrior( circular=math.pi )       # circular between [0,pi]
     pr = CircularUniformPrior( limits=[3,10] )          # circular between [3,10]
 

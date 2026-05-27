@@ -42,7 +42,8 @@ spanned by the knots: knots[0] <= xdata < knots[-1]
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     knots = numpy.arange( 17, dtype=float ) * 10    # make equidistant knots from 0 to 160
     csm = BSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )

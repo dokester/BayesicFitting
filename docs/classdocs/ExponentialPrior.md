@@ -19,7 +19,8 @@ In computational practice the domain is limited to about [0,36] scale units
 Wrapper for
 LaplacePrior( center=0, scale=scale, limits=[0, hilim] )
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = ExponentialPrior()                     # scale=1.0
     pr = ExponentialPrior( scale=5.0 )          # scale=5
 

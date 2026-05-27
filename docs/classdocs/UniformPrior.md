@@ -21,7 +21,8 @@ domain2Unit:
 unit2Domain: 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; d = u * range + lo
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     pr = UniformPrior()                                 # unbound prior
     pr = UniformPrior( limits=[0,10] )                  # limited to the range [0,10]
     pr = UniformPrior( circular=math.pi )               # circular between 0 and pi

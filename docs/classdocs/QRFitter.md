@@ -29,7 +29,8 @@ It can be more efficient if
 similar ydata needs to be fitter to the same model and xdata.
 In that case it uses the same decomposition for all fits.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # assume x and y are numpy.asarray data arrays
     x = numpy.asarray.range( 100 )
     poly = PolynomialModel( 1 )                             # line

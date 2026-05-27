@@ -35,7 +35,8 @@ where
 The parameters are initialized as [1.0, 1.0, 0.0].
 
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     sine = SineModel( )
     print( sine.npchain )
 3

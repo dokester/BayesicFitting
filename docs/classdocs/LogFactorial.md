@@ -28,7 +28,8 @@ if k is float, it will be truncated to int
 * float  :  the ( natural ) log( k! ).
 
 
-<b>Example</b><br>
+<b>Example</b>
+
     print( logFactorial( 0 ) )
     0
     print( logFactorial( [3, 5, 10] ) )

@@ -17,7 +17,8 @@ The index n is just incrementing, making all p's different.
 
 It is a 2-dimensional linear model.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )        # 10
 

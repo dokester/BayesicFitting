@@ -14,7 +14,8 @@ The Fitter class is to be used in conjunction with Model classes.
 The Fitter class and its descendants fit data to a model. Fitter itself
 is the variant for linear models, ie. models linear in its parameters.
 
-<b>Examples</b><br>
+<b>Examples</b>
+
     # assume x and y are numpy.asarray data arrays
     x = numpy.arange( 100 )
     y = numpy.arange( 100 ) // 4        # digitization noise

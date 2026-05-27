@@ -86,7 +86,8 @@ where d is the deviant as above.
 Robust fitting is even more dangerous than ordinary fitting.
 *Never trust what you get without thorough checking.*
 
-<b>Example</b><br>
+<b>Example</b>
+
     model = PolynomialModel( 1 )                # some model
     x = numpy.arange( 100, dtype=float ) / 100  # some x values
     y = numpy.arange( 100, dtype=float ) / 4    # digitization noise
