@@ -4,7 +4,7 @@
 
 <a name="Kernel2dModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Kernel2dModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Kernel2dModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Two dimensional Kernel Model.
@@ -45,8 +45,7 @@ Beware: These models are unaware of anything outside their range.
 
 Author:      Do Kester
 
-<b>Example</b>
-
+<b>Example</b><br>
     model = Kernel2dModel( )                                 # default: circular Gauss
     model.setKernelShape( Lorentz(), 'Elliptic'  )             # elliptic Lorentz model.
     model = Kernel2dModel( shape=3 )                         # rotated Gauss
@@ -57,14 +56,13 @@ Author:      Do Kester
 <a name="Kernel2dModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Kernel2dModel(</strong> kernel=Gauss(), shape=1, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L95-L128 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L95-L128 target=_blank>[source]</a></th></tr></thead></table>
 
 Kernel Model.
 
 Default model: Gauss with Circular shape.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kernel  :  Kernel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kernel to be used
 * shape  :  1 | 2 | 3 | 'circular' | 'elliptic' | 'rotated'
@@ -83,33 +81,32 @@ Default model: Gauss with Circular shape.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L130-L144 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L130-L133 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="parseShape"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>parseShape(</strong> shape ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L146-L152 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L146-L152 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="setKernelShape"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setKernelShape(</strong> kernel, shape ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L154-L185 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L154-L185 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L187-L189 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L187-L189 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L191-L203 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L191-L203 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -119,11 +116,10 @@ Returns the result of the model function.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L205-L218 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L205-L218 target=_blank>[source]</a></th></tr></thead></table>
 Returns df/dx of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -133,11 +129,10 @@ Returns df/dx of the model function.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L220-L235 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L220-L235 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -149,10 +144,9 @@ Returns the partials at the xdata value.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L237-L250 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L237-L250 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
@@ -160,7 +154,7 @@ Return the unit of a parameter.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L252-L253 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kernel2dModel.py#L252-L253 target=_blank>[source]</a></th></tr></thead></table>
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./NonLinearModel.html">NonLinearModel</a></th></tr></thead></table>

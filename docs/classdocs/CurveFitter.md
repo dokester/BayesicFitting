@@ -4,34 +4,31 @@
 
 <a name="CurveFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 CurveFitter implements scipy.optimize.curve<sub>fit</sub>.
 
 Author:      Do Kester.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * method  :  {'lm', 'trf', 'dogbox'}
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 'lm'        LevenbergMarquardt (default for no limits)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 'trf'       Trust Region Reflective (default for limits)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 'dogbox'    for small problems with limits
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError    Something went wrong during the convergence if the fit.
 
 
 <a name="CurveFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>CurveFitter(</strong> xdata, model, method=None, fixedScale=None, map=False, keep=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L49-L77 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L49-L77 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -54,11 +51,10 @@ Create a new class, providing inputs and model.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, inipar=None, keep=None, limits=None,
  accuracy=None, plot=False, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L79-L180 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L79-L170 target=_blank>[source]</a></th></tr></thead></table>
 Return      parameters for the model fitted to the data array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
 * weights  :  array_like
@@ -82,18 +78,16 @@ Return      parameters for the model fitted to the data array.
 * kwargs  :  dict
 <br>&nbsp;&nbsp;&nbsp;&nbsp; keywords arguments to be passed to :ref:`curve_fit<scipy.optimize.curve_fit>`
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when ydata or weights contain a NaN
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> xdata, *fitpar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L182-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L182-L200 target=_blank>[source]</a></th></tr></thead></table>
 Result method to make connection to the scipy optimizers
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; input data
 * fitpar  :  tuple of float
@@ -102,11 +96,10 @@ Result method to make connection to the scipy optimizers
 <a name="jacobian"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>jacobian(</strong> xdata, *fitpar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L216 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py#L202-L216 target=_blank>[source]</a></th></tr></thead></table>
 Method to make connection to the scipy optimizers
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; input data
 * fitpar  :  (tuple of) float

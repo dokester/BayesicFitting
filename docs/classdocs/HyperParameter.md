@@ -4,7 +4,7 @@
 
 <a name="HyperParameter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class HyperParameter(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class HyperParameter(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Values and priors for the parameter(s) of an ErrorDistribution.
@@ -18,8 +18,7 @@ noiseScale.
 The full use of priors is reserved for Bayesian calculations as
 in NestedSampler
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * hypar  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the value of the hyperparameter.  Default: 1.0
 * stdev  :  float
@@ -35,12 +34,11 @@ in NestedSampler
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>HyperParameter(</strong> hypar=1, isFixed=True, prior=None, limits=None,
  copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L56-L103 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L56-L103 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * hypar  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value of the hyperparameter
 * isFixed  :  bool
@@ -64,25 +62,23 @@ elif limits is not None
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L105-L107 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L105-L107 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a copy. 
 <a name="checkPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkPrior(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L109-L116 target=_blank>[source]</a></th></tr></thead></table>
-<b>Raises</b>
-
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L109-L116 target=_blank>[source]</a></th></tr></thead></table>
+<b>Raises</b><br>
 ValueError when no prior has been set.
 
 <a name="setLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setLimits(</strong> limits )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L118-L130 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L118-L130 target=_blank>[source]</a></th></tr></thead></table>
 Set the limits on the scale within the prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  list of 2 float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the [low,high] limits.
 
@@ -90,24 +86,23 @@ Set the limits on the scale within the prior.
 <a name="getLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getLimits(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L132-L134 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L132-L134 target=_blank>[source]</a></th></tr></thead></table>
 
 Return the limits on the scale. 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L136-L139 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L136-L139 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true is the itergral over the prior is bound. 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L141-L153 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L141-L153 target=_blank>[source]</a></th></tr></thead></table>
 Return a value in [0,1] given a value within the valid domain of
 a parameter for the prior distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
@@ -115,12 +110,11 @@ a parameter for the prior distribution.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L155-L167 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L155-L167 target=_blank>[source]</a></th></tr></thead></table>
 Return a value within the valid domain of the parameter given a value
 between [0,1] for the prior distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]
 
@@ -128,11 +122,10 @@ between [0,1] for the prior distribution.
 <a name="partialDomain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialDomain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L169-L181 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HyperParameter.py#L169-L181 target=_blank>[source]</a></th></tr></thead></table>
 Return a the derivate of the domain2Unit function to dval.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 

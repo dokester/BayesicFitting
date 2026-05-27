@@ -4,7 +4,7 @@
 
 <a name="PolySurfaceModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PolySurfaceModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PolySurfaceModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 General polynomial surface model of arbitrary degree.
@@ -17,28 +17,23 @@ The index n is just incrementing, making all p's different.
 
 It is a 2-dimensional linear model.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     poly = PolySurfaceModel( 3 )         # 3rd degree polynomial
     print poly.getNumberOfParameters( )        # 10
 
 Author      Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomial
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
@@ -46,7 +41,7 @@ Author      Do Kester
 <a name="PolySurfaceModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolySurfaceModel(</strong> degree, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L73-L110 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py#L73-L110 target=_blank>[source]</a></th></tr></thead></table>
 
 Polynominal surface of a certain degree. Two dimensions.
 
@@ -61,8 +56,7 @@ Polynominal surface of a certain degree. Two dimensions.
 
 The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial.
 * copy  :  PolySurfaceModel
@@ -77,19 +71,18 @@ The number of parameters is ( degree+2 ) * ( degree+1 ) / 2
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L112-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py#L112-L115 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L159 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py#L125-L159 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input values.
 
 The partials are the powers of x,y ( xdata ) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -99,7 +92,7 @@ The partials are the powers of x,y ( xdata ) from 0 to degree.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L161-L236 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py#L161-L236 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each input (=x).
 
 | degree | df/dx |
@@ -117,8 +110,7 @@ Return the derivative df/dx at each input (=x).
 | 3 | p<sub>2</sub> + p<sub>4</sub> * x + 2 * p<sub>5</sub> * y + p<sub>7</sub> * x<sup>2</sup> + 2 * p<sub>8</sub> * x * y + 3 * p<sub>9</sub> * y<sup>2</sup> |
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -128,14 +120,14 @@ Return the derivative df/dx at each input (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L238-L259 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py#L238-L259 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L261-L271 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySurfaceModel.py#L261-L271 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 Parameters  k    parameter number.
 

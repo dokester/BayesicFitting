@@ -4,7 +4,7 @@
 
 <a name="HarmonicDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class HarmonicDynamicModel(</strong> <a href="./HarmonicModel.html">HarmonicModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class HarmonicDynamicModel(</strong> <a href="./HarmonicModel.html">HarmonicModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Harmonic oscillator Model of adaptable order.
@@ -17,8 +17,7 @@ The parameters are initialized at 1.0. It is a linear model.
 
 Author       Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * minOrder  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of polynomial (def=1)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as minComp
@@ -26,29 +25,23 @@ Author       Do Kester
 <br>&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of polynomial (def=None)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Can also be read as maxComp
 
-<b>Attributes from Dynamic</b>
-
+<b>Attributes from Dynamic</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ncomp (= order), deltaNpar, minComp (= minOrder), maxComp (= maxComp), growPrior
 
-<b>Attributes from HarmonicModel</b>
-
+<b>Attributes from HarmonicModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; order, period
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     harm = HarmonicDynamicModel( 3 )            # period = 1
     print harm.getNumberOfParameters( )         # 6
     harm = HarmonicModel( 4, period=2.7 )       # period = 2.7
@@ -60,15 +53,14 @@ Category     mathematics/Fitting
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>HarmonicDynamicModel(</strong> order, minOrder=1, maxOrder=None, period=1.0, fixed=None,
  growPrior=None, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L90-L137 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L90-L137 target=_blank>[source]</a></th></tr></thead></table>
 
 Harmonic of a adaptable order.
 
 The model starts as a HarmonicModel of order = 1
 Growth of the model is governed by a prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * order  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; order to start with. It should be minOrder <= order <= maxOrder
 * minOrder  :  int
@@ -85,8 +77,7 @@ Growth of the model is governed by a prior.
 * copy  :  HarmonicDynamicModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError when fixed parameters are requested
 ValueError when order is outside [min..max] range
 
@@ -94,34 +85,33 @@ ValueError when order is outside [min..max] range
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L139-L141 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L139-L141 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L143-L144 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L143-L144 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L146-L171 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L146-L148 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="basePrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L173-L183 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L173-L183 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior for parameter k.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the parameter to be selected.
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L185-L187 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicDynamicModel.py#L185-L187 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the model. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -213,6 +203,8 @@ Return a string representation of the model.
 * [<strong>checkPositive(</strong> param ) ](./BaseModel.md#checkPositive)
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Dynamic.html">Dynamic</a></th></tr></thead></table>
 

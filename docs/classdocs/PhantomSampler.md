@@ -4,7 +4,7 @@
 
 <a name="PhantomSampler"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PhantomSampler(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 PhantomSampler is a version of NestedSampler that removes step walkers from
@@ -19,8 +19,7 @@ and are subsequently transferred to the list of posterior samples.
 In principle it speeds up the calculations by a factor step, of course it
 pays in exploratory power and precision.
 
-<b>Attributes from NestedSampler</b>
-
+<b>Attributes from NestedSampler</b><br>
 xdata, model, ydata, weights, problem, distribution, ensemble, discard, rng, seed,
 rate, maxsize, minimumIterations, end, verbose, walkers, samples, engines,
 initialEngine
@@ -34,15 +33,14 @@ Author       Do Kester.
  accuracy=None, problem=None, distribution=None, limits=None,
  keep=None, ensemble=ENSEMBLE, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L59-L158 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L59-L155 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
 Either (model,xdata,ydata) needs to be provided or a completely filled
 problem.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -128,19 +126,18 @@ problem.
 <a name="sample"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>sample(</strong> keep=None, plot=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L160-L168 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L160-L168 target=_blank>[source]</a></th></tr></thead></table>
 see NestedSampler.sample()
 
 <a name="updateEvidence"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>updateEvidence(</strong> worst ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L170-L269 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PhantomSampler.py#L170-L265 target=_blank>[source]</a></th></tr></thead></table>
 Updates the evidence (logZ) and the information (H)
 
 The walkers need to be sorted to logL
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Number of walkers used in the update
 
@@ -148,8 +145,7 @@ Updates the evidence (logZ) and the information (H)
 
 The walkers need to be sorted to logL
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * worst  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Number of walkers used in the update
 

@@ -4,7 +4,7 @@
 
 <a name="ExponentialPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ExponentialPrior(</strong> <a href="./LaplacePrior.html">LaplacePrior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ExponentialPrior(</strong> <a href="./LaplacePrior.html">LaplacePrior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Exponential prior distribution.
@@ -19,18 +19,15 @@ In computational practice the domain is limited to about [0,36] scale units
 Wrapper for
 LaplacePrior( center=0, scale=scale, limits=[0, hilim] )
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = ExponentialPrior()                     # scale=1.0
     pr = ExponentialPrior( scale=5.0 )          # scale=5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; scale of the exponential
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 Author: Do Kester.
@@ -38,12 +35,11 @@ Author: Do Kester.
 <a name="ExponentialPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ExponentialPrior(</strong> scale=1.0, hilimit=math.inf, prior=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L67-L83 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py#L67-L83 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; of the exponential
 * hilimit  :  float
@@ -55,13 +51,13 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L85-L88 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py#L85-L88 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy the prior 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L90-L93 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialPrior.py#L90-L93 target=_blank>[source]</a></th></tr></thead></table>
 
 Return ExponentialPrior. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

@@ -4,7 +4,7 @@
 
 <a name="GaussErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class GaussErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class GaussErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 To calculate a Gauss likelihood.
@@ -34,12 +34,11 @@ Author       Do Kester.
 <a name="GaussErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GaussErrorDistribution(</strong> scale=1.0, limits=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L65-L83 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L65-L83 target=_blank>[source]</a></th></tr></thead></table>
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; noise scale
 * limits  :  None or list of 2 floats [low,high]
@@ -55,24 +54,23 @@ Default Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L85-L87 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L85-L87 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L94 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L89-L94 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 Always true for this distribution.
 
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L96-L109 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L96-L109 target=_blank>[source]</a></th></tr></thead></table>
 Return the noise scale.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -82,13 +80,12 @@ Return the noise scale.
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L111-L140 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L111-L140 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Gaussian distribution.
 
 Alternate calculation
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -98,13 +95,12 @@ Alternate calculation
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L142-L171 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L142-L171 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -116,13 +112,12 @@ logL = sum( logLdata )
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L173-L215 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L173-L215 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
 Alternate calculation
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved.
 * allpars  :  array_like
@@ -134,12 +129,11 @@ Alternate calculation
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L217-L252 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L217-L252 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative all elements of the log( likelihood )
 to the parameters in fitIndex.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -152,7 +146,7 @@ to the parameters in fitIndex.
 <a name="hessianLogL"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hessianLogL(</strong> problem, allpars, fitIndex ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L254-L296 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GaussErrorDistribution.py#L254-L296 target=_blank>[source]</a></th></tr></thead></table>
 Return the hessian of log( likelihood ) to the parameters in fitIndex.
 
 The hessian is a matrix containing the second derivatives to each
@@ -160,8 +154,7 @@ of the parameters.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hessian = d<sup>2</sup> logL / dp<sub>i</sub> dp<sub>k</sub>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like

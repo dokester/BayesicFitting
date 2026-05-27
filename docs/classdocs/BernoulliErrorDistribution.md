@@ -4,7 +4,7 @@
 
 <a name="BernoulliErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class BernoulliErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class BernoulliErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 To calculate a Bernoulli likelihood for categorical True/False data.
@@ -28,36 +28,34 @@ Author       Do Kester.
 <a name="BernoulliErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BernoulliErrorDistribution(</strong> copy=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L57-L66 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L57-L66 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor of Bernoulli Distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  BernoulliErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L68-L71 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L68-L71 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L73-L78 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L73-L78 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 Always true for this distribution.
 
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L80-L93 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L80-L93 target=_blank>[source]</a></th></tr></thead></table>
 Return the noise scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -67,17 +65,16 @@ Return the noise scale
 <a name="toSigma"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSigma(</strong> scale ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L95-L104 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L95-L104 target=_blank>[source]</a></th></tr></thead></table>
 Return sigma, the squareroot of the variance.
-<b>Parameter</b>
-
+<b>Parameter</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the scale of this Bernoulli distribution.
 
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L106-L125 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L106-L125 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Bernoulli distribution.
 
 Alternate calculation.
@@ -85,8 +82,7 @@ Alternate calculation.
 Outside the range the likelihood is zero, so the logL should be -inf.
 However for computational reasons the maximum negative value is returned.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -96,13 +92,12 @@ However for computational reasons the maximum negative value is returned.
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L127-L154 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L127-L154 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -114,11 +109,10 @@ logL = sum( logLdata )
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L156-L187 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L156-L187 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -130,12 +124,11 @@ Return the partial derivative of log( likelihood ) to the parameters.
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L189-L234 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BernoulliErrorDistribution.py#L189-L233 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of elements of the log( likelihood )
 to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like

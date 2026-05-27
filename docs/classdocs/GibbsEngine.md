@@ -4,20 +4,18 @@
 
 <a name="GibbsEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class GibbsEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class GibbsEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GibbsEngine.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Move a one parameter at a time by a random amount.
 
 The walker is kept when the logLikelihood > lowLhood
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * nstep  :  int (2)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of steps in each dimension
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -26,12 +24,11 @@ Author       Do Kester.
 <a name="GibbsEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>GibbsEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L58-L77 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GibbsEngine.py#L58-L77 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  WalkerList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
 * errdis  :  ErrorDistribution
@@ -45,17 +42,16 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L79-L85 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GibbsEngine.py#L79-L82 target=_blank>[source]</a></th></tr></thead></table>
 
-Return copy of this. 
+
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L87-L178 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/GibbsEngine.py#L87-L178 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by diffusing the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
 * lowLhood  :  float
@@ -65,8 +61,7 @@ Execute the engine by diffusing the parameters.
 * iteration  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves
 
 

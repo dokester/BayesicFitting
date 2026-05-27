@@ -4,7 +4,7 @@
 
 <a name="Problem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Problem(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Problem(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Problem implements the common parts of specialized Problems.
@@ -23,8 +23,7 @@ information.
 This class is a base class. Further specializations will define the
 result method.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * model  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be optimized
 * xdata  :  array_like
@@ -49,12 +48,11 @@ result method.
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Problem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L74-L125 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L74-L125 target=_blank>[source]</a></th></tr></thead></table>
 
 Problem Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved
 * xdata  :  array_like or None
@@ -73,18 +71,17 @@ Problem Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L127-L176 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L127-L134 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 
 <a name="setAccuracy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setAccuracy(</strong> accuracy=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L178-L190 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L178-L190 target=_blank>[source]</a></th></tr></thead></table>
 set the value for accuracy.
 
-<b>Paramaters</b>
-
+<b>Paramaters</b><br>
 * accuracy  :  float or array of NDATA floats or None
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Either one value for all or one for each data point
 <br>&nbsp;&nbsp;&nbsp;&nbsp; When None the value is set to 0 (for easy computational reasons)
@@ -92,19 +89,18 @@ set the value for accuracy.
 <a name="hasWeights"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasWeights(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L192-L196 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L192-L196 target=_blank>[source]</a></th></tr></thead></table>
 
 Return whether it has weights. 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L198-L211 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L198-L211 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result using the parameters.
 
 In this (base)class it is a placeholder.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 
@@ -112,11 +108,10 @@ In this (base)class it is a placeholder.
 <a name="residuals"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>residuals(</strong> param, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L213-L226 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L213-L226 target=_blank>[source]</a></th></tr></thead></table>
 Returns the residuals, calculated at the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 * mockdata  :  array_like
@@ -126,15 +121,13 @@ Returns the residuals, calculated at the xdata.
 <a name="cyclicCorrection"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cyclicCorrection(</strong> res )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L228-L242 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L228-L242 target=_blank>[source]</a></th></tr></thead></table>
 No correction.
 
-<b>Returns </b>
-
+<b>Returns </b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; the residuals, unadultered
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; residuals
 
@@ -142,11 +135,10 @@ No correction.
 <a name="cycor1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cycor1(</strong> res )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L244-L254 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L244-L254 target=_blank>[source]</a></th></tr></thead></table>
 Returns the residuals, all corrected for periodicity in residuals
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; residuals
 
@@ -154,12 +146,11 @@ Returns the residuals, all corrected for periodicity in residuals
 <a name="cycor2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cycor2(</strong> res )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L256-L270 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L256-L270 target=_blank>[source]</a></th></tr></thead></table>
 Returns the residuals corrected for periodicity in residuals, only
 the result dimensions listed in the model.cyclic dictionary.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; residuals
 
@@ -167,7 +158,7 @@ the result dimensions listed in the model.cyclic dictionary.
 <a name="cyclize"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>cyclize(</strong> res, period ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L272-L298 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L272-L298 target=_blank>[source]</a></th></tr></thead></table>
 Apply correction on residuals which are cyclic in some
 phase space.
 
@@ -178,27 +169,24 @@ would be (p - 2 &epsilon;) while the actual distance should
 be measured the other way around as (2 &epsilon;).
 Here p = period and &epsilon; = small deviation.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; original residuals
 * period  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; of the phase space
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 corrected residuals.
 
 <a name="weightedResSq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L300-L319 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L300-L319 target=_blank>[source]</a></th></tr></thead></table>
 Returns the (weighted) squared residuals, calculated at the xdata.
 
 Optionally (extra=True) the weighted residuals themselves are returned too.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * allpars  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 * mockdata  :  array_like
@@ -210,16 +198,15 @@ Optionally (extra=True) the weighted residuals themselves are returned too.
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L321-L323 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L321-L323 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval, kpar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L325-L337 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L325-L337 target=_blank>[source]</a></th></tr></thead></table>
 Return value in [0,1] for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; domain value for the selected parameter
 * kpar  :  array_like
@@ -228,11 +215,10 @@ Return value in [0,1] for the selected parameter.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval, kpar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L339-L361 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L339-L352 target=_blank>[source]</a></th></tr></thead></table>
 Return domain value for the selected parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; unit value for the selected parameter
 * kpar  :  array_like
@@ -241,10 +227,10 @@ Return domain value for the selected parameter.
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L363-L364 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L363-L364 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L366-L366 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Problem.py#L366-L366 target=_blank>[source]</a></th></tr></thead></table>
 

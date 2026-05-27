@@ -4,7 +4,7 @@
 
 <a name="ExponentialErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ExponentialErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ExponentialErrorDistribution(</strong> <a href="./ScaledErrorDistribution.html">ScaledErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Also known as generalized gaussian errordistribution.
@@ -15,14 +15,14 @@ For one residual, x, it holds
 
 &nbsp; f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )<sup>p</sup> )
 
-where s is the scale and p is the power.
+where &Gamma; is the Gamma-function, s is the scale and p is the power.
 s and p are hyperparameters, which might be estimated from the data.
 
 The variance of this function is
 
 &nbsp; &sigma;<sup>2</sup> = s<sup>2</sup> &Gamma;( 3 / p ) / &Gamma;( 1 / p )
 
-See toSigma()
+See method [](./.md#toSigma)
 
 The function is mostly used to calculate the likelihood L over N residuals,
 or easier to use log( L )
@@ -33,12 +33,10 @@ Using weights this becomes
 
 &nbsp;&nbsp;&nbsp;&nbsp; logL = log( &sum;( w ) p / ( 2 s &Gamma;( 1 / p ) ) ) - &sum;( w ( |x| / s )<sup>p</sup> )
 
-<b>Note</b>
-
+<b>Note</b><br>
 The scale s in Exponential is NOT the same as the scale in Gaussian or in Laplace.
 
-<b>Attributes from ErrorDistibution</b>
-
+<b>Attributes from ErrorDistibution</b><br>
 hyperpar, deltaP, ncalls, nparts, sumweight, ndata, hypar, nphypar
 
 
@@ -48,12 +46,11 @@ Author       Do Kester.
 <a name="ExponentialErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ExponentialErrorDistribution(</strong> scale=1.0, power=2.0, limits=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L78-L119 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L78-L119 target=_blank>[source]</a></th></tr></thead></table>
 
 Default Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; noise scale
 * power  :  float
@@ -71,34 +68,33 @@ Default Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L121-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L121-L123 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L130 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L125-L130 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 Always true for this distribution.
 
 <a name="toSigma"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>toSigma(</strong> hypar ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L132-L142 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L132-L143 target=_blank>[source]</a></th></tr></thead></table>
 Return sigma, the squareroot of the variance.
-<b>Parameter</b>
 
+<b>Parameter</b><br>
 * hypar  :  array_like (2 floats)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the [scale,power] of this Exponential distribution.
 
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L144-L172 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L145-L173 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Gaussian distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -108,13 +104,12 @@ Return the log( likelihood ) for a Gaussian distribution.
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L174-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L175-L201 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -126,13 +121,12 @@ logL = sum( logLdata )
 <a name="getChipow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getChipow(</strong> problem, allpars=None, scale=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L224 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L203-L225 target=_blank>[source]</a></th></tr></thead></table>
 Return chisq.
 
 return Sum over the (weighted) powered residuals
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -144,11 +138,10 @@ return Sum over the (weighted) powered residuals
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L226-L241 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L227-L242 target=_blank>[source]</a></th></tr></thead></table>
 Return the noise scale calculated from the residuals.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -158,13 +151,12 @@ Return the noise scale calculated from the residuals.
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L243-L288 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L244-L289 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -176,14 +168,13 @@ dL/ds is not implemented for problems with accuracy
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L290-L343 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ExponentialErrorDistribution.py#L291-L343 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of all elements of the log( likelihood )
 to the parameters.
 
 dL/ds is not implemented for problems with accuracy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like

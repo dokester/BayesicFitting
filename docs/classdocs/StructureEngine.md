@@ -4,7 +4,7 @@
 
 <a name="StructureEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class StructureEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class StructureEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StructureEngine.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 The StructureEngine varies the internal structure of the model.
@@ -13,12 +13,10 @@ Only for Models that are Modifiable.
 
 The member is kept when the logLikelihood > lowLhood.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 None of its own
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, slow, maxtrials, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -27,12 +25,11 @@ Author       Do Kester.
 <a name="StructureEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>StructureEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L52-L69 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StructureEngine.py#L52-L69 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  list of Walker
 <br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
 * errdis  :  ErrorDistribution
@@ -46,17 +43,16 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L71-L77 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StructureEngine.py#L71-L74 target=_blank>[source]</a></th></tr></thead></table>
 
-Return copy of this. 
+
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L79-L107 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StructureEngine.py#L79-L107 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by changing a component.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
 * lowLhood  :  float
@@ -66,15 +62,14 @@ Execute the engine by changing a component.
 * iteration  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves
 
 
 <a name="executeOnce"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>executeOnce(</strong> wlkrid, lowLhood, location=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L109-L153 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StructureEngine.py#L109-L153 target=_blank>[source]</a></th></tr></thead></table>
 One execution call.
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

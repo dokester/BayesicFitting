@@ -4,13 +4,12 @@
 
 <a name="AstropyModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class AstropyModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class AstropyModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Wrapper for Astropy Models, so they can be used in BayesicFitting.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     from astropy.modelling.models import Gaussian1D
     gm = Gaussian1D( mean=0, stddev=1, amplitude=1 )
    
@@ -24,35 +23,30 @@ Wrapper for Astropy Models, so they can be used in BayesicFitting.
        6.06530660e-01   1.00000000e+00   6.06530660e-01   1.35335283e-01
        1.11089965e-02   3.35462628e-04   3.72665317e-06]
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * astromodel  :  astropy.modeling.FittableModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The astropy model to be wrapped
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="AstropyModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>AstropyModel(</strong> astromodel, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L71-L101 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py#L71-L101 target=_blank>[source]</a></th></tr></thead></table>
 
 Gaussian model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fitmodel  :  FittableModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; FittableModel from astropy.modeling  
 * copy  :  GaussModel
@@ -67,17 +61,16 @@ Number of parameters is 3.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L103-L105 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py#L103-L105 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L107-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py#L107-L123 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -87,11 +80,10 @@ Returns the result of the model function.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L155 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py#L125-L155 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -103,11 +95,10 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L157-L169 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py#L157-L169 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -117,7 +108,7 @@ Return the derivative df/dx at each xdata (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L171-L179 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AstropyModel.py#L171-L179 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 

@@ -4,7 +4,7 @@
 
 <a name="ProductModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ProductModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ProductModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Direct product of 2 (or more) models.
@@ -13,8 +13,7 @@ The dimensionality of this model is equal to the number of constituent models.
 
 The number of parameters is the sum of the parameters of the models.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     nxk = 17
     nyk = 11
     xknots = numpy.arange(  nxk , dtype=float ) * 10      # make knots from 0 to 160
@@ -28,28 +27,24 @@ The number of parameters is the sum of the parameters of the models.
 
 Category     mathematics/Fitting
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * models  :  list of Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; models to be multiplied, one for each dimension.
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="ProductModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ProductModel(</strong> models, copy=None, fixed=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L73-L109 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L73-L109 target=_blank>[source]</a></th></tr></thead></table>
 
 Direct product of 2 (or more) models. It has dimensionality equal to
 the number of constituent models.
@@ -59,8 +54,7 @@ The models are given as input, the consecutive colums in xdata.
 The number of parameters is the sum of the parameters of the
 constituent models
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * models  :  list of Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the constituent models
 * copy  :  ProductModel
@@ -68,8 +62,7 @@ constituent models
 * fixed  :  dict
 <br>&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError
 <br>&nbsp;&nbsp;&nbsp;&nbsp; When one of the models is 2 (ore more) dimensional
 * AttributeErrr  :  When fixed is not None
@@ -78,19 +71,18 @@ ValueError
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L111-L125 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L111-L115 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L127-L150 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L127-L150 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -100,13 +92,12 @@ The partials are the powers of x (input) from 0 to degree.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L152-L182 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L152-L182 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -118,17 +109,16 @@ The partials are the powers of x (input) from 0 to degree.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L184-L197 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L184-L197 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L199-L216 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L199-L216 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of a parameter as "param<dim><seq>.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
@@ -136,10 +126,9 @@ Return the name of a parameter as "param<dim><seq>.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L218-L245 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ProductModel.py#L218-L245 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 

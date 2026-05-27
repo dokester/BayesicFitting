@@ -4,7 +4,7 @@
 
 <a name="SwitchEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SwitchEngine(</strong> <a href="./OrderEngine.html">OrderEngine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SwitchEngine(</strong> <a href="./OrderEngine.html">OrderEngine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SwitchEngine.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 The SwitchEngine tries exchange two parameters.
@@ -18,8 +18,7 @@ where the parameters of the problem is an ordered list.
 
 The walker is kept when the logLikelihood > lowLhood
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, nstep, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -28,12 +27,11 @@ Author       Do Kester.
 <a name="SwitchEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SwitchEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L51-L67 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SwitchEngine.py#L51-L67 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  SampleList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
 * errdis  :  ErrorDistribution
@@ -47,24 +45,22 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L69-L75 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SwitchEngine.py#L69-L72 target=_blank>[source]</a></th></tr></thead></table>
 
-Return copy of this. 
+
 <a name="executeOnce"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>executeOnce(</strong> kw, lowLhood )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L77-L127 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SwitchEngine.py#L77-L127 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by diffusing the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; id of walker to diffuse
 * lowLhood  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; lower limit in logLikelihood
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves
 
 

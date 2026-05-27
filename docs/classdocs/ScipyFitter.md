@@ -4,7 +4,7 @@
 
 <a name="ScipyFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ScipyFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Unified interface to the Scipy minimization module minimize, to fit data to a model.
@@ -13,8 +13,7 @@ For documentation see scipy.org->Docs->Reference Guide->optimization and root fi
 scipy.optimize.minimize
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122          # make slope
@@ -33,13 +32,11 @@ scipy.optimize.minimize
     yfit  = cgfit.getResult( )                          # fitted values
     yband = cgfit.monteCarloEoor( )                         # 1 sigma confidence region
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. CGF is <b>not</b> guaranteed to find the global minimum.
 2. CGF does <b>not</b> work with fixed parameters or limits
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * gradient  :  callable gradient( par )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; User provided method to calculate the gradient of chisq.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; It can be used to speed up the dotproduct calculation, maybe
@@ -64,13 +61,11 @@ scipy.optimize.minimize
 * vectors  :  list of ndarray (read only when debug=True)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; list of intermediate vectors
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _Chisq  :  class
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate chisq in the method Chisq.func() and Chisq.dfunc()
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * pars  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the parameters at the minimum of the function (chisq).
 
@@ -79,13 +74,12 @@ scipy.optimize.minimize
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ScipyFitter(</strong> xdata, model, method=None, gradient=True, hessp=None,
  **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L109-L177 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L109-L177 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -139,11 +133,10 @@ Create a class, providing inputs and model.
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, constraints=(), verbose=0,
  accuracy=None, plot=False, callback=None, **options )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L179-L370 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L179-L370 target=_blank>[source]</a></th></tr></thead></table>
 Return      parameters for the model fitted to the data array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
 * weights  :  array_like
@@ -179,15 +172,14 @@ Return      parameters for the model fitted to the data array.
 * options  :  dict
 <br>&nbsp;&nbsp;&nbsp;&nbsp; options to be passed to the method
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ConvergenceError if it stops when the tolerance has not yet been reached.
 
 
 <a name="collectVectors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>collectVectors(</strong> par ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L372-L388 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L372-L374 target=_blank>[source]</a></th></tr></thead></table>
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a></th></tr></thead></table>

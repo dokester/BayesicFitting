@@ -4,7 +4,7 @@
 
 <a name="EclipsingStarModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class EclipsingStarModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class EclipsingStarModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Model for the light curve of an eclipsing double star, as a function of time, t. 
@@ -39,15 +39,14 @@ The parameters are initialized at
 <br>&nbsp;&nbsp;&nbsp;&nbsp; [0.0, 1.0, 0.0, pi/2, 0.0, 0.1, 0.1, 1.0, 1.0, 0.0, 0.5].
 It is a non-linear model.
 
-For the mathematics of this model and further explanation see [EclipsingStars.html.](EclipsingStars.html.)
+For the mathematics of this model and further explanation see [../EclipsingStars.md](../EclipsingStars.md)
 
 (Partial) derivatives were obtained with the help of  
-[www.derivative-calculator.net](www.derivative-calculator.net)
+https://www.derivative-calculator.net
 Muchas Gracias
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * storbit  :  StellarOrbitModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate the true stellar orbit
 * circular  :  bool
@@ -61,8 +60,7 @@ Muchas Gracias
 * fixpar  :  lambda function
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to provide parameters for StellarOrbitModel
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     esm = EclipsingStarModel( spot=True, tides=True )
     print( esm.npars )
     10
@@ -73,7 +71,7 @@ Muchas Gracias
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>EclipsingStarModel(</strong> circular=False, spot=False, tides=False, occultation=True,
  copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L105-L172 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L105-L172 target=_blank>[source]</a></th></tr></thead></table>
 
 Radial velocity model.
 
@@ -81,8 +79,7 @@ Number of parameters depends on the settings of ( False or True ) of
 <br>&nbsp; circular       spot        tides
 ( 9 or 6 ) + ( 0 or 1 ) + ( 0 or 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * circular  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; stellar orbit is circular: eccentricity = 0 ==> lonod = 0
 * spot  :  bool or number
@@ -97,18 +94,17 @@ Number of parameters depends on the settings of ( False or True ) of
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L174-L179 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L174-L179 target=_blank>[source]</a></th></tr></thead></table>
 Copy method.  
 
 <a name="distanceConstraint"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>distanceConstraint(</strong> logL, problem, allpars, lowLhood ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L181-L198 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L181-L198 target=_blank>[source]</a></th></tr></thead></table>
 Constrain the sizes of the stars for use in NestedSampling to avoid collapse.
 and the inclination to ensure eclipses
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * logL  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; log Likelihood obtained with allpars
 * problem  :  Problem
@@ -121,23 +117,21 @@ and the inclination to ensure eclipses
 <a name="logCombiPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logCombiPrior(</strong> allpars ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L200-L268 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L200-L268 target=_blank>[source]</a></th></tr></thead></table>
 Get extra prior for this combination of parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * allpars  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; all parameters involved in the problem
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L270-L288 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L270-L288 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -147,15 +141,11 @@ Returns the result of the model function.
 <a name="lightCurve"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>lightCurve(</strong> xy, z, params, debug=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L290-L342 target=_blank>[source]</a></th></tr></thead></table>
-Return the visible area of two eclipsing stars, multiplied by their luminicities.
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L290-L339 target=_blank>[source]</a></th></tr></thead></table>
+Return the visible area of two eclipsing stars, multiplied by their luminocities.
 
-Adapted from 
-<br>&nbsp;&nbsp;&nbsp;&nbsp; https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-circles/
-
-<b>Parameters</b>
-
-* xy  :  arrey
+<b>Parameters</b><br>
+* xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance of star 2 to the sky plane
@@ -168,14 +158,13 @@ Adapted from
 <a name="visibleFraction"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>visibleFraction(</strong> xy, z, r1, r2 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L344-L370 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L341-L367 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the fraction of visibility for both stars.
 
 If z is positive, star 2 is in front of star 1    
 If z is negative, star 2 is behind star 1    
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between overlapping circles
 * z  :  array
@@ -188,11 +177,10 @@ If z is negative, star 2 is behind star 1
 <a name="VFderivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>VFderivative(</strong> xy, z, r1, r2 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L372-L405 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L369-L402 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the derivatives for the visible fraction to xy and z
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between overlapping circles
 * z  :  array
@@ -202,8 +190,7 @@ Calculate the derivatives for the visible fraction to xy and z
 * r2  :  float or array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; radius of star 2
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 ( dV1dx, dV2dx, dV1dz, dV2dz )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of the visibility to xy and z
 
@@ -211,11 +198,10 @@ Calculate the derivatives for the visible fraction to xy and z
 <a name="VFpartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>VFpartial(</strong> xy, z, r1, r2 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L407-L456 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L404-L453 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the partial derivatives for the visible fraction to r1 and r2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between overlapping circles
 * z  :  array
@@ -225,8 +211,7 @@ Calculate the partial derivatives for the visible fraction to r1 and r2.
 * r2  :  float or array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; radius of star 2
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 ( dV1dr1, dV2dr1, dV1dr2, dV2dr2 )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; partials of the visibility to r1 and r2
 
@@ -234,13 +219,12 @@ Calculate the partial derivatives for the visible fraction to r1 and r2.
 <a name="overlap"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>overlap(</strong> xy, r1, r2 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L458-L494 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L455-L491 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the overlap area between two partially overlapping circles
 
-From: https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-circles/
+https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-circles/
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between overlapping circles
 * r1  :  float or array
@@ -251,14 +235,13 @@ From: https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-cir
 <a name="spotIllumination"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>spotIllumination(</strong> xy, z, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L496-L537 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L493-L534 target=_blank>[source]</a></th></tr></thead></table>
 Illumination of the stars on each other.
 Depending on distance between stars and aspect angle
 
 The algoritm is taken from DOI: 10.5817/OEJV2025-0258
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -270,15 +253,15 @@ The algoritm is taken from DOI: 10.5817/OEJV2025-0258
 <a name="tidalDistortion"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>tidalDistortion(</strong> xy, z, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L539-L598 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L536-L596 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the tidal distortion of the stars in a binary system
 as elongated, prolate spheroids (cigars).
 
-from: https://farside.ph.utexas.edu/teaching/355/Surveyhtml/node69.html
-Equation. (1.468) (for as long as it lasts)
+See equation. (1.468) from 
+https://farside.ph.utexas.edu/teaching/355/Surveyhtml/node69.html
+<br>&nbsp; (for as long as it lasts)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -286,31 +269,17 @@ Equation. (1.468) (for as long as it lasts)
 * params  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters of the model
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 ( a1, b1, a2, b2 )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; apparent stretch and squeeze of both stars
 
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L600-L656 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L598-L656 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-x,y,z = SOM(t:p1)
-
-r = S(x,y,z) = ( SQRT( x*x + y*y ), z )
-
-F(t:p,q) = SOM(t:p) | R(x,y,z:) | LC(r,z:q)
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = LC( R( SOM( t:p ) ):q )
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H(G(x:p):q)
-
-dF/dq = dLC( R( SOM(t:p)))/dq
-
-dF/dp = dLC/drz * dRZ/dxyz * dSOM/dp
-
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array
@@ -322,11 +291,10 @@ dF/dp = dLC/drz * dRZ/dxyz * dSOM/dp
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L658-L684 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L658-L684 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of f to t (dfdt) at the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times at which to calculate the result
 * params  :  array
@@ -336,11 +304,10 @@ Returns the derivative of f to t (dfdt) at the input values.
 <a name="OVpartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>OVpartial(</strong> xy, r1, r2 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L686-L738 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L686-L738 target=_blank>[source]</a></th></tr></thead></table>
 calculate the partials of overlap to r1 and r2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; projected distance between stars
 * r1  :  array
@@ -352,15 +319,14 @@ calculate the partials of overlap to r1 and r2.
 <a name="SIpartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SIpartial(</strong> xy, z, params, surface=(1,1) ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L740-L809 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L740-L809 target=_blank>[source]</a></th></tr></thead></table>
 Returns partials of the SpotIllumination.
 Specificly of the modified f1 and f2 to params[-5:] 
 (radius<sub>1</sub>, radius<sub>2</sub>, lumen<sub>1</sub>, lumen<sub>2</sub>, spot) 
 
 If no spot illumination is requested, the dF*dfs are returned as zero.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -370,8 +336,7 @@ If no spot illumination is requested, the dF*dfs are returned as zero.
 * surface  :  tuple of arrays
 <br>&nbsp;&nbsp;&nbsp;&nbsp; normalized surface areas of the stars
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 ( dF1dr1, dF1dr2, dF1df1, dF1df2, dF1dfs,
 <br>&nbsp;&nbsp; dF2dr1, dF2dr2, dF2df1, dF2df2, dF2dfs )
 
@@ -379,11 +344,10 @@ If no spot illumination is requested, the dF*dfs are returned as zero.
 <a name="LCpartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LCpartial(</strong> xy, z, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L811-L920 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L811-L920 target=_blank>[source]</a></th></tr></thead></table>
 Return partial derivatives of LightCurve to each of the parameters
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -394,11 +358,10 @@ Return partial derivatives of LightCurve to each of the parameters
 <a name="TDpartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TDpartial(</strong> xy, z, params, TDresult=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L922-L1021 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L922-L1021 target=_blank>[source]</a></th></tr></thead></table>
 Calculate partials of the tidal distortion to the distortion parameter
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -408,19 +371,17 @@ Calculate partials of the tidal distortion to the distortion parameter
 * TDresult  :  None or tuple
 <br>&nbsp;&nbsp;&nbsp;&nbsp; result of a call to tidalDistortion
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * ( da1dm, db1dm, da2dm, db2dm,  da1dr, db1dr, da2dr, db2dr )  :  8 arrays
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Partials of the normalized projected axes to the parameters
 
 <a name="OVderivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>OVderivative(</strong> xy, r1, r2 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1023-L1057 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L1023-L1057 target=_blank>[source]</a></th></tr></thead></table>
 calculate the derivative of overlap to xy
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; projected distance between stars
 * r1  :  array
@@ -432,11 +393,10 @@ calculate the derivative of overlap to xy
 <a name="LCderivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LCderivative(</strong> xy, z, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L105-L1729 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L105-L1729 target=_blank>[source]</a></th></tr></thead></table>
 Return derivative of LightCurve to xy and z, as 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -448,12 +408,11 @@ Return derivative of LightCurve to xy and z, as
 <a name="SIderivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SIderivative(</strong> xy, z, params, surface=(1,1) ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1143-L1214 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L1143-L1214 target=_blank>[source]</a></th></tr></thead></table>
 Returns derivatives of the SpotIllimunation.
 Specificly of the modified f1 and f2 to xy and z 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  float
@@ -463,19 +422,17 @@ Specificly of the modified f1 and f2 to xy and z
 * surface  :  tuple of 2 array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; normalized surface areas of the stars
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 ( dF1dx, dF2dx, dF1dz, dF2dz )
 
 
 <a name="TDderivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TDderivative(</strong> xy, z, params, TDresult=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1216-L1308 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L1216-L1308 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the derivative of the tidal distortion to xy and z
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xy  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between the stars in the sky plane
 * z  :  array
@@ -485,26 +442,24 @@ Calculate the derivative of the tidal distortion to xy and z
 * TDresult  :  tuple
 <br>&nbsp;&nbsp;&nbsp;&nbsp; result of call tp tidalDostortion
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 ( da1dx, db1dx, da2dx, db2dx, da1dz, db1dz, da2dz, db2dz )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of apparent major and minor axes to xy and z
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1310-L1329 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L1310-L1316 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="reportParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>reportParameters(</strong> param, stdevs=None, toMags=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L1331-L1581 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/EclipsingStarModel.py#L1331-L1404 target=_blank>[source]</a></th></tr></thead></table>
 Print parameters and stdevs (if present)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be converted and printed
 * stdevs  :  array 

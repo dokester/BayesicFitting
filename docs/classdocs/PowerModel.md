@@ -4,7 +4,7 @@
 
 <a name="PowerModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PowerModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PowerModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 General power model of arbitrary degree.
@@ -18,27 +18,22 @@ needs to be divided by a factor 1.0 in the same units as the x.
 Otherwise possibly fractional dimensions are created.
 The factor is omitted as it does not contribute in the calculations.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pwr = PowerModel( -1 )
     print pwr.getNumberOfParameters( )       # 1
     1
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * exponent  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; exponent (a) of the power function.
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
@@ -46,14 +41,13 @@ The factor is omitted as it does not contribute in the calculations.
 <a name="PowerModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PowerModel(</strong> exponent=0, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L72-L99 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py#L72-L99 target=_blank>[source]</a></th></tr></thead></table>
 
 Power of a certain degree.
 
 The number of parameters is 1
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * exponent  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; power to which the xdata is to be raised.
 * copy  :  PowerModel
@@ -68,19 +62,18 @@ The number of parameters is 1
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L101-L110 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py#L101-L104 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L112-L136 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py#L112-L136 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata value.
 <br>
 The partials are x ( xdata ) to degree-th power.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -92,11 +85,10 @@ The partials are x ( xdata ) to degree-th power.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L138-L150 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py#L138-L150 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -106,18 +98,17 @@ Return the derivative df/dx at each xdata (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L152-L157 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py#L152-L157 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L159-L169 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PowerModel.py#L159-L169 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of a parameter.
 Not strictly OK. See Class documentation.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 

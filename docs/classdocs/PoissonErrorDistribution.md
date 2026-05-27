@@ -4,7 +4,7 @@
 
 <a name="PoissonErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PoissonErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PoissonErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 To calculate a Poisson likelihood.
@@ -29,12 +29,11 @@ Author       Do Kester.
 <a name="PoissonErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PoissonErrorDistribution(</strong> copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L62-L72 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L62-L72 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  PoissonErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distribution to be copied.
 
@@ -42,26 +41,25 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L74-L76 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L74-L76 target=_blank>[source]</a></th></tr></thead></table>
 
 Return copy of this. 
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L78-L84 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L78-L84 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 Always false for this distribution.
 
 <a name="getScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getScale(</strong> problem, allpars=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L86-L101 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L86-L101 target=_blank>[source]</a></th></tr></thead></table>
 Return the noise scale.
 
 *** Gaussian approximation ***
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -71,11 +69,10 @@ Return the noise scale.
 <a name="logLikelihood_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLikelihood_alt(</strong> problem, allpars )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L103-L128 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L103-L128 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Poisson distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -85,13 +82,12 @@ Return the log( likelihood ) for a Poisson distribution.
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L130-L161 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L130-L161 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for each residual
 
 logL = sum( logLdata )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -103,11 +99,10 @@ logL = sum( logLdata )
 <a name="partialLogL_alt"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLogL_alt(</strong> problem, allpars, fitIndex )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L163-L186 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L163-L186 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -118,11 +113,10 @@ Return the partial derivative of log( likelihood ) to the parameters.
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L188-L216 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PoissonErrorDistribution.py#L188-L215 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like

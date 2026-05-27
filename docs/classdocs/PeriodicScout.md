@@ -4,7 +4,7 @@
 
 <a name="PeriodicScout"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PeriodicScout(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PeriodicScout(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PeriodicScout.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Investigating scout for periodic models
@@ -13,13 +13,13 @@ Investigating scout for periodic models
 <a name="PeriodicScout"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PeriodicScout(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L44-L47 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PeriodicScout.py#L44-L47 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="findPeriod"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findPeriod(</strong> days, flux, pmin=1, pmax=2, grid=1000, clip=2,
  verbose=0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L49-L139 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PeriodicScout.py#L49-L139 target=_blank>[source]</a></th></tr></thead></table>
 
 Find period in  eclipsing star data.
 
@@ -29,8 +29,7 @@ That is grid points per octave from pmin to pmax.
 
 Select eclipsing parts and find the minimum distance
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * days  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Julian days of observation
 * flux  :  array
@@ -50,11 +49,10 @@ Select eclipsing parts and find the minimum distance
 <a name="downhill"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>downhill(</strong> days, flux, prs, scl, nrknots=20, tol=0.01, verbose=0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L141-L206 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PeriodicScout.py#L141-L206 target=_blank>[source]</a></th></tr></thead></table>
 Search minimum chisq in a range of periods
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * days  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Julian days of observation
 * flux  :  array
@@ -71,12 +69,11 @@ Search minimum chisq in a range of periods
 <a name="findParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findParameters(</strong> days, flux, period, verbose=False, plot=0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L208-L321 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PeriodicScout.py#L208-L321 target=_blank>[source]</a></th></tr></thead></table>
 Return a first guess for the parameters
 eccentricity, phase, longitude
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * days  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; time of observations
 * flux  :  array
@@ -93,11 +90,10 @@ eccentricity, phase, longitude
 <a name="findRadius"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findRadius(</strong> time, yfit, kmin, ymed ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L323-L361 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PeriodicScout.py#L323-L361 target=_blank>[source]</a></th></tr></thead></table>
 Find the radius of a star from the eclips duration
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * time  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; time values of yfit
 * yfit  :  array

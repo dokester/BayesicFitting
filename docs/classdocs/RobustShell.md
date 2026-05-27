@@ -4,7 +4,7 @@
 
 <a name="RobustShell"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class RobustShell(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 RobustShell tries to make a fit more robust in the presence of outliers.
@@ -68,8 +68,7 @@ Other schemes can be written by making another Kernel or writing a function
 <br>&nbsp;&nbsp;&nbsp;&nbsp; wgts = func( d )
 where d is the deviant as above.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * fitter  :  BaseFitter
 <br>&nbsp;&nbsp;&nbsp;&nbsp; The fitter to be used
 * kernel  :  Kernel or callable
@@ -83,13 +82,11 @@ where d is the deviant as above.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; +1 apply to positive residuals.
 
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 Robust fitting is even more dangerous than ordinary fitting.
 *Never trust what you get without thorough checking.*
 
-<b>Example</b>
-
+<b>Example</b><br>
     model = PolynomialModel( 1 )                # some model
     x = numpy.arange( 100, dtype=float ) / 100  # some x values
     y = numpy.arange( 100, dtype=float ) / 4    # digitization noise
@@ -107,12 +104,11 @@ Author       Do Kester.
 <a name="RobustShell"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RobustShell(</strong> fitter, kernel=Biweight, domain=None, onesided=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L136-L164 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L136-L164 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing the fitter to be used.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * fitter  :  BaseFitter
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to be used
 * kernel  :  Kernel or callable
@@ -132,36 +128,32 @@ Create a new class, providing the fitter to be used.
 <a name="setKernel"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setKernel(</strong> kernel ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L166-L193 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L166-L193 target=_blank>[source]</a></th></tr></thead></table>
 Set the robust kernel to be used.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kernel  :  Kernel or callable
 <br>&nbsp;&nbsp;&nbsp;&nbsp; All Kernels have a method `result( d )` which is applied to the deviants.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; where d = ( data - model ) / ( domain * scale )
 <br>&nbsp;&nbsp;&nbsp;&nbsp; If kernel is a callable method it is assumed to be a similar result mathod.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when kernel is not recognized.
 
 
 <a name="setOneSided"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setOneSided(</strong> onesided ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L195-L223 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L195-L223 target=_blank>[source]</a></th></tr></thead></table>
 set self.onesided to either 0 or +1 or -1.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * onesided  :  None or "positive" or "negative"
 <br>&nbsp;&nbsp;&nbsp;&nbsp; None : apply robust weights to positive and negative residuals
 <br>&nbsp;&nbsp;&nbsp;&nbsp; "positive" : apply robust weights to positive residuals only
 <br>&nbsp;&nbsp;&nbsp;&nbsp; "negative" : apply robust weights to negative residuals only
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when onesided could not be interpreted.
 
 
@@ -169,11 +161,10 @@ ValueError when onesided could not be interpreted.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> data, weights=None, kernel=None, domain=None, onesided=None, plot=False,
  **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L225-L283 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L225-L283 target=_blank>[source]</a></th></tr></thead></table>
 Perform a robustification step.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data as they go into a fitter
 * weights  :  array_like
@@ -190,7 +181,7 @@ Perform a robustification step.
 <a name="getOneSidedWeights"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getOneSidedWeights(</strong> wgt, res, onesided ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L285-L312 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RobustShell.py#L285-L293 target=_blank>[source]</a></th></tr></thead></table>
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./IterativeFitter.html">IterativeFitter</a></th></tr></thead></table>

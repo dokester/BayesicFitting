@@ -4,7 +4,7 @@
 
 <a name="JeffreysPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class JeffreysPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class JeffreysPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Jeffreys prior distribution, for scale-like parameters.
@@ -25,21 +25,18 @@ domain2unit:
 unit2domain: 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; d = exp( u * ( log( hi ) - log( lo ) ) + log( lo ) );
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = JeffreysPrior()                       # unbound prior
     pr = JeffreysPrior( limits=[0.1,1.0] )     # limited to the range [0.1,1.0]
 
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _logLo  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; log( lowLimit )
 * _norm  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; log( highLimit / lowLimit )
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 The default of lowLimit and _lowDomain is zero.
@@ -48,12 +45,11 @@ The default of lowLimit and _lowDomain is zero.
 <a name="JeffreysPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>JeffreysPrior(</strong> limits=None, prior=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L76-L87 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L76-L87 target=_blank>[source]</a></th></tr></thead></table>
 
 Default constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  list of 2 floats
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 2 limits resp. low and high
 * prior  :  JeffreysPrior
@@ -62,23 +58,22 @@ Default constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L90 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L89-L90 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="getIntegral"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegral(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L92-L96 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L92-L96 target=_blank>[source]</a></th></tr></thead></table>
 Return the integral of JeffreysPrior from lowLimit to highLimit.
 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L98-L113 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L98-L113 target=_blank>[source]</a></th></tr></thead></table>
 Return a value in [0,1] given a value within the valid domain of
 a parameter for a Jeffreys distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
@@ -86,12 +81,11 @@ a parameter for a Jeffreys distribution.
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L115-L126 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L115-L126 target=_blank>[source]</a></th></tr></thead></table>
 Return a value within the valid domain of the parameter given a value
 between [0,1] for a Jeffreys distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]
 
@@ -99,11 +93,10 @@ between [0,1] for a Jeffreys distribution.
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L128-L149 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L128-L149 target=_blank>[source]</a></th></tr></thead></table>
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
@@ -111,11 +104,10 @@ Return a the result of the distribution function at x.
 <a name="partialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> p )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L151-L164 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L151-L164 target=_blank>[source]</a></th></tr></thead></table>
 Return partial derivative of log( Prior ) wrt parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the value
 
@@ -123,13 +115,13 @@ Return partial derivative of log( Prior ) wrt parameter.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L166-L168 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L166-L168 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the integral over the prior is bound. 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L170-L175 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/JeffreysPrior.py#L170-L175 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the prior. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

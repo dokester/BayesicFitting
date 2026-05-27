@@ -4,7 +4,7 @@
 
 <a name="FreeShapeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class FreeShapeModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class FreeShapeModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Pixelated Model.
@@ -26,8 +26,7 @@ Fitter. It will be a very ill-posed problem.
 Using NestedSampler its exponential prior will ensure that all
 parameters are kept positive.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * npix  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Number of pixels in result. Is also npar.
 * xlo  :  float ( default 0 )
@@ -41,20 +40,16 @@ parameters are kept positive.
 * center  :  float (between 0..1)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; position of the center of shape with respect to the pixels
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     nn = 100
     fsm = FreeShapeModel( nn, nconvolve=4, xlo=-1.0, xhi=4.0 )
     print( fsm.shape )
@@ -66,14 +61,13 @@ Author       Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>FreeShapeModel(</strong> npix, copy=None, shape=None, nconvolve=0,
  center=0.5, xlo=0.0, xhi=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L96-L137 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L96-L137 target=_blank>[source]</a></th></tr></thead></table>
 
 Free Shape model with npix pixels.
 
 The number of parameters equals the number of pixels
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * npix  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of pixels = npar
 * copy  :  FreeShapeModel
@@ -95,33 +89,30 @@ The number of parameters equals the number of pixels
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L139-L158 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L139-L142 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="checkDomain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkDomain(</strong> xdata ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L160-L178 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L160-L178 target=_blank>[source]</a></th></tr></thead></table>
 Check for all data inside domain defined by (xlo - range, xhi + range).
 range = self.shape.range
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when outside domain.
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L180-L194 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L180-L194 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -131,12 +122,11 @@ Returns the result of the model function.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L196-L227 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L196-L227 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partial derivative of the model function to
 each of the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -146,11 +136,10 @@ each of the parameters.
 <a name="TBCbaseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>TBCbaseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L229-L250 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L229-L250 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of the model function df/dx.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -160,16 +149,15 @@ Returns the derivative of the model function df/dx.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L252-L253 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L252-L253 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L255-L263 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FreeShapeModel.py#L255-L263 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
@@ -254,4 +242,6 @@ Return the unit of the indicated parameter.
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)
 * [<strong>baseParameterName(</strong> kpar ) ](./BaseModel.md#baseParameterName)

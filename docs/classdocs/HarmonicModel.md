@@ -4,7 +4,7 @@
 
 <a name="HarmonicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class HarmonicModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class HarmonicModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Harmonic oscillator Model.
@@ -21,44 +21,38 @@ The parameters are initialized at 1.0. It is a linear model.
 
 Author:      Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     harm = HarmonicModel( 3 )            # period = 1
     print( harm.npbase )
     6
     harm = HarmonicModel( 4, 2.7 )        # period = 2.7
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * order  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the order of the harmonic
 * period  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the length of the period of the fundamental
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="HarmonicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>HarmonicModel(</strong> order, period=1.0, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L81-L105 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L81-L105 target=_blank>[source]</a></th></tr></thead></table>
 
 Harmonic oscillator model.
 
 Number of parameters is 2 * order.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * order  :  int (>0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the number of overtones
 * period  :  float
@@ -75,17 +69,16 @@ Number of parameters is 2 * order.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L107-L121 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L107-L110 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L123-L153 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L123-L153 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; x values at which to calculate the partials
 * params  :  array_like
@@ -97,11 +90,10 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L155-L174 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L155-L174 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -111,16 +103,15 @@ Returns the partials at the input value.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L176-L189 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L176-L189 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L191-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L191-L200 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
@@ -128,11 +119,10 @@ Return the name of the indicated parameter.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L212 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/HarmonicModel.py#L202-L212 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 Always : YUnit.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
@@ -218,3 +208,5 @@ Always : YUnit.
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)

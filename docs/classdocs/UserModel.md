@@ -4,7 +4,7 @@
 
 <a name="UserModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class UserModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class UserModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Wrapper for a Models where the User provides the method the evaluate
@@ -17,8 +17,7 @@ df/dx as  userDeriv( x. param )
 name  as  string
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     import numpy as np
     def ur( x, p ) 
         return p[0] * np.sin( p[1] * x + p[2] * np.log( x + p[3] ) ) 
@@ -31,8 +30,7 @@ name  as  string
     4
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * userResult  :  callable
 <br>&nbsp;&nbsp;&nbsp;&nbsp; method to evaluate the result of the F(x:p)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; defined as method( x, p )
@@ -45,16 +43,13 @@ name  as  string
 * userName  :  str
 <br>&nbsp;&nbsp;&nbsp;&nbsp; name of the class
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
@@ -63,12 +58,11 @@ name  as  string
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>UserModel(</strong> npars, userResult, ndim=1, userPartial=None, userDeriv=None,
  userName="unknown", copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L88-L128 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L88-L128 target=_blank>[source]</a></th></tr></thead></table>
 
 User provided model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * npars  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of parameters of this model
 * userResult  :  callable
@@ -94,22 +88,21 @@ User provided model.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L130-L132 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L130-L132 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="setMethod"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setMethod(</strong> name, userMethod, numeric=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L134-L141 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L134-L141 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L143-L155 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L143-L155 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -119,11 +112,10 @@ Returns the result of the model function.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L157-L174 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L157-L174 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -135,11 +127,10 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L176-L188 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L176-L188 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -149,7 +140,7 @@ Return the derivative df/dx at each xdata (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L190-L196 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UserModel.py#L190-L196 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 

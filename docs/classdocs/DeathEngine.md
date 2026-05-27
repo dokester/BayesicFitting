@@ -4,7 +4,7 @@
 
 <a name="DeathEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class DeathEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class DeathEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 The DeathEngine deletes a component from the model.
@@ -14,8 +14,7 @@ The death rate is governed by the growth-prior in the dynamic model.
 
 The member is kept when the logLikelihood > lowLhood.
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -24,12 +23,11 @@ Author       Do Kester.
 <a name="DeathEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DeathEngine(</strong> walkers, errdis, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L55-L71 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py#L55-L71 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  WalkerList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
 * errdis  :  ErrorDistribution
@@ -42,17 +40,16 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L73-L79 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py#L73-L76 target=_blank>[source]</a></th></tr></thead></table>
 
-Return copy of this. 
+
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L81-L151 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/DeathEngine.py#L81-L151 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by removins a component.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
 * lowLhood  :  float
@@ -62,8 +59,7 @@ Execute the engine by removins a component.
 * iteration  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves
 
 

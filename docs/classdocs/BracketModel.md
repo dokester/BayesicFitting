@@ -4,7 +4,7 @@
 
 <a name="BracketModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class BracketModel(</strong> <a href="./Brackets.html">Brackets</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 BracketModel provides brackets to a chain of Models.
@@ -22,28 +22,23 @@ is actually a chain of models.
 
 Model.Brackets is an internal class inside Model.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * model  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be put inside of brackets
 * deep  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; container depth (only for nice printing).
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
 Explicit use of BrackeModel
 
     m1 = GaussModel( )
@@ -62,12 +57,10 @@ Implicit use of BrackeModel, automatically invoked when m2 is a chain
     print( m3 )                             # exactly the same
 
 
-<b>Warning</b>
-
+<b>Warning</b><br>
 BracketModel is about rather advanced model building.
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. You have to complete the BracketModel, including parameter reduction,
 <br>&nbsp;&nbsp;&nbsp; BEFORE you put it into a model chain.
 2. If you change a BracketModel which is part of a model chain, unexpected result
@@ -78,15 +71,14 @@ BracketModel is about rather advanced model building.
 <a name="BracketModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BracketModel(</strong> model, copy=None, fixed=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L102-L127 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py#L102-L127 target=_blank>[source]</a></th></tr></thead></table>
 
 BracketModel
 
 When constructing a BracketModel existing attributes are lost, except
 parameters that were 'fixed' in the constituent Models. They stay fixed.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be put in the container.
 * copy  :  BracketModel
@@ -95,15 +87,14 @@ parameters that were 'fixed' in the constituent Models. They stay fixed.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; if fixed is not None raise AttributeError
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Use fixed on the constituent models.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * AttributeErrr  :  When fixed is not None
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L129-L133 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BracketModel.py#L129-L133 target=_blank>[source]</a></th></tr></thead></table>
 Copy a Bracket Model.
 
 

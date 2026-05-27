@@ -4,7 +4,7 @@
 
 <a name="UniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class UniformPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class UniformPrior(</strong> <a href="./Prior.html">Prior</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Uniform prior distribution, for location parameters.
@@ -21,20 +21,17 @@ domain2Unit:
 unit2Domain: 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; d = u * range + lo
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pr = UniformPrior()                                 # unbound prior
     pr = UniformPrior( limits=[0,10] )                  # limited to the range [0,10]
     pr = UniformPrior( circular=math.pi )               # circular between 0 and pi
     pr = UniformPrior( limits=[2,4], circular=True )    # circular between 2 and 4
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * _range  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; highlimit - lowlimit
 
-<b>Attributes from Prior</b>
-
+<b>Attributes from Prior</b><br>
 lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 
 
@@ -42,12 +39,11 @@ lowLimit, highLimit, deltaP, _lowDomain, _highDomain
 <a name="UniformPrior"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>UniformPrior(</strong> limits=None, circular=False, prior=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L69-L84 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L69-L84 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * limits  :  None or [float,float]
 <br>&nbsp;&nbsp;&nbsp;&nbsp; None    no limits are set
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 2 floats    lowlimit and highlimit
@@ -60,25 +56,24 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L86-L88 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L86-L88 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a (deep) copy of itself. 
 <a name="getIntegral"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIntegral(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L90-L94 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L90-L94 target=_blank>[source]</a></th></tr></thead></table>
 Return integral of UniformPrior from lowLimit to highLimit.
 
 <a name="domain2Unit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>domain2Unit(</strong> dval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L96-L108 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L96-L108 target=_blank>[source]</a></th></tr></thead></table>
 Return the dval as uval
 
 In Prior.limitedDomain2Unit the dval is transformed into a uval
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * dval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
@@ -86,13 +81,12 @@ In Prior.limitedDomain2Unit the dval is transformed into a uval
 <a name="unit2Domain"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>unit2Domain(</strong> uval )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L110-L122 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L110-L122 target=_blank>[source]</a></th></tr></thead></table>
 Return the uval as dval
 
 In Prior.limitedUnit2Domain the uval is transformed into a dval
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * uval  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within [0,1]
 
@@ -100,11 +94,10 @@ In Prior.limitedUnit2Domain the uval is transformed into a dval
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L124-L143 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L124-L143 target=_blank>[source]</a></th></tr></thead></table>
 Return a the result of the distribution function at x.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  float or array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value within the domain of a parameter
 
@@ -112,11 +105,10 @@ Return a the result of the distribution function at x.
 <a name="partialLog"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partialLog(</strong> p )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L145-L158 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L145-L158 target=_blank>[source]</a></th></tr></thead></table>
 Return partial derivative of log( Prior ) wrt parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * p  :  float or array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the value
 
@@ -124,13 +116,13 @@ Return partial derivative of log( Prior ) wrt parameter.
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L160-L162 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L160-L162 target=_blank>[source]</a></th></tr></thead></table>
 
 Return true if the integral over the prior is bound. 
 <a name="shortName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shortName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L164-L168 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/UniformPrior.py#L164-L168 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the prior. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

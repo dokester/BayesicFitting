@@ -4,7 +4,7 @@
 
 <a name="PolynomialDynamicModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PolynomialDynamicModel(</strong> <a href="./PolynomialModel.html">PolynomialModel,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 General polynomial model of an adaptable degree.
@@ -17,8 +17,7 @@ It is a linear model.
 
 Author       Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     poly = PolynomialDynamicModel( )         # polynomial with unknown degree
     poly.grow( )                         # starts at degree = 0, npar = 1
     poly.grow( )                         # each grow( ) adds 1
@@ -30,31 +29,25 @@ Author       Do Kester
     print poly.npbase
     4
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * minDegree  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; minimum degree of the polynomial
 * maxDegree  :  int or None
 <br>&nbsp;&nbsp;&nbsp;&nbsp; maximum degree of the polynomial
 
-<b>Attributes from Dynamic</b>
-
+<b>Attributes from Dynamic</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ncomp (=degree+1), deltaNpar, minComp (=minDegree+1), maxComp (=maxDegree+1), growPrior
 
-<b>Attributes from PolynomialModel</b>
-
+<b>Attributes from PolynomialModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; degree
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
@@ -65,15 +58,14 @@ Category     mathematics/Fitting
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolynomialDynamicModel(</strong> degree, minDegree=0, maxDegree=None, fixed=None,
  growPrior=None, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L95-L137 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L95-L137 target=_blank>[source]</a></th></tr></thead></table>
 
 Polynomial of a adaptable degree.
 
 The model starts as a PolynomialModel of degree = 0.
 Growth of the model is governed by a exponential prior ( scale=1 ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; degree to start with; it should be minDegree <= degree <= maxDegree
 * minDegree  :  int
@@ -86,31 +78,30 @@ Growth of the model is governed by a exponential prior ( scale=1 ).
 * copy  :  PolynomialDynamicModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError when fixed parameters are requested
 ValueError when degree is outside [min..max] range
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L139-L141 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L139-L141 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L143-L144 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L143-L144 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L146-L172 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L146-L148 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L174-L176 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolynomialDynamicModel.py#L174-L176 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the model. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
@@ -203,6 +194,8 @@ Return a string representation of the model.
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Methods inherited from</strong> <a href="./Dynamic.html">Dynamic</a></th></tr></thead></table>
 

@@ -4,7 +4,7 @@
 
 <a name="PadeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PadeModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PadeModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 General Pade model of arbitrary degrees in numerator and denominator.
@@ -25,34 +25,28 @@ Beware of the poles where the denominator equals zero.
 
 Author:      Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     pade = PadeModel( 3, 1 )                # 3rd degree polynomial
     print pade.getNumberOfParameters( )     # 5
     5
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * num  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the numerator
 * den  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; order of the polynomial in the denominator
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 PadeModel( 2, 3 ) is equivalent to
 * PolynomialModel( 2 ) / PolynomialModel( 3, fixed={0 : 1.0} )
 
@@ -60,14 +54,13 @@ PadeModel( 2, 3 ) is equivalent to
 <a name="PadeModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PadeModel(</strong> num, den, copy=None, fixed=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L90-L128 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L90-L128 target=_blank>[source]</a></th></tr></thead></table>
 
 Pade of a certain degree in numerator and denominator.
 
 The number of parameters is ( num + den + 1 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * num  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the degree of the polynomial in the numerator.
 * den  :  int
@@ -86,17 +79,16 @@ The number of parameters is ( num + den + 1 )
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L130-L142 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L130-L133 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L144-L171 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L144-L171 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -106,11 +98,10 @@ Returns the result of the model function.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L173-L218 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L173-L218 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -122,11 +113,10 @@ Returns the partials at the xdata values.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L220-L255 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L220-L255 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -136,17 +126,16 @@ Returns the partials at the xdata values.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L257-L273 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L257-L273 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L275-L287 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PadeModel.py#L275-L287 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 

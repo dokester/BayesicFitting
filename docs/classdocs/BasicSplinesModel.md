@@ -4,7 +4,7 @@
 
 <a name="BasicSplinesModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class BasicSplinesModel(</strong> <a href="./SplinesModel.html">SplinesModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class BasicSplinesModel(</strong> <a href="./SplinesModel.html">SplinesModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Splines model consisting of a basis of spline blobs.
@@ -29,8 +29,7 @@ hard edges. Consequently the function is not continuous or differentiable at the
 The spline blobs at the edges may be different from the ones in the middle.
 
 
-<b>From SplinesModel</b>
-
+<b>From SplinesModel</b><br>
 The user lays out a number ( << datapoints ) of knots on the x-axis at
 arbitrary position, generally more knots where the curvature is higher.
 The knots need to be monotonuously increasing in x.
@@ -42,8 +41,7 @@ larger than the x-values in the dataset.
 
 This model is NOT for (cubic) spline interpolation.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = numpy.arange( 17, dtype=float ) * 10     # make  knots from 0 to 160
     csm = BasicSplinesModel( knots=knots, order=2 )
     print csm.getNumberOfParameters( )
@@ -64,8 +62,7 @@ This model is NOT for (cubic) spline interpolation.
     print csm.getNumberOfParameters( )
     12
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * border  :  int (0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; behaviour at edges
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 0 hard edge
@@ -74,25 +71,20 @@ This model is NOT for (cubic) spline interpolation.
 * period  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; distance between first and last knot (when border=1)
 
-<b>Attributes from SplinesModel</b>
-
+<b>Attributes from SplinesModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; knots, order
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 Dont construct the knots so closely spaced, that there are no datapoints in between.
 
 
@@ -100,7 +92,7 @@ Dont construct the knots so closely spaced, that there are no datapoints in betw
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BasicSplinesModel(</strong> knots=None, order=3, nrknots=None, min=None, max=None, xrange=None,
  border=0, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L206 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L125-L206 target=_blank>[source]</a></th></tr></thead></table>
 
 Splines on a given set of knots and a given order.
 
@@ -108,8 +100,7 @@ The number of parameters is ( length( knots ) + order - 1 ),
 Except when border=1, then the model is periodic with ( nrknots - 1 ) 
 parameters as the first and the last knot are the same.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knots  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; a array of arbitrarily positioned knots
 * order  :  int (3)
@@ -136,16 +127,14 @@ parameters as the first and the last knot are the same.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Attribute fixed can only be set in the constructor.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; See: [FixedModel](./FixedModel.md)
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * ValueError  :  At least either (`knots`) or (`nrknots`, `min`, `max`) or
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (`nrknots`, `xrange`) must be provided to define a valid model.
 * ValueError  :  when border = 1 and nrknots < order + 2, there are not enough
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; independent knots
 
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 The BasicSplinesModel is only strictly valid inside the domain defined by the
 minmax of knots. It deteriorates fastly going outside the domain.
 Except when border=1, then the model is periodic, defined everywhere
@@ -154,16 +143,15 @@ Except when border=1, then the model is periodic, defined everywhere
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L208-L243 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L208-L210 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="makeBaseBasis"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeBaseBasis(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L245-L276 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L245-L276 target=_blank>[source]</a></th></tr></thead></table>
 Make a sets of polynomial bases for each of the parameters
 
-<b>Return</b>
-
+<b>Return</b><br>
 * basis  :  3-d array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs
 
@@ -171,16 +159,15 @@ Make a sets of polynomial bases for each of the parameters
 <a name="makeDist"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeDist(</strong> knotix ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L278-L280 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L278-L280 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="makePeriodicBasis"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makePeriodicBasis(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L282-L316 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L282-L316 target=_blank>[source]</a></th></tr></thead></table>
 Make a sets of polynomial bases for each of the parameters
 
-<b>Return</b>
-
+<b>Return</b><br>
 * basis  :  3-d array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs
 
@@ -188,25 +175,23 @@ Make a sets of polynomial bases for each of the parameters
 <a name="normalizeBasis"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>normalizeBasis(</strong> basis ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L318-L372 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L318-L372 target=_blank>[source]</a></th></tr></thead></table>
 Normalize the base splines such that a constant value of 1.0
 is returned when all model parameters are 1.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * basis  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to the polynomials that make up the spline blobs
 
 <a name="findParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>findParameters(</strong> knotix, dist, kpar=0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L374-L484 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L374-L484 target=_blank>[source]</a></th></tr></thead></table>
 Find the parameters by assuming (order-1) continuous differentials.
 At the edges it is less. Normalized to 1.0
 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * knotix  :  int array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; knot indices involved in this spline blob
 * dist  :  array_like
@@ -214,19 +199,17 @@ At the edges it is less. Normalized to 1.0
 * kpar  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of parameter for which the spline-blob is constructed
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * par  :  2-d array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; sets of poly parameters.
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L486-L509 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L486-L509 target=_blank>[source]</a></th></tr></thead></table>
 Returns the functional result at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -236,13 +219,12 @@ Returns the functional result at the input value.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L511-L540 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L511-L540 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 The partials are the powers of x (input) from 0 to degree.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -254,22 +236,20 @@ The partials are the powers of x (input) from 0 to degree.
 <a name="makeKnotIndices"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>makeKnotIndices(</strong> xdata ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L542-L556 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L542-L556 target=_blank>[source]</a></th></tr></thead></table>
 Return a list of indices of the knots immediately preceeding the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the indices
 
 <a name="basicBlob"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basicBlob(</strong> xdata, basis, x2k, poly ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L558-L582 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L558-L582 target=_blank>[source]</a></th></tr></thead></table>
 Calculates a spline blob for all of xdata
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the spline
 * basis  :  array_like
@@ -282,11 +262,10 @@ Calculates a spline blob for all of xdata
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L584-L610 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L584-L610 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each xdata (=x).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the partials
 * params  :  array_like
@@ -296,17 +275,16 @@ Return the derivative df/dx at each xdata (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L612-L614 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L612-L614 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L616-L624 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BasicSplinesModel.py#L616-L624 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter.
 
@@ -396,4 +374,6 @@ Return the name of the parameter.
 * [<strong>checkZeroParameter(</strong> param )](./BaseModel.md#checkZeroParameter)
 * [<strong>isModifiable(</strong> ) ](./BaseModel.md#isModifiable)
 * [<strong>basePrior(</strong> kpar ) ](./BaseModel.md#basePrior)
+* [<strong>getParameterIndex(</strong> parname ) ](./BaseModel.md#getParameterIndex)
+* [<strong>getParameterValue(</strong> param, name, default=None ) ](./BaseModel.md#getParameterValue)
 * [<strong>baseParameterName(</strong> kpar ) ](./BaseModel.md#baseParameterName)

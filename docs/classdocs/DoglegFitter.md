@@ -4,7 +4,7 @@
 
 <a name="DoglegFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class DoglegFitter(</strong> <a href="./ScipyFitter.html">ScipyFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class DoglegFitter(</strong> <a href="./ScipyFitter.html">ScipyFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Dog-leg trust-region algorithm.
@@ -18,13 +18,12 @@ See [ScipyFitter](./ScipyFitter.md)
 <a name="DoglegFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>DoglegFitter(</strong> xdata, model, gradient=True, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L718-L742 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ScipyFitter.py#L718-L742 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 Create a class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model

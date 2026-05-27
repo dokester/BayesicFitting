@@ -4,7 +4,7 @@
 
 <a name="BirthEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class BirthEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class BirthEngine(</strong> <a href="./Engine.html">Engine</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BirthEngine.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 The BirthEngine adds a new component to the model.
@@ -14,8 +14,7 @@ The birth rate is governed by the growth-prior in the Dynamic.
 
 The member is kept when the logLikelihood > lowLhood.
 
-<b>Attributes from Engine</b>
-
+<b>Attributes from Engine</b><br>
 walkers, errdis, maxtrials, slow, rng, report, phantoms, verbose
 
 Author       Do Kester.
@@ -24,12 +23,11 @@ Author       Do Kester.
 <a name="BirthEngine"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>BirthEngine(</strong> walkers, errdis, copy=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L53-L69 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BirthEngine.py#L53-L69 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walkers  :  list of Walker
 <br>&nbsp;&nbsp;&nbsp;&nbsp; walkers to be diffused
 * errdis  :  ErrorDistribution
@@ -43,17 +41,16 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L71-L77 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BirthEngine.py#L71-L74 target=_blank>[source]</a></th></tr></thead></table>
 
-Return copy of this. 
+
 <a name="execute"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>execute(</strong> kw, lowLhood, iteration=0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L79-L166 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/BirthEngine.py#L79-L166 target=_blank>[source]</a></th></tr></thead></table>
 Execute the engine by adding a component and diffusing the parameters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kw  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of walker to diffuse
 * lowLhood  :  float
@@ -63,8 +60,7 @@ Execute the engine by adding a component and diffusing the parameters.
 * iteration  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; iteration number
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * int  :  the number of successfull moves
 
 

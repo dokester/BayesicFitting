@@ -4,7 +4,7 @@
 
 <a name="FlippedDataProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class FlippedDataProblem(</strong> <a href="./MultipleOutputProblem.html">MultipleOutputProblem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class FlippedDataProblem(</strong> <a href="./MultipleOutputProblem.html">MultipleOutputProblem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FlippedDataProblem.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 A FlippedDataProblem is a problem for solving double star orbits, 
@@ -19,15 +19,13 @@ Directions with misidentification in A and B, should be flipped.
 In spherical coordinates (rho,phi) should be (rho,-phi). 
 In rectangular coordinates (x,y) should be replaced by (-x,-y).
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * nflip  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; actual number of flipped datapoints
 * flipped  :  list of int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; indices of flipped datapoints.
 
-<b>Attributes from Problem</b>
-
+<b>Attributes from Problem</b><br>
 model, xdata, ydata, weights, partype
 
 * Author  :          Do Kester
@@ -37,12 +35,11 @@ model, xdata, ydata, weights, partype
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>FlippedDataProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, nflip=0, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L59-L85 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FlippedDataProblem.py#L59-L85 target=_blank>[source]</a></th></tr></thead></table>
 
 Problem Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved. One with multiple outputs: model.ndout > 1
 * xdata  :  array_like
@@ -63,26 +60,26 @@ Problem Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L87-L92 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FlippedDataProblem.py#L87-L92 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 
 <a name="residuals"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>residuals(</strong> param, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L94-L117 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FlippedDataProblem.py#L94-L117 target=_blank>[source]</a></th></tr></thead></table>
 Returns residuals in a flattened array.
 
 <a name="getFlippedData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getFlippedData(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L119-L140 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FlippedDataProblem.py#L119-L126 target=_blank>[source]</a></th></tr></thead></table>
 Return the corrected datapoints.
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L142-L147 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/FlippedDataProblem.py#L142-L147 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

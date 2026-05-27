@@ -4,7 +4,7 @@
 
 <a name="Plotter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>Module Plotter</strong> </th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>Module Plotter</strong> </th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 
@@ -25,12 +25,11 @@ The fits are invoked when Fitter.fit() or Sampler.sample() are called with plot=
 <strong>plotFit(</strong> x, data=None, yfit=None, model=None, fitter=None, show=True,
  residuals=False, xlabel=None, ylabel=None, title=None, figsize=[7,5],
  xlim=None, ylim=None, filename=None, transparent=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L53-L167 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L53-L167 target=_blank>[source]</a></th></tr></thead></table>
 
 Plot the data of a fit.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; xdata of the problem
 * data  :  array_like
@@ -68,11 +67,10 @@ Plot the data of a fit.
 <strong>plotSampleList(</strong> sl, xdata, ydata, problem=None, errors=None, npt=10000,
  residuals=False, xlabel=None, ylabel=None, title=None, period=None, figsize=[7,5],
  xlim=None, ylim=None, filename=None, transparent=False, show=True ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L169-L330 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L169-L330 target=_blank>[source]</a></th></tr></thead></table>
 Plot the posterior as npt points from the SampleList.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * sl  :  SampleList
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the samplelist containing samples from the posterior
 * xdata  :  arraylike
@@ -113,11 +111,10 @@ Plot the posterior as npt points from the SampleList.
 <a name="plotWalker"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotWalker(</strong> walker, iter, show=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L332-L350 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L332-L350 target=_blank>[source]</a></th></tr></thead></table>
 Plot the results for a walker in an iteration plot.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * walker  :  Walker
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the walker to plot
 * iter  :  int
@@ -128,11 +125,10 @@ Plot the results for a walker in an iteration plot.
 <a name="plotIter"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotIter(</strong> xdata, ydata, model, param, iter, show=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L352-L396 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L352-L396 target=_blank>[source]</a></th></tr></thead></table>
 Plot the data and the fit-results in an iteration plot.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; x data points
 * ydata  :  array
@@ -150,7 +146,7 @@ Plot the data and the fit-results in an iteration plot.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotOrbit(</strong> som, par, npoint=361, xdata=None, ydata=None, show=True,
  plot=None, color='k', ls='-', northEast=True ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L398-L499 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L398-L499 target=_blank>[source]</a></th></tr></thead></table>
 Plot the orbit of a StellarOrbitModel in N points, a forward 
 pointing arrow at T = 0, the line to the periastron and 
 an extended line of nodes. 
@@ -158,8 +154,7 @@ an extended line of nodes.
 if ydata is present, plot the datapoints. If also xdata is present, 
 plot the connecting lines too.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * som  :  StellarOrbitModel with spherical=False
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the orbit to plot
 * par  :   array
@@ -184,11 +179,10 @@ plot the connecting lines too.
 <a name="lineOfNodes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>lineOfNodes(</strong> x, y, n2n, scale=1.0, indices=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L501-L542 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L501-L542 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the line of nodes
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; x-values along the orbit
 * y  :  array
@@ -200,8 +194,7 @@ Calculate the line of nodes
 * indices  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; return indices in (x,y)
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * ( ndx, ndy )  :  tuple to 2 lists 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; tuple of x-values and y-values of the nodes
 
@@ -210,7 +203,7 @@ Calculate the line of nodes
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotOrbit3D(</strong> som, par, npoint=361, xdata=None, ydata=None, show=True,
  plot=None, color='k', ls='-', northEast=True ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L544-L653 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L544-L653 target=_blank>[source]</a></th></tr></thead></table>
 Three dimensional plot of the orbit of a StellarOrbitModel in N points, a forward 
 pointing arrow at T = 0, the line to the periastron and 
 an extended line of nodes. 
@@ -218,8 +211,7 @@ an extended line of nodes.
 if ydata is present, plot the datapoints. If also xdata is present, 
 plot the connecting lines too.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * som  :  StellarOrbitModel with spherical=False
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the orbit to plot
 * par  :   array
@@ -246,11 +238,10 @@ plot the connecting lines too.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotEclipsingStar(</strong> esm, pars, xdata=None, ydata=None, toMags=False, starpos=None,
  figsize=[9,6], grid=None, show=True, filename=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L655-L759 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L655-L759 target=_blank>[source]</a></th></tr></thead></table>
 plot of eclipsing stars seen from above. The orientation is irrelevant.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * esm  :  EclipsingStarModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; containing the stars
 * pars  :  array
@@ -277,11 +268,10 @@ plot of eclipsing stars seen from above. The orientation is irrelevant.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotEsmSideView(</strong> esm, pars, times=None, starpos=None, axin=None, figsize=[9,6],
  show=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L761-L875 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L761-L875 target=_blank>[source]</a></th></tr></thead></table>
 Plot an EclipsingStarModel in sideways view.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * esm  :  EclipsingStarModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; containing the stars
 * pars  :  array
@@ -300,11 +290,10 @@ Plot an EclipsingStarModel in sideways view.
 <a name="starColors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>starColors(</strong> L1, L2, L3 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L877-L905 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L877-L905 target=_blank>[source]</a></th></tr></thead></table>
 Return colors for star 1, star 2 dark side and star 2 spot.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * L1, L2, L3  :  floats
 <br>&nbsp;&nbsp;&nbsp;&nbsp; luminosities for star 1, 2 and spot
 
@@ -312,11 +301,10 @@ Return colors for star 1, star 2 dark side and star 2 spot.
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotEsmEclipseView(</strong> esm, pars, times=None, starpos=None, axin=None, figsize=[9,6],
  show=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L907-L1066 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Plotter.py#L907-L1066 target=_blank>[source]</a></th></tr></thead></table>
 Plot an EclipsingStarModel in eclipsing view.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * esm  :  EclipsingStarModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; containing the stars
 * pars  :  array

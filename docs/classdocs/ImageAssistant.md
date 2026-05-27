@@ -4,7 +4,7 @@
 
 <a name="ImageAssistant"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ImageAssistant(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ImageAssistant(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 ImageAssistant contains 2 methods to assist with more dimensional
@@ -15,8 +15,7 @@ fitting.
 2. resizeData Resizes the data arrays into a 1-dimensional array.
 <br>&nbsp;&nbsp;&nbsp; To be used as data in the Fitter.
 
-<b>Example</b>
-
+<b>Example</b><br>
     ymap = numpy.arange( 6, dtype=float ).reshape( 2, 3 )
     ias = ImageAssistant()
     ky = ias.getIndices( ymap )
@@ -45,13 +44,12 @@ Author       Do Kester
 <a name="ImageAssistant"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ImageAssistant(</strong> order='C' )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L71-L84 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py#L71-L84 target=_blank>[source]</a></th></tr></thead></table>
 
 Helper class to construct from an image, the input arrays
 needed for the Fitters.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * order  :  'C' or 'F'
 <br>&nbsp;&nbsp;&nbsp;&nbsp; set index view according to character
 <br>&nbsp;&nbsp;&nbsp;&nbsp; 'C' orders from slow to fast
@@ -60,31 +58,28 @@ needed for the Fitters.
 <a name="getIndices"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getIndices(</strong> ya, order='C' )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L86-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py#L86-L123 target=_blank>[source]</a></th></tr></thead></table>
 Generates indices for data arrays of any dimension.
 
 To be used as input in the Fitter classes.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ya  :  map
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of y ( data ) values for which an indexed array
 * order  :  'C' or 'F'
 <br>&nbsp;&nbsp;&nbsp;&nbsp; set index view according to character
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * numpy.array of ints  :  the indices of the pixels
 
 
 <a name="getPositions"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getPositions(</strong> ymap, order='C', center=True, deproject=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L153 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py#L125-L153 target=_blank>[source]</a></th></tr></thead></table>
 Return the (x,y) positions of the pixels in the map.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ya  :  map
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of y ( data ) values for which an indexed array
 * order  :  'C' or 'F'
@@ -97,29 +92,26 @@ Return the (x,y) positions of the pixels in the map.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; returning (x,y,...) position given the map indices (ix,iy,...)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Default: returning the indices as floats (+0.5 if center)
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 numpy.array of floats : the positions of the pixels
 
 <a name="getydata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getydata(</strong> ya )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L155-L164 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py#L155-L164 target=_blank>[source]</a></th></tr></thead></table>
 Return a copy of ya as a 1 dim array.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ya  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; map to be reshaped
 
 <a name="resizeData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>resizeData(</strong> res, shape=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L166-L182 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ImageAssistant.py#L166-L182 target=_blank>[source]</a></th></tr></thead></table>
 Reshape the data (res) into the same shape as the map (ya)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * res  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; result of the fit as a 1-dim array
 * shape  :  tuple of int

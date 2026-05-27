@@ -4,7 +4,7 @@
 
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SincModel(</strong> <a href="./KernelModel.html">KernelModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Sinc Model.
@@ -26,8 +26,7 @@ Parameter 2 ( width ) is always kept positive ( >=0 ).
 <br>&nbsp;&nbsp;&nbsp;&nbsp; KernelModel( kernel=Sinc() )
 See [KernelModel](./KernelModel.md)
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sinc = SincModel( )
     print sinc.npchain
     3
@@ -35,30 +34,26 @@ See [KernelModel](./KernelModel.md)
     [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
 
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
 <a name="SincModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SincModel(</strong> copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L75-L90 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py#L75-L90 target=_blank>[source]</a></th></tr></thead></table>
 
 Sinc model.
 
 Number of parameters is 3.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  ArctanModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
 * fixed  :  dictionary of {int:float}
@@ -69,7 +64,7 @@ Number of parameters is 3.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SincModel.py#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

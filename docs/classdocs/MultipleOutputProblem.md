@@ -4,7 +4,7 @@
 
 <a name="MultipleOutputProblem"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class MultipleOutputProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class MultipleOutputProblem(</strong> <a href="./Problem.html">Problem</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 A MultipleOutputProblem is an optimization of parameters where the model
@@ -19,8 +19,7 @@ problem.result( p )
 The parameters, p, are to be optimized while the x provide additional
 information.
 
-<b>Attributes from Problem</b>
-
+<b>Attributes from Problem</b><br>
 model, xdata, ydata, weights, partype
 
 * Author  :          Do Kester
@@ -30,12 +29,11 @@ model, xdata, ydata, weights, partype
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MultipleOutputProblem(</strong> model=None, xdata=None, ydata=None, weights=None,
  accuracy=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L52-L79 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L52-L79 target=_blank>[source]</a></th></tr></thead></table>
 
 Problem Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * model  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the model to be solved. One with multiple outputs: model.ndout > 1
 * xdata  :  array_like
@@ -54,25 +52,24 @@ Problem Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L81-L87 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L81-L87 target=_blank>[source]</a></th></tr></thead></table>
 Copy.
 
 
 <a name="expandFlat"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>expandFlat(</strong> weights, ndout ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L102 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L89-L102 target=_blank>[source]</a></th></tr></thead></table>
 Expand and flatten the arrays.
 
 
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> param )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L104-L114 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L104-L114 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result calculated at the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.
 
@@ -80,11 +77,10 @@ Returns the result calculated at the xdata.
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L116-L138 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L116-L138 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials (df/dp) calculated at the xdata.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters + nuisance params.
 
@@ -92,30 +88,28 @@ Returns the partials (df/dp) calculated at the xdata.
 <a name="derivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>derivative(</strong> param ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L140-L149 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L140-L149 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative of the internal model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; list of model parameters
 
 <a name="residuals"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>residuals(</strong> param, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L151-L156 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L151-L156 target=_blank>[source]</a></th></tr></thead></table>
 Returns residuals in a flattened array.
 
 <a name="weightedResSq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>weightedResSq(</strong> allpars, mockdata=None, extra=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L158-L177 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L158-L177 target=_blank>[source]</a></th></tr></thead></table>
 Returns the (weighted) squared residuals, calculated at the xdata.
 
 Optionally (extra=True) the weighted residuals themselves are returned too.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * allpars  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values for the parameters.
 * mockdata  :  array_like
@@ -127,25 +121,25 @@ Optionally (extra=True) the weighted residuals themselves are returned too.
 <a name="myEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myEngines(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L179-L183 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L179-L183 target=_blank>[source]</a></th></tr></thead></table>
 Return a default list of preferred engines
 
 <a name="myStartEngine"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myStartEngine(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L185-L189 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L185-L189 target=_blank>[source]</a></th></tr></thead></table>
 Return the default preferred startengines
 
 <a name="myDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>myDistribution(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L191-L196 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L191-L196 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the preferred error distribution
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L198-L201 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MultipleOutputProblem.py#L198-L201 target=_blank>[source]</a></th></tr></thead></table>
 
 Returns a string representation of the model. 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

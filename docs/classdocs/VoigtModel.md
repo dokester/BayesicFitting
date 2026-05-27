@@ -4,7 +4,7 @@
 
 <a name="VoigtModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class VoigtModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class VoigtModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Voigt's Gauss Lorentz convoluted model for line profiles.
@@ -20,23 +20,19 @@ Parameters 2 & 3 ( widths ) is always kept positive ( >=0 ).
 
 The implementation uses the Faddeeva function from scipy.special.wofz.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     voigt = VoigtModel( )
     voigt.setParameters( [5, 4, 1, 2] )
     print( voigt( numpy.arange(  41 , dtype=float ) / 5 ) )      # from [0,8]
 
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
@@ -44,14 +40,13 @@ The implementation uses the Faddeeva function from scipy.special.wofz.
 <a name="VoigtModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>VoigtModel(</strong> copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L72-L90 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L72-L90 target=_blank>[source]</a></th></tr></thead></table>
 
 Voigt model.
 
 Number of parameters is 4.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  VoigtModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be copied
 
@@ -59,20 +54,19 @@ Number of parameters is 4.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L92-L94 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L96-L118 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L96-L118 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
 Note: both width in the parameter array ( items 2 & 3 ) are kept
 strictly positive. I.e. they are changed when upon input they are negative.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -82,7 +76,7 @@ strictly positive. I.e. they are changed when upon input they are negative.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L120-L192 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L120-L192 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
 &nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
@@ -108,8 +102,7 @@ Returns the partials at the input value.
 &nbsp;&nbsp;&nbsp;&nbsp; dvdp0 = R(wofzz) / R(wofz0)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; ## The other partial follow from calculating dvdp for the parameters 1..3
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -121,7 +114,7 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L194-L226 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L194-L226 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each xdata (=x).
 
 &nbsp;&nbsp;&nbsp;&nbsp; z = ( x - p1 + 1j * p3 ) / ( p2 * sqrt2 )
@@ -135,8 +128,7 @@ Return the derivative df/dx at each xdata (=x).
 
 &nbsp;&nbsp;&nbsp;&nbsp; dzdx = 1 / ( p2 * sqrt2 )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -146,17 +138,16 @@ Return the derivative df/dx at each xdata (=x).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L228-L233 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L228-L233 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L235-L247 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/VoigtModel.py#L235-L247 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of a parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 

@@ -4,7 +4,7 @@
 
 <a name="NestedSolver"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class NestedSolver(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class NestedSolver(</strong> <a href="./NestedSampler.html">NestedSampler</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 NestedSolver is an extension of NestedSampler. It uses the
@@ -30,8 +30,7 @@ uphill. Mixing them with other engines maintain detailed balance in
 an overall sense. 
 
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -80,12 +79,11 @@ Author       Do Kester.
 <strong>NestedSolver(</strong> problem, distribution=None, keep=None,
  ensemble=100, discard=1, seed=80409, rate=1.0, engines=None,
  maxsize=None, threads=False, verbose=1 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L116-L183 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py#L116-L183 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  OrderProblem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Problem with integer parameters
 * keep  :  None or dict of {int:float}
@@ -139,15 +137,14 @@ Create a new class, providing inputs and model.
 <a name="solve"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>solve(</strong> keep=None, plot=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L185-L211 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py#L185-L207 target=_blank>[source]</a></th></tr></thead></table>
 Solve an order problem.
 
 Return the last sample, representing the best solution.
 
 The more sammples (with solutions) can be found in the sample list.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * keep  :  None or dict of {int:float}
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Dictionary of indices (int) to be kept at a fixed value (float)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Hyperparameters follow model parameters
@@ -160,11 +157,10 @@ The more sammples (with solutions) can be found in the sample list.
 <a name="setErrorDistribution"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setErrorDistribution(</strong> name=None, scale=1.0, power=2.0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L213-L242 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py#L213-L242 target=_blank>[source]</a></th></tr></thead></table>
 Set the error distribution for calculating the likelihood.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * name  :  string
 <br>&nbsp;&nbsp;&nbsp;&nbsp; name of distribution
 * scale  :  float
@@ -176,11 +172,10 @@ Set the error distribution for calculating the likelihood.
 <a name="setEngines"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setEngines(</strong> engines=None, enginedict=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L244-L267 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py#L244-L267 target=_blank>[source]</a></th></tr></thead></table>
 initialize the engines.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * engines  :  list of string
 <br>&nbsp;&nbsp;&nbsp;&nbsp; list of engine names
 * enginedict  :  dictionary of { str : Engine }
@@ -190,11 +185,10 @@ initialize the engines.
 <a name="initWalkers"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>initWalkers(</strong> ensemble, allpars, fitIndex, startdict=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L269-L294 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NestedSolver.py#L269-L294 target=_blank>[source]</a></th></tr></thead></table>
 Initialize the walkers at random values of parameters and scale
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ensemble  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; length od the walkers list
 * allpars  :  array_like

@@ -4,7 +4,7 @@
 
 <a name="QRFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class QRFitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Fitter for linear models, using QR decomposition.
@@ -29,8 +29,7 @@ It can be more efficient if
 similar ydata needs to be fitter to the same model and xdata.
 In that case it uses the same decomposition for all fits.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are numpy.asarray data arrays
     x = numpy.asarray.range( 100 )
     poly = PolynomialModel( 1 )                             # line
@@ -44,8 +43,7 @@ In that case it uses the same decomposition for all fits.
 
 * Category :     Mathematics/Fitting
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * needsNewDecomposition  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; True when starting. Thereafter False,
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.e. the previous QR-decomposition is used, unless weights are used.
@@ -63,7 +61,7 @@ In that case it uses the same decomposition for all fits.
 <a name="QRFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>QRFitter(</strong> xdata, model, map=False, keep=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L116 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py#L89-L116 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing xdatas and model.
 
@@ -71,8 +69,7 @@ A Fitter class is defined by its model and the input vector (the
 independent variable). When a fit to another model and/or another
 input vector is needed a new object should be created.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -90,11 +87,10 @@ input vector is needed a new object should be created.
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L118-L192 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/QRFitter.py#L118-L189 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data, including weights.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
 * weights  :  array_like
@@ -108,8 +104,7 @@ Return model parameters fitted to the data, including weights.
 * plot  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to plot or not
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when ydata or weights contain a NaN
 
 

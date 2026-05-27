@@ -4,7 +4,7 @@
 
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class AmoebaFitter(</strong> <a href="./MaxLikelihoodFitter.html">MaxLikelihoodFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Fitter using the simulated annealing simplex minimum finding algorithm,
@@ -13,8 +13,7 @@ See also: [AnnealingAmoeba](./AnnealingAmoeba.md)
 
 Author       Do Kester
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are Double1d data arrays.
     x = numpy.arange( 100, dtype=float ) / 10
     y = 3.5 * SIN( x + 0.4 )                    # make sine
@@ -41,8 +40,7 @@ Author       Do Kester
     param = amfit.fit( y )
 
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 1. AmoebaFitter is not guaranteed to find the global minimum.
 2. The calculation of the evidence is an Gaussian approximation which is
 only exact for linear models with a fixed scale.
@@ -53,12 +51,11 @@ only exact for linear models with a fixed scale.
 <a name="AmoebaFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>AmoebaFitter(</strong> xdata, model, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L80-L104 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py#L80-L104 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Amoeba class, providing inputs and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; independent input values
 * model  :  Model
@@ -76,13 +73,12 @@ Create a new Amoeba class, providing inputs and model.
  seed=4567, temp=0, limits=None, maxiter=1000,
  tolerance=0.0001, cooling=0.95, steps=10,
  verbose=0, plot=False, accuracy=None, callback=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L106-L220 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/AmoebaFitter.py#L106-L217 target=_blank>[source]</a></th></tr></thead></table>
 Return Model fitted to the data array.
 
 When done, it also calculates the hessian matrix and chisq.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
 * weights  :  array_like

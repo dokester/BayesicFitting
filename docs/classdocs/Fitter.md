@@ -4,7 +4,7 @@
 
 <a name="Fitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Fitter(</strong> <a href="./BaseFitter.html">BaseFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Fitter for linear models.
@@ -14,8 +14,7 @@ The Fitter class is to be used in conjunction with Model classes.
 The Fitter class and its descendants fit data to a model. Fitter itself
 is the variant for linear models, ie. models linear in its parameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are numpy.asarray data arrays
     x = numpy.arange( 100 )
     y = numpy.arange( 100 ) // 4        # digitization noise
@@ -30,8 +29,7 @@ is the variant for linear models, ie. models linear in its parameters.
     yband = fitter.monteCarloError( )        # 1 sigma confidence region
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 1. The Fitter does not work with limits.
 2. The calculation of the evidence is an Gaussian approximation which is
 <br>&nbsp;&nbsp;&nbsp; only exact for linear models with a fixed scale.
@@ -42,7 +40,7 @@ Author  Do Kester
 <a name="Fitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Fitter(</strong> xdata, model, map=False, keep=None, fixedScale=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L67-L93 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py#L67-L93 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new Fitter, providing xdatas and model.
 
@@ -50,8 +48,7 @@ A Fitter class is defined by its model and the input vector (the
 independent variable). When a fit to another model and/or another
 input vector is needed a new object should be created.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -71,7 +68,7 @@ input vector is needed a new object should be created.
 <a name="fit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>fit(</strong> ydata, weights=None, accuracy=None, keep=None, plot=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L95-L162 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Fitter.py#L95-L159 target=_blank>[source]</a></th></tr></thead></table>
 Return model parameters fitted to the data, including weights.
 
 For Linear models the matrix equation
@@ -83,8 +80,7 @@ and &beta; is the inproduct of the data with the D, design matrix.
 
 &nbsp;&nbsp;&nbsp;&nbsp; &beta; = y * w * D<sup>T</sup>
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ydata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
 * weights  :  array_like
@@ -98,8 +94,7 @@ and &beta; is the inproduct of the data with the D, design matrix.
 * plot  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Plot the results
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ValueError when ydata or weights contain a NaN
 
 

@@ -4,7 +4,7 @@
 
 <a name="PolySineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class PolySineAmpModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class PolySineAmpModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Sine of fixed frequency with polynomials as amplitudes.
@@ -17,12 +17,10 @@ P(y), Q(y) are Polynomials of a certain order, n.
 
 It is a linear model in 2 dimensions, with 2n+2 papameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sine = PolySineAmpModel( 2, 150.0 )        # fixed frequency of 150 Hz
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * degree  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials
 * frequency  :  float
@@ -30,16 +28,13 @@ It is a linear model in 2 dimensions, with 2n+2 papameters.
 * pm  :  PolynomialModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; polynomial to be multiplied with the (co)sine
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
@@ -47,14 +42,13 @@ It is a linear model in 2 dimensions, with 2n+2 papameters.
 <a name="PolySineAmpModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>PolySineAmpModel(</strong> degree, frequency, copy=None, fixed=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L75-L110 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py#L75-L110 target=_blank>[source]</a></th></tr></thead></table>
 
 Sine model of a fixed frequency and polynomials as coefficients.
 
 Number of parameters is 2n+2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * degree  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; degree of the polynomials
 * frequency  :  float
@@ -64,25 +58,23 @@ Number of parameters is 2n+2.
 * fixed  :  dict
 <br>&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 * AttributeError  :  When fixed is not None
 
 
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L112-L124 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py#L112-L115 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L126-L153 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py#L126-L153 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2,ndata]
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -94,11 +86,10 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L155-L179 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py#L155-L179 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of f to (x,y) (df/dx,df/dy) at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like [2,ndata]
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -108,17 +99,16 @@ Returns the derivative of f to (x,y) (df/dx,df/dy) at the input value.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L181-L197 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py#L181-L197 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L199-L209 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/PolySineAmpModel.py#L199-L209 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 

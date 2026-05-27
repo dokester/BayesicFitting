@@ -4,7 +4,7 @@
 
 <a name="LevenbergMarquardtFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class LevenbergMarquardtFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Non-linear fitter using the Levenberg-Marquardt method.
@@ -19,8 +19,7 @@ This might be the third or fourth transcription of it.
 
 Author       Do Kester.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     # assume x and y are Double1d data arrays
     x = numpy.arange( 100, dtype=float ) / 10
     y = numpy.arange( 100, dtype=float ) / 122            # make slope
@@ -48,19 +47,16 @@ Author       Do Kester.
     lmfit.setPlotter( plotter, 20 )                   # make a plot every 20th iteration
     param = lmfit.fit( y )
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 In case of problems look at the "Troubles" page in the documentation area.
 
 
-<b>Limitations</b>
-
+<b>Limitations</b><br>
 1. LMF is <b>not</b> guaranteed to find the global minimum.
 2. The calculation of the evidence is an Gaussian approximation which is
 only exact for linear models with a fixed scale.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; vector of numbers as input for model
 * model  :  Model
@@ -72,12 +68,11 @@ only exact for linear models with a fixed scale.
 <a name="LevenbergMarquardtFitter"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LevenbergMarquardtFitter(</strong> xdata, model, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L101-L127 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L101-L127 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a class, providing xdata and model.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; vector of independent input values
 * model  :  Model
@@ -95,13 +90,12 @@ Create a class, providing xdata and model.
 <strong>fit(</strong> data, weights=None, par0=None, keep=None, limits=None,
  maxiter=None, tolerance=None, verbose=None, plot=False,
  accuracy=None, callback=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L129-L219 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L129-L219 target=_blank>[source]</a></th></tr></thead></table>
 Return Model fitted to the data arrays.
 
 It will calculate the hessian matrix and chisq.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * data   :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the data vector to be fitted
 * weights  :  array_like
@@ -134,26 +128,25 @@ It will calculate the hessian matrix and chisq.
 <br>&nbsp;&nbsp;&nbsp;&nbsp; `val = callback( val )`
 <br>&nbsp;&nbsp;&nbsp;&nbsp; where val is the parameter list.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ConvergenceError if it stops when the tolerance has not yet been reached.
 
 
 <a name="chiSquaredExtra"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>chiSquaredExtra(</strong> data, params, weights=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L221-L233 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L221-L233 target=_blank>[source]</a></th></tr></thead></table>
 Add normalizing data to chisq.
 
 <a name="trialfit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>trialfit(</strong> params, fi, data, weights, verbose, maxiter )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L235-L292 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L235-L292 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="getParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getParameters(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L294-L305 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L294-L302 target=_blank>[source]</a></th></tr></thead></table>
 Return status of the fitter: parameters ( for debugging ).
 
 Only for debugging; use Model.getParameters( ) otherwise
@@ -162,7 +155,7 @@ Only for debugging; use Model.getParameters( ) otherwise
 <a name="checkLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>checkLimits(</strong> fitpar, fitindex )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L307-L330 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LevenbergMarquardtFitter.py#L307-L330 target=_blank>[source]</a></th></tr></thead></table>
 
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

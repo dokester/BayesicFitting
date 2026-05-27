@@ -4,7 +4,7 @@
 
 <a name="ConstantModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class ConstantModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 ConstantModel is a Model which does not have any parameters.
@@ -26,28 +26,23 @@ some structure at all.
 It can also be used when some constant is needed in a compound model,
 or a family of similar shapes.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * fixedModel  :  Model
 <br>&nbsp;&nbsp;&nbsp;&nbsp; a model which is calculated. (default: 0, everywhere)
 * table  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Examples</b>
-
+<b>Examples</b><br>
 To make a model that decays to 1.0
 
     model = ConstantModel( values=1.0 )
@@ -60,14 +55,13 @@ To make a model that decays to 1.0
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>ConstantModel(</strong> ndim=1, copy=None, fixedModel=None, values=None,
  table=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L89-L129 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L89-L129 target=_blank>[source]</a></th></tr></thead></table>
 
 The ConstantModel implementation.
 
 Number of parameters = 0.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ndim  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of dimensions for the model. (default: 1)
 * copy  :  ConstantModel
@@ -79,8 +73,7 @@ Number of parameters = 0.
 * table  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of tabulated results
 
-<b>Notes</b>
-
+<b>Notes</b><br>
 A table provided to the constructor has only values at the xdata.
 At other vales than xdata, the model does not work.
 
@@ -88,17 +81,16 @@ At other vales than xdata, the model does not work.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L131-L150 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L131-L134 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L152-L167 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L152-L167 target=_blank>[source]</a></th></tr></thead></table>
 Returns a constant form.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -108,11 +100,10 @@ Returns a constant form.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L169-L183 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L169-L183 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata value. (=empty array)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -124,11 +115,10 @@ Returns the partials at the xdata value. (=empty array)
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L185-L200 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L185-L200 target=_blank>[source]</a></th></tr></thead></table>
 Return the derivative df/dx at each point x (== 0).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -138,7 +128,7 @@ Return the derivative df/dx at each point x (== 0).
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L202-L208 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/ConstantModel.py#L202-L208 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 

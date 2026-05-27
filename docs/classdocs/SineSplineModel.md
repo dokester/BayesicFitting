@@ -4,7 +4,7 @@
 
 <a name="SineSplineModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class SineSplineModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class SineSplineModel(</strong> <a href="./LinearModel.html">LinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Sine of fixed frequency with splineslike amplitudes/phases.
@@ -15,15 +15,13 @@ Where SM0 and SM1 are splines models with defined knots and order.
 
 It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     knots = [3.0*k for k in range( 11 )]
     sine = SineSplineModel( 150, knots )        # fixed frequency of 150 Hz
     print( sine.npbase )                        # number of parameters
 26
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * frequency  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; (fixed) frequency of the sine
 * knots  :  array_like
@@ -35,21 +33,17 @@ It is a linear model with 2 * ( len(knots) + order - 1 ) papameters.
 * sm  :  SplinesModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; amplitude of the sine
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 
-<b>Alternate</b>
-
+<b>Alternate</b><br>
 The model
 
     model = SineSplineModel( frequency, knots )
@@ -66,14 +60,13 @@ The model
 <a name="SineSplineModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>SineSplineModel(</strong> frequency, knots, order=3, copy=None, fixed=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L90-L125 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L90-L125 target=_blank>[source]</a></th></tr></thead></table>
 
 Sine model of a fixed frequency with a splineslike changing amplitude/phase.
 
 Number of parameters is 2 * ( len(knots) + order - 1 ).
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * frequency  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the frequency
 * copy  :  SineSplineModel
@@ -81,8 +74,7 @@ Number of parameters is 2 * ( len(knots) + order - 1 ).
 * fixed  :  dict
 <br>&nbsp;&nbsp;&nbsp;&nbsp; If not None raise AttributeError.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError
 <br>&nbsp;&nbsp;&nbsp;&nbsp; when fixed is not None
 
@@ -90,17 +82,16 @@ AttributeError
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L127-L141 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L127-L130 target=_blank>[source]</a></th></tr></thead></table>
 
-Copy method. 
+
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L143-L165 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L143-L165 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -112,11 +103,10 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L167-L186 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L167-L186 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative of f to x (df/dx) at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -126,11 +116,10 @@ Returns the derivative of f to x (df/dx) at the input value.
 <a name="getAmplitudes"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getAmplitudes(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L188-L202 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L188-L202 target=_blank>[source]</a></th></tr></thead></table>
 Return the amplitudes if cosine and sine, resp.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the partials
 * params  :  array_like
@@ -140,17 +129,16 @@ Return the amplitudes if cosine and sine, resp.
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L204-L210 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L204-L210 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L212-L225 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/SineSplineModel.py#L212-L225 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of a parameter.
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 

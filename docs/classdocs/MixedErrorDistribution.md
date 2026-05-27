@@ -4,7 +4,7 @@
 
 <a name="MixedErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class MixedErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class MixedErrorDistribution(</strong> <a href="./ErrorDistribution.html">ErrorDistribution</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 To calculate a mixture of two likelihoods.
@@ -24,8 +24,7 @@ And the log of L is
 
 &nbsp;&nbsp;&nbsp;&nbsp; logL = &sum; logL( x ) = &sum;( log( f * L1(x) + ( 1 - f ) * L2(x) ) )
 
-<b>Note</b>
-
+<b>Note</b><br>
 The mixture, i.e. the weighted sum of 2 distributions for each residual, is
 the raison-d'etre for the methods logLdata and nextPartialData, so individual
 contributions can be weighted, added, log-ged and summed.
@@ -36,14 +35,13 @@ Author       Do Kester.
 <a name="MixedErrorDistribution"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MixedErrorDistribution(</strong> errdis1, errdis2, fraction=0.5, limits=None, copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L66-L99 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py#L66-L99 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
 Make a new error distribution as a fraction of errdis1 plus the rest of errdis2.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * errdis1  :  ErrorDistribution
 <br>&nbsp;&nbsp;&nbsp;&nbsp; First error distribution
 * errdis2  :  ErrorDistribution
@@ -64,24 +62,23 @@ Make a new error distribution as a fraction of errdis1 plus the rest of errdis2.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L101-L116 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py#L101-L104 target=_blank>[source]</a></th></tr></thead></table>
 
-Return copy of this. 
+
 <a name="acceptWeight"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>acceptWeight(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L118-L125 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py#L118-L125 target=_blank>[source]</a></th></tr></thead></table>
 True if the distribution accepts weights.
 Always true for this distribution.
 
 <a name="logLdata"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logLdata(</strong> problem, allpars, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L127-L158 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py#L127-L158 target=_blank>[source]</a></th></tr></thead></table>
 Return the log( likelihood ) for a Mixedian distribution.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like
@@ -93,11 +90,10 @@ Return the log( likelihood ) for a Mixedian distribution.
 <a name="nextPartialData"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>nextPartialData(</strong> problem, allpars, fitIndex, mockdata=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L160-L239 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MixedErrorDistribution.py#L160-L237 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative of log( likelihood ) to the parameters in fitIndex.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * problem  :  Problem
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to be solved
 * allpars  :  array_like

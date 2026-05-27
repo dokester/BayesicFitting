@@ -4,7 +4,7 @@
 
 <a name="NoiseScale"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class NoiseScale(</strong> <a href="./HyperParameter.html">HyperParameter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class NoiseScale(</strong> <a href="./HyperParameter.html">HyperParameter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Hyperparameter for the scale of a ScaledErrorDistribution
@@ -19,8 +19,7 @@ By default this prior is a JeffreysPrior..
 The full use of priors is reserved for Bayesian calculations as
 in NestedSampler
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the value of the noiseScale.  Default: 1.0
 * stdev  :  float
@@ -38,12 +37,11 @@ in NestedSampler
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>NoiseScale(</strong> scale=1.0, isFixed=True, prior=None, limits=None,
  copy=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L65-L96 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py#L65-L96 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; float   value of the noise scale
 * isFixed  :  bool
@@ -65,17 +63,16 @@ Constructor.
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L98-L123 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py#L98-L102 target=_blank>[source]</a></th></tr></thead></table>
 
-Return a copy. 
+
 <a name="minimumScale"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>minimumScale(</strong> scale=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L125-L139 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/NoiseScale.py#L125-L137 target=_blank>[source]</a></th></tr></thead></table>
 Fit the noise scale with a minimum value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * scale  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the value of the noise scale. Default: noiseScale.scale
 

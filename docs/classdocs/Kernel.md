@@ -4,7 +4,7 @@
 
 <a name="Kernel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Kernel(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Kernel(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 A kernel is an even real-valued integrable function.
@@ -50,8 +50,7 @@ elsewhere it is 0.
 Huber is not a proper Kernel as the integral is inf. However it is important
 in robust fitting (RobustShell) to get a madian-like solution for the outliers.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * integral  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the integral over the valid range
 * fwhm  :  float
@@ -67,12 +66,11 @@ Category    mathematics/Fitting
 <a name="Kernel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Kernel(</strong> integral=1.0, fwhm=1.0, range=1.0 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L91-L107 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L91-L107 target=_blank>[source]</a></th></tr></thead></table>
 
 Constructor
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * integral  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; over [-inf, +inf]
 * fwhm  :  float
@@ -83,46 +81,43 @@ Constructor
 <a name="result"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>result(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L109-L118 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L109-L118 target=_blank>[source]</a></th></tr></thead></table>
 Return the result for input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; input values
 
 <a name="resultsq"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>resultsq(</strong> xsq )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L120-L129 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L120-L129 target=_blank>[source]</a></th></tr></thead></table>
 Return the result for squared input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the squares of the input values
 
 <a name="partial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>partial(</strong> x )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L131-L140 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L131-L140 target=_blank>[source]</a></th></tr></thead></table>
 Return the partial derivative wrt the input values.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * x  :  array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the input values
 
 <a name="isBound"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isBound(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L142-L147 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L142-L147 target=_blank>[source]</a></th></tr></thead></table>
 Return true when the kernel is bound, i.e.
 all non-zero values are between -1 and +1
 
 <a name="name"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>name(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L149-L159 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/kernels/Kernel.py#L149-L155 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the kernel.
 

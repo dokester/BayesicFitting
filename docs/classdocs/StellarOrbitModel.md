@@ -4,7 +4,7 @@
 
 <a name="StellarOrbitModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class StellarOrbitModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class StellarOrbitModel(</strong> <a href="./NonLinearModel.html">NonLinearModel</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Model for the radial velocity variations of a star caused by a orbiting planet.
@@ -34,8 +34,7 @@ It is a non-linear model.
 
 This class uses [Kepplers2ndLaw to find the radius and anomaly.](Kepplers2ndLaw to find the radius and anomaly.)
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * keppler  :  Kepplers2ndLaw()
 <br>&nbsp;&nbsp;&nbsp;&nbsp; to calculate the radius and true anomaly
 * ndout  :  int
@@ -52,20 +51,16 @@ This class uses [Kepplers2ndLaw to find the radius and anomaly.](Kepplers2ndLaw 
 * toSpher  :  Tools.toSpher
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Return (rho,phi) coordinates from (x,y). See [Tools](./Tools.md#toSpher)
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npchain, parameters, stdevs, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Examples</b>
-
+<b>Examples</b><br>
     sm = StellarOrbitModel( )
     print( sm.npars )
     7
@@ -75,14 +70,13 @@ This class uses [Kepplers2ndLaw to find the radius and anomaly.](Kepplers2ndLaw 
 <a name="StellarOrbitModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>StellarOrbitModel(</strong> copy=None, spherical=True, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L103-L138 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L103-L138 target=_blank>[source]</a></th></tr></thead></table>
 
 Radial velocity model.
 
 Number of parameters is 5
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * copy  :  StellarOrbitModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
 * spherical  :  bool (True)
@@ -97,11 +91,10 @@ Number of parameters is 5
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> spherical=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L140-L153 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L140-L153 target=_blank>[source]</a></th></tr></thead></table>
 Copy method.  
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * spherical  :  None or bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; return spherical (True) or rectangular (False) coordinates
 
@@ -109,14 +102,12 @@ Copy method.
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L155-L179 target=_blank>[source]</a></th></tr></thead></table>
-<b>Returns</b>
-
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L155-L179 target=_blank>[source]</a></th></tr></thead></table>
+<b>Returns</b><br>
 the result of the model function as a 2-d array containing 
 [rho,phi] when spherical is true else [x,y]
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -128,13 +119,12 @@ The parameters are explained in the [#StellarOrbitModel constructor.](#StellarOr
 <a name="getOrbit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getOrbit(</strong> xdata, params, d3=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L181-L235 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L181-L235 target=_blank>[source]</a></th></tr></thead></table>
 Calculate the 2 (or 3)-dim result of the model function as a tuple of arrays 
 
 The pertaining rho, phi, (theta) are available from self.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -144,22 +134,20 @@ The pertaining rho, phi, (theta) are available from self.
 
 The parameters are explained in the [#StellarOrbitModel constructor.](#StellarOrbitModel constructor.)
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * x, y(, z)  :  tuple of arrays
 <br>&nbsp;&nbsp;&nbsp;&nbsp; containing the rectangular coordinates
 
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params, d3=False )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L237-L323 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L237-L323 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative [df1/dt, df2/dt] of the model function.
 Where f1 = rho if spherical else x
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; f2 = phi if spherical else y
 and t is time, input data, here aliased to 'xdata' 
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -174,11 +162,10 @@ The parameters are explained in the [#StellarOrbitModel constructor.](#StellarOr
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None, d3=False ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L325-L496 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L325-L496 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the xdata value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like
@@ -194,18 +181,17 @@ The parameters are explained in the [#StellarOrbitModel constructor.](#StellarOr
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L498-L503 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L498-L503 target=_blank>[source]</a></th></tr></thead></table>
 Returns a string representation of the model.
 
 
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L505-L522 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L505-L522 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of a parameter. (TBC)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the kth parameter.
 
@@ -213,13 +199,12 @@ Return the unit of a parameter. (TBC)
 <a name="convertParameters"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>convertParameters(</strong> param, stdevs=None, year=2000 ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L524-L564 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L524-L564 target=_blank>[source]</a></th></tr></thead></table>
 Return time of periastron (p<sub>3</sub>) in years after year and inclination (p<sub>4</sub>), 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the position angle from North to the line of nodes (p<sub>5</sub>) and
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the longitude from line of nodes to periastron (p<sub>6</sub>) in degrees
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters to be converted
 * stdevs  :  array
@@ -227,8 +212,7 @@ Return time of periastron (p<sub>3</sub>) in years after year and inclination (p
 * year  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; return the first periastron passage after year
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 converted parameters if stdevs is None
 converted (parameters, stdevs) else 
 
@@ -236,15 +220,14 @@ converted (parameters, stdevs) else
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>plotOrbit(</strong> par, npoint=361, xdata=None, ydata=None,
  plot=None, color='k', ls='-' ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L566-L593 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/StellarOrbitModel.py#L566-L593 target=_blank>[source]</a></th></tr></thead></table>
 Plot the orbit in N points, a forward pointing arrow at T = 0, 
 the line to the periastron and an extended line of nodes. 
 
 if ydata is present, plot the datapoints. If also xdata is present, 
 plot the connecting lines too.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * par  :   array
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter of the model
 * npoint  :  int

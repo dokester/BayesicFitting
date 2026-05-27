@@ -4,7 +4,7 @@
 
 <a name="LinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class LinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class LinearModel(</strong> <a href="./Model.html">Model</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LinearModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Anchestor of all linear models.
@@ -19,20 +19,16 @@ which means that only the partial derivatives to p<sub>i</sub> need to be given
 as basePartial. The baseResult follows directly from that one.
 It is implemented here.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 None of its own
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit (relegated to model)
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
 Author       Do Kester
@@ -42,12 +38,11 @@ Author       Do Kester
 <a name="LinearModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>LinearModel(</strong> nparams, ndim=1, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L67-L86 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LinearModel.py#L67-L86 target=_blank>[source]</a></th></tr></thead></table>
 
 class for all linear models.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * nparams  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the number of parameters in this model
 * ndim  :  int
@@ -64,14 +59,13 @@ class for all linear models.
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L88-L110 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LinearModel.py#L88-L110 target=_blank>[source]</a></th></tr></thead></table>
 Returns the base result of linear models.
 
 for linear models the result is the inner product of parameters
 and partial derivatives.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; values at which to calculate the result
 * params  :  array_like

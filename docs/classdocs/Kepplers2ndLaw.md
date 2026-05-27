@@ -4,7 +4,7 @@
 
 <a name="Kepplers2ndLaw"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class Kepplers2ndLaw(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class Kepplers2ndLaw(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Class for calculating Kepplers second law for planetary motion.
@@ -22,8 +22,7 @@ The algorithm was taken from [Boule](../references.md#boule).
 
 The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * eccenticAnomaly  :  "standard" or "newton" or "halley"
 <br>&nbsp;&nbsp;&nbsp;&nbsp; method to use in the calculation. 
 <br>&nbsp;&nbsp;&nbsp;&nbsp; By default Halleys method is used.
@@ -36,12 +35,11 @@ The parameters are initialized at [0.0, 1.0, 1.0, 0.0].
 <a name="Kepplers2ndLaw"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>Kepplers2ndLaw(</strong> eccentricAnomaly="halley" ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L61-L80 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L61-L80 target=_blank>[source]</a></th></tr></thead></table>
 
 Use Keppler's 2nd Law to derive the radius and true anomaly.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * eccentricAnomaly  :  ["standard", "newton", "halley"]
 <br>&nbsp;&nbsp;&nbsp;&nbsp; method to use in the calculation
 
@@ -49,7 +47,7 @@ Use Keppler's 2nd Law to derive the radius and true anomaly.
 <a name="meanAnomaly"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>meanAnomaly(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L82-L102 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L82-L102 target=_blank>[source]</a></th></tr></thead></table>
 Return the mean anomaly.
 
 P = params[2] = period
@@ -57,8 +55,7 @@ T = params[3] = periastron passage
 
 M = 2 * pi * xdata / P - T
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit
 * params  :  array_like
@@ -67,22 +64,20 @@ M = 2 * pi * xdata / P - T
 <a name="dMdx"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dMdx(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L104-L115 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L104-L115 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of M (mean anomaly) to xdata
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dMdx  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of M to x (xdata)
 
 <a name="dMdpar"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dMdpar(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L117-L133 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L117-L133 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of M (mean anomaly) to relevant parameters.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dMdP  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of M to P (period)
 * dMdp  :  array_like
@@ -91,7 +86,7 @@ Return derivatives of M (mean anomaly) to relevant parameters.
 <a name="eccentricAnomaly0"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly0(</strong> xdata, params, Estart=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L135-L176 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L135-L176 target=_blank>[source]</a></th></tr></thead></table>
 Return the eccentric anomaly, i.e. the solution for E of
 
 Standard method by Jean Meuss 
@@ -103,8 +98,7 @@ M = mean anomaly
 
 E = M + e * sin( E )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit
 * params  :  array_like
@@ -115,7 +109,7 @@ E = M + e * sin( E )
 <a name="eccentricAnomaly1"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly1(</strong> xdata, params, Estart=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L178-L217 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L178-L217 target=_blank>[source]</a></th></tr></thead></table>
 Newtons method.
 
 Return the eccentric anomaly, i.e. the solution for E of
@@ -125,8 +119,7 @@ M = mean anomaly
 
 E = M + e * sin( E )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit
 * params  :  array_like
@@ -137,7 +130,7 @@ E = M + e * sin( E )
 <a name="eccentricAnomaly2"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>eccentricAnomaly2(</strong> xdata, params, Estart=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L219-L274 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L219-L274 target=_blank>[source]</a></th></tr></thead></table>
 Halleys method.
 
 Return the eccentric anomaly, i.e. the solution for E of
@@ -147,8 +140,7 @@ M = mean anomaly
 
 E = M + e * sin( E )
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit
 * params  :  array_like
@@ -159,33 +151,30 @@ E = M + e * sin( E )
 <a name="dEdM"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dEdM(</strong> xdata, params, cosE ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L276-L287 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L276-L287 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of E (eccentric anomaly) to mean anomaly
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dEdM  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of E to M (mean anomaly)
 
 <a name="dEdx"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dEdx(</strong> xdata, params, cosE ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L289-L298 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L289-L298 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of E (eccentric anomaly) to xdata
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dEdx  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of E to x (xdata)
 
 <a name="dEdpar"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>dEdpar(</strong> xdata, params, cosE, sinE ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L300-L319 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L300-L319 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of E (eccentric anomaly) to relevant parameters.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * dEde  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of E to e (eccentricity)
 * dEdP  :  array_like
@@ -196,7 +185,7 @@ Return derivatives of E (eccentric anomaly) to relevant parameters.
 <a name="radiusAndTrueAnomaly"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>radiusAndTrueAnomaly(</strong> xdata, params ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L321-L373 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L321-L373 target=_blank>[source]</a></th></tr></thead></table>
 Return the radius and the true anomaly.
 
 e = params[0] = eccentricity
@@ -215,15 +204,13 @@ tan( E / 2 ) = sqrt( ( 1 - cos( E ) ) / ( 1 + cos( E ) ) )
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = sin( E ) / ( 1 + cos( E ) )
 Avoid cases where cos( E ) is too close to -1
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit
 * params  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameters: eccentr, semimajor, inclin, ascpos, asclon, period, ppass
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * r  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; radius
 * v  :  array_like
@@ -233,11 +220,10 @@ Avoid cases where cos( E ) is too close to -1
 <a name="drvdE"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>drvdE(</strong> xdata, params, cosE, sinE ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L375-L410 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L375-L410 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; times in the orbit
 * params  :  array_like
@@ -247,8 +233,7 @@ Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 * sinE  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; sine of E
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * drdE  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to E (eccentric anomaly)
 * dvdE  :  array_like
@@ -257,11 +242,10 @@ Return derivatives of r (radius) and v (true anomaly) to eccentric anomaly
 <a name="drvdx"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>drvdx(</strong> xdata, params, cosE, sinE ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L412-L426 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L412-L426 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of r (radius) and v (true anomaly) to xdata
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * drdx  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to x (xdata)
 * dvdx  :  array_like
@@ -270,11 +254,10 @@ Return derivatives of r (radius) and v (true anomaly) to xdata
 <a name="drvdpar"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>drvdpar(</strong> xdata, params, E, cosE, sinE ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L428-L479 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L428-L479 target=_blank>[source]</a></th></tr></thead></table>
 Return derivatives of r (radius) and v (true anomaly) to relevant parameters.
 
-<b>Returns</b>
-
+<b>Returns</b><br>
 * drde  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; derivatives of r to e (eccentricity)
 * drda  :  array_like
@@ -293,11 +276,10 @@ Return derivatives of r (radius) and v (true anomaly) to relevant parameters.
 <a name="getMsini"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getMsini(</strong> stellarmass ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L481-L493 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/Kepplers2ndLaw.py#L481-L493 target=_blank>[source]</a></th></tr></thead></table>
 Return the mass of the exoplanet in Jupiter masses.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * stellarmass  :  float
 <br>&nbsp;&nbsp;&nbsp;&nbsp; mass of the host star in solar masses.
 

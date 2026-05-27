@@ -4,41 +4,37 @@
 
 <a name="LogFactorial"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>Module LogFactorial</strong> </th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>Module LogFactorial</strong> </th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 
-method that returns the log of the factorial of a number.
+One method that returns the log of the factorial of a number.
 
 
 <a name="logFactorial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>logFactorial(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L39-L130 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/LogFactorial.py#L39-L130 target=_blank>[source]</a></th></tr></thead></table>
 
 logFactorial.  It provides the natural log of k!
 
 if k is float, it will be truncated to int
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int or array_like of int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; the number(s) the factorial is wanted for.
 
-<b>Return</b>
-
+<b>Return</b><br>
 * float  :  the ( natural ) log( k! ).
 
 
-<b>Example</b>
-
+<b>Example</b><br>
     print( logFactorial( 0 ) )
     0
     print( logFactorial( [3, 5, 10] ) )
     [1.7917594692280550, 4.7874917427820458, 15.1044125730755159]
 
-<b>Author</b>
-
+<b>Author</b><br>
 Do Kester, shamelessly copied from J.Skilling
 
 

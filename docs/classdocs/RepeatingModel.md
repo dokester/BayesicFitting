@@ -4,7 +4,7 @@
 
 <a name="RepeatingModel"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class RepeatingModel(</strong> <a href="./Model.html">Model,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class RepeatingModel(</strong> <a href="./Model.html">Model,</a><a href="./Dynamic.html">Dynamic</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 RepeatingModel is a dynamic model, that calls the same model zero or more 
@@ -25,8 +25,7 @@ of the model call.
 It can be arranged that all similar parameters are the same, represented by the
 same parameters. Use keywords same=.
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * ncomp  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions
 * model  :  Model
@@ -38,24 +37,19 @@ same parameters. Use keywords same=.
 * isDyna  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Whether this is a Dynamic Model.
 
-<b>Attributes from Dynamic</b>
-
+<b>Attributes from Dynamic</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ncomp, deltaNpar, minComp, maxComp, growPrior
 
-<b>Attributes from Model</b>
-
+<b>Attributes from Model</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; parameters, stdevs, npchain, _next, _head, _operation, xUnit, yUnit
 
-<b>Attributes from FixedModel</b>
-
+<b>Attributes from FixedModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npmax, fixed, parlist, mlist
 
-<b>Attributes from BaseModel</b>
-
+<b>Attributes from BaseModel</b><br>
 &nbsp;&nbsp;&nbsp;&nbsp; npbase, ndim, priors, posIndex, nonZero, tiny, deltaP, parNames
 
-<b>Example</b>
-
+<b>Example</b><br>
     # Define a model containing between 1 and 6 VoigtModels, starting with 3
     # and all with the same widths (for Gauss and Cauchy)
     vgt = VoigtModel()
@@ -79,12 +73,11 @@ Author       Do Kester
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>RepeatingModel(</strong> ncomp, model, minComp=0, maxComp=None, fixed=None,
  same=None, growPrior=None, dynamic=True, copy=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L110-L176 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L110-L176 target=_blank>[source]</a></th></tr></thead></table>
 
 Repeating the same model several times.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * ncomp  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of repetitions
 * model  :  Model
@@ -104,8 +97,7 @@ Repeating the same model several times.
 * copy  :  RepeatingModel
 <br>&nbsp;&nbsp;&nbsp;&nbsp; model to copy
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 AttributeError when fixed parameters are requested
 ValueError when order is outside [min..max] range
 
@@ -113,68 +105,62 @@ ValueError when order is outside [min..max] range
 <a name="copy"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>copy(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L178-L180 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L178-L180 target=_blank>[source]</a></th></tr></thead></table>
 
 Copy method. 
 <a name="changeNComp"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>changeNComp(</strong> dn ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L182-L183 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L182-L183 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="setSame"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setSame(</strong> same ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L185-L203 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L185-L203 target=_blank>[source]</a></th></tr></thead></table>
 Assign similar parameters the same value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * same  :  None or int or [int]
 <br>&nbsp;&nbsp;&nbsp;&nbsp; similar parameters indicated as an index in encapsulated model.
 
 <a name="grow"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>grow(</strong> offset=0, rng=None, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L205-L248 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L205-L248 target=_blank>[source]</a></th></tr></thead></table>
 Increase the the number of components by 1 (if allowed by maxComp)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts
 * rng  :  RandomState
 <br>&nbsp;&nbsp;&nbsp;&nbsp; random numbr generator
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :   succes
 
 
 <a name="shrink"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shrink(</strong> offset=0, **kwargs )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L250-L281 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L250-L281 target=_blank>[source]</a></th></tr></thead></table>
 Decrease the the number of componenets by 1 (if allowed by minComp)
 Remove an arbitrary item.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * offset  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index where the dynamic model starts
 
-<b>Return</b>
-
+<b>Return</b><br>
 * bool  :  succes
 
 
 <a name="shuffle"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>shuffle(</strong> param, offset, np, rng ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L283-L327 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L283-L312 target=_blank>[source]</a></th></tr></thead></table>
 Shuffle the parameters of the components (if they are equivalent)
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * param  :  array-like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; list of all parameters
 * offset  :  int
@@ -187,16 +173,15 @@ Shuffle the parameters of the components (if they are equivalent)
 <a name="isDynamic"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>isDynamic(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L329-L331 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L329-L331 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="baseResult"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseResult(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L333-L365 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L333-L365 target=_blank>[source]</a></th></tr></thead></table>
 Returns the result of the model function.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -206,11 +191,10 @@ Returns the result of the model function.
 <a name="basePartial"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePartial(</strong> xdata, params, parlist=None )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L367-L404 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L367-L404 target=_blank>[source]</a></th></tr></thead></table>
 Returns the partials at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -222,11 +206,10 @@ Returns the partials at the input value.
 <a name="baseDerivative"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseDerivative(</strong> xdata, params )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L406-L434 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L406-L434 target=_blank>[source]</a></th></tr></thead></table>
 Returns the derivative df/dx at the input value.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; value at which to calculate the result
 * params  :  array_like
@@ -236,18 +219,17 @@ Returns the derivative df/dx at the input value.
 <a name="xxxsetLimits"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>xxxsetLimits(</strong> lowLimits=None, highLimits=None ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L436-L437 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L436-L437 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="setPrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>setPrior(</strong> kpar, prior=None, **kwargs ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L439-L464 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L439-L464 target=_blank>[source]</a></th></tr></thead></table>
 Set the prior for the indicated parameter of the repeated model.
 
 All repeated parameters have the same Prior.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number of the repeated model.
 * prior  :  Prior
@@ -255,8 +237,7 @@ All repeated parameters have the same Prior.
 * kwargs  :  keyword arguments
 <br>&nbsp;&nbsp;&nbsp;&nbsp; attributes to be passed to the prior
 
-<b>Raise:</b>
-
+<b>Raise:</b><br>
 IndexException
 <br>&nbsp;&nbsp;&nbsp;&nbsp; When more Priors are set than fit inside the repeated model
 
@@ -264,33 +245,31 @@ IndexException
 <a name="hasPriors"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>hasPriors(</strong> ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L466-L467 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L466-L467 target=_blank>[source]</a></th></tr></thead></table>
 
 <a name="basePrior"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>basePrior(</strong> kpar )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L469-L479 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L469-L479 target=_blank>[source]</a></th></tr></thead></table>
 Return the prior for parameter with index kpar.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * kpar  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; index of the parameter to be selected.
 
 <a name="baseName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseName(</strong> )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L481-L483 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L481-L483 target=_blank>[source]</a></th></tr></thead></table>
 
 Return a string representation of the model. 
 <a name="baseParameterName"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterName(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L485-L497 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L485-L497 target=_blank>[source]</a></th></tr></thead></table>
 Return the name of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
@@ -298,11 +277,10 @@ Return the name of the indicated parameter.
 <a name="baseParameterUnit"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>baseParameterUnit(</strong> k )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L499-L513 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L499-L513 target=_blank>[source]</a></th></tr></thead></table>
 Return the unit of the indicated parameter.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * k  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; parameter number.
 
@@ -310,7 +288,7 @@ Return the unit of the indicated parameter.
 <a name="par2model"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>par2model(</strong> k ) 
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L515-L524 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/RepeatingModel.py#L515-L524 target=_blank>[source]</a></th></tr></thead></table>
 Return index in model and repetition nr for param k
 
 <table><thead style="background-color:#FFD0D0; width:100%; font-size:15px"><tr><th style="text-align:left">

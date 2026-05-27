@@ -4,7 +4,7 @@
 
 <a name="MonteCarlo"></a>
 <table><thead style="background-color:#FFE0E0; width:100%"><tr><th style="text-align:left; font-size:20px">
-<strong>class MonteCarlo(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source// target=_blank>[source]</a></th></tr></thead></table>
+<strong>class MonteCarlo(</strong> object )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
 Helper class to calculate the confidence region of a fitted model.
@@ -15,8 +15,7 @@ The MonteCarlo class is to be used in conjunction with Model classes.
 
 Author:      Do Kester
 
-<b>Attributes</b>
-
+<b>Attributes</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -25,8 +24,7 @@ Author:      Do Kester
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Sets number of cycles in the MonteCarlo procedure to estimate
 <br>&nbsp;&nbsp;&nbsp;&nbsp; error bars. Default = 25
 
-<b>Hidden Attributes</b>
-
+<b>Hidden Attributes</b><br>
 * _eigenvectors  :  array_like (read only)
 <br>&nbsp;&nbsp;&nbsp;&nbsp; from eigenvalue decomposition of covariance matrix
 * _eigenvalues  :  array_like (read only)
@@ -38,7 +36,7 @@ Author:      Do Kester
 <a name="MonteCarlo"></a>
 <table><thead style="background-color:#FFE0E0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>MonteCarlo(</strong> xdata, model, covariance, index=None, seed=12345, mcycles=25 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L64-L100 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L64-L100 target=_blank>[source]</a></th></tr></thead></table>
 
 Create a new MonteCarlo, providing inputs and model.
 
@@ -46,8 +44,7 @@ A MonteCarlo object is defined by its model and the input vector (the
 independent variable). When a fit to another model and/or another
 input vector is needed a new object should be created.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; array of independent input values
 * model  :  Model
@@ -61,26 +58,24 @@ input vector is needed a new object should be created.
 * mcycles  :  int
 <br>&nbsp;&nbsp;&nbsp;&nbsp; number of cycles in the MonteCarlo procedure to estimate error bars.
 
-<b>Raises</b>
-
+<b>Raises</b><br>
 ValueError when model and input have different dimensions
 
 
 <a name="decompose"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>decompose(</strong> covariance )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L102-L114 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L102-L114 target=_blank>[source]</a></th></tr></thead></table>
 Decompose a covariance matrix into eigenvectors and eigenvalues
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * covariance  :  matrix
 <br>&nbsp;&nbsp;&nbsp;&nbsp; covariance matrix
 
 <a name="getError"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>getError(</strong> xdata=None, scale=1.0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L116-L145 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L116-L145 target=_blank>[source]</a></th></tr></thead></table>
 Calculates scale * &sigma;-confidence regions on the model given some inputs.
 
 From the full covariance matrix ( = inverse of the Hessian ) random
@@ -89,8 +84,7 @@ set of parameters the model is calculated. This procedure is done
 by default, 25 times.
 The standard deviation of the models is returned as the error bar.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; input data over which to calculate the error bars. default provided xdata
 * scale  :  float (1.0)
@@ -99,12 +93,11 @@ The standard deviation of the models is returned as the error bar.
 <a name="randomVariant"></a>
 <table><thead style="background-color:#E0FFE0; width:100%; font-size:15px"><tr><th style="text-align:left">
 <strong>randomVariant(</strong> xdata, scale=1.0 )
-</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source//#L147-L175 target=_blank>[source]</a></th></tr></thead></table>
+</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/MonteCarlo.py#L147-L170 target=_blank>[source]</a></th></tr></thead></table>
 Return a random variant of the model result.
 Taking into account the stdev of the parameters and their covariance.
 
-<b>Parameters</b>
-
+<b>Parameters</b><br>
 * xdata  :  array_like
 <br>&nbsp;&nbsp;&nbsp;&nbsp; input data at these indpendent points
 * scale  :  float (1.0)
