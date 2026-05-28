@@ -6,9 +6,9 @@ from . import Tools
 from .IterativeFitter import IterativeFitter
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -26,11 +26,11 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2016 - 2025 Do Kester
+#  *    2016 - 2026 Do Kester
 
 class CurveFitter( IterativeFitter ):
     """
-    CurveFitter implements scipy.optimize.curve_fit.
+    CurveFitter implements `scipy.optimize.curve_fit`.
 
     Author:      Do Kester.
 
@@ -103,7 +103,7 @@ class CurveFitter( IterativeFitter ):
         plot : bool
             Plot the results.
         kwargs : dict
-            keywords arguments to be passed to :ref:`curve_fit<scipy.optimize.curve_fit>`
+            keywords arguments to be passed to `curve_fit<scipy.optimize.curve_fit>`
 
         Raises
         ------

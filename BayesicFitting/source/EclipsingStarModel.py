@@ -69,10 +69,10 @@ class EclipsingStarModel( NonLinearModel ) :
         [0.0, 1.0, 0.0, pi/2, 0.0, 0.1, 0.1, 1.0, 1.0, 0.0, 0.5].
     It is a non-linear model.
 
-    For the mathematics of this model and further explanation see @EclipsingStars.html.
+    For the mathematics of this model and further explanation see @../EclipsingStars.md
 
     (Partial) derivatives were obtained with the help of  
-    @www.derivative-calculator.net
+    https://www.derivative-calculator.net
     Muchas Gracias
 
 
@@ -289,14 +289,11 @@ class EclipsingStarModel( NonLinearModel ) :
 
     def lightCurve( self, xy, z, params, debug=0 ):
         """
-        Return the visible area of two eclipsing stars, multiplied by their luminicities.
-
-        Adapted from 
-            https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-circles/
+        Return the visible area of two eclipsing stars, multiplied by their luminocities.
 
         Parameters
         ----------
-        xy : arrey
+        xy : array
             distance between the stars in the sky plane
         z : array
             distance of star 2 to the sky plane
@@ -459,7 +456,7 @@ class EclipsingStarModel( NonLinearModel ) :
         """
         Calculate the overlap area between two partially overlapping circles
 
-        From: https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-circles/
+        https://scipython.com/books/book2/chapter-8-scipy/problems/overlapping-circles/
     
         Parameters
         ----------
@@ -541,8 +538,9 @@ class EclipsingStarModel( NonLinearModel ) :
         Calculate the tidal distortion of the stars in a binary system
         as elongated, prolate spheroids (cigars).
 
-        from: https://farside.ph.utexas.edu/teaching/355/Surveyhtml/node69.html
-        Equation. (1.468) (for as long as it lasts)
+        See equation. (1.468) from 
+        https://farside.ph.utexas.edu/teaching/355/Surveyhtml/node69.html
+         (for as long as it lasts)
 
         Parameters
         ----------
@@ -601,18 +599,6 @@ class EclipsingStarModel( NonLinearModel ) :
         """
         Returns the partials at the input value.
 
-        x,y,z = SOM(t:p1)
-
-        r = S(x,y,z) = ( SQRT( x*x + y*y ), z )
-
-        F(t:p,q) = SOM(t:p) | R(x,y,z:) | LC(r,z:q)
-                 = LC( R( SOM( t:p ) ):q )
-                   H(G(x:p):q)
-
-        dF/dq = dLC( R( SOM(t:p)))/dq
-
-        dF/dp = dLC/drz * dRZ/dxyz * dSOM/dp
-
         Parameters
         ----------
         xdata : array
@@ -623,6 +609,20 @@ class EclipsingStarModel( NonLinearModel ) :
             list of indices active parameters (or None for all)
 
         """
+        #############################################################
+        # x,y,z = SOM(t:p1)
+        #
+        # r = S(x,y,z) = ( SQRT( x*x + y*y ), z )
+        #
+        # F(t:p,q) = SOM(t:p) | R(x,y,z:) | LC(r,z:q)
+        #          = LC( R( SOM( t:p ) ):q )
+        #            H(G(x:p):q)
+        #
+        # dF/dq = dLC( R( SOM(t:p)))/dq
+        #
+        # dF/dp = dLC/drz * dRZ/dxyz * dSOM/dp
+        #############################################################
+
         if self.circular :
             plist = [2, 3, 4]          ## period phase and inclination
         else :

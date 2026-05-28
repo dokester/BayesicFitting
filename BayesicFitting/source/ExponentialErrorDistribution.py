@@ -7,9 +7,9 @@ from .HyperParameter import HyperParameter
 from .NoiseScale import NoiseScale
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,7 +28,7 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 
 class ExponentialErrorDistribution( ScaledErrorDistribution ):
@@ -41,14 +41,14 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
 
      f( x ) = p / ( 2 s &Gamma;( 1 / p ) ) exp( - ( |x| / s )^p )
 
-    where s is the scale and p is the power.
+    where &Gamma; is the Gamma-function, s is the scale and p is the power.
     s and p are hyperparameters, which might be estimated from the data.
 
     The variance of this function is
 
      &sigma;^2 = s^2 &Gamma;( 3 / p ) / &Gamma;( 1 / p )
 
-    See toSigma()
+    See method @#toSigma
 
     The function is mostly used to calculate the likelihood L over N residuals,
     or easier to use log( L )
@@ -132,6 +132,7 @@ class ExponentialErrorDistribution( ScaledErrorDistribution ):
     def toSigma( self, hypar ) :
         """
         Return sigma, the squareroot of the variance.
+
         Parameter
         --------
         hypar : array_like (2 floats)

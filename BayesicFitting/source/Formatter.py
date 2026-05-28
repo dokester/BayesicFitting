@@ -27,7 +27,16 @@ __status__ = "Perpetual Beta"
 
 # Module Formatter
 """
-This module contains methods to format numbers, especially in arrays.
+    This module contains methods to format numbers, especially in arrays.
+
+    Examples
+    --------
+    >>> arr = numpy.linspace( 0, 10, 48 ).reshape( (4,12) )
+    >>> print( "array ", formatter( arr, indent=7, tail=2, max=5 ) )
+    >>> array  [[    0.000    0.213    0.426    0.638    0.851 ...    2.128    2.340]
+    >>>         [    2.553    2.766    2.979    3.191    3.404 ...    4.681    4.894]
+    >>>         [    5.106    5.319    5.532    5.745    5.957 ...    7.234    7.447]
+    >>>         [    7.660    7.872    8.085    8.298    8.511 ...    9.787   10.000]]  
 
 """
 
@@ -80,6 +89,8 @@ def fma( erray, **kwargs ) :
     """
     Syntactic sugar for
         formatter( ..., max=None, ... )
+
+    It formats ALL numbers in the array
     """
     return formatter( erray, max=None, **kwargs )
 
@@ -87,6 +98,8 @@ def gmt( erray, **kwargs ) :
     """
     Syntactic sugar for
         formatter( ..., format=" %#10.3g", ... )
+
+    It formats the array in "%#10.3g" format.
     """
     return formatter( erray, format=" %#10.3g", **kwargs )
 

@@ -8,9 +8,9 @@ from . import bspline
 from .LinearModel import LinearModel
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.5"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -28,14 +28,14 @@ __status__ = "Perpetual Beta"
 #  *
 #  * The GPL3 license can be found at <http://www.gnu.org/licenses/>.
 #  *
-#  *    2017 - 2025 Do Kester
+#  *    2017 - 2026 Do Kester
 
 class BSplinesModel( LinearModel ):
     """
     General b-splines model of arbitrary order and with arbitrary knot settings.
 
     It encapsulates the bspline package of John Foster and Juha Jeronen,
-    at http://github.com/johnfoster/bspline.
+    at https://github.com/johntfoster/bspline
 
     B-splines have some advantages over natural splines as implemented in
     SplinesModel. Specificly the parameters are much more easily

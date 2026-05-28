@@ -3,9 +3,9 @@ import math
 from . import Tools
 
 __author__ = "Do Kester"
-__year__ = 2025
+__year__ = 2026
 __license__ = "GPL3"
-__version__ = "3.2.4"
+__version__ = "3.3.0"
 __url__ = "https://www.bayesicfitting.nl"
 __status__ = "Perpetual Beta"
 
@@ -32,7 +32,7 @@ __status__ = "Perpetual Beta"
 
 # Module LogFactorial
 """
-One method that returns the log of the factorial of a number.
+    One method that returns the log of the factorial of a number.
 
 """
 
