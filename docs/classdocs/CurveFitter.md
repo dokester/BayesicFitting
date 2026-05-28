@@ -7,7 +7,7 @@
 <strong>class CurveFitter(</strong> <a href="./IterativeFitter.html">IterativeFitter</a> )</th><th style="text-align:right; font-size:12px"><a href=https://github.com/dokester/BayesicFitting/blob/master/BayesicFitting/source/CurveFitter.py target=_blank>[source]</a></th></tr></thead></table>
 <p>
 
-CurveFitter implements scipy.optimize.curve<sub>fit</sub>.
+CurveFitter implements `scipy.optimize.curve<sub>fit</sub>`.
 
 Author:      Do Kester.
 
@@ -76,7 +76,7 @@ Return      parameters for the model fitted to the data array.
 * plot  :  bool
 <br>&nbsp;&nbsp;&nbsp;&nbsp; Plot the results.
 * kwargs  :  dict
-<br>&nbsp;&nbsp;&nbsp;&nbsp; keywords arguments to be passed to :ref:`curve_fit<scipy.optimize.curve_fit>`
+<br>&nbsp;&nbsp;&nbsp;&nbsp; keywords arguments to be passed to `curve_fit<scipy.optimize.curve_fit>`
 
 <b>Raises</b><br>
 ValueError when ydata or weights contain a NaN
