@@ -28,4 +28,14 @@ examples:
     cap: "Exoplanet on HD 2039"
   - img: ./docs/images/spectrallines.png
     cap: "Lines in methanol spectrum"
+  - img: ./docs/images/OGLE-LMC-ECL-30177.png
+    cap: "Eclipsing binary in LMC"
+  - img: ./docs/images/OGLE-LMC-ECL-34645.png
+    cap: "Eccentric binary"
+  - img: ./docs/images/OGLE-LMC-ECL-38801.png
+    cap: "Distorted binary"
+  - img: ./docs/images/OGLE-LMC-ECL-20233.png
+    cap: "Almost touching binary"
+  - img: ./docs/images/OGLE-LMC-ECL-18571.png
+    cap: "Wide binary system"
 
