@@ -343,10 +343,10 @@ figure 4.
 width="815" height="480">
 
 <map name="dynamicmap">
-  <area shape="rect" coords="300,118,368,165" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="20,416,220,478" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="320,416,502,478" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="600,416,780,478" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="373,118,443,158" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="36,498,256,559" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="315,500,500,561" href="#modelclasses" alt="Figure 1">
+  <area shape="rect" coords="636,500,813,561" href="#modelclasses" alt="Figure 1">
 </map>
 -->
 

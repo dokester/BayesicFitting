@@ -103,6 +103,9 @@ something between a separator and an operator.
 <a name="documentation"></a>
 ## Documentation<br>
 All classes and methods have a document string in which the usage is explained.
+Except when a method is clearly not fit for general use. These methods start 
+with and underscore and do not have a document string.
+  
 The attributes of the classes and the parameters of the methods are also 
-listed and explained. Some minimal examples are present in the class 
+listed and explained. Sometimes, minimal examples are present in the class 
 documentation.
