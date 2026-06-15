@@ -72,19 +72,6 @@ displayed. An open arrow indicates inheritance: Model inherits from
 FixedModel which inherits from BaseModel. A black arrow indicates a
 relationship between the classes, which is written next to it.
 
-<!--
-![Models](images/Model.png "Figure 1")
-
-<a name="img-model"></a>
-<img src="images/Model.png" alt="Figure 1" usemap="#modelmap"
-width="936" height="707">
-
-<map name="modelmap">
-  <area shape="rect" coords="250,0,450,60" href="#linearmodel" alt="Figure 3">
-  <area shape="rect" coords="560,0,770,60" href="#nonlinearmodel" alt="Figure 4">
-</map>
--->
-
 <div style="position: relative;">
   <img src="images/Model.png" style="width: 100%; height: auto;" 
 		alt="Figure 1">
@@ -285,14 +272,6 @@ least need to define the result as `baseResult`. When `basePartial` or
 
 All pre-defined non-linear models are displayed in figure 3
 
-<!--
-![NonLinearModels](images/NonLinearModel.png "Figure 3")
-
-<a name="img-nonlin"></a>
-<img src="images/NonLinearModel.png" alt="Figure 3" usemap="#nonlinmap">
--->
-
-
 <div style="position: relative;">
   <img src="images/NonLinearModel.png" style="width: 100%; height: auto;" 
 		alt="Figure 3">
@@ -335,26 +314,11 @@ model with the optimal number of components.
 All pre-defined **Dynamic** and **Modifiable** models are displayed in
 figure 4. 
 
-<!--
-![Dynamic](images/Dynamic.png "Figure 4")
-
-<a name="img-dynamic"></a>
-<img src="images/Dynamic.png" alt="Figure 4" usemap="#dynamicmap"
-width="815" height="480">
-
-<map name="dynamicmap">
-  <area shape="rect" coords="373,118,443,158" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="36,498,256,559" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="315,500,500,561" href="#modelclasses" alt="Figure 1">
-  <area shape="rect" coords="636,500,813,561" href="#modelclasses" alt="Figure 1">
-</map>
--->
-
 <div style="position: relative;">
   <img src="images/Dynamic.png" style="width: 100%; height: auto;" 
 		alt="Figure 4">
   <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
-		left: 37%; top: 25%; width: 8%; height: 10%;"></div></a>
+		left: 45%; top: 20%; width: 8%; height: 10%;"></div></a>
   <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
 		left:  2%; top: 87%; width: 25%; height: 13%;"></div></a>
   <a href="#modelclasses" alt="Figure 1"><div style="position: absolute; 
@@ -816,14 +780,6 @@ For **Dynamic** models, the  **BirthEngine** and the **DeathEngine** are needed.
 And for **Modifiable** models, the **StructureEngine** is needed.
 
 The available **Engine**s are displayed in figure 12.
-<!--
-![Engines](images/Engine.png "Figure 12")
-
-<a name="img-engine"></a>
-<img src="images/Engine.png" alt="Figure 12" usemap="#enginemap"
-width="655" height="466">
--->
-
 
 <div style="position: relative;">
   <img src="images/Engine.png" style="width: 100%; height: auto;" 
