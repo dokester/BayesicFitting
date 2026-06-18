@@ -43,7 +43,7 @@ To quote John Skilling on one of the Maxent conferences:
 
 Well.. It aint me, babe.
 
-## [Data Quality](.dataquality.md).   
+## [Data Quality](./dataquality.md).   
 
 The [quality](./dataquality.md) note discusses the merits of defining 
 data quality in terms of accuracy versus weights.
