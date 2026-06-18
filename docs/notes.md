@@ -43,26 +43,26 @@ To quote John Skilling on one of the Maxent conferences:
 
 Well.. It aint me, babe.
 
-## Data Quality.   
+## [Data Quality](.dataquality.md).   
 
 The [quality](./dataquality.md) note discusses the merits of defining 
 data quality in terms of accuracy versus weights.
 
-## Dimensions.  
+## [Dimensions](./Dimensions.md).
 
 High dimensional space is a confusing place to be.  With increasingly
 more space at the outskirts for higher dimensionality.  How this
 influences Nested Sampling is inverstigated in [Dimensions](./Dimensions.md). 
 
-## Prior Sampling.
+## [Prior Sampling](./Sampling.md).
 
 [Sampling](./Sampling.md) from the Prior can lead in some cases to problems.
 
-## BoundingBox
+## [BoundingBox](./BoundingBox.md).
 
 A look at [bounding boxes](./BoundingBox.md) in higher dimensions.
 
-## Splines.
+## [Splines](./splines.md).
 
 The [splines](./splines.md) note presents details on the algorithms for
 splines construction in
@@ -74,13 +74,13 @@ splines construction in
    - **Dynamic** in the number of knots
    - **Modifiable** in the position of the knots
 
-## Eclipsing Stars.
+## [Eclipsing Stars](./EclipsingStars.md).
 
 [Eclipsing Stars](./EclipsingStars.md) is a note that explains the 
 mathematics and the internal construction of the classes 
 **EclipsingStarModel** and **PeriodicScout**. 
 
-## Input and Output dimensions for Models
+## [Input and Output dimensions for Models](InOutModels.md).
 
 The layout for inputs and output of more-dimensional models is 
 documented in this [note](./InOutModels.md).

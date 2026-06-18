@@ -49,7 +49,8 @@ Bayesian modelling of data or the algorithms used.
 For the mathematics look at the books of [Sivia](./references.md/#sivia), 
 [Bishop](./references.md/#bishop), [von der Linden](./references.md/#linden)
 and [Jaynes](./references.md/#jaynes) 
-and for some fitter algorithms [Press](./references.md/#press). 
+and for some fitter algorithms [Press](./references.md/#press) and 
+for a nested sampling algorithm, again [Sivia](./references.md/#sivia). 
 
 
 <a name="modelclasses"></a>
@@ -84,7 +85,7 @@ relationship between the classes, which is written next to it.
 <td style="width: 10px;">  </td>
 <td style="width: 350px; text-align: left;">
 Figure 1. Class hierarchy diagram for models. 
-Blue boxes refer to further hierachy diagrams.
+Blue boxes refer to further hierarchy diagrams.
 </td></tr>
 </table>
 <p.
