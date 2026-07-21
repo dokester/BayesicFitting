@@ -662,12 +662,12 @@ models, and one-dimensional outputs were handled.  For these kind of
 problems ClassicProblem is introduced.  Mostly it operates behind the
 scenes and is invisible for the users. 
 
-IN version 2 the concept of a **Problem** was introduced to handle more
+In version 2 the concept of a **Problem** was introduced to handle more
 complicated cases. We have the **MultipleOutputProblem** for problems
 with more dimensional output, like a steller orbit on the sky, selection
 in categories, football matches etc. A further specialization is the
-**FlippedDataProblem** (not yet in this version) where there might be
-ambiguity in the stellar orbit data. 
+**FlippedDataProblem** where there might be ambiguity in the stellar 
+orbit data. 
 
 Classically it is assumed the `xdata` are known with a much higher
 precision than the `ydata`. For cases where this is not met, we have the
@@ -702,7 +702,7 @@ Figure 9. Class hierarchy diagram for problems.
 <p>
 
 A **Problem** has **Prior**s for all its parameters. 
-Itknows how to calculate its result, partial and derivative
+It knows how to calculate its result, partial and derivative
 given the parameters. It also knows which **Engine**s and which 
 **ErrorDistribution** is the best choice.
 

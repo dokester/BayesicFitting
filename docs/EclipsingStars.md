@@ -308,8 +308,8 @@ second star follows as
 m<sub>2</sub>&nbsp;=&nbsp;1&nbsp;-&nbsp;m<sub>1</sub>.   
 
 Second order approximations would turn the stars into egg-shapes where
-the pointy parts are directed to each other, eventually resulting th
-mass transfer from one star to the other.  However that would not be the
+the pointy parts are directed to each other, eventually resulting in
+mass transfer from one star to the other.  However that would not be a
 stable situation we would like to consider. 
 
 In the analogous equation for the ellipticity of star 1, the same ratio
@@ -319,7 +319,7 @@ parameter, we can calculate the tidal distortion for both stars.
 Assuming that the total volume of the star is preserved, during tidal
 distortion, we have that the cube of the (nominal) radius, r, equals the
 semimajor axis, a, times the semiminor axis, b, squared. Together with
-the ellipticity, &epsilon;, which connectd a and b, via 
+the ellipticity, &epsilon;, which connects a and b, via 
 b = a ( 1 - &epsilon; ), we find
 
 <!--latex

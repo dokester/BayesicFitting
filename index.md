@@ -10,9 +10,12 @@
 | [Readme](./README.md) | [Glossary](./docs/glossary.md)  |
 | [Notes](./docs/notes.md) | [Design](./docs/design.md) |
 | [Examples][exlink] | [Trouble](./docs/troubles.md) |
--->
+
 
 [![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
+-->
+
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/bayesicfitting?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/bayesicfitting)
 ![Tests Status](./docs/images/tests-badge.svg)
 ![Coverage Status](./docs/images/coverage-badge.svg)
 
@@ -28,8 +31,8 @@ in a Bayesian way.
 
 Data in this context means a set of (measured) points x and y. 
 The model provides some (mathematical) relation between the x and y.
-Fitting adapts the model such that certain criteria are optimized, 
-making the model as close as possible to the data. 
+Fitting adapts the model such that by optimizing certain criteria, 
+the model gets as close as possible to the data. 
 
 BayesicFitting has various tools to find the optimal fit of the data to the model.
 The toolbox can also answer the question whether one model fits 
@@ -48,11 +51,13 @@ The easiest way to install it is via
 
     pip install BayesicFitting
 
-This site is dedicated to documentation. It contains a manual about the 
-use of the package and a reference manual with details about each class.
-A design document about the structure of the package. A glossary
-defining the term used and a help document about restrictions and trouble
-shooting. All can be found via the Navigation fold-out table, upper left.
+This site is dedicated to documentation. It contains a 
+[manual](./docs/manual.md) about the use of the package and a 
+[reference manual](./docs/calsses.md) with details about each class.
+A [design](./docs/design.md) document about the structure of the package. 
+A [glossary](./docs/glossary.md] defining the term used and a help document 
+about [restrictions and trouble shooting](./docs/troubles.md). 
+All can be found via the Navigation fold-out table, upper left.
 On other pages there is also a Contents table, for the page itself.
 
 The pictures in the side bars are a few examples of what can achieved with the 

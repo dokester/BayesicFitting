@@ -17,11 +17,12 @@ solid DodgerBlue">Contents</span>
   </div>
 </div>
 
-[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/bayesicfitting?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/bayesicfitting)
 ![Tests Status](./docs/images/tests-badge.svg)
 ![Coverage Status](./docs/images/coverage-badge.svg)
 
 <!--  With link to tests en coverage
+[![PyPI Downloads](https://static.pepy.tech/badge/bayesicfitting)](https://pepy.tech/projects/bayesicfitting)
 [![Tests Status](./reports/junit/tests-badge.svg?dummy=8484744)](./reports/junit/junit.xml)
 [![Coverage Status](./reports/coverage/coverage-badge.svg?dummy=8484744)](./reports/coverage/coverage.xml)
 -->
@@ -53,7 +54,8 @@ DOI: 10.5281/zenodo.2597200
  + 23 May 2026 version 3.3.0<br>
    * New Classes
      - EclipsingStarModel, FlippedDataProblem, PeriodicScout, UniformRatioPrior
-     - [EclipsingStars](./docs/EclipsingStars.md) explains EclipsingStarModel and PeriodicScout
+     - The note, [EclipsingStars](./docs/EclipsingStars.md), explains 
+       EclipsingStarModel and PeriodicScout
    * New Examples and Tests
      - heartbeat-045.ipynb, TestEclipsingStarModel, TestPeriodicScout, TestWalker
    * Plotter (addressing pull request #28)
@@ -68,7 +70,7 @@ DOI: 10.5281/zenodo.2597200
    * GalileanEngine
      - Skip mirroring when partial LogL fails (with warning)
    * Removed splineslab. One methods of splineslab moved to BSplinesModel
-   * Removed references to __future__
+   * Removed references to \_\_future\_\_
      - pyproject.toml, .gitignore, bspline.py
    * Minor additions, documentation etc.
    * Rerun all examples
