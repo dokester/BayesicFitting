@@ -17,7 +17,10 @@ solid DodgerBlue">Contents</span>
   </div>
 </div>
 
-[![PyPI Downloads](https://static.pepy.tech/personalized-badge/bayesicfitting?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/bayesicfitting)
+[![PyPI Downloads]\
+(https://static.pepy.tech/personalized-badge/bayesicfitting?period=total&units=ABBREVIATION&\
+left_color=BLACK&right_color=GREEN&left_text=downloads)]\
+(https://pepy.tech/projects/bayesicfitting)
 ![Tests Status](./docs/images/tests-badge.svg)
 ![Coverage Status](./docs/images/coverage-badge.svg)
 
